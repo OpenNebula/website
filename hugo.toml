@@ -84,13 +84,6 @@ enable = false
     name = "Community"
     url = "/community/"
     weight = 4
-  [[menu.main]]
-    name = "GitHub"
-    weight = 50
-    url = "https://github.com/google/docsy/"
-    pre = "<i class='fa-brands fa-github'></i>"
-    post = "<span class='alert'>New!</span>"
-
 
 
 [module]
