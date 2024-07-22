@@ -9,6 +9,13 @@
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:37127/tags/test/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Getting Started</title>
+      <link>//localhost:37127/docs/getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:37127/docs/getting-started/</guid>
+      <description>This is a placeholder page that shows you how to use this template site.&#xA;Information in this section helps your user try your project themselves.&#xA;What do your users need to do to start using your project? This could include downloading/installation instructions, including any prerequisites or system requirements.&#xA;Introductory “Hello World” example, if appropriate. More complex tutorials should live in the Tutorials section.&#xA;Consider using the headings below for your getting started page.</description>
+    </item>
+    <item>
       <title>Example Page</title>
       <link>//localhost:37127/docs/getting-started/example-page/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
