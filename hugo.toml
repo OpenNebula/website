@@ -67,6 +67,26 @@ enable = false
   desc = "Discuss development issues around the project"
 
 
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Docs"
+    url = "/docs/"
+    weight = 2
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 3
+  [[menu.main]]
+    name = "Community"
+    url = "/community/"
+    weight = 4
+
+
+
 [module]
   proxy = "direct"
   # uncomment line below for temporary local development of module
