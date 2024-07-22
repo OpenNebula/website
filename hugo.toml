@@ -86,6 +86,23 @@ enable = false
     weight = 4
 
 
+[params]
+  # Add your release versions here
+version_menu = "Versions"
+  [[params.versions]]
+    version = "v6.8.3"
+    url = "https://opennebula.github.io/website/docs/"
+
+  [[params.versions]]
+    version = "v6.6"
+    url = "https://docs.opennebula.io/6.6/"
+
+  [[params.versions]]
+    version = "v5.10"
+    url = "https://docs.opennebula.io/5.10/"
+
+
+
 [module]
   proxy = "direct"
   # uncomment line below for temporary local development of module

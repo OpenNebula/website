@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>OpenNebula</title>
-    <link>//localhost:45911/blog/</link>
-    <description>Recent content on OpenNebula</description>
+    <title>Blog on OpenNebula</title>
+    <link>//localhost:37127/blog/</link>
+    <description>Recent content in Blog on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:45911/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:37127/blog/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

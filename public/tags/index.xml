@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on OpenNebula</title>
-    <link>//localhost:45911/tags/</link>
+    <link>//localhost:37127/tags/</link>
     <description>Recent content in Tags on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:45911/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:37127/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
