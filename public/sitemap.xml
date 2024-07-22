@@ -4,6 +4,8 @@
   <url>
     <loc>//localhost:45911/categories/</loc>
   </url><url>
+    <loc>//localhost:45911/docs/</loc>
+  </url><url>
     <loc>//localhost:45911/</loc>
   </url><url>
     <loc>//localhost:45911/tags/</loc>

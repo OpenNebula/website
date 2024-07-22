@@ -81,7 +81,7 @@ enable = false
     url = "/blog/"
     weight = 3
   [[menu.main]]
-    name = "Community"
+    name = "Commmmmmmunity"
     url = "/community/"
     weight = 4
 
