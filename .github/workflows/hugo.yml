@@ -48,17 +48,12 @@ jobs:
         with:
           node-version: '16'
       - name: Install Node.js dependencies
-        run: |
-          npm install
-          npm install postcss postcss-cli autoprefixer
+        run: npm install
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
-        run: |
-          hugo \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
