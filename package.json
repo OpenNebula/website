@@ -1,0 +1,13 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Hugo website",
+  "scripts": {
+    "build": "hugo --minify"
+  },
+  "dependencies": {
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
+    "autoprefixer": "^10.3.1"
+  }
+}
