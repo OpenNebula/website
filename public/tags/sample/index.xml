@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>OpenNebula</title>
-    <link>//localhost:37127/</link>
-    <description>Recent content on OpenNebula</description>
+    <title>Sample on OpenNebula</title>
+    <link>//localhost:37127/tags/sample/</link>
+    <description>Recent content in Sample on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:37127/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:37127/tags/sample/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Example Page</title>
       <link>//localhost:37127/docs/getting-started/example-page/</link>
