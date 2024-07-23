@@ -4,7 +4,6 @@ type: docs
 description: "This is the description"
 ---
 
-![Description of the image](/images/image1.png)
 
 This section is where the user documentation for your project lives - all the
 information your users need to understand and successfully use your project.
