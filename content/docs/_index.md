@@ -2,6 +2,7 @@
 title: "Documentation"
 type: docs
 weight: 4
+description: "This is the description"
 ---
 
 {{% pageinfo %}}
