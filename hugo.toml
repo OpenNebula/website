@@ -4,12 +4,29 @@ title = "OpenNebula"
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
 
+
+# You can add your own taxonomies
+[taxonomies]
+tag = "tags"
+category = "categories"
+
+[params.taxonomy]
+# set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloud = ["tags", "categories"]
+
+# If used, must have same length as taxonomyCloud
+taxonomyCloudTitle = ["Tag Cloud", "Categories"]
+
+# set taxonomyPageHeader = [] to hide taxonomies on the page headers
+taxonomyPageHeader = ["tags", "categories"]
+
+
 # Uncomment this if your GitHub repo does not have "main" as the default branch,
 # or specify a new value if you want to reference another branch in your GitHub links
 github_branch= "PoC"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "d72aa9b2712488cc3"
+gcs_engine_id = "533000100d06b46c0"
 
 
 [params.ui]
@@ -69,25 +86,37 @@ enable = false
 
 [menu]
   [[menu.main]]
-    name = "Home"
+    name = "OpenNebula"
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "Docs"
-    url = "/docs/"
-    weight = 2
-  [[menu.main]]
-    name = "Blog"
-    url = "/blog/"
-    weight = 3
-  [[menu.main]]
-    name = "Community"
-    url = "/community/"
-    weight = 4
-  [[menu.main]]
     name = "Install"
     url = "/install/"
+    weight = 2
+  [[menu.main]]
+    name = "Docs"
+    url = "/docs/"
+    weight = 3
+  [[menu.main]]
+    name = "Integrate"
+    url = "/integrate/"
+    weight = 4
+  [[menu.main]]
+    name = "Contribute"
+    url = "/contribute/"
     weight = 5
+  [[menu.main]]
+    name = "Ecosystem"
+    url = "/ecosystem/"
+    weight = 6
+  [[menu.main]]
+    name = "Try"
+    url = "/try/"
+    weight = 7
+  [[menu.main]]
+    name = "Forum"
+    url = "/forum/"
+    weight = 8
 
 
 [params]

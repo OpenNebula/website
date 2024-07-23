@@ -2,41 +2,45 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:37127/docs/getting-started/</loc>
+    <loc>//localhost:46603/docs/getting-started/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/categories/</loc>
+    <loc>//localhost:46603/categories/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/tags/docs/</loc>
+    <loc>//localhost:46603/tags/docs/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/docs/</loc>
+    <loc>//localhost:46603/docs/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/docs/getting-started/example-page/</loc>
+    <loc>//localhost:46603/docs/getting-started/example-page/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/categories/examples/</loc>
+    <loc>//localhost:46603/categories/examples/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/</loc>
+    <loc>//localhost:46603/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/categories/placeholders/</loc>
+    <loc>//localhost:46603/categories/placeholders/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/tags/sample/</loc>
+    <loc>//localhost:46603/tags/sample/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/tags/</loc>
+    <loc>//localhost:46603/tags/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/tags/test/</loc>
+    <loc>//localhost:46603/tags/test/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:37127/blog/</loc>
+    <loc>//localhost:46603/blog/</loc>
   </url><url>
-    <loc>//localhost:37127/community/</loc>
+    <loc>//localhost:46603/community/</loc>
+  </url><url>
+    <loc>//localhost:46603/install/</loc>
+  </url><url>
+    <loc>//localhost:46603/search/</loc>
   </url>
 </urlset>

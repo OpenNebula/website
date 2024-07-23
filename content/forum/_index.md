@@ -1,0 +1,4 @@
+---
+title: "Forum"
+type: blog
+---
