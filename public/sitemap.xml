@@ -2,57 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:36225/docs/getting-started/</loc>
+    <loc>//localhost:45807/docs/getting-started/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/install/ansible/</loc>
+    <loc>//localhost:45807/install/ansible/</loc>
   </url><url>
-    <loc>//localhost:36225/install/packages/</loc>
+    <loc>//localhost:45807/install/</loc>
   </url><url>
-    <loc>//localhost:36225/categories/</loc>
+    <loc>//localhost:45807/install/packages/</loc>
+  </url><url>
+    <loc>//localhost:45807/contribute/components/</loc>
+  </url><url>
+    <loc>//localhost:45807/docs/tutorials/</loc>
+  </url><url>
+    <loc>//localhost:45807/docs/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/tags/docs/</loc>
+    <loc>//localhost:45807/docs/explanations/</loc>
+  </url><url>
+    <loc>//localhost:45807/install/marketplace/</loc>
+  </url><url>
+    <loc>//localhost:45807/integrate/</loc>
+  </url><url>
+    <loc>//localhost:45807/install/extension/</loc>
+  </url><url>
+    <loc>//localhost:45807/docs/operation/</loc>
+  </url><url>
+    <loc>//localhost:45807/contribute/</loc>
+  </url><url>
+    <loc>//localhost:45807/install/provider/</loc>
+  </url><url>
+    <loc>//localhost:45807/docs/integration/</loc>
+  </url><url>
+    <loc>//localhost:45807/ecosystem/</loc>
+  </url><url>
+    <loc>//localhost:45807/try/</loc>
+  </url><url>
+    <loc>//localhost:45807/forum/</loc>
+  </url><url>
+    <loc>//localhost:45807/categories/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/docs/</loc>
+    <loc>//localhost:45807/tags/docs/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/docs/getting-started/example-page/</loc>
+    <loc>//localhost:45807/docs/getting-started/example-page/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/categories/examples/</loc>
+    <loc>//localhost:45807/categories/examples/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/</loc>
+    <loc>//localhost:45807/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/categories/placeholders/</loc>
+    <loc>//localhost:45807/categories/placeholders/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/tags/sample/</loc>
+    <loc>//localhost:45807/tags/sample/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/tags/</loc>
+    <loc>//localhost:45807/tags/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:36225/tags/test/</loc>
+    <loc>//localhost:45807/tags/test/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:36225/contribute/</loc>
-  </url><url>
-    <loc>//localhost:36225/ecosystem/</loc>
-  </url><url>
-    <loc>//localhost:36225/forum/</loc>
-  </url><url>
-    <loc>//localhost:36225/install/</loc>
-  </url><url>
-    <loc>//localhost:36225/integrate/</loc>
-  </url><url>
-    <loc>//localhost:36225/search/</loc>
-  </url><url>
-    <loc>//localhost:36225/try/</loc>
-  </url><url>
-    <loc>//localhost:36225/categories/tutorial/</loc>
   </url>
 </urlset>

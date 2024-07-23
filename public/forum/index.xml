@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Forum on OpenNebula</title>
-    <link>//localhost:36225/forum/</link>
+    <link>//localhost:45807/forum/</link>
     <description>Recent content in Forum on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:36225/forum/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:45807/forum/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

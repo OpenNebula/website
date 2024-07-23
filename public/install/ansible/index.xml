@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Install with Ansible on OpenNebula</title>
-    <link>//localhost:36225/install/ansible/</link>
+    <link>//localhost:45807/install/ansible/</link>
     <description>Recent content in Install with Ansible on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:36225/install/ansible/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:45807/install/ansible/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

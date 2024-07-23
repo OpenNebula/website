@@ -1,6 +1,7 @@
 ---
 title: "OpenNebula"
 type: docs
+description: "This is the description"
 ---
 
 {{% pageinfo %}}

@@ -2,38 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on OpenNebula</title>
-    <link>//localhost:36225/categories/</link>
+    <link>//localhost:45807/categories/</link>
     <description>Recent content in Categories on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:36225/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:45807/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Examples</title>
-      <link>//localhost:36225/categories/examples/</link>
+      <link>//localhost:45807/categories/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:36225/categories/examples/</guid>
+      <guid>//localhost:45807/categories/examples/</guid>
       <description></description>
     </item>
     <item>
       <title>Placeholders</title>
-      <link>//localhost:36225/categories/placeholders/</link>
+      <link>//localhost:45807/categories/placeholders/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:36225/categories/placeholders/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Ansible</title>
-      <link>//localhost:36225/categories/ansible/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:36225/categories/ansible/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Tutorial</title>
-      <link>//localhost:36225/categories/tutorial/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:36225/categories/tutorial/</guid>
+      <guid>//localhost:45807/categories/placeholders/</guid>
       <description></description>
     </item>
   </channel>
