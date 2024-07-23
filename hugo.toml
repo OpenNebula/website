@@ -106,16 +106,19 @@ enable = false
     url = "/contribute/"
     weight = 5
   [[menu.main]]
-    name = "Ecosystem"
+    name = "Ecosystem "
     url = "/ecosystem/"
+    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
     weight = 6
   [[menu.main]]
-    name = "Try"
+    name = "Try "
     url = "/try/"
+    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
     weight = 7
   [[menu.main]]
-    name = "Forum"
+    name = "Forum "
     url = "/forum/"
+    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
     weight = 8
 
 

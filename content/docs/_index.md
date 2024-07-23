@@ -1,6 +1,7 @@
 ---
 title: "Documentation"
 type: docs
+weight: 4
 ---
 
 {{% pageinfo %}}

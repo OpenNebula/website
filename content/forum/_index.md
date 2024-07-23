@@ -1,4 +1,5 @@
 ---
 title: "Forum"
-type: blog
+type: docs
+weight: 9
 ---
