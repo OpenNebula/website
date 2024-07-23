@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deploy on a Cloud Provider on OpenNebula</title>
-    <link>//localhost:45807/install/provider/</link>
+    <link>//localhost:43091/install/provider/</link>
     <description>Recent content in Deploy on a Cloud Provider on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:45807/install/provider/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:43091/install/provider/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

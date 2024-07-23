@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Integrate an Extension on OpenNebula</title>
-    <link>//localhost:45807/install/extension/</link>
+    <link>//localhost:43091/install/extension/</link>
     <description>Recent content in Integrate an Extension on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:45807/install/extension/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:43091/install/extension/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

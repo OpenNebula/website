@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Run a Marketplace Appliance on OpenNebula</title>
-    <link>//localhost:45807/install/marketplace/</link>
+    <link>//localhost:43091/install/marketplace/</link>
     <description>Recent content in Run a Marketplace Appliance on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:45807/install/marketplace/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:43091/install/marketplace/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

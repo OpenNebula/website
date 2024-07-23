@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenNebula</title>
-    <link>//localhost:45807/</link>
+    <link>//localhost:43091/</link>
     <description>Recent content on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:45807/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:43091/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Example Page</title>
-      <link>//localhost:45807/docs/getting-started/example-page/</link>
+      <link>//localhost:43091/docs/getting-started/example-page/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
-      <guid>//localhost:45807/docs/getting-started/example-page/</guid>
+      <guid>//localhost:43091/docs/getting-started/example-page/</guid>
       <description>This is a placeholder page. Replace it with your own content.&#xA;Text can be bold, italic, or strikethrough. Links should be blue with no underlines (unless hovered over).&#xA;There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade.</description>
     </item>
   </channel>

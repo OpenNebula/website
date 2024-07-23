@@ -4,9 +4,7 @@ type: docs
 description: "This is the description"
 ---
 
-{{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
-{{% /pageinfo %}}
+![Description of the image](/images/image1.png)
 
 This section is where the user documentation for your project lives - all the
 information your users need to understand and successfully use your project.
@@ -26,3 +24,4 @@ Find out how to use the Docsy theme in the [Docsy User
 Guide](https://docsy.dev/docs/). You can learn more about how to organize your
 documentation (and how we organized this site) in [Organizing Your
 Content](https://docsy.dev/docs/best-practices/organizing-content/).
+

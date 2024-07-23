@@ -28,7 +28,6 @@ github_branch= "PoC"
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "533000100d06b46c0"
 
-
 [params.ui]
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
@@ -42,6 +41,9 @@ sidebar_menu_foldable = true
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if se>
 sidebar_search_disable = false
 showLightDarkModeMenu = true
+
+# Enable Lunr.js offline search
+offlineSearch = false
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page,
@@ -127,7 +129,7 @@ enable = false
   # Add your release versions here
 version_menu = "Versions"
   [[params.versions]]
-    version = "v6.8.3"
+    version = "v7.0"
     url = "https://opennebula.github.io/website/docs/"
 
   [[params.versions]]
