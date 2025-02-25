@@ -164,10 +164,10 @@ version_menu = "Versions"
     disable = false
 
 # added the user feedback module
-[params.ui.feedback]
-enable = true
-yes = 'Glad to hear it'
-no = 'Sorry to hear that'
+#[params.ui.feedback]
+#enable = true
+#yes = 'Glad to hear it'
+#no = 'Sorry to hear that'
 
 # relativeURLs = true
 canonifyURLs = true
