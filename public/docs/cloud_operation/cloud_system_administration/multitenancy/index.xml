@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Multitenancy on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/</link>
+    <description>Recent content in Multitenancy on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/auth_overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/auth_overview/</guid>
+      <description>OpenNebula includes a complete user &amp;amp; group management system.&#xA;The resources a user may access in OpenNebula are controlled by a permissions system that resembles the typical UNIX one. By default, only the owner of a resource can use and manage it. Users can easily share the resources by granting use or manage permissions to other users in her group or to any other user in the system.&#xA;Upon group creation, an associated administrator user can be created.</description>
+    </item>
+    <item>
+      <title>Users</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_users/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_users/</guid>
+      <description>OpenNebula supports user accounts and groups. This guide shows how to manage users, groups are explained in their own guide. To manage user rights, visit the Managing ACL Rules guide.&#xA;A user in OpenNebula is defined by a username and a password. You don’t need to create a new Unix account in the front-end for each OpenNebula user, they are completely different concepts. OpenNebula users are authenticated using a session string (with &amp;lt;user&amp;gt;:&amp;lt;password&amp;gt; format), this is included in every operation and validated by OpenNebula service.</description>
+    </item>
+    <item>
+      <title>Groups</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_groups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_groups/</guid>
+      <description>A group in OpenNebula makes it possible to isolate users and resources. A user can see and use the shared resources from other users.&#xA;The group is an authorization boundary for the users, but you can also partition your cloud infrastructure and define what resources are available to each group using Virtual Data Centers (VDC). You can read more about OpenNebula’s approach to VDCs and the cloud from the perspective of different user roles in the Understanding OpenNebula guide.</description>
+    </item>
+    <item>
+      <title>VDCs</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_vdcs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_vdcs/</guid>
+      <description>A VDC (Virtual Data Center) defines an assignment of one or several groups to a pool of physical resources. This pool of Physical Resources consists of resources from one or several Clusters that could belong to different Zones or public external clouds for hybrid cloud computing. You can read more about OpenNebula’s approach to VDCs and the cloud from the perspective of different user roles in the Understanding OpenNebula guide.</description>
+    </item>
+    <item>
+      <title>Sunstone Views</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/fireedge_sunstone_views/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/fireedge_sunstone_views/</guid>
+      <description>Using the OpenNebula FireEdge Sunstone Views you will be able to provide a simplified UI aimed at end-users of an OpenNebula cloud. The OpenNebula FireEdge Sunstone Views are fully customizable, so you can easily enable or disable specific information tabs or action buttons. You can define multiple views for different user groups. You can define multiple views for different user groups. Each view defines a set of UI components, so each user just accesses and views the relevant parts of the cloud for her role.</description>
+    </item>
+    <item>
+      <title>Permissions and ACLs</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/chmod/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/chmod/</guid>
+      <description>Most OpenNebula resources have associated permissions for the owner, the users in her group, and others. For each one of these groups, there are three rights that can be set: USE, MANAGE and ADMIN. These permissions are very similar to those of UNIX file system.&#xA;The resources with associated permissions are Templates, VMs, Images and Virtual Networks. The exceptions are Users, Groups and Hosts.&#xA;Managing Permission through the CLI This is how the permissions look in the terminal:</description>
+    </item>
+    <item>
+      <title>Accounting</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/accounting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/accounting/</guid>
+      <description>The accounting toolset visualizes and reports resource usage data. This accounting tool addresses the accounting of the virtual resources. It includes resource consumption of the virtual machines as reported from the hypervisor.&#xA;Usage oneacct - prints accounting information for virtual machines&#xA;Usage: oneacct [options] -s, --start TIME First day of the data to retrieve -e, --end TIME Last day of the data to retrieve -u, --userfilter user User name or id to filter the results -g, --group group Group name or id to filter the results -H, --host HOST Host name or id to filter the results --xpath XPATH_EXPRESSION Xpath expression to filter the results.</description>
+    </item>
+    <item>
+      <title>Showback</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/showback/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/showback/</guid>
+      <description>The showback toolset reports resource usage cost, and allows the integration with chargeback and billing platforms. The toolset generates showback reports using the information retrieved from OpenNebula.&#xA;Set the VM Cost Each VM Template can optionally define a cost (see the syntax here). The cost is defined as cost per cpu per hour, and cost per memory MB per hour. The cost units are abstract and their equivalent to monetary or other cost metrics have to be defined in each deployment.</description>
+    </item>
+  </channel>
+</rss>

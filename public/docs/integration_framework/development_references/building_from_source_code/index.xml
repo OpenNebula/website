@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Building From Source Code on OpenNebula</title>
+    <link>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/</link>
+    <description>Recent content in Building From Source Code on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/integration_framework/development_references/building_from_source_code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/overview/</guid>
+      <description>How Should I Read This Chapter You should be reading this Chapter if you are trying to build OpenNebula from source code or trying to extend the Sunstone functionality.&#xA;This Chapter covers what are the OpenNebula software dependencies, how to compile OpenNebula and how to extend Sunstone functionality.&#xA;Hypervisor Compatibility All the Sections of this Chapter applies to all hypervisors.</description>
+    </item>
+    <item>
+      <title>Building from Source Code</title>
+      <link>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/compile/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/compile/</guid>
+      <description>This page will show you how to compile and install OpenNebula from the sources.&#xA;Warning Do not forget to check the Building Dependencies for a list of specific software requirements to build OpenNebula. Note If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please expose your case to &amp;lt;community-manager@opennebula.</description>
+    </item>
+    <item>
+      <title>Build Dependencies</title>
+      <link>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/build_deps/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/build_deps/</guid>
+      <description>This page lists the build dependencies for OpenNebula.&#xA;g++ compiler (&amp;gt;= 5.0) xmlrpc-c development libraries (&amp;gt;= 1.06) scons build tool (&amp;gt;= 0.98) sqlite3 development libraries (if compiling with sqlite support) (&amp;gt;= 3.6) mysql client development libraries (if compiling with mysql support) (&amp;gt;= 5.1, &amp;gt;= 5.6 is recommended for pool search) libxml2 development libraries (&amp;gt;= 2.7) libvncserver development libraries (&amp;gt;= 0.9) openssl development libraries (&amp;gt;= 0.9.8) ruby interpreter (&amp;gt;= 2.0.0) Ubuntu 22.</description>
+    </item>
+    <item>
+      <title>Sunstone Development</title>
+      <link>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/sunstone_dev/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/sunstone_dev/</guid>
+      <description>OpenNebula FireEdge server provides a next-generation web-management interface.&#xA;Sunstone GUI: &amp;lt;http://&amp;lt;OPENNEBULA-FRONTEND&amp;gt;:2616/fireedge/sunstone&amp;gt; (automatically redirected from &amp;lt;http://&amp;lt;OPENNEBULA-FRONTEND&amp;gt;:2616/) This second Sunstone incarnation is written in React / Redux and Material-UI is used for the styles and layout of the web.&#xA;If you want to do development work over Sunstone, you need to install OpenNebula from source. For this, you will need build dependencies, git, nodeJS v12 and npm v6.&#xA;Once the environment has been prepared, you need to clone one repository and follow the steps to compile the OpenNebula software.</description>
+    </item>
+    <item>
+      <title>Cloud Servers Authentication</title>
+      <link>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/cloud_auth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/cloud_auth/</guid>
+      <description>When a user interacts with Sunstone, the server authenticates the request and then forwards the requested operation to the OpenNebula daemon.&#xA;The forwarded requests between the server and the core daemon include the original user name, and are signed with the credentials of a special server user.&#xA;In this guide this request forwarding mechanism is explained, and how it is secured with a symmetric-key algorithm.&#xA;Server Users The Sunstone server communicate with the core using a server user.</description>
+    </item>
+  </channel>
+</rss>

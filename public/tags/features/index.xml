@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Features on OpenNebula</title>
+    <link>//localhost:1313/tags/features/</link>
+    <description>Recent content in Features on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/tags/features/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenNebula Concepts</title>
+      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/</guid>
+      <description>&#xA;OpenNebula Overview OpenNebula Infrastructure and Management The OpenNebula Model for Cloud Infrastructure Deployment OpenNebula Components Next Steps Key Features Cloud Access Model and Roles Knowledge Base Use Cases Screencasts User Stories Case Studies </description>
+    </item>
+    <item>
+      <title>Key Features</title>
+      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</guid>
+      <description>OpenNebula offers a simple but feature-rich and flexible solution to build and manage data center virtualization and enterprise clouds. This page provides a summary of its key features(*).&#xA;To learn more about the infrastructure platforms and services supported in each version of OpenNebula, refer to the Platform Notes for each version.&#xA;For high-level overviews and in-depth technical guides, please refer to OpenNebula’s White Papers.&#xA;INTERFACES&#xA;Simple, clean, intuitive GUI, with different views for cloud admins and end users Powerful command-line tools resembling typical Unix tools API in multiple languages APPLICATION MANAGEMENT AND CATALOG</description>
+    </item>
+  </channel>
+</rss>

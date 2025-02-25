@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Key Concepts on OpenNebula</title>
+    <link>//localhost:1313/tags/key-concepts/</link>
+    <description>Recent content in Key Concepts on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/tags/key-concepts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenNebula Concepts</title>
+      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/</guid>
+      <description>&#xA;OpenNebula Overview OpenNebula Infrastructure and Management The OpenNebula Model for Cloud Infrastructure Deployment OpenNebula Components Next Steps Key Features Cloud Access Model and Roles Knowledge Base Use Cases Screencasts User Stories Case Studies </description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hybrid Cluster Operations on OpenNebula</title>
+    <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/</link>
+    <description>Recent content in Hybrid Cluster Operations on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/overview/</guid>
+      <description>How Should I Read This Chapter Provisions in the form of Edge Clusters or HCI Clusters provide you with the tools needed to dynamically grow your cloud infrastructure on remote cloud providers or on-premises resources. In this chapter you can find a guide on how to:&#xA;Operate your edge or HCI clusters Manage Cloud or on-premises providers. Hypervisor Compatibility Provisions are compatible with the KVM and LXC hypervisors.</description>
+    </item>
+    <item>
+      <title>Managing Providers</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/provider_operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/provider_operations/</guid>
+      <description>You can manage your Edge providers with the command oneprovider. This will allow you to register the provider in OpenNebula and use it. There are two ways of using it:&#xA;As part of an Edge Cluster definition. When you create the Edge Cluster the provider information will be used. You can set the provider when creating a new Edge Cluster with the command oneprovision create and the parameter --provider. This will override any provider in the Edge Cluster definition template.</description>
+    </item>
+    <item>
+      <title>Provision Cluster Operations</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/cluster_operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/cluster_operations/</guid>
+      <description>Edge Cluster Limitations Currently it is not possible to connect to VMs running in edge clusters through the normal Sunstone mechanisms to access VM console, such as VNC. Other mechanisms that connect to the VM’s IP, such as SSH and RDP, work as in other VMs running in local clusters. Creating a Cluster Check the steps here. You can also use the command oneprovision create:&#xA;$ oneprovision create /tmp/provision.yml ID: 0 Managing the Edge Cluster Listing The list command lists all provisions.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Edge Cloud on OpenNebula</title>
+    <link>//localhost:1313/tags/edge-cloud/</link>
+    <description>Recent content in Edge Cloud on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/tags/edge-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Edge Cloud Reference Architecture</title>
+      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture/</guid>
+      <description>To support digital transformation initiatives, IT departments need the right blend of on-premises, public and edge cloud environments to support a variety of existing and emerging use cases while avoiding vendor lock-in and enabling cost optimization. They also need to combine virtual machine workloads with containerized applications from Kubernetes in a shared environment to get the best of both worlds: mature virtualization technologies and orchestration of application containers.&#xA;This document presents a powerful distributed Edge Cloud Architecture for OpenNebula composed of Edge Clusters that can run any workload - both virtual machines and containerized applications — on any resource — bare metal or virtualized — anywhere on premises and on a cloud provider.</description>
+    </item>
+  </channel>
+</rss>

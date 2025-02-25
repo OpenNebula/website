@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hosts and Clusters Configuration on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/</link>
+    <description>Recent content in Hosts and Clusters Configuration on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview/</guid>
+      <description>A Host is a server that has the ability to run Virtual Machines and that is connected to OpenNebula’s Front-end server. To learn how to prepare the Hosts, you can read the Open Cluster Deployment guide. Hosts are usually grouped in Clusters.&#xA;How Should I Read This Chapter In this chapter there are four guides describing these objects.&#xA;Host Management: Host management is achieved through the onehost CLI command or through the Sunstone GUI.</description>
+    </item>
+    <item>
+      <title>Hosts</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts/</guid>
+      <description>In order to use your existing physical nodes, you have to add them to OpenNebula as Hosts. To add a Host only its hostname and type is needed.&#xA;Warning Before adding a Linux Host check that you can SSH to it without being prompted for a password. Creating and Deleting Hosts Hosts are the servers managed by OpenNebula responsible for running VMs. To use these Hosts in OpenNebula you need to register them so they are monitored and made available to the scheduler.</description>
+    </item>
+    <item>
+      <title>Clusters</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide/</guid>
+      <description>Clusters group together Hosts, datastores and virtual networks that are configured to work together. A cluster is used to:&#xA;Ensure that VMs use resources that are compatible. Assign resources to user groups by creating Virtual Private Clouds. Clusters should contain homogeneous resources. Note that some operations like live migrations are restricted to Hosts in the same cluster.&#xA;The requirements for live migrating VMs between hosts of the same cluster are that no differences occur in the following areas of the hypervisors:</description>
+    </item>
+    <item>
+      <title>Virtual Topology and CPU Pinning</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa/</guid>
+      <description>Overview In this guide you’ll learn to set up OpenNebula to control how VM resources are mapped onto the hypervisor ones. These settings will help you to fine tune the performance of VMs. We will use the following concepts:&#xA;Cores, Threads and Sockets. A computer processor is connected to the motherboard through a socket. A processor can pack one or more cores, each one implements a separate processing unit that shares some cache levels, memory, and I/O ports.</description>
+    </item>
+    <item>
+      <title>PCI Passthrough</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough/</guid>
+      <description>It is possible to discover PCI devices in the Hosts and directly assign them to Virtual Machines in the KVM hypervisor.&#xA;The setup and environment information is taken from here. You can safely ignore all the VGA related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.&#xA;Warning The overall setup state was extracted from a preconfigured Fedora 22 machine.</description>
+    </item>
+    <item>
+      <title>NVIDIA GPU</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu/</guid>
+      <description>This section describes how to configure the hypervisor in order to use NVIDIA vGPU features.&#xA;BIOS You need to check that the following settings are enabled in your BIOS configuration:&#xA;Enable SR-IOV Enable IOMMU Note that the specific menu options where you need to activate these features depends on the motherboard manufacturer.&#xA;NVIDIA Drivers The NVIDIA drivers are proprietary, so you will probably need to download them separately. Please check the documentation for your Linux distribution.</description>
+    </item>
+  </channel>
+</rss>

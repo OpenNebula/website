@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WHMCS Installation and Usage on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/</link>
+    <description>Recent content in WHMCS Installation and Usage on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/overview/</guid>
+      <description>WHMCS is a web host billing automation platform which can be configured for many uses. We provide a Module for WHMCS which allows you to automate the creation and management of Users, Groups, and their Access Control Lists inside of OpenNebula, as well as provide billing based on their usage metrics.&#xA;You will be able to define these resource packages to control the usage and cost of your OpenNebula resources.</description>
+    </item>
+    <item>
+      <title>WHMCS Install/Config</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/configure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/configure/</guid>
+      <description>The install and update process are essentially identical. The Module files can be found in /usr/share/one/whmcs after you have installed the opennebula-whmcs-tenants package via your package manager. You will just need to merge the modules directory to the main WHMCS directory on the server hosting WHMCS. When updating the module just copy the files on top of the existing files and overwrite them. An example command for copying the files:</description>
+    </item>
+    <item>
+      <title>WHMCS Admin Usage</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/admin_usage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/admin_usage/</guid>
+      <description>Creating a Product Group Before creating products you should create groups to better organize your offerings. To create a new product group, navigate to System Settings -&amp;gt; Products/Services, then click on the Create a New Group button there. Fill in the Product Group Name, and any other pieces of this form such as Template and Payment Gateways, then click Save Changes once you’re done.&#xA;Creating a Product Navigate to System Settings -&amp;gt; Products/Services.</description>
+    </item>
+    <item>
+      <title>WHMCS User Guide</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/users_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/users_guide/</guid>
+      <description>Register an Account To register a new account, navigate to the client area of your WHMCS install and then go to Account -&amp;gt; Register. Fill out the following form and proceed with user creation. After it’s completed you should be able to log in as that new user.&#xA;Order a New Service To view the available products navigate to Services -&amp;gt; Order New Services. This page will display all available services which can be purchased.</description>
+    </item>
+  </channel>
+</rss>

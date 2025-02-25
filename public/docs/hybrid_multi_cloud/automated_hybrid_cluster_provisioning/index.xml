@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automated Hybrid Cluster Provisioning on OpenNebula</title>
+    <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/</link>
+    <description>Recent content in Automated Hybrid Cluster Provisioning on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

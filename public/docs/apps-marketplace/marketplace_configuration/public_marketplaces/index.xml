@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Public Marketplaces on OpenNebula</title>
+    <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/</link>
+    <description>Recent content in Public Marketplaces on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/overview/</guid>
+      <description>OpenNebula will configure by default the following Marketplaces in your installation:&#xA;Marketplace Name Description OpenNebula Public The official public OpenNebula Systems Marketplace Linux Containers The public LXC image repository Important The OpenNebula front-end needs access to the Internet to use the public Marketplaces. Only the OpenNebula Public marketplace is enabled by default. Other marketplaces are initialized as disabled. To enable them use onemarket enable &amp;lt;market_id&amp;gt;.&#xA;You can list the marketplaces configured in OpenNebula with onemarket list.</description>
+    </item>
+    <item>
+      <title>OpenNebula Systems Marketplace</title>
+      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/opennebula/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/opennebula/</guid>
+      <description>&#xA;The OpenNebula Marketplace is a catalog of virtual appliances ready to run in OpenNebula environments available at http://marketplace.opennebula.io/appliance.&#xA;Requirements No additional requirements needed.&#xA;Configuration Attributes Attribute Description NAME The name of the Marketplace. Default: OpenNebula Public MARKET_MAD one. ENDPOINT The Marketplace endpoint URL </description>
+    </item>
+    <item>
+      <title>Linux Containers Marketplace</title>
+      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/lxc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/lxc/</guid>
+      <description>The Linux Containers image server hosts a public image server with container images for LXC. OpenNebula’s Linux Containers marketplace enable users to easily download, contextualize and add Linux containers images to an OpenNebula datastore.&#xA;Note A log file (/var/log/chroot.log) is created inside the imported image filesystem with information about the operations done during the setup process; in case of issues it could be a useful source of information. Requirements Approximately 6GB of storage plus the container image size.</description>
+    </item>
+  </channel>
+</rss>

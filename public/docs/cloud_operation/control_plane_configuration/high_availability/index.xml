@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>High Availability on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/</link>
+    <description>Recent content in High Availability on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/overview/</guid>
+      <description>No host or service is absolutely reliable; we experience failures across various areas every day. To avoid the down-time and the consequent damages, we try to avoid a single point of failure by running several instances of the same service. Failure of one instance doesn’t mean complete service unavailability, as there are other instances that can handle the workload. Such deployment is highly available and resilient to partial failure.</description>
+    </item>
+    <item>
+      <title>Frontend HA</title>
+      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/frontend_ha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/frontend_ha/</guid>
+      <description>OpenNebula provides a built-in mechanism to ensure high availability (HA) of the core Front-end services - opennebula (i.e., daemon oned) and opennebula-scheduler (i.e., daemon mm_sched). Services need to be deployed and configured across several hosts and a distributed consensus protocol to provide fault-tolerance and state consistency across them. Such deployment is resilient to the failure of at least a single host (it depends on the total number of hosts).</description>
+    </item>
+    <item>
+      <title>VM HA</title>
+      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/vm_ha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/vm_ha/</guid>
+      <description>The goal of this section is to provide information to prepare for failures of the Virtual Machines or Hosts and to recover from them. These failures are categorized depending on whether they come from the physical infrastructure (Host failures) or from the virtualized infrastructure (VM crashes). In both scenarios, OpenNebula provides a cost-effective failover solution to minimize downtime from server and OS failures.&#xA;Host Failures When OpenNebula detects that a Host is down, a hook can be triggered to deal with the situation.</description>
+    </item>
+  </channel>
+</rss>

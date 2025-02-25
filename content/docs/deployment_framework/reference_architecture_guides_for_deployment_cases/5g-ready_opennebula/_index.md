@@ -1,0 +1,18 @@
+---
+title: "5G-ready OpenNebula"
+date: "2025/02/19"
+description:
+categories:
+pageintoc: "316"
+tags:
+weight: "2"
+---
+
+<a id="g-ready-opennebula"></a>
+
+<!--# 5G-ready OpenNebula -->
+
+* [Overview]({{% relref "overview" %}})
+* [Hardware Specification and Architecture]({{% relref "hardware_spec_and_architecture" %}})
+* [Automated Deployment and Config]({{% relref "automated_deploy_and_config" %}})
+* [Certification]({{% relref "certification" %}})

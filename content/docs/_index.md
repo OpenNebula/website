@@ -1,29 +1,60 @@
 ---
-title: "Documentation"
-type: docs
-weight: 4
-description: "This is the description"
+title: "OpenNebula Documentation"
+description: "An at-a-glance overview of the docs"
+weight: "1"
+tags: [documentation, intro]
 ---
 
-{{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
-{{% /pageinfo %}}
++[TBC - the final version would be based on the Hashicorp developer pages.]
 
-This section is where the user documentation for your project lives - all the
-information your users need to understand and successfully use your project.
+## Introduction and First Deployment
 
-For large documentation sets we recommend adding content under the headings in
-this section, though if some or all of them don’t apply to your project feel
-free to remove them or add your own. You can see an example of a smaller Docsy
-documentation site in the [Docsy User Guide](https://docsy.dev/docs/), which
-lives in the [Docsy theme
-repo](https://github.com/google/docsy/tree/master/userguide) if you'd like to
-copy its docs section.
+[**Cloud Installation**](cloud_installation):
 
-Other content such as marketing material, case studies, and community updates
-should live in the [About](/about/) and [Community](/community/) pages.
+- Learn about OpenNebula: Quickly grasp key concepts and overview features
+- Deploy an OpenNebula Cloud a for evaluation and testing
+- Automatically deploy a production-ready OpenNebula Cloud
 
-Find out how to use the Docsy theme in the [Docsy User
-Guide](https://docsy.dev/docs/). You can learn more about how to organize your
-documentation (and how we organized this site) in [Organizing Your
-Content](https://docsy.dev/docs/best-practices/organizing-content/).
+## Create and Manage Infrastructure
+
+[**Cloud Operation**](cloud_operation):
+
+- Configure the OpenNebula Control Plane for resilience, performance and scalability
+- Define hosts, clusters, networks and storage for your cloud
+- Set up authentication, monitoring and alerting, automated backups
+- Create and operate Virtual Machines
+- Deploy Multi-VM services
+
+[**AI Operations**](ai_operations):
+- Use OneAIOps to increase efficiency and reduce costs with AI-driven metrics predictions enabling intelligent resource management
+
+[**Apps Marketplace**](apps-marketplace):
+- Explore the appliances available on OpenNebula's Public Marketplace
+- Download and deploy OpenNebula Marketplace Appliances
+- Access, create and manage private marketplaces
+
+## Extend Infrastructure with Automatic Provisioning
+
+[**Hybrid Multi-Cloud**](hybrid_multi_cloud):
+- Create and define provisions on a variety of cloud providers
+- Automatically provision remote clusters on cloud, edge and hybrid infrastructures
+
+## Integrate OpenNebula
+
+[**Integration Framework**](integration_framework):
+- Leverage OpenNebula's tools to create your custom appliances
+- Learn how to certify and maintain your appliance for compliance with OpenNebula releases
+
+## References for Customized OpenNebula Deployment
+[**Deployment Framework**](deployment_framework):
+- Deployment architecture references:
+  - AI-enabled cloud administration
+  - 5G-ready OpenNebula
+  - Confidential computing
+  - OpenNebula on the ARM platform
+- Architecture guides for on-premises deployments, by hardware vendors and cloud providers
+  - HPE
+  - Dell
+  - Ampere
+  - OVH
+  - Scaleway

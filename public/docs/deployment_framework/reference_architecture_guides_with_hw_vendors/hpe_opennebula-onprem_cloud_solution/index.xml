@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HPE OpenNebula - On-premises Cloud Solution on OpenNebula</title>
+    <link>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/</link>
+    <description>Recent content in HPE OpenNebula - On-premises Cloud Solution on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/overview/</guid>
+      <description>TBC</description>
+    </item>
+    <item>
+      <title>Automated Deploy and Configuration</title>
+      <link>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/automated_deploy_and_config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/automated_deploy_and_config/</guid>
+      <description>TBC</description>
+    </item>
+    <item>
+      <title>Hardware Specification and Architecture</title>
+      <link>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</guid>
+      <description>TBC</description>
+    </item>
+    <item>
+      <title>Certification</title>
+      <link>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/certification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/certification/</guid>
+      <description>TBC</description>
+    </item>
+  </channel>
+</rss>

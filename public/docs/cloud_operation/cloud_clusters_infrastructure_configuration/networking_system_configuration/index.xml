@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking System Configuration on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/</link>
+    <description>Recent content in Networking System Configuration on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview/</guid>
+      <description>When a new Virtual Machine is launched, OpenNebula will connect its virtual network interfaces (defined by NIC attributes) to hypervisor network link devices as defined in the corresponding Virtual Network. This will allow the VM to have access to public and private networks.&#xA;OpenNebula supports the following networking modes:&#xA;Bridged. The VM NIC is added to a Linux bridge on the Host. This mode can be configured to use Security Groups and network isolation.</description>
+    </item>
+    <item>
+      <title>Defining and Managing Virtual Networks</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets/</guid>
+      <description>Commonly a Host is connected to one or more networks that are available to the VMs through bridges. OpenNebula allows the creation of Virtual Networks by mapping them on top of the physical ones.&#xA;Virtual Network Definition A Virtual Network definition consists of three different parts:&#xA;The underlying physical network infrastructure that will support it, including the network driver. The logical address space available. Addresses associated to a Virtual Network can be IPv4, IPv6, dual stack IPv4-IPv6 or Ethernet.</description>
+    </item>
+    <item>
+      <title>Node Setup</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/node/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/node/</guid>
+      <description>This guide includes specific node setup steps to enable each network mode. You only need to apply the corresponding section to the selected mode.&#xA;Bridged Networking Mode Requirements The OpenNebula node packages are installed. See the KVM node and LXC node installation sections for more details. Configuration No additional configuration is needed. If BRIDGE configured in the Virtual Network does not exist, a new Linux bridge will be created when the VM is instantiated.</description>
+    </item>
+    <item>
+      <title>Bridged Networking</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged/</guid>
+      <description>This guide describes how to deploy Bridged networks. In this mode, the virtual machine traffic is directly bridged through the Linux bridge on the hypervisor Nodes. Bridged networks can operate in four different modes depending on the additional traffic filtering made by OpenNebula:&#xA;Dummy Bridged, no filtering, no bridge setup (legacy no-op driver). Bridged, no filtering is made, managed bridge. Bridged with Security Groups, iptables rules are installed to implement security groups rules.</description>
+    </item>
+    <item>
+      <title>802.1Q VLAN Networks</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan/</guid>
+      <description>This guide describes how to enable network isolation provided through Host-managed VLANs. This driver will create a bridge for each OpenNebula Virtual Network and attach a VLAN tagged network interface to the bridge. This mechanism is compliant with IEEE 802.1Q.&#xA;The VLAN ID will be the same for every interface in a given network, automatically computed by OpenNebula. It may also be forced by specifying a VLAN_ID parameter in the Virtual Network template.</description>
+    </item>
+    <item>
+      <title>VXLAN Networks</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan/</guid>
+      <description>This guide describes how to enable Network isolation provided through the VXLAN encapsulation protocol. This driver will create a bridge for each OpenNebula Virtual Network and attach a VXLAN tagged network interface to the bridge.&#xA;The VXLAN ID will be the same for every interface in a given network, calculated automatically by OpenNebula. It may also be forced by setting the VLAN_ID attribute in the Virtual Network template.&#xA;Additionally, each VXLAN has an associated multicast address to encapsulate L2 broadcast and multicast traffic.</description>
+    </item>
+    <item>
+      <title>Open vSwitch Networks</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch/</guid>
+      <description>This guide describes how to use the Open vSwitch network drivers. They provide network isolation using VLANs by tagging ports and basic network filtering using OpenFlow. Other traffic attributes that may be configured through Open vSwitch are not modified.&#xA;The VLAN ID will be the same for every interface in a given network, calculated automatically by OpenNebula. It may also be forced by specifying an VLAN_ID parameter in the Virtual Network template.</description>
+    </item>
+  </channel>
+</rss>

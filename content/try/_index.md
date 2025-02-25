@@ -1,6 +1,9 @@
 ---
 title: "Try"
 type: docs
+description:
 weight: 8
-description: "This is the description"
+---
+
++[TBD. Include link to [Try OpenNebula with miniONE]({{% relref try_opennebula_with_minione %}}).]
 ---

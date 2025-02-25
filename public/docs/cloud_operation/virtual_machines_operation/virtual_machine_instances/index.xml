@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Virtual Machine Instances on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/</link>
+    <description>Recent content in Virtual Machine Instances on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Virtual Machine Instances</title>
+      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/vm_instances/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/vm_instances/</guid>
+      <description>This guide follows the Creating Virtual Machines guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the onevm command.&#xA;Virtual Machine States The life-cycle of a Virtual Machine within OpenNebula includes the following stages:&#xA;Note Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the Virtual Machines States Reference guide): Short state State Meaning pend Pending By default a VM starts in the pending state, waiting for a resource to run on.</description>
+    </item>
+  </channel>
+</rss>

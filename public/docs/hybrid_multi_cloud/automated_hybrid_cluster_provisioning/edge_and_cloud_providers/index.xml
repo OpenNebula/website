@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Edge And Cloud Providers on OpenNebula</title>
+    <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/</link>
+    <description>Recent content in Edge And Cloud Providers on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/overview/</guid>
+      <description>A Provider represents a Cloud where resources (hosts, networks or storage) are allocated to implement a Provision. Usually a Provider includes a zone or region in the target Cloud and an account that will be used to create the resources needed.&#xA;How Should I Read This Chapter In this chapter you can find a guide on how to create Providers based on the supported Clouds. The following Cloud providers are enabled by default after installing OpenNebula:</description>
+    </item>
+    <item>
+      <title>AWS Provider</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/aws_provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/aws_provider/</guid>
+      <description>An AWS provider contains the credentials to interact with Amazon and also the region to deploy your Provisions. OpenNebula comes with four pre-defined AWS providers in the following regions:&#xA;Frankfurt London North Virginia (US) North California (US) In order to define an AWS provider, you need the following information:&#xA;Credentials: these are used to interact with the remote provider. You need to provide access_key and secret_key. You can follow this guide.</description>
+    </item>
+    <item>
+      <title>Equinix Provider</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/equinix_provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/equinix_provider/</guid>
+      <description>An Equinix provider contains the credentials to interact with Equinix and also the location to deploy your Provisions. OpenNebula comes with four pre-defined providers in the following regions:&#xA;Amsterdam Parsippany (NJ, US) Tokyo California (US) In order to define an Equinix provider, you need the following information:&#xA;Credentials: these are used to interact with the remote provider. You need to provide token and project. You can follow this guide to get this data.</description>
+    </item>
+    <item>
+      <title>Scaleway Provider</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/scaleway_provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/scaleway_provider/</guid>
+      <description>A Scaleway provider contains the credentials to interact with Scaleway and also the location to deploy your Provisions. OpenNebula comes with three pre-defined providers in the following regions:&#xA;PAR-1 (France - Paris) NL-AMS-1 (Netherlands - Amsterdam) PL-WAW-3 (Poland - Warsaw) In order to define a Scaleway provider, you need the following information:&#xA;Credentials: these are used to interact with the remote provider. You need to provide access_key, secret_key and project_id.</description>
+    </item>
+    <item>
+      <title>On-Premise Provider</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/onprem_provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/onprem_provider/</guid>
+      <description>The onprem provider is a convenient abstraction to represent your local resources. This provider can be used to automatically configure and install OpenNebula clusters using your on-premises servers. It needs no special configuration as it will retrieve the FQDNs or IP addresses of the hosts while creating the provisions.&#xA;How to Create the On-Premises Provider You just need to create the on-premises provider once, simply run the following command:</description>
+    </item>
+  </channel>
+</rss>

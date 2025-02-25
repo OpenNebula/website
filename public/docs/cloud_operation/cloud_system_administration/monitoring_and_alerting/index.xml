@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monitoring and Alerting on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/</link>
+    <description>Recent content in Monitoring and Alerting on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/overview/</guid>
+      <description>This chapter contains documentation on how to configure OpenNebula to work with Prometheus monitoring and alerting toolkit. The integration consists of four components:&#xA;A Libvirt Exporter, that provides information about VM (KVM domains) running on an OpenNebula host. An OpenNebula Exporter, that provides basic information about the overall OpenNebula cloud. Alert rules sample files based on the provided metrics Grafana dashboards to visualize VM, Host and OpenNebula information in a convenient way.</description>
+    </item>
+    <item>
+      <title>Installation and Configuration</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/install/</guid>
+      <description>This page describes how to install the OpenNebula Prometheus integration packages available in the OpenNebula software repositories.&#xA;Step 1. OpenNebula Repositories [Front-end, Hosts] At this point OpenNebula software repositories should already be configured in your front-end and hosts. Double check this is the case before proceeding, more information can be found in the OpenNebula Repositories guide.&#xA;Step 2. Install Front-end Packages [Front-end] In your OpenNebula front-end, install the Prometheus package.</description>
+    </item>
+    <item>
+      <title>Grafana Visualization</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/grafana/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/grafana/</guid>
+      <description>Requirements This guide assumes you already have a up and running Grafana service. If you do not already have Grafana installed, refer to the following guides:&#xA;Download and Installation. Add a new Prometheus Data sources. Note Prometheus is listening on the standard port (9090) as described in the installation guide. Grafana Dashboards We provide three dashboard templates that can be customized to your needs:&#xA;Dashboard to visualize Virtual Machine information: /usr/share/one/grafana/dashboards/vms.</description>
+    </item>
+    <item>
+      <title>Alert Manager</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/alerts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/alerts/</guid>
+      <description>Installation and Configuration Note If you are already running the Prometheus AlertManager you can skip this section and add the alarms described in the next section to your rules file. AlertManager is part of the Prometheus distribution and should already be installed in your system after completing the installation process, see more details here.&#xA;Now you just need to enable and start the AlertManager service:&#xA;# systemctl enable --now opennebula-alertmanager.</description>
+    </item>
+    <item>
+      <title>Exporter Metrics</title>
+      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/metrics/</guid>
+      <description>OpenNebula Exporter Name Description Type opennebula_host_total Total number of hosts defined in OpenNebula gauge opennebula_host_state Host state 0:init 2:monitored 3:error 4:disabled 8:offline gauge opennebula_host_mem_total_bytes Total memory capacity gauge opennebula_host_mem_maximum_bytes Total memory capacity considering overcommitment gauge opennebula_host_mem_usage_bytes Total memory capacity allocated to VMs gauge opennebula_host_cpu_total_ratio Total CPU capacity gauge opennebula_host_cpu_maximum_ratio Total CPU capacity considering overcommitment gauge opennebula_host_cpu_usage_ratio Total CPU capacity allocated to VMs gauge opennebula_host_vms Number of VMs allocated to the host gauge opennebula_datastore_total Total number of datastores defined in OpenNebula gauge opennebula_datastore_total_bytes Total capacity of the datastore gauge opennebula_datastore_used_bytes Capacity being used in the datastore gauge opennebula_datastore_free_bytes Available capacity in the datastore gauge opennebula_datastore_images Number of images stored in the datastore gauge opennebula_vm_total Total number of VMs defined in OpenNebula gauge opennebula_vm_host_id Host ID where the VM is allocated gauge opennebula_vm_state VM state 0:init 1:pending 2:hold 3:active 4:stopped 5:suspended 6:done 8:poweroff 9:undeployed 10:cloning gauge opennebula_vm_lcm_state VM LCM state, only relevant for state 3 (active) gauge opennebula_vm_mem_total_bytes Total memory capacity gauge opennebula_vm_cpu_ratio Total CPU capacity requested by the VM gauge opennebula_vm_cpu_vcpus Total number of virtual CPUs gauge opennebula_vm_disks Total number of disks gauge opennebula_vm_disk_size_bytes Size of the VM disk gauge opennebula_vm_nics Total number of network interfaces gauge opennebula_oned_state OpenNebula oned service state 0:down 1:up gauge opennebula_scheduler_state OpenNebula scheduler service state 0:down 1:up gauge opennebula_flow_state OpenNebula Flow service state 0:down 1:up gauge opennebula_hem_state OpenNebula hook manager service state 0:down 1:up gauge opennebula_gate_state OpenNebula Gate service state 0:down 1:up gauge Libvirt Exporter Name Description Type opennebula_libvirt_requests_total The total number of HTTP requests handled by the Rack application.</description>
+    </item>
+  </channel>
+</rss>

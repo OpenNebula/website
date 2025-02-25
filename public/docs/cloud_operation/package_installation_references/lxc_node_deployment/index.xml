@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lxc Node Deployment on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/</link>
+    <description>Recent content in Lxc Node Deployment on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/overview/</guid>
+      <description>LXC is a Linux technology which allows us to create and manage system and application containers. The containers are computing environments running on a particular hypervisor Node alongside other containers or Host services, but secured and isolated in their own namespaces (user, process, network).&#xA;From the perspective of a hypervisor Node, such a container environment is just an additional process tree among other hypervisor processes. Inside of the environment, it looks like a standard Linux installation that sees only its own resources but shares the host kernel.</description>
+    </item>
+    <item>
+      <title>LXC Node Installation</title>
+      <link>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_node_installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_node_installation/</guid>
+      <description>This page shows you how to configure OpenNebula LXC Node from the binary packages.&#xA;Note Before reading this chapter, you should have at least installed your Front-end node. Step 1. Add OpenNebula Repositories Refer to OpenNebula Repositories guide to add the Enterprise and Community Edition software repositories.&#xA;Step 2. Installing the Software Installing on AlmaLinux/RHEL Repository EPEL OpenNebula depends on packages which aren’t in the base distribution repositories. Execute one of the commands below (distinguished by the host platform) to configure access to additional EPEL (Extra Packages for Enterprise Linux) repository:</description>
+    </item>
+    <item>
+      <title>LXC Driver</title>
+      <link>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver/</guid>
+      <description>Requirements LXC version &amp;gt;= 3.0.3 installed on the host. cgroup version 1 or 2 hosts are required to implement resource control operations (e.g. CPU pinning, memory or swap limitations). Considerations &amp;amp; Limitations Privileged Containers and Security In order to ensure the security in a multitenant environment, by default, the containers created by the LXC driver will be unprivileged. The unprivileged containers will be deployed as root. It will use 600100001-600165537 sub UID/GID range for mapping users/groups in order to increase security in case a malicious agent is able to escape the container.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Configuration References on OpenNebula</title>
+    <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/</link>
+    <description>Recent content in Configuration References on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/cloud_operation/operation_references/configuration_references/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Virtual Machine Template</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/template/</guid>
+      <description>A template file consists of a set of attributes that defines a Virtual Machine. Using the command onetemplate create, a template can be registered in OpenNebula to be instantiated later. For compatibility with previous versions, you can also create a new Virtual Machine directly from a template file, using the onevm create command.&#xA;Warning Some template attributes can compromise the security of the system or the security of other VMs, and can be used only by users in the oneadmin group.</description>
+    </item>
+    <item>
+      <title>Image Template</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/img_template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/img_template/</guid>
+      <description>This page describes how to define a new image template. An image template follows the same syntax as the VM template.&#xA;Warning Some template attributes can compromise the security of the system or the security of other VMs, and can be used only by users in the oneadmin group. These attributes can be configured in oned.conf. In the following tables, default attributes are marked with *. For the complete list, see the Restricted Attributes section.</description>
+    </item>
+    <item>
+      <title>Virtual Network Template</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/vnet_template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/vnet_template/</guid>
+      <description>This page describes how to define a new Virtual Network. A Virtual Network includes three different aspects:&#xA;Physical network attributes. Address Range. Configuration attributes for the guests. When writing a Virtual Network template in a file, it follows the same syntax as the VM template.&#xA;Physical Network Attributes It defines the underlying networking infrastructure that will support the Virtual Network, such as the VLAN ID or the hypervisor interface to bind the Virtual Network to.</description>
+    </item>
+    <item>
+      <title>Command Line Interface</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/cli/</guid>
+      <description>OpenNebula provides a set commands to interact with the system:&#xA;CLI oneacct: gets accounting data from OpenNebula. oneacl: manages OpenNebula ACLs. onecfg: manages OpenNebula configuration files upgrade. onecluster: manages OpenNebula clusters. onedatastore: manages OpenNebula datastores. onedb: OpenNebula database migration tool. onegroup: manages OpenNebula groups. onehook: manages OpenNebula hooks. onehost: manages OpenNebula hosts. oneimage: manages OpenNebula images. onemarket: manages internal and external marketplaces. onemarketapp: manages appliances from marketplaces. oneprovider: manages OpenNebula providers.</description>
+    </item>
+    <item>
+      <title>Virtual Machine States Reference</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/vm_states/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/vm_states/</guid>
+      <description>This page is a complete reference of all the VM states that will be useful for administrators doing troubleshooting and developers.&#xA;The simplified life-cycle is explained in the Managing Virtual Machines guide. That simplified diagram uses a smaller number of state names. These names are the ones used by onevm list, e.g. prolog, prolog_migrate and prolog_resume are all presented as prol. It is intended as a reference for end-users. That section should be enough for end-users and every-day administration tasks.</description>
+    </item>
+    <item>
+      <title>Image States Reference</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/img_states/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/img_states/</guid>
+      <description>This page is a complete reference of all the Image states that will be useful for administrators doing troubleshooting and developers.&#xA;The simplified life-cycle is explained in the Virtual Machines Images guide. That simplified diagram uses a smaller number of state names. That section should be enough for end-users and every-day administration tasks.&#xA;List of States OpenNebula’s images define its state using the STATE variable. The state can be seen from the CLI (oneimage show) and from Sunstone (Info panel for the Image).</description>
+    </item>
+    <item>
+      <title>Host States Reference</title>
+      <link>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/host_states/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/host_states/</guid>
+      <description>This page is a complete reference of all the Host states that will be useful for administrators doing troubleshooting and developers.&#xA;The simplified life-cycle is explained in the Hosts guide. That simplified diagram uses a smaller number of state names. That section should be enough for end-users and every-day administration tasks.&#xA;List of States OpenNebula’s hosts define its state using the STATE variable. The state can be seen from the CLI (onehost show) and from Sunstone (Info panel for Hosts).</description>
+    </item>
+  </channel>
+</rss>

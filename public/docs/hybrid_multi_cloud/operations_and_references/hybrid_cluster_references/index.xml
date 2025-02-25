@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hybrid Cluster References on OpenNebula</title>
+    <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/</link>
+    <description>Recent content in Hybrid Cluster References on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansible Playbooks</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/playbooks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/playbooks/</guid>
+      <description>Newly provisioned physical resources are mostly running only a base operating system without any additional services. Hosts need to pass the configuration phase to setup the additional software repositories, install packages, and configure and run necessary services to comply with the intended host purpose. This configuration process is fully handled by the oneprovision tool as part of the initial deployment (oneprovision create) or independent run anytime later (oneprovision configure).</description>
+    </item>
+    <item>
+      <title>Ansible Roles</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/roles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/roles/</guid>
+      <description>Warning This chapter is only for advanced users who need to modify the host configuration process significantly. Unless the configuration process doesn’t meet your requirements, you don’t need to be familiar with this part. The following roles are shipped with the OpenNebula provision tool and installed into /usr/share/one/oneprovision/ansible/roles/.&#xA;Role ceph-opennebula-facts This role is used to make ceph_oneadmin_key and ceph_oneadmin_keyring facts accessible for used on ceph-opennebula-osd&#xA;No parameters.&#xA;Role ceph-opennebula-mon Creates OpenNebula Ceph pools</description>
+    </item>
+    <item>
+      <title>Virtual Objects Provisioning</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/virtual/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/virtual/</guid>
+      <description>With OneProvision you can grow up the physical resources available in your cloud. Once you have your infrastructure ready, you need to create virtual objects in it, in order to use it. In this section we are going to show a way to deploy everything at once with OneProvision.&#xA;Managing Virtual Objects In this section you can check how to create all the virtual objects you need to have a cluster ready to instantiate a virtual machine.</description>
+    </item>
+    <item>
+      <title>Provision Template Reference</title>
+      <link>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/template/</guid>
+      <description>The provision is a process of allocating new physical resources from the remote providers. All the information needed is stored in the provision template file and passed to the oneprovision create command.&#xA;In this chapter, we’ll describe the format and content of the provision template.&#xA;A provision template is a YAML-formatted file with parameters specifying the new physical resources to be provisioned. It contains:&#xA;header (name, configuration playbook, parent template) global default parameters for remote connection (SSH), host provision driver, host configuration tunables.</description>
+    </item>
+  </channel>
+</rss>

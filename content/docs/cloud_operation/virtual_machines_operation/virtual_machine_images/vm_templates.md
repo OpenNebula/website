@@ -1,0 +1,546 @@
+---
+title: "Virtual Machine Templates"
+date: "2025/02/17"
+description:
+categories:
+pageintoc: "84"
+tags:
+weight: "3"
+---
+
+<a id="vm-guide"></a>
+
+<a id="vm-templates"></a>
+
+<!--# Virtual Machine Templates -->
+
+In OpenNebula, VMs are defined with VM Templates. This section explains how to describe a Virtual Machine, and how users typically interact with the system.
+
+OpenNebula administrators and users can register Virtual Machine definitions (VM Templates) in the system, to be instantiated later as Virtual Machine instances. These VM Templates can be instantiated several times, and also shared with other users.
+
+<a id="vm-guide-defining-a-vm-in-3-steps"></a>
+
+## Defining a VM
+
+A Virtual Machine Template, at the very basics, consists of:
+
+- A capacity in terms memory and CPU
+- A set of NICs attached to one or more virtual networks
+- A set of disk images
+- Optional attributes like VNC graphics, the booting order, context information, etc.
+
+VM Templates are stored in the system to easily browse and instantiate VMs from them.
+
+### Capacity & Name
+
+Defines the basic attributes of the VM including its NAME, amount of RAM (`MEMORY`), or number of Virtual CPUs.
+
+[See Capacity Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-capacity-section" %}}).
+
+<a id="vm-disks"></a>
+
+### Disks
+
+Each disk is defined with a DISK attribute. A VM can use three types of disk:
+
+* **Use a persistent Image**: changes to the disk image will persist after the VM is terminated.
+* **Use a non-persistent Image**: a copy of the source Image is used, changes made to the VM disk will be lost.
+* **Volatile**: disks are created on the fly on the target host. After the VM is terminated the disk is disposed.
+
+[See Disks Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-disks-section" %}}).
+
+### Network Interfaces & Alias
+
+Network interfaces can be defined in two different ways:
+
+- **Manual selection**: interfaces are attached to a pre-selected Virtual Network. Note that this may require to build multiple templates considering the available networks in each cluster.
+- **Automatic selection**: Virtual networks will be scheduled like other resources needed by the VM (like hosts or datastores). This way, you can hint the type of network the VM will need and it will be automatically selected among those available in the cluster. [See more details here]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#vgg-vm-vnets" %}}).
+
+Network **interface alias** allows you to have more than one IP on each network interface. This does not create a new virtual interface on the VM. The alias address is added to the network interface. An alias can be attached and detached. Note also that when a NIC with an alias is detached, all the associated alias are also detached.
+
+The alias takes a lease from the network which it belongs to. So, for the OpenNebula it is the same as a NIC and exposes the same management interface, it is just different in terms of the associated virtual network interface within the VM.
+
+{{< alert title="Note" color="success" >}}
+The Virtual Network used for the alias can be different from that of the NIC which is alias of.{{< /alert >}} 
+
+[See Network Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-network-section" %}}).
+
+### A Complete Example
+
+The following example shows a VM Template file with a couple of disks and a network interface, also a VNC section and an alias were added.
+
+```none
+NAME   = test-vm
+MEMORY = 128
+CPU    = 1
+
+DISK = [ IMAGE  = "Arch Linux" ]
+DISK = [ TYPE     = swap,
+         SIZE     = 1024 ]
+
+NIC = [ NETWORK = "Public", NETWORK_UNAME="oneadmin" ]
+
+NIC = [ NETWORK = "Private", NAME = "private_net" ]
+NIC_ALIAS = [ NETWORK = "Public", PARENT = "private_net" ]
+
+GRAPHICS = [
+  TYPE    = "vnc",
+  LISTEN  = "0.0.0.0"]
+```
+
+{{< alert title="Important" color="success" >}}
+Check the [VM definition file for a complete reference]({{% relref "../../operation_references/configuration_references/template#template" %}}){{< /alert >}} 
+
+Simple templates can be also created using the command line instead of creating a template file. For example, a similar template as the previous example can be created with the following command:
+
+```default
+$ onetemplate create --name test-vm --memory 128 --cpu 1 --disk "Arch Linux" --nic Public
+```
+
+For a complete reference of all the available options for `onetemplate create`, go to the [CLI reference]({{% relref "../../operation_references/configuration_references/cli#cli" %}}), or run `onetemplate create -h`.
+
+{{< alert title="Note" color="success" >}}
+OpenNebula Templates are designed to be hypervisor-agnostic, but there are additional attributes that are supported for each hypervisor. Check the corresponding hypervisor guide for specific details.{{< /alert >}} 
+
+<a id="context-overview"></a>
+
+## Virtual Machine Contextualization
+
+OpenNebula uses a method called contextualization to send information to the VM at boot time. Its most basic usage is to share networking configuration and login credentials with the VM so it can be configured. More advanced cases can be starting a custom script on VM boot or preparing configuration to use [OpenNebula Gate]({{% relref "../multi-vm_workflows/onegate_usage#onegate-usage" %}}).
+
+You can define contextualization data in the VM Template. [See Context Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).
+
+<a id="vm-templates-endusers"></a>
+
+## Preparing VM Templates for End-Users
+
+Besides the basic VM definition attributes, you can setup some extra options in your VM Template to ease sharing it with other users.
+
+### Customizable Capacity
+
+The capacity attributes (`CPU`, `MEMORY`, `VCPU`) can be modified each time a VM Template is instantiated. The Template owner can decide if and how each attribute can be customized. The modification options available are:
+
+* **fixed** (`fixed`): The value cannot be modified.
+* **any value** (`text`): The value can be changed to any number by the user instantiating the Template.
+* **range** (`range`): Users will be offered a range slider between the given minimum and maximum values.
+* **list** (`list`): Users will be offered a drop-down menu to select one of the given options.
+
+If you are using a template file instead of Sunstone, the modification is defined with user input (`USER_INPUT`) attributes ([see below]({{% relref "#vm-guide-user-inputs" %}})). The absence of user input is an implicit *any value*. For example:
+
+```none
+CPU    = "1"
+MEMORY = "2048"
+VCPU   = "2"
+USER_INPUTS = [
+  VCPU   = "O|fixed|| |2"
+  CPU    = "M|list||0.5,1,2,4|1",
+  MEMORY = "M|range||512..8192|2048" ]
+```
+
+{{< alert title="Note" color="success" >}}
+Use float types for CPU, and integer types for MEMORY and VCPU. More information in [the Template reference documentation]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).{{< /alert >}} 
+
+<!-- TMP FIX: -->
+<!-- .. note:: This capacity customization can be forced to be disabled for any Template in the cloud view. Read more in the :ref:`Cloud View Customization documentation <cloud_view_config>`. -->
+
+<a id="vm-guide-user-inputs"></a>
+
+### User Inputs
+
+The User Inputs functionality provides the VM Template creator the possibility to dynamically ask for dynamic values. This is a convenient way to parametrize a base installation. These inputs will be presented to the user when the VM Template is instantiated. The VM guest needs to have the OpenNebula contextualization packages installed to make use of the values provided by the user. The following example shows how to pass some user inputs to a VM:
+
+```none
+USER_INPUTS = [
+  BLOG_TITLE="M|text|Blog Title",
+  MYSQL_PASSWORD="M|password|MySQL Password",
+]
+
+CONTEXT=[
+  BLOG_TITLE="$BLOG_TITLE",
+  MYSQL_PASSWORD="$MYSQL_PASSWORD" ]
+```
+
+{{< alert title="Note" color="success" >}}
+If a VM Template with user inputs is used by a [Service Template Role]({{% relref "../multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}}), the user will be also asked for these inputs when the Service is created.{{< /alert >}} 
+
+{{< alert title="Note" color="success" >}}
+You can use the flag `--user-inputs ui1,ui2,ui3` to use them in a non-interactive way.{{< /alert >}} 
+
+[See User Inputs Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).
+
+<a id="vm-guide-user-inputs-sunstone"></a>
+
+#### User Inputs in Sunstone
+
+When a virtual machine template is instantiated using Sunstone, the user will be asked to fill the user inputs that are defined in the virtual machine template. So, using the following user inputs:
+
+```none
+USER_INPUTS = [
+  BLOG_TITLE="M|text|Blog Title",
+  BLOG_DESCRIPTION="O|text|Blog Description",
+  MYSQL_ENDPOINT="M|text|MySQL Endpoint",
+  MYSQL_USER="O|password|MySQL User",
+  MYSQL_PASSWORD="O|password|MySQL Password",
+  MYSQL_ADDITIONAL="O|boolean|Define additional parameters",
+  MYSQL_SOCKET="O|text|MySQL Socket",
+  MYSQL_CHARSET="O|text|MySQL Charset",
+]
+```
+
+The result will be a step with all the user inputs that are defined in the template:
+
+![sunstone_user_inputs_no_convention](/images/sunstone_user_inputs_no_convention.png)
+
+In order to improve the user experience, Sunstone can render this user inputs in a different way, easy to understand to the Sunstone user. To do that, Sunstone uses rules based on the name of the user inputs. That rules are:
+
+<a id="sunstone-layout-rules"></a>
+- User input name has to meet the following convention `ONEAPP_<APP>_<GROUP>_<FIELD>` where all the user inputs that meet this convention will be grouped by APP and GROUP. An APP will be rendered as a tab in Sunstone and a GROUP will group the user inputs that belong to this group.
+- If `FIELD` is the word `ENABLED` and the user input type is boolean, all the user inputs that have the same APP and GROUP will be hidden until the ENABLED user input is turn on.
+- If a user input not meet the convention, it will be placed in a tab called Others.
+- If all the user inputs do not meet the convention name, no tabs will be rendered (as the previous example).
+
+So, if the previous template is modified as follows:
+
+```none
+USER_INPUTS = [
+  ONEAPP_BLOG_CONF_TITLE="M|text|Blog Title",
+  ONEAPP_BLOG_CONF_DESCRIPTION="O|text|Blog Description",
+  ONEAPP_MYSQL_CONFIG_ENDPOINT="M|text|MySQL Endpoint",
+  ONEAPP_MYSQL_CONFIG_USER="O|password|MySQL User",
+  ONEAPP_MYSQL_CONFIG_PASSWORD="O|password|MySQL Password",
+  ONEAPP_MYSQL_ADDITIONAL_ENABLED="O|boolean|Define additional parameters",
+  ONEAPP_MYSQL_ADDITIONAL_SOCKET="O|text|MySQL Socket",
+  ONEAPP_MYSQL_ADDITIONAL_CHARSET="O|text|MySQL Charset",
+]
+```
+
+The user inputs will be grouped in a tab called BLOG with a group called CONF:
+
+![sunstone_user_inputs_convention_blog](/images/sunstone_user_inputs_convention_blog.png)
+
+Also, there will be a tab called MYSQL with two groups, CONFIG and ADDITIONAL:
+
+![sunstone_user_inputs_convention_mysql_1](/images/sunstone_user_inputs_convention_mysql_1.png)
+
+To see the user inputs in the ADDITONAL group, the user must turn on the Define additional parameters user input:
+
+![sunstone_user_inputs_convention_mysql_2](/images/sunstone_user_inputs_convention_mysql_2.png)
+
+#### Additional data for User Inputs in Sunstone
+
+In order to help the Sunstone user, the virtual machine templates can be extended with an attribute called USER_INPUTS_METADATA that will be adding some info to the APPS and GROUPS.
+
+[See User Inputs Section Metadata in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-user-inputs-metadata" %}}).
+
+{{< alert title="Note" color="success" >}}
+The attribute `USER_INPUTS_METADATA` only will be used in Sunstone, not in others components of OpenNebula.{{< /alert >}} 
+
+So, if we use the previous template and add the following information:
+
+```default
+USER_INPUTS_METADATA=[
+  DESCRIPTION="This tab includes all the information about the blog section in this template.",
+  NAME="BLOG",
+  TITLE="Blog",
+  TYPE="APP" ]
+USER_INPUTS_METADATA=[
+  NAME="MYSQL",
+  TITLE="MySQL",
+  TYPE="APP" ]
+USER_INPUTS_METADATA=[
+  DESCRIPTION="MySQL configuration parameters",
+  NAME="CONFIG",
+  TITLE="Configuration",
+  TYPE="GROUP" ]
+USER_INPUTS_METADATA=[
+  DESCRIPTION="Additional MySQL parameters",
+  NAME="ADDITIONAL",
+  TITLE="Additional parameters",
+  TYPE="GROUP" ]
+```
+
+Due to the elements with TYPE equal to APP, BLOG tab has title Blog and MYSQL tab has title MySQL (TITLE attribute). Also, due to these elements, we have an info note in the Blog tab (DESCRIPTION attribute):
+
+![sunstone_user_inputs_metadata_1](/images/sunstone_user_inputs_metadata_1.png)
+
+Due to the elements with TYPE equal to GROUP, CONFIG group has title Configuration and ADDITIONAL group has title Additional parameters (TTILE attribute). Also, due to these elements Sunstone shows a info text in both groups (DESCRIPTION attribute):
+
+![sunstone_user_inputs_metadata_2](/images/sunstone_user_inputs_metadata_2.png)
+
+<a id="sched-actions-templ"></a>
+
+### Schedule Actions
+
+If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g.  *“Shut down the VM 5 hours after it started”*. You can also add an Scheduled action at [VM instantiation]({{% relref "../virtual_machine_instances/vm_instances#vm-guide2-scheduling-actions" %}}).
+
+[See Schedule Actions Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}).
+
+### Set a Cost
+
+Each VM Template can have a cost per hour. This cost is set by CPU unit and MEMORY MB, and disk MB. VMs with a cost will appear in the [showback reports]({{% relref "../../cloud_system_administration/multitenancy/showback#showback" %}}).
+
+[See Showback Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-showback-section" %}}).
+
+<a id="cloud-view-features"></a>
+
+### Enable End User Features
+
+There are a few features of the [Cloud View]({{% relref "../../control_plane_configuration/graphical_user_interface/cloud_view#cloud-view" %}}) that will work if you configure the Template to make use of them:
+
+* The Cloud View gives access to the VM’s VNC, but only if it is configured in the Template.
+* End users can upload their public ssh key. This requires the VM guest to be [contextualized]({{% relref "#context-overview" %}}), and the Template must have the ssh contextualization enabled.
+
+### Make the Images Non-Persistent
+
+If a Template is meant to be consumed by end-users, its Images should not be persistent. A persistent Image can only be used by one VM simultaneously, and the next user will find the changes made by the previous user.
+
+If the users need persistent storage, they can use the [“instantiate to persistent” functionality]({{% relref "../virtual_machine_instances/vm_instances#vm-guide2-clone-vm" %}}).
+
+### Prepare the Network Interfaces
+
+End-users can select the VM network interfaces when launching new VMs. You can create templates without any NIC, or set the default ones. If the template contains any NIC, users will still be able to remove them and select new ones.
+
+When users add network interfaces, you need to define a default NIC model in case the VM guest needs a specific one (e.g. virtio for KVM). This can be done with the [NIC_DEFAULT]({{% relref "../../operation_references/configuration_references/template#nic-default-template" %}}) attribute, or through the Template wizard. Alternatively, you could change the default value for all VMs in the driver configuration file (see the [KVM one]({{% relref "../../package_installation_references/kvm_node_deployment/kvm_driver#kvmg-default-attributes" %}}) for example).
+
+<!-- TMP FIX: -->
+<!-- .. note:: This networking customization can be forced to be disabled for any Template in the cloud view. Read more in the :ref:`Cloud View Customization documentation <cloud_view_config>`. -->
+
+## Instantiating Templates
+
+You can create a VM out of an existing VM Template using the `onetemplate instantiate` command . It accepts a Template ID or name, and creates a VM instance from the given template. You can create more than one instance simultaneously with the `--multiple num_of_instances` option.
+
+```default
+$ onetemplate instantiate 6
+VM ID: 0
+
+$ onevm list
+    ID USER     GROUP    NAME         STAT CPU     MEM        HOSTNAME        TIME
+     0 oneuser1 users    one-0        pend   0      0K                 00 00:00:16
+```
+
+### Overwrite VM Template Values
+
+Users can overwrite some of the VM Template values, limited to those not listed in the restricted attributes. This allows users some safe, degree of customization for predefined templates.
+
+Let’s say the administrator wants to provide base templates that the users can customize, but with some restrictions. Having the following [restricted attributes in oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-restricted-attributes-configuration" %}}):
+
+```none
+VM_RESTRICTED_ATTR = "CPU"
+VM_RESTRICTED_ATTR = "VPU"
+VM_RESTRICTED_ATTR = "NIC"
+```
+
+And the following template:
+
+```none
+CPU     = "1"
+VCPU    = "1"
+MEMORY  = "512"
+DISK=[
+  IMAGE = "BaseOS" ]
+NIC=[
+  NETWORK_ID = "0" ]
+```
+
+Users can instantiate it customizing anything except the CPU, VCPU and NIC. To create a VM with different memory and disks:
+
+```default
+$ onetemplate instantiate 0 --memory 1G --disk "Ubuntu 16.04"
+```
+
+Also, a user cannot delete any element of a list that has any restricted attributes. Having the following [restricted attributes in oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-restricted-attributes-configuration" %}}):
+
+```none
+VM_RESTRICTED_ATTR = "DISK/TOTAL_BYTES_SEC"
+```
+
+And the following template:
+
+```none
+CPU     = "1"
+VCPU    = "1"
+MEMORY  = "512"
+DISK=[
+  IMAGE = "BaseOS"
+  TOTAL_BYTES_SEC = 1 ]
+DISK=[
+  IMAGE = "BaseOS2" ]
+NIC=[
+  NETWORK_ID = "0" ]
+```
+
+A user can delete the second disk but an user cannot delete the first disk because it has a restricted attribute.
+
+{{< alert title="Warning" color="warning" >}}
+The provided attributes replace the existing ones. To add a new disk, the current one needs to be added also.{{< /alert >}} 
+
+```default
+$ onetemplate instantiate 0 --disk BaseOS,"Ubuntu 16.04"
+```
+
+```default
+$ cat /tmp/file
+MEMORY = 512
+COMMENT = "This is a bigger instance"
+
+$ onetemplate instantiate 6 /tmp/file
+VM ID: 1
+```
+
+### Deployment
+
+The OpenNebula Scheduler will deploy automatically the VMs in one of the available Hosts, if they meet the requirements. The deployment can be forced by an administrator using the `onevm deploy` command.
+
+Use `onevm terminate` to shutdown and delete a running VM.
+
+Continue to the [Managing Virtual Machine Instances Guide]({{% relref "../virtual_machine_instances/vm_instances#vm-guide-2" %}}) to learn more about the VM States, and the available operations that can be performed.
+
+<a id="instantiate-as-uid-gid"></a>
+
+### Instantiating as another user and/or group
+
+The `onetemplate instantiate` command accepts option `--as_uid` and `--as_gid` with the User ID or Group ID to define the owner or group for the new VM.
+
+```default
+$ onetemplate instantiate 6 --as_uid 2 --as_gid 1
+VM ID: 0
+
+$ onevm list
+    ID USER      GROUP    NAME         STAT CPU     MEM        HOSTNAME        TIME
+     0 test_user users    one-0        pend   0      0K                 00 00:00:16
+```
+
+## Managing Templates
+
+<!-- TMP FIX: -->
+<!-- Users can manage the VM Templates using the command ``onetemplate``, or the graphical interface :ref:`Sunstone <sunstone>`. For each user, the actual list of templates available are determined by the ownership and permissions of the templates. -->
+
+### Adding and Deleting Templates
+
+Using `onetemplate create`, users can create new Templates for private or shared use. The `onetemplate delete` command allows the owner -or the OpenNebula administrator- to delete it from the repository.
+
+For instance, if the previous example template is written in the vm-example.txt file:
+
+```default
+$ onetemplate create vm-example.txt
+ID: 6
+```
+
+Via Sunstone, you can easily add templates using the provided wizards and delete them clicking on the delete button.
+
+<a id="vm-template-clone"></a>
+
+### Cloning Templates
+
+You can also clone an existing Template with the `onetemplate clone` command:
+
+```default
+$ onetemplate clone 6 new_template
+ID: 7
+```
+
+If you use the `onetemplate clone --recursive` option, OpenNebula will clone each one of the Images used in the Template Disks. These Images are made persistent, and the cloned template DISK/IMAGE_ID attributes are replaced to point to the new Images.
+
+### Updating a Template
+
+It is possible to update a template by using the `onetemplate update`. This will launch the editor defined in the variable `EDITOR` and let you edit the template.
+
+```default
+$ onetemplate update 3
+```
+
+### Restricted attributes when create or update a Template
+
+When a user creates or updates a template, there are some restricted attributes that she could not create or update. Having the following [restricted attributes in oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-restricted-attributes-configuration" %}}):
+
+```none
+VM_RESTRICTED_ATTR = "CPU"
+VM_RESTRICTED_ATTR = "VPU"
+VM_RESTRICTED_ATTR = "NIC"
+```
+
+And the following template:
+
+```none
+CPU     = "1"
+VCPU    = "1"
+MEMORY  = "512"
+DISK=[
+  IMAGE = "BaseOS" ]
+NIC=[
+  NETWORK_ID = "0" ]
+```
+
+Users can create or update a template customizing anything except the CPU, VCPU and NIC.
+
+Also, a user cannot delete any element of a list that has a restricted attributes. Having the following [restricted attributes in oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-restricted-attributes-configuration" %}}):
+
+```none
+VM_RESTRICTED_ATTR = "DISK/TOTAL_BYTES_SEC"
+```
+
+And the following template:
+
+```none
+CPU     = "1"
+VCPU    = "1"
+MEMORY  = "512"
+DISK=[
+  IMAGE = "BaseOS"
+  TOTAL_BYTES_SEC = 1 ]
+DISK=[
+  IMAGE = "BaseOS2" ]
+NIC=[
+  NETWORK_ID = "0" ]
+```
+
+A user can delete the second disk but she cannot delete the first disk because it contains a restricted attribute.
+
+### Sharing Templates with other Users
+
+The users can share their Templates with other users in their group, or with all the users in OpenNebula. See the [Managing Permissions documentation]({{% relref "../../cloud_system_administration/multitenancy/chmod#chmod" %}}) for more information.
+
+Let’s see a quick example. To share the Template 0 with users in the group, the **USE** right bit for **GROUP** must be set with the **chmod** command:
+
+```default
+$ onetemplate show 0
+...
+PERMISSIONS
+OWNER          : um-
+GROUP          : ---
+OTHER          : ---
+
+$ onetemplate chmod 0 640
+
+$ onetemplate show 0
+...
+PERMISSIONS
+OWNER          : um-
+GROUP          : u--
+OTHER          : ---
+```
+
+The following command allows users in the same group **USE** and **MANAGE** the Template, and the rest of the users **USE** it:
+
+```default
+$ onetemplate chmod 0 664
+
+$ onetemplate show 0
+...
+PERMISSIONS
+OWNER          : um-
+GROUP          : um-
+OTHER          : u--
+```
+
+The `onetemplate chmod --recursive` option will perform the chmod action also on each one of the Images used in the Template disks.
+
+Sunstone offers an “alias” for `onetemplate chmod --recursive 640`, the share action:
+
+![sunstone_template_share](/images/sunstone_template_share.png)
+
+## Managing VM Templates with Sunstone
+
+Sunstone exposes the above functionality in the Templates > VM Templates tab:
+
+![sunstone_template_create](/images/sunstone_template_create.png)

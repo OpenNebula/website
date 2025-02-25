@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reference Architecture Guides with Cloud Providers on OpenNebula</title>
+    <link>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/</link>
+    <description>Recent content in Reference Architecture Guides with Cloud Providers on OpenNebula</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
