@@ -164,13 +164,13 @@ version_menu = "Versions"
     disable = false
 
 # added the user feedback module
-#[params.ui.feedback]
-#enable = true
-#yes = 'Glad to hear it'
-#no = 'Sorry to hear that'
+[params.ui.feedback]
+enable = true
+yes = 'Glad to hear it'
+no = 'Sorry to hear that'
 
 # relativeURLs = true
-canonifyURLs = true
+# canonifyURLs = true
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
@@ -185,3 +185,11 @@ canonifyURLs = true
       [markup.goldmark.parser.attribute]
         block = true
         title = true
+
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    source = 'static'
+    target = 'assets'
