@@ -2,772 +2,772 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/playbooks/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/playbooks/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/appliances/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/appliances/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/building_from_source_code/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/cloud_architecture_design/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/cloud_architecture_design/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/kvm_contextualization/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/kvm_contextualization/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_learning_environment/create_an_emulated_environment_with_minione/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_learning_environment/create_an_emulated_environment_with_minione/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/downloads/download/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/downloads/download/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/downloads/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/downloads/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/extensions/extensions_in_integration_section/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/extensions/extensions_in_integration_section/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/providers/extensions_in_provider_section/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/providers/extensions_in_provider_section/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/high_availability/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/appliances/how_to_create_an_appliance/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/appliances/how_to_create_an_appliance/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/installation_and_configuration/install/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/installation_and_configuration/install/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/managed_kubernetes/managed_kubernetes_overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/managed_kubernetes/managed_kubernetes_overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/sunstone_marketplaces/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/sunstone_marketplaces/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/ai-driven_metrics_predictions/metrics_predictions/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/ai-driven_metrics_predictions/metrics_predictions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/overview_of_oneaiops/oneaiops_overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/overview_of_oneaiops/oneaiops_overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/</loc>
+    <loc>https://opennebula.github.io/website/docs/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/opennebula_enterprise_and_community_editions/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/opennebula_enterprise_and_community_editions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/opennebula_overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/opennebula_overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/public_marketplaces/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/auth_overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/auth_overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/data_center_federation/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/data_center_federation/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/high_availability/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/large-scale_deployment/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/large-scale_deployment/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/lxc_node_deployment/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/building_from_source_code/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/configuration_management_ee/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/configuration_management_ee/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/tools/overview/</loc>
+    <loc>https://opennebula.github.io/website/docs/tools/overview/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/overview_of_oneaiops/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/overview_of_oneaiops/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/smart_scheduling_of_virtual_machines/predictive_scheduling/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/smart_scheduling_of_virtual_machines/predictive_scheduling/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/public_marketplaces/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_learning_environment/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_learning_environment/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/vm_instances/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/vm_instances/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/template/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/template/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/roles/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/roles/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/aws_cluster_ceph/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/aws_cluster_ceph/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/aws_provider/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/aws_provider/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/configuration_management_ee/usage/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/configuration_management_ee/usage/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/compile/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/building_from_source_code/compile/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_local_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_local_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/configuration_management_ee/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/configuration_management_ee/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/creating_images/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/creating_images/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/data_center_federation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/data_center_federation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/database/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/database/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/datastores/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/datastores/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/extensions/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/extensions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/data_center_federation/config/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/data_center_federation/config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/frontend_ha/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/high_availability/frontend_ha/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/overcommitment/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/overcommitment/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/appliances/how_to_certify_an_appliance/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/appliances/how_to_certify_an_appliance/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_http/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_http/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/img_template/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/img_template/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/images/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/images/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/installation_and_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/installation_and_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/install/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/install/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_node_installation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_node_installation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/managed_kubernetes/managed_kubernetes_description/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/managed_kubernetes/managed_kubernetes_description/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/marketapps/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/marketapps/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/provider_operations/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/provider_operations/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/oned/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/oned/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/opennebula/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/public_marketplaces/opennebula/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/provision_driver/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/provision_driver/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/large-scale_deployment/scalability/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/large-scale_deployment/scalability/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/scheduling/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/scheduling/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/cloud_view/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/cloud_view/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/ssh/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/ssh/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/start_here/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/start_here/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/tools/terraform/</loc>
+    <loc>https://opennebula.github.io/website/docs/tools/terraform/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/try_opennebula_onprem/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/try_opennebula_onprem/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_users/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/manage_users/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/vn_templates/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/vn_templates/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-vmm/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-vmm/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/operations/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/operations/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/whats_new/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/whats_new/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/configure/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/configure/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/api/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/api/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/ai-driven_metrics_predictions/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/ai-driven_metrics_predictions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/tools/ansible/</loc>
+    <loc>https://opennebula.github.io/website/docs/tools/ansible/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/automated_deploy_and_config/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/automated_deploy_and_config/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/automated_deploy_and_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/automated_deploy_and_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/backup_jobs/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/backup_jobs/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/build_deps/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/building_from_source_code/build_deps/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/configuration_management_ee/diff_formats/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/configuration_management_ee/diff_formats/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/equinix_provider/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/equinix_provider/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/data_center_federation/usage/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/data_center_federation/usage/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/grafana/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/grafana/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/groupadmin_view/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/groupadmin_view/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_groups/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/manage_groups/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/hardware_spec_and_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/appliances/how_to_maintain_an_appliance/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/appliances/how_to_maintain_an_appliance/</loc>
   </url><url>
-    <loc>//localhost:1313/install/</loc>
+    <loc>https://opennebula.github.io/website/install/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/public_marketplaces/lxc/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/public_marketplaces/lxc/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/lxc_node_deployment/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/lxc_node_deployment/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/node/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/node/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/onprem_cluster_ceph/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/hci_cluster_provisions/onprem_cluster_ceph/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_elasticity/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_elasticity/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/oneke/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/oneke/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/contribute/components/</loc>
+    <loc>https://opennebula.github.io/website/contribute/components/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/platform_notes/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/platform_notes/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/appliances_and_extensions/providers/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/appliances_and_extensions/providers/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/cluster_operations/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_operations/cluster_operations/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/ruby/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/ruby/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_s3/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_s3/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/large-scale_deployment/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/large-scale_deployment/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/scheduler/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/scheduler/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/security_groups/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/security_groups/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/sd/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/sd/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/try_opennebula_on_kvm/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/try_opennebula_on_kvm/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/upgrading_single/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_single/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/quotas/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/quotas/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/affinity/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/affinity/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_instances/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/vm_templates/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/vm_templates/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/vnet_template/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/vnet_template/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/virtual/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/virtual/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/high_availability/vm_ha/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/high_availability/vm_ha/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/admin_usage/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/admin_usage/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/windows_best_practice/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/windows_best_practice/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/x509/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/x509/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/large-scale_deployment/advanced_ssh_usage/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/large-scale_deployment/advanced_ssh_usage/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/alerts/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/alerts/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/5g-ready_opennebula/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/ai-ready_opennebula/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/arm-ready_opennebula/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_for_deployment_cases/confidential_opennebula/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/ovh_opennebula-onprem_cloud_solution/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_cloud_providers/scaleway_opennebula-onprem_cloud_solution/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/ampere_opennebula-onprem_cloud_solution/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/dell_opennebula-onprem_cloud_solution/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/certification/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/reference_architecture_guides_with_hw_vendors/hpe_opennebula-onprem_cloud_solution/certification/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/cli/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/cli/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/external/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/external/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/knowledge_base/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/knowledge_base/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/ldap/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/ldap/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/managed_kubernetes/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/managed_kubernetes/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/monitoring/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/monitoring/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-im/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-im/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/onegate_usage/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/onegate_usage/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/tools/oneswap/</loc>
+    <loc>https://opennebula.github.io/website/docs/tools/oneswap/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/os_profile/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/os_profile/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/template/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/operations_and_references/hybrid_cluster_references/template/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/python/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/python/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/scaleway_cluster/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/scaleway_cluster/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/scaleway_provider/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/scaleway_provider/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/secondary/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/secondary/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/self_provision/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/self_provision/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/install/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/install/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/smart_scheduling_of_virtual_machines/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/smart_scheduling_of_virtual_machines/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/sunstone_dev/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/building_from_source_code/sunstone_dev/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/configuration_management_ee/conflicts/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/configuration_management_ee/conflicts/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/try_opennebula_hosted/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/try_opennebula_hosted/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/upgrading_ha/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_ha/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/manage_vdcs/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/manage_vdcs/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_backups/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/users_guide/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/users_guide/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/wordpress/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/wordpress/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/ai_operations/</loc>
+    <loc>https://opennebula.github.io/website/docs/ai_operations/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/configuration_management_ee/appendix/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/configuration_management_ee/appendix/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/development_references/building_from_source_code/cloud_auth/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/development_references/building_from_source_code/cloud_auth/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/compatibility/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/compatibility/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/metrics/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/monitoring_and_alerting/metrics/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/fireedge/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/fireedge/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/</loc>
   </url><url>
-    <loc>//localhost:1313/integrate/</loc>
+    <loc>https://opennebula.github.io/website/integrate/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/java/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/java/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-nm/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-nm/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/onprem_provider/</loc>
+    <loc>https://opennebula.github.io/website/docs/hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_and_cloud_providers/onprem_provider/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/provisioning_edge_cluster/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/provisioning_edge_cluster/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/sunstone_auth/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/sunstone_auth/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/fireedge_sunstone_views/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/fireedge_sunstone_views/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/upgrading_federation/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_federation/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/vm_states/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/vm_states/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/vrouter/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/vrouter/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/vnf/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/vnf/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-auth/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-auth/</loc>
   </url><url>
-    <loc>//localhost:1313/contribute/</loc>
+    <loc>https://opennebula.github.io/website/contribute/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/go/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/go/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/img_states/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/img_states/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/known_issues/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/known_issues/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/apps-marketplace/marketplace_appliances/minio_intro/</loc>
+    <loc>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_appliances/minio_intro/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/oneflow/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/oneflow/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/chmod/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/chmod/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/restoring_version/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/restoring_version/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/running_virtual_machines/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/running_virtual_machines/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/tproxy/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machines_networking/tproxy/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/whmcs_installation_and_usage/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/accounting/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/accounting/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/release_notes/acknowledgements/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/release_notes/acknowledgements/</loc>
   </url><url>
-    <loc>//localhost:1313/ecosystem/</loc>
+    <loc>https://opennebula.github.io/website/ecosystem/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/configuration_references/host_states/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/configuration_references/host_states/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-market/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-market/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/appflow_api/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/appflow_api/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/onegate/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/onegate/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/package_installation_references/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/dev_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/dev_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/running_kubernetes_clusters/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/running_kubernetes_clusters/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/tools/</loc>
+    <loc>https://opennebula.github.io/website/docs/tools/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/releases/release_information/upgrade/upgrade_from_previous_versions/</loc>
+    <loc>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrade_from_previous_versions/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/database/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/database/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-ipam/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-ipam/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/iscsi_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/iscsi_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/onegate_api/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/onegate_api/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/operating_edge_cluster/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/operating_edge_cluster/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_system_administration/multitenancy/showback/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/multitenancy/showback/</loc>
   </url><url>
-    <loc>//localhost:1313/try/</loc>
+    <loc>https://opennebula.github.io/website/try/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/deployment_framework/</loc>
+    <loc>https://opennebula.github.io/website/docs/deployment_framework/</loc>
   </url><url>
-    <loc>//localhost:1313/forum/</loc>
+    <loc>https://opennebula.github.io/website/forum/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/file_ds/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/file_ds/</loc>
   </url><url>
-    <loc>//localhost:1313/support/</loc>
+    <loc>https://opennebula.github.io/website/support/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/troubleshooting/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/troubleshooting/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/hook_driver/</loc>
+    <loc>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/hook_driver/</loc>
   </url><url>
-    <loc>//localhost:1313/github/</loc>
+    <loc>https://opennebula.github.io/website/github/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/replace_failing_fe/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/replace_failing_fe/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/support/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/support/</loc>
   </url><url>
-    <loc>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/io_limit/</loc>
+    <loc>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/io_limit/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/access-model/</loc>
+    <loc>https://opennebula.github.io/website/tags/access-model/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/case-studies/</loc>
+    <loc>https://opennebula.github.io/website/tags/case-studies/</loc>
   </url><url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>https://opennebula.github.io/website/categories/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/cloud-architecture/</loc>
+    <loc>https://opennebula.github.io/website/tags/cloud-architecture/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/documentation/</loc>
+    <loc>https://opennebula.github.io/website/tags/documentation/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/edge-cloud/</loc>
+    <loc>https://opennebula.github.io/website/tags/edge-cloud/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/enterprise/</loc>
+    <loc>https://opennebula.github.io/website/tags/enterprise/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/features/</loc>
+    <loc>https://opennebula.github.io/website/tags/features/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/intro/</loc>
+    <loc>https://opennebula.github.io/website/tags/intro/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/key-concepts/</loc>
+    <loc>https://opennebula.github.io/website/tags/key-concepts/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/knowledge-base/</loc>
+    <loc>https://opennebula.github.io/website/tags/knowledge-base/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/open-cloud/</loc>
+    <loc>https://opennebula.github.io/website/tags/open-cloud/</loc>
   </url><url>
-    <loc>//localhost:1313/</loc>
+    <loc>https://opennebula.github.io/website/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>https://opennebula.github.io/website/tags/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/use-cases/</loc>
+    <loc>https://opennebula.github.io/website/tags/use-cases/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/white-paper/</loc>
+    <loc>https://opennebula.github.io/website/tags/white-paper/</loc>
   </url>
 </urlset>

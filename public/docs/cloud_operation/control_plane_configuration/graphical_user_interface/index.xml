@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Graphical User Interface on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/</link>
     <description>Recent content in Graphical User Interface on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/overview/</guid>
       <description>This chapter contains reference guides for Sunstone end-users.&#xA;How Should I Read This Chapter The following sections are intended for the cloud consumers. They can skip most of the OpenNebula documentation and read these two guides only.&#xA;Proceed to the corresponding guide following these links:&#xA;Self-service Cloud View: For cloud consumers that just require a portal where they can provision new virtual machines and services easily. Group Admin View: For group administrators.</description>
     </item>
     <item>
       <title>Self-service Cloud View</title>
-      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/cloud_view/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/cloud_view/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/cloud_view/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/cloud_view/</guid>
       <description>This is a simplified view intended for cloud consumers that just require a portal where they can provision new VMs easily. To create new VMs and Services, they just have to select one of the available Templates prepared by the administrators.&#xA;Using the Cloud Create VM In this scenario the cloud administrator must prepare a set of Templates and Images to make them available to the cloud users. These resources must be ready to be used.</description>
     </item>
     <item>
       <title>Group Admin View</title>
-      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/groupadmin_view/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/groupadmin_view/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/groupadmin_view/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/groupadmin_view/</guid>
       <description>The role of a Group Admin is to manage all the virtual resources of the Group, including the creation of new users. It’s like a limited version of the cloud administrator view. You can read more about OpenNebula’s approach to Groups and VDC’s from the perspective of different user roles in the Understanding OpenNebula guide.&#xA;Manage Users The Group Admin can create new user accounts, that will belong to the same Group.</description>
     </item>
     <item>
       <title>Sunstone Labels</title>
-      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels/</guid>
       <description>Labels can be defined for most of the OpenNebula resources from the admin view.&#xA;Each resource will store the label information in its own template, thus it can be easily edited from the CLI or Sunstone.&#xA;This feature enables the possibility to group the different resources under a given label and filter them in the admin and cloud views. The user will be able to easily find the template she wants to instantiate, or select a set of resources to apply a given action.</description>
     </item>
     <item>
       <title>Sunstone</title>
-      <link>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone/</guid>
       <description>Overview Sunstone is the new generation OpenNebula web interface, fully featured for VM and VM Template management and with other sections ready covering most functionality for end users.&#xA;This interface is delivered by the FireEdge server, and it is its main interface, meaning that it will redirect to Sunstone when contacted in the http://&amp;lt;OPENNEBULA-FRONTEND&amp;gt;:2616/ address.&#xA;Configuration To configure Sunstone, there are several options to consider, and they are described in the FireEdge Configuration guide.</description>
     </item>
   </channel>

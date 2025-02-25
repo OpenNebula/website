@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KVM Node Deployment on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/</link>
     <description>Recent content in KVM Node Deployment on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/overview/</guid>
       <description>KVM (Kernel-based Virtual Machine) is the main virtualization solution for Linux on x86 hardware that contains virtualization extensions (Intel VT or AMD-V). It consists of the loadable KVM kernel modules (one that provides the core virtualization infrastructure and several processor-specific modules), but the complete KVM virtualization stack usually also contains the user-space machine hardware emulator QEMU accelerated by the KVM and virtual machines management tool libvirt.&#xA;By using KVM, you can run multiple Virtual Machines with unmodified Linux or Windows images.</description>
     </item>
     <item>
       <title>KVM Node Installation</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation/</guid>
       <description>This page shows you how to configure OpenNebula KVM Node from the binary packages.&#xA;Note Before reading this chapter, you should have at least installed your Front-end node. Step 1. Add OpenNebula Repositories Refer to OpenNebula Repositories guide to add the Enterprise and Community Edition software repositories.&#xA;Step 2. Installing the Software Installing on CentOS/RHEL Repository EPEL OpenNebula depends on packages which aren’t in the base distribution repositories. Execute one of the commands below (distinguished by the host platform) to configure access to additional EPEL (Extra Packages for Enterprise Linux) repository:</description>
     </item>
     <item>
       <title>KVM Driver</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver/</guid>
       <description>Requirements The Hosts will need a CPU with Intel VT or AMD’s AMD-V features in order to support virtualization. KVM’s Preparing to use KVM guide will clarify any doubts you may have regarding whether your hardware supports KVM.&#xA;KVM will be installed and configured after following the KVM Host Installation section.&#xA;Considerations &amp;amp; Limitations Try to use virtio whenever possible, both for networks and disks. Using emulated hardware, both for networks and disks, will have an impact on performance and will not expose all the available functionality.</description>
     </item>
   </channel>

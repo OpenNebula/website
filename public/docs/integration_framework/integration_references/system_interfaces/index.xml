@@ -2,72 +2,72 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>System Interfaces on OpenNebula</title>
-    <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/</link>
+    <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/</link>
     <description>Recent content in System Interfaces on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/integration_framework/integration_references/system_interfaces/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/overview/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/overview/</guid>
       <description>OpenNebula has been designed to be easily adapted to any infrastructure and easily extended with new components. The result is a modular system that can implement a variety of Cloud architectures and can interface with multiple datacenter services. In this Guide we review the main interfaces of OpenNebula and their.&#xA;How Should I Read This Chapter You should be reading this Chapter if you are trying to automate tasks in your deployed OpenNebula cloud, and you have already read all of the previous guides.</description>
     </item>
     <item>
       <title>XML-RPC API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/api/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/api/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/api/</guid>
       <description>This reference documentation describes the xml-rpc methods exposed by OpenNebula. Each description consists of the method name and the input and output values.&#xA;All xml-rpc responses share a common structure.&#xA;Type Data Type Description OUT Boolean True or false whenever is successful or not. OUT String If an error occurs this is the error message. OUT Int Error code. The output will always consist of three values. The first and third ones are fixed, but the second one will contain the String error message only in case of failure.</description>
     </item>
     <item>
       <title>Ruby OpenNebula Cloud API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/ruby/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/ruby/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/ruby/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/ruby/</guid>
       <description>This page contains the OpenNebula Cloud API Specification for Ruby. It has been designed as a wrapper for the XML-RPC methods, with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the XML-RPC documentation, you can download the XML Schemas (XSD) here.&#xA;API Documentation You can consult the doc online.&#xA;Usage You can use the Ruby OCA included in the OpenNebula distribution by adding the OpenNebula Ruby library path to the search path:</description>
     </item>
     <item>
       <title>Python OpenNebula Cloud API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/python/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/python/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/python/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/python/</guid>
       <description>PyONE is an implementation of OpenNebula XML-RPC bindings in Python. It has been designed as a wrapper for the XML-RPC methods, with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the XML-RPC documentation, you can download the XML Schemas (XSD) here.&#xA;API Documentation As long as the code is generated, the main source of the documentation is still the XML-RPC doc</description>
     </item>
     <item>
       <title>Java OpenNebula Cloud API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/java/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/java/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/java/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/java/</guid>
       <description>This page contains the OpenNebula Cloud API Specification for Java. It has been designed as a wrapper for the XML-RPC methods, with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the XML-RPC documentation, you can download the XML Schemas (XSD) here.&#xA;Download You can download the .jar file compiled using Java 1.</description>
     </item>
     <item>
       <title>Go OpenNebula Cloud API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/go/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/go/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/go/</guid>
       <description>This page contains the OpenNebula Cloud API Specification for Go. It has been designed as a wrapper for the XML-RPC methods, with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the XML-RPC documentation, you can download the XML Schemas (XSD) here.&#xA;Go OpenNebula Cloud API cover the resources lists below:&#xA;Resource URL ACL acl.</description>
     </item>
     <item>
       <title>OneFlow Server API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/appflow_api/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/appflow_api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/appflow_api/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/appflow_api/</guid>
       <description>The OpenNebula OneFlow API is a RESTfull service to create, control and monitor services composed of interconnected Virtual Machines with deployment dependencies between them. Each group of Virtual Machines is deployed and managed as a single entity, and is completely integrated with the advanced OpenNebula user and group management. There are two kind of resources; services templates and services. All data is sent and received as JSON.&#xA;This guide is intended for developers.</description>
     </item>
     <item>
       <title>OneGate API</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/onegate_api/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/onegate_api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/onegate_api/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/onegate_api/</guid>
       <description>OneGate provides a REST API. To use this API you will need to get some data from the CONTEXT file. The contextualization cdrom should contain the context.sh and token.txt files.&#xA;# mkdir /mnt/context # mount /dev/hdb /mnt/context # cd /mnt/context # ls context.sh token.txt # cat context.sh # Context variables generated by OpenNebula DISK_ID=&amp;#39;1&amp;#39; ONEGATE_ENDPOINT=&amp;#39;http://192.168.0.1:5030&amp;#39; VMID=&amp;#39;0&amp;#39; TARGET=&amp;#39;hdb&amp;#39; TOKEN=&amp;#39;yes&amp;#39; # cat token.txt yCxieDUS7kra7Vn9ILA0+g== With that data, you can obtain the headers required for all the ONEGATE API methods:</description>
     </item>
     <item>
       <title>Using Hooks</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/hook_driver/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/hook_driver/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/system_interfaces/hook_driver/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/system_interfaces/hook_driver/</guid>
       <description>The Hook subsystem enables the execution of custom scripts tied to a change in state in a particular resource, or API call. This opens a wide area of automation for system administrators to tailor their cloud infrastructures. It also features a logging mechanism that allows a convenient way to query the execution history or to retry the execution of a given hook.&#xA;Overview The hook subsystem has two main components:</description>
     </item>
   </channel>

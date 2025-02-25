@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authentication Configuration on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/</link>
     <description>Recent content in Authentication Configuration on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/overview/</guid>
       <description>OpenNebula comes with a default internal user authentication system based on username/password, where information and secrets are stored in the OpenNebula (see the Users &amp;amp; Groups Subsystem guide). Dedicated external user authentication drivers can be used to leverage additional authentication mechanisms or sources of information about the users (e.g., LDAP). This chapter describes the available user authentication and management options.&#xA;Authentication In this figure you can see three authentication configurations you can customize in OpenNebula.</description>
     </item>
     <item>
       <title>SSH Authentication</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/ssh/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/ssh/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/ssh/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/ssh/</guid>
       <description>This guide will show you how to enable and use the SSH authentication with the OpenNebula CLI with authentication driver ssh. Using this method, users log in to the OpenNebula with a token encrypted with their private SSH keys.&#xA;Requirements No additional installation required.&#xA;Considerations &amp;amp; Limitations This authentication method works only for interaction with OpenNebula over CLI.&#xA;Configuration This authentication mechanism is enabled by default. If it doesn’t work, make sure you have the authentication method ssh enabled in the AUTH_MAD section of your /etc/one/oned.</description>
     </item>
     <item>
       <title>X.509 Authentication</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/x509/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/x509/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/x509/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/x509/</guid>
       <description>This guide will show you how to enable and use authentication using X.509 certificates with OpenNebula with authentication driver x509. The X.509 certificates can be used in two different ways in OpenNebula.&#xA;The first option that is explained in this guide enables us to use certificates with the CLI. In this case the user will generate a login token with their private key. OpenNebula will validate the certificate and decrypt the token to authenticate the user.</description>
     </item>
     <item>
       <title>LDAP Authentication</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/ldap/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/ldap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/ldap/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/ldap/</guid>
       <description>The LDAP Authentication allows users to have the same credentials as in LDAP, effectively centralizing authentication. Enabling it will let any correctly authenticated LDAP user use OpenNebula.&#xA;Requirements You need to have your own LDAP server in the infrastructure. OpenNebula doesn’t contain or configure any LDAP server, it only connects to an existing one. Also, it doesn’t create, delete or modify any entry in the LDAP server it connects to.</description>
     </item>
     <item>
       <title>Sunstone Authentication</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/sunstone_auth/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/sunstone_auth/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/authentication_configuration/sunstone_auth/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/authentication_configuration/sunstone_auth/</guid>
       <description>By default, Sunstone works with the default core authentication method (user and password) although you can configure any authentication mechanism supported by OpenNebula. In this section, you will learn how to enable other authentication.&#xA;Authentication is based on the credentials stored in the OpenNebula database for the user. Depending on the type of these credentials the authentication method can be: remote or opennebula. The following sections explain the client to Sunstone server authentication methods.</description>
     </item>
   </channel>

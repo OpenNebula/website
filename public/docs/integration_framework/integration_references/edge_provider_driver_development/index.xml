@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Edge Provider Driver Development on OpenNebula</title>
-    <link>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/</link>
+    <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/</link>
     <description>Recent content in Edge Provider Driver Development on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/overview/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/overview/</guid>
       <description>How Should I Read This Chapter These guides shows you how to create new providers to OpenNebula Edge Clusters component. It is intended for Cloud developers that need to create Edge Cluster on a provider not supported in the official distribution.&#xA;Hypervisor Compatibility These guides are compatible with all hypervisors.</description>
     </item>
     <item>
       <title>Provision Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/provision_driver/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/provision_driver/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/edge_provider_driver_development/provision_driver/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/edge_provider_driver_development/provision_driver/</guid>
       <description>An Edge Cluster provider is responsible to interface with the Cloud or Edge provider to provision the Edge cluster resources including hosts, public IPs or any other abstraction required to support the cluster. Note that the specific artifacts needed depended on the features and capabilities of each provider.&#xA;Terraform Representation First you need to provide a representation of the Edge Cluster using Terraform. OpenNebula will use the Terraform driver for the target provider to provision the Edge Cluster infrastructure.</description>
     </item>
   </channel>

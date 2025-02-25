@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenNebula Concepts on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/</link>
     <description>Recent content in OpenNebula Concepts on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OpenNebula Overview</title>
-      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/opennebula_overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/opennebula_overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/opennebula_overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/opennebula_overview/</guid>
       <description>Welcome to OpenNebula, the open source Cloud &amp;amp; Edge Computing Platform bringing real freedom to your Enterprise Cloud 🚀&#xA;This page provides a high-level overview of the OpenNebula cloud model, architecture and components. To familiarize yourself with OpenNebula and build an evaluation environment, we strongly recommend you follow the tutorials in our Quick Start Guide. For a description of the steps needed to build a production environment, please refer to Cloud Architecture Design.</description>
     </item>
     <item>
       <title>Key Features</title>
-      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/key_features/</guid>
       <description>OpenNebula offers a simple but feature-rich and flexible solution to build and manage data center virtualization and enterprise clouds. This page provides a summary of its key features(*).&#xA;To learn more about the infrastructure platforms and services supported in each version of OpenNebula, refer to the Platform Notes for each version.&#xA;For high-level overviews and in-depth technical guides, please refer to OpenNebula’s White Papers.&#xA;INTERFACES&#xA;Simple, clean, intuitive GUI, with different views for cloud admins and end users Powerful command-line tools resembling typical Unix tools API in multiple languages APPLICATION MANAGEMENT AND CATALOG</description>
     </item>
     <item>
       <title>Cloud Access Model and Roles</title>
-      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles/</guid>
       <description>In a small installation with a few hosts you can use OpenNebula without giving much thought to infrastructure partitioning and provisioning. Yet, for medium and large-scale deployments you will probably want to provide some level of isolation and structure. OpenNebula offers a flexible and powerful cloud provisioning model based on Virtual Data Centers (VDCs) that enables an integrated, comprehensive framework to dynamically provision the infrastructure resources in large multi-datacenter and multi-cloud environments to different customers, business units or groups.</description>
     </item>
     <item>
       <title>Knowledge Base</title>
-      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/knowledge_base/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/knowledge_base/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/knowledge_base/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/knowledge_base/</guid>
       <description>&#xA;The OpenNebula Customer Portal provides exclusive answers to common questions and issues, as well as best practices to deploy and operate an OpenNebula cloud. Although most of the contents are only available for customers with an active subscription, the portal also includes open content for the whole community.&#xA;Note Open content in our Enterprise Portal. </description>
     </item>
     <item>
       <title>Use Cases</title>
-      <link>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases/</guid>
       <description>Screencasts Browse the ever-expanding catalog of screencasts created by the OpenNebula Team to showcase interesting applications and integrations with third-party technologies and other open source projects.&#xA;Note Browse the catalog of screencasts and tutorial videos here. User Stories OpenNebula is used to implement different types of cloud deployments, from clouds tuned to address the demands of a niche market to clouds optimized to manage the virtualized resources in the data center.</description>
     </item>
   </channel>

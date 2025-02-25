@@ -2,86 +2,86 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Opennebula Services Configuration on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/</link>
     <description>Recent content in Opennebula Services Configuration on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/overview/</guid>
       <description>This chapter is a configuration and deployment reference for all OpenNebula services. It contains the description of the configuration files (for least effort, basic and even advanced setups), how to stop and start them, and where to find their logs.&#xA;How Should I Read This Chapter Read the sections for services you are interested in&#xA;OpenNebula Daemon Scheduler Monitoring FireEdge OneFlow OneGate Move on to Database Maintenance and Troubleshooting.</description>
     </item>
     <item>
       <title>OpenNebula Configuration</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/oned/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/oned/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/oned/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/oned/</guid>
       <description>The OpenNebula Daemon (oned) is the core service of the cloud management platform. It manages the cluster nodes, virtual networks and storages, groups, users and their virtual machines, and provides the XML-RPC API to other services and end-users. The service is distributed as an operating system package opennebula with system service opennebula.&#xA;Configuration The OpenNebula Daemon configuration file can be found in /etc/one/oned.conf on the Front-end and can be customized with the following parameters:</description>
     </item>
     <item>
       <title>Scheduler Configuration</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/scheduler/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/scheduler/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/scheduler/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/scheduler/</guid>
       <description>The OpenNebula Scheduler is responsible for planning of the pending Virtual Machines on available hypervisor Nodes. It’s a dedicated daemon installed alongside the OpenNebula Daemon (oned), but can be deployed independently on a different machine. The Scheduler is distributed as an operating system package opennebula with the system service opennebula-scheduler.&#xA;Scheduling Algorithm OpenNebula comes with a match-making scheduler (/usr/bin/mm_sched) that implements the Rank Scheduling Policy. The goal of this policy is to prioritize those resources more suitable for the VM.</description>
     </item>
     <item>
       <title>Monitoring Configuration</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/monitoring/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/monitoring/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/monitoring/</guid>
       <description>The monitoring subsystem is represented by a dedicated daemon (onemonitord) running as part of the OpenNebula Daemon (oned), that gathers information relevant to the Hosts and the Virtual Machines, e.g. Host status, basic performance indicators, Virtual Machine status, and capacity consumption. This information is collected by executing a set of probe programs provided by OpenNebula. The output of these probes is sent to OpenNebula using a push mechanism. It’s part of the operating system package opennebula.</description>
     </item>
     <item>
       <title>FireEdge Configuration</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/fireedge/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/fireedge/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/fireedge/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/fireedge/</guid>
       <description>The OpenNebula FireEdge server provides a next-generation web-management interface for remote OpenNebula Cluster provisioning (OneProvision GUI) as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the Single Front-end Installation, but can be deployed independently on a different machine. The server is distributed as an operating system package opennebula-fireedge with the system service opennebula-fireedge.&#xA;Main Features Guacamole Proxy for Sunstone to remotely access the VMs (incl.</description>
     </item>
     <item>
       <title>OneFlow Configuration</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/oneflow/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/oneflow/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/oneflow/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/oneflow/</guid>
       <description>OneFlow orchestrates multi-VM services as a whole, interacts with the OpenNebula Daemon to manage the Virtual Machines (starts, stops), and can be controlled via the Sunstone GUI or over CLI. It’s a dedicated daemon installed by default as part of the Single Front-end Installation, but can be deployed independently on a different machine. The server is distributed as an operating system package opennebula-flow with the system service opennebula-flow.&#xA;Read more in Multi-VM Service Management.</description>
     </item>
     <item>
       <title>OneGate Configuration</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/onegate/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/onegate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/onegate/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/onegate/</guid>
       <description>The OneGate server allows Virtual Machines to pull and push information from/to OpenNebula. It can be used with all hypervisor Host types (KVM, LXC, and the legacy vCenter driver) if the guest operating system has preinstalled the OpenNebula contextualization package. It’s a dedicated daemon installed by default as part of the Single Front-end Installation, but can be deployed independently on a different machine. The server is distributed as an operating system package opennebula-gate with the system service opennebula-gate.</description>
     </item>
     <item>
       <title>Database Maintenance</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/database/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/database/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/database/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/database/</guid>
       <description>OpenNebula persists the state of the cloud into the selected SQL database. The database should be monitored and tuned for the best performance by cloud administrators following the best practices of the particular database product. In this guide, we provide a few tips on how to optimize database for OpenNebula and thoroughly describe OpenNebula’s database maintenance tool onedb, which simplifies the most common database operations - backups and restores, version upgrades, or consistency checks.</description>
     </item>
     <item>
       <title>Troubleshooting</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/troubleshooting/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/troubleshooting/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/troubleshooting/</guid>
       <description>Logging Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in /var/log/one/ on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end-users in CLI tools or the Sunstone GUI.&#xA;Configure Logging System Follow the guides of each component to find the logs’ location and configuration of log verbosity:</description>
     </item>
     <item>
       <title>Replace failing frontend</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/replace_failing_fe/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/replace_failing_fe/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/replace_failing_fe/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/replace_failing_fe/</guid>
       <description>Follow this guide as the oneadmin user. To switch the user run:&#xA;sudo -i -u oneadmin Back up files This command has to be executed in the failing host.&#xA;Create the backup directory:&#xA;BAK_DIR=~/one_backup mkdir -p $BAK_DIR Copy configuration directory /etc/one to backup directory:&#xA;cp -rp --parents /etc/one $BAK_DIR Copy remotes directory /var/lib/one/remotes to backup directory:&#xA;cp -rp --parents /var/lib/one/remotes $BAK_DIR Copy keys directory /var/lib/one/.one to backup directory:&#xA;cp -rp --parents /var/lib/one/.</description>
     </item>
     <item>
       <title>Support Utilities (EE)</title>
-      <link>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/support/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/support/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/operation_references/opennebula_services_configuration/support/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/operation_references/opennebula_services_configuration/support/</guid>
       <description>OpenNebula provides customers with means to generate diagnostic bundles with all details necessary to handle the support cases. There are two specialized tools contained in the OpenNebula server package for this purpose:&#xA;OneGather: Generates an archive bundle with information about the OpenNebula instance, like configuration, database and hosts state. OneSupport: Only for vCenter deployments, on top of bundles, it also allows to scan permissions used to interact with the vCenter cluster.</description>
     </item>
   </channel>

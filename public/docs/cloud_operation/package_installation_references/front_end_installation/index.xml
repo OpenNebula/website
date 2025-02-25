@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Front End Installation on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/</link>
     <description>Recent content in Front End Installation on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/overview/</guid>
       <description>The Front-end is the central part of an OpenNebula installation and is the very first thing that needs to be deployed (or upgraded). Typically it’s a host where the OpenNebula server-side components are installed and which is responsible for the management of an entire virtualization stack. It can be a physical host or a virtual machine (this decision is left up to the cloud administrator) as long as it matches the requirements.</description>
     </item>
     <item>
       <title>Database Setup</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/database/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/database/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/database/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/database/</guid>
       <description>OpenNebula Front-end uses the database to persist the complete state of the cloud. It supports several database solutions and each is recommended for different usage. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the Back-end). The following options are available:&#xA;default embedded SQLite for small workloads, recommended MySQL/MariaDB for production, It’s recommended to install the database Back-end now.</description>
     </item>
     <item>
       <title>OpenNebula Repositories</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration/</guid>
       <description>Before we can proceed with installation, we have to configure the packaging tools on your Front-end host to include OpenNebula repositories. OpenNebula software is provided via two distinct distribution channels depending on the build type you are going to install:&#xA;Enterprise Edition - enterprise users facing hardened builds, Community Edition - free public builds. Follow the steps below based on your OpenNebula edition and Front-end operating system.&#xA;Enterprise Edition OpenNebula Systems provides an OpenNebula Enterprise Edition to customers with an active support subscription.</description>
     </item>
     <item>
       <title>Single Front-end Installation</title>
-      <link>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/install/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/install/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/package_installation_references/front_end_installation/install/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/package_installation_references/front_end_installation/install/</guid>
       <description>This page describes how to install a complete OpenNebula Front-end from binary packages available in the software repositories configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced from other places of this documentation. If there are no packages for your distribution, you might consider reading the Building from Source Code guide to build OpenNebula on your own.</description>
     </item>
   </channel>

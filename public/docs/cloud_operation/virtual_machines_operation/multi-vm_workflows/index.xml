@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Multi-VM Workflows on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/</link>
     <description>Recent content in Multi-VM Workflows on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/overview/</guid>
       <description>How Should I Read This Chapter Some applications require multiple VMs to implement their workflow. OpenNebula allows you to coordinate the deployment and resource usage of such applications through the OneFlow component.&#xA;This component is able to deploy services, these services are a group of interconnected virtual machines that work as an entity. They can communicate each other using virtual networks deployed by the OneFlow server itself and they can also have some relationship.</description>
     </item>
     <item>
       <title>OneFlow Services Management</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/</guid>
       <description>OneFlow allows users and administrators to define, execute and manage multi-tiered applications, which we call Services, composed of interconnected Virtual Machines with deployment dependencies between them. Each group of Virtual Machines is deployed and managed as a single entity and is completely integrated with the advanced OpenNebula user and group management.&#xA;What Is a Service The following diagram represents a multi-tier application. Each node represents a Role, and its cardinality (the number of VMs that will be deployed).</description>
     </item>
     <item>
       <title>OneFlow Services Auto-scaling</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_elasticity/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_elasticity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_elasticity/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/appflow_elasticity/</guid>
       <description>A Service Role’s cardinality can be adjusted either manually, or automatically in two ways: based on metrics or based on a schedule.&#xA;Overview When a scaling action starts, the Role and Service enter the SCALING state. In this state, the Role will instantiate or terminate a number of VMs to reach its new cardinality.&#xA;A Role with elasticity policies must define a minimum and maximum number of VMs:&#xA;&amp;#34;roles&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;frontend&amp;#34;, &amp;#34;cardinality&amp;#34;: 1, &amp;#34;vm_template&amp;#34;: 0, &amp;#34;min_vms&amp;#34; : 1, &amp;#34;max_vms&amp;#34; : 5, .</description>
     </item>
     <item>
       <title>OneGate Usage</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/onegate_usage/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/onegate_usage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/onegate_usage/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/multi-vm_workflows/onegate_usage/</guid>
       <description>The OneGate component allows Virtual Machine guests to pull and push VM information from OpenNebula. Users and administrators can use it to gather metrics, detect problems in their applications, and trigger OneFlow elasticity rules from inside the VM.&#xA;For Virtual Machines that are part of a Multi-VM Application (OneFlow Service), they can also retrieve the Service information directly from OneGate and trigger actions to reconfigure the Service or pass information among different VMs.</description>
     </item>
   </channel>

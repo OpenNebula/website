@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Release Notes on OpenNebula</title>
-    <link>//localhost:1313/docs/releases/release_information/release_notes/</link>
+    <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/</link>
     <description>Recent content in Release Notes on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/releases/release_information/release_notes/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/releases/release_information/release_notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OpenNebula Enterprise and Community Editions</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/opennebula_enterprise_and_community_editions/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/opennebula_enterprise_and_community_editions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/opennebula_enterprise_and_community_editions/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/opennebula_enterprise_and_community_editions/</guid>
       <description>The Release Notes section now includes notes for CE and EE, so this would be a new page explaining the differences between the EE and CE editions, using the content from:&#xA;What is OpenNebula CE&#xA;What is OpenNebula EE</description>
     </item>
     <item>
       <title>What&#39;s New</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/whats_new/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/whats_new/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/whats_new/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/whats_new/</guid>
       <description>OpenNebula Core The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs. The enforce parameter has been restored for the resize operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently. Option to define Compute Quotas per Cluster to achieve more granular control of resources.</description>
     </item>
     <item>
       <title>Platform Notes</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/platform_notes/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/platform_notes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/platform_notes/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/platform_notes/</guid>
       <description>This page will show you the specific considerations when using an OpenNebula cloud, according to the different supported platforms.&#xA;This is the list of the individual platform components that have been through the complete OpenNebula Quality Assurance and Certification Process.&#xA;Certified Components Version Front-End Components Component Version More information Red Hat Enterprise Linux 8, 9 Front-End Installation AlmaLinux 8, 9 Front-End Installation Ubuntu Server 22.04 (LTS), 24.04 (LTS) Front-End Installation Debian 11, 12 Front-End Installation.</description>
     </item>
     <item>
       <title>Secondary Platforms</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/secondary/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/secondary/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/secondary/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/secondary/</guid>
       <description>Secondary Platforms are experimental OpenNebula builds for bleeding edge operating systems and software versions, a completely new platform which hasn’t gained mature support in OpenNebula yet, or for non-mainstream CPU architectures. Continuity of support is not guaranteed. Builds for the Secondary Platforms are provided with only limited testing coverage and without any commercial support options.&#xA;Important Secondary Platforms are not recommended for production environments, nor officially supported by OpenNebula Systems.</description>
     </item>
     <item>
       <title>Compatibility Guide</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/compatibility/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/compatibility/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/compatibility/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/compatibility/</guid>
       <description>This guide is aimed at OpenNebula 6.10.x users and administrators who want to upgrade to the latest version. The following sections summarize the new features and usage changes that should be taken into account, or are prone to cause confusion. You can check the upgrade process in the corresponding section. If upgrading from previous versions, please make sure you read all the intermediate versions’ Compatibility Guides for possible pitfalls.</description>
     </item>
     <item>
       <title>Known Issues</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/known_issues/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/known_issues/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/known_issues/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/known_issues/</guid>
       <description>A complete list of known issues for OpenNebula is maintained here.&#xA;This page will be updated with relevant information about bugs affecting OpenNebula, as well as possible workarounds until a patch is officially published.&#xA;Drivers - Virtualization libvirtd restarts in cycles each 10 minutes with error message in system logs, due to the way libvirtd gets activated per interaction by systemd in 120-second slices. As the default interval for the OpenNebula monitor probe is 600 seconds (10 minutes), each time a probe reactivates libvirtd, it sends those messages to syslog.</description>
     </item>
     <item>
       <title>Acknowledgements</title>
-      <link>//localhost:1313/docs/releases/release_information/release_notes/acknowledgements/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/release_notes/acknowledgements/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/release_notes/acknowledgements/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/release_notes/acknowledgements/</guid>
       <description>The OpenNebula project would like to thank the community members and users who have contributed to this software release by being active in discussions, answering user questions, or providing patches for bugfixes, features, and documentation.&#xA;Some of the new functionality in OpenNebula 6.10 has been made possible through funding from the following innovation projects:&#xA;SovereignEdge.Cognit, funded by the European Union’s Horizon Europe research and innovation programme through the SovereignEdge.Cognit project: A Cognitive Serverless Framework for the Cloud-Edge Continuum (Grant Agreement 101092711 - SovereignEdge.</description>
     </item>
   </channel>

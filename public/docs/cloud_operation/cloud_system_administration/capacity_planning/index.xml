@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capacity Planning on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/</link>
     <description>Recent content in Capacity Planning on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/overview/</guid>
       <description>How Should I Read This Chapter This Chapter shows different mechanism available to administrators to control the capacity assigned to Virtual Machines as well as that available to the users:&#xA;First you can control the apparent capacity of Hosts configuring its overcommitment. Also you can fine tune the scheduling policies that controls how resources from Hosts, Datastores, and Virtual Networks are allocated to Virtual Machines. Similarly, you can limit the resources that are made available to users with the quota system.</description>
     </item>
     <item>
       <title>Host Overcommitment</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/overcommitment/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/overcommitment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/overcommitment/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/overcommitment/</guid>
       <description>Before allocating a VM to a Host, the Scheduler checks that the capacity requested by the VM fits in the available capacity of the Host. The overall number of VMs assigned to a Host can be controlled by:&#xA;Adjusting the total capacity announced by each Host. Adjusting the capacity requested by the VM. Virtual Machine Capacity The resource allocation of the VM is expressed with the following attributes:&#xA;CPU, percentage of CPU divided by 100 required for the VM, e.</description>
     </item>
     <item>
       <title>Usage Quotas</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/quotas/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/quotas/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/capacity_planning/quotas/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/capacity_planning/quotas/</guid>
       <description>The quota system tracks user and group usage of system resources, and allows the system administrator to set limits on the usage of these resources. Quota limits can be set for:&#xA;users, to individually limit the usage made by a given user. groups, to limit the overall usage made by all the users in a given group. This can be of special interest for the OpenNebula Zones and Virtual Data Center (VDC) components.</description>
     </item>
   </channel>

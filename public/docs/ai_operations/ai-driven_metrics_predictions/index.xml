@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AI-driven Metrics Predictions on OpenNebula</title>
-    <link>//localhost:1313/docs/ai_operations/ai-driven_metrics_predictions/</link>
+    <link>https://opennebula.github.io/website/docs/ai_operations/ai-driven_metrics_predictions/</link>
     <description>Recent content in AI-driven Metrics Predictions on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/ai_operations/ai-driven_metrics_predictions/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/ai_operations/ai-driven_metrics_predictions/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Metrics Predictions</title>
-      <link>//localhost:1313/docs/ai_operations/ai-driven_metrics_predictions/metrics_predictions/</link>
+      <link>https://opennebula.github.io/website/docs/ai_operations/ai-driven_metrics_predictions/metrics_predictions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/ai_operations/ai-driven_metrics_predictions/metrics_predictions/</guid>
+      <guid>https://opennebula.github.io/website/docs/ai_operations/ai-driven_metrics_predictions/metrics_predictions/</guid>
       <description>Placeholder text for page that needs to be written, document title not definitive.</description>
     </item>
   </channel>

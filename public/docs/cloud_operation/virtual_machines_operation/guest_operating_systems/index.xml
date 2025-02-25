@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Guest Operating Systems on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/</link>
     <description>Recent content in Guest Operating Systems on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contextualization</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/kvm_contextualization/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/kvm_contextualization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/kvm_contextualization/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/kvm_contextualization/</guid>
       <description>OpenNebula provides a set of contextualization packages for different operating systems that integrates the VM guests with the OpenNebula services. The OpenNebula contextualization process allows to automatically:&#xA;Configure guest networking and hostname settings. Set up user credentials for seamless VM access. Define the system timezone. Resize disk partitions as needed. Execute custom actions during boot. All the OS appliances available in the OpenNebula Marketplace comes with all the software pre-installed.</description>
     </item>
     <item>
       <title>Creating Disk Images</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/creating_images/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/creating_images/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/creating_images/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/creating_images/</guid>
       <description>When it comes to creating OS disk images for your VM guests, you have several options:&#xA;OpenNebula Marketplace Appliances: Utilize ready-to-use OpenNebula Marketplace appliances. OpenNebula Apps Project: Build or customize your own images using the build toolchain provided by the OpenNebula Apps project. Manual Installation: Perform a manual installation directly in a running VM guest. OpenNebula Marketplace Appliances If you have access to the public OpenNebula Marketplace from your frontend, you’ll find pre-configured images ready to run in an OpenNebula Cloud.</description>
     </item>
     <item>
       <title>Windows Best Practices</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/windows_best_practice/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/windows_best_practice/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/windows_best_practice/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/windows_best_practice/</guid>
       <description>Windows as a guest operating system on KVM hypervisors requires some additional configuration in order to achieve performant virtual machines. In this document we’ll go over the best practices for deploying your Windows Virtual Machine, and provide some extra actions that can be taken in Windows after deployment to improve performance.&#xA;Resource Allocations Template Configuration Post Deployment actions The best way to achieve high performance when using this guide is to also use higher performing hardware, the disk will be the most relevant and performance will be greatly impacted on systems with HDDs rather than SSD/NVMe.</description>
     </item>
     <item>
       <title>Operating System Profiles</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/os_profile/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/os_profile/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/os_profile/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/guest_operating_systems/os_profile/</guid>
       <description>In Sunstone you can quickly flavor a VM template by using a Operating System Profile, which will pre-fill part of the template for you. By default Sunstone ships with a default “Windows Optimized” profile which contains some basic windows specific optimization settings.&#xA;Defining a Profile Navigate to the profiles directory&#xA;By default found in etc/one/fireedge/sunstone/profiles.&#xA;Create a new YAML file&#xA;Name your profile by defining a new .yaml file</description>
     </item>
   </channel>

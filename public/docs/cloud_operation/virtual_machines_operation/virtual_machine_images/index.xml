@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Virtual Machines Images on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/</link>
     <description>Recent content in Virtual Machines Images on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/overview/</guid>
       <description>How Should I Read This Chapter In OpenNenbula there are two main places where VM disk images are stored:&#xA;Marketplaces, these are shared locations across multiple OpenNebula clouds. They can be public or for private use. Marketplaces store Marketplace Applications (or Appliances), that includes the application definition together with the disk images. Datastores, these are the local storage areas of a cloud. They typically refer to storage clusters or hypervisor disks and are mainly devoted to store disk images.</description>
     </item>
     <item>
       <title>Images</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/images/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/images/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/images/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/images/</guid>
       <description>An OpenNebula Image represents a VM disk. Images can have multiple formats (e.g. filesystem or block device) and can store OS installations, data filesystems, images or kernels. In this guide you’ll learn about different Image types, and how to mange and use them.&#xA;Types and Persistency OpenNebula uses three different Image types to represent VM disks. A VM can use multiple Image types simultaneously:&#xA;Operating System (OS): Main disk, the VM will start from this Image.</description>
     </item>
     <item>
       <title>Virtual Machine Templates</title>
-      <link>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/vm_templates/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/vm_templates/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/vm_templates/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/virtual_machines_operation/virtual_machine_images/vm_templates/</guid>
       <description>In OpenNebula, VMs are defined with VM Templates. This section explains how to describe a Virtual Machine, and how users typically interact with the system.&#xA;OpenNebula administrators and users can register Virtual Machine definitions (VM Templates) in the system, to be instantiated later as Virtual Machine instances. These VM Templates can be instantiated several times, and also shared with other users.&#xA;Defining a VM A Virtual Machine Template, at the very basics, consists of:</description>
     </item>
   </channel>

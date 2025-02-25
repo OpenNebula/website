@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Backup System Configuration on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/</link>
     <description>Recent content in Backup System Configuration on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview/</guid>
       <description>This chapter contains documentation on how to create and manage Virtual Machines Backups. Backups are managed through the datastore and image abstractions. In this way, all the concepts that apply to these objects also apply to backups like access control or quotas. Backup datastores can be defined using two backends (datastore drivers):&#xA;restic, based on the restic backup tool rsync, that uses the rsync utility to transfer backup files. How Should I Read This Chapter Before reading this chapter, you should have already installed your Frontend, the KVM Hosts and have an OpenNebula cloud up and running with at least one virtualization node.</description>
     </item>
     <item>
       <title>Backup Datastore: Restic</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic/</guid>
       <description>Restic is an open source (BSD 2-Clause License) backup tool designed for speed, security and efficiency. The current implementation of the driver uses the SFTP storage type. Restic offers interesting features to store backups, like deduplication (only transferring image blobs not already present in the repository) or compression (enabled by default).&#xA;In both the Enterprise and Community editions of OpenNebula, the correct version of restic is included as a dependency.</description>
     </item>
     <item>
       <title>Backup Datastore: Rsync</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync/</guid>
       <description>RSync is an open source file transfer utility that is included with most distributions of Linux. This backup utility is provided with the Community Edition (CE) of OpenNebula and supports both full and incremental backup methods.&#xA;Step 0. Setup the backup server First, a server should be configured to receive and store these backup files. The rsync backup server can be any server which is accessible from the oneadmin user on the hosts.</description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/io_limit/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/io_limit/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/io_limit/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_clusters_infrastructure_configuration/backup_system_configuration/io_limit/</guid>
       <description>Backup operations may incur in a high I/O or CPU demands. This will add noise to the VMs running in the hypervisor. You can control resource usage of the backup operations by:&#xA;Lower the priority of the associated processes. Backup commands are run under a given ionice priority (best-effort, class 2 scheduler); and a given nice. Confine the associated processes in a cgroup. OpenNebula will create a systemd slice for each backup datastore so the backup commands run with a limited number or read/write IOPS and CPU Quota.</description>
     </item>
   </channel>

@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Managing Marketplaces In Sunstone on OpenNebula</title>
-    <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/</link>
+    <link>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/</link>
     <description>Recent content in Managing Marketplaces In Sunstone on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Marketplaces in Sunstone</title>
-      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/sunstone_marketplaces/</link>
+      <link>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/sunstone_marketplaces/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/sunstone_marketplaces/</guid>
+      <guid>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/managing_marketplaces_in_sunstone/sunstone_marketplaces/</guid>
       <description>The Sunstone web UI allows you to graphically manage marketplaces. Within Sunstone, open the left-hand pane, then select Storage -&amp;gt; Marketplaces to perform the following operations:&#xA;Create a marketplace Update a marketplace Delete a marketplace Enable or disable a marketplace Change the owner or the group of a marketplace Check details of a marketplace See the appliances that have a marketplace Note Only OpenNebula Systems, LinuxContainers, HTTP and S3 marketplaces could be created with Sunstone.</description>
     </item>
   </channel>

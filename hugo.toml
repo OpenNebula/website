@@ -1,6 +1,6 @@
 title = "OpenNebula"
 
-baseURL = "https://opennebula.github.io/website/"
+#baseURL = "https://opennebula.github.io/website/"
 
 # Configure how URLs look like per section.
 [permalinks]
@@ -169,7 +169,7 @@ yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
 # relativeURLs = true
-canonifyURLs = true
+#canonifyURLs = true
 
 [markup]
   defaultMarkdownHandler = 'goldmark'

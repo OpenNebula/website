@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Private Marketplaces on OpenNebula</title>
-    <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/</link>
+    <link>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/</link>
     <description>Recent content in Private Marketplaces on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/overview/</link>
+      <link>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/overview/</guid>
       <description>Besides the public Marketplaces (leveraging various remote public repositories with existing Appliances and accessible universally by all OpenNebula instances), the private ones allow the cloud administrators to create the private Marketplaces within an single organization in a specific OpenNebula (single zone) or shared by a Federation (collection of zones). Private Marketplaces provide their users with an easy way of privately publishing, downloading and sharing their own custom Appliances.&#xA;A Marketplace is a repository of Marketplace Appliances.</description>
     </item>
     <item>
       <title>HTTP Marketplace</title>
-      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_http/</link>
+      <link>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_http/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_http/</guid>
+      <guid>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_http/</guid>
       <description>Overview This Marketplace uses a conventional HTTP server to expose the images (Marketplace Appliances) uploaded to the Marketplace. The image will be placed in a specific directory (available on or at least accessible from the Front-end), that must be also served by a dedicated HTTP service.&#xA;This is a fully supported Marketplace with all the implemented features.&#xA;Requirements The web server should be deployed either in the Front-end or on a node reachable by the Front-end.</description>
     </item>
     <item>
       <title>S3 Marketplace</title>
-      <link>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_s3/</link>
+      <link>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_s3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_s3/</guid>
+      <guid>https://opennebula.github.io/website/docs/apps-marketplace/marketplace_configuration/private_marketplaces/market_s3/</guid>
       <description>Overview This Marketplace uses an S3 API-capable service as the Back-end. This means Marketplace Appliances will be stored in the official AWS S3 service , or in services that implement that API, like Ceph Object Gateway S3.&#xA;Limitations Since the S3 API does not provide a value for available space, this space is hard-coded into the driver file, limiting it to 1TB. See below to learn how to change the default value.</description>
     </item>
   </channel>

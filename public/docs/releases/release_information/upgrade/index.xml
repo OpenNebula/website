@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Upgrade on OpenNebula</title>
-    <link>//localhost:1313/docs/releases/release_information/upgrade/</link>
+    <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/</link>
     <description>Recent content in Upgrade on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/releases/release_information/upgrade/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/releases/release_information/upgrade/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/overview/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/overview/</guid>
       <description>Keeping your OpenNebula up-to-date is very important, as you will receive the latest functionality and, more importantly, the latest security patches. It is possible to upgrade to the latest OpenNebula release from earlier versions.&#xA;If you are using the Enterprise Edition you can upgrade from previous OpenNebula versions. If you are using the Community Edition you can only upgrade from the previous stable release if you are using your cloud for non-commercial purposes and you need to request the migrator package.</description>
     </item>
     <item>
       <title>Start Here</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/start_here/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/start_here/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/start_here/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/start_here/</guid>
       <description>This guide describes the upgrade procedure for systems that are already running an OpenNebula Enterprise Edition 5.12.x or older. The upgrade to OpenNebula EE 7.0 can be done directly by following this section; you don’t need to perform intermediate version upgrades (for CE deployments, please see the Important Note below). The upgrade will preserve all current users, hosts, resources, and configurations, for both SQLite and MySQL/MariaDB back-ends.&#xA;Read the Compatibility Guide and Release Notes to know what’s new in OpenNebula 7.</description>
     </item>
     <item>
       <title>Upgrading Single Front-End</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/upgrading_single/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_single/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/upgrading_single/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_single/</guid>
       <description>Important Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this online form. In order to use these non-commercial migrators to upgrade to the latest CE release (OpenNebula 6.8.0), you will need to upgrade your existing OpenNebula environment first to CE Patch Release 6.</description>
     </item>
     <item>
       <title>Upgrading High Availability Clusters</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/upgrading_ha/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_ha/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/upgrading_ha/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_ha/</guid>
       <description>Step 1. Check Virtual Machine Status Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). Check the Managing Virtual Machines guide for more information on the VM life-cycle.&#xA;Step 2. Set All Hosts to Disable Mode Set all Hosts to disable mode to stop all monitoring processes.&#xA;$ onehost disable &amp;lt;host_id&amp;gt; If you are upgrading from version 6.</description>
     </item>
     <item>
       <title>Upgrading Federated Instances</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/upgrading_federation/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_federation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/upgrading_federation/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrading_federation/</guid>
       <description>This version of OpenNebula introduces some changes in the federation data model. You need to coordinate the upgrade across zones and upgrade them at the same time.&#xA;Step 1. Check Federation Status Check that federation is in sync and all zones are at the same index (FED_INDEX):&#xA;$ onezone list C ID NAME ENDPOINT FED_INDEX 101 S-US-CA http://192.168.150.3:2633/RPC2 715438 100 S-EU-GE http://192.168.150.2:2633/RPC2 715438 * 0 M-EU-FR http://192.168.150.1:2633/RPC2 715438 It is a good idea to prevent any API access to the master zone during this step (e.</description>
     </item>
     <item>
       <title>Restoring Previous Version</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/restoring_version/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/restoring_version/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/restoring_version/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/restoring_version/</guid>
       <description>&#xA;If for any reason you need to restore your previous OpenNebula, follow these steps:&#xA;With OpenNebula 7.0 still installed, restore the DB backup using onedb restore -f Uninstall OpenNebula 7.0, and install your previous version again. Copy back the backup of /etc/one you did to restore your configuration. </description>
     </item>
     <item>
       <title>Upgrading from Previous Versions</title>
-      <link>//localhost:1313/docs/releases/release_information/upgrade/upgrade_from_previous_versions/</link>
+      <link>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrade_from_previous_versions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/releases/release_information/upgrade/upgrade_from_previous_versions/</guid>
+      <guid>https://opennebula.github.io/website/docs/releases/release_information/upgrade/upgrade_from_previous_versions/</guid>
       <description>If you need to upgrade from an OpenNebula version lower than 6.0, please contact your account manager at OpenNebula Systems, or alternatively open a ticket in the OpenNebula Systems support portal</description>
     </item>
   </channel>

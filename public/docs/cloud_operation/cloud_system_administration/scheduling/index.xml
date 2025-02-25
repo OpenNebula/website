@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Scheduling on OpenNebula</title>
-    <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/</link>
+    <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/</link>
     <description>Recent content in Scheduling on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/overview/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/overview/</guid>
       <description>How Should I Read This Chapter This Chapter shows different mechanism available to administrators to control the capacity assigned to Virtual Machines as well as that available to the users:&#xA;First you can control the apparent capacity of Hosts configuring its overcommitment. Also you can fine tune the scheduling policies that controls how resources from Hosts, Datastores, and Virtual Networks are allocated to Virtual Machines. Similarly, you can limit the resources that are made available to users with the quota system.</description>
     </item>
     <item>
       <title>Scheduling Policies</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/scheduling/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/scheduling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/scheduling/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/scheduling/</guid>
       <description>The OpenNebula scheduler uses a Matchmaking algorithm to allocate VMs to Hosts. A matchmaking request consists of two parts:&#xA;Requirements, the target resource needs to fulfill these to be considered to allocate the VM. Resources that does not fulfill the requirements are filtered out. Rank, or preferences, a function that ranks the suitable resources to sort them. Resources with a higher rank are used first. OpenNebula uses this algorithm to schedule all resources types:</description>
     </item>
     <item>
       <title>Virtual Machine Affinity</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/affinity/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/affinity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/affinity/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/affinity/</guid>
       <description>A VM Group defines a set of related VMs, and associated placement constraints for the VMs in the group. A VM Group allows you to place together (or separately) certain VMs (or VM classes, called roles). VMGroups will help you to optimize the performance (e.g. not placing all the CPU bound VMs in the same host) or improve the fault tolerance (e.g. not placing all your front-ends in the same host) of your multi-VM applications.</description>
     </item>
     <item>
       <title>External Schedulers</title>
-      <link>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/external/</link>
+      <link>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/external/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/cloud_operation/cloud_system_administration/scheduling/external/</guid>
+      <guid>https://opennebula.github.io/website/docs/cloud_operation/cloud_system_administration/scheduling/external/</guid>
       <description>The default OpenNebula scheduler can interface with external schedulers to implement additional algorithms tailored to your specific use case or business logic. Communication is established through a straightforward REST API. This guide will walk you through configuring and developing your own external scheduler.&#xA;External Scheduler API The scheduler employs a simple REST API. When the external scheduler is configured, the OpenNebula scheduler triggers a POST operation to the designated URL.</description>
     </item>
   </channel>

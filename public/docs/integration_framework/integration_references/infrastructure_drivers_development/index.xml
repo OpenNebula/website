@@ -2,65 +2,65 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Infrastructure Drivers Development on OpenNebula</title>
-    <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/</link>
+    <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/</link>
     <description>Recent content in Infrastructure Drivers Development on OpenNebula</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/overview/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/overview/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/overview/</guid>
       <description>The interactions between OpenNebula and the Cloud infrastructure are performed by specific drivers. Each one addresses a particular area:&#xA;Storage. The OpenNebula core issue abstracts storage operations (e.g. clone or delete) that are implemented by specific programs that can be replaced or modified to interface special storage backends and file-systems. Virtualization. The interaction with the hypervisors are also implemented with custom programs to boot, stop or migrate a virtual machine.</description>
     </item>
     <item>
       <title>Virtualization Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-vmm/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-vmm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-vmm/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-vmm/</guid>
       <description>The component that deals with the hypervisor to create, manage and get information about virtual machine objects is called Virtual Machine Manager (VMM for short). This component has two parts. The first one resides in the core and holds most of the general functionality common to all the drivers (and some specific), the second is the driver that is the one able to translate basic VMM actions to the hypervisor.</description>
     </item>
     <item>
       <title>Storage Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/sd/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/sd/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/sd/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/sd/</guid>
       <description>The Storage subsystem is highly modular. These drivers are separated into two logical sets:&#xA;DS: Datastore drivers. They serve the purpose of managing images: register, delete, and create empty datablocks. TM: Transfer Manager drivers. They manage images associated with instantiated VMs. Datastore Drivers Structure Located under /var/lib/one/remotes/datastore/&amp;lt;ds_mad&amp;gt;&#xA;cp: copies/dumps the image to the datastore ARGUMENTS: image_id STDIN: datastore_image_dump RETURNS: image_source image_format datastore_image_dump is an XML dump of the driver action encoded in Base 64.</description>
     </item>
     <item>
       <title>Monitoring Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-im/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-im/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-im/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-im/</guid>
       <description>The Monitoring Drivers (or IM drivers) collect host and virtual machine monitoring data by executing a monitoring agent in the hosts. The agent periodically executes probes to collect data and periodically send them to the frontend.&#xA;This guide describes the internals of the monitoring system. It is also a starting point on how to create a new IM driver from scratch.&#xA;Message structure The structure of monitoring message is:</description>
     </item>
     <item>
       <title>Networking Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-nm/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-nm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-nm/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-nm/</guid>
       <description>This component is in charge of configuring the network in the hypervisors. The purpose of this guide is to describe how to create a new network manager driver.&#xA;Driver Configuration and Description To enable a new network manager driver, the first requirement is to make a new directory with the name of the driver in /var/lib/one/remotes/vnm/&amp;lt;name&amp;gt; with these files:&#xA;pre: This driver should perform all the network related actions required before the Virtual Machine starts in a host.</description>
     </item>
     <item>
       <title>Authentication Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-auth/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-auth/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-auth/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-auth/</guid>
       <description>This guide will show you how to develop a new driver for OpenNebula to interact with an external authentication service.&#xA;OpenNebula comes with an internal user/password way of authentication, this is called core. To be able to use other auth methods there is a system that performs authentication with external systems. Authentication drivers are responsible for getting the user credentials from OpenNebula database and login and answer whether the authentication is correct or not.</description>
     </item>
     <item>
       <title>Market Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-market/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-market/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-market/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-market/</guid>
       <description>The Market Driver is in charge of managing both Marketplaces and MarketPlace Apps.&#xA;Marketplace Drivers Structure The main drivers are located under /var/lib/one/remotes/market/&amp;lt;market_mad&amp;gt;. Marketplaces support the following operations:&#xA;Action Description create Create a new Marketplace. monitor This automatic action discovers the available Marketplace Apps andmonitors the available space of the Marketplace. delete Removes a Marketplace from OpenNebula. For a Public Marketplace,it will also remove the Marketplace Apps, but for any other type ofMarketplace this will not remove the Marketplace Apps, and willonly work if the Marketplace is empty.</description>
     </item>
     <item>
       <title>IPAM Driver</title>
-      <link>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-ipam/</link>
+      <link>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-ipam/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-ipam/</guid>
+      <guid>https://opennebula.github.io/website/docs/integration_framework/integration_references/infrastructure_drivers_development/devel-ipam/</guid>
       <description>A IPAM driver lets you delegate IP lease management to an external component. This way you can coordinate IP use with other virtual or bare-metal servers in your datacenter. To effectively use an external IPAM you need to develop four action scripts that hooks on different points of the IP network/lease life-cycle.&#xA;Note that OpenNebula includes a built-in internal IPAM. You need to develop this component if you are using a IPAM server and want to coordinate OpenNebula with it.</description>
     </item>
   </channel>
