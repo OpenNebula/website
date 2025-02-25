@@ -170,7 +170,7 @@ yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
 # relativeURLs = true
-# canonifyURLs = true
+canonifyURLs = true
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
