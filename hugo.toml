@@ -1,6 +1,6 @@
 title = "OpenNebula"
 
-#baseURL = "https://opennebula.github.io/website/"
+baseURL = "https://opennebula.github.io/website/"
 
 # Configure how URLs look like per section.
 [permalinks]
