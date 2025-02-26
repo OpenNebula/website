@@ -1,7 +1,7 @@
 ---
 title: "Tools"
 date: "2025/02/17"
-description:
+description: "OpenNebula's automation tools integration"
 categories:
 pageintoc: "264"
 tags:
