@@ -164,6 +164,7 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'assets'
     target = 'assets'
+  [[module.mounts]]
     source = 'static'
     target = 'assets'
 
