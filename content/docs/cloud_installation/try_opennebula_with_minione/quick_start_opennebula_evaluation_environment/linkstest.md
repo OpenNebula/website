@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Overview -->
 
-Page with `{{% relref` and ` %}}` removed.
+Page with relrefs removed.
 
 ## Linking in MD format, to pages and sections:
 
@@ -37,7 +37,7 @@ LDAP
 
 Deployment Basics Overview
 
-[Deployment Basics Overview]({{% relref "deployment-basics-overview" %}})
+<!-- [Deployment Basics Overview]({{% relref "deployment-basics-overview" %}}) -->
 
 LDAP
 
