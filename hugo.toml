@@ -2,6 +2,9 @@ title = "OpenNebula"
 
 baseURL = "https://opennebula.github.io/website/"
 
+capitalizeListTitles = "false"
+titleCaseStyle = "none"
+
 # Configure how URLs look like per section.
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
