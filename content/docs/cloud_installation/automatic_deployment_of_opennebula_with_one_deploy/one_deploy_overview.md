@@ -4,7 +4,7 @@ date: "2025/02/17"
 description:
 categories:
 pageintoc: "26"
-tags:
+tags: [OneDeploy, deployment, 'automatic deployment', installation]
 weight: "1"
 ---
 

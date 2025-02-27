@@ -4,7 +4,7 @@ date: "2025/02/17"
 description:
 categories:
 pageintoc: "19"
-tags:
+tags: ['quick start', learning, evaluation, deployment, AWS, tutorial]
 weight: "3"
 ---
 

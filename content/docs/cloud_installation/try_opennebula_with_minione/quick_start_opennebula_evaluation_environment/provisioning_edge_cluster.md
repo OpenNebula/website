@@ -4,7 +4,7 @@ date: "2025/02/17"
 description:
 categories:
 pageintoc: "21"
-tags:
+tags: ['quick start', learning, evaluation, deployment, OneProvision, tutorial]
 weight: "5"
 ---
 

@@ -4,7 +4,7 @@ date: "2025/02/17"
 description:
 categories:
 pageintoc: "24"
-tags:
+tags: ['quick start', learning, evaluation, deployment, 'edge cluster', 'cluster operations']
 weight: "8"
 ---
 

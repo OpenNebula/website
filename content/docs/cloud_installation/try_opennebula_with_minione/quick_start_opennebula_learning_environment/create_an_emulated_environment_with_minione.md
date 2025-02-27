@@ -4,8 +4,8 @@ date: "2025/02/17"
 description:
 categories:
 pageintoc: "15"
-tags:
-weight: "1"
+tags: [intro, learning, evaluation, miniONE]
+weight: "2"
 ---
 
 <a id="create-an-emulated-environment-with-minione"></a>
