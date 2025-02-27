@@ -19,7 +19,6 @@ The OpenNebula Evaluation environment is designed to help you deploy an OpenNebu
 All tutorials use OpenNebula’s **Sunstone** web UI, and most take under ten minutes to complete. The Quick Start is by far the fastest way to familiarize yourself with OpenNebula.
 
 * [Overview]({{% relref "overview" %}})
-* [Links test]({{% relref "linkstest" %}})
 * [Try OpenNebula Front-end On-prem]({{% relref "try_opennebula_onprem" %}})
   * [Step 1: Ensure System Requirements]({{% relref "try_opennebula_onprem#step-1-ensure-system-requirements" %}})
   * [Step 2: Download and Install miniONE]({{% relref "try_opennebula_onprem#step-2-download-and-install-minione" %}})
