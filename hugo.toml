@@ -41,8 +41,10 @@ navbar_logo = true
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like o>
 navbar_translucent_over_cover_disable = false
 # Enable to show the side bar menu in its compact state.
-sidebar_menu_compact = false
+# sidebar_menu_compact = false
+sidebar_menu_compact = true
 sidebar_menu_foldable = true
+ul_show = 3
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if se>
 sidebar_search_disable = false
 showLightDarkModeMenu = true
@@ -91,43 +93,39 @@ enable = false
   desc = "Discuss development issues around the project"
 
 
+# Menu above the page
 [menu]
   [[menu.main]]
     name = "OpenNebula"
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "Install"
-    url = "/install/"
+    name = "Documentation"
+    url = "/docs/"
     weight = 2
   [[menu.main]]
-    name = "Docs"
-    url = "/docs/"
+    name = "Software"
+    url = "/software/"		# fill in
     weight = 3
   [[menu.main]]
-    name = "Integrate"
-    url = "/integrate/"
-    weight = 4
-  [[menu.main]]
-    name = "Contribute"
-    url = "/contribute/"
+    name = "Community"
+    url = "/community/"		# fill in
     weight = 5
   [[menu.main]]
     name = "Ecosystem "
-    url = "/ecosystem/"
+    url = "/ecosystem/"		# fill in --> Integration Framework, Deployment Framework
     post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
-    weight = 6
+    weight = 4
+  [[menu.main]]
+    name = "Use Cases "
+    url = "/use_cases/"		# fill in
+    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
+    weight = 5
   [[menu.main]]
     name = "Support "
-    url = "/support/"
+    url = "/support/"		# fill in --> subscriptions
     post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
-    weight = 7
-  [[menu.main]]
-    name = "GitHub "
-    url = "/github/"
-    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
-    weight = 8
-
+    weight = 6
 
 [params]
   # Add your release versions here

@@ -1,6 +1,7 @@
 ---
 title: "Support"
 type: docs
+toc_hide : true
 weight: 9
 description: "This is the description"
 ---

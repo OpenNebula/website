@@ -1,6 +1,9 @@
 ---
 title: "Ecosystem"
-type: community
-weight: 7
-description: "This is the description"
+type: docs
+toc_hide: true
+description: "Test description"
+weight: 1
 ---
+
+Test Ecosystem.

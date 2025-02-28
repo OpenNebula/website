@@ -5,7 +5,7 @@ description: "Consult references for customized OpenNebula deployments"
 categories:
 pageintoc: "309"
 tags:
-weight: "9"
+weight: "1"
 ---
 
 <a id="deployment-framework"></a>
