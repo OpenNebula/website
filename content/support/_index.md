@@ -1,23 +1,22 @@
 ---
 title: "Support"
-type: docs
 toc_hide : true
 weight: 9
 description: "This is the description"
 ---
 
-## OpenNebula Commercial Services
+{{< blocks/cover title="OpenNebula Support" image_anchor="top" color="primary" height="min" >}}
+{{< /blocks/cover >}}
 
-OpenNebula Subscriptions and professional services open the door to maintaining direct engagement with the OpenNebula Systems Engineering and Support team, providing resources and accessibility that augment your own technical team, ultimately saving you effort and expense in the long run.
+{{< blocks/section >}}
+<p>OpenNebula subscriptions and professional services open the door to maintaining direct engagement with the OpenNebula Systems Engineering and Support team, providing resources and accessibility that augment your own technical team, ultimately saving you effort and expense in the long run.</p>
 
-[OpenNebula Enterprise](https://opennebula.io/enterprise/)
+<h4> <a href="https://opennebula.io/enterprise/">OpenNebula Enterprise</a></h4>
 
-Access entreprise-level support with an OpenNebula subscription.
+<p>Access entreprise-level support with an OpenNebula subscription, in the <a href="https://support.opennebula.pro/hc/en-us">OpenNebula Enterprise Support Portal</a>.</p>
 
-[OpenNebula Enterprise Support Portal](https://support.opennebula.pro/hc/en-us)
+<h4>OpenNebula Community</h4>
 
-## OpenNebula Community Support
+<p>Browse topics, check out announcements and discussions, and find answers in the <a href="https://forum.opennebula.io">OpenNebula Forum</a>.</p>
 
-Browse topics, check out announcements and discussions, and find answers in the online forum.
-
-[OpenNebula Forum](https://forum.opennebula.io/)
+{{< /blocks/section >}}
