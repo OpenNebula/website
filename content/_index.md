@@ -4,7 +4,7 @@ title: "OpenNebula"
 
 {{< blocks/cover title="Welcome to OpenNebula" image_anchor="top" image="world_connected.jpg" color="primary" height="full" >}}
 
-<a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
+<a class="btn btn-lg btn-primary me-3 mb-4" href="docs/">
   Read the Docs <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <a class="btn btn-lg btn-success me-3 mb-4" href="https://opennebula.io/evaluate-opennebula/#try_yourself">
