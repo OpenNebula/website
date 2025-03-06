@@ -2,7 +2,7 @@
 title: "OpenNebula Documentation"
 description: "An at-a-glance overview of the docs"
 weight: "1"
-url: '/'
+url: "/"
 main_menu: true
 hide_feedback: true
 no_list: true
