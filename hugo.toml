@@ -96,7 +96,7 @@ enable = false
 [menu]
   [[menu.main]]
     name = "Documentation"
-    url = "/docs/"
+    url = "/"
     weight = 1
 
 [params]
