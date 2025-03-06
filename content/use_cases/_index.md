@@ -22,4 +22,4 @@ Browse other [case studies](https://opennebula.io/case-studies/), [user stories]
 {{% /blocks/section %}}
 
 
-{{< alert title="Note" color="success" >}} Content TBD. There is also a [Use Cases]({{% relref "../docs/cloud_installation/understand_opennebula/opennebula_concepts/use_cases" %}}) in the documentation.{{< /alert >}}
+{{< alert title="Note" color="success" >}} Content TBD. There is also a [Use Cases]({{% relref "../docs/quick_start/understand_opennebula/opennebula_concepts/use_cases" %}}) in the documentation.{{< /alert >}}

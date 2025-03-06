@@ -16,13 +16,13 @@ weight: "3"
 Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration). In order to use these non-commercial migrators to upgrade to the latest CE release (OpenNebula 6.8.0), you will need to upgrade your existing OpenNebula environment first to CE Patch Release 6.6.0.1{{< /alert >}} 
 
 {{< alert title="Important" color="success" >}}
-If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/install#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}} 
+If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}} 
 
 ## Upgrading from 6.x and higher
 
 ### Step 1. Check Virtual Machine Status
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../cloud_operation/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../configuration_and_operation/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
 
 ### Step 2. Set All Hosts to Disable Mode
 
@@ -54,7 +54,7 @@ $ onedb backup
 
 ### Step 5. Upgrade OpenNebula Packages Repository
 
-In order to be able to retrieve the packages for the latest version, you need to update the OpenNebula packages repository. The instructions for doing this are detailed [here]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/opennebula_repository_configuration#repositories" %}}).
+In order to be able to retrieve the packages for the latest version, you need to update the OpenNebula packages repository. The instructions for doing this are detailed [here]({{% relref "opennebula_repository_configuration#repositories" %}}).
 
 ### Step 6. Upgrade to the New Version
 
@@ -74,7 +74,7 @@ $ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-provision op
 {{< alert title="Warning" color="warning" >}}
 Sunstone on Apache
 
-If upgrading a Front-end where Sunstone is deployed through an **Apache web server**, bear in mind that the upgrade may cause [filesystem permissions]({{% relref "../../../cloud_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-fs-permissions" %}}) to be reset. If this happens Apache will be unable to access Sunstone files, and users be unable to access the Sunstone UI. The Apache log will show an entry like below:
+If upgrading a Front-end where Sunstone is deployed through an **Apache web server**, bear in mind that the upgrade may cause [filesystem permissions]({{% relref "../../../configuration_and_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-fs-permissions" %}}) to be reset. If this happens Apache will be unable to access Sunstone files, and users be unable to access the Sunstone UI. The Apache log will show an entry like below:
 
 ```default
 [Mon Feb 14 11:10:09.133702 2022] [core:error] [pid 668659:tid 140354620548864] [client 10.141.18.116:60062] AH00037: Symbolic link not allowed or link target not accessible: /usr/lib/one/sunstone/public/dist/main.js, referer:
@@ -216,7 +216,7 @@ If you are running FireEdge service behind Apache/Nginx, please start also the A
 
 ### Step 11. Restore Custom Probes
 
-If you have any custom monitoring probes, follow [these instructions]({{% relref "../../../integration_framework/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}), to update them to the new monitoring system
+If you have any custom monitoring probes, follow [these instructions]({{% relref "../../../integration_and_development/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}), to update them to the new monitoring system
 
 ### Step 12. Update the Hypervisors
 

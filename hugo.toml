@@ -1,4 +1,4 @@
-title = "OpenNebula"
+# title = "OpenNebula"
 
 #baseURL = "https://opennebula.github.io/website/"
 
@@ -98,29 +98,6 @@ enable = false
     name = "Documentation"
     url = "/docs/"
     weight = 1
-  [[menu.main]]
-    name = "Software"
-    url = "/software/"		# fill in
-    weight = 2
-  [[menu.main]]
-    name = "Community"
-    url = "/community/"		# fill in
-    weight = 3
-  [[menu.main]]
-    name = "Ecosystem "
-    url = "/ecosystem/"		# fill in --> Integration Framework, Deployment Framework
-    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
-    weight = 4
-  [[menu.main]]
-    name = "Use Cases "
-    url = "/use_cases/"		# fill in
-    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
-    weight = 5
-  [[menu.main]]
-    name = "Support "
-    url = "/support/"		# fill in --> subscriptions
-    post = "<i class='fa-solid fa-arrow-up-right-from-square'></i>"
-    weight = 6
 
 [params]
   # Add your release versions here

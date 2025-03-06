@@ -57,7 +57,7 @@ This is harmless and can be discarded, it will be addressed in future releases.
 
 ## Backups
 
-- OpenNebula stores the whole VM Template in a backup. When restoring it some attributes are wiped out as they are dynamic or they need to be re-generated (e.g. IP). However some attributes (e.g. DEV_PREFIX) would be better to keep them. It is recommended to review and adjust the resulting template for any missing (and required) attribute. The [list of attributes removed can be checked here]({{% relref "../../../cloud_operation/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-restore" %}}).
+- OpenNebula stores the whole VM Template in a backup. When restoring it some attributes are wiped out as they are dynamic or they need to be re-generated (e.g. IP). However some attributes (e.g. DEV_PREFIX) would be better to keep them. It is recommended to review and adjust the resulting template for any missing (and required) attribute. The [list of attributes removed can be checked here]({{% relref "../../../configuration_and_operation/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-restore" %}}).
 
 ## Market proxy settings
 

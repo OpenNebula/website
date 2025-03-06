@@ -16,17 +16,17 @@ weight: "2"
 
 - The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs.
 - The enforce parameter has been restored for the resize operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently.
-- Option to define [Compute Quotas per Cluster]({{% relref "../../../cloud_operation/cloud_system_administration/capacity_planning/quotas#compute-quotas" %}}) to achieve more granular control of resources.
+- Option to define [Compute Quotas per Cluster]({{% relref "../../../configuration_and_operation/cloud_system_administration/capacity_planning/quotas#compute-quotas" %}}) to achieve more granular control of resources.
 
 ## Storage & Backups
 
-- [Integrated NFS life-cycle setup]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds#automatic-nfs-setup" %}}) for volumes in shared datastore.
+- [Integrated NFS life-cycle setup]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds#automatic-nfs-setup" %}}) for volumes in shared datastore.
 
 ## FireEdge Sunstone
 
-- Removed Provision/Provider as application [FireEdge Sunstone]({{% relref "../../../cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}).
-- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../../integration_framework/development_references/building_from_source_code/sunstone_dev#sunstone-dev" %}}).
-- Guacamole VDI over SSH tunnel [Remote connections guide]({{% relref "../../../cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-remote-connections" %}}).
+- Removed Provision/Provider as application [FireEdge Sunstone]({{% relref "../../../configuration_and_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}).
+- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../../integration_and_development/development_references/building_from_source_code/sunstone_dev#sunstone-dev" %}}).
+- Guacamole VDI over SSH tunnel [Remote connections guide]({{% relref "../../../configuration_and_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-remote-connections" %}}).
 
 ## API and CLI
 

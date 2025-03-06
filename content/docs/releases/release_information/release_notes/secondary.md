@@ -21,13 +21,13 @@ weight: "4"
 
 | Component   | Version                  | More information                                                                                                                        |
 |-------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| Fedora      | 32 (x86-64), 33 (x86-64) | [Front-End Installation]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/install#frontend-installation" %}}) |
+| Fedora      | 32 (x86-64), 33 (x86-64) | [Front-End Installation]({{% relref "front_end_installation" %}}) |
 
 ## KVM Nodes
 
 | Component   | Version                  | More information                                                                                           |
 |-------------|--------------------------|------------------------------------------------------------------------------------------------------------|
-| Fedora      | 32 (x86-64), 33 (x86-64) | [KVM Driver]({{% relref "../../../cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver#kvmg" %}}) |
+| Fedora      | 32 (x86-64), 33 (x86-64) | [KVM Driver]({{% relref "kvm_driver#kvmg" %}}) |
 
 ## Nodes Platform Notes
 

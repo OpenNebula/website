@@ -22,11 +22,11 @@ This is the list of the individual platform components that have been through th
 
 | Component                | Version                                    | More information                                                                                                                                                                            |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9                                       | [Front-End Installation]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/install#frontend-installation" %}})                                                     |
-| AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/install#frontend-installation" %}})                                                     |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/install#frontend-installation" %}})                                                     |
-| Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/install#frontend-installation" %}}).<br/>Not certified to manage VMware infrastructures |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../cloud_operation/package_installation_references/front_end_installation/database#mysql" %}})                                                                               |
+| Red Hat Enterprise Linux | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "/docs/releases/installation/database#mysql" %}})                                                                               |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
@@ -37,20 +37,20 @@ Debian front-ends are not certified to manage VMware infrastructures with OpenNe
 
 | Component                | Version                                                                                                    | More information                                                                                                                     |
 |--------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver#kvmg" %}})                           |
-| AlmaLinux                | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver#kvmg" %}})                           |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver#kvmg" %}})                           |
-| Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../cloud_operation/package_installation_references/kvm_node_deployment/kvm_driver#kvmg" %}})                           |
-| KVM/Libvirt              | Support for version included in the Linux distribution.<br/>For RHEL the packages from `qemu-ev` are used. | [KVM Node Installation]({{% relref "../../../cloud_operation/package_installation_references/kvm_node_deployment/kvm_node_installation#kvm-node" %}}) |
+| Red Hat Enterprise Linux | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| AlmaLinux                | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| KVM/Libvirt              | Support for version included in the Linux distribution.<br/>For RHEL the packages from `qemu-ev` are used. | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
 
 ### LXC Nodes
 
 | Component     | Version                                                | More information                                                                                                                     |
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver#lxcmg" %}})                          |
-| Debian        | 11, 12                                                 | [LXC Driver]({{% relref "../../../cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver#lxcmg" %}})                          |
-| AlmaLinux     | 8, 9                                                   | [LXC Driver]({{% relref "../../../cloud_operation/package_installation_references/lxc_node_deployment/lxc_driver#lxcmg" %}})                          |
-| LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "../../../cloud_operation/package_installation_references/lxc_node_deployment/lxc_node_installation#lxc-node" %}}) |
+| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| Debian        | 11, 12                                                 | [LXC Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| AlmaLinux     | 8, 9                                                   | [LXC Driver]({{% relref "../../../configuration_and_operation/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}}) |
 
 <a id="context-supported-platforms"></a>
 
@@ -64,24 +64,24 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component           | Version                                    | More information                                                                                                                             |
 |---------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan#hm-vlan" %}})             |
-| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch#openvswitch" %}}) |
-| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan#vxlan" %}})                    |
+| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan#hm-vlan" %}})             |
+| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch#openvswitch" %}}) |
+| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan#vxlan" %}})                    |
 
 ### Open Cloud Storage Infrastructure
 
 | Component   | Version                                    | More information                                                                                                                         |
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| Ceph        | Quincy v17.2.x<br/>Reef   v18.2.x          | [The Ceph Datastore]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
+| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
+| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
+| Ceph        | Quincy v17.2.x<br/>Reef   v18.2.x          | [The Ceph Datastore]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
 
 ### Authentication
 
 | Component             | Version                                    | More information                                                                                                        |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| net-ldap ruby library | 0.12.1 or 0.16.1                           | [LDAP Authentication]({{% relref "../../../cloud_operation/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
-| openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../cloud_operation/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
+| net-ldap ruby library | 0.12.1 or 0.16.1                           | [LDAP Authentication]({{% relref "../../../configuration_and_operation/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
+| openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../configuration_and_operation/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Sunstone
 
@@ -107,16 +107,16 @@ Providers based on *virtual* instances have been disabled by default.{{< /alert 
 
 | Edge/Cloud Provider                                                                                                                  | Edge Cluster   | Hypervisor   |
 |--------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [Equinix]({{% relref "../../../hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
-| [AWS]({{% relref "../../../hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
-| [On-prem]({{% relref "../../../hybrid_multi_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster#onprem-cluster" %}})   | metal          | KVM and LXC  |
+| [Equinix]({{% relref "../../../hybrid_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
+| [AWS]({{% relref "../../../hybrid_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
+| [On-prem]({{% relref "../../../hybrid_cloud/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster#onprem-cluster" %}})   | metal          | KVM and LXC  |
 
 The Edge Cluster type determines the hypervisor and workload that can be run in the cluster. The following table summarizes the Edge Cluster you need to run specific workloads:
 
 | Use Case                                                                                                                                                                                             | Edge Cluster   | Hypervisor   |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [I want to run virtual servers…]({{% relref "../../../cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}})            | metal          | KVM, LXC     |
-| [I want to run a Kubernetes cluster…]({{% relref "../../../cloud_installation/try_opennebula_with_minione/quick_start_opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}}) | metal          | KVM          |
+| [I want to run virtual servers…]({{% relref "../../../quick_start/try_opennebula_with_minione/opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}})            | metal          | KVM, LXC     |
+| [I want to run a Kubernetes cluster…]({{% relref "../../../quick_start/try_opennebula_with_minione/opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}}) | metal          | KVM          |
 
 ## Certified Infrastructure Scale
 
@@ -135,7 +135,7 @@ The following applies to all Front-Ends:
 
 The following items apply to all distributions:
 
-* Since OpenNebula 4.14 there is a new monitoring probe that gets information about PCI devices. By default it retrieves all the PCI devices in a Host. To limit the PCI devices for which it gets info and appear in `onehost show`, refer to [PCI Passthrough]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough#kvm-pci-passthrough" %}}).
+* Since OpenNebula 4.14 there is a new monitoring probe that gets information about PCI devices. By default it retrieves all the PCI devices in a Host. To limit the PCI devices for which it gets info and appear in `onehost show`, refer to [PCI Passthrough]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough#kvm-pci-passthrough" %}}).
 * When using qcow2 storage drivers you can make sure that the data is written to disk when doing snapshots by setting the `cache` parameter to `writethrough`. This change will make writes slower than other cache modes but safer. To do this edit the file `/etc/one/vmm_exec/vmm_exec_kvm.conf` and change the line for `DISK`:
 
 ```default

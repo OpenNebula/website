@@ -222,10 +222,10 @@ $ onemarketapp download 40 /path/to/app
 ```
 
 {{< alert title="Warning" color="warning" >}}
-This command requires that the ONE_SUNSTONE environment variable is set. Read [here]({{% relref "../../cloud_operation/cloud_system_administration/multitenancy/manage_users#manage-users-shell" %}}) for more information.{{< /alert >}} 
+This command requires that the ONE_SUNSTONE environment variable is set. Read [here]({{% relref "../../configuration_and_operation/cloud_system_administration/multitenancy/manage_users#manage-users-shell" %}}) for more information.{{< /alert >}} 
 
 {{< alert title="Warning" color="warning" >}}
-Make sure Sunstone is properly deployed to handle this feature. Read [here]({{% relref "../../cloud_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-advance" %}}) for more information.{{< /alert >}} 
+Make sure Sunstone is properly deployed to handle this feature. Read [here]({{% relref "../../configuration_and_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-advance" %}}) for more information.{{< /alert >}} 
 
 ## Additional Commands
 
@@ -243,6 +243,6 @@ Please take a look at the CLI reference to see how to use these actions. These o
 
 ## Using Sunstone to Manage Marketplace Appliances
 
-You can also import and export Marketplace Appliances using [Sunstone]({{% relref "../../cloud_operation/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}). Select the Storage > Apps tab, and there, you will be able see the available Appliances in a user friendly way.
+You can also import and export Marketplace Appliances using [Sunstone]({{% relref "../../configuration_and_operation/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}). Select the Storage > Apps tab, and there, you will be able see the available Appliances in a user friendly way.
 
 ![image](/images/show_marketplaceapp.png)

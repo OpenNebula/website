@@ -12,7 +12,7 @@ weight: "3"
 
 <!--# Apps-marketplace -->
 
-+[Add a reference to the [Integration Framework]({{% relref integration_framework %}}) section]
++[Add a reference to the [Integration Framework]({{% relref integration_and_development %}}) section]
 
 OpenNebula Marketplaces provide a simple way to integrate your cloud with popular application/image providers. Think of them as external datastores.
 

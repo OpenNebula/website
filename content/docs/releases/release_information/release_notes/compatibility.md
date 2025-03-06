@@ -14,7 +14,7 @@ weight: "5"
 
 This guide is aimed at OpenNebula 6.10.x users and administrators who want to upgrade to the latest version. The following sections summarize the new features and usage changes that should be taken into account, or are prone to cause confusion. You can check the upgrade process in the [corresponding section]({{% relref "../upgrade/index#upgrade" %}}). If upgrading from previous versions, please make sure you read all the intermediate versions’ Compatibility Guides for possible pitfalls.
 
-Visit the [Features list]({{% relref "../../../cloud_installation/understand_opennebula/opennebula_concepts/key_features#features" %}}) and the [What’s New guide]({{% relref "whats_new#whats-new" %}}) for a comprehensive list of what’s new in OpenNebula 7.0.
+Visit the [Features list]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/key_features#features" %}}) and the [What’s New guide]({{% relref "whats_new#whats-new" %}}) for a comprehensive list of what’s new in OpenNebula 7.0.
 
 ## Resize Operation
 
@@ -22,11 +22,11 @@ The enforcement parameter was deprecated to ensure NUMA consistency for the VM d
 
 ## New default Local datastore driver
 
-Since OpenNebula 6.10.2, the default Local driver is `local` instead of `ssh` (see [Local Storage datastore drivers]({{% relref "../../../cloud_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds#local-ds-drivers" %}})). The legacy `ssh` driver is still supported and nothing needs to be done for already existing datastores to keep working. As supporting qcow2 features such as thin provisioning required breaking compatibility with existing datastores, we decided to take the opportunity to write the `local` driver from scratch, making the driver more maintainable and easing new feature development.
+Since OpenNebula 6.10.2, the default Local driver is `local` instead of `ssh` (see [Local Storage datastore drivers]({{% relref "../../../configuration_and_operation/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds#local-ds-drivers" %}})). The legacy `ssh` driver is still supported and nothing needs to be done for already existing datastores to keep working. As supporting qcow2 features such as thin provisioning required breaking compatibility with existing datastores, we decided to take the opportunity to write the `local` driver from scratch, making the driver more maintainable and easing new feature development.
 
 ## Check Datastore Capacity During Image Create
 
-We fixed and synchronized usage of the `no_check_capacity` flag across all APIs (XML-RPC, CLI, Ruby, Java, Python). Now it works as described in the [XML-RPC API documentation]({{% relref "../../../integration_framework/integration_references/system_interfaces/api#api" %}}). If you are using this flag in any of the API bindings provided for OpenNebula please make sure you update your code.
+We fixed and synchronized usage of the `no_check_capacity` flag across all APIs (XML-RPC, CLI, Ruby, Java, Python). Now it works as described in the [XML-RPC API documentation]({{% relref "../../../integration_and_development/integration_references/system_interfaces/api#api" %}}). If you are using this flag in any of the API bindings provided for OpenNebula please make sure you update your code.
 
 ## VM Drivers
 
@@ -38,7 +38,7 @@ OpenNebula and opennebula-cli gems both require Nokogiri gem as a running depend
 
 ## Search Virtual Machines
 
-VM search uses has new pattern-based syntax. The following table includes some examples to move from old search format to the new one, see [Search Virtual Machines]({{% relref "../../../cloud_operation/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-search" %}}) for more info:
+VM search uses has new pattern-based syntax. The following table includes some examples to move from old search format to the new one, see [Search Virtual Machines]({{% relref "../../../configuration_and_operation/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-search" %}}) for more info:
 
 | Search Description      | Old syntax   | New syntax                       |
 |-------------------------|--------------|----------------------------------|
@@ -49,7 +49,7 @@ VM search uses has new pattern-based syntax. The following table includes some e
 
 ## Labels on Sunstone
 
-Remember that in Sunstone you need to create the user label in the Settings section before apply a label to a resource. See [Sunstone labels guide]({{% relref "../../../cloud_operation/control_plane_configuration/graphical_user_interface/sunstone_labels#sunstone-labels" %}}) to get more information.
+Remember that in Sunstone you need to create the user label in the Settings section before apply a label to a resource. See [Sunstone labels guide]({{% relref "../../../configuration_and_operation/control_plane_configuration/graphical_user_interface/sunstone_labels#sunstone-labels" %}}) to get more information.
 
 ## OneProvision on Sunstone
 

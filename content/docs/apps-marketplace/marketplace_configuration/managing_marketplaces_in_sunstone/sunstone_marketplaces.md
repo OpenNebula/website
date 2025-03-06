@@ -12,7 +12,7 @@ weight: "1"
 
 <!--# Managing Marketplaces in Sunstone -->
 
-The [Sunstone web UI]({{% relref "../../../cloud_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) allows you to graphically manage marketplaces. Within Sunstone, open the left-hand pane, then select **Storage** -> **Marketplaces** to perform the following operations:
+The [Sunstone web UI]({{% relref "../../../configuration_and_operation/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) allows you to graphically manage marketplaces. Within Sunstone, open the left-hand pane, then select **Storage** -> **Marketplaces** to perform the following operations:
 
 * [Create a marketplace]({{% relref "#sunstone-marketplaces-create" %}})
 * [Update a marketplace]({{% relref "#sunstone-marketplaces-update" %}})
