@@ -96,8 +96,8 @@ enable = false
 
 [params]
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "533000100d06b46c0"
-# offlineSearch = true
+# gcs_engine_id = "533000100d06b46c0"
+offlineSearch = true
   # Add your release versions here
 version_menu = "Versions"
   [[params.versions]]
