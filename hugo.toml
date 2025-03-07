@@ -30,6 +30,7 @@ taxonomyPageHeader = ["tags", "categories"]
 # or specify a new value if you want to reference another branch in your GitHub links
 github_branch= "PoC"
 
+# ATM offline search is enabled in [params] -> offlineSearch
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "533000100d06b46c0"
 
@@ -47,9 +48,6 @@ ul_show = 3
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if se>
 sidebar_search_disable = false
 showLightDarkModeMenu = true
-
-# Enable Lunr.js offline search
-offlineSearch = true
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page,
@@ -100,6 +98,7 @@ enable = false
     weight = 1
 
 [params]
+offlineSearch = true
   # Add your release versions here
 version_menu = "Versions"
   [[params.versions]]
