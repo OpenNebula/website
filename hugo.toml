@@ -31,7 +31,7 @@ taxonomyPageHeader = ["tags", "categories"]
 github_branch= "PoC"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "533000100d06b46c0"
+# gcs_engine_id = "533000100d06b46c0"
 
 [params.ui]
 #  Set to true to disable breadcrumb navigation.
@@ -49,7 +49,7 @@ sidebar_search_disable = false
 showLightDarkModeMenu = true
 
 # Enable Lunr.js offline search
-offlineSearch = false
+offlineSearch = true
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page,
