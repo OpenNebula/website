@@ -26,11 +26,6 @@ taxonomyCloudTitle = ["Tag Cloud", "Categories"]
 taxonomyPageHeader = ["tags", "categories"]
 
 
-# Uncomment this if your GitHub repo does not have "main" as the default branch,
-# or specify a new value if you want to reference another branch in your GitHub links
-github_branch= "PoC"
-
-
 [params.ui]
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
@@ -95,6 +90,11 @@ enable = false
     weight = 1
 
 [params]
+# Uncomment this if your GitHub repo does not have "main" as the default branch,
+# or specify a new value if you want to reference another branch in your GitHub links
+github_branch= "version_5"
+github_repo = "https://github.com/OpenNebula/website/"
+enableGitInfo = true
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
@@ -115,6 +115,8 @@ version_menu = "Versions"
   [[params.versions]]
     version = "v5.10"
     url = "https://docs.opennebula.io/5.10/"
+
+
 
 
 
