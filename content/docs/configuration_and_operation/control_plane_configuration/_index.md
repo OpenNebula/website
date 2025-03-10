@@ -1,6 +1,6 @@
 ---
 title: "Control Plane Configuration"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Configure your OpenNebula cloud for resilience, performance and scalability"
 categories:
 pageintoc: "30"

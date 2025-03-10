@@ -1,6 +1,6 @@
 ---
 title: "5G-ready OpenNebula"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "316"

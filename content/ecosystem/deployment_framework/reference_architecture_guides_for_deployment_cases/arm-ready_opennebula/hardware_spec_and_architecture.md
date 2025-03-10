@@ -1,6 +1,6 @@
 ---
 title: "Hardware Specification and Architecture"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "328"

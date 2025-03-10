@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Understand OpenNebula - Evaluate by deploying - Deploy a production-ready cloud"
 categories:
 pageintoc: "1"

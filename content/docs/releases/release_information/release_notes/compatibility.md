@@ -1,6 +1,6 @@
 ---
 title: "Compatibility Guide"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "247"

@@ -1,6 +1,6 @@
 ---
 title: "Upgrading Single Front-End"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "259"

@@ -1,6 +1,6 @@
 ---
 title: "Try OpenNebula with miniONE"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Follow tutorials to quickly deploy an OpenNebula cloud, for learning and evaluation"
 categories:
 pageintoc: "13"

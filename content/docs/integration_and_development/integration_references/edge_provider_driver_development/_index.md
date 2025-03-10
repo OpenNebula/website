@@ -1,6 +1,6 @@
 ---
 title: "Edge Provider Driver Development"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "299"

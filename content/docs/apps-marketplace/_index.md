@@ -1,6 +1,6 @@
 ---
 title: "Apps Marketplace"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Explore the appliances available on OpenNebula's public marketplace, and how to access, create and manage private marketplaces"
 categories:
 pageintoc: "182"

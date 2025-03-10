@@ -1,6 +1,6 @@
 ---
 title: "Releases"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Access OpenNebula releases, release notes and upgrade information"
 hide_feedback: true
 categories:

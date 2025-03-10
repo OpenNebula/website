@@ -1,6 +1,6 @@
 ---
 title: "Ampere OpenNebula - On-premises Cloud Solution"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "342"

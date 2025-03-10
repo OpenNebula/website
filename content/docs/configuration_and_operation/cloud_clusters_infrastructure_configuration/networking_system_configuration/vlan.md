@@ -1,6 +1,6 @@
 ---
 title: "802.1Q VLAN Networks"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "63"

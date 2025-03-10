@@ -1,6 +1,6 @@
 ---
 title: "Installation"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Consult references for manually installing and configuring customized cloud infrastructure"
 categories:
 pageintoc: "168"

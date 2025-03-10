@@ -1,6 +1,6 @@
 ---
 title: "OVH OpenNebula - On-premses Cloud Solution"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "348"

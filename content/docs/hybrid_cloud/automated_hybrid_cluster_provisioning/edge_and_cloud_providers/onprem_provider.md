@@ -1,6 +1,6 @@
 ---
 title: "On-Premise Provider"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "208"

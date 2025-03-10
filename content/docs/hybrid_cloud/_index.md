@@ -1,6 +1,6 @@
 ---
 title: "Hybrid Cloud"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Automatically provision remote clusters on different providers, for cloud, edge and hybrid infrastructures"
 hide_feedback: true
 categories:

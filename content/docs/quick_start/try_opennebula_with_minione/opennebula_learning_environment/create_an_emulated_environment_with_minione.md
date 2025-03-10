@@ -1,6 +1,6 @@
 ---
 title: "Create an Emulated Environment with miniONE"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "15"

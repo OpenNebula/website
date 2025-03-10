@@ -1,6 +1,6 @@
 ---
 title: "Reference Architecture Guides with Hardware Vendors"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "331"

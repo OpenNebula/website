@@ -1,6 +1,6 @@
 ---
 title: "Deployment Framework"
-date: "2025/02/19"
+date: "2025-02-19"
 description: "Consult references for customized OpenNebula deployments"
 categories:
 pageintoc: "309"

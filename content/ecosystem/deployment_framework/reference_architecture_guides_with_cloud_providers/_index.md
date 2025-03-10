@@ -1,6 +1,6 @@
 ---
 title: "Reference Architecture Guides with Cloud Providers"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "347"

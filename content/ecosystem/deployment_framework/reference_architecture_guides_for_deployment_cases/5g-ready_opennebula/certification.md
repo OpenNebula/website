@@ -1,6 +1,6 @@
 ---
 title: "Certification"
-date: "2025/02/19"
+date: "2025-02-19"
 description:
 categories:
 pageintoc: "320"

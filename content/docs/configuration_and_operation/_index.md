@@ -1,6 +1,6 @@
 ---
 title: "Configuration and Operation"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud"
 categories:
 pageintoc: "29"

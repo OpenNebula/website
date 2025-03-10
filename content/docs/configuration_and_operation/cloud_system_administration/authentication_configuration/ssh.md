@@ -1,6 +1,6 @@
 ---
 title: "SSH Authentication"
-date: "2025/02/17"
+date: "2025-02-17"
 description:
 categories:
 pageintoc: "123"

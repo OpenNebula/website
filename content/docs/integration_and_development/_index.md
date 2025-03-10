@@ -1,6 +1,6 @@
 ---
 title: "Integration and Development"
-date: "2025/02/17"
+date: "2025-02-17"
 description: "Create, certify and maintain your custom appliances using OpenNebula's tooling"
 categories:
 pageintoc: "269"
