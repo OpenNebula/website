@@ -18,10 +18,10 @@ The documentation is divided into sections designed to... [TBC]
   {{< card header="[Quick Start](/docs/quick_start)" >}}
   OpenNebula Oveview - Deploy a cloud for evaluation and testing - Automatically deploy a production-ready OpenNebula cloud
   {{< /card >}}
-  {{< card header="[Configuration and Operation](/docs/operation_and_configuration)" >}}
+  {{< card header="[Configuration and Operation](/docs/configuration_and_operation)" >}}
   Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud
   {{< /card >}}
-  {{< card header="[Apps Marketplace](/docs/apps_marketplace)" >}}
+  {{< card header="[Apps Marketplace](/docs/apps-marketplace)" >}}
   Explore the appliances available on OpenNebula's public marketplace, and how to access, create and manage private marketplaces
   {{< /card >}}
 {{< /cardpane >}}
