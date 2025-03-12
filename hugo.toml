@@ -90,6 +90,7 @@ enable = false
     weight = 1
 
 [params]
+no_list = true
 # Uncomment this if your GitHub repo does not have "main" as the default branch,
 # or specify a new value if you want to reference another branch in your GitHub links
 github_branch= "version_5"
@@ -115,10 +116,6 @@ version_menu = "Versions"
   [[params.versions]]
     version = "v5.10"
     url = "https://docs.opennebula.io/5.10/"
-
-
-
-
 
 [module]
   proxy = "direct"

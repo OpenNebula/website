@@ -12,4 +12,4 @@ weight: "2"
 
 <!--# Extensions -->
 
-* [Extensions in Integration Section]({{% relref "extensions_in_integration_section" %}})
+

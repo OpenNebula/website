@@ -11,5 +11,5 @@ weight: "1"
 
 These pages contain explanations and configuration for configuring hypervisor nodes with the KVM and LXC drivers.
 
-* [KVM Driver]({{% relref "kvm_driver" %}})
-* [LXC Driver]({{% relref "lxc_driver" %}})
+
+

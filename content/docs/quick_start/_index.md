@@ -14,13 +14,10 @@ weight: "1"
 
 This first chapter is designed to quickly take you from an introduction to OpenNebula to deploying your first cloud for learning and evaluation.
 
-* [Understand OpenNebula]({{% relref "understand_opennebula/index" %}}): Quickly understand OpenNebula concepts and key features
-  * [OpenNebula Concepts]({{% relref "understand_opennebula/opennebula_concepts/index" %}})
-  * [Cloud Architecture and Design]({{% relref "understand_opennebula/cloud_architecture_and_design/index" %}})
-* [Try OpenNebula with miniONE]({{% relref "try_opennebula_with_minione/index" %}}): Follow tutorials to quickly build an OpenNebula cloud for learning, evaluation and simple production tasks.
-  * [OpenNebula Learning Environment]({{% relref "try_opennebula_with_minione/opennebula_learning_environment/index" %}})
-  * [OpenNebula Evaluation Environment]({{% relref "try_opennebula_with_minione/opennebula_evaluation_environment/index" %}})
-* [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy/index" %}}): Follow tutorials to automatically install a production-ready OpenNebula cloud.
-  * [Overview]({{% relref "automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview" %}})
-  * [Cloud Deployment - Local Storage]({{% relref "automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_local_ds" %}})
-  * [Cloud Deployment - Shared Storage]({{% relref "automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds" %}})
+The first section, [Understand OpenNebula]({{% relref "understand_opennebula" %}}), provides you with a bird's eye view of the system's base concepts, key features, architecture basics, and the most common pathway from cloud design to deployment.
+
+The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula_with_minione" %}}), consists of tutorials for quickly installing an OpenNebula cloud for purposes of evaluation, testing, and even on-premises production operations. The tutorials guide you in building progressively complex infrastructure, from a basic Front-end install to automatically deploying a Kubernetes cluster.
+
+The third section, [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}) contains an overview and tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks.
+
+

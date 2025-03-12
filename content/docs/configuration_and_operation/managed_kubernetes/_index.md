@@ -12,5 +12,5 @@ weight: "4"
 
 <!--# Managed Kubernetes -->
 
-* [Managed Kubernetes Overview]({{% relref "managed_kubernetes_overview" %}})
-* [Managed Kubernetes Description]({{% relref "managed_kubernetes_description" %}})
+
+

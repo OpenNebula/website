@@ -12,4 +12,4 @@ weight: "3"
 
 <!--# Providers -->
 
-* [Extensions in Provider Section]({{% relref "extensions_in_provider_section" %}})
+

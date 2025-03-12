@@ -12,6 +12,6 @@ weight: "1"
 
 <!--# Appliances -->
 
-* [How To Create An Appliance]({{% relref "how_to_create_an_appliance" %}})
-* [How To Certify An Appliance]({{% relref "how_to_certify_an_appliance" %}})
-* [How To Maintain An Appliance]({{% relref "how_to_maintain_an_appliance" %}})
+
+
+

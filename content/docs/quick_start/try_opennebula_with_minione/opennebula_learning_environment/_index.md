@@ -14,4 +14,4 @@ weight: "1"
 
 Placeholder text for QS: OpenNebula Learning Environment.
 
-* [Create an Emulated Environment with miniONE]({{% relref "create_an_emulated_environment_with_minione" %}})
+

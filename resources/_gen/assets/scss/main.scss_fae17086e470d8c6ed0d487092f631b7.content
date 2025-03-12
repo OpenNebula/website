@@ -11,6 +11,15 @@ a:hover {
 a:active {
   text-decoration: underline; }
 
+inl {
+  display: block;
+  list-style: disc outside none;
+  margin: 0 0;
+  padding: 0 0 0 40px; }
+
+inl {
+  list-style-type: decimal; }
+
 :root,
 [data-bs-theme="light"] {
   --td-pre-bg: var(--bs-tertiary-bg); }
