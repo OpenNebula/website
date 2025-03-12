@@ -1,5 +1,5 @@
 ---
-title: "OpenNebula Documentation"
+title: ""
 ---
 
 {{< blocks/cover title="OpenNebula Documentation" image_anchor="top" image="world_connected.jpg" color="primary" height="min" >}}

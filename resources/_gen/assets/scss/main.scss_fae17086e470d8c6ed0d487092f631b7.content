@@ -20,6 +20,9 @@ inl {
 inl {
   list-style-type: decimal; }
 
+.td-breadcrumbs__single {
+  display: none !important; }
+
 :root,
 [data-bs-theme="light"] {
   --td-pre-bg: var(--bs-tertiary-bg); }

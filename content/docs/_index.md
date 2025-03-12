@@ -6,13 +6,14 @@ url: "/"
 main_menu: true
 hide_feedback: true
 no_list: true
+breadcrumb_disable: true
 Description: >
   At-a-glance overview of the OpenNebula Docs
 ---
 
-[OpenNebula](https://opennebula.io) is a powerful but easy-to-use open source platform for enterprise private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence.
+[OpenNebula](https://opennebula.io) is a powerful, but easy-to-use open source platform for enterprise, private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence.
 
-The documentation is divided into sections designed to... [TBC]
+This site contains the OpenNebula technical documentation, divided into the sections listed below.
 
 {{< cardpane >}}
   {{< card header="[Quick Start](/docs/quick_start)" >}}

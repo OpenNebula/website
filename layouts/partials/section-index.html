@@ -47,13 +47,13 @@
     {{ end -}}
 </div>
 {{ else -}}
-    <h4>In this section:</h4>
+    <h5>In this section:</h5>
     {{ range .Pages -}}
     {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-            <div class="entry">
-                <h5>
+            <div class="td-content">
+                <h6>
                     <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
-                </h5>
+                </h6>
 		{{ if .Description -}}
 		 <p>{{ .Description | markdownify -}}</p>
 		{{ end -}}
