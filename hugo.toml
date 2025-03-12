@@ -140,7 +140,7 @@ version_menu = "Versions"
 
 # added the user feedback module
 [params.ui.feedback]
-enable = true
+enable = false
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
