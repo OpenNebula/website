@@ -1,7 +1,7 @@
 ---
 title: "Cloud Architecture and Design"
 date: "2025-02-17"
-description:
+description: "OpenNebula reference architectures, and design and deployment of an OpenNebula cloud"
 hide_feedback: true
 categories:
 pageintoc: "9"
