@@ -56,36 +56,36 @@ enable = false
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if >
 [[params.links.user]]
-  name = "User mailing list"
-  url = "https://example.org/mail"
+  name = "OpenNebula Newsletter - Updates on releases, events, tutorials..."
+  url = "https://opennebula.io/subscribe-to-opennebula-newsletter/"
   icon = "fa fa-envelope"
-  desc = "Discussion and help from your fellow users"
+  desc = "Updates on new releases, community events, tutorials, workshps, webinars..."
 [[params.links.user]]
-  name ="Twitter"
-  url = "https://example.org/twitter"
+  name ="OpenNebula on X"
+  url = "https://x.com/opennebula/"
   icon = "fab fa-twitter"
-  desc = "Follow us on Twitter to get the latest news!"
+  desc = "Follow OpenNebula on X"
 [[params.links.user]]
-  name = "Stack Overflow"
-  url = "https://example.org/stack"
-  icon = "fab fa-stack-overflow"
-  desc = "Practical questions and curated answers"
-# Developer relevant links. These will show up on right side of footer and in the community page i>
-[[params.links.developer]]
-  name = "GitHub"
+  name = "OpenNebula on YouTube - Webinars, demos and more"
+  url = "http://www.youtube.com/opennebula"
+  icon = "fa fa-play"
+  desc = "Webinars, video tutorials, demos and more"
+[[params.links.user]]
+  name = "OpenNebula on GitHub - Sources and wikis"
   url = "https://github.com/OpenNebula"
   icon = "fab fa-github"
   desc = "Development takes place here!"
-[[params.links.developer]]
-  name = "Slack"
-  url = "https://example.org/slack"
-  icon = "fab fa-slack"
-  desc = "Chat with other project developers"
-[[params.links.developer]]
-  name = "Developer mailing list"
-  url = "https://example.org/mail"
-  icon = "fa fa-envelope"
-  desc = "Discuss development issues around the project"
+# Developer relevant links. These will show up on right side of footer and in the community page i>
+#[[params.links.developer]]
+#  name = "Slack"
+#  url = "https://example.org/slack"
+#  icon = "fab fa-slack"
+#  desc = "Chat with other project developers"
+#[[params.links.developer]]
+#  name = "Developer mailing list"
+#  url = "https://example.org/mail"
+#  icon = "fa fa-envelope"
+#  desc = "Discuss development issues around the project"
 
 
 # Top menu
