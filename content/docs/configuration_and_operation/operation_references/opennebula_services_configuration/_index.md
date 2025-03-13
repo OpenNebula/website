@@ -1,7 +1,7 @@
 ---
 title: "Opennebula Services Configuration"
 date: "2025-02-17"
-description:
+description: "Complete references for core and optional services"
 categories:
 pageintoc: "156"
 tags:

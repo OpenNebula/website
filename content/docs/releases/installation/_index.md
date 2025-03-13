@@ -18,4 +18,4 @@ weight: "7"
 
 <!--# Package Installation References -->
 
-This section contains information for installing and setting up customized clusters based on open source components. First, you need to install the OpenNebula services by following the [Operation References]({{% relref "../../configuration_and_operation/operation_references/opennebula_services_configuration/" %}}) guide.
+This sections provides details on installing an OpenNebula cloud, beginning with the OpenNebula Front-end and including services and hypervisors. The complete references for configuring OpenNebula services, templates and hypervisor nodes may be found in [Operation References]({{% relref "../../configuration_and_operation/operation_references/" %}}).
