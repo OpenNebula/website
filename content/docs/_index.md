@@ -34,10 +34,10 @@ To access additional material including white papers, guides and screencasts, se
   Automatically provision remote clusters on different providers, for cloud, edge and hybrid infrastructures
   {{< /card >}}
   {{< card header="[Releases](/docs/releases)" >}}
-  Automatically provision remote clusters on different providers, for cloud, edge and hybrid infrastructures
+  Access OpenNebula releases, consult release notes and upgrade information
   {{< /card >}}
   {{< card header="[Integration and Development](/docs/integration_and_development)" >}}
-  Automatically provision remote clusters on different providers, for cloud, edge and hybrid infrastructures
+  Consult references for building custom integrations with OpenNebula
   {{< /card >}}
 {{< /cardpane >}}
 
