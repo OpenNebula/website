@@ -47,6 +47,12 @@ showLightDarkModeMenu = true
 [params.ui.readingtime]
 enable = false
 
+[cascade]
+   [cascade.params]
+      hide_feedback = true
+   [cascade.target]
+      kind = 'section'
+
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if >
 [[params.links.user]]
@@ -99,6 +105,7 @@ enableGitInfo = true
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
+offlineSearchSummaryLength = 400
   # Add your release versions here
 version_menu = "Versions"
   [[params.versions]]
@@ -140,7 +147,7 @@ version_menu = "Versions"
 
 # added the user feedback module
 [params.ui.feedback]
-enable = false
+enable = true
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
