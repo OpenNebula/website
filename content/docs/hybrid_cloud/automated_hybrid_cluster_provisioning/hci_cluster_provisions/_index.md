@@ -1,5 +1,5 @@
 ---
-title: "Hci Cluster Provisions"
+title: "HCI Cluster Provisions"
 date: "2025-02-17"
 description:
 categories:

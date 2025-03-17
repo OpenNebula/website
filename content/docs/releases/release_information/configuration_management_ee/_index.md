@@ -1,5 +1,5 @@
 ---
-title: "Configuration Management EE"
+title: "Configuration Management (EE)"
 date: "2025-02-17"
 description:
 categories:
