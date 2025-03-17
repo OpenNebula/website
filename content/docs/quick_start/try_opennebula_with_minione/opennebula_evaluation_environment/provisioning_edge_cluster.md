@@ -2,9 +2,9 @@
 title: "Provisioning a Cloud Cluster"
 date: "2025-02-17"
 description:
-categories:
+categories: [Learning, Evaluation, Deployment]
 pageintoc: "21"
-tags: ['quick start', learning, evaluation, deployment, OneProvision, tutorial]
+tags: ['Quick Start', OneProvision, Tutorial]
 weight: "5"
 ---
 

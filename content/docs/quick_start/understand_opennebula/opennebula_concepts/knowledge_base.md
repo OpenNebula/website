@@ -2,9 +2,9 @@
 title: "Knowledge Base"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction]
 pageintoc: "7"
-tags: [intro, enterprise, 'knowledge base']
+tags: [Enterprise, 'Knowledge Base']
 weight: "4"
 ---
 

@@ -2,9 +2,9 @@
 title: "Open Cloud Reference Architecture"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction]
 pageintoc: "12"
-tags: ['intro', 'cloud architecture', 'open cloud', 'white paper']
+tags: ['White Paper', 'Reference Architectures']
 weight: "3"
 ---
 

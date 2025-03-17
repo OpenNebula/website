@@ -2,9 +2,9 @@
 title: "Overview"
 date: "2025-02-17"
 description:
-categories:
+categories: [Evaluation, Learning, Overview, Introduction, Deployment]
 pageintoc: "17"
-tags: ['quick start', learning, evaluation, deployment]
+tags: ['Quick Start']
 weight: "1"
 ---
 

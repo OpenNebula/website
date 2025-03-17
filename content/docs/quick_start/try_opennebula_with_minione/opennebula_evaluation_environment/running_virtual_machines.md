@@ -2,9 +2,9 @@
 title: "Running Virtual Machines"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Learning, Evaluation]
 pageintoc: "22"
-tags: ['quick start', learning, evaluation, 'VM operations', tutorial]
+tags: ['Quick Start', 'VM Operations', Tutorial]
 weight: "6"
 ---
 

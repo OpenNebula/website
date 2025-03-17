@@ -2,9 +2,9 @@
 title: "Edge Cloud Reference Architecture"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction]
 pageintoc: "11"
-tags: [intro, 'white paper', 'edge cloud', 'cloud architecture']
+tags: ['White Paper', 'Edge Cloud', 'Reference Architectures']
 weight: "2"
 ---
 

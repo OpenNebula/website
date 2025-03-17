@@ -2,9 +2,9 @@
 title: "Cloud Access Model and Roles"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction]
 pageintoc: "6"
-tags: ['white paper', 'access model', intro]
+tags: ['White paper', 'Access Model']
 weight: "3"
 ---
 

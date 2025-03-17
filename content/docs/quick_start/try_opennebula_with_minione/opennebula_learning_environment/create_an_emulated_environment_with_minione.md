@@ -2,9 +2,9 @@
 title: "Create an Emulated Environment with miniONE"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Evaluation, Learning]
 pageintoc: "15"
-tags: [intro, learning, evaluation, miniONE]
+tags: [miniONE]
 weight: "2"
 ---
 

@@ -2,9 +2,9 @@
 title: "Running Kubernetes Clusters"
 date: "2025-02-17"
 description:
-categories:
+categories: [Learning, Evaluation, Deployment, Introduction]
 pageintoc: "23"
-tags: ['quick start', learning, evaluation, deployment, Kubernetes, tutorial]
+tags: ['Quick Start', Kubernetes, Tutorial, OneKE]
 weight: "7"
 ---
 

@@ -2,9 +2,9 @@
 title: "Use Cases"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction]
 pageintoc: "8"
-tags: [intro, 'use cases', 'case studies']
+tags: ['Use cases', 'Case Studies']
 weight: "5"
 ---
 

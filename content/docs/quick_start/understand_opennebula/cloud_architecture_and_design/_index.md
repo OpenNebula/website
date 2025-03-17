@@ -5,7 +5,7 @@ description: "OpenNebula reference architectures, and design and deployment of a
 hide_feedback: true
 categories:
 pageintoc: "9"
-tags: [intro, 'cloud architecture']
+tags:
 weight: "2"
 ---
 

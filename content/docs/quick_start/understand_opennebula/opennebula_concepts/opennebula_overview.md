@@ -2,7 +2,7 @@
 title: "OpenNebula Overview"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Overview]
 pageintoc: "4"
 tags:
 weight: "1"

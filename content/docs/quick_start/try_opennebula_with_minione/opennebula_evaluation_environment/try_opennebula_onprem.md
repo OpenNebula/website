@@ -2,9 +2,9 @@
 title: "Try OpenNebula Front-end On-prem"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Learning, Evaluation, Deployment]
 pageintoc: "18"
-tags: ['quick start', learning, evaluation, deployment, 'on-premises', tutorial]
+tags: ['Quick Start', Tutorial, miniONE]
 weight: "2"
 ---
 

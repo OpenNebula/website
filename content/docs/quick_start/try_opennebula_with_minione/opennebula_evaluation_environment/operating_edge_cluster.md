@@ -2,9 +2,9 @@
 title: "Operating an Edge Cluster"
 date: "2025-02-17"
 description:
-categories:
+categories: [Learning, Evaluation, Introduction, Deployment]
 pageintoc: "24"
-tags: ['quick start', learning, evaluation, deployment, 'edge cluster', 'cluster operations']
+tags: ['Quick Start', 'Edge Cluster']
 weight: "8"
 ---
 

@@ -2,9 +2,9 @@
 title: "Key Features"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Overview]
 pageintoc: "5"
-tags: [features, intro]
+tags: [Features]
 weight: "2"
 ---
 

@@ -4,7 +4,7 @@ date: "2025-02-17"
 description: "A general overview of OpenNebula objects, key features and architecture"
 categories:
 pageintoc: "3"
-tags: [intro, 'key concepts', features]
+tags: 
 weight: "1"
 ---
 

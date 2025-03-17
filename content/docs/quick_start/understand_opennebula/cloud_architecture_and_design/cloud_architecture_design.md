@@ -2,7 +2,7 @@
 title: "Cloud Architecture Design"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Overview]
 pageintoc: "10"
 tags:
 weight: "1"

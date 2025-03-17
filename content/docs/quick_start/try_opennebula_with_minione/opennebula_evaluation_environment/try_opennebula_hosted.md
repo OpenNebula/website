@@ -2,9 +2,9 @@
 title: "Try OpenNebula Hosted Front-end"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Evaluation, Deployment, Learning]
 pageintoc: "20"
-tags: ['quick start', learning, evaluation, deployment, hosted, PoC, tutorial]
+tags: ['Quick Start', PoC, miniONE, tutorial]
 weight: "4"
 ---
 

@@ -2,9 +2,9 @@
 title: "Try OpenNebula Front-end on AWS"
 date: "2025-02-17"
 description:
-categories:
+categories: [Introduction, Learning, Deployment, Evaluation]
 pageintoc: "19"
-tags: ['quick start', learning, evaluation, deployment, AWS, tutorial]
+tags: ['Quick Start', AWS, Tutorial, miniONE]
 weight: "3"
 ---
 
