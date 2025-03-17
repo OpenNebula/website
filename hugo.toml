@@ -110,7 +110,7 @@ offlineSearchSummaryLength = 400
 version_menu = "Versions"
   [[params.versions]]
     version = "v7.0"
-    url = "https://opennebula.github.io/website/docs/"
+    url = "https://opennebula.github.io/website/"
 
   [[params.versions]]
     version = "v6.10"
