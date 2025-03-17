@@ -1,7 +1,7 @@
 ---
 title: "Authentication Configuration"
 date: "2025-02-17"
-description:
+description: "Set up authentication for OpenNebula and for Sunstone on several backends"
 categories:
 pageintoc: "121"
 tags:
