@@ -1,7 +1,7 @@
 ---
 title: "Multi-VM Workflows"
 date: "2025-02-17"
-description:
+description: "Create, configure manage multi-VM applications (services)"
 categories:
 pageintoc: "103"
 tags:

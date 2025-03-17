@@ -1,7 +1,7 @@
 ---
 title: "High Availability"
 date: "2025-02-17"
-description:
+description: "Configure High Availability for the OpenNebula Front-end and Virtual Machines"
 categories:
 pageintoc: "31"
 tags:

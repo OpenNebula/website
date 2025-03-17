@@ -1,5 +1,5 @@
 ---
-title: "Frontend HA"
+title: "Front-end HA"
 date: "2025-02-17"
 description:
 categories:

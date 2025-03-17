@@ -1,7 +1,7 @@
 ---
 title: "Data Center Federation"
 date: "2025-02-17"
-description:
+description: "Set up a federation of integrated OpenNebula Front-ends"
 categories:
 pageintoc: "35"
 tags:
