@@ -111,6 +111,12 @@ version_menu = "Versions"
   [[params.versions]]
     version = "v7.0"
     url = "https://opennebula.github.io/website/"
+    #url = "http://localhost:1313/"
+
+  [[params.versions]]
+    version = "development"
+    #url = "http://localhost:1313/docs-7.2/"
+    url = "https://opennebula.github.io/website/docs-7.2/"
 
   [[params.versions]]
     version = "v6.10"
