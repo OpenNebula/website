@@ -12,4 +12,4 @@ weight: "6"
 
 <!--# minIO -->
 
-Placeholder text for new page based on the minIO wiki, `https://github.com/OpenNebula/one-apps/wiki/minio_intro`.
++[Placeholder text for new page based on the minIO wiki, `https://github.com/OpenNebula/one-apps/wiki/minio_intro`.]

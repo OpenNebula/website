@@ -1,7 +1,7 @@
 ---
 title: "Marketplace Configuration"
 date: "2025-02-17"
-description:
+description: "Add and configure public and private marketplaces, and manage marketplaces in the Sunstone web UI"
 categories:
 pageintoc: "183"
 tags:
