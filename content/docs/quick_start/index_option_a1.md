@@ -1,10 +1,10 @@
 ---
-title: "Quick Start"
+title: "Quick Start option"
 date: "2025-02-17"
 description: "Understand, deploy and evaluate OpenNebula. Deploy a production-ready OpenNebula cloud"
 categories:
-no_list: true
 hide_feedback: true
+no_list: true
 pageintoc: "1"
 tags:
 weight: "1"
@@ -22,11 +22,9 @@ The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula_wit
 
 The third section, [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}) contains an overview and tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks. -->
 
-## Learn
+## Understand OpenNebula
 
 Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying a cloud.
-
-#### Understand OpenNebula
 
 {{< cardpane >}}
    {{< card header="OpenNebula concepts, features and components" >}}
@@ -54,41 +52,37 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
 
 <hr class="panel-line">
 
-## Evaluate
+## Run Evaluation Environments with miniONE
 
 Follow tutorials to quickly deploy an on-prem or remote cloud for learning and evaluation. Deploy and run a Cloud Cluster, a Kubernetes Cluster, and Virtual Machines.
-
-#### Run Evaluation Environments with miniONE
 
 {{< cardpane >}}
    {{< card header="Emulated OpenNebula environment to learn about and explore OpenNebula" >}}
       <p></p>
       <inl>
-         <a href="try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create an Emulated Environment with miniONE</a>
+         <a href="try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create a Learning Environment</a>
       </inl>
    {{< /card >}}
    <p></p>
    {{< card header="Deploy a cloud and run Virtual Machines and Kubernetes clusters" >}}
       <p></p>
       <inl>
-         <a href="try_opennebula_with_minione/opennebula_evaluation_environment/overview">Deployment Tutorials</a>
+         <a href="try_opennebula_with_minione/opennebula_evaluation_environment/overview">Create Evaluation Environments</a>
       </inl>
-      <inl>
+<!--      <inl>
          <a href="try_opennebula_with_minione/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
       </inl>
       <inl>
          <a href="try_opennebula_with_minione/opennebula_evaluation_environment/running_kubernetes_clusters">Deploy a Kubernetes Cluster</a>
-      </inl>
+      </inl> -->
    {{< /card >}}
 {{< /cardpane >}}
 
 <hr class="panel-line">
 
-## Deploy
+## Deploy a Production-ready Cloud
 
 Follow tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks.
-
-#### Production-ready Deployment
 
 {{< card header="Perform an automated installation of a production-grade OpenNebula Cloud" >}}
    <p></p>

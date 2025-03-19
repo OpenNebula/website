@@ -1,6 +1,7 @@
 ---
 title: "Releases - Simple, no descriptions"
 date: "2025-02-17"
+toc_hide: true
 description: "Access OpenNebula releases, release notes and upgrade information"
 hide_feedback: true
 no_list: true
