@@ -1,6 +1,7 @@
 ---
-title: "Releases"
+title: "Releases index version 2 - discarded"
 date: "2025-02-17"
+toc_hide: true
 description: "Access OpenNebula releases, release notes and upgrade information"
 hide_feedback: true
 no_list: true
@@ -14,9 +15,8 @@ weight: "6"
 
 <!--# Releases -->
 
-## Release Notes
-
-{{< card header="Updated information on Enterprise and Community Edition releases" >}}
+{{< cardpane >}}
+   {{< card header="[Release Notes](release_information/release_notes/)" >}}
    <p></p>
       <inl>
          <a href="release_information/release_notes/opennebula_enterprise_and_community_editions">OpenNebula Enterprise and Community Editions</a>
@@ -39,12 +39,8 @@ weight: "6"
       <inl>
          <a href="release_information/release_notes/acknowledgements">Acknowledgements</a>
       </inl>
-{{< /card >}}
-   <p></p>
-
-## Upgrade
-
-{{< card header="Upgrade information for different configurations, including upgrade of config files (EE)" >}}
+   {{< /card >}}
+   {{< card header="[Upgrade](release_information/upgrade/)" >}}
    <p></p>
                 <inl>
                     <a href="/docs/releases/release_information/upgrade/overview/">Overview</a>
@@ -71,12 +67,8 @@ weight: "6"
                      <a href="/docs/releases/release_information/configuration_management_ee/">Configuration Management (EE)</a>
                 </inl>
 		  <p></p>
-{{< /card >}}
-   <p></p>
-
-## Manual Installation
-
-{{< card header="How to install OpenNebula from the software repositories, and set up nodes and components" >}}
+   {{< /card >}}
+   {{< card header="[Manual Installation](installation/)" >}}
    <p></p>
       <inl>
                     <a href="/docs/releases/installation/overview/">Overview</a>
@@ -99,14 +91,5 @@ weight: "6"
                 <inl>
                     <a href="/docs/releases/installation/oneswap/">Migrating VMs from VMware with OneSwap</a>
                 </inl>
-{{< /card >}}
-
-
-## Migration
-
-{{< card header="How to automatically migrate Virtual Machines from VMware using OneSwap" >}}
-   <p></p>
-      <inl>
-         <a href="installation/oneswap">Migrate VMs with OneSwap</a>
-      </inl>
-{{< /card >}}
+   {{< /card >}}
+{{< /cardpane >}}

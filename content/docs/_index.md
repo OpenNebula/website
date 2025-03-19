@@ -1,6 +1,6 @@
 ---
 title: "OpenNebula Documentation"
-description: "An at-a-glance overview of the docs"
+description: "Landing page for the OpenNebula documentation"
 weight: "1"
 url: "/"
 main_menu: true

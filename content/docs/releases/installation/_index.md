@@ -1,5 +1,5 @@
 ---
-title: "Installation"
+title: "Manual Installation"
 date: "2025-02-17"
 description: "Consult references for manually installing and configuring customized cloud infrastructure"
 categories:
