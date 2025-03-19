@@ -18,10 +18,6 @@ This section is designed to help you deploy an OpenNebula environment for learni
 
 All tutorials use OpenNebula’s **Sunstone** web UI, and most take under ten minutes to complete. The Quick Start is by far the fastest way to familiarize yourself with OpenNebula.
 
-{{% imgproc "/images/oneprovision-provider.png" %}}
-The Sunstone web UI.
-{{% /imgproc %}}
-
 The tutorials in this section were designed to be followed sequentially. To take full advantage of them and deploy the complete set of infrastructure, you will need to start at the first tutorial and continue in order.
 
 To begin, see the [Overview]({{% relref "overview" %}}) for your next steps.
