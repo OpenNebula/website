@@ -12,9 +12,6 @@ weight: "1"
 
 <!--# Overview -->
 
-{{< alert title="Note" color="success" >}}
-Note for docs migration: need to modify text in this page, as in all “Overview” pages.{{< /alert >}} 
-
 So we heard you want to try out OpenNebula? Welcome! You came to the right place.
 
 The pages in this section will help you through the process of achieving a fully functional OpenNebula cloud, through a series of tutorials that will   take you from a bare install to quickly deploying an enterprise-grade Kubernetes cluster.

@@ -14,49 +14,15 @@ weight: "2"
 
 <!--# Quick Start: OpenNebula Evaluation Environment [formerly Quick Start] -->
 
-The OpenNebula Evaluation environment is designed to help you deploy an OpenNebula environment for learning, developing or testing. By following a series of tutorials, you can progressively build infrastructure from an OpenNebula **Front-end** to provisioning an **Edge Cluster**, running a **Virtual Machine**, and finally deploying a **Kubernetes cluster**.
+This section is designed to help you deploy an OpenNebula environment for learning, developing or testing. By following a series of tutorials, you can progressively build infrastructure from an OpenNebula **Front-end** to provisioning an **Edge Cluster**, running a **Virtual Machine**, and finally deploying a **Kubernetes cluster**.
 
 All tutorials use OpenNebula’s **Sunstone** web UI, and most take under ten minutes to complete. The Quick Start is by far the fastest way to familiarize yourself with OpenNebula.
 
+{{% imgproc "/images/oneprovision-provider.png" %}}
+The Sunstone web UI.
+{{% /imgproc %}}
 
+The tutorials in this section were designed to be followed sequentially. To take full advantage of them and deploy the complete set of infrastructure, you will need to start at the first tutorial and continue in order.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+To begin, see the [Overview]({{% relref "overview" %}}) for your next steps.
 
