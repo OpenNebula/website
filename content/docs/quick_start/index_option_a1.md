@@ -4,6 +4,7 @@ date: "2025-02-17"
 description: "Understand, deploy and evaluate OpenNebula. Deploy a production-ready OpenNebula cloud"
 categories:
 no_list: true
+hide_feedback: true
 pageintoc: "1"
 tags:
 weight: "1"
