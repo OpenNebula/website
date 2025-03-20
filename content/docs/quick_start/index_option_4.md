@@ -1,5 +1,5 @@
 ---
-title: "Quick Start (Option 3)"
+title: "Quick Start (Option 4)"
 date: "2025-02-17"
 description: "From learning about OpenNebula to deploying a production-ready OpenNebula cloud"
 #description: "Learn about OpenNebula, install an evaluation cloud, and automatically install a production-ready cloud"
@@ -14,7 +14,7 @@ weight: "1"
 
 <a id="cloud-installation"></a>
 
-+[NOTE: This is Option 3 for the Quick Start index page]
++[NOTE: This is Option 4 for the Quick Start index page]
 
 <!--# Cloud Installation -->
 
@@ -26,16 +26,18 @@ The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula_wit
 
 The third section, [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}) contains an overview and tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks. -->
 
-## Understand OpenNebula
+## Learning and Evaluation
 
-Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying a cloud.
+Gain a high-level view of OpenNebula, its concepts and features. Deploy an OpenNebula cloud for learning and evaluation.
 
 {{< cardpane >}}
-   {{< card header="**OpenNebula Concepts**" >}}
+   {{< card header="**Understand OpenNebula**" >}}
+      <p></p>
+      <a href="../understand_opennebula/opennebula_concepts">OpenNebula Concepts</a>
          <inl><a href="../understand_opennebula/opennebula_concepts/opennebula_overview">OpenNebula Overview</a></inl>
          <inl><a href="../understand_opennebula/opennebula_concepts/key_features">Key Features</a></inl>
-   {{< /card >}}
-   {{< card header="**Cloud Architecture and Design**" >}}
+      <p></p>
+      <a href="../understand_opennebula/cloud_architecture_design">Cloud Architecture and Design</a>
       <inl>
          <a href="../understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
       </inl>
@@ -46,38 +48,18 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
          <a href="../understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture">Open Cloud Architecture</a>
       </inl>
    {{< /card >}}
-{{< /cardpane >}}
 
-<hr class="panel-line">
-
-## Run Evaluation Environments with miniONE
-
-Follow tutorials to quickly deploy an on-prem or remote cloud for learning and evaluation. Deploy and run a Cloud Cluster, a Kubernetes Cluster, and Virtual Machines.
-
-{{< cardpane >}}
-   {{< card header="**OpenNebula Learning Environment**" >}}
+   {{< card header="**Evaluate OpenNebula**" >}}
       <p></p>
-      <div>
-      <bxctr>
          <a href="../try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
-      </bxctr>
-      <ul>
-         <ni>Item 1 TBD</ni>
-         <ni>Item 2 TBD</ni>
-      </ul>
-      </div>
-   {{< /card >}}
-   <p></p>
-   {{< card header="**OpenNebula Evaluation Environment**" >}}
+         <inl><a href="../try_opennebula_with_minione/opennebula_learning_environment/cerate_an_emulated_environment_with_minione">Create an Emulated Environment with miniONE</a></inl>
       <p></p>
-      <inl>
-         <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/">Create Evaluation Environment</a>
-      </inl>
-      <ul>
+         <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/">Create an Evaluation Environment</a>
+      <ol>
          <ni><a href="../try_opennebula_with_minione/opennebula_evaluation_environment/try_opennebula_onprem">On-prem</a></ni>
          <ni><a href="../try_opennebula_with_minione/opennebula_evaluation_environment/try_opennebula_on_kvm">On AWS</a></ni>
          <ni><a href="../try_opennebula_with_minione/opennebula_evaluation_environment/try_opennebula_hosted">On Hosted Infrastructure</a></ni>
-      </ul>
+      </ol>
       <inl>
          <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
       </inl>
@@ -92,8 +74,6 @@ Follow tutorials to quickly deploy an on-prem or remote cloud for learning and e
       </inl>
    {{< /card >}}
 {{< /cardpane >}}
-
-<hr class="panel-line">
 
 ## Deploy a Production-ready Cloud
 
