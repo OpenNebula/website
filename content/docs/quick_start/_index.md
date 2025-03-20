@@ -1,7 +1,8 @@
 ---
 title: "Quick Start"
 date: "2025-02-17"
-description: "Learn about OpenNebula, install an evaluation cloud, and automatically install a production-ready cloud"
+description: "These sections will take you from learning about OpenNebula to deploying a production-ready OpenNebula cloud"
+#description: "Learn about OpenNebula, install an evaluation cloud, and automatically install a production-ready cloud"
 #"Understand, deploy and evaluate OpenNebula. Deploy a production-ready OpenNebula cloud"
 categories:
 hide_feedback: true
@@ -30,22 +31,22 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
 {{< cardpane >}}
    {{< card header="OpenNebula concepts, features and components" >}}
          <inl>
-            <a href="/docs/quick_start/understand_opennebula/opennebula_concepts">OpenNebula Concepts</a>
+            <a href="understand_opennebula/opennebula_concepts/opennebula_overview">OpenNebula Overview</a>
          </inl>
          <inl>
-            <a href="/docs/quick_start/understand_opennebula/opennebula_concepts/key_features">Key Features</a>
+            <a href="understand_opennebula/opennebula_concepts/key_features">Key Features</a>
          </inl>
    {{< /card >}}
    <p></p>
    {{< card header="Pathway to designing an OpenNebula cloud" >}}
       <inl>
-         <a href="/docs/quick_start/understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
+         <a href="understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
       </inl>
       <inl>
-         <a href="/docs/quick_start/understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture">Edge Cloud Architecture</a>
+         <a href="understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture">Edge Cloud Architecture</a>
       </inl>
       <inl>
-         <a href="/docs/quick_start/understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture">Open Cloud Architecture</a>
+         <a href="understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture">Open Cloud Architecture</a>
       </inl>
    {{< /card >}}
 {{< /cardpane >}}
@@ -60,14 +61,14 @@ Follow tutorials to quickly deploy an on-prem or remote cloud for learning and e
    {{< card header="Create an emulated OpenNebula environment for learning" >}}
       <p></p>
       <inl>
-         <a href="/docs/quick_start/try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
+         <a href="try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
       </inl>
    {{< /card >}}
    <p></p>
    {{< card header="Deploy a cloud and run Virtual Machines and Kubernetes clusters" >}}
       <p></p>
       <inl>
-         <a href="/docs/quick_start/try_opennebula_with_minione/opennebula_evaluation_environment/">Create Evaluation Environment</a>
+         <a href="try_opennebula_with_minione/opennebula_evaluation_environment/">Create Evaluation Environment</a>
       </inl>
 <!--      <inl>
          <a href="try_opennebula_with_minione/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
@@ -87,12 +88,12 @@ Follow tutorials for automatically installing a production-grade OpenNebula clou
 {{< card header="Perform an automated installation of a production-grade OpenNebula Cloud" >}}
    <p></p>
       <inl>
-         <a href="/docs/quick_start/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
+         <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
       </inl>
       <inl>
-         <a href="/docs/quick_start/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_local_ds">Deploy with Local Storage</a>
+         <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_local_ds">Deploy with Local Storage</a>
       </inl>
       <inl>
-         <a href="/docs/quick_start/automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
+         <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
    {{< /card >}}
