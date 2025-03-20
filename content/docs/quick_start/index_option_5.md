@@ -77,7 +77,7 @@ Finally, perform automated Devops-like deployment of a production-grade OpenNebu
          <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/running_kubernetes_clusters">Deploy a Kubernetes Cluster</a>
       </inl>
    {{< /card >}}
-   {{< card header="**Automatically Deploy a Cloud**" >}}
+   {{< card header="**Deploy a Cloud**" >}}
    <p></p>
          <a href="../automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
    <p></p>
