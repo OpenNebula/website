@@ -11,17 +11,28 @@ a:hover {
 a:active {
   text-decoration: underline; }
 
+/* Improvised styles for index pages */
 inl {
-  display: block;
-  list-style: disc outside none;
+  display: list-item;
+  list-style: none outside none;
   margin: 0 0;
   padding: 0 0 0 40px; }
 
-inl {
-  list-style-type: decimal; }
+ni {
+  display: list-item;
+  list-style: disc none;
+  text-indent: 5%;
+  margin: 0 0 0 30px; }
 
 .td-breadcrumbs__single {
   display: none !important; }
+
+/* Quick ad-hoc thing to center text on boxes in index pages */
+bxctr {
+  display: block;
+  /* margin: 40 40 40 40; */
+  margin: 40 40 40 40;
+  padding: 30px 30px 30px 30px; }
 
 :root,
 [data-bs-theme="light"] {
