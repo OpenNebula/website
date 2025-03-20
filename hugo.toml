@@ -1,6 +1,6 @@
 # title = "OpenNebula"
 
-#baseURL = "https://opennebula.github.io/website/"
+baseURL = "https://opennebula.github.io/website/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
