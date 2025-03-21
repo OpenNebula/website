@@ -39,7 +39,7 @@ Gain a high-level view of OpenNebula, its key concepts and features. View the pa
       <a href="understand_opennebula/opennebula_concepts/key_features">Key Features</a>
    </inl>
    <inl>
-      <a href="understand_opennebula/opennebula_concepts/cloud_access_models_and_roles">Cloud Access Models and Roles</a>
+      <a href="understand_opennebula/opennebula_concepts/cloud_access_model_and_roles">Cloud Access Model and Roles</a>
    </inl>
    <inl>
       <a href="understand_opennebula/opennebula_concepts/knowledge_base">Knowledge Base</a>
@@ -53,10 +53,10 @@ Gain a high-level view of OpenNebula, its key concepts and features. View the pa
       <a href="understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
    </inl>
    <inl>
-      <a href="understand_opennebula/cloud_architecture_and_design/edge_cloud_architecture">Edge Cloud Architecture</a>
+      <a href="understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture">Edge Cloud Reference Architecture</a>
    </inl>
    <inl>
-      <a href="understand_opennebula/cloud_architecture_and_design/open_cloud_architecture">Open Cloud Architecture</a>
+      <a href="understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture">Open Cloud Reference Architecture</a>
    </inl>
 
 {{< /card >}}

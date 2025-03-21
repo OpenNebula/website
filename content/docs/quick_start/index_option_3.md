@@ -34,6 +34,9 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
    {{< card header="**OpenNebula Concepts**" >}}
          <inl><a href="../understand_opennebula/opennebula_concepts/opennebula_overview">OpenNebula Overview</a></inl>
          <inl><a href="../understand_opennebula/opennebula_concepts/key_features">Key Features</a></inl>
+         <inl><a href="../understand_opennebula/opennebula_concepts/cloud_access_model_and_roles">Cloud Access Model and Roles</a></inl>
+         <inl><a href="../understand_opennebula/opennebula_concepts/knowledge_base">Knowledge Base</a></inl>
+         <inl><a href="../understand_opennebula/opennebula_concepts/use_cases">Use Cases</a></inl>
    {{< /card >}}
    {{< card header="**Cloud Architecture and Design**" >}}
       <inl>

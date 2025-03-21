@@ -36,8 +36,17 @@ Gain a high-level view of OpenNebula, its concepts and features. Deploy an OpenN
       <a href="../understand_opennebula/opennebula_concepts">OpenNebula Concepts</a>
          <inl><a href="../understand_opennebula/opennebula_concepts/opennebula_overview">OpenNebula Overview</a></inl>
          <inl><a href="../understand_opennebula/opennebula_concepts/key_features">Key Features</a></inl>
+   <inl>
+      <a href="../understand_opennebula/opennebula_concepts/cloud_access_model_and_roles">Cloud Access Model and Roles</a>
+   </inl>
+   <inl>
+      <a href="../understand_opennebula/opennebula_concepts/knowledge_base">Knowledge Base</a>
+   </inl>
+   <inl>
+      <a href="../understand_opennebula/opennebula_concepts/use_cases">Use Cases</a>
+   </inl>
       <p></p>
-      <a href="../understand_opennebula/cloud_architecture_design">Cloud Architecture and Design</a>
+      <a href="../understand_opennebula/cloud_architecture_and_design">Cloud Architecture and Design</a>
       <inl>
          <a href="../understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
       </inl>
@@ -52,7 +61,7 @@ Gain a high-level view of OpenNebula, its concepts and features. Deploy an OpenN
    {{< card header="**Evaluate OpenNebula**" >}}
       <p></p>
          <a href="../try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
-         <inl><a href="../try_opennebula_with_minione/opennebula_learning_environment/cerate_an_emulated_environment_with_minione">Create an Emulated Environment with miniONE</a></inl>
+         <inl><a href="../try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create an Emulated Environment with miniONE</a></inl>
       <p></p>
          <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/">Create an Evaluation Environment</a>
       <ol>
