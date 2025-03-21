@@ -42,7 +42,7 @@ weight: "6"
 {{< /card >}}
    <p></p>
 
-## Upgrade
+## Upgrade Process
 
 {{< card header="Upgrade information for different configurations, including upgrade of config files (EE)" >}}
    <p></p>
@@ -102,7 +102,7 @@ weight: "6"
 {{< /card >}}
 
 
-## Migration
+## Migration Tools
 
 {{< card header="How to automatically migrate Virtual Machines from VMware using OneSwap" >}}
    <p></p>
