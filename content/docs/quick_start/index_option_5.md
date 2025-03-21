@@ -32,7 +32,7 @@ The Quick Start is designed to help you to:
 - Easily deploy an OpenNebula cloud for learning and evaluation
 - Automatically deploy a production-grade OpenNebula cloud
 
-Once you've acquired a basic grasp of OpenNebula concepts, the fastest way to familiarize yourself with OpenNebula is by following the tutorials in the [OpenNebula Evaluation Environment]({{% relref "try_opennebula_with_minione/opennebula_evaluation_environment/" %}}). The tutorials use [miniONE](https://github.com/OpenNebula/minione) -- a simple installation script -- to quickly install a Front-end, then guide you through deploying cloud infrastructure using a Sunstone, OpenNebula's point-and-click web UI.
+Once you've acquired a basic grasp of OpenNebula concepts, the fastest way to familiarize yourself with OpenNebula is by following the tutorials in this chapter. The tutorials use [miniONE](https://github.com/OpenNebula/minione) -- a simple installation script -- to quickly install a Front-end, then guide you through deploying cloud infrastructure using **Sunstone**, OpenNebula's point-and-click web UI.
 
 <hr class="panel-line">
 
