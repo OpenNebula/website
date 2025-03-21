@@ -26,7 +26,7 @@ The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula_wit
 
 The third section, [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}) contains an overview and tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks. -->
 
-The Quick Start is designed to help you to:
+This first chapter is designed to help you to:
 
 - Quickly understand the OpenNebula model, explore popular use cases, and design a cloud
 - Easily deploy an OpenNebula cloud for learning and evaluation
