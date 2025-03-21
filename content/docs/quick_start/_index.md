@@ -27,7 +27,7 @@ This would not be the final text but a "proof of concept" for presenting the con
 
 ## Learn
 
-Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying a cloud.
+Gain a high-level view of OpenNebula, its key concepts and features. View the pathway to designing and deploying an OpenNebula cloud.
 
 {{< card header="**Understand OpenNebula**" >}}
 <p></p>
@@ -64,7 +64,7 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
 
 ## Evaluate
 
-Follow tutorials to quickly deploy an on-prem or remote cloud for learning and evaluation. Deploy and run a Cloud Cluster, a Kubernetes Cluster, and Virtual Machines.
+Using the miniONE installation tool, follow tutorials to quickly deploy an OpenNebula cloud for learning and evaluation. Provision a Cloud Cluster, run Virtual Machines, and deploy a Kubernetes Cluster.
 
 {{< card header="**Try OpenNebula with miniONE**" >}}
 <p></p>
