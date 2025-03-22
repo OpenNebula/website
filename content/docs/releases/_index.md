@@ -47,42 +47,42 @@ weight: "6"
 {{< card header="Upgrade information for different configurations, including upgrade of config files (EE)" >}}
    <p></p>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/overview/">Overview</a>
+                    <a href="release_information/upgrade/overview/">Overview</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/start_here/">Start Here</a>
+                    <a href="release_information/upgrade/start_here/">Start Here</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/upgrading_single/">Upgrading Single Front-End</a>
+                    <a href="release_information/upgrade/upgrading_single/">Upgrading Single Front-End</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/upgrading_ha/">Upgrading High Availability Clusters</a>
+                    <a href="release_information/upgrade/upgrading_ha/">Upgrading High Availability Clusters</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/upgrading_federation/">Upgrading Federated Instances</a>
+                    <a href="release_information/upgrade/upgrading_federation/">Upgrading Federated Instances</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/restoring_version/">Restoring Previous Version</a>
+                    <a href="release_information/upgrade/restoring_version/">Restoring Previous Version</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/release_information/upgrade/upgrade_from_previous_versions/">Upgrading from Previous Versions</a>
+                    <a href="release_information/upgrade/upgrade_from_previous_versions/">Upgrading from Previous Versions</a>
                 </inl>
                 <inl>
-                     <a href="/docs/releases/release_information/configuration_management_ee/">Configuration Management (EE)</a>
+                     <a href="release_information/configuration_management_ee/">Configuration Management (EE)</a>
                    <inl>
-                        <a href="/docs/releases/release_information/configuration_management_ee/overview">Overview</a>
+                        <a href="release_information/configuration_management_ee/overview">Overview</a>
                    </inl>
                    <inl>
-                        <a href="/docs/releases/release_information/configuration_management_ee/usage">Basic Usage</a>
+                        <a href="release_information/configuration_management_ee/usage">Basic Usage</a>
                    </inl>
                    <inl>
-                        <a href="/docs/releases/release_information/configuration_management_ee/diff_formats">Diff Formats</a>
+                        <a href="release_information/configuration_management_ee/diff_formats">Diff Formats</a>
                    </inl>
                    <inl>
-                        <a href="/docs/releases/release_information/configuration_management_ee/conflicts">Troubleshooting</a>
+                        <a href="release_information/configuration_management_ee/conflicts">Troubleshooting</a>
                    </inl>
                    <inl>
-                        <a href="/docs/releases/release_information/configuration_management_ee/appendix">Appendix - List of Configurations</a>
+                        <a href="release_information/configuration_management_ee/appendix">Appendix - List of Configurations</a>
                    </inl>
                 </inl>
 		  <p></p>
@@ -94,25 +94,25 @@ weight: "6"
 {{< card header="How to install OpenNebula from the software repositories, and set up nodes and components" >}}
    <p></p>
       <inl>
-                    <a href="/docs/releases/installation/overview/">Overview</a>
+                    <a href="installation/overview/">Overview</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/installation/database/">Database Setup</a>
+                    <a href="installation/database/">Database Setup</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/installation/opennebula_repository_configuration/">OpenNebula Repositories</a>
+                    <a href="installation/opennebula_repository_configuration/">OpenNebula Repositories</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/installation/front_end_installation/">Single Front-end Installation</a>
+                    <a href="installation/front_end_installation/">Single Front-end Installation</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/installation/kvm_node_installation/">KVM Node Installation</a>
+                    <a href="installation/kvm_node_installation/">KVM Node Installation</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/installation/lxc_node_installation/">LXC Node Installation</a>
+                    <a href="installation/lxc_node_installation/">LXC Node Installation</a>
                 </inl>
                 <inl>
-                    <a href="/docs/releases/installation/oneswap/">Migrating VMs from VMware with OneSwap</a>
+                    <a href="installation/oneswap/">Migrating VMs from VMware with OneSwap</a>
                 </inl>
 {{< /card >}}
 
