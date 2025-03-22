@@ -1,7 +1,7 @@
 ---
 title: "Release Information"
 date: "2025-02-17"
-description:
+description: "Release and platform notes, known issues and compatibility for EE and CE editions"
 categories:
 pageintoc: "241"
 tags:

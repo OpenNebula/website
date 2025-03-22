@@ -1,7 +1,7 @@
 ---
 title: "Quick Start: OpenNebula Learning Environment"
 date: "2025-02-17"
-description:
+description: "Use miniONE to quickly set up an emulated cloud as a learning environment"
 categories:
 pageintoc: "14"
 tags:

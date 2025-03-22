@@ -1,7 +1,7 @@
 ---
 title: "Private Marketplaces"
 date: "2025-02-17"
-description:
+description: "Configure your own or third-party private marketplaces"
 categories:
 pageintoc: "188"
 tags:

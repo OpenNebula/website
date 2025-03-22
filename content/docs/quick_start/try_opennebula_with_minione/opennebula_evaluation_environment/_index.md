@@ -1,7 +1,7 @@
 ---
 title: "Quick Start: OpenNebula Evaluation Environment"
 date: "2025-02-17"
-description:
+description: "Use miniONE to quickly set up an OpenNebula cloud for evaluation, on a variety of infrastructure"
 categories:
 pageintoc: "16"
 tags:

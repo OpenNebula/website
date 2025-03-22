@@ -69,6 +69,21 @@ weight: "6"
                 </inl>
                 <inl>
                      <a href="/docs/releases/release_information/configuration_management_ee/">Configuration Management (EE)</a>
+                   <inl>
+                        <a href="/docs/releases/release_information/configuration_management_ee/overview">Overview</a>
+                   </inl>
+                   <inl>
+                        <a href="/docs/releases/release_information/configuration_management_ee/usage">Basic Usage</a>
+                   </inl>
+                   <inl>
+                        <a href="/docs/releases/release_information/configuration_management_ee/diff_formats">Diff Formats</a>
+                   </inl>
+                   <inl>
+                        <a href="/docs/releases/release_information/configuration_management_ee/conflicts">Troubleshooting</a>
+                   </inl>
+                   <inl>
+                        <a href="/docs/releases/release_information/configuration_management_ee/appendix">Appendix - List of Configurations</a>
+                   </inl>
                 </inl>
 		  <p></p>
 {{< /card >}}
