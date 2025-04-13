@@ -101,7 +101,7 @@ enable = false
     weight = 1
   [[menu.main]]
     name = "Product"
-    url = "/docs/configuration_and_operation"
+    url = "/docs/product"
     weight = 2
   [[menu.main]]
     name = " Solutions"
