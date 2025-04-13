@@ -22,7 +22,7 @@ If you haven’t done so, please enable the [OpenNebula and needed 3rd party rep
 
 ### Step 1. Check Virtual Machine Status
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../configuration_and_operation/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../product/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
 
 ### Step 2. Set All Hosts to Disable Mode
 
@@ -74,7 +74,7 @@ $ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-provision op
 {{< alert title="Warning" color="warning" >}}
 Sunstone on Apache
 
-If upgrading a Front-end where Sunstone is deployed through an **Apache web server**, bear in mind that the upgrade may cause [filesystem permissions]({{% relref "../../../configuration_and_operation/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-fs-permissions" %}}) to be reset. If this happens Apache will be unable to access Sunstone files, and users be unable to access the Sunstone UI. The Apache log will show an entry like below:
+If upgrading a Front-end where Sunstone is deployed through an **Apache web server**, bear in mind that the upgrade may cause [filesystem permissions]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-fs-permissions" %}}) to be reset. If this happens Apache will be unable to access Sunstone files, and users be unable to access the Sunstone UI. The Apache log will show an entry like below:
 
 ```default
 [Mon Feb 14 11:10:09.133702 2022] [core:error] [pid 668659:tid 140354620548864] [client 10.141.18.116:60062] AH00037: Symbolic link not allowed or link target not accessible: /usr/lib/one/sunstone/public/dist/main.js, referer:
@@ -185,7 +185,7 @@ ANY   : Backup stored in '/tmp/onescape/backups/2020-6...
 ANY   : Configuration updated to 6.2.1
 ```
 
-If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade basic usage documentation]({{% relref "../configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../configuration_management_ee/usage#cfg-upgrade" %}}) and the [troubleshooting section]({{% relref "../configuration_management_ee/conflicts#cfg-conflicts" %}}).
+If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade basic usage documentation]({{% relref "../../life_cycle_management/configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../../life_cycle_management/configuration_management_ee/usage#cfg-upgrade" %}}) and the [troubleshooting section]({{% relref "../../life_cycle_management/configuration_management_ee/conflicts#cfg-conflicts" %}}).
 
 ### Step 8. Upgrade the Database Version
 
@@ -216,7 +216,7 @@ If you are running FireEdge service behind Apache/Nginx, please start also the A
 
 ### Step 11. Restore Custom Probes
 
-If you have any custom monitoring probes, follow [these instructions]({{% relref "../../../integration_and_development/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}), to update them to the new monitoring system
+If you have any custom monitoring probes, follow [these instructions]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}), to update them to the new monitoring system
 
 ### Step 12. Update the Hypervisors
 

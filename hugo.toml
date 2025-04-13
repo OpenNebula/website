@@ -1,4 +1,4 @@
-# title = "OpenNebula"
+#title = ""
 
 #baseURL = "https://opennebula.github.io/website/"
 
@@ -90,10 +90,23 @@ enable = false
 
 # Top menu
 [menu]
+  #[[menu.main]]
+  #  name = "Documentation"
+  #  url = "/"
+  #  weight = 1
   [[menu.main]]
-    name = "Documentation"
-    url = "/"
+    name = "Quick Start"
+    #url = "/content/docs/quick_start"
+    url = "/docs/quick_start"
     weight = 1
+  [[menu.main]]
+    name = "Product"
+    url = "/docs/configuration_and_operation"
+    weight = 2
+  [[menu.main]]
+    name = " Solutions"
+    url = "/docs/solutions"
+    weight = 3
 
 [params]
 no_list = true
@@ -105,22 +118,21 @@ enableGitInfo = true
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
-offlineSearchSummaryLength = 400
+offlineSearchSummaryLength = 800
   # Add your release versions here
 version_menu = "Versions"
   [[params.versions]]
     version = "v7.0"
     url = "https://opennebula.github.io/website/"
     #url = "http://localhost:1313/"
+  [[params.versions]]
+    version = "v6.10"
+    url = "https://docs.opennebula.io/6.10/"
 
   [[params.versions]]
     version = "development"
     #url = "http://localhost:1313/docs-7.2/"
     url = "https://opennebula.github.io/website/docs-7.2/"
-
-  [[params.versions]]
-    version = "v6.10"
-    url = "https://docs.opennebula.io/6.10/"
 
   [[params.versions]]
     version = "v6.8"

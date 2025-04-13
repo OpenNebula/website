@@ -1,5 +1,5 @@
 ---
-title: "Automatic Deployment of OpenNebula with OneDeploy"
+title: "Automatic Deployment"
 date: "2025-02-17"
 description: "Perform Devops-like deployment of a production-ready OpenNebula cloud"
 categories:

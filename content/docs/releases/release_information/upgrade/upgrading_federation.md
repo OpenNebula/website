@@ -65,7 +65,7 @@ $ onedb backup -v --federated
 ```
 
 {{< alert title="Important" color="success" >}}
-If you are running MySQL you will need to supply connection parameters such as `--user` and `--password`, and `--host` if the database is not on localhost. Please refer to [the CLI Reference]({{% relref "../../../configuration_and_operation/operation_references/configuration_references/cli#cli" %}}) for further information.{{< /alert >}} 
+If you are running MySQL you will need to supply connection parameters such as `--user` and `--password`, and `--host` if the database is not on localhost. Please refer to [the CLI Reference]({{% relref "../../../product/operation_references/configuration_references/cli#cli" %}}) for further information.{{< /alert >}} 
 
 ## Step 5. Restore Federated Backup in Slave Zones
 

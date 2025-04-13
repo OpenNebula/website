@@ -9,7 +9,7 @@ weight: 1
 
 The preferred method for installing OpenNebula is by performing [Automatic Installation with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}).
 
-You can also [evaluate OpenNebula](https://opennebula.io/evaluate-opennebula/#try_yourself) by using [miniONE]({{% relref "try_opennebula_with_minione" %}}), a lightweight deployment script to quickly deploy a distributed cloud for evaluation, development or testing.
+You can also [evaluate OpenNebula](https://opennebula.io/evaluate-opennebula/#try_yourself) by using [miniONE]({{% relref "try_opennebula" %}}), a lightweight deployment script to quickly deploy a distributed cloud for evaluation, development or testing.
 
 For available releases, please see [OpenNebula Releases and Downloads](https://opennebula.io/use/#download_opennebula).
 

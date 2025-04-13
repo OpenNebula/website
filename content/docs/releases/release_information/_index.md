@@ -11,26 +11,3 @@ weight: "2"
 <a id="release-information"></a>
 
 <!--# Release Information -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

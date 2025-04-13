@@ -21,7 +21,7 @@ To access additional material including white papers, guides and screencasts, se
   {{< card header="[Quick Start](/docs/quick_start)" >}}
   OpenNebula Oveview - Deploy a cloud for evaluation and testing - Automatically deploy a production-ready OpenNebula cloud
   {{< /card >}}
-  {{< card header="[Configuration and Operation](/docs/configuration_and_operation)" >}}
+  {{< card header="[Configuration and Operation](/docs/product)" >}}
   Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud
   {{< /card >}}
   {{< card header="[Apps Marketplace](/docs/apps-marketplace)" >}}
@@ -36,7 +36,7 @@ To access additional material including white papers, guides and screencasts, se
   {{< card header="[Releases](/docs/releases)" >}}
   Access OpenNebula releases, consult release notes and upgrade information
   {{< /card >}}
-  {{< card header="[Integration and Development](/docs/integration_and_development)" >}}
+  {{< card header="[Integration and Development](/docs/product)" >}}
   Consult references for building custom integrations with OpenNebula
   {{< /card >}}
 {{< /cardpane >}}

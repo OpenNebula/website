@@ -22,7 +22,7 @@ weight: "1"
 
 The first section, [Understand OpenNebula]({{% relref "understand_opennebula" %}}), provides you with a bird's eye view of the system's base concepts, key features, architecture basics, and the most common pathway from cloud design to deployment.
 
-The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula_with_minione" %}}), consists of tutorials for quickly installing an OpenNebula cloud for purposes of evaluation, testing, and even on-premises production operations. The tutorials guide you in building progressively complex infrastructure, from a basic Front-end install to automatically deploying a Kubernetes cluster.
+The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula" %}}), consists of tutorials for quickly installing an OpenNebula cloud for purposes of evaluation, testing, and even on-premises production operations. The tutorials guide you in building progressively complex infrastructure, from a basic Front-end install to automatically deploying a Kubernetes cluster.
 
 The third section, [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}) contains an overview and tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks. -->
 
@@ -63,20 +63,20 @@ Follow tutorials to quickly deploy an on-prem or remote cloud for learning and e
    {{< card header="Quick Start: OpenNebula Learning Environment" >}}
       <p></p>
       <bxctr>
-         <a href="../try_opennebula_with_minione/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
+         <a href="../try_opennebula/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
       </bxctr>
    {{< /card >}}
    <p></p>
    {{< card header="Quick Start: OpenNebula Evaluation Environment" >}}
       <p></p>
       <inl>
-         <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/">Create Evaluation Environment</a>
+         <a href="../try_opennebula/opennebula_evaluation_environment/">Create Evaluation Environment</a>
       </inl>
       <inl>
-         <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
+         <a href="../try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
       </inl>
       <inl>
-         <a href="../try_opennebula_with_minione/opennebula_evaluation_environment/running_kubernetes_clusters">Deploy a Kubernetes Cluster</a>
+         <a href="../try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters">Deploy a Kubernetes Cluster</a>
       </inl>
    {{< /card >}}
 {{< /cardpane >}}
