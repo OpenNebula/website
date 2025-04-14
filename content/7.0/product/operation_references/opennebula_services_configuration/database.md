@@ -252,7 +252,7 @@ Confirm to write to the database [Y/n]: y
 
 ### onedb upgrade
 
-Upgrades database to the new OpenNebula version. This process is fully documented in the [upgrade guides]({{% relref "../../../releases/release_information/upgrade/index#upgrade" %}}).
+Upgrades database to the new OpenNebula version. This process is fully documented in the [upgrade guides]({{% relref "../../../software/release_information/upgrade/index#upgrade" %}}).
 
 <a id="onedb-backup"></a>
 

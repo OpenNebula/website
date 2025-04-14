@@ -21,7 +21,7 @@ This chapter provides documentation on how different resources are monitored in 
 
 ## How to Use This Chapter
 
-Before proceeding with this chapter, ensure you have already installed your [Front-end]({{% relref "../../../releases/installation/front_end_installation#frontend-installation" %}}), configured [KVM Hosts]({{% relref "../../../releases/installation/kvm_node_installation#kvm-node" %}}), and set up an OpenNebula cloud with at least one virtualization node.
+Before proceeding with this chapter, ensure you have already installed your [Front-end]({{% relref "../../../software/installation/front_end_installation#frontend-installation" %}}), configured [KVM Hosts]({{% relref "../../../software/installation/kvm_node_installation#kvm-node" %}}), and set up an OpenNebula cloud with at least one virtualization node.
 
 This chapter is organized as follows:
 

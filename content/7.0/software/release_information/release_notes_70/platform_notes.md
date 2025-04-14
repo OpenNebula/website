@@ -26,7 +26,7 @@ This is the list of the individual platform components that have been through th
 | AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../releases/installation/database#mysql" %}})                                                                               |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation/database#mysql" %}})                                                                               |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
@@ -56,7 +56,7 @@ Debian front-ends are not certified to manage VMware infrastructures with OpenNe
 
 ### [Linux and Windows Contextualization Packages](https://github.com/OpenNebula/one-apps/wiki/linux_release)
 
-Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/releases/latest)
+Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/software/latest)
 
 More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
