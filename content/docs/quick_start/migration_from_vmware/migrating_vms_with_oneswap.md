@@ -5,4 +5,4 @@ categories:
 weight: 2
 ---
 
-Placeholder text for page that needs to be written, probably linking to the [GitHub repo](https://github.com/OpenNebula/one-swap) or the [wiki](https://github.com/OpenNebula/one-swap/wiki).
+TBC, including stats on successful VM migration, linking to the [GitHub repo](https://github.com/OpenNebula/one-swap) and the [wiki](https://github.com/OpenNebula/one-swap/wiki).

@@ -1,7 +1,7 @@
 ---
 title: "Third-party Enterprise Extensions"
 date:
-description: ""
+description: "Developed and maintained by third parties"
 tags:
 weight: "3"
 ---

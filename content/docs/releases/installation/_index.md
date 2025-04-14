@@ -5,7 +5,7 @@ description: "Consult references for manually installing and configuring customi
 categories:
 pageintoc: "168"
 tags:
-weight: "7"
+weight: "3"
 ---
 
 <a id="package-installation-references"></a>
