@@ -1,5 +1,5 @@
 ---
-description: "Landing page for the OpenNebula documentation"
+description: "The OpenNebula documentation"
 weight: "1"
 url: "/"
 main_menu: true
