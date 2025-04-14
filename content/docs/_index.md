@@ -21,23 +21,17 @@ To access additional material including white papers, guides and screencasts, se
   {{< card header="[Quick Start](/docs/quick_start)" >}}
   OpenNebula Oveview - Deploy a cloud for evaluation and testing - Automatically deploy a production-ready OpenNebula cloud
   {{< /card >}}
-  {{< card header="[Configuration and Operation](/docs/product)" >}}
+  {{< card header="[Product](/docs/product)" >}}
   Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud
-  {{< /card >}}
-  {{< card header="[Apps Marketplace](/docs/apps-marketplace)" >}}
-  Explore the appliances available on OpenNebula's public marketplace, and how to access, create and manage private marketplaces
   {{< /card >}}
 {{< /cardpane >}}
 
 {{< cardpane >}}
-  {{< card header="[Hybrid Cloud](/docs/hybrid_cloud)" >}}
-  Automatically provision remote clusters on different providers, for cloud, edge and hybrid infrastructures
-  {{< /card >}}
-  {{< card header="[Releases](/docs/releases)" >}}
+  {{< card header="[Software](/docs/releases)" >}}
   Access OpenNebula releases, consult release notes and upgrade information
   {{< /card >}}
-  {{< card header="[Integration and Development](/docs/product)" >}}
-  Consult references for building custom integrations with OpenNebula
+  {{< card header="[Solutions](/docs/solutions)" >}}
+  Integrations, extensions and tools
   {{< /card >}}
 {{< /cardpane >}}
 
