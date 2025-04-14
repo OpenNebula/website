@@ -1,5 +1,4 @@
 ---
-title: "OpenNebula Documentation"
 description: "Landing page for the OpenNebula documentation"
 weight: "1"
 url: "/"
@@ -10,6 +9,8 @@ breadcrumb_disable: true
 Description: >
 
 ---
+
+# Welcome to OpenNebula
 
 [OpenNebula](https://opennebula.io) is a powerful, but easy-to-use open source platform for enterprise, private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence.
 
