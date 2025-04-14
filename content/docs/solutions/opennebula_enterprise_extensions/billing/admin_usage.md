@@ -26,7 +26,7 @@ From the Products/Services page, click on **Create a New Product**.  Select the 
 
 On this page, click on the **Module Settings** tab then select **OpenNebula Tenants** for the **Module Name**, then select your recently created **Server Group**.  Here, you can fill in the maximum resources usable by this product. You can also set the ACL parameters which will be created in OpenNebula for this product.
 
-These resource limits correlate to the [Quota]({{% relref "../capacity_planning/quotas#quota-auth" %}}) for the Group in OpenNebula, so this will limit the amount of resources used in OpenNebula for each product.  You can also enable Metric Billing and set pricing for each of these metrics:
+These resource limits correlate to the [Quota]({{% relref "../../../product/cloud_system_administration/capacity_planning/quotas#quota-auth" %}}) for the Group in OpenNebula, so this will limit the amount of resources used in OpenNebula for each product.  You can also enable Metric Billing and set pricing for each of these metrics:
 
 > * IP Addresses
 > * RAM
@@ -42,7 +42,7 @@ Below the resources you can determine if the User should be automatically setup 
 ![image](/images/whmcs_tenants_module_settings.png)
 
 {{< alert title="Note" color="success" >}}
-For more information about managing VDCs refer to the [Managing VDCs]({{% relref "../multitenancy/manage_vdcs#manage-vdcs" %}}) page.{{< /alert >}} 
+For more information about managing VDCs refer to the [Managing VDCs]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_vdcs#manage-vdcs" %}}) page.{{< /alert >}} 
 
 The **Upgrades** tab can also be a useful feature to make use of.  If you create multiple products with different resource quotas, you can select the products here which your users can upgrade to.  You can select multiple products by holding the Shift or Ctrl key.
 

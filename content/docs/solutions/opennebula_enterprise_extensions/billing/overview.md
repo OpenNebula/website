@@ -20,7 +20,7 @@ Inside of OpenNebula when an order is accepted, the setup is performed: there is
 
 ## How I Should Read This Chaper
 
-Before reading this chapter you should be aware of the [WHMCS Documentation](https://docs.whmcs.com/Documentation_Home) and have it installed on a server which can access your OpenNebula install.  You should also be familiar with OpenNebula’s [Manage Users]({{% relref "../multitenancy/manage_users#manage-users" %}}), [Manage Groups]({{% relref "../multitenancy/manage_groups#manage-groups" %}}), [Usage Quotas]({{% relref "../capacity_planning/quotas#quota-auth" %}}) and [Managing Permissions]({{% relref "../multitenancy/chmod#chmod" %}}) features.
+Before reading this chapter you should be aware of the [WHMCS Documentation](https://docs.whmcs.com/Documentation_Home) and have it installed on a server which can access your OpenNebula install.  You should also be familiar with OpenNebula’s [Manage Users]({{% relref "../../../product/cloud_system_administration/multitenancy//manage_users#manage-users" %}}), [Manage Groups]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_groups#manage-groups" %}}), [Usage Quotas]({{% relref "../../../product/cloud_system_administration/capacity_planning/quotas#quota-auth" %}}) and [Managing Permissions]({{% relref "../../../product/cloud_system_administration/multitenancy/chmod#chmod" %}}) features.
 
 In this chapter there are three guides for this module:
 : * Install/Configure
