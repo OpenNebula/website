@@ -47,11 +47,17 @@ showLightDarkModeMenu = true
 [params.ui.readingtime]
 enable = false
 
-[cascade]
+[[cascade]]
    [cascade.params]
       hide_feedback = true
    [cascade.target]
       kind = 'section'
+[[cascade]]
+   [cascade.params]
+      type = 'docs'
+   [cascade.target]
+      path = '{/7.0,/7.0/**}'
+      #path = '{/7.0/quick_start,/7.0/quick_start/**,/7.0/produc,/7.0/product/**}'
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if >
@@ -97,15 +103,16 @@ enable = false
   [[menu.main]]
     name = "Quick Start"
     #url = "/content/docs/quick_start"
-    url = "/docs/quick_start"
+    #url = "/docs/quick_start"
+    url = "/7.0/quick_start"
     weight = 1
   [[menu.main]]
     name = "Product"
-    url = "/docs/product"
+    url = "/7.0/product"
     weight = 2
   [[menu.main]]
     name = " Solutions"
-    url = "/docs/solutions"
+    url = "/7.0/solutions"
     weight = 3
 
 [params]
