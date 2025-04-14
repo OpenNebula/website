@@ -1,6 +1,5 @@
 ---
-title: ""
-
+title: "What is OpenNebula Community Edition"
 description:
 categories:
 pageintoc: ""
