@@ -28,7 +28,7 @@ taxonomyPageHeader = ["tags", "categories"]
 
 [params.ui]
 #  Set to true to disable breadcrumb navigation.
-breadcrumb_disable = false
+breadcrumb_disable = true
 # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
 navbar_logo = true
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like o>
@@ -119,7 +119,7 @@ enable = false
 no_list = true
 # Uncomment this if your GitHub repo does not have "main" as the default branch,
 # or specify a new value if you want to reference another branch in your GitHub links
-github_branch= "version_5"
+github_branch= "version_6"
 github_repo = "https://github.com/OpenNebula/website/"
 enableGitInfo = true
 # Google Custom Search Engine ID. Remove or comment out to disable search.
