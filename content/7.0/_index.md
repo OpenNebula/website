@@ -3,7 +3,7 @@ title: ""
 type: docs
 description: "The OpenNebula documentation"
 weight: "1"
-#url: "/"
+url: "/"
 main_menu: true
 hide_feedback: true
 no_list: true
