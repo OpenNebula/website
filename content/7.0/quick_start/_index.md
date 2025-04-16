@@ -116,5 +116,3 @@ Follow tutorials for automatically installing a production-grade OpenNebula clou
          <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
    {{< /card >}}
-
-{{< alert title="Note" >}}Test for deploying from a branch instead of a custom GH Actions workflow.{{< /alert >}}
