@@ -30,7 +30,7 @@ To access additional material including white papers, guides and screencasts, se
 {{< /cardpane >}}
 
 {{< cardpane >}}
-  {{< card header="[Software](7.0/releases)" >}}
+  {{< card header="[Software](7.0/software)" >}}
   Access OpenNebula releases, consult release notes and upgrade information
   {{< /card >}}
   {{< card header="[Solutions](7.0/solutions)" >}}
