@@ -1,6 +1,7 @@
 # title = " Documentation"
 
 #baseURL = "https://opennebula.github.io/website/"
+baseURL = "https://techdocs.opennebula.io/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
@@ -177,8 +178,8 @@ enable = true
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
-# relativeURLs = true
-#canonifyURLs = true
+relativeURLs = true
+canonifyURLs = true
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
