@@ -12,7 +12,7 @@ weight: "1"
 
 <!--# Overview -->
 
-A **Host** is a server that has the ability to run Virtual Machines and that is connected to OpenNebula’s Front-end server. To learn how to prepare the Hosts, you can read the [Installation]({{% relref "../../../software/installation" %}}) guide. Hosts are usually grouped in **Clusters**.
+A **Host** is a server that has the ability to run Virtual Machines and that is connected to OpenNebula’s Front-end server. To learn how to prepare the Hosts, you can read the [Installation]({{% relref "../../../software/life_cycle_management/installation" %}}) guide. Hosts are usually grouped in **Clusters**.
 
 ## How Should I Read This Chapter
 

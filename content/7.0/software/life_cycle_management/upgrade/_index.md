@@ -5,7 +5,7 @@ description: "Guides for upgrading OpenNebula in several configurations"
 categories:
 pageintoc: "256"
 tags:
-weight: "3"
+weight: "1"
 ---
 
 <a id="upgrade"></a>

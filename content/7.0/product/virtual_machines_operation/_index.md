@@ -23,7 +23,7 @@ Through these guides Virtual Machine or VM is used as a generic abstraction that
 
 ## How Should I Read This Chapter
 
-Before reading this chapter, you should have already installed your [Front-end]({{% relref "../../software/installation/front_end_installation.md" %}}), the [KVM Hosts]({{% relref "../../software/installation/kvm_node_installation.md" %}}) or [LXC Hosts]({{% relref "../../software/installation/kvm_node_installation.md" %}}) and have an OpenNebula cloud up and running with at least one virtualization node.
+Before reading this chapter, you should have already installed your [Front-end]({{% relref "../../software/life_cycle_management/installation/front_end_installation.md" %}}), the [KVM Hosts]({{% relref "../../software/life_cycle_management/installation/kvm_node_installation.md" %}}) or [LXC Hosts]({{% relref "../../software/life_cycle_management/installation/kvm_node_installation.md" %}}) and have an OpenNebula cloud up and running with at least one virtualization node.
 
 ## Hypervisor Compatibility
 

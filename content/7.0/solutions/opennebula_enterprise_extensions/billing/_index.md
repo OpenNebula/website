@@ -1,5 +1,5 @@
 ---
-title: "Billing"
+title: "Billing-WHMCS"
 date: "2025-02-17"
 description: "Set up and configure the WHMCS web host billing automation platform"
 categories:

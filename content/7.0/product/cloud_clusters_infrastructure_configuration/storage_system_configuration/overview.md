@@ -47,7 +47,7 @@ Each datastore supports different features, here is a basic overview:
 
 ## How Should I Read This Chapter
 
-Before reading this chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/installation" %}}) guide.
+Before reading this chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/life_cycle_management/installation" %}}) guide.
 
 After that, proceed with the specific Datastore documentation you might be interested in.
 

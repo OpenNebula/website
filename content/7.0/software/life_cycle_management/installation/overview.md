@@ -16,13 +16,13 @@ The Front-end is the central part of an OpenNebula installation and is the very 
 
 ## How Should I Read This Chapter
 
-Before reading this chapter make sure you are familiar with the [Architecture Blueprint]({{% relref "../../quick_start/understand_opennebula/cloud_architecture_and_design/index#architecture-blueprints" %}}), and the blueprint most appropriate to your needs.
+Before reading this chapter make sure you are familiar with the [Architecture Blueprint]({{% relref "../../../quick_start/understand_opennebula/cloud_architecture_and_design/index#architecture-blueprints" %}}), and the blueprint most appropriate to your needs.
 
 The aim of this chapter is to give you a quick-start guide to deploying OpenNebula. This is the simplest possible installation, but it is also the foundation for a more complex setup. First, you should go through the [Database Setup]({{% relref "database#database-setup" %}}) section, especially if you expect to use OpenNebula for production. Then move on to the configuration of [OpenNebula Repositories]({{% relref "opennebula_repository_configuration#repositories" %}}), from which you’ll install the required components. And finally, proceed with the [Front-end Installation]({{% relref "install#frontend-installation" %}}) section. You’ll end up running a fully featured OpenNebula Front-end.
 
 After reading this chapter, you can go on to add the [KVM]({{% relref "kvm_node_installation#kvm-node" %}}) or [LXC]({{% relref "lxc_node_installation#lxc-node" %}}) hypervisor nodes.
 
-To scale from a single-host Front-end deployment to several hosts for better performance or reliability (HA), continue to the following chapters on [Large-scale Deployment]({{% relref "../../product/control_plane_configuration/large-scale_deployment/" %}}), [High Availability]({{% relref "../../product/control_plane_configuration/high_availability/index#ha" %}}) and [Data Center Federation]({{% relref "../../product/control_plane_configuration/data_center_federation/index#federation-section" %}}).
+To scale from a single-host Front-end deployment to several hosts for better performance or reliability (HA), continue to the following chapters on [Large-scale Deployment]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/" %}}), [High Availability]({{% relref "../../../product/control_plane_configuration/high_availability/index#ha" %}}) and [Data Center Federation]({{% relref "../../../product/control_plane_configuration/data_center_federation/index#federation-section" %}}).
 
 ## Hypervisor Compatibility
 
@@ -42,7 +42,7 @@ By using KVM, you can run multiple Virtual Machines with unmodified Linux or Win
 
 This chapter focuses on the configuration options for KVM-based Nodes. Read the [installation]({{% relref "kvm_node_installation#kvm-node" %}}) section to add a KVM Node to your OpenNebula cloud to start deploying VMs. Continue with the [driver]({{% relref "kvm_driver#kvmg" %}}) section to understand the specific requirements, functionalities, and limitations of the KVM driver.
 
-You can then move on to the Open Cloud [Storage]({{% relref "../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) chapters to be able to deploy Virtual Machines on your KVM nodes and access them remotely over the network.
+You can then move on to the Open Cloud [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) chapters to be able to deploy Virtual Machines on your KVM nodes and access them remotely over the network.
 
 ## Hypervisor Compatibility
 
@@ -62,7 +62,7 @@ From the perspective of a hypervisor Node, such a container environment is just 
 
 This chapter focuses on the configuration options for LXC-based Nodes. Read the [installation]({{% relref "lxc_node_installation#lxc-node" %}}) section to add an LXC Node to your OpenNebula cloud to start deploying containers. Continue with the [driver]({{% relref "lxc_driver#lxcmg" %}}) section in order to understand the specific requirements, functionalities, and limitations of the LXC driver.
 
-You can then move on to look at the Open Cloud [Storage]({{% relref "../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) chapters to be able to deploy your containers on your LXC Nodes and access them remotely over the network.
+You can then move on to look at the Open Cloud [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) chapters to be able to deploy your containers on your LXC Nodes and access them remotely over the network.
 
 ## Hypervisor Compatibility
 

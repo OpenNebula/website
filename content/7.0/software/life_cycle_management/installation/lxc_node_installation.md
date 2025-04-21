@@ -223,7 +223,7 @@ $ exit
 
 Network connection is needed by the OpenNebula Front-end daemons to access, manage and monitor the Hosts, and to transfer the Image files. It is highly recommended to use a dedicated network for this purpose.
 
-There are various models for Virtual Networks, check the [Open Cloud Networking]({{% relref "../..//product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) chapter to find the ones supported by OpenNebula.
+There are various models for Virtual Networks, check the [Open Cloud Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) chapter to find the ones supported by OpenNebula.
 
 You may want to use the simplest network model, that corresponds to the [bridged]({{% relref "bridged#bridged" %}}) driver. For this driver, you will need to setup a Linux bridge and include a physical device in the bridge. Later on, when defining the network in OpenNebula, you will specify the name of this bridge and OpenNebula will know that it should connect the VM to this bridge, thus giving it connectivity with the physical network device connected to the bridge. For example, a typical host with two physical networks, one for public IP addresses (attached to an `eth0` NIC for example) and the other for private virtual LANs (NIC `eth1` for example) should have two bridges:
 
@@ -246,13 +246,13 @@ Remember that this is only required in the Hosts, not in the Front-end. Also rem
 
 In default OpenNebula configuration, the local storage is used for storing Images and running Virtual Machines. This is enough for basic use and you don’t need to take any extra steps now unless you want to deploy an advanced storage solution.
 
-Follow the [Open Cloud Storage Setup]({{% relref "../..//product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) guide to learn how to use Ceph, NFS, LVM, etc.
+Follow the [Open Cloud Storage Setup]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) guide to learn how to use Ceph, NFS, LVM, etc.
 
 ## Step 7. Adding Host to OpenNebula
 
 In this step, we’ll register the hypervisor Node we have configured above into the OpenNebula Front-end, so that OpenNebula can launch Virtual Machines on it. This step is documented for Sunstone GUI and CLI, but both accomplish the same result. Select and proceed with just one of the two options.
 
-Learn more in [Hosts and Clusters Management]({{% relref "../..//product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview#hostsubsystem" %}}).
+Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview#hostsubsystem" %}}).
 
 {{< alert title="Note" color="success" >}}
 If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}} 
@@ -293,7 +293,7 @@ $ onehost list
 
 Now, you can continue with:
 
-- configuring [Storage]({{% relref "../..//product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../..//product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}})
+- configuring [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}})
 - exploring [Management and Operations]({{% relref "../../index#operations-guide" %}}) guide
 
 to extend and control your cloud.

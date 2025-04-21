@@ -12,7 +12,7 @@ weight: "5"
 
 <!--# Compatibility Guide -->
 
-This guide is aimed at OpenNebula 6.10.x users and administrators who want to upgrade to the latest version. The following sections summarize the new features and usage changes that should be taken into account, or are prone to cause confusion. You can check the upgrade process in the [corresponding section]({{% relref "../upgrade/index#upgrade" %}}). If upgrading from previous versions, please make sure you read all the intermediate versions’ Compatibility Guides for possible pitfalls.
+This guide is aimed at OpenNebula 6.10.x users and administrators who want to upgrade to the latest version. The following sections summarize the new features and usage changes that should be taken into account, or are prone to cause confusion. You can check the upgrade process in the [corresponding section]({{% relref "../../life_cycle_management/upgrade/index#upgrade" %}}). If upgrading from previous versions, please make sure you read all the intermediate versions’ Compatibility Guides for possible pitfalls.
 
 Visit the [Features list]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/key_features#features" %}}) and the [What’s New guide]({{% relref "whats_new#whats-new" %}}) for a comprehensive list of what’s new in OpenNebula 7.0.
 
