@@ -107,12 +107,12 @@ Follow tutorials for automatically installing a production-grade OpenNebula clou
 {{< card header="**Automatic Deployment with OneDeploy**" >}}
    <p></p>
       <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
+         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
       </inl>
       <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_local_ds">Deploy with Local Storage</a>
+         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_local_ds">Deploy with Local Storage</a>
       </inl>
       <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
+         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
    {{< /card >}}
