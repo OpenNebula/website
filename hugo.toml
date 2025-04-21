@@ -182,8 +182,8 @@ enable = true
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
-relativeURLs = true
-canonifyURLs = true
+#relativeURLs = true
+#canonifyURLs = true
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
