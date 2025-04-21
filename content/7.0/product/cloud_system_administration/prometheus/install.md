@@ -12,11 +12,11 @@ weight: "2"
 
 <!--# Installation and Configuration -->
 
-This page describes how to install the OpenNebula Prometheus integration packages available in the [OpenNebula software repositories]({{% relref "../../../../software/installation/opennebula_repository_configuration#repositories" %}}).
+This page describes how to install the OpenNebula Prometheus integration packages available in the [OpenNebula software repositories]({{% relref "../../../software/installation/opennebula_repository_configuration#repositories" %}}).
 
 ## Step 1. OpenNebula Repositories [Front-end, Hosts]
 
-At this point OpenNebula software repositories should already be configured in your front-end and hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../../software/installation/opennebula_repository_configuration#repositories" %}}) guide.
+At this point OpenNebula software repositories should already be configured in your front-end and hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../software/installation/opennebula_repository_configuration#repositories" %}}) guide.
 
 ## Step 2. Install Front-end Packages [Front-end]
 
@@ -226,7 +226,7 @@ If you already have an existing Prometheus installation, you just need to adapt 
 
 ## Using Prometheus with OpenNebula in HA
 
-You can refer to [OpenNebula Front-end HA]({{% relref "../../../../product/control_plane_configuration/high_availability/frontend_ha#frontend-ha-setup" %}}) to learn more about HA mode in OpenNebula.
+You can refer to [OpenNebula Front-end HA]({{% relref "../../../product/control_plane_configuration/high_availability/frontend_ha#frontend-ha-setup" %}}) to learn more about HA mode in OpenNebula.
 
 Let’s assume your existing OpenNebula instance consists of three front-ends and two KVM hosts:
 

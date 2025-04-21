@@ -28,7 +28,7 @@ This chapter is organized as follows:
 - The [OpenNebula Monitoring guide]({{% relref "configuration#monitor-alert-configuration" %}}) covers the setup and operation of the built-in monitoring system.
 - The [Resource Monitoring guide]({{% relref "metrics#monitor-alert-resource" %}}) outlines the metrics collected for each resource type.
 - The [Resource Forecasting guide]({{% relref "forecast#monitor-alert-forecast" %}}) explains how to configure the monitoring system to generate resource usage forecasts.
-- Lastly, the [Prometheus Integration Guide]({{% relref "prometheus/overview#monitor-alert-prom-overview" %}}) provides instructions for setting up Prometheus to monitor your OpenNebula cloud.
+- Lastly, the [Prometheus Integration Guide]({{% relref "../prometheus/overview#monitor-alert-prom-overview" %}}) provides instructions for setting up Prometheus to monitor your OpenNebula cloud.
 
 ## Hypervisor Compatibility
 

@@ -250,7 +250,7 @@ $ onehost update
 TYPE="production"
 ```
 
-This tag can be used at a later time for scheduling purposes, [see more details here]({{% relref "../../cloud_system_administration/capacity_planning/scheduler" %}}).
+This tag can be used at a later time for scheduling purposes, [see more details here]({{% relref "../../cloud_system_administration/scheduler" %}}).
 
 <a id="host-guide-sync"></a>
 

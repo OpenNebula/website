@@ -28,7 +28,7 @@ This scheduling mechanism is used for the following cloud operations:
 
 ### Virtual Machine Automatic Requirements
 
-OpenNebula prevents incompatible resources from being used to run a VM. When a VM requires resources (such as Images or Virtual Networks) from a Cluster, OpenNebula automatically adds a [requirement]({{% relref "../../../operation_references/configuration_references/template#template-placement-section" %}}) to the template:
+OpenNebula prevents incompatible resources from being used to run a VM. When a VM requires resources (such as Images or Virtual Networks) from a Cluster, OpenNebula automatically adds a [requirement]({{% relref "../../operation_references/configuration_references/template#template-placement-section" %}}) to the template:
 
 ```default
 $ onevm show 0
@@ -54,7 +54,7 @@ Every Host in a Cluster **must** have access to all System and Image Datastores 
 
 You can specify VM allocation requirements with the `SCHED_REQUIREMENTS` attribute in the Virtual Machine Template. This attribute defines a boolean expression that determines whether a Host is suitable for deployment (i.e., the expression evaluates to `true`).
 
-The `SCHED_REQUIREMENTS` expression can reference attributes from both the Host and its associated Cluster templates. Host attributes are regularly updated by monitoring probes that run on the nodes. Administrators can add custom attributes by either [creating a probe in the host]({{% relref "../../../integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}) or manually updating Host information using:
+The `SCHED_REQUIREMENTS` expression can reference attributes from both the Host and its associated Cluster templates. Host attributes are regularly updated by monitoring probes that run on the nodes. Administrators can add custom attributes by either [creating a probe in the host]({{% relref "../../integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}) or manually updating Host information using:
 
 ```default
 onehost update

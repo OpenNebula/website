@@ -25,7 +25,7 @@ Resource forecasting is automatically enabled upon hypervisor package installati
 - **Enhanced capacity planning** – Make data-driven decisions about infrastructure expansion.
 - **Optimized workload scheduling** – Improve VM placement based on predictive analysis to minimize resource contention and maintain stability.
 
-When integrated with the [OpenNebula Distributed Resource Scheduler (DRS)]({{% relref "../capacity_planning/scheduler/drs#scheduler-drs" %}}), forecasting enables intelligent workload balancing, helping prevent bottlenecks and improve cluster efficiency.
+When integrated with the [OpenNebula Distributed Resource Scheduler (DRS)]({{% relref "../scheduler/drs#scheduler-drs" %}}), forecasting enables intelligent workload balancing, helping prevent bottlenecks and improve cluster efficiency.
 
 ## Types of Forecasts
 
@@ -49,7 +49,7 @@ By default, long-term forecasts project resource usage for the next 30 days.
 
 **Purpose**: Facilitates immediate operational decisions and dynamic resource adjustments.
 
-Short-term forecasts power the Predictive DRS, optimizing cluster load distribution. To enable predictive scheduling, refer to [Distributed Resource Scheduling]({{% relref "../capacity_planning/scheduler/drs#scheduler-drs" %}}).
+Short-term forecasts power the Predictive DRS, optimizing cluster load distribution. To enable predictive scheduling, refer to [Distributed Resource Scheduling]({{% relref "../scheduler/drs#scheduler-drs" %}}).
 
 Sunstone’s **Monitoring** tab also provides short-term forecast data.
 

@@ -62,7 +62,7 @@ The monitoring probes gather information attributes and insert them in the Host 
 
 > * Monitoring the status of the Host to detect any error condition.
 > * Gathering the configuration of the Host (e.g., capacity, PCI devices, or NUMA nodes). This information is used to control VM resource assignments.
-> * Creating placement constraints for allocation of VMs, [see more details here]({{% relref "../capacity_planning/scheduler/overview#scheduler-overview" %}}).
+> * Creating placement constraints for allocation of VMs, [see more details here]({{% relref "../scheduler/overview#scheduler-overview" %}}).
 
 In general, you can find the following monitoring information in a Host. Note that each hypervisor may include additional attributes:
 

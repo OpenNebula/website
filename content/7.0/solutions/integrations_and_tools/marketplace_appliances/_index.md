@@ -1,9 +1,13 @@
 ---
 title: "Marketplace Appliances"
-date:
-description: ""
+date: "2025-02-17"
+description: "Explore the appliances in the OpenNebula Marketplace, and create and manage your own appliances"
+categories:
+pageintoc: "194"
 tags:
-weight: "4"
+weight: "3"
 ---
 
-{{< alert title="Note" >}}Content TBD, is there overlap in this section with the pages in [Product/Marketplace Configuration/Marketplace Applances](../../../product/apps-marketplace/marketplace_appliances/)?{{< /alert >}}
+<a id="appliances"></a>
+
+<!--# Appliances -->

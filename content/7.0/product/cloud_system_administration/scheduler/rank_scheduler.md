@@ -23,10 +23,10 @@ The Rank Scheduler implements a **match-making** algorithm for VM allocation. Th
 The match-making algorithm works as follows:
 
 * Each disk of a running VM uses storage from an Image Datastore. VMs that require more storage than is currently available are filtered out, and will remain in the `pending` state.
-* Hosts that do not meet VM requirements (see the [SCHED_REQUIREMENTS attribute]({{% relref "../../../operation_references/configuration_references/template#template-placement-section" %}})) or do not have enough resources (available CPU and memory) to run the VM are filtered out (see below for more information).
-* The same happens for System Datastores: those that do not meet the DS requirements (see the [SCHED_DS_REQUIREMENTS attribute]({{% relref "../../../operation_references/configuration_references/template#template" %}})) or do not have enough free storage are filtered out.
-* Finally, if the VM uses automatic network selection, the Virtual Networks that do not meet the NIC requirements (see the [SCHED_REQUIREMENTS attribute for NICs]({{% relref "../../../operation_references/configuration_references/template#template" %}})) or do not have enough free leases are filtered out.
-* The [SCHED_RANK and SCHED_DS_RANK expressions]({{% relref "../../../operation_references/configuration_references/template#template-placement-section" %}}) are evaluated upon the Host and Datastore list using the information gathered by the monitor drivers. Also, the [NIC/SCHED_RANK expressions]({{% relref "../../../operation_references/configuration_references/template#template-network-section" %}}) are evaluated upon the Network list using the information in the Virtual Network template. Any variable reported by the monitor driver (or manually set in the Host, Datastore, or Network template) can be included in the rank expressions.
+* Hosts that do not meet VM requirements (see the [SCHED_REQUIREMENTS attribute]({{% relref "../../operation_references/configuration_references/template#template-placement-section" %}})) or do not have enough resources (available CPU and memory) to run the VM are filtered out (see below for more information).
+* The same happens for System Datastores: those that do not meet the DS requirements (see the [SCHED_DS_REQUIREMENTS attribute]({{% relref "../../operation_references/configuration_references/template#template" %}})) or do not have enough free storage are filtered out.
+* Finally, if the VM uses automatic network selection, the Virtual Networks that do not meet the NIC requirements (see the [SCHED_REQUIREMENTS attribute for NICs]({{% relref "../../operation_references/configuration_references/template#template" %}})) or do not have enough free leases are filtered out.
+* The [SCHED_RANK and SCHED_DS_RANK expressions]({{% relref "../../operation_references/configuration_references/template#template-placement-section" %}}) are evaluated upon the Host and Datastore list using the information gathered by the monitor drivers. Also, the [NIC/SCHED_RANK expressions]({{% relref "../../operation_references/configuration_references/template#template-network-section" %}}) are evaluated upon the Network list using the information in the Virtual Network template. Any variable reported by the monitor driver (or manually set in the Host, Datastore, or Network template) can be included in the rank expressions.
 * Resources with a higher rank are used first to allocate VMs.
 
 The Scheduling algorithm allows us to easily implement several placement heuristics (see below) depending on the selected `RANK` expressions.
@@ -57,7 +57,7 @@ The default scheduling policies for hosts, datastores and virtual networks are d
 |        0 | [Packing]({{% relref "#sched-conf-packing" %}}): Minimize the number of hosts in use by packing the VMs in the hosts to reduce VM fragmentation                             |
 |        1 | [Striping]({{% relref "#sched-conf-striping" %}}): Maximize resources available for the VMs by spreading the VMs in the hosts                                               |
 |        2 | [Load-aware]({{% relref "#sched-conf-load" %}}): Maximize resources available for the VMs by using those nodes with less load                                               |
-|        3 | **Custom**: Use a custom `RANK`, see [Rank Expression Syntax]({{% relref "../../../operation_references/configuration_references/template#template-rank" %}}). Example: `RANK="- (RUNNING_VMS * 50  + FREE_CPU)"` |
+|        3 | **Custom**: Use a custom `RANK`, see [Rank Expression Syntax]({{% relref "../../operation_references/configuration_references/template#template-rank" %}}). Example: `RANK="- (RUNNING_VMS * 50  + FREE_CPU)"` |
 |        4 | [Fixed]({{% relref "#sched-conf-fixed" %}}): Hosts will be ranked according to the PRIORITY attribute found in the Host or Cluster template                                 |
 * `DEFAULT_DS_SCHED`: Definition of the default storage scheduling algorithm. **IMPORTANT:** storage policies work only for shared datastores.
   * `RANK`: Arithmetic expression to rank suitable **datastores** based on their attributes.
@@ -67,7 +67,7 @@ The default scheduling policies for hosts, datastores and virtual networks are d
 |----------|------------------------------------------------------------------------------------------------------------------------------|
 |        0 | [Packing]({{% relref "#sched-conf-ds-packing" %}}): Tries to optimize storage usage by selecting the DS with less free space                  |
 |        1 | [Striping]({{% relref "#sched-conf-ds-striping" %}}): Tries to optimize I/O by distributing the VMs across datastores                         |
-|        2 | **Custom**: Use a custom RANK, see [Rank Expression Syntax]({{% relref "../../../operation_references/configuration_references/template#template-rank" %}})                         |
+|        2 | **Custom**: Use a custom RANK, see [Rank Expression Syntax]({{% relref "../../operation_references/configuration_references/template#template-rank" %}})                         |
 |        3 | [Fixed]({{% relref "#sched-conf-ds-fixed" %}}): Datastores will be ranked according to the PRIORITY attribute found in the Datastore template |
 * `DEFAULT_NIC_SCHED`: Definition of the default virtual network scheduling algorithm.
   * `RANK`: Arithmetic expression to rank suitable **networks** based on their attributes.

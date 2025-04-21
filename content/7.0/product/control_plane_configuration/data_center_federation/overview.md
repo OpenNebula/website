@@ -29,7 +29,7 @@ The federated information replication is implemented with a log that includes a 
 The cloud administrators can share appliances across different Zones with [Private Marketplaces]({{% relref "../../../product/apps-marketplace/private_marketplaces/index#private-marketplaces" %}}).
 
 {{< alert title="Important" color="success" >}}
-Although a single Sunstone server can connect to different Zones, all the other OpenNebula services will only work with the local Zone resources. This includes the [Scheduler]({{% relref "../../cloud_system_administration/capacity_planning/scheduler#schg" %}}), [OneFlow]({{% relref "../../virtual_machines_operation/multi-vm_workflows/overview#oneapps-overview" %}}), and [OneGate]({{% relref "../../virtual_machines_operation/multi-vm_workflows/onegate_usage#onegate-overview" %}}).{{< /alert >}} 
+Although a single Sunstone server can connect to different Zones, all the other OpenNebula services will only work with the local Zone resources. This includes the [Scheduler]({{% relref "../../../product/cloud_system_administration/scheduler" %}}), [OneFlow]({{% relref "../../virtual_machines_operation/multi-vm_workflows/overview#oneapps-overview" %}}), and [OneGate]({{% relref "../../virtual_machines_operation/multi-vm_workflows/onegate_usage#onegate-overview" %}}).{{< /alert >}} 
 
 ## How Should I Read This Chapter
 

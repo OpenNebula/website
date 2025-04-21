@@ -12,7 +12,7 @@ weight: "6"
 
 <!--# OpenNebula Distributed Resource Scheduler (DRS) -->
 
-The **OpenNebula Distributed Resource Scheduler (DRS)** optimizes resource allocation and prevents resource contention within a single OpenNebula [cluster]({{% relref "../../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}). It integrates with OpenNebula’s built-in monitoring and forecasting systems, considering real-time Virtual Machine (VM) and Host usage metrics as well as predictions of future resource consumption.
+The **OpenNebula Distributed Resource Scheduler (DRS)** optimizes resource allocation and prevents resource contention within a single OpenNebula [cluster]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}). It integrates with OpenNebula’s built-in monitoring and forecasting systems, considering real-time Virtual Machine (VM) and Host usage metrics as well as predictions of future resource consumption.
 
 OpenNebula DRS offers flexible automation levels, allowing recommendations to be generated and applied either automatically or manually. Administrators can review and execute migration suggestions through the OpenNebula Sunstone GUI.
 

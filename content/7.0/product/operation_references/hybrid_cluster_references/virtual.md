@@ -87,7 +87,7 @@ marketplaceapps:
     dsid: 1
 ```
 
-These are the three mandatory values to export an image from the marketplace. Please refer to this [guide]({{% relref "../../../product/apps-marketplace/marketplace_appliances/marketapps#marketapp" %}}) to know what more options are available.
+These are the three mandatory values to export an image from the marketplace. Please refer to this [guide]({{% relref "../../../solutions/integrations_and_tools/marketplace_appliances/marketapps#marketapp" %}}) to know what more options are available.
 
 {{< alert title="Note" color="success" >}}
 You can also use **appname** instead of appid.{{< /alert >}} 

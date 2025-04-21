@@ -909,7 +909,8 @@ There are some `onevm` commands operations meant for the cloud administrators:
 
 **Scheduling:**
 
-- `resched`: Sets the reschedule flag for the VM. The Scheduler will migrate (or migrate –live, depending on the [Scheduler configuration]({{% relref "../../cloud_system_administration/capacity_planning/scheduler#schg-configuration" %}})) the VM in the next monitorization cycle to a Host that better matches the requirements and rank restrictions. Read more in the [Scheduler documentation]({{% relref "../../cloud_system_administration/capacity_planning/scheduler#schg-re-scheduling-virtual-machines" %}}).
+- `resched`: Sets the reschedule flag for the VM. The Scheduler will migrate (or migrate –live, depending on the [Scheduler configuration]({{% relref "../../../product/cloud_system_administration/scheduler/configuration" %}})) the VM in the next monitorization cycle to a Host that better matches the requirements and rank restrictions. Read more in the [Scheduler documentation]({{% relref "../../../product/cloud_system_administration/scheduler/" %}}).
+
 - `unresched`: Clears the reschedule flag for the VM, canceling the rescheduling operation.
 
 **Deployment:**

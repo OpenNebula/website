@@ -87,7 +87,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component                     | Version   | More information                                                                                                                    |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
-| Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/monitoring_and_alerting/prometheus/install.md#monitor-alert-installation" %}}) |
+| Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.65.0    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
 
 ### Sunstone
