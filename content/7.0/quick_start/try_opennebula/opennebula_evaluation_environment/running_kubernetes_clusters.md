@@ -199,7 +199,7 @@ To verify the deployment using the command line, log in to the Front-end node as
 ```default
 [oneadmin@FN]$ oneflow list
 ID USER     GROUP    NAME                                 STARTTIME STAT
-3 oneadmin oneadmin Service OneKE 1.29              04/29 08:18:17 RUNNING
+3 oneadmin oneadmin Service OneKE 1.29              04/29 08:18:17  RUNNING
 ```
 
 To verify that the VMs for the cluster were correctly deployed, you can use the `onevm list` command. In the example below, the command lists the VMs for the cluster (and, in this case, the WordPress VM deployed in the previous tutorial):
@@ -495,3 +495,16 @@ In this case you can manually instruct the VMs to report `READY` to the OneGate 
    ID USER     GROUP    NAME                                                                    STARTTIME STAT
     3 oneadmin oneadmin OneKE 1.29                                                         08/30 12:35:21 RUNNING
    ```
+
+#### One or more VMs is Ready, but Unreachable
+
+In a similar situation as above when `onevm list` shows all VMs running, but the service is still in `DEPLOYING` state and the VM is not reachable through SSH (e.g. to run the `onegate vm update` command).
+
+In this case, we can try to scale down and up the role of the problematic VM from [Sunstone]({{% relref "fireedge_sunstone.md" %}}), the Front-end UI:
+
+> 1. In Sunstone, go to **Services**, then select the **OneKE** Service.
+> 2. In the **Roles** tab, choose the problematic VM’s role (e.g. `worker`).
+> 3. Scale the role to `0`.
+> 4. Wait until VM shuts down and the scaling and cooldown period of the service finishes.
+> 5. Scale the role to `1`.
+> 6. Verify if the problem is solved and `oneflow list` reports the `RUNNING` state.
