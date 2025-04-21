@@ -24,10 +24,13 @@ To use the OneGate Service, VMs must have connectivity to the service. We recomm
 
 ## Configuration
 
-The OneGate configuration file can be found in `/etc/one/onegate-server.conf` on your Front-end. It uses **YAML** syntax with following parameters:
+The OneGate configuration file can be found in `/etc/one/onegate-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the OneGate server must be [restarted]({{% relref "#onegate-conf-service" %}}) to take effect.{{< /alert >}} 
+
+{{< alert title="Tip" color="info" >}}
+For a quick view of any changes in configuration file options in maintenance releases, check the Resolved Issues page in the [Release Notes]({{% relref "../../../software/release_information/release_notes_enterprise/index#rn-enterprise" %}}) for the release. Please note that even in the case of changes (such as a new option available), you do *not* need to update your configuration files unless you wish to change the application’s behavior.{{< /alert >}}
 
 | Parameter                   | Description                                                                                                                                                                                                                                                                                                                                                              |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

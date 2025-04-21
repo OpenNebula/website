@@ -150,41 +150,51 @@ This section will use an Ubuntu22.04 server to show working configurations. You 
 
 #### Setup Hugepages and iommu
 
-Hugepages are virtual memory pages of a size greater than the 4K default. Increasing the size of the page reduces the number of pages in the system and hence the entries needed in the TLB to perform virtual address translations.
+[Hugepages](https://wiki.debian.org/Hugepages) are virtual memory pages of a size greater than the 4K default. Increasing the size of the page reduces the number of pages in the system and hence the entries needed in the TLB to perform virtual address translations.
 
 The size of virtual pages supported by the system can be check from the CPU flags:
 
 * `pse` for 2M
-* `pdpe1g` for 1G
+* `pdpe1gb` for 1G
 
 For 64-bit applications it is recommended to use 1G. Note that on NUMA systems, the pages reserved are divided equally between sockets.
 
-For example to configure default page size of 1G and 250 hugepages at boot time:
+For example, to configure default page size of **1G** and **250** hugepages with [iommu](https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit#:~:text=In%20computing%2C%20an%20input%E2%80%93output,bus%20to%20the%20main%20memory.) enabled at boot time on a host with an **Intel CPU**, you have to append `"intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=250"` to the bootloader configuration.
 
 ```default
-# vim /etc/default/grub
-...
-GRUB_CMDLINE_LINUX_DEFAULT="intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=250"
+# grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=250"
 
 # update-grub
 ```
 
-After rebooting the system mount the hugepage folder so application can access them:
+{{< alert title="Tip" color="info" >}}
+Use `amd_iommu=on` instead for hosts with an AMD CPU{{< /alert >}} 
+
+Then reboot the system. After rebooting, make sure that the hugepages mount can be seen so the applications can access them.
+
+If you see the following, you don’t need to setup a mount as the mounts are already handled:
+
+```default
+# mount | grep huge
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=1G)
+# systemctl list-units --type=mount | grep hugepages
+dev-hugepages.mount                                    loaded active mounted Huge Pages File System
+```
+
+If not, you have to set it up yourself. To do this, create a mount point, for example, `/mnt/hugepages1G` and append `nodev  /mnt/hugepages1G hugetlbfs pagesize=1GB 0 0` as an entry to `/etc/fstab`
 
 ```default
 # mkdir /mnt/hugepages1G
-
-# vim /etc/fstab
-...
+# grep huge /etc/fstab
 nodev       /mnt/hugepages1G hugetlbfs pagesize=1GB 0 0
-
 # mount /mnt/hugepages1G
 ```
 
 Now check hugepages are allocated to NUMA nodes, for example (or with `numastat -m`):
 
 ```default
-# mkdir /mnt/hugepages1G# cat /sys/devices/system/node/node*/meminfo  | grep -i '\<huge'
+# grep -i '\<huge' /sys/devices/system/node/node*/meminfo
 Node 0 HugePages_Total:   125
 Node 0 HugePages_Free:    125
 Node 0 HugePages_Surp:      0
@@ -193,10 +203,13 @@ Node 1 HugePages_Free:    125
 Node 1 HugePages_Surp:      0
 ```
 
+{{< alert title="Tip" color="info" >}}
+To run the `numastat -m` command, you can install `numactl`.{{< /alert >}}
+
 And finally iommu should be also enabled:
 
 ```default
-# grep -i dmar dmesg
+# dmesg | grep -i dmar
 [    0.010651] kernel: ACPI: DMAR 0x000000007BAFE000 0000F0 (v01 DELL   PE_SC3   00000001 DELL 00000001)
 [    0.010695] kernel: ACPI: Reserving DMAR table memory at [mem 0x7bafe000-0x7bafe0ef]
 [    1.837579] kernel: DMAR: IOMMU enabled
@@ -210,9 +223,14 @@ We just need to install the dpdk version of the package and update alternatives 
 # apt install openvswitch-switch-dpdk
 
 # update-alternatives --set ovs-vswitchd /usr/lib/openvswitch-switch-dpdk/ovs-vswitchd-dpdk
+
+# ovs-vsctl set Open_vSwitch . other_config:dpdk-init=true
 ```
 
-Now, restart openvswitch service and check dpdk is enabled:
+{{< alert title="Warning" color="warning" >}}
+Make sure the openvswitch software you install has been compiled with dpdk support. You should be able to see if this is the case by querying its dependencies with the package manager.{{< /alert >}}
+
+Now, restart the openvswitch service and check dpdk is enabled:
 
 ```default
 # systemctl restart openvswitch-switch.service
@@ -233,13 +251,13 @@ true
 
 Next step is to tune the execution parameters of the polling mode drivers (PMD) threads by pinning them into specific CPUs and assigning some hugepages.
 
-To specify the CPU cores we need to set a binary mask, where each bit represents a CPU core by its ID. For example `0xF0` is `11110000`, bits 4,5,6,7 are set to 1 so CPU cores 4,5,6,7 would be use for PMDs. Usually, it is recommended to allocate same number of cores across NUMA nodes.
+To specify the CPU cores we need to set a binary mask, where each bit represents a CPU core by its ID. For example `0xF0` is `11110000`, bits 7,6,5,4 are set to 1 so CPU cores 7,6,5,4 would be use for PMDs. Usually, it is recommended to allocate same number of cores across NUMA nodes.
 
-For example to set cores 0,28,1,29 and 2G of hugepages per NUMA node, execute the following commands:
+For example to set cores **0,28,1,29** and **2G** of hugepages per NUMA node on a host with two sockets, execute the following commands:
 
 ```default
 # ovs-vsctl set Open_vSwitch . other_config:pmd-cpu-mask=0x30000003
-# ovs-vsctl set Open_vSwitch . other_config:dpdk-socket-mem="2048,2048"
+# ovs-vsctl set Open_vSwitch . other_config:dpdk-socket-mem="2048,2048" # socket-mem=socket0_mem,socket1_mem
 # ovs-vsctl set Open_vSwitch . other_config:dpdk-hugepage-dir="/mnt/hugepages1G"
 
 # systemctl restart openvswitch-switch.service
@@ -249,7 +267,7 @@ For example to set cores 0,28,1,29 and 2G of hugepages per NUMA node, execute th
 
 OpenNebula does not support adding and configuring DPDK physical devices. Binding cards to vfio-pci driver needs to be configured before using the DPDK network in OpenNebula. Usually, Open vSwitch setups only requires one bridge so these steps can be easily automated during the host installation.
 
-In this example, we’ll be creating a bond with to cards (each one attached to a different NUMA node). Let’s first trace the cards with the `dpdk-debind.py` tool, and then bind the cards to the vfio-pci driver.
+In this example, we’ll create a bond with two cards (each attached to a different NUMA node). Let’s first trace the cards with the `dpdk-debind.py` tool, and then bind the cards to the **vfio-pci** driver.
 
 ```default
 # dpdk-devbind.py --status
@@ -270,6 +288,9 @@ Network devices using DPDK-compatible driver
 0000:01:00.1 'Ethernet Controller X710 for 10GbE SFP+ 1572' drv=vfio-pci unused=i40e
 0000:83:00.1 'Ethernet Controller X710 for 10GbE SFP+ 1572' drv=vfio-pci unused=i40e
 ```
+
+{{< alert title="Tip" color="info" >}}
+For this operation to work, you might need to enable the `vfio-pci` kernel module.{{< /alert >}}
 
 Now we can add the cards to an Open vSwitch port, or in this example create a bond port with both:
 

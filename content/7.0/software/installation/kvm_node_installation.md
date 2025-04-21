@@ -25,7 +25,7 @@ Refer to [OpenNebula Repositories]({{% relref "opennebula_repository_configurati
 
 ## Step 2. Installing the Software
 
-### Installing on CentOS/RHEL
+### Installing on AlmaLinux/RHEL
 
 #### Repository EPEL
 
@@ -79,7 +79,7 @@ For further configuration check the specific [guide]({{% relref "kvm_driver#kvmg
 {{< alert title="Warning" color="warning" >}}
 If you are performing an upgrade skip this and the next steps and go back to the upgrade document.{{< /alert >}} 
 
-### Disable SELinux on CentOS/RHEL
+### Disable SELinux on AlmaLinux/RHEL
 
 Depending on the type of OpenNebula deployment, the SELinux can block some operations initiated by the OpenNebula Front-end, which results in a failure of the particular operation.  It’s **not recommended to disable** the SELinux on production environments, as it degrades the security of your server, but to investigate and workaround each individual problem based on the [SELinux User’s and Administrator’s Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/). The administrator might disable the SELinux to temporarily workaround the problem or on non-production deployments by changing following line in `/etc/selinux/config`:
 

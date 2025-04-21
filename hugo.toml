@@ -54,11 +54,12 @@ enable = false
    [cascade.target]
       kind = 'section'
 [[cascade]]
+   # for the time being set all pages to page type "docs"
    [cascade.params]
       type = 'docs'
    [cascade.target]
       path = '{/7.0,/7.0/**}'
-      #path = '{/7.0/quick_start,/7.0/quick_start/**,/7.0/produc,/7.0/product/**}'
+      # path = '{/**}'	# for testing of dir mounting
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if >
@@ -171,6 +172,9 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
+  #[[module.mounts]]		# for testing of dir. remapping
+  #  source = 'content/7.0'
+  #  target = 'content'
 
 # added the user feedback module
 [params.ui.feedback]

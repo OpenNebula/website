@@ -1,5 +1,6 @@
 ---
 title: "Life Cycle Management"
+type: "docs"
 date: "2025-02-17"
 description: "Guides for managing OpenNebula upgrades in different configurations"
 categories:

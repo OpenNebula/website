@@ -37,7 +37,7 @@ We’ll follow these high-level steps:
 > 5. Verify the installation.
 
 {{< alert title="Important" color="success" >}}
-This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e. OpenNebula front-end and hypervisor nodes) using a virtual environment with [Poetry](https://python-poetry.org/). For information on other installation methods and OSes, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
+This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e. OpenNebula front-end and hypervisor nodes) using a virtual environment with [Hatch](https://hatch.pypa.io/). For information on other installation methods and OSes, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Requirements
 
@@ -57,13 +57,13 @@ drwxr-xr-x 2 9869 9869 6 Jun 26 17:55 one_datastores
 ```
 
 {{< alert title="Important" color="success" >}}
-The shared directories **MUST** be owned by UID and GID 9869, since these are assigned to the OpenNebula `oneadmin` user during installation. If you need to change the UID/GID, run as root:
+The shared directories **MUST** be owned by UID and GID 9869, since these are assigned to the OpenNebula `oneadmin` user during installation. If you need to change the UID/GID, run as root:{{< /alert >}} 
 
 ```default
 chown 9869:9869 /storage/one_datastores
 ```
 
-You can change these values even if a user with this UID/GID does not exist on the system.{{< /alert >}}
+You can change these values even if a user with this UID/GID does not exist on the system.
 
 The shared folder must be available to all servers will OpenNebula will be deployed. The example `/etc/exports` file shown below shares the folder for the entire network where the servers reside.
 
@@ -82,18 +82,26 @@ The shared folder must be available to all servers will OpenNebula will be deplo
 First, in the Front-end we’ll install two packages for Python:
 
 > * `pip`, the Python package installer
-> * Poetry, a Python dependency manager
+> * Hatch, a Python project manager
 
 To install the packages, run:
 
 ```default
-sudo apt install python3-pip python3-poetry
+sudo apt install python3-pip pipx
 ```
 
 Once the packages are installed, clone the `one-deploy` repository:
 
 ```default
 git clone https://github.com/OpenNebula/one-deploy.git
+```
+
+Install hatch:
+
+```default
+pipx install hatch
+pipx ensurepath
+source ~/.bashrc
 ```
 
 Go to the `one-deploy` directory:
@@ -108,62 +116,54 @@ Install the necessary components for the installation, by running:
 make requirements
 ```
 
-Poetry will create the virtual environment and install the necessary components:
+Hatch will create two virtual environments and install the necessary components:
 
 ```default
 front-end:~/one-deploy$ make requirements
-poetry update --directory /home/basedeployer/one-deploy/
-Creating virtualenv one-deploy-Yw-1D8Id-py3.12 in /home/basedeployer/.cache/pypoetry/virtualenvs
-Updating dependencies
-Resolving dependencies... (3.6s)
-
-Package operations: 40 installs, 0 updates, 0 removals
-
-  - Installing attrs (24.2.0)
-  - Installing pycparser (2.22)
-  - Installing rpds-py (0.20.0)
-  - Installing cffi (1.17.0)
-  - Installing markupsafe (2.1.5)
-  - Installing mdurl (0.1.2)
-  - Installing referencing (0.35.1)
-  - Installing cryptography (43.0.0)
-  - Installing jinja2 (3.1.4)
-  - Installing jsonschema-specifications (2023.12.1)
-  - Installing markdown-it-py (3.0.0)
-  - Installing packaging (24.1)
-  - Installing pygments (2.18.0)
-  - Installing pyyaml (6.0.2)
-  - Installing resolvelib (1.0.1)
-  - Installing ansible-core (2.15.12)
-  - Installing bracex (2.5)
+hatch env create default
+hatch env run -e default -- ansible-galaxy collection install --requirements-file /home/frontend/one-deploy/requirements.yml
 ```
 
 To list the available environments, run:
 
 ```default
-poetry env list
+hatch env show
 ```
 
-Poetry should display the newly-created environment:
+Hatch should display the newly-created environments, `default` and `ceph` (which isolates the ceph-ansible dependencies in a different virtual environment):
 
 ```default
-front-end:~/one-deploy$ poetry env list
-one-deploy-Yw-1D8Id-py3.12 (Activated)
+front-end:~/one-deploy$ hatch env show
+            Standalone
+┏━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Name    ┃ Type    ┃ Dependencies      ┃
+┡━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│ default │ virtual │ ansible-core<2.17 │
+│         │         │ ansible-lint      │
+│         │         │ molecule          │
+│         │         │ netaddr           │
+│         │         │ pyone             │
+├─────────┼─────────┼───────────────────┤
+│ ceph    │ virtual │ ansible-core<2.16 │
+│         │         │ molecule          │
+│         │         │ netaddr           │
+│         │         │ pyone             │
+│         │         │ setuptools        │
+└─────────┴─────────┴───────────────────┘
 ```
 
-Now you can switch to the virtual environment:
+Now you can switch to the default virtual environment:
 
 ```default
-poetry shell
+hatch shell
 ```
 
-After switching to the virtual environment, the string `(one-deploy-py3.12)` is included in your terminal prompt:
+After switching to the virtual environment, the string `(one-deploy)` is included in your terminal prompt:
 
 ```default
-front-end:~/one-deploy$ poetry shell
-Spawning shell within /home/basedeployer/.cache/pypoetry/virtualenvs/one-deploy-Yw-1D8Id-py3.12
-front-end:~/one-deploy$ . /home/basedeployer/.cache/pypoetry/virtualenvs/one-deploy-Yw-1D8Id-py3.12/bin/activate
-(one-deploy-py3.12) front-end:~/one-deploy$
+front-end:~/one-deploy$ hatch shell
+source "/home/frontend/.local/share/hatch/env/virtual/one-deploy/RdxhOVxs/one-deploy/bin/activate"
+(one-deploy) frontend:~/one-deploy$
 ```
 
 ## Configuring Cloud Parameters
@@ -273,7 +273,7 @@ ansible -i shared.yml all -m ping -b
 Example command and output:
 
 ```default
-(one-deploy-py3.12) front-end:~/one-deploy$ ansible -i shared.yml all -m ping -b
+(one-deploy) front-end:~/one-deploy$ ansible -i shared.yml all -m ping -b
 f1 | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
@@ -311,7 +311,7 @@ n2 | UNREACHABLE! => {
 
 Once you have edited the files, it’s time to run the Ansible playbooks.
 
-First, ensure you are in the Poetry environment by verifying that your terminal prompt begins with `(one-deploy-py3.12)`.
+First, ensure you are in the Hatch environment by verifying that your terminal prompt begins with `(one-deploy)`.
 
 To run the playbooks, in the `my-one` directory, run this command:
 
@@ -324,7 +324,7 @@ The Ansible playbooks should run and perform the installation. Installation may 
 Sample installation output:
 
 ```default
-(one-deploy-py3.12) front-end:~/my-one$ ansible-playbook -v opennebula.deploy.main
+(one-deploy) front-end:~/my-one$ ansible-playbook -v opennebula.deploy.main
 Using /home/basedeployer/my-one/ansible.cfg as config file
 running playbook inside collection opennebula.deploy
 [WARNING]: Could not match supplied host pattern, ignoring: bastion
@@ -582,4 +582,4 @@ You can also use automated deployment with more advanced network configurations,
 
 ## Next Steps
 
-The Ansible playbooks available in OneDeploy offer a full range of configuration options for your cloud. You can expand on the basic example provided in this tutorial by modifying the variables in the playbooks to define your configuration for Ceph storage, airgapped installations, HA and federated Front-ends, and other options. For details please refer to the [OneDepoy repository](https://github.com/OpenNebula/one-deploy) and [Wiki](https://github.com/OpenNebula/one-deploy/wiki).
+The Ansible playbooks available in OneDeploy offer a full range of configuration options for your cloud. You can expand on the basic example provided in this tutorial by modifying the variables in the playbooks to define your configuration for Ceph storage, airgapped installations, HA and federated Front-ends, and other options. For details please refer to the [OneDeploy repository](https://github.com/OpenNebula/one-deploy) and [Wiki](https://github.com/OpenNebula/one-deploy/wiki).

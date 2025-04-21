@@ -71,17 +71,6 @@ RHEL
 $ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-provision opennebula-fireedge python3-pyone
 ```
 
-{{< alert title="Warning" color="warning" >}}
-Sunstone on Apache
-
-If upgrading a Front-end where Sunstone is deployed through an **Apache web server**, bear in mind that the upgrade may cause [filesystem permissions]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-fs-permissions" %}}) to be reset. If this happens Apache will be unable to access Sunstone files, and users be unable to access the Sunstone UI. The Apache log will show an entry like below:
-
-```default
-[Mon Feb 14 11:10:09.133702 2022] [core:error] [pid 668659:tid 140354620548864] [client 10.141.18.116:60062] AH00037: Symbolic link not allowed or link target not accessible: /usr/lib/one/sunstone/public/dist/main.js, referer:
-```
-
-To prevent this problem, reapply the correct file permissions after upgrading.{{< /alert >}}  
-
 #### Community Edition
 
 If upgrading OpenNebula CE, you will need to install the `opennebula-migration-community` package on your Front-end.
@@ -221,7 +210,7 @@ If you have any custom monitoring probes, follow [these instructions]({{% relref
 ### Step 12. Update the Hypervisors
 
 {{< alert title="Warning" color="warning" >}}
-If you’re using vCenter please skip to the next step.{{< /alert >}} 
+The hypervisor node operating system must meet the minimum version required according to the [KVM]({{% relref "../release_notes_70/platform_notes.md#platform-notes-kvm" %}}) or [LXC]({{% relref "../release_notes_70/platform_notes#platform-notes-lxc" %}}) platform notes. Running a frontend node with a newer OpenNebula version controlling hypervisor nodes running in old unsupported platforms, like CentOS 7, can result in a myriad of dependency problems. A very common issue is the old ruby version shipped in CentOS 7 not being able to run the newer driver code.{{< /alert >}}
 
 Update the virtualization, storage and networking drivers.  As the `oneadmin` user, execute:
 

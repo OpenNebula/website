@@ -185,7 +185,7 @@ $ kvm -net nic,model=? -nographic /dev/null
 $ virsh -c qemu:///system nwfilter-list
 ```
 
-* `VIRTIO_QUEUES` to define how many queues will be used for the communication between CPUs and Network drivers. This attribute is only available with `MODEL="virtio"`.
+* `VIRTIO_QUEUES` to define how many queues will be used for the communication between CPUs and Network drivers. This attribute is only available with `MODEL="virtio"`. The `auto` keyword automatically set the number of queues to the number of vCPUs.
 
 #### Graphics
 
@@ -480,9 +480,9 @@ You can translate that into a command on the configuration file as follows
 
 <a id="kvm-multiple-actions"></a>
 
-### Multiple Actions per Host
+### Multiple Actions per Host or Cluster
 
-By default the VMM driver is configured to allow more than one action to be executed per Host. Make sure the parameter `-p` is added to the driver executable. This is done in `/etc/one/oned.conf` in the VM_MAD configuration section:
+By default the VMM driver is configured to allow more than one action to be executed per Host. Make sure the parameter `-p` is added to the driver executable. This is done in `/etc/one/oned.conf`, in the `VM_MAD` configuration section:
 
 ```default
 VM_MAD = [
@@ -493,19 +493,27 @@ VM_MAD = [
     TYPE       = "kvm" ]
 ```
 
-Restart the main OpenNebula service if changes were made to the mentioned file:
+Additionally, also in `/etc/one/oned.conf`, increase the value of the `MAX_ACTIONS_PER_HOST` (default = `1`), for example:
+
+```default
+MAX_ACTIONS_PER_HOST = 10
+```
+
+To increase the maximum number of allowed actions per cluster, increase the value of the `MAX_ACTIONS_PER_CLUSTER` parameter (default = `30`).
+
+After changing `/etc/one/oned.conf`, restart the main OpenNebula service:
 
 ```default
 $ sudo systemctl restart opennebula
 ```
 
-The scheduler configuration should be changed to let it deploy more than one VM per Host. The file is located at `/etc/one/sched.conf` and the value to change is `MAX_HOST` For example, to let the scheduler submit 10 VMs per Host use this line:
+Additionally, if you are using the Rank Scheduler, you will need to change the configuration to let the scheduler deploy more than one VM per Host. In the file `/etc/one/schedulers/rank.conf`, change the value of the `MAX_HOST` parameter. For example, to let the scheduler submit 10 VMs per Host:
 
 ```default
 MAX_HOST = 10
 ```
 
-Restart the scheduler service for this change to take effect:
+Changes in `rank.conf` do not require a restart.
 
 ```default
 $ sudo systemctl restart opennebula-scheduler
@@ -573,6 +581,35 @@ The parameters that can be changed here are as follows:
 | `OVMF_NVRAM`                                | Virtual Machine Firmware path to the NVRAM file.                                                                                                                                                                   |
 
 See the [Virtual Machine drivers reference]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-vmm#devel-vmm" %}}) for more information.
+
+<a id="arm64specifics"></a>
+
+## ARM64 Specifics
+
+We suggest the following adjustments for the ARM64 architecture. In `/etc/one/oned.conf`, switch to `sd` or `vd` for the CD-ROM device:
+
+```default
+DEFAULT_CDROM_DEVICE_PREFIX = "sd"
+```
+
+This is necessary as IDE disk support is usually missing in ARM64.
+
+Additionally, we recommend adding a virtio keyboard using the `RAW` attribute in `/etc/one/vmm_exec/vmm_exec_kvm.conf` to ensure keyboard functionality over VNC:
+
+```default
+RAW = "<devices><input type='keyboard' bus='virtio'/></devices>"
+```
+
+The following OS section is recommended for an ARM64 host template. Here, `virt` is typically an alias for the most recent `QEMU ARM Virtual Machine`:
+
+```default
+OS=[
+  ARCH="aarch64",
+  FIRMWARE="/usr/share/AAVMF/AAVMF_CODE.fd",
+  FIRMWARE_SECURE="no",
+  MACHINE="virt"
+]
+```
 
 ## Troubleshooting
 

@@ -20,9 +20,6 @@ Some template attributes can compromise the security of the system or the securi
 {{< alert title="Note" color="success" >}}
 If not explicitly stated, the described attributes are valid for all supported hypervisors.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
-The vCenter driver is a legacy component, and no longer receives updates or bug fixes.{{< /alert >}} 
-
 ## Syntax
 
 The syntax of the template file is as follows:
@@ -105,7 +102,7 @@ CPU    = 1
 ### Hotplug Resize VM Capacity
 
 {{< alert title="Important" color="success" >}}
-Hotplug implemented only for KVM and vCenter{{< /alert >}} 
+Hotplug is implemented only for KVM.{{< /alert >}} 
 
 If you need to resize the capacity in `RUNNING` state you have to setup some extra attributes in the VM template. These attributes must be set before the VM is started. They are driver-specific, more info for [KVM]({{% relref "../hypervisor_configuration/kvm_driver#kvm-live-resize" %}}).
 
@@ -743,8 +740,6 @@ Examples:
 # Consider also the CPU temperature
   SCHED_RANK = "FREE_CPU * 100 - TEMPERATURE"
 ```
-
-## vCenter Section
 
 <a id="template-requirement-expression-syntax"></a>
 

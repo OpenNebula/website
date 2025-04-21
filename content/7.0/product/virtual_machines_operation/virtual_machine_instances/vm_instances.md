@@ -877,30 +877,6 @@ USER TEMPLATE
 ROOT_GENERATED_PASSWORD="1234"
 ```
 
-## Virtual Machine Monitoring
-
-The monitoring probes gathers information attributes and insert them in the VM template. This information is mainly used for:
-
-> * Monitor the status of the VM.
-> * Gather the resource usage data of the VM.
-
-In general, you can find the following monitoring information for a VM, note that each hypervisor may include additional attributes:
-
-| Key         | Description                                                                                |
-|-------------|--------------------------------------------------------------------------------------------|
-| ID          | ID of the VM in OpenNebula.                                                                |
-| UUID        | Unique ID, must be unique across all hosts.                                                |
-| MONITOR     | Base64 encoded monitoring information, the monitoring information includes following data: |
-| TIMESTAMP   | Timestamp of the measurement.                                                              |
-| CPU         | Percentage of 1 CPU consumed (two fully consumed cpu is 2.0).                              |
-| MEMORY      | MEMORY consumption in kilobytes.                                                           |
-| DISKRDBYTES | Amount of bytes read from disk.                                                            |
-| DISKRDIOPS  | Number of IO read operations.                                                              |
-| DISKWRBYTES | Amount of bytes written to disk.                                                           |
-| DISKWRIOPS  | Number of IO write operations.                                                             |
-| NETRX       | Received bytes from the network.                                                           |
-| NETTX       | Sent bytes to the network.                                                                 |
-
 ## Virtual Machine VM Permissions
 
 OpenNebula comes with an advanced [ACL rules permission mechanism]({{% relref "../../cloud_system_administration/multitenancy/chmod#manage-acl" %}}) intended for administrators, but each VM object has also [implicit permissions]({{% relref "../../cloud_system_administration/multitenancy/chmod#chmod" %}}) that can be managed by the VM owner. To share a VM instance with other users or to allow them to list and show its information, use the `onevm chmod` command:

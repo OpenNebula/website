@@ -140,8 +140,8 @@ USER_INPUTS = [
 {{< alert title="Note" color="success" >}}
 Use float types for CPU, and integer types for MEMORY and VCPU. More information in [the Template reference documentation]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).{{< /alert >}} 
 
-<!-- TMP FIX: -->
-<!-- .. note:: This capacity customization can be forced to be disabled for any Template in the cloud view. Read more in the :ref:`Cloud View Customization documentation <cloud_view_config>`. -->
+{{< alert title="Note" color="success" >}}
+This capacity customization can be forced to be disabled for any Template in the cloud view. Read more in the [Cloud View Customization documentation]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/cloud_view.md" %}}).{{< /alert >}}
 
 <a id="vm-guide-user-inputs"></a>
 
@@ -302,8 +302,8 @@ End-users can select the VM network interfaces when launching new VMs. You can c
 
 When users add network interfaces, you need to define a default NIC model in case the VM guest needs a specific one (e.g. virtio for KVM). This can be done with the [NIC_DEFAULT]({{% relref "../../operation_references/configuration_references/template#nic-default-template" %}}) attribute, or through the Template wizard. Alternatively, you could change the default value for all VMs in the driver configuration file (see the [KVM one]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#kvmg-default-attributes" %}}) for example).
 
-<!-- TMP FIX: -->
-<!-- .. note:: This networking customization can be forced to be disabled for any Template in the cloud view. Read more in the :ref:`Cloud View Customization documentation <cloud_view_config>`. -->
+{{< alert title="Note" color="success" >}}
+This networking customization can be forced to be disabled for any Template in the cloud view. Read more in the [Cloud View Customization documentation]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/cloud_view.md" %}}).{{< /alert >}}
 
 ## Instantiating Templates
 
@@ -412,8 +412,7 @@ $ onevm list
 
 ## Managing Templates
 
-<!-- TMP FIX: -->
-<!-- Users can manage the VM Templates using the command ``onetemplate``, or the graphical interface :ref:`Sunstone <sunstone>`. For each user, the actual list of templates available are determined by the ownership and permissions of the templates. -->
+Users can manage the VM Templates using the command `onetemplate`, or the graphical interface [Sunstone]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md" %}}). For each user, the actual list of templates available are determined by the ownership and permissions of the templates.
 
 ### Adding and Deleting Templates
 

@@ -39,7 +39,7 @@ http://<OPENNEBULA-FRONTEND>:2616
 
 ### Configuration
 
-The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax with the parameters listed below.
+The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 

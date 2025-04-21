@@ -12,6 +12,8 @@ weight: "2"
 
 <!--# What’s New in 7.0 -->
 
+OpenNebula 7.0 “XXXX” is the first stable release of the OpenNebula 7 series. This release comes with many exciting features: integration with enterprise components (Veeam backup software, dedicated NetApp drivers, OVA import, LVM-thin drivers supporting any SAN vendor, revamped Sunstone interface (it’s lush!), and many more.
+
 ## OpenNebula Core
 
 - The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs.
@@ -20,18 +22,22 @@ weight: "2"
 
 ## Storage & Backups
 
-- [Integrated NFS life-cycle setup]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds#automatic-nfs-setup" %}}) for volumes in shared datastore.
+- [Integrated NFS life-cycle setup]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds.md#automatic-nfs-setup" %}}) for volumes in shared datastore.
 
-## FireEdge Sunstone
+## Sunstone
 
-- Removed Provision/Provider as application [FireEdge Sunstone]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}).
-- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#sunstone-dev" %}}).
-- Guacamole VDI over SSH tunnel [Remote connections guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-remote-connections" %}}).
+- Removed Provision/Provider as application [Sunstone]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-sunstone" %}}).
+- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../../software/life_cycle_management/building_from_source_code/sunstone_dev.md#sunstone-dev" %}}).
+- Guacamole VDI over SSH tunnel [Remote connections guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections" %}}).
 
 ## API and CLI
 
-- Feature 1
+- [The ‘onedb purge-history’ command now removes history records only within the specified –start, –end range for the –id, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
 - Feature 2
+
+## Ecosystem
+
+<!-- - [OVA import]({{ "../../marketplace/ova_management/import_ova#import-ova" }}), a new CLI command, oneswap, allows to ingest VMs in OVA format that can be exported directly from VMware vCenter. Stay tuned for Sunstone support! -->
 
 ## KVM
 
@@ -51,8 +57,12 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix de-selecting hidden datatable entries](https://github.com/OpenNebula/one/issues/6781).
 - [Text of selection in schedule action](https://github.com/OpenNebula/one/issues/6410).
 - [Fix Filter datastore type when deploy a VM](https://github.com/OpenNebula/one/issues/6927).
+- [Fix show more labels in cards](https://github.com/OpenNebula/one/issues/6643).
+- [Fix host tab does not validate Enable/Disable button states](https://github.com/OpenNebula/one/issues/6792).
+- [Fix add qcow2 format support for volatile disk type “swap”](https://github.com/OpenNebula/one/issues/6622).
 
 ## Other Issues Solved
 
-- Issue 1
-- Issue 2
+- [Limit password size for each authentication driver to prevent DoS attacks](https://github.com/OpenNebula/one/issues/6892).
+- [For ‘list’ and ‘top’ commadns fix filter flag G exposing resources of other group members](https://github.com/OpenNebula/one/issues/6952).
+- [Fix duplicit Scheduled Actions](https://github.com/OpenNebula/one/issues/6996).

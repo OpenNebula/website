@@ -31,7 +31,7 @@ This is the list of the individual platform components that have been through th
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
 {{< alert title="Note" color="success" >}}
-Debian front-ends are not certified to manage VMware infrastructures with OpenNebula.{{< /alert >}} 
+Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}} 
 
 ### KVM Nodes
 
@@ -83,6 +83,13 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | net-ldap ruby library | 0.12.1 or 0.16.1                           | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
+### Monitoring and Backups
+
+| Component                     | Version   | More information                                                                                                                    |
+|-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
+| Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/monitoring_and_alerting/prometheus/install.md#monitor-alert-installation" %}}) |
+| Restic backup backend         | 0.65.0    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
+
 ### Sunstone
 
 | Browser   | Version     |
@@ -93,8 +100,8 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 {{< alert title="Note" color="success" >}}
 For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}} 
 
-**Chrome**: chrome://flags -> #touch-events: disabled.
-**Firefox**: `about:config` -> dom.w3c_touch_events: disabled.
+**Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
+**Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
 
 <a id="edge-cluster-provision-workloads-compatibility"></a>
 

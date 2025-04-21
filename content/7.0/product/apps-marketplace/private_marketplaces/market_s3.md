@@ -76,9 +76,6 @@ $ onemarket create market.conf
 ID: 100
 ```
 
-{{< alert title="Note" color="success" >}}
-In order to use the [download]({{% relref "../marketplace_appliances/marketapps#marketapp-download" %}}) functionality make sure you read the [Sunstone Advanced Guide]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-advance" %}}).{{< /alert >}} 
-
 ## Tuning & Extending
 
 {{< alert title="Important" color="success" >}}

@@ -224,9 +224,6 @@ $ onemarketapp download 40 /path/to/app
 {{< alert title="Warning" color="warning" >}}
 This command requires that the ONE_SUNSTONE environment variable is set. Read [here]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#manage-users-shell" %}}) for more information.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
-Make sure Sunstone is properly deployed to handle this feature. Read [here]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/fireedge_for_large_deployments#fireedge-advance" %}}) for more information.{{< /alert >}} 
-
 ## Additional Commands
 
 Like any other OpenNebula Resource, Marketplace Appliances respond to the base actions, namely:

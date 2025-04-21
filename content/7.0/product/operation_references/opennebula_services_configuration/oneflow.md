@@ -20,10 +20,13 @@ Read more in [Multi-VM Service Management]({{% relref "../../virtual_machines_op
 
 ## Configuration
 
-The OneFlow configuration file can be found in `/etc/one/oneflow-server.conf` on your Front-end. It uses **YAML** syntax with following parameters:
+The OneFlow configuration file can be found in `/etc/one/oneflow-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
-After a configuration change, the OneFlow server must be [restarted]({{% relref "#oneflow-conf-service" %}}) to take effect.{{< /alert >}} 
+After a configuration change, the OneFlow server must be [restarted]({{% relref "#oneflow-conf-service" %}}) to take effect.{{< /alert >}}
+
+{{< alert title="Tip" color="info" >}}
+For a quick view of any changes in configuration file options in maintenance releases, check the Resolved Issues page in the [Release Notes]({{% relref "../../../software/release_information/release_notes_enterprise/index#rn-enterprise" %}}) for the release. Please note that even in the case of changes (such as a new option available), you do *not* need to update your configuration files unless you wish to change the application’s behavior.{{< /alert >}}
 
 | Parameter                             | Description                                                                                                                                                                                                                                                                                                                                                              |
 |---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -49,6 +49,8 @@ VM search uses has new pattern-based syntax. The following table includes some e
 
 ## Labels on Sunstone
 
+Only persistent user labels that were created in old Sunstone will be showed [in new Sunstone]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/sunstone_labels#sunstone-labels" %}}). We are working to offer you a better experience in new Sunstone with the system and user labels in future versions of OpenNebula.
+
 Remember that in Sunstone you need to create the user label in the Settings section before apply a label to a resource. See [Sunstone labels guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/sunstone_labels#sunstone-labels" %}}) to get more information.
 
 ## OneProvision on Sunstone

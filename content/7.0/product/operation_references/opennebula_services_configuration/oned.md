@@ -16,10 +16,13 @@ The OpenNebula Daemon (`oned`) is the **core service of the cloud management pla
 
 ## Configuration
 
-The OpenNebula Daemon configuration file can be found in `/etc/one/oned.conf` on the Front-end and can be customized with the following parameters:
+The OpenNebula Daemon configuration file can be found in `/etc/one/oned.conf` on the Front-end, and can be customized with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
-After a configuration change, the OpenNebula Daemon must be [restarted]({{% relref "#oned-conf-service" %}}) to take effect.{{< /alert >}} 
+After a configuration change, the OpenNebula Daemon must be [restarted]({{% relref "#oned-conf-service" %}}) to take effect.{{< /alert >}}
+
+{{< alert title="Tip" color="info" >}}
+For a quick view of any changes in configuration file options in maintenance releases, check the Resolved Issues page in the [Release Notes]({{% relref "../../../software/release_information/release_notes_enterprise/index#rn-enterprise" %}}) for the release. Please note that even in the case of changes (such as a new option available), you do *not* need to update your configuration files unless you wish to change the application’s behavior.{{< /alert >}}
 
 - `MANAGER_TIMER`: Time in seconds the core uses to evaluate periodical functions. `MONITORING_INTERVAL` cannot have a smaller value than `MANAGER_TIMER`.
 - `MONITORING_INTERVAL_DATASTORE`: Time in seconds between each Datastore monitoring cycle.
@@ -340,6 +343,10 @@ There are some non-mandatory attributes:
 
 - `DS_LIVE_MIGRATION`: live migration between datastores is allowed.
 - `COLD_NIC_ATTACH`: NIC attach/detach in poweroff state calls networks scripts (`pre`, `post`, `clean`) and virtualization driver attach/detach actions.
+
+For more information on configuring and setting up the Virtual Machine Manager Driver please check the section relevant to you:
+
+* [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver.md#kvmg" %}})
 
 Sample configuration:
 

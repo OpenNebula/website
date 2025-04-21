@@ -1,5 +1,6 @@
 ---
 title: "Solutions"
+type: "docs"
 date:
 description: ""
 tags:

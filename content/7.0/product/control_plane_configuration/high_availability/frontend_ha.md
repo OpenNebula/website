@@ -14,7 +14,7 @@ weight: "2"
 
 <!--# OpenNebula Front-end HA -->
 
-OpenNebula provides a built-in mechanism to ensure high availability (HA) of the core Front-end services - `opennebula` (i.e., daemon `oned`) and `opennebula-scheduler` (i.e., daemon `mm_sched`). Services need to be deployed and configured across several hosts and a distributed consensus protocol to provide fault-tolerance and state consistency across them. Such deployment is resilient to the failure of at least a single host (it depends on the total number of hosts).
+OpenNebula provides a built-in mechanism to ensure high availability (HA) of the core Front-end daemon, `oned`. Services need to be deployed and configured across several hosts, and a distributed consensus protocol enforced to provide fault-tolerance and state consistency across them. Such deployment is resilient to the failure of at least a single host, depending on the total number of hosts.
 
 In this section, you learn the basics of how to bootstrap a distributed highly available OpenNebula Front-end.
 
@@ -312,7 +312,7 @@ The whole procedure is documented [above]({{% relref "#frontend-ha-setup-add-rem
 
 <a id="frontend-ha-recover-servers"></a>
 
-## Recovering servers
+## Recovering Servers
 
 When a *follower* is down for some time it may fall out of the recovery window, i.e. the log may not include all the records needed to bring it up to date. In order to recover this server you need to:
 
@@ -334,7 +334,7 @@ During maintenance you may use `onezone disable zone_id`. Disabled zone can stil
 
 <a id="frontend-ha-shared"></a>
 
-## Shared data between HA nodes
+## Shared Data Between HA Nodes
 
 HA deployment requires the filesystem view of most datastores (by default in `/var/lib/one/datastores/`) to be the same on all frontends. It is necessary to set up a shared filesystem over the datastore directories. This document doesn’t cover configuration and deployment of the shared filesystem; it is left completely up to the cloud administrator.
 
@@ -368,7 +368,7 @@ The Raft algorithm can be tuned by several parameters in the configuration file 
 {{< alert title="Warning" color="warning" >}}
 Any change in these parameters can lead to unexpected behavior during the fail-over and result in whole-cluster malfunction. After any configuration change, always check the crash scenarios for the correct behavior.{{< /alert >}} 
 
-## Compatibility with the earlier HA
+## Compatibility with the Earlier HA
 
 In OpenNebula <= 5.2, HA was configured using a classic active-passive approach, using Pacemaker and Corosync. While this still works for OpenNebula > 5.2, it is not the recommended way to set up a cluster. However, it is fine if you want to continue using that HA method if you’re coming from earlier versions.
 
@@ -376,38 +376,31 @@ This is documented here: [Front-end HA Setup](http://docs.opennebula.io/5.2/adva
 
 <a id="server-sync-ha"></a>
 
-## Synchronize configuration files across servers
+## Synchronize Configuration Files Across Servers
 
-You can use the command `onezone serversync`. This command is designed to help administrators to sync OpenNebula’s configurations across High Availability (HA) nodes and fix lagging nodes in HA environments. It will first check for inconsistencies between local and remote configuration files inside `/etc/one/` directory. In case these exist, the local version will be replaced by the remote version and only the affected service will be restarted. Whole configuration files will be replaced with the sole exception of `/etc/one/oned.conf`. In this case, the local `FEDERATION` configuration will be maintained, but the rest of the content will be overwritten. A backup will be made inside `/etc/one/` before replacing any file.
+To synchronize files, you can use the command `onezone serversync`. This command is designed to help administrators to sync OpenNebula’s configurations across HA nodes and fix lagging nodes in HA environments. The command first checks for inconsistencies between local and remote configuration files inside the `/etc/one/` directory. If inconsistencies are found, the local version of a file will be replaced by the remote version, and only the affected service will be restarted. Whole configuration files will be replaced, with the sole exception of `/etc/one/oned.conf`. For this file, the local `FEDERATION` configuration will be maintained, but the rest of the content will be overwritten. Before replacing any file, a backup will be made inside `/etc/one/`.
 
 {{< alert title="Warning" color="warning" >}}
-Only use this option between HA nodes, never across federated nodes{{< /alert >}} 
+Only use this option between HA nodes, never across federated nodes.{{< /alert >}} 
 
 This is the list of files that will be checked and replaced:
 
 Individual files:
 
-- `/etc/one/az_driver.conf`
-- `/etc/one/az_driver.default`
-- `/etc/one/ec2_driver.conf`
-- `/etc/one/ec2_driver.default`
-- `/etc/one/econe.conf`
 - `/etc/one/monitord.conf`
 - `/etc/one/oneflow-server.conf`
 - `/etc/one/onegate-server.conf`
-- `/etc/one/sched.conf`
-- `/etc/one/vcenter_driver.default`
 
 Folders:
 
 - `/etc/one/fireedge`
 - `/etc/one/auth`
-- `/etc/one/ec2query_templates`
 - `/etc/one/hm`
+- `/etc/one/schedulers`
 - `/etc/one/vmm_exec`
 
 {{< alert title="Note" color="success" >}}
-Any file inside previous folders that doesn’t exist on the remote server (like backups) will **not** be removed.{{< /alert >}} 
+Any file inside the above folders that does not exist on the remote server (such as backups) will *not* be removed.{{< /alert >}}
 
 ### Usage
 
