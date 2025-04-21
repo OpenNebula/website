@@ -1,5 +1,5 @@
 ---
-title: "Prometheus Integration"
+title: "Prometheus and Grafana Integration"
 
 description:
 categories:
