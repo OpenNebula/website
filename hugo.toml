@@ -1,7 +1,7 @@
 # title = " Documentation"
 
 #baseURL = "https://opennebula.github.io/website/"
-baseURL = "https://techdocs.opennebula.io/7.0/"
+baseURL = "https://techdocs.opennebula.io/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
