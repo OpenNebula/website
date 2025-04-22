@@ -419,6 +419,9 @@ Sunstone also admits direct connections using RDP. This kind of connection is bo
 {{< alert title="Note" color="success" >}}
 To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want to have it.{{< /alert >}} 
 
+{{< alert title="Note" color="success" >}}
+For RDP connections to work, a service such as [XRPD](https://www.xrdp.org/) is required on the VM to which you want to connect.{{< /alert >}} 
+
 ### Actions in RDP console
 
 At the top of the console you can find the buttons for the following actions:
