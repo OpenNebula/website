@@ -1,5 +1,5 @@
 ---
-title: "OVA Import"
+title: "OVA/VMDK Import"
 description:
 categories:
 pageintoc: ""
@@ -9,15 +9,15 @@ weight: "2"
 
 <a id="import-ova"></a>
 
-<!--# OVA Import -->
+<!--# OVA/VMDK Import -->
 
 ## Requirements
 
 The [OneSwap](https://github.com/OpenNebula/one-swap) VM import tool will assume that the provided OVA has been exported from a VMware environment, user must make sure that the provided OVA is compatible with VMware environments. Other sources are currently not supported (i.e. Xen or VirtualBox).
 
-When converting an OVA you will need enough space both in the `/tmp` folder and in the destination DS where the disk images are going to be imported.
+When converting an OVA or VMDK you will need enough space both in the `/tmp` folder (can be changed with `--work-dir`) and in the destination DS where the disk images are going to be imported.
 
-### Windows VirtIO drivers
+### Windows VirtIO Drivers
 
 Before converting Windows VMs, download the required VirtIO drivers for the Windows VM distribution. These drivers can be downloaded from the [virtio-win repository](https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md).
 
@@ -30,14 +30,20 @@ It is possible to specify the target Datastore and VNET for the OVA to be import
 
 | Parameter                              | Description                                                                                                                                                                                                     |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--ova file.ova` | `/path/to/ovf/files/` | Path to the OVA file or folder containing the OVF files.                                                                                                                                                        |
-| `--datastore name` | `ID`                | Name/ID of the Datastore to store the new Image. Accepts one or more Datastores (i.e. `--datastore 101,102`). When more than one Datastore is provided, each disk will be allocated in a different one. |
-| `--network name` | `ID`                  | Name/ID of the VNET to assign in the VM Template. Accepts one or more VNETs (i.e. `--network 0,1`). When more than one VNET is provided, each interface from the OVA will be assigned to each VNET.     |
+| `--ova file.ova \| /path/to/ovf/files/` | Path to the OVA file or folder containing the OVF files.                                                                                                                                                        |
+| `--vmdk file.ova \| /path/to/disk.vmdk` | Path to the VMDK disk file.                                                                                                                                                                                                                
+| `--datastore name \| ID`                | Name/ID of the Datastore to store the new Image. Accepts one or more Datastores (i.e. `--datastore 101,102`). When more than one Datastore is provided, each disk will be allocated in a different one. |
+| `--network name \| ID`                  | Name/ID of the VNET to assign in the VM Template. Accepts one or more VNETs (i.e. `--network 0,1`). When more than one VNET is provided, each interface from the OVA will be assigned to each VNET. **Not supported for VMDK**.     |
 | `--virtio /path/to/virtio.iso`         | Path to the ISO file with the VirtIO drivers for the Windows version.                                                                                                                                           |
+| `--skip-context`                       | Skip injection of the context package.                                                                                                                                                                                                 |
+| `--remove_vmtools`                     | Add contextualization script to force remove VMware tools from the VM.                                                                                                                                                                      |
+
+{{< alert title="Note" color="success" >}}
+The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used together.{{< /alert >}} 
 
 If multiple network interfaces are detected when importing an OVA and only one VNET ID or not enough VNET IDs are provided for all interfaces, using `--network ID`, the last one will be used for the rest of the interfaces after the last coincidence. The same will apply to Datastores using the `--datastore ID` option.
 
-### Example on importing OVF
+### Example of Importing an OVF
 
 Example command on how to import an OVF using the Datastore ID 101 and VNET ID 1:
 
@@ -57,9 +63,9 @@ $ onetemplate instantiate 63
 VM ID: 103
 ```
 
-### Example on importing OVA with multiple DS and VNET
+### Example of Importing an OVA with Multiple DSs and VNETs
 
-The source OVA has two disks and two NICs, as it can be seen from the .ovf file:
+The source OVA has two disks and two NICs, as can be seen from the `.ovf` file:
 
 ```default
 <DiskSection>
@@ -89,7 +95,7 @@ Setting up the source: -i ova /home/onepoc/ovas/ubuntu2404.ova
 (...)
 
 $ onetemplate list
-ID USER     GROUP    NAME                  REGTIME
+ID  USER     GROUP    NAME                  REGTIME
 101 onepoc   oneadmin ubuntu2404    04/10 12:55:03
 ```
 
@@ -97,9 +103,9 @@ The OS Image is imported in Datastore 1 and the Datablock Image is imported in D
 
 ```default
 $ oneimage list
-ID USER     GROUP    NAME            DATASTORE     SIZE TYPE PER STAT RVMS
-151 onepoc   oneadmin ubuntu2404_1   NFS image       2G DB    No rdy     0
-150 onepoc   oneadmin ubuntu2404_0   default         8G OS    No rdy     0
+ID  USER     GROUP    NAME            DATASTORE     SIZE TYPE PER STAT RVMS
+151 onepoc   oneadmin ubuntu2404_1    NFS image       2G DB    No rdy     0
+150 onepoc   oneadmin ubuntu2404_0    default         8G OS    No rdy     0
 
 $ onetemplate show 101 | grep NIC -A 1
 NIC=[
@@ -108,7 +114,31 @@ NIC=[
     NETWORK_ID="0" ]
 ```
 
-## Context injection
+### Example of Importing VMDK Uninstalling VMware Tools
+
+Example command on how to import a VMDK disk using the Datastore ID 101:
+
+```default
+[onepoc@nebulito ~]$ oneswap import --vmdk /home/onepoc/ovas/vm-debian125/vm-debian125-1.vmdk --datastore 101 --remove_vmtools
+Converting the Image => Converting disk /home/onepoc/ovas/vm-debian125/vm-debian125-1.vmdk to qcow2...
+    (100.00/100%)
+Disk converted successfully in 58.15 seconds.
+Converted image: /tmp/vm-debian125-1/conversions/vm-debian125-1.qcow2
+
+(...)
+
+Allocating image 0 in OpenNebula
+Waiting for image to be ready. Timeout: 120 seconds.
+Created image: 174
+Deleting password files.
+No such file or directory @ apply2files - /tmp/vm-debian125-1/vpassfile
+
+[onepoc@nebulito ~]$ oneimage list
+ID  USER     GROUP    NAME                DATASTORE     SIZE TYPE PER STAT RVMS
+174 onepoc   oneadmin vm-debian125-1_0    NFS image       5G OS    No rdy     0
+```
+
+## Context Injection
 
 OneSwap will detect the guest operating system and try to inject the context packages available from the [one-apps](https://github.com/opennebula/one-apps) repository.
 
@@ -133,7 +163,7 @@ Context will install on first boot, you may need to boot it twice.
 {{< alert title="Note" color="success" >}}
 If context injection does not work after importing, it is also possible to install one-context **before exporting the OVA** from VMware using the packages available in the one-apps repository and uninstalling VMware Tools. In this case it is important to be aware that the one-context service will get rid of any manual network configurations done to the guest OS and the VM won’t be able to get the network configuration from VMware anymore.{{< /alert >}} 
 
-## Additional virt-v2v options
+## Additional `virt-v2v` Options
 
 The following parameters can be tuned for virt-v2v, defaults will be applied if no options are provided.
 

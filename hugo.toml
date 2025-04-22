@@ -1,3 +1,5 @@
+#################### GLOGAL CONFIG SECTION
+
 # title = " Documentation"
 
 #baseURL = "https://opennebula.github.io/website/"
@@ -6,9 +8,16 @@ baseURL = "https://techdocs.opennebula.io/"
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
 
+#relativeURLs = true
+#canonifyURLs = true
+
 # Configure how URLs look like per section.
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
+
+
+#################### END GLOGAL CONFIG SECTION
+# Global parameters below this point are ignored by Hugo
 
 
 # You can add your own taxonomies
@@ -181,9 +190,6 @@ version_menu = "Versions"
 enable = true
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
-
-#relativeURLs = true
-#canonifyURLs = true
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
