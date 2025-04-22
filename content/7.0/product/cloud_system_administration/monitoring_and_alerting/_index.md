@@ -1,5 +1,5 @@
 ---
-title: "Monitoring and Alerting"
+title: "Resource Monitoring and Usage Forecast"
 description: "Set up and configure the OpenNebula monitoring and resource usage forecast system"
 categories:
 pageintoc: ""
