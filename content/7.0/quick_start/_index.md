@@ -96,7 +96,6 @@ Follow tutorials to quickly deploy an on-prem or remote cloud for learning and e
 
 Follow tutorials to automatically install a production-grade OpenNebula cloud using OneDeploy, an installation tool based on Ansible playbooks.
 
-{{< cardpane >}}
 {{< card header="[On-premises Deployment with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/)" >}}
    <p></p>
       <inl>
@@ -108,10 +107,4 @@ Follow tutorials to automatically install a production-grade OpenNebula cloud us
       <inl>
          <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
-   {{< /card >}}
-{{< card header="[Migration from VMware](migration_from_vmware)" >}}
-      <bxctr>
-         <a href="migration_from_vmware/migrating_vms_with_oneswap">Migrating VMs with OneSwap</a>
-      </bxctr>
 {{< /card >}}
-{{< /cardpane >}}
