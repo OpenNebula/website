@@ -2,9 +2,11 @@
 title: "Quick Start"
 date: "2025-02-17"
 description: "From learning about OpenNebula to deploying a production-ready OpenNebula cloud"
+#description: "Learn about OpenNebula, install an evaluation cloud, and automatically install a production-ready cloud"
+#"Understand, deploy and evaluate OpenNebula. Deploy a production-ready OpenNebula cloud"
 categories:
-no_list: true
 hide_feedback: true
+no_list: true
 pageintoc: "1"
 tags:
 weight: "1"
@@ -22,89 +24,78 @@ The second section, [Try OpenNebula with miniONE]({{% relref "try_opennebula" %}
 
 The third section, [Automatic Deployment of OpenNebula with OneDeploy]({{% relref "automatic_deployment_of_opennebula_with_one_deploy" %}}) contains an overview and tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks. -->
 
-<!-- {{< alert title="Note" color="success" >}}
-This would not be the final text but a "proof of concept" for presenting the contents of the Quick Start around these 3 concepts.{{< /alert >}} -->
+## [Understand OpenNebula](understand_opennebula)
 
-## Learn
+Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying a cloud.
 
-Gain a high-level view of OpenNebula, its key concepts and features. View the pathway to designing and deploying an OpenNebula cloud.
+{{< cardpane >}}
+   {{< card header="[OpenNebula Concepts](understand_opennebula/opennebula_concepts)" >}}
+         <inl>
+            <a href="understand_opennebula/opennebula_concepts/opennebula_overview">OpenNebula Overview</a>
+         </inl>
+         <inl>
+            <a href="understand_opennebula/opennebula_concepts/key_features">Key Features</a>
+         </inl>
+         <inl>
+               <a href="understand_opennebula/opennebula_concepts/cloud_access_model_and_roles">Cloud Access Model and Roles</a>
+           </inl>
+           <inl>
+               <a href="understand_opennebula/opennebula_concepts/knowledge_base">Knowledge Base</a>
+           </inl>
+           <inl>
+               <a href="understand_opennebula/opennebula_concepts/use_cases">Use Cases</a>
+           </inl>
+   {{< /card >}}
+   <p></p>
+   {{< card header="[Cloud Architecture and Design](understand_opennebula/cloud_architecture_and_design)" >}}
+      <inl>
+         <a href="understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
+      </inl>
+      <inl>
+         <a href="understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture">Edge Cloud Architecture</a>
+      </inl>
+      <inl>
+         <a href="understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture">Open Cloud Architecture</a>
+      </inl>
+   {{< /card >}}
+{{< /cardpane >}}
 
-{{< card header="**Understand OpenNebula**" >}}
-<p></p>
-<a href="understand_opennebula/opennebula_concepts"><b>OpenNebula Concepts</b></a>
-   <inl>
-      <a href="understand_opennebula/opennebula_concepts/opennebula_overview">OpenNebula Overview</a>
-   </inl>
-   <inl>
-      <a href="understand_opennebula/opennebula_concepts/key_features">Key Features</a>
-   </inl>
-   <inl>
-      <a href="understand_opennebula/opennebula_concepts/cloud_access_model_and_roles">Cloud Access Model and Roles</a>
-   </inl>
-   <inl>
-      <a href="understand_opennebula/opennebula_concepts/knowledge_base">Knowledge Base</a>
-   </inl>
-   <inl>
-      <a href="understand_opennebula/opennebula_concepts/use_cases">Use Cases</a>
-   </inl>
-<p></p>
-<a href="understand_opennebula/cloud_architecture_and_design/"><b>Cloud Architecture and Design</b></a>
-   <inl>
-      <a href="understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
-   </inl>
-   <inl>
-      <a href="understand_opennebula/cloud_architecture_and_design/edge_cloud_reference_architecture">Edge Cloud Reference Architecture</a>
-   </inl>
-   <inl>
-      <a href="understand_opennebula/cloud_architecture_and_design/open_cloud_reference_architecture">Open Cloud Reference Architecture</a>
-   </inl>
+<hr class="panel-line">
 
-{{< /card >}}
+## [Try OpenNebula with miniONE](try_opennebula)
 
+Follow tutorials to quickly deploy an on-prem or remote cloud for learning and evaluation. Deploy and run a Cloud Cluster, a Kubernetes Cluster, and Virtual Machines.
 
-## Evaluate
+{{< cardpane >}}
+   {{< card header="[Quick Start: OpenNebula Learning Environment](try_opennebula/opennebula_learning_environment)" >}}
+      <p></p>
+      <bxctr>
+         <a href="try_opennebula/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
+      </bxctr>
+   {{< /card >}}
+   <p></p>
+   {{< card header="[Quick Start: OpenNebula Evaluation Environment](try_opennebula/opennebula_evaluation_environment)" >}}
+      <p></p>
+      <inl>
+         <a href="try_opennebula/opennebula_evaluation_environment/">Create Evaluation Environment</a>
+      </inl>
+      <inl>
+         <a href="try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
+      </inl>
+      <inl>
+         <a href="try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters">Deploy a Kubernetes Cluster</a>
+      </inl>
+   {{< /card >}}
+{{< /cardpane >}}
 
-Using the miniONE installation tool, follow tutorials to quickly deploy an OpenNebula cloud for learning and evaluation. Provision a Cloud Cluster, run Virtual Machines, and deploy a Kubernetes Cluster.
+<hr class="panel-line">
 
-{{< card header="**Try OpenNebula with miniONE**" >}}
-<p></p>
-<a href="try_opennebula/opennebula_learning_environment/"><b>Quick Start: OpenNebula Learning Environment</b></a>
-   <inl>
-      <a href="try_opennebula/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create an Emulated Environment with miniONE</a>
-   </inl>
-<p></p>
-<a href="try_opennebula/opennebula_evaluation_environment/"><b>Quick Start: OpenNebula Evaluation Environment</b></a>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/overview">Overview</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/try_opennebula_onprem">Try OpenNebula On-premises</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/try_opennebula_on_kvm">Try OpenNebula On AWS</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/try_opennebula_hosted">Try OpenNebula Hosted Front-end</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/running_virtual_machines">Running Virtual Machines</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters">Running Kubernetes Clusters</a>
-   </inl>
-   <inl>
-      <a href="try_opennebula/opennebula_evaluation_environment/operating_edge_cluster">Operating an Edge Cluster</a>
-   </inl>
-{{< /card >}}
+## [Automatic Deployment of OpenNebula with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy)
 
-## Deploy
+Follow tutorials to automatically install a production-grade OpenNebula cloud using OneDeploy, an installation tool based on Ansible playbooks.
 
-Follow tutorials for automatically installing a production-grade OpenNebula cloud using OneDeploy, an automated installation tool based on Ansible playbooks.
-
-{{< card header="**Automatic Deployment with OneDeploy**" >}}
+{{< cardpane >}}
+{{< card header="[On-premises Deployment with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/)" >}}
    <p></p>
       <inl>
          <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
@@ -116,3 +107,9 @@ Follow tutorials for automatically installing a production-grade OpenNebula clou
          <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
    {{< /card >}}
+{{< card header="[Migration_from_VMware](migration_from_vmware)" >}}
+      <bxctr>
+         <a href="migration_from_vmware/migrating_vms_with_oneswap">Migrating VMs with OneSwap</a>
+      </bxctr>
+{{< /card >}}
+{{< /cardpane >}}
