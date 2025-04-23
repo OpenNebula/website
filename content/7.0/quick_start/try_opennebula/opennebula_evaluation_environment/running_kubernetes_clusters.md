@@ -119,8 +119,6 @@ At this point, you have instantiated a private network for the Edge Cluster wher
 
 ## Step 3. Instantiate the Kubernetes Service
 
-<!-- Acá iba nota "You may want to adjust the VM templates..." que está en la versión online. -->
-
 In the left-hand pane, select **Templates** -> **Service Templates**.
 
 Select **Service OneKE 1.29**, then click the **Instantiate** icon ![icon2](/images/icons/sunstone/instantiate.png).

@@ -11,16 +11,3 @@ weight: "1"
 <a id="understand-opennebula"></a>
 
 <!--# Understand OpenNebula -->
-
-
-
-
-
-
-
-
-
-
-
-
-
