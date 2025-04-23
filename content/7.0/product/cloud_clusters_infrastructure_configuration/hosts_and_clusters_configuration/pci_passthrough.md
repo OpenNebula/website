@@ -154,6 +154,10 @@ The only configuration needed is the filter for the monitoring probe that gets t
 | `:short_address` | *(List)* Filters by short PCI address `bus:device.function`                        |
 | `:device_name`   | *(List)* Filters by device names with case-insensitive regular expression patterns |
 
+{{< alert title = "Note" color = "success" >}}
+The file `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` must be edited in the Front-end. After this, the command `onehost sync --force` should be executed to update the drivers in the KVM nodes.
+{{< /alert >}}
+
 All filters are applied on the final PCI cards list.
 
 Example:
