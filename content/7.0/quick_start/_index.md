@@ -48,6 +48,8 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
    {{< /card >}}
    <p></p>
    {{< card header="[Cloud Architecture and Design](understand_opennebula/cloud_architecture_and_design)" >}}
+   <p></p>
+   <p></p>
       <inl>
          <a href="understand_opennebula/cloud_architecture_and_design/cloud_architecture_design">Cloud Architecture Design</a>
       </inl>
@@ -107,7 +109,7 @@ Follow tutorials to automatically install a production-grade OpenNebula cloud us
          <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
    {{< /card >}}
-{{< card header="[Migration_from_VMware](migration_from_vmware)" >}}
+{{< card header="[Migration from VMware](migration_from_vmware)" >}}
       <bxctr>
          <a href="migration_from_vmware/migrating_vms_with_oneswap">Migrating VMs with OneSwap</a>
       </bxctr>
