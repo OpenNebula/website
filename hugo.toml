@@ -2,14 +2,14 @@
 
 # title = " Documentation"
 
-#baseURL = "https://opennebula.github.io/website/"
+# baseURL = "https://opennebula.github.io/website/"
 baseURL = "https://techdocs.opennebula.io/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
 
-#relativeURLs = true
-#canonifyURLs = true
+# relativeURLs = true
+# canonifyURLs = true
 
 # Configure how URLs look like per section.
 [permalinks]
