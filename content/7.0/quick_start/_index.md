@@ -98,3 +98,16 @@ Follow tutorials to automatically install a production-grade OpenNebula cloud us
          <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
       </inl>
 {{< /card >}}
+
+## [Migration from VMware](migration_from_vmware)
+
+Automatically migrate Virtual Machines and Virtual Machine Appliances from VMware.
+
+{{< card header="[Migration from VMware](migration_from_vmware)" >}}
+      <inl>
+         <a href="migration_from_vmware/migrating_vms_with_oneswap">Migrating VMs with OneSwap</a>
+      </inl>
+      <inl>
+         <a href="migration_from_vmware/managing_ovas_and_vmdks">Managing OVAs and VMDKs</a>
+      </inl>
+{{< /card >}}
