@@ -1,5 +1,5 @@
 ---
-title: "WHMCS Install/Config"
+title: "WHMCS Tenants Module Install/Update"
 date: "2025-02-17"
 description:
 categories:
@@ -12,7 +12,11 @@ weight: "2"
 
 <!--# WHMCS Tenants Module Install/Update -->
 
-The install and update process are essentially identical. The Module files can be found in  */usr/share/one/whmcs* after you have installed the *opennebula-whmcs-tenants* package via your package manager. You will just need to merge the *modules* directory to the main WHMCS directory on the server hosting WHMCS. When updating the module just copy the files on top of the existing files and overwrite them. An example command for copying the files:
+{{< alert title = "Warning" color = "warning" >}}
+You must use PHP 7.4, currently PHP 8.x will cause an error when creating the user.
+{{< /alert >}}
+
+The install and update process are essentially identical. The Module files can be found in  `/usr/share/one/whmcs` after you have installed the `opennebula-whmcs-tenants` package via your package manager. You will just need to merge the `modules` directory to the main WHMCS directory on the server hosting WHMCS. When updating the module just copy the files on top of the existing files and overwrite them. An example command for copying the files:
 
 ```default
 cp -rf /usr/share/one/whmcs/modules /path/to/web/root/whmcs/.
