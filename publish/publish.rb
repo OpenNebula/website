@@ -62,7 +62,7 @@ ssh_op              = '-o StrictHostKeyChecking=no -i /tmp/id_rsa'
 error(run("ssh #{ssh_op} #{host} 'test -d #{host_path} && touch #{host_path}'"))
 error(run("ssh #{ssh_op} #{host} 'mkdir #{branch_build_path}'"))
 
-error(run("tar -C '../public/' --mode='a+r' -cf - . | " \
+error(run("tar -C './public/' --mode='a+r' -cf - . | " \
           "ssh #{ssh_op} #{host} 'tar -C '#{branch_build_path}' -xvf -'"))
 error(
     run(
