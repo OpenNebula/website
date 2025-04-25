@@ -5,7 +5,7 @@ title = ""
 
 # baseURL = "https://opennebula.github.io/website/"
 # baseURL = "https://techdocs.opennebula.io/"
-baseURL = "https://docs.opennebula.io/7.0/"
+#baseURL = "https://docs.opennebula.io/7.0/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
@@ -69,7 +69,8 @@ enable = false
    [cascade.params]
       type = 'docs'
    [cascade.target]
-      path = '{/product,/product/**,/quick_start,/quick_start/**,/software,/software/**,/solutions,/solutions/**}'
+      #path = '{/product,/product/**,/quick_start,/quick_start/**,/software,/software/**,/solutions,/solutions/**}'
+      path = '{/product/**,/quick_start/**,/software/**,/solutions/**}'
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if >
@@ -116,15 +117,18 @@ enable = false
     name = "Quick Start"
     #url = "/content/docs/quick_start"
     #url = "/docs/quick_start"
-    url = "/7.0/quick_start"
+    #url = "/7.0/quick_start"
+    url = "/quick_start"
     weight = 1
   [[menu.main]]
     name = "Product"
-    url = "/7.0/product"
+    #url = "/7.0/product"
+    url = "/product"
     weight = 2
   [[menu.main]]
     name = " Solutions"
-    url = "/7.0/solutions"
+    #url = "/7.0/solutions"
+    url = "/solutions"
     weight = 3
 
 [params]

@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-#type: docs
+type: docs
 date: "2025-02-17"
 description: "From learning about OpenNebula to deploying a production-ready OpenNebula cloud"
 categories:
