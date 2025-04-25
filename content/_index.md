@@ -1,7 +1,7 @@
 ---
 title: ""
 type: docs
-description: "The OpenNebula documentation"
+#description: "The OpenNebula Documentation"
 weight: "1"
 main_menu: true
 hide_feedback: true
