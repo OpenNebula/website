@@ -6,6 +6,8 @@
 # baseURL = "https://techdocs.opennebula.io/"
 baseURL = "https://docs.opennebula.io/7.0/"
 
+###
+
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
 
