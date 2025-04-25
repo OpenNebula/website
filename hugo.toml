@@ -1,7 +1,7 @@
 #################### GLOGAL CONFIG SECTION
 
 # Empty title to prevent it showing beside the top-left logo
-title = ""
+#title = ""
 
 baseURL = "https://docs.opennebula.io/7.0/"
 # baseURL = "https://opennebula.github.io/website/"
