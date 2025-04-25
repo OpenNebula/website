@@ -3,9 +3,9 @@
 # Empty title to prevent it showing beside the top-left logo
 title = ""
 
+baseURL = "https://docs.opennebula.io/7.0/"
 # baseURL = "https://opennebula.github.io/website/"
 # baseURL = "https://techdocs.opennebula.io/"
-baseURL = "https://docs.opennebula.io/7.0/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
@@ -16,6 +16,7 @@ titleCaseStyle = "none"
 #################### END GLOGAL CONFIG SECTION
 # After the 1st section parameter, global parameters are ignored by Hugo
 
+#
 
 # Configure how URLs look like per section.
 [permalinks]
