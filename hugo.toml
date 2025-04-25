@@ -5,7 +5,7 @@ title = ""
 
 # baseURL = "https://opennebula.github.io/website/"
 # baseURL = "https://techdocs.opennebula.io/"
-#baseURL = "https://docs.opennebula.io/7.0/"
+baseURL = "https://docs.opennebula.io/7.0/"
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
