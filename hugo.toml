@@ -140,17 +140,17 @@ offlineSearchSummaryLength = 800
   # Add your release versions here
 version_menu = "Versions"
   [[params.versions]]
-    version = "v7.0"
-    url = "https://opennebula.github.io/website/"
+    #version = "v7.0"
+    #url = "https://opennebula.github.io/website/"
     #url = "http://localhost:1313/"
   [[params.versions]]
     version = "v6.10"
     url = "https://docs.opennebula.io/6.10/"
 
   [[params.versions]]
-    version = "development"
+    #version = "development"
     #url = "http://localhost:1313/docs-7.2/"
-    url = "https://opennebula.github.io/website/7.2/"
+    #url = "https://opennebula.github.io/website/7.2/"
     # url = "/7.2/" # this works locally but not online, it needs the full URL
 
   [[params.versions]]
