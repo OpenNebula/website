@@ -1,9 +1,8 @@
 ---
 title: "Quick Start"
+#type: docs
 date: "2025-02-17"
 description: "From learning about OpenNebula to deploying a production-ready OpenNebula cloud"
-#description: "Learn about OpenNebula, install an evaluation cloud, and automatically install a production-ready cloud"
-#"Understand, deploy and evaluate OpenNebula. Deploy a production-ready OpenNebula cloud"
 categories:
 hide_feedback: true
 no_list: true
