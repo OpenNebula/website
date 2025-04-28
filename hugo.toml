@@ -1,11 +1,13 @@
 #################### GLOGAL CONFIG SECTION
 
-# Empty title to prevent it showing beside the top-left logo
-#title = ""
+# title = " Documentation"
 
-baseURL = "https://docs.opennebula.io/7.0/"
 # baseURL = "https://opennebula.github.io/website/"
 # baseURL = "https://techdocs.opennebula.io/"
+baseURL = "https://docs.opennebula.io/7.0/"
+# baseURL = "7.0/"
+
+#######
 
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
@@ -13,14 +15,14 @@ titleCaseStyle = "none"
 # relativeURLs = true
 # canonifyURLs = true
 
-#################### END GLOGAL CONFIG SECTION
-# After the 1st section parameter, global parameters are ignored by Hugo
-
-#
-
 # Configure how URLs look like per section.
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
+
+
+#################### END GLOGAL CONFIG SECTION
+# Global parameters below this point are ignored by Hugo
+
 
 # You can add your own taxonomies
 [taxonomies]
@@ -60,7 +62,6 @@ showLightDarkModeMenu = true
 enable = false
 
 [[cascade]]
-   # hide feedback buttons in index pages
    [cascade.params]
       hide_feedback = true
    [cascade.target]
@@ -70,8 +71,8 @@ enable = false
    [cascade.params]
       type = 'docs'
    [cascade.target]
-      #path = '{/product,/product/**,/quick_start,/quick_start/**,/software,/software/**,/solutions,/solutions/**}'
       path = '{/product/**,/quick_start/**,/software/**,/solutions/**}'
+      #path = '{/7.0,/7.0/**}'
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if >
@@ -118,17 +119,14 @@ enable = false
     name = "Quick Start"
     #url = "/content/docs/quick_start"
     #url = "/docs/quick_start"
-    #url = "/7.0/quick_start"
     url = "/quick_start"
     weight = 1
   [[menu.main]]
     name = "Product"
-    #url = "/7.0/product"
     url = "/product"
     weight = 2
   [[menu.main]]
     name = " Solutions"
-    #url = "/7.0/solutions"
     url = "/solutions"
     weight = 3
 
