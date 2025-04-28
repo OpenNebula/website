@@ -420,7 +420,13 @@ Sunstone also admits direct connections using RDP. This kind of connection is bo
 To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want to have it.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
-For RDP connections to work, a service such as [XRPD](https://www.xrdp.org/) is required on the VM to which you want to connect.{{< /alert >}} 
+For RDP connections to work, a service such as [XRPD](https://www.xrdp.org/) is required on the VM to which you want to connect. Also, depending on the configuration of your RDP service, the following parameters can be added in the context of the VM:
+
+| Attribute      | Description                                                          |
+|----------------|----------------------------------------------------------------------|
+| `RDP_SECURITY` | You can change the type of security that the `opennebula-guacd` service will use (it must be the same as the one configured in the RDP service of the VM). By default it uses `rdp`. |
+| `RDP_PORT`     | You can change the port that the `opennebula-guacd` service will use. By default it uses port `3389`. |
+{{< /alert >}} 
 
 ### Actions in RDP console
 
