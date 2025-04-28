@@ -119,7 +119,7 @@ enable = false
     url = "/product"
     weight = 2
   [[menu.main]]
-    name = " Solutions"
+    name = " Solutions"	# Space added intentionally to prevent Hugo from changing page type
     url = "/solutions"
     weight = 3
 
