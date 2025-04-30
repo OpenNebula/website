@@ -19,12 +19,13 @@ When converting an OVA or VMDK you will need enough space both in the `/tmp` fol
 
 ## Supported Platforms
 
-This procedure is supported on all platforms listed in the [Platform Notes](https://docs.opennebula.io/|version|/intro_release_notes/release_notes/platform_notes.html).
+This procedure is supported on all platforms listed in the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes/" %}}).
 
 {{< alert title = "Warning" color = "warning" >}}
 The following platforms listed in the above Platform Notes are _not supported_ for this procedure:
 
 - Debian 11
+- Debian 12
 - Almalinux 8
 
 Attempting to import an OVA or VMDK on these systems may result in unexpected issues.
@@ -35,7 +36,7 @@ Attempting to import an OVA or VMDK on these systems may result in unexpected is
 Before converting Windows VMs, download the required VirtIO drivers for the Windows VM distribution. These drivers can be downloaded from the [virtio-win repository](https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md).
 
 {{< alert title="Note" color="success" >}}
-The converted VM will reboot several times after instantiation in order to install and configure the VirtIO drivers.{{< /alert >}} 
+The converted VM will reboot several times after instantiation in order to install and configure the VirtIO drivers.{{< /alert >}}
 
 ## Usage
 
@@ -44,7 +45,7 @@ It is possible to specify the target Datastore and VNET for the OVA to be import
 | Parameter                              | Description                                                                                                                                                                                                     |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--ova file.ova \| /path/to/ovf/files/` | Path to the OVA file or folder containing the OVF files.                                                                                                                                                        |
-| `--vmdk file.ova \| /path/to/disk.vmdk` | Path to the VMDK disk file.                                                                                                                                                                                                                
+| `--vmdk file.ova \| /path/to/disk.vmdk` | Path to the VMDK disk file.
 | `--datastore name \| ID`                | Name/ID of the Datastore to store the new Image. Accepts one or more Datastores (i.e. `--datastore 101,102`). When more than one Datastore is provided, each disk will be allocated in a different one. |
 | `--network name \| ID`                  | Name/ID of the VNET to assign in the VM Template. Accepts one or more VNETs (i.e. `--network 0,1`). When more than one VNET is provided, each interface from the OVA will be assigned to each VNET. **Not supported for VMDK**.     |
 | `--virtio /path/to/virtio.iso`         | Path to the ISO file with the VirtIO drivers for the Windows version.                                                                                                                                           |
@@ -52,7 +53,7 @@ It is possible to specify the target Datastore and VNET for the OVA to be import
 | `--remove_vmtools`                     | Add contextualization script to force remove VMware tools from the VM.                                                                                                                                                                      |
 
 {{< alert title="Note" color="success" >}}
-The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used together.{{< /alert >}} 
+The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used together.{{< /alert >}}
 
 If multiple network interfaces are detected when importing an OVA and only one VNET ID or not enough VNET IDs are provided for all interfaces, using `--network ID`, the last one will be used for the rest of the interfaces after the last coincidence. The same will apply to Datastores using the `--datastore ID` option.
 
@@ -174,7 +175,7 @@ Context will install on first boot, you may need to boot it twice.
 ```
 
 {{< alert title="Note" color="success" >}}
-If context injection does not work after importing, it is also possible to install one-context **before exporting the OVA** from VMware using the packages available in the one-apps repository and uninstalling VMware Tools. In this case it is important to be aware that the one-context service will get rid of any manual network configurations done to the guest OS and the VM won’t be able to get the network configuration from VMware anymore.{{< /alert >}} 
+If context injection does not work after importing, it is also possible to install one-context **before exporting the OVA** from VMware using the packages available in the one-apps repository and uninstalling VMware Tools. In this case it is important to be aware that the one-context service will get rid of any manual network configurations done to the guest OS and the VM won’t be able to get the network configuration from VMware anymore.{{< /alert >}}
 
 ## Additional `virt-v2v` Options
 
