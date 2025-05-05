@@ -62,6 +62,12 @@ Here is an example to create an Rsync datastore in a host named "backup-host" an
 
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync.md" %}}).
 
+**Sizing recommendations**
+
+The backup datastore need to have enough size to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup Datastore and the Veeam Backup Storage. This is something inherent to the Veean integration with oVirt, as further backups of a virtual machine will be incremental and only the changed disk regions will be retrieved.
+
+If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup Datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
+
 ## Step 3: Install and configure the oVirtAPI module
 
 In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backups server. You can do this by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/life_cycle_management/installation/opennebula_repository_configuration.md" %}}). Then, follow the steps below:
