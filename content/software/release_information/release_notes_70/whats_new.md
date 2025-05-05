@@ -66,3 +66,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Limit password size for each authentication driver to prevent DoS attacks](https://github.com/OpenNebula/one/issues/6892).
 - [For ‘list’ and ‘top’ commadns fix filter flag G exposing resources of other group members](https://github.com/OpenNebula/one/issues/6952).
 - [Fix duplicit Scheduled Actions](https://github.com/OpenNebula/one/issues/6996).
+- [Disable KEEP_LAST for incremental backups on CEPH datastores. Support for KEEP_LAST will be addressed in future releases](https://github.com/OpenNebula/one/issues/6857).
