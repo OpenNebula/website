@@ -5,7 +5,7 @@ description:
 categories:
 pageintoc: "200"
 tags:
-weight: "5"
+weight: "25"
 ---
 
 <a id="minio-intro"></a>
