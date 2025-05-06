@@ -1,11 +1,11 @@
 ---
-title: "Migrating VMs from VMware with OneSwap"
+title: "Migrating VMs with OneSwap"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "268"
 tags:
-weight: "7"
+weight: "1"
 ---
 
 <a id="oneswap"></a>

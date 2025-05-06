@@ -1,11 +1,11 @@
 ---
-title: "On-Prem Deployment with OneDeploy"
+title: "Automatic Installation with OneDeploy"
 date: "2025-02-17"
 description: "Perform Devops-like deployment of a production-ready OpenNebula cloud"
 categories:
 pageintoc: "25"
 tags:
-weight: "3"
+weight: "1"
 ---
 
 <a id="automatic-deployment"></a>

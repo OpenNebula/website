@@ -1,7 +1,7 @@
 ---
-title: "Manual Installation"
+title: "Installation"
 date: "2025-02-17"
-description: "Consult references for manually installing and configuring customized cloud infrastructure"
+description: "Choose the best installation method for your environment"
 categories:
 pageintoc: "168"
 tags:

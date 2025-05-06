@@ -1,5 +1,5 @@
 ---
-title: "Upgrade"
+title: "Upgrade Guide"
 date: "2025-02-17"
 description: "Guides for upgrading OpenNebula in several configurations"
 categories:
