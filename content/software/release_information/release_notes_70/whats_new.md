@@ -33,7 +33,7 @@ OpenNebula 7.0 “XXXX” is the first stable release of the OpenNebula 7 series
 ## API and CLI
 
 - [The ‘onedb purge-history’ command now removes history records only within the specified –start, –end range for the –id, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
-- Feature 2
+- The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and **ARCHITECTURE**.
 
 ## Ecosystem
 
@@ -54,6 +54,7 @@ OpenNebula 7.0 “XXXX” is the first stable release of the OpenNebula 7 series
 
 Additionally, the following functionalities are present that were not in OpenNebula 6.10.0, although they debuted in subsequent maintenance releases of the 6.10.x series:
 
+- The [public marketplaces](../../../product/apps-marketplace/public_marketplaces/overview#-overview) appliances generate [scheduling requirements](../../../product/cloud_system_administration/scheduler/overview.md#host-requirements)  and [OS configurations](../../../product/operation_references/hypervisor_configuration/kvm_driver#arm64specifics) based on the architecture.
 - [Fix de-selecting hidden datatable entries](https://github.com/OpenNebula/one/issues/6781).
 - [Text of selection in schedule action](https://github.com/OpenNebula/one/issues/6410).
 - [Fix Filter datastore type when deploy a VM](https://github.com/OpenNebula/one/issues/6927).
