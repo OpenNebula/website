@@ -27,7 +27,7 @@ OpenNebula 7.0 “XXXX” is the first stable release of the OpenNebula 7 series
 ## Sunstone
 
 - Removed Provision/Provider as application [Sunstone]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-sunstone" %}}).
-- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../../software/life_cycle_management/building_from_source_code/sunstone_dev.md#sunstone-dev" %}}).
+- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../installation/build_from_source_code/sunstone_dev.md#sunstone-dev" %}}).
 - Guacamole VDI over SSH tunnel [Remote connections guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections" %}}).
 
 ## API and CLI

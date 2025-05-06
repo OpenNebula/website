@@ -78,35 +78,3 @@ Follow tutorials to quickly deploy an on-prem or remote cloud for learning and e
       </inl>
    {{< /card >}}
 {{< /cardpane >}}
-
-<hr class="panel-line">
-
-## [Automatic Deployment of OpenNebula with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy)
-
-Follow tutorials to automatically install a production-grade OpenNebula cloud using OneDeploy, an installation tool based on Ansible playbooks.
-
-{{< card header="[On-premises Deployment with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/)" >}}
-   <p></p>
-      <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
-      </inl>
-      <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_local_ds">Deploy with Local Storage</a>
-      </inl>
-      <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
-      </inl>
-{{< /card >}}
-
-## [Migration from VMware](migration_from_vmware)
-
-Automatically migrate Virtual Machines and Virtual Machine Appliances from VMware.
-
-{{< card header="[Migration from VMware](migration_from_vmware)" >}}
-      <inl>
-         <a href="migration_from_vmware/migrating_vms_with_oneswap">Migrating VMs with OneSwap</a>
-      </inl>
-      <inl>
-         <a href="migration_from_vmware/managing_ovas_and_vmdks">Managing OVAs and VMDKs</a>
-      </inl>
-{{< /card >}}

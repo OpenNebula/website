@@ -174,7 +174,7 @@ ANY   : Backup stored in '/tmp/onescape/backups/2020-6...
 ANY   : Configuration updated to 6.2.1
 ```
 
-If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade basic usage documentation]({{% relref "../../life_cycle_management/configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../../life_cycle_management/configuration_management_ee/usage#cfg-upgrade" %}}) and the [troubleshooting section]({{% relref "../../life_cycle_management/configuration_management_ee/conflicts#cfg-conflicts" %}}).
+If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade basic usage documentation]({{% relref "../configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../configuration_management_ee/usage#cfg-upgrade" %}}) and the [troubleshooting section]({{% relref "../configuration_management_ee/conflicts#cfg-conflicts" %}}).
 
 ### Step 8. Upgrade the Database Version
 

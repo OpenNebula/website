@@ -26,7 +26,7 @@ Users of the Community Edition of OpenNebula can upgrade to the latest version o
 Enterprise Edition is distributed with a tool `onecfg` as part of the main server package (in 5.12 and earlier it was provided via the OneScape project and repository). This tool simplifies the upgrade process of configuration files and always comes in the latest version of OpenNebula.
 
 {{< alert title="Important" color="success" >}}
-**For each OpenNebula upgrade (even between minor versions, e.g. 5.10.2 and 5.10.3), configuration files must be processed via `onecfg upgrade`**. If you skip the configuration upgrade step for an OpenNebula upgrade, the tool will lose the current version state and you’ll have to handle the files upgrade manually and [reinitialize]({{% relref "../../life_cycle_management/configuration_management_ee/usage#cfg-init" %}}) the configuration version management state.
+**For each OpenNebula upgrade (even between minor versions, e.g. 5.10.2 and 5.10.3), configuration files must be processed via `onecfg upgrade`**. If you skip the configuration upgrade step for an OpenNebula upgrade, the tool will lose the current version state and you’ll have to handle the files upgrade manually and [reinitialize]({{% relref "../configuration_management_ee/usage#cfg-init" %}}) the configuration version management state.
 
 ```default
 $ onecfg upgrade
@@ -49,7 +49,7 @@ Update your OpenNebula packages by following only the guide that applies to your
 - [Upgrading an HA Cluster]({{% relref "upgrading_ha#upgrade-ha" %}})
 - [Upgrading a Federation]({{% relref "upgrading_federation#upgrade-federation" %}})
 
-Follow [onecfg upgrade]({{% relref "../../life_cycle_management/configuration_management_ee/usage#cfg-upgrade" %}}) documentation for information on how to upgrade and troubleshoot the configurations.
+Follow [onecfg upgrade]({{% relref "../configuration_management_ee/usage#cfg-upgrade" %}}) documentation for information on how to upgrade and troubleshoot the configurations.
 
 <a id="validate-upgrade"></a>
 

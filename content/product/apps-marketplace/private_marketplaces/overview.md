@@ -48,7 +48,7 @@ Using the Marketplace is recommended in many scenarios. To name a few:
 
 Before reading this chapter make sure you have read the [Quick Start]({{% relref "../../../quick_start" %}}) guide.
 
-Read the [Public Marketplaces]({{% relref "../public_marketplaces/index#public-marketplaces" %}}) as it’s global for all OpenNebula installations. Then, read the specific guide for the private Marketplace flavor you are interested in. Finally, read the [Managing Marketplace Apps]({{% relref "../../../solutions/integrations_and_tools/marketplace_appliances/marketapps" %}}) to understand what operations you can perform on Marketplace Apps.
+Read the [Public Marketplaces]({{% relref "../public_marketplaces/index#public-marketplaces" %}}) as it’s global for all OpenNebula installations. Then, read the specific guide for the private Marketplace flavor you are interested in. Finally, read the [Managing Marketplace Apps]({{% relref "../../apps-marketplace/managing_marketplaces/marketapps" %}}) to understand what operations you can perform on Marketplace Apps.
 
 ## Hypervisor Compatibility
 

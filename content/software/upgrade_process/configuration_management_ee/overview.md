@@ -30,7 +30,7 @@ This chapter describes how to use the configuration management tool to
 
 In this chapter, you’ll find all the information about how to manage your configuration files. Although this knowledge is not so important for new installations, it’s essential for the OpenNebula upgrades that might happen in the near future.
 
-First, get familiar with the [Basic Usage]({{% relref "usage#cfg-usage" %}}) of the tool `onecfg`. Move on to the [Diff Format]({{% relref "diff_formats#cfg-diff-formats" %}}), which describes the custom changes you already have or you want to apply. Then get familiar with how configuration upgrade automation fits into the [OpenNebula Upgrade Workflow]({{% relref "../../life_cycle_management/upgrade/start_here.md#start-here" %}}) and how to [Troubleshoot]({{% relref "conflicts#cfg-conflicts" %}}) potential conflicts.
+First, get familiar with the [Basic Usage]({{% relref "usage#cfg-usage" %}}) of the tool `onecfg`. Move on to the [Diff Format]({{% relref "diff_formats#cfg-diff-formats" %}}), which describes the custom changes you already have or you want to apply. Then get familiar with how configuration upgrade automation fits into the [OpenNebula Upgrade Workflow]({{% relref "../upgrade_guide/start_here.md#start-here" %}}) and how to [Troubleshoot]({{% relref "conflicts#cfg-conflicts" %}}) potential conflicts.
 
 The [Appendix]({{% relref "appendix#cfg-files" %}}) presents list of supported configuration files and their types.
 
