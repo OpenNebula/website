@@ -12,7 +12,7 @@ To create issues to report changes and requests, please use the [OpenNebula main
 
 To build the documentation, you will need:
 
-- The [Hugo]((https://gohugo.io/) static site generator and web server: **extended version** between `0.128.0` and `0.145.0`
+- The [Hugo](https://gohugo.io/) static site generator and web server: **extended version** between `0.128.0` and `0.145.0`
 - [Go](https://go.dev/doc/install)
 - [Node.js LTS](https://github.com/nodesource/distributions/blob/master/README.md#using-debian-as-root-nodejs-current)
 - [npm](https://www.npmjs.com/)
