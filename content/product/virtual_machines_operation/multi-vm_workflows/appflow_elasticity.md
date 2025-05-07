@@ -71,7 +71,7 @@ Each Role can have an array of `elasticity_policies`. These policies define an e
 These expressions can use performance data from
 
 - The VM guest. Using the [OneGate server]({{% relref "onegate_usage#onegate-usage" %}}), applications can send custom monitoring metrics to OpenNebula.
-- The VM, at hypervisor level. The [Virtualization Drivers]({{% relref "../../../software/installation" %}}) return information about the VM, such as `CPU`, `NETTX` and `NETRX`.
+- The VM, at hypervisor level. The [Virtualization Drivers]({{% relref "../../../software/installation_process" %}}) return information about the VM, such as `CPU`, `NETTX` and `NETRX`.
 
 ```javascript
 "elasticity_policies" : [
