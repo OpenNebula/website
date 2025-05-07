@@ -62,7 +62,7 @@ The NetApp SAN Datastore is provided as an Enterprise Extension. Its basic featu
 
 ## How Should I Read This Chapter
 
-Before reading this chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/installation" %}}) guide.
+Before reading this chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/installation_process" %}}) guide.
 
 After that, proceed with the specific Datastore documentation you might be interested in.
 

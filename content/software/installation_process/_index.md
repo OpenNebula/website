@@ -1,5 +1,5 @@
 ---
-title: "Installation"
+title: "Installation Process"
 date: "2025-02-17"
 description: "Choose the best installation method for your environment:"
 categories:
