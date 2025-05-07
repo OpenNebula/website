@@ -3,13 +3,13 @@ title: "NetApp SAN Datastore (EE)"
 weight: "1"
 ---
 
-# NetApp SAN Datastore (EE)
-
 This datastore is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as virtual machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the system datastore, while non‐persistent images are cloned using FlexClone and then split.
 
 The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be useful during this setup.
 
-> **Note:** Sharing datastores between multiple OpenNebula instances is not supported and may cause issues if they share datastore IDs.
+{{< alert title="Note" color="success" >}}
+Sharing datastores between multiple OpenNebula instances is not supported and may cause issues if they share datastore IDs.
+{{< /alert >}}
 
 ## NetApp ONTAP Setup
 
@@ -108,7 +108,9 @@ $ onedatastore create netapp_system.ds
 ID: 101
 ~~~
 
-> **Note:** Set `DATASTORE_CAPACITY_CHECK=no` in both datastores if maximum capacity isn’t configured in ONTAP.
+{{< alert title="Note" color="success" >}}
+Set `DATASTORE_CAPACITY_CHECK=no` in both datastores if maximum capacity isn’t configured in ONTAP.
+{{< /alert >}}
 
 ### Create Image Datastore
 
@@ -161,7 +163,9 @@ ID: 102
 
 Symbolic links from the system datastore will be created for each virtual machine on its host once the LUNs have been mapped.
 
-> **Note:** The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
+{{< alert title="Note" color="success" >}}
+The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
+{{< /alert >}}
 
 ## System Considerations
 
@@ -179,7 +183,9 @@ Here are a few tips to clean these up:
   ~~~
   *Be very careful to target the correct multipath device.*
 
-> **Note:** This behavior stems from the inherent complexities of iSCSI connections and is not exclusive to OpenNebula or NetApp.
+{{< alert title="Note" color="success" >}}
+This behavior stems from the inherent complexities of iSCSI connections and is not exclusive to OpenNebula or NetApp.
+{{< /alert >}}
 
 If devices persist, follow these steps:
 
