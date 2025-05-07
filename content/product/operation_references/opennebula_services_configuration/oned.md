@@ -310,7 +310,7 @@ The Monitoring Daemon gather gather information from the cluster nodes. To defin
 - **arguments**: for the daemon executable, usually a path to configuration file `-c monitord.conf`.
 - **threads**: number of threads used for communication
 
-For more information on configuring the information and monitoring system and hints to extend it, please check the [monitoring configuration]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#mon-conf" %}}) and [information driver configuration guide]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}).
+For more information on configuring the information and monitoring system and hints to extend it, please check the [monitoring configuration]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) and [information driver configuration guide]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}).
 
 Sample configuration:
 
