@@ -117,15 +117,11 @@ enable = false
   [[menu.main]]
     name = "Product"
     url = "/product"
-    weight = 2
-  [[menu.main]]
-    name = "Integrations"
-    url = "/integrations"
-    weight = 3
+    weight = 5
   [[menu.main]]
     name = " Solutions"	# Space added intentionally to prevent Hugo from changing page type
     url = "/solutions"
-    weight = 4
+    weight = 10
 
 [params]
 no_list = true
