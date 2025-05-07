@@ -66,7 +66,7 @@ enable = false
    [cascade.params]
       type = 'docs'
    [cascade.target]
-      path = '{/product/**,/quick_start/**,/software/**,/solutions/**}'
+      path = '{/product/**,/quick_start/**,/software/**,/solutions/**,/integrations/**}'
 
 
 [params.links]
@@ -117,11 +117,11 @@ enable = false
   [[menu.main]]
     name = "Product"
     url = "/product"
-    weight = 2
+    weight = 5
   [[menu.main]]
     name = " Solutions"	# Space added intentionally to prevent Hugo from changing page type
     url = "/solutions"
-    weight = 3
+    weight = 10
 
 [params]
 no_list = true

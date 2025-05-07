@@ -26,7 +26,7 @@ This is the list of the individual platform components that have been through th
 | AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/life_cycle_management/installation/database#mysql" %}})                                                                               |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation/manual_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
@@ -114,9 +114,9 @@ Providers based on *virtual* instances have been disabled by default.{{< /alert 
 
 | Edge/Cloud Provider                                                                                                                  | Edge Cluster   | Hypervisor   |
 |--------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [Equinix]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
-| [AWS]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
-| [On-prem]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster#onprem-cluster" %}})   | metal          | KVM and LXC  |
+| [Equinix]({{% relref "../../../product/cloud_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
+| [AWS]({{% relref "../../../product/cloud_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
+| [On-prem]({{% relref "../../../product/cloud_cluster_provisioning/edge_cluster_provisions/onprem_cluster#onprem-cluster" %}})   | metal          | KVM and LXC  |
 
 The Edge Cluster type determines the hypervisor and workload that can be run in the cluster. The following table summarizes the Edge Cluster you need to run specific workloads:
 

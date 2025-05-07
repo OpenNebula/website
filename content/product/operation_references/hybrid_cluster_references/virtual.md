@@ -87,7 +87,7 @@ marketplaceapps:
     dsid: 1
 ```
 
-These are the three mandatory values to export an image from the marketplace. Please refer to this [guide]({{% relref "../../../solutions/integrations_and_tools/marketplace_appliances/marketapps#marketapp" %}}) to know what more options are available.
+These are the three mandatory values to export an image from the marketplace. Please refer to this [guide]({{% relref "../../apps-marketplace/managing_marketplaces/marketapps#marketapp" %}}) to know what more options are available.
 
 {{< alert title="Note" color="success" >}}
 You can also use **appname** instead of appid.{{< /alert >}} 
@@ -107,7 +107,7 @@ flowtemplates:
         vm_template: 1
 ```
 
-These are the mandatory values for a service template. Please refer to this [guide]({{% relref "../../../product/virtual_machines_operation/multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}}) to know more about OneFlow templates.
+These are the mandatory values for a service template. Please refer to this [guide]({{% relref "../../virtual_machines_operation/multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}}) to know more about OneFlow templates.
 
 {{< alert title="Note" color="success" >}}
 You can create more than one object at once, just add more elements to the specific list.{{< /alert >}} 

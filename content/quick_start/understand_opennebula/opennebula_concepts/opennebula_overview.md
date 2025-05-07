@@ -149,6 +149,6 @@ The Quick Start Guide is by far the fastest way to familiarize yourself with Ope
 
 If you are interested in building a production environment, then [Cloud Architecture Design]({{% relref "../cloud_architecture_and_design/cloud_architecture_design#intro" %}}) is a good resource to explore and consider the available options and choices.
 
-If you are interested in automatic, DevOps-like deployment of a production-ready OpenNebula cloud, please refer to the [Automatic Deployment]({{% relref "../../automatic_deployment_of_opennebula_with_one_deploy/index#automatic-deployment" %}}) section of the Installation Guide.
+If you are interested in automatic, DevOps-like deployment of a production-ready OpenNebula cloud, please refer to the [Automatic Deployment]({{% relref "../../../software/installation/automatic_installation_with_onedeploy/index#automatic-deployment" %}}) section of the Installation Guide.
 
 Remember that if you need our support at any time, or access to our professional services or to the **Enterprise Edition**, you can always [contact us](https://opennebula.io/enterprise).
