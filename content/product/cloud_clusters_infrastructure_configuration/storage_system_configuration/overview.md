@@ -27,12 +27,14 @@ Storage in OpenNebula is designed around the concept of Datastores. A Datastore 
 ### Image Datastores
 
 There are different Image Datastores depending on how the images are stored on the underlying storage technology:
+
 : - [NFS/NAS]({{% relref "nas_ds#nas-ds" %}})
   - [Local Storage]({{% relref "local_ds#local-ds" %}})
   - [Ceph]({{% relref "ceph_ds#ceph-ds" %}})
   - [SAN]({{% relref "lvm_drivers#lvm-drivers" %}})
   - [Raw Device Mapping]({{% relref "dev_ds#dev-ds" %}})
   - [iSCSI - Libvirt]({{% relref "iscsi_ds#iscsi-ds" %}}), to access iSCSI devices through the built-in QEMU support
+  - [NetApp]({{% relref "netapp" %}}) - Datastore to register a NetApp SAN appliance, provided as an Enterprise Extension
 
 ### System Datastores
 
@@ -43,7 +45,20 @@ Each datastore supports different features, here is a basic overview:
 | Disk snapshots                                                                                 | yes                        | yes                          | yes                       | no                               | no                           |
 | VM snapshots                                                                                   | yes                        | yes                          | no                        | no                               | no                           |
 | Live migration                                                                                 | yes                        | yes                          | yes                       | yes                              | yes                          |
-| Fault tolerance<br/>([VM ha]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes                        | no                           | yes                       | yes                              | yes                          |
+| Fault tolerance<br/>([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes                        | no                           | yes                       | yes                              | yes                          |
+
+{{< alert title="NetApp SAN Datastore (EE)" >}}
+
+The NetApp SAN Datastore is provided as an Enterprise Extension. Its basic features are listed below.
+
+|                          |     |
+|--------------------------|-----|
+| Disk snapshots           | no  |
+| VM snapshots             | no  |
+| Live migration           | yes |
+| Fault tolerance ([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes |
+
+{{< /alert >}}
 
 ## How Should I Read This Chapter
 
