@@ -1,7 +1,7 @@
 ---
 title: "Backup Extensions"
 date:
-description: ""
+description: "Integrate with leading backup platforms for VM data protection:"
 tags:
 weight: "4"
 ---

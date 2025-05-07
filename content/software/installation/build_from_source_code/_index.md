@@ -1,7 +1,7 @@
 ---
 title: "Build from Source Code"
 date: "2025-02-17"
-description: "Placeholder - TBC"
+description: "Build OpenNebula components from source code"
 categories:
 pageintoc: "303"
 tags:

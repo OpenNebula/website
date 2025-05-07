@@ -1,7 +1,7 @@
 ---
 title: "Billing Extensions"
 date: "2025-02-17"
-description: "Connect OpenNebula with external billing platforms to enable usage-based pricing and customer management"
+description: "Connect OpenNebula with external billing platforms to enable usage-based pricing and customer management:"
 categories:
 pageintoc: "142"
 tags:
