@@ -1,5 +1,5 @@
 ---
-title: "OpenNebula Monitoring System"
+title: "Monitoring System"
 
 description:
 categories:

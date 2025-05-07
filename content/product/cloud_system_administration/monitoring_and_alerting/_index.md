@@ -1,6 +1,6 @@
 ---
-title: "Resource Monitoring and Usage Forecast"
-description: "Set up and configure the OpenNebula monitoring and resource usage forecast system"
+title: "Resource Monitoring and Usage Forecasting"
+description: "Set up and configure the OpenNebula monitoring and resource usage forecasting system"
 categories:
 pageintoc: ""
 tags:
