@@ -70,7 +70,7 @@ If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup 
 
 ## Step 3: Install and configure the oVirtAPI module
 
-In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backups server. You can do this by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation/manual_installation/opennebula_repository_configuration.md" %}}). Then, follow the steps below:
+In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backups server. You can do this by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, follow the steps below:
 
 1. Install the ``opennebula-ovirtapi`` package in the backup server.
 2. Change the ``one_xmlrpc`` variable in the configuration file ``/etc/one/ovirtapi/ovirtapi-server.yml`` and make sure it points to your OpenNebula front-end address.
