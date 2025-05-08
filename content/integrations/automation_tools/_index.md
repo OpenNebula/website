@@ -11,3 +11,4 @@ weight: "1"
 <!--# Automation Tools Integration -->
 
 OpenNebula includes a number of extensions and plug-ins that allow the integration of OpenNebula with other open source software. In this guide we review the integration of OpenNebula with the third-party tools listed below.
+
