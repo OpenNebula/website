@@ -53,7 +53,7 @@ The NetApp SAN Datastore is provided as an Enterprise Extension. Its basic featu
 
 |                          |     |
 |--------------------------|-----|
-| Disk snapshots           | no  |
+| Disk snapshots           | yes |
 | VM snapshots             | no  |
 | Live migration           | yes |
 | Fault tolerance ([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes |
