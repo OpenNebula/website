@@ -9,6 +9,51 @@ Veeam is a backup and recovery software that provides data protection and disast
 
 The oVirtAPI module is compatible with Veeam Backup & Replication 12.0.
 
+The following table summarizes the supported backup modes for each storage system:
+
+<table class="docutils align-default">
+<thead>
+<th class="head" rowspan="2"><p>Storage</p></th>
+<th class="head" colspan="2"><p>Full</p></th>
+<th class="head" colspan="2"><p>Incremental</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Live</p></th>
+<th class="head"><p>Power off</p></th>
+<th class="head"><p>Live</p></th>
+<th class="head"><p>Power off</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd">
+<td><p>File<sup>*</sup> (qcow2)</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>File<sup>*</sup> (raw)</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ceph</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes
+<td><p>No
+<td><p>No
+</tr>
+<tr class="row-even"><td><p>LVM</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+
+<sup>\*</sup> Any datastore based on files with the given format, i.e. NFS/SAN or Local.
+
 ## Requirements & Architecture
 
 In order to achieve a setup compatible with the OpenNebula and Veeam Backup integration, the following requirements must be met:
