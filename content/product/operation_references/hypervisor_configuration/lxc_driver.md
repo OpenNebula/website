@@ -61,17 +61,15 @@ You can pin containers to host CPUs and NUMA nodes simply by adding a `TOPOLOGY`
 
 ### Container Actions
 
-There are a number of regular features that are not implemented yet:
-Some of the actions supported by OpenNebula for VMs are not implemented yet for LXC. The following actions are not currently supported:
+Some of the VM actions available in the OpenNebula API are not implemented yet for the LXC driver:
 
-- `migration`
-- `live migration`
-- `live disk resize`
-- `save/restore`
-- `snapshots`
-- `disk-saveas`
-- `disk hot-plugging`
-- `nic hot-plugging`
+- [live migration](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#advanced-operations-for-administrators)
+- [live disk resize](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#resizing-vm-disks)
+- [vm state save and restore](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#save-a-vm-instance)
+- [system snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-system-snapshots)
+- [live disk snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-disk-snapshots)
+- [live disk save](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#saving-a-vm-disk-to-an-image)
+- [live capacity resize](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#live-resize-of-capacity)
 
 ### PCI Passthrough
 
@@ -117,7 +115,7 @@ Mon Apr  4 22:20:25 2022 [Z0][VMM][I]: mount: /var/lib/one/datastores/0/30/mappe
 ```
 
 {{< alert title="Note" color="success" >}}
-Custom images can also be created by using common linux tools like the `mkfs` command for creating the file system and `dd` for copying an existing file system inside the new one. Also OpenNebula will preserve any custom id map present on the filesystem.{{< /alert >}} 
+Custom images can also be created by using common linux tools like the `mkfs` command for creating the file system and `dd` for copying an existing file system inside the new one. Also OpenNebula will preserve any custom id map present on the filesystem.{{< /alert >}}
 
 ## Networking
 
@@ -170,7 +168,7 @@ RAW = [
 ```
 
 {{< alert title="Note" color="success" >}}
-Each line of the `DATA` attribute must contain only an LXC configuration attribute and its corresponding value. If a provided attribute is already set by OpenNebula, it will be discarded and the original value will take precedence.{{< /alert >}} 
+Each line of the `DATA` attribute must contain only an LXC configuration attribute and its corresponding value. If a provided attribute is already set by OpenNebula, it will be discarded and the original value will take precedence.{{< /alert >}}
 
 The `LXC_PROFILES` attribute implements a similar behavior than [LXD profiles](https://linuxcontainers.org/lxd/advanced-guide/#profiles). It allows to include pre-defined LXC configuration to a container. In order to use a profile, the corresponding LXC configuration file must be available at `/var/lib/one/remotes/etc/vmm/lxc/profiles`.
 
@@ -184,7 +182,7 @@ $ ls -l /var/lib/one/remotes/etc/vmm/lxc/profiles
 ```
 
 {{< alert title="Warning" color="warning" >}}
-After defining the profiles, make sure `oneadmin` user has enough permission for reading them. Also, remember to use `onehost sync` command to make sure the changes are synced in the host. If the profile is not available in the host, the container will be deployed without including the corresponding profile configuration.{{< /alert >}} 
+After defining the profiles, make sure `oneadmin` user has enough permission for reading them. Also, remember to use `onehost sync` command to make sure the changes are synced in the host. If the profile is not available in the host, the container will be deployed without including the corresponding profile configuration.{{< /alert >}}
 
 After defining the profiles they can be used by adding the `PROFILES` attribute to the VM Template:
 

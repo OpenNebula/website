@@ -23,7 +23,7 @@ This guide follows the [Creating Virtual Machines guide]({{% relref "../virtual_
 The life-cycle of a Virtual Machine within OpenNebula includes the following stages:
 
 {{< alert title="Note" color="success" >}}
-Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "../../operation_references/configuration_references/vm_states#vm-states" %}})):{{< /alert >}} 
+Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "../../operation_references/configuration_references/vm_states#vm-states" %}})):{{< /alert >}}
 
 | Short state   | State              | Meaning                                                                                                                                                                                                                                                                                                  |
 |---------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -54,10 +54,10 @@ Note that this is a simplified version. If you are a developer you may want to t
 ## Create and List Virtual Machines
 
 {{< alert title="Note" color="success" >}}
-Read the [Creating Virtual Machines guide]({{% relref "../virtual_machine_images/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM Templates.{{< /alert >}} 
+Read the [Creating Virtual Machines guide]({{% relref "../virtual_machine_images/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM Templates.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-Read the complete reference for [Virtual Machine templates]({{% relref "../../operation_references/configuration_references/template#template" %}}).{{< /alert >}} 
+Read the complete reference for [Virtual Machine templates]({{% relref "../../operation_references/configuration_references/template#template" %}}).{{< /alert >}}
 
 Assuming we have a VM Template registered called **vm-example** with ID 6, then we can instantiate the VM issuing a:
 
@@ -173,7 +173,7 @@ $ onevm list --search 'VM.NAME=test-vm&VM.UNAME=oneadmin'
 ```
 
 {{< alert title="Warning" color="warning" >}}
-This feature is only available for **MySQL** backend with a version higher or equal than **5.6**.{{< /alert >}} 
+This feature is only available for **MySQL** backend with a version higher or equal than **5.6**.{{< /alert >}}
 
 ## Basic Virtual Machine Operations
 
@@ -195,7 +195,7 @@ There are two different ways to temporarily stop the execution of a VM: *short* 
 * `poweroff --hard`: Same as above but the VM is immediately powered off. Use this action when the VM doesn’t have ACPI support.
 
 {{< alert title="Note" color="success" >}}
-When the guest is shutdown from within the VM, OpenNebula will put the VM in the `poweroff` state.{{< /alert >}} 
+When the guest is shutdown from within the VM, OpenNebula will put the VM in the `poweroff` state.{{< /alert >}}
 
 You can also plan a **long term pause**. The Host resources used by the VM are freed and the Host is cleaned. VM disk state is saved in the system datastore. The following actions are useful if you want to preserve network and storage allocations (e.g. IPs, persistent disk images):
 
@@ -229,7 +229,7 @@ Then you can resume it with:
 ## Hotplug Devices to a Virtual Machine
 
 {{< alert title="Warning" color="warning" >}}
-Hotplugging might not be available for every supported hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.{{< /alert >}} 
+Hotplugging might not be available for every supported hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.{{< /alert >}}
 
 ### Disk Hot-plugging
 
@@ -375,7 +375,7 @@ $ onevm pci-detach alpine01 0
 {{< alert title="Warning" color="warning" >}}
 Snapshotting might not be available for every supported hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.
 
-A system snapshot will contain the current disks and memory state. You can create, delete and restore snapshots for running VMs.{{< /alert >}}  
+A system snapshot will contain the current disks and memory state. You can create, delete and restore snapshots for running VMs.{{< /alert >}}
 
 ```default
 $ onevm snapshot-create 4 "just in case"
@@ -393,7 +393,7 @@ VM 4: snapshot reverted
 {{< alert title="Warning" color="warning" >}}
 Snapshots for VMs running under the **KVM hypervisor** presents consideration the following limitations:
 
-- Snapshots are only available if all the VM disks use the [qcow2 driver]({{% relref "../../operation_references/configuration_references/img_template#img-template" %}}).{{< /alert >}}  
+- Snapshots are only available if all the VM disks use the [qcow2 driver]({{% relref "../../operation_references/configuration_references/img_template#img-template" %}}).{{< /alert >}}
 
 <a id="vm-guide-2-disk-snapshots"></a>
 
@@ -405,7 +405,7 @@ There are two kinds of operations related to disk snapshots:
 * `disk-saveas`: Exports VM disk (or a previously created snapshot) to an Image in an OpenNebula Datastore. This is a live action.
 
 {{< alert title="Warning" color="warning" >}}
-Disk snapshots might have different limitations depending on the hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.{{< /alert >}} 
+Disk snapshots might have different limitations depending on the hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.{{< /alert >}}
 
 <a id="vm-guide-2-disk-snapshots-managing"></a>
 
@@ -430,12 +430,12 @@ Disk snapshots are managed with the following commands:
 With these combinations (CEPH and qcow2 datastores and KVM hypervisor) you can [enable QEMU Guest Agent]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#enabling-qemu-guest-agent" %}}). With this agent enabled the filesystem will be frozen while the snapshot is being done.
 
 {{< alert title="Warning" color="warning" >}}
-OpenNebula will not automatically handle live `disk-snapshot-create` and `disk-snapshot-revert` operations for VMs in `RUNNING` if the virtualization driver do not support it (check the limitations of the corresponding virtualization driver guide to know if this feature is available for your hypervisor). In this case the user needs to suspend or poweroff the VM before creating the snapshot.{{< /alert >}} 
+OpenNebula will not automatically handle live `disk-snapshot-create` and `disk-snapshot-revert` operations for VMs in `RUNNING` if the virtualization driver do not support it (check the limitations of the corresponding virtualization driver guide to know if this feature is available for your hypervisor). In this case the user needs to suspend or poweroff the VM before creating the snapshot.{{< /alert >}}
 
 See the [Storage Driver]({{% relref "../../../product/integration_references/infrastructure_drivers_development/sd#sd-tm" %}}) guide for a reference on the driver actions invoked to perform live and non-live snapshots.
 
 {{< alert title="Warning" color="warning" >}}
-Depending on the `DISK/CACHE` attribute the live snapshot may or may not work correctly. To be sure, you can use `CACHE=writethrough`, although this delivers the slowest performance.{{< /alert >}} 
+Depending on the `DISK/CACHE` attribute the live snapshot may or may not work correctly. To be sure, you can use `CACHE=writethrough`, although this delivers the slowest performance.{{< /alert >}}
 
 ### Persistent Images and Disk Snapshots
 
@@ -443,12 +443,12 @@ These actions are available for both persistent and non-persistent images. In th
 
 <a id="disk-save-as-action"></a>
 
-### Saving a VM Disk to an Image (`disk-saveas`)
+### Saving a VM Disk to an Image
 
-Any VM disk can be saved to a new image (if the VM is in `RUNNING`, `POWEROFF`, `SUSPENDED`, `UNDEPLOYED` or `STOPPED` states). This is a live operation that happens immediately. This operation accepts `--snapshot <snapshot_id>` as an optional argument, which specifies a disk snapshot to use as base of the new Image, instead of the current disk state (value by default).
+Any VM disk can be saved to a new image by issuing the `onevm disk-saveas` command if the VM is in `RUNNING`, `POWEROFF`, `SUSPENDED`, `UNDEPLOYED` or `STOPPED` states. This is a live operation that happens immediately. This operation accepts `--snapshot <snapshot_id>` as an optional argument, which specifies a disk snapshot to use as base of the new Image, instead of the current disk state (value by default).
 
 {{< alert title="Warning" color="warning" >}}
-This action is not in sync with the hypervisor. If the VM is in `RUNNING` state make sure the disk is unmounted (preferred), synced or quiesced in some way or another before doing the `disk-saveas` operation.{{< /alert >}} 
+This action is not in sync with the hypervisor. If the VM is in `RUNNING` state make sure the disk is unmounted (preferred), synced or quiesced in some way or another before doing the `disk-saveas` operation.{{< /alert >}}
 
 <a id="vm-guide2-resizing-a-vm"></a>
 
@@ -479,7 +479,7 @@ $ onevm resume web_vm
 If you need to resize the capacity in the RUNNING state you have to set up some extra attributes in the VM template. These attributes **must be set before the VM is started**. These attributes are driver-specific, more info for [KVM]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#kvm-live-resize" %}}).
 
 {{< alert title="Warning" color="warning" >}}
-Hotplug is only implemented only for KVM and vCenter. Added CPUs will be in offline state after the resize. Enable them with `echo 1 > /sys/devices/system/cpu/cpu<ID>/online`{{< /alert >}} 
+Hotplug is only implemented only for KVM and vCenter. Added CPUs will be in offline state after the resize. Enable them with `echo 1 > /sys/devices/system/cpu/cpu<ID>/online`{{< /alert >}}
 
 <a id="vm-guide2-resize-disk"></a>
 
@@ -505,10 +505,10 @@ $ onevm disk-resize <vm_id> <disk_id> <new_size> # <new_size> must be greater th
 This will make the VM disk grow on the hypervisor node. Then the contextualization service running inside the guest OS will expand the filesystem with the newfound free space. The support for this filesystem expansion depends on the Guest OS.
 
 {{< alert title="Important" color="success" >}}
-In FreeBSD the resize of the root filesystem inside the guest OS is not performed automatically by the Contextualization Service. This leads to [filesystem corruption](https://github.com/OpenNebula/addon-context-linux/issues/298) and permanent data loss. This only applies to the partition mounted on `/` , partitions with other mountpoints will be resized.{{< /alert >}} 
+In FreeBSD the resize of the root filesystem inside the guest OS is not performed automatically by the Contextualization Service. This leads to [filesystem corruption](https://github.com/OpenNebula/addon-context-linux/issues/298) and permanent data loss. This only applies to the partition mounted on `/` , partitions with other mountpoints will be resized.{{< /alert >}}
 
 {{< alert title="Important" color="success" >}}
-In vCenter a disk can be resized only if the VM is in poweroff state and the VM has no snapshots or the vCenter template, which the VM is based on, doesn’t use linked clones.{{< /alert >}} 
+In vCenter a disk can be resized only if the VM is in poweroff state and the VM has no snapshots or the vCenter template, which the VM is based on, doesn’t use linked clones.{{< /alert >}}
 
 <a id="vm-updateconf"></a>
 
@@ -531,10 +531,10 @@ Some of the VM configuration attributes defined in the VM Template can be update
 Visit the [Virtual Machine Template reference]({{% relref "../../operation_references/configuration_references/template#template" %}}) for a complete description of each attribute.
 
 {{< alert title="Warning" color="warning" >}}
-This action might not be supported for `RUNNING` VMs depending on the hypervisor. Please check the limitation section of the specific virtualization driver.{{< /alert >}} 
+This action might not be supported for `RUNNING` VMs depending on the hypervisor. Please check the limitation section of the specific virtualization driver.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-In running state only changes in CONTEXT take effect immediately, other values may need a VM restart. Also, the action may fail and the context will not be changed if the VM is running. You can try to manually trigger the action again.{{< /alert >}} 
+In running state only changes in CONTEXT take effect immediately, other values may need a VM restart. Also, the action may fail and the context will not be changed if the VM is running. You can try to manually trigger the action again.{{< /alert >}}
 
 <a id="vm-guide2-clone-vm"></a>
 
@@ -641,7 +641,7 @@ DONE="-1"
 ```
 
 {{< alert title="Note" color="success" >}}
-The attributes `ID`, `PARENT_ID` and `TYPE` are OpenNebula system attributes and can’t be modified. For more details about the attributes which can be modified see [Scheduled Action Template]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}){{< /alert >}} 
+The attributes `ID`, `PARENT_ID` and `TYPE` are OpenNebula system attributes and can’t be modified. For more details about the attributes which can be modified see [Scheduled Action Template]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}){{< /alert >}}
 
 ### Periodic Punctual Actions
 
@@ -771,7 +771,7 @@ TIME="1537653600"
 In this example, the first argument would be the disk and the second the snapshot name.
 
 {{< alert title="Note" color="success" >}}
-The arguments are mandatory. If you use the CLI or Sunstone they are generated automatically for the actions.{{< /alert >}} 
+The arguments are mandatory. If you use the CLI or Sunstone they are generated automatically for the actions.{{< /alert >}}
 
 <a id="vm-charter"></a>
 
@@ -940,7 +940,7 @@ Sunstone provides several different methods to access your VM console and deskto
 [FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-configuration" %}}) automatically installs dependencies for Guacamole connections which are necessary to use VNC, RDP and SSH.
 
 {{< alert title="Important" color="success" >}}
-The [FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) server must be running to get Guacamole connections working.{{< /alert >}} 
+The [FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) server must be running to get Guacamole connections working.{{< /alert >}}
 
 <a id="requirements-remote-access-sunstone"></a>
 
@@ -1008,7 +1008,7 @@ RDP connection permits to **choose the screen resolution** from Sunstone interfa
 
 {{< alert title="Important" color="success" >}}
 **The RDP connection is only allowed to activate on a single NIC**. In any case, the connection will only contain the IP of the first NIC with this property enabled.
-The RDP connection will work the **same way for NIC ALIASES**.{{< /alert >}}  
+The RDP connection will work the **same way for NIC ALIASES**.{{< /alert >}}
 
 If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the RDP connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).
 
@@ -1018,7 +1018,7 @@ If your Windows VM has a firewall enabled, you can set the following in the star
 ```
 netsh advfirewall firewall set rule group="Remotedesktop" new enable=yes
 ```
-{{< /alert >}} 
+{{< /alert >}}
 
 <a id="requirements-guacamole-ssh-sunstone"></a>
 
@@ -1043,7 +1043,7 @@ need to specify the **SSH port in the contextualization section as** `SSH_PORT` 
 not using the standard port.
 
 {{< alert title="Note" color="success" >}}
-If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the SSH connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).{{< /alert >}} 
+If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the SSH connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).{{< /alert >}}
 
 For example, to allow connection by username and password to a guest VM, first make sure you
 have SSH root access to the VM, check more info [here]({{% relref "../../control_plane_configuration/graphical_user_interface/cloud_view#cloudview-ssh-keys" %}}).
@@ -1066,4 +1066,4 @@ root@<guest-VM>:~$ adduser <username>
 ![fireedge_sunstone_ssh_list](/images/fireedge_sunstone_ssh_list.png) ![fireedge_sunstone_ssh_console](/images/fireedge_sunstone_ssh_console.png)
 
 {{< alert title="Note" color="success" >}}
-Guacamole SSH uses RSA encryption. Make sure the VM SSH accepts RSA, otherwise you need to explicitly enable it in the VM SSH configuration (HostkeyAlgorithms and PubkeyAcceptedAlgorithms set as ‘+ssh-rsa){{< /alert >}} 
+Guacamole SSH uses RSA encryption. Make sure the VM SSH accepts RSA, otherwise you need to explicitly enable it in the VM SSH configuration (HostkeyAlgorithms and PubkeyAcceptedAlgorithms set as ‘+ssh-rsa){{< /alert >}}
