@@ -19,6 +19,10 @@ The NetApp system requires specific configurations. This driver operates using a
    - In ONTAP System Manager: **Storage > Storage VMs > Select your SVM > Edit > Limit volume creation to preferred local tiers**
    - Assign at least one aggregate/tier and note their UUID(s) from the URL for later use
 
+{{< alert title="Note" color="success" >}}
+The UUID of an object is often found in the URL if using the web interface, otherwise you can use the ONTAP CLI to gather them: `vserver show -fields uuid`, `igroup show -fields uuid`, etc.
+{{< /alert >}}
+
 2. **To enable capacity monitoring:**
    - Enable *Enable maximum capacity limit* on the same Edit Storage VM screen
    - If not configured, set `DATASTORE_CAPACITY_CHECK=no` in both of the OpenNebula datastores’ attributes
@@ -27,7 +31,7 @@ The NetApp system requires specific configurations. This driver operates using a
 
 4. If you do not plan to use the administrator account, create a new user with all API permissions and assign it to the SVM.
 
-## Frontend Setup
+## Frontend Only Setup
 
 The frontend requires network access to the NetApp ONTAP API endpoint:
 
@@ -50,15 +54,33 @@ Configure both the frontend and nodes with persistent iSCSI connections:
 
 2. **Persistent iSCSI Configuration:**
    - Set `node.startup = automatic` in `/etc/iscsi/iscsid.conf`
-   - Add frontend NFS mounts to `/etc/fstab`
+   - Ensure iscsid is started with `systemctl status iscsid`
+   - Enable iscsid with `systemctl enable iscsid`
 
 3. **Multipath Configuration:**
    Update `/etc/multipath.conf` to something like:
    ~~~text
-   defaults {
-     user_friendly_names yes
-     find_multipaths    yes
-   }
+    defaults {
+      user_friendly_names yes
+      find_multipaths yes
+    }
+
+    devices {
+      device {
+        vendor "NETAPP"
+        product "LUN.*"
+        no_path_retry queue
+        path_checker tur
+        alias_prefix "mpath"
+      }
+    }
+
+    blacklist {
+      devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+      devnode "^hd[a-z][0-9]*"
+      devnode "^cciss!c[0-9]d[0-9]*[p[0-9]*]"
+    }
+   ~~~
 
 ## OpenNebula Configuration
 
@@ -107,10 +129,6 @@ NETAPP_TARGET     = "iqn.1993-08.org.debian:01:1234"
 $ onedatastore create netapp_system.ds
 ID: 101
 ~~~
-
-{{< alert title="Note" color="success" >}}
-Set `DATASTORE_CAPACITY_CHECK=no` in both datastores if maximum capacity isn’t configured in ONTAP.
-{{< /alert >}}
 
 ### Create Image Datastore
 
@@ -171,7 +189,7 @@ The minimum size for a NetApp volume is 20 MB, so any disk smaller than that wil
 
 Occasionally, under network interruptions or if a volume is deleted directly from NetApp, the iSCSI connection may drop or fail. This can cause the system to hang on a `sync` command, which in turn may lead to OpenNebula operation failures on the affected host. Although the driver is designed to manage these issues automatically, it’s important to be aware of these potential iSCSI connection challenges.
 
-Here are a few tips to clean these up:
+You may wish to contact the OpenNebula Support team to assist in this cleanup, however here are a few advanced tips to clean these up if you are comfortable doing so:
 
 - If you have extra devices from failures leftover, run:
   ~~~bash
@@ -221,4 +239,4 @@ If devices persist, follow these steps:
      dmsetup remove /dev/mapper/<device_name>
      ~~~
 
-This should resolve most I/O lockups caused by failed iSCSI operations. Please contact the OpenNebula Support team if you need additional assistance.
+This should resolve most I/O lockups caused by failed iSCSI operations. Please contact the OpenNebula Support team if you need assistance.
