@@ -188,15 +188,6 @@ unix_sock_rw_perms = "0770"
 OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
 You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.
 
-### vCenter 7.0 Platform Notes
-
-{{< alert title="Important" color="success" >}}
-The legacy vCenter driver is currently included in the distribution, but no longer receives updates or bug fixes.{{< /alert >}} 
-
-#### Problem with Boot Order
-
-Currently in vCenter 7.0 changing the boot order is only supported in Virtual Machines at deployment time.
-
 ### Debian 10 and Ubuntu 18 Upgrade
 
 When upgrading your nodes from Debian 10 or Ubuntu 18 you may need to update the opennebula sudoers file because of the  */usr merge* feature implemented for Debian11/Ubuntu20. You can [find more information and a recommended work around in this issue](https://github.com/OpenNebula/one/issues/6090).

@@ -91,17 +91,11 @@ Performing a VM backup may require some support from the hypervisor or the disk 
 <td><p>No</p></td>
 <td><p>No</p></td>
 </tr>
-<tr class="row-even"><td><p>vCenter</p></td>
-<td><p>vCenter<sup>**</sup></p></td>
-<td colspan="4"><p>Not supported</p></td>
-</tr>
 </tbody>
 </table>
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e. NFS/SAN or Local.
 
-<sup>\*\*</sup> The legacy vCenter driver is included in the distribution, but no longer receives updates or bug fixes.
+<sup>\*\*</sup> Ceph full/incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#vm-backups-operations" %}}) for more details.
 
-<sup>†</sup> Ceph full/incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#vm-backups-operations" %}}) for more details.
-
-<sup>‡</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/#lvm-thin" %}}).
+<sup>†</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/#lvm-thin" %}}).

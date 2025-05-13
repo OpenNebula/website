@@ -390,7 +390,7 @@ Sample configuration:
 
 TM_MAD = [
     EXECUTABLE = "one_tm",
-    ARGUMENTS = "-t 15 -d dummy,lvm,shared,fs_lvm,qcow2,ssh,local,ceph,dev,vcenter,iscsi_libvirt"
+    ARGUMENTS = "-t 15 -d dummy,lvm,shared,fs_lvm,qcow2,ssh,local,ceph,dev,iscsi_libvirt"
 ]
 ```
 
@@ -451,7 +451,7 @@ Sample configuration:
 ```default
 DATASTORE_MAD = [
     EXECUTABLE = "one_datastore",
-    ARGUMENTS  = "-t 15 -d dummy,fs,lvm,ceph,dev,iscsi_libvirt,vcenter -s shared,local,ceph,fs_lvm"
+    ARGUMENTS  = "-t 15 -d dummy,fs,lvm,ceph,dev,iscsi_libvirt -s shared,local,ceph,fs_lvm"
 ]
 ```
 
@@ -704,8 +704,6 @@ DOCUMENT_ENCRYPTED_ATTR = "PROVISION_BODY"
 
 HOST_ENCRYPTED_ATTR = "AZ_ID"
 HOST_ENCRYPTED_ATTR = "AZ_CERT"
-HOST_ENCRYPTED_ATTR = "VCENTER_PASSWORD"
-HOST_ENCRYPTED_ATTR = "NSX_PASSWORD"
 HOST_ENCRYPTED_ATTR = "ONE_PASSWORD"
 
 VM_ENCRYPTED_ATTR = "ONE_PASSWORD"

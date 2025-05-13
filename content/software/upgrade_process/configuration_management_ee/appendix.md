@@ -55,10 +55,7 @@ managed by the `onecfg` tool:
 | `/etc/one/sunstone-views.yaml`                             | YAML                   |
 | `/etc/one/sunstone-views/**/*.yaml`                        | YAML                   |
 | `/etc/one/tmrc`                                            | Shell                  |
-| `/etc/one/vcenter_driver.conf`                             | YAML                   |
-| `/etc/one/vcenter_driver.default`                          | Plain file (or XML)    |
 | `/etc/one/vmm_exec/vmm_exec_kvm.conf`                      | oned.conf-like         |
-| `/etc/one/vmm_exec/vmm_exec_vcenter.conf`                  | oned.conf-like         |
 | `/etc/one/vmm_exec/vmm_execrc`                             | Shell                  |
 | `/var/lib/one/remotes/datastore/ceph/ceph.conf`            | Shell                  |
 | `/var/lib/one/remotes/etc/datastore/ceph/ceph.conf`        | Shell                  |
@@ -76,5 +73,3 @@ managed by the `onecfg` tool:
 | `/var/lib/one/remotes/etc/vmm/kvm/kvmrc`                   | Shell                  |
 | `/var/lib/one/remotes/etc/vmm/lxc/lxcrc`                   | YAML                   |
 | `/var/lib/one/remotes/etc/vmm/lxc/profiles/*`              | Plain file (or XML)    |
-| `/var/lib/one/remotes/etc/vmm/vcenter/vcenterrc`           | YAML                   |
-| `/var/lib/one/remotes/etc/vnm/OpenNebulaNetwork.conf`      | YAML                   |

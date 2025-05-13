@@ -37,7 +37,7 @@ OpenNebula 7.0 “XXXX” is the first stable release of the OpenNebula 7 series
 
 ## Ecosystem
 
-<!-- - [OVA import]({{ "../../marketplace/ova_management/import_ova#import-ova" }}), a new CLI command, oneswap, allows to ingest VMs in OVA format that can be exported directly from VMware vCenter. Stay tuned for Sunstone support! -->
+[OVA import](../../../software/migration_from_vmware/import_ova): a new CLI command, oneswap, allows to ingest VMs in OVA format that can be exported directly from VMware vCenter. Stay tuned for Sunstone support!
 
 ## KVM
 

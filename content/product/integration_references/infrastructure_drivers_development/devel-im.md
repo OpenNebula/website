@@ -184,7 +184,7 @@ The DATASTORE LOCATION is the path where the datastores are mounted. By default,
 
 ### Choosing the Execution Engine
 
-OpenNebula provides two IM probe execution engines: `one_im_sh` and `one_im_ssh`. `one_im_sh` is used to execute probes in the frontend, for example `vcenter` uses this engine as it collects data via an API call executed in the frontend. On the other hand, `one_im_ssh` is used when probes need to be run remotely in the hosts, which is the case for `KVM`.
+OpenNebula provides two IM probe execution engines: `one_im_sh` and `one_im_ssh`. `one_im_sh` is used to execute probes in the Front-end; `one_im_ssh` is used when probes need to be run remotely on the hosts, which is the case for `KVM`.
 
 ### Populating the Probes
 
