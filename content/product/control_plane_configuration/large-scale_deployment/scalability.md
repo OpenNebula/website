@@ -83,12 +83,7 @@ Note: These values can be used as a baseline to adjust the probe frequency in [/
 
 Following OpenNebula 5.12, the monitoring system uses TCP/UDP to send monitoring information to Monitor Daemon. This model is highly scalable and its limit (in terms of the number of VMs monitored per second) is bound by the performance of the server running oned and the database server. Read more in the [Monitoring guide]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf#mon" %}}).
 
-For vCenter environments, OpenNebula uses the VI API offered by vCenter to monitor the state of the hypervisor and all the Virtual Machines running in all the imported vCenter clusters. The driver is optimized to cache common VM information.
-
-In both environments, our scalability testing achieves the monitoring of tens of thousands of VMs in a few minutes.
-
-{{< alert title="Important" color="success" >}}
-The vCenter driver is a legacy component. It is currently included in the distribution, but no longer receives updates or bug fixes.{{< /alert >}} 
+Our scalability testing achieves the monitoring of tens of thousands of VMs in a few minutes.
 
 ### Core Tuning
 

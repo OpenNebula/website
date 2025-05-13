@@ -479,7 +479,7 @@ $ onevm resume web_vm
 If you need to resize the capacity in the RUNNING state you have to set up some extra attributes in the VM template. These attributes **must be set before the VM is started**. These attributes are driver-specific, more info for [KVM]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#kvm-live-resize" %}}).
 
 {{< alert title="Warning" color="warning" >}}
-Hotplug is only implemented only for KVM and vCenter. Added CPUs will be in offline state after the resize. Enable them with `echo 1 > /sys/devices/system/cpu/cpu<ID>/online`{{< /alert >}} 
+Hotplug is only implemented only for KVM. Added CPUs will be in offline state after the resize. Enable them with `echo 1 > /sys/devices/system/cpu/cpu<ID>/online`{{< /alert >}} 
 
 <a id="vm-guide2-resize-disk"></a>
 
@@ -506,9 +506,6 @@ This will make the VM disk grow on the hypervisor node. Then the contextualizati
 
 {{< alert title="Important" color="success" >}}
 In FreeBSD the resize of the root filesystem inside the guest OS is not performed automatically by the Contextualization Service. This leads to [filesystem corruption](https://github.com/OpenNebula/addon-context-linux/issues/298) and permanent data loss. This only applies to the partition mounted on `/` , partitions with other mountpoints will be resized.{{< /alert >}} 
-
-{{< alert title="Important" color="success" >}}
-In vCenter a disk can be resized only if the VM is in poweroff state and the VM has no snapshots or the vCenter template, which the VM is based on, doesn’t use linked clones.{{< /alert >}} 
 
 <a id="vm-updateconf"></a>
 

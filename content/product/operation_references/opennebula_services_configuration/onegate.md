@@ -12,7 +12,7 @@ weight: "7"
 
 <!--# OneGate Configuration -->
 
-The OneGate server allows **Virtual Machines to pull and push information from/to OpenNebula**. It can be used with all hypervisor Host types (KVM, LXC, and the legacy vCenter driver) if the guest operating system has preinstalled the OpenNebula [contextualization package]({{% relref "../../virtual_machines_operation/guest_operating_systems/creating_images#os-install" %}}). It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-gate` with the system service `opennebula-gate`.
+The OneGate server allows **Virtual Machines to pull and push information from/to OpenNebula**. It can be used with both the KVM and LXC hypervisors if the guest operating system has preinstalled the OpenNebula [contextualization package]({{% relref "../../virtual_machines_operation/guest_operating_systems/creating_images#os-install" %}}). It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-gate` with the system service `opennebula-gate`.
 
 Read more in [OneGate Usage]({{% relref "../../virtual_machines_operation/multi-vm_workflows/onegate_usage#onegate-usage" %}}).
 

@@ -283,11 +283,6 @@ dialogs:
     ownership: true
     capacity: true
     vm_group: true
-    vcenter:
-      enabled: true
-      not_on:
-        - kvm
-        - lxc
     network: true
     storage: true
     placement: true
@@ -299,11 +294,6 @@ dialogs:
     capacity: true
     showback: true
     vm_group: true
-    vcenter:
-      enabled: true
-      not_on:
-        - kvm
-        - lxc
     network: true
     storage: true
     placement: true

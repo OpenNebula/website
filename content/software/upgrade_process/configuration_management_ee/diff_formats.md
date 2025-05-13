@@ -136,8 +136,6 @@ When the value in the addressed configuration file contains quotes, these must a
 /etc/one/cli/oneimage.yaml set :GROUP/:size 15
 /etc/one/cli/oneimage.yaml ins :NAME/:expand false
 /etc/one/oned.conf set DEFAULT_DEVICE_PREFIX "\"sd\""
-/etc/one/oned.conf set VM_MAD/"vcenter"/ARGUMENTS "\"-p -t 15 -r 0 -s sh vcenter\""
-/etc/one/oned.conf rm  VM_MAD/"vcenter"/DEFAULT
 /etc/one/oned.conf ins HM_MAD/ARGUMENTS "\"-p 2101 -l 2102 -b 127.0.0.1\""
 /etc/one/oned.conf ins VM_RESTRICTED_ATTR "\"NIC/FILTER\""
 ```
@@ -146,7 +144,6 @@ How to read the output? Let’s go through few examples from above:
 
 - `/etc/one/cli/oneimage.yaml ins :ID/:adjust false` - add new key `:adjust` with Boolean value `false` into top Hash structure `:ID`
 - `/etc/one/cli/oneimage.yaml set :USER/:size 15` - value for existing key `:size` inside top Hash structure `:USER` changes to `15`
-- `/etc/one/oned.conf rm VM_MAD/"vcenter"/DEFAULT` - remove key `DEFAULT` from `VM_MAD` section for `vcenter`
 
 ## Text Format
 
@@ -164,8 +161,6 @@ Text format is similar to line format with visually separated sections for each 
 
 /etc/one/oned.conf
 - set DEFAULT_DEVICE_PREFIX "\"sd\""
-- set VM_MAD/"vcenter"/ARGUMENTS "\"-p -t 15 -r 0 -s sh vcenter\""
-- rm  VM_MAD/"vcenter"/DEFAULT
 - ins HM_MAD/ARGUMENTS "\"-p 2101 -l 2102 -b 127.0.0.1\""
 - ins VM_RESTRICTED_ATTR "\"NIC/FILTER\""
 ```

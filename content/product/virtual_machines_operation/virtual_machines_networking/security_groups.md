@@ -17,7 +17,7 @@ weight: "3"
 Security Groups define firewall rules to be applied to Virtual Machines.
 
 {{< alert title="Warning" color="warning" >}}
-Security groups are not supported for OpenvSwitch. In vCenter environments, NSX is mandatory to enable Security Groups functionality.{{< /alert >}} 
+Security groups are not supported for OpenvSwitch.{{< /alert >}} 
 
 <a id="security-groups-requirements"></a>
 
