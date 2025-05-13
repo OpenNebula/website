@@ -1,7 +1,6 @@
 ---
 title: "Prometheus and Grafana Integration"
-
-description:
+description: "Configure Prometheus monitoring and alerting, visualize data with Grafana"
 categories:
 pageintoc: ""
 tags:

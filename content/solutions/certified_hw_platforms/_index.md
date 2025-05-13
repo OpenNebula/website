@@ -1,5 +1,6 @@
 ---
 title: "Certified Hardware Platforms"
+description: "TBC"
 weight: 2
 ---
 
