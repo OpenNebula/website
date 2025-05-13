@@ -92,7 +92,6 @@ JWT is a acronym of JSON Web Token{{< /alert >}}
 |---------------------------|-----------------------------------------|---------------------------------------------------------------------------------|
 | `support_url`             | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                                             |
 | `token_remote_support`    |                                         | Support enterprise token                                                        |
-| `vcenter_prepend_command` |                                         | Command prefix for `onevcenter` command                                         |
 | `sunstone_prepend`        |                                         | Optional parameter for `Sunstone commands` command                              |
 | `tmpdir`                  | `/var/tmp`                              | Directory to store temporal files when uploading images                     |
 | `max_upload_file_size`    | `10737418240`                           | Max size upload file (bytes). Default is 10GB                                   |

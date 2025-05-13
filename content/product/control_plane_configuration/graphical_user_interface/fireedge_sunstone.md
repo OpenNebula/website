@@ -293,7 +293,6 @@ The attributes described here indicate the available actions on each info tab on
 | `permissions_panel` | Describes the behavior for the `permissions` panel in the resource<br/>info tab. |
 | `qos_panel`         | Describes the behavior for the `QoS` panel in the resource info tab.             |
 | `rules_panel`       | Describes the behavior for the `rules` panel in the resource info tab.           |
-| `vcenter_panel`     | Describes the behavior for the `vCenter` panel in the resource info tab.         |
 
 The available actions in the info tabs are described in the following table.
 
@@ -367,7 +366,6 @@ The attributes described here indicate the available actions on each dialog on t
 | `sched_action` | Scheduled Actions section will be displayed. |
 | `showback`     | Showback section will be displayed.          |
 | `storage`      | Storage section will be displayed.           |
-| `vcenter`      | vCenter section will be displayed.           |
 | `vm_group`     | VM groups section will be displayed.         |
 
 <a id="fireedge-remote-connections"></a>

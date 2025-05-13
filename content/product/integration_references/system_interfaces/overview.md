@@ -29,4 +29,4 @@ This Chapter introduces the OpenNebula system interfaces:
 
 ## Hypervisor Compatibility
 
-All Sections of this Chapter apply to KVM and to the legacy vCenter hypervisor.
+All Sections of this Chapter apply to KVM.

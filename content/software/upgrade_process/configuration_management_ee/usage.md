@@ -176,7 +176,6 @@ When running in verbose mode with `--verbose`, it writes all checked files:
 
 ```default
 # onecfg validate --verbose
-INFO  : File '/etc/one/vcenter_driver.default' - OK
 INFO  : File '/etc/one/ec2_driver.default' - OK
 INFO  : File '/etc/one/az_driver.default' - OK
 INFO  : File '/etc/one/auth/ldap_auth.conf' - OK
@@ -189,7 +188,6 @@ You can also validate files inside a dedicated directory instead of a system-wid
 
 ```default
 # onecfg validate --prefix /tmp/ONE --verbose
-INFO  : File '/tmp/ONE/etc/one/vcenter_driver.default' - OK
 INFO  : File '/tmp/ONE/etc/one/ec2_driver.default' - OK
 INFO  : File '/tmp/ONE/etc/one/az_driver.default' - OK
 INFO  : File '/tmp/ONE/etc/one/auth/ldap_auth.conf' - OK
@@ -221,8 +219,6 @@ Example:
 # onecfg diff
 /etc/one/oned.conf
 - set DEFAULT_DEVICE_PREFIX "\"sd\""
-- set VM_MAD/"vcenter"/ARGUMENTS "\"-p -t 15 -r 0 -s sh vcenter\""
-- rm  VM_MAD/"vcenter"/DEFAULT
 - ins HM_MAD/ARGUMENTS "\"-p 2101 -l 2102 -b 127.0.0.1\""
 - ins VM_RESTRICTED_ATTR "\"NIC/FILTER\""
 ```

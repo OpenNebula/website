@@ -27,4 +27,4 @@ Before reading this chapter, you should have already installed your [Front-end](
 
 ## Hypervisor Compatibility
 
-These guides are compatible with all hypervisors, except for the VMware vCenter Section.
+These guides are compatible with all hypervisors.
