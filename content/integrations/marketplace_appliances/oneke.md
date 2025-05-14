@@ -14,7 +14,7 @@ weight: "5"
 
 ## Appliance Description
 
-OneKE is a minimal [hyperconverged](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) Kubernetes platform that comes with OpenNebula out of the box. OneKE is based on [RKE2 - Rancher’s Next Generation Kubernetes Distribution](https://docs.rke2.io/) with preinstalled components to handle:
+OneKE is a minimal [hyperconverged](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) Kubernetes platform that comes with OpenNebula out of the box, based on [RKE2 - Rancher’s Next Generation Kubernetes Distribution](https://docs.rke2.io/).
 
 ## Main Features
 
