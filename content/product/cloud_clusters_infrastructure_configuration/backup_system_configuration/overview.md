@@ -12,7 +12,9 @@ weight: "1"
 
 <!--# Overview -->
 
-This chapter contains documentation on how to create and manage Virtual Machines Backups. Backups are managed through the datastore and image abstractions. In this way, all the concepts that apply to these objects also apply to backups like access control or quotas. Backup datastores can be defined using two backends (datastore drivers):
+This chapter contains documentation on how to configure the available backends for [Virtual Machine Backups](../../virtual_machines_operation/virtual_machine_backups/). Backups are managed through the datastore and image abstractions, so all of the concepts that apply to these objects (such as access control or quotas) also apply to backups.
+
+Backup datastores can be defined using two backends (datastore drivers):
 
 > - restic, based on the [restic backup tool](https://restic.net/)
 > - rsync, that uses the [rsync utility](https://rsync.samba.org/) to transfer backup files.
