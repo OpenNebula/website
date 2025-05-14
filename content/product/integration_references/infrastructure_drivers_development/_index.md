@@ -1,7 +1,7 @@
 ---
 title: "Infrastructure Drivers"
 date: "2025-02-17"
-description: "Placeholder - TBC"
+description: "Consult driver references for extending OpenNebula functionality"
 categories:
 pageintoc: "290"
 tags:
