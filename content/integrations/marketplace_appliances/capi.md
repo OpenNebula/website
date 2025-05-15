@@ -19,7 +19,7 @@ The Rancher CAPI appliance provides a fully preconfigured environment with [Ranc
 This appliance comes with a set of preinstalled components designed to streamline Kubernetes cluster management on OpenNebula:
 
 * Rancher running on a lightweight [K3s](https://k3s.io/) cluster, along with the Turtles extension.
-* [Cluster API provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula) (CAPONE) imported as an infraestructure provider.
+* [Cluster API provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula) (CAPONE) imported as an infrastructure provider.
 * RKE2 and Kubeadm charts to simplify cluster deployments.
 
 ## Main References
