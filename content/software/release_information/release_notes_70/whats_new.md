@@ -19,6 +19,7 @@ OpenNebula 7.0 “XXXX” is the first stable release of the OpenNebula 7 series
 - The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs.
 - The enforce parameter has been restored for the resize operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently.
 - Option to define [Compute Quotas per Cluster]({{% relref "../../../product/cloud_system_administration/capacity_planning/quotas#compute-quotas" %}}) to achieve more granular control of resources.
+- Added option [CONTEXT_ALLOW_ETH_UPDATES to oned.conf]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned" %}}) to enable updates of VM context `ETH*` values.
 
 ## Storage & Backups
 
