@@ -12,9 +12,21 @@ weight: "10"
 
 <!--# WordPress -->
 
-This OpenNebula marketplace appliance comes with a preinstalled [WordPress](https://wordpress.org/) service and includes the following features:
+## Appliance Description
 
-* Based on the latest AlmaLinux 8 Linux distribution (for x86-64).
-* No default login (local or SSH) password - must be provided via contextualization
+The WordPress Appliance is a Virtual Machine with a preinstalled [WordPress](https://wordpress.org/) service, available for KVM hosts.
 
-The full documentation of the [WordPress appliance](https://github.com/OpenNebula/one-apps/wiki) is maintained in the OpenNebula Apps project.
+## Main Features
+
+The WordPress Appliance features:
+
+- Based on the latest AlmaLinux 8 Linux distribution (for x86-64)
+- No default login (local or SSH) password - must be provided via contextualization
+- Ability to automate WordPress initial configuration with [contextualization parameters](https://github.com/OpenNebula/one-apps/wiki/wp_feature#contextualization)
+
+## Main References
+
+- [Wordpress](https://github.com/OpenNebula/one-apps/tree/master/appliances/Wordpress) in the [OpenNebula one-apps](https://github.com/OpenNebula/one-apps) project
+- [Full documentation](https://github.com/OpenNebula/one-apps/wiki) for the WordPress Appliance
+- Download the WordPress Appliance from the [Opennebula Marketplace](https://marketplace.opennebula.io/appliance/84bd27fe-5d14-4e70-a79a-eb3fdd0072ae)
+
