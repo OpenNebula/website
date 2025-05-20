@@ -14,7 +14,7 @@ weight: "1"
 
 Welcome to OpenNebula, the open source **Cloud & Edge Computing Platform** bringing real freedom to your Enterprise Cloud 🚀
 
-This page provides a high-level overview of the OpenNebula cloud model, architecture and components. To familiarize yourself with OpenNebula and build an evaluation environment, we strongly recommend you follow the tutorials in our [Quick Start Guide]({{% relref "../../try_opennebula/opennebula_evaluation_environment/index#quick-start" %}}). For a description of the steps needed to build a production environment, please refer to [Cloud Architecture Design]({{% relref "../cloud_architecture_and_design/cloud_architecture_design#intro" %}}).
+This page provides a high-level overview of the OpenNebula cloud model, architecture and components. To familiarize yourself with OpenNebula and build an evaluation environment, we strongly recommend you follow the tutorials in our [Quick Start Guide]({{% relref "quick_start" %}}). For a description of the steps needed to build a production environment, please refer to [Cloud Architecture Design]({{% relref "cloud_architecture_design#intro" %}}).
 
 OpenNebula is a **powerful, but easy-to-use, open source platform to build and manage enterprise clouds and virtualized Data Centers**. It combines existing virtualization technologies with advanced features for multi-tenancy, automatic provision and elasticity on private, hybrid, and edge environments. It unifies management of IT infrastructure and applications, preventing vendor lock-in and reducing complexity, resource consumption and operational costs.
 
@@ -134,14 +134,14 @@ The OpenNebula documentation provides a summary of its [key features]({{% relref
 
 **Building an Evaluation Environment**
 
-To evaluate OpenNebula, we strongly recommend that you follow our [Quick Start Guide]({{% relref "../../try_opennebula/opennebula_evaluation_environment/index#quick-start" %}}). The Guide will walk you through a series of tutorials to progressively build infrastructure. All tutorials use the Sunstone UI, and most take under ten minutes to complete.
+To evaluate OpenNebula, we strongly recommend that you follow our [Quick Start Guide]({{% relref "quick_start" %}}). The Guide will walk you through a series of tutorials to progressively build infrastructure. All tutorials use the Sunstone UI, and most take under ten minutes to complete.
 
 Following the Guide, you can:
 
-> * [Install an OpenNebula Front-end]({{% relref "../../try_opennebula/opennebula_evaluation_environment/try_opennebula_on_kvm#try-opennebula-on-kvm" %}}), then use that Front-end to
-> * [Deploy an Edge Cluster]({{% relref "../../try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster#first-edge-cluster" %}}), where you will
-> * [Deploy a Virtual Machine]({{% relref "../../try_opennebula/opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}}), and finally
-> * [Deploy a Kubernetes cluster]({{% relref "../../try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}}).
+> * [Install an OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws" %}}), then use that Front-end to
+> * [Deploy an Edge Cluster]({{% relref "provisioning_edge_cluster" %}}), where you will
+> * [Deploy a Virtual Machine]({{% relref "validate_the_minione_environment" %}}), and finally
+> * [Deploy a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}).
 
 The Quick Start Guide is by far the fastest way to familiarize yourself with OpenNebula.
 

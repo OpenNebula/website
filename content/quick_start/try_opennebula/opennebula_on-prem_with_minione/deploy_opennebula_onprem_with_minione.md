@@ -1,5 +1,5 @@
 ---
-title: "Create an Emulated Environment with miniONE"
+title: "Deploy OpenNebula On-prem with miniONE"
 date: "2025-02-17"
 description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
 categories: [Introduction, Evaluation, Learning]
@@ -18,6 +18,7 @@ This tutorial covers installation of a Front-end and KVM hypervisor node on the 
 
 With this setup, during installation miniONE will:
 
+- Install OpenNebula from the software packages
 - Install a KVM hypervisor on the local machine
 - Automatically download a Virtual Machine template for the Alpine Linux 3.20 OS from the [OpenNebula Marketplace](https://marketplace.opennebula.io/))
 
@@ -29,10 +30,6 @@ To install an OpenNebula Front-end using miniONE, we’ll need to complete the f
 > 2. Download and run the miniONE script.
 > 3. Verify the installation.
 
-
-{{< alert title="Tip" color="success" >}}
-To use miniONE for provisioning resources to remote infrastructure, see the tutorials in [Quick Start: OpenNebula Evaluation Environment]({{% relref "opennebula_evaluation_environment" %}}).
-{{< /alert >}}
 
 ## Step 1: Verify Installation Requirements
 
@@ -88,7 +85,7 @@ chmod +x minione
 To install miniONE, run:
 
 ```default
-bash minione
+minione --version 6.99
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
@@ -177,7 +174,7 @@ The quickest way to log into the VM is by VNC, available directly in Sunstone. J
 
 Log in as root with password `opennebula`.
 
-Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine. You can now further explore your OpenNebula system -- for example, by downloading more VMs and appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploying them to your new cloud, or by checking out the deployment options in [Quick Start: OpenNebula Evaluation Environment]({{% relref "opennebula_evaluation_environment" %}}).
+Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine. You can now further explore your OpenNebula system -- for example, by downloading more VMs and appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploying them to your new cloud, or by checking out the deployment options in PLACEHOLDER.
 
 
 

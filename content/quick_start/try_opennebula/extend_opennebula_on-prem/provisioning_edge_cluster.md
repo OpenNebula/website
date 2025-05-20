@@ -12,7 +12,7 @@ weight: "5"
 
 <!--# Provisioning an Edge Cluster -->
 
-In the first tutorial of this Quick Start Guide, we installed an [OpenNebula Front-end]({{% relref "try_opennebula_on_kvm#try-opennebula-on-kvm" %}}) on AWS. In this tutorial, we’ll use that Front-end to provision an **Edge Cluster** on AWS, using the Sunstone GUI for the whole process, in just a few clicks.
+In the first tutorial of this Quick Start Guide, we installed an [OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}) on AWS. In this tutorial, we’ll use that Front-end to provision an **Edge Cluster** on AWS, using the Sunstone GUI for the whole process, in just a few clicks.
 
 The edge cluster we’ll create includes a KVM hypervisor. It’s a suitable platform for deploying both Virtual Machines and Kubernetes clusters.
 
@@ -57,7 +57,7 @@ In the following steps, we’ll use the Sunstone GUI to create a provider and pr
 ## Step 1: Configure AWS
 
 {{< alert title="Important" color="success" >}}
-Creating an AWS account is covered in the previous tutorial in this Quick Start Guide, on installing an [OpenNebula Front-end on AWS]({{% relref "try_opennebula_on_kvm#try-opennebula-on-kvm" %}}). If you completed that tutorial, you should have your AWS account already configured and ready, and can skip to the [next step]({{% relref "#step-2-ref" %}}). If you haven’t, we highly recommend you follow that tutorial before completing this one.{{< /alert >}} 
+Creating an AWS account is covered in the previous tutorial in this Quick Start Guide, on installing an [OpenNebula Front-end on AWS]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}). If you completed that tutorial, you should have your AWS account already configured and ready, and can skip to the [next step]({{% relref "#step-2-ref" %}}). If you haven’t, we highly recommend you follow that tutorial before completing this one.{{< /alert >}} 
 
 As a first step, if you don’t already have one, create an account in AWS. AWS publishes a complete guide: [How do I create and activate a new AWS account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
 
@@ -190,7 +190,7 @@ To see that all objects in the provision have been correctly created, we’ll ru
 First, log in to the Front-end node.
 
 {{< alert title="Tip" color="info" >}}
-If you installed the Front-end by following the [Quickstart with miniONE on AWS]({{% relref "try_opennebula_on_kvm" %}}) tutorial, to log into the Front-end you will need to use the key stored in the PEM file that you obtained from AWS. For details, see [Step 1.1. Log in to the EC2 VM]({{% relref "try_opennebula_on_kvm#minione-log-in-to-ec2" %}}) in that tutorial.{{< /alert >}} 
+If you installed the Front-end by following the [Quickstart with miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) tutorial, to log into the Front-end you will need to use the key stored in the PEM file that you obtained from AWS. For details, see [Step 1.1. Log in to the EC2 VM]({{% relref "deploy_opennebula_on_aws#minione-log-in-to-ec2" %}}) in that tutorial.{{< /alert >}} 
 
 On the Front-end node, use the `oneprovision` command to perform the following actions:
 
@@ -258,4 +258,4 @@ If you want root access to the edge cluster, log in as user `ubuntu`, then `sudo
 
 ## Next Steps
 
-To see all of the resources created with your new edge cluster, and how they are displayed in Sunstone, see [Operating an Edge Cluster]({{% relref "operating_edge_cluster" %}}).
+To see all of the resources created with your new edge cluster, and how they are displayed in Sunstone, see [Operating an Edge Cluster]({{% relref "validate_the_minione_environment" %}}).
