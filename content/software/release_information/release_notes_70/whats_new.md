@@ -50,8 +50,8 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 
 ## Sunstone
 
-- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev" %}}).
-- Guacamole VDI over SSH tunnel [Remote connections guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections" %}}).
+- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide](../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev").
+- Guacamole VDI over SSH tunnel [Remote connections guide](../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections).
 - Redesigned Sunstone UI, featuring improved accessibility, streamlined navigation, and new data visualization options.
 - New cloud view for end users: a dashboard with real-time metrics and quick access to common actions.
 - Support for VM Template Profiles with pre-defined deployment settings.
