@@ -92,7 +92,7 @@ For a complete overview, see [Virtual Network Templates]({{% relref "../../../pr
 
 In previous tutorials of this Quick Start Guide, we:
 
-> * Installed an [OpenNebula Front-end using miniONE]({{% relref "try_opennebula_on_kvm#try-opennebula-on-kvm" %}}), and
+> * Installed an [OpenNebula Front-end using miniONE]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}), and
 > * Deployed a [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}) on AWS.
 
 In this tutorial, we’ll use that infrastructure to deploy a fully-configured virtual machine with a ready-to-use WordPress installation, in under five minutes.

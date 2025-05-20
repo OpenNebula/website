@@ -122,8 +122,8 @@ The Edge Cluster type determines the hypervisor and workload that can be run in 
 
 | Use Case                                                                                                                                                                                             | Edge Cluster   | Hypervisor   |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [I want to run virtual servers…]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}})            | metal          | KVM, LXC     |
-| [I want to run a Kubernetes cluster…]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}}) | metal          | KVM          |
+| [I want to run virtual servers…]({{% relref "validate_the_minione_environment" %}})            | metal          | KVM, LXC     |
+| [I want to run a Kubernetes cluster…]({{% relref "running_kubernetes_clusters" %}}) | metal          | KVM          |
 
 ## Certified Infrastructure Scale
 
