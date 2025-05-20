@@ -1,5 +1,5 @@
 ---
-title: "Try OpenNebula Front-end on AWS"
+title: "Deploy OpenNebula on AWS with miniONE"
 date: "2025-02-17"
 description:
 categories: [Introduction, Learning, Deployment, Evaluation]

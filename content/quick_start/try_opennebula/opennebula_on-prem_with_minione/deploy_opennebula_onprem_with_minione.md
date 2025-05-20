@@ -1,5 +1,5 @@
 ---
-title: "Try OpenNebula Front-end On-prem"
+title: "Deploy OpenNebula On-prem with miniONE"
 date: "2025-02-17"
 description:
 categories: [Introduction, Learning, Evaluation, Deployment]
