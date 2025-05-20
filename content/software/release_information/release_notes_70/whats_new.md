@@ -50,13 +50,13 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 
 ## Sunstone
 
-- Architectural shift to Micro-Frontend as part of the Dynamic Tabs update [Sunstone development guide](../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev").
+- Dynamic Tabs to be able to add third party section in Sunstone in an easy way. Learn how in [Sunstone development guide](../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev").
 - Guacamole VDI over SSH tunnel [Remote connections guide](../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections).
-- Redesigned Sunstone UI, featuring improved accessibility, streamlined navigation, and new data visualization options.
+- Redesigned part of the Sunstone UI, featuring improved accessibility, streamlined navigation, and new data visualization options.
 - New cloud view for end users: a dashboard with real-time metrics and quick access to common actions.
 - Support for VM Template Profiles with pre-defined deployment settings.
-- TODO: Labels
-- TODO: User Inputs
+- Add support for labels in Sunstone, including the labels that were set in the old Sunstone UI. Check [Compatibility guide](../compatibility#compatibility-guide-labels).
+- New way to render and group user inputs when instantiating an appliance. Check [User Inputs in Sunstone](product/virtual_machines_operation/virtual_machine_images/vm_templates/#vm-guide-user-inputs-sunstone).
 
 ## API and CLI
 
