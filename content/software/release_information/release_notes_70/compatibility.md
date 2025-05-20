@@ -48,6 +48,11 @@ New attributes:
 |----------|-------------------|---------------|
 | type     | vm,vr             |  vm           |
 
+
+## Cloud Cluster Provisioning
+
+- This version removes the legacy provisioning component, incorporating internal code changes that lay the groundwork for a complete rewrite. The fully redesigned provisioning system, featuring enhanced support for additional providers, will be released in a subsequent maintenance update.
+
 ## Resize Operation
 
 The enforcement parameter was deprecated to ensure NUMA consistency for the VM during a resize. Instead, it has been reinstated to control capacity attributes, such as memory and CPU.
