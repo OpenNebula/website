@@ -67,7 +67,7 @@ Sequential tutorials to help you install and explore OpenNebula in just a few mi
          <a href="try_opennebula/opennebula_on-prem_with_minione/deploy_opennebula_on_aws">Deploy OpenNebula on AWS with miniONE</a>
       </inl>
       <inl>
-         <a href="try_opennebula/opennebula_on-prem_with_minione/deploy_opennebula-tbc-with_minione">Deploy OpenNebula on +PLACEHOLDER TBC with miniONE</a>
+         <a href="try_opennebula/opennebula_on-prem_with_minione/deploy_opennebula-tbc-with_minione">Deploy OpenNebula on +TBC with miniONE</a>
       </inl>
       <inl>
          <a href="try_opennebula/opennebula_on-prem_with_minione/validate_the_minione_environment">Validate the miniONE Environment</a>
