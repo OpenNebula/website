@@ -66,7 +66,6 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 ## KVM & Networking
 
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
-- [VLAN filtering](../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan/#defining-a-q-in-q-network) support has been added for Linux bridge-based networking drivers, simplifying the handling of service and customer VLAN tags.
 - [ARM architecture support](../../../product/operation_references/hypervisor_configuration/kvm_driver/#arm64-specifics), including OpenNebula packages and Marketplace appliances for aarch64.
 - [OVA import](../../../software/migration_from_vmware/import_ova): a new CLI command, oneswap, allows to ingest VMs in OVA format that can be exported directly from VMware vCenter. Stay tuned for Sunstone support!
 
