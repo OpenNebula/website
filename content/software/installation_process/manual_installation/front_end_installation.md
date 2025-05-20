@@ -146,7 +146,7 @@ For advanced setup, follow the configuration references for the OpenNebula [Daem
 
 ### FireEdge
 
-OpenNebula FireEdge is the next-generation web UI server that replaces the legacy Ruby Sunstone. It provides the Sunstone GUI — including additional functionality via Guacamole — as well as the OneProvision GUI for provisioning clusters. It is installed and configured by default.
+OpenNebula FireEdge is the next-generation web UI server that replaces the legacy Ruby Sunstone. It provides the Sunstone GUI, including additional functionality provided via Guacamole. It is installed and configured by default.
 
 {{< alert title="Note" color="success" >}}
 For advanced setup, follow the FireEdge [configuration reference]({{% relref "fireedge#fireedge-configuration" %}}).{{< /alert >}} 

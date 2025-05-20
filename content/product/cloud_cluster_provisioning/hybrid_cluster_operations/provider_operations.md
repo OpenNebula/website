@@ -12,10 +12,7 @@ weight: "2"
 
 <!--# Managing Providers -->
 
-You can manage your Edge providers with the command `oneprovider`. This will allow you to register the provider in OpenNebula and use it. There are two ways of using it:
-
-- As part of [an Edge Cluster definition]({{% relref "../../operation_references/hybrid_cluster_references/template#ddc-template" %}}). When you create the Edge Cluster the provider information will be used.
-- You can set the provider when creating a new Edge Cluster with the command `oneprovision create` and the parameter `--provider`. This will override any provider in the Edge Cluster definition template.
+You can manage your Edge providers with the command `oneprovider`. This will allow you to register the provider in OpenNebula and use it. The provider will be created as part of the Edge Cluster definition when you create the Edge Cluster.
 
 {{< alert title="Important" color="success" >}}
 The information stored in providers is encrypted due to security reasons. Because of this, a user should belong to `oneadmin's` group in order to use them.{{< /alert >}} 
@@ -71,16 +68,3 @@ $ oneprovider delete 2
 If you try to delete a provider that is being used by a provision or provision template, you will get an error.{{< /alert >}} 
 
 <a id="adding-provider"></a>
-
-## Adding and Customizing Edge Providers
-
-The predefined providers are located in `/usr/share/one/oneprovision/edge-clusters/<provision_type>/providers/<provider>`. The provision type can be `metal` or `virtual`, and the provider is one of the ones available.
-
-Providers’ information is loaded by the OneProvision Sunstone GUI, so the user can select one in order to create his or her own provider. If you want to add a new template here, you need to follow these steps:
-
-1. Clone one of the templates.
-2. In the cloned template put the new information.
-3. Restart the OneProvision Edge GUI `systemctl restart opennebula-fireedge`.
-
-{{< alert title="Note" color="success" >}}
-If you want to modify some of the existing providers, you just need to execute points 2 and 3.{{< /alert >}} 

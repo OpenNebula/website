@@ -14,10 +14,7 @@ HCI Clusters features an hyperconvergent storage configuration based on Ceph. Co
 
 ## How Should I Read This Chapter
 
-In this chapter you can find a guide on how to automatically deploy HCI Clusters on bare-metal on:
-
-> - [Amazon AWS Edge Clusters]({{% relref "aws_cluster_ceph#aws-cluster-ceph" %}})
-> - [On-Premise Edge Cluster]({{% relref "onprem_cluster_ceph#onprem-cluster-ceph" %}})
+This chapter describes how to automatically deploy HCI Clusters on bare-metal on [Amazon AWS Edge Clusters]({{% relref "aws_cluster_ceph#aws-cluster-ceph" %}}).
 
 ## Hypervisor Compatibility
 
