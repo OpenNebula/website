@@ -100,6 +100,14 @@ This redesign was necessary to support advanced QCOW2 features such as thin prov
 
 Note: Caching support is not yet included in this release but is in an advanced development stage and will be available in an upcoming maintenance update.
 
+<a id="compatibility-guide-labels"></a>
+
 ## Labels on Sunstone
 
+Starting from version 7.0, the labels system in Sunstone has been revamped, moving away from the old global/system-wide approach towards a more user/group-specific structure. 
 
+Previously, labels were stored directly on the resources they were applied to, which didn't scale well. There was no way to tell which user had created which label, and removing a label only affected the user template, leaving the resource template untouched. This often led to "stale labels", cluttering resource templates and misrepresenting which labels were actually in use-especially when different users applied similarly named labels to shared resources. 
+
+The new format introduces two types of labels: "User" and "Group" labels. These are now stored in either the user template or the group template, along with metadata about which resources they're applied to. This avoids cluttering the resource templates themselves and makes it possible to control label visibility more precisely by leveraging different group memberships. 
+
+When upgrading to 7.0, existing in-use labels will be automatically migrated. To avoid bringing over stale or unused data, only labels that are present both in a user's template and on a resource template will be migrated. Any existing persistent labels defined in `etc/one/sunstone/sunstone-views.yaml` will be migrated to the new format, as user labels. New persistent labels can be defined in `etc/one/fireedge/sunstone/default-labels.yaml`.

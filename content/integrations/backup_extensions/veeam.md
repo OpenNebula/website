@@ -115,17 +115,17 @@ If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup 
 
 ## Step 3: Install and configure the oVirtAPI module
 
-In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backups server. You can do this by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, follow the steps below:
+In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backups server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
 
-1. Install the ``opennebula-ovirtapi`` package in the backup server.
-2. Change the ``one_xmlrpc`` variable in the configuration file ``/etc/one/ovirtapi/ovirtapi-server.yml`` and make sure it points to your OpenNebula front-end address.
-3. You must also place a certificate at ``/etc/one/ovirtapi/ovirtapi-ssl.crt`` or generate one with:
+The configuration file can be found at ``/etc/one/ovirtapi-server.yml``, you should change the following variables before starting the service:
 
-    ``openssl req -newkey rsa:2048 -nodes -keyout /etc/one/ovirtapi/ovirtapi-ssl.key -x509 -days 365 -out /etc/one/ovirtapi/ovirtapi-ssl.crt -subj "/C=US/ST=State/L=City/O=Organization/OU=OrgUnit/CN=example.com"``
+* ``one_xmlrpc``: Address of the OpenNebula front-end.
+* ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
+* ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
 
-4. Start the oVirtAPI module with:
+During installation a self-signed certificate is generated at ``/etc/one/ovirtapi-ssl.crt`` for encryption. You can replace this certificate by your own and change the ``cert_path`` configuration variable.
 
-    ``systemctl start opennebula-ovirtapi``
+Finally, start the service with either ``systemctl start apache2`` (ubuntu/debian) or ``systemctl start httpd`` (alma).
 
 ## Step 4: Add OpenNebula to Veeam
 
