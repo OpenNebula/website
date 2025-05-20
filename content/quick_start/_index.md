@@ -2,7 +2,7 @@
 title: "Quick Start"
 type: docs
 date: "2025-02-17"
-description: "From learning about OpenNebula to deploying a production-ready OpenNebula cloud"
+description: "Conceptual overviews to help you understand the platform and its architecture, followed by practical guidance on cloud design and deployment with  sequential tutorials to quickly install and explore OpenNebula using tools like miniONE or the OnePoC ISO, ideal for evaluation and testing that can be extended to hybrid cloud and to run Kubernetes clusters"
 categories:
 hide_feedback: true
 no_list: true
@@ -15,7 +15,7 @@ weight: "1"
 
 ## [Understand OpenNebula](understand_opennebula)
 
-Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying a cloud.
+Get a high-level overview of OpenNebula and discover the essential steps for designing and deploying your own cloud infrastructure
 
 {{< cardpane >}}
    {{< card header="[OpenNebula Concepts](understand_opennebula/opennebula_concepts)" >}}
@@ -53,9 +53,9 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
 
 <hr class="panel-line">
 
-## [Try OpenNebula with miniONE](try_opennebula)
+## [Try OpenNebula](try_opennebula)
 
-Follow tutorials to quickly deploy an on-prem or remote cloud for learning and evaluation. Deploy and run a Cloud Cluster, a Kubernetes Cluster, and Virtual Machines.
+Sequential tutorials to help you install and explore OpenNebula in just a few minutes. Whether you’re evaluating the platform, testing key features, or preparing for a future production deployment, these guides will help you get started quickly and efficiently
 
 {{< cardpane >}}
    {{< card header="[Quick Start: OpenNebula Learning Environment](try_opennebula/opennebula_learning_environment)" >}}
