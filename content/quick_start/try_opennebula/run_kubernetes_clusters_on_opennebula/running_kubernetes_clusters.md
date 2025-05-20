@@ -14,9 +14,9 @@ weight: "7"
 
 In previous tutorials of this Quick Start Guide, we:
 
-> * Installed an [OpenNebula Front-end using miniONE]({{% relref "try_opennebula_on_kvm#try-opennebula-on-kvm" %}}),
+> * Installed an [OpenNebula Front-end using miniONE]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}),
 > * deployed a [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}) on AWS, and
-> * deployed a [Virtual Machine]({{% relref "running_virtual_machines#running-virtual-machines" %}}) with WordPress on that Metal Edge Cluster.
+> * deployed a [Virtual Machine]({{% relref "validate_the_minione_environment#running-virtual-machines" %}}) with WordPress on that Metal Edge Cluster.
 
 At this point, we are ready to deploy something more complex on our Metal Edge Cluster: an enterprise-grade, multi-master Kubernetes cluster based on SUSE Rancher’s RKE2 Kubernetes distribution. Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
 
@@ -28,7 +28,7 @@ To deploy the Kubernetes cluster, we’ll follow these high-level steps:
 > 4. Deploy an application on Kubernetes.
 
 {{< alert title="Important" color="success" >}}
-As mentioned above, we’ll use the infrastructure created in previous tutorials of this Quick Start Guide, namely our [OpenNebula Front-end]({{% relref "try_opennebula_on_kvm#try-opennebula-on-kvm" %}}) and our [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}), both deployed on AWS. To complete this tutorial, you will need the Front-end and the Edge Cluster up and running.{{< /alert >}} 
+As mentioned above, we’ll use the infrastructure created in previous tutorials of this Quick Start Guide, namely our [OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}) and our [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}), both deployed on AWS. To complete this tutorial, you will need the Front-end and the Edge Cluster up and running.{{< /alert >}} 
 
 This tutorial includes a preliminary section to avoid known problems related to a datastore parameter in AWS, and a [Known Issues]({{% relref "#k8s-known-issues" %}}) section at the end for troubleshooting.
 
@@ -380,7 +380,7 @@ Then, re-instantiate the service from the Sunstone UI: in the left-hand pane, **
 
 Another possible cause for VMs in the Kubernetes cluster failing to run is lack of contact between the VNF node in the cluster and the OneGate server on the Front-end.
 
-As described in [Quick Start Using miniONE on AWS]({{% relref "try_opennebula_on_kvm#try-opennebula-on-kvm" %}}), the AWS instance where the Front-end is running must allow incoming connections for port 5030. If you do not want to open the port for all addresses, check the **public** IP address of the VNF node (the AWS Elastic IP, see [above]({{% relref "#check-vnf" %}})), and create an inbound rule in the AWS security groups for that IP.
+As described in [Quick Start Using miniONE on AWS]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}), the AWS instance where the Front-end is running must allow incoming connections for port 5030. If you do not want to open the port for all addresses, check the **public** IP address of the VNF node (the AWS Elastic IP, see [above]({{% relref "#check-vnf" %}})), and create an inbound rule in the AWS security groups for that IP.
 
 In cases of lack of connectivity with the OneGate server, the `/var/log/one/oneflow.log` file on the Front-end will display messages like the following:
 

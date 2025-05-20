@@ -14,11 +14,11 @@ weight: "1"
 
 This page describes the high-level steps to design and deploy an OpenNebula cloud.
 
-To familiarize yourself with deployment and daily operations, or if you want to quickly try an Edge, Hybrid or Multi-cloud deployment, we strongly recommend you begin with the [Quick Start Guide]({{% relref "../../try_opennebula/opennebula_evaluation_environment/index#quick-start" %}}). In the Quick Start, you can:
+To familiarize yourself with deployment and daily operations, or if you want to quickly try an Edge, Hybrid or Multi-cloud deployment, we strongly recommend you begin with the [Quick Start Guide]({{% relref "quick_start" %}}). In the Quick Start, you can:
 
-> * [Install an OpenNebula Front-end]({{% relref "../../try_opennebula/opennebula_evaluation_environment/overview#deployment-basics-overview" %}})
-> * Deploy on-demand [Edge Clusters]({{% relref "../../try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster#first-edge-cluster" %}}) on remote cloud providers
-> * Deploy [Virtual Machines]({{% relref "../../try_opennebula/opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}}) and [Kubernetes clusters]({{% relref "../../try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}})
+> * [Install an OpenNebula Front-end]({{% relref "try_opennebula" %}})
+> * Deploy on-demand [Edge Clusters]({{% relref "provisioning_edge_cluster" %}}) on remote cloud providers
+> * Deploy [Virtual Machines]({{% relref "validate_the_minione_environment" %}}) and [Kubernetes clusters]({{% relref "running_kubernetes_clusters" %}})
 
 As you follow the tutorials you will learn the basic usage and operation of your cloud. This trial of a real cloud deployment can help you to plan for the most suitable features for performance and scalability, to get the most out of your OpenNebula cloud.
 

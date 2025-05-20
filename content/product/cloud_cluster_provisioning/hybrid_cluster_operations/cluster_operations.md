@@ -18,7 +18,7 @@ weight: "3"
 
 ## Creating a Cluster
 
-Check the steps [here]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster#first-edge-cluster" %}}). You can also use the command `oneprovision create`:
+Check the steps [here]({{% relref "provisioning_edge_cluster" %}}). You can also use the command `oneprovision create`:
 
 ```default
 $ oneprovision create /tmp/provision.yml
@@ -228,11 +228,11 @@ Examples:
 $ oneprovision ip add 0
 ```
 
-Check [this]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/operating_edge_cluster#edge-public" %}}) to know more about public networking.
+Check [this]({{% relref "validate_the_minione_environment#edge-public" %}}) to know more about public networking.
 
 #### Adding Virtual Network
 
-Check [this]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/operating_edge_cluster#edge-private" %}}) to know how you can add more private networks to an existing Edge Cluster.
+Check [this]({{% relref "validate_the_minione_environment#edge-private" %}}) to know how you can add more private networks to an existing Edge Cluster.
 
 ## CLI Commands
 

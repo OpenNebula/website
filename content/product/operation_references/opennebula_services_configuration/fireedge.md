@@ -23,7 +23,7 @@ The OpenNebula FireEdge server provides a **next-generation web-management inter
 ## Main Features
 
 - **Guacamole Proxy** for Sunstone to remotely access the VMs (incl., VNC, RDP, and SSH)
-- **OneProvision GUI**: to manage deployments of fully operational Clusters on remote Edge Cloud providers, see [Provisioning an Edge Cluster]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster#first-edge-cluster" %}}). Accessible from the following URL:
+- **OneProvision GUI**: to manage deployments of fully operational Clusters on remote Edge Cloud providers, see [Provisioning an Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}). Accessible from the following URL:
 
 ```default
 http://<OPENNEBULA-FRONTEND>:2616/fireedge/provision
