@@ -23,6 +23,7 @@ As part of OpenNebula 7.0’s effort to streamline infrastructure operations and
 - vCenter Drivers – Support for VMware vCenter has been discontinued.
 - Original Sunstone – The legacy Sunstone interface with a Ruby backend has been removed in favor of the current interface.
 - Ebtables Network Driver – The ebtables driver has been deprecated and is no longer available in favor on more reliable VLAN solutions.
+- Legacy hybrid cloud computing drivers have been removed (ec2, azure, OpenNebula) in favor of the new components
 
 ## Redesigned Scheduling System
 
@@ -83,7 +84,7 @@ New Format:
 
 ```
 
-## Cloud Cluster Provisioning
+## Cluster Provisioning
 
 - This version removes the legacy provisioning component, incorporating internal code changes that lay the groundwork for a complete rewrite. The fully redesigned provisioning system, featuring enhanced support for additional providers, will be released in a subsequent maintenance update.
 
