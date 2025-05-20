@@ -68,8 +68,6 @@ $ oneprovider create provider.yaml
 ID: 0
 ```
 
-The providers’ templates are located in `/usr/share/one/oneprovision/edge-clusters/metal/providers/scaleway`. You just need to enter valid credentials.
-
 ## How to Customize an Existing Provider
 
-The provider information is stored in the OpenNebula database and can be updated just like any other resource. In this case, you need to use the command `oneprovider update`. It will open an editor so you can edit all the information there. You can also use the OneProvision FireEdge GUI to update all the information.
+The provider information is stored in the OpenNebula database and can be updated just like any other resource. In this case, you need to use the command `oneprovider update`. It will open an editor so you can edit all the information there.

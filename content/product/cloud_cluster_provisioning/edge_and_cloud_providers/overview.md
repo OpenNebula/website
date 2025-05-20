@@ -19,7 +19,6 @@ In this chapter you can find a guide on how to create Providers based on the sup
 > - [Equinix Provider]({{% relref "equinix_provider#equinix-provider" %}})
 > - [Amazon AWS Provider]({{% relref "aws_provider#aws-provider" %}})
 > - [Scaleway Provider]({{% relref "scaleway_provider#scaleway-provider" %}})
-> - [On-Premise Provider]({{% relref "onprem_provider#onprem-provider" %}})
 
 Note, the on-premise provider is a convenient abstraction to represent your own resources on your datacenter.
 

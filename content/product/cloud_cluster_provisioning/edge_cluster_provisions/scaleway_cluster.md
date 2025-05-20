@@ -41,11 +41,3 @@ The following resources, associated to each Edge Cluster, will be created in Ope
 3. Datastores - image and system datastores with SSH transfer manager using first instance as a replica.
 4. Virtual network - for public networking.
 5. Virtual network template - for private networking.
-
-## Operating Providers & Edge Clusters
-
-Refer to the [cluster operation guide]({{% relref "../../cloud_cluster_provisioning/hybrid_cluster_operations/cluster_operations#cluster-operations" %}}) to check all of the operations needed to create, manage, and delete an Edge Cluster. Refer to the [providers guide]({{% relref "../../cloud_cluster_provisioning/hybrid_cluster_operations/provider_operations#provider-operations" %}}) to check all of the operations related to providers.
-
-You can also manage AWS and Equinix Clusters using the OneProvision GUI in Sunstone.
-
-![image_fireedge](/images/oneprovision_fireedge.png)

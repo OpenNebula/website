@@ -75,7 +75,6 @@ Getting: OpenNebula logs.
 Getting: Dump of OpenNebula database.
 Getting: OpenNebula configuration.
 Getting: OpenNebula remotes.
-Getting: OneProvision GUI logs.
 Error: source directory /var/lib/one/fireedge/provision does not exist
 Getting: VM Templates.
 Getting: VMS folder.
