@@ -48,6 +48,40 @@ New attributes:
 |----------|-------------------|---------------|
 | type     | vm,vr             |  vm           |
 
+### Examples:
+
+Old Format:
+
+```json
+{
+   "name": "old_role_example",
+   "vm_template": 1,
+   "cardinality": 3,
+   "vm_template_contents": "ATT_A=\"$ATT_A\",\n\"CONTEXT\"=[ATT_A=\"$ATT_A\"],\n
+        "CPU=\"2\"\n",
+   "custom_attrs": {
+       "ATT_A": "M|text|desc| |default"
+   }
+}
+```
+
+New Format:
+
+```json
+{
+   "name": "new_role_example",
+   "template_id": 1,
+   "type": "vm",
+   "cardinality": 3,
+   "template_contents": {
+       "CPU": 2
+   },
+   "user_inputs": {
+       "ATT_A": "M|text|desc| |default"
+   }
+}
+
+```
 
 ## Cloud Cluster Provisioning
 
