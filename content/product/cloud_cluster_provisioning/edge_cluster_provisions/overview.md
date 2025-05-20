@@ -23,7 +23,6 @@ In this chapter you can find a guide on how to automatically provision Edge Clus
 
 > - [Equinix Edge Clusters]({{% relref "equinix_cluster#equinix-cluster" %}})
 > - [Amazon AWS Edge Clusters]({{% relref "aws_cluster#aws-cluster" %}})
-> - [On-Premise Edge Cluster]({{% relref "onprem_cluster#onprem-cluster" %}})
 > - [Scaleway Edge Cluster]({{% relref "scaleway_cluster" %}})
 
 ## Hypervisor Compatibility

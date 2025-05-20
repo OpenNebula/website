@@ -29,7 +29,6 @@ OpenNebula provides a set commands to interact with the system:
 * [onemarket](https://docs.opennebula.io/doc/6.8/cli/onemarket.1.html): manages internal and external marketplaces.
 * [onemarketapp](https://docs.opennebula.io/doc/6.8/cli/onemarketapp.1.html): manages appliances from marketplaces.
 * [oneprovider](https://docs.opennebula.io/doc/6.8/cli/oneprovider.1.html): manages OpenNebula providers.
-* [oneprovision](https://docs.opennebula.io/doc/6.8/cli/oneprovision.1.html): manages OpenNebula provisions.
 * [onesecgroup](https://docs.opennebula.io/doc/6.8/cli/onesecgroup.1.html): manages OpenNebula security groups.
 * [oneshowback](https://docs.opennebula.io/doc/6.8/cli/oneshowback.1.html): OpenNebula Showback tool.
 * [onetemplate](https://docs.opennebula.io/doc/6.8/cli/onetemplate.1.html): manages OpenNebula templates.
@@ -167,7 +166,6 @@ root@supermicro9:~# tree /etc/one/cli/
 ├── onemarketapp.yaml
 ├── onemarket.yaml
 ├── oneprovider.yaml
-├── oneprovision.yaml
 ├── onesecgroup.yaml
 ├── oneshowback.yaml
 ├── onetemplate.yaml
