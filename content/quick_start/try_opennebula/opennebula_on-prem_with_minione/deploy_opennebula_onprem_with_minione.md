@@ -85,7 +85,7 @@ chmod +x minione
 To install miniONE, run:
 
 ```default
-minione --version 6.99
+./minione --version 6.99
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
@@ -174,7 +174,7 @@ The quickest way to log into the VM is by VNC, available directly in Sunstone. J
 
 Log in as root with password `opennebula`.
 
-Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine. You can now further explore your OpenNebula system -- for example, by downloading more VMs and appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploying them to your new cloud, or by checking out the deployment options in PLACEHOLDER.
+Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine. You can now further explore your OpenNebula system -- for example, by downloading more VMs and appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploying them to your new cloud.
 
 
 
