@@ -100,6 +100,8 @@ This redesign was necessary to support advanced QCOW2 features such as thin prov
 
 Note: Caching support is not yet included in this release but is in an advanced development stage and will be available in an upcoming maintenance update.
 
+<a id="compatibility-guide-labels"></a>
+
 ## Labels on Sunstone
 
 
