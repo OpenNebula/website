@@ -1,5 +1,5 @@
 ---
-title: "Running Kubernetes Clusters"
+title: "Run a Kubernetes Cluster on OpenNebula"
 date: "2025-02-17"
 description:
 categories: [Learning, Evaluation, Deployment, Introduction]
@@ -15,7 +15,7 @@ weight: "7"
 In previous tutorials of this Quick Start Guide, we:
 
 > * Installed an [OpenNebula Front-end using miniONE]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}),
-> * deployed a [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}) on AWS, and
+> * deployed a [Metal Edge Cluster]({{% relref "provision_cloud_cluster#first-edge-cluster" %}}) on AWS, and
 > * deployed a [Virtual Machine]({{% relref "validate_the_minione_environment#running-virtual-machines" %}}) with WordPress on that Metal Edge Cluster.
 
 At this point, we are ready to deploy something more complex on our Metal Edge Cluster: an enterprise-grade, multi-master Kubernetes cluster based on SUSE Rancher’s RKE2 Kubernetes distribution. Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
@@ -28,7 +28,7 @@ To deploy the Kubernetes cluster, we’ll follow these high-level steps:
 > 4. Deploy an application on Kubernetes.
 
 {{< alert title="Important" color="success" >}}
-As mentioned above, we’ll use the infrastructure created in previous tutorials of this Quick Start Guide, namely our [OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}) and our [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}), both deployed on AWS. To complete this tutorial, you will need the Front-end and the Edge Cluster up and running.{{< /alert >}} 
+As mentioned above, we’ll use the infrastructure created in previous tutorials of this Quick Start Guide, namely our [OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}) and our [Metal Edge Cluster]({{% relref "provision_cloud_cluster#first-edge-cluster" %}}), both deployed on AWS. To complete this tutorial, you will need the Front-end and the Edge Cluster up and running.{{< /alert >}} 
 
 This tutorial includes a preliminary section to avoid known problems related to a datastore parameter in AWS, and a [Known Issues]({{% relref "#k8s-known-issues" %}}) section at the end for troubleshooting.
 
@@ -85,7 +85,7 @@ Click **Finish**. Sunstone will display the appliance template and download the 
 
 ## Step 2. Instantiate a Private Network on the Edge Cluster
 
-During [Provisioning an Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}), OpenNebula automatically created a network template for the Edge Cluster. In this step we will instantiate it and assign a range of IPs to it.
+During [Provisioning an Edge Cluster]({{% relref "provision_cloud_cluster#first-edge-cluster" %}}), OpenNebula automatically created a network template for the Edge Cluster. In this step we will instantiate it and assign a range of IPs to it.
 
 In Sunstone, open the left-hand pane, then select **Network** -> **Network Templates**.
 

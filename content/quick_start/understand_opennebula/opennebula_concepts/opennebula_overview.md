@@ -139,7 +139,7 @@ To evaluate OpenNebula, we strongly recommend that you follow our [Quick Start G
 Following the Guide, you can:
 
 > * [Install an OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws" %}}), then use that Front-end to
-> * [Deploy an Edge Cluster]({{% relref "provisioning_edge_cluster" %}}), where you will
+> * [Deploy an Edge Cluster]({{% relref "provision_cloud_cluster" %}}), where you will
 > * [Deploy a Virtual Machine]({{% relref "validate_the_minione_environment" %}}), and finally
 > * [Deploy a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}).
 
