@@ -462,7 +462,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    We will do this for the oneadmin user only
 
    ```default
-   cp /etc/one/fireedge/sunstone/admin/user-tab.yaml /etc/one/fireedge/sunstone/admin/usersgroups-tab.yaml
+   cp /etc/one/fireedge/sunstone/views/admin/user-tab.yaml /etc/one/fireedge/sunstone/views/admin/usersgroups-tab.yaml
    ```
 
    And then we update the resource name inside the new `usersandgroups-tab.yaml` view file to match the path of our component
