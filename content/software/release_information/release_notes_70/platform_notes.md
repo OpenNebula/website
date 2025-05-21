@@ -31,7 +31,7 @@ This is the list of the individual platform components that have been through th
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
 {{< alert title="Note" color="success" >}}
-Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}} 
+Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}}
 
 ### KVM Nodes
 
@@ -74,13 +74,13 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
 | LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| Ceph        | Quincy v17.2.x<br/>Reef   v18.2.x          | [The Ceph Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
+| Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
 
 ### Authentication
 
 | Component             | Version                                    | More information                                                                                                        |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| net-ldap ruby library | 0.12.1 or 0.16.1                           | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
+| net-ldap ruby library | 0.19.0                                     | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Monitoring and Backups
@@ -88,7 +88,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Component                     | Version   | More information                                                                                                                    |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
-| Restic backup backend         | 0.65.0    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
+| Restic backup backend         | 0.16.5    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
 
 ### Sunstone
 
@@ -98,7 +98,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Firefox   | 59.0 - 92.0 |
 
 {{< alert title="Note" color="success" >}}
-For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}} 
+For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}}
 
 **Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
 **Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
@@ -110,7 +110,7 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 Edge Clusters can be *virtual* or *metal* depending of the instance type used to build the cluster. Note that not all providers offer both instance types.
 
 {{< alert title="Important" color="success" >}}
-Providers based on *virtual* instances have been disabled by default.{{< /alert >}} 
+Providers based on *virtual* instances have been disabled by default.{{< /alert >}}
 
 | Edge/Cloud Provider                                                                                                                  | Edge Cluster   | Hypervisor   |
 |--------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
