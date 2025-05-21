@@ -14,9 +14,7 @@ weight: "3"
 
 In this tutorial, we’ll install an OpenNebula Front-end in under ten minutes, using **miniONE**, the installation script provided by OpenNebula.
 
-We’ll install our OpenNebula Front-end on a Virtual Machine in AWS. In later sections of this Quick Start Guide, you can use this Front-end to provision additional resources — such as Edge clusters or Kubernetes clusters — on your OpenNebula cloud.
-
-To complete this tutorial, you will need an AWS account with the capacity to create a virtual machine and obtain public IP addresses.
+We’ll install our OpenNebula Front-end on AWS. You can deploy to a supported OS on any instance type, virtual or metal.
 
 **miniONE** is a simple Bash script. It automatically downloads, installs and configures an OpenNebula Front-end and all necessary components to manage and run virtual machines.
 
@@ -71,7 +69,7 @@ To quickly deploy a suitable VM, browse the AWS AMI Catalog and select **Ubuntu 
 
 ![image](/images/minione-aws-ubuntu24.04.png){{< /alert >}} 
 
-Below is an example of a successfully-tested configuration (though by no means the only possible one):
+Below is an example of a successfully-tested configuration:
 
 - Region: Frankfurt
 - Operating System: Ubuntu Server 24.04 LTS (HVM)
@@ -211,7 +209,7 @@ The miniONE script will begin the installation, logging output to the terminal. 
 
 ```default
 ### Report
-OpenNebula 6.8 was installed
+OpenNebula 7.0 was installed
 Sunstone is running on:
 http://<omitted>/
 FireEdge is running on:
@@ -251,7 +249,3 @@ This is the default view for cloud administrators. From this view in Sunstone, y
 <br/>
 
 Congratulations — you have deployed an OpenNebula Front-end node, which is ready to provision resources on cloud infrastructure.
-
-## Next Steps
-
-You can now try out the GUI-based automatic provisioning features to quickly and easily add a remote Edge Cluster on AWS to your shiny new OpenNebula cloud!
