@@ -12,13 +12,11 @@ weight: "7"
 
 <!--# Running Kubernetes Clusters -->
 
-In previous tutorials of this Quick Start Guide, we:
+This page illustrates how to download a Kubernetes cluster from the OpenNebula Marketplace and deploy it on a remote cloud cluster.
 
-> * Installed an [OpenNebula Front-end using miniONE]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}),
-> * deployed a [Metal Edge Cluster]({{% relref "provision_cloud_cluster#first-edge-cluster" %}}) on AWS, and
-> * deployed a [Virtual Machine]({{% relref "validate_the_minione_environment#running-virtual-machines" %}}) with WordPress on that Metal Edge Cluster.
+It assumes that an OpenNebula instance exists running a Front-end with a remote cloud cluster on AWS.
 
-At this point, we are ready to deploy something more complex on our Metal Edge Cluster: an enterprise-grade, multi-master Kubernetes cluster based on SUSE Rancher’s RKE2 Kubernetes distribution. Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
+Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
 
 To deploy the Kubernetes cluster, we’ll follow these high-level steps:
 
@@ -26,9 +24,6 @@ To deploy the Kubernetes cluster, we’ll follow these high-level steps:
 > 2. Instantiate a private network on the Edge Cluster.
 > 3. Instantiate the Kubernetes Service.
 > 4. Deploy an application on Kubernetes.
-
-{{< alert title="Important" color="success" >}}
-As mentioned above, we’ll use the infrastructure created in previous tutorials of this Quick Start Guide, namely our [OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}) and our [Metal Edge Cluster]({{% relref "provision_cloud_cluster#first-edge-cluster" %}}), both deployed on AWS. To complete this tutorial, you will need the Front-end and the Edge Cluster up and running.{{< /alert >}} 
 
 This tutorial includes a preliminary section to avoid known problems related to a datastore parameter in AWS, and a [Known Issues]({{% relref "#k8s-known-issues" %}}) section at the end for troubleshooting.
 
