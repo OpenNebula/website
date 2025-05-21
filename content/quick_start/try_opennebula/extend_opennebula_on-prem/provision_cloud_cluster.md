@@ -34,7 +34,8 @@ The following resources are created *in OpenNebula*:
 To create the OpenNebula hosts and ensure connectivity, OpenNebula creates the following resources *in the remote provider*:
 
 > * A **Virtual Private Cloud** (VPC) to allocate remote instances as OpenNebula hosts.
+
+> * A **Virtual Private Cloud** (VPC) to allocate AWS instances as OpenNebula hosts.
 > * A **CIDR block of IPs** to assign secondary IPs to the hosts, and to allocate elastic IPs.
 > * An **Internet Gateway** to provide internet access for the hosts and VMs.
 > * A **routing table** for directing network traffic between these elements.
-
