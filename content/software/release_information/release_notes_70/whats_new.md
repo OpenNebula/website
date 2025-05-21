@@ -19,13 +19,13 @@ The name *Phoenix* reflects a broader transformation in cloud infrastructure—s
 This beta represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and help shape the final 7.0 release.
 Stay tuned—OpenNebula 7.0 *Phoenix* is almost here.
 
-Please note that this beta version is not upgradeable from 6.10.x, nor to the final 7.0.0 release. It's intended for testing and feedback, not production use. We encourage you to review the known issues and report any bugs through our GitHub development portal.
+Please note that this beta version is not upgradeable from 6.10.x, nor to the final 7.0.0 release. It's intended for testing and feedback, not production use. We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
 
 ## OpenNebula Core
 
 - The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs.
-- The enforce parameter has been restored for the resize operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently.
-- [Cluster-level quotas](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), define per-user or per-group resource limits across clusters—especially useful in distributed edge environments.Allow setting per-user or per-group resource limits at the cluster level, enabling precise control over resource consumption across different locations—particularly valuable in distributed edge deployments.
+- The `enforce` parameter has been restored for the `resize` operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently.
+- [Cluster-level quotas](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), define per-user or per-group resource limits across clusters—especially useful in distributed edge environments. Allow setting per-user or per-group resource limits at the cluster level, enabling precise control over resource consumption across different locations—particularly valuable in distributed edge deployments.
 - [Generic quota definitions](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), track and control usage of custom resources such as vGPUs, licenses, or any administrator-defined metrics
 - [Improve database search queries and performance](https://github.com/OpenNebula/one/issues/5861)
 
@@ -41,33 +41,33 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 
 ## Storage & Backups
 
-- [Integrated NFS life-cycle setup](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds.md#automatic-nfs-setup), to simplify the configuration and management of SAN/NFS in shared storage scenarios.
+- [Integrated NFS life cycle setup](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds.md#automatic-nfs-setup), to simplify the configuration and management of SAN/NFS in shared storage scenarios.
 - [Local datastore enhancements](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds): streamlined operations for qcow2-based VM disks, featuring a complete backend rewrite for improved maintainability and performance.
 - [LVM backend improvements](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/#lvm-thin), introduces support for snapshots, full backups, and various performance optimizations. These enhancements leverage LVM Thin and provide significant improvements over the original LVM-based management.
-- [NetApp iSCSI driver](../../../integrations/storage_extensions/netapp): leverages NetApp’s native API for LUN management to deliver maximum performance optimize operations for VM disks management.
+- [NetApp iSCSI driver](../../../integrations/storage_extensions/netapp): leverages NetApp’s native API for LUN management to deliver maximum performance and optimize operations for VM disks management.
 - [Veeam integration](../../../integrations/backup_extensions/veeam/): allows policy-based backup and restore operations directly for OpenNebula-managed VMs through the Veeam console.
-- [Full backup support for LVM](../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview): adds native data protection options for traditional environments.Enables full backups using native LVM mechanisms. Incremental backup support is planned for a future release to further enhance backup efficiency.
+- [Full backup support for LVM](../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview): adds native data protection options for traditional environments. Enables full backups using native LVM mechanisms. Incremental backup support is planned for a future release to further enhance backup efficiency.
 
 ## Sunstone
 
-- Dynamic Tabs to be able to add third party section in Sunstone in an easy way. Learn how in [Sunstone development guide](../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev").
-- Guacamole VDI over SSH tunnel [Remote connections guide](../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections).
+- Dynamic Tabs to be able to add third party section in Sunstone in an easy way. Learn how in the [Sunstone Development](../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev") guide.
+- Guacamole VDI over SSH tunnel, described in the [Remote connections guide](../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-remote-connections).
 - Redesigned part of the Sunstone UI, featuring improved accessibility, streamlined navigation, and new data visualization options.
 - New cloud view for end users: a dashboard with real-time metrics and quick access to common actions.
 - Support for VM Template Profiles with pre-defined deployment settings.
-- Add support for labels in Sunstone, including the labels that were set in the old Sunstone UI. Check [Compatibility guide](../compatibility#compatibility-guide-labels).
+- Add support for labels in Sunstone, including the labels that were set in the old Sunstone UI. See the [Compatibility guide](../compatibility#compatibility-guide-labels).
 - New way to render and group user inputs when instantiating an appliance. Check [User Inputs in Sunstone](product/virtual_machines_operation/virtual_machine_images/vm_templates/#vm-guide-user-inputs-sunstone).
 
 ## API and CLI
 
-- [The ‘onedb purge-history’ command now removes history records only within the specified –start, –end range for the –id, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
+- [The `onedb purge-history` command now removes history records only within the specified `–start`, `–end` range for the `–id`, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
 - The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and **ARCHITECTURE**.
 
 ## KVM & Networking
 
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
 - [ARM architecture support](../../../product/operation_references/hypervisor_configuration/kvm_driver/#arm64-specifics), including OpenNebula packages and Marketplace appliances for aarch64.
-- [OVA import](../../../software/migration_from_vmware/import_ova): a new CLI command, oneswap, allows to ingest VMs in OVA format that can be exported directly from VMware vCenter. Stay tuned for Sunstone support!
+- [OVA import](../../../software/migration_from_vmware/import_ova): a new CLI command, `oneswap`, allows to ingest VMs in OVA format which were exported directly from VMware vCenter. Stay tuned for Sunstone support!
 
 ## OpenNebula Flow
 
@@ -84,19 +84,19 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 Additionally, the following functionalities are present that were not in OpenNebula 6.10.0, although they debuted in subsequent maintenance releases of the 6.10.x series:
 
 - [Add human-readable text for schedule actions to describe the recurring intervals](https://github.com/OpenNebula/one/issues/6410).
-- [Added new cli command onevm snapshot-list](https://github.com/OpenNebula/one/issues/6623).
-- [Add a "disk-snapshot-list" option to onevm cli command](../../../product/operation_references/configuration_references/cli.md).
-- [Optimize handling of VM history records, it greatly improves perfomance of all VM operations for VMs with many history records](https://github.com/OpenNebula/one/issues/2111).
+- [Added new cli command `onevm snapshot-list`](https://github.com/OpenNebula/one/issues/6623).
+- [Add a `disk-snapshot-list` option to `onevm` cli command](../../../product/operation_references/configuration_references/cli.md).
+- [Optimize handling of VM history records, greatly improving perfomance of all VM operations for VMs with many history records](https://github.com/OpenNebula/one/issues/2111).
 - [Add support for incremental backups in Ceph](https://github.com/OpenNebula/one/issues/6411).
-- [New Transparent Proxies for VMs to simplify access to external services (e.g. OneGate)](../product/virtual_machines_operation/virtual_machines_networking/tproxy.md).
-- [Add support for VLAN filtering to the Linux bridge drivers](https://github.com/OpenNebula/one/issues/6669). This allows to limit the VLANs in trunk mode, as well as in QinQ mode. For more information check the [bridge driver](../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged.md) and the [802.1Q VLAN driver](../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan.md) documentation guides.
-- Added support for the new NVIDIA mediated devices framework introduced in Ubuntu 24.04. The legacy method remains unaffected by this new feature. For more details, see the [NVIDIA vGPU documentation](../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu.md).
+- [New Transparent Proxies for VMs to simplify access to external services (e.g. OneGate)](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy).
+- [Add support for VLAN filtering to the Linux bridge drivers](https://github.com/OpenNebula/one/issues/6669). This allows to limit the VLANs in trunk mode, as well as in QinQ mode. For more information check the [bridge driver](../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged) and the [802.1Q VLAN driver](../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan) documentation guides.
+- Added support for the new NVIDIA mediated devices framework introduced in Ubuntu 24.04. The legacy method remains unaffected by this new feature. For more details, see the [NVIDIA vGPU documentation](../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu).
 - [Added capability to change CPU_MODEL/FEATURES with one.vm.updateconf request](https://github.com/OpenNebula/one/issues/6636).
 - [Added support for auto keywork to set NIC virtio queues, same as DISK attribute](https://github.com/OpenNebula/one/issues/6435).
 - [Increment_flatten operation is executed using qemu-img commit instead of qemu-img convert](https://github.com/OpenNebula/one/issues/6547).
-- [Add support of using defined timezone by oneacct utility with flag -t/--timezone](https://github.com/OpenNebula/one/issues/821).
+- [Add support of using defined timezone by oneacct utility with flag `-t`/`--timezone`](https://github.com/OpenNebula/one/issues/821).
 - [Limit password size for each authentication driver to prevent DoS attacks](https://github.com/OpenNebula/one/issues/6892).
-- [Disable KEEP_LAST for incremental backups on CEPH datastores. Support for KEEP_LAST will be addressed in future releases](https://github.com/OpenNebula/one/issues/6857).
+- [Disable `KEEP_LAST` for incremental backups on CEPH datastores. Support for `KEEP_LAST` will be addressed in future releases](https://github.com/OpenNebula/one/issues/6857).
 
 ## Other Issues Solved
 
