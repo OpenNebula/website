@@ -26,7 +26,7 @@ This is the list of the individual platform components that have been through th
 | AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/life_cycle_management/installation/database#mysql" %}})                                                                               |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
@@ -164,4 +164,3 @@ unix_sock_rw_perms = "0770"
 
 OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
 You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.
-

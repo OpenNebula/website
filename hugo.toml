@@ -37,7 +37,7 @@ taxonomyPageHeader = ["tags", "categories"]
 
 [params.ui]
 #  Set to true to disable breadcrumb navigation.
-breadcrumb_disable = true
+breadcrumb_disable = false
 # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
 navbar_logo = true
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like o>
@@ -66,7 +66,7 @@ enable = false
    [cascade.params]
       type = 'docs'
    [cascade.target]
-      path = '{/product/**,/quick_start/**,/software/**,/solutions/**}'
+      path = '{/product/**,/quick_start/**,/software/**,/solutions/**,/integrations/**}'
 
 
 [params.links]
@@ -91,25 +91,9 @@ enable = false
   url = "https://github.com/OpenNebula"
   icon = "fab fa-github"
   desc = "Development takes place here!"
-# Developer relevant links. These will show up on right side of footer and in the community page i>
-#[[params.links.developer]]
-#  name = "Slack"
-#  url = "https://example.org/slack"
-#  icon = "fab fa-slack"
-#  desc = "Chat with other project developers"
-#[[params.links.developer]]
-#  name = "Developer mailing list"
-#  url = "https://example.org/mail"
-#  icon = "fa fa-envelope"
-#  desc = "Discuss development issues around the project"
-
 
 # Top menu
 [menu]
-  #[[menu.main]]
-  #  name = "Documentation"
-  #  url = "/"
-  #  weight = 1
   [[menu.main]]
     name = "Quick Start"
     url = "/quick_start"
@@ -117,11 +101,11 @@ enable = false
   [[menu.main]]
     name = "Product"
     url = "/product"
-    weight = 2
+    weight = 5
   [[menu.main]]
     name = " Solutions"	# Space added intentionally to prevent Hugo from changing page type
     url = "/solutions"
-    weight = 3
+    weight = 10
 
 [params]
 no_list = true
@@ -178,9 +162,6 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
-  #[[module.mounts]]		# for testing of dir. remapping
-  #  source = 'content/7.0'
-  #  target = 'content'
 
 # added the user feedback module
 [params.ui.feedback]

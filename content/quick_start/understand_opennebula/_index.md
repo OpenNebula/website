@@ -1,7 +1,7 @@
 ---
 title: "Understand OpenNebula"
 date: "2025-02-17"
-description: "Overview of OpenNebula, its key concepts and features"
+description: "Get a high-level overview of OpenNebula and discover the essential steps for designing and deploying your own cloud infrastructure"
 categories:
 pageintoc: "2"
 tags:

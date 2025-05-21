@@ -21,7 +21,7 @@ Every OpenNebula server generates logs with a configurable verbosity (level of d
 Follow the guides of each component to find the logs’ location and configuration of log verbosity:
 
 - OpenNebula Daemon: [logs]({{% relref "oned#oned-conf-service" %}}), [configuration]({{% relref "oned#oned-conf" %}}) (parameter `LOG/DEBUG_LEVEL`)
-- Monitoring: [logs]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#mon-conf-service" %}}), [configuration]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#mon-conf" %}}) (parameter `LOG/DEBUG_LEVEL`)
+- Monitoring: [logs]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf-service" %}}), [configuration]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) (parameter `LOG/DEBUG_LEVEL`)
 - FireEdge: [logs]({{% relref "fireedge#fireedge-conf-service" %}}), [configuration]({{% relref "fireedge#fireedge-conf" %}}) (parameter `log`)
 - OneFlow: [logs]({{% relref "oneflow#oneflow-conf-service" %}}), [configuration]({{% relref "oneflow#oneflow-conf" %}}) (parameter `:debug_level`)
 - OneGate: [logs]({{% relref "onegate#onegate-conf-service" %}}), [configuration]({{% relref "onegate#onegate-conf" %}}) (parameter `:debug_level`)

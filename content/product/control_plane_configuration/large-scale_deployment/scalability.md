@@ -75,24 +75,19 @@ The number of VMs, micro-VMs or containers that a virtualization node can run is
 |--------------|-------------------------|----------------------------|
 | KVM          | 52s (500 VMs)           | 0.11s                      |
 
-Note: These values can be used as a baseline to adjust the probe frequency in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#dmon-conf" %}}).
+Note: These values can be used as a baseline to adjust the probe frequency in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf" %}}).
 
 ## Tuning for Large Scale
 
 ### Monitoring Tuning
 
-Following OpenNebula 5.12, the monitoring system uses TCP/UDP to send monitoring information to Monitor Daemon. This model is highly scalable and its limit (in terms of the number of VMs monitored per second) is bound by the performance of the server running oned and the database server. Read more in the [Monitoring guide]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#dmon-conf#mon" %}}).
+Following OpenNebula 5.12, the monitoring system uses TCP/UDP to send monitoring information to Monitor Daemon. This model is highly scalable and its limit (in terms of the number of VMs monitored per second) is bound by the performance of the server running oned and the database server. Read more in the [Monitoring guide]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf#mon" %}}).
 
-For vCenter environments, OpenNebula uses the VI API offered by vCenter to monitor the state of the hypervisor and all the Virtual Machines running in all the imported vCenter clusters. The driver is optimized to cache common VM information.
-
-In both environments, our scalability testing achieves the monitoring of tens of thousands of VMs in a few minutes.
-
-{{< alert title="Important" color="success" >}}
-The vCenter driver is a legacy component. It is currently included in the distribution, but no longer receives updates or bug fixes.{{< /alert >}} 
+Our scalability testing achieves the monitoring of tens of thousands of VMs in a few minutes.
 
 ### Core Tuning
 
-OpenNebula keeps the monitoring history for a defined time in a database table. These values are then used to draw the plots in Sunstone. These monitoring entries can take up quite a bit of storage in your database. The amount of storage used will depend on the size of your cloud and the following configuration attributes in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#dmon-conf#mon-conf" %}}):
+OpenNebula keeps the monitoring history for a defined time in a database table. These values are then used to draw the plots in Sunstone. These monitoring entries can take up quite a bit of storage in your database. The amount of storage used will depend on the size of your cloud and the following configuration attributes in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf#mon-conf" %}}):
 
 - `MONITORING_INTERVAL_HOST`: Time in seconds between each monitoring cycle. Default: 180. This parameter sets the timeout to proactively restart the monitoring probe in the standard `udp-push` model.
 - `HOST_MONITORING_EXPIRATION_TIME`: Time in seconds before monitoring information expires. Default: 12h.
