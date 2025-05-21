@@ -12,9 +12,7 @@ weight: "7"
 
 <!--# Running Kubernetes Clusters -->
 
-This page illustrates how to download a Kubernetes cluster from the OpenNebula Marketplace and deploy it on a remote cloud cluster.
-
-It assumes that an OpenNebula instance exists running a Front-end with a remote cloud cluster on AWS.
+This page illustrates how to download a Kubernetes cluster from the OpenNebula Marketplace and deploy it on a remote cloud cluster. For this example, the cloud cluster is provisioned on AWS, and has at least two virtual networks configured: a private and a public network, that pre-allocates elastsic IPs.
 
 Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
 
@@ -78,9 +76,9 @@ In the second screen you will need to select a datastore for the appliance. Sele
 
 Click **Finish**. Sunstone will display the appliance template and download the appliance in the background. Wait for the appliance **State** to switch from **LOCKED** to **READY**. The appliance comprises a 25GB download, so this may take several minutes.
 
-## Step 2. Instantiate a Private Network on the Edge Cluster
+## Step 2. Instantiate a Private Network on the Cloud Cluster
 
-During [Provisioning an Edge Cluster]({{% relref "provision_cloud_cluster#first-edge-cluster" %}}), OpenNebula automatically created a network template for the Edge Cluster. In this step we will instantiate it and assign a range of IPs to it.
+In this step we will instantiate the private network on the Cloud Cluster, it and assign a range of IPs to it.
 
 In Sunstone, open the left-hand pane, then select **Network** -> **Network Templates**.
 
