@@ -103,28 +103,6 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 **Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
 **Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
 
-<a id="edge-cluster-provision-workloads-compatibility"></a>
-
-## Compatibility of Workloads on Certified Edge Clusters
-
-Edge Clusters can be *virtual* or *metal* depending of the instance type used to build the cluster. Note that not all providers offer both instance types.
-
-{{< alert title="Important" color="success" >}}
-Providers based on *virtual* instances have been disabled by default.{{< /alert >}}
-
-| Edge/Cloud Provider                                                                                                                  | Edge Cluster   | Hypervisor   |
-|--------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [Equinix]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
-| [AWS]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
-| [On-prem]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster#onprem-cluster" %}})   | metal          | KVM and LXC  |
-
-The Edge Cluster type determines the hypervisor and workload that can be run in the cluster. The following table summarizes the Edge Cluster you need to run specific workloads:
-
-| Use Case                                                                                                                                                                                             | Edge Cluster   | Hypervisor   |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [I want to run virtual servers…]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}})            | metal          | KVM, LXC     |
-| [I want to run a Kubernetes cluster…]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}}) | metal          | KVM          |
-
 ## Certified Infrastructure Scale
 
 A single instance of OpenNebula (i.e., a single `oned` process) has been stress-tested to cope with 500 hypervisors without performance degradation. This is the maximum recommended configuration for a single instance, and depending on the underlying configuration of storage and networking, it is mainly recommended to switch to a federated scenario for any larger number of hypervisors.
@@ -142,7 +120,6 @@ The following applies to all Front-Ends:
 
 The following items apply to all distributions:
 
-* Since OpenNebula 4.14 there is a new monitoring probe that gets information about PCI devices. By default it retrieves all the PCI devices in a Host. To limit the PCI devices for which it gets info and appear in `onehost show`, refer to [PCI Passthrough]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough#kvm-pci-passthrough" %}}).
 * When using qcow2 storage drivers you can make sure that the data is written to disk when doing snapshots by setting the `cache` parameter to `writethrough`. This change will make writes slower than other cache modes but safer. To do this edit the file `/etc/one/vmm_exec/vmm_exec_kvm.conf` and change the line for `DISK`:
 
 ```default
@@ -188,15 +165,3 @@ unix_sock_rw_perms = "0770"
 OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
 You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.
 
-### vCenter 7.0 Platform Notes
-
-{{< alert title="Important" color="success" >}}
-The legacy vCenter driver is currently included in the distribution, but no longer receives updates or bug fixes.{{< /alert >}} 
-
-#### Problem with Boot Order
-
-Currently in vCenter 7.0 changing the boot order is only supported in Virtual Machines at deployment time.
-
-### Debian 10 and Ubuntu 18 Upgrade
-
-When upgrading your nodes from Debian 10 or Ubuntu 18 you may need to update the opennebula sudoers file because of the  */usr merge* feature implemented for Debian11/Ubuntu20. You can [find more information and a recommended work around in this issue](https://github.com/OpenNebula/one/issues/6090).
