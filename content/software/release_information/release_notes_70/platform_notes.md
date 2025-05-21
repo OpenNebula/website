@@ -31,7 +31,7 @@ This is the list of the individual platform components that have been through th
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
 {{< alert title="Note" color="success" >}}
-Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}} 
+Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}}
 
 ### KVM Nodes
 
@@ -74,13 +74,13 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
 | LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| Ceph        | Quincy v17.2.x<br/>Reef   v18.2.x          | [The Ceph Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
+| Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
 
 ### Authentication
 
 | Component             | Version                                    | More information                                                                                                        |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| net-ldap ruby library | 0.12.1 or 0.16.1                           | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
+| net-ldap ruby library | 0.19.0                                     | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Monitoring and Backups
@@ -88,7 +88,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Component                     | Version   | More information                                                                                                                    |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
-| Restic backup backend         | 0.65.0    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
+| Restic backup backend         | 0.16.5    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
 
 ### Sunstone
 
@@ -98,32 +98,10 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Firefox   | 59.0 - 92.0 |
 
 {{< alert title="Note" color="success" >}}
-For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}} 
+For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}}
 
 **Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
 **Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
-
-<a id="edge-cluster-provision-workloads-compatibility"></a>
-
-## Compatibility of Workloads on Certified Edge Clusters
-
-Edge Clusters can be *virtual* or *metal* depending of the instance type used to build the cluster. Note that not all providers offer both instance types.
-
-{{< alert title="Important" color="success" >}}
-Providers based on *virtual* instances have been disabled by default.{{< /alert >}} 
-
-| Edge/Cloud Provider                                                                                                                  | Edge Cluster   | Hypervisor   |
-|--------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [Equinix]({{% relref "../../../product/cloud_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
-| [AWS]({{% relref "../../../product/cloud_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
-| On-prem                                                                                                                         | metal          | KVM and LXC  |
-
-The Edge Cluster type determines the hypervisor and workload that can be run in the cluster. The following table summarizes the Edge Cluster you need to run specific workloads:
-
-| Use Case                                                                                                                                                                                             | Edge Cluster   | Hypervisor   |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [I want to run virtual servers…]({{% relref "validate_the_minione_environment" %}})            | metal          | KVM, LXC     |
-| [I want to run a Kubernetes cluster…]({{% relref "running_kubernetes_clusters" %}}) | metal          | KVM          |
 
 ## Certified Infrastructure Scale
 
@@ -142,7 +120,6 @@ The following applies to all Front-Ends:
 
 The following items apply to all distributions:
 
-* Since OpenNebula 4.14 there is a new monitoring probe that gets information about PCI devices. By default it retrieves all the PCI devices in a Host. To limit the PCI devices for which it gets info and appear in `onehost show`, refer to [PCI Passthrough]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough#kvm-pci-passthrough" %}}).
 * When using qcow2 storage drivers you can make sure that the data is written to disk when doing snapshots by setting the `cache` parameter to `writethrough`. This change will make writes slower than other cache modes but safer. To do this edit the file `/etc/one/vmm_exec/vmm_exec_kvm.conf` and change the line for `DISK`:
 
 ```default
@@ -187,7 +164,3 @@ unix_sock_rw_perms = "0770"
 
 OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
 You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.
-
-### Debian 10 and Ubuntu 18 Upgrade
-
-When upgrading your nodes from Debian 10 or Ubuntu 18 you may need to update the opennebula sudoers file because of the  */usr merge* feature implemented for Debian11/Ubuntu20. You can [find more information and a recommended work around in this issue](https://github.com/OpenNebula/one/issues/6090).
