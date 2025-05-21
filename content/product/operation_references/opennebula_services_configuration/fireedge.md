@@ -104,7 +104,7 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 You can add your logo to the login, main, favicon and loading screens by updating the `logo:` attribute as follows:
 
-- The logo configuration is done in the `/etc/one/fireedge/sunstone/sunstone-views.yaml` file.
+- The logo configuration is done in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
 - The logo of the main UI screen is defined for each view.
 
 The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/logos`.
@@ -112,7 +112,7 @@ The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/image
 The following example shows how you can change the logo to a generic linux one (included by default in all FireEdge installations):
 
 ```yaml
-# /etc/one/fireedge/sunstone/sunstone-views.yaml
+# /etc/one/fireedge/sunstone/views/sunstone-views.yaml
 ---
 logo: linux.png
 
