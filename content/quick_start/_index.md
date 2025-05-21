@@ -92,7 +92,7 @@ Sequential tutorials to help you install and explore OpenNebula in just a few mi
  {{< card header="[Extend OpenNebula On-prem with Hybrid Cloud](try_opennebula/extend_opennebula_on-prem)" >}}
       <p></p>
       <inl>
-         <a href="try_opennebula/extend_opennebula_on-prem/provisioning_edge_cluster">Provision a Cloud Cluster on a Public Cloud</a>
+         <a href="try_opennebula/extend_opennebula_on-prem/provision_cloud_cluster">Provision a Cloud Cluster on a Public Cloud</a>
       </inl>
       <inl>
          <a href="try_opennebula/opennebula_on-prem_with_onepoc_iso/validate_the_poc_iso_environment">Validate the PoC ISO Environment</ a>

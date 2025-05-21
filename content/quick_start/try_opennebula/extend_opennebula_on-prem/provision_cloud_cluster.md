@@ -1,5 +1,5 @@
 ---
-title: "Provisioning a Cloud Cluster"
+title: "Provision a Cloud Cluster"
 date: "2025-02-17"
 description:
 categories: [Learning, Evaluation, Deployment]
