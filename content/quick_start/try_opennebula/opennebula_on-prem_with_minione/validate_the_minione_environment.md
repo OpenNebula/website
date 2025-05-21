@@ -8,25 +8,19 @@ tags: ['Quick Start', 'Edge Cluster']
 weight: "4"
 ---
 
-<a id="operating-edge-cluster"></a>
 
-<!--# Operating an Edge Cluster -->
+This page provides an overview of the resources created in OpenNebula when deploying with [miniONE](https://github.com/OpenNebula/minione), as well as an example of installing virtual machines from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) on the installed resources.
 
-In [Provisioning an Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}), we used the OneProvision GUI to create an Edge Cluster in AWS.
+When you install using miniONE with no options, the following resources are created:
 
-This page provides an overview of all resources created in OpenNebula during that deployment, which together comprise the Edge Cluster.
+- A KVM Host on the local machine
+- Virtualization Cluster
+- Datastores
+- Virtual Network
 
-All resources in the Edge Cluster are created from templates. Templates contain all of the information for the physical features of resources. For some templates, such as the network templates, users need to provide the logical attributes at the moment of instantiating the template, such as the IP or the address range.
+All resources in the Edge Cluster are created from templates. Templates contain all of the information for the physical features of resources.
 
-Below you will find brief descriptions for the resources that comprise the Edge Cluster, with examples of their visual representation in the Sunstone UI and links to complete references for each resource.
-
-## Cluster
-
-A cluster is the main object that groups all the physical resources and ensures that everything will work correctly in terms of scheduling and the resources required.
-
-![image_cluster](/images/edge_cluster.png)
-
-For a complete overview of Cluster management, see [Clusters]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}).
+Below you will find brief descriptions for these resources, with examples of their visual representation in the Sunstone UI and links to complete references for each resource.
 
 ## Hosts
 
@@ -35,13 +29,15 @@ A Host is any entity that is capable of running a VM or a container. Besides run
 * `VM_MAD`: the virtualization technology used on the Host.
 * `IM_MAD`: the driver that retrieves all monitoring metrics from the Host.
 
+As mentioned above, miniONE installs a KVM host.
+
 The screenshot below displays the information about the Host. The important information here is:
 
 * The **State** of the Host: **MONITORED** indicates that the Host is currently being monitored.
 * The **Attributes** section displays the monitoring metrics.
 * The tabs to the right of the **Info** tab display additional information, such as the VMs running on the Host.
 
-![image_host](/images/edge_host.png)
+![image_host](/images/minione-kvm_host.png)
 
 The basic operations you can perform on the Host are:
 
@@ -49,53 +45,45 @@ The basic operations you can perform on the Host are:
 * **Disable**: disable the Host, for example to perform maintenance operations.
 * **Enable**: enable the Host, so that OpenNebula monitors it and it switches back to MONITORED state.
 
-For a complete overview of Hosts management, see [Hists]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts#hosts" %}}).
+For a complete overview of Hosts management, see [Hosts]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts#hosts" %}}).
+
+## Cluster
+
+A cluster is the main object that groups all the physical resources and ensures that everything will work correctly in terms of scheduling and the resources required. In this very simple scenario the cluster includes only the local KVM Host, the virtual network and datastores.
+
+![image_local_cluster](/images/minione-cluster.png)
+
+For a complete overview of Cluster management, see [Clusters]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}).
 
 ## Datastores
 
-There are two types of datastores:
+There are three types of datastores:
 
 * **System**: contains the information of running VMs, such as disks or context CD-ROM.
 * **Image**: stores the images in your cloud.
+* **Files**: Stores plain files used in contextualization, or VM kernels used by some hypervisors.
 
-Each Edge Cluster contains two datastores: one system and one image. Both of them use the SSH replica driver to decrease VMs’ deployment time using the images cached on the datastores.
+In the on-prem Cluster created by miniONE, the `default` datastore is the image datastore.
 
-![image_datastore](/images/edge_datastore.png)
+![image_datastore](/images/minione-datastore.png)
 
 For a complete overview of Datastore management, see [Datastores]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/datastores#datastores" %}}).
 
 <a id="edge-public"></a>
 
-## Virtual Networks: Public
+## Virtual Networks
 
-A virtual network in OpenNebula basically resembles the physical network in the data center. Virtual Networks allow VMs to have connectivity between them and with the rest of the world. Each Edge Cluster has one public network with the number of the IPs selected by the user in Sunstone. This allows VMs to have public connectivity so the user can connect to them.
+A virtual network in OpenNebula basically resembles the physical network in the data center. Virtual Networks allow VMs to have connectivity between them and with the rest of the world. The default miniONE installation creates a private network, by default called `vnet` with a base address of 172.16.100.1, with access to public networks via NAT.
 
-![image_public_net](/images/edge_public_net.png)
+![image_vnet](/images/minione-vnet.png)
 
 <a id="edge-private"></a>
 
-## Virtual Networks: Private
-
-As with the public network, a private network needs user input before instantiation, such as the IP or number of address ranges.
-
-The network uses driver VXLAN - BGP EVPN:
-
-![image_private_net](/images/edge_private_net.png)
-
 For a complete overview, see [Virtual Network Templates]({{% relref "../../../product/virtual_machines_operation/virtual_machines_networking/vn_templates#vn-templates" %}}).
 
-<!-- BEGIN FORMER RUNNING VIRTUAL MACHINES GUIDE -->
+## Downloading and Deploying a Virtual Machine
 
-<a id="running-virtual-machines"></a>
-
-<!--# Running Virtual Machines -->
-
-In previous tutorials of this Quick Start Guide, we:
-
-> * Installed an [OpenNebula Front-end using miniONE]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}), and
-> * Deployed a [Metal Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}) on AWS.
-
-In this tutorial, we’ll use that infrastructure to deploy a fully-configured virtual machine with a ready-to-use WordPress installation, in under five minutes.
+If you followed the [Deploy OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}), guide, you will have already [locally deployed the Virtual Machine]({{% relref "deploy_opennebula_onprem_with_minione/#deploying-a-virtual-machine-locally" %}}) bundled by default with the miniONE installation. In this section we will download a Virtual Machine from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io) and deploy it on the local KVM hypervisor created by miniONE.
 
 We’ll follow these high-level steps:
 
@@ -137,21 +125,23 @@ Sunstone will display the **Download App to OpenNebula** dialog:
 ![image](/images/sunstone-download_app.png)
 <br/>
 
-Click **Next**. In the next screen, we’ll need to select a datastore. For efficiency, and to try out the cluster created in [Provisioning an Edge Cluster]({{% relref "provisioning_edge_cluster#first-edge-cluster" %}}), select the `aws-cluster-image` datastore:
+Click **Next**. The next screen prompts us to select a datastore, which in this case is the `default` image datastore installed locally:
 
-![image](/images/aws_cluster_images_datastore.png)
+![image](/images/minione-import_to_datastore.png)
 <br/>
 
 Click **Finish**. Sunstone will download the appliance template and display basic information for the appliance, shown below in the **Info** tab:
 
-![image](/images/sunstone-wordpress_info.png)
+![image](/images/minione-imported_wordpress.png)
 <br/>
 
 Wait for the appliance **State** to indicate **READY**. When it does, the VM will be ready to be instantiated.
 
 ## Step 2. Instantiate the VM
 
-In the left-hand pane, click **Templates**, then **VM Templates**:
+The Wordpress Appliance VM was imported as a Virtual Machine template. To instantiate, follow these steps:
+
+In the left-hand pane click **Templates**, then **VM Templates**:
 
 ![image](/images/sunstone-vm_templates.png)
 <br/>
@@ -185,37 +175,33 @@ In this screen we need to specify what network the VM will connect to. Select th
 
 Sunstone will display a wizard with network parameters:
 
-![image](/images/sunstone-vm_instantiate-attach_nic1.png)
+![image](/images/minione-attach_nic_2.png)
 <br/>
 
 Click **Next**. Sunstone displays the **Select a network** screen:
 
-![image](/images/select_aws_cluster_public_network.png)
+![image](/images/minione-attach_nic.png)
 <br/>
 
-Select `aws-cluster-public`, then click **Next**. Sunstone displays the **Network values** screen:
+Select `vnet`, then click **Next**. Sunstone displays the final screen, **Select QoS**:
 
-![image](/images/sunstone-vm_instantiate-attach_nic1_network_values.png)
-<br/>
-
-Click **Next**. Sunstone displays the final screen, **Select QoS**:
-
-![image](/images/sunstone-vm_instantiate-attach_nic3.png)
+![image](/images/minione-select_qos.png)
 <br/>
 
 To instantiate the VM, click **Finish**. Sunstone will take you to the last screen of the **Instantiate VM Template** wizard. To deploy the VM, click **Finish**.
 
-Sunstone will deploy the VM to the AWS edge cluster, and display the **VMs** screen with the status of the VM. When the VM is running — as indicated by the green dot — it will be ready for your first login.
+Sunstone will deploy the VM to KVM Host, and display the **VMs** screen with the status of the VM. When the VM is running — as indicated by the green dot — it will be ready for your first login.
 
-![image](/images/sunstone-wordpress.png)
+The image below shows the newly-instantiated WordPress VM and the Alpine VM that was bundled by default with miniONE:
+
+![image](/images/minione-running_vms.png)
 <br/>
 
-{{< alert title="Note" color="success" >}}
-The VNC icon ![icon3](/images/icons/sunstone/VNC.png) displayed by Sunstone does not work for accessing VMs deployed on Edge Clusters, since this access method is considered insecure and is disabled by OpenNebula.{{< /alert >}} 
+As you can see in the image above, its IP address is 172.16.100.3.
 
 ## Step 3. Connect to WordPress
 
-Select the public IP of the VM, which is highlighted in bold (blurred in the screen shown above). Simply enter the IP in your browser, and you’ll be greeted by the famous five-minute WordPress installation process.
+To log into WordPress, simply enter the IP address in your browser, and you’ll be greeted by the famous five-minute WordPress installation process.
 
 ![wordpress_install_page](/images/wordpress_install_page.png)
 
