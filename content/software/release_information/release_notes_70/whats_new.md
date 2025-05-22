@@ -24,6 +24,7 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 ## OpenNebula Core
 
 - The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs.
+- Added option [CONTEXT_ALLOW_ETH_UPDATES to oned.conf](../../../product/operation_references/opennebula_services_configuration/oned) to enable updates of VM context `ETH*` values.
 - The `enforce` parameter has been restored for the `resize` operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently.
 - [Cluster-level quotas](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), define per-user or per-group resource limits across clusters—especially useful in distributed edge environments. Allow setting per-user or per-group resource limits at the cluster level, enabling precise control over resource consumption across different locations—particularly valuable in distributed edge deployments.
 - [Generic quota definitions](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), track and control usage of custom resources such as vGPUs, licenses, or any administrator-defined metrics
@@ -106,6 +107,7 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix host tab does not validate Enable/Disable button states](https://github.com/OpenNebula/one/issues/6792).
 - [Fix add qcow2 format support for volatile disk type “swap”](https://github.com/OpenNebula/one/issues/6622).
 - [Fix duplicit Scheduled Actions](https://github.com/OpenNebula/one/issues/6996).
+- [Fix resource names to not allow special characters `\t`, `\n`, `\v`, `\f`, `\r`](https://github.com/OpenNebula/one/issues/6950).
 - [Fix filter flag G exposing resources of other group members for ‘list’ and ‘top’ commands](https://github.com/OpenNebula/one/issues/6952).
 - [Fix a bug when Restic passwords include quotes](https://github.com/OpenNebula/one/issues/6666/).
 - [Fix onevrouter instantiate command prompts for user input unnecessarily](https://github.com/OpenNebula/one/issues/6948/).
@@ -117,3 +119,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix vGPU profile monitoring for legacy mode](https://github.com/OpenNebula/one/issues/7012/).
 - [Fix README.md links to old paths](https://github.com/OpenNebula/one/issues/7032).
 - [Fix Restic backup driver when the server is not deployed together with the frontend](https://github.com/OpenNebula/one/issues/7054).
+- [Fix HA in case of wrong SQL query](https://github.com/OpenNebula/one/issues/7025).

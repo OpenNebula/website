@@ -60,32 +60,32 @@ You can download miniONE from the [GitHub repository](https://github.com/OpenNeb
 
 To quickly download miniONE, run:
 
-```
-wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```default
+$ wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
 ````
 
 After downloading, open a terminal and use the `sudo` to become the `root` user. For example, run:
 
 ```default
-sudo -i
+$ sudo -i
 ```
 
 Go to the folder where you downloaded the miniONE script, by using the `cd` command:
 
 ```default
-cd <path/to/folder>
+# cd <path/to/folder>
 ```
 
 Next, ensure that the `minione` file has execute permissions:
 
 ```default
-chmod +x minione
+# chmod +x minione
 ```
 
 To install miniONE, run:
 
 ```default
-./minione --version 6.99 --force
+# ./minione --version 6.99 --force
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
@@ -100,6 +100,12 @@ FireEdge is running on:
 Use following to login:
   user: oneadmin
   password: ZMCoOWUsBg
+```
+
+Finally we will force a refresh of the ``localhost`` status:
+
+```default
+# sudo -u oneadmin onehost sync --force
 ```
 
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
