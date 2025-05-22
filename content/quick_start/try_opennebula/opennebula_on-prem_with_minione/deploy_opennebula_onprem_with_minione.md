@@ -174,9 +174,6 @@ The quickest way to log into the VM is by VNC, available directly in Sunstone. J
 
 Log in as root with password `opennebula`.
 
-Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine. You can now further explore your OpenNebula system -- for example, by downloading more VMs and appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploying them to your new cloud.
+Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine.
 
-
-
-
-
+To explore the resources in the environment you've just created, see [Validate the miniONE Environment]({{% relref "validate_the_minione_environment" %}}) --- where additionally you can learn how to quickly download virtual appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploy them to your new cloud.

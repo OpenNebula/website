@@ -1,28 +1,30 @@
 ---
 title: "Validate the miniONE Environment"
 date: "2025-02-17"
-description:
+description: "Explore the resources automatically installed with **miniONE**, and download and install appliances from the **OpenNebula Marketplace**"
 categories: [Learning, Evaluation, Introduction, Deployment]
 pageintoc: "24"
 tags: ['Quick Start', 'Edge Cluster']
 weight: "4"
 ---
 
+A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione), the simple-to-use installation and deployment tool. This page provides:
 
-This page provides an overview of the resources created in OpenNebula when deploying with [miniONE](https://github.com/OpenNebula/minione), as well as an example of installing virtual machines from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) on the installed resources.
+- An overview of the resources automatically created during that installation
+- An example of what you can do with this type of installation -- in this case, installing a virtual machine from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
 
-When you install using miniONE with no options, the following resources are created:
+## Installed Resources
+
+The installation described in [Deploy OpenNebula On-premises with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}) automatically installs and configures the following resources:
 
 - A KVM Host on the local machine
-- Virtualization Cluster
-- Datastores
-- Virtual Network
-
-All resources in the Edge Cluster are created from templates. Templates contain all of the information for the physical features of resources.
+- A virtualization Cluster to which the Host belongs to
+- Datastores for storing files and Virtual Machine images
+- A virtual network for the Virtual Machines
 
 Below you will find brief descriptions for these resources, with examples of their visual representation in the Sunstone UI and links to complete references for each resource.
 
-## Hosts
+### Hosts
 
 A Host is any entity that is capable of running a VM or a container. Besides running them, it retrieves all monitoring information. A Host has two important attributes:
 
@@ -47,7 +49,7 @@ The basic operations you can perform on the Host are:
 
 For a complete overview of Hosts management, see [Hosts]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts#hosts" %}}).
 
-## Cluster
+### Cluster
 
 A cluster is the main object that groups all the physical resources and ensures that everything will work correctly in terms of scheduling and the resources required. In this very simple scenario the cluster includes only the local KVM Host, the virtual network and datastores.
 
@@ -55,7 +57,7 @@ A cluster is the main object that groups all the physical resources and ensures 
 
 For a complete overview of Cluster management, see [Clusters]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}).
 
-## Datastores
+### Datastores
 
 There are three types of datastores:
 
@@ -71,7 +73,7 @@ For a complete overview of Datastore management, see [Datastores]({{% relref "..
 
 <a id="edge-public"></a>
 
-## Virtual Networks
+### Virtual Networks
 
 A virtual network in OpenNebula basically resembles the physical network in the data center. Virtual Networks allow VMs to have connectivity between them and with the rest of the world. The default miniONE installation creates a private network, by default called `vnet` with a base address of 172.16.100.1, with access to public networks via NAT.
 
@@ -94,7 +96,7 @@ We’ll follow these high-level steps:
 {{< alert title="Important" color="success" >}}
 As mentioned above, in this tutorial we’ll deploy to the Edge Cluster created previously in this Quick Start Guide. To complete this tutorial, you need the Edge Cluster up and running.{{< /alert >}} 
 
-## Step 1. Download the WordPress Appliance from the OpenNebula Marketplace
+### Step 1. Download the WordPress Appliance from the OpenNebula Marketplace
 
 The [OpenNebula Public Marketplace](https://marketplace.opennebula.io) is a repository of Virtual Machines and appliances which are curated, tested and certified by OpenNebula.
 
@@ -137,7 +139,7 @@ Click **Finish**. Sunstone will download the appliance template and display basi
 
 Wait for the appliance **State** to indicate **READY**. When it does, the VM will be ready to be instantiated.
 
-## Step 2. Instantiate the VM
+### Step 2. Instantiate the VM
 
 The Wordpress Appliance VM was imported as a Virtual Machine template. To instantiate, follow these steps:
 
@@ -199,7 +201,7 @@ The image below shows the newly-instantiated WordPress VM and the Alpine VM that
 
 As you can see in the image above, its IP address is 172.16.100.3.
 
-## Step 3. Connect to WordPress
+### Step 3. Connect to WordPress
 
 To log into WordPress, simply enter the IP address in your browser, and you’ll be greeted by the famous five-minute WordPress installation process.
 
