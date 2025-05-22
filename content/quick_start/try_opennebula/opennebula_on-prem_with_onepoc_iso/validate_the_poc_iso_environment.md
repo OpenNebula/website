@@ -1,7 +1,7 @@
 ---
 title: "Validate the PoC ISO Environment"
 description:
-weight: 2
+weight: 3
 ---
 
 {{< alert color="success" >}}
