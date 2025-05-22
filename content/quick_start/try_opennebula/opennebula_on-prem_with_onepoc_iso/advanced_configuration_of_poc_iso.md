@@ -1,7 +1,7 @@
 ---
 title: "Advanced Configuration of the PoC ISO"
 description:
-weight: 2
+weight: 4
 ---
 
 {{< alert color="success" >}}
