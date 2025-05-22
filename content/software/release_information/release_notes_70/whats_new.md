@@ -24,6 +24,7 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 ## OpenNebula Core
 
 - The ability to import wild VMs into OpenNebula has been removed from code to provide a more coherent management experience across all interfaces and APIs.
+- Added option [CONTEXT_ALLOW_ETH_UPDATES to oned.conf](../../../product/operation_references/opennebula_services_configuration/oned) to enable updates of VM context `ETH*` values.
 - The `enforce` parameter has been restored for the `resize` operation. In this context, it only manages capacity enforcement checks (memory and CPU), while the NUMA topology is always verified independently.
 - [Cluster-level quotas](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), define per-user or per-group resource limits across clusters—especially useful in distributed edge environments. Allow setting per-user or per-group resource limits at the cluster level, enabling precise control over resource consumption across different locations—particularly valuable in distributed edge deployments.
 - [Generic quota definitions](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), track and control usage of custom resources such as vGPUs, licenses, or any administrator-defined metrics
