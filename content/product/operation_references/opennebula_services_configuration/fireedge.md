@@ -18,17 +18,11 @@ weight: "5"
 
 <!--# FireEdge Configuration -->
 
-The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning (OneProvision GUI) as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
+The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
 
 ## Main Features
 
 - **Guacamole Proxy** for Sunstone to remotely access the VMs (incl., VNC, RDP, and SSH)
-- **OneProvision GUI**: to manage deployments of fully operational Clusters on remote Edge Cloud providers, see [Provisioning an Edge Cluster]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster#first-edge-cluster" %}}). Accessible from the following URL:
-
-```default
-http://<OPENNEBULA-FRONTEND>:2616/fireedge/provision
-```
-
 - **FireEdge Sunstone**: new iteration of Sunstone written in React/Redux. Accessible through the following URL:
 
 ```default
@@ -71,17 +65,6 @@ After a configuration change, the FireEdge server must be [restarted]({{% relref
 {{< alert title="Note" color="success" >}}
 JWT is a acronym of JSON Web Token{{< /alert >}} 
 
-<a id="oneprovision-configuration"></a>
-
-**OneProvision GUI**
-
-![oneprovision_dashboard](/images/oneprovision_dashboard.png)
-
-| Parameter                              | Default Value   | Description                                                                                                      |
-|----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
-| `oneprovision_prepend_command`         |                 | Command prefix for `oneprovision` command                                                                        |
-| `oneprovision_optional_create_command` |                 | Optional options for `oneprovision create` command. Check `oneprovision create --help` for more information. |
-
 <a id="fireedge-sunstone-configuration"></a>
 
 **FireEdge Sunstone**
@@ -92,7 +75,6 @@ JWT is a acronym of JSON Web Token{{< /alert >}}
 |---------------------------|-----------------------------------------|---------------------------------------------------------------------------------|
 | `support_url`             | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                                             |
 | `token_remote_support`    |                                         | Support enterprise token                                                        |
-| `vcenter_prepend_command` |                                         | Command prefix for `onevcenter` command                                         |
 | `sunstone_prepend`        |                                         | Optional parameter for `Sunstone commands` command                              |
 | `tmpdir`                  | `/var/tmp`                              | Directory to store temporal files when uploading images                     |
 | `max_upload_file_size`    | `10737418240`                           | Max size upload file (bytes). Default is 10GB                                   |
@@ -122,7 +104,7 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 You can add your logo to the login, main, favicon and loading screens by updating the `logo:` attribute as follows:
 
-- The logo configuration is done in the `/etc/one/fireedge/sunstone/sunstone-views.yaml` file.
+- The logo configuration is done in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
 - The logo of the main UI screen is defined for each view.
 
 The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/logos`.
@@ -130,7 +112,7 @@ The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/image
 The following example shows how you can change the logo to a generic linux one (included by default in all FireEdge installations):
 
 ```yaml
-# /etc/one/fireedge/sunstone/sunstone-views.yaml
+# /etc/one/fireedge/sunstone/views/sunstone-views.yaml
 ---
 logo: linux.png
 
@@ -204,13 +186,6 @@ Other logs are also available in Journald. Use the following command to show the
 ```default
 $ journalctl -u opennebula-fireedge.service
 ```
-
-**OneProvision GUI Logs**
-
-FireEdge OneProvision GUI app also creates logs for provisions created with it. These logs are saved in two phases, while the provisions are created, the logs are stored in `/var/lib/one/fireedge/provision/<user_id>/tmp/`, once they are created the logs are moved to `/var/lib/one/fireedge/provision/<user_id>/<provision_id>/stdouterr.log`.
-
-{{< alert title="Note" color="success" >}}
-The OneProvision GUI logs get rotated automatically when the log size gets over 100kb and perform any action to the provision.{{< /alert >}} 
 
 ### Troubleshooting
 

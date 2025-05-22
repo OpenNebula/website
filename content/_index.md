@@ -9,7 +9,9 @@ no_list: true
 breadcrumb_disable: true
 ---
 
-# Welcome to OpenNebula
+# Welcome to OpenNebula 7.0
+
+### *Version Beta 1*
 
 [OpenNebula](https://opennebula.io) is a powerful, but easy-to-use open source platform for enterprise, private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence.
 
@@ -19,19 +21,18 @@ To access additional material including white papers, guides and screencasts, se
 
 {{< cardpane >}}
   {{< card header="[Quick Start](/quick_start)" >}}
-  OpenNebula Oveview - Deploy a cloud for evaluation and testing - Automatically deploy a production-ready OpenNebula cloud
+  Gain a high-level view of OpenNebula, and easily deploy a cloud for evaluation and testing.
   {{< /card >}}
   {{< card header="[Product](/product)" >}}
-  Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud
+  Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud.
   {{< /card >}}
 {{< /cardpane >}}
 
 {{< cardpane >}}
   {{< card header="[Software](/software)" >}}
-  Access OpenNebula releases, consult release notes and upgrade information
+  Release notes, upgrade guides, available installation methods, and migration tools.
   {{< /card >}}
-  {{< card header="[Solutions](/solutions)" >}}
-  Integrations, extensions and tools
+  {{< card header="[Integrations](/integrations)" >}}
+  Extend functionalities for orchestration, storage, backup, billing, and application management.
   {{< /card >}}
 {{< /cardpane >}}
-

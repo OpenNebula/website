@@ -129,7 +129,7 @@ Each view is in an individual directory, `admin`, `user`, `groupadmin` and `clou
 
 ### Admin View
 
-This view provides complete control of the Virtual Machines, Templates, and Marketplace apps. Details can be configured in the `/etc/one/fireedge/sunstone/admin/` directory.
+This view provides complete control of the Virtual Machines, Templates, and Marketplace apps. Details can be configured in the `/etc/one/fireedge/sunstone/views/admin/` directory.
 
 ![fireedge_sunstone_admin_view](/images/fireedge_sunstone_admin_view.png)
 
@@ -137,7 +137,7 @@ This view provides complete control of the Virtual Machines, Templates, and Mark
 
 ### User View
 
-Based on the Admin View. It is an advanced user view intended for users with fewer privileges than an admin user, allowing them to manage Virtual Machines and Templates. Users will not be able to manage or retrieve the hosts and clusters of the cloud. Details can be configured in the `/etc/one/fireedge/sunstone/user/` directory.
+Based on the Admin View. It is an advanced user view intended for users with fewer privileges than an admin user, allowing them to manage Virtual Machines and Templates. Users will not be able to manage or retrieve the hosts and clusters of the cloud. Details can be configured in the `/etc/one/fireedge/sunstone/views/user/` directory.
 
 ![fireedge_sunstone_user_view](/images/fireedge_sunstone_user_view.png)
 
@@ -145,22 +145,22 @@ Based on the Admin View. It is an advanced user view intended for users with few
 
 ### Groupadmin View
 
-This view it’s like a limited version of the cloud administrator view to be used by the administrators of a group. Details can be configured in the `/etc/one/fireedge/sunstone/groupadmin/` directory. More details on [Group admin view]({{% relref "groupadmin_view#group-admin-view" %}})
+This view it like a limited version of the cloud administrator view to be used by the administrators of a group. Details can be configured in the `/etc/one/fireedge/sunstone/views/groupadmin/` directory. More details on [Group admin view]({{% relref "groupadmin_view#group-admin-view" %}})
 
 <a id="fireedge-sunstone-cloud-view"></a>
 
 ### Cloud View
 
-This is a simplified view intended for cloud consumers that just require a portal where they can provision new VMs easily. Details can be configured in the `/etc/one/fireedge/sunstone/cloud/` directory. More details on [Cloud view]({{% relref "cloud_view#cloud-view" %}})
+This is a simplified view intended for cloud consumers that just require a portal where they can provision new VMs easily. Details can be configured in the `/etc/one/fireedge/sunstone/views/cloud/` directory. More details on [Cloud view]({{% relref "cloud_view#cloud-view" %}})
 
 <a id="fireedge-sunstone-new-view"></a>
 
 ### Defining a New View
 
-The views definitions are placed in the `/etc/one/fireedge/sunstone/` directory. Each view is defined by a folder (named as the view) with the needed configuration files inside.
+The views definitions are placed in the `/etc/one/fireedge/sunstone/views` directory. Each view is defined by a folder (named as the view) with the needed configuration files inside.
 
 ```default
-/etc/one/fireedge/sunstone/
+/etc/one/fireedge/sunstone/views
 ...
 |-- admin/
 |   |-- backup-tab.yaml           <--- the Backup tab configuration file
@@ -187,7 +187,7 @@ The views definitions are placed in the `/etc/one/fireedge/sunstone/` directory.
 ...
 ```
 
-The easiest way to create a custom view is to copy the `admin` or `user` folder and modify its content as needed. After that, add the new view into `/etc/one/fireedge/sunstone/sunstone-views.yaml`.
+The easiest way to create a custom view is to copy the `admin` or `user` folder and modify its content as needed. After that, add the new view into `/etc/one/fireedge/sunstone/views/sunstone-views.yaml`.
 
 ### View Customization
 
@@ -293,7 +293,6 @@ The attributes described here indicate the available actions on each info tab on
 | `permissions_panel` | Describes the behavior for the `permissions` panel in the resource<br/>info tab. |
 | `qos_panel`         | Describes the behavior for the `QoS` panel in the resource info tab.             |
 | `rules_panel`       | Describes the behavior for the `rules` panel in the resource info tab.           |
-| `vcenter_panel`     | Describes the behavior for the `vCenter` panel in the resource info tab.         |
 
 The available actions in the info tabs are described in the following table.
 
@@ -367,7 +366,6 @@ The attributes described here indicate the available actions on each dialog on t
 | `sched_action` | Scheduled Actions section will be displayed. |
 | `showback`     | Showback section will be displayed.          |
 | `storage`      | Storage section will be displayed.           |
-| `vcenter`      | vCenter section will be displayed.           |
 | `vm_group`     | VM groups section will be displayed.         |
 
 <a id="fireedge-remote-connections"></a>

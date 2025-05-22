@@ -2,7 +2,7 @@
 title: "Quick Start"
 type: docs
 date: "2025-02-17"
-description: "From learning about OpenNebula to deploying a production-ready OpenNebula cloud"
+description: "Conceptual overviews to help you understand the platform and its architecture, followed by practical guidance on cloud design and deployment with  sequential tutorials to quickly install and explore OpenNebula using tools like miniONE or the OnePoC ISO, ideal for evaluation and testing that can be extended to hybrid cloud and to run Kubernetes clusters"
 categories:
 hide_feedback: true
 no_list: true
@@ -15,7 +15,7 @@ weight: "1"
 
 ## [Understand OpenNebula](understand_opennebula)
 
-Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying a cloud.
+Get a high-level overview of OpenNebula and discover the essential steps for designing and deploying your own cloud infrastructure
 
 {{< cardpane >}}
    {{< card header="[OpenNebula Concepts](understand_opennebula/opennebula_concepts)" >}}
@@ -53,60 +53,55 @@ Gain a bird's eye view of OpenNebula, and the pathway to designing and deploying
 
 <hr class="panel-line">
 
-## [Try OpenNebula with miniONE](try_opennebula)
+## [Try OpenNebula](try_opennebula)
 
-Follow tutorials to quickly deploy an on-prem or remote cloud for learning and evaluation. Deploy and run a Cloud Cluster, a Kubernetes Cluster, and Virtual Machines.
+Sequential tutorials to help you install and explore OpenNebula in just a few minutes. Whether you’re evaluating the platform, testing key features, or preparing for a future production deployment, these guides will help you get started quickly and efficiently
 
 {{< cardpane >}}
-   {{< card header="[Quick Start: OpenNebula Learning Environment](try_opennebula/opennebula_learning_environment)" >}}
+   {{< card header="[OpenNebula On-prem with miniONE](try_opennebula/opennebula_on-prem_with_minione)" >}}
       <p></p>
-      <bxctr>
-         <a href="try_opennebula/opennebula_learning_environment/create_an_emulated_environment_with_minione">Create Learning Environment</a>
-      </bxctr>
+      <inl>
+         <a href="try_opennebula/opennebula_on-prem_with_minione/deploy_opennebula_onprem_with_minione">Deploy OpenNebula On-prem with miniONE</a>
+      </inl>
+      <inl>
+         <a href="try_opennebula/opennebula_on-prem_with_minione/deploy_opennebula_on_aws">Deploy OpenNebula on AWS with miniONE</a>
+      </inl>
+      <inl>
+         <a href="try_opennebula/opennebula_on-prem_with_minione/validate_the_minione_environment">Validate the miniONE Environment</a>
+      </inl>
    {{< /card >}}
    <p></p>
-   {{< card header="[Quick Start: OpenNebula Evaluation Environment](try_opennebula/opennebula_evaluation_environment)" >}}
+   {{< card header="[OpenNebula On-prem with OnePoc ISO](try_opennebula/opennebula_on-prem_with_onepoc_iso)" >}}
       <p></p>
       <inl>
-         <a href="try_opennebula/opennebula_evaluation_environment/">Create Evaluation Environment</a>
+         <a href="try_opennebula/opennebula_on-prem_with_onepoc_iso/deploy_opennebula_onprem_with_poc_iso">Deploy OpenNebula On-prem with the PoC ISO</a>
       </inl>
       <inl>
-         <a href="try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster">Provision a Cloud Cluster</a>
+         <a href="try_opennebula/opennebula_on-prem_with_onepoc_iso/validate_the_poc_iso_environment">Validate the PoC ISO Environment</a>
       </inl>
       <inl>
-         <a href="try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters">Deploy a Kubernetes Cluster</a>
+         <a href="try_opennebula/opennebula_on-prem_with_onepoc_iso/advanced_configuration_of_poc_iso">Advanced Configuration of the PoC ISO</a>
       </inl>
    {{< /card >}}
 {{< /cardpane >}}
-
-<hr class="panel-line">
-
-## [Automatic Deployment of OpenNebula with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy)
-
-Follow tutorials to automatically install a production-grade OpenNebula cloud using OneDeploy, an installation tool based on Ansible playbooks.
-
-{{< card header="[On-premises Deployment with OneDeploy](automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/)" >}}
    <p></p>
+{{< cardpane >}}
+ {{< card header="[Extend OpenNebula On-prem with Hybrid Cloud](try_opennebula/extend_opennebula_on-prem)" >}}
+      <p></p>
       <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_overview">Overview of Automatic Deployment</a>
+         <a href="try_opennebula/extend_opennebula_on-prem/provision_cloud_cluster">Provision a Cloud Cluster on a Public Cloud</a>
       </inl>
       <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_local_ds">Deploy with Local Storage</a>
+         <a href="try_opennebula/opennebula_on-prem_with_onepoc_iso/validate_the_poc_iso_environment">Validate the PoC ISO Environment</ a>
+      </inl>
+   {{< /card >}}
+  {{< card header="[Run Kubernetes Clusters on an OpenNebula Cloud](try_opennebula/run_kubernetes_clusters_on_opennebula/)" >}}
+      <p></p>
+      <inl>
+	<a href="try_opennebula/run_kubernetes_clusters_on_opennebula/running_kubernetes_clusters">Run a Kubernetes Cluster on OpenNebula</a>
       </inl>
       <inl>
-         <a href="automatic_deployment_of_opennebula_with_one_deploy/on-prem_deployment_with_one_deploy/one_deploy_tutorial_shared_ds">Deploy with Shared Storage</a>
+	<a href="try_opennebula/run_kubernetes_clusters_on_opennebula/integrate_rancher_with_opennebula">Integrate Rancher with OpenNebula</a>
       </inl>
-{{< /card >}}
-
-## [Migration from VMware](migration_from_vmware)
-
-Automatically migrate Virtual Machines and Virtual Machine Appliances from VMware.
-
-{{< card header="[Migration from VMware](migration_from_vmware)" >}}
-      <inl>
-         <a href="migration_from_vmware/migrating_vms_with_oneswap">Migrating VMs with OneSwap</a>
-      </inl>
-      <inl>
-         <a href="migration_from_vmware/managing_ovas_and_vmdks">Managing OVAs and VMDKs</a>
-      </inl>
-{{< /card >}}
+    {{< /card >}}
+{{< /cardpane >}}

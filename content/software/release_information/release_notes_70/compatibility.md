@@ -12,47 +12,102 @@ weight: "5"
 
 <!--# Compatibility Guide -->
 
-This guide is aimed at OpenNebula 6.10.x users and administrators who want to upgrade to the latest version. The following sections summarize the new features and usage changes that should be taken into account, or are prone to cause confusion. You can check the upgrade process in the [corresponding section]({{% relref "../../life_cycle_management/upgrade/index#upgrade" %}}). If upgrading from previous versions, please make sure you read all the intermediate versions’ Compatibility Guides for possible pitfalls.
+This guide is aimed at OpenNebula 6.10.x users and administrators who want to upgrade to the latest version. The following sections summarize the new features and usage changes that should be taken into account, or are prone to cause confusion. You can check the upgrade process in the [corresponding section](../../upgrade_process). If upgrading from previous versions, please make sure you read all the intermediate versions’ Compatibility Guides for possible pitfalls.
 
-Visit the [Features list]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/key_features#features" %}}) and the [What’s New guide]({{% relref "whats_new#whats-new" %}}) for a comprehensive list of what’s new in OpenNebula 7.0.
+Visit the [Features list](../../../quick_start/understand_opennebula/opennebula_concepts/key_features#features) and the [What’s New guide](whats_new#whats-new) for a comprehensive list of what’s new in OpenNebula 7.0.
+
+## Deprecated Components
+
+As part of OpenNebula 7.0’s effort to streamline infrastructure operations and simplify cloud deployments based on KVM and LXC, the following components have been removed:
+
+- vCenter Drivers – Support for VMware vCenter has been discontinued.
+- Original Sunstone – The legacy Sunstone interface with a Ruby backend has been removed in favor of the current interface.
+- Ebtables Network Driver – The ebtables driver has been deprecated and is no longer available in favor on more reliable VLAN solutions.
+- Legacy hybrid cloud computing drivers have been removed (ec2, azure, OpenNebula) in favor of the new components.
+
+## Redesigned Scheduling System
+
+OpenNebula 7.0 introduces a [completely redesigned scheduling architecture](../../../product/cloud_system_administration/scheduler/overview/#opennebula-scheduler-framework-architecture) based on a modular driver framework. The scheduler is no longer a persistent system service; instead, it is executed on demand whenever a new *plan* is required.
+
+This new framework supports multiple scheduling algorithms. By default, the original rank-based scheduler handles placement decisions, while the new OpenNebula DRS scheduler is used for optimization tasks. We recommend [reviewing the updated configuration options and files](../../../product/cloud_system_administration/scheduler/configuration/) to fine-tune the scheduling behavior to your specific infrastructure needs.
+
+## OneFlow: Support for Virtual Router Roles
+
+This version of OneFlow introduces support for Virtual Router roles, enabling more advanced and flexible service definitions. To accommodate this enhancement, the underlying data model has been updated—some attributes have been renamed or relocated within the flow definition document.
+
+The database migrator automatically updates existing services to the new format. However, users with custom applications or integrations are advised to review the updated data model to ensure compatibility and make any necessary adjustments:
+
+| Old attribute          | New Attribute       |
+|------------------------|---------------------|
+| `vm_template`          | `template_id`       |
+| `vm_template_contents` | `template_contents` |
+| `custom_attrs`         | `user_inputs`       |
+
+New attributes:
+
+| Attribute  | Permitted Values  | Default Value |
+|------------|-------------------|---------------|
+| `type`     | `vm`, `vr`        |  `vm`         |
+
+### Examples:
+
+Old Format:
+
+```json
+{
+   "name": "old_role_example",
+   "vm_template": 1,
+   "cardinality": 3,
+   "vm_template_contents": "ATT_A=\"$ATT_A\",\n\"CONTEXT\"=[ATT_A=\"$ATT_A\"],\n
+        "CPU=\"2\"\n",
+   "custom_attrs": {
+       "ATT_A": "M|text|desc| |default"
+   }
+}
+```
+
+New Format:
+
+```json
+{
+   "name": "new_role_example",
+   "template_id": 1,
+   "type": "vm",
+   "cardinality": 3,
+   "template_contents": {
+       "CPU": 2
+   },
+   "user_inputs": {
+       "ATT_A": "M|text|desc| |default"
+   }
+}
+
+```
+
+## Cluster Provisioning
+
+- This version removes the legacy provisioning component, incorporating internal code changes that lay the groundwork for a complete rewrite. The fully redesigned provisioning system, featuring enhanced support for additional providers, will be released in a subsequent maintenance update.
 
 ## Resize Operation
 
 The enforcement parameter was deprecated to ensure NUMA consistency for the VM during a resize. Instead, it has been reinstated to control capacity attributes, such as memory and CPU.
 
-## New default Local datastore driver
+## New Default Local Datastore Driver
 
-Since OpenNebula 6.10.2, the default Local driver is `local` instead of `ssh` (see [Local Storage datastore drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds#local-ds-drivers" %}})). The legacy `ssh` driver is still supported and nothing needs to be done for already existing datastores to keep working. As supporting qcow2 features such as thin provisioning required breaking compatibility with existing datastores, we decided to take the opportunity to write the `local` driver from scratch, making the driver more maintainable and easing new feature development.
+Starting with OpenNebula 6.10.2, the default driver for Local datastores is now `local`, replacing the legacy `ssh` driver (see [Local Storage Datastore Drivers](../../../product/cloud\_clusters\_infrastructure\_configuration/storage\_system\_configuration/local\_ds#local-ds-drivers). While the `ssh` driver remains fully supported and existing datastores require no changes, the new `local` driver was developed from scratch to improve maintainability and facilitate future enhancements.
 
-## Check Datastore Capacity During Image Create
+This redesign was necessary to support advanced QCOW2 features such as thin provisioning, which introduced incompatibilities with previous implementations. The new driver streamlines the codebase and lays the foundation for upcoming capabilities.
 
-We fixed and synchronized usage of the `no_check_capacity` flag across all APIs (XML-RPC, CLI, Ruby, Java, Python). Now it works as described in the [XML-RPC API documentation]({{% relref "../../../product/integration_references/system_interfaces/api#api" %}}). If you are using this flag in any of the API bindings provided for OpenNebula please make sure you update your code.
+Note: Caching support is not yet included in this release but is in an advanced development stage and will be available in an upcoming maintenance update.
 
-## VM Drivers
-
-We changed default for `CLEANUP_MEMORY_ON_STOP` to `no` as it could potentially lead to heavy workload on hosts when multiple VMs were stopped or migrated in parallel, e.g. when running `onehost flush`.
-
-## Ruby gems opennebula and opennebula-cli
-
-OpenNebula and opennebula-cli gems both require Nokogiri gem as a running dependency. As nokogiri from 1.16 requires Ruby >= 3.0 we locked Nokogiri to 1.16 to avoid installation failure on systems such as AlmaLinux 8, Debian 10, Ubuntu 20.04. In next 7.0 we will revisit this issue.
-
-## Search Virtual Machines
-
-VM search uses has new pattern-based syntax. The following table includes some examples to move from old search format to the new one, see [Search Virtual Machines]({{% relref "../../../product/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-search" %}}) for more info:
-
-| Search Description      | Old syntax   | New syntax                       |
-|-------------------------|--------------|----------------------------------|
-| VM name                 | NAME=abc     | VM.NAME=abc                      |
-| VM with disk target vda | TARGET=vda   | VM.TEMPLATE.DISK[\*].TARGET=vda  |
-| IP matching             | IP=10.10.0.5 | VM.TEMPLATE.NIC[\*].IP=10.10.0.5 |
-| IP starts with 10.10    | —            | VM.TEMPLATE.NIC[\*].IP=10.10     |
+<a id="compatibility-guide-labels"></a>
 
 ## Labels on Sunstone
 
-Only persistent user labels that were created in old Sunstone will be showed [in new Sunstone]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/sunstone_labels#sunstone-labels" %}}). We are working to offer you a better experience in new Sunstone with the system and user labels in future versions of OpenNebula.
+Starting from version 7.0, the labels system in Sunstone has been revamped, moving away from the old global/system-wide approach towards a more user/group-specific structure. 
 
-Remember that in Sunstone you need to create the user label in the Settings section before apply a label to a resource. See [Sunstone labels guide]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/sunstone_labels#sunstone-labels" %}}) to get more information.
+Previously, labels were stored directly on the resources they were applied to, which didn't scale well. There was no way to tell which user had created which label, and removing a label only affected the user template, leaving the resource template untouched. This often led to "stale labels", cluttering resource templates and misrepresenting which labels were actually in use-especially when different users applied similarly named labels to shared resources. 
 
-## OneProvision on Sunstone
+The new format introduces two types of labels: "User" and "Group" labels. These are now stored in either the user template or the group template, along with metadata about which resources they're applied to. This avoids cluttering the resource templates themselves and makes it possible to control label visibility more precisely by leveraging different group memberships. 
 
-We have integrated the OneProvision app into Sunstone, for convenience. Now users don’t have to switch sessions to be able to manage provisions and see the equivalent resources in Sunstone. Both the Provision and the Provider can be found in the Sunstone Infrastructure left-side menu category.
+When upgrading to 7.0, existing in-use labels will be automatically migrated. To avoid bringing over stale or unused data, only labels that are present both in a user's template and on a resource template will be migrated. Any existing persistent labels defined in `etc/one/sunstone/sunstone-views.yaml` will be migrated to the new format, as user labels. New persistent labels can be defined in `etc/one/fireedge/sunstone/default-labels.yaml`.

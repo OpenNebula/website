@@ -12,11 +12,11 @@ weight: "2"
 
 <!--# Installation and Configuration -->
 
-This page describes how to install the OpenNebula Prometheus integration packages available in the [OpenNebula software repositories]({{% relref "../../../software/life_cycle_management/installation/opennebula_repository_configuration#repositories" %}}).
+This page describes how to install the OpenNebula Prometheus integration packages available in the [OpenNebula software repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}).
 
 ## Step 1. OpenNebula Repositories [Front-end, Hosts]
 
-At this point OpenNebula software repositories should already be configured in your front-end and hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../software/life_cycle_management/installation/opennebula_repository_configuration#repositories" %}}) guide.
+At this point OpenNebula software repositories should already be configured in your front-end and hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}) guide.
 
 ## Step 2. Install Front-end Packages [Front-end]
 

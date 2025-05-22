@@ -311,7 +311,7 @@ The Monitoring Daemon gather gather information from the cluster nodes. To defin
 - **arguments**: for the daemon executable, usually a path to configuration file `-c monitord.conf`.
 - **threads**: number of threads used for communication
 
-For more information on configuring the information and monitoring system and hints to extend it, please check the [monitoring configuration]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#mon-conf" %}}) and [information driver configuration guide]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}).
+For more information on configuring the information and monitoring system and hints to extend it, please check the [monitoring configuration]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) and [information driver configuration guide]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}).
 
 Sample configuration:
 
@@ -391,7 +391,7 @@ Sample configuration:
 
 TM_MAD = [
     EXECUTABLE = "one_tm",
-    ARGUMENTS = "-t 15 -d dummy,lvm,shared,fs_lvm,qcow2,ssh,local,ceph,dev,vcenter,iscsi_libvirt"
+    ARGUMENTS = "-t 15 -d dummy,lvm,shared,fs_lvm,qcow2,ssh,local,ceph,dev,iscsi_libvirt"
 ]
 ```
 
@@ -452,7 +452,7 @@ Sample configuration:
 ```default
 DATASTORE_MAD = [
     EXECUTABLE = "one_datastore",
-    ARGUMENTS  = "-t 15 -d dummy,fs,lvm,ceph,dev,iscsi_libvirt,vcenter -s shared,local,ceph,fs_lvm"
+    ARGUMENTS  = "-t 15 -d dummy,fs,lvm,ceph,dev,iscsi_libvirt -s shared,local,ceph,fs_lvm"
 ]
 ```
 
@@ -705,8 +705,6 @@ DOCUMENT_ENCRYPTED_ATTR = "PROVISION_BODY"
 
 HOST_ENCRYPTED_ATTR = "AZ_ID"
 HOST_ENCRYPTED_ATTR = "AZ_CERT"
-HOST_ENCRYPTED_ATTR = "VCENTER_PASSWORD"
-HOST_ENCRYPTED_ATTR = "NSX_PASSWORD"
 HOST_ENCRYPTED_ATTR = "ONE_PASSWORD"
 
 VM_ENCRYPTED_ATTR = "ONE_PASSWORD"

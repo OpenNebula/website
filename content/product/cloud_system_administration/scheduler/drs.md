@@ -1,5 +1,5 @@
 ---
-title: "OpenNebula Distributed Resource Scheduler"
+title: "Distributed Resource Scheduler"
 
 description:
 categories:

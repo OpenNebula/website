@@ -55,6 +55,7 @@ In order to save space in the backup system, RAW disk backups are converted and 
 - Live backups are only supported for KVM
 - Attaching a disk to a VM that had an incremental backup previously made will yield an error. The –reset option for the backup operation is required to recreate a new incremental chain
 - Incremental backups on VMs with disk or system snapshots is not supported
+- `KEEP_LAST` option is not supported for Incremental backups of Ceph disks
 
 ## Preparing VMs for Backups
 
