@@ -31,6 +31,20 @@ To install an OpenNebula Front-end using miniONE, we’ll need to complete the f
 > 3. Verify the installation.
 
 
+{{< alert title="Emulation" color="success" >}}
+It is recommended to perform the installation on a machine capable of running KVM virtualization. If KVM virtualization is not available, miniONE will automatically fall back on QEMU emulation; however, running in full emulation mode will decrease performance.
+{{< /alert >}}
+
+{{< alert title="Tip" color="primary" >}}
+To quickly check that your machine is capable of KVM emulation, you can run the `kvm-ok` command:
+```
+kvm-ok 
+INFO: /dev/kvm exists
+KVM acceleration can be used
+```
+On Debian-based Linux, you can install `kvm-ok` by installing the `cpu-checker` package.
+{{< /alert >}}
+
 ## Step 1: Verify Installation Requirements
 
 To run the miniONE script, you will need a physical or virtual server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need an internet connection to download software packages during installation.
@@ -52,7 +66,7 @@ To run the miniONE script, you will need a physical or virtual server with a fre
       - 80 (for the Ruby Sunstone GUI)
       - 2616 (for the FireEdge GUI)
 
-For this tutorial, the installation was performed on Ubuntu 22.04.
+This tutorial was tested on on Ubuntu 22.04 and 24.04.
 
 ## Step 2: Download and Install miniONE
 
@@ -92,7 +106,7 @@ The miniONE script will begin the installation, logging output to the terminal. 
 
 ```default
 ### Report
-OpenNebula 7.0 was installed
+OpenNebula 6.99 was installed
 Sunstone is running on:
   http://192.168.1.130/
 FireEdge is running on:

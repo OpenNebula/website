@@ -12,6 +12,14 @@ weight: "7"
 
 <!--# Running Kubernetes Clusters -->
 
+{{< alert title="Warning" color="warning" >}}
+The deployment described in this page has not been tested for this Beta version.
+{{< /alert >}}
+
+{{< alert color="success" >}}
+The definitive version of this page will be published with the upcoming 7.0 stable release. Stay tuned!
+{{< /alert >}}
+
 This page illustrates how to download a Kubernetes cluster from the OpenNebula Marketplace and deploy it on a remote cloud cluster. For this example, the cloud cluster is provisioned on AWS, and has at least two virtual networks configured: a private and a public network, that pre-allocates elastsic IPs.
 
 Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
