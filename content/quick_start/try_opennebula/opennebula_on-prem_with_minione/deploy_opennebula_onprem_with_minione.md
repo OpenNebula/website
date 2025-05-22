@@ -32,7 +32,7 @@ To install an OpenNebula Front-end using miniONE, we’ll need to complete the f
 
 
 {{< alert title="Emulation" color="success" >}}
-It is recommended to perform the installation on a machine capable of running KVM virtualization. If KVM virtualization is not available, miniONE will automatically fall back on QEMU emulation; however, running in full emulatin mode will decrease performance.
+It is recommended to perform the installation on a machine capable of running KVM virtualization. If KVM virtualization is not available, miniONE will automatically fall back on QEMU emulation; however, running in full emulation mode will decrease performance.
 {{< /alert >}}
 
 {{< alert title="Tip" color="primary" >}}
