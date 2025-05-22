@@ -85,7 +85,7 @@ chmod +x minione
 To install miniONE, run:
 
 ```default
-./minione --version 6.99
+./minione --version 6.99 --force
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
