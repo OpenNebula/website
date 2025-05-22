@@ -76,7 +76,7 @@ Available packages for OpenNebula clients, the Front-end and hypervisor Nodes:
 There are also packages with debugging symbols for some platforms, e.g. `openenbula-debuginfo` on AlmaLinux/RHEL and `opennebula-dbgsym` on Debian/Ubuntu. Other architecture-specific components might come with similarly named packages, please query your packaging database if necessary.
 
 {{< alert title="Note" color="success" >}}
-There are a few differences in package names among distributions. Those with varying package names contain mostly integration libraries and since they are for general use on installation Hosts, their names are left to follow the distribution conventions. Above, you can find the AlmaLinux/RHEL specific packages prefixed with “*rpm:*” and Debian/Ubuntu specific packages prefixed with “*deb:*”.{{< /alert >}} 
+There are a few differences in package names among distributions. Those with varying package names contain mostly integration libraries and since they are for general use on installation Hosts, their names are left to follow the distribution conventions. Above, you can find the AlmaLinux/RHEL specific packages prefixed with “*rpm:*” and Debian/Ubuntu specific packages prefixed with “*deb:*”.{{< /alert >}}
 
 Install all OpenNebula Front-end components by executing the following commands under a privileged user:
 
@@ -120,7 +120,7 @@ If you are deploying Front-end for production/serious use, make sure you read th
 ### OpenNebula Daemon
 
 {{< alert title="Important" color="success" >}}
-This is **only for initial** OpenNebula deployment, not applicable for upgrades!{{< /alert >}} 
+This is **only for initial** OpenNebula deployment, not applicable for upgrades!{{< /alert >}}
 
 OpenNebula’s initial deployment on first usage creates a user `oneadmin` **inside the OpenNebula** (not to be confused with system user `oneadmin` in the Front-end operating system!) based on a randomly generated password read from `/var/lib/one/.one/one_auth`. To set your own user password from the very beginning, proceed with the following steps before starting the services:
 
@@ -137,19 +137,19 @@ $ echo 'oneadmin:changeme123' > /var/lib/one/.one/one_auth
 ```
 
 {{< alert title="Warning" color="warning" >}}
-This will set the oneadmin’s password only upon starting OpenNebula for the first time. From that point, you must use the `oneuser passwd` command to change oneadmin’s password. More information on how to change the oneadmin password is [here]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}).{{< /alert >}} 
+This will set the oneadmin’s password only upon starting OpenNebula for the first time. From that point, you must use the `oneuser passwd` command to change oneadmin’s password. More information on how to change the oneadmin password is [here]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}).{{< /alert >}}
 
 Check how to [change oneadmin password]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}) for already running services.
 
 {{< alert title="Note" color="success" >}}
-For advanced setup, follow the configuration references for the OpenNebula [Daemon]({{% relref "oned#oned-conf" %}}).{{< /alert >}} 
+For advanced setup, follow the configuration references for the OpenNebula [Daemon]({{% relref "oned#oned-conf" %}}).{{< /alert >}}
 
 ### FireEdge
 
 OpenNebula FireEdge is the next-generation web UI server that replaces the legacy Ruby Sunstone. It provides the Sunstone GUI, including additional functionality provided via Guacamole. It is installed and configured by default.
 
 {{< alert title="Note" color="success" >}}
-For advanced setup, follow the FireEdge [configuration reference]({{% relref "fireedge#fireedge-configuration" %}}).{{< /alert >}} 
+For advanced setup, follow the FireEdge [configuration reference]({{% relref "fireedge#fireedge-configuration" %}}).{{< /alert >}}
 
 ### OneGate (Optional)
 
@@ -170,7 +170,7 @@ ONEGATE_ENDPOINT="http://one.example.com:5030"
 If you are reconfiguring already running services at a later point, don’t forget to restart them to apply the changes.
 
 {{< alert title="Note" color="success" >}}
-For advanced setup, follow the OneGate [configuration reference]({{% relref "onegate#onegate-conf" %}}).{{< /alert >}} 
+For advanced setup, follow the OneGate [configuration reference]({{% relref "onegate#onegate-conf" %}}).{{< /alert >}}
 
 ### OneFlow (Optional)
 
@@ -183,7 +183,7 @@ The OneFlow server orchestrates the services and multi-VM deployments. While for
 If you are reconfiguring already running services at a later point, don’t forget to restart them to apply the changes.
 
 {{< alert title="Note" color="success" >}}
-For advanced setup, follow the OneFlow [configuration reference]({{% relref "oneflow#appflow-configure" %}}).{{< /alert >}} 
+For advanced setup, follow the OneFlow [configuration reference]({{% relref "oneflow#appflow-configure" %}}).{{< /alert >}}
 
 <a id="frontend-services"></a>
 
@@ -204,7 +204,7 @@ The complete list of operating system services provided by OpenNebula:
 | **opennebula-ssh-socks-cleaner** | Periodic cleaner of SSH persistent connections                                                                              | opennebula          |
 
 {{< alert title="Note" color="success" >}}
-Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}} 
+Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}}
 
 You are ready to **start** all OpenNebula services with the following command (NOTE: you might want to remove the services from the command arguments if you skipped their configuration steps above):
 
@@ -213,7 +213,7 @@ You are ready to **start** all OpenNebula services with the following command (N
 ```
 
 {{< alert title="Warning" color="warning" >}}
-Make sure all required [network ports]({{% relref "#frontend-fw" %}}) are enabled on your firewall (on Front-end or the router).{{< /alert >}} 
+Make sure all required [network ports]({{% relref "#frontend-fw" %}}) are enabled on your firewall (on Front-end or the router).{{< /alert >}}
 
 Other OpenNebula services might be started as a dependency but you don’t need to care about them unless they need to be explicitly restarted or stopped. To start these **services automatically on server boot**, it’s necessary to enable them by the following command:
 
@@ -261,7 +261,7 @@ To check for errors, you can search in the main OpenNebula Daemon log file, `/va
 ### FireEdge
 
 {{< alert title="Note" color="success" >}}
-Make sure the TCP port 2616 is not blocked on your firewall.{{< /alert >}} 
+Make sure the TCP port 2616 is not blocked on your firewall.{{< /alert >}}
 
 Now you can try to log in through the Sunstone GUI and Provision GUI. To do so, point your browser to `http://<frontend_address>:2616/fireedge/sunstone` to access to Sunstone and point your browser to `http://<frontend_address>:2616/fireedge/provision` to access to Provision. You should get to the login page in both cases. The access user is `oneadmin` and initial (or customized) password is the one from the file `/var/lib/one/.one/one_auth` on your Front-end.
 
@@ -298,18 +298,20 @@ The following table lists few significant directories on your OpenNebula Front-e
 
 The list below shows the ports used by OpenNebula. These ports need to be open for OpenNebula to work properly:
 
-| Port    | Description                                         |
-|---------|-----------------------------------------------------|
-| `22`    | Front-end host SSH server                           |
-| `2474`  | OneFlow server                                      |
-| `2616`  | Next-generation GUI server FireEdge                 |
-| `2633`  | Main OpenNebula Daemon (oned), XML-RPC API endpoint |
-| `4124`  | Monitoring daemon (both TCP/UDP)                    |
-| `5030`  | OneGate server                                      |
-| `29876` | noVNC Proxy Server                                  |
+|     Port      | Description                                                  |
+|---------------|--------------------------------------------------------------|
+| `22`          | Front-end host SSH server                                    |
+| `2474`        | OneFlow server                                               |
+| `2616`        | Next-generation GUI server FireEdge                          |
+| `2633`        | Main OpenNebula Daemon (oned), XML-RPC API endpoint          |
+| `4124`        | Monitoring daemon (both TCP/UDP)                             |
+| `5030`        | OneGate server                                               |
+| `29876`       | noVNC Proxy Server                                           |
+| `5900+`       | VNC Server ports on hosts for VMs. See VNC_PORTS             |
+| `49152-49215` | Host-Host port communication required for KVM live migrations|
 
 {{< alert title="Note" color="success" >}}
-These are only the default ports. Each component can be configured to bind to specific ports or use a HTTP Proxy.{{< /alert >}} 
+These are only the default ports. Each component can be configured to bind to specific ports or use a HTTP Proxy.{{< /alert >}}
 
 OpenNebula connects to the hypervisor Nodes over SSH (port 22). Additionally, the main OpenNebula Daemon (oned) may connect to various remote Marketplace servers to get a list of available appliances, e.g.:
 
