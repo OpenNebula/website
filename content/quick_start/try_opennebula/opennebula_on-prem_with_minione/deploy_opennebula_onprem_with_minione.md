@@ -99,14 +99,14 @@ Next, ensure that the `minione` file has execute permissions:
 To install miniONE, run:
 
 ```default
-# ./minione --version 6.99 --force
+# ./minione --version 6.99.85 --force
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
 
 ```default
 ### Report
-OpenNebula 6.99 was installed
+OpenNebula 6.99.85 was installed
 Sunstone is running on:
   http://192.168.1.130/
 FireEdge is running on:

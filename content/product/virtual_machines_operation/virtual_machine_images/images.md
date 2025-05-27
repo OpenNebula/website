@@ -14,7 +14,7 @@ weight: "2"
 
 <!--# Images -->
 
-An OpenNebula Image represents a VM disk. Images can have multiple formats (e.g. filesystem or block device) and can store OS installations, data filesystems, images or kernels. In this guide you’ll learn about different Image types, and how to mange and use them.
+An OpenNebula Image represents a VM disk. Images can have multiple formats (e.g. filesystem or block device) and can store OS installations, data filesystems, images or kernels. In this guide you’ll learn about different Image types, and how to manage and use them.
 
 ## Types and Persistency
 
