@@ -141,7 +141,7 @@ The hypervisor column states that the attribute is **O**ptional, **M**andatory, 
 | `BOOT`             | comma separated list of boot devices types, by order of preference (first device in the list is the first device used for boot). Possible values: `disk#`,`nic#`. | M                | O         |
 | `SD_DISK_BUS`      | bus for disks with **sd** prefix, either `scsi` or `sata`, if attribute is missing, libvirt chooses itself.                                                           | O                | -
 | `UUID`             | unique ID of the VM. It’s referenced as machine ID inside the VM. Could be used to force ID for licensing purposes.                                                   | O                | -     |
-| `FIRMWARE`         | firmware type or firmware path. Possible values: `BIOS` or path.                                                                                                      | O                | -     |
+| `FIRMWARE`         | firmware type or firmware path. Possible values: `BIOS`, `UEFI` or path.                                                                                              | O                | -     |
 | `FIRMWARE_SECURE`  | enable Secure Boot. Possible values: `true`, `false`.                                                                                                                 | O                | -     |
 
 (!!) Use one of `KERNEL_DS` or KERNEL (and `INITRD` or `INITRD_DS`).
