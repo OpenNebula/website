@@ -184,10 +184,6 @@ These two files store a JSON object that has the same structure but with differe
 | footer          | Defines the different colors used in the footer of the app.  |
 | graphs          | Defines the different colors used in the different graphs used in the app. |
 
-> [!WARNING]
->
-> Remember that these files are source files, so any change on this configuration will force to compile again Sunstone in order to applied these changes.
-
 {{< alert title="Warning" color="warning" >}}
 Remember that these files are source files, so any change on this configuration will force to compile again Sunstone in order to applied these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
 
