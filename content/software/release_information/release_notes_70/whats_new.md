@@ -69,6 +69,9 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
 - [ARM architecture support](../../../product/operation_references/hypervisor_configuration/kvm_driver/#arm64-specifics), including OpenNebula packages and Marketplace appliances for aarch64.
 - [OVA import](../../../software/migration_from_vmware/import_ova): a new CLI command, `oneswap`, allows to ingest VMs in OVA format which were exported directly from VMware vCenter. Stay tuned for Sunstone support!
+- Add support for the `SERIAL` disk attribute. This allows specifying a `SERIAL` value in [Image](../../../product/operation_references/configuration_references/img_template.md) and [VM Templates](../../../product/operation_references/configuration_references/template.md), including support for automatic generation (`auto`).
+- Add support for automatic [UEFI firmware selection](../../../product/operation_references/configuration_references/template.md).
+
 
 ## OpenNebula Flow
 
