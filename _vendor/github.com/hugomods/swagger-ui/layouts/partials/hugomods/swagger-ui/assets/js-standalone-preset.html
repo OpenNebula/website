@@ -1,0 +1,2 @@
+{{ $js := resources.Get "hugomods/swagger-ui/swagger-ui-standalone-preset.js" | resources.Copy "js/swagger-ui-standalone-preset.js" }}
+<script src="{{ $js.RelPermalink }}"></script>
