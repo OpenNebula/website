@@ -69,24 +69,30 @@ JWT is a acronym of JSON Web Token{{< /alert >}}
 
 **FireEdge Sunstone**
 
+The Sunstone server configuration file can be found in `/etc/one/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+
+{{< alert title="Note" color="success" >}}
+After a configuration change, the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}}    (#fireedge-sunstone-configuration)
+
 ![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
 
-| Parameter                 | Default Value                           | Description                                                                     |
-|---------------------------|-----------------------------------------|---------------------------------------------------------------------------------|
-| `support_url`             | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                                             |
-| `token_remote_support`    |                                         | Support enterprise token                                                        |
-| `sunstone_prepend`        |                                         | Optional parameter for `Sunstone commands` command                              |
-| `tmpdir`                  | `/var/tmp`                              | Directory to store temporal files when uploading images                     |
-| `max_upload_file_size`    | `10737418240`                           | Max size upload file (bytes). Default is 10GB                                   |
-| `proxy`                   |                                         | Enable an http proxy for the support portal and to download MarketPlaceApps |
-| `leases`                  |                                         | Enable the vm leases                                                            |
-| `supported_fs`            |                                         | Support filesystem                                                              |
-| `currency`                | `EUR`                                   | Currency formatting                                                             |
-| `default_lang`            | `en`                                    | Default language setting                                                        |
-| `langs`                   |                                         | List of server localizations                                                    |
-| `keep_me_logged_in`       | `true`                                  | True to display ‘Keep me logged in’ option                                      |
-| `currentTimeZone`         |                                         | Time Zone                                                                       |
-| `rowStyle`                |                                         | Changes the style of rows in datatables, values can be `card` or `list`.    |
+| Parameter              | Default Value                           | Description                                                  |
+| ---------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| `support_url`          | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                          |
+| `token_remote_support` |                                         | Support enterprise token                                     |
+| `sunstone_prepend`     |                                         | Optional parameter for `Sunstone commands` command           |
+| `tmpdir`               | `/var/tmp`                              | Directory to store temporal files when uploading images      |
+| `max_upload_file_size` | `10737418240`                           | Max size upload file (bytes). Default is 10GB                |
+| `proxy`                |                                         | Enable an http proxy for the support portal and to download MarketPlaceApps |
+| `leases`               |                                         | Enable the vm leases                                         |
+| `supported_fs`         |                                         | Support filesystem                                           |
+| `currency`             | `EUR`                                   | Currency formatting                                          |
+| `default_lang`         | `en`                                    | Default language setting                                     |
+| `langs`                |                                         | List of server localizations                                 |
+| `keep_me_logged_in`    | `true`                                  | True to display ‘Keep me logged in’ option                   |
+| `currentTimeZone`      |                                         | Time Zone                                                    |
+| `rowStyle`             | `card`                                  | Changes the style of rows in tables. Values can be `card` or `list`. |
+| `fullViewMode`         | `false`                                 | Changes to full mode view when see details of a resource. Values can be `true` or `false`. |
 
 Once the server is initialized, it creates the file `/var/lib/one/.one/fireedge_key`, used to encrypt communication with Guacd.
 
@@ -131,15 +137,59 @@ The logo can be updated without having to restart the FireEdge server!{{< /alert
 
 <a id="fireedge-conf-guacamole"></a>
 
-## Configure DataTables
+## Configure Tables
 
-You can change the style of the rows depending on your preferences. in case they are changed in the fireedge-server.conf file. this change will be priority. and it will adjust the view to all users.
+Tables in Sunstone can be configured to visualize data as a list of plain text or as a list of cards:
 
 ![fireedge_sunstone_list_datatable](/images/sunstone_list_datatable.png)
 
-Each user can also do it from his configuration.
+![fireedge_sunstone_card_datatable](/images/sunstone_card_datatable.png)
+
+This configuration could be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `rowStyle`. See [table below](#fireedge-sunstone-configuration).
+
+Moreover, Suntone has the capacity to show the detail of a resource in a full screen mode or in a split mode:
+
+![fireedge_sunstone_resource_full_mode](/images/sunstone_resource_full_mode.png)
+
+![fireedge_sunstone_resource_split_mode](/images/sunstone_resource_split_mode.png)
+
+This configuration can be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `fullViewMode`. See [table below](#fireedge-sunstone-configuration).
+
+Also, both configurations will be override for an specific user if the user changes the configuration in the settings section.
 
 ![fireedge_sunstone_setting_list_datatable](/images/sunstone_setting_list_datatable.png)
+
+## Customize colors
+
+Sunstone will store the colors used in its components in two different files:
+
+- For light mode: `src/modules/providers/theme/palettes/light.js`
+- For dark mode: `src/modules/providers/theme/palettes/dark.js`
+
+These two files store a JSON object that has the same structure but with different values in order to set colors for light and dark mode.
+
+| Key             | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| mainContainer   | Defines the background color of the app.                     |
+| buttons         | Defines the different colors used in buttons.                |
+| tables          | Defines the different colors used in resource tables.        |
+| tabs            | Defines the different colors used in the component tabs, the one used in the details of a resource. |
+| searchBar       | Defines the different colors used in the search bar placed over all the resource tables. |
+| sidebar         | Defines the different colors used in the sidebar menu.       |
+| scrollbar       | Defines the color of the scrollbar.                          |
+| login           | Defines the different colors used in login.                  |
+| switchViewTable | Defines the different colors used in the button to switch between view types. |
+| breadCrumb      | Defines the different colors used in the breadcrumb.         |
+| topbar          | Defines the different colors used in the topbar of the app.  |
+| footer          | Defines the different colors used in the footer of the app.  |
+| graphs          | Defines the different colors used in the different graphs used in the app. |
+
+> [!WARNING]
+>
+> Remember that these files are source files, so any change on this configuration will force to compile again Sunstone in order to applied these changes.
+
+{{< alert title="Warning" color="warning" >}}
+Remember that these files are source files, so any change on this configuration will force to compile again Sunstone in order to applied these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
 
 ## Configure Guacamole
 
