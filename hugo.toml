@@ -118,6 +118,9 @@ enableGitInfo = true
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
 offlineSearchSummaryLength = 800
+# CSS TEST
+custom_css = ["scss/main"]
+
 
   # Add your release versions here
 version_menu = "Versions"
