@@ -169,6 +169,7 @@ version_menu = "Versions"
 # added the user feedback module
 [params.ui.feedback]
 enable = true
+feedback_question = 'We value your feedback. Was this page helpful?'
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
