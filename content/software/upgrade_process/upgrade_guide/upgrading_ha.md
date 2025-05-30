@@ -24,7 +24,7 @@ Set all Hosts to disable mode to stop all monitoring processes.
 $ onehost disable <host_id>
 ```
 
-If you are upgrading from version 6.2+. Use `onezone disable <zone_id>` to make sure that no operation changing OpenNebula state are executed.
+If you are upgrading from version 6.2+ use `onezone disable <zone_id>` to make sure that no operations changing OpenNebula's state are executed.
 
 ## Step 3. Stop the HA Cluster
 
@@ -33,7 +33,7 @@ You need to stop all the nodes in the cluster to upgrade them at the same time. 
 Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
 {{< alert title="Important" color="success" >}}
-If you are running FireEdge service behind Apache/Nginx, please stop also the Apache/Nginx service.{{< /alert >}} 
+If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}} 
 
 {{< alert title="Warning" color="warning" >}}
 Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.{{< /alert >}} 
@@ -68,7 +68,7 @@ MySQL DB opennebula at localhost restored.
 Synchronize the configuration files to the followers:
 
 {{< alert title="Note" color="success" >}}
-Before copying, gather the `SERVER_ID` from your `/etc/one/oned.conf files` on each follower, then replace those values after.{{< /alert >}} 
+Before copying, gather the `SERVER_ID` from your `/etc/one/oned.conf files` on each follower, then replace those values afterwards.{{< /alert >}} 
 
 ```default
 $ rsync -r /etc/one root@<follower_ip>:/etc
@@ -87,7 +87,7 @@ $ chown -R oneadmin:oneadmin /var/lib/one/remotes/etc
 Start OpenNebula and any other related services: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
 {{< alert title="Important" color="success" >}}
-If you are running FireEdge service behind Apache/Nginx, please start also the Apache/Nginx service.{{< /alert >}} 
+If you are running FireEdge service behind Apache/Nginx, please also start the Apache/Nginx service.{{< /alert >}} 
 
 ## Step 8. Check Cluster Health
 
