@@ -10,11 +10,11 @@ weight: "1"
 
 <!--# Overview -->
 
-A Provider represents a Cloud where resources (hosts, networks or storage) are allocated to implement a Provision. Usually a Provider includes a zone or region in the target Cloud and an account that will be used to create the resources needed.
+A Provider represents a cloud where resources (Hosts, networks, or storage) are allocated to implement a Provision. Usually a Provider includes a Zone or region in the target cloud and an account that will be used to create the resources needed.
 
 ## How Should I Read This Chapter
 
-In this chapter you can find a guide on how to create Providers based on the supported Clouds. The following Cloud providers are enabled by default after installing OpenNebula:
+In this Chapter you can find a guide on how to create Providers based on the supported clouds. The following cloud providers are enabled by default after installing OpenNebula:
 
 > - [Equinix Provider]({{% relref "equinix_provider#equinix-provider" %}})
 > - [Amazon AWS Provider]({{% relref "aws_provider#aws-provider" %}})
