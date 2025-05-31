@@ -12,12 +12,12 @@ weight: "2"
 
 <!--# Database Setup -->
 
-OpenNebula Front-end uses the database to persist the complete state of the cloud. It supports several database solutions and each is recommended for different usage. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the Back-end). The following options are available:
+OpenNebula Front-end uses the database to persist the complete state of the cloud. It supports several database solutions and each is recommended for different usage. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the backend). The following options are available:
 
-- default embedded [SQLite]({{% relref "#sqlite-setup" %}}) for small workloads,
-- recommended [MySQL/MariaDB]({{% relref "#mysql-setup" %}}) for production,
+- default embedded [SQLite]({{% relref "#sqlite-setup" %}}) for small workloads
+- recommended [MySQL/MariaDB]({{% relref "#mysql-setup" %}}) for production
 
-It’s recommended to install the database Back-end now. Later, when doing the [Front-end Installation]({{% relref "install#frontend-installation" %}}), return back here and only update the OpenNebula configuration for specific Back-end based tasks (ideally) *prior* to starting OpenNebula for the first time.
+It’s recommended to install the database backend now. Later, when doing the [Front-end Installation]({{% relref "install#frontend-installation" %}}), return back here and only update the OpenNebula configuration for specific backend based tasks (ideally) *prior* to starting OpenNebula for the first time.
 
 <a id="sqlite-setup"></a>
 
@@ -26,7 +26,7 @@ It’s recommended to install the database Back-end now. Later, when doing the [
 {{< alert title="Note" color="success" >}}
 The information about SQLite is only for information, default installation is preconfigured for SQLite and no actions are required!{{< /alert >}} 
 
-The **SQLite** Back-end is the default database Back-end. It’s not recommended for production use, as it doesn’t perform well under load and on bigger infrastructures. For most cases, it’s recommended to use [MySQL/MariaDB]({{% relref "#mysql-setup" %}}).
+The **SQLite** backend is the default database backend. It’s not recommended for production use as it doesn’t perform well under load and on bigger infrastructures. For most cases, it’s recommended to use [MySQL/MariaDB]({{% relref "#mysql-setup" %}}).
 
 ### Install
 
@@ -49,7 +49,7 @@ DB = [ BACKEND = "sqlite",
 
 ## MySQL/MariaDB Setup
 
-The **MySQL/MariaDB** Back-end is an alternative to the default SQLite Back-end. It’s recommended for heavy or production workloads and is fully featured for the best performance. In this guide and in the rest of the documentation and configuration files we refer to this database as MySQL. However, OpenNebula can use either MySQL or MariaDB.
+The **MySQL/MariaDB** backend is an alternative to the default SQLite backend. It’s recommended for heavy or production workloads and is fully featured for the best performance. In this guide and in the rest of the documentation and configuration files we refer to this database as MySQL. However, OpenNebula can use either MySQL or MariaDB.
 
 <a id="mysql-installation"></a>
 
@@ -85,7 +85,7 @@ mysql> SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 ### Configure OpenNebula
 
-Before you run OpenNebula for the first time in the next section [Front-end Installation]({{% relref "front_end_installation" %}}), you’ll need to set the database Back-end and connection details in the configuration file [/etc/one/oned.conf]({{% relref "oned#oned-conf" %}}) as follows:
+Before you run OpenNebula for the first time in the next section [Front-end Installation]({{% relref "front_end_installation" %}}), you’ll need to set the database backend and connection details in the configuration file [/etc/one/oned.conf]({{% relref "oned#oned-conf" %}}) as follows:
 
 ```default
 # Sample configuration for MySQL
@@ -101,10 +101,10 @@ DB = [ BACKEND = "mysql",
 
 Fields:
 
-- `SERVER` - IP/hostname of the machine running the MySQL server,
-- `PORT` - port for the connection to the server (default port is used when `0`),
-- `USER` - MySQL user-name,
-- `PASSWD` - MySQL password,
-- `DB_NAME` - name of the MySQL database OpenNebula will use,
-- `CONNECTIONS` - max. number of connections,
-- `COMPARE_BINARY` - compare strings using BINARY clause to make name searches case sensitive.
+- `SERVER` - IP/hostname of the machine running the MySQL server
+- `PORT` - port for the connection to the server (default port is used when `0`)
+- `USER` - MySQL user-name
+- `PASSWD` - MySQL password
+- `DB_NAME` - name of the MySQL database OpenNebula will use
+- `CONNECTIONS` - max. number of connections
+- `COMPARE_BINARY` - compare strings using BINARY clause to make name searches case sensitive
