@@ -12,25 +12,25 @@ weight: "2"
 
 <!--# Amazon AWS Provider -->
 
-An AWS provider contains the credentials to interact with Amazon and also the region to deploy your Provisions. OpenNebula comes with four pre-defined AWS providers in the following regions:
+An AWS Provider contains the credentials to interact with Amazon and also the region to deploy your Provisions. OpenNebula comes with four pre-defined AWS Providers in the following regions:
 
 * Frankfurt
 * London
 * North Virginia (US)
 * North California (US)
 
-In order to define an AWS provider, you need the following information:
+In order to define an AWS Provider you need the following information:
 
-* **Credentials**: these are used to interact with the remote provider. You need to provide `access_key` and `secret_key`. You can follow [this guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
+* **Credentials**: these are used to interact with the remote Provider. You need to provide `access_key` and `secret_key`. To do this you can follow [this guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
 * **Region**: this is the location in the world where the resources are going to be allocated. All the available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
-* **Instance types and AMI’s**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
+* **Instance types and AMIs**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Please note even though custom AMIs (i.e other than the default one) can be used, the automation tools are tailored to works with these default ones. If you use a custom AMI, please be aware that it might required some adjustments, and things might not work as expected. Avoid using them in production environment unless you’ve properly tested it before.{{< /alert >}} 
+Please note even though custom AMIs (i.e., other than the default one) can be used, the automation tools are tailored to work with these default ones. If you use a custom AMI, please be aware that it might require some adjustments and things might not work as expected. Avoid using them in production environments unless you’ve properly tested it before.{{< /alert >}} 
 
 ## How to Create an AWS Provider
 
-To add a new provider you need a YAML template file with the following information:
+To add a new Provider you need a YAML template file with the following information:
 
 ```default
 $ cat provider.yaml
@@ -73,4 +73,4 @@ ID: 0
 
 ## How to Customize an Existing Provider
 
-The provider information is stored in the OpenNebula database and can be updated just like any other resource. In this case, you need to use the command `oneprovider update`. It will open an editor so you can edit all the information there.
+The Provider information is stored in the OpenNebula database and can be updated just like any other resource. In this case, you need to use the command `oneprovider update`. It will open an editor so you can edit all the information there.
