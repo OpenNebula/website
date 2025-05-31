@@ -14,17 +14,17 @@ weight: "2"
 
 ## Edge Cluster Types
 
-The AWS **metal** edge clusters uses baremetal instances to create OpenNebula Hosts, providing the best performance and highest capacity. These edge clusters can run **LXC** or **KVM** hypervisors.
+The AWS **metal** Edge Clusters uses baremetal instances to create OpenNebula Hosts, providing the best performance and highest capacity. These Edge Clusters can run **LXC** or **KVM** hypervisors.
 
 ## AWS Edge Cluster Implementation
 
 An Edge Cluster in AWS creates the following resources:
 
-* **AWS instance**: Host to run virtual machines.
+* **AWS instance**: Host to run Virtual Machines.
 * **AWS VPC**: it creates an isolated virtual network for all the deployed resources. There are some limits in the number of VPC that can be requested by the user, please refer to [this link](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) for more information.
 * **AWS subnet**: it allows communication between VMs that are running in the provisioned Hosts.
 * **AWS internet gateway**: it allows VMs to have public connectivity over Internet.
-* **AWS security group**: by default all the traffic is allowed, but custom security rules can be defined by the user to allow only specific traffic to the VMs.
+* **AWS security group**: by default all the traffic is allowed but custom security rules can be defined by the user to allow only specific traffic to the VMs.
 
 The network model is implemented in the following way:
 
