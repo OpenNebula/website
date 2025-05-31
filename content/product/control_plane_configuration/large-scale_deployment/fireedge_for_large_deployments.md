@@ -12,9 +12,9 @@ weight: "3"
 
 <!--# FireEdge for Large Deployments -->
 
-Low to medium size enterprise clouds will typically deploy FireEdge on a single machine with the other OpenNebula daemons as part. However, this simple deployment can be extended by
+Low-to-medium sized enterprise clouds will typically deploy FireEdge on a single machine with the other OpenNebula Daemons as part. However, this simple deployment can be extended by
 
-- **Improving scalability** of the server for large user pools, usually by deploying FireEdge as a separate application on one or more hosts.
+- **Improving scalability** of the server for large user pools, usually by deploying FireEdge as a separate application on one or more Hosts.
 
 This guide introduces various deployment options to achieve this. Check also the [API Scalability]({{% relref "scalability#one-scalability-api-tuning" %}}) guide for tips on how to improve FireEdge and OpenNebula Daemon performance.
 
@@ -22,9 +22,9 @@ This guide introduces various deployment options to achieve this. Check also the
 
 ## Deploy in Webserver
 
-Self-contained deployment of [FireEdge]({{% relref "../graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). (using `opennebula-fireedge` system service) is sufficient for small to medium installations. This is no longer enough when the service has lots of concurrent users and the number of objects in the system is high (for example, more than 2000 simultaneous Virtual Machines).
+Self-contained deployment of [FireEdge]({{% relref "../graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) (using `opennebula-fireedge` system service) is sufficient for small-to-medium installations. This is no longer enough when the service has lots of concurrent users and the number of objects in the system is high (for example, more than 2000 simultaneous Virtual Machines).
 
-The FireEdge server is implemented as a nodejs server. This makes it suitable to run on any server. Also, embed the service inside Apache HTTP Server or NGINX. Another advantage is the ability to run FireEdge on multiple servers and balance the load between them.
+The FireEdge server is implemented as a nodejs server. This makes it suitable to run on any server. Also, the service is embedded inside Apache HTTP Server or NGINX. Another advantage is the ability to run FireEdge on multiple servers and balance the load between them.
 
 **Guacamole**
 
@@ -52,7 +52,7 @@ Another thing you have to take into account is the user under which the server w
 
 ### Non-TLS Configuration
 
-If FireEdge is installed and you want to place an apache to forward traffic to fireedge you can inside `VirtualHost`, insert the following snippet and **adjust** it to your current configuration.
+If FireEdge is installed and you want to place an apache to forward traffic to FireEdge, you can inside `VirtualHost`. Simply insert the following snippet and **adjust** it to your current configuration.
 
 **Apache**
 
@@ -82,13 +82,13 @@ If FireEdge is installed and you want to place an apache to forward traffic to f
 ```
 
 {{< alert title="Note" color="success" >}}
-As you can see in the configuration inside the **location** is in `/fireedge` that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the fireedge to be in the root you must change it to `/`{{< /alert >}} 
+As you can see in the configuration the **location** is in `/fireedge`, that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`{{< /alert >}} 
 
 **NGINX**
 
-You will need to configure a new virtual host in NGINX. Depending on the operating system and the method of installation, NGINX loads virtual host configurations from either `/etc/nginx/conf.d` or `/etc/nginx/sites-enabled`.
+You will need to configure a new virtual Host in NGINX. Depending on the operating system and the method of installation, NGINX loads virtual Host configurations from either `/etc/nginx/conf.d` or `/etc/nginx/sites-enabled`.
 
-- A sample `cloudserver.org` virtual host is presented next:
+- A sample `cloudserver.org` virtual Host is shown below:
 
 ```default
 # No squealing.
@@ -124,13 +124,13 @@ server {
 ```
 
 {{< alert title="Note" color="success" >}}
-As you can see in the configuration inside the **location** is in `/fireedge` that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the fireedge to be in the root you must change it to `/`{{< /alert >}} 
+As you can see in the configuration the **location** is in `/fireedge`, that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`{{< /alert >}} 
 
 <a id="fireedge-advance-apache-tls-proxy"></a>
 
 ### TLS-secured Configuration
 
-We must create the Virtual Host that will run our FireEdge. Here is an example:
+We must create the virtual Host that will run our FireEdge. Here is an example:
 
 **Apache**
 
@@ -171,14 +171,14 @@ We must create the Virtual Host that will run our FireEdge. Here is an example:
 </VirtualHost>
 ```
 
-Now the configuration should be ready. Restart  or reload the Apache configuration to start the application and point to the virtual host to check that everything is running.
+Now the configuration should be ready. Restart  or reload the Apache configuration to start the application and point to the virtual Host to check that everything is running.
 
 {{< alert title="Note" color="success" >}}
-As you can see in the configuration inside the **location**, **ProxyPass** and **ProxyPassReverse** is in `/fireedge` that means it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the fireedge to be in the root you must change it to `/`.{{< /alert >}} 
+As you can see in the configuration inside the **location**, **ProxyPass** and **ProxyPassReverse** is in `/fireedge` that means it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`.{{< /alert >}} 
 
 **NGINX**
 
-You will need to configure a new virtual host in NGINX. Depending on the operating system and the method of installation, NGINX loads virtual host configurations from either `/etc/nginx/conf.d` or `/etc/nginx/sites-enabled`.
+You will need to configure a new virtual Host in NGINX. Depending on the operating system and the method of installation, NGINX loads virtual Host configurations from either `/etc/nginx/conf.d` or `/etc/nginx/sites-enabled`.
 
 ```default
 # No squealing.
@@ -226,4 +226,4 @@ server {
 ```
 
 {{< alert title="Note" color="success" >}}
-As you can see in the configuration inside the **location** is in `/fireedge` that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the fireedge to be in the root you must change it to `/`{{< /alert >}} 
+As you can see in the configuration the **location** is in `/fireedge`, that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`{{< /alert >}} 
