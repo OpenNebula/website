@@ -16,8 +16,8 @@ weight: "2"
 
 OpenNebula features three different datastore types:
 
-* The **Image Datastore**, stores the Image repository.
-* The **System Datastore** holds disk for running virtual machines, usually cloned from the Image Datastore.
+* The **Image Datastore** stores the Image repository.
+* The **System Datastore** holds disk for running Virtual Machines, usually cloned from the Image Datastore.
 * The **Files & Kernels Datastore** to store plain files used in contextualization, or VM kernels used by some hypervisors.
 
 By default, OpenNebula will create an image (`default`), system (`system`), and files datastore (`files`). These datastores are configured to use the SSH protocol to transfer images.  You can list the datastores in your cloud with the `onedatastore list` command:
@@ -82,13 +82,13 @@ IMAGES
 
 There are four important sections:
 
-> * **General Information**, it includes basic information like the name, the file path of the datastore or its type (`IMAGE`). It includes also the set of drivers (`DS_MAD` and `TM_MAD`) used to store and transfer images. In this example, the datastores uses a file based driver (`DS_MAD="fs"`) and the Local protocol for transfers (`TM_MAD=local`).
-> * **Capacity**, including basic usage metrics like total, used, and free space.
+> * **General Information** includes basic information like the name, the file path of the datastore, or its type (`IMAGE`). It also includes the set of drivers (`DS_MAD` and `TM_MAD`) used to store and transfer images. In this example, the datastore uses a file-based driver (`DS_MAD="fs"`) and the Local protocol for transfers (`TM_MAD=local`).
+> * **Capacity** includes basic usage metrics like total, used, and free space.
 > * **Generic Attributes**, under `DATASTORE TEMPLATE` you can find configuration attributes and custom tags (see below).
 > * **Images**, the list of images currently stored in this datastore.
 
 {{< alert title="Note" color="success" >}}
-The example above shows how a basic image datastore looks like. A Files & Kernels Datastore will look mostly the same but with different values in the type fields.{{< /alert >}} 
+The example above shows what a basic image datastore looks like. A Files and Kernels Datastore will look mostly the same but with different values in the type fields.{{< /alert >}} 
 
 ### System Datastore
 
@@ -135,14 +135,14 @@ IMAGES
 
 Note the differences in this case:
 : * Only the transfer driver (`TM_MAD`) is defined.
-  * For the datastore of this example, there are no overall usage figures. The `local` driver uses the local storage area of each Host. To check the available space in a specific host you need to check the host details with `onehost show` command. Note that this behavior may be different for other drivers.
+  * For the datastore of this example, there are no overall usage figures. The `local` driver uses the local storage area of each Host. To check the available space in a specific Host you need to check the Host details with `onehost show` command. Note that this behavior may be different for other drivers.
   * Images cannot be registered in System Datastores.
 
 ## Basic Configuration
 
-Configuring a Datastore usually requires adding some specific attributes that depends on the storage driver and your infrastructure, check the [Open Cloud Storage Guide]({{% relref "overview#storage" %}}) for specific details.
+Configuring a datastore usually requires you to add some specific attributes that depend on the storage driver and your infrastructure. Check the [Open Cloud Storage Guide]({{% relref "overview#storage" %}}) for specific details.
 
-Also, there are a set of common attributes that can be used in any Datastore to tune its behavior. The following table describes each attribute:
+Also, there are a set of common attributes that can be used in any datastore to tune its behavior. The following table describes each attribute:
 
 | Attribute                  | Description                                                                                                                                                                                                                |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -158,14 +158,14 @@ Also, there are a set of common attributes that can be used in any Datastore to 
 | `COMPATIBLE_SYS_DS`        | Only for Image Datastores. Set the System Datastores that can be used with an Image Datastore, e.g. “0,100”                                                                                                                |
 | `CONTEXT_DISK_TYPE`        | Specifies the disk type used for context devices (`BLOCK` or `FILE`). If not specified, `FILE` is used by default.                                                                                                         |
 
-The Files & Kernels Datastore is an special datastore type to store plain files to be used as kernels, ram-disks or context files. [See here to learn how to define them]({{% relref "file_ds#file-ds" %}}).
+The Files & Kernels Datastore is a special datastore type to store plain files to be used as kernels, ram-disks, or context files. [See here to learn how to define them]({{% relref "file_ds#file-ds" %}}).
 
 {{< alert title="Important" color="success" >}}
-If you  are using `BRIDGE_LIST` you need to install any tool needed to access the underlying storage (e.g. Ceph `BRIDGE_LIST` servers need Ceph client tools), as well as generic tools like `qemu-img`.{{< /alert >}} 
+If you  are using `BRIDGE_LIST` you need to install any tool needed to access the underlying storage (e.g., Ceph `BRIDGE_LIST` servers need Ceph client tools), as well as generic tools like `qemu-img`.{{< /alert >}} 
 
 ## Disable a System Datastore
 
-System Datastores can be disabled to prevent the scheduler from deploying new VM in them. Datastores in the `disabled` state are monitored as usual, and the existing VM will continue to run.
+System Datastores can be disabled to prevent the scheduler from deploying new VM in them. Datastores in the `disabled` state are monitored as usual and the existing VM will continue to run.
 
 ```default
 $ onedatastore disable system
@@ -181,6 +181,6 @@ STATE          : DISABLED
 
 ## Using Sunstone to Manage Datastores
 
-You can also manage your Datastores using the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Storage > Datastore** to create, enable, disable, delete and see information about your datastores in a user-friendly way.
+You can also manage your Datastores using the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Storage > Datastore** to create, enable, disable, delete, and see information about your datastores in a user-friendly way.
 
 ![image1](/images/sunstone_datastores.png)
