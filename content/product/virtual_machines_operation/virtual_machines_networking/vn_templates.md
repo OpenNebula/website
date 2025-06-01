@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Virtual Networks Templates -->
 
-The Virtual Network Templates allows the end user to create virtual networks without knowing the details of the underlying infrastructure. Typically the administrator sets up the templates with the required physical attributes, e.g. driver or physical device information and let the end user to add all the logic information like address ranges or gateway.
+The Virtual Network Templates allow the end user to create Virtual Networks without knowing the details of the underlying infrastructure. Typically the administrator sets up the templates with the required physical attributes, e.g., driver or physical device information and lets the end user add all the logic information like address ranges or gateway.
 
 Virtual Network Templates can be instantiated several times and shared between multiple users.
 
@@ -38,9 +38,9 @@ The networks created by instantiating this template will be on clusters 1 and 10
 
 ## Using Virtual Network Templates
 
-By default just `oneadmin` can create Virtual Network Templates, if other users need permissions for creating Virtual Network Templates it can be provided by creating a specific ACL.
+By default just `oneadmin` can create Virtual Network Templates. If other users need permissions for creating Virtual Network Templates it can be provided by creating a specific ACL.
 
-Once the Virtual Network Template is created, you can control access to it by its permissions. For example, if a end user needs to instantiate an specific template, it would be enough to give the template **USE** permission for others. You can find more [information about permissions here]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}).
+Once the Virtual Network Template is created, you can control access to it by its permissions. For example, if an end user needs to instantiate a specific template, it would be enough to give the template **USE** permission for others. You can find more [information about permissions here]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}).
 
 {{< alert title="Note" color="success" >}}
 Depending on the user, ACLs might need to be created in order to allow the users to manage their own networks.{{< /alert >}} 
@@ -61,12 +61,12 @@ The available operations for Virtual Network Templates are the following:
 - lock
 - unlock
 
-## Preparing Virtual Network Templates for End-Users
+## Preparing Virtual Network Templates for End Users
 
-First create a Virtual Network Template and set all the attributes which need to be set to define the Virtual Network at the template like bridge, vlan id, etc.
+First, create a Virtual Network Template and set all the attributes which need to be set to define the Virtual Network at the template like bridge, vlan id, etc.
 
 {{< alert title="Note" color="success" >}}
-Note that Virtual Network restricted attributes will be also restricted for virtual network templates.{{< /alert >}} 
+Note that Virtual Network restricted attributes will be also restricted for Virtual Network Templates.{{< /alert >}} 
 
 ```default
 $ cat vn_template.txt
@@ -106,10 +106,10 @@ $ onevnet list
   1  user          users        private         0          virbr0  rdy         0
 ```
 
-The network is now ready. Users can create VMs and attach their interfaces to the newly created Virtual Network, by simply adding `NIC = [ NETWORK = private ]` or selecting it through Sunstone.
+The network is now ready. Users can create VMs and attach their interfaces to the newly created Virtual Network simply by adding `NIC = [ NETWORK = private ]` or selecting it through Sunstone.
 
 {{< alert title="Note" color="success" >}}
-Note that for using the newly created Virtual Network, the user needs to define an Address Range either during the Virtual Network Template instantiation or just updating the Virtual Network.{{< /alert >}} 
+Note that for using the newly created Virtual Network, the user needs to define an Address Range either during the Virtual Network Template instantiation or just by updating the Virtual Network.{{< /alert >}} 
 
 You can also manage your Virtual Networks Templates using [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Networks Template** tab to create and operate your Virtual Networks Templates in a user-friendly way.
 
