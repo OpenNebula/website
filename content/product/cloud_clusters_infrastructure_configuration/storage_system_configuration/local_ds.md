@@ -12,31 +12,31 @@ weight: "4"
 
 <!--# Local Storage Datastore -->
 
-This storage configuration uses the local storage area of each Host to run VMs. Additionally you’ll need a storage area for the VM disk image repository. Disk images are transferred from the repository to the hosts using the SSH protocol.
+This storage configuration uses the local storage area of each Host to run VMs. Additionally you’ll need a storage area for the VM disk image repository. Disk images are transferred from the repository to the Hosts using the SSH protocol.
 
 ## Front-end Setup
 
 The Front-end needs to prepare the storage area for:
 
-* **Image Datastores**, to store the image repository.
-* **System Datastores**, will hold temporary disks and files for VMs `stopped` and `undeployed`.
+* **Image Datastores** to store the image repository.
+* **System Datastores** to hold temporary disks and files for VMs `stopped` and `undeployed`.
 
-Simply make sure that there is enough space under `/var/lib/one/datastores` to store Images and the disks of the `stopped` and `undeployed` Virtual Machines. Note that `/var/lib/one/datastores` **can be mounted from any NAS/SAN server in your network**.
+Simply make sure that there is enough space under `/var/lib/one/datastores` to store images and the disks of the `stopped` and `undeployed` Virtual Machines. Note that `/var/lib/one/datastores` **can be mounted from any NAS/SAN server in your network**.
 
 ## Host Setup
 
 Just make sure that there is enough space under `/var/lib/one/datastores` to store the disks of running VMs on that Host.
 
 {{< alert title="Warning" color="warning" >}}
-Make sure all the Hosts, including the Front-end, can SSH to any other host (including themselves), otherwise migrations will not work.{{< /alert >}} 
+Make sure all the Hosts, including the Front-end, can SSH to any other Host (including themselves), otherwise migrations will not work.{{< /alert >}} 
 
 ## OpenNebula Configuration
 
-Once the Hosts and Front-end storage is setup, the OpenNebula configuration comprises the creation of an Image and System Datastores.
+Once the Hosts and Front-end storage is set up, the OpenNebula configuration comprises the creation of Image and System Datastores.
 
 ### Create System Datastore
 
-To create a new System Datastore, you need to set following (template) parameters:
+To create a new System Datastore, you need to set the following (template) parameters:
 
 | Attribute   | Description       |
 |-------------|-------------------|
@@ -57,7 +57,7 @@ ID: 101
 ```
 
 {{< alert title="Note" color="success" >}}
-When different System Datastores are available the `TM_MAD_SYSTEM` attribute will be set after picking the Datastore.{{< /alert >}} 
+When different System Datastores are available the `TM_MAD_SYSTEM` attribute will be set after picking the datastore.{{< /alert >}} 
 
 ### Create Image Datastore
 
@@ -85,14 +85,14 @@ ID: 100
 Also note that there are additional attributes that can be set. Check the [datastore template attributes]({{% relref "datastores#datastore-common" %}}).
 
 {{< alert title="Warning" color="warning" >}}
-Be sure to use the same `TM_MAD` for both the System and Image datastore. When combining different transfer modes, check the section below.{{< /alert >}} 
+Be sure to use the same `TM_MAD` for both the System and Image Datastores. When combining different transfer modes, check the section below.{{< /alert >}} 
 
 ### Additional Configuration
 
-* `DD_BLOCK_SIZE`: Block size for dd operations (default: 64kB) could be set in `/var/lib/one/remotes/etc/datastore/fs/fs.conf`.
+* `DD_BLOCK_SIZE`: Block size for dd operations (default: 64kB) can be set in `/var/lib/one/remotes/etc/datastore/fs/fs.conf`.
 * `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
 * `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
-* `SPARSE`: If set to `NO` the images and disks in the image and system Datastore, respectively, wont be sparsed (i.e. the files will use all assigned space on the Datastore filesystem).
+* `SPARSE`: If set to `NO` the images and disks in the Image and System Datastores, respectively, won't be sparsed (i.e., the files will use all assigned space on the Datastore filesystem).
 
 {{< alert title="Warning" color="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.{{< /alert >}} 
@@ -111,7 +111,7 @@ There are currently two Local transfer drivers:
 
 ## Datastore Internals
 
-Images are saved into the corresponding Datastore directory (`/var/lib/one/datastores/<DATASTORE ID>`). Also, for each running Virtual Machine there is a directory (named after the `VM ID`) in the corresponding System Datastore. These directories contain the VM disks and additional files, e.g. checkpoint or snapshots.
+Images are saved into the corresponding datastore directory (`/var/lib/one/datastores/<DATASTORE ID>`). Also, for each running Virtual Machine there is a directory (named after the `VM ID`) in the corresponding System Datastore. These directories contain the VM disks and additional files, e.g., checkpoint or snapshots.
 
 For example, a system with an Image Datastore (`1`) with three images and three Virtual Machines (VM 0 and 2 running, and VM 7 stopped) running from System Datastore `0` would present the following layout:
 
