@@ -14,7 +14,7 @@ weight: "5"
 
 It is possible to discover PCI devices in the Hosts and directly assign them to Virtual Machines in the KVM hypervisor.
 
-The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.
+The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA-related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.
 
 {{< alert title="Warning" color="warning" >}}
 The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different.**{{< /alert >}} 
@@ -23,7 +23,7 @@ The overall setup state was extracted from a preconfigured Fedora 22 machine. **
 
 Virtualization Host must
 
-* support [I/O MMU](https://en.wikipedia.org/wiki/IOMMU) (processor features Intel VT-d or AMD-Vi).
+* support [I/O MMU](https://en.wikipedia.org/wiki/IOMMU) (processor features Intel VT-d or AMD-Vi)
 * have Linux kernel >= 3.12
 
 (instructions below are made for Intel branded processors but the process should be very similar for AMD)
@@ -70,7 +70,7 @@ alias nouveau off
 alias lbm-nouveau off
 ```
 
-Alongside this configuration the VFIO driver should be loaded passing the id of the PCI cards we want to attach to VMs. For example, for NVIDIA GRID K2 GPU we pass the id `10de:11bf`. File `/etc/modprobe.d/local.conf`:
+Alongside this configuration the VFIO driver should be loaded by passing the id of the PCI cards we want to attach to VMs. For example, for NVIDIA GRID K2 GPU we pass the id `10de:11bf`. File `/etc/modprobe.d/local.conf`:
 
 ```default
 options vfio-pci ids=10de:11bf
@@ -126,7 +126,7 @@ Now we need to give QEMU access to the VFIO devices for the groups assigned to t
 # find /sys/kernel/iommu_groups/ -type l
 ```
 
-In our example our cards have the groups 45, 46, 58 and 59 so we add this configuration to `/etc/libvirt/qemu.conf`:
+In our example our cards have the groups 45, 46, 58, and 59 so we add this configuration to `/etc/libvirt/qemu.conf`:
 
 ```default
 cgroup_device_acl = [
@@ -142,7 +142,7 @@ cgroup_device_acl = [
 <a id="pci-config"></a>
 
 {{< alert title="Note" color="success" >}}
-There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the needed owner:group for them to work{{< /alert >}} 
+There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the necessary owner:group for them to work{{< /alert >}} 
 
 ## Driver Configuration
 
@@ -254,7 +254,7 @@ PCI DEVICES
 - `TYPE` - Values describing the device. These are VENDOR:DEVICE:CLASS. These values are used when selecting a PCI device do to passthrough.
 - `NAME` - Name of the PCI device.
 
-To make use of one of the PCI devices in a VM a new option can be added selecting which device to use. For example this will ask for a `Haswell-ULT HD Audio Controller`:
+To make use of one of the PCI devices in a VM a new option can be added to select which device to use. For example, this will ask for a `Haswell-ULT HD Audio Controller`:
 
 ```default
 PCI = [
@@ -272,7 +272,7 @@ PCI = [
 
 More than one `PCI` options can be added to attach more than one PCI device to the VM.
 
-In some scenarios it maybe useful to select and specific device, in this case simply input the address of the device you are interested in:
+In some scenarios it may be useful to select a specific device. In this case simply input the address of the device you are interested in:
 
 ```default
 PCI = [
@@ -282,11 +282,11 @@ PCI = [
 
 ### Sunstone
 
-In Sunstone the information is displayed in the **PCI** tab of a host:
+In Sunstone the information is displayed in the **PCI** tab of a Host:
 
 ![pciHostTab](/images/sunstone_host_pci.png)
 
-To add a PCI device to a template, select the **PCI Devices** tab when you are creating a virtual machine template:
+To add a PCI device to a template, select the **PCI Devices** tab when you are creating a Virtual Machine template:
 
 ![pciTemplateTab](/images/sunstone_template_pci.png)
 
@@ -310,9 +310,9 @@ The [context packages]({{% relref "../../virtual_machines_operation/virtual_mach
 
 ### CLI
 
-When a `PCI` in a template contains the attribute `TYPE="NIC"`, it will be treated as a `NIC` and OpenNebula will assign a MAC address, a VLAN_ID, an IP, etc, to the PCI device.
+When a `PCI` in a template contains the attribute `TYPE="NIC"`, it will be treated as a `NIC` and OpenNebula will assign a MAC address, a VLAN_ID, an IP, etc., to the PCI device.
 
-This is an example of the PCI section of an interface that will be treated as a NIC:
+This is an example of the PCI section of an interface that will be treated as an NIC:
 
 ```default
 PCI = [
@@ -330,11 +330,11 @@ Note that the order of appearance of the `PCI` elements and `NIC` elements in th
 
 ### Sunstone
 
-In the Network tab, under advanced options the hardware profile of the interface can be of three types:
+In the Network tab, under advanced options, the hardware profile of the interface can be of three types:
 
-- “Emulated” it includes the hardware model emulated by Qemu.
-- “PCI - Automatic” OpenNebula hardware scheduler will pick the best PCI device for the NIC.
-- “PCI - Manual” user can specify the PCI device by its short-address as shown in host information.
+- “Emulated”, it includes the hardware model emulated by Qemu.
+- “PCI - Automatic”, OpenNebula hardware scheduler will pick the best PCI device for the NIC.
+- “PCI - Manual”, user can specify the PCI device by its short-address as shown in Host information.
 
 Use the rest of the dialog as usual by selecting a network from the table.
 
