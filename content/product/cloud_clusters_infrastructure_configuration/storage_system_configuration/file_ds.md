@@ -12,13 +12,13 @@ weight: "9"
 
 <!--# The Kernels & Files Datastore -->
 
-The Kernels & Files Datastore lets you store plain files to be used as VM kernels, ramdisks or any other files that need to be passed to the VM through the contextualization process. The Kernels & Files Datastore does not expose any special storage mechanism but is a simple and secure way to use files within VM templates.
+The Kernels and Files Datastore lets you store plain files to be used as VM kernels, ramdisks, or any other files that need to be passed to the VM through the contextualization process. The Kernels and Files Datastore does not expose any special storage mechanism but is a simple and secure way to use files within VM templates.
 
 ## Configuration
 
-The [datastores common configuration attributes]({{% relref "datastores#datastore-common" %}}) apply to the Kernels & Files Datastores and can be defined during the creation process or updated once the datastore have been created.
+The [datastores common configuration attributes]({{% relref "datastores#datastore-common" %}}) apply to the Kernels and Files Datastores and can be defined during the creation process or updated once the datastores have been created.
 
-The specific attributes for Kernels & Files Datastore are listed in the following table:
+The specific attributes for Kernels and Files Datastore are listed in the following table:
 
 | Attribute   | Description   |
 |-------------|---------------|
@@ -27,9 +27,9 @@ The specific attributes for Kernels & Files Datastore are listed in the followin
 | `TM_MAD`    | `local`       |
 
 {{< alert title="Note" color="success" >}}
-The recommended `DS_MAD` and `TM_MAD` are the ones stated above but any other can be used to fit specific use cases. Regarding this, the same [configuration guidelines]({{% relref "datastores#datastores" %}}) defined for Image and System Datastores applies for the Kernels & Files Datastore.{{< /alert >}} 
+The recommended `DS_MAD` and `TM_MAD` are the ones stated above but any other can be used to fit specific use cases. Regarding this, the same [configuration guidelines]({{% relref "datastores#datastores" %}}) defined for Image and System Datastores apply for the Kernels and Files Datastore.{{< /alert >}} 
 
-For example, the following illustrates the creation of Kernels & Files.
+For example, the following illustrates the creation of Kernels and Files:
 
 ```default
 > cat kernels_ds.conf
