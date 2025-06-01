@@ -58,7 +58,7 @@ You can update the provider information using the command `oneprovider update`.
 
 ### Delete
 
-To delete the provider, use the command `oneprovider delete`, e,g:
+To delete the provider, use the command `oneprovider delete`, e.g.:
 
 ```default
 $ oneprovider delete 2
