@@ -16,15 +16,15 @@ weight: "2"
 
 ### HCI Cluster Nodes
 
-The HCI cluster consists of three different type of servers:
+The HCI Cluster consists of three different type of servers:
 
-* **Full nodes**, run Ceph OSD and Monitor daemons as well as the selected hypervisor. In order to get a fault tolerant cluster a number of 3 nodes of this type is recommended.
-* **OSD nodes**, run Ceph OSD daemon and the selected hypervisor.
-* **Hypervisor-only nodes**, run the selected hypervisor and the Ceph client tools.
+* **Full nodes** run Ceph OSD and Monitor daemons as well as the selected hypervisor. In order to get a fault tolerant cluster a number of 3 nodes of this type is recommended.
+* **OSD nodes** run Ceph OSD daemon and the selected hypervisor.
+* **Hypervisor-only nodes** run the selected hypervisor and the Ceph client tools.
 
 ### Ceph Specific AWS Resources
 
-The following resources are allocated to implement the Ceph cluster:
+The following resources are allocated to implement the Ceph Cluster:
 
 * **AWS EBS Volume**, each node running the OSD daemons include an EBS backed device to store the cluster data.
 * **AWS Ceph subnet**, each instance include a dedicated interface to isolate Ceph communication. This network uses `10.1.0.0/16` address by default, see below.
@@ -41,13 +41,13 @@ These networks are implemented with the following resources:
 * **AWS VPC**: it creates an isolated virtual network for all the deployed resources. There are some limits in the number of VPC that can be requested by the user, please refer to [this link](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) for more information.
 * **AWS subnet**: it allows communication between VMs that are running in the provisioned Hosts.
 * **AWS internet gateway**: it allows VMs to have public connectivity over Internet.
-* **AWS security group**: by default all the traffic is allowed, but custom security rules can be defined by the user to allow only specific traffic to the VMs.
+* **AWS security group**: by default all the traffic is allowed but custom security rules can be defined by the user to allow only specific traffic to the VMs.
 
 ![image_cluster_ceph](/images/aws_ceph_deployment.png)
 
 ## AWS HCI Cluster Definition
 
-To create a HCI Cluster in Amazon AWS cloud you need to input the following information:
+To create an HCI Cluster in Amazon AWS cloud you need to input the following information:
 
 | Input Name                   | Default   | Description                                                  |
 |------------------------------|-----------|--------------------------------------------------------------|
@@ -63,7 +63,7 @@ To create a HCI Cluster in Amazon AWS cloud you need to input the following info
 
 ## OpenNebula Resources
 
-In OpenNebula there are following resources created
+In OpenNebula the following resources are created:
 
 1. Cluster - containing all other resources
 2. Hosts - for each AWS instance
