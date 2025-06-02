@@ -1,0 +1,38 @@
+/**
+* This file defines all the styles that need to change between and there is no difference between dark and light mode
+*/
+
+// Navbar
+.td-navbar {
+  background-color: #005675;
+}
+
+// Sidebar
+.td-sidebar-nav .td-sidebar-link.tree-root {
+  border-bottom-width: 0px;
+}
+
+// Footer
+.td-footer {
+  background-color: #181921;
+}
+
+// Cards
+.td-card {
+  border-color: #8F9392 !important;
+}
+.td-navbar .td-search__input {
+  border-style: solid;
+  border-width: 1px;
+}  
+.td-navbar .td-search__input:hover {
+  border-style: solid;
+  border-width: 1px;
+}  
+
+// Alerts
+.alert {
+  border-left-width: 3px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
