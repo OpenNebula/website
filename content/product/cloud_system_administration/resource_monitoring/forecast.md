@@ -37,11 +37,11 @@ OpenNebula provides two types of resource forecasts:
 
 Long-term forecasts are accessible via the CLI and Sunstone. In Sunstone, the **Monitoring** tab displays predicted trends alongside real-time usage data, aiding administrators in effective planning.
 
-[INSERT SUNSTONE IMAGE HERE]
+<!-- [INSERT SUNSTONE IMAGE HERE] -->
 
-CLI users can retrieve long-term forecasts via:
+<!-- CLI users can retrieve long-term forecasts via:
 
-[INSERT CLI COMMAND EXAMPLE HERE]
+[INSERT CLI COMMAND EXAMPLE HERE] -->
 
 By default, long-term forecasts project resource usage for the next 30 days.
 
