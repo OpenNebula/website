@@ -18,7 +18,7 @@ This component is in charge of configuring the network in the hypervisors. The p
 
 To enable a new network manager driver, the first requirement is to make a new directory with the name of the driver in `/var/lib/one/remotes/vnm/<name>` with these files:
 
-- **pre**: This driver should perform all the network related actions required before the Virtual Machine starts in a host.
+- **pre**: This driver should perform all the network related actions required before the Virtual Machine starts in a Host.
 - **post**: This driver should perform all the network related actions required after the Virtual Machine starts (actions which typically require the knowledge of the `tap` interface the Virtual Machine is connected to).
 - **clean**: If any clean-up should be performed after the Virtual Machine shuts down, it should be placed here.
 - **vnet_create**: Virtual Network is being added to OpenNebula, do driver initialization.
@@ -37,11 +37,11 @@ Virtual Machine actions and their relation with Network actions:
 - **Cancel**: `clean`
 - **Save**: `clean`
 - **Restore**: `pre` and `post`
-- **Migrate**: `pre` (target host), `clean` (source host), `post` (target host)
+- **Migrate**: `pre` (target Host), `clean` (source Host), `post` (target Host)
 - **Attach Nic**: `pre` and `post`
 - **Detach Nic**: `clean`
 
-After that you need to define the bridging technology used by the driver at `/etc/one/oned.conf`. OpenNebula support two different technologies, **Linux Bridge** and **Open vSwitch**. See the examples below:
+After that you need to define the bridging technology used by the driver at `/etc/one/oned.conf`. OpenNebula supports two different technologies, **Linux Bridge** and **Open vSwitch**. See the examples below:
 
 ```default
 VN_MAD_CONF = [
@@ -67,9 +67,9 @@ Note that you can set `BRIDGE_TYPE` attribute to `none` if you need to leave the
 
 ## Driver Customization
 
-Default driver actions support the execution of hooks after the main action is successfully executed. In order to create an action hook you need to place your custom configuration scripts in the corresponding **action.d** directory (`pre.d`, `post.d`, `clean.d`), inside the target networking driver directory. Files found in that directory will be run in an alphabetical order, excluding the ones `oneadmin` cannot run due to lack of permissions. If the main action fails the hooks won’t be run. If a hook fails the corresponding network actions will be consider as a **FAILURE** and the VM will change its state accordingly. Note that the scripts will receive the same information as the main action through `stdin`.
+Default driver actions support the execution of hooks after the main action is successfully executed. In order to create an action hook you need to place your custom configuration scripts in the corresponding **action.d** directory (`pre.d`, `post.d`, `clean.d`), inside the target networking driver directory. Files found in that directory will be run in alphabetical order, excluding the ones `oneadmin` cannot run due to lack of permissions. If the main action fails the hooks won’t be run. If a hook fails the corresponding network actions will be consider as a **FAILURE** and the VM will change its state accordingly. Note that the scripts will receive the same information as the main action through `stdin`.
 
-For example, this is the directory tree of the bridge driver synced to a virtualization node with some custom scripts
+For example, this is the directory tree of the bridge driver synced to a virtualization node with some custom scripts:
 
 ```default
 root@ubuntu1804-local-6ee11-2:/var/tmp/one/vnm/bridge# tree ./
@@ -98,7 +98,7 @@ The `clean` action doesn’t require **deploy-id**
 
 ### Driver Files
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 
 * /var/lib/one/remotes/vnm/802.1Q/post
 * /var/lib/one/remotes/vnm/802.1Q/vlan_tag_driver.rb
@@ -109,9 +109,9 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 | Action          | Description                                                                                              |
 |-----------------|----------------------------------------------------------------------------------------------------------|
-| **Pre**         | Creates a VLAN tagged interface in the Host and a attaches it to a dynamically created bridge.           |
+| **Pre**         | Creates a VLAN-tagged interface in the Host and a attaches it to a dynamically created bridge.           |
 | **Post**        | N/A                                                                                                      |
-| **Clean**       | It doesn’t do anything. The VLAN tagged interface and bridge are kept in the Host to speed up future VMs |
+| **Clean**       | It doesn’t do anything. The VLAN-tagged interface and bridge are kept in the Host to speed up future VMs |
 | **vnet_create** | It doesn’t do anything.                                                                                  |
 | **vnet_delete** | It doesn’t do anything.                                                                                  |
 
@@ -119,7 +119,7 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 ### Driver Files
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 
 * /var/lib/one/remotes/vnm/vxlan/vxlan_driver.rb
 * /var/lib/one/remotes/vnm/vxlan/post
@@ -138,7 +138,7 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 ## The Open vSwitch Driver
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 \* /var/lib/one/remotes/vnm/ovswitch/OpenvSwitch.rb
 \* /var/lib/one/remotes/vnm/ovswitch/post
 \* /var/lib/one/remotes/vnm/ovswitch/clean
@@ -156,7 +156,7 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 ## The Dummy Driver
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 
 * /var/lib/one/remotes/vnm/dummy/post
 * /var/lib/one/remotes/vnm/dummy/clean
@@ -174,7 +174,7 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 ## The Bridge Driver
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 
 * /var/lib/one/remotes/vnm/bridge/post
 * /var/lib/one/remotes/vnm/bridge/clean
@@ -184,7 +184,7 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 | Action          | Description                              |
 |-----------------|------------------------------------------|
-| **Pre**         | Creates the bridge if it doesn’t exists. |
+| **Pre**         | Creates the bridge if it doesn’t exist.  |
 | **Post**        | N/A                                      |
 | **Clean**       | Remove the bridge if it’s empty.         |
 | **vnet_create** | It doesn’t do anything.                  |
@@ -192,17 +192,17 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 ## The FW Driver
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 
 * /var/lib/one/remotes/vnm/fw/post
 * /var/lib/one/remotes/vnm/fw/clean
 * /var/lib/one/remotes/vnm/fw/pre
 
-It performs the same action than Bridge driver but adding extra iptables rules to implement the security groups of the VM.
+It performs the same action as the Bridge driver but adds extra iptables rules to implement the security groups of the VM.
 
 ## The Elastic Driver
 
-The code can be enhanced and modified, by changing the following files in the frontend:
+The code can be enhanced and modified by changing the following files in the Front-end:
 
 * /var/lib/one/remotes/vnm/elastic/post
 * /var/lib/one/remotes/vnm/elastic/clean
@@ -212,8 +212,8 @@ The code can be enhanced and modified, by changing the following files in the fr
 
 | Action          | Description                                                  |
 |-----------------|--------------------------------------------------------------|
-| **Pre**         | Creates the bridge if it doesn’t exists. Setup forward rules |
-| **Post**        | Assign elastic IPs to the target host                        |
+| **Pre**         | Creates the bridge if it doesn’t exist. Setup forward rules  |
+| **Post**        | Assign elastic IPs to the target Host                        |
 | **Clean**       | Remove the bridge if it’s empty. Unassigns elastic IPs       |
 | **vnet_create** | It doesn’t do anything.                                      |
 | **vnet_delete** | It doesn’t do anything.                                      |
