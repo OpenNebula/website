@@ -92,7 +92,6 @@ enable = false
   icon = "fab fa-github"
   desc = "Development takes place here!"
 
-# Top menu
 [menu]
   [[menu.main]]
     name = "Quick Start"
@@ -120,6 +119,7 @@ offlineSearch = true
 offlineSearchSummaryLength = 800
 # CSS TEST
 custom_css = ["scss/main"]
+docs_version = "7.0"
 
 
   # Add your release versions here
@@ -165,6 +165,9 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
+  [[module.mounts]]
+    source = 'images'
+    target = 'static/images'
 
 # added the user feedback module
 [params.ui.feedback]

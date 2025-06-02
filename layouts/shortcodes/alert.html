@@ -1,9 +1,10 @@
 {{ $_hugo_config := `{ "version": 1 }` }}
 {{ $color := .Get "color" | default "primary" }}
 {{ $title := .Get "title" }}
+{{ $docs_version := site.Params.docs_version }}
 {{ $icon := $title }}
 <div class="alert alert-{{ $color }}" role="alert">
-{{ with .Get "title" }}<h4 class="alert-heading"><img src="/7.0/images/icons/alerts/{{ $icon }}.png">   {{ . | safeHTML }}</h4>{{ end }}
+{{ with .Get "title" }}<h4 class="alert-heading"><img src="/{{ $docs_version }}/images/icons/alerts/{{ $icon }}.png">   {{ . | safeHTML }}</h4>{{ end }}
 {{ if eq .Page.File.Ext "md" }}
     {{ .Inner | markdownify }}
 {{ else }}
