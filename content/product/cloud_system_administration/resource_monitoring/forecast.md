@@ -53,11 +53,11 @@ Short-term forecasts power the Predictive DRS, optimizing cluster load distribut
 
 Sunstone’s **Monitoring** tab also provides short-term forecast data.
 
-[INSERT SUNSTONE IMAGE HERE]
+<!-- [INSERT SUNSTONE IMAGE HERE]
 
 CLI users can access short-term forecasts via:
 
-[INSERT CLI COMMAND EXAMPLE HERE]
+[INSERT CLI COMMAND EXAMPLE HERE] -->
 
 By default, short-term forecasts cover the next 5 minutes.
 
