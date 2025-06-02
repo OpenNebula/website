@@ -14,15 +14,15 @@ weight: "6"
 
 This guide will show you how to develop a new driver for OpenNebula to interact with an external authentication service.
 
-OpenNebula comes with an internal user/password way of authentication, this is called `core`. To be able to use other auth methods there is a system that performs authentication with external systems. Authentication drivers are responsible for getting the user credentials from OpenNebula database and login and answer whether the authentication is correct or not.
+OpenNebula comes with an internal user/password way of authentication, this is called `core`. To be able to use other auth methods there is a system that performs authentication with external systems. Authentication drivers are responsible for getting the user credentials from the OpenNebula database and they login and answer whether the authentication is correct or not.
 
-In the OpenNebula database there are two values saved for every user, this is `username` and `password`. When the driver used for authentication is core (authenticated without an external auth driver) the password value holds the SHA256 hash of the user’s password. In case we are using another authentication method this `password` field can contain any other information we can use to recognize a user, for example, for x509 authentication this field contains the user’s public key.
+In the OpenNebula database there are two values saved for every user, these are `username` and `password`. When the driver used for authentication is core (authenticated without an external auth driver) the password value holds the SHA256 hash of the user’s password. In case we are using another authentication method this `password` field can contain any other information we can use to recognize a user, for example, for x509 authentication this field contains the user’s public key.
 
 ## Authentication Driver
 
-Authentication drivers are located at `/var/lib/one/remotes/auth`. There is a directory for each of authentication drivers with an executable inside called `authenticate`. The name of the directory has to be the same as the user’s auth driver we want to authenticate. For example, if a user has as an auth driver `x509` OpenNebula will execute the file `/var/lib/one/remotes/auth/x509/authenticate` when he performs an OpenNebula action.
+Authentication drivers are located at `/var/lib/one/remotes/auth`. There is a directory for each authentication driver with an executable inside called `authenticate`. The name of the directory has to be the same as the user’s auth driver we want to authenticate. For example, if a user has as an auth driver `x509` OpenNebula will execute the file `/var/lib/one/remotes/auth/x509/authenticate` when the user performs an OpenNebula action.
 
-The authentication driver expects parameters passed on the standard input as the XML document with following structure:
+The authentication driver expects parameters passed on the standard input as the XML document with the following structure:
 
 ```xml
 <AUTHN>
@@ -32,7 +32,7 @@ The authentication driver expects parameters passed on the standard input as the
 </AUTHN>
 ```
 
-Where:
+In this example:
 
 - `USERNAME`: name of the user who wants to authenticate.
 - `PASSWORD`: value of the password field for the user that is trying to authenticate. This can be `-` when the user does not exist in the OpenNebula database.
@@ -57,7 +57,7 @@ echo '<AUTHN><USERNAME>test</USERNAME><PASSWORD>5</PASSWORD><SECRET>12345</SECRE
 The script should exit with a non 0 status when the authentication is not correct and write in `stderr` the error. When the authentication is correct it should return:
 
 - Name of the driver. This is used when the user does not exist, this will be written to the user’s the auth driver field.
-- User name
+- User name.
 - Text to write in the user’s password field in case the user does not exist.
 
 The code for the `/var/lib/one/remotes/auth/length/authenticate` executable can be:
@@ -94,7 +94,7 @@ AUTH_MAD = [
 
 ## Managed Groups
 
-The authentication driver may also assign user to groups, this requires that `DRIVER_MANAGED_GROUPS` option is to be set to `YES`, e.g. like for the `ldap` driver
+The authentication driver may also assign users to groups, this requires the `DRIVER_MANAGED_GROUPS` option to be set to `YES`, e.g., like for the `ldap` driver
 
 ```default
 AUTH_MAD_CONF = [
@@ -106,9 +106,9 @@ AUTH_MAD_CONF = [
 ]
 ```
 
-Driver then needs to pass the space-separated group ids right after the username and the secret.
+The driver then needs to pass the space-separated group ids right after the username and the secret.
 
-Such a driver response then looks like following line
+The driver response then looks like the following line:
 
 ```default
 ldap userx CN=userx,CN=Users,DC=opennebula,DC=org *100 101
