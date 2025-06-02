@@ -91,6 +91,52 @@
   p {
     color: #E9E9E9;
   }  
+
+  // Feedback section
+  .panel-line  {
+    color: #4A4F6B;
+  }
+
+  // Buttons
+  .btn-primary {
+    background-color: #2A2D3D;
+    color: #EBEBEB;
+    border-color: #8F9392;
+    background-image: none;
+  }
+  .btn-primary:hover {
+    background-color: #35384D;
+    color: #EBEBEB;
+    border-color: #F5F5F5;
+    background-image: none !important;
+  }  
+
+  // Alerts
+  .alert-success {
+    background-color: #35384D;
+    color: #E9E9E9;
+    border-left-color: #40B3D9;
+    .alert-heading {
+      color: #40B3D9;
+    }
+  }
+  .alert-warning {
+    background-color: #DEA7002E;
+    color: #E9E9E9;
+    border-left-color: #DEA700;
+    .alert-heading {
+      color: #DEA700;
+    }
+  }
+  .alert-danger {
+    background-color: #F377792E;
+    color: #E9E9E9;
+    border-left-color: #F37779;
+    .alert-heading {
+      color: #F37779;
+    }
+  }
+
 }
 
 // ****************** Light mode ****************** 
@@ -180,6 +226,51 @@
   // Paragraphs
   p {
     color: #575C5B;
+  }
+
+  // Feedback section
+  .panel-line  {
+    color: #C7C9C8;
+  }
+
+  // Buttons
+  .btn-primary {
+    background-color: #E5F5FA;
+    color: #575C5B;
+    border-color: #007099;
+    background-image: none;
+  }
+  .btn-primary:hover {
+    background-color: #DFE6F2;
+    color: #575C5B;
+    border-color: #0098C3;
+    background-image: none !important;
+  }
+
+  // Alerts
+  .alert-success {
+    background-color: #F5F5F5;
+    color: #575C5B;
+    border-left-color: #007099;
+    .alert-heading {
+      color: #007099;
+    }
+  }
+  .alert-warning {
+    background-color: #F5F5F5;
+    color: #575C5B;
+    border-left-color: #AF8400;
+    .alert-heading {
+      color: #AF8400;
+    }
+  }
+  .alert-danger {
+    background-color: #F5F5F5;
+    color: #575C5B;
+    border-left-color: #C30049;
+    .alert-heading {
+      color: #C30049;
+    }
   }
 }
 
