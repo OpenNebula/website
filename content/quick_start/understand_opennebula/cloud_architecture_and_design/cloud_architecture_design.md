@@ -38,7 +38,7 @@ Besides connecting your cloud to the public [OpenNebula Marketplace and other th
 
 ## Step 2. Deploy Edge Clusters
 
-OpenNebula brings its own [Edge Cluster configuration]({{% relref "edge_cloud_reference_architecture#true-hybrid-cloud-reference-architecture" %}}). Based on solid open-source storage and networking technologies, it is a much simpler approach than those of customized cloud architectures made of more complex, general-purpose and separate infrastructure components. OpenNebula [automates the deployment of Edge Clusters]({{% relref "../../../product/cloud_cluster_provisioning/index#try-hybrid-overview" %}}) on-demand, on virtual or bare-metal resources both on-premises and on your choice of public cloud or edge provider.
+OpenNebula brings its own [Edge Cluster configuration]({{% relref "edge_cloud_reference_architecture#true-hybrid-cloud-reference-architecture" %}}). Based on solid open-source storage and networking technologies, it is a much simpler approach than those of customized cloud architectures made of more complex, general-purpose and separate infrastructure components. OpenNebula automates the deployment of cloud clusters on demand, on virtual or bare-metal resources both on-premises and on your choice of public cloud or edge provider.
 
 ## Step 3. Set Up Customized Clusters On-premises
 
