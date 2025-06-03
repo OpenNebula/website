@@ -33,7 +33,7 @@ Before reading this chapter make sure you are familiar with the [Open Cloud Stor
 
 Read the common [Node Setup]({{% relref "node#networking-node" %}}) section to learn how to configure your Hosts, and then proceed to the specific section for the networking mode that you are interested in.
 
-Next, if you are interested in optional integration with the IP Address Manager (IPAM), the external mechanism that allocates and assigns the IP addresses for the Virtual Machines, you can continue to the section about [developing IPAM driver]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-ipam#devel-ipam" %}}).
+Additionally, if you are interested in optional integration with the IP Address Manager (IPAM), the external mechanism that allocates and assigns the IP addresses for the Virtual Machines, you can consult [IPAM driver]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-ipam" %}}) in the [Integration References]({{% relref "integration_references" %}}).
 
 ## Hypervisor Compatibility
 

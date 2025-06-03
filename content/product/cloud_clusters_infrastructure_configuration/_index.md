@@ -1,7 +1,7 @@
 ---
 title: "Cloud Cluster Configuration"
 date: "2025-02-17"
-description: "Define the fundamental building blocks of your cloud: hosts, clusters, networks and storage"
+description: "Complete configuration guides for the building blocks of your cloud, including supported network architectures and available drivers and backends for hosts, clusters, storage and backups"
 categories:
 pageintoc: "50"
 tags:
