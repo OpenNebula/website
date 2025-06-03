@@ -78,7 +78,6 @@
   border-bottom-right-radius: 8px;
 }
 
-// _content.scss
 // Markdown headings
 .td-content {
  > h1 {
@@ -99,4 +98,8 @@
 
 .td-card-group.card-group {
   @extend .td-max-width-on-larger-screens;
+}
+// Tags
+.tag-back {
+  cursor: pointer;
 }
