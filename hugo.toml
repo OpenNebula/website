@@ -92,7 +92,6 @@ enable = false
   icon = "fab fa-github"
   desc = "Development takes place here!"
 
-# Top menu
 [menu]
   [[menu.main]]
     name = "Quick Start"
@@ -118,6 +117,10 @@ enableGitInfo = true
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
 offlineSearchSummaryLength = 800
+# CSS TEST
+custom_css = ["scss/main"]
+docs_version = "7.0"
+
 
   # Add your release versions here
 version_menu = "Versions"
@@ -162,10 +165,14 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
+  #[[module.mounts]]
+  #  source = 'images'
+  #  target = 'static/images'
 
 # added the user feedback module
 [params.ui.feedback]
 enable = true
+feedback_question = 'We value your feedback. Was this page helpful?'
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 

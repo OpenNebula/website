@@ -19757,12 +19757,23 @@ div.drawioframe {
     height: 5rem;
     visibility: hidden; } }
 
-/*
+.td-content > h1, .td-content > .h1 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem; }
 
-Nothing defined here. The Hugo project that uses this theme can override Bootstrap by adding a file to:
+.td-content > h2, .td-content > .h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem; }
 
-assets/scss/_styles_project.scss
+.td-content > h2:not(:first-child), .td-content > .h2:not(:first-child) {
+  margin-top: 3rem; }
 
-*/
+.card {
+  --bs-card-border-radius: 12px; }
+  .card .card-header {
+    font-size: 1.4rem; }
+  .card .card-body {
+    font-size: 1.2rem; }
 
 /*# sourceMappingURL=main.css.map */
