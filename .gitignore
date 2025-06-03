@@ -1,4 +1,8 @@
 public/
-.hugo_build.lock
 node_modules/
+<<<<<<< HEAD
 _vendor
+=======
+_vendor/
+.hugo_build.lock
+>>>>>>> b21dbeb1422c358fb3bb79922c110b5f98e7b7b6
