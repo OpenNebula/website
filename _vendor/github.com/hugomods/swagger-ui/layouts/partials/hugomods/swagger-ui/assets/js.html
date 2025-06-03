@@ -1,0 +1,4 @@
+{{ if .Store.Get "hasSwaggerUI" }}
+  {{ $js := resources.Get "hugomods/swagger-ui/swagger-ui-bundle.js" | resources.Copy "js/swagger-ui.js" }}
+  <script src="{{ $js.RelPermalink }}"></script>
+{{ end }}

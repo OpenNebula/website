@@ -1,0 +1,16 @@
+{{ .Page.Store.Set "hasSwaggerUI" true }}
+{{ $url := "" }}
+{{ if .IsNamedParams }}
+  {{ $url = .Get "url" }}
+{{ else }}
+  {{ $url = .Get 0 }}
+{{ end }}
+<div id="swagger-ui"></div>
+<script>
+  window.onload = () => {
+    window.ui = SwaggerUIBundle({
+      url: '{{ $url }}',
+      dom_id: '#swagger-ui',
+    });
+  };
+</script>
