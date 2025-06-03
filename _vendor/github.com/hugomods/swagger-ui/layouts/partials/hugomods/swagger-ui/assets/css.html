@@ -1,9 +1,0 @@
-{{ if .Store.Get "hasSwaggerUI" }}
-  {{ $opts := dict
-    "targetPath" "css/swagger-ui.css"
-    "outputStyle" (cond hugo.IsProduction "compressed" "")
-    "transpiler" (default "dartsass" site.Params.swagger_ui.sass_transpiler)
-  }}
-  {{ $css := resources.Get "hugomods/swagger-ui/swagger-ui.css" | toCSS $opts }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
-{{ end }}
