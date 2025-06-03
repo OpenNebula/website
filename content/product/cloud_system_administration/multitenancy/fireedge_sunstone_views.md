@@ -12,14 +12,14 @@ weight: "5"
 
 <!--# Sunstone Views -->
 
-Using the OpenNebula FireEdge Sunstone Views you will be able to provide a simplified UI aimed at end-users of an OpenNebula cloud. The OpenNebula FireEdge Sunstone Views are fully customizable, so you can easily enable or disable specific information tabs or action buttons. [You can define multiple views for different user groups]({{% relref "#fireedge-sunstone-views-define-new" %}}). You can define multiple views for different user groups. Each view defines a set of UI components, so each user just accesses and views the relevant parts of the cloud for her role. Default views:
+Using the OpenNebula FireEdge Sunstone Views you will be able to provide a simplified UI aimed at end users of an OpenNebula cloud. The OpenNebula FireEdge Sunstone Views are fully customizable, so you can easily enable or disable specific information tabs or action buttons. [You can define multiple views for different user groups]({{% relref "#fireedge-sunstone-views-define-new" %}}). You can define multiple views for different user groups. Each view defines a set of UI components, so each user just accesses and views the relevant parts of the cloud for their role. Default views:
 
 - [Admin View]({{% relref "#fireedge-admin-view" %}}).
 - [User View]({{% relref "#fireedge-user-view" %}}).
 - [Group Admin View]({{% relref "#fireedge-groupadmin-view" %}}).
 - [Cloud View]({{% relref "#fireedge-cloud-view" %}}).
 
-Each of these views is defined on a folder in `/etc/one/fireedge/sunstone/views` that contains as many yaml files as tabs are enabled in this view. On this path, there is also a file `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` where is defined the default configuration (see [Defining a New OpenNebula Sunstone View or Customizing an Existing one]({{% relref "#fireedge-sunstone-views-define-new" %}}) to more information about configure or create a view).
+Each of these views is defined on a folder in `/etc/one/fireedge/sunstone/views` that contains as many yaml files as tabs are enabled in this view. On this path, there is also a file `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` where the default configuration is defined (see [Defining a New OpenNebula Sunstone View or Customizing an Existing one]({{% relref "#fireedge-sunstone-views-define-new" %}}) for more information about configuring or creating a view).
 
 <a id="fireedge-suns-views-default-views"></a>
 
@@ -37,7 +37,7 @@ This view provides full control of the cloud. Details can be configured in the `
 
 ### User View
 
-Based on the Admin View; it is an advanced user view. It is intended for users that need access to more actions than the limited set available in the cloud view. Users will not be able to manage nor retrieve the hosts and clusters of the cloud. They will be able to see Datastores and Virtual Networks in order to use them when creating a new Image or Virtual Machine, but they will not be able to create new ones. Details can be configured in the `/etc/one/fireedge/sunstone/views/user/*.yaml` file.
+Based on the Admin View; it is an advanced user view. It is intended for users that need access to more actions than the limited set available in the cloud view. Users will not be able to manage nor retrieve the Hosts and clusters of the cloud. They will be able to see datastores and Virtual Networks in order to use them when creating a new Image or Virtual Machine, but they will not be able to create new ones. Details can be configured in the `/etc/one/fireedge/sunstone/views/user/*.yaml` file.
 
 ![fireedge_sunstone_view_dashboard](/images/fireedge_sunstone_user_view.png)
 
@@ -45,7 +45,7 @@ Based on the Admin View; it is an advanced user view. It is intended for users t
 
 ### Group Admin View
 
-Based on Users View; this view has the same tabs as the User View plus the Groups and Users tabs to manage the group and the users of the groups that this user is administrator. Details can be configured in the `/etc/one/fireedge/sunstone/views/groupadmin/*.yaml` files.
+Based on the User View; this view has the same tabs as the User View plus the Groups and Users tabs to manage the group and the users of the groups where this user is an administrator. Details can be configured in the `/etc/one/fireedge/sunstone/views/groupadmin/*.yaml` files.
 
 ![fireedge_sunstone_groupadmin_dashboard](/images/fireedge_sunstone_groupadmin_view.png)
 
@@ -53,7 +53,7 @@ Based on Users View; this view has the same tabs as the User View plus the Group
 
 ### Cloud View
 
-This is a simplified view, mainly intended for end-users that just require a portal where they can provision new virtual machines easily from pre-defined Templates. For more information about this view, please check the `/etc/one/fireedge/sunstone/views/cloud/*.yaml` files.
+This is a simplified view mainly intended for end users that just require a portal where they can provision new Virtual Machines easily from pre-defined Templates. For more information about this view, please check the `/etc/one/fireedge/sunstone/views/cloud/*.yaml` files.
 
 ![fireedge_sunstone_cloud_dashboard](/images/fireedge_sunstone_cloud_view.png)
 
@@ -93,7 +93,7 @@ The file `sunstone-views.yaml` configures:
       - user
   ```
 
-  Users that belong to oneadmin group will used admin and user views and all the users that does not belong to oneadmin group will used user view (that configuration only applies if the group that the user belongs [does not have the FIREEDGE attribute on his template]({{% relref "manage_groups#groupwise-configuration-attributes" %}})):
+  Users that belong to oneadmin group will use admin and user views while users that do not belong to oneadmin group will use user view only (that configuration only applies if the group that the user belongs to [does not have the FIREEDGE attribute on the template]({{% relref "manage_groups#groupwise-configuration-attributes" %}})):
 - Name and description that will be showed on Sunstone:
   ```yaml
   # Name and description of each view.
@@ -122,11 +122,11 @@ The file `sunstone-views.yaml` configures:
       description: Description for custom view
   ```
 
-  The views attribute is used to add readable names and description to the views. If we used the previous configuration, the result on Sunstone will be:
+  The views attribute is used to add readable names and description to the views. If we use the previous configuration, the result on Sunstone will be:
 
   ![fireedge_sunstone_views](/images/groups_views.png)
 
-## Defining a New OpenNebula Sunstone View or Customizing an Existing one
+## Defining a New OpenNebula Sunstone View or Customizing an Existing One
 
 View definitions are placed in the `/etc/one/fireedge/sunstone/views` directory. Each view is defined by a folder which contains one yaml file for each tab that will be in the view. The structure of this folder will be as follows:
 
@@ -186,7 +186,7 @@ View definitions are placed in the `/etc/one/fireedge/sunstone/views` directory.
 ```
 
 {{< alert title="Note" color="success" >}}
-The easiest way to create a custom view is to copy the admin folder and modify or delete tab files as needed. Also, configure sunstone-views.yaml if it is needed.{{< /alert >}} 
+The easiest way to create a custom view is to copy the admin folder and modify or delete tab files as needed. Also, configure sunstone-views.yaml if needed.{{< /alert >}} 
 
 <a id="fireedge-sunstone-views-custom"></a>
 
@@ -199,9 +199,9 @@ The contents of a tab file are organized in six sections:
 * actions: Which buttons are visible to operate over the resources.
 * filters: List of criteria to filter the resources.
 * info-tabs: Which info tabs are used to show extended information.
-* dialogs: Enable or disable different actions on a dialog that it is enabled on the actions section.
+* dialogs: Enable or disable different actions on a dialog that is enabled in the actions section.
 
-Each section has some attributes that can be disabled or enable changing their value to false or true.
+Each section has some attributes that can be disabled or enabled by changing their value to false or true.
 
 An example of a tab with the vm-template-tab.yaml file:
 
