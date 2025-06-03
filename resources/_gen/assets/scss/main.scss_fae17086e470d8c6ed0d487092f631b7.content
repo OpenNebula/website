@@ -19960,6 +19960,28 @@ div.drawioframe {
     height: 5rem;
     visibility: hidden; } }
 
+.td-content > h1, .td-content > .h1 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem; }
+
+.td-content > h2, .td-content > .h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem; }
+
+.td-content > h2:not(:first-child), .td-content > .h2:not(:first-child) {
+  margin-top: 3rem; }
+
+.card {
+  card-border-radius: 12px;
+  /*
+  .card-body {
+    font-size: 1.2rem;
+  }
+*/ }
+  .card .card-header {
+    font-size: 1.2rem; }
+
 /**
 * This file defines all the styles that need to change between and there is no difference between dark and light mode
 */
@@ -19987,5 +20009,27 @@ div.drawioframe {
   border-left-width: 3px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px; }
+
+.td-content > h1, .td-content > .h1 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem; }
+
+.td-content > h2, .td-content > .h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem; }
+
+.td-content > h2:not(:first-child), .td-content > .h2:not(:first-child) {
+  margin-top: 3rem; }
+
+.card {
+  --bs-card-border-radius: 12px;
+  /*
+  .card-body {
+    font-size: 1.2rem;
+  }
+*/ }
+  .card .card-header {
+    font-size: 1.2rem; }
 
 /*# sourceMappingURL=main.css.map */

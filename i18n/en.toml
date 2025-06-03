@@ -1,0 +1,10 @@
+[feedback_title]
+other = "We value your feedback"
+[feedback_question]
+other = "Was this information helpful?"
+
+[ui_pager_prev]
+other = "Previous page"
+
+[ui_pager_next]
+other = "Next page"
