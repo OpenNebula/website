@@ -11,45 +11,50 @@ The oVirtAPI module is compatible with Veeam Backup & Replication 12.0.
 
 The following table summarizes the supported backup modes for each storage system:
 
-<table class="docutils align-default">
-<thead>
-<th class="head" rowspan="2"><p>Storage</p></th>
-<th class="head" colspan="2"><p>Full</p></th>
-<th class="head" colspan="2"><p>Incremental</p></th>
-</tr>
-<tr class="row-even"><th class="head"><p>Live</p></th>
-<th class="head"><p>Power off</p></th>
-<th class="head"><p>Live</p></th>
-<th class="head"><p>Power off</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-odd">
-<td><p>File<sup>*</sup> (qcow2)</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-</tr>
-<tr class="row-even"><td><p>File<sup>*</sup> (raw)</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
-</tr>
-<tr class="row-odd"><td><p>Ceph</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes
-<td><p>No
-<td><p>No
-</tr>
-<tr class="row-even"><td><p>LVM</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
-</tr>
-</tbody>
+<table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <thead>
+    <tr>
+      <th class="head" rowspan="2" style="min-width: 120px;"><p>Storage</p></th>
+      <th class="head" colspan="2" style="min-width: 100px;"><p>Full</p></th>
+      <th class="head" colspan="2" style="min-width: 100px;"><p>Incremental</p></th>
+    </tr>
+    <tr>
+      <th class="head" style="min-width: 100px;"><p>Live</p></th>
+      <th class="head" style="min-width: 100px;"><p>Power off</p></th>
+      <th class="head" style="min-width: 100px;"><p>Live</p></th>
+      <th class="head" style="min-width: 100px;"><p>Power off</p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="min-width: 120px;"><p>File<sup>*</sup> (qcow2)</p></td>
+      <td><p>Yes</p></td>
+      <td><p>Yes</p></td>
+      <td><p>Yes</p></td>
+      <td><p>Yes</p></td>
+    </tr>
+    <tr>
+      <td><p>File<sup>*</sup> (raw)</p></td>
+      <td><p>Yes</p></td>
+      <td><p>Yes</p></td>
+      <td><p>No</p></td>
+      <td><p>No</p></td>
+    </tr>
+    <tr>
+      <td><p>Ceph</p></td>
+      <td><p>Yes</p></td>
+      <td><p>Yes</p></td>
+      <td><p>No</p></td>
+      <td><p>No</p></td>
+    </tr>
+    <tr>
+      <td><p>LVM</p></td>
+      <td><p>Yes</p></td>
+      <td><p>Yes</p></td>
+      <td><p>No</p></td>
+      <td><p>No</p></td>
+    </tr>
+  </tbody>
 </table>
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e. NFS/SAN or Local.
