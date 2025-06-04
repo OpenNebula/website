@@ -20022,14 +20022,4 @@ div.drawioframe {
 .td-content > h2:not(:first-child), .td-content > .h2:not(:first-child) {
   margin-top: 3rem; }
 
-.card {
-  --bs-card-border-radius: 12px;
-  /*
-  .card-body {
-    font-size: 1.2rem;
-  }
-*/ }
-  .card .card-header {
-    font-size: 1.2rem; }
-
 /*# sourceMappingURL=main.css.map */

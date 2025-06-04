@@ -100,20 +100,3 @@
 .td-card-group.card-group {
   @extend .td-max-width-on-larger-screens;
 }
-
-// card.scss
-// ./_vendor/github.com/twbs/bootstrap/scss/_card.scss
-
-.card {
-  --#{$prefix}card-border-radius: 12px;
-
-  .card-header {
-    font-size: 1.2rem;
-  }
-
-/*
-  .card-body {
-    font-size: 1.2rem;
-  }
-*/
-}
