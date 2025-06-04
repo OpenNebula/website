@@ -1,0 +1,134 @@
+{{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites. */ -}}
+{{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
+{{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
+{{ $sidebarCacheTypeRoot := .Site.Params.ui.sidebar_cache_type_root | default false -}}
+{{ if $shouldCache -}}
+  {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #{{ $mid }}").addClass("active"); 
+    $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item"); 
+    $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path"); 
+    $("#td-section-nav li.active-path").addClass("show"); 
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #{{ $mid }}-li").siblings("li").addClass("show");  
+    $("#td-section-nav #{{ $mid }}-li").children("ul").children("li").addClass("show");  
+    $("#td-sidebar-menu").toggleClass("d-none"); 
+    });
+  </script>
+  {{ partialCached "sidebar-tree.html" . .FirstSection.RelPermalink }}
+{{ else -}}
+  {{ partial "sidebar-tree.html" . }}
+{{- end }}
+
+<script>
+
+  // Script to filter content of the sidebar menu
+  $(function () {
+
+    // Function expand all options in sidebar
+    function expandSidebar() {
+      $('#td-section-nav li').children('ul').show()
+    }
+
+    // Function to collapse sidebar except for the active links
+    function collapseSidebar() {
+
+      // Hide all the menu
+      $('#td-section-nav li').children('ul').hide()
+
+      // Show first level (ul & li)
+      $('.ul-1').show()
+      $('.ul-1 > li').show()
+
+      // Show active paths (ul & li)
+      $('.active-path > ul').show()
+      $('.active-path').show()
+
+      // Show siblings of the active path
+      $('li .active-path').siblings().show()
+
+      // Show children of the active path
+      $('.active-path ul li').show();
+    }
+    
+    // Action to dispatch when click on clear button
+    $('#clear-search').on('click', function () {
+      
+      // Clear search input
+      $('#sidebar-search').val('').trigger('input');
+
+      // Hide the cross icon
+      $(this).hide();
+
+      // Collapse sidebar to original state
+      collapseSidebar();
+
+    });
+
+    // Filter menu when the user type any character
+    $('#sidebar-search').on('input', function () {
+
+      // Get value in the input
+      var searchTerm = $(this).val().toLowerCase();
+
+      // Check if is empty or not
+      if (searchTerm === '') {
+
+        // Collapse sidebar to original state
+        collapseSidebar();
+
+        // Delete marks in texts
+        $('#td-section-nav li span').each(function () {
+          $(this).html($(this).text());
+        });
+      } 
+      else {
+      
+        // Look for in all the menu items
+        $('#td-section-nav li').each(function () {
+
+          // Show cross icon to clear
+          $('#clear-search').show()
+
+          // Get text of the item
+          var $li = $(this);
+          var text = $li.text().toLowerCase();
+
+          // Check if the searched term in in the item text
+          if (text.includes(searchTerm)) {
+
+            // Show the item
+            $li.show();
+            $li.parents('li').show();
+
+            // Mark with yellow
+            $li.find('span').each(function () {
+              var originalText = $(this).text();
+              var regex = new RegExp('(' + searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+              var newHtml = originalText.replace(regex, '<mark style="padding:0">$1</mark>');
+              $(this).html(newHtml);
+            });
+            $li.find('ul').show();
+          } 
+          else {
+
+            // If the searched term is not in the item, hide it
+            $li.hide();
+            $li.find('ul').hide();
+            $li.find('span').each(function () {
+              $(this).html($(this).text());
+            });
+          }
+        });
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
