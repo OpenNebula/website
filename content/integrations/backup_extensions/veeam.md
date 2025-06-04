@@ -14,7 +14,7 @@ The following table summarizes the supported backup modes for each storage syste
 <table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: center;">
   <thead>
     <tr>
-      <th class="head" rowspan="2" style="min-width: 120px; border: 1px solid"><p>Storage</p></th>
+      <th class="head" rowspan="2" style="min-width: 120px; border: 1px solid; vertical-align: middle"><p>Storage</p></th>
       <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Full</p></th>
       <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Incremental</p></th>
     </tr>
