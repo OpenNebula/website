@@ -14,45 +14,45 @@ The following table summarizes the supported backup modes for each storage syste
 <table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: center;">
   <thead>
     <tr>
-      <th class="head" rowspan="2" style="min-width: 120px;"><p>Storage</p></th>
-      <th class="head" colspan="2" style="min-width: 100px;"><p>Full</p></th>
-      <th class="head" colspan="2" style="min-width: 100px;"><p>Incremental</p></th>
+      <th class="head" rowspan="2" style="min-width: 120px; border: 1px solid"><p>Storage</p></th>
+      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Full</p></th>
+      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Incremental</p></th>
     </tr>
     <tr>
-      <th class="head" style="min-width: 100px;"><p>Live</p></th>
-      <th class="head" style="min-width: 100px;"><p>Power off</p></th>
-      <th class="head" style="min-width: 100px;"><p>Live</p></th>
-      <th class="head" style="min-width: 100px;"><p>Power off</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="min-width: 120px;"><p>File<sup>*</sup> (qcow2)</p></td>
-      <td><p>Yes</p></td>
-      <td><p>Yes</p></td>
-      <td><p>Yes</p></td>
-      <td><p>Yes</p></td>
+      <td style="min-width: 120px; border: 1px solid"><p>File<sup>*</sup> (qcow2)</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
     </tr>
     <tr>
-      <td><p>File<sup>*</sup> (raw)</p></td>
-      <td><p>Yes</p></td>
-      <td><p>Yes</p></td>
-      <td><p>No</p></td>
-      <td><p>No</p></td>
+      <td style="border: 1px solid"><p>File<sup>*</sup> (raw)</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
     </tr>
     <tr>
-      <td><p>Ceph</p></td>
-      <td><p>Yes</p></td>
-      <td><p>Yes</p></td>
-      <td><p>No</p></td>
-      <td><p>No</p></td>
+      <td style="border: 1px solid"><p>Ceph</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
     </tr>
     <tr>
-      <td><p>LVM</p></td>
-      <td><p>Yes</p></td>
-      <td><p>Yes</p></td>
-      <td><p>No</p></td>
-      <td><p>No</p></td>
+      <td style="border: 1px solid"><p>LVM</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
     </tr>
   </tbody>
 </table>
