@@ -192,9 +192,6 @@ When a VM is launched or migrated, the cache manager performs the following thre
 
 3. **Fallback to Front-End:** If not found in any cache, it falls back to retrieving the image from the Image Datastore on the front-end, then stores it both locally and on the central cache..
 
-
-
-
 In each host’s cache path (e.g. `/var/lib/one/cache/`) cached images appear as two files:
 
 ```default
