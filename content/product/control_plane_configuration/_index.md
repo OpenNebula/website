@@ -2,7 +2,7 @@
 title: "Control Plane Configuration"
 # no_list: true
 date: "2025-02-17"
-description: "Guides for the design, deployment and configuration of cloud architectures for resilience, performance and scalability -- covering from the high-level design to the configuration of cloud components -- and for defining a graphical control environment for cloud administrators and users"
+description: "Design and configuration guides to improve resilience, performance, scalability and usability, covering from high-level design to the configuration of cloud components and the graphical control environment for cloud admins and users"
 categories:
 # simple_list: true
 pageintoc: "30"
