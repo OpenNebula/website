@@ -56,7 +56,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### [Linux and Windows Contextualization Packages](https://github.com/OpenNebula/one-apps/wiki/linux_release)
 
-Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/software/latest)
+Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/releases/latest)
 
 More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 

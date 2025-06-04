@@ -70,7 +70,7 @@ $ onedb <command> -v -S localhost -u oneadmin -p oneadmin -d opennebula
 ```
 
 {{< alert title="Warning" color="warning" >}}
-If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](http://dev.mysql.com/doc/refman/5.6/en/set-password.html) statement can be used for this:
+If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](https://dev.mysql.com/doc/refman/8.4/en/set-password.html) statement can be used for this:
 
 ```default
 $ mysql -u oneadmin -p
