@@ -366,12 +366,6 @@ The Raft algorithm can be tuned by several parameters in the configuration file 
 {{< alert title="Warning" color="warning" >}}
 Any change in these parameters can lead to unexpected behavior during the fail-over and result in whole-cluster malfunction. After any configuration change, always check the crash scenarios for the correct behavior.{{< /alert >}} 
 
-## Compatibility with the Earlier HA
-
-In OpenNebula <= 5.2, HA was configured using a classic active-passive approach, using Pacemaker and Corosync. While this still works for OpenNebula > 5.2, it is not the recommended way to set up a cluster. However, it is fine if you want to continue using that HA method if you’re coming from earlier versions.
-
-This is documented here: [Front-end HA Setup](http://docs.opennebula.io/5.2/advanced_components/ha/frontend_ha_setup.html).
-
 <a id="server-sync-ha"></a>
 
 ## Synchronize Configuration Files Across Servers

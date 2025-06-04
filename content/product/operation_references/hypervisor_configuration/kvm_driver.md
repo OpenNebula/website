@@ -14,7 +14,7 @@ weight: "3"
 
 ## Requirements
 
-The Hosts will need a CPU with [Intel VT](http://www.intel.com/content/www/us/en/virtualization/virtualization-technology/intel-virtualization-technology.html) or [AMD’s AMD-V](http://www.amd.com/en-us/solutions/servers/virtualization) features in order to support virtualization. KVM’s [Preparing to use KVM](http://www.linux-kvm.org/page/FAQ#Preparing_to_use_KVM) guide will clarify any doubts you may have regarding whether your hardware supports KVM.
+To support virtualization, the Hosts will need a CPU with Intel VT or AMD’s AMD-V features. KVM's [Preparing to use KVM](http://www.linux-kvm.org/page/FAQ#Preparing_to_use_KVM) guide will clarify any doubts you may have regarding whether your hardware supports KVM.
 
 KVM will be installed and configured after following the [KVM Host Installation]({{% relref "kvm_node_installation#kvm-node" %}}) section.
 
