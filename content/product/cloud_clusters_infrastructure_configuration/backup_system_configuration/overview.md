@@ -23,11 +23,11 @@ Backup datastores can be defined using two backends (datastore drivers):
 
 Before reading this chapter, you should have already installed your [Frontend]({{% relref "front_end_installation" %}}), the [KVM Hosts]({{% relref "kvm_node_installation#kvm-node" %}}) and have an OpenNebula cloud up and running with at least one virtualization node.
 
-This Chapter is structured as follows:
+For configuring your backup system, you can first learn how to setup a datastore to save your VM backups, [for the restic backend]({{% relref "restic#vm-backups-restic" %}}) and [for the rsync datastore]({{% relref "rsync#vm-backups-rsync" %}}).
 
-> - First, you will learn how to setup a datastore to save your VM backups, [for the restic backend]({{% relref "restic#vm-backups-restic" %}}) and [for the rsync datastore]({{% relref "rsync#vm-backups-rsync" %}}).
-> - And then, you will find out [how to perform and schedule VM backups, as well as to restore them]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#vm-backups-operations" %}}).
-> - Finally, if you need to backup a large number of VMs you can manage them [effectively through Backup Jobs]({{% relref "../../virtual_machines_operation/virtual_machine_backups/backup_jobs#vm-backup-jobs" %}}).
+Then, consult the [Virtual Machines Operation]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations" %}}) section to find out how to perform, schedule and restore VM backups.
+
+Finally, if you need to backup a large number of VMs you can manage them [effectively through Backup Jobs]({{% relref "../../virtual_machines_operation/virtual_machine_backups/backup_jobs" %}}).
 
 ## Hypervisor & Storage Compatibility
 

@@ -19,7 +19,6 @@ This chapter is a configuration and deployment reference for all OpenNebula serv
 Read the sections for services you are interested in
 
 - [OpenNebula Daemon]({{% relref "oned#oned-conf" %}})
-- [Scheduler]({{% relref "scheduler#sched-conf" %}})
 - [FireEdge]({{% relref "fireedge#fireedge-conf" %}})
 - [OneFlow]({{% relref "oneflow#oneflow-conf" %}})
 - [OneGate]({{% relref "onegate#onegate-conf" %}})

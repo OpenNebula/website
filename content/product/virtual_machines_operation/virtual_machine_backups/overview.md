@@ -12,7 +12,11 @@ weight: "1"
 
 <!--# Overview of VM Backups -->
 
-This section contains documentation on how to create and manage Virtual Machines Backups. Backups are managed through the datastore and image abstractions, so all of the concepts that apply to these objects (such as access control or quotas) also apply to backups.
+This section contains documentation on how to create and manage Virtual Machines Backups.
+
+Backups are managed through the [datastore]({{% relref "datastores" %}}) and [image]({{% relref "images" %}}) abstractions, so all of the concepts that apply to these objects (such as access control or quotas) also apply to backups.
+
+## How Should I Read this Chapter
 
 The pages in this section describe backup types and available backup operations (such as scheduling, cancelling or restoring), advanced configurations (such as defining quotas and access control) and how to set up backup jobs for multiple Virtual Machines.
 
