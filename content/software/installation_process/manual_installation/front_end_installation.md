@@ -346,7 +346,7 @@ Use the following command to **restart all** already running OpenNebula services
     opennebula-novnc opennebula-ssh-agent
 ```
 
-Learn more about [Managing Services with Systemd](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-services-with-systemd_configuring-basic-system-settings#managing-system-services_managing-services-with-systemd).
+Learn more about [Managing Services with Systemd](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-systemd_configuring-basic-system-settings).
 
 In production environments the services should be stopped in a specific order and with extra manual safety checks:
 
