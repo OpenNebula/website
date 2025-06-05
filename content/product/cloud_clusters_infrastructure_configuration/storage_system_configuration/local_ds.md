@@ -160,13 +160,13 @@ When a VM is instantiated, the host first checks its **local cache** for the nee
 The Cache is configured per **Image Datastore**. In other words, each Image Datastore in OpenNebula that uses the local TM driver defines its own cache settings. The cache settings are described in the next table:
 
 
-| Attribute         | Description                                                                                                                                                           |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ENABLE_CACHE`    | Set to `yes` to enable the distributed cache for this Image Datastore, or `no` to disable it.                                                                         |
-| `CACHE_PATH`      | Absolute directory where cached images will be stored (e.g., `/var/lib/one/cache`).                                                                                   |
-| `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` resides) allocated for caching. For example, "10" means 10 % of that disk may be used. |
-| `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                   |
-| `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         |
+| Attribute         | Description                                                                                                                                                           | Deault value         |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
+| `ENABLE_CACHE`    | Set to `yes` to enable the distributed cache for this Image Datastore, or `no` to disable it.                                                                         | `NO`                 |
+| `CACHE_PATH`      | Absolute directory where cached images will be stored (e.g., `/var/lib/one/cache`).                                                                                   | `/var/lib/one/cache` |
+| `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` resides) allocated for caching. For example, "10" means 10 % of that disk may be used. | `10`                 |
+| `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                   | `''` (no upstreams)  |
+| `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         | `0`                  |
 
 
 For example, update the image datastore tempalte with following parameters to configure a Distributed Cache:
