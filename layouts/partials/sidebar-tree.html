@@ -18,10 +18,12 @@
   </div>
   <div id="content-desktop"></div>
   {{ end -}}
-<div class="td-sidebar-search p-2 mb-3 mt-3" style="position: relative;">
-  <input type="text" id="sidebar-search" class="form-control" placeholder="Filter table of contents" style="padding-right: 2rem;">
-  <i id="clear-search" class="fa-solid fa-xmark" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
-</div>
+
+  <!-- Input to filter menu items -->
+  <div class="td-sidebar-search p-2 mb-3 mt-3 d-none d-md-block" style="position: relative;">
+    <input type="text" id="sidebar-search" class="form-control" placeholder="Filter table of contents" style="padding-right: 2rem;">
+    <i id="clear-search" class="fa-solid fa-xmark" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
+  </div>
 
   <nav class="td-sidebar-nav collapse pt-0
       {{- if .Site.Params.ui.sidebar_search_disable }} td-sidebar-nav--search-disabled{{ end -}}

@@ -79,7 +79,7 @@ enable = false
 [[params.links.user]]
   name ="OpenNebula on X"
   url = "https://x.com/opennebula/"
-  icon = "fab fa-twitter"
+  icon = "fab fa-x-twitter"
   desc = "Follow OpenNebula on X"
 [[params.links.user]]
   name = "OpenNebula on YouTube - Webinars, demos and more"
@@ -91,6 +91,23 @@ enable = false
   url = "https://github.com/OpenNebula"
   icon = "fab fa-github"
   desc = "Development takes place here!"
+[[params.links.user]]
+  name = "OpenNebula on Bluesky"
+  url = "https://bsky.app/profile/opennebula.bsky.social"
+  icon = "fab fa-bluesky"
+  desc = "Follow OpenNebula on Bluesky"
+[[params.links.user]]
+  name = "OpenNebula on Facebook"
+  url = "https://www.facebook.com/p/OpenNebula-100057184252936/"
+  icon = "fab fa-facebook"
+  desc = "Follow OpenNebula on Facebook"  
+[[params.links.user]]
+  name = "OpenNebula on LinkedIn"
+  url = "https://www.linkedin.com/company/opennebula"
+  icon = "fab fa-linkedin"
+  desc = "Follow OpenNebula on LinkedIn"
+
+
 
 [menu]
   [[menu.main]]
