@@ -4,6 +4,13 @@
 * This file defines all the styles that need to change between and there is no difference between dark and light mode
 */
 
+// Main
+.td-max-width-on-larger-screens {
+  @include media-breakpoint-up(lg) {
+    max-width: 100%;
+  }
+}
+
 // Markdown headings
 .td-content {
  > h1 {

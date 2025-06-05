@@ -2,6 +2,29 @@
 * This file defines all the styles that needs breakpoint definitions
 */
 
+// Main
+[role="main"] {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  @include media-breakpoint-up(md) {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-left: 123px !important;
+    padding-right: 123px !important;
+  }
+  @include media-breakpoint-up(xl) {
+    padding-left: 200px !important;
+    padding-right: 200px !important;
+  }
+}
+
 // Footer
 .one-footer-links-container {
   width: 570px;
