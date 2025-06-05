@@ -1,0 +1,30 @@
+<div class="one-footer-main-container">
+
+  <div class="one-footer-logo-container">
+
+    {{ $logo := resources.Get "icons/logo.svg" }}
+    {{ if $logo }}
+      <div class="one-footer-logo">
+        <a href="{{ .Site.BaseURL }}" aria-label="{{ .Site.Title }} home">
+          {{ $logo.Content | safeHTML }}
+        </a>
+      </div>
+    {{ end }}
+
+    <div class="one-footer-second-row">Stay in touch</div>
+
+    <div class="one-footer-links-container">
+      {{ with .Site.Params.links -}}
+      {{ with index . "user" -}}
+          {{- partial "footer/links.html"  . -}}
+      {{ end -}}
+      {{ end -}}
+    </div>
+
+  </div>
+
+  <div class="one-footer-copyright text-center">
+    <p>Copyright 2002-2025 © OpenNebula Project (OpenNebula.io). All Rights Reserved. Please send comments to the <a href="mailto:webmaster@opennebula.io">webmaster</a>. Read the <a href="http://opennebula.io/legal">Legal Notice</a>. This site is hosted by <a href="http://opennebula.io/">OpenNebula Systems</a>.</p>
+  </div>
+
+</div>

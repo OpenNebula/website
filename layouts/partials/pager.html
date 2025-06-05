@@ -1,7 +1,9 @@
 <ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
-  <li>
-    <a {{if .NextInSection}}href="{{.NextInSection.Permalink}}"{{end}} class="btn {{if .NextInSection}} btn-primary{{end}} {{if not .NextInSection}} btn-dark disabled{{end}}"><span class="mr-1">←</span> {{ T "ui_pager_prev" }}</a>        
-  </li>
-    <a {{if .PrevInSection}}href="{{.PrevInSection.Permalink}}"{{end}} class="btn {{if .PrevInSection}} btn-primary{{end}} {{if not .PrevInSection}} btn-dark disabled{{end}}">{{ T "ui_pager_next" }} <span class="ml-1">→</span></a>
+    {{ if .NextInSection }}
+    <a class="one-pager" href="{{.NextInSection.Permalink}}" >< {{ T "ui_pager_prev" }}</a>
+    {{ end }}
+    {{ if .PrevInSection }}
+      <a class="one-pager {{ if not .NextInSection}} ms-auto {{ end }}" href="{{.PrevInSection.Permalink}}" >{{ T "ui_pager_next" }} ></a>
+    {{ end }}
   </li>
 </ul>
