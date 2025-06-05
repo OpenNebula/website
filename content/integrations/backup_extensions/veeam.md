@@ -110,6 +110,9 @@ Here is an example to create an Rsync datastore in a host named "backup-host" an
     # Add the datastore to the cluster with "onecluster adddatastore <cluster-name> <datastore-name>"
     onecluster adddatastore somecluster VeeamDS
 
+{{< alert title="Remember" color="success" >}}
+Note that the ``VEEAM_DS`` property must exist and be set to ``YES``.{{< /alert >}} 
+
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync.md" %}}).
 
 **Sizing recommendations**
@@ -130,13 +133,18 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``, you sho
 
 During installation a self-signed certificate is generated at ``/etc/one/ovirtapi-ssl.crt`` for encryption. You can replace this certificate by your own and change the ``cert_path`` configuration variable.
 
+After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the front-end server. 
+
 Finally, start the service with either ``systemctl start apache2`` (ubuntu/debian) or ``systemctl start httpd`` (alma).
 
 ## Step 4: Add OpenNebula to Veeam
 
 To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step.
 
-## Current limitations
+## Current limitations and issues
 
 - Volatile disks cannot be backed up. 
-- Only in-place restores are supported.
+- Veeam will not attempt incremental backups, so all backups will be full.
+- When trying to start a backup job, the following error may appear. It can be solved by refreshing the backup job properties (even if no configuration is changed).
+
+![image](/images/veeam_infra_error.png)
