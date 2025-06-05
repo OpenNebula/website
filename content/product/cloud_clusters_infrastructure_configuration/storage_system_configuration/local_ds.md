@@ -186,7 +186,7 @@ The oneadmin user (see [Node installation]({{% relref "../../../product/operatio
 
 When a VM is launched or migrated, the cache manager performs the following three steps:
 
-1. **Local Cache Check:** The cache manager checks the local cache for the image. If found and still valid (regtime matches the one in the Image Datastore), it returns the local path.
+1. **Local Cache Check:** The cache manager checks the local cache for the image. If found and still valid (modtime matches the one in the Image Datastore), it returns the local path.
 
 2. **Upstream Cache Check:** If missing locally (or invalid), the cache manager iterates through each `CACHE_UPSTREAMS`. If an image is found on an upstream host, it stores a copy locally and returns that path.
 
@@ -204,7 +204,7 @@ The metadata is a YAML file which contains:
 
 ```default
 last_used: "2025-05-30T14:22:10Z"       # ISO 8601 timestamp of the most recent cache hit
-regtime:   "1725552553"                 # OpenNebula image regtime
+modtime:   "1725552553"                 # Last OpenNebula image modification time
 ```
 
 ## Eviction Policy.
