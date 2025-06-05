@@ -14,7 +14,7 @@ weight: "3"
 
 <!--# Group Admin View -->
 
-The role of a **Group Admin is to manage all the virtual resources of the Group**, including the creation of new users. It’s like a limited version of the cloud administrator view. You can read more about OpenNebula’s approach to Groups and VDC’s from the perspective of different user roles in the [Understanding OpenNebula]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}) guide.
+The role of a **Group Admin is to manage all the virtual resources of the Group**, including the creation of new users. It’s like a limited version of the cloud administrator view. You can read more about OpenNebula’s approach to Groups and VDC’s from the perspective of different user roles in [Cloud Access Models and Roles]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}).
 
 ![groupadmin_dash](/images/sunstone_groupadmin_dash.png)
 
