@@ -1,5 +1,5 @@
 ---
-title: "Run a Kubernetes Cluster on OpenNebula"
+title: "Run a Kubernetes Cluster on OpenNebula - OLD"
 date: "2025-02-17"
 description:
 categories: [Learning, Evaluation, Deployment, Introduction]
@@ -11,40 +11,6 @@ weight: "7"
 <a id="running-kubernetes-clusters"></a>
 
 <!--# Running Kubernetes Clusters -->
-
-<!-- We continue from the Deploy miniONE on Bare Metal.
-
-4 roles:
-VNF
-master
-worker
-storage
-
-Steps:
-
-1. Create a private net
-Go to Networks, then Virtual Networks - 1.network.png -, click **Create**.
-Select host-only (see 2.network...png)
-Add **Addresses**: Click **Address Range** - 1st 192.168.200.2 - size 100
-You don't need any other config for the network since all VMs will communicate through the VNF
-
-2. Donwload **Service OneKE 1.31** from the OpenNebula Marketplace
-Go to Storage -> Apps, filter for the thing, select **Import**
-Several things will be imported: service template itself, VM templates, and VM images.
-
-3. Instantiate **Service OneKE 1.31**
-Go to **Service Templates**, select it and click the Play Icon
-  - Select a Name (at least 3 chars)
-  - 1 instance to be deployed , then lcick Next
-  Next screen: **Networks**:
-  Select vnet for Public and privnet for Private
-    BEAR IN MIND that with this setup you will have to use the VNF node to connect to the VMs 
-  Click Next.
-  Next screen: **Service Inputs**
-    Virtual IPs: VIP for the VNF node. If you change this, you will need to add your IP to the ApiServer extracertificate SANs box or you'll get an error when trying to run kubectl.
-    Scroll down and click **Enable Longhorn** and **Enable Traefik**.
-    In **Virtual Network Functions** ensure **Enable DNS recursor" and **NAT4** and **ROUTER4** are activated. 
- Next screen: **Charter** - leave as is -->
 
 {{< alert title="Warning" color="warning" >}}
 The deployment described in this page has not been tested for this Beta version.
