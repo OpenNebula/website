@@ -92,7 +92,7 @@ KVM_MACHINES="pc-i440fx-5.2 pc pc-q35-5.2 q35 pc-i440fx-2.12 pc-i440fx-2.0 pc-q3
 MODELNAME="Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz"
 RESERVED_CPU=""
 RESERVED_MEM=""
-VERSION="|release|"
+VERSION="{{< release >}}"
 VM_MAD="kvm"
 
 NUMA NODES

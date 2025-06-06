@@ -185,7 +185,7 @@ Make sure at this point that OpenNebula is not running. If you installed from pa
 
 ### Step 9. Check DB Consistency
 
-First, move the 7.0 backup file created by the upgrade command to a safe place. If you face any issues, the `onedb` command can restore this backup, but it won’t downgrade databases to previous versions. Then, execute the `onedb fsck` command:
+First, move the {{< version >}} backup file created by the upgrade command to a safe place. If you face any issues, the `onedb` command can restore this backup, but it won’t downgrade databases to previous versions. Then, execute the `onedb fsck` command:
 
 ```default
 $ onedb fsck
@@ -256,4 +256,4 @@ As a measure of caution, look for any error messages in `oned.log`, and check th
 
 ### Restoring the Previous Version
 
-If for any reason you need to restore your previous OpenNebula, simply uninstall OpenNebula 7.0, and install again your previous version. After that, update the drivers if needed, as outlined in Step 12.
+If for any reason you need to restore your previous OpenNebula, simply uninstall OpenNebula {{< version >}}, and install again your previous version. After that, update the drivers if needed, as outlined in Step 12.
