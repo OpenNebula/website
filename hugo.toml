@@ -134,9 +134,14 @@ enableGitInfo = true
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
 offlineSearchSummaryLength = 800
-# CSS TEST
-custom_css = ["scss/main"]
-docs_version = "7.0"
+
+### Version variables
+# The short X.Y version
+version = "7.0"
+# The full version, including alpha/beta/rc tags
+release = "6.99.85"
+# The context packages released version
+context_release = "7.0.0"
 
 
   # Add your release versions here
