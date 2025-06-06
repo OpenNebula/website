@@ -177,7 +177,7 @@ To enable access with the `kubectl` command from outside the cluster, you can ad
 
 You can use a public DNS server or add the custom domain to your local `/etc/hosts` file, for example:
 
-```default
+```bash
 127.0.0.1 localhost
 1.2.3.4 k8s.yourdomain.it
 ```
@@ -258,7 +258,7 @@ To check the VNF node IP in Sunstone, in the left-hand pane go to **Instances** 
 
 Alternatively, to check on the command line, log in to the Front-end and run:
 
-```default
+```bash
 onevm show -j <VNF_VM_ID>|jq -r .VM.TEMPLATE.NIC[0].EXTERNAL_IP
 ```
 
@@ -287,7 +287,7 @@ For connecting to the master Kubernetes node, you need to know the public addres
 
 Once you know the correct IP, from the Front-end node connect to the master Kubernetes node with the below command (replace “1.2.3.4” with the public IP address of the VNF node):
 
-```default
+```bash
 $ ssh -A -J root@1.2.3.4 root@172.20.0.2
 ```
 
@@ -297,9 +297,9 @@ In this example, `172.20.0.2` is the private IP address of the Kubernetes master
 If you don’t use `ssh-agent` then you may skip the `-A` flag in the above command. You will need to copy your *private* ssh key (used to connect to VNF) into the VNF node itself, at the location `~/.ssh/id_rsa`. Make sure that the file permissions are correct, i.e. `0600` (or `u=rw,go=`). For example:
 
 ```default
-$ ssh root@1.2.3.4 install -m u=rwx,go= -d /root/.ssh/ # make sure ~/.ssh/ exists
-$ scp ~/.ssh/id_rsa root@1.2.3.4:/root/.ssh/           # copy the key
-$ ssh root@1.2.3.4 chmod u=rw,go= /root/.ssh/id_rsa    # make sure the key is secured
+ssh root@1.2.3.4 install -m u=rwx,go= -d /root/.ssh/ # make sure ~/.ssh/ exists
+scp ~/.ssh/id_rsa root@1.2.3.4:/root/.ssh/           # copy the key
+ssh root@1.2.3.4 chmod u=rw,go= /root/.ssh/id_rsa    # make sure the key is secured
 ```
 {{< /alert >}}
 

@@ -121,13 +121,13 @@ After downloading the PEM file, make sure to set its file permissions to read-on
 
 To log in to your EC2 VM, use ssh as user `ubuntu`, specifying the PEM file you downloaded, by running this command:
 
-```default
+```bash
 ssh <public IP of the VM> -l ubuntu -i <PEM file>
 ```
 
 For example:
 
-```default
+```bash
 ssh <IP> -l ubuntu -i ~/.ssh/aws_pemfile.pem
 ```
 
@@ -138,13 +138,13 @@ Ensure you have set the appropriate permissions for the PEM file, or for securit
 
 Once you have logged in to the VM as user `ubuntu`, use the `sudo` command to become the root user (no password is required):
 
-```default
+```bash
 sudo -i
 ```
 
 Then, update the system to its latest software packages by running the following command:
 
-```default
+```bash
 apt update && apt upgrade
 ```
 
@@ -160,13 +160,13 @@ Diagnostics:
 
 In this example, you need to restart the VM in order to upgrade to kernel `6.8.0-1014-aws`. To restart the VM, run:
 
-```default
+```bash
 shutdown -r now
 ```
 
 You will be immediately logged out of the VM as it restarts. Wait a few moments for the VM to finish rebooting, then log in again using the same procedure as before. After logging back into the VM, you can check the running kernel version with:
 
-```default
+```bash
 uname -a
 ```
 
@@ -205,25 +205,25 @@ After copying the miniONE script to the VM, log in to the VM (as described [abov
 
 Use the `sudo` command to become the `root` user:
 
-```default
+```bash
 sudo -i
 ```
 
 If necessary, use the `cd` command to navigate to the folder where you copied the miniONE script. For example, if you copied it to the home directory of user `ubuntu` run:
 
-```default
+```bash
 cd ~ubuntu
 ```
 
 Next, ensure that the `minione` file has execute permissions, by running:
 
-```default
+```bash
 chmod +x minione
 ```
 
 To install miniONE, run as root:
 
-```default
+```bash
 ./minione --version 6.99 --force
 ```
 
