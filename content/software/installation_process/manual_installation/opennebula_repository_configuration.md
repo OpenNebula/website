@@ -45,7 +45,7 @@ To add the OpenNebula enterprise repository, execute the following as user `root
 # cat << "EOT" > /etc/yum.repos.d/opennebula.repo
 [opennebula]
 name=OpenNebula Enterprise Edition
-baseurl=https://<token>@enterprise.opennebula.io/repo/6.99.85/RedHat/$releasever/$basearch
+baseurl=https://<token>@enterprise.opennebula.io/repo/{{< release >}}/RedHat/$releasever/$basearch
 enabled=1
 gpgkey=https://downloads.opennebula.io/repo/repo2.key
 gpgcheck=1
@@ -60,7 +60,7 @@ EOT
 # cat << "EOT" > /etc/yum.repos.d/opennebula.repo
 [opennebula]
 name=OpenNebula Enterprise Edition
-baseurl=https://<token>@enterprise.opennebula.io/repo/6.99.85/AlmaLinux/$releasever/$basearch
+baseurl=https://<token>@enterprise.opennebula.io/repo/{{< release >}}/AlmaLinux/$releasever/$basearch
 enabled=1
 gpgkey=https://downloads.opennebula.io/repo/repo2.key
 gpgcheck=1
@@ -97,28 +97,28 @@ and then continue with repository configuration:
 **Debian 11**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/6.99.85/Debian/11 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/{{< release >}}/Debian/11 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
 **Debian 12**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/6.99.85/Debian/12 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/{{< release >}}/Debian/12 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
 **Ubuntu 22.04**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/6.99.85/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/{{< release >}}/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
 **Ubuntu 24.04**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/6.99.85/Ubuntu/24.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://<token>@enterprise.opennebula.io/repo/{{< release >}}/Ubuntu/24.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
@@ -161,7 +161,7 @@ To add OpenNebula repository, execute the following as user `root`:
 # cat << "EOT" > /etc/yum.repos.d/opennebula.repo
 [opennebula]
 name=OpenNebula Community Edition
-baseurl=https://downloads.opennebula.io/repo/6.99.85/RedHat/$releasever/$basearch
+baseurl=https://downloads.opennebula.io/repo/{{< release >}}/RedHat/$releasever/$basearch
 enabled=1
 gpgkey=https://downloads.opennebula.io/repo/repo2.key
 gpgcheck=1
@@ -176,7 +176,7 @@ EOT
 # cat << "EOT" > /etc/yum.repos.d/opennebula.repo
 [opennebula]
 name=OpenNebula Community Edition
-baseurl=https://downloads.opennebula.io/repo/6.99.85/AlmaLinux/$releasever/$basearch
+baseurl=https://downloads.opennebula.io/repo/{{< release >}}/AlmaLinux/$releasever/$basearch
 enabled=1
 gpgkey=https://downloads.opennebula.io/repo/repo2.key
 gpgcheck=1
@@ -204,27 +204,27 @@ First, add the repository signing GPG key on the Front-end by executing as user 
 **Debian 11**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/6.99.85/Debian/11 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/{{< release >}}/Debian/11 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
 **Debian 12**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/6.99.85/Debian/12 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/{{< release >}}/Debian/12 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
 **Ubuntu 22.04**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/6.99.85/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/{{< release >}}/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
 
 **Ubuntu 24.04**
 
 ```default
-# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/6.99.85/Ubuntu/24.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+# echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://downloads.opennebula.io/repo/{{< release >}}/Ubuntu/24.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 # apt-get update
 ```
