@@ -92,13 +92,13 @@ Sequential tutorials to help you install and explore OpenNebula in just a few mi
          <a href="try_opennebula/extend_opennebula_on-prem/provision_cloud_cluster">Provision a Cloud Cluster on a Public Cloud</a>
       </bxctr>
    {{< /card >}}
-  {{< card header="[Try Kubernetes on OpenNebula](try_opennebula/run_kubernetes_clusters_on_opennebula/)" >}}
+  {{< card header="[Try Kubernetes on OpenNebula](try_opennebula/try_kubernetes_on_opennebula/)" >}}
       <p></p>
       <inl>
-	<a href="try_opennebula/run_kubernetes_clusters_on_opennebula/running_kubernetes_clusters">Run a Kubernetes Cluster on OpenNebula</a>
+	<a href="try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters">Run a Kubernetes Cluster on OpenNebula</a>
       </inl>
       <inl>
-	<a href="try_opennebula/run_kubernetes_clusters_on_opennebula/integrate_rancher_with_opennebula">Integrate Rancher with OpenNebula</a>
+	<a href="try_opennebula/try_kubernetes_on_opennebula/integrate_rancher_with_opennebula">Integrate Rancher with OpenNebula</a>
       </inl>
     {{< /card >}}
 {{< /cardpane >}}
