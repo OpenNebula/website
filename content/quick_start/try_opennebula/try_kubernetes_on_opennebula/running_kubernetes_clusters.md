@@ -12,7 +12,7 @@ weight: "7"
 
 <!--# Running Kubernetes Clusters -->
 
-We continue from the Deploy miniONE on Bare Metal.
+<!-- We continue from the Deploy miniONE on Bare Metal.
 
 4 roles:
 VNF
@@ -44,7 +44,7 @@ Go to **Service Templates**, select it and click the Play Icon
     Virtual IPs: VIP for the VNF node. If you change this, you will need to add your IP to the ApiServer extracertificate SANs box or you'll get an error when trying to run kubectl.
     Scroll down and click **Enable Longhorn** and **Enable Traefik**.
     In **Virtual Network Functions** ensure **Enable DNS recursor" and **NAT4** and **ROUTER4** are activated. 
- Next screen: **Charter** - leave as is
+ Next screen: **Charter** - leave as is -->
 
 {{< alert title="Warning" color="warning" >}}
 The deployment described in this page has not been tested for this Beta version.
