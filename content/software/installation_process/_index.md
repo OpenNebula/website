@@ -1,7 +1,7 @@
 ---
 title: "Installation Process"
 date: "2025-02-17"
-description: "Choose the best installation method for your environment:"
+description: "Choose the best installation method for your needs -- from automatic installation of a complete OpenNebula cloud, to customized installation of individual components, to compiling from source code for building your own infrastructure and integrations"
 categories:
 pageintoc: "168"
 tags:
