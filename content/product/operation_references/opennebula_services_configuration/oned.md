@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# OpenNebula Configuration (oned) -->
 
-The OpenNebula Daemon (`oned`) is the **core service of the cloud management platform**. It manages the cluster nodes, virtual networks and storages, groups, users and their virtual machines, and provides the XML-RPC API to other services and end-users. The service is distributed as an operating system package `opennebula` with system service `opennebula`.
+The OpenNebula Daemon (`oned`) is the **core service of the cloud management platform**. It manages the cluster nodes, Virtual Networks and storages, groups, users and their Virtual Machines, and provides the XML-RPC API to other services and end users. The service is distributed as an operating system package `opennebula` with system service `opennebula`.
 
 ## Configuration
 
@@ -32,14 +32,14 @@ For a quick view of any changes in configuration file options in maintenance rel
 - `PORT`: Port where `oned` will listen for XML-RPC calls.
 - `LISTEN_ADDRESS`: Host IP to listen for XML-RPC calls (default: all IPs).
 - `HOSTNAME`: Hostname to use instead of autodetect it. This hostname is used to connect to Front-end during driver operations.
-- `DB`: Vector of configuration attributes for the database Back-end.
+- `DB`: Vector of configuration attributes for the database backend.
   - `BACKEND`: Set to `sqlite` or `mysql`. Please see the [MySQL configuration guide]({{% relref "database#mysql" %}}) for more information.
   - `SERVER` (MySQL only): Host name or IP address of the MySQL server.
   - `USER` (MySQL only): MySQL user’s login ID.
   - `PASSWD` (MySQL only): MySQL user’s password.
   - `DB_NAME` (MySQL only): MySQL database name.
   - `COMPARE_BINARY` (MySQL only): compare strings using BINARY clause makes name searches case sensitive.
-  - `ENCODING` (MySQL only): charset to use for the db connections
+  - `ENCODING` (MySQL only): charset to use for the db connections.
   - `CONNECTIONS` (MySQL only): maximum number of connections to the MySQL server.
   - `TIMEOUT` (SQLite only): timeout in ms for acquiring lock to DB, should be at least 100 ms
   - `ERRORS_LIMIT`: number of consecutive DB errors to stop oned node in HA. Default `25`, use `-1` to disable this feature.
@@ -47,12 +47,12 @@ For a quick view of any changes in configuration file options in maintenance rel
   - `START`: First port to assign.
   - `RESERVED`: Comma-separated list of reserved ports or ranges. Two numbers separated by a colon indicate a range.
 - `VM_SUBMIT_ON_HOLD`: Forces VMs to be created on hold state instead of pending. Values: `YES` or `NO`.
-- `API_LIST_ORDER`: Sets order (by ID) of elements in list API calls (e.g. `onevm list`). Values: `ASC` (ascending order) or `DESC` (descending order).
-- `CONTEXT_RESTRICTED_DIRS`: List of space separated directories, which can’t be used in `CONTEXT/FILES` attribute.
-- `CONTEXT_SAFE_DIRS`: List of space separated directories, which allows use of subdirectories from `CONTEXT_RESTRICTED_DIRS`.
+- `API_LIST_ORDER`: Sets order (by ID) of elements in list API calls (e.g., `onevm list`). Values: `ASC` (ascending order) or `DESC` (descending order).
+- `CONTEXT_RESTRICTED_DIRS`: List of space-separated directories which can’t be used in `CONTEXT/FILES` attribute.
+- `CONTEXT_SAFE_DIRS`: List of space-separated directories which allow use of subdirectories from `CONTEXT_RESTRICTED_DIRS`.
 - `CONTEXT_ALLOW_ETH_UPDATES`: Allow manual updates of `CONTEXT->ETH*` values. It may lead to inconsistencies between VM NIC settings and context attributes, but it might be useful for some use cases. Default value = NO
 - `LOG`: Configure the logging system
-  - `SYSTEM`: Can be either `file` (default), `syslog` or `std`
+  - `SYSTEM`: Can be either `file` (default), `syslog` or `std`.
   - `USE_VMS_LOCATION`: Defines if store VM logs in VMS_LOCATION (`/var/lib/one/vms/<VMID>/vm.log`).
   - `DEBUG_LEVEL`: Sets the verbosity of the log messages. Possible values are:
 
@@ -63,7 +63,7 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `2`           | **INFO**    |
 | `3`           | **DEBUG**   |
 
-Example of this section:
+Here's an example of this section:
 
 ```default
 #*******************************************************************************
@@ -119,10 +119,10 @@ Control the [federation capabilities of oned]({{% relref "../../control_plane_co
 - `FEDERATION`: Federation attributes.
   - `MODE`: Operation mode of this oned.
     - `STANDALONE`: Not federated. This is the default operational mode.
-    - `MASTER`: This oned is the master Zone of the federation.
+    - `MASTER`: This oned is the master Zone of the Federation.
     - `SLAVE`: This oned is a slave Zone.
 - `ZONE_ID`: The Zone ID, as returned by the `onezone` command.
-- `MASTER_ONED`: The XML-RPC endpoint of the master oned, e.g. `http://master.one.org:2633/RPC2`.
+- `MASTER_ONED`: The XML-RPC endpoint of the master oned, e.g., `http://master.one.org:2633/RPC2`.
 
 ```default
 #*******************************************************************************
@@ -147,7 +147,7 @@ Opennebula uses the Raft algorithm. It can be tuned by the following options:
 - `BROADCAST_TIMEOUT_MS`: How often heartbeats are sent to followers (in milliseconds).
 - `XMLRPC_TIMEOUT_MS`: Timeout for Raft-related API calls (in milliseconds). For an infinite timeout, set this value to `0`.
 
-Example:
+Here's an example:
 
 ```default
 RAFT = [
@@ -164,7 +164,7 @@ RAFT = [
 
 ## Default Showback Cost
 
-The following attributes define the default cost for Virtual Machines that don’t have a CPU, MEMORY or DISK costs. This is used by the [oneshowback calculate method]({{% relref "../../cloud_system_administration/multitenancy/showback#showback" %}}).
+The following attributes define the default cost for Virtual Machines that don’t have a CPU, MEMORY, or DISK costs. This is used by the [oneshowback calculate method]({{% relref "../../cloud_system_administration/multitenancy/showback#showback" %}}).
 
 ```default
 #*******************************************************************************
@@ -180,17 +180,17 @@ DEFAULT_COST = [
 SHOWBACK_ONLY_RUNNING = "no"
 ```
 
-For showback the CPU and memory cost are counted if the resource is reserved on host. That includes also `poweroff` and `suspend` state, when the VM is uploaded to the host, the resources are reserved, but VM is not running. If you wish to count resources only for runnning VMs, set parameter `SHOWBACK_ONLY_RUNNING = "yes"`, default is `no`. The disk cost is always counted in `poweroff` and `suspend` state as the VM image is already uploaded to the host.
+For showback the CPU and memory cost are counted if the resource is reserved on Host. That includes also `poweroff` and `suspend` states, when the VM is uploaded to the Host, the resources are reserved, but VM is not running. If you wish to count resources only for runnning VMs, set parameter `SHOWBACK_ONLY_RUNNING = "yes"`, default is `no`. The disk cost is always counted in `poweroff` and `suspend` states as the VM image is already uploaded to the Host.
 
 <a id="oned-conf-xml-rpc-server-configuration"></a>
 
 ## XML-RPC Server Configuration
 
-- `MAX_CONN`: Maximum number of simultaneous TCP connections the server will maintain
-- `MAX_CONN_BACKLOG`: Maximum number of TCP connections the operating system will accept on the server’s behalf without the server accepting them from the operating system
-- `KEEPALIVE_TIMEOUT`: Maximum time in seconds that the server allows a connection to be open between RPCs
-- `KEEPALIVE_MAX_CONN`: Maximum number of RPCs that the server will execute on a single connection
-- `TIMEOUT`: Maximum time in seconds the server will wait for the client to do anything while processing an RPC. This timeout will also be used when a proxy calls to the master in a federation.
+- `MAX_CONN`: Maximum number of simultaneous TCP connections the server will maintain.
+- `MAX_CONN_BACKLOG`: Maximum number of TCP connections the operating system will accept on the server’s behalf without the server accepting them from the operating system.
+- `KEEPALIVE_TIMEOUT`: Maximum time in seconds that the server allows a connection to be open between RPCs.
+- `KEEPALIVE_MAX_CONN`: Maximum number of RPCs that the server will execute on a single connection.
+- `TIMEOUT`: Maximum time in seconds the server will wait for the client to do anything while processing an RPC. This timeout will also be used when a proxy calls to the master in a Federation.
 - `RPC_LOG`: Create a separate log file for XML-RPC requests, in `/var/log/one/one_xmlrpc.log`.
 - `MESSAGE_SIZE`: Buffer size in bytes for XML-RPC responses.
 - `LOG_CALL_FORMAT`: Format string to log XML-RPC calls. Interpreted strings:
@@ -225,13 +225,13 @@ This functionality is only available when compiled with xmlrpc-c libraries >= 1.
 
 ## Virtual Networks
 
-- `NETWORK_SIZE`: Here you can define the default size for the virtual networks
+- `NETWORK_SIZE`: Here you can define the default size for the Virtual Networks.
 - `MAC_PREFIX`: Default MAC prefix to be used to create the auto-generated MAC addresses. (This can be overwritten by the Virtual Network template.)
 - `VLAN_IDS`: VLAN ID pool for the automatic `VLAN_ID` assignment. This pool is for 802.1Q networks (Open vSwitch and 802.1Q drivers). The driver will try first to allocate `VLAN_IDS[START] + VNET_ID`
-  - `START`: First `VLAN_ID` to use
+  - `START`: First `VLAN_ID` to use.
   - `RESERVED`: Comma-separated list of reserved VLAN_IDs or ranges. Two numbers separated by a colon indicate a range.
 - `VXLAN_IDS`: Automatic VXLAN Network ID (VNI) assignment. This is used for `vxlan` networks.
-  - `START`: First VNI to use
+  - `START`: First VNI to use.
   - Note: **Reserved is not supported by this pool**
 
 Sample configuration:
@@ -259,11 +259,11 @@ VXLAN_IDS = [
 
 ## Datastores
 
-The [Storage Subsystem]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}) allows users to set up images, which can be operating systems or data, to be used in Virtual Machines easily. These images can be used by several Virtual Machines simultaneously and also shared with other users.
+The [Storage Subsystem]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}) allows users to set up images, which can be operating systems or data, to be easily used in Virtual Machines. These images can be used by several Virtual Machines simultaneously and also shared with other users.
 
 Here you can configure the default values for the Datastores and Image templates. There is more information about the template syntax [here]({{% relref "../configuration_references/img_template#img-template" %}}).
 
-- `DATASTORE_LOCATION`: Path for Datastores. It is the same for all the hosts and Front-end. It defaults to `/var/lib/one/datastores` (or in self-contained mode defaults to `$ONE_LOCATION/var/datastores`). Each datastore has its own directory (called `BASE_PATH`) of the form: `$DATASTORE_LOCATION/<datastore_id>`. You can symlink this directory to any other path, if needed. `BASE_PATH` is generated from this attribute each time oned is started.
+- `DATASTORE_LOCATION`: Path for Datastores. It is the same for all the Hosts and Front-end. It defaults to `/var/lib/one/datastores` (or in self-contained mode defaults to `$ONE_LOCATION/var/datastores`). Each Datastore has its own directory (called `BASE_PATH`) of the form: `$DATASTORE_LOCATION/<datastore_id>`. You can symlink this directory to any other path, if needed. `BASE_PATH` is generated from this attribute each time oned is started.
 - `DATASTORE_CAPACITY_CHECK`: Check that there is enough capacity before creating a new image. Defaults to `yes`.
 - `DEFAULT_IMAGE_TYPE`: Default value for `TYPE` field when it is omitted in a template. Values accepted are:
   - `OS`: Image file holding an operating system
@@ -304,14 +304,14 @@ DEFAULT_CDROM_DEVICE_PREFIX = "hd"
 
 ## Monitoring Daemon
 
-The Monitoring Daemon gather gather information from the cluster nodes. To define one, the following need to be set:
+The Monitoring Daemon gathers information from the cluster nodes. To define one, the following need to be set:
 
 - **name**: name for this monitoring daemon.
 - **executable**: path of the monitoring daemon as an absolute path or relative to `/usr/lib/one/mads/`. Default value `onemonitord`.
 - **arguments**: for the daemon executable, usually a path to configuration file `-c monitord.conf`.
-- **threads**: number of threads used for communication
+- **threads**: number of threads used for communication.
 
-For more information on configuring the information and monitoring system and hints to extend it, please check the [monitoring configuration]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) and [information driver configuration guide]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}).
+For more information on configuring the information and monitoring system, and hints to extend it, please check the [monitoring configuration]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) and [information driver configuration guide]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-im#devel-im" %}}).
 
 Sample configuration:
 
@@ -328,7 +328,7 @@ IM_MAD = [
 
 ## Virtualization Drivers
 
-The virtualization drivers are used to create, control and monitor VMs on the hosts. You can define more than one virtualization driver (e.g. you have different virtualizers in several hosts) but make sure they have different names. To define one, the following need to be set:
+The virtualization drivers are used to create, control, and monitor VMs on the Hosts. You can define more than one virtualization driver (e.g., you have different virtualizers in several Hosts) but make sure they have different names. To define one, the following need to be set:
 
 - `NAME`: Name of the virtualization driver
 - `SUNSTONE_NAME`: Name displayed in Sunstone
@@ -342,8 +342,8 @@ The virtualization drivers are used to create, control and monitor VMs on the ho
 
 There are some non-mandatory attributes:
 
-- `DS_LIVE_MIGRATION`: live migration between datastores is allowed.
-- `COLD_NIC_ATTACH`: NIC attach/detach in poweroff state calls networks scripts (`pre`, `post`, `clean`) and virtualization driver attach/detach actions.
+- `DS_LIVE_MIGRATION`: live migration between datastores is allowed
+- `COLD_NIC_ATTACH`: NIC attach/detach in poweroff state calls networks scripts (`pre`, `post`, `clean`) and virtualization driver attach/detach actions
 
 For more information on configuring and setting up the Virtual Machine Manager Driver please check the section relevant to you:
 
@@ -373,11 +373,11 @@ VM_MAD = [
 
 ## Transfer Driver
 
-The transfer drivers are used to transfer, clone, remove and create VM images. The default `TM_MAD` driver includes plugins for all supported storage modes. You may need to modify the `TM_MAD` to add custom plugins.
+The transfer drivers are used to transfer, clone, remove, and create VM images. The default `TM_MAD` driver includes plugins for all supported storage modes. You may need to modify the `TM_MAD` to add custom plugins.
 
 - `EXECUTABLE`: path of the transfer driver executable, as an absolute path or relative to `/usr/lib/one/mads/`
 - `ARGUMENTS`: for the driver executable:
-  - `-t`: number of threads, i.e. number of transfers made at the same time
+  - `-t`: number of threads, i.e., number of transfers made at the same time
   - `-d`: list of transfer drivers separated by commas. If not defined all the drivers available will be enabled
 
 For more information on configuring different storage alternatives please check the [storage configuration]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}) guide.
@@ -398,7 +398,7 @@ TM_MAD = [
 The configuration for each driver is defined in the `TM_MAD_CONF` section.
 
 {{< alert title="Important" color="success" >}}
-These values define the datastore behaviour and thus should not be modified. They are used when creating a new datastore of given type and also when developing new drivers.{{< /alert >}} 
+These values define the datastore behavior and thus should not be modified. They are used when creating a new datastore of given type and also when developing new drivers.{{< /alert >}} 
 
 - `NAME`: name of the transfer driver, listed in the `-d` option of the `TM_MAD` section
 - `LN_TARGET`: determines how persistent images will be cloned when a new VM is instantiated:
@@ -409,12 +409,12 @@ These values define the datastore behaviour and thus should not be modified. The
   - `NONE`: The image will be linked and no more storage capacity will be used
   - `SELF`: The image will be cloned in the Images datastore
   - `SYSTEM`: The image will be cloned in the System datastore
-- `SHARED`: determines if the storage holding the system datastore is shared among the different hosts or not. Valid values: `yes` or `no`.
-- `DS_MIGRATE`: set to `YES` if system datastore migrations are allowed for this TM. Only useful for system datastore TMs.
+- `SHARED`: determines if the storage holding the system datastore is shared among the different Hosts or not. Valid values: `yes` or `no`
+- `DS_MIGRATE`: set to `YES` if system datastore migrations are allowed for this TM. Only useful for system datastore TMs
 - `ALLOW_ORPHANS`: Whether snapshots can live without parents:
   > - `YES`: The snapshot will be attempted to be deleted even if it has children
   > - `NO`: The snapshot will not be attempted to be deleted if it has children
-  > - `MIXED`: Creates children snapshots from the current active(last recovered) snapshot.  This also takes into account some dependencies which can appear after a revert snapshot action in Ceph datastores.
+  > - `MIXED`: Creates children snapshots from the current active (last recovered) snapshot.  This also takes into account some dependencies which can appear after a revert snapshot action in Ceph datastores
   > - `FORMAT`: Allows orphans based on the image format in a `SHARED` datastore. For `QCOW2` this acts as `NO` and for `RAW` this acts as `YES`
 
 Sample configuration:
@@ -439,11 +439,11 @@ TM_MAD_CONF = [
 
 ## Datastore Driver
 
-The Datastore Driver defines a set of scripts to manage the storage Back-end.
+The Datastore Driver defines a set of scripts to manage the storage backend.
 
 - `EXECUTABLE`: path of the transfer driver executable as an absolute path or relative to `/usr/lib/one/mads/`
 - `ARGUMENTS`: for the driver executable
-  - `-t` number of threads, i.e. number of simultaneous repo operations
+  - `-t` number of threads, i.e., number of simultaneous repo operations
   - `-d` datastore MADs, separated by commas
   - `-s` system datastore TM drivers, used to monitor shared system DS
 
@@ -460,12 +460,12 @@ For more information on this driver and how to customize it, please visit the [s
 
 ## Marketplace Driver Configuration
 
-Drivers to manage different marketplaces, specialized for the storage Back-end
+Drivers to manage different Marketplaces, specialized for the storage backend.
 
 - `EXECUTABLE`: path of the transfer driver executable as an absolute path or relative to `/usr/lib/one/mads/`
 - `ARGUMENTS`: for the driver executable:
-  - `-t` number of threads, i.e. number of simultaneous repo operations
-  - `-m` marketplace mads separated by commas
+  - `-t` number of threads, i.e., number of simultaneous repo operations
+  - `-m` Marketplace mads separated by commas
   - `--proxy` proxy URI, if required to access the internet. For example `--proxy http://1.2.3.4:5678`
   - `-w` timeout in seconds to execute external commands (default unlimited)
 
@@ -494,7 +494,7 @@ HM_MAD = [
 
 ### Virtual Machine Hooks (VM_HOOK) defined by:
 
-- `NAME`: for the hook; useful to track the hook (OPTIONAL).
+- `NAME`: for the hook; useful to track the hook (OPTIONAL)
 - `ON`: when the hook should be executed:
   - `CREATE`: when the VM is created (`onevm create`)
   - `PROLOG`: when the VM is in the prolog state
@@ -503,21 +503,21 @@ HM_MAD = [
   - `SHUTDOWN`: after the VM is shutdown
   - `STOP`: after the VM is stopped (including VM image transfers)
   - `DONE`: after the VM is deleted or shutdown
-  - `CUSTOM`: user defined specific `STATE` and `LCM_STATE` combination of states to trigger the hook
+  - `CUSTOM`: user-defined specific `STATE` and `LCM_STATE` combination of states to trigger the hook
 - `COMMAND`: as an absolute path or relative to `/usr/share/one/hooks`
 - `ARGUMENTS`: for the hook. You can substitute VM information with:
-  - `$ID`: the ID of the virtual machine
+  - `$ID`: the ID of the Virtual Machine
   - `$TEMPLATE`: the VM template as base64-encoded XML
   - `PREV_STATE`: the previous `STATE` of the Virtual Machine
   - `PREV_LCM_STATE`: the previous `LCM_STATE` of the Virtual Machine
 - `REMOTE`: values:
-  - `YES`: The hook is executed in the host where the VM was allocated
+  - `YES`: The hook is executed in the Host where the VM was allocated
   - `NO`: The hook is executed in the OpenNebula server (default)
 
 ### Host Hooks (HOST_HOOK) defined by:
 
 - `NAME`: for the hook, useful to track the hook (OPTIONAL)
-- `ON`: when the hook should be executed,
+- `ON`: when the hook should be executed
   - `CREATE`: when the Host is created (`onehost create`)
   - `ERROR`: when the Host enters the error state
   - `DISABLE`: when the Host is disabled
@@ -526,7 +526,7 @@ HM_MAD = [
   - `$ID`: the ID of the host
   - `$TEMPLATE`: the Host template as base64-encoded XML
 - `REMOTE`: values,
-  - `YES`: The hook is executed in the host
+  - `YES`: The hook is executed in the Host
   - `NO`: The hook is executed in the OpenNebula server (default)
 
 Sample configuration:
@@ -545,13 +545,13 @@ VM_HOOK = [
 
 ## Auth Manager Configuration
 
-- `AUTH_MAD`: The [driver]({{% relref "../../cloud_system_administration/authentication_configuration/overview#external-auth" %}}) that will be used to authenticate and authorize OpenNebula requests. If not defined, OpenNebula will use the built-in authorization policies.
+- `AUTH_MAD`: The [driver]({{% relref "../../cloud_system_administration/authentication_configuration/overview#external-auth" %}}) that will be used to authenticate and authorize OpenNebula requests. If not defined, OpenNebula will use the built-in authorization policies
   - `EXECUTABLE`: path of the auth driver executable as an absolute path or relative to `/usr/lib/one/mads/`
   - `AUTHN`: list of authentication modules, separated by commas. If not defined, all the modules available will be enabled
   - `AUTHZ`: list of authorization modules, separated by commas
-- `SESSION_EXPIRATION_TIME`: Time in seconds for which an authenticated token is valid. During this time the driver is not used. Use `0` to disable session caching.
-- `ENABLE_OTHER_PERMISSIONS`: Whether or not to enable the permissions for ‘other’. Users in the oneadmin group will still be able to change these permissions. Values: `YES` or `NO`.
-- `DEFAULT_UMASK`: Similar to Unix umask. Sets the default resource permissions. Its format must be 3 octal digits. For example a umask of 137 will set the new object’s permissions to 640 `um- u-- ---`.
+- `SESSION_EXPIRATION_TIME`: Time in seconds for which an authenticated token is valid. During this time the driver is not used. Use `0` to disable session caching
+- `ENABLE_OTHER_PERMISSIONS`: Whether or not to enable the permissions for ‘other’. Users in the oneadmin group will still be able to change these permissions. Values: `YES` or `NO`
+- `DEFAULT_UMASK`: Similar to Unix umask. Sets the default resource permissions. Its format must be 3 octal digits. For example, a umask of 137 will set the new object’s permissions to 640 `um- u-- ---`.
 
 Sample configuration:
 
@@ -579,18 +579,18 @@ DEFAULT_AUTH = "ldap"
 ## VM Operations Permissions
 
 The following parameters define the operations associated with the **ADMIN**,
-**MANAGE** and **USE** permissions. Note that some VM operations may require additional
-permissions on other objects. Also some operations refer to a class of
+**MANAGE**, and **USE** permissions. Note that some VM operations may require additional
+permissions on other objects. Also, some operations refer to a class of
 actions:
 
-- `disk-snapshot`: includes `create`, `delete` and `revert` actions
+- `disk-snapshot`: includes `create`, `delete`, and `revert` actions
 - `disk-attach`: includes `attach` and `detach` actions
-- `nic-attach`: includes `attach`, `detach` and `nic-update` actions
-- `snapshot`: includes `create`, `delete` and `revert` actions
+- `nic-attach`: includes `attach`, `detach`, and `nic-update` actions
+- `snapshot`: includes `create`, `delete`, and `revert` actions
 - `resched`: includes `resched` and `unresched` actions
-- `migrate`: includes `migrate`, `live-migrate` and `poweroff migrate` actions
+- `migrate`: includes `migrate`, `live-migrate`, and `poweroff migrate` actions
 - `sg-attach`: includes `attach` and `detach` actions
-- `sched-action`: includes `add`, `delete` and `update` actions
+- `sched-action`: includes `add`, `delete`, and `update` actions
 
 The list and show operations require **USE** permission; this is not configurable.
 
@@ -627,7 +627,7 @@ Users outside the `oneadmin` group won’t be able to instantiate templates crea
 - `IMAGE_RESTRICTED_ATTR`: Image attribute to be restricted for users outside the oneadmin group
 - `VNET_RESTRICTED_ATTR`: Virtual Network attribute to be restricted for users outside the oneadmin group when updating a reservation. These attributes are not considered for regular VNET creation.
 
-If the VM template has been created by admins in the `oneadmin` group, then users outside the oneadmin group **can** instantiate these templates.
+If the VM template has been created by admins in the `oneadmin` group then users outside the oneadmin group **can** instantiate these templates.
 
 Sample configuration:
 
@@ -694,7 +694,7 @@ These attributes are encrypted and decrypted by the OpenNebula core. The support
 - `DATASTORE_ENCRYPTED_ATTR`
 - `HOST_ENCRYPTED_ATTR`
 - `VM_ENCRYPTED_ATTR`: these attributes apply also to the user template.
-- `VNET_ENCRYPTED_ATTR`: these attributes apply also to address ranges which belong to the virtual network.
+- `VNET_ENCRYPTED_ATTR`: these attributes apply also to address ranges which belong to the Virtual Network.
 - `USER_ENCRYPTED_ATTR`
 - `IMAGE_ENCRYPTED_ATTR`
 
@@ -716,7 +716,7 @@ OpenNebula encrypts these attributes:
 - on object create (`onecluster/onedatastore/onehost/onevm/onevnet create`)
 - on object update (`onecluster/onedatastore/onehost/onevm/onevnet update`)
 
-To decrypt the attribute, you need to use the `info` API method with `true` as a parameter. You can decrypt the attributes using the `--decrypt` option for `onevm show`, `onehost show` and `onevnet show`.
+To decrypt the attribute you need to use the `info` API method with `true` as a parameter. You can decrypt the attributes using the `--decrypt` option for `onevm show`, `onehost show`, and `onevnet show`.
 
 ## Inherited Attributes Configuration
 
@@ -779,14 +779,14 @@ Sample configuration:
 ONEGATE_ENDPOINT = "http://192.168.0.5:5030"
 ```
 
-## Default Permissions for VDC ACL rules
+## Default Permissions for VDC ACL Rules
 
 Default ACL rules created when a resource is added to a VDC. The following attributes configure the permissions granted to the VDC group for each resource type:
 
-- `DEFAULT_VDC_HOST_ACL`: permissions granted on hosts added to a VDC.
+- `DEFAULT_VDC_HOST_ACL`: permissions granted on Hosts added to a VDC.
 - `DEFAULT_VDC_NET_ACL`: permissions granted on vnets added to a VDC.
 - `DEFAULT_VDC_DATASTORE_ACL`: permissions granted on datastores to a VDC.
-- `DEFAULT_VDC_CLUSTER_HOST_ACL`: permissions granted to cluster hosts when a cluster is added to the VDC.
+- `DEFAULT_VDC_CLUSTER_HOST_ACL`: permissions granted to cluster Hosts when a cluster is added to the VDC.
 - `DEFAULT_VDC_CLUSTER_NET_ACL`: permissions granted to cluster vnets when a cluster is added to the VDC.
 - `DEFAULT_VDC_CLUSTER_DATASTORE_ACL`: permissions granted to a datastores added to a cluster.
 
@@ -796,7 +796,7 @@ Example:
 
 ```default
 DEFAULT_VDC_HOST_ACL      = "MANAGE"
-#Adds @<gid> HOST/#<hid> MANAGE #<zid> when a host is added to the VDC.
+#Adds @<gid> HOST/#<hid> MANAGE #<zid> when a Host is added to the VDC.
 onevdc addhost <vdc> <zid> <hid>
 
 DEFAULT_VDC_NET_ACL       = "USE"
@@ -831,14 +831,14 @@ To start, restart, stop the server, execute one of:
 # systemctl stop    opennebula
 ```
 
-To enable or disable automatic start on host boot, execute one of:
+To enable or disable automatic start upon Host boot, execute one of:
 
 ```default
 # systemctl enable  opennebula
 # systemctl disable opennebula
 ```
 
-Server **logs** are located in `/var/log/one` in following files:
+Server **logs** are located in `/var/log/one` in the following files:
 
 - `/var/log/one/oned.log`
 - `/var/log/one/one_xmlrpc.log` (optional, if `RPC_LOG` enabled)
@@ -847,7 +847,7 @@ Logs of individual VMs can be found in
 
 - `/var/log/one/$ID.log` where `$ID` identifies the VM
 
-Other logs are also available in Journald, use the following command to show:
+Other logs are also available in Journald, use the following command to show these:
 
 ```default
 # journalctl -u opennebula.service
