@@ -16,4 +16,4 @@ weight: "3"
 
 These ARM packages are being released in beta mode, allowing the community to test them and provide feedback. This initiative aims to extend OpenNebula’s flexibility by enabling deployment on ARM-based servers (both hypervisors and Front-end nodes), opening new possibilities for lightweight, distributed cloud environments.
 
-For the configuration details about ARM64 please refer to [ARM64 specific]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#arm64specifics" %}})
+For the configuration details about ARM64 please refer to [ARM64 Specifics]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#arm64specifics" %}}).

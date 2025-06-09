@@ -18,52 +18,12 @@ The Front-end is the central part of an OpenNebula installation and is the very 
 
 Before reading this Chapter make sure you are familiar with the [Architecture Blueprint]({{% relref "../../../quick_start/understand_opennebula/cloud_architecture_and_design/index#architecture-blueprints" %}}), and the blueprint most appropriate to your needs.
 
-The aim of this Chapter is to give you a quick-start guide to deploying OpenNebula. This is the simplest possible installation, but it is also the foundation for a more complex setup. First, you should go through the [Database Setup]({{% relref "database#database-setup" %}}) section, especially if you expect to use OpenNebula for production. Then move on to the configuration of [OpenNebula Repositories]({{% relref "opennebula_repository_configuration#repositories" %}}), from which you’ll install the required components. And finally, proceed with the [Front-end Installation]({{% relref "install#frontend-installation" %}}) section. You’ll end up running a fully featured OpenNebula Front-end.
+The aim of this Chapter is to give you a quick-start guide to deploying OpenNebula. This is the simplest possible installation, but it is also the foundation for a more complex setup. First, you should go through the [Database Setup]({{% relref "database" %}}) section, especially if you expect to use OpenNebula for production. Then move on to the configuration of [OpenNebula Repositories]({{% relref "opennebula_repository_configuration" %}}), from which you’ll install the required components. And finally, proceed with the [Front-end Installation]({{% relref "front_end_installation" %}}) section. You’ll end up running a fully featured OpenNebula Front-end.
 
-After reading this Chapter, you can go on to add the [KVM]({{% relref "kvm_node_installation#kvm-node" %}}) or [LXC]({{% relref "lxc_node_installation#lxc-node" %}}) hypervisor nodes.
+After reading this Chapter, you can go on to add the [KVM]({{% relref "kvm_node_installation" %}}) or [LXC]({{% relref "lxc_node_installation" %}}) hypervisor nodes.
 
-To scale from a single-Host Front-end deployment to several Hosts for better performance or reliability (HA), continue to the following chapters on [Large-scale Deployment]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/" %}}), [High Availability]({{% relref "../../../product/control_plane_configuration/high_availability/index#ha" %}}) and [Data Center Federation]({{% relref "../../../product/control_plane_configuration/data_center_federation/index#federation-section" %}}).
+To scale from a single-Host Front-end deployment to several Hosts for better performance or reliability (HA), continue to the following chapters on [Large-scale Deployment]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/" %}}), [High Availability]({{% relref "../../../product/control_plane_configuration/high_availability/index" %}}) and [Data Center Federation]({{% relref "../../../product/control_plane_configuration/data_center_federation/index" %}}).
 
 ## Hypervisor Compatibility
 
 This Chapter applies to all supported hypervisors.
-
-<!-- FROM HERE ON CONTENT OF KVM NODE DEPLOYMENT's overview.md: -->
-
-<a id="kvm-node-deployment-overview"></a>
-
-<!--# Overview -->
-
-[KVM](https://www.linux-kvm.org/) (Kernel-based Virtual Machine) is the main virtualization solution for Linux on x86 hardware that contains virtualization extensions (Intel VT or AMD-V) and on ARM64 (currently in beta mode). It consists of the loadable KVM kernel modules (one that provides the core virtualization infrastructure and several processor-specific modules), but the complete KVM virtualization stack usually also contains the user-space machine hardware emulator [QEMU](https://www.qemu.org) accelerated by the KVM and Virtual Machines management tool [libvirt](https://libvirt.org).
-
-By using KVM, you can run multiple Virtual Machines with unmodified Linux or Windows images. Each Virtual Machine has private virtualized hardware - network card, disk, graphics adapter, etc.
-
-## How Should I Read This Chapter
-
-This Chapter focuses on the configuration options for KVM-based nodes. Read the [installation]({{% relref "kvm_node_installation#kvm-node" %}}) section to add a KVM node to your OpenNebula cloud to start deploying VMs. Continue with the [driver]({{% relref "kvm_driver#kvmg" %}}) section to understand the specific requirements, functionalities, and limitations of the KVM driver.
-
-You can then move on to the Open Cloud [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) Chapters to be able to deploy Virtual Machines on your KVM nodes and access them remotely over the network.
-
-## Hypervisor Compatibility
-
-This chapter applies only to KVM.
-
-<!-- FROM HERE ON CONTENT OF LXC NODE DEPLOYMENT's overview.md: -->
-
-<a id="lxc-node-deployment-overview"></a>
-
-<!--# Overview -->
-
-[LXC](https://linuxcontainers.org/lxc/introduction/) is a Linux technology which allows us to create and manage system and application containers. The containers are computing environments running on a particular hypervisor node alongside other containers or Host services, but secured and isolated in their own namespaces (user, process, network).
-
-From the perspective of a hypervisor node, such a container environment is just an additional process tree among other hypervisor processes. Inside of the environment, it looks like a standard Linux installation that sees only its own resources but shares the Host kernel.
-
-## How Should I Read This Chapter
-
-This Chapter focuses on the configuration options for LXC-based nodes. Read the [installation]({{% relref "lxc_node_installation#lxc-node" %}}) section to add an LXC node to your OpenNebula cloud to start deploying containers. Continue with the [driver]({{% relref "lxc_driver#lxcmg" %}}) section in order to understand the specific requirements, functionalities, and limitations of the LXC driver.
-
-You can then move on to look at the Open Cloud [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) Chapters to be able to deploy your containers on your LXC nodes and access them remotely over the network.
-
-## Hypervisor Compatibility
-
-This Chapter applies only to LXC.

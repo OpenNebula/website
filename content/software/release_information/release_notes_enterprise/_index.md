@@ -1,7 +1,7 @@
 ---
 title: "Release Notes Enterprise"
 date: "2025-02-17"
-description: "Release Notes, compatibility guides, and other information"
+description: "Information about the OpenNebula Enterprise Edition (EE) -- updates, subscriptions, release cycle"
 categories:
 pageintoc: ""
 tags:

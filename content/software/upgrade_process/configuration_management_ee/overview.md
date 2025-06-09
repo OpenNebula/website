@@ -13,8 +13,7 @@ weight: "1"
 <!--# Overview -->
 
 {{< alert title="Important" color="success" >}}
-Complete feature is available in OpenNebula **Enterprise Edition**.{{< /alert >}} 
-Only a single functionality comes in **Community Edition**.
+The complete feature is available in the OpenNebula **Enterprise Edition**. Only a single functionality is included in the **Community Edition**.{{< /alert >}}
 
 OpenNebula has tens of configuration files, where cloud administrators can fine-tune the behavior of their cloud environment. When carrying out an upgrade to a newer minor OpenNebula version (`X.Y`), unfortunately all custom changes in configuration files must be migrated to new configuration files. OpenNebula **Enterprise Edition** comes with a dedicated tool (`onecfg`) which automates and simplifies the upgrade of configuration files.
 
@@ -30,9 +29,9 @@ This Chapter describes how to use the configuration management tool to:
 
 In this Chapter, you’ll find all the information about how to manage your configuration files. Although this knowledge is not so important for new installations, it’s essential for the OpenNebula upgrades that might happen in the near future.
 
-First, get familiar with the [Basic Usage]({{% relref "usage#cfg-usage" %}}) of the tool `onecfg`. Move on to the [Diff Format]({{% relref "diff_formats#cfg-diff-formats" %}}), which describes the custom changes you already have or you want to apply. Then get familiar with how configuration upgrade automation fits into the [OpenNebula Upgrade Workflow]({{% relref "../upgrade_guide/start_here.md#start-here" %}}) and how to [Troubleshoot]({{% relref "conflicts#cfg-conflicts" %}}) potential conflicts.
+First, get familiar with the [Basic Usage]({{% relref "usage" %}}) of the tool `onecfg`. Move on to the [Diff Format]({{% relref "diff_formats" %}}), which describes the custom changes you already have or you want to apply. Then get familiar with how configuration upgrade automation fits into the OpenNebula upgrade workflow (see the [Upgrade Guide - Start Here]({{% relref "../upgrade_guide/start_here.md" %}}) page) and how to [Troubleshoot]({{% relref "conflicts" %}}) potential conflicts.
 
-The [Appendix]({{% relref "appendix#cfg-files" %}}) presents a list of supported configuration files and their types.
+The [Appendix]({{% relref "appendix" %}}) presents a list of supported configuration files and their types.
 
 ## Hypervisor Compatibility
 
