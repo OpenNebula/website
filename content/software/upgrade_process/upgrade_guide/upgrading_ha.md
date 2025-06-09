@@ -14,7 +14,7 @@ weight: "4"
 
 ## Step 1. Check Virtual Machine Status
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../product/virtual_machines_operation/virtual_machine_instances/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). For more information on the life cycle of Virtual Machines, see [Virtual Machine Instances]({{% relref "../../../product/virtual_machines_operation/virtual_machine_instances/vm_instances" %}}).
 
 ## Step 2. Set All Hosts to Disable Mode
 
@@ -40,9 +40,9 @@ Make sure that every OpenNebula process is stopped. The output of `systemctl lis
 
 ## Step 4. Upgrade the Leader
 
-Follow Steps 4 to 9 described in the [Upgrading Single Front-end Deployments]({{% relref "upgrading_single#upgrade-single" %}}) guide in the HA leader.
+Upgrade the leader Front-end as described in steps 4 to 9 of [Upgrading Single Front-end]({{% relref "upgrading_single" %}}).
 
-Afterwards, create a database backup to replicate the upgraded state to the followers:
+Then, create a database backup to replicate the upgraded state to the followers:
 
 ```default
 $ onedb backup
@@ -53,7 +53,7 @@ mysql -u user -h server -P port db_name < backup_file
 
 ## Step 5. Upgrade OpenNebula in the Followers
 
-Follow Steps 4 to 9 described in the [Upgrading Single Front-end Deployments]({{% relref "upgrading_single#upgrade-single" %}}) guide in the HA followers.
+Upgrade the HA followers as described in steps 4 to 9 of [Upgrading Single Front-end]({{% relref "upgrading_single" %}}).
 
 ## Step 6. Replicate Database and Configuration
 

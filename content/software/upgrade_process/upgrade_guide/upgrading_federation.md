@@ -53,8 +53,8 @@ Make sure that every OpenNebula process is stopped. The output of `systemctl lis
 
 You can now upgrade the master zone:
 
-> * [Follow the upgrading for single Front-end deployments]({{% relref "upgrading_single#upgrade-single" %}})
-> * [Follow the upgrading for high availability clusters]({{% relref "upgrading_ha#upgrade-ha" %}})
+> * [Follow the upgrading guide for single Front-end deployments]({{% relref "upgrading_single" %}})
+> * [Follow the upgrading guide for High Availability clusters]({{% relref "upgrading_ha" %}})
 
 ## Step 4. Back up Federated Tables
 
@@ -80,8 +80,8 @@ $ onedb restore <backup_file> -v --federated
 
 You can now upgrade the slave zones:
 
-> * [Follow the upgrading for single Front-end deployments]({{% relref "upgrading_single#upgrade-single" %}})
-> * [Follow the upgrading for high availability clusters]({{% relref "upgrading_ha#upgrade-ha" %}})
+> * [Follow the upgrading guide for single Front-end deployments]({{% relref "upgrading_single" %}})
+> * [Follow the upgrading guide for High Availability clusters]({{% relref "upgrading_ha" %}})
 
 You will restart OpenNebula in each zone as part of the upgrade. Once you finish upgrading your master, remove any access restriction to the API imposed in Step 1.
 
