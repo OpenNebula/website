@@ -14,7 +14,7 @@ weight: "1"
 
 <!--# Managing Virtual Machines Instances -->
 
-This guide follows the [Creating Virtual Machines guide]({{% relref "../virtual_machine_images/vm_templates#vm-guide" %}}). Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
+This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machine_images/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
 
 <a id="vm-life-cycle-and-states"></a>
 
@@ -23,7 +23,7 @@ This guide follows the [Creating Virtual Machines guide]({{% relref "../virtual_
 The life-cycle of a Virtual Machine within OpenNebula includes the following stages:
 
 {{< alert title="Note" color="success" >}}
-Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "../../operation_references/configuration_references/vm_states#vm-states" %}})):{{< /alert >}} 
+Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "../../operation_references/configuration_references/vm_states#vm-states" %}}).{{< /alert >}} 
 
 | Short state   | State              | Meaning                                                                                                                                                                                                                                                                                                  |
 |---------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

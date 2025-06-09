@@ -47,7 +47,7 @@ sidebar_menu_compact = false
 sidebar_menu_foldable = true
 ul_show = 3
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if se>
-sidebar_search_disable = false
+sidebar_search_disable = true
 showLightDarkModeMenu = true
 
 # Adds a reading time to the top of each doc.
@@ -79,7 +79,7 @@ enable = false
 [[params.links.user]]
   name ="OpenNebula on X"
   url = "https://x.com/opennebula/"
-  icon = "fab fa-twitter"
+  icon = "fab fa-x-twitter"
   desc = "Follow OpenNebula on X"
 [[params.links.user]]
   name = "OpenNebula on YouTube - Webinars, demos and more"
@@ -91,8 +91,24 @@ enable = false
   url = "https://github.com/OpenNebula"
   icon = "fab fa-github"
   desc = "Development takes place here!"
+[[params.links.user]]
+  name = "OpenNebula on Bluesky"
+  url = "https://bsky.app/profile/opennebula.bsky.social"
+  icon = "fab fa-bluesky"
+  desc = "Follow OpenNebula on Bluesky"
+[[params.links.user]]
+  name = "OpenNebula on Facebook"
+  url = "https://www.facebook.com/p/OpenNebula-100057184252936/"
+  icon = "fab fa-facebook"
+  desc = "Follow OpenNebula on Facebook"  
+[[params.links.user]]
+  name = "OpenNebula on LinkedIn"
+  url = "https://www.linkedin.com/company/opennebula"
+  icon = "fab fa-linkedin"
+  desc = "Follow OpenNebula on LinkedIn"
 
-# Top menu
+
+
 [menu]
   [[menu.main]]
     name = "Quick Start"
@@ -118,6 +134,18 @@ enableGitInfo = true
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
 offlineSearchSummaryLength = 800
+
+### Version variables
+# The short X.Y version
+version = "7.0"
+# The full version, including alpha/beta/rc tags
+release = "6.99.85"
+# The context packages released version
+context_release = "7.0.0"
+# Docs version is part of the URL & invoked by the alert shortcode
+# Setting here in case it ever needs to differ from SW version
+docs_version = "7.0"
+
 
   # Add your release versions here
 version_menu = "Versions"
@@ -162,10 +190,14 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
+  #[[module.mounts]]
+  #  source = 'images'
+  #  target = 'static/images'
 
 # added the user feedback module
 [params.ui.feedback]
 enable = true
+feedback_question = 'We value your feedback. Was this page helpful?'
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 

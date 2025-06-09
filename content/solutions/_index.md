@@ -2,7 +2,7 @@
 title: "Solution Blueprints"
 type: docs
 linkTitle: "Solutions"
-description: "This section under development will present a range of OpenNebula deployment scenarios, showcasing how the platform can be adapted to meet diverse infrastructure needs—from enterprise data centers to edge environments and AI workloads."
+description: "This section under development will present a range of OpenNebula deployment scenarios, showcasing how the platform can be adapted to meet diverse infrastructure needs—from enterprise data centers to edge environments and AI workloads"
 weight: 5
 ---
 

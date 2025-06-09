@@ -56,7 +56,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### [Linux and Windows Contextualization Packages](https://github.com/OpenNebula/one-apps/wiki/linux_release)
 
-Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/software/latest)
+Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/releases/latest)
 
 More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
@@ -89,6 +89,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.16.5    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
+| Veeam                         | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../integrations/backup_extensions/veeam.md" %}}) |
 
 ### Sunstone
 

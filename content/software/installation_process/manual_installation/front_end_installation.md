@@ -61,8 +61,6 @@ Available packages for OpenNebula clients, the Front-end and hypervisor nodes:
 | **opennebula-flow**                                                                                      | [OneFlow]({{% relref "../../../product/virtual_machines_operation/multi-vm_workflows/overview#oneflow-overview" %}}) manages services and elasticity                                   |
 | **opennebula-migration**                                                                                 | Database migration tools for EE (*only in EE*)                                                                                                             |
 | **opennebula-migration-community**                                                                       | Database migration tools for CE - please request via [online form](https://opennebula.io/get-migration/)                                                   |
-| **opennebula-provision**                                                                                 | Tools to provision [Edge Clusters]({{% relref "../../../product/cloud_cluster_provisioning" %}})                            |
-| **opennebula-provision-data**                                                                            | Data for [Edge Clusters]({{% relref "../../../product/cloud_cluster_provisioning" %}}) provisioning tools                   |
 | **opennebula-node-kvm**                                                                                  | Base setup for KVM hyp. Node                                                                                                                               |
 | **opennebula-node-lxc**                                                                                  | Base setup for LXC hypervisor Node (*not on RHEL 7*)                                                                                                       |
 | **opennebula-guacd**                                                                                     | Proxy daemon for Guacamole                                                                                                                                 |
@@ -348,7 +346,7 @@ Use the following command to **restart all** already running OpenNebula services
     opennebula-novnc opennebula-ssh-agent
 ```
 
-Learn more about [Managing Services with Systemd](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-services-with-systemd_configuring-basic-system-settings#managing-system-services_managing-services-with-systemd).
+Learn more about [Managing Services with Systemd](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-systemd_configuring-basic-system-settings).
 
 In production environments the services should be stopped in a specific order and with extra manual safety checks:
 

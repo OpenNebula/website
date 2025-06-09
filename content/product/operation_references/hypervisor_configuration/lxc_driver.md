@@ -108,7 +108,7 @@ Mount options configuration section also in lxcrc
 
 ## Storage
 
-LXC containers need a root file system image in order to boot. This image can be downloaded directly to OpenNebula from [Linux Containers](https://uk.images.linuxcontainers.org/) Marketplace. Check the [Public Marketplaces]({{% relref "../../apps-marketplace/public_marketplaces/index#public-marketplaces" %}}) chapter for more information. You can use LXC with NAS (file-based), SAN (lvm) or Ceph Datastores.
+LXC containers need a root file system image in order to boot. This image can be downloaded directly to OpenNebula from [Linux Containers](https://images.linuxcontainers.org/) Marketplace. Check the [Public Marketplaces]({{% relref "../../apps-marketplace/public_marketplaces/index#public-marketplaces" %}}) chapter for more information. You can use LXC with NAS (file-based), SAN (lvm) or Ceph Datastores.
 
 When using XFS images it is recommended to use images with a block size of 4K, as it is the default block size for mounting the file system. Otherwise is possible to get an error like the one below:
 

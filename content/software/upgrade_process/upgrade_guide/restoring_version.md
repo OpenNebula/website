@@ -14,6 +14,6 @@ weight: "6"
 
 If for any reason you need to restore your previous OpenNebula, follow these steps:
 
-- With OpenNebula 7.0 still installed, restore the DB backup using `onedb restore -f`
-- Uninstall OpenNebula 7.0, and install your previous version again.
+- With OpenNebula {{< version >}} still installed, restore the DB backup using `onedb restore -f`
+- Uninstall OpenNebula {{< version >}}, and install your previous version again.
 - Copy back the backup of `/etc/one` you did to restore your configuration.

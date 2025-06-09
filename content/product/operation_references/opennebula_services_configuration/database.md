@@ -70,7 +70,7 @@ $ onedb <command> -v -S localhost -u oneadmin -p oneadmin -d opennebula
 ```
 
 {{< alert title="Warning" color="warning" >}}
-If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](http://dev.mysql.com/doc/refman/5.6/en/set-password.html) statement can be used for this:
+If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](https://dev.mysql.com/doc/refman/8.4/en/set-password.html) statement can be used for this:
 
 ```default
 $ mysql -u oneadmin -p
@@ -143,10 +143,18 @@ Comment:   Database migrated from 3.7.80 to 3.8.0 (OpenNebula 3.8.0) by onedb co
 
 Change the CLUSTER_ID of a previous VM sequence in a non interactive way. This is useful when accidentally deleting a cluster. You might be unable to attach disks or NICs to the VM due to the VM being reported in a non existing cluster.
 
-The following command changes the the sequence 0 of the VM 224 to have the CLUSTER_ID set to 0.
+{{< alert title="Warning" color="warning" >}}
+When dealing with history records one needs to take into account that the oldest index of the history records equals 0 whereas the latest one has the largest index. So in order to modify the latest history record one needs to get the largest index first, e.g. with help of the following command:
 
 ```default
-$ onedb change-history --id 224 --seq 0 '/HISTORY/CID' 0
+$ onevm show -j <vm_id>| jq -r '.VM.HISTORY_RECORDS.HISTORY[-1].SEQ'
+```{{< /alert >}}
+
+
+The following command changes the sequence 10 (let's assume it's the latest history record for that example) of the VM 224 to have the CLUSTER_ID set to 0.
+
+```default
+$ onedb change-history --id 224 --seq 10 '/HISTORY/CID' 0
 ```
 
 <a id="onedb-update-history"></a>

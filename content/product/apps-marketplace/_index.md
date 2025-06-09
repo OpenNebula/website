@@ -1,7 +1,7 @@
 ---
 title: "Marketplace Configuration"
 date: "2025-02-17"
-description: "Manage public and private marketplaces, and explore the appliances available on OpenNebula's public marketplace"
+description: "By default, an OpenNebula installation includes access to the OpenNebula Marketplace, a public catalog of ready-to-use appliances preconfigured to perform specific services. This section details how to manage public and private marketplaces -- including creating your own -- and how to explore and manage marketplace appliances"
 categories:
 pageintoc: "182"
 tags:

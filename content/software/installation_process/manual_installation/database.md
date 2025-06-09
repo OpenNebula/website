@@ -75,7 +75,7 @@ mysql> GRANT ALL PRIVILEGES ON opennebula.* TO 'oneadmin';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Visit the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/access-control.html) to learn how to manage accounts.
+Visit the [MySQL documentation](https://dev.mysql.com/doc/refman/8.4/en/access-control.html) to learn how to manage accounts.
 
 Now, configure the transaction isolation level:
 
