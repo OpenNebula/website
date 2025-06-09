@@ -14,7 +14,7 @@ weight: "4"
 
 <!--# Single Front-end Installation -->
 
-This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration#repositories" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced from other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula on your own.
+This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration#repositories" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced in other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula on your own.
 
 Proceed with the following steps to get the fully-featured OpenNebula Front-end up.
 
@@ -24,9 +24,9 @@ Proceed with the following steps to get the fully-featured OpenNebula Front-end 
 
 Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configuration#repositories" %}}) guide and add software repositories for the OpenNebula edition you are going to deploy.
 
-## Step 2. Add 3rd Party Repositories
+## Step 2. Add Third Party Repositories
 
-Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable 3rd party repositories by running the following commands under privileged user (`root`):
+Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable third party repositories by running the following commands under privileged user (`root`):
 
 **AlmaLinux 8,9**
 
@@ -50,7 +50,7 @@ Not all OpenNebula dependencies are in base distribution repositories. On select
 
 ## Step 3. Installing the Software
 
-Available packages for OpenNebula clients, the Front-end and hypervisor Nodes:
+Available packages for OpenNebula clients, the Front-end and hypervisor nodes:
 
 | Package                                                                                                  | Description                                                                                                                                                |
 |----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -71,7 +71,7 @@ Available packages for OpenNebula clients, the Front-end and hypervisor Nodes:
 | rpm: **opennebula-java** <br/><br/>deb: **libopennebula-java** <br/><br/>deb: **libopennebula-java-doc** | [Java OCA]({{% relref "../../../product/integration_references/system_interfaces/java#java" %}}) Bindings                                                     |
 | **python3-pyone**                                                                                        | [Python 3 OCA]({{% relref "../../../product/integration_references/system_interfaces/python#python" %}}) Bindings                                             |
 
-There are also packages with debugging symbols for some platforms, e.g. `openenbula-debuginfo` on AlmaLinux/RHEL and `opennebula-dbgsym` on Debian/Ubuntu. Other architecture-specific components might come with similarly named packages, please query your packaging database if necessary.
+There are also packages with debugging symbols for some platforms, e.g., `openenbula-debuginfo` on AlmaLinux/RHEL and `opennebula-dbgsym` on Debian/Ubuntu. Other architecture-specific components might come with similarly named packages, please check your packaging database if necessary.
 
 {{< alert title="Note" color="success" >}}
 There are a few differences in package names among distributions. Those with varying package names contain mostly integration libraries and since they are for general use on installation Hosts, their names are left to follow the distribution conventions. Above, you can find the AlmaLinux/RHEL specific packages prefixed with “*rpm:*” and Debian/Ubuntu specific packages prefixed with “*deb:*”.{{< /alert >}}
@@ -93,9 +93,9 @@ Install all OpenNebula Front-end components by executing the following commands 
 
 ### Optional: Install dependencies for OpenNebula Edge Clusters provisioning
 
-There are 2 main dependencies which needs to be installed on the FE for running provisioning.
+There are two main dependencies which needs to be installed on the FE for running provisioning.
 
-1. **Terraform** – is needed to provision resources on public cloud providers, download the binary as follows
+1. **Terraform** – is needed to provision resources on public cloud providers, download the binary as follows:
 
 ```default
 # curl 'https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip' | zcat >/usr/bin/terraform
@@ -103,22 +103,22 @@ There are 2 main dependencies which needs to be installed on the FE for running 
 ```
 
 2. **Ansible** – is used to configure the provisioned resources (cloud or on-premise). Ansible system package is installed
-as a dependency of the opennebula-provision package. However for HCI provisioning including Ceph, the system-installed
-ansible version may not be sufficient as it requires ansible-core 2.15+. It is advised to use latest Ubuntu for the FE if
-Ceph HCI provision is needed or install ansible 2.15+ on the system and make it default for oneadmin user.
+as a dependency of the OpenNebula provision package. However, for HCI provisioning including Ceph, the system-installed
+ansible version may not be sufficient as it requires ansible-core 2.15+. It is advised to use the latest Ubuntu for the FE if
+Ceph HCI provision is needed or to install ansible 2.15+ on the system and make it default for oneadmin user.
 
 ## Step 3. Enabling MySQL/MariaDB (Optional)
 
 You can skip this step if you want to deploy OpenNebula as quickly as possible for evaluation.
 
-If you are deploying Front-end for production/serious use, make sure you read the [Database Setup]({{% relref "database#database-setup" %}}) guide and select the suitable database Back-end. Although it **is** possible to switch from (default) SQLite to MySQL/MariaDB Back-end later, it’s not easy and straightforward, so **we suggest to deploy and use MySQL/MariaDB Back-end from the very beginning**.
+If you are deploying Front-end for production/serious use, make sure you read the [Database Setup]({{% relref "database#database-setup" %}}) guide and select the suitable database backend. Although it **is** possible to switch from (default) SQLite to MySQL/MariaDB backend later, it’s not easy and straightforward, so **we suggest to deploy and use MySQL/MariaDB backend from the very beginning**.
 
 ## Step 4. Configuring OpenNebula
 
 ### OpenNebula Daemon
 
 {{< alert title="Important" color="success" >}}
-This is **only for initial** OpenNebula deployment, not applicable for upgrades!{{< /alert >}}
+This is **only for initial** OpenNebula deployment, not applicable to upgrades!{{< /alert >}}
 
 OpenNebula’s initial deployment on first usage creates a user `oneadmin` **inside the OpenNebula** (not to be confused with system user `oneadmin` in the Front-end operating system!) based on a randomly generated password read from `/var/lib/one/.one/one_auth`. To set your own user password from the very beginning, proceed with the following steps before starting the services:
 
@@ -151,7 +151,7 @@ For advanced setup, follow the FireEdge [configuration reference]({{% relref "fi
 
 ### OneGate (Optional)
 
-The OneGate server allows communication between VMs and OpenNebula. It’s optional and not required for basic functionality but is essential for multi-VM services orchestrated by OneFlow server below. The configuration is two-phase - configure the OneGate server to listen for the connections from outside the Front-end and configure the OpenNebula Daemon with OneGate end-point passed to the virtual machines. Neither or both must be done.
+The OneGate server allows communication between VMs and OpenNebula. It’s optional and not required for basic functionality but is essential for multi-VM services orchestrated by OneFlow server below. The configuration is two-phase: configure the OneGate server to listen for the connections from outside the Front-end and configure the OpenNebula Daemon with OneGate endpoint passed to the Virtual Machines. Neither or both must be done.
 
 1. To configure OneGate, edit `/etc/one/onegate-server.conf` and update the `:host` parameter with service listening address accordingly. For example, use `0.0.0.0` to work on all configured network interfaces on the Front-end:
 
@@ -159,7 +159,7 @@ The OneGate server allows communication between VMs and OpenNebula. It’s optio
 :host: 0.0.0.0
 ```
 
-2. To configure OpenNebula Daemon, edit `/etc/one/oned.conf` and set the `ONEGATE_ENDPOINT` with the URL and port of your OneGate server (domain or IP-based). The end-point address **must be reachable directly from your future virtual machines**. You need to decide what virtual networks and addresses will be used in your cloud. For example:
+2. To configure OpenNebula Daemon, edit `/etc/one/oned.conf` and set the `ONEGATE_ENDPOINT` with the URL and port of your OneGate server (domain or IP-based). The endpoint address **must be reachable directly from your future Virtual Machines**. You need to decide which virtual networks and addresses will be used in your cloud. For example:
 
 ```default
 ONEGATE_ENDPOINT="http://one.example.com:5030"
@@ -202,7 +202,7 @@ The complete list of operating system services provided by OpenNebula:
 | **opennebula-ssh-socks-cleaner** | Periodic cleaner of SSH persistent connections                                                                              | opennebula          |
 
 {{< alert title="Note" color="success" >}}
-Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}}
+Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service, which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}}
 
 You are ready to **start** all OpenNebula services with the following command (NOTE: you might want to remove the services from the command arguments if you skipped their configuration steps above):
 
@@ -223,7 +223,7 @@ Other OpenNebula services might be started as a dependency but you don’t need 
 
 ## Step 6. Verifying the Installation
 
-After OpenNebula is started for the first time, you should check that the commands can connect to the OpenNebula daemon. You can do this in the Linux CLI or the graphical user interface Sunstone.
+After OpenNebula is started for the first time, you should check that the commands can connect to the OpenNebula Daemon. You can do this in the Linux CLI or the graphical user interface Sunstone.
 
 ### Linux CLI
 
@@ -261,7 +261,7 @@ To check for errors, you can search in the main OpenNebula Daemon log file, `/va
 {{< alert title="Note" color="success" >}}
 Make sure the TCP port 2616 is not blocked on your firewall.{{< /alert >}}
 
-Now you can try to log in through the Sunstone GUI and Provision GUI. To do so, point your browser to `http://<frontend_address>:2616/fireedge/sunstone` to access to Sunstone and point your browser to `http://<frontend_address>:2616/fireedge/provision` to access to Provision. You should get to the login page in both cases. The access user is `oneadmin` and initial (or customized) password is the one from the file `/var/lib/one/.one/one_auth` on your Front-end.
+Now you can try to log in through the Sunstone GUI and Provision GUI. To do so, point your browser to `http://<frontend_address>:2616/fireedge/sunstone` to access Sunstone and point your browser to `http://<frontend_address>:2616/fireedge/provision` to access Provision. You should get to the login page in both cases. The access user is `oneadmin` and initial (or customized) password is the one from the file `/var/lib/one/.one/one_auth` on your Front-end.
 
 ![sunstone_login](/images/sunstone-login.png)
 
@@ -269,7 +269,7 @@ In case of problems, you can investigate the OpenNebula logs in `/var/log/one` a
 
 ### Directory Structure
 
-The following table lists few significant directories on your OpenNebula Front-end:
+The following table lists various significant directories on your OpenNebula Front-end:
 
 | Path                              | Description                                                              |
 |-----------------------------------|--------------------------------------------------------------------------|
@@ -285,7 +285,7 @@ The following table lists few significant directories on your OpenNebula Front-e
 | `/var/lib/one/remotes/vmm/`       | Virtual Machine Manager Driver scripts                                   |
 | `/var/lib/one/remotes/auth/`      | Authentication Driver scripts                                            |
 | `/var/lib/one/remotes/im/`        | Information Manager (monitoring) Driver scripts                          |
-| `/var/lib/one/remotes/market/`    | MarketPlace Driver scripts                                               |
+| `/var/lib/one/remotes/market/`    | Marketplace Driver scripts                                               |
 | `/var/lib/one/remotes/datastore/` | Datastore Driver scripts                                                 |
 | `/var/lib/one/remotes/vnm/`       | Networking Driver scripts                                                |
 | `/var/lib/one/remotes/tm/`        | Transfer Manager Driver scripts                                          |
@@ -305,13 +305,13 @@ The list below shows the ports used by OpenNebula. These ports need to be open f
 | `4124`        | Monitoring daemon (both TCP/UDP)                             |
 | `5030`        | OneGate server                                               |
 | `29876`       | noVNC Proxy Server                                           |
-| `5900+`       | VNC Server ports on hosts for VMs. See VNC_PORTS             |
+| `5900+`       | VNC Server ports on Hosts for VMs. See VNC_PORTS             |
 | `49152-49215` | Host-Host port communication required for KVM live migrations|
 
 {{< alert title="Note" color="success" >}}
 These are only the default ports. Each component can be configured to bind to specific ports or use a HTTP Proxy.{{< /alert >}}
 
-OpenNebula connects to the hypervisor Nodes over SSH (port 22). Additionally, the main OpenNebula Daemon (oned) may connect to various remote Marketplace servers to get a list of available appliances, e.g.:
+OpenNebula connects to the hypervisor nodes over SSH (port 22). Additionally, the main OpenNebula Daemon (oned) may connect to various remote Marketplace servers to get a list of available appliances, e.g.:
 
 - OpenNebula Marketplace (`https://marketplace.opennebula.io/`)
 - Linux Containers Marketplace (`https://images.linuxcontainers.org/`)
@@ -320,7 +320,7 @@ You should open the outgoing connections to these services.
 
 ## Step 7. Stop and Restart Services (Optional)
 
-To stop, start or restart any of the listed individual [services]({{% relref "#frontend-services" %}}), follow the examples below for a selected service:
+To stop, start, or restart any of the listed individual [services]({{% relref "#frontend-services" %}}), follow the examples below for a selected service:
 
 ```default
 # systemctl stop        opennebula
@@ -355,11 +355,11 @@ In production environments the services should be stopped in a specific order an
 3. Check and wait until there are no active operations with VMs and images.
 4. Stop **opennebula** and rest services.
 
-## Step 8. Next steps
+## Step 8. Next Steps
 
-Now that you have successfully started your OpenNebula services, you can continue with adding content to your cloud. Add hypervisor Nodes, storage, and Virtual Networks. Or you can provision Users with Groups and permissions, Images, define and run Virtual Machines.
+Now that you have successfully started your OpenNebula services, you can continue with adding content to your cloud. Add hypervisor nodes, storage, and virtual networks. Or you can provision users with groups and permissions, images, define and run Virtual Machines.
 
 Continue with the following guides:
 
-- [Open Cluster Deployment]({{% relref "../index#open-cluster-deployment" %}}) to provision hypervisor Nodes, storage, and Virtual Networks.
-- [Management and Operations]({{% relref "../../index#operations-guide" %}}) to add Users, Groups, Images, define Virtual Machines, and a lot more …
+- [Open Cluster Deployment]({{% relref "../index#open-cluster-deployment" %}}) to provision hypervisor nodes, storage, and virtual networks.
+- [Management and Operations]({{% relref "../../index#operations-guide" %}}) to add users, groups, images, define Virtual Machines, and a lot more …

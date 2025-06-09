@@ -18,4 +18,4 @@ weight: "3"
 
 <!--# Package Installation References -->
 
-These sections provide details on installing an OpenNebula cloud, beginning with the OpenNebula Front-end and including services and hypervisors. The complete references for configuring OpenNebula services, templates and hypervisor nodes may be found in [Operation References]({{% relref "../../../product/operation_references/" %}}).
+These sections provide details on installing an OpenNebula cloud, beginning with the OpenNebula Front-end and including services and hypervisors. The complete references for configuring OpenNebula services, templates, and hypervisor nodes may be found in [Operation References]({{% relref "../../../product/operation_references/" %}}).

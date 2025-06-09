@@ -1,7 +1,7 @@
 ---
 title: "Release Notes 7.0"
 date: "2025-02-17"
-description: "Release Notes, compatibility guides and other information"
+description: "Release Notes, compatibility guides, and other information"
 categories:
 pageintoc: ""
 tags:

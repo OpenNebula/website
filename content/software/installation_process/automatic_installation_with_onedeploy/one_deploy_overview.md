@@ -22,7 +22,7 @@ OpenNebula provides [OneDeploy](https://github.com/OpenNebula/one-deploy), a set
 
 The Ansible playbooks in OneDeploy install a complete OpenNebula cloud, including the Front-end with the OneFlow and OneGate services, and the Sunstone UI. Before running the playbooks, you can modify variables to configure the OpenNebula cloud that will be created. For example, you can select the OpenNebula version to install, and define the network, storage configuration, and other options.
 
-To perform automated deployments, the Ansible architecture is based on the concept of a control node and managed nodes. You designate a machine as a control node, where you will run the playbooks to deploy on the managed nodes. Nodes may be physical or virtual, and you can deploy to any nodes that you have network access to.
+To perform automated deployments, the Ansible architecture is based on the concept of a control node and managed nodes. You designate a machine as a control node, where you will run the playbooks to deploy on the managed nodes. Nodes may be physical or virtual and you can deploy to any nodes that you have network access to.
 
 The basic procedure is as follows:
 
@@ -30,7 +30,7 @@ The basic procedure is as follows:
 > 2. Modify the inventory according to your needs.
 > 3. Run the playbooks on the control node, to deploy on the managed nodes.
 
-Ansible is an agentless platform, and uses SSH as the default transport for deployment. The control node must be able to communicate with the managed nodes via SSH.
+Ansible is an agentless platform and uses SSH as the default transport for deployment. The control node must be able to communicate with the managed nodes via SSH.
 
 <!-- ![image](/images/one_deploy_basic_arch.png&width=1612&height=718) -->
 
@@ -39,12 +39,12 @@ Ansible is an agentless platform, and uses SSH as the default transport for depl
 <!-- ![image](/images/one_deploy_basic_arch.png)
 <br/> -->
 
-It is worth noting that you can use the control node itself as a managed node. In the tutorials included in this documentation, the OpenNebula Front-end is installed on the Ansible control node, and the Hypervisors on the managed nodes.
+It is worth noting that you can use the control node itself as a managed node. In the tutorials included in this documentation, the OpenNebula Front-end is installed on the Ansible control node and the Hypervisors on the managed nodes.
 
 In the sections below you will find a brief overview of reference architectures and requirements for installing an OpenNebula cloud with the most basic configuration. The documentation also includes two short tutorials for performing a simple installation on two of the reference architectures: using local storage for datastores, and using shared storage.
 
 {{< alert title="Important" color="success" >}}
-The recommended OS for running the playbooks is Ubuntu 24.04 or 22.04. The tutorials contain configuration and commands tested on these versions. It is possible to use other OSes to perform the installation; for reference please see the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
+The recommended OS for running the playbooks is Ubuntu 24.04 or 22.04. The tutorials contain configuration and commands tested on these versions. It is possible to use other OSs to perform the installation; for reference please see the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Reference Architectures
 
@@ -60,7 +60,7 @@ This architecture uses the most basic network configuration, a flat (bridged) ne
 
 This architecture is a variation of the Local Storage architecture. In this configuration, an NFS/NAS server provides the storage for the Virtual Machines, and the image repository.
 
-Note that the playbooks expect the NFS server to be available on the network. Before deploying, you can configure the mount point and options for the NFS shares on the OpenNebula hosts.
+Note that the playbooks expect the NFS server to be available on the network. Before deploying, you can configure the mount point and options for the NFS shares on the OpenNebula Hosts.
 
 ## Requirements
 
@@ -80,7 +80,7 @@ Network:
 
 > * All nodes must be able to communicate with each other via SSH
 > * The managed nodes must reside on a network with sufficient IPs available for the virtual OpenNebula network that will be created, to which the VMs will connect
-> * The IP addresses to assign to the virtual network must be reachable through the main network interface on the hosts
+> * The IP addresses to assign to the virtual network must be reachable through the main network interface on the Hosts
 
 ## Quick Start Tutorials
 

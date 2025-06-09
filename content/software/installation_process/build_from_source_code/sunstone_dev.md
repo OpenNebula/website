@@ -35,7 +35,7 @@ You can read more about this in the [FireEdge configuration guide]({{% relref ".
 
 ## Architecture
 
-In our latest generation of FireEdge Sunstone, we have done a architectural revamp, moving from our previously Monolithic architecture towards a more modern and streamlined Micro-Frontend like architecture. This new architecture is based on the latest Module Federation implementation in [Webpack](https://webpack.js.org/concepts/module-federation/). Which allows us to dynamically, and remotely, load different modules in our baseline Sunstone client.
+In our latest generation of FireEdge Sunstone, we have done a architectural revamp, moving from our previously Monolithic architecture towards a more modern and streamlined Micro-Frontend-like architecture. This new architecture is based on the latest Module Federation implementation in [Webpack](https://webpack.js.org/concepts/module-federation/) which allows us to dynamically, and remotely, load different modules in our baseline Sunstone client.
 
 <a id="base-modules"></a>
 
@@ -50,7 +50,7 @@ The Sunstone client has been split up into **8** different base modules:
 > * Providers.
 > * Utils.
 
-These modules have been separated in such a way that no hard links exist between them. Any internal cross-module dependencies are handled at runtime, by the module federation through it’s shared dependency scope. This ensures modules can be rebuilt and served separately from each other.
+These modules have been separated in such a way that no hard links exist between them. Any internal cross-module dependencies are handled at runtime by the module federation through its shared dependency scope. This ensures modules can be rebuilt and served separately from each other.
 
 {{< alert title="Note" color="success" >}}
 By default, when a new version is released, all modules are packaged and shipped with the client, and served from the FireEdge server.{{< /alert >}} 
@@ -59,7 +59,7 @@ By default, when a new version is released, all modules are packaged and shipped
 
 ## Remotes Configuration
 
-The `remotes-config.json` file, typically located at `/etc/one/fireedge/sunstone/remotes-config.json`, dictates where different modules are loaded from. At a minimum, the eight [base modules]({{% relref "#base-modules" %}}) must be defined in this file, in order for the client to load properly.
+The `remotes-config.json` file, typically located at `/etc/one/fireedge/sunstone/remotes-config.json`, dictates where different modules are loaded from. At a minimum, the eight [base modules]({{% relref "#base-modules" %}}) must be defined in this file in order for the client to load properly.
 
 The configuration file is structured according to the following schema:
 
@@ -86,7 +86,7 @@ Where:
 {{< alert title="Tip" color="info" >}}
 The `__HOST__` flag can be used to simplify setups, as this resolves to the current navigator URL in the client. This should be used most of the time when the remote modules are being served directly from the FireEdge server.{{< /alert >}} 
 
-This example shows the default configuration of the different modules, when they are being loaded locally from the FireEdge server.
+This example shows the default configuration of the different modules when they are being loaded locally from the FireEdge server.
 
 ```json
 {
@@ -130,17 +130,17 @@ Loading modules over HTTPS is fully supported and requires no extra setting up i
 
 ### A module fails to load
 
-In the case that a module fails to load, either due to a failed network request or due to a error in the code itself, the fallback editor will be employed. The client checks all modules when loading to make sure that they are properly initialized, in order to try and prevent and narrow down any fatal problems as early on as possible. The fallback editor allows the user to try and repair any misconfigured remotes, directly in the browser.
+In the case that a module fails to load, either due to a failed network request or due to a error in the code itself, the fallback editor will be employed. The client checks all modules when loading to make sure that they are properly initialized, in order to try and prevent and narrow down any fatal problems as early on as possible. The fallback editor allows the user to try and repair any misconfigured remotes directly in the browser.
 
-The server passes the `remotes-config.json` file to the client through the [Window Interface](https://developer.mozilla.org/en-US/docs/Web/API/Window), accessible through `window.__REMOTES_MODULE_CONFIG__` from the browser console. This configuration gets potentially modified by the fallback editor and cached using the browsers [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). This cache is implemented in order for the client to be able to use a temporary configuration that persists across reloads, in order to mitigate potential lockouts from the user interface.
+The server passes the `remotes-config.json` file to the client through the [Window Interface](https://developer.mozilla.org/en-US/docs/Web/API/Window), accessible through `window.__REMOTES_MODULE_CONFIG__` from the browser console. This configuration gets potentially modified by the fallback editor and cached using the browser's [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). This cache is implemented in order for the client to be able to use a temporary configuration that persists across reloads in order to mitigate potential lockouts from the user interface.
 
 ![image_fallback_editor](/images/fireedge_fallback_editor.png)
 
-Inside the fallback editor, you will have access to a simple interface, consisting of a text area for editing the configured remotes (changes do not affect any file on-disk), and three different buttons.
+Inside the fallback editor, you will have access to a simple interface consisting of a text area for editing the configured remotes (changes do not affect any file on-disk) and three different buttons.
 
 Where:
 : * `Reset` : Resets the entire configuration to the minimal eight [base modules]({{% relref "#base-modules" %}}).
-  * `Clear fallback configuration` : Clears the fallback flag, discarding any modifications made to the `remotes-config.json` file loaded from the server & attempts to re-use it.
+  * `Clear fallback configuration` : Clears the fallback flag, discarding any modifications made to the `remotes-config.json` file loaded from the server and attempts to re-use it.
   * `Continue` : Attempts to continue loading the currently defined configuration.
 
 ## Tab Manifest
@@ -163,7 +163,7 @@ The configuration file is structured according to the following schema:
 Where:
 : * `title`: The display name of the tab as shown in the UI.
   * `path`: The URL path that maps to this tab. It must be unique across all tabs.
-  * `sidebar`:  A boolean (true or false) Indicates whether the tab should appear in the sidebar navigation.
+  * `sidebar`:  A boolean (true or false) indicates whether the tab should appear in the sidebar navigation.
   * `icon`: The name of the icon to represent the tab visually. Must correspond to a valid icon identifier from the [iconoir-react library](https://www.npmjs.com/package/iconoir-react).
   * `moduleId`: The identifier for the remote module. It must match the name field in the corresponding module’s entry in the `remotes-config.json`.
   * `Component`: The exported name of the component that renders the tab’s content.
@@ -173,16 +173,16 @@ The client searches for the `Component` from the base of the `<ModuleIdentifier>
 
 ### Adding a new tab
 
-In order to develop a new tab, you need to make sure it has the correct webpack configuration & has been added to the `tab-manifest.json` & `remotes-config.json` files. In this example we will use the [OpenNebula ONE repo](https://github.com/OpenNebula/one) to create a new module and add it to the Sunstone client.
+In order to develop a new tab, you need to make sure it has the correct webpack configuration and has been added to the `tab-manifest.json` & `remotes-config.json` files. In this example we will use the [OpenNebula ONE repo](https://github.com/OpenNebula/one) to create a new module and add it to the Sunstone client.
 
-1. Begin by cloning the [one repo](https://github.com/OpenNebula/one).
+1. Begin by cloning the [one repo](https://github.com/OpenNebula/one)
 
    ```default
    git clone git@github.com:OpenNebula/one.git
    # Cd into the fireedge directory
    cd ./one/src/fireedge
    ```
-2. Build the [base modules]({{% relref "#base-modules" %}}), then start the FireEdge server.
+2. Build the [base modules]({{% relref "#base-modules" %}}) then start the FireEdge server
 
    ```default
    $ npm i         # Install dependencies from package.json
@@ -191,7 +191,7 @@ In order to develop a new tab, you need to make sure it has the correct webpack 
    $ npm run start # Start the server, by default accessible on http://localhost:2616/fireedge
    ```
 
-Now let's create a new module called `CustomContainers`, based off the original `ContainersModule`.
+Now let's create a new module called `CustomContainers`, based on the original `ContainersModule`.
 
 3. We will begin by creating a new `src/modules/customContainers` folder
 
@@ -199,7 +199,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    mkdir -p  src/modules/customContainers
    ```
 
-4. Then we’ll copy the `/Users` directory & webpack configuration file from the original `ContainersModule`
+4. Then we’ll copy the `/Users` directory and webpack configuration file from the original `ContainersModule`
 
    ```default
    # Copying the Users directory
@@ -212,7 +212,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    touch src/modules/customContainers/index.js
    ```
 
-5. Now we need to modify the `webpack.config.prod.customcontainers.js` file:
+5. Now we need to modify the `webpack.config.prod.customcontainers.js` file
 
    ```javascript
    // We will update the module name at the top to `CustomContainers`
@@ -243,9 +243,9 @@ Now let's create a new module called `CustomContainers`, based off the original 
    ```
    {{< /alert >}}
 
-6. Moving onto the actual code now, we’ll move into the new `customContainers` directory and modify the `Users.js` file.
+6. Moving on to the actual code now, we’ll move into the new `customContainers` directory and modify the `Users.js` file.
 
-   For this example, we’ll modify the normal Users component to also display groups in a column like layout.
+   For this example, we’ll modify the normal Users component to also display groups in a column like layout
    ```javascript
    import { Chip, Stack, Typography, Grid } from '@mui/material' // Adding the Grid import
 
@@ -267,7 +267,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    {{< alert title="Important" color="success" >}}
    Cross-module imports should *NEVER* be done relative to one another, only inside subdirectories of the module itself should you use relative import paths like `import ... from @modules/<moduleName>`. See [importing from other modules]({{% relref "#importing-remote-modules" %}}) for more information.{{< /alert >}} 
 
-7. Now lets rename our component to “UsersAndGroups” and modify the code so that we return a 2 column grid with both our tables inside
+7. Now let's rename our component to “UsersAndGroups” and modify the code so that we return a two column grid with both our tables inside
 
    ```jsx
    export function UsersAndGroups() {
@@ -341,7 +341,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    export * from '@modules/customContainers/Users'
    ```
 
-   Also update the exports inside the `src/modules/customContainers/Users/index.js` file, as it will point to the wrong directory otherwise
+   Also, we should update the exports inside the `src/modules/customContainers/Users/index.js` file, as it will point to the wrong directory otherwise
   
    ```javascript
    export * from '@modules/customContainers/Users/Users'
@@ -350,7 +350,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    {{< alert title="Note" color="success" >}}
    Here the `@modules` name is an alias we use in our webpack configuration, which gets resolved to the `src/modules` directory when building. You can examine this more closely inside the `webpack.config.prod.customcontainer.js` file. In this case, exporting relative to our parent directory is fine as we are not doing any cross-module referencing. See the [module webpack configuration]({{% relref "#module-webpack-configuration" %}}) section for more information.{{< /alert >}} 
 
-9. Time to build our module (for convenience sake, we will save the build command inside our `package.json` file)
+9. Time to build our module (for the sake of convenience we will save the build command inside our `package.json` file)
 
    ```javascript
    "scripts": {
@@ -429,7 +429,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
 
    Now the client will fetch and load the `CustomContainersModule`
 
-12. Then we need to update out `tab-manifest.json` file with our new `UsersAndGroups` component
+12. Then we need to update our `tab-manifest.json` file with our new `UsersAndGroups` component
 
    ```json
    {
@@ -455,7 +455,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    ```
 
    {{< alert title="Important" color="success" >}}
-   Make sure to add the `moduleId` pointing to the “CustomContainersModule”, as otherwise the client will attempt loading the Component from the default `ContainersModule`{{< /alert >}} 
+   Make sure to add the `moduleId` pointing to the “CustomContainersModule”, as otherwise the client will attempt to load the Component from the default `ContainersModule`{{< /alert >}} 
 
 13. Finally we need to add a new [view configuration]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-sunstone-views" %}}), allowing us to access the /usersgroups endpoint
 
@@ -471,7 +471,7 @@ Now let's create a new module called `CustomContainers`, based off the original 
    resource_name: "USERSGROUPS"
    ```
 
-Now open up your Sunstone web UI (should be reachable at `http://localhost:2616/fireedge`) and you should have a new tab under the “System” category, named “Users and Groups”, which displays both the users and groups table next to each other!
+Now open up your Sunstone web UI (should be reachable at `http://localhost:2616/fireedge`) and you should have a new tab under the “System” category named “Users and Groups”. This displays both the users and groups table next to each other!
 
 ![users_and_groups_tab](/images/users_and_groups_tab.png)
 
@@ -481,11 +481,11 @@ Note that all of this was done with the FireEdge Sunstone server up and running 
 
 ## Module Webpack Configuration
 
-When defining a new module, you need to make sure that it has a correctly defined webpack configuration file. This configuration file can be tweaked as you see fit, but should include a few key options in order to be compatible with the Sunstone client.
+When defining a new module, you need to make sure that it has a correctly defined webpack configuration file. This configuration file can be tweaked as you see fit but should include a few key options in order to be compatible with the Sunstone client.
 
 <a id="default-module-webpack"></a>
 
-This example shows the default webpack configuration file for a module.
+This example shows the default webpack configuration file for a module:
 
 ```javascript
 const moduleName = '<ModuleName>' // This is how the module will be referenced
@@ -588,7 +588,7 @@ module.exports = {
 }
 ```
 
-When creating a new module, you can use [this]({{% relref "#default-module-webpack" %}}) template as a base. Just make sure you update the `<ModuleName>` to match the name of your module.
+When creating a new module you can use [this]({{% relref "#default-module-webpack" %}}) template as a base. Just make sure you update the `<ModuleName>` to match the name of your module.
 
 <a id="resolving-remote-modules"></a>
 
@@ -635,11 +635,11 @@ Not all dependencies are shared between modules. For more information on which d
 
 ### Importing from other modules
 
-In order to import correctly between modules, you should not use relative import paths between them, even if this may seem convenient at first. As this creates a hard-link between the modules, and webpack will bundle parts of them together. Which in turn means that the modules cannot be rebuilt independently of one another. Instead, you should use the following syntax to import from another module:
+In order to import correctly between modules, you should not use relative import paths between them, even if this may seem convenient at first, because this creates a hard link between the modules and webpack will bundle parts of them together. This in turn means that the modules cannot be rebuilt independently of one another. Instead, you should use the following syntax to import from another module:
 
 `import ... from @<ModuleName>`
 
-Which should match the key property in the `configuredRemotes` object, as mentioned previously in the [resolving other modules]({{% relref "#resolving-remote-modules" %}}) section.
+This should match the key property in the `configuredRemotes` object, as mentioned previously in the [resolving other modules]({{% relref "#resolving-remote-modules" %}}) section.
 
 <a id="exporting-remote-modules"></a>
 
@@ -749,7 +749,7 @@ The JWT lifetime can be configured in the fireedge_server.conf configuration fil
 | **PUT**    | `/fireedge/api/service/<id>`                                | **Update** the service identified by <id>.                                                         |
 | **DELETE** | `/fireedge/api/service/<id>`                                | **Delete** the service identified by <id>.                                                         |
 | **POST**   | `/fireedge/api/service/action/<id>`                         | **Perform** an action on the service identified by <id>.                                           |
-| **POST**   | `/fireedge/api/service/scale/<id>`                          | **Perform** an scale on the service identified by <id>.                                            |
+| **POST**   | `/fireedge/api/service/scale/<id>`                          | **Perform** a scale on the service identified by <id>.                                            |
 | **POST**   | `/fireedge/api/service/role_action/<role_id>/<id>`          | **Perform** an action on all the VMs belonging to the role to the service identified both by <id>. |
 | **POST**   | `/fireedge/api/service/sched_action/<id>`                   | **Create** a new schedule action on the service identified by <id>.                                |
 | **PUT**    | `/fireedge/api/service/sched_action/<sched_action_id>/<id>` | **Update** the schedule action on the service identified both by <id>.                             |
@@ -773,7 +773,7 @@ The JWT lifetime can be configured in the fireedge_server.conf configuration fil
 | **POST** | `/fireedge/api/zendesk`               | **Create** a new ticket.                           |
 | **PUT**  | `/fireedge/api/zendesk/<id>`          | **Update** the ticket identified by <id>.          |
 
-## Frontend Architecture
+## Front-end Architecture
 
 An important part of managing OpenNebula through an interface is the use of forms and lists of resources. For this reason, we decided to extract some of this logic in configuration files.
 
@@ -787,7 +787,7 @@ Through the configuration files we can define view types and assign them to diff
 
 ### Master File
 
-This file orchestrates the views according to the user’s primary group and it’s located in `etc/sunstone/sunstone-view.yaml`.
+This file orchestrates the views according to the user’s primary group and is located in `etc/sunstone/sunstone-view.yaml`.
 
 In the following example, all groups have access to the user view and `oneadmin` to the admin view also:
 
@@ -809,7 +809,7 @@ The tab files are located in `etc/sunstone/<view_name>/<resource_tab>`.
 
 ## Adding New Tabs
 
-OpenNebula resources are grouped into pools and can be managed from the interface through resource tab (or route) where we can operate over one or more resources, filter by attributes or get detailed information about individual resources.
+OpenNebula resources are grouped into pools and can be managed from the interface through resource tab (or route), where we can operate over one or more resources, filter by attributes, or get detailed information about individual resources.
 
 To develop a new tab, it’s necessary to understand the structure of the configuration tab files:
 
@@ -823,14 +823,14 @@ To develop a new tab, it’s necessary to understand the structure of the config
 
 Using the view files as a starting point, the interface generates the available routes and defines them in a menu.
 
-Through each tab in the sidebar you can control and manage OpenNebula resources. All tabs should have a folder in the containers directory `src/client/containers` and enabled the route in `src/client/apps/sunstone/routesOne.js`.
+Through each tab in the sidebar you can control and manage OpenNebula resources. All tabs should have a folder in the containers directory `src/client/containers` and have enabled the route in `src/client/apps/sunstone/routesOne.js`.
 
 | Property        | Description                                                      |
 |-----------------|------------------------------------------------------------------|
 | `resource_name` | Reference to `RESOURCE_NAMES` in `src/client/constants/index.js` |
 
 {{< alert title="Note" color="success" >}}
-It’s important that `resource_name` matches the `RESOURCE_NAMES` constant, because the constants are used to define the routes in `src/client/apps/sunstone/routesOne.js`.{{< /alert >}} 
+It’s important that `resource_name` matches the `RESOURCE_NAMES` constant because the constants are used to define the routes in `src/client/apps/sunstone/routesOne.js`.{{< /alert >}} 
 
 ### Actions
 
@@ -838,11 +838,11 @@ List of actions to operate over the resources: `refresh`, `chown`, `chgrp`, `loc
 
 There are three action types:
 
-- Form modal actions. These actions do not have a `_dialog` suffix.
-- Actions referenced in other files. For example, the VM Template `create_app_dialog` references the Marketplace App `create_dialog`.
-- Form actions on separate route. These actions have a `_dialog` suffix. For example, the VM Template `instantiate_dialog` will have a route defined similar to `http://localhost:2616/fireedge/sunstone/vm-template/instantiate`.
+- Form modal actions: These actions do not have a `_dialog` suffix.
+- Actions referenced in other files: For example, the VM Template `create_app_dialog` references the Marketplace App `create_dialog`.
+- Form actions on separate route: These actions have a `_dialog` suffix. For example, the VM Template `instantiate_dialog` will have a route defined similar to `http://localhost:2616/fireedge/sunstone/vm-template/instantiate`.
 
-All actions are defined in the resource constants. For example, the VM Template’s are located in `src/client/constants/vmTemplate.js` as `VM_TEMPLATE_ACTIONS`.
+All actions are defined in the resource constants. For example, those of the VM Template are located in `src/client/constants/vmTemplate.js` as `VM_TEMPLATE_ACTIONS`.
 
 ### Filter
 
@@ -868,19 +868,19 @@ To add one, first it’s necessary to implement the filter in the table columns.
 
 ### Information Tabs
 
-The detailed view of a resource is structured in a tab-like layout. Tabs are defined in the `index.js` file of each resource’s folder `src/client/components/Tabs/<resource>`. E.g.: The VM Templates tabs are located in `src/client/components/Tabs/VmTemplate/index.js`.
+The detailed view of a resource is structured in a tab-like layout. Tabs are defined in the `index.js` file of each resource’s folder `src/client/components/Tabs/<resource>`. For example, the VM Templates tabs are located in `src/client/components/Tabs/VmTemplate/index.js`.
 
 Each entry in the `info-tabs` represents a tab and they all have two attributes, except for the `info` tab:
 
 - `enabled`: defines if the tab is visible.
 - `actions`: contains the allowed actions in the tab. The utility function to get the available actions for a tab is located at `src/client/models/Helper.js`.
 
-The `info` tab is special because it contains panels sections. Each panel section is an attribute group that can include actions itself.
+The `info` tab is special because it contains panel sections. Each panel section is an attribute group that can include actions itself.
 
 Attribute groups can be separated into four panels:
 
-- Information: Main attributes and details for the resource.
-- Permissions: associated permissions for the owner, the users in her group, and others.
+- Information: main attributes and details for the resource.
+- Permissions: associated permissions for the owner, the users in their group, and others.
 - Ownership: user and group to which it belongs.
 - Attributes (not always displayed): these panels are separate because they have information about each hypervisor and monitoring.
 
@@ -899,7 +899,7 @@ storage:
 
 ### Dialogs
 
-The resource actions that have the `_dialog` suffix, need to define their structure in this section.
+The resource actions that have the `_dialog` suffix need to define their structure in this section.
 
 The first entries in the dialog refer to the available steps. Then, within the individual step definitions are the accessible sections.
 

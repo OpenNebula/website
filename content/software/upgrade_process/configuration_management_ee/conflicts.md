@@ -12,9 +12,9 @@ weight: "4"
 
 <!--# Troubleshooting -->
 
-The configuration files upgrade is a complex process, during which many problems may arise. The root cause of all problems are the users’ customizations made in the configuration files in places that also change in a newer version. Because the upgrade process tries to apply changes from newer versions to existing files, the tool can be confused when it reaches the incompatibly modified part.
+The configuration files upgrade is a complex process during which many problems may arise. The root cause of all problems are users’ customizations made in the configuration files in places that also change in a newer version. Because the upgrade process tries to apply changes from newer versions to existing files, the tool can be confused when it reaches the incompatibly modified part.
 
-In case of a problem, the upgrade process terminates and **leaves the state of configuration files unchanged**. There is no automatic mechanism preconfigured, but the user has to instruct the tool on how to resolve the problem. This is done by specifying **patch modes** globally for the whole process, for a particular file, or for a particular file and (intermediate) version we upgrade to.
+In case of a problem, the upgrade process terminates and **leaves the state of configuration files unchanged**. There is no automatic mechanism preconfigured, but the user has to instruct the tool on how to resolve the problem. This is done by specifying **patch modes** globally for the whole process, for a particular file, or for a particular file and (intermediate) version the user is upgrading to.
 
 <a id="cfg-patch-modes"></a>
 
@@ -30,13 +30,13 @@ To deal with these situations, there are the following patch modes available:
 
 | Patch Modes   | Action                                                       | Problem Cause                                      |
 |---------------|--------------------------------------------------------------|----------------------------------------------------|
-| `skip`        | **Skip** patch operation                                     | Removed or incompatible configuration part.        |
+| `skip`        | **Skip** patch operation.                                     | Removed or incompatible configuration part.        |
 | `force`       | Place value in any suitable place, instead of precise place. | No precise place for application found.            |
 | `replace`     | **Replace** user changed values **with new default ones**.   | User changed value for which new default appeared. |
 
 The patch modes are specified using the `--patch-modes MODES` parameter passed to the `onecfg upgrade`. Patch modes can be used multiple times but the most specific one always overrides the more general ones (patch mode for particular file/version overrides the default patch mode). The syntax of the parameter should follow one of the following syntaxes:
 
-- `MODES` - **default patch modes** `MODES` for all files and all versions.
+- `MODES` - **default patch modes** `MODES` for all files and all versions
 - `MODES:FILE_NAME` - patch modes `MODES` for specific file `FILE_NAME` and all its versions
 - `MODES:FILE_NAME:VERSION` - patch modes `MODES` for specific file `FILE_NAME` when upgraded **to version** `VERSION`
 
@@ -96,7 +96,7 @@ Example of multiple patch modes for multiple files:
 Upgrade operations are done safely on a copy of production configuration files without changing the system state. After the upgrade ends successfully, the modified files are copied back to production locations.
 
 {{< alert title="Important" color="success" >}}
-Each upgrade operation creates a backup of current directories with OpenNebula configuration files into `/var/lib/one/backups/config/`. In case of error when copying the modified state back to production locations, the automatic restore is triggered.{{< /alert >}} 
+Each upgrade operation creates a backup of current directories with OpenNebula configuration files in `/var/lib/one/backups/config/`. In case of error when copying the modified state back to production locations, the automatic restore is triggered.{{< /alert >}} 
 
 In the case of a catastrophic failure when even automatic restore fails, the original content of configuration directories must be restored **manually** from initial backup. Here’s an example of a failed upgrade which requires manual intervention:
 
