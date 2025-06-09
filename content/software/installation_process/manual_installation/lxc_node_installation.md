@@ -17,7 +17,17 @@ weight: "7"
 This page shows you how to configure OpenNebula LXC Node from the binary packages.
 
 {{< alert title="Note" color="success" >}}
-Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "front_end_installation" %}}).{{< /alert >}} 
+Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "front_end_installation" %}}).{{< /alert >}}
+
+## Overview
+
+[LXC](https://linuxcontainers.org/lxc/introduction/) is a Linux technology which allows us to create and manage system and application containers. The containers are computing environments running on a particular hypervisor node alongside other containers or Host services, but secured and isolated in their own namespaces (user, process, network).
+
+From the perspective of a hypervisor node, such a container environment is just an additional process tree among other hypervisor processes. Inside of the environment, it looks like a standard Linux installation that sees only its own resources but shares the Host kernel.
+
+To understand the specific requirements, functionalities, and limitations of the LXC driver, see [LXC Driver]({{% relref "lxc_driver" %}}).
+
+You can then check the [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview" %}}) system configuration sections to deploy Virtual Machines on your LXC nodes and access them remotely over the network.
 
 ## Step 1. Add OpenNebula Repositories
 
@@ -291,9 +301,7 @@ $ onehost list
 
 ## Next steps
 
-Now, you can continue with:
+Now, you can continue by controlling and extending your cloud:
 
-- configuring [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}})
-- exploring [Management and Operations]({{% relref "../../index#operations-guide" %}}) guide
-
-to extend and control your cloud.
+- Configuring [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview" %}})
+- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cloud_clusters_infrastructure_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}})
