@@ -15,7 +15,17 @@ weight: "6"
 This page shows you how to configure OpenNebula KVM Node from the binary packages.
 
 {{< alert title="Note" color="success" >}}
-Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "front_end_installation" %}}).{{< /alert >}} 
+Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "front_end_installation" %}}).{{< /alert >}}
+
+## Overview
+
+[KVM](https://www.linux-kvm.org/) (Kernel-based Virtual Machine) is the main virtualization solution for Linux on x86 hardware that contains virtualization extensions (Intel VT or AMD-V) and on ARM64 (currently in beta mode). It consists of the loadable KVM kernel modules (one that provides the core virtualization infrastructure and several processor-specific modules), but the complete KVM virtualization stack usually also contains the user-space machine hardware emulator [QEMU](https://www.qemu.org) accelerated by the KVM and Virtual Machines management tool [libvirt](https://libvirt.org).
+
+By using KVM, you can run multiple Virtual Machines with unmodified Linux or Windows images. Each Virtual Machine has private virtualized hardware -- network card, disk, graphics adapter, etc.
+
+To understand the specific requirements, functionalities, and limitations of the KVM driver, see [KVM Driver]({{% relref "kvm_driver" %}}).
+
+You can then check the [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview" %}}) system configuration sections to deploy Virtual Machines on your KVM nodes and access them remotely over the network.
 
 <a id="kvm-repo"></a>
 
@@ -325,9 +335,7 @@ $ onehost list
 
 ## Next steps
 
-Now, you can continue with:
+Now, you can continue by controlling and extending your cloud:
 
-- configuring [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}})
-- exploring [Management and Operations]({{% relref "../../index#operations-guide" %}}) guide
-
-to extend and control your cloud.
+- Configuring [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview" %}})
+- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cloud_clusters_infrastructure_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}})
