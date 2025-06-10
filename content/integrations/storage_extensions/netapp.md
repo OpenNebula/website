@@ -97,7 +97,6 @@ Create both datastores for optimal performance (instant cloning/moving capabilit
 | --------------------- | ----------------------------------------------- |
 | `NAME`                | Datastore name                                  |
 | `TYPE`                | `SYSTEM_DS`                                     |
-| `DS_MAD`              | `netapp`                                        |
 | `TM_MAD`              | `netapp`                                        |
 | `DISK_TYPE`           | `BLOCK`                                         |
 | `NETAPP_HOST`         | NetApp ONTAP API IP address                     |
@@ -138,6 +137,7 @@ ID: 101
 | ------------------- | ----------------------------------------------- |
 | `NAME`              | Datastore name                                  |
 | `TYPE`              | `IMAGE_DS`                                      |
+| `DS_MAD`            | `netapp`                                        |
 | `TM_MAD`            | `netapp`                                        |
 | `DISK_TYPE`         | `BLOCK`                                         |
 | `NETAPP_HOST`       | NetApp ONTAP API IP address                     |
