@@ -93,8 +93,10 @@
   }
 }
 .td-footer svg {
-  width: 220.68px;
-  height: 32.099px;
+  // width: 220.68px;
+  width: 331.02px;
+  //height: 32.099px;
+  height: 48.148px;
 }
 .td-footer p {
   color: #EDEDED;
@@ -104,11 +106,12 @@
 }
 .one-footer-second-row {
   color: #EDEDED;
-  font-size: 19.063px;
+  //font-size: 19.063px;
+  font-size: 16.203px;
   font-style: normal;
   font-weight: 600;
   line-height: 13.5px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .td-footer__center {
   padding-top: 20px;
@@ -117,6 +120,10 @@
   display: flex;
   justify-content: space-between;
   width: 100%
+}
+.td-footer__links-item {
+  margin: 0 60px;
+  scale: 70%
 }
 
 
