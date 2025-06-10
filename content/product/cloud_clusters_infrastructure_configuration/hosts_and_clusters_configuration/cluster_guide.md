@@ -12,14 +12,14 @@ weight: "3"
 
 <!--# Clusters -->
 
-Clusters group together Hosts, datastores and virtual networks that are configured to work together. A cluster is used to:
+Clusters group together Hosts, datastores, and virtual networks that are configured to work together. A cluster is used to:
 
 > * Ensure that VMs use resources that are compatible.
 > * Assign resources to user groups by creating Virtual Private Clouds.
 
 Clusters should contain homogeneous resources. Note that some operations like live migrations are restricted to Hosts in the same cluster.
 
-The requirements for live migrating VMs between hosts of the same cluster are that no differences occur in the following areas of the hypervisors:
+The requirements for live migrating VMs between Hosts of the same cluster are that no differences occur in the following areas of the hypervisors:
 
 * CPU model
 * Firmware settings
@@ -127,19 +127,19 @@ DATASTORES
 
 In order to create a complete environment where the scheduler can deploy VMs, your clusters need to have at least one System Datastore.
 
-You can add the default System Datastore (ID: 0), or create a new one to improve its performance (e.g. balance VM I/O between different servers) or to use different System Datastore types (e.g. `shared` and `local`).
+You can add the default System Datastore (ID: 0) or create a new one to improve its performance (e.g., balance VM I/O between different servers) or to use different System Datastore types (e.g., `shared` and `local`).
 
-To use a specific System Datastore with your cluster, instead of the default one, just create it and associate it just like any other datastore (`onecluster adddatastore`).
+To use a specific System Datastore with your cluster instead of the default one, just create it and associate it just like any other datastore (`onecluster adddatastore`).
 
 ## Managing Clusters in Sunstone
 
-The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) offers an easy way to manage clusters and the resources within them. You will find the cluster sub-menu under the infrastructure menu. From there, you will be able to:
+The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) offers an easy way to manage clusters and the resources within them. You will find the cluster sub-menu under the infrastructure menu. From there you will be able to:
 
 - Create new clusters selecting the resources you want to include in this cluster.
 
 ![create_cluster](/images/sunstone_cluster_create.png)
 
-- See the list of current clusters, from which you can update the existing ones, or delete them.
+- See the list of current clusters, from which you can update or delete existing ones.
 
 ![dashboard_cluster](/images/sunstone_cluster_dashboard.png)
 

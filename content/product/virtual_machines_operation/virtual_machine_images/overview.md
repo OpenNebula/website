@@ -23,8 +23,6 @@ This section provides guides on creating and managing disk [Images]({{% relref "
 
 VM templates are _instantiated_ to become Virtual Machine instances. For information on VM instances, please refer to the [Virtual Machine Instances]({{% relref "vm_instances" %}}) section.
 
-
-
 ## Hypervisor Compatibility
 
 These guides are compatible with all hypervisors.

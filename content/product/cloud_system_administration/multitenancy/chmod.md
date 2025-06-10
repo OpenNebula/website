@@ -12,7 +12,7 @@ weight: "6"
 
 <!--# Managing Permissions -->
 
-Most OpenNebula resources have associated permissions for the **owner**, the users in her **group**, and **others**. For each one of these groups, there are three rights that can be set: **USE**, **MANAGE** and **ADMIN**. These permissions are very similar to those of UNIX file system.
+Most OpenNebula resources have associated permissions for the **owner**, the users in the owner's **group**, and **others**. For each one of these groups there are three rights that can be set: **USE**, **MANAGE**, and **ADMIN**. These permissions are very similar to those of UNIX file system.
 
 The resources with associated permissions are [Templates]({{% relref "../../virtual_machines_operation/virtual_machine_images/vm_templates#vm-guide" %}}), [VMs]({{% relref "../../virtual_machines_operation/virtual_machine_instances/vm_instances#vm-guide-2" %}}), [Images]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}}) and [Virtual Networks]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}). The exceptions are [Users]({{% relref "manage_users#manage-users" %}}), [Groups]({{% relref "manage_users#manage-users" %}}) and [Hosts]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview#hostsubsystem" %}}).
 
@@ -39,21 +39,21 @@ OTHER          : ---
 
 The previous output shows that for the Template 0, the owner user `oneuser1` has **USE** and **MANAGE** rights. Users in the group `users` have **USE** rights, and users that are not the owner or in the `users` group don’t have any rights over this Template.
 
-You can check what operations are allowed with each of the **USE**, **MANAGE** and **ADMIN** rights in the [xml-rpc reference documentation]({{% relref "../../../product/integration_references/system_interfaces/api#api" %}}). In general these rights are associated with the following operations:
+You can check what operations are allowed with each of the **USE**, **MANAGE**, and **ADMIN** rights in the [xml-rpc reference documentation]({{% relref "../../../product/integration_references/system_interfaces/api#api" %}}). In general these rights are associated with the following operations:
 
-* **USE**: Operations that do not modify the resource like listing it or using it (e.g. using an image or a virtual network). Typically you will grant **USE** rights to share your resources with other users of your group or with the rest of the users.
-* **MANAGE**: Operations that modify the resource like stopping a virtual machine, changing the persistent attribute of an image or removing a lease from a network. Typically you will grant **MANAGE** rights to users that will manage your own resources.
-* **ADMIN**: Special operations that are typically limited to administrators, like updating the data of a host or deleting an user group. Typically you will grant **ADMIN** permissions to those users with an administrator role.
+* **USE**: Operations that do not modify the resource like listing it or using it (e.g., using an image or a Virtual Network). Typically you will grant **USE** rights to share your resources with other users of your group or with the rest of the users.
+* **MANAGE**: Operations that modify the resource like stopping a Virtual Machine, changing the persistent attribute of an image, or removing a lease from a network. Typically you will grant **MANAGE** rights to users that will manage your own resources.
+* **ADMIN**: Special operations that are typically limited to administrators, like updating the data of a Host or deleting a user group. Typically you will grant **ADMIN** permissions to those users with an administrator role.
 
 {{< alert title="Important" color="success" >}}
-VirtualMachine objects allow you to set the permission level required for each specific action, for example you may want to require USE for the delete-recreate operation instead the default ADMIN right. You can [overrride the default permissions for each action]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-vm-operations" %}}) in oned.conf.{{< /alert >}} 
+Virtual Machine objects allow you to set the permission level required for each specific action, for example you may want to require USE for the delete-recreate operation instead of the default ADMIN right. You can [overrride the default permissions for each action]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-vm-operations" %}}) in oned.conf.{{< /alert >}} 
 
 {{< alert title="Warning" color="warning" >}}
-By default every user can update any permission group (owner, group or other) with the exception of the admin bit. There are some scenarios where it would be advisable to limit the other set (e.g. OpenNebula Zones so users can not break the group limits). In these situations the `ENABLE_OTHER_PERMISSIONS` attribute can be set to `NO` in `/etc/one/oned.conf` file{{< /alert >}} 
+By default every user can update any permission group (owner, group, or other) with the exception of the admin bit. There are some scenarios where it would be advisable to limit the other set (e.g., OpenNebula Zones so users cannot break the group limits). In these situations the `ENABLE_OTHER_PERMISSIONS` attribute can be set to `NO` in `/etc/one/oned.conf` file{{< /alert >}} 
 
 ### Changing Permissions with chmod
 
-The previous permissions can be updated with the chmod command. This command takes an octet as a parameter, following the [octal notation of the Unix chmod command](http://en.wikipedia.org/wiki/File_system_permissions#Octal_notation). The octet must be a three-digit base-8 number. Each digit, with a value between 0 and 7, represents the rights for the **owner**, **group** and **other**, respectively. The rights are represented by these values:
+The previous permissions can be updated with the chmod command. This command takes an octet as a parameter, following the [octal notation of the Unix chmod command](http://en.wikipedia.org/wiki/File_system_permissions#Octal_notation). The octet must be a three-digit base-8 number. Each digit, with a value between 0 and 7, represents the rights for the **owner**, **group**, and **other**, respectively. The rights are represented by these values:
 
 - The **USE** bit adds 4 to its total (in binary 100)
 - The **MANAGE** bit adds 2 to its total (in binary 010)
@@ -111,9 +111,9 @@ The default permissions given to newly created resources are:
 These permissions are reduced by the UMASK, which can be set:
 
 - Globally, with the **DEFAULT_UMASK** attribute in [oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}})
-- Individually for each User, using the [oneuser umask command]({{% relref "../../operation_references/configuration_references/cli#cli" %}}).
+- Individually for each user, using the [oneuser umask command]({{% relref "../../operation_references/configuration_references/cli#cli" %}}).
 
-These mask attributes work in a similar way to the [Unix umask command](http://en.wikipedia.org/wiki/Umask). The expected value is a three-digit base-8 number. Each digit is a mask that **disables** permissions for the **owner**, **group** and **other**, respectively.
+These mask attributes work in a similar way to the [Unix umask command](http://en.wikipedia.org/wiki/Umask). The expected value is a three-digit base-8 number. Each digit is a mask that **disables** permissions for the **owner**, **group**, and **other**, respectively.
 
 This table shows some examples:
 
@@ -125,7 +125,7 @@ This table shows some examples:
 
 ## Managing Permissions in Sunstone
 
-Sunstone offers a convenient way to manage resources permissions. This can be done by selecting resources from a view (for example the templates view) and click Info tab. The dialog lets the user conveniently set the resource’s permissions.
+Sunstone offers a convenient way to manage resources permissions. This can be done by selecting resources from a view (for example the templates view) and clicking the Info tab. The dialog lets the user conveniently set the resource’s permissions.
 
 ![sunstone_managing_permissions](/images/sunstone_managing_perms.png)
 
@@ -133,7 +133,7 @@ Sunstone offers a convenient way to manage resources permissions. This can be do
 
 ## Locking Resources
 
-OpenNebula can lock actions on a resource to prevent not intended operations, e.g.  to not accidentally delete a VM. By default OpenNebula will lock all operations, but you can provide a fine grain lock by specifying the access level required by the action:
+OpenNebula can lock actions on a resource to prevent unintended operations, e.g.,  to avoid accidentally deleting a VM. By default OpenNebula will lock all operations, but you can provide a fine grain lock by specifying the access level required by the action:
 
 > - **USE**: locks all possible actions. You can use **ALL** as an equivalent keyword.
 > - **MANAGE**: locks manage and admin actions.
@@ -152,7 +152,7 @@ The following resources can be locked:
 > - `VMGROUP`
 > - `VNTEMPLATE`
 
-Example:
+For example:
 
 ```default
 $ oneimage lock 2
@@ -171,7 +171,7 @@ Only the owner of the lock may unlock the resource. The user ONEADMIN can overri
 
 # Managing ACL Rules
 
-The ACL authorization system enables fine-tuning of the allowed operations for any user, or group of users. Each operation generates an authorization request that is checked against the registered set of ACL rules. The core then can grant permission, or reject the request.
+The ACL authorization system enables fine-tuning of the allowed operations for any user or group of users. Each operation generates an authorization request that is checked against the registered set of ACL rules. The core can then grant permission or reject the request.
 
 This allows administrators to tailor the user roles according to their infrastructure needs. For instance, using ACL rules you could create a group of users that can see and use existing virtual resources, but not create any new ones. Or grant permissions to a specific user to manage Virtual Networks for some of the existing groups, but not to perform any other operation in your cloud. Some examples are provided at the end of this guide.
 
@@ -189,18 +189,18 @@ This rule grants the user with ID 5 the right to perform USE and MANAGE operatio
 
 The rule is split in four components, separated by a space:
 
-- **User** component is composed only by an **ID definition**.
-- **Resources** is composed by a list of **‘+’** separated resource types, **‘/’** and an **ID definition**.
+- **User** component is composed only of an **ID definition**.
+- **Resources** is composed of a list of **‘+’** separated resource types, **‘/’** and an **ID definition**.
 - **Rights** is a list of Operations separated by the **‘+’** character.
-- **Zone** is an **ID definition** of the zones where the rule applies. This last part is optional, and can be ignored unless OpenNebula is configured in a [federation]({{% relref "../../control_plane_configuration/data_center_federation/overview#introf" %}}).
+- **Zone** is an **ID definition** of the Zones where the rule applies. This last part is optional and can be ignored unless OpenNebula is configured in a [federation]({{% relref "../../control_plane_configuration/data_center_federation/overview#introf" %}}).
 
-The **ID definition** for User in a rule is written as:
+The **ID definition** for a user in a rule is written as:
 
 - `#<id> :` for individual IDs
 - `@<id> :` for a group ID
 - `* :` for All
 
-The **ID definition** for a Resource has the same syntax as the ones for Users, but adding:
+The **ID definition** for a resource has the same syntax as the ones for users, but adding:
 
 - `%<id> :` for cluster IDs
 
@@ -221,7 +221,7 @@ The next one allows all users in the group 106 to use the Virtual Network 47. Th
 {{< alert title="Note" color="success" >}}
 Note the difference between `* NET/#47 USE"` **vs** `* NET/@47 USE`
 
-All Users can use NETWORK with ID 47 **vs** All Users can use NETWORKS belonging to the Group whose ID is 47.{{< /alert >}}  
+All users can use NETWORK with ID 47 **vs** All users can use NETWORKS belonging to the group whose ID is 47.{{< /alert >}}  
 
 The following one allows users in group 106 to deploy VMs in Hosts assigned to the cluster 100
 
@@ -255,7 +255,7 @@ The rules shown correspond to the following ones:
 @106    IMAGE/#31                               USE     #0
 ```
 
-The first five were created on bootstrap by OpenNebula, and the last one was created using oneacl:
+The first five were created on bootstrap by OpenNebula and the last one was created using oneacl:
 
 ```default
 $ oneacl create "@106 IMAGE/#31 USE"
@@ -264,9 +264,9 @@ ID: 5
 
 The **ID** column identifies each rule’s ID. This ID is needed to delete rules, using **‘oneacl delete <id>’**.
 
-Next column is **USER**, which can be an individual user (#) or group (@) id; or all (\*) users.
+The next column is **User**, which can be an individual user (#) or group (@) id; or all (\*) users.
 
-The **Resources** column lists the existing Resource types initials. Each rule fills the initials of the resource types it applies to.
+The **Resources** column lists the existing Resource types initials. Each rule fills the initials of the resource type it applies to.
 
 - `V : VM`
 - `H : HOST`
@@ -290,14 +290,14 @@ The **Resources** column lists the existing Resource types initials. Each rule f
 
 **RID** stands for Resource ID, it can be an individual object (#), group (@) or cluster (%) id; or all (\*) objects.
 
-The next **Operations** column lists the allowed operations initials.
+The **Operations** column lists the initials of allowed operations.
 
 - `U : USE`
 - `M : MANAGE`
 - `A : ADMIN`
 - `C : CREATE`
 
-And the last column, **Zone**, shows the zone(s) where the rule applies. It can be an individual zone id (#), or all (\*) zone.
+And the last column, **Zone**, shows the Zone(s) where the rule applies. It can be an individual Zone id (#), or all (\*) Zones.
 
 ## Managing ACLs via Sunstone
 
@@ -309,11 +309,11 @@ Select ACLs in the left-side menu to access a view of the current ACLs defined i
 
 This view is designed to easily understand what the purpose of each ACL is. You can create new ACLs in two different ways.
 
-First way it is to use the **Create from string** functionality by clicking on the icon with a pencil:
+The first way is to use the **Create from string** functionality by clicking on the icon with a pencil:
 
 ![sunstone_acl_create_string_button](/images/sunstone_acl_create_string.png)
 
-In the creation dialog you can type the string ACL rule in the same way as the CLI. After type the rule, Sunstone will validate if the string has the correct format and will show to the user what is the meaning of the rule.
+In the creation dialog you can type the string ACL rule in the same way as the CLI. After typing the rule, Sunstone will validate whether the string has the correct format and will show the user the meaning of the rule.
 
 If we use the following example:
 
@@ -325,11 +325,11 @@ Sunstone will validate the rule and show its meaning:
 
 ![sunstone_acl_create_string_form](/images/sunstone_acl_create_string_form.png)
 
-Also, if the rule has a not valid format, Sunstone will show an error:
+If the rule does not have a valid format, Sunstone will show an error:
 
 ![sunstone_acl_create_string_form_novalid](/images/sunstone_acl_create_string_novalid.png)
 
-The other way to create a rule it is to use the **Create form** functionality by clicking the icon with a plus symbol. In this case, the user will be guided for different steps to create the rule. For example, to create the rule:
+The other way to create a rule it is to use the **Create form** functionality by clicking the icon with a plus symbol. In this case, the user will be guided through different steps to create the rule. For example, to create the rule:
 
 ```default
 #3 IMAGE+TEMPLATE/@100 USE+MANAGE #0
@@ -341,15 +341,15 @@ The following steps are needed:
 
 ![sunstone_acl_create](/images/sunstone_acl_create.png)
 
-- Select whom the rule will apply. Could be an individual user, a group or all users:
+- Select whom the rule will apply to. It could be an individual user, a group, or all users:
 
 ![sunstone_acl_create_users](/images/sunstone_acl_create_user.png)
 
-- Select affected resources by the rule:
+- Select resources affected by the rule:
 
 ![sunstone_acl_create_resources](/images/sunstone_acl_create_resources.png)
 
-- Select resource owners. Could be an individual user, a group of users, a cluster or all users:
+- Select resource owners. These could be an individual user, a group of users, a cluster, or all users:
 
 ![sunstone_acl_create_resourcesidentifier](/images/sunstone_acl_create_resourcesidentifier.png)
 
@@ -357,7 +357,7 @@ The following steps are needed:
 
 ![sunstone_acl_create_rights](/images/sunstone_acl_create_rights.png)
 
-- Select the zone where the rule will apply. Optional unless OpenNebula is configured in a federation:
+- Select the Zone where the rule will apply. Optional unless OpenNebula is configured in a federation:
 
 ![sunstone_acl_create_zone](/images/sunstone_acl_create_zone.png)
 
@@ -365,11 +365,11 @@ The following steps are needed:
 
 ![sunstone_acl_create_summary](/images/sunstone_acl_create_summary.png)
 
-In both ways, to create the rule the user will have to click on Finish button.
+In both ways, to create the rule the user will have to click on the Finish button.
 
 ## Default ACL Rules for Group
 
-When new group is created, the following ACL rules are created:
+When a new group is created, the following ACL rules are created:
 
 ```default
 ID     USER RES_VHNIUTGDCOZSvRMAPtB   RID OPE_UMAC  ZONE
@@ -379,7 +379,7 @@ ID     USER RES_VHNIUTGDCOZSvRMAPtB   RID OPE_UMAC  ZONE
  9     @100     V--I-T---O-S-R--P-B     *     ---c     *
 ```
 
-Which means that, users of this group have **MANAGE** permissions for Hosts, **USE** permissions for Virtual Networks and Datastores. Users can create Virtual Machines, Images, Templates, Documents, Security Groups, Virtual Routers, VMGroups and Backup Jobs.
+Which means that users of this group have **MANAGE** permissions for Hosts and **USE** permissions for Virtual Networks and Datastores. Users can create Virtual Machines, Images, Templates, Documents, Security Groups, Virtual Routers, VMGroups, and Backup Jobs.
 
 Default ACL rules for group admin are:
 
@@ -398,9 +398,9 @@ Visit the [XML-RPC API reference documentation]({{% relref "../../../product/int
 
 For the internal Authorization in OpenNebula, there is an implicit rule:
 
-- The oneadmin user, or users in the oneadmin group are authorized to perform any operation.
+- The oneadmin user or users in the oneadmin group are authorized to perform any operation.
 
-If the resource is one of type `VM`, `NET`, `IMAGE`, `TEMPLATE`, or `DOCUMENT` the object’s permissions are checked. For instance, this is an example of the oneimage show output:
+If the resource is one of the following types: `VM`, `NET`, `IMAGE`, `TEMPLATE`, or `DOCUMENT`, the object’s permissions are checked. For instance, this is an example of the oneimage show output:
 
 ```default
 $ oneimage show 2
@@ -416,11 +416,11 @@ OTHER          : ---
 
 The output above shows that the owner of the image has **USE** and **MANAGE** rights.
 
-If none of the above conditions are true, then the set of ACL rules is iterated until one of the rules allows the operation.
+If none of the above conditions are true then the set of ACL rules is iterated until one of the rules allows the operation.
 
-An important concept about the ACL set is that each rule adds new permissions, and they can’t restrict existing ones: if any rule grants permission, the operation is allowed.
+An important concept about the ACL set is that each rule adds new permissions and they can’t restrict existing ones: if any rule grants permission, the operation is allowed.
 
-This is important because you have to be aware of the rules that apply to a user and his group. Consider the following example: if a user **#7** is in the group **@108**, with the following existing rule:
+This is important because you have to be aware of the rules that apply to a user and the user's group. Consider the following example: if a user **#7** is in the group **@108**, with the following existing rule:
 
 ```default
 @108 IMAGE/#45 USE+MANAGE
@@ -436,7 +436,7 @@ Then the following rule won’t have any effect:
 
 ### Special Authorization for Virtual Network Reservations
 
-There is a special sub-type of Virtual Network: [reservations]({{% relref "../../virtual_machines_operation/virtual_machines_networking/self_provision#vgg-vn-reservations" %}}). For these virtual networks the ACL system makes the following exceptions:
+There is a special sub-type of Virtual Network: [reservations]({{% relref "../../virtual_machines_operation/virtual_machines_networking/self_provision#vgg-vn-reservations" %}}). For these Virtual Networks the ACL system makes the following exceptions:
 
 - ACL rules that apply to ALL (\*) are ignored
 - ACL rules that apply to a cluster (%) are ignored

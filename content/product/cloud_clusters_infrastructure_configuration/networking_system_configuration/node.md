@@ -22,7 +22,7 @@ This guide includes specific node setup steps to enable each network mode. You *
 
 ### Configuration
 
-* No additional configuration is needed. If `BRIDGE` configured in the Virtual Network does not exist, a new Linux bridge will be created when the VM is instantiated.
+* No additional configuration is needed. If `BRIDGE` configured in the virtual network does not exist, a new Linux bridge will be created when the VM is instantiated.
 
 ## 802.1Q VLAN Networking Mode
 
@@ -57,7 +57,7 @@ No additional configuration is needed.
 
 ### Configuration
 
-* No additional configuration is needed. If `BRIDGE` configured in the Virtual Network does not exist, a Linux bridge and a Open vSwitch bridge will be created when the VM is instantiated. For example:
+* No additional configuration is needed. If `BRIDGE` configured in the virtual network does not exist, a Linux bridge and a Open vSwitch bridge will be created when the VM is instantiated. For example:
 
 ```default
 # ovs-vsctl show

@@ -16,11 +16,11 @@ This page describes how to install the OpenNebula Prometheus integration package
 
 ## Step 1. OpenNebula Repositories [Front-end, Hosts]
 
-At this point OpenNebula software repositories should already be configured in your front-end and hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}) guide.
+At this point OpenNebula software repositories should already be configured in your Front-end and Hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}) guide.
 
 ## Step 2. Install Front-end Packages [Front-end]
 
-In your OpenNebula front-end, install the Prometheus package. This package includes:
+In your OpenNebula Front-end, install the Prometheus package. This package includes:
 
 > - The [Prometheus monitoring system binary](https://github.com/prometheus/prometheus).
 > - The [Prometheus Alertmanager binary](https://github.com/prometheus/alertmanager).
@@ -35,13 +35,13 @@ Prometheus, Alertmanager Node Exporter are free software and they are re-distrib
 
 Note that you will be able to use any existing installation of both systems after the installation.
 
-**RPM based distributions (Alma, RHEL)**
+**RPM-based distributions (Alma, RHEL)**
 
 ```default
 # yum -y install opennebula-prometheus opennebula-prometheus-kvm
 ```
 
-**Deb based distributions (Ubuntu, Debian)**
+**Deb-based distributions (Ubuntu, Debian)**
 
 ```default
 # apt -y install opennebula-prometheus opennebula-prometheus-kvm
@@ -49,7 +49,7 @@ Note that you will be able to use any existing installation of both systems afte
 
 ## Step 3. Install Hosts Packages [Hosts]
 
-In your hosts you need to install the Prometheus-KVM, this package includes:
+In your Hosts you need to install the Prometheus-KVM, this package includes:
 
 > - The OpenNebula exporter (unused in Hosts).
 > - The OpenNebula Libvirt exporter.
@@ -59,13 +59,13 @@ Prometheus Node exporter is free software and re-distributed in this package for
 
 Note that you will be able to use any existing installation of the node exporter after the installation.
 
-**RPM based distributions (Alma, RHEL)**
+**RPM-based distributions (Alma, RHEL)**
 
 ```default
 # yum -y install opennebula-prometheus-kvm
 ```
 
-**Deb based distributions (Ubuntu, Debian)**
+**Deb-based distributions (Ubuntu, Debian)**
 
 ```default
 # apt -y install opennebula-prometheus-kvm
@@ -73,7 +73,7 @@ Note that you will be able to use any existing installation of the node exporter
 
 ## Step 4. Configure Prometheus [Front-end]
 
-The OpenNebula Prometheus package comes with a simple script that automatically configures the scrape endpoints for your cloud. First, make sure all your hosts are properly listed with the onehost command, for example:
+The OpenNebula Prometheus package comes with a simple script that automatically configures the scrape endpoints for your cloud. First, make sure all your Hosts are properly listed with the onehost command, for example:
 
 ```default
 $ onehost list
@@ -82,7 +82,7 @@ ID NAME                          CLUSTER    TVM      ALLOCATED_CPU      ALLOCATE
  0 kvm-local-uimw3-1.test        default      0       0 / 100 (0%)     0K / 1.2G (0%) on
 ```
 
-Now, we will generate the prometheus configuration in `/etc/one/prometheus/prometheus.yml`, as `root` (or `oneadmin`) execute:
+Now, we will generate the Prometheus configuration in `/etc/one/prometheus/prometheus.yml`, as `root` (or `oneadmin`) execute:
 
 ```default
 # /usr/share/one/prometheus/patch_datasources.rb
@@ -143,13 +143,13 @@ scrape_configs:
 You can adjust scrape intervals or other configuration attributes in this file.
 
 {{< alert title="Note" color="success" >}}
-You can easily add or remove hosts by copying or deleting the corresponding targets, or simply re-run the script. In that case you’ll have a backup in `/etc/one/prometheus/` to recover any additional configurations.{{< /alert >}} 
+You can easily add or remove Hosts by copying or deleting the corresponding targets, or simply re-run the script. In that case you’ll have a backup in `/etc/one/prometheus/` to recover any additional configurations.{{< /alert >}} 
 
 ## Step 5. Start the Prometheus Service [Front-end]
 
-Prometheus service is controlled with a Systemd unit file (`/usr/lib/systemd/system/opennebula-prometheus.service`). We recommend that you take a look to the default options set in that file, and add any flags of interest for your setup (e.g. run `prometheus -h` to get a complete list).
+Prometheus service is controlled with a Systemd unit file (`/usr/lib/systemd/system/opennebula-prometheus.service`). We recommend that you take a look at the default options set in that file and add any flags of interest for your setup (e.g., run `prometheus -h` to get a complete list).
 
-Once you are happy with the options, start and enable prometheus:
+Once you are happy with the options, start and enable Prometheus:
 
 ```default
 # systemctl enable --now opennebula-prometheus.service
@@ -161,7 +161,7 @@ Finally, we need to start and enable both exporters:
 # systemctl enable --now opennebula-exporter.service opennebula-node-exporter.service
 ```
 
-If everything went ok, you should be able to check that prometheus and both exporters are running:
+If everything went ok, you should be able to check that Prometheus and both exporters are running:
 
 ```default
 # ss -tapn | grep 'LISTEN.*\(9925\|9100\|9090\)'
@@ -199,7 +199,7 @@ LISTEN    0      100          0.0.0.0:9926       0.0.0.0:*     users:(("ruby",pi
 LISTEN    0      4096               *:9100             *:*     users:(("node_exporter",pid=38884,fd=3))
 ```
 
-You should be able also to retrieve some metrics:
+You should also be able to retrieve some metrics:
 
 ```default
 $ curl localhost:9926/metrics
@@ -216,7 +216,7 @@ opennebula_libvirt_daemon_up 1.0
 
 ## Using an Existing Prometheus Installation
 
-If you already have an existing Prometheus installation, you just need to adapt Steps 4, 5 and 6 as follows:
+If you already have an existing Prometheus installation, you just need to adapt Steps 4, 5, and 6 as follows:
 
 > - You can use `/usr/share/one/prometheus/patch_datasources.rb` as described in Step 4 to copy the scrape configurations into your current Prometheus configuration file.
 > - You just need to enable and start the `opennebula-exporter` as described in Step 5, but not the Prometheus service.
@@ -228,7 +228,7 @@ If you already have an existing Prometheus installation, you just need to adapt 
 
 You can refer to [OpenNebula Front-end HA]({{% relref "../../../product/control_plane_configuration/high_availability/frontend_ha#frontend-ha-setup" %}}) to learn more about HA mode in OpenNebula.
 
-Let’s assume your existing OpenNebula instance consists of three front-ends and two KVM hosts:
+Let’s assume your existing OpenNebula instance consists of three Front-ends and two KVM Hosts:
 
 ```default
 # onezone show 0
@@ -314,7 +314,7 @@ scrape_configs:
       one_host_id: '0'
 ```
 
-You can spot that all Front-ends and all hosts are included in various scrape jobs. You can also see configuration for alerting:
+You can spot that all Front-ends and all Hosts are included in various scrape jobs. You can also see configuration for alerting:
 
 ```yaml
 alerting:

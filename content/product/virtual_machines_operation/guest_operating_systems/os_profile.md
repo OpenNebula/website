@@ -12,7 +12,7 @@ weight: "4"
 
 <!--# Operating System Profiles -->
 
-In Sunstone you can quickly flavor a VM template by using a Operating System Profile, which will pre-fill part of the template for you. By default Sunstone ships with a default “Windows Optimized” profile which contains some basic windows specific optimization settings.
+In Sunstone you can quickly flavor a VM template by using an Operating System Profile, which will pre-fill part of the template for you. By default, Sunstone ships with a “Windows Optimized” profile which contains some basic Windows-specific optimization settings.
 
 <a id="define-os-profile"></a>
 
@@ -26,15 +26,15 @@ In Sunstone you can quickly flavor a VM template by using a Operating System Pro
    Name your profile by defining a new `.yaml` file
 
    {{< alert title="Note" color="success" >}}
-   The filename is used to identify the profile in Sunstone. The filename is sentence cased and all `_` characters are displayed as spaces. For example `windows_optimized.yaml` becomes `Windows Optimized`.{{< /alert >}} 
+   The filename is used to identify the profile in Sunstone. The filename is sentence-cased and all `_` characters are displayed as spaces. For example, `windows_optimized.yaml` becomes `Windows Optimized`.{{< /alert >}} 
 3. **Configure the profile**
 
    Define the profile according to the [Operating System Profiles schema]({{% relref "#os-profile-schema" %}}).
 
    {{< alert title="Important" color="success" >}}
-   All values are case-sensitive{{< /alert >}} 
+   All values are case sensitive{{< /alert >}} 
 
-   Here’s an example of a profile that fills in the name of the VM template, the CPU & memory configuration and sets up the backup strategy.
+   Here’s an example of a profile that fills in the name of the VM template, the CPU & memory configuration, and sets up the backup strategy.
    ```yaml
    ---
    # basic_profile.yaml
@@ -64,9 +64,9 @@ Sunstone also ships with a `base.template` file (found in the default profiles d
 
 ## Profile Chain Loading
 
-It’s also possible to chain-load profiles by referencing one profile from another. This allows you to more efficiently combine snippets of profiles together, combining different optimizations for specialized use cases.
+It’s also possible to chain-load profiles by referencing one profile from another. This allows you to combine snippets of profiles together more efficiently, combining different optimizations for specialized use cases.
 
-Take for example, the default windows profile that ships with Sunstone:
+Take for example the default Windows profile that ships with Sunstone:
 
 ```yaml
 ---
@@ -124,7 +124,7 @@ Take for example, the default windows profile that ships with Sunstone:
       VALIDATE: "Yes"
 ```
 
-Now say you want to combine this profile with the `basic profile` from the [previous section]({{% relref "#define-os-profile" %}}). Then you just add the `OS_PROFILE` attribute to the basic profile’s configuration and reference the other profile from it:
+Now say you want to combine this profile with the `basic profile` from the [previous section]({{% relref "#define-os-profile" %}}). Now you just add the `OS_PROFILE` attribute to the basic profile’s configuration and reference the other profile from it:
 
 {{< alert title="Note" color="success" >}}
 The `OS_PROFILE` value being referenced should match the one on disk exactly, excluding the `.yaml` extension{{< /alert >}} 
@@ -304,8 +304,8 @@ NICs are configured under `Network→NIC` and PCI devices under `Network→PCI`{
 | **→OS**               |         | Operating System configuration           |                                                                                     |
 | →→ ARCH               | string  | Architecture                             | “x86_64”, “i686”                                                                    |
 | →→ SD_DISK_BUS        | string  | SD disk bus type                         | “scsi”, “sata”                                                                      |
-| →→ MACHINE            | string  | Machine type                             | Dependent on host support                                                           |
-| →→ FIRMWARE           | string  | Firmware type                            | “BIOS”, “UEFI” & host<br/>supported e.g.,<br/>“/usr/share/AAVMF/<br/>AAVMF_CODE.fd” |
+| →→ MACHINE            | string  | Machine type                             | Dependent on Host support                                                           |
+| →→ FIRMWARE           | string  | Firmware type                            | “BIOS”, “UEFI” & Host<br/>supported e.g.,<br/>“/usr/share/AAVMF/<br/>AAVMF_CODE.fd” |
 | →→ BOOT               | string  | Boot device order                        | Comma-separated list<br/>e.g., “disk0,disk1,nic0”                                   |
 | →→ KERNEL             | string  | Kernel image path                        | Any valid path                                                                      |
 | →→ KERNEL_DS          | string  | Kernel file reference                    | e.g., $FILE[IMAGE_ID=123]                                                           |
@@ -321,7 +321,7 @@ NICs are configured under `Network→NIC` and PCI devices under `Network→PCI`{
 | →→ PAE                | boolean | PAE setting                              | “Yes”, “No”                                                                         |
 | →→ APIC               | boolean | APIC setting                             | “Yes”, “No”                                                                         |
 | →→ HYPERV             | boolean | Enable Hyper-V features                  | “Yes”, “No”                                                                         |
-| →→ LOCALTIME          | boolean | Synchronize guest time with host         | “Yes”, “No”                                                                         |
+| →→ LOCALTIME          | boolean | Synchronize guest time with Host         | “Yes”, “No”                                                                         |
 | →→ GUEST_AGENT        | boolean | Enable guest agent                       | “Yes”, “No”                                                                         |
 | →→ VIRTIO_SCSI_QUEUES | string  | Virtio SCSI queues configuration         | “auto” or positive integer                                                          |
 | →→ VIRTIO_BLK_QUEUES  | string  | Virtio block queues configuration        | “auto” or positive integer                                                          |

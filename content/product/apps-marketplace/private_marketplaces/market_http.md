@@ -20,11 +20,11 @@ This is a fully supported Marketplace with all the implemented features.
 
 ## Requirements
 
-The web server should be deployed either in the Front-end or on a node reachable by the Front-end. A directory that will be used to store the uploaded images (Marketplace Apps.) should be configured to have the necessary space available and the web server must be configured to grant HTTP access to that directory.
+The web server should be deployed either in the Front-end or on a node reachable by the Front-end. A directory that will be used to store the uploaded images (Marketplace Apps) should be configured to have the necessary space available and the web server must be configured to grant HTTP access to that directory.
 
-It is recommended to use either [Apache](https://httpd.apache.org/) or [NGINX](https://www.nginx.com/), as they are known to work properly with the potentially large size of the Marketplace App. files. However, other web servers may work, as long as they can handle the load.
+It is recommended to use either [Apache](https://httpd.apache.org/) or [NGINX](https://www.nginx.com/), as they are known to work properly with the potentially large size of the Marketplace App files. However, other web servers may work, as long as they can handle the load.
 
-The web server should be deployed by the administrator before registering the MarketPlace.
+The web server should be deployed by the administrator before registering the Marketplace.
 
 ## Summary
 
@@ -40,7 +40,7 @@ These are the configuration attributes of a Marketplace template of the HTTP kin
 | `BASE_URL`    | **YES**    | Base URL of the Marketplace HTTP endpoint.                                                                                                          |
 | `BRIDGE_LIST` | **NO**     | Space separated list of servers to access the public directory. If not defined, the public directory will be local to the Front-end.                |
 
-When an image is uploaded to this market, it is copied to `BRIDGE_LIST`:`PUBLIC_DIR` (if `BRIDGE_LIST` is not set, then it is copied to the current frontend where OpenNebula is running). After that, they are available in `BASE_URL`. OpenNebula does not set up neither the webserver nor the secure access to it.
+When an image is uploaded to this market, it is copied to `BRIDGE_LIST`:`PUBLIC_DIR` (if `BRIDGE_LIST` is not set, then it is copied to the current Front-end where OpenNebula is running). After that, it is available in `BASE_URL`. OpenNebula does not set up the webserver nor the secure access to it.
 
 ![HTTP marketplace overview](/images/market_http.png)
 

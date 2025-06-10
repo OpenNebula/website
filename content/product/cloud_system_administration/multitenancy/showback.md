@@ -12,7 +12,7 @@ weight: "8"
 
 <!--# Showback -->
 
-The showback toolset reports resource usage cost, and allows the integration with chargeback and billing platforms. The toolset generates showback reports using the information retrieved from OpenNebula.
+The showback toolset reports resource usage cost and allows the integration with chargeback and billing platforms. The toolset generates showback reports using the information retrieved from OpenNebula.
 
 ## Set the VM Cost
 
@@ -22,7 +22,7 @@ Each VM Template can optionally define a cost (see the [syntax here]({{% relref 
 
 There is a default cost that will be applied to VM Templates without a cost defined. It can be set in the [oned.conf file]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-default-showback" %}}).
 
-Using this cost schema allows the users to resize the Virtual Machine instances.
+Using this cost schema allows users to resize the Virtual Machine instances.
 
 ![sunstone_showback_memory](/images/sunstone_showback_memory.png)
 ![sunstone_showback_disks](/images/sunstone_showback_disks.png)
@@ -32,7 +32,7 @@ If your users can access the [Sunstone ‘user’ view]({{% relref "fireedge_sun
 
 ## Calculate Monthly Reports
 
-Before the cost reports can be seen by the users, the administrator has to generate them. To create the monthly cost reports, use the `oneshowback` command or Sunstone:
+Before the cost reports can be seen by the users, the administrator has to generate them. To create the monthly cost reports use the `oneshowback` command or Sunstone:
 
 ### Using oneshowback command
 
@@ -43,7 +43,7 @@ Usage: oneshowback [options]
     -e, --end TIME                   Last month of the data
 ```
 
-When this command is executed, the OpenNebula core reads all the accounting records, and calculates the total cost for each month. The records include the total cost of the month, and basic information about the VM and its owner. This information is then stored in the database, to be consumed with the `oneshowback list` command.
+When this command is executed, the OpenNebula core reads all the accounting records and calculates the total cost for each month. The records include the total cost of the month, and basic information about the VM and its owner. This information is then stored in the database to be consumed with the `oneshowback list` command.
 
 The monthly cost of each VM is calculated as the sum of:
 
@@ -51,14 +51,14 @@ The monthly cost of each VM is calculated as the sum of:
 * `MEMORY_COST` \* `MEMORY` \* `HOURS`
 * `DISK_COST` \* `DISK_SIZE` \* `HOURS`
 
-The number of hours is calculated as the total number of hours that a VM has been `active`. This accounts for every VM state that keeps Host resources secured, like `poweroff` or `suspended` but not in `stopped` or `undeploy`.
+The number of hours is calculated as the total number of hours that a VM has been `active`. This accounts for every VM state that keeps Host resources secured, like `poweroff` or `suspended`, but not in `stopped` or `undeploy`.
 
 Optionally you can compute CPU and MEMORY cost only for VMs in `running` state, see `SHOWBACK_ONLY_RUNNING` in [oned.conf file]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-default-showback" %}})
 
 If the time range includes the current month, OpenNebula will calculate the cost up to today’s date.
 
 {{< alert title="Note" color="success" >}}
-There is a timer in the front-end opennebula-showback.timer that calculates automatically the showback every day, you can check the status by running `systemctl status opennebula-showback.timer`.{{< /alert >}} 
+There is a timer in the Front-end opennebula-showback.timer that automatically calculates the showback every day. You can check the status by running `systemctl status opennebula-showback.timer`.{{< /alert >}} 
 
 The `oneshowback` command can only be executed by the oneadmin user.
 
@@ -80,11 +80,11 @@ $ oneshowback calculate --start "09/2016" --end "09/2016"
 This is a resource intensive operation. For big deployments, it is recommended to use the `--start` option to process only the last missing months.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
-Existing records can be re-calculated. This can be useful to update old records when a VM is renamed, or the owner is changed. In this case, the cost of previous months will be also assigned to the new user.{{< /alert >}} 
+Existing records can be re-calculated. This can be useful to update old records when a VM is renamed or the owner is changed. In this case, the cost of previous months will be also assigned to the new user.{{< /alert >}} 
 
 ### Using Sunstone
 
-Log in Sunstone as an administrator user and go to the Settings section. Select a start date and a end date and press Calculate showback button:
+Log into Sunstone as an administrator user and go to the Settings section. Select a start date and a end date and press Calculate showback button:
 
 ![sunstone_showback_calculate](/images/sunstone_showback_calculate.png)
 
@@ -120,13 +120,13 @@ list
 
 ### Using Sunstone
 
-Log in Sunstone and go to the Users or Groups section. Click on an user or a group and select the Showback tab:
+Log into Sunstone and go to the Users or Groups section. Click on a user or a group and select the Showback tab:
 
 ![showback_showback](/images/sunstone_showback.png)
 
 ## Disable Showback in Sunstone
 
-Showback reports can be disabled in any of the Sunstone views modifying the yaml file called `user-tab.yaml` in the corresponding view ([See Sunstone views to get more information]({{% relref "fireedge_sunstone_views#fireedge-suns-views" %}})):
+Showback reports can be disabled in any of the Sunstone views by modifying the yaml file called `user-tab.yaml` in the corresponding view ([See Sunstone views to get more information]({{% relref "fireedge_sunstone_views#fireedge-suns-views" %}})):
 
 ```yaml
 ...
@@ -147,4 +147,4 @@ YEAR,MONTH,VM_ID,COST
 2015,11,4258,34248600
 ```
 
-Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.showback method](http://docs.opennebula.io/doc/6.4/oca/ruby/OpenNebula/VirtualMachinePool.html#showback-instance_method) to retrieve showback information filtering and ordering by multiple parameters.
+Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.showback method](http://docs.opennebula.io/doc/6.4/oca/ruby/OpenNebula/VirtualMachinePool.html#showback-instance_method) to retrieve showback information and filter and order by multiple parameters.

@@ -125,9 +125,9 @@ The information of a Host contains:
 
 * **General information** of the Host including its name and the drivers used to interact with it.
 * **Capacity** (*Host Shares*) for CPU and memory.
-* **Local datastore information** (*Local System Datastore*) if the Host is configured to use a local datastore (e.g. in Local transfer mode).
+* **Local datastore information** (*Local System Datastore*) if the Host is configured to use a local datastore (e.g., in Local transfer mode).
 * **Monitoring Information**, including PCI devices and NUMA information of the node. You can also find hypervisor specific information here.
-* **Virtual Machines** allocated to the Host. *Wild* are virtual machines running on the Host but not started by OpenNebula.
+* **Virtual Machines** allocated to the Host. *Wild* are Virtual Machines running on the Host but not started by OpenNebula.
 
 To see a list of all the Hosts:
 
@@ -139,13 +139,13 @@ $ onehost list
    2 kvm2            kvm         0                  -                  - off
 ```
 
-The above information can be also displayed in XML, JSON or CSV format using `-x` or `-j` or `-c`, respectively.
+The above information can be also displayed in XML, JSON, or CSV format using `-x` or `-j` or `-c`, respectively.
 
 <a id="host-lifecycle"></a>
 
 ## Host States
 
-In order to manage the life cycle of a Host it can be set to different operation modes: enabled (`on`), disabled (`dsbl`) and offline (`off`). The different operation status for each mode is described in the following table:
+In order to manage the life cycle of a Host it can be set to different operation modes: enabled (`on`), disabled (`dsbl`), and offline (`off`). The different operation status for each mode is described in the following table:
 
 <table class="docutils align-default">
 <thead>
@@ -200,7 +200,7 @@ In order to manage the life cycle of a Host it can be set to different operation
 
 ## Host Operations
 
-The `onehost` tool provides commands to set the operation mode of a Host: `disable`, `offline` and `enable`, for example:
+The `onehost` tool provides commands to set the operation mode of a Host: `disable`, `offline`, and `enable`, for example:
 
 ```default
 $ onehost disable 0
@@ -219,7 +219,7 @@ $ onehost offline 0
 ```
 
 {{< alert title="Note" color="success" >}}
-`onehost disable` and `onehost offline` do not change state of already running VMs on the host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}} 
+`onehost disable` and `onehost offline` do not change the state of VMs already running on the Host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}} 
 
 Apart from the commands above, the `onehost` tool also provides some commands that allow you to easily perform common operations on a Host.
 
@@ -229,7 +229,7 @@ You can use `forceupdate` subcommand to reset the monitoring process on the Host
 $ onehost forceupdate 0
 ```
 
-The `flush` command will migrate all the active VMs in the specified Host to another server with enough capacity. At the same time, the specified Host will be disabled, so no more Virtual Machines are deployed in it. This command is useful to clean a Host of active VMs. The migration process can be done by a `resched` action or by a recover `delete-recreate` action; it can be configured in `/etc/one/cli/onehost.yaml` by setting the field `default_actions\flush` to `delete-recreate` or to `resched`. Here is an example:
+The `flush` command will migrate all the active VMs in the specified Host to another server with enough capacity. At the same time, the specified Host will be disabled so no more Virtual Machines are deployed in it. This command is useful to clean a Host of active VMs. The migration process can be done by a `resched` action or by a recover `delete-recreate` action; it can be configured in `/etc/one/cli/onehost.yaml` by setting the field `default_actions\flush` to `delete-recreate` or to `resched`. Here is an example:
 
 ```default
 :default_actions:
@@ -256,7 +256,7 @@ This tag can be used at a later time for scheduling purposes, [see more details 
 
 ### Updating Host Files
 
-When OpenNebula monitors a Host, it copies driver files to `/var/tmp/one`. When these files are updated, they need to be copied again to the Hosts with the `sync` command. To keep track of the probes version there’s a file in `/var/lib/one/remotes/VERSION`. By default this holds the OpenNebula version (e.g. ‘6.99.0’). This version can be seen in the Hosts by using `onehost show <host>`:
+When OpenNebula monitors a Host it copies driver files to `/var/tmp/one`. When these files are updated they need to be copied again to the Hosts with the `sync` command. To keep track of the probes version there’s a file in `/var/lib/one/remotes/VERSION`. By default this holds the OpenNebula version (e.g., ‘6.99.0’). This version can be seen in the Hosts by using `onehost show <host>`:
 
 ```default
 $ onehost show 0
@@ -304,11 +304,11 @@ WILD VIRTUAL MACHINES
 ```
 
 {{< alert title="Warning" color="warning" >}}
-Wild VMs’ support and limitations may differ depending on the virtualization driver used (e.g KVM or LXC). In order to find more specific information for the virtualization driver you’re using, please check the corresponding driver guide.{{< /alert >}} 
+Wild VMs’ support and limitations may differ depending on the virtualization driver used (e.g., KVM or LXC). In order to find more specific information for the virtualization driver you’re using, please check the corresponding driver guide.{{< /alert >}} 
 
 ## Using Sunstone to Manage Hosts
 
-You can also manage your Hosts using [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the Host tab, and there, you will be able to create, enable, disable, delete, and see information about your Hosts in a user-friendly way.
+You can also manage your Hosts using [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the Host tab and there you will be able to create, enable, disable, delete, and see information about your Hosts in a user-friendly way.
 
 ![image1](/images/hosts_fireedge.png)
 

@@ -12,20 +12,20 @@ weight: "6"
 
 <!--# VXLAN Networks -->
 
-This guide describes how to enable Network isolation provided through the VXLAN encapsulation protocol. This driver will create a bridge for each OpenNebula Virtual Network and attach a VXLAN tagged network interface to the bridge.
+This guide describes how to enable Network isolation provided through the VXLAN encapsulation protocol. This driver will create a bridge for each OpenNebula Virtual Network and attach a VXLAN-tagged network interface to the bridge.
 
 The VXLAN ID will be the same for every interface in a given network, calculated automatically by OpenNebula. It may also be forced by setting the `VLAN_ID` attribute in the [Virtual Network template]({{% relref "../../operation_references/configuration_references/vnet_template#vnet-template" %}}).
 
 Additionally, each VXLAN has an associated multicast address to encapsulate L2 broadcast and multicast traffic. By default, the address assigned will belong to the `239.0.0.0/8` range as defined by RFC 2365 (Administratively Scoped IP Multicast). The multicast address is obtained by adding the value of the attribute `VLAN_ID` to `239.0.0.0/8` base address.
 
-## Considerations & Limitations
+## Considerations and Limitations
 
-By default, this driver uses the default linux UDP server port 8472 to transfer VXLAN traffic between hosts.
+By default, this driver uses the default linux UDP server port 8472 to transfer VXLAN traffic between Hosts.
 
 {{< alert title="Important" color="success" >}}
-Please note that the official IANA port for VXLAN transport is UDP 4789. If you will use hardware equipment take this in consideration.{{< /alert >}}
+Please note that the official IANA port for VXLAN transport is UDP 4789. If you use hardware equipment, take this into consideration.{{< /alert >}}
 
-VXLAN traffic is forwarded to a physical device; this device can be set (optionally) to be a VLAN tagged interface, but in that case you must make sure that the tagged interface is manually created first in all the Hosts.
+VXLAN traffic is forwarded to a physical device; this device can be set (optionally) to be a VLAN-tagged interface, but in that case you must make sure that the tagged interface is manually created first in all the Hosts.
 
 {{< alert title="Important" color="success" >}}
 The network interface that will act as the physical device **must** have an IP.{{< /alert >}}
@@ -33,7 +33,7 @@ The network interface that will act as the physical device **must** have an IP.{
 The bridge `${PHYSDEV}.${VXLAN_ID}` (PHYSDEV is the physical interface and VXLAN_ID is the VxLAN VNI) will be created and the VM NICs will be attached to it. This has a very important implication: **the amount of characters for a bridge name that iproute2 allows is 15**
 
 {{< alert title="Important" color="success" >}}
-If the physical interface name and the VNI are longer than 15 characters the deploy of any VM with that virtual network will fail. The solution can be creating an alternative name (alias) for the interface. For instance, if you have the interface `en0s0f0p0`, you can execute{{< /alert >}} 
+If the physical interface name and the VNI are longer than 15 characters the deploy of any VM with that Virtual Network will fail. The solution can be creating an alternative name (alias) for the interface. For instance, if you have the interface `en0s0f0p0`, you can execute{{< /alert >}} 
 
 `sudo ip link set en0s0f0p0 alias vx`
 
@@ -43,15 +43,15 @@ This change DOES NOT PERSIST after a reboot (the command must be issued again or
 
 ### Limited Count of VXLANs on Host
 
-Each VXLAN is associated with one multicast group. There is a limit on how many multicast groups can be a physical Host member of at the same time, which also means how many **different** VXLANs can be used on a physical Host concurrently. The default value is 20 and can be changed via `sysctl` through the kernel runtime parameter `net.ipv4.igmp_max_memberships`.
+Each VXLAN is associated with one multicast group. There is a limit on how many multicast groups can be a physical Host member at the same time, which also means how many **different** VXLANs can be used on a physical Host concurrently. The default value is 20 and can be changed via `sysctl` through the kernel runtime parameter `net.ipv4.igmp_max_memberships`.
 
-For permanent change to e.g. 150, place the following settings inside the `/etc/sysctl.conf`:
+For a permanent change to 150, for example, place the following settings inside the `/etc/sysctl.conf`:
 
 ```default
 net.ipv4.igmp_max_memberships=150
 ```
 
-and reload the configuration
+and reload the configuration:
 
 ```default
 # sysctl -p
@@ -138,7 +138,7 @@ VLAN_ID = 50            # Optional
 BRIDGE  = "vxlan50"     # Optional
 ```
 
-In this example, the driver will check for the existence of the `vxlan50` bridge. If it doesn’t exist it will be created. `eth0` will be tagged (`eth0.50`) and attached to `vxlan50` (unless it’s already attached). Note that `eth0` can be a 802.1Q tagged interface, if you want to isolate the VXLAN traffic by 802.1Q VLANs.
+In this example, the driver will check for the existence of the `vxlan50` bridge. If it doesn’t exist it will be created. `eth0` will be tagged (`eth0.50`) and attached to `vxlan50` (unless it’s already attached). Note that `eth0` can be an 802.1Q tagged interface if you want to isolate the VXLAN traffic by 802.1Q VLANs.
 
 ## Using VXLAN with BGP EVPN
 
@@ -146,7 +146,7 @@ By default, VXLAN relies on multicast to discover tunnel endpoints; alternativel
 
 ### Configuring the Hypervisors
 
-The hypervisor needs to run a BGP EVPN capable routing software like [FFRouting (FRR)](https://frrouting.org/). Its main purpose is to send BGP updates with the MAC address and IP (optional) for each VXLAN tunnel endpoint (i.e. the VM interfaces in the VXLAN network) running in the Host. The updates need to be distributed to all other hypervisors in the cloud to achieve full route reachability. This second step is usually performed by one or more BGP route reflectors.
+The hypervisor needs to run a BGP EVPN-capable routing software like [FFRouting (FRR)](https://frrouting.org/). Its main purpose is to send BGP updates with the MAC address and IP (optional) for each VXLAN tunnel endpoint (i.e., the VM interfaces in the VXLAN network) running in the Host. The updates need to be distributed to all other hypervisors in the cloud to achieve full route reachability. This second step is usually performed by one or more BGP route reflectors.
 
 As an example, consider two hypervisors `10.4.4.11` and `10.4.4.12`, and a route reflector at `10.4.4.13`. The FRR configuration file for the hypervisors could be (to be announced to all VXLAN networks):
 

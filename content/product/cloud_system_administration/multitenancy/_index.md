@@ -1,7 +1,7 @@
 ---
 title: "Multitenancy"
 date: "2025-02-17"
-description: "Manage permissions, ACLs and resources for users and groups"
+description: "Manage permissions, ACLs, and resources for users and groups"
 categories:
 pageintoc: "112"
 tags:

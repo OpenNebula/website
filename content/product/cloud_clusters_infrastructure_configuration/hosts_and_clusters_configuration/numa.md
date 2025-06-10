@@ -16,11 +16,11 @@ weight: "4"
 
 In this guide you’ll learn to set up OpenNebula to control how VM resources are mapped onto the hypervisor ones. These settings will help you to fine tune the performance of VMs. We will use the following concepts:
 
-* **Cores, Threads and Sockets**. A computer processor is connected to the motherboard through a *socket*. A processor can pack one or more *cores*, each one implements a separate processing unit that shares some cache levels, memory, and I/O ports. CPU cores’ performance can be improved by the use of hardware *multi-threading* (SMT) that permits multiple execution flows to run simultaneously on a single core.
+* **Cores, Threads, and Sockets**. A computer processor is connected to the motherboard through a *socket*. A processor can pack one or more *cores*, each one implements a separate processing unit that shares some cache levels, memory, and I/O ports. CPU cores’ performance can be improved by the use of hardware *multi-threading* (SMT) that permits multiple execution flows to run simultaneously on a single core.
 * **NUMA**. Multi-processor servers are usually arranged in nodes or cells. Each *NUMA node* holds a fraction of the overall system memory. In this configuration, a processor accesses memory and I/O ports local to its node faster than those of non-local ones.
 * **Hugepages**. Systems with big physical memory also use a large number of virtual memory pages. This big number makes the use of virtual-to-physical translation caches inefficient. Hugepages reduces the number of virtual pages in the system and optimizes the virtual memory subsystem.
 
-In OpenNebula the virtual topology of a VM is defined by the number of sockets, cores and threads. We assume that a NUMA node or cell is equivalent to a socket and they will be used interchangeably in this guide.
+In OpenNebula the virtual topology of a VM is defined by the number of sockets, cores, and threads. We assume that a NUMA node or cell is equivalent to a socket and they will be used interchangeably in this guide.
 
 {{< alert title="Note" color="success" >}}
 Depending on the hypervisor, various limitations may be present regarding virtual topology definition and CPU pinning. For complete information please make sure to read the corresponding driver guide.{{< /alert >}}
@@ -62,7 +62,7 @@ node   0
 
 You can give more detail to the previous scenario by defining a custom number of sockets, cores, and threads for a given number of vCPUs. Usually, there is no significant difference between how you arrange the number of cores and sockets performance-wise. However, some software products may require a specific topology setup in order to work.
 
-For example a VM with two sockets and two cores per sockets, and two threads per core is defined by the following template:
+For example, a VM with two sockets and two cores per sockets, and two threads per core is defined by the following template:
 
 ```default
 VCPU   = 8
@@ -95,11 +95,11 @@ node   0
 ```
 
 {{< alert title="Important" color="success" >}}
-When defining a custom CPU Topology you need to set the number of sockets, cores, and threads, and it must match the total number of vCPUS, e.g. `VCPU = SOCKETS * CORES * THREAD`.{{< /alert >}} 
+When defining a custom CPU Topology you need to set the number of sockets, cores, and threads, and it must match the total number of vCPUs, e.g., `VCPU = SOCKETS * CORES * THREAD`.{{< /alert >}} 
 
 ### NUMA Topology
 
-You can provide further detail to the topology of your VM by defining the placement of the sockets (NUMA nodes) in the hypervisor NUMA nodes. In this scenario each VM `SOCKET` will be exposed to guest OS as a separated NUMA node with its own local memory.
+You can provide further detail to the topology of your VM by defining the placement of the sockets (NUMA nodes) in the hypervisor NUMA nodes. In this scenario each VM `SOCKET` will be exposed to guest OS as a separate NUMA node with its own local memory.
 
 The previous example can expose a two socket (NUMA node) by setting a `PIN_POLICY` (see below):
 
@@ -146,7 +146,7 @@ node   0   1
 
 ### Asymmetric topology
 
-For some applications you may need an asymmetric NUMA configuration, i.e. not distributing the VM resources evenly across the nodes. You can define each node configuration by manually setting the `NUMA_NODE` attributes. For example:
+For some applications you may need an asymmetric NUMA configuration, i.e., not distributing the VM resources evenly across the nodes. You can define each node configuration by manually setting the `NUMA_NODE` attributes. For example:
 
 ```default
 MEMORY = 3072
@@ -163,7 +163,7 @@ OpenNebula will also check that the total MEMORY in all the nodes matches that s
 
 ## NUMA Node Affinity
 
-You can improve the performance of some VM workloads by manually pinning its virtual CPUs and memory to a given NUMA node, and thus preventing the VM virtual CPUs processes from migrating across NUMA nodes. Note that as opposed to the CPU pinning described in the next section, the host CPUs are **NOT** reserved for the VM for exclusive access.
+You can improve the performance of some VM workloads by manually pinning its virtual CPUs and memory to a given NUMA node, thus preventing the VM virtual CPUs processes from migrating across NUMA nodes. Note that as opposed to the CPU pinning described in the next section, the Host CPUs are **NOT** reserved for the VM for exclusive access.
 
 To set the affinity simply add the node id to the topology:
 
@@ -176,7 +176,7 @@ TOPOLOGY = [ NODE_AFFINITY = 1 ]
 ```
 
 {{< alert title="Important" color="success" >}}
-It is recommended to use homogeneous cluster configurations (same number of nodes, cores and threads per core) to allow the live-migration of VMs with NUMA node affinity.{{< /alert >}} 
+It is recommended to use homogeneous cluster configurations (same number of nodes, cores, and threads per core) to allow the live-migration of VMs with NUMA node affinity.{{< /alert >}} 
 
 {{< alert title="Important" color="success" >}}
 NUMA node affinity cannot be used together with the PIN_POLICY attribute.{{< /alert >}} 
@@ -188,7 +188,7 @@ When you need predictable performance for your VMs, you have to set a pinning po
 * `CORE`: each vCPU is assigned to a whole hypervisor core. No other threads in that core will be used. This policy can be useful to isolate the VM workload for security reasons.
 * `THREAD`: each vCPU is assigned to a hypervisor CPU thread.
 * `SHARED`: the VM is assigned to a set of the hypervisor CPUS shared by all the VM vCPUs.
-* `NONE`: the VM is not assigned to any hypervisor CPUs. Access to the resources (i.e CPU time) will be limited by the CPU attribute.
+* `NONE`: the VM is not assigned to any hypervisor CPUs. Access to the resources (i.e., CPU time) will be limited by the CPU attribute.
 
 VM memory is assigned to the closet hypervisor NUMA node where the vCPUs are pinned, to prioritize local memory access.
 
@@ -220,7 +220,7 @@ The scheduling process is slightly modified when a pinned VM includes PCI passth
 
 ## Using Hugepages
 
-To enable the use of hugepages for the memory allocation of the VM just add the desired page size in the `TOPOLOGY` attribute. The size must be expressed in megabytes. For example to use 2M hugepages use:
+To enable the use of hugepages for the memory allocation of the VM just add the desired page size in the `TOPOLOGY` attribute. The size must be expressed in megabytes. For example, to use 2M hugepages use:
 
 ```default
 TOPOLOGY = [ PIN_POLICY = thread, SOCKETS = 2, HUGEPAGE_SIZE = 2 ]
@@ -241,7 +241,7 @@ TOPOLOGY = [ HUGEPAGE_SIZE = 2 ]
 ```
 
 {{< alert title="Important" color="success" >}}
-When no pin policy or NUMA node affinity is set, OpenNebula will pick the node with a higher number of free hugepages, to try balancing the load.{{< /alert >}} 
+When no pin policy or NUMA node affinity is set, OpenNebula will pick the node with a higher number of free hugepages to try balancing the load.{{< /alert >}} 
 
 ## Summary of Virtual Topology Attributes
 
@@ -249,7 +249,7 @@ When no pin policy or NUMA node affinity is set, OpenNebula will pick the node w
 |----------------------|----------------------------------------------------------------------|
 |                      |                                                                      |
 | PIN_POLICY           | vCPU pinning preference: `CORE`, `THREAD`, `SHARED`, `NONE`          |
-| NODE_AFFINITY        | Pin virtual CPUs to the given NUMA node in the host                  |
+| NODE_AFFINITY        | Pin virtual CPUs to the given NUMA node in the Host                  |
 | SOCKETS              | Number of sockets or NUMA nodes                                      |
 | CORES                | Number of cores per node                                             |
 | THREADS              | Number of threads per core                                           |
@@ -262,13 +262,13 @@ When running VMs with a specific topology it is important to map (*pin*) it as c
 
 First, you need to define which Hosts are going to be used to run pinned workloads, and define the `PIN_POLICY` tag through Sunstone or by using the `onehost update` command. A Host can operate in two modes:
 
-* `NONE`. Default mode where no NUMA or hardware characteristics are considered. Resources are assigned and balanced by an external component, e.g. numad or kernel.
+* `NONE`. Default mode where no NUMA or hardware characteristics are considered. Resources are assigned and balanced by an external component, e.g., numad or kernel.
 * `PINNED`. VMs are allocated and pinned to specific nodes according to different policies.
 
 {{< alert title="Note" color="success" >}}
-You can also create an OpenNebula Cluster including all the Hosts devoted to running pinned workloads, and set the `PIN_POLICY` at the cluster level.{{< /alert >}} 
+You can also create an OpenNebula Cluster, including all the Hosts devoted to running pinned workloads, and set the `PIN_POLICY` at the cluster level.{{< /alert >}} 
 
-The Host monitoring probes should also return the NUMA topology and usage status of the hypervisors. The following command shows a single node hypervisor with four cores and two threads running a 2 vCPU VM:
+The Host monitoring probes should also return the NUMA topology and usage status of the hypervisors. The following command shows a single node hypervisor with four cores and two threads running a two vCPU VM:
 
 ```default
 $ onehost show 0
@@ -293,7 +293,7 @@ In this output, the string `X- X- -- --` represents the NUMA allocation: each gr
 {{< alert title="Note" color="success" >}}
 If you want to use hugepages of a given size you need to allocate them first. This can be done either at boot time or dynamically. Also you may need to mount the hugetlbfs filesystem. Please refer to your OS documentation to learn how to do this.{{< /alert >}} 
 
-You can also isolate some hypervisor CPUS from the NUMA scheduler. Isolated CPUs will not be used to pin any VM. The isolated CPUs are defined by the `ISOLCPUS` attribute; the attribute is a comma-separated list of CPU IDs. For example `ISOLCPUS="0,5"` will isolate CPUs 0,5 and hence will not be used to pin any VM.
+You can also isolate some hypervisor CPUs from the NUMA scheduler. Isolated CPUs will not be used to pin any VM. The isolated CPUs are defined by the `ISOLCPUS` attribute; the attribute is a comma-separated list of CPU IDs. For example, `ISOLCPUS="0,5"` will isolate CPUs 0,5 and hence will not be used to pin any VM.
 
 ### CPU Pinning and Overcommitment
 
@@ -327,7 +327,7 @@ NIC  = [ IP="10.4.4.11", NETWORK="Management" ]
 CONTEXT = [ NETWORK="YES", SSH_PUBLIC_KEY="$USER[SSH_PUBLIC_KEY]" ]
 ```
 
-The VM is deployed in a hypervisor with the following characteristics, one node, eight CPUs and four cores:
+The VM is deployed in a hypervisor with the following characteristics, one node, eight CPUs, and four cores:
 
 ```default
 # numactl -H
@@ -379,7 +379,7 @@ NUMA HUGEPAGES
 ...
 ```
 
-Note that in this case the previous VM has been pinned to four CPUS (0,4,1,5) and it
+Note that in this case the previous VM has been pinned to four CPUs (0,4,1,5) and it
 is using 512 pages of 2M. You can verify that the VM is actually running in this resource through libvirt:
 
 ```default

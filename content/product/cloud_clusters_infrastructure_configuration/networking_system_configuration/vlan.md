@@ -12,7 +12,7 @@ weight: "5"
 
 <!--# 802.1Q VLAN Networks -->
 
-This guide describes how to enable network isolation provided through Host-managed VLANs. This driver will create a bridge for each OpenNebula Virtual Network and attach a VLAN tagged network interface to the bridge. This mechanism is compliant with [IEEE 802.1Q](http://en.wikipedia.org/wiki/IEEE_802.1Q).
+This guide describes how to enable network isolation provided through Host-managed VLANs. This driver will create a bridge for each OpenNebula Virtual Network and attach a VLAN-tagged network interface to the bridge. This mechanism is compliant with [IEEE 802.1Q](http://en.wikipedia.org/wiki/IEEE_802.1Q).
 
 The VLAN ID will be the same for every interface in a given network, automatically computed by OpenNebula. It may also be forced by specifying a `VLAN_ID` parameter in the [Virtual Network template]({{% relref "../../operation_references/configuration_references/vnet_template#vnet-template" %}}).
 
@@ -84,7 +84,7 @@ To create an 802.1Q network, include the following information in the template:
 | `AUTOMATIC_VLAN_ID` | Mandatory and must be set to `YES` if `VLAN_ID` hasn’t been defined        | **YES** (unless `VLAN_ID`)           |
 | `MTU`               | The MTU for the tagged interface and bridge                                | NO                                   |
 
-For example, you can define a *802.1Q Network* with the following template:
+For example, you can define an *802.1Q Network* with the following template:
 
 ```default
 NAME    = "private2"
@@ -100,10 +100,10 @@ In this example, the driver will check for the existence of the `br0` bridge. If
 
 Q-in-Q is not natively supported by Linux bridges, as compared to Open vSwitch, and presents some limitations:
 
-- The service VLAN tag (also referred as transport or outer) cannot be preserved in the VMs,
+- The service VLAN tag (also referred as transport or outer) cannot be preserved in the VMs.
 - The bridge cannot be fully configured using both VLAN tags.
 
-However, for the most common scenarios the 802.1Q driver can produce the double tag and filter out VLANs not included in the customer VLAN set. In this configuration the bridge works as follow:
+However, for the most common scenarios the 802.1Q driver can produce the double tag and filter out VLANs not included in the customer VLAN set. In this configuration the bridge works as follows:
 
 - Untagged traffic from the VM will be tagged using the transport VLAN.
 - Tagged traffic from the VM using the CVLANS will be also tagged with the transport VLAN.
@@ -118,14 +118,14 @@ There is no configuration specific for this use case, just consider the general 
 
 ### Defining a Q-in-Q Network
 
-The Q-in-Q behavior is controlled by the following attributes (**please, also refer to the attributes defined above**):
+The Q-in-Q behavior is controlled by the following attributes (**please also refer to the attributes defined above**):
 
 | Attribute   | Value                                                          | Mandatory                            |
 |-------------|----------------------------------------------------------------|--------------------------------------|
 | `VLAN_ID`   | The VLAN ID for the transport/outer VLAN.                      | **YES** (unless `AUTOMATIC_VLAN_ID`) |
-| `CVLANS`    | The customer VLAN set. A comma separated list, supports ranges | **YES**                              |
+| `CVLANS`    | The customer VLAN set. A comma-separated list, supports ranges | **YES**                              |
 
-For example, you can define an *QinQ aware Network* with the following template:
+For example, you can define a *QinQ aware Network* with the following template:
 
 ```default
 NAME     = "qinq_net"
@@ -140,10 +140,10 @@ CVLANS   = "101,103,110-113"  # Customer VLAN ID list
 
 ### Implementation Details
 
-When the `CVLANS` attribute is defined the 802.1Q perform the following configurations on the bridge:
+When the `CVLANS` attribute is defined, the 802.1Q performs the following configurations on the bridge:
 
-- Activate the VLAN filtering flag
-- Installs a VLAN filter that includes all the VLANs in the `CVLANS` set in all VM ports in the network. In this way only tagged traffic in the customer set will be allowed in the bridge.
+- Activates the VLAN filtering flag.
+- Installs a VLAN filter that includes all the VLANs in the `CVLANS` set in all VM ports in the network. In this way, only tagged traffic in the customer set will be allowed in the bridge.
 - All untagged traffic is associated to the transport (outer) VLAN.
 - As in the other configurations, a tagged link for the transport VLAN is added to the bridge. This link is the one that will add the transport tag.
 

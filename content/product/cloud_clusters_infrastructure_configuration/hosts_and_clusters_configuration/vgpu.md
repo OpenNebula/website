@@ -21,7 +21,7 @@ You need to check that the following settings are enabled in your BIOS configura
 - Enable SR-IOV
 - Enable IOMMU
 
-Note that the specific menu options where you need to activate these features depends on the motherboard manufacturer.
+Note that the specific menu options where you need to activate these features depend on the motherboard manufacturer.
 
 ## NVIDIA Drivers
 
@@ -57,7 +57,7 @@ Wed Feb  9 12:36:07 2022
 ## Enable the NVIDIA vGPU
 
 {{< alert title="Warning" color="warning" >}}
-The following steps assume that your graphic card supports SR-IOV, if not, please refer to official NVIDIA documentation in order to activate vGPU.{{< /alert >}} 
+The following steps assume that your graphic card supports SR-IOV. If not, please refer to official NVIDIA documentation in order to activate vGPU.{{< /alert >}} 
 
 ### Finding the PCI
 
@@ -66,7 +66,7 @@ $ lspci | grep NVIDIA
 41:00.0 3D controller: NVIDIA Corporation Device 2236 (rev a1)
 ```
 
-In this example the address is `41:00.0`. Then, we need to convert this to transformed-bdf format by replacing the colon and period with underscores, in our case: `41_00_0`. Now, we can obtain the PCI name, and the full information about the NVIDIA GPU (e.g. max number of virtual functions):
+In this example the address is `41:00.0`. We now need to convert this to transformed-bdf format by replacing the colon and period with underscores, in our case: `41_00_0`. Now we can obtain the PCI name and the full information about the NVIDIA GPU (e.g., max number of virtual functions):
 
 ```default
 $ virsh nodedev-list --cap pci | grep 41_00_0

@@ -16,15 +16,15 @@ weight: "2"
 
 <!--# The OpenNebula Monitoring System -->
 
-The monitoring subsystem is represented by a dedicated daemon (`onemonitord`) running as part of the OpenNebula Daemon (`oned`), that **gathers information relevant to the Hosts and the Virtual Machines**, e.g. Host status, basic performance indicators, Virtual Machine status, and capacity consumption. This information is collected by executing a set of probe programs provided by OpenNebula. The output of these probes is sent to OpenNebula using a push mechanism. It’s part of the operating system package `opennebula`.
+The monitoring subsystem is represented by a dedicated daemon (`onemonitord`) running as part of the OpenNebula Daemon (`oned`), that **gathers information relevant to the Hosts and the Virtual Machines**, e.g., Host status, basic performance indicators, Virtual Machine status, and capacity consumption. This information is collected by executing a set of probe programs provided by OpenNebula. The output of these probes is sent to OpenNebula using a push mechanism. It’s part of the operating system package `opennebula`.
 
 ## Overview
 
-Each host periodically sends monitoring data via the network to the Front-end, which collects and processes it in a dedicated module. This distributed monitoring system resembles the architecture of dedicated monitoring systems, using a lightweight communication protocol and a push model.
+Each Host periodically sends monitoring data via the network to the Front-end, which collects and processes it in a dedicated module. This distributed monitoring system resembles the architecture of dedicated monitoring systems, using a lightweight communication protocol and a push model.
 
-As part of the regular start process, OpenNebula starts the `onemonitord` daemon running in the Front-end, that listens for network connections on port 4124 (both UDP and TCP). Initially, OpenNebula connects to the hosts using SSH and starts a light agent that executes the probe scripts to collect and send data back to the `onemonitord` daemon in the Front-end.
+As part of the regular start process, OpenNebula starts the `onemonitord` daemon running in the Front-end, that listens for network connections on port 4124 (both UDP and TCP). Initially, OpenNebula connects to the Hosts using SSH and starts a light agent that executes the probe scripts to collect and send data back to the `onemonitord` daemon in the Front-end.
 
-Probes are structured in information categories for host and virtual machine information. At regular intervals (in seconds, configurable per category in the `monitord.conf`) the data is transmitted, so the monitoring subsystem doesn’t need to make any additional connections to gather it.
+Probes are structured in information categories for Host and Virtual Machine information. At regular intervals (in seconds, configurable per category in the `monitord.conf`) the data is transmitted, so the monitoring subsystem doesn’t need to make any additional connections to gather it.
 
 ![image0](/images/collector.png)
 
@@ -50,25 +50,25 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `DB`                                                                                        | `CONNECTIONS`                                                                                                                                                                                          | DB connections. DB needs to be configured to support oned + monitord connections |
 | **Network Configuration**                                                                   |                                                                                                                                                                                                        |                                                                                  |
 | `NETWORK`                                                                                   | `ADDRESS`                                                                                                                                                                                              | Network address to bind the UDP/TCP listener to                                  |
-| `MONITOR_ADDRESS`                                                                           | Agents will send updates to this monitor address.<br/>If “auto” is used, agents will detect the address from the ssh connection<br/>Front-end -> host ($SSH_CLIENT), “auto” is not usable for HA setup |                                                                                  |
+| `MONITOR_ADDRESS`                                                                           | Agents will send updates to this monitor address.<br/>If “auto” is used, agents will detect the address from the ssh connection<br/>Front-end -> Host ($SSH_CLIENT), “auto” is not usable for HA setup |                                                                                  |
 | `PORT`                                                                                      | Listening port                                                                                                                                                                                         |                                                                                  |
 | `THREADS`                                                                                   | Number of threads used to receive messages from monitor probes                                                                                                                                         |                                                                                  |
 | `PUBKEY`                                                                                    | Absolute path to public key. Empty for no encryption                                                                                                                                                   |                                                                                  |
 | `PRIKEY`                                                                                    | Absolute path to private key. Empty for no encryption                                                                                                                                                  |                                                                                  |
 | **Probes Configuration**                                                                    |                                                                                                                                                                                                        |                                                                                  |
-| `PROBES_PERIOD`                                                                             | `BEACON_HOST`                                                                                                                                                                                          | Time in seconds to send heartbeat for the host                                   |
-| `SYSTEM_HOST`                                                                               | Time in seconds to send host static/configuration information                                                                                                                                          |                                                                                  |
-| `MONITOR_HOST`                                                                              | Time in seconds to send host variable information                                                                                                                                                      |                                                                                  |
+| `PROBES_PERIOD`                                                                             | `BEACON_HOST`                                                                                                                                                                                          | Time in seconds to send heartbeat for the Host                                   |
+| `SYSTEM_HOST`                                                                               | Time in seconds to send Host static/configuration information                                                                                                                                          |                                                                                  |
+| `MONITOR_HOST`                                                                              | Time in seconds to send Host variable information                                                                                                                                                      |                                                                                  |
 | `STATE_VM`                                                                                  | Time in seconds to send VM status (ie. running, error, stopped…)                                                                                                                                       |                                                                                  |
 | `MONITOR_VM`                                                                                | Time in seconds to send VM resource usage metrics                                                                                                                                                      |                                                                                  |
 | `SYNC_STATE_VM`                                                                             | Send a complete VM report if probes stopped more than `SYNC_STATE_VM` seconds                                                                                                                          |                                                                                  |
 
-Additionally, you need to enable the drivers that `onemonitord` will use to interface the hypervisor Nodes in your cloud. In general, the following attributes can be tuned in the `arguments` section of the driver configuration (`IM_MAD`):
+Additionally, you need to enable the drivers that `onemonitord` will use to interface the hypervisor nodes in your cloud. In general, the following attributes can be tuned in the `arguments` section of the driver configuration (`IM_MAD`):
 
 | Argument   | Description                                                              |
 |------------|--------------------------------------------------------------------------|
-| `-r`       | number of retries when monitoring a host                                 |
-| `-t`       | number of threads it limits the hosts (started/stopped) at the same time |
+| `-r`       | number of retries when monitoring a Host                                 |
+| `-t`       | number of threads it limits the Hosts (started/stopped) at the same time |
 | `-w`       | Timeout in seconds to execute external commands (e.g. ssh connections)   |
 
 ### Configure Probes
@@ -113,22 +113,22 @@ Monitoring daemon is started as part of OpenNebula Daemon (service `opennebula`)
 
 ## Monitoring Storage and Database Structure
 
-The monitoring data collected by OpenNebula probes is processed by the monitoring module and stored in a time-series structure within the OpenNebula database. This data is accessed via the CLI and Sunstone UI through designated API calls. Additionally, OpenNebula employs a distributed database approach to efficiently store and process host and VM monitoring data, enabling resource usage forecasting and ensuring scalability.
+The monitoring data collected by OpenNebula probes is processed by the monitoring module and stored in a time-series structure within the OpenNebula database. This data is accessed via the CLI and Sunstone UI through designated API calls. Additionally, OpenNebula employs a distributed database approach to efficiently store and process Host and VM monitoring data, enabling resource usage forecasting and ensuring scalability.
 
 ### Host Time-Series Databases
 
-Each physical host in an OpenNebula deployment maintains its own dedicated monitoring databases. These databases are updated through the regular host and VM monitoring cycles:
+Each physical Host in an OpenNebula deployment maintains its own dedicated monitoring databases. These databases are updated through the regular Host and VM monitoring cycles:
 
 - **Location**: `/var/tmp/one_db/host.db`
-- **Purpose**: Stores historical monitoring metrics for the host
+- **Purpose**: Stores historical monitoring metrics for the Host
 
-Additionally, for each VM running on a host, a dedicated database tracks its specific metrics:
+Additionally, for each VM running on a Host, a dedicated database tracks its specific metrics:
 
-- **Location**: `/var/tmp/one_db/<VM_ID>.db` (stored on the host where the VM is running)
+- **Location**: `/var/tmp/one_db/<VM_ID>.db` (stored on the Host where the VM is running)
 - **Purpose**: Stores historical monitoring metrics for the specific VM
 
 {{< alert title="Note" color="success" >}}
-Following a VM migration, forecast accuracy may be temporarily reduced until sufficient monitoring data is collected on the new host.{{< /alert >}} 
+Following a VM migration, forecast accuracy may be temporarily reduced until sufficient monitoring data is collected on the new Host.{{< /alert >}} 
 
 For more details on how these databases contribute to resource forecasting, see the [Resource Forecast]({{% relref "forecast#monitor-alert-forecast" %}}) section.
 
@@ -140,7 +140,7 @@ The following sections present optional advanced setups which can improve the se
 
 You can configure the probes to encrypt the monitoring messages sent to the Front-end. This may help to secure your environment when some of the hypervisors are in cloud/edge locations. Follow the next steps to configure encryption.
 
-1. Generate dedicated public and private keys for the monitor system and store them in a safe place (we’ll use `/etc/one`). Do not use any passphrase to encrypt the private key.
+1. Generate dedicated public and private keys for the monitor system and store them in a safe place (we’ll use `/etc/one`). Do not use any passphrase to encrypt the private key:
 
 ```default
 # ssh-keygen -f /etc/one/onemonitor
@@ -153,13 +153,13 @@ The key fingerprint is:
 SHA256:XlFQK35lZ0i2ncAZUbmkKJ8F8ra5uQJA3VGa36OP10I V
 ```
 
-1. Change the format of the public key to PKCS#1
+2. Change the format of the public key to PKCS#1:
 
 ```default
 # ssh-keygen -f /etc/one/onemonitor.pub -e -m pem > /etc/one/onemonitor_pem.pub
 ```
 
-1. Update configuration `/etc/one/monitord.conf` and set path to keys:
+3. Update configuration `/etc/one/monitord.conf` and set path to keys:
 
 ```default
 NETWORK = [
@@ -169,13 +169,13 @@ NETWORK = [
 ]
 ```
 
-1. Restart [OpenNebula]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-service" %}})
+4. Restart [OpenNebula]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-service" %}})
 
 ```default
 # systemctl restart opennebula
 ```
 
-1. Restart the probes on the hosts to use the configured keys:
+5. Restart the probes on the Hosts to use the configured keys:
 
 ```default
 # sudo -u oneadmin onehost sync -f
@@ -187,9 +187,9 @@ If you are running OpenNebula in an HA cluster, it is recommended to use a virtu
 
 ### Adjust Monitoring Intervals
 
-For medium-sized clouds, the default values should perform well. For larger environments, you may need to tune your OpenNebula installation with appropriate values of the monitoring parameters and monitoring intervals in the `PROBES_PERIOD` section. The final values should consider the number of hosts and VMs that, in turn, will determine the processing requirements for OpenNebula. Also, you may need to increase the number of threads (`THREADS`) in [/etc/one/oned.conf]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf" %}}) and drivers in `/etc/one/monitord.conf`.
+For medium-sized clouds, the default values should perform well. For larger environments, you may need to tune your OpenNebula installation with appropriate values of the monitoring parameters and monitoring intervals in the `PROBES_PERIOD` section. The final values should consider the number of Hosts and VMs that, in turn, will determine the processing requirements for OpenNebula. Also, you may need to increase the number of threads (`THREADS`) in [/etc/one/oned.conf]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf" %}}) and drivers in `/etc/one/monitord.conf`.
 
-If the system is not working well, the problem could be in database performance. If the number of virtual machines and hosts is too large and the monitoring periods too low, OpenNebula will not be able to write that amount of data to the database.
+If the system is not working well, the problem could be in database performance. If the number of Virtual Machines and Hosts is too large and the monitoring periods too low, OpenNebula will not be able to write that amount of data to the database.
 
 <a id="monitoring-troubleshooting"></a>
 
@@ -289,9 +289,9 @@ The purpose of each directory is described in the following table:
 
 If you need to add custom metrics, the procedure is:
 
-1. Develop a program that gathers the metric and output it to stdout
+1. Develop a program that gathers the metric and output it to stdout.
 2. Place the program in the target directory. Depending on the nature and object it should be one of `host/monitor`, `host/system` or `vm/monitor`. You should not modify probes in the other directories.
-3. Increment the `VERSION` number in `/var/lib/one/remotes/VERSION`
+3. Increment the `VERSION` number in `/var/lib/one/remotes/VERSION`.
 4. Distribute changes to the hosts by running `onehost sync`.
 
 ## Usage

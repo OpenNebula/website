@@ -12,14 +12,14 @@ weight: "9"
 
 <!--# Using Hooks -->
 
-The Hook subsystem enables the execution of custom scripts tied to a change in state in a particular resource, or API call. This opens a wide area of automation for system administrators to tailor their cloud infrastructures. It also features a logging mechanism that allows a convenient way to query the execution history or to retry the execution of a given hook.
+The Hook subsystem enables the execution of custom scripts tied to a change in state in a particular resource or API call. This opens a wide area of automation for system administrators to tailor their cloud infrastructures. It also features a logging mechanism that allows a convenient way to query the execution history or to retry the execution of a given hook.
 
 ## Overview
 
 The hook subsystem has two main components:
 
-- **Hook Manager Driver**: it receives information about every event triggered by OpenNebula service and publishes it to an event queue. Custom components can also use this queue to subscribe to OpenNebula events, [more information here]({{% relref "#hook-manager-events" %}}).
-- **Hook Execution Manager** (HEM): It registers itself to the events that triggers the hooks defined in the system. When an event is received it takes care of executing the corresponding hook command.
+- **Hook Manager Driver**: it receives information about every event triggered by the OpenNebula service and publishes it to an event queue. Custom components can also use this queue to subscribe to OpenNebula events, [more information here]({{% relref "#hook-manager-events" %}}).
+- **Hook Execution Manager** (HEM): it registers itself to the events that trigger the hooks defined in the system. When an event is received it takes care of executing the corresponding hook command.
 
 ![hook-subsystem](/images/hooks-subsystem-architecture.png)
 
@@ -29,7 +29,7 @@ Both components are started together with the OpenNebula service. Note that, pro
 
 ### Hook Manager
 
-Hook Manager configuration is set in `HM_MAD` section in `/etc/one/oned.conf`. The configuration attributes are described below:
+Hook Manager configuration is set in the `HM_MAD` section in `/etc/one/oned.conf`. The configuration attributes are described below:
 
 | Parameter   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -62,7 +62,7 @@ HOOK_LOG_CONF = [
 
 ## Hook Types
 
-There are two types of hooks, **API hooks** (triggered on API calls) and **State hooks** (triggered on state change). The main attributes for both types are described in the table below:
+There are two types of hooks: **API hooks** (triggered on API calls) and **State hooks** (triggered on state change). The main attributes for both types are described in the table below:
 
 | Option          | Mandatory | Description                                                                              |
 |-----------------|----------|-------------------------------------------------------------------------------------------|
@@ -81,7 +81,7 @@ The API hooks are triggered after the execution of an API call. The specific att
 
 | Option   | Mandatory   | Description                                                                                                     |
 |----------|-------------|-----------------------------------------------------------------------------------------------------------------|
-| CALL     | YES         | The API call which trigger the hook. For more info about API calls please check [XML-RPC API section.]({{% relref "api#api" %}}) |
+| CALL     | YES         | The API call which triggers the hook. For more info about API calls please check [XML-RPC API section.]({{% relref "api#api" %}}) |
 
 For API hooks, the `$API` keyword can be used in the `ARGUMENTS` attribute to get the information about the API call. If `$API` is used, a base64-encoded XML document containing the API call arguments and result will be passed to the hook command. The schema of the XML is [defined here](https://github.com/OpenNebula/one/blob/master/share/doc/xsd/api_info.xsd).
 
@@ -103,12 +103,12 @@ ARGUMENTS_STDIN = yes
 
 ### State Hooks
 
-The state hooks are only available for **Hosts** and **Virtual Machines** and they are triggered on specific state transitions. The specific attributes to define state hooks are:
+The State hooks are only available for **Hosts** and **Virtual Machines** and they are triggered on specific state transitions. The specific attributes to define State hooks are:
 
 | Option    | Mandatory   | Description                                                                                                                                                             |
 |-----------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | RESOURCE  | YES         | Type of the resource, supported values are `IMAGE`, `HOST` and `VM`.                                                                                                    |
-| REMOTE    | NO          | If `yes` the hook will be executed in the host that triggered the hook (for Host hooks) or in the host where the VM is running (for VM hooks). Not used for Image hooks |
+| REMOTE    | NO          | If `yes` the hook will be executed in the Host that triggered the hook (for Host hooks) or in the Host where the VM is running (for VM hooks). Not used for Image hooks |
 | STATE     | YES         | The state that triggers the hook.                                                                                                                                       |
 | LCM_STATE | YES         | The LCM state that triggers the hook (Only for VM hooks)                                                                                                                |
 | ON        | YES         | For `RESOURCE=VM`, shortcut to define common `STATE`/`LCM_STATE` pairs. Supported values are: PROLOG, RUNNING, SHUTDOWN, STOP, DONE, UNKNOWN, CUSTOM                    |
@@ -116,9 +116,9 @@ The state hooks are only available for **Hosts** and **Virtual Machines** and th
 {{< alert title="Warning" color="warning" >}}
 Note that `ON` is mandatory for VM hooks, use `ON=CUSTOM` with `STATE` and `LCM_STATE` to define hooks on specific state transitions.{{< /alert >}} 
 
-For state hooks, `$TEMPLATE` can be used in the `ARGUMENTS` attribute to get the template (in XML format, base64 encoded) of the resource which triggered the hook. The XSD schema files for the XML document of each object are available [here](https://github.com/OpenNebula/one/tree/master/share/doc/xsd)
+For State hooks, `$TEMPLATE` can be used in the `ARGUMENTS` attribute to get the template (in XML format, base64 encoded) of the resource which triggered the hook. The XSD schema files for the XML document of each object are available [here](https://github.com/OpenNebula/one/tree/master/share/doc/xsd)
 
-The following examples define two state hooks for VMs, hosts and images:
+The following examples define two State hooks for VMs, Hosts, and images:
 
 ```default
 # VM
@@ -176,7 +176,7 @@ $ onehook create hook.tmpl
   ID: 0
 ```
 
-We have just created a hook which will be triggered each time a VM switch to `PENDING` state.
+We have just created a hook which will be triggered each time a VM switches to `PENDING` state.
 
 {{< alert title="Note" color="success" >}}
 Note that just one hook can be created for each trigger event.{{< /alert >}} 
@@ -208,7 +208,7 @@ $ onehook show 0
     0     09/23 15:10  ERROR (255)
 ```
 
-We can see that there is an execution which have failed with error code 255. To get more information about a specific execution use the `-e` option:
+We can see that there is an execution which has failed with error code 255. To get more information about a specific execution use the `-e` option:
 
 ```default
 $ onehook show 0 -e 0
@@ -271,21 +271,21 @@ $ onehook show 0 -e 0
   ERROR MESSAGE ------>8--
 ```
 
-The `EXECUTION STDERR` message shows the reason for the hook execution failure, the script does not exists:
+The `EXECUTION STDERR` message shows the reason for the hook execution failure, in this case because the script does not exist:
 
 ```default
 Internal error No such file or directory - /var/lib/one/remotes/hooks/vm-pending.rb
 ```
 
 {{< alert title="Important" color="success" >}}
-The hook log can be queried and filtered by several criteria using `onehook log`. More info about `onehook log` command can be found running `onehook log --help`.{{< /alert >}} 
+The hook log can be queried and filtered according to several criteria by using `onehook log`. More info about the `onehook log` command can be found by running `onehook log --help`.{{< /alert >}} 
 
 ### Retrying Hook Executions
 
-We are going to fix the previous error, let’s first create the `vm-pending.rb` script, and then retry the hook execution.
+We are going to fix the previous error. Let’s first create the `vm-pending.rb` script and then retry the hook execution.
 
 {{< alert title="Note" color="success" >}}
-Note that any hook execution can be retried regardless of it result.{{< /alert >}} 
+Note that any hook execution can be retried regardless of its result.{{< /alert >}} 
 
 ```default
 $ vim /var/lib/one/remotes/hooks/vm-pending.rb
@@ -318,16 +318,16 @@ $ onehook show 0
 Note the last successful execution record!
 
 {{< alert title="Important" color="success" >}}
-When a hook execution is retried the same execution context is used, i.e. arguments and $TEMPLATE/$API values.{{< /alert >}} 
+When a hook execution is retried, the same execution context is used, i.e., arguments and $TEMPLATE/$API values.{{< /alert >}} 
 
 ## Developing Hooks
 
-First thing you need to decide is the type of hook you are interested in, being it API or STATE hooks. Each type of hook is triggered by a different event and requires/provides different runtime information.
+The first thing you need to decide is the type of hook you are interested in, either API or STATE hooks. Each type of hook is triggered by a different event and requires/provides different runtime information.
 
-In this section you’ll find two simple script hooks (in ruby) for each type. This examples are good starting points for developing custom hooks.
+In this section you’ll find two simple script hooks (in ruby) for each type. These examples are good starting points for developing custom hooks.
 
 {{< alert title="Warning" color="warning" >}}
-Note that the scripts below import some dependencies that need to be installed properly in the front-end node. As most of the dependencies are OpenNebula dependencies these dependencies can be used by adding the snippet below to your scripts.
+Note that the scripts below import some dependencies that need to be installed properly in the Front-end node. As most of the dependencies are OpenNebula dependencies, these can be used by adding the snippet below to your scripts:
 
 ```default
 ONE_LOCATION = ENV['ONE_LOCATION']
@@ -379,9 +379,9 @@ end
 puts "User #{uname} successfully created"
 ```
 
-### State Hook example (HOST)
+### State Hook Example (HOST)
 
-This script prints to stdout when an host is in error state.
+This script prints to stdout when a Host is in error state.
 
 ```ruby
 # Hook template
@@ -406,9 +406,9 @@ host_id = host_template.xpath("//ID").text.to_i
 puts "Host #{host_id} is in error state!!"
 ```
 
-### State Hook example (VM)
+### State Hook Example (VM)
 
-This script prints to stdout if when a VM is in prolog state.
+This script prints to stdout when a VM is in prolog state.
 
 ```ruby
 # Hook template
@@ -433,9 +433,9 @@ vm_id = vm_template.xpath("//ID").text.to_i
 puts "VM #{vm_id} is in PROLOG state"
 ```
 
-### State Hook example (IMAGE)
+### State Hook Example (IMAGE)
 
-This script prints to stdout the ID of image when it is ready to use.
+This script prints to stdout the ID of an image when it is ready to use.
 
 ```ruby
 # Hook template
@@ -464,12 +464,12 @@ puts "Image #{img_id} ready to use!!"
 
 ### A Complete Example: Autostart Hooks for KVM
 
-OpenNebula creates *transient* KVM domains, i.e. they only exist while the domain is running. Therefore, the KVM autostart feature cannot be activated via *libvirt* configuration. This example shows how to implement VM autostart for the KVM hypervisor in OpenNebula using state hooks.
+OpenNebula creates *transient* KVM domains, i.e., they only exist while the domain is running. Therefore, the KVM autostart feature cannot be activated via *libvirt* configuration. This example shows how to implement VM autostart for the KVM hypervisor in OpenNebula using State hooks.
 
-The hooks track Hosts reboots and resume VMs allocated to the Host that includes the `AUTOSTART` attribute in their template. If `AUTOSTART=yes` the VM will be automatically restarted if it was running before the host was rebooted, if `AUTOSTART=always` the VM will be automatically restarted always regardless its previous state. This functionality is implemented by two state hooks: one for the `HOST` and one for the `VM` resource. The code for both hooks can be found in
+The hooks track Host reboots and resume VMs allocated to the Host that include the `AUTOSTART` attribute in their template. If `AUTOSTART=yes` the VM will be automatically restarted if it was running before the Host was rebooted, if `AUTOSTART=always` the VM will always be automatically restarted regardless of its previous state. This functionality is implemented by two State hooks: one for the `HOST` and one for the `VM` resource. The code for both hooks can be found in
 `/var/lib/one/remotes/hooks/autostart/` folder.
 
-To install the hooks create a definition file for each one. The `autostart-host.tmpl` definition file for the Host hook will be as follows:
+To install the hooks, create a definition file for each one. The `autostart-host.tmpl` definition file for the Host hook will be as follows:
 
 ```default
 NAME = autostart-host
@@ -509,16 +509,16 @@ Note that any command can be specified in `COMMAND`, for debugging (`COMMAND="/u
 
 ## Hook Manager Events
 
-The Hook Manager publish the OpenNebula events over a [ZeroMQ publisher socket](http://zguide.zeromq.org/page:all#Getting-the-Message-Out). This can be used for developing custom components that subscribe to specific events to perform custom actions.
+The Hook Manager publishes the OpenNebula events over a [ZeroMQ publisher socket](http://zguide.zeromq.org/page:all#Getting-the-Message-Out). This can be used for developing custom components that subscribe to specific events to perform custom actions.
 
 ### Hook Manager Messages
 
-The hook manager sends two different types of messages:
+The Hook Manager sends two different types of messages:
 
-> - **EVENT** messages: represent an OpenNebula event, which potentially could trigger a hook if the Hook Execution Manager is subscribed to it.
+> - **EVENT** messages: represent an OpenNebula event, which could potentially trigger a hook if the Hook Execution Manager is subscribed to it.
 > - **RETRY** messages: represent a retry action of a given hook execution. These event messages are specific to the Hook Execution Manager.
 
-Both messages have a **key** that can be used by the subscriber to receive messages related to an specific event class; and a **content** that contains the information related to the event **encoded in base64**.
+Both messages have a **key** that can be used by the subscriber to receive messages related to a specific event class; and a **content** that contains the information related to the event **encoded in base64**.
 
 #### Event Messages Format
 
@@ -531,17 +531,17 @@ There are two different types of EVENT messages, representing API and state even
 | STATE (VM)       | `EVENT STATE VM/<STATE>/<LCM_STATE>` (e.g. `EVENT STATE VM/PENDING/LCM_INIT`)<br/><br/>`EVENT VM <VM_ID>/<STATE>/<LCM_STATE>` (e.g. `EVENT VM 0/PENDING/LCM_INIT`) |
 | CHANGE (SERVICE) | `EVENT SERVICE SERVICE_ID` (e.g. `EVENT SERVICE 0`)                                                                                                                |
 
-Keys are used to subscribe to specific events. Note also that you do not need to specify the whole key, form example `EVENT STATE HOST/ERROR/` will subscribe for state changes to `ERROR` on the hosts, while `EVENT STATE HOST/` will subscribe for all state changes of the hosts.
+Keys are used to subscribe to specific events. Note also that you do not need to specify the whole key, for example `EVENT STATE HOST/ERROR/` will subscribe for state changes to `ERROR` on the Hosts, while `EVENT STATE HOST/` will subscribe for all state changes of the Hosts.
 
-The content of an event message is an XML document containing information related to the event, the XSD representing this content are available [here](https://github.com/OpenNebula/one/tree/master/share/doc/xsd).
+The content of an event message is an XML document containing information related to the event. The XSD representing this content is available [here](https://github.com/OpenNebula/one/tree/master/share/doc/xsd).
 
 #### Retry Messages Format
 
 The key format of the retry messages is just the word `RETRY`, no more info is needed in the key. The retry messages content is an XML file with information about the execution to retry. The XSD representing this content is available [here](https://github.com/OpenNebula/one/tree/master/share/doc/xsd).
 
-### Subscriber script example
+### Subscriber Script Example
 
-Below there is an example of script which retrieve all the event messages and prints their key and their content.
+Below is an example of a script which retrieves all the event messages and prints their key and their content:
 
 ```default
 #!/usr/bin/ruby
@@ -568,4 +568,4 @@ end
 ```
 
 {{< alert title="Note" color="success" >}}
-Note that the key and the content as read separately as [ZeroMQ envelopes](http://zguide.zeromq.org/page:all#Pub-Sub-Message-Envelopes) are used.{{< /alert >}} 
+Note that the key and the content are read separately as [ZeroMQ envelopes](http://zguide.zeromq.org/page:all#Pub-Sub-Message-Envelopes) are used.{{< /alert >}} 

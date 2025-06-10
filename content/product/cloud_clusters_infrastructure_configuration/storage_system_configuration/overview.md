@@ -16,7 +16,7 @@ weight: "1"
 
 ## Datastore Types
 
-Storage in OpenNebula is designed around the concept of Datastores. A Datastore is any storage medium to store disk images. OpenNebula distinguishes between three different Datastore types:
+Storage in OpenNebula is designed around the concept of datastores. A datastore is any storage medium to store disk images. OpenNebula distinguishes between three different datastore types:
 
 * **Images Datastore**, which stores the base operating system images, persistent data volumes, CD-ROMs.
 * **System Datastore** holds disks of running Virtual Machines. Disk are moved from/to the Images when the VMs are deployed/terminated.
@@ -62,13 +62,13 @@ The NetApp SAN Datastore is provided as an Enterprise Extension. Its basic featu
 
 ## How Should I Read This Chapter
 
-Before reading this chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/installation_process" %}}) guide.
+Before reading this Chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/installation_process" %}}) guide.
 
 After that, proceed with the specific Datastore documentation you might be interested in.
 
 ## Hypervisor Compatibility
 
-This chapter applies to KVM and LXC.
+This Chapter applies to KVM and LXC.
 
 {{< alert title="Warning" color="warning" >}}
 Hypervisor limitations:

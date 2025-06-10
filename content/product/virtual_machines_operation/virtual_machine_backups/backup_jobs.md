@@ -22,7 +22,7 @@ Backup Jobs enable you to define backup operations that involve multiple VMs, si
 
 ## Defining a Backup Job
 
-To define a Backup Job, you need to provide four key piece of information:
+To define a Backup Job, you need to provide four key pieces of information:
 
 - **VM Selection**: Start by selecting the VMs that will be included in the Backup Job.
 - **Backup Operation Configuration**: Once the VMs are chosen, configure the backup operation settings. These configurations will be applied when performing backups for each VM within the Backup Job.
@@ -43,7 +43,7 @@ BACKUP_VMS = "13,15,3"
 
 ### Backup Operation Configuration
 
-Every backup operation within the Backup Job shares the same configuration attributes, which can use the [attributes defined for Single Backup operations]({{% relref "operations#vm-backups-config-attributes" %}}). In addition, you **must** specify the `DATASTORE_ID` where the backups will be stored. For instance, to configure incremental backups with a retention policy of 4 backups and utilize backup datastore 101, you can use the following example:
+Every backup operation within the Backup Job shares the same configuration attributes, which can use the [attributes defined for Single Backup operations]({{% relref "operations#vm-backups-config-attributes" %}}). In addition, you **must** specify the `DATASTORE_ID` where the backups will be stored. For instance, to configure incremental backups with a retention policy of 4 backups and utilizing backup datastore 101, you can use the following example:
 
 ```default
 DATASTORE_ID = 101
@@ -102,7 +102,7 @@ SCHED_ACTION = [
 
 ### Example
 
-Once you have all the information for the backup job use `onebackupjob create` command. For example:
+Once you have all the information for the Backup Job, use the `onebackupjob create` command. For example:
 
 ```default
 $ cat my_backupjob.txt
@@ -137,11 +137,11 @@ $ cat my_backupjob.txt
  ID: 1
 ```
 
-## Managing you Backup Jobs
+## Managing Your Backup Jobs
 
 ### Listing
 
-You can see the backup jobs defined in the system along with some information using the list command:
+You can see the Backup Jobs defined in the system along with some information by using the list command:
 
 ```default
 $ onebackupjob list
@@ -189,7 +189,7 @@ KEEP_LAST="3"
 MODE="FULL"
 ```
 
-### One-shot execution
+### One-shot Execution
 
 If you want to initiate the execution of a Backup Job immediately, without waiting for the scheduled time, you can use the backup action. Here’s an example:
 
@@ -199,7 +199,7 @@ $ onebackupjob backup 2
 
 By executing the backup action, all the VMs included in the Backup Job will be marked as “OUTDATED” and scheduled for backup based on the current state of the system.
 
-### Checking state and progress
+### Checking State and Progress
 
 The Backup Job’s status can be determined by examining four sets:
 
@@ -219,21 +219,21 @@ DURATION       :   0d 00h00m19s
 ...
 ```
 
-### Updating the configuration
+### Updating the Configuration
 
 #### Backup Configuration
 
-You can modify the configuration of a backup job using the `onebackupjob update` command. This allows you to update various parameters related to the backup operation, such as the `MODE` or `DATASTORE_ID`, as well as the list of VMs (`BACKUP_VMS`) included in the backup job.
+You can modify the configuration of a Backup Job by using the `onebackupjob update` command. This allows you to update various parameters related to the backup operation, such as the `MODE` or `DATASTORE_ID`, as well as the list of VMs (`BACKUP_VMS`) included in the Backup Job.
 
 #### Schedules
 
-If you wish to modify the schedule of a backup job, you can utilize dedicated commands: `onebackupjob backup --schedule`, `onebackupjob sched-update` and `onebackupjob sched-delete`. These commands allow you to add, update, and delete schedules respectively.
+If you wish to modify the schedule of a Backup Job, you can utilize dedicated commands: `onebackupjob backup --schedule`, `onebackupjob sched-update` and `onebackupjob sched-delete`. These commands allow you to add, update, and delete schedules respectively.
 
-To work with a specific schedule, provide its corresponding ID. You can use the `onebackupjob show` command to list the schedules associated with a backup job and their respective IDs.
+To work with a specific schedule, provide its corresponding ID. You can use the `onebackupjob show` command to list the schedules associated with a Backup Job and their respective IDs.
 
 #### Priority
 
-To prioritize the execution of your backup jobs, you have the option to change the priority of a backup job. As a regular user, you can assign a priority from 0 to 49 using the `onebackupjob priority` command.
+To prioritize the execution of your Backup Jobs, you have the option to change the priority of a Backup Job. As a regular user, you can assign a priority from 0 to 49 using the `onebackupjob priority` command.
 
 ### Other operations
 
@@ -252,6 +252,6 @@ In addition to these basic operations, there are two specific operations availab
 
 ## Restoring Backups
 
-Once the backup job is completed, it generates a backup image in the selected datastore with the following name: `<VM_ID>.<DAY>-<MONTH> <TIME>`. For example: `162 19-Jul 15.00.49` is the backup for VM 162, taken Jul 19th at 3PM.
+Once the Backup Job is completed, it generates a backup image in the selected datastore with the following name: `<VM_ID>.<DAY>-<MONTH> <TIME>`. For example: `162 19-Jul 15.00.49` is the backup for VM 162, taken Jul 19th at 3PM.
 
 You can restore this backup as it was performed independently, [refer to the VM backup restore section]({{% relref "operations#vm-backups-restore" %}}) for detailed instructions.

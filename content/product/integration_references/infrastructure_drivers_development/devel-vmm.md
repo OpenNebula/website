@@ -12,11 +12,11 @@ weight: "2"
 
 <!--# Virtualization Driver -->
 
-The component that deals with the hypervisor to create, manage and get information about virtual machine objects is called Virtual Machine Manager (VMM for short). This component has two parts. The first one resides in the core and holds most of the general functionality common to all the drivers (and some specific), the second is the driver that is the one able to translate basic VMM actions to the hypervisor.
+The component that deals with the hypervisor to create, manage, and get information about Virtual Machine objects is called Virtual Machine Manager (VMM for short). This component has two parts. The first one resides in the core and holds most of the general functionality common to all the drivers (and some specific), the second is the driver that is able to translate basic VMM actions to the hypervisor.
 
 ## Driver Configuration
 
-There are two main drivers `one_vmm_exec` and `one_vmm_sh`. Both take commands from OpenNebula and execute a set of scripts for those actions, the main difference is that `one_vmm_exec` executes the commands remotely (logging into the host where VM is being or is going to be executed) and `one_vmm_sh` does the execution of the scripts in the frontend.
+There are two main drivers, `one_vmm_exec` and `one_vmm_sh`. Both take commands from OpenNebula and execute a set of scripts for those actions, the main difference is that `one_vmm_exec` executes the commands remotely (logging into the Host where the VM is being or is going to be executed) and `one_vmm_sh` does the execution of the scripts in the Front-end.
 
 The driver takes some parameters, described here:
 
@@ -72,11 +72,11 @@ VM_MAD = [
 
 The hypervisor may preserve system snapshots across power on/off cycles and live migrations, in that case you can set `keep_snapshots` variable to `yes`.
 
-If hypervisor allows live VM resize, set `live_resize` to `yes`.
+If the hypervisor allows live VM resize, set `live_resize` to `yes`.
 
-If hypervisor supports shareable disks, set `support_shareable` to `yes`.
+If the hypervisor supports shareable disks, set `support_shareable` to `yes`.
 
-The sunstone name will be used in the host creation dialog in the Sunstone WebUI.
+The Sunstone name will be used in the Host creation dialog in the Sunstone WebUI.
 
 <a id="devel-vmm-action"></a>
 
@@ -84,7 +84,7 @@ The sunstone name will be used in the host creation dialog in the Sunstone WebUI
 
 Every action should have an executable program (mainly scripts) located in the remote dir (`remotes/vmm/<driver_directory>`) that performs the desired action. These scripts receive some parameters (and in the case of `DEPLOY` also STDIN) and give back the error message or information in some cases writing to STDOUT.
 
-VMM actions, they are the same as the names of the scripts:
+VMM actions are the same as the names of the scripts:
 
 - **attach_disk**: Attaches a new DISK in the VM
   - Arguments
@@ -108,7 +108,7 @@ VMM actions, they are the same as the names of the scripts:
     - **BRIDGE**: Bridge where to attach the new NIC
     - **MODEL**: NIC model to emulate, ex: `e1000`
     - **NET_DRV**: Network driver used, ex: `ovswitch`
-    - **TARGET**: Names the VM interface in the host bridge
+    - **TARGET**: Names the VM interface in the Host bridge
   - Response
     - Success: -
     - Failure: Error message
@@ -147,7 +147,7 @@ VMM actions, they are the same as the names of the scripts:
   - Response
     - Success: -
     - Failure: Error message
-- **migrate_local**: Live migrate a VM to another host, initiating the connection from the front-end
+- **migrate_local**: Live migrate a VM to another Host, initiating the connection from the Front-end
   - Arguments:
     - **DOMAIN**: Domain name: one-286
     - **DESTINATION_HOST**: Host where to migrate the VM
@@ -206,7 +206,7 @@ VMM actions, they are the same as the names of the scripts:
     - **DOMAIN**: Domain name: one-286
     - **FILE**: VM save file
     - **HOST**: Host where the VM is running
-- **shutdown**: Orderly shutdowns a VM
+- **shutdown**: Orderly shuts down a VM
   - Arguments:
     - **DOMAIN**: Domain name: one-286
     - **HOST**: Host where the VM is running
@@ -227,7 +227,7 @@ VMM actions, they are the same as the names of the scripts:
   - Response
     - Success: -
     - Failure: Error message
-- **snapshot_revert**: Returns a VM to an saved state
+- **snapshot_revert**: Returns a VM to a saved state
   - Arguments:
     - **DOMAIN**: Domain name: one-286
     - **SNAPSHOT_NAME**: Name used to refer the snapshot in the hypervisor
@@ -241,7 +241,7 @@ VMM actions, they are the same as the names of the scripts:
 /VMM_DRIVER_ACTION_DATA/VM/TEMPLATE/DISK[ATTACH='YES']/READONLY
 ```
 
-When using shell script there is a handy script that gets parameters for given XPATH in that XML. Example:
+When using shell script there is a handy script that gets parameters for a given XPATH in that XML. For example:
 
 ```default
 XPATH="${DRIVER_PATH}/../../datastore/xpath.rb -b $DRV_ACTION"
@@ -265,11 +265,11 @@ CACHE="${XPATH_ELEMENTS[j++]}"
 IMG_SRC="${XPATH_ELEMENTS[j++]}"
 ```
 
-`one_vmm_sh` has the same script actions and meanings but an argument more that is the host where the action is going to be performed. This argument is always the first one. If you use `-p` parameter in `one_vmm_ssh` the poll action script is called with one more argument that is the host where the VM resides, also it is the same parameter.
+`one_vmm_sh` has the same script actions and meanings but an argument more that is the Host where the action is going to be performed. This argument is always the first one. If you use `-p` parameter in `one_vmm_ssh` the poll action script is called with one more argument that is the host where the VM resides, also it is the same parameter.
 
 ## Poll Information
 
-`POLL` is the action that gets monitoring info from the running VMs. This action is called when the VM is not found in the host monitoring process for whatever reason. The format it is supposed to give back information is a line with `KEY=VALUE` pairs separated by spaces. It also supports vector values `KEY = [ SK1=VAL1, SK2=VAL2 ]`. An example monitoring output looks like this:
+`POLL` is the action that gets monitoring info from the running VMs. This action is called when the VM is not found in the Host monitoring process for whatever reason. The format to return information is a line with `KEY=VALUE` pairs separated by spaces. It also supports vector values `KEY = [ SK1=VAL1, SK2=VAL2 ]`. An example monitoring output looks like this:
 
 ```default
 STATE=a USEDMEMORY=554632 DISK_SIZE=[ ID=0, SIZE=24 ] DISK_SIZE=[ ID=1, SIZE=242 ] SNAPSHOT_SIZE=[ ID=0, DISK_ID=0, SIZE=24 ]
@@ -324,4 +324,4 @@ If the target hypervisor is not libvirt/kvm the best format to use is xml as it 
 </TEMPLATE>
 ```
 
-There are some information added by OpenNebula itself like the VMID and the `DISK_ID` for each disk. `DISK_ID` is very important as the disk images are previously manipulated by the `TM` driver and the disk should be accessible at `VM_DIR/VMID/images/disk.DISK_ID`.
+Some information is added by OpenNebula itself like the VMID and the `DISK_ID` for each disk. `DISK_ID` is very important as the disk images are previously manipulated by the `TM` driver and the disk should be accessible at `VM_DIR/VMID/images/disk.DISK_ID`.

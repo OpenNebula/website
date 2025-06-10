@@ -12,7 +12,7 @@ weight: "1"
 
 <!--# Overview -->
 
-This chapter describes the performance capabilities of various OpenNebula components and how to deploy and configure OpenNebula on a large scale or just fine-tune the performance.
+This Chapter describes the performance capabilities of various OpenNebula components and how to deploy and configure OpenNebula on a large scale or just fine-tune the performance.
 
 ## How Should I Read This Chapter
 
@@ -20,4 +20,4 @@ Read [Scalability Testing and Tuning]({{% relref "scalability" %}}) to understan
 
 ## Hypervisor Compatibility
 
-This chapter applies to all supported hypervisors.
+This Chapter applies to all supported hypervisors.
