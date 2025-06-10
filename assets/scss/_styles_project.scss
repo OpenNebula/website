@@ -93,29 +93,37 @@
   }
 }
 .td-footer svg {
-  width: 441.37px;
-  height: 64.198px;
+  // width: 220.68px;
+  width: 331.02px;
+  //height: 32.099px;
+  height: 48.148px;
 }
 .td-footer p {
   color: #EDEDED;
 }
 .one-footer-logo {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .one-footer-second-row {
   color: #EDEDED;
-  font-size: 19.063px;
+  //font-size: 19.063px;
+  font-size: 16.203px;
   font-style: normal;
   font-weight: 600;
-  line-height: 27px;
+  line-height: 13.5px;
+  margin-top: 40px;
 }
 .td-footer__center {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 .td-footer__links-list {
   display: flex;
   justify-content: space-between;
   width: 100%
+}
+.td-footer__links-item {
+  margin: 0 60px;
+  scale: 70%
 }
 
 
