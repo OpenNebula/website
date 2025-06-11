@@ -54,7 +54,7 @@ Each disk is defined with a DISK attribute. A VM can use three types of disk:
 Network interfaces can be defined in two different ways:
 
 - **Manual selection**: interfaces are attached to a pre-selected Virtual Network. Note that this may require building multiple templates that consider the available networks in each cluster.
-- **Automatic selection**: Virtual Networks will be scheduled like other resources needed by the VM (like Hosts or datastores). This way, you can specify the type of network the VM will need and it will be automatically selected among those available in the cluster. [See more details here]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#vgg-vm-vnets" %}}).
+- **Automatic selection**: Virtual Networks will be scheduled like other resources needed by the VM (like Hosts or datastores). This way, you can specify the type of network the VM will need and it will be automatically selected among those available in the cluster. [See more details here]({{% relref "../../cluster_configuration/networking_system/manage_vnets#vgg-vm-vnets" %}}).
 
 Network **interface alias** allows you to have more than one IP on each network interface. This does not create a new virtual interface on the VM. The alias address is added to the network interface. An alias can be attached and detached. Note also that when an NIC with an alias is detached, all the associated aliases are also detached.
 

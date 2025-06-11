@@ -1,5 +1,5 @@
 ---
-title: "Storage System Configuration"
+title: "Storage System"
 date: "2025-02-17"
 description: "Set up storage on different drivers and cloud architectures"
 categories:

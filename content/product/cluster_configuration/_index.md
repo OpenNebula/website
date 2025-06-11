@@ -1,5 +1,5 @@
 ---
-title: "Cloud Cluster Configuration"
+title: "Cluster Configuration"
 date: "2025-02-17"
 description: "Complete configuration guides for the building blocks of your cloud, including supported network architectures and available drivers and backends for hosts, clusters, storage and backups"
 categories:

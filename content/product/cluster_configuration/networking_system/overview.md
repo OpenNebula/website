@@ -29,7 +29,7 @@ Security Groups are not supported in the Open vSwitch modes.{{< /alert >}}
 
 ## How Should I Read This Chapter
 
-Before reading this Chapter make sure you are familiar with the [Open Cloud Storage]({{% relref "../storage_system_configuration/overview#storage" %}}). It’s necessary to be aware of requirements for your selected storage solution in order to be able to design the network architecture of your hypervisor nodes.
+Before reading this Chapter make sure you are familiar with the [Open Cloud Storage]({{% relref "../storage_system/overview#storage" %}}). It’s necessary to be aware of requirements for your selected storage solution in order to be able to design the network architecture of your hypervisor nodes.
 
 Read the common [Node Setup]({{% relref "node#networking-node" %}}) section to learn how to configure your Hosts, and then proceed to the specific section for the networking mode that you are interested in.
 

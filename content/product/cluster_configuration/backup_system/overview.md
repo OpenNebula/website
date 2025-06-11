@@ -100,4 +100,4 @@ Performing a VM backup may require some support from the hypervisor or the disk 
 
 <sup>\*\*</sup> Ceph full/incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#vm-backups-operations" %}}) for more details.
 
-<sup>†</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/#lvm-thin" %}}).
+<sup>†</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers/#lvm-thin" %}}).

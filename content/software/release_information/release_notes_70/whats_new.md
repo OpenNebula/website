@@ -42,12 +42,12 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 
 ## Storage & Backups
 
-- [Integrated NFS life cycle setup](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds.md#automatic-nfs-setup): simplify the configuration and management of SAN/NFS in shared storage scenarios.
-- [Local datastore enhancements](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds): streamlined operations for qcow2-based VM disks, featuring a complete backend rewrite for improved maintainability and performance.
-- [LVM backend improvements](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers/#lvm-thin): introduces support for snapshots, full backups, and various performance optimizations. These enhancements leverage LVM Thin and provide significant improvements over the original LVM-based management.
+- [Integrated NFS life cycle setup](../../../product/cluster_configuration/storage_system/nas_ds.md#automatic-nfs-setup): simplify the configuration and management of SAN/NFS in shared storage scenarios.
+- [Local datastore enhancements](../../../product/cluster_configuration/storage_system/local_ds): streamlined operations for qcow2-based VM disks, featuring a complete backend rewrite for improved maintainability and performance.
+- [LVM backend improvements](../../../product/cluster_configuration/storage_system/lvm_drivers/#lvm-thin): introduces support for snapshots, full backups, and various performance optimizations. These enhancements leverage LVM Thin and provide significant improvements over the original LVM-based management.
 - [NetApp iSCSI driver](../../../integrations/storage_extensions/netapp): leverages NetApp’s native API for LUN management to deliver maximum performance and optimize operations for VM disks management.
 - [Veeam integration](../../../integrations/backup_extensions/veeam/): allows policy-based backup and restore operations directly for OpenNebula-managed VMs through the Veeam console.
-- [Full backup support for LVM](../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/overview): adds native data protection options for traditional environments. Enables full backups using native LVM mechanisms. Incremental backup support is planned for a future release to further enhance backup efficiency.
+- [Full backup support for LVM](../../../product/cluster_configuration/backup_system/overview): adds native data protection options for traditional environments. Enables full backups using native LVM mechanisms. Incremental backup support is planned for a future release to further enhance backup efficiency.
 
 ## Sunstone
 
@@ -93,8 +93,8 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Optimize handling of VM history records, greatly improving perfomance of all VM operations for VMs with many history records](https://github.com/OpenNebula/one/issues/2111).
 - [Add support for incremental backups in Ceph](https://github.com/OpenNebula/one/issues/6411).
 - [New Transparent Proxies for VMs to simplify access to external services (e.g., OneGate)](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy).
-- [Add support for VLAN filtering to the Linux bridge drivers](https://github.com/OpenNebula/one/issues/6669). This allows you to limit the VLANs in trunk mode as well as in QinQ mode. For more information check the [bridge driver](../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/bridged) and the [802.1Q VLAN driver](../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan) documentation guides.
-- Added support for the new NVIDIA mediated devices framework introduced in Ubuntu 24.04. The legacy method remains unaffected by this new feature. For more details, see the [NVIDIA vGPU documentation](../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/vgpu).
+- [Add support for VLAN filtering to the Linux bridge drivers](https://github.com/OpenNebula/one/issues/6669). This allows you to limit the VLANs in trunk mode as well as in QinQ mode. For more information check the [bridge driver](../../../product/cluster_configuration/networking_system/bridged) and the [802.1Q VLAN driver](../../../product/cluster_configuration/networking_system/vlan) documentation guides.
+- Added support for the new NVIDIA mediated devices framework introduced in Ubuntu 24.04. The legacy method remains unaffected by this new feature. For more details, see the [NVIDIA vGPU documentation](../../../product/cluster_configuration/hosts_and_clusters/vgpu).
 - [Added capability to change CPU_MODEL/FEATURES with one.vm.updateconf request](https://github.com/OpenNebula/one/issues/6636).
 - [Added support for auto keywork to set NIC virtio queues, same as DISK attribute](https://github.com/OpenNebula/one/issues/6435).
 - [Increment_flatten operation is executed using qemu-img commit instead of qemu-img convert](https://github.com/OpenNebula/one/issues/6547).

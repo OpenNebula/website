@@ -326,7 +326,7 @@ DISK = [ TYPE     = swap,
          SIZE     = 1024 ]
 ```
 
-Because this VM did not declare a `CONTEXT` or any disk using a `CDROM` Image, the first `DATABLOCK` found is placed right after the OS Image, in `sdb`. For more information on Image management and moving please check the [Storage guide]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}).
+Because this VM did not declare a `CONTEXT` or any disk using a `CDROM` Image, the first `DATABLOCK` found is placed right after the OS Image, in `sdb`. For more information on Image management and moving please check the [Storage guide]({{% relref "../../cluster_configuration/storage_system/overview#sm" %}}).
 
 <a id="template-network-section"></a>
 
@@ -383,7 +383,7 @@ NIC = [ NETWORK = "Test", NAME = "TestName" ]
 NIC_ALIAS = [ NETWORK = "Test", PARENT = "TestName" ]
 ```
 
-For more information on setting up virtual networks please check the [Managing Virtual Networks guide]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}).
+For more information on setting up virtual networks please check the [Managing Virtual Networks guide]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}).
 
 <a id="nic-default-template"></a>
 
@@ -1040,7 +1040,7 @@ NUMA_NODE = [ MEMORY = 1024, TOTAL_CPUS = 2 ]
 NUMA_NODE = [ MEMORY = 2048, TOTAL_CPUS = 4 ]
 ```
 
-Please [check the NUMA guide]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa#numa" %}}) for more information.
+Please [check the NUMA guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}}) for more information.
 
 <a id="sunstone-template-section"></a>
 

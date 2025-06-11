@@ -14,7 +14,7 @@ weight: "7"
 
 This page is a complete reference of all the Host states that will be useful for developers and administrators doing troubleshooting.
 
-The simplified life-cycle is explained in the [Hosts guide]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts#host-lifecycle" %}}). This simplified diagram uses a smaller number of state names. That section should be enough for end users and everyday administration tasks.
+The simplified life-cycle is explained in the [Hosts guide]({{% relref "../../cluster_configuration/hosts_and_clusters/hosts#host-lifecycle" %}}). This simplified diagram uses a smaller number of state names. That section should be enough for end users and everyday administration tasks.
 
 ## List of States
 

@@ -358,8 +358,8 @@ Certain types of TM can be used in so called *mixed mode* and allow different ty
 
 The following combinations are supported by default:
 
-- **CEPH** + **SSH** described in [Ceph SSH mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ssh-mode" %}})
-- **Qcow2/shared** + **SSH** described in [Qcow2/shared SSH mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds#shared-ssh-mode" %}})
+- **CEPH** + **SSH** described in [Ceph SSH mode]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ssh-mode" %}})
+- **Qcow2/shared** + **SSH** described in [Qcow2/shared SSH mode]({{% relref "../../../product/cluster_configuration/storage_system/nas_ds#shared-ssh-mode" %}})
 
 The support in oned is generic, in a *mixed mode* every TM action (such as `clone` or `delete`) is suffixed with the driver name of the system DS in use. For example, an action like `clone.ssh` is actually invoked in CEPH + SSH mode. The driver first tries to find the complete action script, including the system DS suffix (e.g., `ceph/clone.ssh`), and only if that does not exist falls back to the default (`ceph/clone`).
 

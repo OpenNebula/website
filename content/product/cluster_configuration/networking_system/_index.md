@@ -1,5 +1,5 @@
 ---
-title: "Networking System Configuration"
+title: "Networking System"
 date: "2025-02-17"
 description: "Configure virtual networks in your hypervisor nodes and in the cloud"
 categories:

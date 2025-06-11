@@ -64,17 +64,17 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component           | Version                                    | More information                                                                                                                             |
 |---------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan#hm-vlan" %}})             |
-| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch#openvswitch" %}}) |
-| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan#vxlan" %}})                    |
+| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
+| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
+| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../product/cluster_configuration/networking_system/vxlan#vxlan" %}})                    |
 
 ### Open Cloud Storage Infrastructure
 
 | Component   | Version                                    | More information                                                                                                                         |
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
+| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
+| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
+| Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}})  |
 
 ### Authentication
 
@@ -88,7 +88,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Component                     | Version   | More information                                                                                                                    |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
-| Restic backup backend         | 0.16.5    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
+| Restic backup backend         | 0.16.5    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
 | Veeam                         | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../integrations/backup_extensions/veeam.md" %}}) |
 
 ### Sunstone

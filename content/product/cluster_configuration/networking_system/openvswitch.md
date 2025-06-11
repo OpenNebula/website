@@ -141,7 +141,7 @@ Please consider the following when using the DPDK datapath for Open vSwitch:
 * An Open vSwitch version compiled with DPDK support is required.
 * The VMs need to use the virtio interface for their NICs.
 * Hugepages needs to be configured in the Hosts.
-* VMs need to use be configured to use NUMA pinning and hugepages. See [here]({{% relref "../hosts_and_clusters_configuration/numa#numa" %}}).
+* VMs need to use be configured to use NUMA pinning and hugepages. See [here]({{% relref "../hosts_and_clusters/numa#numa" %}}).
 
 ### Host Configuration
 

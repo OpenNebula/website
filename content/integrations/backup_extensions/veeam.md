@@ -81,7 +81,7 @@ A server should be configured to expose both the Rsync backup datastore and the 
 
 ## Step 2: Create a backup datastore
 
-The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the virtual machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync.md" %}}) is supported. 
+The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the virtual machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. 
 
 {{< alert title="Remember" color="success" >}}
 The backup datastore must be created in the backup server configured in step 1. Also remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}} 
@@ -113,7 +113,7 @@ Here is an example to create an Rsync datastore in a host named "backup-host" an
 {{< alert title="Remember" color="success" >}}
 Note that the ``VEEAM_DS`` property must exist and be set to ``YES``.{{< /alert >}} 
 
-You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync.md" %}}).
+You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
 
 **Sizing recommendations**
 

@@ -18,7 +18,7 @@ Virtual Network Templates can be instantiated several times and shared between m
 
 ## Virtual Network Template Definition
 
-A Virtual Network Template is a representation of a Virtual Network, so a template can be defined by using the same attributes available for a Virtual Network. Virtual Network Templates and Virtual Networks also share their required attributes depending on driver they are using (see the requirements [here]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}), Physical Network Attributes section).
+A Virtual Network Template is a representation of a Virtual Network, so a template can be defined by using the same attributes available for a Virtual Network. Virtual Network Templates and Virtual Networks also share their required attributes depending on driver they are using (see the requirements [here]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}), Physical Network Attributes section).
 
 When a network is created by instantiating a Virtual Network Template, it is associated to the default cluster. You can **control which clusters the networks** will be in with the `CLUSTER_IDS` attribute.
 
@@ -40,7 +40,7 @@ The networks created by instantiating this template will be on clusters 1 and 10
 
 By default just `oneadmin` can create Virtual Network Templates. If other users need permissions for creating Virtual Network Templates it can be provided by creating a specific ACL.
 
-Once the Virtual Network Template is created, you can control access to it by its permissions. For example, if an end user needs to instantiate a specific template, it would be enough to give the template **USE** permission for others. You can find more [information about permissions here]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}).
+Once the Virtual Network Template is created, you can control access to it by its permissions. For example, if an end user needs to instantiate a specific template, it would be enough to give the template **USE** permission for others. You can find more [information about permissions here]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}).
 
 {{< alert title="Note" color="success" >}}
 Depending on the user, ACLs might need to be created in order to allow the users to manage their own networks.{{< /alert >}} 

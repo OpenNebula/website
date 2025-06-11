@@ -50,7 +50,7 @@ lxc.cgroup.devices.allow = 'c 10:200 rwm'
 
 ### CPU and NUMA Pinning
 
-You can pin containers to Host CPUs and NUMA nodes simply by adding a `TOPOLOGY` attribute to the VM template, [see the use Virtual Topology and CPU Pinning guide]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa#numa" %}})
+You can pin containers to Host CPUs and NUMA nodes simply by adding a `TOPOLOGY` attribute to the VM template, [see the use Virtual Topology and CPU Pinning guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}})
 
 ### Supported Storage Formats
 
