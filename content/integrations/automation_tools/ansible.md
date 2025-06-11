@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Ansible -->
 
-OpenNebula Ansible modules allow managing common OpenNebula resources, e.g. VMs, images or hosts, using Ansible playbooks. In the latest Ansible version OpenNebula modules are part of the collection [community.general](https://galaxy.ansible.com/community/general). Formerly, they were distributed together with Ansible main package.
+OpenNebula Ansible modules allow you to manage common OpenNebula resources, e.g., VMs, images or Hosts, using Ansible playbooks. In the latest Ansible version OpenNebula modules are part of the collection [community.general](https://galaxy.ansible.com/community/general). Formerly, they were distributed together with Ansible main package.
 
 For the module usage, please follow the official Ansible documentation:
 
@@ -24,4 +24,4 @@ For the module usage, please follow the official Ansible documentation:
 
 ## Dependencies
 
-For OpenNebula Ansible modules [Python bindings PYONE]({{% relref "../../../product/integration_references/system_interfaces/python#python" %}}) are necessary, for `one_image.py` also legacy [Python OCA](https://github.com/python-oca/python-oca)
+For OpenNebula Ansible modules [Python bindings PYONE]({{% relref "../../../product/integration_references/system_interfaces/python#python" %}}) are necessary, for `one_image.py` the legacy [Python OCA](https://github.com/python-oca/python-oca) is also required.
