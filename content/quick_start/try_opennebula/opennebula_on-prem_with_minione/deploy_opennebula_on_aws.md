@@ -255,7 +255,7 @@ When running miniONE within an AWS instance, the reported IP may be a private ad
 
 Point your browser to the public IP showed in miniONE's report. You should be greeted with the Sunstone login screen:
 
-![image ><](/images/sunstone-login-dark.png)
+![image ><](/images/sunstone-login.png)
 <br/>
 
 In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE, then press `Enter` or click **SIGN IN NOW**.
