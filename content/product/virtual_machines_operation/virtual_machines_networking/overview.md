@@ -10,7 +10,7 @@ weight: "1"
 
 <!--# Overview -->
 
-This section contains documentation on how to create and manage [Virtual Networks]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets" %}}) and their related objects.
+This section contains documentation on how to create and manage [Virtual Networks]({{% relref "../../cluster_configuration/networking_system/manage_vnets" %}}) and their related objects.
 
 ## How Should I Read This Chapter
 

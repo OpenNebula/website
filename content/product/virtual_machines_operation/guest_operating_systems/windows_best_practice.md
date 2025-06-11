@@ -133,7 +133,7 @@ Under the Inputs section select a Tablet type on USB bus, then click Add. This w
 
 Defining a Virtio model display device at a higher resolution can be useful here as well; this can allow higher resolutions in the desktop.
 
-If you are using non-networking PCI Passthrough devices, this is the place to add them too, such as GPUs. See the [PCI Passthrough Guide]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough#kvm-pci-passthrough" %}}).
+If you are using non-networking PCI Passthrough devices, this is the place to add them too, such as GPUs. See the [PCI Passthrough Guide]({{% relref "../../cluster_configuration/hosts_and_clusters/pci_passthrough#kvm-pci-passthrough" %}}).
 
 #### Tags
 
@@ -198,7 +198,7 @@ For best performance, the Pin Policy should be set to core but any of the polici
 
 You may also want to define Hugepages Size, the most performant should be 1024M (1G) hugepages. [Here is some RedHat Documenetation about enabling huge tables persistently](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/configuring-huge-pages_monitoring-and-managing-system-status-and-performance#configuring-huge-pages_monitoring-and-managing-system-status-and-performance). Enabling these should increase memory performance of the VM, and even with the default 2M pages you should see a difference.
 
-For extra information and how to enable this on the Hosts, please see [our documentation about NUMA Topology]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa#numa" %}}).
+For extra information and how to enable this on the Hosts, please see [our documentation about NUMA Topology]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}}).
 
 ## Installing the Operating System
 

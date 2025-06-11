@@ -27,7 +27,7 @@ From the perspective of a hypervisor node, such a container environment is just 
 
 To understand the specific requirements, functionalities, and limitations of the LXC driver, see [LXC Driver]({{% relref "lxc_driver" %}}).
 
-You can then check the [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview" %}}) system configuration sections to deploy Virtual Machines on your LXC nodes and access them remotely over the network.
+You can then check the [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}}) system configuration sections to deploy Virtual Machines on your LXC nodes and access them remotely over the network.
 
 ## Step 1. Add OpenNebula Repositories
 
@@ -233,7 +233,7 @@ $ exit
 
 Network connection is needed by the OpenNebula Front-end Daemons to access, manage, and monitor the Hosts, and to transfer the Image files. It is highly recommended to use a dedicated network for this purpose.
 
-There are various models for virtual networks, check the [Open Cloud Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview#nm" %}}) Chapter to find the ones supported by OpenNebula.
+There are various models for virtual networks, check the [Open Cloud Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview#nm" %}}) Chapter to find the ones supported by OpenNebula.
 
 You may want to use the simplest network model that corresponds to the [bridged]({{% relref "bridged#bridged" %}}) driver. For this driver, you will need to set up a Linux bridge and include a physical device in the bridge. Later on, when defining the network in OpenNebula, you will specify the name of this bridge and OpenNebula will know that it should connect the VM to this bridge, thus giving it connectivity with the physical network device connected to the bridge. For example, a typical Host with two physical networks, one for public IP addresses (attached to an `eth0` NIC for example) and the other for private virtual LANs (NIC `eth1` for example) should have two bridges:
 
@@ -256,13 +256,13 @@ Remember that this is only required in the Hosts, not in the Front-end. Also rem
 
 In default OpenNebula configuration, the local storage is used for storing Images and running Virtual Machines. This is enough for basic use and you don’t need to take any extra steps now unless you want to deploy an advanced storage solution.
 
-Follow the [Open Cloud Storage Setup]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#storage" %}}) guide to learn how to use Ceph, NFS, LVM, etc.
+Follow the [Open Cloud Storage Setup]({{% relref "../../../product/cluster_configuration/storage_system/overview#storage" %}}) guide to learn how to use Ceph, NFS, LVM, etc.
 
 ## Step 7. Adding Host to OpenNebula
 
 In this step, we’ll register the hypervisor node we have configured above into the OpenNebula Front-end, so that OpenNebula can launch Virtual Machines on it. This step is documented for Sunstone GUI and CLI, but both accomplish the same result. Select and proceed with just one of the two options.
 
-Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/overview#hostsubsystem" %}}).
+Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
 
 {{< alert title="Note" color="success" >}}
 If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}} 
@@ -303,5 +303,5 @@ $ onehost list
 
 Now, you can continue by controlling and extending your cloud:
 
-- Configuring [Storage]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/overview" %}}) and [Networking]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/overview" %}})
-- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cloud_clusters_infrastructure_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}})
+- Configuring [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}})
+- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cluster_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}})

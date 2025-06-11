@@ -168,7 +168,7 @@ IP_LINK_CONF="tos=10,udpcsum=,udp6zerocsumrx=__delete__"
 
 Options can have an empty value when they don’t need a parameter. Also, the special value “_\_delete_\_” can be used to delete parameters set here.
 
-You can find more information about these parameters in [802.1Q]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan#hm-vlan" %}}) and [VXLAN]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan#vxlan" %}}) documentation.
+You can find more information about these parameters in [802.1Q]({{% relref "../../cluster_configuration/networking_system/vlan#hm-vlan" %}}) and [VXLAN]({{% relref "../../cluster_configuration/networking_system/vxlan#vxlan" %}}) documentation.
 
 <a id="vnet-template-example"></a>
 

@@ -259,7 +259,7 @@ VXLAN_IDS = [
 
 ## Datastores
 
-The [Storage Subsystem]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}) allows users to set up images, which can be operating systems or data, to be easily used in Virtual Machines. These images can be used by several Virtual Machines simultaneously and also shared with other users.
+The [Storage Subsystem]({{% relref "../../cluster_configuration/storage_system/overview#sm" %}}) allows users to set up images, which can be operating systems or data, to be easily used in Virtual Machines. These images can be used by several Virtual Machines simultaneously and also shared with other users.
 
 Here you can configure the default values for the Datastores and Image templates. There is more information about the template syntax [here]({{% relref "../configuration_references/img_template#img-template" %}}).
 
@@ -380,7 +380,7 @@ The transfer drivers are used to transfer, clone, remove, and create VM images. 
   - `-t`: number of threads, i.e., number of transfers made at the same time
   - `-d`: list of transfer drivers separated by commas. If not defined all the drivers available will be enabled
 
-For more information on configuring different storage alternatives please check the [storage configuration]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}) guide.
+For more information on configuring different storage alternatives please check the [storage configuration]({{% relref "../../cluster_configuration/storage_system/overview#sm" %}}) guide.
 
 Sample configuration:
 
@@ -456,7 +456,7 @@ DATASTORE_MAD = [
 ]
 ```
 
-For more information on this driver and how to customize it, please visit the [storage configuration]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}) guide.
+For more information on this driver and how to customize it, please visit the [storage configuration]({{% relref "../../cluster_configuration/storage_system/overview#sm" %}}) guide.
 
 ## Marketplace Driver Configuration
 

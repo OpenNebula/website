@@ -20,4 +20,4 @@ Backups are managed through the [datastore]({{% relref "datastores" %}}) and [im
 
 The pages in this section describe backup types and available backup operations (such as scheduling, cancelling or restoring), advanced configurations (such as defining quotas and access control) and how to set up backup jobs for multiple Virtual Machines.
 
-For information about the available backup backends, see [Backup System Configuration]({{% relref "backup_system_configuration" %}}).
+For information about the available backup backends, see [Backup System Configuration]({{% relref "backup_system" %}}).
