@@ -73,7 +73,45 @@ Some of the VM actions available in the OpenNebula API are not implemented yet f
 
 ### PCI Passthrough
 
-PCI Passthrough is not currently supported for LXC containers.
+You can perform NIC PCI Passthrough on containers. For this you simply need the [PCI NICs to be monitored in the LXC hosts]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough.md#driver-configuration" %}}). The configuration file for the PCI device detection is `/var/lib/one/remotes/etc/im/lxc-probes.d/pci.conf`. Once monitoring is successful, you can [use this PCI NIC]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough.md#usage" %}})
+by declaring in it on the VM Template or hot plugging it.
+
+Example PCI device monitoring
+
+```bash
+onehost show 1 -j | jq .HOST.HOST_SHARE.PCI_DEVICES.PCI[-1]
+{
+  "ADDRESS": "0000:00:08:0",
+  "BUS": "00",
+  "CLASS": "0200",
+  "CLASS_NAME": "Ethernet controller",
+  "DEVICE": "100e",
+  "DEVICE_NAME": "82540EM Gigabit Ethernet Controller",
+  "DOMAIN": "0000",
+  "FUNCTION": "0",
+  "NUMA_NODE": "-",
+  "SHORT_ADDRESS": "00:08.0",
+  "SLOT": "08",
+  "TYPE": "8086:100e:0200",
+  "VENDOR": "8086",
+  "VENDOR_NAME": "Intel Corporation",
+  "VMID": "-1"
+}
+```
+
+NIC declaration in VM Template
+
+```
+PCI=[
+  NETWORK="public",
+  NETWORK_ID="0",
+  NETWORK_UID="0",
+  NETWORK_UNAME="oneadmin",
+  SHORT_ADDRESS="00:08.0",
+  TYPE="NIC" ]
+```
+
+Hot-plug that device with `onevm nic-attach $VM_ID -n $VNET_ID --pci "00:08.0"`
 
 ### Wild Containers
 
