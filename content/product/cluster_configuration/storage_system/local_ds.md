@@ -155,7 +155,7 @@ When a VM is instantiated, the Host first checks its *local cache* for the neede
 
 <!-- [image3](/images/local_ds_cache.png) -->
 
-{{< image alt="><" path=/images/local_ds_cache.png width=580 height=421 >}}
+{{< image alt="><" path=/images/local_ds_cache.png width=678 height=590 >}}
 
 ## How to Enable and Configure the Cache
 
