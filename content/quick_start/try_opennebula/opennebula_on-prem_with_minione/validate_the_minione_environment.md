@@ -185,6 +185,11 @@ Click **Next**. Sunstone displays the **Select a network** screen:
 ![image](/images/minione-attach_nic.png)
 <br/>
 
+Click **Next**. Sunstone displays the **Network values** screen:
+
+![image](/images/minione-attach_nic_3.png)
+<br/>
+
 Select `vnet`, then click **Next**. Sunstone displays the final screen, **Select QoS**:
 
 ![image](/images/minione-select_qos.png)

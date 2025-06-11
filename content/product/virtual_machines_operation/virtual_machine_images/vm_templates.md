@@ -183,7 +183,7 @@ USER_INPUTS = [
   MYSQL_PASSWORD="O|password|MySQL Password",
   MYSQL_ADDITIONAL="O|boolean|Define additional parameters",
   MYSQL_SOCKET="O|text|MySQL Socket",
-  MYSQL_CHARSET="O|text|MySQL Charset",
+  MYSQL_CHARSET="O|text|MySQL Charset"
 ]
 ```
 
@@ -210,7 +210,7 @@ USER_INPUTS = [
   ONEAPP_MYSQL_CONFIG_PASSWORD="O|password|MySQL Password",
   ONEAPP_MYSQL_ADDITIONAL_ENABLED="O|boolean|Define additional parameters",
   ONEAPP_MYSQL_ADDITIONAL_SOCKET="O|text|MySQL Socket",
-  ONEAPP_MYSQL_ADDITIONAL_CHARSET="O|text|MySQL Charset",
+  ONEAPP_MYSQL_ADDITIONAL_CHARSET="O|text|MySQL Charset"
 ]
 ```
 

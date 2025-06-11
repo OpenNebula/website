@@ -806,9 +806,9 @@ ID USER            GROUP           NAME          STARTTIME          STATE
 
 The Service will eventually change to `DEPLOYING`. You can see information for each Role by using `oneflow show`.
 
-From Sunstone, you can instantiate a new Service from the tab `Instances` > `Services`, clicking on the `Instantiate` button located in the toolbar.
+From Sunstone, you can instantiate a new Service from the tab `Instances` > `Services`, clicking in the `Create` button located in the toolbar.
 
-![oneflow-services-list](/images/oneflow-services-list.png)
+![oneflow-services-list](/images/oneflow-services-create.png)
 
 By selecting the Role tab once you have selected a Service, you can see the deployment state of each Role:
 

@@ -122,11 +122,11 @@ LAST_INCREMENT_ID="-1"
 MODE="INCREMENT"
 ```
 
-To configure using the Sunstone GUI, click on the Virtual Machine, select the **Configuration** tab and click on the **Update VM Configuration** button:
+To configure using the Sunstone GUI, click on the virtual machine, select the **Backup** tab and click on the **Backup config** button:
 
 ![vm_cfg](/images/backup_vm_configuration.png)
 
-Sunstone will display the screen to update the VM Configuration. Select the **Backup** tab to update the backup configuration.
+Sunstone will display the screen to update the VM Configuration.
 
 ![vm_cfg_tab](/images/backup_vm_configuration_tab.png)
 
