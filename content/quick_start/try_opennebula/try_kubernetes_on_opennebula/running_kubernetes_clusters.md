@@ -88,8 +88,6 @@ Follow these steps:
 
 You have deleted the `REPLICA_HOST` parameter from the datastore. In the next step we’ll download the OneKE appliance.
 
-<!-- .. image:: /images/kubernetes-replica_host_param.png -->
-
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
 The [OpenNebula Public Marketplace](https://marketplace.opennebula.io) is a repository of Virtual Machines and appliances which are curated, tested and certified by OpenNebula.
@@ -106,7 +104,7 @@ In the search field at the top, type `oneke` to filter by name. Then, select **S
 ![image](/images/sunstone-service_oneke_1.29.png)
 <br/>
 
-Click the **Import into Datastore** ![icon1](/images/icons/sunstone/import_into_datastore.png) icon.
+Click the **Import** button.
 
 As with the WordPress appliance, Sunstone displays the **Download App to OpenNebula** wizard. In the first screen of the wizard, click **Next**.
 
@@ -164,9 +162,17 @@ Sunstone displays the **Instantiate Service Template** wizard. In the first scre
 
 Click **Next** to go to the next screen, **User Inputs**.
 
-Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. There are three User Inputs pages in total; you can browse them by clicking the page numbers at the bottom of each page, highlighted below.
+Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others grouped in the following tabs:
 
-![image](/images/sunstone-kubernetes-user_inputs.png)
+![image](/images/sunstone-kubernetes-user_inputs_vrouter.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_rke2.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_k8s.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_vnf.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_others.png)
 <br/>
 
 ### Optional: Add a Custom Domain

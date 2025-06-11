@@ -191,7 +191,7 @@ In order to develop a new tab, you need to make sure it has the correct webpack 
    $ npm run start # Start the server, by default accessible on http://localhost:2616/fireedge
    ```
 
-Now let's create a new module called `CustomContainers`, based on the original `ContainersModule`.
+Now let's create a new module called `CustomContainersModule`, based off the original `ContainersModule`.
 
 3. We will begin by creating a new `src/modules/customContainers` folder
 
@@ -203,19 +203,19 @@ Now let's create a new module called `CustomContainers`, based on the original `
 
    ```default
    # Copying the Users directory
-   cp -r src/modules/containers/Users src/modoules/customContainers
+   cp -r src/modules/containers/Users src/modules/customContainers
 
    # Copying containers webpack config for reference
-   cp src/modules/containers/webpack.config.prod.containers.js src/modules/customContainers/webpack.config.prod.customcontainers.js
+   cp src/modules/containers/webpack.config.prod.containers.js src/modules/customContainers/webpack.config.prod.customContainers.js
 
    # We'll also create a index.js file which will expose our new component
    touch src/modules/customContainers/index.js
    ```
 
-5. Now we need to modify the `webpack.config.prod.customcontainers.js` file
+5. Now we need to modify the `webpack.config.prod.customContainers.js` file:
 
    ```javascript
-   // We will update the module name at the top to `CustomContainers`
+   // We will update the module name at the top to `CustomContainersModule`
    const moduleName = 'ContainersModule'
 
    // Make sure your module can import the shared dependency script!
@@ -407,51 +407,39 @@ Now let's create a new module called `CustomContainers`, based on the original `
 10. Now we need to copy our new module to the `/usr/lib/one/fireedge/dist/modules` directory, as we will be serving it locally
 
    ```default
-   cp -r dist/modules/customContainers /usr/lib/one/fireedge/dist/modules
+   cp -r dist/modules/CustomContainersModule /usr/lib/one/fireedge/dist/modules
    ```
 
    This ensures the fireedge server has access to and can serve the module for the client
 
-11. Now we need to add our module to the `remotes-config.json` file
+11. Now we need to add our module to the `remotes-config.yaml` file
 
-   ```json
-   {
-     "ContainersModule": {
-       "name": "ContainersModule",
-       "entry": "__HOST__/fireedge/modules/ContainersModule/remoteEntry.js"
-     },
-     "CustomContainersModule": {
-       "name": "CustomContainersModule",
-       "entry": "__HOST__/fireedge/modules/CustomContainersModule/remoteEntry.js"
-     }
-   }
+   ```yaml
+  ContainersModule:
+     name: ContainersModule
+     entry: __HOST__/fireedge/modules/ContainersModule/remoteEntry.js
+  CustomContainersModule:
+     name: CustomContainersModule
+     entry: __HOST__/fireedge/modules/CustomContainersModule/remoteEntry.js
    ```
 
    Now the client will fetch and load the `CustomContainersModule`
 
-12. Then we need to update our `tab-manifest.json` file with our new `UsersAndGroups` component
+12. Then we need to update out `tab-manifest.yaml` file with our new `UsersAndGroups` component
 
-   ```json
-   {
-       "title": "System",
-       "icon": "Home",
-       "routes": [
-           {
-               "title": "Create User",
-               "path": "/user/create",
-               "Component": "CreateUser"
-           },
-           {
-               "title": "Users and Groups",
-               "path": "/usersgroups",
-               "sidebar": true,
-               "icon": "User",
-               "moduleId": "CustomContainersModule", // We explicitly define which module to load the component from
-               "Component": "UsersAndGroups"
-           },
-           // Other tabs and definitions
-        ]
-   }
+   ```yaml
+   - title: System
+     icon: Home
+     routes:
+       - title: Create User
+         path: /user/create
+         Component: CreateUser
+       - title: Users and Groups
+         path: /usersgroups
+         sidebar: true
+         icon: User
+         moduleId: "CustomContainersModule" # We explicitly define which module to load the component from
+         Component: "UsersAndGroups"
    ```
 
    {{< alert title="Important" color="success" >}}
