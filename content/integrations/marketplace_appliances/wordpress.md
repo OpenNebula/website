@@ -14,11 +14,11 @@ weight: "10"
 
 ## Appliance Description
 
-The WordPress Appliance is a Virtual Machine with a preinstalled [WordPress](https://wordpress.org/) service, available for KVM hosts.
+The WordPress appliance is a Virtual Machine with a preinstalled [WordPress](https://wordpress.org/) service, available for KVM Hosts.
 
 ## Main Features
 
-The WordPress Appliance features:
+The WordPress appliance features:
 
 - Based on the latest AlmaLinux 8 Linux distribution (for x86-64)
 - No default login (local or SSH) password - must be provided via contextualization
