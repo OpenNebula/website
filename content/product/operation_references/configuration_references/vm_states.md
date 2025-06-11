@@ -107,6 +107,6 @@ In OpenNebula a Virtual Machine has two variables to define its state: `STATE` a
 
 ## Diagram
 
-You can click on the following image to open it in a new window. For a simplified version of this diagram, please visit the [Managing Virtual Machines guide]({{% relref "../../virtual_machines_operation/virtual_machine_instances/vm_instances#vm-life-cycle-and-states" %}}).
+You can click on the following image to zoom into it.
 
 ![Virtual Machine States](/images/states-complete.png)
