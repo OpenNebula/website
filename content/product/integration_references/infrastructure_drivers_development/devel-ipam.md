@@ -12,17 +12,17 @@ weight: "8"
 
 <!--# IPAM driver -->
 
-A IPAM driver lets you delegate IP lease management to an external component. This way you can coordinate IP use with other virtual or bare-metal servers in your datacenter. To effectively use an external IPAM you need to develop four action scripts that hooks on different points of the IP network/lease life-cycle.
+An IPAM driver lets you delegate IP lease management to an external component. This way you can coordinate IP use with other virtual or bare-metal servers in your datacenter. To effectively use an external IPAM you need to develop four action scripts that hook on different points of the IP network/lease life-cycle.
 
-Note that OpenNebula includes a built-in internal IPAM. You need to develop this component if you are using a IPAM server and want to coordinate OpenNebula with it.
+Note that OpenNebula includes a built-in internal IPAM. You need to develop this component if you are using an IPAM server and want to coordinate OpenNebula with it.
 
 ## IPAM Drivers Structure
 
-The main drivers are located under `/var/lib/one/remotes/ipam/<ipam_mad>`. For an example, you can take a look to `/var/lib/one/remotes/ipam/dummy`. This set of simple scripts can be used as an starting point to develop the integration.
+The main drivers are located under `/var/lib/one/remotes/ipam/<ipam_mad>`. For an example, you can take a look at `/var/lib/one/remotes/ipam/dummy`. This set of simple scripts can be used as an starting point to develop the integration.
 
 ### `register_address_range`
 
-This action is used to register a new IP network in the IPAM. The network may be selected from a pool of free networks or if an specific network is requested its availability maybe checked by the IPAM driver. The IPAM driver must return an OpenNebula AddressRange definition, potentially augmented with network specific variables to be used by VMs (e.g. `GATEWAY`, `NETWORK_MASK`…)
+This action is used to register a new IP network in the IPAM. The network may be selected from a pool of free networks or if a specific network is requested its availability may be checked by the IPAM driver. The IPAM driver must return an OpenNebula AddressRange definition, potentially augmented with network-specific variables to be used by VMs (e.g., `GATEWAY`, `NETWORK_MASK`…)
 
 **STDIN Argument**
 
@@ -112,15 +112,15 @@ This action is used to unregister an address range from the IPAM.
 
 **Returns**
 
-This scripts MUST exit `0` if no errors we found.
+This script MUST exit `0` if no errors were found.
 
 ### `allocate_address`
 
-This action is used to register an specific IP address (or addresses) as used. The IP (or IPs)  will be used by an OpenNebula VM and should not be allocated to any other host in the network.
+This action is used to register a specific IP address (or addresses) as used. The IP (or IPs)  will be used by an OpenNebula VM and should not be allocated to any other Host in the network.
 
 **STDIN Argument**
 
-* **AddressRange and Address**: in XML encoded in Base64. The XML will contain the AR as defined by the previous action; and the address request:
+* **AddressRange and Address**: in XML encoded in Base64. The XML will contain the AR as defined by the previous action, and the address request:
 
 ```default
 <IPAM_DRIVER_ACTION_DATA>
@@ -141,15 +141,15 @@ This action is used to register an specific IP address (or addresses) as used. T
 
 **Returns**
 
-This scripts MUST exit `0` if the address is free.
+This script MUST exit `0` if the address is free.
 
 ### `get_address`
 
-This action is used to lease an IP address (or addresses). The IP (or IPs)  will be used by an OpenNebula VM and should not be allocated to any other host in the network.
+This action is used to lease an IP address (or addresses). The IP (or IPs)  will be used by an OpenNebula VM and should not be allocated to any other Host in the network.
 
 **STDIN Argument**
 
-* **AddressRange and Address**: in XML encoded in Base64. The XML will contain the AR as defined by the previous action; and the address request:
+* **AddressRange and Address**: in XML encoded in Base64. The XML will contain the AR as defined by the previous action, and the address request:
 
 ```default
 <IPAM_DRIVER_ACTION_DATA>
@@ -178,7 +178,7 @@ If the `SIZE` IPs cannot be assigned the script must return `-1`, otherwise it m
 
 ### `free_address`
 
-This action is used to free an specific IP address (or addresses). The IP (or IPs)  are no longer in use by OpenNebula VMs or reservations.
+This action is used to free a specific IP address (or addresses). The IP (or IPs)  are no longer in use by OpenNebula VMs or reservations.
 
 **STDIN Argument**
 
@@ -190,7 +190,7 @@ This action is used to free an specific IP address (or addresses). The IP (or IP
 
 **Returns**
 
-This scripts MUST exit `0` if the address is free.
+This script MUST exit `0` if the address is free.
 
 ## IPAM Usage
 

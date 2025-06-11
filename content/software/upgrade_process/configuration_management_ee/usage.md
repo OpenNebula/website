@@ -14,7 +14,7 @@ weight: "2"
 
 This section covers `onecfg` tool subcommands:
 
-- [status]({{% relref "#cfg-status" %}}) - Versions status
+- [status]({{% relref "#cfg-status" %}}) - Version status
 - [init]({{% relref "#cfg-init" %}}) - Initialize version management state
 - [validate]({{% relref "#cfg-validate" %}}) - Validate current configuration files
 - [diff]({{% relref "#cfg-diff" %}}) - Identify changes in configuration files
@@ -65,7 +65,7 @@ New config: 5.10.0
 {{< alert title="Important" color="success" >}}
 **OpenNebula version** and **Configuration version** are tracked independently, but both versions are closely related and must be from the same `X.Y` release (i.e., OpenNebula 5.10.Z must have a configuration on version 5.10.Z). Minor configuration releases `X.Y.Z` are linked to the OpenNebula version for which a significant update has happened. Usually, the configuration version **remains on the same version for all OpenNebula releases** within the same `X.Y` release (i.e., configuration version 5.10.0 is valid for all OpenNebula releases from 5.10.0 to the latest available 5.10.5).{{< /alert >}} 
 
-**Backup to Process** is a one-shot backup that needs to be processed. It’s created automatically by OpenNebula packages (since 5.10.2) during the upgrade and contains a backup of all configuration files from the previous version. Content of the backup is taken, upgraded for the current OpenNebula version and placed into production directories (`/etc/one/` and `/var/lib/one/remotes/etc`). Any existing content will be replaced there.
+**Backup to Process** is a one-shot backup that needs to be processed. It’s created automatically by OpenNebula packages (since 5.10.2) during the upgrade and contains a backup of all configuration files from the previous version. Content of the backup is taken, upgraded for the current OpenNebula version, and placed into production directories (`/etc/one/` and `/var/lib/one/remotes/etc`). Any existing content will be replaced there.
 
 Example of status without available updates:
 
@@ -298,7 +298,7 @@ Subcommands `diff` and `patch` can be chained to apply changes from one Front-en
 The `upgrade` subcommand makes all the changes in configuration files to update content from one version to another. It mainly does the following steps:
 
 - Detect if an upgrade is necessary (or, at least, if one-shot backup should be processed)
-- Back-up existing configuration files
+- Back up existing configuration files
 - Apply upgrades (run migrators)
 - Copy upgraded files back
 

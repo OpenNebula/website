@@ -20,7 +20,7 @@ sudo -i -u oneadmin
 
 ## Back up files
 
-This command has to be executed in the failing host.
+This command has to be executed in the failing Host.
 
 Create the backup directory:
 
@@ -59,9 +59,9 @@ Copy the database backup file to the backup directory:
 cp -rp <onedb_backup> $BAK_DIR
 ```
 
-## Remove failing frontend from HA
+## Remove failing Front-end from HA
 
-Stop all the OpenNebula services `systemctl stop opennebula*`. This command has to be executed in the failing host.
+Stop all the OpenNebula services `systemctl stop opennebula*`. This command has to be executed in the failing Host.
 
 ```shell
 systemctl stop opennebula*

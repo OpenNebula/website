@@ -32,16 +32,16 @@ We’ll follow these high-level steps:
 
 > 1. Set up the Ansible control node (for example, install Ansible if necessary).
 > 2. Download the Ansible playbooks.
-> 3. Modify the playbooks to your needs, e.g. set the OpenNebula version, define the virtual network for the hosts, storage options, etc.
+> 3. Modify the playbooks to your needs, e.g., set the OpenNebula version, define the virtual network for the Hosts, storage options, etc.
 > 4. Run the playbooks.
 > 5. Verify the installation.
 
 {{< alert title="Important" color="success" >}}
-This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e. OpenNebula front-end and hypervisor nodes) using a virtual environment with [Hatch](https://hatch.pypa.io/). For information on other installation methods and OSes, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
+This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e., OpenNebula Front-end and Hypervisor nodes) using a virtual environment with [Hatch](https://hatch.pypa.io/). For information on other installation methods and OSs, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Requirements
 
-The cloud hosts (i.e. the OpenNebula Front-end and Hypervisors) must meet the following requirements:
+The cloud Hosts (i.e., the OpenNebula Front-end and Hypervisors) must meet the following requirements:
 
 > * Ubuntu 22.04 or 24.04 with Netplan >=0.105
 > * Passwordless SSH login, as root, from the Front-end node to the Hypervisors nodes
@@ -57,7 +57,7 @@ drwxr-xr-x 2 9869 9869 6 Jun 26 17:55 one_datastores
 ```
 
 {{< alert title="Important" color="success" >}}
-The shared directories **MUST** be owned by UID and GID 9869, since these are assigned to the OpenNebula `oneadmin` user during installation. If you need to change the UID/GID, run as root:{{< /alert >}} 
+The shared directories **MUST** be owned by UID and GID 9869 since these are assigned to the OpenNebula `oneadmin` user during installation. If you need to change the UID/GID, run as root:{{< /alert >}} 
 
 ```default
 chown 9869:9869 /storage/one_datastores
@@ -65,7 +65,7 @@ chown 9869:9869 /storage/one_datastores
 
 You can change these values even if a user with this UID/GID does not exist on the system.
 
-The shared folder must be available to all servers will OpenNebula will be deployed. The example `/etc/exports` file shown below shares the folder for the entire network where the servers reside.
+The shared folder must be available to all servers where OpenNebula will be deployed. The example `/etc/exports` file shown below shares the folder for the entire network where the servers reside.
 
 ```shell
 # /etc/exports
@@ -96,7 +96,7 @@ Once the packages are installed, clone the `one-deploy` repository:
 git clone https://github.com/OpenNebula/one-deploy.git
 ```
 
-Install hatch:
+Install Hatch:
 
 ```default
 pipx install hatch
@@ -110,7 +110,7 @@ Go to the `one-deploy` directory:
 cd one-deploy
 ```
 
-Install the necessary components for the installation, by running:
+Install the necessary components for the installation by running:
 
 ```default
 make requirements
@@ -297,7 +297,7 @@ n1 | SUCCESS => {
 }
 ```
 
-If any host is unreachable, or if access via SSH is not properly configured, you will see output like the following:
+If any Host is unreachable, or if access via SSH is not properly configured, you will see output like the following:
 
 ```default
 n2 | UNREACHABLE! => {
@@ -369,7 +369,7 @@ After the command completes, your new OpenNebula cloud should be up and running.
 
 ## Verifying the Installation
 
-On the Front-end, check that the NFS share with the datastores is mounted, by running the `df` command. The sample output below shows the NFS share mounted on `/var/lib/one/datastores`:
+On the Front-end, check that the NFS share with the datastores is mounted by running the `df` command. The sample output below shows the NFS share mounted on `/var/lib/one/datastores`:
 
 ```default
 df
@@ -433,7 +433,7 @@ Next we’ll verify that the cloud resources are up. First, become the `oneadmin
 sudo -i -u oneadmin
 ```
 
-As user `oneadmin`, to verify the hosts run:
+As user `oneadmin`, to verify the Hosts run:
 
 ```default
 onehost list
@@ -511,7 +511,7 @@ VMTEMPLATE
     ID: 0
 ```
 
-Verify that the image is ready to be instantiated, by running:
+Verify that the image is ready to be instantiated by running:
 
 ```default
 oneimage list

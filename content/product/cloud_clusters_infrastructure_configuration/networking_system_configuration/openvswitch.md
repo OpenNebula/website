@@ -76,11 +76,11 @@ VLAN_ID = 50          # Optional
 ```
 
 {{< alert title="Warning" color="warning" >}}
-Currently, if IP Spoofing enabled, only one NIC per VM for the same Open vSwith network can be attached.{{< /alert >}} 
+Currently, if IP Spoofing is enabled, only one NIC per VM for the same Open vSwith network can be attached.{{< /alert >}} 
 
 ### Multiple VLANs (VLAN trunking)
 
-VLAN trunking is also supported by adding the following tag to the `NIC` element in the VM template or to the virtual network template:
+VLAN trunking is also supported by adding the following tag to the `NIC` element in the VM template or to the Virtual Network template:
 
 - `VLAN_TAGGED_ID`: Specify a range of VLANs to tag, for example: `1,10,30,32,100-200`.
 
@@ -90,13 +90,13 @@ VLAN trunking is also supported by adding the following tag to the `NIC` element
 
 This section describes how to use [Open vSwitch](http://openvswitch.org/) on VXLAN networks. To use VXLAN you need to use a specialized version of the Open vSwitch driver that incorporates the features of the [VXLAN]({{% relref "vxlan#vxlan" %}}) driver. It’s necessary to be familiar with these two drivers, their configuration options, benefits, and drawbacks.
 
-The VXLAN overlay network is used as a base with the Open vSwitch (instead of regular Linux bridge) on top. Traffic on the lowest level is isolated by the VXLAN encapsulation protocol and Open vSwitch still allows second level isolation by 802.1Q VLAN tags **inside the encapsulated traffic**. The main isolation is always provided by VXLAN, not 802.1Q VLANs. If 802.1Q is required to isolate the VXLAN, the driver needs to be configured with user-created 802.1Q tagged physical interface.
+The VXLAN overlay network is used as a base with the Open vSwitch (instead of regular Linux bridge) on top. Traffic on the lowest level is isolated by the VXLAN encapsulation protocol and Open vSwitch still allows second level isolation by 802.1Q VLAN tags **inside the encapsulated traffic**. The main isolation is always provided by VXLAN, not 802.1Q VLANs. If 802.1Q is required to isolate the VXLAN, the driver needs to be configured with a user-created 802.1Q-tagged physical interface.
 
-This hierarchy is important to understand.
+This hierarchy is important.
 
 ### OpenNebula Configuration
 
-There is no configuration specific to this driver, except the options specified above and in the [VXLAN Networks]({{% relref "vxlan#vxlan" %}}) guide.
+There is no configuration specific to this driver except the options specified above and in the [VXLAN Networks]({{% relref "vxlan#vxlan" %}}) guide.
 
 ### Defining an Open vSwitch - VXLAN Network
 
@@ -125,7 +125,7 @@ VLAN_ID        = 50                 # Optional VLAN ID
 ...
 ```
 
-In this example, the driver will check for the existence of bridge `ovsvxbr0.10000`.  If it doesn’t exist, it will be created. Also, the VXLAN interface `eth0.10000` will be created and attached to the Open vSwitch bridge `ovsvxbr0.10000`. When a virtual machine is instantiated, its bridge ports will be tagged with 802.1Q VLAN ID `50`.
+In this example, the driver will check for the existence of bridge `ovsvxbr0.10000`.  If it doesn’t exist, it will be created. Also, the VXLAN interface `eth0.10000` will be created and attached to the Open vSwitch bridge `ovsvxbr0.10000`. When a Virtual Machine is instantiated, its bridge ports will be tagged with 802.1Q VLAN ID `50`.
 
 <a id="openvswitch-dpdk"></a>
 
@@ -139,16 +139,16 @@ This section describes how to use a DPDK datapath with the Open vSwitch drivers.
 Please consider the following when using the DPDK datapath for Open vSwitch:
 
 * An Open vSwitch version compiled with DPDK support is required.
-* The VMs need to use the virtio interface for its NICs.
-* Hugepages needs to be configured in the Hosts
-* VMs needs to use be configured to use NUMA pinning and hugepages. See [here]({{% relref "../hosts_and_clusters_configuration/numa#numa" %}}).
+* The VMs need to use the virtio interface for their NICs.
+* Hugepages needs to be configured in the Hosts.
+* VMs need to use be configured to use NUMA pinning and hugepages. See [here]({{% relref "../hosts_and_clusters_configuration/numa#numa" %}}).
 
 ### Host Configuration
 
 {{< alert title="Note" color="success" >}}
 This section will use an Ubuntu22.04 server to show working configurations. You may need to adapt them to other Linux distributions.{{< /alert >}} 
 
-#### Setup Hugepages and iommu
+#### Set up Hugepages and iommu
 
 [Hugepages](https://wiki.debian.org/Hugepages) are virtual memory pages of a size greater than the 4K default. Increasing the size of the page reduces the number of pages in the system and hence the entries needed in the TLB to perform virtual address translations.
 
@@ -159,7 +159,7 @@ The size of virtual pages supported by the system can be check from the CPU flag
 
 For 64-bit applications it is recommended to use 1G. Note that on NUMA systems, the pages reserved are divided equally between sockets.
 
-For example, to configure default page size of **1G** and **250** hugepages with [iommu](https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit#:~:text=In%20computing%2C%20an%20input%E2%80%93output,bus%20to%20the%20main%20memory.) enabled at boot time on a host with an **Intel CPU**, you have to append `"intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=250"` to the bootloader configuration.
+For example, to configure default page size of **1G** and **250** hugepages with [iommu](https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit#:~:text=In%20computing%2C%20an%20input%E2%80%93output,bus%20to%20the%20main%20memory.) enabled at boot time on a Host with an **Intel CPU**, you have to append `"intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=250"` to the bootloader configuration.
 
 ```default
 # grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
@@ -169,11 +169,11 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on default_hugepagesz=1G hu
 ```
 
 {{< alert title="Tip" color="info" >}}
-Use `amd_iommu=on` instead for hosts with an AMD CPU{{< /alert >}} 
+Use `amd_iommu=on` instead for Hosts with an AMD CPU{{< /alert >}} 
 
-Then reboot the system. After rebooting, make sure that the hugepages mount can be seen so the applications can access them.
+Then reboot the system. After rebooting make sure that the hugepages mount can be seen so the applications can access them.
 
-If you see the following, you don’t need to setup a mount as the mounts are already handled:
+If you see the following, you don’t need to set up a mount as the mounts are already handled:
 
 ```default
 # mount | grep huge
@@ -249,11 +249,11 @@ true
 
 #### Configure Open vSwitch
 
-Next step is to tune the execution parameters of the polling mode drivers (PMD) threads by pinning them into specific CPUs and assigning some hugepages.
+The next step is to tune the execution parameters of the polling mode drivers (PMD) threads by pinning them into specific CPUs and assigning some hugepages.
 
-To specify the CPU cores we need to set a binary mask, where each bit represents a CPU core by its ID. For example `0xF0` is `11110000`, bits 7,6,5,4 are set to 1 so CPU cores 7,6,5,4 would be use for PMDs. Usually, it is recommended to allocate same number of cores across NUMA nodes.
+To specify the CPU cores we need to set a binary mask, where each bit represents a CPU core by its ID. For example `0xF0` is `11110000`, bits 7,6,5,4 are set to 1 so CPU cores 7,6,5,4 would be used for PMDs. Usually, it is recommended to allocate the same number of cores across NUMA nodes.
 
-For example to set cores **0,28,1,29** and **2G** of hugepages per NUMA node on a host with two sockets, execute the following commands:
+For example, to set cores **0,28,1,29** and **2G** of hugepages per NUMA node on a Host with two sockets, execute the following commands:
 
 ```default
 # ovs-vsctl set Open_vSwitch . other_config:pmd-cpu-mask=0x30000003
@@ -265,9 +265,9 @@ For example to set cores **0,28,1,29** and **2G** of hugepages per NUMA node on 
 
 #### Configure Open vSwitch Bridge
 
-OpenNebula does not support adding and configuring DPDK physical devices. Binding cards to vfio-pci driver needs to be configured before using the DPDK network in OpenNebula. Usually, Open vSwitch setups only requires one bridge so these steps can be easily automated during the host installation.
+OpenNebula does not support adding and configuring DPDK physical devices. Binding cards to vfio-pci driver needs to be configured before using the DPDK network in OpenNebula. Usually, Open vSwitch setups only require one bridge so these steps can be easily automated during the Host installation.
 
-In this example, we’ll create a bond with two cards (each attached to a different NUMA node). Let’s first trace the cards with the `dpdk-debind.py` tool, and then bind the cards to the **vfio-pci** driver.
+In this example, we’ll create a bond with two cards (each attached to a different NUMA node). Let’s first trace the cards with the `dpdk-debind.py` tool and then bind the cards to the **vfio-pci** driver.
 
 ```default
 # dpdk-devbind.py --status
@@ -317,7 +317,7 @@ Now we can add the cards to an Open vSwitch port, or in this example create a bo
     ovs_version: "2.17.2"
 ```
 
-We are all set now, the bridge `onebr.dpdk` is ready to be used by OpenNebula.
+Now we are all set! The bridge `onebr.dpdk` is ready to be used by OpenNebula.
 
 ### OpenNebula Configuration
 
@@ -345,10 +345,10 @@ VN_MAD = "ovswitch"
 
 #### Using DPDK in your Virtual Machines
 
-The following settings needs to be enabled:
+The following settings need to be enabled:
 
 > * Make sure that the NIC model is set to `virtio`. This setting can be added as a default in `/etc/one/vmm_exec/vmm_exec_kvm.conf`.
-> * In order to use the vhost-user interface in libvirt hugepages needs to be enabled. OVS reads/write network packages from/to the memory (hugepages) of the guest. The memory access mode **MUST** be shared, and the VM **MUST** configure huge pages.
+> * In order to use the vhost-user interface in libvirt hugepages needs to be enabled. OVS reads/write network packages from/to the memory (hugepages) of the guest. The memory access mode **MUST** be shared and the VM **MUST** configure huge pages.
 
 An example of a Virtual Machine template for the previous configuration could be:
 
@@ -405,7 +405,7 @@ Bridge onebr.dpdk
 
 ## Using Open vSwitch with Q-in-Q
 
-Q-in-Q is an amendment to the IEEE 802.1Q specification that provides the capability for multiple VLAN tags to be inserted into a single Ethernet frame. Using Q-in-Q (aka C-VLAN, customer VLAN) tunneling allows to create Layer 2 Ethernet connection between customers cloud infrastructure and OpenNebula VMs, or use a single service VLAN to bundle different customer VLANs.
+Q-in-Q is an amendment to the IEEE 802.1Q specification that provides the capability for multiple VLAN tags to be inserted into a single Ethernet frame. Using Q-in-Q (aka C-VLAN, customer VLAN) tunneling allows us to create Layer 2 Ethernet connection between customers' cloud infrastructure and OpenNebula VMs, or use a single service VLAN to bundle different customer VLANs.
 
 ### OpenNebula Configuration
 
@@ -436,7 +436,7 @@ VLAN_ID  = 50                 # Service VLAN ID
 CVLANS   = "101,103,110-113"  # Customer VLAN ID list
 ```
 
-In this example, the driver will assign and create an Open vSwitch bridge and will attach the interface `eth0` it. When a virtual machine is instantiated, its bridge ports will be tagged with 802.1Q VLAN ID `50` and service VLAN IDs `101,103,110,111,112,113`. The configuration of the port should be similar to the that of following example that shows the second (`NIC_ID=1`) interface port `one-1-5` for VM 5:
+In this example, the driver will assign and create an Open vSwitch bridge and will attach the interface `eth0` it. When a Virtual Machine is instantiated, its bridge ports will be tagged with 802.1Q VLAN ID `50` and service VLAN IDs `101,103,110,111,112,113`. The configuration of the port should be similar to the that of following example that shows the second (`NIC_ID=1`) interface port `one-1-5` for VM 5:
 
 ```default
 # ovs-vsctl list Port one-5-1

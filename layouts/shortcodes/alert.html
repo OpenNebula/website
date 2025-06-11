@@ -11,6 +11,6 @@
   {{ $icon = $title }}
 {{ end }}
 <div class="alert alert-{{ $color }}" role="alert">
-{{ with .Get "title" }}<h4 class="alert-heading"><img src="/{{ $docs_version }}/images/icons/alerts/{{$icon}}.svg">   {{ . | safeHTML }}</h4>{{ end }}
+{{ with .Get "title" }}<h4 class="alert-heading"><img src="/{{ $docs_version }}/images/icons/alerts/{{ $icon }}.svg">   {{ . | safeHTML }}</h4>{{ end }}
 {{ .Inner | markdownify }}
 </div>

@@ -18,13 +18,13 @@ This page will show you how to compile and install OpenNebula from the sources.
 Do not forget to check the [Building Dependencies]({{% relref "build_deps#build-deps" %}}) for a list of specific software requirements to build OpenNebula.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
-If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please expose your case to <[community-manager@opennebula.io](mailto:community-manager@opennebula.io)>.{{< /alert >}} 
+If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please get in touch at <[community-manager@opennebula.io](mailto:community-manager@opennebula.io)>.{{< /alert >}} 
 
 ## Compiling the Software
 
 Follow these simple steps to install the OpenNebula software:
 
-- Download and untar the OpenNebula tarball.
+- Download and untar the OpenNebula tarball
 - Change to the created folder and run scons to compile OpenNebula
 
 ```default
@@ -56,13 +56,13 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 | context    | no        | **yes** to download guest contextualization packages      |
 | download   | no        | **yes** to download 3rd-party tools (Restic, Prometheus…) |
 
-If the following error appears, then you need to remove the option ‘new_xmlrpc=yes’ or install xmlrpc-c version >= 1.31:
+If the following error appears then you need to remove the option ‘new_xmlrpc=yes’ or install xmlrpc-c version >= 1.31:
 
 ```default
 error: 'class xmlrpc_c::serverAbyss::constrOpt' has no member named 'maxConn'
 ```
 
-- OpenNebula can be installed in two modes: `system-wide`, or in `self-contained` directory. In either case, you do not need to run OpenNebula as root. These options can be specified when running the install script:
+- OpenNebula can be installed in two modes: `system-wide` or in `self-contained` directory. In either case, you do not need to run OpenNebula as root. These options can be specified when running the install script:
 
 ```default
 ./install.sh <install_options>
@@ -126,7 +126,7 @@ All required Ruby gems are provided by the **opennebula-rubygems** package. Plea
 
 ## Building Python Bindings from Source
 
-In order to build the OpenNebula python components it is required to install pip package manager and following pip packages:
+In order to build the OpenNebula python components it is required to install pip package manager and the following pip packages:
 
 Build Dependencies:
 

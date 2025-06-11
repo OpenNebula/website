@@ -24,7 +24,7 @@ When it comes to creating OS disk images for your VM guests, you have several op
 
 ## OpenNebula Marketplace Appliances
 
-If you have access to the public OpenNebula Marketplace from your frontend, you’ll find pre-configured images ready to run in an OpenNebula Cloud.
+If you have access to the public OpenNebula Marketplace from your Front-end, you’ll find pre-configured images ready to run in an OpenNebula Cloud.
 
 To retrieve images from the OpenNebula Marketplace:
 
@@ -87,7 +87,7 @@ $ oneimage create --name centos7-install --path https://buildlogs.centos.org/rol
 
 ### Step 2. Create Installation Disk
 
-The disk where the OS will be installed needs to be created as a `DATABLOCK`. Don’t make the image too big as it can be resized afterwards on VM instantiation. Also make sure to make it persistent so we won’t lose the disk changes when the Virtual Machine terminates.
+The disk where the OS will be installed needs to be created as a `DATABLOCK`. Don’t make the image too big as it can be resized afterwards on VM instantiation. Also make sure to make it persistent so you won’t lose the disk changes when the Virtual Machine terminates.
 
 ![sunstone_datablock_create](/images/sunstone_datablock_create.png)
 
@@ -122,9 +122,9 @@ Upon completion, tell the instantiater to reboot the machine, login to the guest
 
 As a tip, one of the final things you should do when using this method is disabling `root` password and deleting any extra users created by the installation tools.
 
-### Step 4. Shutdown the Machine and Configure the Image
+### Step 4. Shut down the Machine and Configure the Image
 
-Now, you can shutdown the Virtual Machine from the guest OS. When the Virtual Machine appears as `POWEROFF` in OpenNebula, terminate it.
+Now, you can shut down the Virtual Machine from the guest OS. When the Virtual Machine appears as `POWEROFF` in OpenNebula, terminate it.
 
 Make sure to change the attribute `PERSISTENT` of the installation disk image to `NO` and set access permissions for other users (optional).
 

@@ -22,11 +22,11 @@ The following table shows supported formats by each subcommand:
 | `line`   | Single line for one change | YES             | YES (default)    |
 | `yaml`   | Complete change structure  | YES             | YES              |
 
-Only `line` format will be described in a detail, as it’s powerful in achieving even complex changes and easy enough to read or write manually.
+Only `line` format will be described here in detail, as it’s powerful in achieving even complex changes and easy enough to read or write manually.
 
 ## Line Format
 
-Each line of change consists of the following space separated parts:
+Each line of change consists of the following space-separated parts:
 
 `<FILENAME> <COMMAND> <PATH> [<JSON VALUE>]`
 
@@ -53,7 +53,7 @@ For YAML configuration files, the path elements and values starting with `:` are
 
 Examples:
 
-- for following `/etc/one/oned.conf` snippet
+- for the following `/etc/one/oned.conf` snippet
 
 ```default
 PORT = 2633                                  # path 1

@@ -41,11 +41,11 @@ Virtual Machine disks are symbolic links to the block devices. However, addition
 
 ## OpenNebula Configuration
 
-Once the Host and Front-end storage is setup, the OpenNebula configuration comprises the creation of an Image and System Datastores.
+Once the Host and Front-end storage is set up, the OpenNebula configuration comprises the creation of the Image and System Datastores.
 
 ### Create System Datastore
 
-To create a new SAN/LVM System Datastore, you need to set following (template) parameters:
+To create a new SAN/LVM System Datastore, you need to set the following (template) parameters:
 
 | Attribute     | Description                                                                                                                                    |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -123,7 +123,7 @@ ZERO_LVM_ON_DELETE=yes
 DD_BLOCK_SIZE=32M
 ```
 
-The following attribute can be set for every Datastore type:
+The following attribute can be set for every datastore type:
 
 * `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
 * `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
@@ -143,7 +143,7 @@ Files are dumped directly from the Front-end to the LVs in the Host, using the S
 This is the recommended driver to be used when a high-end SAN is available. The same LUN can be exported to all the Hosts while Virtual Machines will be able to run directly from the SAN.
 
 {{< alert title="Note" color="success" >}}
-The LVM datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Hosts.{{< /alert >}} 
+The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.{{< /alert >}} 
 
 For example, consider a system with two Virtual Machines (`9` and `10`) using a disk, running in an LVM Datastore, with ID `0`. The Hosts have configured a shared LUN and created a volume group named `vg-one-0`. The layout of the Datastore would be:
 
@@ -158,14 +158,14 @@ For example, consider a system with two Virtual Machines (`9` and `10`) using a 
 
 ### LVM Thin internals
 
-You have the option to enable the LVM Thin functionality by setting the `LVM_THIN_ENABLE` attribute to `YES` in the **image** datastore.
+You have the option to enable the LVM Thin functionality by setting the `LVM_THIN_ENABLE` attribute to `YES` in the **Image** Datastore.
 
 {{< alert title="Note" color="success" >}}
 The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.{{< /alert >}} 
 
-This mode leverages the thin provisioning features provided by LVM to enable creating **thin snapshots** of VM disks.
+This mode leverages the thin provisioning features provided by LVM to enable the creation of **thin snapshots** of VM disks.
 
-Setup for this mode is quite similar to the standard (non-thin) mode: a `vg-one-<system_ds_id>` is required, and LVs will be created over it as needed. The difference is that, in this mode, every launched VM will allocate a dedicated **Thin Pool**, containing one **Thin LV** per disk. So, a VM (with id 11) with two disks would be instantiated as follows:
+The setup for this mode is quite similar to the standard (non-thin) mode: a `vg-one-<system_ds_id>` is required, and LVs will be created over it as needed. The difference is that, in this mode, every launched VM will allocate a dedicated **Thin Pool**, containing one **Thin LV** per disk. So, a VM (with id 11) with two disks would be instantiated as follows:
 
 ```default
 # lvs
@@ -180,7 +180,7 @@ The pool would be the equivalent to a typical LV, and it detracts its total size
 {{< alert title="Note" color="success" >}}
 This model makes over-provisioning easy, by having pools smaller than the sum of its LVs. The current version of this driver does not allow such cases to happen though, as the pool grows dynamically to be always able to fit all of its Thin LVs even if they were full.{{< /alert >}} 
 
-Thin LVM snapshots are just a special case of Thin LV, and can be created from a base Thin LV instantly and consuming no extra data, as all of their blocks are shared with its parent. From that moment, changed data on the active parent will be written in new blocks on the pool, and so will start requiring extra space as the “old” blocks referenced by previous snapshots are kept unchanged.
+Thin LVM snapshots are just a special case of Thin LV, and can be created from a base Thin LV instantly and consuming no extra data, as all of their blocks are shared with its parent. From that moment, changed data on the active parent will be written in new blocks on the pool and so will start requiring extra space as the “old” blocks referenced by previous snapshots are kept unchanged.
 
 Let’s create a couple of snapshots over the first disk of the previous VM. As you can see, snapshots are no different from Thin LVs at the LVM level:
 
@@ -194,4 +194,4 @@ Let’s create a couple of snapshots over the first disk of the previous VM. As 
   lv-one-11-pool  vg-one-0 twi---tz--   1.00g                              24.22  12.70
 ```
 
-For more details about the inner workings of LVM, please refer to the [lvmthin(7)](https://man7.org/linux/man-pages/man7/lvmthin.7.html) man page.
+For more details about the inner workings of LVM, please refer to the [lvmthin(7)](https://man7.org/linux/man-pages/man7/lvmthin.7.html) main page.

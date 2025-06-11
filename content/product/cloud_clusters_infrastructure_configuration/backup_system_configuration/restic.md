@@ -12,23 +12,23 @@ weight: "2"
 
 <!--# Backup Datastore: Restic -->
 
-[Restic](https://restic.net/) is an open source (BSD 2-Clause License) backup tool designed for speed, security and efficiency. The current implementation of the driver uses the SFTP storage type. Restic offers interesting features to store backups, like deduplication (only transferring image blobs not already present in the repository) or compression (enabled by default).
+[Restic](https://restic.net/) is an open source (BSD 2-Clause License) backup tool designed for speed, security, and efficiency. The current implementation of the driver uses the SFTP storage type. Restic offers interesting features to store backups, like deduplication (only transferring image blobs not already present in the repository) or compression (enabled by default).
 
 In both the Enterprise and Community editions of OpenNebula, the correct version of restic is included as a dependency. In this guide we will use the following terminology (introduced by restic):
 
-- *Repository*: This is the storage volume where the disk images backups will be stored. Restic creates an specific interval structure to store the backups efficiently. The restic driver access to the repository through the sftp. protocol. OpenNebula will create a separate restic repository for each VM or backup job.
-- *Snapshot*: It represents a backup and it is referenced by an unique hash (e.g. `eda52f34`). Each snapshot stores a VM backup and includes all of its disks and the metadata description of the VM at the time you make the backup.
-- *Backup Server*: A host that will store the VM backups and the restic repositories.
+- *Repository*: This is the storage volume where the disk images backups will be stored. Restic creates a specific interval structure to store the backups efficiently. The restic driver accesses the repository through the sftp. protocol. OpenNebula will create a separate restic repository for each VM or backup job.
+- *Snapshot*: It represents a backup and it is referenced by an unique hash (e.g., `eda52f34`). Each snapshot stores a VM backup and includes all of its disks and the metadata description of the VM at the time you make the backup.
+- *Backup Server*: A Host that will store the VM backups and the restic repositories.
 
-## Step 0. [Backup Server] Setup the backup server
+## Step 1. [Backup Server] Set up the backup server
 
-The first thing you need to do is setup a server to hold the restic repository. Typically the server will have a dedicated storage medium dedicated to store the backups (e.g. iSCSI volume). Also, the hosts and front-end need to reach the server IP.
+The first thing you need to do is set up a server to hold the restic repository. Typically the server will have a dedicated storage medium dedicated to store the backups (e.g., iSCSI volume). Also, the Hosts and Front-end need to reach the server IP.
 
-To setup the server perform the following steps:
+To set up the server perform the following steps:
 
-- Create an user account with username `oneadmin`. This account will be used to connect to the server.
-- Copy the SSH public key of existing `oneadmin` from the OpenNebula front-end to this new `oneadmin` account.
-- Check that `oneadmin` can SSH access the server **without being prompt for a password** from the front-end and hosts.
+- Create a user account with username `oneadmin`. This account will be used to connect to the server.
+- Copy the SSH public key of existing `oneadmin` from the OpenNebula Front-end to this new `oneadmin` account.
+- Check that `oneadmin` can SSH access the server **without being prompt for a password** from the Front-end and Hosts.
 - Create the following folder in the backup server `/var/lib/one/datastores`, change the ownership to `oneadmin`.
 - Mount the storage volume in `/var/lib/one/datastores`.
 - Finally make sure **rsync** and **qemu-img** commands are installed in the backup server.
@@ -52,9 +52,9 @@ $ ls -ld /var/lib/one/datastores/
 drwxrwxr-x 2 oneadmin oneadmin 4096 Sep  3 12:04 /var/lib/one/datastores/
 ```
 
-## Step 1. [Front-end] Create a Restic Datastore
+## Step 2. [Front-end] Create a Restic Datastore
 
-Now that we have the backup server prepared, let’s create an OpenNebula backup datastore. We just need to pick a password to access our repository and create a datastore template:
+Now that we have the backup server prepared, let’s create an OpenNebula Backup Datastore. We just need to pick a password to access our repository and create a datastore template:
 
 ```default
 $ cat ds_restic.txt
@@ -68,7 +68,7 @@ RESTIC_PASSWORD    = "opennebula"
 RESTIC_SFTP_SERVER = "192.168.1.8"
 ```
 
-*Note*: The `RESTIC_SFTP_SERVER` is the IP address of the backup server, it needs to be reachable from the front-end and hosts.
+*Note*: The `RESTIC_SFTP_SERVER` is the IP address of the backup server, it needs to be reachable from the Front-end and Hosts.
 
 ```default
 $ onedatastore create ds_restic.txt
@@ -96,11 +96,11 @@ That’s it, we are all set to make VM backups!
 
 ### Repository Pruning
 
-Data not referenced by any snapshot needs to be deleted by running the `prune` command in the repository. This operation is executed by OpenNebula whenever an image backup is deleted, either because an explicit removal or to conform the retention policy set.
+Data not referenced by any snapshot needs to be deleted by running the `prune` command in the repository. This operation is executed by OpenNebula whenever an image backup is deleted, either because of an explicit removal or to conform the retention policy set.
 
 ### Repository is locked
 
-During the operation of the VM backups you could rarely find that the repository is left in a locked state. You should see an error similar to:
+During the operation of the VM backups you may rarely find that the repository is left in a locked state. You should see an error similar to:
 
 ```default
 unable to create lock in backend: repository is already locked exclusively by PID 111971 on ubuntu2204-kvm-qcow2-6-5-yci34-0 by oneadmin (UID 9869, GID 9869)
@@ -112,14 +112,14 @@ To recover from this error, check there are no ongoing operations and execute `r
 
 ### Limiting I/O and CPU usage
 
-Backup operations may incur in a high I/O or CPU demands. This will add noise to the VMs running in the hypervisor. You can control resource usage of the backup operations by:
+Backup operations may incur in high I/O or CPU demands. This will add noise to the VMs running in the hypervisor. You can control resource usage of the backup operations by:
 
-> * Lower the priority of the associated processes. Backup commands are run under a given ionice priority (best-effort, class 2 scheduler); and a given nice.
-> * Confine the associated processes in a cgroup. OpenNebula will create a systemd slice for each backup datastore so the backup commands run with a limited number or read/write IOPS and CPU Quota.
+> * Lowering the priority of the associated processes. Backup commands are run under a given ionice priority (best-effort, class 2 scheduler); and a given nice.
+> * Confining the associated processes in a cgroup. OpenNebula will create a systemd slice for each Backup Datastore so the backup commands run with a limited number or read/write IOPS and CPU Quota.
 
-Note that for the later, you need to delegate the `cpu` and `io` cgroup controllers to the `oneadmin` user. This way OpenNebula can set `CPUQuota`, `IOReadIOPSMax` and `IOWriteIOPSMax`.
+Note that for the latter, you need to delegate the `cpu` and `io` cgroup controllers to the `oneadmin` user. This way OpenNebula can set `CPUQuota`, `IOReadIOPSMax` and `IOWriteIOPSMax`.
 
-To delegate the controllers you need to add the following file for `oneadmin` account (id 9869) in **all the hosts** (note that you’d probably need to create the user service folder):
+To delegate the controllers you need to add the following file for `oneadmin` account (id 9869) in **all the Hosts** (note that you’d probably need to create the user service folder):
 
 ```default
 $ cat /etc/systemd/system/user@9869.service.d/delegate.conf
@@ -136,11 +136,11 @@ cpuset cpu io memory pids
 
 ### Temporary Backup Path
 
-Disk images backups are generated within a local folder in the host where the VM is running. These images are later uploaded to the selected backup datastore. By default, this temporary path is set to the VM folder, in `/var/lib/one/datastores/<DATASTORE_ID>/<VM_ID>/backup`.
+Disk images backups are generated within a local folder in the Host where the VM is running. These images are later uploaded to the selected Backup Datastore. By default, this temporary path is set to the VM folder, in `/var/lib/one/datastores/<DATASTORE_ID>/<VM_ID>/backup`.
 
 However, it’s possible to modify this path to utilize alternative locations, such as different local volumes, or to opt out of using the shared VM folder entirely.
 
-To change the base folder to store disk backups for **all** hosts edit `/var/lib/one/remotes/etc/datastore.conf` and set the `BACKUP_BASE_PATH` variable. Please note this file uses shell syntax.
+To change the base folder to store disk backups for **all** Hosts, edit `/var/lib/one/remotes/etc/datastore.conf` and set the `BACKUP_BASE_PATH` variable. Please note this file uses shell syntax.
 
 ## Reference: Restic Datastore Attributes
 

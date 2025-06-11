@@ -18,13 +18,13 @@ Read more in [OneGate Usage]({{% relref "../../virtual_machines_operation/multi-
 
 ## Recommended Network Setup
 
-To use the OneGate Service, VMs must have connectivity to the service. We recommend setting up a dedicated virtual network, ideally on a separate VLAN, for OneGate access. To accomplish this, simply add a virtual network interface (NIC) to the OneGate Service network for the VMs requiring access to the service. In cases where you’re deploying a multi-tier service, you can just add the virtual router to the OneGate Service network. The recommended network layout is illustrated in the diagram below:
+To use the OneGate Service, VMs must have connectivity to the service. We recommend setting up a dedicated Virtual Network, ideally on a separate VLAN, for OneGate access. To accomplish this, simply add a Virtual Network Interface (NIC) to the OneGate Service network for the VMs requiring access to the service. In cases where you’re deploying a multi-tier service, you can just add the virtual router to the OneGate Service network. The recommended network layout is illustrated in the diagram below:
 
 ![onegate_net](/images/onegate_net.png)
 
 ## Configuration
 
-The OneGate configuration file can be found in `/etc/one/onegate-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+The OneGate configuration file can be found in `/etc/one/onegate-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the OneGate server must be [restarted]({{% relref "#onegate-conf-service" %}}) to take effect.{{< /alert >}} 
@@ -54,7 +54,7 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `:expire_delta`             | Default interval for timestamps. Tokens will be generated using the same timestamp for this interval of time. THIS VALUE CANNOT BE LOWER THAN EXPIRE_MARGIN.                                                                                                                                                                                                             |
 | `:expire_margin`            | Tokens will be generated if time > EXPIRE_TIME - EXPIRE_MARGIN                                                                                                                                                                                                                                                                                                           |
 
-In the default configuration, the OneGate server will only listen to requests coming from `localhost`. Because the OneGate needs to be accessible remotely from the Virtual Machines, you need to change `:host` parameter in `/etc/one/onegate-server.conf` to a public IP of your Front-end host or to `0.0.0.0` (to work on all IP addresses configured on host).
+In the default configuration, the OneGate server will only listen to requests coming from `localhost`. Because the OneGate needs to be accessible remotely from the Virtual Machines, you need to change `:host` parameter in `/etc/one/onegate-server.conf` to a public IP of your Front-end Host or to `0.0.0.0` (to work on all IP addresses configured on Host).
 
 ### Configure OpenNebula
 
@@ -72,7 +72,7 @@ Restart the OpenNebula service to apply changes.
 
 Change the server running state by managing the operating system service `opennebula-gate`.
 
-To start, restart or stop the server, execute one of:
+To start, restart, or stop the server, execute one of:
 
 ```default
 # systemctl start   opennebula-gate
@@ -80,19 +80,19 @@ To start, restart or stop the server, execute one of:
 # systemctl stop    opennebula-gate
 ```
 
-To enable or disable automatic start on Host boot, execute one of:
+To enable or disable automatic start upon Host boot, execute one of:
 
 ```default
 # systemctl enable  opennebula-gate
 # systemctl disable opennebula-gate
 ```
 
-Server **logs** are located in `/var/log/one` in following files:
+Server **logs** are located in `/var/log/one` in the following files:
 
 - `/var/log/one/onegate.log`
 - `/var/log/one/onegate.error`
 
-Other logs are also available in Journald. Use the following command to show:
+Other logs are also available in Journald. Use the following command to show these:
 
 ```default
 # journalctl -u opennebula-gate.service
@@ -112,7 +112,7 @@ Add the following config snippet to the `~oneadmin/remotes/etc/vnm/OpenNebulaNet
   :remote_port: 5030
 ```
 
-Propagate config to Hypervisor hosts, execute as `oneadmin` on the leader Front-end machine:
+Propagate config to hypervisor Hosts, execute as `oneadmin` on the leader Front-end machine:
 
 ```default
 $ onehost sync -f
@@ -129,7 +129,7 @@ Read more in [Transparent Proxies]({{% relref "../../virtual_machines_operation/
 <!-- Example: Deployment Behind TLS Proxy
 ------------------------------------
 
-This is an **example** of how to configure Nginx as a SSL/TLS proxy for OneGate on Ubuntu.
+This is an **example** of how to configure Nginx as an SSL/TLS proxy for OneGate on Ubuntu.
 
 1. Update your package lists and install Nginx:
 
