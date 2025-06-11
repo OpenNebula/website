@@ -33,7 +33,7 @@ The Front-end also needs access to the shared LVM, either directly (see the conf
 * A LVM VG needs to be created in the shared LUNs for each datastore with the following name: `vg-one-<system_ds_id>`. This just needs to be done in one Host.
 
 {{< alert title="Note" color="success" >}}
-In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).{{< /alert >}} 
+In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).{{< /alert >}}
 
 Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
 
@@ -80,7 +80,7 @@ To create a new LVM Image Datastore, you need to set following (template) parame
 | `DS_MAD`          | `fs`                                                                                                      |
 | `TM_MAD`          | `fs_lvm_ssh`                                                                                              |
 | `DISK_TYPE`       | `BLOCK`                                                                                                   |
-| `BRIDGE_LIST`     | List of Hosts with access to the LV. **NOT** needed if the Front-end is configured to access<br/>the LVs. |
+| `BRIDGE_LIST`     | List of Hosts with access to the file system where image files are stored before dumping to logical volumes |
 | `LVM_THIN_ENABLE` | (default: `NO`) `YES` to enable [LVM Thin]({{% relref "#lvm-thin" %}}) functionality.                                      |
 
 The following examples illustrate the creation of an LVM datastore using a template. In this case we will use the Host `host01` as one of our OpenNebula LVM-enabled Hosts.
@@ -129,7 +129,7 @@ The following attribute can be set for every datastore type:
 * `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
 
 {{< alert title="Warning" color="warning" >}}
-Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in all Hosts including Front-end and hypervisors. If an unsupported FS is used by the user the default one will be used.{{< /alert >}} 
+Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in all Hosts including Front-end and hypervisors. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
 
 ## Datastore Internals
 
@@ -138,12 +138,12 @@ Images are stored as regular files (under the usual path: `/var/lib/one/datastor
 ![image0](/images/fs_lvm_datastore.png)
 
 {{< alert title="Note" color="success" >}}
-Files are dumped directly from the Front-end to the LVs in the Host, using the SSH protocol.{{< /alert >}} 
+Files are dumped directly from the Front-end to the LVs in the Host, using the SSH protocol.{{< /alert >}}
 
 This is the recommended driver to be used when a high-end SAN is available. The same LUN can be exported to all the Hosts while Virtual Machines will be able to run directly from the SAN.
 
 {{< alert title="Note" color="success" >}}
-The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.{{< /alert >}} 
+The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.{{< /alert >}}
 
 For example, consider a system with two Virtual Machines (`9` and `10`) using a disk, running in an LVM Datastore, with ID `0`. The Hosts have configured a shared LUN and created a volume group named `vg-one-0`. The layout of the Datastore would be:
 
@@ -161,7 +161,7 @@ For example, consider a system with two Virtual Machines (`9` and `10`) using a 
 You have the option to enable the LVM Thin functionality by setting the `LVM_THIN_ENABLE` attribute to `YES` in the **Image** Datastore.
 
 {{< alert title="Note" color="success" >}}
-The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.{{< /alert >}} 
+The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.{{< /alert >}}
 
 This mode leverages the thin provisioning features provided by LVM to enable the creation of **thin snapshots** of VM disks.
 
@@ -178,7 +178,7 @@ The setup for this mode is quite similar to the standard (non-thin) mode: a `vg-
 The pool would be the equivalent to a typical LV, and it detracts its total size from the VG. On the other hand, per-disk Thin LVs are thinly provisioned and blocks are allocated in their associated pool.
 
 {{< alert title="Note" color="success" >}}
-This model makes over-provisioning easy, by having pools smaller than the sum of its LVs. The current version of this driver does not allow such cases to happen though, as the pool grows dynamically to be always able to fit all of its Thin LVs even if they were full.{{< /alert >}} 
+This model makes over-provisioning easy, by having pools smaller than the sum of its LVs. The current version of this driver does not allow such cases to happen though, as the pool grows dynamically to be always able to fit all of its Thin LVs even if they were full.{{< /alert >}}
 
 Thin LVM snapshots are just a special case of Thin LV, and can be created from a base Thin LV instantly and consuming no extra data, as all of their blocks are shared with its parent. From that moment, changed data on the active parent will be written in new blocks on the pool and so will start requiring extra space as the “old” blocks referenced by previous snapshots are kept unchanged.
 
