@@ -153,7 +153,9 @@ The distributed cache maintains VM disk images in two levels:
 
 When a VM is instantiated, the Host first checks its *local cache* for the needed image. If missing, it then checks the *central cache*. Only if the image is not found in either cache does the Host request it from the Image Datastore on the Front-end. Once retrieved from the Front-end, the image is stored in both caches for future reuse.
 
-![image3](/images/local_ds_cache.png)
+<!-- [image3](/images/local_ds_cache.png) -->
+
+{{< image alt="><" path=/images/local_ds_cache.png width=678 height=590 >}}
 
 ## How to Enable and Configure the Cache
 
