@@ -146,7 +146,7 @@ Sunstone will display the screen to update the VM Configuration. Select the **Ba
 
 ## Taking VM Backups
 
-Backup actions may potentially take some time, leaving some resources in use for a long time. In order to make efficient use of resources, backups are planned by the OpenNebula scheduler [through the schedule actions interface]({{% relref "../virtual_machine_instances/vm_instances#schedule-actions" %}}).
+Backup actions may potentially take some time, leaving some resources in use for a long time. In order to make efficient use of resources, backups are planned by the OpenNebula scheduler [through the schedule actions interface]({{% relref "../virtual_machine_definitions/vm_instances#schedule-actions" %}}).
 
 ### One-shot Backups
 
@@ -248,7 +248,7 @@ ID        Time                 Host                                  Tags       
 
 ### Scheduling Backups
 
-You can program periodic backups [through the schedule actions interface]({{% relref "../virtual_machine_instances/vm_instances#schedule-actions" %}}). Note that in this case, you have to pass the target datastore ID as argument of the action. You can create a periodic backup with the `--schedule` option in the CLI, or through Sunstone in the Schedule Action dialog (to open the dialog, click the Sched Actions tab then click Add action).
+You can program periodic backups [through the schedule actions interface]({{% relref "../virtual_machine_definitions/vm_instances#schedule-actions" %}}). Note that in this case, you have to pass the target datastore ID as argument of the action. You can create a periodic backup with the `--schedule` option in the CLI, or through Sunstone in the Schedule Action dialog (to open the dialog, click the Sched Actions tab then click Add action).
 
 ![vm_schedule](/images/backup_schedule.png)
 

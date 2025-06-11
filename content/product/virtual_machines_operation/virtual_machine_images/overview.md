@@ -19,9 +19,9 @@ In OpenNenbula there are two main places where VM disk images are stored:
 
 ## How Should I Read This Chapter
 
-This section provides guides on creating and managing disk [Images]({{% relref "images" %}}) and [Virtual Machine Templates]({{% relref "vm_templates" %}}).
+This section describes how to create and manage disk [Images]({{% relref "images" %}}).
 
-VM templates are _instantiated_ to become Virtual Machine instances. For information on VM instances, please refer to the [Virtual Machine Instances]({{% relref "vm_instances" %}}) section.
+After reading this section, you can consult [Virtual Machine Definitions]({{% relref "../virtual_machine_definitions/overview" %}}). Here you will find descriptions of how VMs are defined in [Virtual Machine Templates]({{% relref "vm_templates" %}}), which are _instantiated_ to become Virtual Machines, i.e. [Virtual Machine Instances]({{% relref "vm_instances" %}}).
 
 ## Hypervisor Compatibility
 

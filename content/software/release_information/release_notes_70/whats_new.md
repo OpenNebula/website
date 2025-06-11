@@ -57,7 +57,7 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 - New cloud view for end users: a dashboard with real-time metrics and quick access to common actions.
 - Support for VM Template Profiles with pre-defined deployment settings.
 - Add support for labels in Sunstone, including the labels that were set in the old Sunstone UI. See the [Compatibility guide](../compatibility#compatibility-guide-labels).
-- New way to render and group user inputs when instantiating an appliance. Check [User Inputs in Sunstone](product/virtual_machines_operation/virtual_machine_images/vm_templates/#vm-guide-user-inputs-sunstone).
+- New way to render and group user inputs when instantiating an appliance. Check [User Inputs in Sunstone](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/#vm-guide-user-inputs-sunstone).
 
 ## API and CLI
 

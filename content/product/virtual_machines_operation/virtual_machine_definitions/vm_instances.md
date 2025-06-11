@@ -5,7 +5,7 @@ description:
 categories:
 pageintoc: "93"
 tags:
-weight: "1"
+weight: "3"
 ---
 
 <a id="vm-guide-2"></a>
@@ -14,7 +14,7 @@ weight: "1"
 
 <!--# Managing Virtual Machines Instances -->
 
-This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machine_images/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
+This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machine_definitions/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
 
 <a id="vm-life-cycle-and-states"></a>
 
@@ -54,7 +54,7 @@ Note that this is a simplified version. If you are a developer you may want to t
 ## Create and List Virtual Machines
 
 {{< alert title="Note" color="success" >}}
-Read the [Creating Virtual Machines guide]({{% relref "../virtual_machine_images/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
+Read the [Creating Virtual Machines guide]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 Read the complete reference for [Virtual Machine templates]({{% relref "../../operation_references/configuration_references/template#template" %}}).{{< /alert >}} 
@@ -70,7 +70,7 @@ $ onetemplate instantiate vm-example --name my_vm
 VM ID: 0
 ```
 
-If the template has [USER INPUTS]({{% relref "../virtual_machine_images/vm_templates#vm-guide-user-inputs" %}}) defined, the CLI will prompt the user for these values:
+If the template has [USER INPUTS]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide-user-inputs" %}}) defined, the CLI will prompt the user for these values:
 
 ```default
 $ onetemplate instantiate vm-example --name my_vm
@@ -488,7 +488,7 @@ Hotplug is only implemented for KVM. Added CPUs will be in offline state after t
 If the disks assigned to a Virtual Machine need more size, this can achieved at instantiation time of the VM. The SIZE parameter of the disk can be adjusted and, if it is bigger than the original size of the Image, OpenNebula will:
 
 - Increase the size of the disk container prior to launching the VM
-- Using the [contextualization packages]({{% relref "../virtual_machine_images/vm_templates#context-overview" %}}), at boot time the VM will grow the filesystem to adjust to the new size.
+- Using the [contextualization packages]({{% relref "../virtual_machine_definitions/vm_templates#context-overview" %}}), at boot time the VM will grow the filesystem to adjust to the new size.
 
 You can override the size of a `DISK` in a VM template at instantiation:
 
