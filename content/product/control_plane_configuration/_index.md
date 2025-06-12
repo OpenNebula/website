@@ -6,6 +6,8 @@ description: "Design and configuration guides to improve resilience, performance
 categories:
 # simple_list: true
 pageintoc: "30"
+#type: indexlevel2
+#layout: partials/level-2-section-index
 tags:
 weight: "1"
 ---
