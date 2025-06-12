@@ -18,7 +18,7 @@ To register a new account, navigate to the client area of your WHMCS install and
 
 ## Order a New Service
 
-To view the available products navigate to **Services** -> **Order New Services**. This page will display all available services which can be purchased.  One can be added to the cart by clicking the corresponding **Order Now** button. After checking out, the new order will be created.
+To view the available products, navigate to **Services** -> **Order New Services**. This page will display all available services which can be purchased.  These can be added to the cart by clicking the corresponding **Order Now** button. After checking out, the new order will be created.
 
 ## Upgrade a Service
 
@@ -26,4 +26,4 @@ To upgrade a product, navigate to the product’s page.  On the left side there 
 
 ## Managing Services
 
-As a user, when viewing a Product/Service there should be an action **Login** which should redirect them to the OpenNebula interface where they should be able to manage their Virtual Machines within the limits that the Product allows.
+When viewing a Product/Service, there should be an action **Login** which should redirect users to the OpenNebula interface where they should be able to manage their Virtual Machines within the limits that the product allows.
