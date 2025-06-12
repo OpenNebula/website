@@ -14,7 +14,7 @@ weight: "5"
 
 This page is a complete reference of all the VM states that will be useful for developers and administrators doing troubleshooting.
 
-The simplified life cycle is explained in the [Virtual Machine Instances]({{% relref "vm_instances" %}}). That simplified guide uses a smaller number of state names. The names here are the ones used by `onevm list`, e.g., `prolog`, `prolog_migrate`, and `prolog_resume` are all presented as `prol`. This section is intended as a reference for end users. However, the information in the Virtual Machine Instances guide should be enough for everyday administration tasks.
+The simplified life cycle is explained in [Virtual Machine Instances]({{% relref "vm_instances" %}}). That simplified guide uses a smaller number of state names. The names here are the ones used by `onevm list`, e.g., `prolog`, `prolog_migrate`, and `prolog_resume` are all presented as `prol`. This section is intended as a reference for end users. However, the information in the Virtual Machine Instances guide should be enough for everyday administration tasks.
 
 ## List of States
 
