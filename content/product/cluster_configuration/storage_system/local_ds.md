@@ -137,7 +137,7 @@ The canonical path for `/var/lib/one/datastores` can be changed in [/etc/one/one
 
 In this case, the System Datastore is distributed among the Hosts. The **local** transfer driver uses the Hosts' local storage to place the images of running Virtual Machines. All of the operations are then performed locally, but images still need to be copied to the Hosts, which can be a very resource-demanding operation.
 
-![image2](/images/fs_ssh.png)
+![><](/images/fs_ssh.png)
 
 ## Distributed Cache
 
