@@ -103,7 +103,7 @@ Any user can be configured to be Admin of a group with the commands `onegroup ad
 
 You can make the following virtual resources available to group users:
 
-* [Virtual Machine Templates]({{% relref "../../virtual_machines_operation/virtual_machine_images/vm_templates#vm-guide" %}})
+* [Virtual Machine Templates]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-guide" %}})
 * [Service Templates]({{% relref "../../virtual_machines_operation/multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}})
 * [Images]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}})
 * [Files & Kernels]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#img-guide-kernel-and-ramdisk" %}})

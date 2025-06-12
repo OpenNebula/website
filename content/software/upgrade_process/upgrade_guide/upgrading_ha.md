@@ -14,7 +14,7 @@ weight: "4"
 
 ## Step 1. Check Virtual Machine Status
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). For more information on the life cycle of Virtual Machines, see [Virtual Machine Instances]({{% relref "../../../product/virtual_machines_operation/virtual_machine_instances/vm_instances" %}}).
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). For more information on the life cycle of Virtual Machines, see [Virtual Machine Instances]({{% relref "../../../product/virtual_machines_operation/virtual_machine_definitions/vm_instances" %}}).
 
 ## Step 2. Set All Hosts to Disable Mode
 
