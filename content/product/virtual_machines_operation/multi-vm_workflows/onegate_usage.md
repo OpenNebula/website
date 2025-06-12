@@ -49,7 +49,7 @@ or check the OneGate checkbox in Sunstone:
 
 ![onegate_context](/images/onegate_context.png)
 
-When this Template is instantiated, OpenNebula will automatically add the `ONEGATE_ENDPOINT` context variable, and a `token.txt` will be placed in the [context cdrom]({{% relref "../virtual_machine_images/vm_templates#context-overview" %}}). This `token.txt` file is only accessible from inside the VM.
+When this Template is instantiated, OpenNebula will automatically add the `ONEGATE_ENDPOINT` context variable, and a `token.txt` will be placed in the [context cdrom]({{% relref "../virtual_machine_definitions/vm_templates#context-overview" %}}). This `token.txt` file is only accessible from inside the VM.
 
 ```none
 ...
@@ -239,7 +239,7 @@ The following actions can be performed in any of the Virtual Machines of the Ser
 * `onegate vm hold`
 * `onegate vm release`
 
-Check [this guide]({{% relref "../virtual_machine_instances/vm_instances#vm-instances" %}}) to know more about states and operations.
+Check [this guide]({{% relref "../virtual_machine_definitions/vm_instances#vm-instances" %}}) to know more about states and operations.
 
 ##### Change Service cardinality
 
