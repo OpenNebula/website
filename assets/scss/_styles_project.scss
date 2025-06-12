@@ -209,3 +209,49 @@ img[alt$="><"] {
 .medium-zoom-image--opened {
   z-index: 999;
 }
+
+/*
+// card columns
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+}
+*/
+
+// card-columns
+.card-columns {
+  column-count: 2;
+  // column-gap: 0.5rem !important;
+
+  @include media-breakpoint-only(lg) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-only(xs) {
+    column-count: 1;
+  }
+
+  .card {
+    display: inline-block; // align on same row, don't span across rows
+    width: 100%; // fixed width
+    //margin-bottom: $card-columns-margin;
+    //flex: 1 1 auto;
+    //padding: $card-spacer-y $card-spacer-x;
+    padding: 0;
+    margin: 0;
+  }
+
+  
+
+  //.card-body {
+   // Enable `flex-grow: 1` for decks and groups so that card blocks take up
+   // as much space as possible, ensuring footers are aligned to the bottom.
+   // flex: 1 1 auto;
+   // color: $card-color;
+  //}
+}
+

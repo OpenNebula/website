@@ -26,9 +26,9 @@
 
     {{/* Otherwise show cards with list of subpages with page descriptions */}}
 
-    <hr class="panel-line" width="100%">
+    <hr class="panel-line">
 
-    {{/* H2 SECTION HEADER - before cards begin */}}
+    {{/* H2 SECTIONS HEADER, not in cards - */}}
 
         {{ range $pages -}}
             {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
@@ -38,39 +38,38 @@
                     <p>{{ .Description | markdownify -}}</p>
        	       {{ end -}}
 
-    <hr class="panel-line" width="100%">
-    <p>H3 SUBSECTIONS</p>
-    {{/* H3 SUBSECTION HEADER, e.g. High Availability */}}
+    {{/* H3 SECTIONS IN CARD GROUPS */}}
 
-      <div class="td-card card border me-4">
       <div class="card-columns">
-        <div class="entry">
-	      {{/* <div class="td-card card border me-4" width="250%"> */}}
+            <div class="entry">
+	      <div class="td-card card border me-4">
+		</div>
 
       {{/* Lists subsections within the card body, after the description */}}
       {{ range .Pages -}}
 		{{ $manualsubsecLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
 
     {{/* begin H3 card */}}
-    {{/* header */}}
     <div class="entry">
-              {{/* <div class="card" border="me-4" style="width: 400px"> */}}
-              <div class="card">
+              <div class="card" border="me-4" style="width: 400px">
+		{{/* card header */}}
                 <div class="card-header">
       		  <h4><a href="{{ $manualsubsecLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a></h4>
 		</div>
+		{{/* card body */}}
                {{ if .Description -}}
                     <p><ul>{{ .Description | markdownify -}}</ul></p>
        	       {{ end -}}
-		{{ range .Pages -}}
-		  {{ $manualpageLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-		  <inl>
-		    <a href="{{ $manualpageLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
-		  </inl>
-		{{ end -}} 
-	      <p></p>
+	       <p></p>
+      {{ range .Pages -}}
+		{{ $manualpageLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+		<inl>
+      		  <a href="{{ $manualpageLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
+		</inl>
+      {{ end -}} 
+    <p></p>
 	      </div>
-	    </div>
+	      </div>
       {{ end -}} 
           </div>
          </div>
@@ -78,7 +77,6 @@
         {{ end -}}
     {{ end -}}
     </div>
-  </div>
     {{/* end H3 card */}}
 {{ end -}}
 
