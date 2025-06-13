@@ -19,7 +19,7 @@ weight: "20"
 ## Main Features
 
 - Based on MinIO release on Ubuntu 22.04 LTS
-- TLS configuration with self generated certificates. Enabled by default
+- TLS configuration with self-generated certificates. Enabled by default
 - Single-Drive and Multi-Drive deployment
 - Multi-Node deployment, optional as a OneFlow service template
 

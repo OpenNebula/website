@@ -21,12 +21,12 @@ The Virtual Router (VR) is a solution to common problems regarding management of
 The VR includes a comprehensive set of features:
 
 - Keepalive Failover, High-Availability for the Service Virtual Router itself
-- Router4, for fine control of routing between your virtual networks
-- NAT4 to enable private virtual networks to reach the Internet
+- Router4, for fine control of routing between your Virtual Networks
+- NAT4 to enable private Virtual Networks to reach the Internet
 - HAProxy Load Balancer, a robust layer4 (TCP) reverse-proxy/load-balancing solution
 - Keepalive LVS Load Balancer, so called layer4 switching, a high-performance load-balancing solution
-- SDNAT4, a public to private, private to public IP address mapping (SNAT + DNAT)
-- DNS, a DNS recursor (to provide DNS to isolated virtual networks)
+- SDNAT4, a public-to-private, private-to-public IP address mapping (SNAT + DNAT)
+- DNS, a DNS recursor (to provide DNS to isolated Virtual Networks)
 - DHCP4, an additional DHCP server implementation
 
 ## Main References
