@@ -219,7 +219,6 @@ img[alt$="><"] {
   display: flex !important;
   flex-wrap: wrap !important;
   column-count: 2 !important;
-  //column-gap: 0.5rem !important;
 
   @include media-breakpoint-only(lg) {
     column-count: 2;
@@ -237,17 +236,12 @@ img[alt$="><"] {
     align-self: start !important;
     flex-wrap: wrap;
     row-gap: 1rem;
-    column-gap: 1rem;
+    column-gap: 0.9rem;
   }
 
   .card {
     width: 90%;
-    // flex: 0 1 50%;
     flex: 0 2 49%;
-  }
-
-  .card-border {
-    display: inline-block !important; // no effect
   }
 
 }
