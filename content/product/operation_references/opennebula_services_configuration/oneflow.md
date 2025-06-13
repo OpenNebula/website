@@ -20,7 +20,7 @@ Read more in [Multi-VM Service Management]({{% relref "../../virtual_machines_op
 
 ## Configuration
 
-The OneFlow configuration file can be found in `/etc/one/oneflow-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+The OneFlow configuration file can be found in `/etc/one/oneflow-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the OneFlow server must be [restarted]({{% relref "#oneflow-conf-service" %}}) to take effect.{{< /alert >}}
@@ -43,7 +43,7 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `:wait_timeout`                       | Default time to wait for VMs state changes, in seconds                                                                                                                                                                                                                                                                                                                   |
 | `:concurrency`                        | Number of threads to make actions with flows                                                                                                                                                                                                                                                                                                                             |
 | `:shutdown_action`                    | Default shutdown action. Values: `shutdown`, `shutdown-hard`                                                                                                                                                                                                                                                                                                             |
-| `:action_number`<br/>`:action_period` | Default number of virtual machines (`:action_number`) that will receive the given call in each interval (`:action_period`),<br/>when an action is performed on a Role.                                                                                                                                                                                                   |
+| `:action_number`<br/>`:action_period` | Default number of Virtual Machines (`:action_number`) that will receive the given call in each interval (`:action_period`),<br/>when an action is performed on a Role.                                                                                                                                                                                                   |
 | `:vm_name_template`                   | Default name for the Virtual Machines created by Oneflow. You can use any of the following placeholders:<br/>`$SERVICE_ID`, `$SERVICE_NAME`, `$ROLE_NAME`, `$VM_NUMBER`.                                                                                                                                                                                                 |
 | `:page_size`                          | Default page size when purging DONE services                                                                                                                                                                                                                                                                                                                             |
 | **Authentication**                    |                                                                                                                                                                                                                                                                                                                                                                          |
@@ -53,13 +53,13 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `:expire_delta`                       | Default interval for timestamps. Tokens will be generated using the same timestamp for this interval of time. THIS VALUE CANNOT BE LOWER THAN EXPIRE_MARGIN.                                                                                                                                                                                                             |
 | `:expire_margin`                      | Tokens will be generated if time > EXPIRE_TIME - EXPIRE_MARGIN                                                                                                                                                                                                                                                                                                           |
 
-In the default configuration, the OneFlow server will only listen to requests coming from `localhost` (which is enough to control OneFlow over Sunstone running on the same host). If you want to control OneFlow over API/CLI remotely, you need to change `:host` parameter in `/etc/one/oneflow-server.conf` to a public IP of your Front-end host or to `0.0.0.0` (to work on all IP addresses configured on Host).
+In the default configuration, the OneFlow server will only listen to requests coming from `localhost` (which is enough to control OneFlow over Sunstone running on the same Host). If you want to control OneFlow over API/CLI remotely, you need to change `:host` parameter in `/etc/one/oneflow-server.conf` to a public IP of your Front-end Host or to `0.0.0.0` (to work on all IP addresses configured on Host).
 
 <a id="oneflow-conf-sunstone"></a>
 
 ### Configure Sunstone
 
-Sunstone GUI enables end-users to access the OneFlow from the UI and it directly connects to OneFlow on their behalf. Sunstone has configured the OneFlow endpoint it connects to in `/etc/one/fireedge-server.conf` in parameter `:oneflow_server`. When OneFlow is running on a different host than Sunstone, the endpoint in Sunstone must be configured appropriately.
+Sunstone GUI enables end users to access the OneFlow from the UI and it directly connects to OneFlow on their behalf. Sunstone has configured the OneFlow endpoint it connects to in `/etc/one/fireedge-server.conf` in parameter `:oneflow_server`. When OneFlow is running on a different Host than Sunstone, the endpoint in Sunstone must be configured appropriately.
 
 Sunstone tabs for OneFlow (*Services* and *Service Templates*) are enabled in Sunstone by default. To customize visibility for different types of users, follow the [Sunstone Views]({{% relref "../../cloud_system_administration/multitenancy/fireedge_sunstone_views#fireedge-suns-views" %}}) documentation.
 
@@ -81,7 +81,7 @@ See more in [Managing Users documentation]({{% relref "../../cloud_system_admini
 
 Change the server running state by managing the operating system service `opennebula-flow`.
 
-To start, restart or stop the server, execute one of:
+To start, restart, or stop the server, execute one of:
 
 ```default
 # systemctl start   opennebula-flow

@@ -1,7 +1,7 @@
 ---
 title: "WHMCS Integration (EE)"
 date: "2025-02-17"
-description: "TBC"
+description: "Use a dedicated OpenNebula module to implement the WHMCS web host billing automation solution"
 categories:
 pageintoc: "142"
 tags:

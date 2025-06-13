@@ -1,0 +1,211 @@
+@import "_styles_project_breakpoints";
+
+/**
+* This file defines all the styles that need to change between and there is no difference between dark and light mode
+*/
+
+// Main
+.td-max-width-on-larger-screens {
+  @include media-breakpoint-up(lg) {
+    max-width: 100%;
+  }
+}
+
+// Markdown headings
+.td-content {
+ > h1 {
+    font-weight: $font-weight-bold;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  > h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  > h2:not(:first-child) {
+    margin-top: 3rem;
+  } 
+}
+
+.td-card-group.card-group {
+  @extend .td-max-width-on-larger-screens;
+}
+
+// Cards: ./_vendor/github.com/twbs/bootstrap/scss/_card.scss
+.card {
+  border-radius: 12px !important;
+
+  .card-header {
+    font-size: 1.2rem;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+  }
+
+  .card-body {
+    border-radius: 12px !important;
+  }
+}
+
+// Navbar
+.td-navbar {
+  background-color: #005675;
+}
+
+// Sidebar
+.td-sidebar-nav .td-sidebar-link.tree-root {
+  border-bottom-width: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.td-sidebar {
+  padding-bottom: 6rem;
+}
+
+// Footer
+.one-footer-main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.one-footer-logo-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.one-footer-links-container {
+  width: 100%;
+}
+.td-footer {
+  background-color: #005675;
+  padding-top: 0px;
+}
+.one-footer-copyright {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  border-top: #E0E4E733;
+  border-top-style: solid;
+  border-width: 1px;
+  p {
+    margin-bottom: 0px;;
+  }
+}
+.td-footer svg {
+  // width: 220.68px;
+  width: 331.02px;
+  //height: 32.099px;
+  height: 48.148px;
+}
+.td-footer p {
+  color: #EDEDED;
+}
+.one-footer-logo {
+  margin-top: 20px;
+}
+.one-footer-second-row {
+  color: #EDEDED;
+  //font-size: 19.063px;
+  font-size: 16.203px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13.5px;
+  margin-top: 40px;
+}
+.td-footer__center {
+  padding-top: 20px;
+}
+.td-footer__links-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%
+}
+.td-footer__links-item {
+  margin: 0 60px;
+  scale: 70%
+}
+
+
+// Cards
+.td-card {
+  border-color: #8F9392 !important;
+}
+.td-navbar .td-search__input {
+  border-style: solid;
+  border-width: 1px;
+}  
+.td-navbar .td-search__input:hover {
+  border-style: solid;
+  border-width: 1px;
+}  
+
+// Alerts
+.alert {
+  border-left-width: 3px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+// Markdown headings
+.td-content {
+ > h1 {
+    font-weight: $font-weight-bold;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  > h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  > h2:not(:first-child) {
+    margin-top: 3rem;
+  } 
+}
+
+.td-card-group.card-group {
+  @extend .td-max-width-on-larger-screens;
+}
+// Tags
+.tag-back {
+  cursor: pointer;
+}
+
+// Pager
+.one-pager:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+// Align images according to alt text
+img[alt$=">"] {
+  float: right;
+}
+
+img[alt$="<"] {
+  float: left;
+}
+
+img[alt$="><"] {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  float: none!important;
+}
+
+/*
+  For MediumZoom.js to force the zoomed image to be displayed on top of everything.
+  Without these settings, the zoomed image will display under some elements on the page.
+
+  Ref: https://github.com/francoischalifour/medium-zoom#debugging
+*/
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 999;
+}

@@ -74,39 +74,39 @@ You can download miniONE from the [GitHub repository](https://github.com/OpenNeb
 
 To quickly download miniONE, run:
 
-```default
-$ wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
 ````
 
 After downloading, open a terminal and use the `sudo` to become the `root` user. For example, run:
 
-```default
-$ sudo -i
+```bash
+sudo -i
 ```
 
 Go to the folder where you downloaded the miniONE script, by using the `cd` command:
 
-```default
-# cd <path/to/folder>
+```bash
+cd <path/to/folder>
 ```
 
 Next, ensure that the `minione` file has execute permissions:
 
-```default
-# chmod +x minione
+```bash
+chmod +x minione
 ```
 
-To install miniONE, run:
+To install miniONE, run as root:
 
-```default
-# ./minione --version 6.99.85 --force
+```bash
+./minione --version 6.99 --force
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
 
 ```default
 ### Report
-OpenNebula 6.99.85 was installed
+OpenNebula 6.99 was installed
 Sunstone is running on:
   http://192.168.1.130/
 FireEdge is running on:
@@ -118,8 +118,8 @@ Use following to login:
 
 Finally we will force a refresh of the ``localhost`` status:
 
-```default
-# sudo -u oneadmin onehost sync --force
+```bash
+sudo -u oneadmin onehost sync --force
 ```
 
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.

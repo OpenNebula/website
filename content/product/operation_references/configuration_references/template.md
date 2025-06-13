@@ -292,7 +292,7 @@ If the `TARGET` attribute is not set for a disk, OpenNebula will automatically a
 
 Please visit the guide for [managing images]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}}) and the [image template reference]({{% relref "img_template#img-template" %}}) to learn more about the different image types.
 
-You can find a complete description of the contextualization features in the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machine_images/vm_templates#context-overview" %}}).
+You can find a complete description of the contextualization features in the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}).
 
 The default device prefix `sd` can be changed to `hd` or other prefix that suits your virtualization hypervisor requirements. You can find more information in the [daemon configuration guide]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}).
 
@@ -326,7 +326,7 @@ DISK = [ TYPE     = swap,
          SIZE     = 1024 ]
 ```
 
-Because this VM did not declare a `CONTEXT` or any disk using a `CDROM` Image, the first `DATABLOCK` found is placed right after the OS Image, in `sdb`. For more information on Image management and moving please check the [Storage guide]({{% relref "../../cloud_clusters_infrastructure_configuration/storage_system_configuration/overview#sm" %}}).
+Because this VM did not declare a `CONTEXT` or any disk using a `CDROM` Image, the first `DATABLOCK` found is placed right after the OS Image, in `sdb`. For more information on Image management and moving please check the [Storage guide]({{% relref "../../cluster_configuration/storage_system/overview#sm" %}}).
 
 <a id="template-network-section"></a>
 
@@ -383,7 +383,7 @@ NIC = [ NETWORK = "Test", NAME = "TestName" ]
 NIC_ALIAS = [ NETWORK = "Test", PARENT = "TestName" ]
 ```
 
-For more information on setting up virtual networks please check the [Managing Virtual Networks guide]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/manage_vnets#manage-vnets" %}}).
+For more information on setting up virtual networks please check the [Managing Virtual Networks guide]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}).
 
 <a id="nic-default-template"></a>
 
@@ -463,7 +463,7 @@ Context information is passed to the Virtual Machine via an ISO mounted as a par
 | `REPORT_READY`                  | The VM will send the READY signal to the onegate server. After this, the VM template will contain `READY=YES` in the `USER_TEMPLATE` section                                                                                                                                                                                                                                                                                                                                                                       | O         |
 | `READY_SCRIPT`                  | `READY=YES` will only be sent if the script is successfully executed                                                                                                                                                                                                                                                                                                                                                                                                                                               | Linux     |
 | `READY_SCRIPT_PATH`             | Similar to READY_SCRIPT but the script exists in the Guest FS                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Linux     |
-| `NETWORK`                       | `YES` to automatically fill the networking parameters for each NIC, used by the [Contextualization packages]({{% relref "../../virtual_machines_operation/virtual_machine_images/vm_templates#context-overview" %}}).                                                                                                                                                                                                                                                                                              | O         |
+| `NETWORK`                       | `YES` to automatically fill the networking parameters for each NIC, used by the [Contextualization packages]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}).                                                                                                                                                                                                                                                                                              | O         |
 | `NETCFG_TYPE`                   | Network configuration service inside guest VM responsible for configuring the NICs: empty (autodetects suitable service inside VM), `bsd` (for FreeBSD network configuration), `interfaces` (for Debian-style configuration via `/etc/network/interfaces`), `netplan` (for Netplan, set custom Netplan renderer via `NETCFG_NETPLAN_RENDERER`) `networkd` (for systemd-networkd), `nm` (for NetworkManager), `scripts` (for legacy Red Hat-style configuration via `ifcfg-ethX` files)                             | Linux     |
 | `NETCFG_NETPLAN_RENDERER`       | Netplan renderer (effective only when `NETCFG_TYPE=netplan`): empty or `networkd` (for systemd-networkd), `NetworkManager` (for NetworkManager)                                                                                                                                                                                                                                                                                                                                                                    | Linux     |
 | `SET_HOSTNAME`                  | This parameter value will be the hostname of the VM.                                                                                                                                                                                                                                                                                                                                                                                                                                                               | O         |
@@ -930,7 +930,7 @@ In Sunstone, the `USER_INPUTS` can be ordered with the mouse.
 
 <a id="template-user-inputs-metadata"></a>
 
-`USER_INPUTS_METADATA` provides the template creator with the possibility to add titles and descriptions to the user inputs. To understand how Sunstone renders user inputs metadata, [see User Inputs in Sunstone]({{% relref "../../virtual_machines_operation/virtual_machine_images/vm_templates#vm-guide-user-inputs-sunstone" %}}).
+`USER_INPUTS_METADATA` provides the template creator with the possibility to add titles and descriptions to the user inputs. To understand how Sunstone renders user inputs metadata, [see User Inputs in Sunstone]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-guide-user-inputs-sunstone" %}}).
 
 {{< alert title="Note" color="success" >}}
 `USER_INPUTS_METADATA` will only be used in Sunstone, not in other components of OpenNebula.{{< /alert >}} 
@@ -1040,7 +1040,7 @@ NUMA_NODE = [ MEMORY = 1024, TOTAL_CPUS = 2 ]
 NUMA_NODE = [ MEMORY = 2048, TOTAL_CPUS = 4 ]
 ```
 
-Please [check the NUMA guide]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa#numa" %}}) for more information.
+Please [check the NUMA guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}}) for more information.
 
 <a id="sunstone-template-section"></a>
 

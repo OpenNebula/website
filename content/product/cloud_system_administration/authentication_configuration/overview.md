@@ -49,8 +49,8 @@ When designing the architecture of your cloud you will have to choose where to s
 
 Usable with API, CLI and Sunstone:
 
-* [Built-in User/Password and token authentication]({{% relref "../multitenancy/manage_users#manage-users" %}})
 * [LDAP Authentication]({{% relref "ldap#ldap" %}})
+* Additionally, you can check [Users]({{% relref "../multitenancy/manage_users" %}}) in the [Multitenancy]({{% relref "../multitenancy" %}}) section for information in built-in User/Password and token authentication.
 
 Usable only with API and CLI:
 

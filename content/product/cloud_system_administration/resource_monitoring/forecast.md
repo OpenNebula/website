@@ -14,7 +14,7 @@ weight: "4"
 
 ## Overview
 
-The OpenNebula Resource Forecast system provides predictive insights into resource utilization across hosts and virtual machines. By analyzing trends in CPU, memory, network, and disk usage, it allows administrators to proactively manage infrastructure, optimize resource allocation, and prevent performance bottlenecks.
+The OpenNebula Resource Forecast system provides predictive insights into resource utilization across Hosts and Virtual Machines. By analyzing trends in CPU, memory, network, and disk usage, it allows administrators to proactively manage infrastructure, optimize resource allocation, and prevent performance bottlenecks.
 
 {{< alert title="Note" color="success" >}}
 Resource forecasting is automatically enabled upon hypervisor package installation and requires no additional setup. For configuration options, refer to the [Configuration and Optimization]({{% relref "#forecast-configuration" %}}) section.{{< /alert >}} 
@@ -37,11 +37,11 @@ OpenNebula provides two types of resource forecasts:
 
 Long-term forecasts are accessible via the CLI and Sunstone. In Sunstone, the **Monitoring** tab displays predicted trends alongside real-time usage data, aiding administrators in effective planning.
 
-[INSERT SUNSTONE IMAGE HERE]
+<!-- [INSERT SUNSTONE IMAGE HERE] -->
 
-CLI users can retrieve long-term forecasts via:
+<!-- CLI users can retrieve long-term forecasts via:
 
-[INSERT CLI COMMAND EXAMPLE HERE]
+[INSERT CLI COMMAND EXAMPLE HERE] -->
 
 By default, long-term forecasts project resource usage for the next 30 days.
 
@@ -53,20 +53,20 @@ Short-term forecasts power the Predictive DRS, optimizing cluster load distribut
 
 Sunstone’s **Monitoring** tab also provides short-term forecast data.
 
-[INSERT SUNSTONE IMAGE HERE]
+<!-- [INSERT SUNSTONE IMAGE HERE]
 
 CLI users can access short-term forecasts via:
 
-[INSERT CLI COMMAND EXAMPLE HERE]
+[INSERT CLI COMMAND EXAMPLE HERE] -->
 
-By default, short-term forecasts cover the next 5 minutes.
+By default, short-term forecasts cover the next five minutes.
 
 ## Forecast Generation
 
-Forecasts rely on OpenNebula’s built-in monitoring system ([The OpenNebula Monitoring System]({{% relref "configuration#monitor-alert-configuration" %}})). Periodically, monitoring probes analyze real-time CPU, memory, disk, and network metrics to generate predictions. Each host maintains a local time-series database (`/var/tmp/one_db/host.db`) storing historical data for forecasting. Similarly, every VM has a dedicated database (`/var/tmp/one_db/<VM_ID>.db`) that tracks its individual metrics.
+Forecasts rely on OpenNebula’s built-in monitoring system ([The OpenNebula Monitoring System]({{% relref "configuration#monitor-alert-configuration" %}})). Periodically, monitoring probes analyze real-time CPU, memory, disk, and network metrics to generate predictions. Each Host maintains a local time-series database (`/var/tmp/one_db/host.db`) storing historical data for forecasting. Similarly, every VM has a dedicated database (`/var/tmp/one_db/<VM_ID>.db`) that tracks its individual metrics.
 
 {{< alert title="Note" color="success" >}}
-When a VM migrates, a new database is created on the destination host, temporarily reducing forecast accuracy until sufficient data accumulates.{{< /alert >}} 
+When a VM migrates, a new database is created on the destination Host, temporarily reducing forecast accuracy until sufficient data accumulates.{{< /alert >}} 
 
 The forecast computation process is as follows:
 
@@ -116,7 +116,7 @@ Administrators can modify retention settings to optimize storage and forecast ac
 
 Forecast database size depends on retention and monitoring frequency:
 
-- **Host database**: ~2.5 MB per host (4-week retention, 2-minute intervals)
+- **Host database**: ~2.5 MB per Host (4-week retention, 2-minute intervals)
 - **VM database**: ~6.5 MB per VM (2-week retention, 30-second intervals)
 
 To optimize storage:

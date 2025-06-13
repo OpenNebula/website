@@ -14,7 +14,7 @@ weight: "3"
 
 ## Overview
 
-This Marketplace uses an S3 API-capable service as the Back-end. This means Marketplace Appliances will be stored in the official [AWS S3 service](https://aws.amazon.com/s3/) , or in services that implement that API, like [Ceph Object Gateway S3](https://docs.ceph.com/en/latest/radosgw/s3/).
+This Marketplace uses an S3 API-capable service as the backend. This means Marketplace Appliances will be stored in the official [AWS S3 service](https://aws.amazon.com/s3/) , or in services that implement that API, like [Ceph Object Gateway S3](https://docs.ceph.com/en/latest/radosgw/s3/).
 
 ## Limitations
 
@@ -42,7 +42,7 @@ These are the configuration attributes of a Marketplace template of the S3 kind:
 | `BUCKET`            | **YES**    | The bucket where the files will be stored.                                                                    |
 | `REGION`            | **YES**    | The region to connect to. If you are using Ceph S3 any value here will work.                                  |
 | `TOTAL_MB`          | **NO**     | This parameter defines the total size of the Marketplace in MB. It defaults to `1048576` (MB).                |
-| `READ_LENGTH`       | **NO**     | Split the file into chunks of this size in MB, **never** user a value larger than 100. Defaults to `32` (MB). |
+| `READ_LENGTH`       | **NO**     | Split the file into chunks of this size in MB, **never** use a value larger than 100. Defaults to `32` (MB). |
 
 The following attributes are **required for non AWS s3 implementtions**
 
@@ -51,7 +51,7 @@ The following attributes are **required for non AWS s3 implementtions**
 | `AWS`               | Must be `no`.                                                                                    |
 | `SIGNATURE_VERSION` | Must be `s3`.                                                                                    |
 | `FORCE_PATH_STYLE`  | Must be `YES`.                                                                                   |
-| `ENDPOINT`          | Preferably don’t use an endpoint that includes the bucket as the leading part of the host’s URL. |
+| `ENDPOINT`          | Preferably don’t use an endpoint that includes the bucket as the leading part of the Host’s URL. |
 
 For example, the following template illustrates the definition of a Ceph S3 Marketplace:
 

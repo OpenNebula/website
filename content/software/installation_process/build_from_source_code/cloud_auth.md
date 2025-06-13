@@ -14,13 +14,13 @@ weight: "5"
 
 When a user interacts with [Sunstone]({{% relref "../../../product/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}), the server authenticates the request and then forwards the requested operation to the OpenNebula daemon.
 
-The forwarded requests between the server and the core daemon include the original user name, and are signed with the credentials of a special `server` user.
+The forwarded requests between the server and the core daemon include the original user name and are signed with the credentials of a special `server` user.
 
-In this guide this request forwarding mechanism is explained, and how it is secured with a symmetric-key algorithm.
+In the current guide this request forwarding mechanism is explained, and how it is secured with a symmetric-key algorithm is also detailed.
 
 ## Server Users
 
-The [Sunstone]({{% relref "../../../product/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}) server communicate with the core using a `server` user. OpenNebula creates the **serveradmin** account at bootstrap, with the authentication driver **server_cipher** (symmetric key).
+The [Sunstone]({{% relref "../../../product/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}) server communicates with the core using a `server` user. OpenNebula creates the **serveradmin** account at bootstrap with the authentication driver **server_cipher** (symmetric key).
 
 This `server` user uses a special authentication mechanism that allows the servers to perform an operation on behalf of another user.
 

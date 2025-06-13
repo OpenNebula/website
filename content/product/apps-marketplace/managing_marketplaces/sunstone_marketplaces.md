@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Managing Marketplaces in Sunstone -->
 
-The [Sunstone web UI]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) allows you to graphically manage marketplaces. Within Sunstone, open the left-hand pane, then select **Storage** -> **Marketplaces** to perform the following operations:
+The [Sunstone web UI]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) allows you to graphically manage Marketplaces. Within Sunstone, open the left-hand pane then select **Storage** -> **Marketplaces** to perform the following operations:
 
 * [Create a marketplace]({{% relref "#sunstone-marketplaces-create" %}})
 * [Update a marketplace]({{% relref "#sunstone-marketplaces-update" %}})
@@ -23,7 +23,7 @@ The [Sunstone web UI]({{% relref "../../../product/control_plane_configuration/g
 * [See the appliances that have a marketplace]({{% relref "#sunstone-marketplaces-appliances" %}})
 
 {{< alert title="Note" color="success" >}}
-Only [OpenNebula Systems]({{% relref "../public_marketplaces/opennebula#market-one" %}}), [LinuxContainers]({{% relref "../public_marketplaces/lxc#market-linux-container" %}}), [HTTP]({{% relref "../private_marketplaces/market_http#market-http" %}}) and [S3]({{% relref "../private_marketplaces/market_s3#market-s3" %}}) marketplaces could be created with Sunstone.{{< /alert >}} 
+Only [OpenNebula Systems]({{% relref "../public_marketplaces/opennebula#market-one" %}}), [LinuxContainers]({{% relref "../public_marketplaces/lxc#market-linux-container" %}}), [HTTP]({{% relref "../private_marketplaces/market_http#market-http" %}}) and [S3]({{% relref "../private_marketplaces/market_s3#market-s3" %}}) Marketplaces can be created with Sunstone.{{< /alert >}} 
 
 ![marketplace_dashboard](/images/marketplaces/dashboard.png)
 
@@ -35,11 +35,11 @@ Only [OpenNebula Systems]({{% relref "../public_marketplaces/opennebula#market-o
 
 ![marketplace_create1](/images/marketplaces/create_1.png)
 
-2. Fill the name, description and type of the marketplace:
+2. Fill in the name, description, and type of the Marketplace:
 
 ![marketplace_create2](/images/marketplaces/create_2.png)
 
-3. Fill the fields of the marketplace. Depending on the marketplace type, these fields are different. Please, see [Public]({{% relref "../public_marketplaces/index#public-marketplaces" %}}) and [Private]({{% relref "../private_marketplaces/index#private-marketplaces" %}}) marketplaces documentation):
+3. Fill in the fields of the Marketplace. Depending on the Marketplace type, these fields are different. Please see [Public]({{% relref "../public_marketplaces/index#public-marketplaces" %}}) and [Private]({{% relref "../private_marketplaces/index#private-marketplaces" %}}) Marketplaces documentation:
 
 ![marketplace_create3](/images/marketplaces/create_3.png)
 
@@ -47,7 +47,7 @@ Only [OpenNebula Systems]({{% relref "../public_marketplaces/opennebula#market-o
 
 ## Update a Marketplace
 
-Select a marketplace and click on the update button:
+Select a Marketplace and click on the update button:
 
 ![marketplace_update](/images/marketplaces/update.png)
 
@@ -55,7 +55,7 @@ Select a marketplace and click on the update button:
 
 ## Delete a Marketplace
 
-Select a marketplace and click on the delete button:
+Select a Marketplace and click on the delete button:
 
 ![marketplace_delete](/images/marketplaces/delete.png)
 
@@ -63,7 +63,7 @@ Select a marketplace and click on the delete button:
 
 ## Enable or Disable a Marketplace
 
-Select a marketplace and click on the enable/disable menu:
+Select a Marketplace and click on the enable/disable menu:
 
 ![marketplace_enable](/images/marketplaces/enable.png)
 
@@ -71,7 +71,7 @@ Select a marketplace and click on the enable/disable menu:
 
 ## Change the Owner or the Group of a Marketplace
 
-Select a marketplace and click on the change owner/change group menu:
+Select a Marketplace and click on the change owner/change group menu:
 
 ![marketplace_change](/images/marketplaces/change.png)
 
@@ -79,7 +79,7 @@ Select a marketplace and click on the change owner/change group menu:
 
 ## Check Details of a Marketplace
 
-Select a marketplace and click on Info tab to see the details of a marketplace:
+Select a Marketplace and click on Info tab to see its details:
 
 ![marketplace_details](/images/marketplaces/details.png)
 
@@ -87,6 +87,6 @@ Select a marketplace and click on Info tab to see the details of a marketplace:
 
 ## See Appliances Available in a Marketplace
 
-Select a marketplace and click on Apps tab to see the appliances in a marketplace:
+Select a Marketplace and click on Apps tab to see the Appliances available:
 
 ![marketplace_apps](/images/marketplaces/apps.png)

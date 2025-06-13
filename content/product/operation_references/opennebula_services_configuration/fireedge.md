@@ -33,7 +33,7 @@ http://<OPENNEBULA-FRONTEND>:2616
 
 ### Configuration
 
-The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 
@@ -63,7 +63,7 @@ After a configuration change, the FireEdge server must be [restarted]({{% relref
 | `auth_redirect`                 |                              | This configuration is for the login button redirect. The available options are: **/**, **.** or a **URL**                                                                                                                                                                         |
 
 {{< alert title="Note" color="success" >}}
-JWT is a acronym of JSON Web Token{{< /alert >}} 
+JWT is an acronym of JSON Web Token{{< /alert >}} 
 
 <a id="fireedge-sunstone-configuration"></a>
 
@@ -72,7 +72,7 @@ JWT is a acronym of JSON Web Token{{< /alert >}}
 The Sunstone server configuration file can be found in `/etc/one/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
-After a configuration change, the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}}    (#fireedge-sunstone-configuration)
+After a configuration change the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}}    (#fireedge-sunstone-configuration)
 
 ![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
 
@@ -98,7 +98,7 @@ Once the server is initialized, it creates the file `/var/lib/one/.one/fireedge_
 
 <a id="fireedge-in-ha"></a>
 
-In HA environments, `fireedge_key` needs to be copied from the first leader to the followers. Optionally, in order to have the provision logs available in all the HA nodes, `/var/lib/one/fireedge` need to be shared between nodes.
+In HA environments, `fireedge_key` needs to be copied from the first leader to the followers. Optionally, in order to have the provision logs available in all the HA nodes, `/var/lib/one/fireedge` needs to be shared between nodes.
 
 <a id="fireedge-configuration-for-sunstone"></a>
 
@@ -108,7 +108,7 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 ## Branding FireEdge
 
-You can add your logo to the login, main, favicon and loading screens by updating the `logo:` attribute as follows:
+You can add your logo to the login, main, favicon, and loading screens by updating the `logo:` attribute as follows:
 
 - The logo configuration is done in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
 - The logo of the main UI screen is defined for each view.
@@ -155,7 +155,7 @@ Moreover, Suntone has the capacity to show the detail of a resource in a full sc
 
 This configuration can be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `fullViewMode`. See [table below](#fireedge-sunstone-configuration).
 
-Also, both configurations will be override for an specific user if the user changes the configuration in the settings section.
+Also, both configurations will be overridden for a specific user if the user changes the configuration in the settings section.
 
 ![fireedge_sunstone_setting_list_datatable](/images/sunstone_setting_list_datatable.png)
 
@@ -185,7 +185,7 @@ These two files store a JSON object that has the same structure but with differe
 | graphs          | Defines the different colors used in the different graphs used in the app. |
 
 {{< alert title="Warning" color="warning" >}}
-Remember that these files are source files, so any change on this configuration will force to compile again Sunstone in order to applied these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
+Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
 
 ## Configure Guacamole
 
@@ -196,7 +196,7 @@ Guacamole supports multiple connection methods such as **VNC, RDP, and SSH** and
 {{< alert title="Note" color="success" >}}
 The OpenNebula **binary packages** provide Guacamole proxy daemon (package `opennebula-guacd` and service `opennebula-guacd`), which is installed alongside FireEdge. In the default configuration, the Guacamole proxy daemon is automatically started along with FireEdge, and FireEdge is configured to connect to the locally-running Guacamole. No extra steps are required!{{< /alert >}} 
 
-If Guacamole is running on a different host to the FireEdge, following FireEdge configuration parameters have to be customized:
+If Guacamole is running on a different Host to the FireEdge, the following FireEdge configuration parameters have to be customized:
 
 - `guacd/host`
 - `guacd/port`
@@ -207,7 +207,7 @@ If Guacamole is running on a different host to the FireEdge, following FireEdge 
 
 Change the server running state by managing the operating system service `opennebula-fireedge`.
 
-To start, restart or stop the server, execute one of:
+To start, restart, or stop the server, execute one of:
 
 ```default
 $ systemctl start   opennebula-fireedge
@@ -222,7 +222,7 @@ $ systemctl enable  opennebula-fireedge
 $ systemctl disable opennebula-fireedge
 ```
 
-Server **logs** are located in `/var/log/one` in the following file:
+Server **logs** are located in `/var/log/one` in the following files:
 
 - `/var/log/one/fireedge.log`: operational log.
 - `/var/log/one/fireedge.error`: errors and exceptions log.
@@ -243,4 +243,4 @@ A common issue when starting FireEdge is a used port:
 Error: listen EADDRINUSE: address already in use 0.0.0.0:2616
 ```
 
-If another service is using the port, you can change FireEdge configuration (`/etc/one/fireedge-server.conf`) to use another host/port.
+If another service is using the port, you can change FireEdge configuration (`/etc/one/fireedge-server.conf`) to use another Host/port.

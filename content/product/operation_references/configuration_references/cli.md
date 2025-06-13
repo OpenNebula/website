@@ -12,7 +12,7 @@ weight: "4"
 
 <!--# Command Line Interface -->
 
-OpenNebula provides a set commands to interact with the system:
+OpenNebula provides a set of commands to interact with the system:
 
 ## CLI
 
@@ -24,28 +24,28 @@ OpenNebula provides a set commands to interact with the system:
 * [onedb](https://docs.opennebula.io/doc/6.99/cli/onedb.1.html): OpenNebula database migration tool.
 * [onegroup](https://docs.opennebula.io/doc/6.99/cli/onegroup.1.html): manages OpenNebula groups.
 * [onehook](https://docs.opennebula.io/doc/6.99/cli/onehook.1.html): manages OpenNebula hooks.
-* [onehost](https://docs.opennebula.io/doc/6.99/cli/onehost.1.html): manages OpenNebula hosts.
+* [onehost](https://docs.opennebula.io/doc/6.99/cli/onehost.1.html): manages OpenNebula Hosts.
 * [oneimage](https://docs.opennebula.io/doc/6.99/cli/oneimage.1.html): manages OpenNebula images.
-* [onemarket](https://docs.opennebula.io/doc/6.99/cli/onemarket.1.html): manages internal and external marketplaces.
-* [onemarketapp](https://docs.opennebula.io/doc/6.99/cli/onemarketapp.1.html): manages appliances from marketplaces.
+* [onemarket](https://docs.opennebula.io/doc/6.99/cli/onemarket.1.html): manages internal and external Marketplaces.
+* [onemarketapp](https://docs.opennebula.io/doc/6.99/cli/onemarketapp.1.html): manages appliances from Marketplaces.
 * [oneprovider](https://docs.opennebula.io/doc/6.99/cli/oneprovider.1.html): manages OpenNebula providers.
 * [onesecgroup](https://docs.opennebula.io/doc/6.99/cli/onesecgroup.1.html): manages OpenNebula security groups.
 * [oneshowback](https://docs.opennebula.io/doc/6.99/cli/oneshowback.1.html): OpenNebula Showback tool.
 * [onetemplate](https://docs.opennebula.io/doc/6.99/cli/onetemplate.1.html): manages OpenNebula templates.
 * [oneuser](https://docs.opennebula.io/doc/6.99/cli/oneuser.1.html): manages OpenNebula users.
-* [onevdc](https://docs.opennebula.io/doc/6.99/cli/onevdc.1.html): manages OpenNebula Virtual DataCenters.
-* [onevm](https://docs.opennebula.io/doc/6.99/cli/onevm.1.html): manages OpenNebula virtual machines.
+* [onevdc](https://docs.opennebula.io/doc/6.99/cli/onevdc.1.html): manages OpenNebula Virtual Datacenters.
+* [onevm](https://docs.opennebula.io/doc/6.99/cli/onevm.1.html): manages OpenNebula Virtual Machines.
 * [onevmgroup](https://docs.opennebula.io/doc/6.99/cli/onevmgroup.1.html): manages OpenNebula VMGroups.
 * [onevnet](https://docs.opennebula.io/doc/6.99/cli/onevnet.1.html): manages OpenNebula networks.
 * [onevntemplate](https://docs.opennebula.io/doc/6.99/cli/onevntemplate.1.html): manages OpenNebula networks templates.
 * [onevrouter](https://docs.opennebula.io/doc/6.99/cli/onevrouter.1.html): manages OpenNebula Virtual Routers.
-* [onezone](https://docs.opennebula.io/doc/6.99/cli/onezone.1.html): manages OpenNebula zones.
+* [onezone](https://docs.opennebula.io/doc/6.99/cli/onezone.1.html): manages OpenNebula Zones.
 * [oneirb](https://docs.opennebula.io/doc/6.99/cli/oneirb.1.html): opens an irb session.
 * [onelog](https://docs.opennebula.io/doc/6.99/cli/onelog.1.html): access to OpenNebula services log files.
 
-The output of these commands can be customized by modifying the configuration files that can be found in `/etc/one/cli/`. They also can be customized on a per-user basis, in this case the configuration files should be placed in `$HOME/.one/cli`.
+The output of these commands can be customized by modifying the configuration files found in `/etc/one/cli/`. They also can be customized on a per-user basis, in this case the configuration files should be placed in `$HOME/.one/cli`.
 
-List operation for each command will open a `less` session for a better user experience. First elements will be printed right away while the rest will begin to be requested and added to a cache, providing faster response times, specially on big deployments. Less session will automatically be canceled if a pipe is used for better interaction with scripts, providing the traditional, non interactive output.
+List operation for each command will open a `less` session for a better user experience. First elements will be printed right away while the rest will begin to be requested and added to a cache, providing faster response times, especially on big deployments. Less session will automatically be canceled if a pipe is used for better interaction with scripts, providing the traditional, non-interactive output.
 
 ## OneFlow Commands
 
@@ -62,8 +62,8 @@ List operation for each command will open a `less` session for a better user exp
 
 OpenNebula users should have the following environment variables set, you may want to place them in the `.bashrc` of the user’s Unix account for convenience:
 
-* **ONE_XMLRPC**: URL where the OpenNebula daemon is listening. If it is not set, CLI tools will use the default: `http://localhost:2633/RPC2`. See the `PORT` attribute in the [Daemon configuration file]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}) for more information.
-* **ONE_XMLRPC_TIMEOUT**: number of seconds to wait before a xmlrpc request timeouts.
+* **ONE_XMLRPC**: URL where the OpenNebula Daemon is listening. If it is not set, CLI tools will use the default: `http://localhost:2633/RPC2`. See the `PORT` attribute in the [Daemon configuration file]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}) for more information.
+* **ONE_XMLRPC_TIMEOUT**: number of seconds to wait before a xmlrpc request times out.
 * **ONE_ZMQ**: URL to subscribe to receive ZMQ messages. If it is not set, CLI tools will use the default: `tcp://localhost:2101`.
 * **ONE_AUTH**: needs to point to **a file containing a valid authentication key**, it can be:
   > * A password file with just a single line stating `username:password`.
@@ -71,7 +71,7 @@ OpenNebula users should have the following environment variables set, you may wa
 
 If `ONE_AUTH` is not defined, `$HOME/.one/one_auth` will be used instead. If no auth file is present, OpenNebula cannot work properly, as this is needed by the core, the CLI, and the cloud components as well.
 
-* **ONE_POOL_PAGE_SIZE**: by default the OpenNebula Cloud API (CLI and Sunstone make use of it) paginates some pool responses. By default this size is 300 but it can be changed with this variable. A numeric value greater that 2 is the pool size. To disable it you can use a non numeric value.
+* **ONE_POOL_PAGE_SIZE**: by default the OpenNebula Cloud API (CLI and Sunstone make use of it) paginates some pool responses. By default this size is 300 but it can be changed with this variable. A numeric value greater than 2 is the pool size. To disable it you can use a non-numeric value.
 
 ```default
 $ export ONE_POOL_PAGE_SIZE=5000        # Sets the page size to 5000
@@ -118,7 +118,7 @@ regularuser:password
 ```
 
 {{< alert title="Note" color="success" >}}
-Please note that the example above is intended for a user interacting with OpenNebula from the front-end, but you can use it from any other computer. Just set the appropriate hostname and port in the `ONE_XMLRPC` variable.{{< /alert >}} 
+Please note that the example above is intended for a user interacting with OpenNebula from the Front-end, but you can use it from any other computer. Just set the appropriate hostname and port in the `ONE_XMLRPC` variable.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 If you do not want passwords to be stored in plain files, protected with basic filesystem permissions, please refer to the token-based authentication mechanism described below.{{< /alert >}} 
@@ -130,7 +130,7 @@ An alternative method to specify credentials and OpenNebula endpoint is using co
 | `--password password` | Password to authenticate with OpenNebula  |
 | `--endpoint endpoint` | URL of OpenNebula XML-RPC Front-end       |
 
-If `user` is specified but not `password` the user will be prompted for the password. `endpoint` has the same meaning and get the same value as `ONE_XMLRPC`. For example:
+If `user` is specified but not `password` the user will be prompted for the password. `endpoint` has the same meaning and gets the same value as `ONE_XMLRPC`. For example:
 
 ```default
 $ onevm list --user my_user --endpoint http://one.frontend.com:2633/RPC2
@@ -139,7 +139,7 @@ Password:
 ```
 
 {{< alert title="Warning" color="warning" >}}
-You should better not use `--password` parameter in a shared machine. Process parameters can be seen by any user with the command `ps` so it is highly insecure.{{< /alert >}} 
+You shouldn't use `--password` parameter in a shared machine. Process parameters can be seen by any user with the command `ps` so it is highly insecure.{{< /alert >}} 
 
 * **ONE_SUNSTONE**: URL of the Sunstone portal, used for downloading Marketplace Apps streamed through Sunstone. If this is not specified, it will be inferred from `ONE_XMLRPC` (by changing the port to 9869), and if that ENV variable is undefined as well, it will default to `http://localhost:9869`.
 * **ONEFLOW_URL**, **ONEFLOW_USER** and **ONEFLOW_PASSWORD**: these variables are used by the [OneFlow]({{% relref "../../virtual_machines_operation/multi-vm_workflows/overview#oneflow-overview" %}}) command line tools. If not set, the default OneFlow URL will be `http://localhost:2474`. The user and password will be taken from the `ONE_AUTH` file if the environment variables are not found.
@@ -179,7 +179,7 @@ root@supermicro9:~# tree /etc/one/cli/
 └── onezone.yaml
 ```
 
-For example, in the case of `onevm list`, by default it looks like this
+For example, in the case of `onevm list`, by default it looks like this:
 
 ```default
 root@supermicro9:~# onevm list
@@ -190,7 +190,7 @@ root@supermicro9:~# onevm list
 9231 nhansen  users    alma8-kvm-local-6-6-pkofu-0.test                                            runn  0.5    1.8G localhost                                            0d 07h04
 ```
 
-But you can change the default columns, increase the column width and disable expansion to make it look like this
+But you can change the default columns, increase the column width and disable expansion to make it look like this:
 
 ```default
  ~  onevm list

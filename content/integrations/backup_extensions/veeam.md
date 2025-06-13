@@ -11,45 +11,50 @@ The oVirtAPI module is compatible with Veeam Backup & Replication 12.0.
 
 The following table summarizes the supported backup modes for each storage system:
 
-<table class="docutils align-default">
-<thead>
-<th class="head" rowspan="2"><p>Storage</p></th>
-<th class="head" colspan="2"><p>Full</p></th>
-<th class="head" colspan="2"><p>Incremental</p></th>
-</tr>
-<tr class="row-even"><th class="head"><p>Live</p></th>
-<th class="head"><p>Power off</p></th>
-<th class="head"><p>Live</p></th>
-<th class="head"><p>Power off</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-odd">
-<td><p>File<sup>*</sup> (qcow2)</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-</tr>
-<tr class="row-even"><td><p>File<sup>*</sup> (raw)</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
-</tr>
-<tr class="row-odd"><td><p>Ceph</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes
-<td><p>No
-<td><p>No
-</tr>
-<tr class="row-even"><td><p>LVM</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
-</tr>
-</tbody>
+<table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <thead>
+    <tr>
+      <th class="head" rowspan="2" style="min-width: 120px; border: 1px solid; vertical-align: middle"><p>Storage</p></th>
+      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Full</p></th>
+      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Incremental</p></th>
+    </tr>
+    <tr>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="min-width: 120px; border: 1px solid"><p>File<sup>*</sup> (qcow2)</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid"><p>File<sup>*</sup> (raw)</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid"><p>Ceph</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid"><p>LVM</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No</p></td>
+    </tr>
+  </tbody>
 </table>
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e. NFS/SAN or Local.
@@ -76,7 +81,7 @@ A server should be configured to expose both the Rsync backup datastore and the 
 
 ## Step 2: Create a backup datastore
 
-The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the virtual machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync.md" %}}) is supported. 
+The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the virtual machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. 
 
 {{< alert title="Remember" color="success" >}}
 The backup datastore must be created in the backup server configured in step 1. Also remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}} 
@@ -105,7 +110,10 @@ Here is an example to create an Rsync datastore in a host named "backup-host" an
     # Add the datastore to the cluster with "onecluster adddatastore <cluster-name> <datastore-name>"
     onecluster adddatastore somecluster VeeamDS
 
-You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/rsync.md" %}}).
+{{< alert title="Remember" color="success" >}}
+Note that the ``VEEAM_DS`` property must exist and be set to ``YES``.{{< /alert >}} 
+
+You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
 
 **Sizing recommendations**
 
@@ -125,13 +133,80 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``, you sho
 
 During installation a self-signed certificate is generated at ``/etc/one/ovirtapi-ssl.crt`` for encryption. You can replace this certificate by your own and change the ``cert_path`` configuration variable.
 
+After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the front-end server. 
+
 Finally, start the service with either ``systemctl start apache2`` (ubuntu/debian) or ``systemctl start httpd`` (alma).
 
 ## Step 4: Add OpenNebula to Veeam
 
-To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step.
+To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step or follow the next steps:
 
-## Current limitations
+### Step 4.1: Add the new virtualization manager
+
+The first step should be to add the ovirtAPI backup server to Veeam. Head over to the "Backup Infrastructure", then to "Managed Servers" and then click "Add Manager".
+
+![image](/images/veeam/add_manager.png)
+
+Then, choose to add a new "Virtualization Platform" of type "Oracle Linux Virtualization Manager".
+
+![image](/images/veeam/virtualization_platform.png)
+
+![image](/images/veeam/virtualization_platform_olvm.png)
+
+This will open a new dialog box. In the address field, you must make sure that it points to the IP address or DNS name of the server where the ovirtAPI module is installed and the backup datastore is hosted.
+
+![image](/images/veeam/new_manager.png)
+
+On the credentials tab, you should set the user and password used to access the OpenNebula front-end. You can either choose the oneadmin user or create a new user with the same privileges as oneadmin. If you are using the default certificate, you may receive an untrust certificate warning which you can omit.
+
+![image](/images/veeam/one_credentials.png)
+
+With this last step, you can click finish and the new ovirtAPI server should be listed under Managed Servers as a "oVirt KVM" hypervisor.
+
+![image](/images/veeam/hypervisor_added.png)
+
+### Step 4.2: Deploy the KVM appliance
+
+In order for Veeam to be able to perform backup and restore operations, it must deploy a dedicated virtual machine to act as a worker. To deploy it, go to the the "Backup Infrastructure" tab, then "Backup Proxies" and click "Add Proxy".
+
+![image](/images/veeam/add_proxy.png)
+
+A new dialog box will open. Choose to deploy in "Oracle Linux Virtualization Manager" and then choose to deploy the "Oracle Linux Virtualization Manager backup appliance". 
+
+![image](/images/veeam/add_proxy_olvm.png)
+
+![image](/images/veeam/add_proxy_app.png)
+
+This will open a new wizard to deploy the appliance. You should choose to deploy a new appliance.
+
+![image](/images/veeam/new_appliance.png)
+
+Next you should choose the cluster on which to deploy the appliance, a name and the storage domain to store the appliance image. 
+
+![image](/images/veeam/appliance_virtual_machine.png)
+
+For the appliance credentials, you should choose the same ones that you set up when configuring the virtualization manager in the previous steps.
+
+![image](/images/veeam/appliance_credentials.png)
+
+In the network settings tab, choose the management network that the appliance should use. It is recommended to manually choose the IP address configuration that the appliance should use.
+
+![image](/images/veeam/appliance_network.png)
+
+On the next step, Veeam will take care of deploying the appliance. Once finished, you should see it listed in the same tab.
+
+![image](/images/veeam/appliance_listed.png)
+
+### Step 4.3: Verification
+
+If everything is set properly, you should be able to see the available Virtual Machines in the "Inventory" tab under the "Virtual Infrastructure" -> "oVirt KVM" section.
+
+![image](/images/veeam/verification.png)
+
+## Current limitations and issues
 
 - Volatile disks cannot be backed up. 
-- Only in-place restores are supported.
+- Veeam will not attempt incremental backups, so all backups will be full.
+- When trying to start a backup job, the following error may appear. It can be solved by refreshing the backup job properties (even if no configuration is changed).
+
+![image](/images/veeam_infra_error.png)

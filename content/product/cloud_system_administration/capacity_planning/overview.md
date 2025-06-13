@@ -17,9 +17,10 @@ weight: "1"
 This Chapter shows the different mechanisms available to administrators and users for controlling the capacity assigned to Virtual Machines:
 
 > - First, you can control the apparent capacity of Hosts by [configuring host overcommitment]({{% relref "overcommitment#overcommitment" %}}).
-> - You can also fine-tune [the scheduling policies]({{% relref "../scheduler/overview" %}}) that control how resources from Hosts, Datastores, and Virtual Networks are allocated to Virtual Machines.
 > - Similarly, you can limit the resources that are made available to users, by using the [quota system]({{% relref "quotas#quota-auth" %}}).
 > - Finally, some workloads may require that you co-allocate or coordinate the capacity assigned to a group of Virtual Machines. [Affinity and placement rules can be set for VM groups]({{% relref "affinity#vmgroups" %}}).
+
+Additionally, you can consult the [Scheduler]({{% relref "scheduler" %}}) section to fine-tune [the scheduling policies]({{% relref "../scheduler/overview" %}}) that control how resources from Hosts, Datastores, and Virtual Networks are allocated to Virtual Machines.
 
 ## Hypervisor Compatibility
 

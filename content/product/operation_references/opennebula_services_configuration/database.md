@@ -12,7 +12,7 @@ weight: "8"
 
 <!--# Database Maintenance -->
 
-OpenNebula persists the state of the cloud into the selected [SQL database]({{% relref "database" %}}). The database should be monitored and tuned for the best performance by cloud administrators following the best practices of the particular database product. In this guide, we provide a few tips on how to optimize database for OpenNebula and thoroughly describe OpenNebula’s database maintenance tool `onedb`, which simplifies the most common database operations - backups and restores, version upgrades, or consistency checks.
+OpenNebula persists the state of the cloud into the selected [SQL database]({{% relref "database" %}}). The database should be monitored and tuned for the best performance by cloud administrators following the best practices of the particular database product. In this guide, we provide a few tips on how to optimize the database for OpenNebula and thoroughly describe OpenNebula’s database maintenance tool `onedb`, which simplifies the most common database operations - backups and restores, version upgrades, or consistency checks.
 
 <a id="mysql-maintenance"></a>
 
@@ -22,14 +22,14 @@ Depending on the environment, you should consider periodically executing the fol
 
 ### Cleanup Old Content
 
-When Virtual Machines are terminated (changed into a `DONE` state), OpenNebula just changes their state in database but keeps the information in the database in case it’s required in the future (e.g., to generate accounting reports). To reduce the size of the VM table, it is recommended to periodically delete the information about already terminated Virtual Machines if no longer needed with [onedb purge-done]({{% relref "#onedb-purge-done" %}}) (tool is available below).
+When Virtual Machines are terminated (changed into a `DONE` state), OpenNebula just changes their state in the database but keeps the information in the database in case it’s required in the future (e.g., to generate accounting reports). To reduce the size of the VM table, it is recommended to periodically delete the information about already terminated Virtual Machines if no longer needed with [onedb purge-done]({{% relref "#onedb-purge-done" %}}) (tool is available below).
 
 <a id="onedb"></a>
 
 ## OpenNebula Database Maintenance Tool
 
 {{< alert title="Important" color="success" >}}
-All the commands should be run with OpenNebula stopped, except the ones that has a warning in this documentation saying that it is executed with OpenNebula running.{{< /alert >}} 
+All the commands should be run with OpenNebula stopped, except the ones that have a warning in this documentation saying that it is executed with OpenNebula running.{{< /alert >}} 
 
 This section describes the OpenNebula database maintenance command-line tool `onedb`. It can be used to get information from an OpenNebula database, backup and restore, upgrade to new versions of an OpenNebula database, clean up unused content, or fix inconsistency problems.
 
@@ -45,11 +45,11 @@ Available subcommands (visit the [manual page]({{% relref "../configuration_refe
 - [change-history]({{% relref "#onedb-change-history" %}}) - Change records in VM metadata
 - [update-history]({{% relref "#onedb-update-history" %}}) - Update history records in VM metadata
 - [purge-done]({{% relref "#onedb-purge-done" %}}) - Cleans database of unused content
-- [change-body]({{% relref "#onedb-change-body" %}}) - Allows to update OpenNebula objects in database
-- [update-body]({{% relref "#onedb-update-body" %}}) - Allows to update OpenNebula objects body in database
+- [change-body]({{% relref "#onedb-change-body" %}}) - Allows users to update OpenNebula objects in database
+- [update-body]({{% relref "#onedb-update-body" %}}) - Allows users to update OpenNebula objects body in database
 - [sqlite2mysql]({{% relref "#onedb-sqlite2mysql" %}}) - Migration tool from SQLite to MySQL/MariaDB
 
-The command `onedb` works with all supported database backends - SQLite or MySQL/MariaDB. The database type and connection parameters are automatically taken from OpenNebula Daemon configuration ([/etc/one/oned.conf]({{% relref "oned#oned-conf" %}})), but can be overwrite on the command line with the following example parameters:
+The command `onedb` works with all supported database backends - SQLite or MySQL/MariaDB. The database type and connection parameters are automatically taken from OpenNebula Daemon configuration ([/etc/one/oned.conf]({{% relref "oned#oned-conf" %}})), but can be overwritten on the command line with the following example parameters:
 
 **Automatic Connection Parameters**
 
@@ -70,7 +70,7 @@ $ onedb <command> -v -S localhost -u oneadmin -p oneadmin -d opennebula
 ```
 
 {{< alert title="Warning" color="warning" >}}
-If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](http://dev.mysql.com/doc/refman/5.6/en/set-password.html) statement can be used for this:
+If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](https://dev.mysql.com/doc/refman/8.4/en/set-password.html) statement can be used for this:
 
 ```default
 $ mysql -u oneadmin -p
@@ -106,9 +106,9 @@ Timestamp: 09/08 11:58:27
 Comment:   Database migrated from 5.8.0 to 5.12.0 (OpenNebula 5.12.0) by onedb command.
 ```
 
-Command exits with different return codes based on the state of database:
+Command exits with different return codes based on the state of the database:
 
-- `0`: The current version of the DB match with the source version.
+- `0`: The current version of the DB matches with the source version.
 - `1`: The database has not been bootstrapped yet, requires OpenNebula start.
 - `2`: The DB version is older than required, requires upgrade.
 - `3`: The DB version is newer and not supported by this release.
@@ -141,12 +141,20 @@ Comment:   Database migrated from 3.7.80 to 3.8.0 (OpenNebula 3.8.0) by onedb co
 
 ### onedb change history
 
-Change the CLUSTER_ID of a previous VM sequence in a non interactive way. This is useful when accidentally deleting a cluster. You might be unable to attach disks or NICs to the VM due to the VM being reported in a non existing cluster.
+Change the CLUSTER_ID of a previous VM sequence in a non-interactive way. This is useful when accidentally deleting a cluster. You might be unable to attach disks or NICs to the VM due to the VM being reported in a non-existing cluster.
 
-The following command changes the the sequence 0 of the VM 224 to have the CLUSTER_ID set to 0.
+{{< alert title="Warning" color="warning" >}}
+When dealing with history records you need to take into account that the oldest index of the history records equals 0, whereas the latest one has the largest index number. So in order to modify the latest history record one needs to get the largest index first, for example with the following command:
 
 ```default
-$ onedb change-history --id 224 --seq 0 '/HISTORY/CID' 0
+$ onevm show -j <vm_id>| jq -r '.VM.HISTORY_RECORDS.HISTORY[-1].SEQ'
+```
+{{< /alert >}}
+
+The following command changes the sequence 0 of the VM 224 so that it has the CLUSTER_ID set to 0:
+
+```default
+$ onedb change-history --id 224 --seq 10 '/HISTORY/CID' 0
 ```
 
 <a id="onedb-update-history"></a>
@@ -155,7 +163,7 @@ $ onedb change-history --id 224 --seq 0 '/HISTORY/CID' 0
 
 Change the scheduling record of a previous VM sequence interactively. This is useful when recovering from errors in the database.
 
-The following command prompts an editor to open where the XML of the sequence 0 of the VM 224 will be edited.
+The following command prompts an editor to open where the XML of the sequence 0 of the VM 224 will be edited:
 
 ```default
 $ onedb update-history --id 224 --seq 0
@@ -167,7 +175,7 @@ $ onedb update-history --id 224 --seq 0
 
 Checks the consistency of OpenNebula objects inside the database and fixes any problems it finds. For example, if the machine where OpenNebula is running crashes or loses connectivity to the database, you may have the wrong number of VMs running in a Host or incorrect usage quotas for some users.
 
-To repair any error, first you need to stop OpenNebula and then run the `onedb fsck` command. To check consistency, without writing fixes, use the `--dry` option.
+To repair any error, first you need to stop OpenNebula and then run the `onedb fsck` command. To check consistency, without writing fixes, use the `--dry` option:
 
 ```default
 $ onedb fsck
@@ -270,7 +278,7 @@ Use 'onedb restore' or copy the file back to restore the DB.
 
 ### onedb restore
 
-Restores OpenNebula database from a provided [backup]({{% relref "#onedb-backup" %}}) file. Please note that only backups **from the same Back-end can be restored**, e.g. you can’t back-up SQLite database and then restore to a MySQL. E.g.,
+Restores OpenNebula database from a provided [backup]({{% relref "#onedb-backup" %}}) file. Please note that only backups **from the same Back-end can be restored**, e.g., you can’t back-up SQLite database and then restore to a MySQL. E.g.:
 
 ```default
 $ onedb restore /tmp/my_backup.db
@@ -284,7 +292,7 @@ Sqlite database backup restored in /var/lib/one/one.db
 {{< alert title="Warning" color="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
-Deletes all but the last two history records from the metadata of Virtual Machines which are still active (not in a `DONE` state). You can specify the start and end dates if you don’t want to delete all history. E.g.,
+Deletes all but the last two history records from the metadata of Virtual Machines which are still active (not in a `DONE` state). You can specify the start and end dates if you don’t want to delete all history. E.g.:
 
 ```default
 $ onedb purge-history --start 2008/07/24 --end 2023/06/14
@@ -303,7 +311,7 @@ $ onedb purge-history --id <vm_id>
 {{< alert title="Warning" color="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
-Deletes information from the database with already terminated Virtual Machines (state `DONE`). You can set start and end dates via `-start` and `--end` parameters if you don’t want to delete all the old data. E.g.,
+Deletes information from the database with already terminated Virtual Machines (state `DONE`). You can set start and end dates via `-start` and `--end` parameters if you don’t want to delete all the old data. E.g.:
 
 ```default
 $ onedb purge-done --end 2016/01
@@ -316,7 +324,7 @@ $ onedb purge-done --end 2016/01
 {{< alert title="Warning" color="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
-This command allows you to update the body content of OpenNebula objects in a database. Supported object types are `vm`, `host`, `vnet`, `image`, `cluster`, `document`, `group`, `marketplace`, `marketplaceapp`, `secgroup`, `template`, `vrouter` or `zone`.
+This command allows you to update the body content of OpenNebula objects in a database. Supported object types are `vm`, `host`, `vnet`, `image`, `cluster`, `document`, `group`, `marketplace`, `marketplaceapp`, `secgroup`, `template`, `vrouter`, or `zone`.
 
 You can filter the objects to update using one of the options:
 
@@ -334,7 +342,7 @@ Examples:
 $ onedb change-body vm --expr UNAME=johndoe '/VM/TEMPLATE/NIC[NETWORK="service"]/NETWORK' new_network
 ```
 
-- Delete the `CACHE` attribute for all VMs and their disks. Don’t modify DB (`dry`), but only show the XML object content.
+- Delete the `CACHE` attribute for all VMs and their disks. Don’t modify DB (`dry`), but only show the XML object content:
 
 ```default
 $ onedb change-body vm '/VM/TEMPLATE/DISK/CACHE' --delete --dry
@@ -359,7 +367,7 @@ $ onedb change-body vm --expr LCM_STATE=8 '/VM/TEMPLATE/DISK/CACHE' default --ap
 {{< alert title="Warning" color="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
-This command allows you to update the body content of OpenNebula objects in a database. Supported object types are `vm`, `host`, `vnet`, `image`, `cluster`, `document`, `group`, `marketplace`, `marketplaceapp`, `secgroup`, `template`, `vrouter` or `zone`.
+This command allows you to update the body content of OpenNebula objects in a database. Supported object types are `vm`, `host`, `vnet`, `image`, `cluster`, `document`, `group`, `marketplace`, `marketplaceapp`, `secgroup`, `template`, `vrouter`, or `zone`.
 
 You can filter the objects to update using one of the options:
 
@@ -374,7 +382,7 @@ You can use the parameter `--file` to pass the object XML directly.
 This command migrates from an SQLite database to a MySQL database. Follow the steps:
 
 * Stop OpenNebula
-* Reconfigure database in [/etc/one/oned.conf]({{% relref "oned#oned-conf" %}}) to use MySQL instead of SQLite.
+* Reconfigure database in [/etc/one/oned.conf]({{% relref "oned#oned-conf" %}}) to use MySQL instead of SQLite
 * Bootstrap the MySQL Database by running `oned -i`
 * Migrate the Database: `onedb sqlite2mysql -s <SQLITE_PATH> -u <MYSQL_USER> -p <MYSQL_PASS> -d <MYSQL_DB>`
-* Start OpenNebula.
+* Start OpenNebula

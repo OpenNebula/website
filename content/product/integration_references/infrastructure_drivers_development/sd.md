@@ -26,7 +26,7 @@ Located under `/var/lib/one/remotes/datastore/<ds_mad>`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `image_source image_format`
   - `datastore_image_dump` is an XML dump of the driver action encoded in Base 64. See a decoded [example]({{% relref "#sd-dump" %}}).
-  - `image_source` is the image source which will be later sent to the transfer manager
+  - `image_source` is the image source which will be later sent to the transfer manager.
 - **mkfs**: creates a new empty image in the datastore
   - **ARGUMENTS**: `image_id`
   - **STDIN**: `datastore_image_dump`
@@ -46,7 +46,7 @@ Located under `/var/lib/one/remotes/datastore/<ds_mad>`
   - `size` the size of the image in Mb.
 
 <a id="clone"></a>
-- **clone**: clones an image.
+- **clone**: clones an image
   - **ARGUMENTS**: `image_id`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `source`
@@ -57,8 +57,8 @@ Located under `/var/lib/one/remotes/datastore/<ds_mad>`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `monitor data`
   - `datastore_image_dump` is an XML dump of the driver action encoded in Base 64. See a decoded [example]({{% relref "#sd-dump" %}}).
-  - `monitor data` The monitoring information of the datastore, namely “USED_MB=…\\nTOTAL_MB=…\\nFREE_MB=…” which are respectively the used size of the datastore in MB, the total capacity of the datastore in MB and the available space in the datastore in MB.
-- **snap_delete**: Deletes a snapshot of a persistent image.
+  - `monitor data` The monitoring information of the datastore, namely “USED_MB=…\\nTOTAL_MB=…\\nFREE_MB=…” which are the used size of the datastore in MB, the total capacity of the datastore in MB and the available space in the datastore in MB, respectively.
+- **snap_delete**: Deletes a snapshot of a persistent image
   - **ARGUMENTS**: `image_id`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `-`
@@ -68,19 +68,19 @@ Located under `/var/lib/one/remotes/datastore/<ds_mad>`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `-`
   - `datastore_image_dump` is an XML dump of the driver action encoded in Base 64. See a decoded [example]({{% relref "#sd-dump" %}}). This dump, in addition to the elements in the example, contains a ROOT element: `TARGET_SNAPSHOT`, with the ID of the snapshot.
-- **snap_revert**: Overwrites the contents of the image by the selected snapshot (discarding any unsaved changes).
+- **snap_revert**: Overwrites the contents of the image by the selected snapshot (discarding any unsaved changes)
   - **ARGUMENTS**: `image_id`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `-`
   - `datastore_image_dump` is an XML dump of the driver action encoded in Base 64. See a decoded [example]({{% relref "#sd-dump" %}}). This dump, in addition to the elements in the example, contains a ROOT element: `TARGET_SNAPSHOT`, with the ID of the snapshot.
-- **increment_flatten**: Flattens one or several snapshots. The operation results in a shortened chain of snapshots, committing from the beginning to only preserve the amount specified by KEEP_LAST.
+- **increment_flatten**: Flattens one or several snapshots. The operation results in a shortened chain of snapshots, committing from the beginning to only preserve the amount specified by KEEP_LAST
   - **ARGUMENTS**: `image_id`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `size chain`
   - `datastore_image_dump` is an XML dump of the driver action encoded in Base 64. See a decoded [example]({{% relref "#sd-dump" %}}). This dump, in addition to the elements in the example, contains a ROOT element: `TARGET_SNAPSHOT`, with the ID of the snapshot.
   - `size` the size in MB.
   - `chain` chain spec in format <base_id>:<base_hash>[,<inc_id>:<inc_hash>]\*.
-- **export**: Generates an XML file required to export an image from a datastore. This script represents only the first part of the export process, it only generates metadata (an xml). The information returned by this script is then fed to `downloader.sh` which completes the export process.
+- **export**: Generates an XML file required to export an image from a datastore. This script represents only the first part of the export process, it only generates metadata (an xml). The information returned by this script is then fed to `downloader.sh` which completes the export process
   - **ARGUMENTS**: `image_id`
   - **STDIN**: `datastore_image_dump`
   - **RETURNS**: `export_xml`
@@ -96,27 +96,27 @@ Located under `/var/lib/one/remotes/datastore/<ds_mad>`
 
 ### Backup Datastore Operations
 
-The backup datastore drivers are responsible to store the generate `backup` folder into the backup system; and for restoring disk images from existing backups. Two specific operations needs to be implemented for this datastore type:
+The backup datastore drivers are responsible for storing the generate `backup` folder into the backup system and for restoring disk images from existing backups. Two specific operations need to be implemented for this datastore type:
 
 - **backup**: Uploads the contents of the `remote_system_ds/<vm_id>/backup` folder to the backup storage
   - **ARGUMENTS**: `host:remote_system_ds disks deploy_id vm_id ds_id`
-  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
-  - `host` is the target host where the VM is running
-  - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g. “0:1:”)
+  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
+  - `host` is the target Host where the VM is running
+  - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g., “0:1:”)
   - `deploy_id` ID of the VM in the hypervisor
   - `backupjob_id` if defined ‘-’ otherwise
   - `vm_id` is the id of the VM
-  - `ds_id` is the target datastore (the system datastore).
+  - `ds_id` is the target datastore (the system datastore)
   - **STDIN**: `datastore_backup_dump` See an [example]({{% relref "#ds-backup-dump" %}}).
   - **RETURNS**: `backup_id size_mb format`
   - `backup_id` driver reference for the backup
   - `size_mb` size that the backup takes
   - `format` value of the backup image’s FORMAT attribute (values: raw, rbd)
-- **restore**: Restore the OpenNebula objects (VM Template and Images). Note that the actual download of the images will be made by the Image Datastore using the reference uri. The specific mechanism for download images of a given protocol are coded in the `downloader.sh` script. The pseudo-URL takes the form: `<backup_proto>://<datastore_id>/<backup_job_id>/<driver_snapshot_id_chain>/<disk filename>` (example: `restic://100/23/0:25f4b298,1:6968545c//var/lib/one/datastores/0/0/backup/disk.0`, the backup job id can be empty):
+- **restore**: Restore the OpenNebula objects (VM Template and Images). Note that the actual download of the images will be made by the Image Datastore using the reference uri. The specific mechanism for download images of a given protocol is coded in the `downloader.sh` script. The pseudo-URL takes the form: `<backup_proto>://<datastore_id>/<backup_job_id>/<driver_snapshot_id_chain>/<disk filename>` (example: `restic://100/23/0:25f4b298,1:6968545c//var/lib/one/datastores/0/0/backup/disk.0`, the backup job id can be empty):
   - **ARGUMENTS**: `datastore_action_dump image_id`
   - **RETURNS**: `Template_ID Image_ID1 Image_ID2 ...`
 - **ls**: Lists the disk backups included in a given backup together with a downloader URL. The action receives the increment ID as a parameter and the information of the backup image, datastore and VM as XML through standard input.
-  - **ARGUMENTS**: `-i <increment_id>` to select a specific increment to restore use -1 for last increment or full backups.
+  - **ARGUMENTS**: `-i <increment_id>` to select a specific increment to restore use -1 for last increment or full backups
   - **STDIN**: An XML document with the VM, backup Image and Datastore object information, in the form:
 
 ```default
@@ -135,7 +135,7 @@ The backup datastore drivers are responsible to store the generate `backup` fold
 }
 ```
 
-The following actions needs also to be implemented (see above):
+The following actions also need to be implemented (see above):
 
 - **monitor**: Returns the storage space of the backup system.
 - **rm**: To remove existing backups from the repository.
@@ -153,54 +153,54 @@ Action scripts for generic image datastores:
 
 - **clone**: clones the image from the datastore (non-persistent images)
   - **ARGUMENTS**: `fe:SOURCE host:remote_system_ds/disk.i vm_id ds_id`
-  - `fe` is the front-end hostname
+  - `fe` is the Front-end hostname
   - `SOURCE` is the path of the disk image in the form DS_BASE_PATH/disk
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the source datastore (the images datastore)
 - **ln**: Links the image from the datastore (persistent images)
   - **ARGUMENTS**: `fe:SOURCE host:remote_system_ds/disk.i vm_id ds_id`
-  - `fe` is the front-end hostname
+  - `fe` is the Front-end hostname
   - `SOURCE` is the path of the disk image in the form DS_BASE_PATH/disk
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the source datastore (the images datastore)
 - **mvds**: moves an image back to its datastore (persistent images)
   - **ARGUMENTS**: `host:remote_system_ds/disk.i fe:SOURCE vm_id ds_id`
-  - `fe` is the front-end hostname
+  - `fe` is the Front-end hostname
   - `SOURCE` is the path of the disk image in the form DS_BASE_PATH/disk
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the original datastore for the image)
 - **cpds**: copies an image back to its datastore (executed for the saveas operation)
   - **ARGUMENTS**: `host:remote_system_ds/disk.i fe:SOURCE snap_id vm_id ds_id`
-  - `fe` is the front-end hostname
+  - `fe` is the Front-end hostname
   - `SOURCE` is the path of the disk image in the form DS_BASE_PATH/disk
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `snap_id` the ID of the snapshot to save. If the ID is -1 it saves the current state and not a snapshot.
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the original datastore for the image)
-- **mv**: moves images/directories across system_ds in different hosts. When used for the system datastore the script will receive the directory ARGUMENT. This script will be also called for the image TM for each disk to perform setup tasks on the target node.
+- **mv**: moves images/directories across system_ds in different Hosts. When used for the system datastore the script will receive the directory ARGUMENT. This script will be also called for the image TM for each disk to perform setup tasks on the target node.
   - **ARGUMENTS**: `hostA:system_ds/disk.i|hostB:system_ds/disk.i vm_id ds_id` OR `hostA:system_ds/|hostB:system_ds/ vm_id ds_id`
-  - `hostA` is the host the VM is in.
-  - `hostB` is the target host to deploy the VM
+  - `hostA` is the Host the VM is in.
+  - `hostB` is the target Host to deploy the VM
   - `system_ds` is the path for the system datastore in the host
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
 
 {{< alert title="Note" color="success" >}}
-You only need to implement one `mv` script, but consider the arguments received when the TM is used for the system datastore, a regular image datastore or both.{{< /alert >}} 
+You only need to implement one `mv` script, but consider the arguments received when the TM is used for the system datastore, a regular image datastore, or both.{{< /alert >}} 
 
 - **premigrate**: It is executed before a livemigration operation is issued to the hypervisor. Note that **only the premigrate script from the system datastore will be used**. Any customization must be done for the premigrate script of the system datastore, although you will probably add operations for other backends than that used by the system datastore.
   - Base64 encoded VM XML is sent via stdin.
   - **ARGUMENTS**: `source_host dst_host remote_system_dir vmid dsid`
-  - `src_host` is the host the VM is in.
-  - `dst_host` is the target host to migrate the VM to
-  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
+  - `src_host` is the Host the VM is in.
+  - `dst_host` is the target Host to migrate the VM to
+  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
   - `vmid` is the id of the VM
   - `dsid` is the target datastore
 - **failmigrate**: It is executed after a failure in the livemigration operation. Note that **save the postmigrate script from the system datastore will be used**. This action should revert any operation made by the premigrate script, for example removing any file transferred to the destination as it will not be used. The default operation does not perform any action and should be adjust accordingly to the custom premigrate operation.
@@ -213,15 +213,15 @@ You only need to implement one `mv` script, but consider the arguments received 
   - see `premigrate` description.
 - **snap_create**: Creates a disk snapshot of the selected disk
   - **ARGUMENTS**: `host:remote_system_ds/disk.i snapshot_id vm_id ds_id`
-  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
-  - `host` is the target host where the VM is running
+  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
+  - `host` is the target Host where the VM is running
   - `snapshot_id` the id of the snapshot to be created/reverted to/deleted
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
 - **snap_create_live**: Creates a disk snapshot of the selected disk while the VM is running in the hypervisor. This is a hypervisor operation.
   - **ARGUMENTS**: `host:remote_system_ds/disk.i snapshot_id vm_id ds_id`
-  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
-  - `host` is the target host where the VM is running
+  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
+  - `host` is the target Host where the VM is running
   - `snapshot_id` the id of the snapshot to be created/reverted to/deleted
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
@@ -236,29 +236,29 @@ Action scripts needed when the TM is used for the system datastore:
 
 - **context**: creates an ISO that contains all the files passed as an argument.
   - **ARGUMENTS**: `file1 file2 ... fileN host:remote_system_ds/disk.i vm_id ds_id`
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
 - **delete**: removes the either system datastore’s directory of the VM or a disk itself.
   - **ARGUMENTS**: `host:remote_system_ds/disk.i|host:remote_system_ds/ vm_id ds_id`
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the source datastore (the images datastore) for normal disks or target datastore (the system datastore) for volatile disks
 - **mkimage**: creates an image on-the-fly bypassing the datastore/image workflow
   - **ARGUMENTS**: `size format host:remote_system_ds/disk.i vm_id ds_id`
   - `size` size in MB of the image
   - `format` format for the image
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
 - **mkswap**: creates a swap image
   - **ARGUMENTS**: `size host:remote_system_ds/disk.i vm_id ds_id`
   - `size` size in MB of the image
-  - `host` is the target host to deploy the VM
-  - `remote_system_ds` is the path for the system datastore in the host
+  - `host` is the target Host to deploy the VM
+  - `remote_system_ds` is the path for the system datastore in the Host
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
 - **monitor**: monitors a **shared** system datastore. Sends `monitor VMs data` to Monitor Daemon. Non-shared system datastores are monitored through `monitor_ds` script.
@@ -267,7 +267,7 @@ Action scripts needed when the TM is used for the system datastore:
   - **RETURNS**: `monitor data`
   - `datastore_image_dump` is an XML dump of the driver action encoded in Base 64. See a decoded [example]({{% relref "#sd-dump" %}}).
   - `monitor data` The monitoring information of the datastore, namely “USED_MB=…\\nTOTAL_MB=…\\nFREE_MB=…” which are respectively the used size of the datastore in MB, the total capacity of the datastore in MB and the available space in the datastore in MB.
-  - `monitor VMs data` For each VM the size of each disk and any snapshot on those disks. This data are sent by UDP to Monitor Daemon. The MONITOR parameter is encoded in base64 format. Decoded example:
+  - `monitor VMs data` For each VM the size of each disk and any snapshot on those disks. This data is sent by UDP to Monitor Daemon. The MONITOR parameter is encoded in base64 format. Decoded example:
 
 ```default
 VM = [ ID = ${vm_id}, MONITOR = "\
@@ -283,17 +283,17 @@ VM = [ ID = ${vm_id}, MONITOR = "\
 - **monitor_ds**: monitors a **local-like** system datastore. Distributed system datastores should `exit 0` on the previous monitor script. Arguments and return values are the same as the monitor script.
 - **pre_backup** and **pre_backup_live**: These actions needs to generate disk backup images, as well as the VM XML representation in the folder `remote_system_ds/backup`. Each disk is created in the form `disk.<disk_id>.<increment_id>`. The VM representation is stored in a file named `vm.xml`. The live version needs to pause/snapshot the VM to create consistent backup images.
   - **ARGUMENTS**: `host:remote_system_ds disks deploy_id vm_id ds_id`
-  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
-  - `host` is the target host where the VM is running
+  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
+  - `host` is the target Host where the VM is running
   - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g. “0:1:”)
   - `deploy_id` ID of the VM in the hypervisor
   - `backupjob_id` is the id of the Backup job (‘-’ if undefined)
   - `vm_id` is the id of the VM
   - `ds_id` is the target datastore (the system datastore)
-- **post_backup** and **post_backup_live**: These actions performs cleanup operations of any tmp folder as well as the `backup` folder. The live version need also to commit or pivot VMs disks to the original ones.
+- **post_backup** and **post_backup_live**: These actions performs cleanup operations of any tmp folder as well as the `backup` folder. The live version also needs to commit or pivot VMs disks to the original ones.
   - **ARGUMENTS**: `host:remote_system_ds disks deploy_id vm_id ds_id`
-  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
-  - `host` is the target host where the VM is running
+  - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
+  - `host` is the target Host where the VM is running
   - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g. “0:1:”)
   - `deploy_id` ID of the VM in the hypervisor
   - `backupjob_id` is the id of the Backup job (‘-’ if undefined)
@@ -301,8 +301,8 @@ VM = [ ID = ${vm_id}, MONITOR = "\
   - `ds_id` is the target datastore (the system datastore)
 - **restore**: Restores VM disks from a backup. This script will access the `ls` operation of the associated datastore to get a list of VM disks and their downloader pseudo-URLs. The downloader script is then used to get the disk images from the backup and replace the VM disks. The VM is in poweroff state.
   > - **ARGUMENTS**: `host:remote_system_ds vm_id img_id inc_id disk_id`
-  > - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the host
-  > - `host` is the target host where the VM is running
+  > - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
+  > - `host` is the target Host where the VM is running
   > - `vm_id` is the id of the VM
   > - `img_id` is the id of the image backup to restore
   > - `inc_id` ID of the increment to use, -1 will select the last increment or for full backups
@@ -315,7 +315,7 @@ If the TM is only for regular images you only need to implement the first group.
 
 ## Tuning OpenNebula Core and Driver Integration
 
-The behavior of OpenNebula can be adapted depending on how the storage perform the underlying operations. For example quotas are computed on the original image datastore depending on the CLONE attribute. In particular, you may want to set two configuration attributes for your drivers: `DS_MAD_CONF` and `TM_MAD_CONF`. See [the OpenNebula configuration reference]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-transfer-driver" %}}) for details.
+The behavior of OpenNebula can be adapted depending on how the storage performs the underlying operations. For example quotas are computed on the original image datastore depending on the CLONE attribute. In particular, you may want to set two configuration attributes for your drivers: `DS_MAD_CONF` and `TM_MAD_CONF`. See [the OpenNebula configuration reference]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-transfer-driver" %}}) for details.
 
 ## The Monitoring Process
 
@@ -325,12 +325,12 @@ The information is obtained periodically using the Datastore driver monitor scri
 
 ### Shared System Datastores
 
-These datastores are monitored from a single point once (either the front-end or one of the storage bridges in `BRIDGE_LIST`). This will prevent overloading the storage by all the nodes querying it at the same time.
+These datastores are monitored from a single point once (either the Front-end or one of the storage bridges in `BRIDGE_LIST`). This will prevent overloading the storage by all the nodes querying it at the same time.
 
 The driver plugin `<tm_mad>/monitor` will report the information for two things:
 
 - Total storage metrics for the datastore (`USED_MB` `FREE_MB` `TOTAL_MB`)
-- Disk usage metrics (all disks: volatile, persistent and non-persistent)
+- Disk usage metrics (all disks: volatile, persistent, and non-persistent)
 
 ### Local System Datastores (SSH-like)
 
@@ -339,14 +339,14 @@ Local datastores are labeled by including a `.monitor` file in the datastore dir
 The plugins <tm_mad>/monitor_ds + kvm-probes.d/monitor_ds.sh will report the information for two things:
 
 - Total storage metrics for the datastore (`USED_MB` `FREE_MB` `TOTAL_MB`)
-- Disk usage metrics (all disks volatile, persistent and non-persistent)
+- Disk usage metrics (all disks volatile, persistent, and non-persistent)
 
 {{< alert title="Note" color="success" >}}
-`.monitor` will be only present in Local datastores to be monitored in the nodes.  System Datastores that need to be monitored in the nodes will need to provide a `monitor_ds` script and not the `monitor` one. This is to prevent errors, and not invoke the shared mechanism for local datastores.{{< /alert >}} 
+`.monitor` will only be present in Local datastores to be monitored in the nodes.  System Datastores that need to be monitored in the nodes will need to provide a `monitor_ds` script and not the `monitor` one. This is to prevent errors and not to invoke the shared mechanism for local datastores.{{< /alert >}} 
 
 ### The monitor_ds script.
 
-The monitor_ds.sh probe from the IM, if the `.monitor` file is present (e.g. `/var/lib/one/datastores/100/.monitor`), will execute its contents in the form `/var/tmp/one/remotes/tm/$(cat .monitor)/monitor_ds /var/lib/one/datastores/100/`. Note that the argument is the datastore path and not the VM or VM disk.
+The monitor_ds.sh probe from the IM, if the `.monitor` file is present (e.g., `/var/lib/one/datastores/100/.monitor`), will execute its contents in the form `/var/tmp/one/remotes/tm/$(cat .monitor)/monitor_ds /var/lib/one/datastores/100/`. Note that the argument is the datastore path and not the VM or VM disk.
 
 The script is responsible for getting the information from all disks of all VMs in the datastore in that node.
 
@@ -358,10 +358,10 @@ Certain types of TM can be used in so called *mixed mode* and allow different ty
 
 The following combinations are supported by default:
 
-- **CEPH** + **SSH** described in [Ceph SSH mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ssh-mode" %}})
-- **Qcow2/shared** + **SSH** described in [Qcow2/shared SSH mode]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/nas_ds#shared-ssh-mode" %}})
+- **CEPH** + **SSH** described in [Ceph SSH mode]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ssh-mode" %}})
+- **Qcow2/shared** + **SSH** described in [Qcow2/shared SSH mode]({{% relref "../../../product/cluster_configuration/storage_system/nas_ds#shared-ssh-mode" %}})
 
-The support in oned is generic, in a *mixed mode* every TM action (such as `clone` or `delete`) is suffixed with the driver name of the system DS in use. For example, an action like `clone.ssh` is actually invoked in CEPH + SSH mode. The driver first tries to find the complete action script, including the system DS suffix (e.g. `ceph/clone.ssh`) and only if that does not exist fallbacks to the default (`ceph/clone`).
+The support in oned is generic, in a *mixed mode* every TM action (such as `clone` or `delete`) is suffixed with the driver name of the system DS in use. For example, an action like `clone.ssh` is actually invoked in CEPH + SSH mode. The driver first tries to find the complete action script, including the system DS suffix (e.g., `ceph/clone.ssh`), and only if that does not exist falls back to the default (`ceph/clone`).
 
 In this way other combinations can be easily added.
 
@@ -419,11 +419,11 @@ This a list of TM actions that will be called upon the events listed:
 <tm_mad_sysds>/delete <host02>:<ds_path>/<vm_id>
 ```
 
-- `non_pers_image_source`: Source of the non persistent image.
+- `non_pers_image_source`: Source of the non-persistent image.
 - `pers_image_source` : Source of the persistent image.
-- `frontend`: hostname of the frontend
-- `host01`: hostname of host01
-- `host02`: hostname of host02
+- `frontend`: hostname of the Front-end
+- `host01`: hostname of Host01
+- `host02`: hostname of Host02
 - `tm_mad`: TM driver of the datastore where the image is registered
 - `tm_mad_sysds`: TM driver of the system datastore
 

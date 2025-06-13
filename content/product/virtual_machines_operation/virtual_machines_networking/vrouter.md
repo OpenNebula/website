@@ -12,13 +12,13 @@ weight: "5"
 
 <!--# Virtual Routers -->
 
-Virtual Routers provide routing across Virtual Networks. The administrators can easily connect Virtual Networks from Sunstone and the CLI. The routing itself is implemented with a Virtual Machine appliance available though the market place. This Virtual Machine can be seamlessly deployed in high availability mode.
+Virtual Routers provide routing across Virtual Networks. The administrators can easily connect Virtual Networks from Sunstone and the CLI. The routing itself is implemented with a Virtual Machine appliance available though the Marketplace. This Virtual Machine can be seamlessly deployed in high availability mode.
 
 ## Download the Virtual Router Appliance
 
-OpenNebula provides appliance which implements various Virtual Network Functions (VNFs), including the virtual router. The virtual router image is prepared to run in a HA mode, and process the context information from OpenNebula. So its base capabilities can be easily extended. Continue to the [VNF appliance documentation]({{% relref "../../../integrations/marketplace_appliances/vnf#service-vnf" %}}) for more details about the advanced usage and other implemented functions.
+OpenNebula provides an appliance which implements various Virtual Network Functions (VNFs), including the Virtual Router. The Virtual Router image is prepared to run in an HA mode and process the context information from OpenNebula. In this way, its base capabilities can be easily extended. Continue to the [VNF appliance documentation]({{% relref "../../../integrations/marketplace_appliances/vnf#service-vnf" %}}) for more details about the advanced usage and other implemented functions.
 
-- Download the appliance from the OpenNebula Marketplace. For example to put the virtual router image in the default datastore and create a Virtual Router template named `Service Virtual Router` use:
+- Download the appliance from the OpenNebula Marketplace. For example, to put the Virtual Router image in the default datastore and create a Virtual Router template named `Service Virtual Router`, use:
 
 ```default
 $ onemarketapp export 'Service Virtual Router' vr --datastore default --vmname vr
@@ -28,16 +28,16 @@ VMTEMPLATE
     ID: 8
 ```
 
-- Check that the resources are properly created, an update them to your OpenNebula installation if needed.
+- Check that the resources are properly created and update them to your OpenNebula installation if needed:
 
 ```default
 $ oneimage show 9 # 9 is the IMAGE ID from the previous onemarketapp command
 $ onetemplate show 8 # 8 is for the VMTEMPLATE ID
 ```
 
-## Creating a new Virtual Router
+## Creating a New Virtual Router
 
-New Virtual Routers are created from a special type of VM Template, as the one created automatically when downloading the market app.
+New Virtual Routers are created from a special type of VM Template, like the one created automatically when downloading the market app.
 
 <a id="force-ipv4-sunstone"></a>
 
@@ -59,7 +59,7 @@ Once ready, click the “create” button to finish. OpenNebula will create the 
 
 Virtual Routers can be managed with the `onevrouter` command.
 
-To create a new Virtual Router from the CLI, first you need to create a VR Template file, with the following attributes:
+To create a new Virtual Router from the CLI, first you need to create a VR Template file with the following attributes:
 
 Then use the `onevrouter create` command:
 
@@ -77,7 +77,7 @@ $ onevrouter create myvr.txt
 ID: 1
 ```
 
-At this point the Virtual Router resource is created, but it does not have any Virtual Machines. A second step is needed to create one (or more, if High Availability is used):
+At this point the Virtual Router resource is created but it does not have any Virtual Machines. A second step is needed to create one (or more, if High Availability is used):
 
 ```default
 $ onevrouter instantiate <vrouterid> <templateid>
@@ -93,13 +93,13 @@ In the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_us
 
 ![sunstone_vrouter](/images/sunstone_vrouter.png)
 
-The `onevrouter nic-attach` command takes a file containing a single NIC attribute. Alternatively, you can provide the new virtual network settings with command options, see `onevrouter nic-attach -h` for more information.
+The `onevrouter nic-attach` command takes a file containing a single NIC attribute. Alternatively, you can provide the new Virtual Network settings with command options, see `onevrouter nic-attach -h` for more information.
 
 After a NIC is attached or detached, the Virtual Machine appliances are automatically reconfigured to start routing to the new interface. No other action, like a reboot, is required.
 
 ### Managing Virtual Router VMs
 
-The Virtual Machines that are associated to a Virtual Router have all actions allow except nic-attach/detach. They can be terminated and new Virtual Machines can be added to an existing Virtual Router.
+The Virtual Machines that are associated to a Virtual Router have all actions allowed except nic-attach/detach. They can be terminated and new Virtual Machines can be added to an existing Virtual Router.
 
 All the Virtual Machines associated with a Virtual Router are terminated automatically when the Virtual Router is deleted. Each VM can however be terminated individually at any time.
 
@@ -107,9 +107,9 @@ To create new VMs use the `onevrouter instantiate` command, or the “Instantiat
 
 ## High Availability
 
-More than one Virtual Machines can be associated to a Virtual Router in order to implement a high availability scenario. In this case, OpenNebula will also assign a floating IP to the group of Virtual Machines, that will coordinate to manage the traffic directed to that IP.
+More than one Virtual Machine can be associated to a Virtual Router in order to implement a high-availability scenario. In this case, OpenNebula will also assign a floating IP to the group of Virtual Machines that will coordinate to manage the traffic directed to that IP.
 
-To enable a high-availability scenario, you need to choose 2 or more number of instances when the Virtual Router is created in Sunstone. In the CLI, the number of VM instances is given with the `-m` option
+To enable a high-availability scenario, you need to choose two or more instances when the Virtual Router is created in Sunstone. In the CLI, the number of VM instances is given with the `-m` option
 
 ```default
 $ onevrouter instantiate -h
@@ -117,14 +117,14 @@ $ onevrouter instantiate -h
 -m, --multiple x          Instance multiple VMs
 ```
 
-In this scenario, the following Virtual Router options became relevant:
+In this scenario, the following Virtual Router options become relevant:
 
-* **Keepalived ID**: Optional. Sets keepalived configuration parameter `virtual_router_id`. If not set OpenNebula will pick one for you.
+* **Keepalived ID**: Optional. Sets keepalived configuration parameter `virtual_router_id`. If not set, OpenNebula will pick one for you.
 * **Keepalived password**: Optional. Sets keepalived configuration parameter `authentication/auth_pass`.
 
 And for each Virtual Network Interface:
 
-* **Floating IP**. Check it to enable the floating IP. This adds the attribute `FLOATING_IP = yes` in the NIC.
+* **Floating IP**. Select this to enable the floating IP. This adds the attribute `FLOATING_IP = yes` in the NIC.
 * **Force IPv4**. Optional. With the floating IP option selected, this field requests a fixed IP for that floating IP, not the individual VM IPs.
 
 The floating IP assignment is managed in a similar way to normal VM IPs. If you open the information of the Virtual Network, it will contain a lease assigned to the Virtual Router (not a VM). Besides the floating IP, you can choose to assign each VM their own individual IP in the network or not (set `FLOATING_ONLY = yes` in the NIC). In this case VRRP will run on one of the other VM NICs.
@@ -135,8 +135,8 @@ Other Virtual Machines in the network will use the floating IP to contact the Vi
 
 You can provide two optional parameters in the context to configure the keepalived service started in the Virtual Router VM:
 
-* `VROUTER_KEEPALIVED_PASSWORD`: Password used for the service to protect the service from packages of rogue machines. By default the service is configured without password.
-* `VROUTER_KEEPALIVED_ID`: Number identifier of the service (1-255). This is useful when you have several virtual routers or other keepalived services in the same network. By default it is generated from the Virtual Router ID (`$vrouter_id & 255`) but you can specify it manually if needed.
+* `VROUTER_KEEPALIVED_PASSWORD`: Password used for the service to protect the service from packages of rogue machines. By default the service is configured without a password.
+* `VROUTER_KEEPALIVED_ID`: Number identifier of the service (1-255). This is useful when you have several Virtual Routers or other keepalived services in the same network. By default it is generated from the Virtual Router ID (`$vrouter_id & 255`) but you can specify it manually if needed.
 * `FLOATING_IP` and `FLOATING_ONLY` controls the IP assignment  on the NIC interface. When the `FLOATING_IP` is set to `yes` an IP (`VROUTER_IP`) is assigned and shared across all VMs of the VR. When `FLOATING_ONLY` is set to `yes` no additional IP is allocated for that NIC.
 
 These parameters can also be provided in the Virtual Router creation wizard of Sunstone.

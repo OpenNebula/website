@@ -1,0 +1,311 @@
+/**
+* This file defines all the styles that need to change between dark and light modes
+*/
+
+// ****************** Dark mode ****************** 
+@include color-mode(dark) {
+
+  // Main container
+  .td-main {
+    background-color: #222431;
+  }
+
+  // Navbar
+  .td-navbar .td-search__input {
+    background-color: #337891;
+    border-color: #337891;
+  }
+  .td-navbar .td-search__input:hover {
+    border-color: #FFFFFF;
+  }  
+
+  // Sidebar
+  .td-sidebar .td-search__input {
+    border-color: #8F9392;
+  }
+  .td-sidebar .td-search__input:hover {
+    border-color: #0098C3;
+  }
+  .td-sidebar-nav a.active {
+    color: #F5F5F5 !important;
+  }    
+ .td-sidebar-link {
+    color: #E9E9E9 !important;
+  }
+
+ .td-sidebar-link:hover {
+    color: #80CDE6 !important;
+  }  
+
+  // Tags
+  .taxonomy-term {
+    background-color: #4E505A;
+  }
+  .taxonomy-term:hover {
+    background-color: #40435C;
+  }
+  .taxonomy-label {
+    color: #EDEDED;
+  }
+  .taxonomy-title {
+    color: #E5F5FA !important;
+  }
+
+  // Cards  
+  .card-header {
+    background-color: #2A2D3D;
+    a {
+      color: #40B3D9;
+    }
+  }
+  .card-body {
+    background-color: #222431;
+    a {
+      color: #80CDE6;
+    }    
+  }
+
+  // Breadcrumb
+  .breadcrumb-item.active {
+    color: #80CDE6;
+  }
+  .breadcrumb-item:not(.active) a {    
+    color: #C7C9C8;
+  }
+
+  // Titles
+  h1 {
+    color: #E5F5FA;
+    a {
+        color: #E5F5FA;
+    }
+  }
+  h2 {
+    color: #E5F5FA !important;
+    a {
+        color: #E5F5FA;
+    }
+  } 
+
+  // Paragraphs
+  p {
+    color: #E9E9E9;
+  }  
+
+  // Feedback section
+  .panel-line  {
+    color: #4A4F6B;
+  }
+
+  // Buttons
+  .btn-primary {
+    background-color: #2A2D3D;
+    color: #EBEBEB;
+    border-color: #8F9392;
+    background-image: none;
+  }
+  .btn-primary:hover {
+    background-color: #35384D;
+    color: #EBEBEB;
+    border-color: #F5F5F5;
+    background-image: none !important;
+  }  
+
+  // Alerts
+  .alert-success {
+    background-color: #35384D;
+    color: #E9E9E9;
+    border-left-color: #40B3D9;
+    .alert-heading {
+      color: #40B3D9;
+    }
+  }
+  .alert-warning {
+    background-color: #DEA7002E;
+    color: #E9E9E9;
+    border-left-color: #DEA700;
+    .alert-heading {
+      color: #DEA700;
+    }
+  }
+  .alert-danger {
+    background-color: #F377792E;
+    color: #E9E9E9;
+    border-left-color: #F37779;
+    .alert-heading {
+      color: #F37779;
+    }
+  }
+
+  // Tags
+  .tag-back {
+    color: #83A1BB;
+  }
+
+  // Pager
+  .one-pager {
+    color: #E9E9E9;
+  }
+  .one-pager:hover {
+    color: #40B3D9;
+  }
+
+}
+
+// ****************** Light mode ****************** 
+@include color-mode(light) {
+
+  // Main component
+  .td-main {
+    background-color: #ffffff;
+  }
+
+  // Navbar
+  .td-navbar .td-search__input {
+    background-color: #1a6783;
+    border-color: #1a6783;
+  }
+  .td-navbar .td-search__input:hover {
+    border-color: #FFFFFF;
+  }
+
+  // Sidebar
+  .td-sidebar .td-search__input {
+    border-color: #c7c9c8;
+  } 
+  .td-sidebar .td-search__input:hover {
+    border-color: #0098C3;
+  }
+  .td-sidebar-nav a.active {
+    color: #353735 !important;
+  }
+  .td-sidebar-link {
+    color: #575C5B !important;
+  }
+ .td-sidebar-link:hover {
+    color: #007099 !important;
+  }
+
+  // Tags
+  .taxonomy-term {
+    background-color: #E9E9E9;
+  }
+  .taxonomy-term:hover {
+    background-color: #BFE6F2;;
+  }  
+  .taxonomy-label {
+    color: #575C5B;
+  }
+  .taxonomy-title {
+    color: #575C5B !important;
+  }
+
+  // Cards
+  .card-header {
+    background-color: #EDEDED;
+    a {
+      color: #007099;
+    }
+  }
+  .card-body {
+    background-color: #FFFFFF;
+    a {
+      color: #005675;
+    }    
+  }
+
+  // Breadcrumb
+  .breadcrumb-item.active {
+    color: #007099;    
+  }
+  .breadcrumb-item:not(.active) a {
+    color: #575C5B;
+  }
+
+  // Titles
+  h1 {
+    color: #353735;
+    a {
+        color: #353735;
+    }
+  }
+  h2 {
+    color: #353735 !important;
+    a {
+        color: #353735;
+    }
+  } 
+
+  // Paragraphs
+  p {
+    color: #575C5B;
+  }
+
+  // Feedback section
+  .panel-line  {
+    color: #C7C9C8;
+  }
+
+  // Buttons
+  .btn-primary {
+    background-color: #E5F5FA;
+    color: #575C5B;
+    border-color: #007099;
+    background-image: none;
+  }
+  .btn-primary:hover {
+    background-color: #DFE6F2;
+    color: #575C5B;
+    border-color: #0098C3;
+    background-image: none !important;
+  }
+
+  // Alerts
+  .alert-success {
+    background-color: #F5F5F5;
+    color: #575C5B;
+    border-left-color: #007099;
+    .alert-heading {
+      color: #007099;
+    }
+  }
+  .alert-warning {
+    background-color: #F5F5F5;
+    color: #575C5B;
+    border-left-color: #AF8400;
+    .alert-heading {
+      color: #AF8400;
+    }
+  }
+  .alert-danger {
+    background-color: #F5F5F5;
+    color: #575C5B;
+    border-left-color: #C30049;
+    .alert-heading {
+      color: #C30049;
+    }
+  }
+
+  // Tags
+  .tag-back {
+    color: #0d6efd;
+  }
+
+  // Pager
+  .one-pager {
+    color: #575C5B;
+  }
+  .one-pager:hover {
+    color: #007099;
+  }  
+
+  // Right-hand sidebar
+  .td-sidebar-toc {
+    a:hover {
+      text-decoration: underline !important;
+    }
+    .td-page-meta a {
+      color: #007099 !important;
+      }
+    }
+}

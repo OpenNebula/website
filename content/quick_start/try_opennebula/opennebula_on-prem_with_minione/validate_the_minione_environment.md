@@ -47,7 +47,7 @@ The basic operations you can perform on the Host are:
 * **Disable**: disable the Host, for example to perform maintenance operations.
 * **Enable**: enable the Host, so that OpenNebula monitors it and it switches back to MONITORED state.
 
-For a complete overview of Hosts management, see [Hosts]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/hosts#hosts" %}}).
+For a complete overview of Hosts management, see [Hosts]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/hosts#hosts" %}}).
 
 ### Cluster
 
@@ -55,7 +55,7 @@ A cluster is the main object that groups all the physical resources and ensures 
 
 ![image_local_cluster](/images/minione-cluster.png)
 
-For a complete overview of Cluster management, see [Clusters]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}).
+For a complete overview of Cluster management, see [Clusters]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/cluster_guide#cluster-guide" %}}).
 
 ### Datastores
 
@@ -69,7 +69,7 @@ In the on-prem Cluster created by miniONE, the `default` datastore is the image 
 
 ![image_datastore](/images/minione-datastore.png)
 
-For a complete overview of Datastore management, see [Datastores]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/datastores#datastores" %}}).
+For a complete overview of Datastore management, see [Datastores]({{% relref "../../../product/cluster_configuration/storage_system/datastores#datastores" %}}).
 
 <a id="edge-public"></a>
 
@@ -183,6 +183,11 @@ Sunstone will display a wizard with network parameters:
 Click **Next**. Sunstone displays the **Select a network** screen:
 
 ![image](/images/minione-attach_nic.png)
+<br/>
+
+Click **Next**. Sunstone displays the **Network values** screen:
+
+![image](/images/minione-attach_nic_3.png)
 <br/>
 
 Select `vnet`, then click **Next**. Sunstone displays the final screen, **Select QoS**:

@@ -14,7 +14,7 @@ weight: "9"
 
 ## Logging
 
-Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in `/var/log/one/` on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end-users in [CLI]({{% relref "../configuration_references/cli#cli" %}}) tools or the [Sunstone GUI]({{% relref "fireedge#fireedge" %}}).
+Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in `/var/log/one/` on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end users in [CLI]({{% relref "../configuration_references/cli#cli" %}}) tools or the [Sunstone GUI]({{% relref "fireedge#fireedge" %}}).
 
 ### Configure Logging System
 
@@ -38,8 +38,8 @@ Logs are rotated on (re)start of a particular component. Find a historic log alo
 As well as the common service logs, the following are other places to investigate and troubleshoot problems:
 
 - **Virtual Machines**: The information specific to a VM will be dumped in the log file `/var/log/one/<vmid>.log`. All VMs controlled by OpenNebula have their own directory, `/var/lib/one/vms/<VID>` if syslog/stderr isn’t enabled. You can find the following information in it:
-  > - **Deployment description files** : Stored in `deployment.<EXECUTION>`, where `<EXECUTION>` is the sequence number in the execution history of the VM (`deployment.0` for the first host, `deployment.1` for the second and so on).
-  > - **Transfer description files** : Stored in `transfer.<EXECUTION>.<OPERATION>`, where `<EXECUTION>` is the sequence number in the execution history of the VM, and `<OPERATION>` is the stage where the script was used, e.g. `transfer.0.prolog`, `transfer.0.epilog`, or `transfer.1.cleanup`.
+  > - **Deployment description files** : Stored in `deployment.<EXECUTION>`, where `<EXECUTION>` is the sequence number in the execution history of the VM (`deployment.0` for the first Host, `deployment.1` for the second and so on).
+  > - **Transfer description files** : Stored in `transfer.<EXECUTION>.<OPERATION>`, where `<EXECUTION>` is the sequence number in the execution history of the VM, and `<OPERATION>` is the stage where the script was used, e.g., `transfer.0.prolog`, `transfer.0.epilog`, or `transfer.1.cleanup`.
 - **Drivers**: Each driver can have its `ONE_MAD_DEBUG` variable activated in **RC** files. If enabled, the error information will be dumped in `/var/log/one/name-of-the-driver-executable.log`. Log information from the drivers is in `oned.log`.
 
 ### OpenNebula Daemon Log Format
@@ -123,7 +123,7 @@ The error message here (see `ERROR=[MESSAGE="Error executing image...`) shows an
 
 #### Recover from VM Failure
 
-The overall state of a virtual machine in a failure condition will show as `failure` (or `fail` in the CLI). To find out the specific failure situation you need to check the `LCM_STATE` of the VM in the VM info tab (or `onevm show` in the CLI.). Moreover, a VM can be stuck in a transition (e.g. boot or save) because of a host or network failure. Typically these operations will eventually time out and lead to a VM failure state.
+The overall state of a Virtual Machine in a failure condition will show as `failure` (or `fail` in the CLI). To find out the specific failure situation you need to check the `LCM_STATE` of the VM in the VM info tab (or `onevm show` in the CLI.). Moreover, a VM can be stuck in a transition (e.g., boot or save) because of a Host or network failure. Typically these operations will eventually time out and lead to a VM failure state.
 
 The administrator has the ability to force a recovery action from Sunstone or from the CLI, with the `onevm recover` command. This command has the following options:
 
@@ -148,10 +148,10 @@ The following list details failure states caused by errors related to the hyperv
 
 ##### Transfer Manager / Storage Problems
 
-The following list details failure states caused by errors in the Transfer Manager driver. These states can be recovered by checking the `vm.log` and looking for the specific error (disk space, permissions, misconfigured datastore, etc). You can execute `--retry` to relaunch the Transfer Manager actions after fixing the problem (freeing disk space, etc). You can execute `--retry --interactive` to launch a Transfer Manager Interactive Debug environment that will allow you to: (1) see all the TM actions in detail (2) relaunch each action until it’s successful (3) skip TM actions.
+The following list details failure states caused by errors in the Transfer Manager driver. These states can be recovered by checking the `vm.log` and looking for the specific error (disk space, permissions, misconfigured datastore, etc). You can execute `--retry` to relaunch the Transfer Manager actions after fixing the problem (freeing disk space, etc). You can execute `--retry --interactive` to launch a Transfer Manager Interactive Debug environment that will allow you to: (1) see all the TM actions in detail, (2) relaunch each action until it’s successful, (3) skip TM actions.
 
 * `PROLOG_FAILURE`: there was a problem setting up the disk images needed by the VM.
-* `PROLOG_MIGRATE_FAILURE`: problem setting up the disks in the target host.
+* `PROLOG_MIGRATE_FAILURE`: problem setting up the disks in the target Host.
 * `EPILOG_FAILURE`: there was a problem processing the disk images (may be discard or save) after the VM execution.
 * `EPILOG_STOP_FAILURE`: there was a problem moving the disk images after a stop.
 * `EPILOG_UNDEPLOY_FAILURE`: there was a problem moving the disk images after an undeploy.
@@ -253,7 +253,7 @@ ERROR=[
   TIMESTAMP="Tue Jul 19 17:17:22 2011" ]
 ```
 
-The error message here (see `ERROR=[MESSAGE="Error monitoring host...`) shows an error when updating remote drivers on a host. To get more information, you have to check OpenNebula Daemon log (`/var/log/one/oned.log`) and, for example, see this relevant error:
+The error message here (see `ERROR=[MESSAGE="Error monitoring host...`) shows an error when updating remote drivers on a Host. To get more information, you have to check OpenNebula Daemon log (`/var/log/one/oned.log`) and, for example, see this relevant error:
 
 ```none
 Tue Jul 19 17:17:22 2011 [InM][I]: Monitoring host host01 (1)
