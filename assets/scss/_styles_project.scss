@@ -133,6 +133,13 @@
 // Cards
 .td-card {
   border-color: #8F9392 !important;
+  // display: inline-block !important; // causes single cards too small
+  //padding: 10px !important;
+  //flex: 1 0 auto; // no effect
+  // flex-direction: row !important; // no effect
+  //flex-wrap: wrap !important; // no effect
+    //align-items: flex-start; // noffect
+    //align-self: center; // noffect
 }
 .td-navbar .td-search__input {
   border-style: solid;
@@ -168,9 +175,6 @@
   } 
 }
 
-.td-card-group.card-group {
-  @extend .td-max-width-on-larger-screens;
-}
 // Tags
 .tag-back {
   cursor: pointer;
@@ -224,8 +228,10 @@ img[alt$="><"] {
 
 // card-columns
 .card-columns {
-  column-count: 2;
-  // column-gap: 0.5rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  column-count: 2 !important;
+  //column-gap: 0.5rem !important;
 
   @include media-breakpoint-only(lg) {
     column-count: 2;
@@ -235,15 +241,29 @@ img[alt$="><"] {
     column-count: 1;
   }
 
+.entry {
+    padding: 10px !important;
+    display: flex !important;
+    columns: 2 !important;
+    width: 100% !important;
+    align-self: start !important;
+    flex-wrap: wrap;
+}
+
   .card {
-    display: inline-block; // align on same row, don't span across rows
-    width: 100%; // fixed width
-    //margin-bottom: $card-columns-margin;
-    //flex: 1 1 auto;
-    //padding: $card-spacer-y $card-spacer-x;
-    padding: 0;
-    margin: 0;
+    width: 90% !important; // fixed width
+    flex: 0 1 50% !important;
+    //padding: 5px !important;
+    //margin: 0.5rem !important;
   }
+
+  .card-border {
+    display: inline-block !important; // no effect
+  }
+
+  //article {
+  //  flex: 2;
+  //}
 
   
 

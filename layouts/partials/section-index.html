@@ -50,7 +50,6 @@
       <div class="td-card card border me-4">
       <div class="card-columns">
         <div class="entry">
-	      {{/* <div class="td-card card border me-4" width="250%"> */}}
 
       {{/* Lists subsections within the card body, after the description */}}
       {{ range .Pages -}} {{/* 1 */}}
@@ -58,8 +57,7 @@
 
     {{/* begin H3 card */}}
     {{/* header */}}
-    <div class="entry">
-              {{/* <div class="card" border="me-4" style="width: 400px"> */}}
+    
               <div class="card">
                 <div class="card-header">
       		  <h4><a href="{{ $manualsubsecLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a></h4>
@@ -75,7 +73,7 @@
 		{{ end -}}  {{/* 2 */}}
 	      <p></p>
 	      </div>
-	    </div>
+	 
       {{ end -}}  {{/* 1 */}}
           </div>
          </div>
@@ -96,15 +94,14 @@
 	<div class="entry">
    {{ range .Pages -}} {{/* 1 */}}
     {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-	<div class="card">
-	<div class="card-header">
+   
+	  <div class="card">
+	   <div class="card-header">
             <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
-         </div>
+      </div>
         <p></p>
-	    <div class="entry">
-           {{/* <div class="td-content"> */}}
                   {{ if .Description -}}
-                  <p>{{ .Description | markdownify -}}</p>
+                  <p><ul>{{ .Description | markdownify -}}</ul></p>
                   {{ end -}}
 	{{ range .Pages -}} {{/* 2 */}}
 	    {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
@@ -113,8 +110,8 @@
                 </inl>
 	{{ end -}} {{/* 2 */}}
               <p></p>
-	    </div>
-	    </div>
+	 </div>
+
      {{ end -}} {{/* 1 */}}
 	    </div>
           </div>
@@ -132,7 +129,8 @@
 
     <div class="entry">
       <div class="td-card card border me-4">
-        <div class="card-header">
+        <div class="card">
+          <div class="card-header">
 	In this section:
 	     </div>
 	<p></p>
@@ -149,4 +147,5 @@
 	      <p></p>
 	    </div>
       </div>
+    </div>
 {{ end -}}
