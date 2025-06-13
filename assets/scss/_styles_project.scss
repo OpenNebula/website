@@ -214,18 +214,6 @@ img[alt$="><"] {
   z-index: 999;
 }
 
-/*
-// card columns
-.card-columns {
-  @include media-breakpoint-only(lg) {
-    column-count: 4;
-  }
-  @include media-breakpoint-only(xl) {
-    column-count: 5;
-  }
-}
-*/
-
 // card-columns
 .card-columns {
   display: flex !important;
@@ -242,36 +230,24 @@ img[alt$="><"] {
   }
 
 .entry {
-    padding: 10px !important;
-    display: flex !important;
+    padding: 10px;
+    display: flex;
     columns: 2 !important;
     width: 100% !important;
     align-self: start !important;
     flex-wrap: wrap;
-}
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
 
   .card {
-    width: 90% !important; // fixed width
-    flex: 0 1 50% !important;
-    //padding: 5px !important;
-    //margin: 0.5rem !important;
+    width: 90%;
+    // flex: 0 1 50%;
+    flex: 0 2 49%;
   }
 
   .card-border {
     display: inline-block !important; // no effect
   }
 
-  //article {
-  //  flex: 2;
-  //}
-
-  
-
-  //.card-body {
-   // Enable `flex-grow: 1` for decks and groups so that card blocks take up
-   // as much space as possible, ensuring footers are aligned to the bottom.
-   // flex: 1 1 auto;
-   // color: $card-color;
-  //}
 }
-
