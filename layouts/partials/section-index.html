@@ -10,6 +10,12 @@
 
 {{ if .Page.Sections -}}
 {{ $seclevel := "" }}
+{{ $hasSubsections := false }}
+{{ range .Sections }}
+  {{ if gt (len .Sections) 0 }}
+    {{ $hasSubsections = true }}
+  {{ end }}
+{{ end }}
 
     {{ if $page.File -}}
         {{ $pages = (where $pages "Parent.File.UniqueID" "==" $page.File.UniqueID) -}}
@@ -29,7 +35,12 @@
 
     {{/* Otherwise show cards with list of subpages with page descriptions */}}
 
-  {{ if eq (len .Ancestors) 1 }}
+  {{/* {{ $thedepth := partial "render-section-depth-below" . }} */}}
+  {{/* {{ $thedepth }} */}}
+    
+  {{/* {{ if eq (len .Ancestors) 1 }} */}}
+  {{ if $hasSubsections }}
+      {{/* {{ if gt (len .Sections) 0 }} */}}
 
     <hr class="panel-line" width="100%">
 
@@ -48,11 +59,24 @@
     {{/* H3 SUBSECTION HEADER, e.g. High Availability */}}
 
       <div class="td-card card border me-4">
+      {{ range .Pages -}}
+      {{ $count := 0 }}
+      {{ if $count = 0 }}
+        <p></p>
+      {{ end -}}
+      {{ if not .Page.IsNode -}}
+      {{ $count = add $count 1 }}
+        <bxctrsp>
+		    <h4><a href="{{ .Page.Permalink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a></h4>
+		  </bxctrsp>
+      {{ end -}}
+      {{ end -}}
       <div class="card-columns">
         <div class="entry">
 
       {{/* Lists subsections within the card body, after the description */}}
-      {{ range .Pages -}} {{/* 1 */}}
+      {{ range .Page.Sections -}} {{/* 1 */}}
+      {{ if .Page.Section -}}
 		{{ $manualsubsecLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
 
     {{/* begin H3 card */}}
@@ -70,6 +94,7 @@
 		  <inl>
 		    <a href="{{ $manualpageLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
 		  </inl>
+		{{ end -}}
 		{{ end -}}  {{/* 2 */}}
 	      <p></p>
 	      </div>
@@ -87,7 +112,8 @@
   {{ if eq (len .Ancestors) 2 }}
     {{ $seclevel := "2" }}
 
-  {{ if $seclevel = "2" }}
+  {{/* {{ if $seclevel = "2" }} */}}
+  {{ if not $hasSubsections }}
 
     <div class="td-card card border me-4">
       <div class="card-columns">
@@ -148,4 +174,5 @@
 	    </div>
       </div>
     </div>
-{{ end -}}
+{{ end }}
+

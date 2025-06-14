@@ -44,6 +44,22 @@ bxctr {
   padding: 30px 30px 30px 30px;
 }
 
+// Temporary for section-index.html
+bxctrsp {
+  display: block;
+  /* margin: 40 40 40 40; */
+  // margin: 80 80 80 80;
+  // padding: 15px 2px 1px 50px;
+  // padding: 45px 10px 15px 70px; // for h4
+  padding: 0px 10px 15px 60px; // for h4
+  margin-block-start: 2rem;
+  margin-block-end: 2rem;
+  margin-bottom: -1rem;
+  margin-left: 2rem;
+  //margin-top: 0rem;
+  //margin-bottom: 0rem;
+}
+
 // Navbar text color
 $navbar-dark-color: #F5F5F5;
 
