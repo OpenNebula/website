@@ -68,7 +68,7 @@ In order to achieve a setup compatible with the OpenNebula and Veeam Backup inte
 * A management network must be in place connecting the following components:
      * OpenNebula Backup server
      * OpenNebula Front-end
-     * All Host-running VMs to be backed up by Veeam
+     * All Hosts running VMs to be backed up by Veeam
      * Veeam Server
      * Veeam Backup appliance
 
@@ -88,7 +88,7 @@ The backup datastore must be created in the backup server configured in step 1. 
 
 **Rsync Datastore**
 
-Here is an example of how to create an Rsync datastore in a Host named "backup-host" and then add it to a given cluster:
+Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given cluster:
 
 
     # Create the Rsync backup datastore
@@ -143,11 +143,11 @@ To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager
 
 ### Step 4.1: Add the new virtualization manager
 
-The first step should be to add the ovirtAPI Backup server to Veeam. Head over to "Backup Infrastructure", then to "Managed Servers", and then click "Add Manager":
+The first step should be to add the ovirtAPI Backup server to Veeam. Head over to **Backup Infrastructure**, then to **Managed Servers**, and then click **Add Manager**:
 
 ![image](/images/veeam/add_manager.png)
 
-Then, choose to add a new "Virtualization Platform" and select "Oracle Linux Virtualization Manager":
+Then, choose to add a new **Virtualization Platform** and select **Oracle Linux Virtualization Manager**:
 
 ![image](/images/veeam/virtualization_platform.png)
 
@@ -157,21 +157,21 @@ This will open a new dialog box. In the address field, you must make sure that i
 
 ![image](/images/veeam/new_manager.png)
 
-On the "Credentials" tab, you should set the user and password used to access the OpenNebula Front-end. You can either choose the oneadmin user or create a new user with the same privileges as oneadmin. If you are using the default certificate, you may receive an untrust certificate warning, which you can disregard:
+On the **Credentials** tab, you should set the user and password used to access the OpenNebula Front-end. You can either choose the oneadmin user or create a new user with the same privileges as oneadmin. If you are using the default certificate, you may receive an untrust certificate warning, which you can disregard:
 
 ![image](/images/veeam/one_credentials.png)
 
-As a last step, you can click finish and the new ovirtAPI server should be listed under Managed Servers as a "oVirt KVM" hypervisor.
+As a last step, you can click finish and the new ovirtAPI server should be listed under Managed Servers as a **oVirt KVM**hypervisor.
 
 ![image](/images/veeam/hypervisor_added.png)
 
 ### Step 4.2: Deploy the KVM appliance
 
-In order for Veeam to be able to perform backup and restore operations, it must deploy a dedicated Virtual Machine to act as a worker. To deploy it, go to the the "Backup Infrastructure" tab, then "Backup Proxies", and click "Add Proxy":
+In order for Veeam to be able to perform backup and restore operations, it must deploy a dedicated Virtual Machine to act as a worker. To deploy it, go to the **Backup Infrastructure** tab, then **Backup Proxies**, and click **Add Proxy**:
 
 ![image](/images/veeam/add_proxy.png)
 
-A new dialog box will open. Select the "Oracle Linux Virtualization Manager" and then click to deploy the "Oracle Linux Virtualization Manager backup appliance": 
+A new dialog box will open. Select the **Oracle Linux Virtualization Manager**, then click to deploy the **Oracle Linux Virtualization Manager backup appliance**:
 
 ![image](/images/veeam/add_proxy_olvm.png)
 
@@ -189,7 +189,7 @@ For the appliance credentials, you should choose the same ones that you set up w
 
 ![image](/images/veeam/appliance_credentials.png)
 
-In the "Network Settings" tab, choose the management network that the appliance should use. It is recommended to manually choose the IP address configuration that the appliance should use:
+In the **Network Settings** tab, choose the management network that the appliance should use. It is recommended to manually choose the IP address configuration that the appliance should use:
 
 ![image](/images/veeam/appliance_network.png)
 
@@ -199,7 +199,7 @@ In the next step, Veeam will take care of deploying the appliance. Once finished
 
 ### Step 4.3: Verification
 
-If everything is set properly, you should be able to see the available Virtual Machines in the "Inventory" tab under the "Virtual Infrastructure" -> "oVirt KVM" section.
+If everything is set properly, you should be able to see the available Virtual Machines in the **Inventory** tab under the **Virtual Infrastructure** -> **oVirt KVM** section.
 
 ![image](/images/veeam/verification.png)
 
