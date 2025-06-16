@@ -87,12 +87,12 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  // line-height: 16px;
-  // the below lines were commented out to add the ACKs above the copyright notice:
-  // border-top: #E0E4E733;
-  // border-top-style: solid;
-  // border-width: 1px;
+  line-height: 16px;
+  border-top: #E0E4E733;
+  border-top-style: solid;
+  border-width: 1px;
   p {
+    margin-top: 5px;;
     margin-bottom: 0px;;
   }
 }
@@ -106,7 +106,7 @@
   border-top-style: solid;
   border-width: 1px;
   p {
-    margin-bottom: 0px;;
+    margin-bottom: 7px;;
   }
 }
 .td-footer svg {
