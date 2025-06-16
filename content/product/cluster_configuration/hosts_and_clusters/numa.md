@@ -212,11 +212,19 @@ TOPOLOGY = [ PIN_POLICY = thread, SOCKETS = 2 ]
 ```
 
 {{< alert title="Important" color="success" >}}
-For pinned VMs the CPU (assigned hypervisor capacity) is automatically set to the vCPU number. No overcommitment is allowed for pinned workloads.{{< /alert >}} 
+For pinned VMs the CPU (assigned hypervisor capacity) is automatically set to the vCPU number. No overcommitment is allowed for pinned workloads.{{< /alert >}}
 
 ### PCI Passthrough
 
 The scheduling process is slightly modified when a pinned VM includes PCI passthrough devices. In this case, the NUMA nodes where the PCI devices are attached are prioritized to pin the VM vCPUs and memory to speed up I/O operations. No additional configuration is needed.
+
+For optimal performance, it is recommended to deploy virtual machines using the ``q35`` chipset model with UEFI firmware. When NUMA pinning is enabled, OpenNebula automatically generates a NUMA-aware PCIe topology that mirrors the physical server’s layout. Specifically, for each virtual NUMA node, the following PCIe structure is created:
+
+* A dedicated PCIe expander bus
+* Four PCIe root ports attached to the expander bus
+* A virtual PCIe switch with one upstream port and eight downstream ports, all connected to the expander bus
+
+PCI passthrough devices are assigned to the same virtual NUMA node as their corresponding physical NUMA node, so that CPU cores and PCI devices maintain locality.
 
 ## Using Hugepages
 
