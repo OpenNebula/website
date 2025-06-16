@@ -102,6 +102,10 @@ Note: Caching support is not yet included in this release but is in an advanced 
 
 <a id="compatibility-guide-labels"></a>
 
+## SAN driver BRIDGE_LIST location change
+
+To make its behaviour consistent with other drivers, [LVM/SAN](/product/cluster_configuration/storage_system/lvm_drivers/) drivers now define the `BRIDGE_LIST` attribute in the IMAGE datastore, instead of in the SYSTEM one.
+
 ## Labels on Sunstone
 
 Starting from version 7.0, the labels system in Sunstone has been revamped, moving away from the old global/system-wide approach towards a more user/group-specific structure. 

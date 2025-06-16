@@ -47,13 +47,12 @@ Once the Host and Front-end storage is set up, the OpenNebula configuration comp
 
 To create a new SAN/LVM System Datastore, you need to set the following (template) parameters:
 
-| Attribute     | Description                                                                                                                                    |
-|---------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`        | Name of Datastore                                                                                                                              |
-| `TM_MAD`      | `fs_lvm_ssh`                                                                                                                                   |
-| `TYPE`        | `SYSTEM_DS`                                                                                                                                    |
-| `BRIDGE_LIST` | List of Hosts with access to the LV to perform<br/>driver operations.<br/>**NOT** needed if the Front-end is configured to<br/>access the LVs. |
-| `DISK_TYPE`   | `BLOCK` (used for volatile disks)                                                                                                              |
+| Attribute     | Description                       |
+|---------------|-----------------------------------|
+| `NAME`        | Name of Datastore                 |
+| `TYPE`        | `SYSTEM_DS`                       |
+| `TM_MAD`      | `fs_lvm_ssh`                      |
+| `DISK_TYPE`   | `BLOCK` (used for volatile disks) |
 
 For example:
 
@@ -62,7 +61,6 @@ For example:
 NAME   = lvm_system
 TM_MAD = fs_lvm_ssh
 TYPE   = SYSTEM_DS
-BRIDGE_LIST = "node1.kvm.lvm node2.kvm.lvm"
 DISK_TYPE = BLOCK
 
 > onedatastore create ds.conf
@@ -92,6 +90,7 @@ DS_MAD = fs
 TM_MAD = fs_lvm_ssh
 DISK_TYPE = "BLOCK"
 TYPE = IMAGE_DS
+BRIDGE_LIST = "node1.kvm.lvm node2.kvm.lvm"
 SAFE_DIRS="/var/tmp /tmp"
 
 > onedatastore create ds.conf
