@@ -61,15 +61,18 @@
     {{/* H3 SUBSECTION HEADER, e.g. High Availability */}}
 
       <div class="td-card card border me-4">
+      {{/* <div class="entry"> */}}
       {{ range .Pages -}}
       
-      {{ if not .Page.IsNode -}}
+      {{ if not .Page.IsNode -}} {{/* if 1 level under curre  nt page */}}
      
         <bxctrsp>
 		    <h4><a href="{{ .Page.Permalink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a></h4>
 		  </bxctrsp>
       {{ end -}}
       {{ end -}}
+      {{/* </div> */}}
+
       <div class="card-columns">
         <div class="entry">
 

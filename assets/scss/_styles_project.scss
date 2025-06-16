@@ -133,8 +133,13 @@
 
 // Cards
 .td-card {
-  border-color: #797979 !important;
-  border-width: 0px !important;
+  // border-color: #797979 !important;
+  // border-color: rgba(255, 255, 255, 0.15)-translucent;
+  //  border-color: #8F9392 !important;
+  // border-color: #ededed !important;
+  // border-style: solid;
+  // border-width: 1px !important;
+  // border-radius: 12px !important;
 }
 .td-navbar .td-search__input {
   border-style: solid;
@@ -237,6 +242,7 @@ img[alt$="><"] {
   .card {
     width: 90%;
     flex: 0 2 49%;
+    border-color: #8F9392 !important;
   }
 
 }
