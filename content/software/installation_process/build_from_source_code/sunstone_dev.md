@@ -714,34 +714,34 @@ The JWT lifetime can be configured in the fireedge_server.conf configuration fil
 | Method     | URL                        | Meaning / Entity Body                   |
 |------------|----------------------------|-----------------------------------------|
 | **GET**    | `/fireedge/api/files`      | **List** the files collection.          |
-| **GET**    | `/fireedge/api/files/<id>` | **Show** the file identified by <id>.   |
+| **GET**    | `/fireedge/api/files/<id>` | **Show** the file identified by `<id>`.   |
 | **POST**   | `/fireedge/api/files`      | **Create** a new file.                  |
-| **PUT**    | `/fireedge/api/files/<id>` | **Update** the file identified by <id>. |
-| **DELETE** | `/fireedge/api/files/<id>` | **Delete** the file identified by <id>. |
+| **PUT**    | `/fireedge/api/files/<id>` | **Update** the file identified by `<id>`. |
+| **DELETE** | `/fireedge/api/files/<id>` | **Delete** the file identified by `<id>`. |
 
 ### OneFlow
 
 | Method     | URL                                   | Meaning / Entity Body                               |
 |------------|---------------------------------------|-----------------------------------------------------|
 | **GET**    | `/fireedge/api/service_template`      | **List** the service template collection.           |
-| **GET**    | `/fireedge/api/service_template/<id>` | **Show** the service template identified by <id>.   |
+| **GET**    | `/fireedge/api/service_template/<id>` | **Show** the service template identified by `<id>`.   |
 | **POST**   | `/fireedge/api/service_template`      | **Create** a new service template.                  |
-| **PUT**    | `/fireedge/api/service_template/<id>` | **Update** the service template identified by <id>. |
-| **DELETE** | `/fireedge/api/service_template/<id>` | **Delete** the service template identified by <id>. |
+| **PUT**    | `/fireedge/api/service_template/<id>` | **Update** the service template identified by `<id>`. |
+| **DELETE** | `/fireedge/api/service_template/<id>` | **Delete** the service template identified by `<id>`. |
 
 | Method     | URL                                                         | Meaning / Entity Body                                                                              |
 |------------|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | **GET**    | `/fireedge/api/service`                                     | **List** the service collection.                                                                   |
-| **GET**    | `/fireedge/api/service/<id>`                                | **Show** the service identified by <id>.                                                           |
+| **GET**    | `/fireedge/api/service/<id>`                                | **Show** the service identified by `<id>`.                                                           |
 | **POST**   | `/fireedge/api/service`                                     | **Create** a new service.                                                                          |
-| **PUT**    | `/fireedge/api/service/<id>`                                | **Update** the service identified by <id>.                                                         |
-| **DELETE** | `/fireedge/api/service/<id>`                                | **Delete** the service identified by <id>.                                                         |
-| **POST**   | `/fireedge/api/service/action/<id>`                         | **Perform** an action on the service identified by <id>.                                           |
-| **POST**   | `/fireedge/api/service/scale/<id>`                          | **Perform** a scale on the service identified by <id>.                                            |
-| **POST**   | `/fireedge/api/service/role_action/<role_id>/<id>`          | **Perform** an action on all the VMs belonging to the role to the service identified both by <id>. |
-| **POST**   | `/fireedge/api/service/sched_action/<id>`                   | **Create** a new schedule action on the service identified by <id>.                                |
-| **PUT**    | `/fireedge/api/service/sched_action/<sched_action_id>/<id>` | **Update** the schedule action on the service identified both by <id>.                             |
-| **DELETE** | `/fireedge/api/service/sched_action/<sched_action_id>/<id>` | **Delete** the schedule action on the service identified both by <id>.                             |
+| **PUT**    | `/fireedge/api/service/<id>`                                | **Update** the service identified by `<id>`.                                                         |
+| **DELETE** | `/fireedge/api/service/<id>`                                | **Delete** the service identified by `<id>`.                                                         |
+| **POST**   | `/fireedge/api/service/action/<id>`                         | **Perform** an action on the service identified by `<id>`.                                           |
+| **POST**   | `/fireedge/api/service/scale/<id>`                          | **Perform** a scale on the service identified by `<id>`.                                            |
+| **POST**   | `/fireedge/api/service/role_action/<role_id>/<id>`          | **Perform** an action on all the VMs belonging to the role to the service identified both by `<id>`. |
+| **POST**   | `/fireedge/api/service/sched_action/<id>`                   | **Create** a new schedule action on the service identified by `<id>`.                                |
+| **PUT**    | `/fireedge/api/service/sched_action/<sched_action_id>/<id>` | **Update** the schedule action on the service identified both by `<id>`.                             |
+| **DELETE** | `/fireedge/api/service/sched_action/<sched_action_id>/<id>` | **Delete** the schedule action on the service identified both by `<id>`.                             |
 
 ### Sunstone
 
@@ -756,10 +756,10 @@ The JWT lifetime can be configured in the fireedge_server.conf configuration fil
 |----------|---------------------------------------|----------------------------------------------------|
 | **POST** | `/fireedge/api/zendesk/login`         | Authenticate user by credentials.                  |
 | **GET**  | `/fireedge/api/zendesk`               | **List** the tickets collection.                   |
-| **GET**  | `/fireedge/api/zendesk/<id>`          | **Show** the ticket identified by <id>.            |
-| **GET**  | `/fireedge/api/zendesk/comments/<id>` | **List** the ticket’s comments identified by <id>. |
+| **GET**  | `/fireedge/api/zendesk/<id>`          | **Show** the ticket identified by `<id>`.            |
+| **GET**  | `/fireedge/api/zendesk/comments/<id>` | **List** the ticket’s comments identified by `<id>`. |
 | **POST** | `/fireedge/api/zendesk`               | **Create** a new ticket.                           |
-| **PUT**  | `/fireedge/api/zendesk/<id>`          | **Update** the ticket identified by <id>.          |
+| **PUT**  | `/fireedge/api/zendesk/<id>`          | **Update** the ticket identified by `<id>`.          |
 
 ## Front-end Architecture
 

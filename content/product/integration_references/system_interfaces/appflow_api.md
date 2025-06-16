@@ -65,12 +65,12 @@ The methods specified below are described without taking into account **4xx** (t
 | Method     | URL                                | Meaning / Entity Body                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Response                                                              |
 |------------|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 | **GET**    | `/service`                         | **List** the contents of the `SERVICE` collection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | **200 OK**: A JSON representation of the collection in the HTTP body. |
-| **GET**    | `/service/<id>`                    | **Show** the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | **200 OK**: A JSON representation of the collection in the HTTP body. |
-| **DELETE** | `/service/<id>`                    | **Delete** the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
-| **POST**   | `/service/<id>/action`             | **Perform** an action on the `SERVICE` resource identified by <id>. Available actions: shutdown, recover, chown, chgrp, chmod, release. It can also be used to perform an action in all the Virtual Machines. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete. | **204**:                                                              |
-| **PUT**    | `/service/<id>`                    | **Update** the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
-| **POST**   | `/service/<id>/scale`              | **Perform** an scale operation on the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                               | **204**:                                                              |
-| **POST**   | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by <name> of the `SERVICE` resource identified by <id>. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete.                                                                  | **204**:                                                              |
+| **GET**    | `/service/<id>`                    | **Show** the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | **200 OK**: A JSON representation of the collection in the HTTP body. |
+| **DELETE** | `/service/<id>`                    | **Delete** the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
+| **POST**   | `/service/<id>/action`             | **Perform** an action on the `SERVICE` resource identified by `<id>`. Available actions: shutdown, recover, chown, chgrp, chmod, release. It can also be used to perform an action in all the Virtual Machines. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete. | **204**:                                                              |
+| **PUT**    | `/service/<id>`                    | **Update** the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
+| **POST**   | `/service/<id>/scale`              | **Perform** an scale operation on the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                               | **204**:                                                              |
+| **POST**   | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by <name> of the `SERVICE` resource identified by `<id>`. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete.                                                                  | **204**:                                                              |
 | **POST**   | `/service/<id>/role_action`        | **Add** or **remove** a role from running service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | **204**:                                                              |
 
 ### Service Pool
@@ -84,11 +84,11 @@ The methods specified below are described without taking into account **4xx** (t
 | Method     | URL                             | Meaning / Entity Body                                                                                                             | Response                                                                                        |
 |------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
 | **GET**    | `/service_template`             | **List** the contents of the `SERVICE_TEMPLATE` collection.                                                                       | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
-| **GET**    | `/service_template/<id>`        | **Show** the `SERVICE_TEMPLATE` resource identified by <id>.                                                                      | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
-| **DELETE** | `/service_template/<id>`        | **Delete** the `SERVICE_TEMPLATE` resource identified by <id>.                                                                    | **204**:                                                                                        |
+| **GET**    | `/service_template/<id>`        | **Show** the `SERVICE_TEMPLATE` resource identified by `<id>`.                                                                      | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
+| **DELETE** | `/service_template/<id>`        | **Delete** the `SERVICE_TEMPLATE` resource identified by `<id>`.                                                                    | **204**:                                                                                        |
 | **POST**   | `/service_template`             | **Create** a new `SERVICE_TEMPLATE` resource.                                                                                     | **201 Created**: A JSON representation of the new `SERVICE_TEMPLATE` resource in the HTTP body. |
-| **PUT**    | `/service_template/<id>`        | **Update** the `SERVICE_TEMPLATE` resource identified by <id>.                                                                    | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
-| **POST**   | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by <id>. Available actions: instantiate, chown, chgrp, chmod. | **201**:                                                                                        |
+| **PUT**    | `/service_template/<id>`        | **Update** the `SERVICE_TEMPLATE` resource identified by `<id>`.                                                                    | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
+| **POST**   | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by `<id>`. Available actions: instantiate, chown, chgrp, chmod. | **201**:                                                                                        |
 
 ## Resource Representation
 
@@ -613,7 +613,7 @@ curl http://127.0.0.1:2474/service_template -u 'oneadmin:password' -v --data '{
 
 | Method   | URL                      | Meaning / Entity Body                                       | Response                                                              |
 |----------|--------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
-| **GET**  | `/service_template/<id>` | **Show** the `SERVICE_TEMPLATE` resource identified by <id> | **200 OK**: A JSON representation of the collection in the HTTP body. |
+| **GET**  | `/service_template/<id>` | **Show** the `SERVICE_TEMPLATE` resource identified by `<id>` | **200 OK**: A JSON representation of the collection in the HTTP body. |
 ```default
 curl -u 'oneadmin:password' http://127.0.0.1:2474/service_template/4 -v
 ```
@@ -711,7 +711,7 @@ curl -u 'oneadmin:password' http://127.0.0.1:2474/service_template -v
 
 | Method   | URL                      | Meaning / Entity Body                                          | Response    |
 |----------|--------------------------|----------------------------------------------------------------|-------------|
-| **PUT**  | `/service_template/<id>` | **Update** the `SERVICE_TEMPLATE` resource identified by <id>. | **200 OK**: |
+| **PUT**  | `/service_template/<id>` | **Update** the `SERVICE_TEMPLATE` resource identified by `<id>`. | **200 OK**: |
 ```default
 curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X PUT --data '{
   "name":"web-application",
@@ -823,7 +823,7 @@ curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X PUT -
 
 | Method   | URL                             | Meaning / Entity Body                                                                                                                     | Response   |
 |----------|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| **POST** | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by <id>. Available actions: `instantiate`, `chown`, `chgrp`, `chmod`. | **201**:   |
+| **POST** | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by `<id>`. Available actions: `instantiate`, `chown`, `chgrp`, `chmod`. | **201**:   |
 ```default
 curl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{
   "action": {
@@ -911,7 +911,7 @@ curl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -
 
 | Method     | URL                      | Meaning / Entity Body                                          | Response   |
 |------------|--------------------------|----------------------------------------------------------------|------------|
-| **DELETE** | `/service_template/<id>` | **Delete** the `SERVICE_TEMPLATE` resource identified by <id>. | **204**:   |
+| **DELETE** | `/service_template/<id>` | **Delete** the `SERVICE_TEMPLATE` resource identified by `<id>`. | **204**:   |
 ```default
 curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X DELETE
 ```
@@ -936,7 +936,7 @@ curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X DELET
 
 | Method   | URL             | Meaning / Entity Body                               | Response                                                              |
 |----------|-----------------|-----------------------------------------------------|-----------------------------------------------------------------------|
-| **GET**  | `/service/<id>` | **Show** the `SERVICE` resource identified by <id>. | **200 OK**: A JSON representation of the collection in the HTTP body. |
+| **GET**  | `/service/<id>` | **Show** the `SERVICE` resource identified by `<id>`. | **200 OK**: A JSON representation of the collection in the HTTP body. |
 ```default
 curl http://127.0.0.1:2474/service/5 -u 'oneadmin:password' -v
 ```
@@ -1163,7 +1163,7 @@ curl http://127.0.0.1:2474/service -u 'oneadmin:password' -v
 
 | Method   | URL                    | Meaning / Entity Body                                               | Response   |
 |----------|------------------------|---------------------------------------------------------------------|------------|
-| **POST** | `/service/<id>/action` | **Perform** an action on the `SERVICE` resource identified by <id>. | **201**:   |
+| **POST** | `/service/<id>/action` | **Perform** an action on the `SERVICE` resource identified by `<id>`. | **201**:   |
 
 Available actions:
 
@@ -1192,7 +1192,7 @@ curl http://127.0.0.1:2474/service/5/action -u 'oneadmin:password' -v -X POST --
 
 | Method   | URL                                | Meaning / Entity Body                                                                                                                        | Response   |
 |----------|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| **POST** | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by <name> of the `SERVICE` resource identified by <id>. | **201**:   |
+| **POST** | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by `<name>` of the `SERVICE` resource identified by `<id>`. | **201**:   |
 
 You can use this call to perform a VM action on all the Virtual Machines belonging to a Role. For example, if you want to suspend the Virtual Machines of the worker Role, these are the commands that can be performed:
 
@@ -1281,7 +1281,7 @@ curl http://127.0.0.1:2474/service/5/role_action -u 'oneadmin:password' -v -X PO
 
 | Method   | URL             | Meaning / Entity Body                                 | Response    |
 |----------|-----------------|-------------------------------------------------------|-------------|
-| **PUT**  | `/service/<id>` | **Update** the `SERVICE` resource identified by <id>. | **200 OK**: |
+| **PUT**  | `/service/<id>` | **Update** the `SERVICE` resource identified by `<id>`. | **200 OK**: |
 
 Append can be used to append information to the service, in this case the request body must include the following information:
 
