@@ -20,7 +20,7 @@ OpenNebula provides a set of contextualization packages for different operating 
 * Resize disk partitions as needed.
 * Execute custom actions during boot.
 
-All the OS appliances available in the [OpenNebula Marketplace](https://marketplace.opennebula.io/appliance) comes with all the software pre-installed. If you want to build these images yourself, take a look at the [OpenNebula Apps project](https://github.com/OpenNebula/one-apps).
+All the OS appliances available in the [OpenNebula Marketplace](https://marketplace.opennebula.io/appliance) come with all the software pre-installed. If you want to build these images yourself, take a look at the [OpenNebula Apps project](https://github.com/OpenNebula/one-apps).
 
 ## Install the Context Packages
 
@@ -28,7 +28,7 @@ Additionally you can install the packages manually in any running VM guest, just
 
 ## Using the Context Packages
 
-Configuration parameters are passed to the contextualization packages through the `CONTEXT` attribute of the virtual machine. The most common attributes are network configuration, user credentials and startup scripts. These parameters can be added both using the CLI or using the Sunstone Template wizard. Here is an example of the context section using the CLI:
+Configuration parameters are passed to the contextualization packages through the `CONTEXT` attribute of the Virtual Machine. The most common attributes are network configuration, user credentials, and startup scripts. These parameters can be added by using either the CLI or the Sunstone Template wizard. Here is an example of the context section using the CLI:
 
 ```default
 CONTEXT = [

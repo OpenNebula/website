@@ -3,7 +3,7 @@ title: "NetApp SAN Datastore (EE)"
 weight: "1"
 ---
 
-This datastore is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as virtual machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the system datastore, while non‐persistent images are cloned using FlexClone and then split.
+This datastore is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
 
 The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be useful during this setup.
 
@@ -13,7 +13,7 @@ Sharing datastores between multiple OpenNebula instances is not supported and ma
 
 ## NetApp ONTAP Setup
 
-The NetApp system requires specific configurations. This driver operates using a Storage VM that provides iSCSI connections, with volumes/LUNs mapped directly to each host after creation. Configure and enable the iSCSI protocol according to your infrastructure requirements.
+The NetApp system requires specific configurations. This driver operates using a Storage VM that provides iSCSI connections, with volumes/LUNs mapped directly to each Host after creation. Configure and enable the iSCSI protocol according to your infrastructure requirements.
 
 1. **Define Aggregates/Local Tiers for your Storage VM:**
    - In ONTAP System Manager: **Storage > Storage VMs > Select your SVM > Edit > Limit volume creation to preferred local tiers**
@@ -31,21 +31,21 @@ The UUID of an object is often found in the URL if using the web interface, othe
 
 4. If you do not plan to use the administrator account, create a new user with all API permissions and assign it to the SVM.
 
-## Frontend Only Setup
+## Front-end Only Setup
 
-The frontend requires network access to the NetApp ONTAP API endpoint:
+The Front-end requires network access to the NetApp ONTAP API endpoint:
 
 1. **API Access:**
    - Ensure network connectivity to the NetApp ONTAP API interface. The datastore will be in an ERROR state if the API is not accessible or the SVM cannot be monitored properly.
 
-## Frontend & Node Setup
+## Front-end & Node Setup
 
-Configure both the frontend and nodes with persistent iSCSI connections:
+Configure both the Front-end and nodes with persistent iSCSI connections:
 
 1. **iSCSI Initiators:**
    - Configure initiator security in NetApp Storage VM:
      - **Storage VM > Settings > iSCSI Protocol > Initiator Security**
-     - Add initiators from `/etc/iscsi/initiatorname.conf` (all nodes and frontend)
+     - Add initiators from `/etc/iscsi/initiatorname.conf` (all nodes and Front-end)
    - Discover and login to the iSCSI targets:
      ~~~bash
      iscsiadm -m discovery -t sendtargets -p <target_ip>   # for each iSCSI target IP from NetApp
@@ -97,7 +97,6 @@ Create both datastores for optimal performance (instant cloning/moving capabilit
 | --------------------- | ----------------------------------------------- |
 | `NAME`                | Datastore name                                  |
 | `TYPE`                | `SYSTEM_DS`                                     |
-| `DS_MAD`              | `netapp`                                        |
 | `TM_MAD`              | `netapp`                                        |
 | `DISK_TYPE`           | `BLOCK`                                         |
 | `NETAPP_HOST`         | NetApp ONTAP API IP address                     |
@@ -138,6 +137,7 @@ ID: 101
 | ------------------- | ----------------------------------------------- |
 | `NAME`              | Datastore name                                  |
 | `TYPE`              | `IMAGE_DS`                                      |
+| `DS_MAD`            | `netapp`                                        |
 | `TM_MAD`            | `netapp`                                        |
 | `DISK_TYPE`         | `BLOCK`                                         |
 | `NETAPP_HOST`       | NetApp ONTAP API IP address                     |
@@ -179,7 +179,7 @@ ID: 102
   - Non‐persistent: FlexClone, then split
   - Persistent: Rename
 
-Symbolic links from the system datastore will be created for each virtual machine on its host once the LUNs have been mapped.
+Symbolic links from the System datastore will be created for each Virtual Machine on its Host once the LUNs have been mapped.
 
 {{< alert title="Note" color="success" >}}
 The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
@@ -187,9 +187,9 @@ The minimum size for a NetApp volume is 20 MB, so any disk smaller than that wil
 
 ## System Considerations
 
-Occasionally, under network interruptions or if a volume is deleted directly from NetApp, the iSCSI connection may drop or fail. This can cause the system to hang on a `sync` command, which in turn may lead to OpenNebula operation failures on the affected host. Although the driver is designed to manage these issues automatically, it’s important to be aware of these potential iSCSI connection challenges.
+Occasionally, under network interruptions or if a volume is deleted directly from NetApp, the iSCSI connection may drop or fail. This can cause the system to hang on a `sync` command, which in turn may lead to OpenNebula operation failures on the affected Host. Although the driver is designed to manage these issues automatically, it’s important to be aware of these potential iSCSI connection challenges.
 
-You may wish to contact the OpenNebula Support team to assist in this cleanup, however here are a few advanced tips to clean these up if you are comfortable doing so:
+You may wish to contact the OpenNebula Support team to assist in this cleanup; however, here are a few advanced tips to clean these up if you are comfortable doing so:
 
 - If you have extra devices from failures leftover, run:
   ~~~bash

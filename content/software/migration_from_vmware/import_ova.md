@@ -23,7 +23,7 @@ The same command allows users to import single VMDK disks as OpenNebula Images, 
 
 ## Requirements
 
-The [OneSwap](https://github.com/OpenNebula/one-swap) VM import tool will assume that the provided OVA has been exported from a VMware environment, user must make sure that the provided OVA is compatible with VMware environments. Other sources are currently not supported (i.e. Xen or VirtualBox).
+The [OneSwap](https://github.com/OpenNebula/one-swap) VM import tool will assume that the provided OVA has been exported from a VMware environment. Users must make sure that the provided OVA is compatible with VMware environments. Other sources are currently not supported (i.e., Xen or VirtualBox).
 
 When converting an OVA or VMDK you will need enough space both in the `/tmp` folder (can be changed with `--work-dir`) and in the destination DS where the disk images are going to be imported.
 
@@ -65,7 +65,7 @@ It is possible to specify the target Datastore and VNET for the OVA to be import
 {{< alert title="Note" color="success" >}}
 The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used together.{{< /alert >}}
 
-If multiple network interfaces are detected when importing an OVA and only one VNET ID or not enough VNET IDs are provided for all interfaces, using `--network ID`, the last one will be used for the rest of the interfaces after the last coincidence. The same will apply to Datastores using the `--datastore ID` option.
+If multiple network interfaces are detected when importing an OVA and only one VNET ID or not enough VNET IDs are provided for all interfaces using `--network ID`, the last one will be used for the rest of the interfaces after the last coincidence. The same will apply to Datastores using the `--datastore ID` option.
 
 ### Example of Importing an OVF
 
@@ -176,7 +176,7 @@ Injecting one-context...Running: virt-customize -q -a /tmp/vm-alma9/conversions/
 Failed (6.31s)
 ```
 
-1. Context will be installed using a fallback method of copying the context packages into the guest OS and installing it on the first boot in case the previous step fails. Sometimes it will be necessary to boot twice in order for this method to work.
+2. Context will be installed using a fallback method of copying the context packages into the guest OS and installing it on the first boot in case the previous step fails. Sometimes it will be necessary to boot twice in order for this method to work.
 
 ```default
 Running: virt-customize -q -a /tmp/vm-alma9/conversions/vm-alma9-sda --firstboot-install epel-release --copy-in /var/lib/one/context//one-context-6.10.0-3.el9.noarch.rpm:/tmp --firstboot-install /tmp/one-context-6.10.0-3.el9.noarch.rpm --run-command 'systemctl enable network.service || exit 0'

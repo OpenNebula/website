@@ -14,7 +14,7 @@ weight: "6"
 
 This page contains the OpenNebula Cloud API Specification for Go. It has been designed as a wrapper for the [XML-RPC methods]({{% relref "api#api" %}}), with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the [XML-RPC documentation]({{% relref "api#api" %}}), you can download the [XML Schemas (XSD) here]({{% relref "api#api-xsd-reference" %}}).
 
-Go OpenNebula Cloud API cover the resources lists below:
+Go OpenNebula Cloud API covers the resources lists below:
 
 | Resource         | URL                                                                                                          |
 |------------------|--------------------------------------------------------------------------------------------------------------|
@@ -47,11 +47,11 @@ The source code can be downloaded from the OpenNebula [repository](https://githu
 
 ## Usage
 
-To use the OpenNebula Cloud API for Go in your Go project, you have to import `GOCA` at your project as the example below and make a `go get`.
+To use the OpenNebula Cloud API for Go in your Go project, you have to import `GOCA` into your project as the example below and make a `go get`.
 
 ## Code Sample
 
-The example below shows how to poweroff a running VM. You need to pass the VM ID argument to the program.
+The example below shows how to poweroff a running VM. You need to pass the VM ID argument to the program:
 
 ```go
 package main
@@ -108,9 +108,9 @@ Take a look at these [examples](https://github.com/OpenNebula/one/tree/master/sr
 
 In the file errors.go, two errors types are defined:
 - ClientError: errors on client side implying that we can’t have a complete and well formed OpenNebula response (request building, network errors …).
-- ResponseError: We have a well formed response, but there is an OpenNebula error (resource does not exists, can’t perform the action, rights problems …).
+- ResponseError: We have a well formed response, but there is an OpenNebula error (resource does not exist, can’t perform the action, rights problems …).
 
-Each of theses types has several error codes allowing you fine grained error handling.
+Each of theses types has several error codes allowing you fine-grained error handling.
 If we have an HTTP response, ClientError returns it.
 
 ## Extend the client

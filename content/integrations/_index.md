@@ -3,7 +3,7 @@ type: "docs"
 title: "Enterprise Integrations"
 linkTitle: "Integrations"
 date:
-description: "This section highlights a wide range of OpenNebula integrations with enterprise technologies and third-party components. These integrations extend the platform's functionality — covering orchestration, storage, backup, billing, and application management — and demonstrate how OpenNebula can be seamlessly embedded into complex IT ecosystems."
+description: "This section highlights a wide range of OpenNebula integrations with enterprise technologies and third-party components. These integrations extend the platform's functionality — covering orchestration, storage, backup, billing, and application management — and demonstrate how OpenNebula can be seamlessly embedded into complex IT ecosystems"
 tags:
 weight: "4"
 ---

@@ -12,6 +12,40 @@ weight: "7"
 
 <!--# Running Kubernetes Clusters -->
 
+<!-- We continue from the Deploy miniONE on Bare Metal.
+
+4 roles:
+VNF
+master
+worker
+storage
+
+Steps:
+
+1. Create a private net
+Go to Networks, then Virtual Networks - 1.network.png -, click **Create**.
+Select host-only (see 2.network...png)
+Add **Addresses**: Click **Address Range** - 1st 192.168.200.2 - size 100
+You don't need any other config for the network since all VMs will communicate through the VNF
+
+2. Donwload **Service OneKE 1.31** from the OpenNebula Marketplace
+Go to Storage -> Apps, filter for the thing, select **Import**
+Several things will be imported: service template itself, VM templates, and VM images.
+
+3. Instantiate **Service OneKE 1.31**
+Go to **Service Templates**, select it and click the Play Icon
+  - Select a Name (at least 3 chars)
+  - 1 instance to be deployed , then lcick Next
+  Next screen: **Networks**:
+  Select vnet for Public and privnet for Private
+    BEAR IN MIND that with this setup you will have to use the VNF node to connect to the VMs 
+  Click Next.
+  Next screen: **Service Inputs**
+    Virtual IPs: VIP for the VNF node. If you change this, you will need to add your IP to the ApiServer extracertificate SANs box or you'll get an error when trying to run kubectl.
+    Scroll down and click **Enable Longhorn** and **Enable Traefik**.
+    In **Virtual Network Functions** ensure **Enable DNS recursor" and **NAT4** and **ROUTER4** are activated. 
+ Next screen: **Charter** - leave as is -->
+
 {{< alert title="Warning" color="warning" >}}
 The deployment described in this page has not been tested for this Beta version.
 {{< /alert >}}
@@ -54,8 +88,6 @@ Follow these steps:
 
 You have deleted the `REPLICA_HOST` parameter from the datastore. In the next step we’ll download the OneKE appliance.
 
-<!-- .. image:: /images/kubernetes-replica_host_param.png -->
-
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
 The [OpenNebula Public Marketplace](https://marketplace.opennebula.io) is a repository of Virtual Machines and appliances which are curated, tested and certified by OpenNebula.
@@ -72,7 +104,7 @@ In the search field at the top, type `oneke` to filter by name. Then, select **S
 ![image](/images/sunstone-service_oneke_1.29.png)
 <br/>
 
-Click the **Import into Datastore** ![icon1](/images/icons/sunstone/import_into_datastore.png) icon.
+Click the **Import** button.
 
 As with the WordPress appliance, Sunstone displays the **Download App to OpenNebula** wizard. In the first screen of the wizard, click **Next**.
 
@@ -130,9 +162,17 @@ Sunstone displays the **Instantiate Service Template** wizard. In the first scre
 
 Click **Next** to go to the next screen, **User Inputs**.
 
-Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. There are three User Inputs pages in total; you can browse them by clicking the page numbers at the bottom of each page, highlighted below.
+Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others grouped in the following tabs:
 
-![image](/images/sunstone-kubernetes-user_inputs.png)
+![image](/images/sunstone-kubernetes-user_inputs_vrouter.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_rke2.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_k8s.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_vnf.png)
+
+![image](/images/sunstone-kubernetes-user_inputs_others.png)
 <br/>
 
 ### Optional: Add a Custom Domain
@@ -143,7 +183,7 @@ To enable access with the `kubectl` command from outside the cluster, you can ad
 
 You can use a public DNS server or add the custom domain to your local `/etc/hosts` file, for example:
 
-```default
+```bash
 127.0.0.1 localhost
 1.2.3.4 k8s.yourdomain.it
 ```
@@ -224,7 +264,7 @@ To check the VNF node IP in Sunstone, in the left-hand pane go to **Instances** 
 
 Alternatively, to check on the command line, log in to the Front-end and run:
 
-```default
+```bash
 onevm show -j <VNF_VM_ID>|jq -r .VM.TEMPLATE.NIC[0].EXTERNAL_IP
 ```
 
@@ -253,7 +293,7 @@ For connecting to the master Kubernetes node, you need to know the public addres
 
 Once you know the correct IP, from the Front-end node connect to the master Kubernetes node with the below command (replace “1.2.3.4” with the public IP address of the VNF node):
 
-```default
+```bash
 $ ssh -A -J root@1.2.3.4 root@172.20.0.2
 ```
 
@@ -263,9 +303,9 @@ In this example, `172.20.0.2` is the private IP address of the Kubernetes master
 If you don’t use `ssh-agent` then you may skip the `-A` flag in the above command. You will need to copy your *private* ssh key (used to connect to VNF) into the VNF node itself, at the location `~/.ssh/id_rsa`. Make sure that the file permissions are correct, i.e. `0600` (or `u=rw,go=`). For example:
 
 ```default
-$ ssh root@1.2.3.4 install -m u=rwx,go= -d /root/.ssh/ # make sure ~/.ssh/ exists
-$ scp ~/.ssh/id_rsa root@1.2.3.4:/root/.ssh/           # copy the key
-$ ssh root@1.2.3.4 chmod u=rw,go= /root/.ssh/id_rsa    # make sure the key is secured
+ssh root@1.2.3.4 install -m u=rwx,go= -d /root/.ssh/ # make sure ~/.ssh/ exists
+scp ~/.ssh/id_rsa root@1.2.3.4:/root/.ssh/           # copy the key
+ssh root@1.2.3.4 chmod u=rw,go= /root/.ssh/id_rsa    # make sure the key is secured
 ```
 {{< /alert >}}
 

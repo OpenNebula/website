@@ -18,15 +18,15 @@ Each resource **will store the label information in its own template**, thus it 
 
 ![labels_edit](/images/sunstone_labels_edit.png)
 
-This feature enables the possibility to **group the different resources** under a given label and filter them in the admin and cloud views. The user will be able to easily find the template she wants to instantiate, **or select a set of resources** to apply a given action.
+This feature enables the possibility to **group the different resources** under a given label and filter them in the admin and cloud views. The user will be able to easily find the template to instantiate **or select a set of resources** to apply a given action.
 
 ![labels_filter](/images/sunstone_labels_filter.png)
 
 ## Label creation
 
-To create a label, go to the Settings section of an user and enter the name of the label.
+To create a label, go to the Settings section of a user and enter the name of the label.
 
 ![labels_create](/images/sunstone_labels_create.png)
 
 {{< alert title="Warning" color="warning" >}}
-When an user applies a label to a resource, he can only applies the labels that he has created. The same happens with the label filter, the user can only filter by the labels that he has created.{{< /alert >}} 
+When user apply a label to a resource, they can only apply the labels that they have created. The same happens with the label filter, the user can only filter by the labels that they have created.{{< /alert >}} 

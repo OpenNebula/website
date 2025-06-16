@@ -38,7 +38,7 @@ A Security Group is composed of several Rules. Each Rule is defined with the fol
 {{< alert title="Note" color="success" >}}
 When using `IPSEC` value for `PROTOCOL`, rules for the Encapsulating Security Payload (ESP) protocol of IPSec are set.{{< /alert >}} 
 
-To create a Security Group, use the [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}), or create a template file following this example:
+To create a Security Group, use the [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) or create a template file following this example:
 
 ```default
 NAME = test
@@ -66,7 +66,7 @@ ID: 102
 ```
 
 {{< alert title="Tip" color="info" >}}
-This guide focuses on the CLI command `onesecgroup`, but you can also manage Security Groups using the [Sunstone GUI interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Security Group** tab to create and manage groups in a user-friendly way.{{< /alert >}} 
+This guide focuses on the CLI command `onesecgroup` but you can also manage Security Groups using the [Sunstone GUI interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Security Group** tab to create and manage groups in a user-friendly way.{{< /alert >}} 
 
 ![sg_wizard_create](/images/sg_wizard_create.png)
 
@@ -86,7 +86,7 @@ When a Virtual Machine is instantiated, the rules are copied to the VM resource 
 
 ### Advanced Usage
 
-To accommodate more complex scenarios, you can also set Security Groups to each Address Range of a Virtual Network.
+To accommodate more complex scenarios, you can also set Security Groups to each Address Range of a Virtual Network:
 
 ```default
 $ onevnet updatear 0 1
@@ -104,7 +104,7 @@ NIC = [
 ]
 ```
 
-If the Address Range or the Template NIC defines SECURITY_GROUPS, the IDs will be added to the ones defined in the Virtual Network. All the Security Group IDs are combined, and applied to the Virtual Machine instance.
+If the Address Range or the Template NIC defines SECURITY_GROUPS, the IDs will be added to the ones defined in the Virtual Network. All the Security Group IDs are combined and applied to the Virtual Machine instance.
 
 ## The Default Security Group
 
@@ -115,17 +115,17 @@ Whenever a network is created, the `default` Security Group is added to the
 network.
 
 This means that you **must** edit every newly created network and remove the
-`default` Security Group from it. Otherwise even if you add other Security
+`default` Security Group from it. Otherwise, even if you add other Security
 Groups, the `default` one will allow all traffic and therefore override the rest
 of the Security Groups.
 
 {{< alert title="Note" color="success" >}}
-You may want to remove the rules included in the `default` security groups. This way users are forced to create security groups (otherwise they will not have connectivity to and from the VMs) which avoid some security problems.{{< /alert >}} 
+You may want to remove the rules included in the `default` security groups. This way, users are forced to create security groups (otherwise they will not have connectivity to and from the VMs) which avoid some security problems.{{< /alert >}} 
 
 <a id="security-groups-update"></a>
 
 ## Security Group Update
 
-Security Groups can be updated to edit or add new rules. These changes are propagated to all VMs in the security group, so it may take some time till the changes are applied. The particular status of a VM can be checked in the security group properties, where outdated and up-to-date VMs are listed.
+Security Groups can be updated to edit or add new rules. These changes are propagated to all VMs in the security group, so it may take some time till the changes are applied. The particular status of a VM can be checked in the Security Group properties, where outdated and up-to-date VMs are listed.
 
-If the update process needs to be reset, i.e. apply again the rules, you can use the `onesecgroup commit` command.
+If the update process needs to be reset, i.e., reapply the rules, you can use the `onesecgroup commit` command.

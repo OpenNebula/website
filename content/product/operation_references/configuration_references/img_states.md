@@ -12,13 +12,13 @@ weight: "6"
 
 <!--# Image States Reference -->
 
-This page is a complete reference of all the Image states that will be useful for administrators doing troubleshooting and developers.
+This page is a complete reference of all the Image states that will be useful for developers and administrators doing troubleshooting.
 
-The simplified life-cycle is explained in the [Virtual Machines Images guide]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images-states" %}}). That simplified diagram uses a smaller number of state names. That section should be enough for end-users and every-day administration tasks.
+The simplified life-cycle is explained in the [Virtual Machines Images guide]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images-states" %}}). This simplified diagram uses a smaller number of state names. That section should be enough for end users and everyday administration tasks.
 
 ## List of States
 
-OpenNebula’s images define its state using the `STATE` variable. The state can be seen from the CLI (`oneimage show`) and from Sunstone (Info panel for the Image).
+OpenNebula’s images define their state using the `STATE` variable. The state can be seen from the CLI (`oneimage show`) and from Sunstone (Info panel for the Image).
 
 |   # | State            | Short State Alias   | Meaning                                           |
 |-----|------------------|---------------------|---------------------------------------------------|

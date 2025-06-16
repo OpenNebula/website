@@ -32,16 +32,16 @@ We’ll follow these high-level steps:
 
 > 1. Set up the Ansible control node (for example, install Ansible if necessary).
 > 2. Download the Ansible playbooks.
-> 3. Modify the playbooks to your needs, e.g. set the OpenNebula version, define the virtual network for the hosts, storage options, etc.
+> 3. Modify the playbooks to your needs, e.g., set the OpenNebula version, define the virtual network for the Hosts, storage options, etc.
 > 4. Run the playbooks.
 > 5. Verify the installation.
 
 {{< alert title="Important" color="success" >}}
-This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e. OpenNebula Front-end and Hypervisor nodes) using a virtual environment with [Hatch](https://hatch.pypa.io/) . For information on other installation methods and OSes, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
+This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e., OpenNebula Front-end and Hypervisor nodes) using a virtual environment with [Hatch](https://hatch.pypa.io/) . For information on other installation methods and OSs, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Requirements
 
-The cloud hosts (i.e. the OpenNebula Front-end and Hypervisors) must meet the following requirements:
+The cloud Hosts (i.e., the OpenNebula Front-end and Hypervisors) must meet the following requirements:
 
 > * Ubuntu 22.04 or 24.04 with Netplan >=0.105
 > * Passwordless SSH login, as root, from the Front-end node to the Hypervisor nodes
@@ -81,7 +81,7 @@ Go to the `one-deploy` directory:
 cd one-deploy
 ```
 
-Install the necessary components for the installation, by running:
+Install the necessary components for the installation by running:
 
 ```default
 make requirements
@@ -101,7 +101,7 @@ To list the available environments, run:
 hatch env show
 ```
 
-Hatch should display the newly-created environments, `default` and `ceph` (which isolates the ceph-ansible dependencies in a different virtual environment):
+Hatch should display the newly created environments, `default` and `ceph` (which isolates the ceph-ansible dependencies in a different virtual environment):
 
 ```default
 front-end:~/one-deploy$ hatch env show
@@ -263,7 +263,7 @@ n1 | SUCCESS => {
 }
 ```
 
-If any host is unreachable, or if access via SSH is not properly configured, you will see output like the following:
+If any Host is unreachable, or if access via SSH is not properly configured, you will see output like the following:
 
 ```default
 n2 | UNREACHABLE! => {
@@ -375,7 +375,7 @@ Next we’ll verify that the cloud resources are up. First, become the `oneadmin
 sudo -i -u oneadmin
 ```
 
-As user `oneadmin`, to verify the hosts run:
+As user `oneadmin`, to verify the Hosts run:
 
 ```default
 onehost list

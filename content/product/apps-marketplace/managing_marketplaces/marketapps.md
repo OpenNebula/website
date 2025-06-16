@@ -12,7 +12,7 @@ weight: "1"
 
 <!--# Managing MarketPlace Appliances -->
 
-A Marketplace Appliance is a generic resource (an entry on the marketplaceapp pool) that can be of any of the following three different types:
+A Marketplace Appliance is a generic resource (an entry on the marketplaceapp pool) that can be of any of the following three types:
 
 * *Image*, a single Image, optionally including a VM template.
 * *VM*, a VM template referring to one or more images.
@@ -22,7 +22,7 @@ This guide introduces the process to create and manage Marketplace Appliances.
 
 ## Exploring Marketplace Appliances
 
-You can list the Marketplace Appliances (apps) with `onemartketapp list` command. OpenNebula pre-configures some public Marketplaces so in a standard installation you should see some apps already:
+You can list the Marketplace Appliances (apps) with `onemartketapp list` command. OpenNebula pre-configures some Public Marketplaces so in a standard installation you should see some apps already:
 
 ```default
 $ onemarketapp list
@@ -99,34 +99,34 @@ VMTEMPLATE64="Q09OVEVYVCA9IFsgTkV...2x1c3RlcikiXQo="
 {{< alert title="Important" color="success" >}}
 You can only create new Marketplace Appliances on **Private Marketplaces**{{< /alert >}} 
 
-A Marketplace Appliance can be created in (or imported into) a Marketplace out of an existing Image, Virtual Machine, Virtual Machine Template or Multi-VM Service Template. The following table list the command to use for each case:
+A Marketplace Appliance can be created in (or imported into) a Marketplace out of an existing Image, Virtual Machine, Virtual Machine Template, or Multi-VM Service Template. The following table lists the command to use for each case:
 
 | Object                   | Command                                | Description                                                                                      |
 |--------------------------|----------------------------------------|--------------------------------------------------------------------------------------------------|
-| Image                    | `onemarketapp create`                  | Imports an Image into the marketplace, and optionally a VM template to use it                    |
-| Virtual Machine          | `onemarketapp vm import`               | Imports a VM into the marketplace, and recursively all the disks associated                      |
-| Virtual Machine Template | `onemarketapp vm-template import`      | Imports a VM template into the marketplace and recursively all the images associated.            |
-| Service Template         | `onemarketapp service-template import` | Imports a service template into the marketplace and recursively all the VM templates associated. |
+| Image                    | `onemarketapp create`                  | Imports an Image into the Marketplace, and optionally a VM template to use it                    |
+| Virtual Machine          | `onemarketapp vm import`               | Imports a VM into the Marketplace, and recursively all the disks associated                      |
+| Virtual Machine Template | `onemarketapp vm-template import`      | Imports a VM template into the Marketplace and recursively all the images associated.            |
+| Service Template         | `onemarketapp service-template import` | Imports a service template into the Marketplace and recursively all the VM templates associated. |
 
 These commands use some common options described below:
 
 | Parameter                | Description                                |
 |--------------------------|--------------------------------------------|
-| `--name name`            | Name of the new MarketPlace Application    |
+| `--name name`            | Name of the new Marketplace Application    |
 | `--vmname name`          | Name for the new VM Template               |
 | `--market market_id`     | Marketplace to import the Application      |
-| `--yes`                  | Import everything.                         |
-| `--no`                   | Import just the main template.             |
-| `--template template_id` | Use this template with the imported image. |
+| `--yes`                  | Import everything                          |
+| `--no`                   | Import just the main template              |
+| `--template template_id` | Use this template with the imported image  |
 
-For example, if you want to import an exiting Image (e.g. with `ID` 0) into the `Backup` marketplace, you could use:
+For example, if you want to import an exiting Image (e.g., with `ID` 0) into the `Backup` Marketplace, you could use:
 
 ```default
 $ onemarketapp create --name 'Alipe-Vanilla' --image 0 --market "Backup"
 ID: 40
 ```
 
-Importing VMs with multiple disks or Multi-VM Services can be a complex task. In this case the `onemarketapp` commands provides an interactive process, although they can run in batch mode (see below). The process of importing a Multi-VM Service is illustrated in the following example:
+Importing VMs with multiple disks or Multi-VM Services can be a complex task. In this case the `onemarketapp` command provides an interactive process, although they can run in batch mode (see below). The process of importing a Multi-VM Service is illustrated in the following example:
 
 ```default
 $ onemarketapp service-template import 0
@@ -178,13 +178,13 @@ ID: 449
 ```
 
 {{< alert title="Important" color="success" >}}
-If a running VM doesn’t have the `TEMPLATE_ID` attribute set, it cannot be imported into the marketplace.{{< /alert >}} 
+If a running VM doesn’t have the `TEMPLATE_ID` attribute set, it cannot be imported into the Marketplace.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 NICs are marked as auto, so they can work when the Marketplace Application is exported to a OpenNebula cloud. If you have NIC_ALIAS in the template, NICs are **not** marked as auto, you need to select the network when you instantiate it.{{< /alert >}} 
 
 {{< alert title="Warning" color="warning" >}}
-To avoid clashing names, if no name is specified, a hash is added at the end of the main object name. Sub objects like disks or VM templates in case of Service Template, always have the hash.{{< /alert >}} 
+To avoid clashing names, if no name is specified a hash is added at the end of the main object name. Sub-objects like disks or VM templates in the case of Service Template, always have the hash.{{< /alert >}} 
 
 ### Marketplace Appliance Attributes
 
@@ -192,7 +192,7 @@ You can update several attributes of a Marketplace Appliance with the `onemarket
 
 | Attribute       | Description                                                                                      |
 |-----------------|--------------------------------------------------------------------------------------------------|
-| `NAME`          | Name of the Appliance                                                                            |
+| `NAME`          | Name of the Appliance.                                                                           |
 | `ORIGIN_ID`     | The ID of the source image. -1 if not defined.                                                   |
 | `TYPE`          | `IMAGE`, `VMTEMPLATE`, `SERVICE_TEMPLATE`.                                                       |
 | `DESCRIPTION`   | Text description of the Marketplace Appliance.                                                   |
@@ -203,7 +203,7 @@ You can update several attributes of a Marketplace Appliance with the `onemarket
 
 ## Downloading a Marketplace Appliance into your Cloud or Desktop
 
-The command that exports (downloads) the Marketplace Appliance is `onemarketapp export` which will return the ID of the new Image **and** the ID of the new associated template. If no template has been defined, it will return -1. For example:
+The command that exports (downloads) the Marketplace Appliance is `onemarketapp export`, which will return the ID of the new Image **and** the ID of the new associated template. If no template has been defined, it will return -1. For example:
 
 ```default
 $ onemarketapp export 40 from_t1app -d 1
@@ -240,6 +240,6 @@ Please take a look at the CLI reference to see how to use these actions. These o
 
 ## Using Sunstone to Manage Marketplace Appliances
 
-You can also import and export Marketplace Appliances using [Sunstone]({{% relref "../../../product/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}). Select the Storage > Apps tab, and there, you will be able see the available Appliances in a user friendly way.
+You can also import and export Marketplace Appliances using [Sunstone]({{% relref "../../../product/operation_references/opennebula_services_configuration/fireedge#fireedge" %}}). Select the Storage > Apps tab and there you will be able see the available Appliances in a user-friendly way.
 
 ![image](/images/show_marketplaceapp.png)

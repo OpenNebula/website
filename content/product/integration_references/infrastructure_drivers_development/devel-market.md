@@ -12,7 +12,7 @@ weight: "7"
 
 <!--# Market Driver -->
 
-The Market Driver is in charge of managing both Marketplaces and MarketPlace Apps.
+The Market Driver is in charge of managing both Marketplaces and Marketplace Apps.
 
 ## Marketplace Drivers Structure
 
@@ -39,7 +39,7 @@ As for the Marketplace Apps, they support these actions:
 
 The monitor action is orchestrated by the `/var/lib/one/remotes/market/<market_mad>/monitor` script.
 
-There are two kinds of `monitor` scripts, those that do not require the discovery of the Marketplace Apps, since OpenNebula already know about them because it has created them. And those that include this discovery, like in the case of the `one/monitor` script to monitor the official OpenNebula Systems Marketplace.
+There are two kinds of `monitor` scripts: those that do not require the discovery of Marketplace Apps, since OpenNebula has created them and so already knows about them; and those that include this discovery, like in the case of the `one/monitor` script to monitor the official OpenNebula Systems Marketplace.
 
 **ARGUMENTS**
 
@@ -92,7 +92,7 @@ Which is the Marketplace App template in OpenNebula-syntax format.
 
 ### `import`
 
-The `import` action is an special action that involves two driver calls chained one after the other. The involved actors are: `/var/lib/one/remotes/datastore/<ds_mad>/export` and `/var/lib/one/remotes/market/<market_mad>/import`. Note they they aren’t piped together: the core will run the `export` action first, collect the output and use it for the driver message of the `import` action.
+The `import` action is an special action that involves two driver calls chained one after the other. The involved actors are: `/var/lib/one/remotes/datastore/<ds_mad>/export` and `/var/lib/one/remotes/market/<market_mad>/import`. Note they they aren’t piped together: the core will run the `export` action first, collect the output, and use it for the driver message of the `import` action.
 
 `<ds_mad>/export`:
 
@@ -122,7 +122,7 @@ It should return an XML document:
 
 `<market_mad>/import`:
 
-The job of the export is to grab the `IMPORT_SOURCE` and dump it to the back-end.
+The job of the export is to grab the `IMPORT_SOURCE` and dump it to the backend.
 
 **ARGUMENTS**
 
@@ -139,13 +139,13 @@ SIZE="<SIZE_IN_MB>"
 FORMAT="<FORMAT>"
 ```
 
-Note that typically inside the `import` script we will find a call to the `downloader.sh` as such:
+Note that typically inside the `import` script we will find a call to the `downloader.sh` like this:
 
 ```default
 ${UTILS_PATH}/downloader.sh $IMPORT_SOURCE -
 ```
 
-Which will be in turn piped to the target destination in the Marketplace, or in some Market Drivers the target file will appear in the `downloader.sh` command as the destination instead of `-`. Note that this might require extending `downloader.sh` to handle a custom new protocol, like: `s3://`, `rbd://`, etc…
+Which will be in turn piped to the target destination in the Marketplace, or in some Market Drivers the target file will appear in the `downloader.sh` command as the destination instead of `-`. Note that this might require extending `downloader.sh` to handle a custom new protocol, like: `s3://`, `rbd://`, etc.
 
 ### `export`
 

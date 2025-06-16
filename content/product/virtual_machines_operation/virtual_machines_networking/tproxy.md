@@ -12,13 +12,13 @@ weight: "6"
 
 <!--# Transparent Proxies -->
 
-Transparent Proxies make it possible to connect to management services, such as OneGate, by implicitly using the existing data center backbone networking. The OneGate service usually runs on the leader Front-end machine, which makes it difficult for Virtual Machines running in isolated virtual networks to contact it. This situation forces OpenNebula users to design virtual networking in advance, to ensure that VMs can securely reach OneGate. Transparent Proxies have been designed to remove that requirement.
+Transparent Proxies make it possible to connect to management services, such as OneGate, by implicitly using the existing data center backbone networking. The OneGate service usually runs on the leader Front-end machine, which makes it difficult for Virtual Machines running in isolated Virtual Networks to contact it. This situation forces OpenNebula users to design virtual networking in advance, to ensure that VMs can securely reach OneGate. Transparent Proxies have been designed to remove that requirement.
 
 ## About the Design
 
 ![tproxy_diagram](/images/tproxy-diagram.drawio.png)
 
-Virtual networking in OpenNebula is bridge-based. Each Hypervisor that runs Virtual Machines in a specific Virtual Network pre-creates such a bridge before deploying the VMs. Transparent Proxies extend that design by introducing a pair of VETH devices, where one of two “ends” is inserted into the bridge and the other is boxed inside the dedicated network namespace. This makes it possible to deploy proxy processes that can be reached by Virtual Machine guests via TCP/IP securely, i.e. without compromising the internal networking of Hypervisor hosts. Proxy processes themselves form a “mesh” of daemons interconnected with UNIX sockets, which allows for complete isolation of the two involved TCP/IP stacks; we call this environment the “String-Phone Proxy.” The final part of the solution requires that Virtual Machine guests contact services over proxy via the `169.254.16.9` link-local address on specific ports, instead of their real endpoints.
+Virtual networking in OpenNebula is bridge-based. Each Hypervisor that runs Virtual Machines in a specific Virtual Network pre-creates such a bridge before deploying the VMs. Transparent Proxies extend that design by introducing a pair of VETH devices, where one of two “ends” is inserted into the bridge and the other is boxed inside the dedicated network namespace. This makes it possible to deploy proxy processes that can be reached by Virtual Machine guests via TCP/IP securely, i.e., without compromising the internal networking of hypervisor Hosts. Proxy processes themselves form a “mesh” of daemons interconnected with UNIX sockets, which allows for complete isolation of the two involved TCP/IP stacks; we call this environment the “String-Phone Proxy.” The final part of the solution requires that Virtual Machine guests contact services over proxy via the `169.254.16.9` link-local address on specific ports, instead of their real endpoints.
 
 ## Hypervisor Configuration
 
@@ -46,7 +46,7 @@ If the `:networks:` YAML key is missing or empty, the particular proxy will be a
 
 **To apply the configuration, you need to perform two steps:**
 
-1. On the leader Front-end machine: as the `oneadmin` system user, sync the `OpenNebulaNetwork.conf` file with the Hypervisor hosts, by running `onehost sync -f`.
+1. On the leader Front-end machine: as the `oneadmin` system user, sync the `OpenNebulaNetwork.conf` file with the hypervisor Hosts, by running `onehost sync -f`.
 2. Power-cycle any running guests (for example by running `onevm poweroff` followed by `onevm resume`); otherwise the desired configuration changes may show no effect.
 
 ## Guest Configuration
@@ -126,7 +126,7 @@ table ip one_tproxy {
 ```
 
 {{< alert title="Note" color="success" >}}
-The `nftables` config is not persisted across Hypervisor host reboots, as it is the default behavior in OpenNebula in general.{{< /alert >}} 
+The `nftables` config is not persisted across hypervisor Host reboots, as it is the default behavior in OpenNebula in general.{{< /alert >}} 
 
 **Listing all custom network namespaces:**
 
@@ -153,7 +153,7 @@ $ ip netns exec one_tproxy_br0 ip address
 ```
 
 {{< alert title="Note" color="success" >}}
-In case multiple Hypervisor hosts participate in the Virtual Network’s traffic, the `169.254.16.9` address stays the same regardless, the closest Hypervisor host is supposed to answer guest requests.{{< /alert >}} 
+In case multiple hypervisor Hosts participate in the Virtual Network’s traffic, the `169.254.16.9` address stays the same regardless, the closest hypervisor Host is supposed to answer guest requests.{{< /alert >}} 
 
 **Checking if the default route for sending packets back into the bridge has been configured:**
 

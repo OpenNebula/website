@@ -12,7 +12,7 @@ weight: "3"
 
 <!--# OpenNebula Resource Metrics -->
 
-This document provides an overview of the metrics collected by OpenNebula’s default probes for each resource type and explains how this data is utilized within the system
+This document provides an overview of the metrics collected by OpenNebula’s default probes for each resource type and explains how this data is utilized within the system.
 
 ## Virtual Machine
 
@@ -26,7 +26,7 @@ In general, you can find the following monitoring information for a VM. Note tha
 | Key       | Description                                                |
 |-----------|------------------------------------------------------------|
 | `ID`      | ID of the VM in OpenNebula.                                |
-| `UUID`    | Unique ID, must be unique across all hosts.                |
+| `UUID`    | Unique ID, must be unique across all Hosts.                |
 | `MONITOR` | Base64 encoded monitoring information (see details below). |
 
 The MONITOR information includes the following data:

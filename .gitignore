@@ -1,3 +1,7 @@
 public/
-.hugo_build.lock
 node_modules/
+_vendor/
+resources/
+.hugo_build.lock
+package.json
+package-lock.json
