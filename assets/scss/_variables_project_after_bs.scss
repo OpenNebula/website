@@ -65,6 +65,13 @@
     }    
   }
 
+  // Entry in card-columns
+  .entry {
+    background: #222431;
+    border-color: #222431;	// no effect
+    border-width: 1px;	// no effect
+  }
+
   // Breadcrumb
   .breadcrumb-item.active {
     color: #80CDE6;

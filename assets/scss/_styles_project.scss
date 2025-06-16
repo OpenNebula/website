@@ -36,6 +36,7 @@
 // Cards: ./_vendor/github.com/twbs/bootstrap/scss/_card.scss
 .card {
   border-radius: 12px !important;
+  border-color: #4a4c5a;
 
   .card-header {
     font-size: 1.2rem;
@@ -132,14 +133,8 @@
 
 // Cards
 .td-card {
-  border-color: #8F9392 !important;
-  // display: inline-block !important; // causes single cards too small
-  //padding: 10px !important;
-  //flex: 1 0 auto; // no effect
-  // flex-direction: row !important; // no effect
-  //flex-wrap: wrap !important; // no effect
-    //align-items: flex-start; // noffect
-    //align-self: center; // noffect
+  border-color: #797979 !important;
+  border-width: 0px !important;
 }
 .td-navbar .td-search__input {
   border-style: solid;
