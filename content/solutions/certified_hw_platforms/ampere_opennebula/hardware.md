@@ -1,4 +1,4 @@
-| Parameter                | amp01 Server                                                                              |
+| Parameter                | Ampere Server                                                                              |
 |--------------------------|-------------------------------------------------------------------------------------------|
 | **Architecture**         | aarch64 (ARM 64-bit)                                                                      |
 | **CPU Model**            | Ampere(R) Altra(R) Processor Q80-30 CPU @ 3.0GHz (Neoverse-N1)                            |
@@ -23,5 +23,5 @@
 | **USB Controllers**      | Hitachi, Renesas uPD720201 USB 3.0, Linux Foundation root hubs                            |
 | **VGA Controller**       | ASPEED Technology, Inc. ASPEED Graphics Family (server management, not for computation)    |
 | **PCI Devices**          | Multiple Ampere PCIe root complexes, bridges, and controllers                             |
-| **RAM**                  | 512 GiB                                                                                   |
+| **RAM**                  | 32 GiB                                                                                   |
 | **Other**                | No high-performance GPU detected                                                          |
