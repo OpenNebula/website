@@ -79,7 +79,7 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 - [Oneflow clients include content-type header to make them work with Sinatra 4.0.0](https://github.com/OpenNebula/one/issues/6508).
 - [Support for defining Virtual Routers as app roles, simplifying multi-tier deployments](../../../product/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/#defining-the-roles-of-a-service).
 
-## Markeplace
+## Marketplace
 
 - The [public marketplaces](../../../product/apps-marketplace/public_marketplaces/overview#-overview) appliances generate [scheduling requirements](../../../product/cloud_system_administration/scheduler/overview.md#host-requirements) and [OS configurations](../../../product/operation_references/hypervisor_configuration/kvm_driver#arm64specifics) based on the architecture.
 

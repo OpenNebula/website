@@ -404,7 +404,7 @@ The hypervisor column states that the attribute is **O**ptional, **M**andatory, 
 
 The following I/O interfaces can be defined for a VM:
 
-| Attribute                                                                    | Description                                                                                                                            | KVM   | LXC |
+<!-- | Attribute                                                                    | Description                                                                                                                            | KVM   | LXC |
 |------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|-------|-----|
 | `INPUT`                                                                      | Define input devices, available sub-attributes:  * `TYPE`: values are `mouse` or `tablet` * `BUS`: values are `usb`, `ps2`             | O     | -   |
 | `GRAPHICS`                                                                   | Whether the VM should export its graphical display and how, available sub-attributes:                                                  | O     | O   |
@@ -419,7 +419,133 @@ The following I/O interfaces can be defined for a VM:
 | * `IOMMU`: Enables the use of emulated IOMMU by the video device.            | O                                                                                                                                      | -     |     |
 | * `ATS`: Enables Address Translate Service for the device.                   | O                                                                                                                                      | -     |     |
 | * `VRAM`: Defines the amount of VRAM for the device, in kB                   | O                                                                                                                                      | -     |     |
-| * `RESOLUTION`: The preferred device resolution(ex: “1920x1080”, “1280x768”) | O                                                                                                                                      | -     |     |
+| * `RESOLUTION`: The preferred device resolution(ex: “1920x1080”, “1280x768”) | O                                                                                                                                      | -     |     | -->
+
+<!-- BEGIN TABLE -->
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>KVM</p></th>
+<th class="head"><p>vCenter</p></th>
+<th class="head"><p>LXC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">INPUT</span></code></p></td>
+<td><p>Define input devices, available sub-attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TYPE</span></code>: values are <code class="docutils literal notranslate"><span class="pre">mouse</span></code> or <code class="docutils literal notranslate"><span class="pre">tablet</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BUS</span></code>: values are <code class="docutils literal notranslate"><span class="pre">usb</span></code>, <code class="docutils literal notranslate"><span class="pre">ps2</span></code></p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="7"><p><code class="docutils literal notranslate"><span class="pre">GRAPHICS</span></code></p></td>
+<td><p>Whether the VM should export its graphical display and how, available sub-attributes:</p></td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TYPE</span></code>: values: <code class="docutils literal notranslate"><span class="pre">vnc</span></code>, <code class="docutils literal notranslate"><span class="pre">sdl</span></code>, <code class="docutils literal notranslate"><span class="pre">spice</span></code>.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>O (vnc)</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LISTEN</span></code>: IP to listen on.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PORT</span></code>: port for the VNC server.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PASSWD</span></code><sup>*</sup>: password for the VNC server.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KEYMAP</span></code>: keyboard configuration locale to use in the VNC display.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RANDOM_PASSWD</span></code>: if &quot;YES&quot;, generate a random password for each VM.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+<td><p>O</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p><code class="docutils literal notranslate"><span class="pre">VIDEO</span></code></p></td>
+<td><p>Defines a custom video device, available sub-attributes:</p></td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TYPE</span></code>: values: <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">vnc</span></code>, <code class="docutils literal notranslate"><span class="pre">cirrus</span></code>, and <code class="docutils literal notranslate"><span class="pre">virtio</span></code></p></li>
+</ul>
+</td>
+<td><p>M</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IOMMU</span></code>: Enables the use of emulated IOMMU by the video device.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ATS</span></code>: Enables Address Translate Service for the device.</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VRAM</span></code>: Defines the amount of VRAM for the device, in kB</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RESOLUTION</span></code>: The preferred device resolution(ex: &quot;1920x1080&quot;, &quot;1280x768&quot;)</p></li>
+</ul>
+</td>
+<td><p>O</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<!-- END TABLE -->
 
 {{< alert title="Note" color="success" >}}
 Password will be truncated if its length exceeds eight characters for `vnc` or 60 characters for `spice`.{{< /alert >}} 
