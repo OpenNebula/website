@@ -60,12 +60,14 @@
   }
   .card-body {
     background-color: #222431;
+    border-color: #8F9392 !important;
+    border-width: 12px !important;
     a {
       color: #80CDE6;
     }    
   }
 
-  // Entry in card-columns
+  // Entry in section-index.html template
   .entry {
     background: #222431;
     border-color: #222431;	// no effect
@@ -75,12 +77,6 @@
   .td-card {
     background: #222431 !important;
     border-color: #222431 !important;
-    //background: #1e202b;
-    //border-radius: 0.375rem !important;
-    //border-radius: 12px !important;
-    //border-bottom-left-radius: 12px !important;
-    //border-bottom-right-radius: 12px !important;
-    //border-width: 1px !important;
   }
 
   // Breadcrumb
@@ -235,6 +231,19 @@
     }    
   }
 
+// NEW:
+  .td-card {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+  }
+
+  // Entry in card-columns
+  .entry {
+    background: #ffffff !important;
+    border-color: #ffffff !important;      // no effect
+    border-width: 0px !important;  // no effect
+  }
+
   // Breadcrumb
   .breadcrumb-item.active {
     color: #007099;    
@@ -319,6 +328,8 @@
   .one-pager:hover {
     color: #007099;
   }  
+
+
 }
 
 
