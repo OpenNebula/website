@@ -13,8 +13,7 @@ After successful deployment and verification as implemented by the automations, 
 
 The default username is “oneadmin” and its password is specified in the “one_pass” variable of the inventory file.
 
-<!-- <a id="one-marketplace"></a> -->
-<!-- <img src="/images/solutions/ionos/one-marketplace.png" alt="Marketplace" class="img-maxwidth-50"> -->
+<a id="one-marketplace"></a>
 ![image][one-marketplace]
 
 Instantiate the VM by clicking the icon highlighted below. And choose the previously imported image.
