@@ -120,4 +120,15 @@
   @include media-breakpoint-up(xl) {
     margin-bottom: 20px;
   }
+
+// Section index
+.section-index {
+
+  @include media-breakpoint-up(sm) {
+    width: 375px;
+  }
+  @include media-breakpoint-up(md) {
+    width: 450px;
+  }
+ }
 }
