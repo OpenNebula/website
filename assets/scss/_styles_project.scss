@@ -93,7 +93,21 @@
   border-top-style: solid;
   border-width: 1px;
   p {
+    margin-top: 5px;;
     margin-bottom: 0px;;
+  }
+}
+.one-footer-acks {
+  display: flex;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  border-top: #E0E4E733;
+  border-top-style: solid;
+  border-width: 1px;
+  p {
+    margin-bottom: 7px;;
   }
 }
 .td-footer svg {

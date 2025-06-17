@@ -71,6 +71,7 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 - [OVA import](../../../software/migration_from_vmware/import_ova): a new CLI command, `oneswap`, allows you to ingest VMs in OVA format which were exported directly from VMware vCenter. Stay tuned for Sunstone support!
 - Add support for the `SERIAL` disk attribute. This allows you to specify a `SERIAL` value in [Image](../../../product/operation_references/configuration_references/img_template.md) and [VM Templates](../../../product/operation_references/configuration_references/template.md), including support for automatic generation (`auto`).
 - Add support for automatic [UEFI firmware selection](../../../product/operation_references/configuration_references/template.md).
+- Generate [NUMA-aware PCIe topology](../../../product/cluster_configuration/hosts_and_clusters/numa.md#pci-passthrough) for NUMA pinned virtual machines (``q35`` chipset).
 
 
 ## OpenNebula Flow
@@ -78,7 +79,7 @@ Please note that this beta version is not upgradeable from 6.10.x, nor to the fi
 - [Oneflow clients include content-type header to make them work with Sinatra 4.0.0](https://github.com/OpenNebula/one/issues/6508).
 - [Support for defining Virtual Routers as app roles, simplifying multi-tier deployments](../../../product/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/#defining-the-roles-of-a-service).
 
-## Markeplace
+## Marketplace
 
 - The [public marketplaces](../../../product/apps-marketplace/public_marketplaces/overview#-overview) appliances generate [scheduling requirements](../../../product/cloud_system_administration/scheduler/overview.md#host-requirements) and [OS configurations](../../../product/operation_references/hypervisor_configuration/kvm_driver#arm64specifics) based on the architecture.
 

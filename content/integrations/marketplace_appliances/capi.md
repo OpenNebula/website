@@ -26,4 +26,4 @@ This appliance comes with a set of preinstalled components designed to streamlin
 
 - [Rancher CAPI](https://github.com/OpenNebula/one-apps/tree/master/appliances/Capi) in the [OpenNebula one-apps](https://github.com/OpenNebula/one-apps) project
 - [Full documentation](https://github.com/OpenNebula/one-apps/wiki/capi_intro) for the Rancher CAPI appliance
-- Download the appliance from the [OpenNebula Marketplace](https://marketplace.opennebula.io/appliance):
+- Download the appliance from the [OpenNebula Marketplace](https://marketplace.opennebula.io/appliance)

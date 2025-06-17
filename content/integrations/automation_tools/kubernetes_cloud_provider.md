@@ -12,6 +12,6 @@ weight: "3"
 
 <!--# Kubernetes Cloud Provider -->
 
-The [Kubernetes cloud-provider interface](https://github.com/kubernetes/kubernetes/tree/master/staging/src/k8s.io/cloud-provider) allows Kubernetes to interact with the underlying cloud infrastructure through the cluster-provider controller. This allows Kubernetes to manage cloud resources like nodes, load-balancers, etc.
+The [Kubernetes Cloud-Provider Interface](https://github.com/kubernetes/kubernetes/tree/master/staging/src/k8s.io/cloud-provider) allows Kubernetes to interact with the underlying cloud infrastructure through the cluster-provider controller. This allows Kubernetes to manage cloud resources like nodes, load-balancers, etc.
 
-OpenNebula offers its own Kubernetes cloud-provider implementation for providing nodes and load-balancers to Kubernetes clusters. More information on the [OpenNebula Cloud-provider documentation](https://github.com/OpenNebula/cloud-provider-opennebula/wiki).
+OpenNebula offers its own Kubernetes cloud-provider implementation for providing nodes and load-balancers to Kubernetes clusters. You can find more information in the [OpenNebula Cloud-Provider documentation](https://github.com/OpenNebula/cloud-provider-opennebula/wiki).

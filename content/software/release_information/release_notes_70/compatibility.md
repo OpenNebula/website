@@ -102,11 +102,19 @@ Note: Caching support is not yet included in this release but is in an advanced 
 
 <a id="compatibility-guide-labels"></a>
 
+## SAN driver BRIDGE_LIST location change
+
+To make its behaviour consistent with other drivers, [LVM/SAN](/product/cluster_configuration/storage_system/lvm_drivers/) drivers now define the `BRIDGE_LIST` attribute in the IMAGE datastore, instead of in the SYSTEM one.
+
+## Virtual Machine PCI passthrough address generation
+
+The guest PCI address for passthrough devices (``VM_BUS``, ``VM_SLOT``, ``VM_ADDRESS``...) is now generated at allocation time (i.e. when the PCI device is assigned to the VM). This change has been introduce to properly generate NUMA-aware PCIe topologies.
+
 ## Labels on Sunstone
 
-Starting from version 7.0, the labels system in Sunstone has been revamped, moving away from the old global/system-wide approach towards a more user/group-specific structure. 
+Starting from version 7.0, the labels system in Sunstone has been revamped, moving away from the old global/system-wide approach towards a more user/group-specific structure.
 
-Previously, labels were stored directly on the resources they were applied to, which didn't scale well. There was no way to tell which user had created which label, and removing a label only affected the user template, leaving the resource template untouched. This often led to "stale labels", cluttering resource templates and misrepresenting which labels were actually in use, especially when different users applied similarly named labels to shared resources. 
+Previously, labels were stored directly on the resources they were applied to, which didn't scale well. There was no way to tell which user had created which label, and removing a label only affected the user template, leaving the resource template untouched. This often led to "stale labels", cluttering resource templates and misrepresenting which labels were actually in use, especially when different users applied similarly named labels to shared resources.
 
 The new format introduces two types of labels: "User" and "Group" labels. These are now stored in either the user template or the group template, along with metadata about which resources they're applied to. This avoids cluttering the resource templates themselves and makes it possible to control label visibility more precisely by leveraging different group memberships. 
 

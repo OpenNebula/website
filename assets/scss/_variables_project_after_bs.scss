@@ -329,7 +329,13 @@
     color: #007099;
   }  
 
-
+  // Right-hand sidebar
+  .td-sidebar-toc {
+    a:hover {
+      text-decoration: underline !important;
+    }
+    .td-page-meta a {
+      color: #007099 !important;
+      }
+    }
 }
-
-

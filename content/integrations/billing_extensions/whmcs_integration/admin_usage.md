@@ -14,7 +14,7 @@ weight: "3"
 
 ## Creating a Product Group
 
-Before creating products you should create groups to better organize your offerings.  To create a new product group, navigate to **System Settings** -> **Products/Services**, then click on the **Create a New Group** button there. Fill in the Product Group Name, and any other pieces of this form such as Template and Payment Gateways, then click **Save Changes** once you’re done.
+Before creating products you should create groups to better organize your offerings.  To create a new product group, navigate to **System Settings** -> **Products/Services**, then click on the **Create a New Group** button there. Fill in the Product Group Name and any other pieces of this form, such as Template and Payment Gateways, then click **Save Changes** once you’re done.
 
 ## Creating a Product
 
@@ -37,7 +37,7 @@ These resource limits correlate to the [Quota]({{% relref "../../../product/clou
 > * NETRX
 > * NETTX
 
-Below the resources you can determine if the User should be automatically setup or if the system should wait for the Administrator to Accept the order.
+Below the resources you can determine if the User should be automatically set up or if the system should wait for the Administrator to accept the order.
 
 ![image](/images/whmcs_tenants_module_settings.png)
 
@@ -52,9 +52,9 @@ To view the orders waiting to be accepted navigate to **Orders** -> **Pending Or
 
 ![image](/images/whmcs_tenants_accept_order.png)
 
-If your product is configured to be setup after manually accepting the order, you will need to accept the order created before any changes are made in OpenNebula. This is also true for package upgrades your users might request.
+If your product is configured to be set up after manually accepting the order, you will need to accept the order created before any changes are made in OpenNebula. This is also true for package upgrades your users might request.
 
-Once orders are setup there is a User, Group, and ACL created corresponding to the Service in WHMCS. Then, the Quota will be created for the Group linked to this Order. On the service page for the customer, they will have a Login link.
+Once orders are set up there is a User, Group, and ACL created which correspond to the Service in WHMCS. Then, the Quota will be created for the Group linked to this order. On the service page for the customer, they will have a Login link.
 
 {{< alert title="Note" color="success" >}}
 If there are issues when upgrading products, the user and group may need to be recreated. Any existing VMs can be assigned to the admin user temporarily while this is done. This will be fixed in a future release.{{< /alert >}} 
