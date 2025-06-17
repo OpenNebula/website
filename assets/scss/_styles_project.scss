@@ -145,9 +145,6 @@
 
 
 // Cards
-.td-card {
-  border-color: #8F9392 !important;
-}
 .td-navbar .td-search__input {
   border-style: solid;
   border-width: 1px;
@@ -182,9 +179,6 @@
   } 
 }
 
-.td-card-group.card-group {
-  @extend .td-max-width-on-larger-screens;
-}
 // Tags
 .tag-back {
   cursor: pointer;
@@ -222,4 +216,37 @@ img[alt$="><"] {
 .medium-zoom-overlay,
 .medium-zoom-image--opened {
   z-index: 999;
+}
+
+// This is for section-index.html to display sections, subsections & pages in 2-column rows of cards
+.card-columns {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  column-count: 2 !important;
+
+  @include media-breakpoint-only(lg) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-only(xs) {
+    column-count: 1;
+  }
+
+.entry {
+    padding: 10px;
+    display: flex;
+    columns: 2 !important;
+    width: 100% !important;
+    align-self: start !important;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    column-gap: 0.9rem;
+  }
+
+  .card {
+    width: 90%;
+    flex: 0 2 49%;
+    border-color: #8F9392 !important;
+  }
+
 }
