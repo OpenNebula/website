@@ -19,6 +19,16 @@ This site contains the OpenNebula technical documentation. For additional resour
 
 To access additional material including white papers, guides and screencasts, see [Official Guides](https://opennebula.io/docs/).
 
+<!-- temporary inline styling until we define cards for manual use -->
+<style>
+.td-card {
+  display: flex !important;
+  flex: 0 2 45% !important;
+}
+</style>
+
+<div class="card-columns">
+<div class="entry">
 {{< cardpane >}}
   {{< card header="[Quick Start](/quick_start)" >}}
   Gain a high-level view of OpenNebula, and easily deploy a cloud for evaluation and testing.
@@ -36,3 +46,5 @@ To access additional material including white papers, guides and screencasts, se
   Extend functionalities for orchestration, storage, backup, billing, and application management.
   {{< /card >}}
 {{< /cardpane >}}
+</div>
+</div>
