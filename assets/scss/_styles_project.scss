@@ -225,11 +225,11 @@ img[alt$="><"] {
   column-count: 2 !important;
 
   @include media-breakpoint-only(lg) {
-    column-count: 2;
+    //column-count: 2;
   }
 
   @include media-breakpoint-only(xs) {
-    column-count: 1;
+    //column-count: 1;
   }
 
 .entry {
