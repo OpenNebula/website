@@ -1,7 +1,7 @@
 ---
 title: "IONOS OpenNebula - Hosted Deployment"
 linkTitle: "IONOS OpenNebula"
-description: "Guide to provision IONOS infrastructure, which is used to deploy and verify OpenNebula."
+description: "Guide for provisioning IONOS infrastructure, which is used to deploy and verify OpenNebula"
 weight: 2
 ---
 
