@@ -1,5 +1,5 @@
 ---
-title: "Basic OpenNebula UI Guide: VM instantiation"
+title: "Basic OpenNebula UI Guide: VM Instantiation"
 description:
 categories:
 pageintoc: ""
@@ -7,56 +7,68 @@ tags:
 weight: 4
 ---
 
-After successful deployment and verification as implemented by the automations, access the OpenNebula Web UI at
+This short guide explains how to access your OpenNebula cloud via the web UI and instantiate a Virtual Machine that was automatically imported when the OpenNebula cloud was created.
 
-[http://frontend_public_ip:2616/fireedge/sunstone](http://FRONTEND_PUBLIC_IP:2616/fireedge/sunstone) 
+{{< alert title="Tip" color="success" >}}
+This guide provides the basic steps. If you wish to see a more detailed guide, please refer to [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione#deploying-a-virtual-machine-locally" %}}).
+{{< /alert >}}
 
-The default username is “oneadmin” and its password is specified in the “one_pass” variable of the inventory file.
+After successfully verifying the infrastructure deployed by the automations, to run a Virtual Machine access the OpenNebula web UI at:
+
+`http://<Front-end public IP>:2616/fireedge/sunstone`
+
+To log in, use the default username `oneadmin`, and the password specified in the `one_pass` variable of the inventory file.
+
+The image below shows the Virtual Machine included in the OpenNebula installation:
 
 <a id="one-marketplace"></a>
 ![image][one-marketplace]
 
-Instantiate the VM by clicking the icon highlighted below. And choose the previously imported image.
+To instantiate the VM, in the Sunstone UI's left-hand menu go to **Instances** --> **VMs**. Click the icon highlighted below, then select the Virtual Machine image.
 
 <a id="one-new-vm"></a>
 ![image][one-new-vm]
 
-At the VM instantiation menu attach a NIC and choose the public bridge, as shown below. All other values can be left empty or their default values.
+Follow the steps of the VM instantiation wizard. Ensure to attach a NIC and choose the public bridge, as shown below. All other values can be left empty or at their defaults.
 
 <a id="attach-nic"></a>
 ![image][attach-nic]
 
-Add a PASSWORD field and specify the desired root password for the VM, then click Accept, as shown below.
+Add a `PASSWORD` field and specify the desired root password for the VM, then click **Accept**, as shown below.
 
 <a id="one-vm-config"></a>
 ![image][one-vm-config]
 
-Log in to the VM via VNC, using root user and the password previously specified, the VNC button is highlighted below.
+Log in to the VM via VNC (click the icon highlighted below). Log in as user `root` with the password that you specified in the previous step.
 
 <a id="one-vnc-connect"></a>
 ![image][one-vnc-connect]
 
-Perform a manual, public connectivity test from the deployed VM, by pinging a public IP address, e.g. 8.8.8.8, as shown below.
+To test connectivity, from the deployed VM, ping a public IP address, e.g. `8.8.8.8`, as shown below.
 
 <a id="one-vnc-connectivity-test"></a>
 ![image][one-vnc-connectivity-test]
 
-Finally, as a cleanup step, terminate the VM by clicking the red “Trash can” icon, and verify that VM transitions to DONE state, as shown below.
+Finally, as a cleanup step, terminate the VM by clicking the red “Trash can” icon, then verify that the VM transitions to state `DONE`, as shown below.
 
 <a id="one-terminate-vm"></a>
 ![image][one-terminate-vm]
 
-# Manual VM connectivity verification {#manual-vm-connectivity-verification}
+## Manually Verifying VM Connectivity
 
-At this point the automatic verification does not verify the correct behaviour of the VXLAN networking deployed between the VMs.   
-Deploy the following test VMs as shown below. This VM deployment has been demonstrated on the target architecture. For each VM deployment, follow the UI guide as detailed above with screenshots.
+Currently the automatic verification does not verify the correct behavior of the VXLAN networking deployed between the VMs.
 
-Log into each VM and verify the following connectivity matrix of the deployed VMs, as shown in Table 4\.
+To verify VXLAN networking, deploy the test VMs shown below. These VM deployments have been demonstrated on the target architecture. For each VM deployment, follow the UI guide as detailed above with screenshots.
 
-**Table 4\.** Connectivity matrix to manually test the VXLAN networking between the deployed VMs.
+Log into each VM and verify the following connectivity matrix of the deployed VMs, as shown in the table below.
 
-| *Source (row), target (column)* | VM1 | VM2 | VM3 | 8.8.8.8 (or any public IP) |
+### Table 1: Connectivity Matrix
+
+Connectivity matrix to manually test VXLAN networking between the deployed VMs.
+
+| Source | <th class="head" rowspan="4" style="text-align: center; font-weight: bold !important; vertical-align: bottom !important;">Targets</th> |
 | :---- | :---- | :---- | :---- | :---- |
+| VM1 | VM2 | VM3 | `8.8.8.8` (or any public IP) |
 | **VM1** | \- | TEST | TEST | TEST |
 | **VM2** | To vxlan: TEST | \- | TEST | \- |
 | **VM3** | To vxlan: TEST | TEST | \- | \- |
