@@ -35,7 +35,7 @@ Then, book the following two IP ranges, as shown below.
 * **booked-for-vms**: These are the traffic IPs for the public-facing VMs that will be deployed using OpenNebula. Book a block big enough for the VMs.
 
 <a id="ip-man"></a>
-![image][ip-man]
+![><][ip-man]
 
 Assign the booked IP addresses to the servers, as shown below. Note that, without assigning any booked public IP addresses, IONOS will automatically assign new addresses at server startup.
 
@@ -49,14 +49,14 @@ To effect the changes, click the **Provision changes** button in the DCD. Implem
 Access the [IONOS Token Manager](https://dcd.ionos.com/latest/#/tokens), generate a new token, and save the token's value. As indicated in the screenshot below, you will not be able to access this value later, so make sure you save it securely.
 
 <a id="token-manager"></a>
-![image][token-manager]
+![><][token-manager]
 
 ### Retrieving the Data Center UUID
 
 At the [IONOS Data Center Designer web UI](https://dcd.ionos.com/), open the canvas where the infrastructure was designed. Copy and save the virtual data center's UUID by clicking the **API** icon, as shown below.
 
 <a id="dcd-uuid"></a>
-![image][dcd-uuid]
+![><][dcd-uuid]
 
 ## Saving Essential Parameters
 
