@@ -24,9 +24,6 @@ install_hugo_linux() {
     aarch64)
         FILE="hugo_extended_0.145.0_Linux-arm64.tar.gz"
         ;;
-    i386 | i686)
-        FILE="hugo_extended_0.145.0_Linux-32bit.tar.gz"
-        ;;
     x86_64)
         FILE="hugo_extended_0.145.0_Linux-amd64.tar.gz"
         ;;
