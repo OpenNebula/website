@@ -3,7 +3,7 @@ title: Overview
 weight: 1
 ---
 
-This guide provides a complete deployment and verification path to create an OpenNebula Hosted Cloud using IONOS infrastucture, as part of the OpenNebula Ready Certification Program. It includes an OpenNebula Architecture specifically tailored for the IONOS infrastructure, as well as the hardware specification from the IONOS offering.
+This guide provides a complete deployment and verification path to create an OpenNebula Hosted Cloud using IONOS infrastructure, as part of the OpenNebula Ready Certification Program. It includes an OpenNebula Architecture specifically tailored for the IONOS infrastructure, as well as the hardware specification from the IONOS offering.
 
 The guide provides instructions on how to request these resources using the IONOS interface and perform a ZeroTouch deployment of OpenNebula over them. It also provides an automated verification procedure to ensure the correct functioning of the resulting cloud.
 
