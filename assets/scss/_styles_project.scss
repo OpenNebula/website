@@ -224,12 +224,14 @@ img[alt$="><"] {
   flex-wrap: wrap !important;
   column-count: 2 !important;
 
-  @include media-breakpoint-only(lg) {
-    //column-count: 2;
+  @include media-breakpoint-only(sm) {
+    column-count: 1;
+    column-width: 95%;
   }
 
   @include media-breakpoint-only(xs) {
-    //column-count: 1;
+    column-count: 1;
+    column-width: 95%;
   }
 
 .entry {
@@ -241,12 +243,20 @@ img[alt$="><"] {
     flex-wrap: wrap;
     row-gap: 1rem;
     column-gap: 0.9rem;
+
   }
 
   .card {
     width: 90%;
     flex: 0 2 49%;
     border-color: #8F9392 !important;
+  }
+
+@media (max-width: 1000px) {
+    .card {
+      flex: 0 1 95%;
+      columns: 1 !important;
+      }
   }
 
 }
