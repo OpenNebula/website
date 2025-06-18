@@ -1,4 +1,3 @@
-
 # OpenNebula 7.0 Documentation
 
 This is the official repository of OpenNebula's Documentation, currently in development. This documentation is live at:
@@ -17,6 +16,13 @@ To build the documentation, you will need:
 - [Node.js LTS](https://github.com/nodesource/distributions/blob/master/README.md#using-debian-as-root-nodejs-current)
 - [npm](https://www.npmjs.com/)
 - PostCSS
+
+#### Installation
+
+The environment can be automatically bootstrapped by running the `./setup.sh` file. This will download and install hugo `0.14.5` along with all other build requirements.
+Thereafter you can use `npm run start` to download the different modules and start the server.
+
+---
 
 The documentation uses the [Docsy](https://www.docsy.dev/) theme. It is installed automatically as a Hugo module when Hugo first runs from the documentation root folder.
 

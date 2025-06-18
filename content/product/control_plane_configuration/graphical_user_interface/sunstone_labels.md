@@ -14,7 +14,7 @@ weight: "4"
 
 Labels can be defined for most of the OpenNebula resources from the admin view.
 
-Each resource **will store the label information in its own template**, thus it can be easily edited from the CLI or Sunstone.
+Depending on the type of label used **the label information will be stored under either the user or group template**.
 
 ![labels_edit](/images/sunstone_labels_edit.png)
 
@@ -24,9 +24,13 @@ This feature enables the possibility to **group the different resources** under 
 
 ## Label creation
 
-To create a label, go to the Settings section of a user and enter the name of the label.
+To create a label, select one or more resources and press the **New label** button.
 
 ![labels_create](/images/sunstone_labels_create.png)
 
+This will open the **Create label** modal, which can be used to create user and group labels.
+
+![labels_create_modal](/images/sunstone_labels_create_modal.png)
+
 {{< alert title="Warning" color="warning" >}}
-When user apply a label to a resource, they can only apply the labels that they have created. The same happens with the label filter, the user can only filter by the labels that they have created.{{< /alert >}} 
+Only groupadmins can apply and create group labels. However they will still be visible to all members of the group.{{< /alert >}}
