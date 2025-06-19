@@ -36,9 +36,4 @@ matrix:
             - "blockquote"
     sources:
       - content/**/*.md
-      # test file:
-      #- content/solutions/hosted_cloud_providers/ionos_opennebula/*.md
-      #- "!_styles/**/*.md"
-      #- "**/*.md"
-      #- "**/*.markdown"
     default_encoding: utf-8

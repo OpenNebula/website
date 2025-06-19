@@ -27,7 +27,7 @@ To build the documentation:
 
 Hugo should build the site and expose it on `localhost:1313/7.0/`.
 
-## Spellchecking
+## Spell Checking
 
 Please ensure to check for typos before contributing!
 
@@ -38,6 +38,8 @@ pyspelling -c .spellcheck.yml
 ```
 
 This will run the spellcheck including the words in the dictionary provided in this repo, `dicts/OpenNebula.dic`.
+
+You can also run the command from the provided script, `spellcheck.sh`.
 
 For installation details on Linux and macOS please see SPELLCHECKING.md.
 

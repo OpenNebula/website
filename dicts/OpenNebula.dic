@@ -93,7 +93,7 @@ DNAT
 Dockerfile
 Dockerfiles
 Dockerhub
-Documenetation
+Docsy
 DRS
 DRV
 DSs
@@ -290,6 +290,7 @@ PMD
 PMDs
 PoC
 PolicyKit
+PostCSS
 Poweroff
 Pre
 ProxyPass
@@ -297,6 +298,7 @@ ProxyPassReverse
 PubkeyAcceptedAlgorithms
 PublicIP
 Pyone
+PySpelling
 Qcow
 Qemu
 QinQ
@@ -1277,6 +1279,7 @@ webrick
 webserver
 websockets
 weren
+wordlist
 wr
 writeback
 writethrough
