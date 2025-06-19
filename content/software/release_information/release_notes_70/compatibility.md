@@ -93,7 +93,7 @@ The enforcement parameter was deprecated to ensure NUMA consistency for the VM d
 
 ## New Default Local Datastore Driver
 
-Starting with OpenNebula 6.10.2, the default driver for Local datastores is now `local`, replacing the legacy `ssh` driver (see [Local Storage Datastore Drivers](../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/local_ds#local-ds-drivers)). While the `ssh` driver remains fully supported and existing datastores require no changes, the new `local` driver was developed from scratch to improve maintainability and facilitate future enhancements.
+Starting with OpenNebula 6.10.2, the default driver for Local datastores is now `local`, replacing the legacy `ssh` driver (see [Local Storage Datastore Drivers]({{% relref "local_ds" %}})). While the `ssh` driver remains fully supported and existing datastores require no changes, the new `local` driver was developed from scratch to improve maintainability and facilitate future enhancements.
 
 This redesign was necessary to support advanced QCOW2 features such as thin provisioning, which introduced incompatibilities with previous implementations. The new driver streamlines the codebase and lays the foundation for upcoming capabilities.
 
@@ -101,13 +101,13 @@ Note: Caching support is not yet included in this release but is in an advanced 
 
 <a id="compatibility-guide-labels"></a>
 
-## SAN driver BRIDGE_LIST location change
+## SAN driver BRIDGE_LIST Location Change
 
 To make its behaviour consistent with other drivers, [LVM/SAN](/product/cluster_configuration/storage_system/lvm_drivers/) drivers now define the `BRIDGE_LIST` attribute in the IMAGE datastore, instead of in the SYSTEM one.
 
-## Virtual Machine PCI passthrough address generation
+## Virtual Machine PCI Passthrough Address Generation
 
-The guest PCI address for passthrough devices (`VM_BUS`, `VM_SLOT`, `VM_ADDRESS`...) is now generated at allocation time (i.e. when the PCI device is assigned to the VM). This change has been introduce to properly generate NUMA-aware PCIe topologies.
+The guest PCI address for passthrough devices (`VM_BUS`, `VM_SLOT`, `VM_ADDRESS`...) is now generated at allocation time (i.e. when the PCI device is assigned to the VM). This change has been introduced to properly generate NUMA-aware PCIe topologies.
 
 ## Labels on Sunstone
 
@@ -121,7 +121,7 @@ When upgrading to 7.0, existing in-use labels will be automatically migrated. To
 
 #### Persistent labels
 
-The new default or persistent labels in Sunstone adheres to the following structure:
+The new default or persistent labels in Sunstone adhere to the following structure:
 
 ```yaml
 #User labels are organized as nested categories and subcategories under each user template.

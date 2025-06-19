@@ -19,7 +19,7 @@ To build the documentation, you will need:
 
 #### Installation
 
-The environment can be automatically bootstrapped by running the `./setup.sh` file. This will download and install hugo `0.14.5` along with all other build requirements.
+The environment can be automatically bootstrapped by running the `./setup.sh` file. This will download and install hugo `0.145.0` along with all other build requirements.
 Thereafter you can use `npm run start` to download the different modules and start the server.
 
 ---
