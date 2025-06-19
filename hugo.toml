@@ -2,7 +2,7 @@
 
 # title = ""
 
-baseURL = "https://docs.opennebula.io/7.0/"
+baseURL = "https://docs.opennebula.io/devel"
 
 #######
 
