@@ -27,7 +27,7 @@ As part of OpenNebula 7.0’s effort to streamline infrastructure operations and
 
 ## Redesigned Scheduling System
 
-OpenNebula 7.0 introduces a [completely redesigned scheduling architecture](../../../product/cloud_system_administration/scheduler/overview/#opennebula-scheduler-framework-architecture) based on a modular driver framework. The scheduler is no longer a persistent system service; instead, it is executed on demand whenever a new *plan* is required.
+OpenNebula 7.0 introduces a [completely redesigned scheduling architecture](../../../product/cloud_system_administration/scheduler/overview/#opennebula-scheduler-framework-architecture) based on a modular driver framework. The scheduler is no longer a persistent system service; instead, it is executed on demand whenever a new _plan_ is required.
 
 This new framework supports multiple scheduling algorithms. By default, the original rank-based scheduler handles placement decisions, while the new OpenNebula DRS scheduler is used for optimization tasks. We recommend [reviewing the updated configuration options and files](../../../product/cloud_system_administration/scheduler/configuration/) to fine-tune the scheduling behavior to your specific infrastructure needs.
 
@@ -38,16 +38,16 @@ This version of OneFlow introduces support for Virtual Router roles, enabling mo
 The database migrator automatically updates existing services to the new format. However, users with custom applications or integrations are advised to review the updated data model to ensure compatibility and make any necessary adjustments:
 
 | Old attribute          | New Attribute       |
-|------------------------|---------------------|
+| ---------------------- | ------------------- |
 | `vm_template`          | `template_id`       |
 | `vm_template_contents` | `template_contents` |
 | `custom_attrs`         | `user_inputs`       |
 
 New attributes:
 
-| Attribute  | Permitted Values  | Default Value |
-|------------|-------------------|---------------|
-| `type`     | `vm`, `vr`        |  `vm`         |
+| Attribute | Permitted Values | Default Value |
+| --------- | ---------------- | ------------- |
+| `type`    | `vm`, `vr`       | `vm`          |
 
 ### Examples:
 
@@ -70,18 +70,17 @@ New Format:
 
 ```json
 {
-   "name": "new_role_example",
-   "template_id": 1,
-   "type": "vm",
-   "cardinality": 3,
-   "template_contents": {
-       "CPU": 2
-   },
-   "user_inputs": {
-       "ATT_A": "M|text|desc| |default"
-   }
+  "name": "new_role_example",
+  "template_id": 1,
+  "type": "vm",
+  "cardinality": 3,
+  "template_contents": {
+    "CPU": 2
+  },
+  "user_inputs": {
+    "ATT_A": "M|text|desc| |default"
+  }
 }
-
 ```
 
 ## Cluster Provisioning
@@ -94,7 +93,7 @@ The enforcement parameter was deprecated to ensure NUMA consistency for the VM d
 
 ## New Default Local Datastore Driver
 
-Starting with OpenNebula 6.10.2, the default driver for Local datastores is now `local`, replacing the legacy `ssh` driver (see [Local Storage Datastore Drivers](../../../product/cloud\_clusters\_infrastructure\_configuration/storage\_system\_configuration/local\_ds#local-ds-drivers)). While the `ssh` driver remains fully supported and existing datastores require no changes, the new `local` driver was developed from scratch to improve maintainability and facilitate future enhancements.
+Starting with OpenNebula 6.10.2, the default driver for Local datastores is now `local`, replacing the legacy `ssh` driver (see [Local Storage Datastore Drivers]({{% relref "local_ds" %}})). While the `ssh` driver remains fully supported and existing datastores require no changes, the new `local` driver was developed from scratch to improve maintainability and facilitate future enhancements.
 
 This redesign was necessary to support advanced QCOW2 features such as thin provisioning, which introduced incompatibilities with previous implementations. The new driver streamlines the codebase and lays the foundation for upcoming capabilities.
 
@@ -102,13 +101,13 @@ Note: Caching support is not yet included in this release but is in an advanced 
 
 <a id="compatibility-guide-labels"></a>
 
-## SAN driver BRIDGE_LIST location change
+## SAN driver BRIDGE_LIST Location Change
 
 To make its behaviour consistent with other drivers, [LVM/SAN](/product/cluster_configuration/storage_system/lvm_drivers/) drivers now define the `BRIDGE_LIST` attribute in the IMAGE datastore, instead of in the SYSTEM one.
 
-## Virtual Machine PCI passthrough address generation
+## Virtual Machine PCI Passthrough Address Generation
 
-The guest PCI address for passthrough devices (``VM_BUS``, ``VM_SLOT``, ``VM_ADDRESS``...) is now generated at allocation time (i.e. when the PCI device is assigned to the VM). This change has been introduce to properly generate NUMA-aware PCIe topologies.
+The guest PCI address for passthrough devices (`VM_BUS`, `VM_SLOT`, `VM_ADDRESS`...) is now generated at allocation time (i.e. when the PCI device is assigned to the VM). This change has been introduced to properly generate NUMA-aware PCIe topologies.
 
 ## Labels on Sunstone
 
@@ -116,6 +115,29 @@ Starting from version 7.0, the labels system in Sunstone has been revamped, movi
 
 Previously, labels were stored directly on the resources they were applied to, which didn't scale well. There was no way to tell which user had created which label, and removing a label only affected the user template, leaving the resource template untouched. This often led to "stale labels", cluttering resource templates and misrepresenting which labels were actually in use, especially when different users applied similarly named labels to shared resources.
 
-The new format introduces two types of labels: "User" and "Group" labels. These are now stored in either the user template or the group template, along with metadata about which resources they're applied to. This avoids cluttering the resource templates themselves and makes it possible to control label visibility more precisely by leveraging different group memberships. 
+The new format introduces two types of labels: "User" and "Group" labels. These are now stored in either the user template or the group template, along with metadata about which resources they're applied to. This avoids cluttering the resource templates themselves and makes it possible to control label visibility more precisely by leveraging different group memberships.
 
 When upgrading to 7.0, existing in-use labels will be automatically migrated. To avoid bringing over stale or unused data, only labels that are present both in a user's template and on a resource template will be migrated. Any existing persistent labels defined in `etc/one/sunstone/sunstone-views.yaml` will be migrated to the new format as user labels. New persistent labels can be defined in `etc/one/fireedge/sunstone/default-labels.yaml`.
+
+#### Persistent labels
+
+The new default or persistent labels in Sunstone adhere to the following structure:
+
+```yaml
+#User labels are organized as nested categories and subcategories under each user template.
+user:
+  Test1:
+    A:
+      B:
+        C:
+
+# For group labels, the first level key is the group name.
+# Under each group, labels are organized similarly to users, with nested categories and subcategories.
+
+group:
+  oneadmin:
+    Test2:
+      D:
+        E:
+          F:
+```
