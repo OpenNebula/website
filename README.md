@@ -33,7 +33,24 @@ To build the documentation:
 
 Hugo should build the site and expose it on `localhost:1313/7.0/`.
 
+## Spell Checking
+
+Please ensure to check for typos before contributing!
+
+To ensure compatibility with the OpenNebula wordlist, it is recommended to use `pyspelling` with the Aspell spell checking tool and the config file provided in the repo.
+
+```
+pyspelling -c .spellcheck.yml
+```
+
+This will run the spellcheck including the words in the dictionary provided in this repo, `dicts/OpenNebula.dic`.
+
+You can also run the command from the provided script, `spellcheck.sh`.
+
+For installation details on Linux and macOS please see SPELLCHECKING.md.
+
 ## More Info
 
 - [Hugo installation](https://gohugo.io/installation/)
 - [Hugo releases on GitHub](https://github.com/gohugoio/hugo/releases)
+- [PySpelling](https://facelessuser.github.io/pyspelling/)
