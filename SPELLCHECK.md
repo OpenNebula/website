@@ -95,7 +95,7 @@ For help, `pyspelling -h`.
 
 The spell checker displays its results on standard output, including any errors and the names of the files where they occur. If you get any errors you will need to correct them or, if an error is a false positive, update the dictionary at `dicts/OpenNebula.dic` and include the update in your PR.
 
-If you get unexpected behavior, please check the default options for your Aspell installation (to quickly check your Aspell config, you can `aspell config`).
+If you get unexpected behavior, please check the default options for your Aspell installation (to quickly check your Aspell config, you can run `aspell dump config`).
 
 ## More Info
 
