@@ -50,19 +50,19 @@ Running the spellchecker with the provided configuration file will automatically
 To run the spellchecker:
 
 ```
-pyspelling -c spellcheck.yml
+pyspelling -c .spellcheck.yml
 ```
 
 If you wish to only check the files that you wrote or modified:
 
 ```
---name Markdown -c spellcheck.yml --source <file>
+--name Markdown -c .spellcheck.yml --source <file>
 ```
 
 For example:
 
 ```
---name Markdown -c spellcheck.yml --source content/product/my_new_section/*.md
+--name Markdown -c .spellcheck.yml --source content/product/my_new_section/*.md
 ```
 
 checks every Markdown file (\*md) in the specified section. Note that to check only specific file(s) you have to pass the `--name Markdown` parameter.
