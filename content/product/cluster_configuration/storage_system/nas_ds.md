@@ -64,8 +64,8 @@ To create a new System Datastore, you need to set following (template) parameter
 | `NAME`                          | Name of datastore                                    |
 | `TYPE`                          | `SYSTEM_DS`                                          |
 | `TM_MAD`                        | `shared` for shared transfer mode                    |
-| `qcow2` for qcow2 transfer mode |                                                      |
-| `BRIDGE_LIST`                   | Space separated list of hosts with system DS mounted |
+|                                 | `qcow2` for qcow2 transfer mode                      |
+| `BRIDGE_LIST`                   | Space-separated list of hosts with system DS mounted |
 
 This can be done either in Sunstone or through the CLI; for example, to create a System Datastore using the shared mode simply enter:
 
@@ -127,11 +127,29 @@ Attributes related to NFS auto configuration can’t be changed after datastore 
 
 * `NFS_AUTO_ENABLE`: If set to `YES` the automatic NFS mounting functionality is enabled (default: `no`).
 * `NFS_AUTO_HOST`: (Required if `NFS_AUTO_ENABLE=yes`) Hostname or IP address of the NFS server.
-* `NFS_AUTO_PATH`: (Required if `NFS_AUTO_ENABLE=yes`) NFS share path.
+* `NFS_AUTO_PATH`: (Required if `NFS_AUTO_ENABLE=yes`) NFS share path. This share will be mounted in
+  the hosts at the datastore path (`/var/lib/one/datastores/<dsid>/`).
 * `NFS_AUTO_OPTS`: Comma-separated options (fstab-like) used for mounting the NFS shares (default: `defaults`).
 
+Here's a sample configuration for an automatically mounted image datastore:
+
+```default
+$ cat ds.conf
+NAME            = nfs_images_share1
+DS_MAD          = fs
+TM_MAD          = shared
+NFS_AUTO_ENABLE = yes
+NFS_AUTO_HOST   = 192.168.150.10
+NFS_AUTO_PATH   = /srv/share1
+NFS_AUTO_OPTS   = "soft,intr,rsize=32768,wsize=32768"
+
+$ onedatastore create ds.conf
+ID: 102
+```
+
 {{< alert title="Warning" color="warning" >}}
-Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.{{< /alert >}} 
+Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.
+{{< /alert >}}
 
 <a id="shared-ssh-mode"></a>
 
