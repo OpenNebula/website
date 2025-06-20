@@ -1,6 +1,6 @@
 ---
-title: "5G-Ready OpenNebula - Deployment Blueprint"
-linkTitle: "5G-Ready OpenNebula"
+title: "5G Telco - Deployment Blueprint"
+linkTitle: "5G Telco"
 description: "TBC"
 weight: 2
 ---
