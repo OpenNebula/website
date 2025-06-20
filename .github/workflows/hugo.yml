@@ -3,7 +3,7 @@ name: Build Hugo Site and Publish
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["one-7.0"]
+    branches: ["one-7.0", "master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
