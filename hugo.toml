@@ -37,7 +37,7 @@ taxonomyPageHeader = ["tags", "categories"]
 
 [params.ui]
 #  Set to true to disable breadcrumb navigation.
-breadcrumb_disable = true
+breadcrumb_disable = false
 # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
 navbar_logo = true
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like o>
@@ -47,7 +47,7 @@ sidebar_menu_compact = false
 sidebar_menu_foldable = true
 ul_show = 3
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if se>
-sidebar_search_disable = false
+sidebar_search_disable = true
 showLightDarkModeMenu = true
 
 # Adds a reading time to the top of each doc.
@@ -66,7 +66,7 @@ enable = false
    [cascade.params]
       type = 'docs'
    [cascade.target]
-      path = '{/product/**,/quick_start/**,/software/**,/solutions/**}'
+      path = '{/product/**,/quick_start/**,/software/**,/solutions/**,/integrations/**}'
 
 
 [params.links]
@@ -79,7 +79,7 @@ enable = false
 [[params.links.user]]
   name ="OpenNebula on X"
   url = "https://x.com/opennebula/"
-  icon = "fab fa-twitter"
+  icon = "fab fa-x-twitter"
   desc = "Follow OpenNebula on X"
 [[params.links.user]]
   name = "OpenNebula on YouTube - Webinars, demos and more"
@@ -91,25 +91,25 @@ enable = false
   url = "https://github.com/OpenNebula"
   icon = "fab fa-github"
   desc = "Development takes place here!"
-# Developer relevant links. These will show up on right side of footer and in the community page i>
-#[[params.links.developer]]
-#  name = "Slack"
-#  url = "https://example.org/slack"
-#  icon = "fab fa-slack"
-#  desc = "Chat with other project developers"
-#[[params.links.developer]]
-#  name = "Developer mailing list"
-#  url = "https://example.org/mail"
-#  icon = "fa fa-envelope"
-#  desc = "Discuss development issues around the project"
+[[params.links.user]]
+  name = "OpenNebula on Bluesky"
+  url = "https://bsky.app/profile/opennebula.bsky.social"
+  icon = "fab fa-bluesky"
+  desc = "Follow OpenNebula on Bluesky"
+[[params.links.user]]
+  name = "OpenNebula on Facebook"
+  url = "https://www.facebook.com/p/OpenNebula-100057184252936/"
+  icon = "fab fa-facebook"
+  desc = "Follow OpenNebula on Facebook"  
+[[params.links.user]]
+  name = "OpenNebula on LinkedIn"
+  url = "https://www.linkedin.com/company/opennebula"
+  icon = "fab fa-linkedin"
+  desc = "Follow OpenNebula on LinkedIn"
 
 
-# Top menu
+
 [menu]
-  #[[menu.main]]
-  #  name = "Documentation"
-  #  url = "/"
-  #  weight = 1
   [[menu.main]]
     name = "Quick Start"
     url = "/quick_start"
@@ -117,11 +117,11 @@ enable = false
   [[menu.main]]
     name = "Product"
     url = "/product"
-    weight = 2
+    weight = 5
   [[menu.main]]
     name = " Solutions"	# Space added intentionally to prevent Hugo from changing page type
     url = "/solutions"
-    weight = 3
+    weight = 10
 
 [params]
 no_list = true
@@ -134,6 +134,18 @@ enableGitInfo = true
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
 offlineSearchSummaryLength = 800
+
+### Version variables
+# The short X.Y version
+version = "7.0"
+# The full version, including alpha/beta/rc tags
+release = "6.99.85"
+# The context packages released version
+context_release = "7.0.0"
+# Docs version is part of the URL & invoked by the alert shortcode
+# Setting here in case it ever needs to differ from SW version
+docs_version = "7.0"
+
 
   # Add your release versions here
 version_menu = "Versions"
@@ -178,13 +190,14 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
-  #[[module.mounts]]		# for testing of dir. remapping
-  #  source = 'content/7.0'
-  #  target = 'content'
+  #[[module.mounts]]
+  #  source = 'images'
+  #  target = 'static/images'
 
 # added the user feedback module
 [params.ui.feedback]
 enable = true
+feedback_question = 'We value your feedback. Was this page helpful?'
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 

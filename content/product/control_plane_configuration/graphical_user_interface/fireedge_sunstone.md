@@ -18,15 +18,15 @@ weight: "5"
 
 **Sunstone** is the new generation OpenNebula web interface, fully featured for VM and VM Template management and with other [sections]({{% relref "#fireedge-sections" %}}) ready covering most functionality for end users.
 
-This interface is delivered by the [FireEdge server]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}), and it is its main interface, meaning that it will redirect to Sunstone when contacted in the `http://<OPENNEBULA-FRONTEND>:2616/` address.
+This interface is delivered by the [FireEdge server]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}), and is its main interface, meaning that it will redirect to Sunstone when contacted in the `http://<OPENNEBULA-FRONTEND>:2616/` address.
 
 ## Configuration
 
-To configure Sunstone, there are several options to consider, and they are described in the [FireEdge Configuration]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}) guide.
+To configure Sunstone, there are several options to consider and they are described in the [FireEdge Configuration]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}) guide.
 
 ## Usage
 
-This completely fresh user experience is available by accessing `http://<OPENNEBULA-FRONTEND>:2616`. On the left menu, the users can find the available tabs to manage resources, as described in the [Sections]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}) part of this guide.
+This completely fresh user experience is available by accessing `http://<OPENNEBULA-FRONTEND>:2616`. On the left menu, users can find the available tabs to manage resources, as described in the [Sections]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}) part of this guide.
 
 Sunstone users can change their current view from the top-right dropdown menu:
 
@@ -42,68 +42,68 @@ The available Sunstone sections and their tabs are described in the following su
 
 ### Instances
 
-- **VMs Tab**: Users can see all their Virtual Machines, and perform managing actions such as changing permissions, attaching disks, attaching networks, taking snapshots, adding scheduled actions, remote console connections, and more. From this tab, users can also instantiate a new Virtual Machine. Some VM actions can be through multiple VMs, such as: `suspend`, `stop`, `power-off`, `reboot`, `resume`, `undeploy` and more.
-- **Virtual Routers Tab**: Admins can see all their virtual routers, and perform different kinds of managing actions. From this tab, admins can also instantiate new virtual routers.
-- **Services Tab**: Admins can see all their services, and perform different kinds of managing actions. From this tab, admins can also instantiate new services.
+- **VMs Tab**: Users can see all their Virtual Machines and perform managing actions such as changing permissions, attaching disks, attaching networks, taking snapshots, adding scheduled actions, remote console connections, and more. From this tab, users can also instantiate a new Virtual Machine. Some VM actions can be through multiple VMs, such as: `suspend`, `stop`, `power-off`, `reboot`, `resume`, `undeploy`, and more.
+- **Virtual Routers Tab**: Admins can see all their virtual routers and perform different kinds of managing actions. From this tab, admins can also instantiate new virtual routers.
+- **Services Tab**: Admins can see all their services and perform different kinds of managing actions. From this tab, admins can also instantiate new services.
 
 ### Templates
 
-- **VM Template Tab**: Users can see all their Templates, and perform updates and clones. From this tab, user can also instantiate a Virtual Machine. Also, the user can perform some managing operations over the templates, such as: change permissions, share and unshare, lock and unlock, and more.
-- **Service Template Tab**: Admins can see all their Service Templates, create new ones and update existing templates. From this tab, admins can also instantiate services directly and perform different kinds of managing operations.
-- **Virtual Routers Template Tab**: Admins can see all their Virtual Routers Templates, create new ones and update existing templates. From this tab, admins can also instantiate virtual routers directly and perform different kinds of managing operations.
-- **VM Groups Tab**: Admins can access all the VM groups defined in the OpenNebula instance, and perform managing operations such as updating, enabling/disabling, and more. Also, admins can create new VM groups from this tab.
+- **VM Template Tab**: Users can see all their Templates and perform updates and clones. From this tab, users can also instantiate a Virtual Machine. Also, users can perform some managing operations over the templates, such as: change permissions, share and unshare, lock and unlock, and more.
+- **Service Template Tab**: Admins can see all their Service Templates, create new ones, and update existing templates. From this tab, admins can also instantiate services directly and perform different kinds of managing operations.
+- **Virtual Routers Template Tab**: Admins can see all their Virtual Routers Templates, create new ones, and update existing templates. From this tab, admins can also instantiate virtual routers directly and perform different kinds of managing operations.
+- **VM Groups Tab**: Admins can access all the VM groups defined in the OpenNebula instance and perform managing operations such as updating, enabling/disabling, and more. Also, admins can create new VM groups from this tab.
 
 ### Storage
 
-- **Datastores Tab**: Users can see all their `FILE`, `IMAGE`, and `SYSTEM` datastores. Also, the users can perform some managing actions, such as changing permissions, enabling and disabling, and more. From this tab, users can create a new Datastore of one of the types described before.
-- **Images Tab**: Users can see all their `OS`, `CDROM`, and `DATABLOCK` images. Also, the users can perform some managing actions, such as changing permissions, locking and unlocking, and more. From this tab, users can instantiate a new Image of one of the types described before.
-- **Files Tab**: Users can see all their `KERNEL`, `RAMDISK`, and `CONTEXT` images. Also, the users can perform some managing actions, such as changing permissions, enabling and disabling, and more. From this tab, users can instantiate a new Image of one of the types described before.
-- **Backups Tab**: Users can see all their `BACKUP` images. Also, the users can perform some managing actions, such as changing permissions and restoring.
-- **Marketplace Tab**: Users can see all their marketplaces. Also, the users can perform some managing actions, such as create and update a marketplace, changing permissions and restoring, and more.
-- **Marketplace Apps Tab**: Users can see all the apps from their active marketplaces, download and create templates from them, or download them locally on their computers.
-- **BackupJobs Tab**: Users can see all their backup jobs. Also, the users can perform some managing actions, such as create, start and cancel a backup job, changing permissions and restoring, and more.
+- **Datastores Tab**: Users can see all their `FILE`, `IMAGE`, and `SYSTEM` datastores. Also, users can perform some managing actions, such as changing permissions, enabling and disabling, and more. From this tab, users can create a new Datastore of one of the types described before.
+- **Images Tab**: Users can see all their `OS`, `CDROM`, and `DATABLOCK` images. Also, users can perform some managing actions, such as changing permissions, locking and unlocking, and more. From this tab, users can instantiate a new Image of one of the types described before.
+- **Files Tab**: Users can see all their `KERNEL`, `RAMDISK`, and `CONTEXT` images. Also, users can perform some managing actions, such as changing permissions, enabling and disabling, and more. From this tab, users can instantiate a new Image of one of the types described before.
+- **Backups Tab**: Users can see all their `BACKUP` images. Also, users can perform some managing actions, such as changing permissions and restoring.
+- **Marketplace Tab**: Users can see all their Marketplaces. Also, users can perform some managing actions, such as create and update a Marketplace, changing permissions and restoring, and more.
+- **Marketplace Apps Tab**: Users can see all the apps from their active Marketplaces, download and create templates from them, or download them locally on their computers.
+- **BackupJobs Tab**: Users can see all their backup jobs. Also, users can perform some managing actions, such as create, start, and cancel a backup job, changing permissions and restoring, and more.
 
 ### Networks
 
-- **Virtual Networks Tab**: Users can see all their Virtual Networks, and perform managing operations such as updating, reserving, changing permissions, and more. Also, users can create a new Virtual Network from this tab.
-- **Virtual Networks Template Tab**: Users can see all their Virtual Networks Templates, and perform updates. From this tab, user can also instantiate a Virtual Network from a template. Also, the user can perform some managing operations over the templates, such as: change permissions, lock and unlock, and more.
-- **Security Groups Tab**: Users can see all their Security Groups, and perform managing operations such as updating, cloning, committing, changing permissions, and more. Also, users can create a new Security Group from this tab.
+- **Virtual Networks Tab**: Users can see all their Virtual Networks and perform managing operations such as updating, reserving, changing permissions, and more. Also, users can create a new Virtual Network from this tab.
+- **Virtual Networks Template Tab**: Users can see all their Virtual Networks Templates and perform updates. From this tab, users can also instantiate a Virtual Network from a template. Also, users can perform some managing operations over the templates, such as: change permissions, lock and unlock, and more.
+- **Security Groups Tab**: Users can see all their Security Groups and perform managing operations such as updating, cloning, committing, changing permissions, and more. Also, users can create a new Security Group from this tab.
 
 ### Infrastructure
 
 - **Providers Tab**: Users can see all their Providers and can create and edit them.
 - **Provisions Tab**: Users can see all their Provisions and can create and edit them.
-- **Clusters Tab**: Users can see all their Clusters, and perform managing operations such as updating and deleting.
-- **Hosts Tab**: Users can see all their Hosts, and perform managing operations such as enabling, disabling, and more. Also, users can create a new Host from this tab.
-- **Zone Tab**: Users can see all their Zones and see all the information about a zone.
+- **Clusters Tab**: Users can see all their Clusters and perform managing operations such as updating and deleting.
+- **Hosts Tab**: Users can see all their Hosts and perform managing operations such as enabling, disabling, and more. Also, users can create a new Host from this tab.
+- **Zone Tab**: Users can see all their Zones and see all the information about a Zone.
 
 ### System
 
-- **VDCs Tab**: Users can see all their VDCs, and can update, rename and view the resources associated with them, and more. Also, users can create a new VDC from this tab.
-- **Users Tab**: Admins can access all the users defined in the OpenNebula instance, and perform managing operations such as updating, enabling/disabling, setting quotas, and more. Also, admins can create new Users from this tab.
-- **Groups Tab**: Admins can access all the groups defined in the OpenNebula instance, and perform managing operations such as updating, setting quotas, and more. Also, admins can create new Groups from this tab.
-- **ACL Tab**: Admins can access all the ACL rules defined in the OpenNebula instance, and perform create and delete operations.
+- **VDCs Tab**: Users can see all their VDCs and can update, rename, and view the resources associated with them, and more. Also, users can create a new VDC from this tab.
+- **Users Tab**: Admins can access all the users defined in the OpenNebula instance and perform managing operations such as updating, enabling/disabling, setting quotas, and more. Also, admins can create new Users from this tab.
+- **Groups Tab**: Admins can access all the groups defined in the OpenNebula instance and perform managing operations such as updating, setting quotas, and more. Also, admins can create new Groups from this tab.
+- **ACL Tab**: Admins can access all the ACL rules defined in the OpenNebula instance and perform create and delete operations.
 
 <a id="fireedge-sunstone-settings-tab"></a>
 
 ### Settings
 
-From this section, users can define multiple configuration options for themselves, that will be saved inside the user template, such as:
+From this section, users can define multiple configuration options for themselves that will be saved inside the user template, such as:
 
-- **Schema (default = System)**: change the Sunstone Theme to dark, light or matching with the system.
+- **Schema (default = System)**: change the Sunstone Theme to dark, light, or matching with the system.
 - **Language (default = English US)**: select the language that they want to use for the UI.
-- **View**: allows to change the user view.
-- **Default endpoint**: allows to change the Sunstone endpoint when using federation.
-- **SSH Public key**: allows the user to specify a public SSH key that they can use on the VMs.
+- **View**: allows users to change the user view.
+- **Default endpoint**: allows users to change the Sunstone endpoint when using federation.
+- **SSH Public key**: allows users to specify a public SSH key that they can use on the VMs.
 - Disable the dashboard animations. By default they are enabled.
 - Disable the information on full screen. By default they are disabled.
-- **Change password**: allows to change the user’s password.
-- **Labels**: allows the user to manage their labels.
-- **SSH Public key**: allows the user to specify a public SSH key that they can use on the VMs.
-- **SSH Private key**: allows the user to specify a private SSH key that they can use when establishing connections with their VMs.
+- **Change password**: allows users to change their password.
+- **Labels**: allows users to manage their labels.
+- **SSH Public key**: allows users to specify a public SSH key that they can use on the VMs.
+- **SSH Private key**: allows users to specify a private SSH key that they can use when establishing connections with their VMs.
 - **SSH Private key passphrase**: if the private SSH key is encrypted, the user must specify the password.
-- **Login token**: allows to create a new token for the user.
-- **Two Factor Authentication**: allows to register an app to perform [Two Factor Authentication]({{% relref "../../cloud_system_administration/authentication_configuration/sunstone_auth#sunstone-2f-auth" %}}).
+- **Login token**: allows the creation of a new token for the user.
+- **Two Factor Authentication**: allows users to register an app to perform [Two Factor Authentication]({{% relref "../../cloud_system_administration/authentication_configuration/sunstone_auth#sunstone-2f-auth" %}}).
 
 {{< alert title="Note" color="success" >}}
 All the configurations set in this section will be in the user template.{{< /alert >}} 
@@ -114,14 +114,14 @@ All the configurations set in this section will be in the user template.{{< /ale
 
 ## Views
 
-Using the Sunstone views, you can provide a simplified UI aimed at end-users of an OpenNebula cloud. Sunstone Views are fully customizable, so you can easily enable or disable specific information tabs or action buttons. [You can define multiple views for different user groups]({{% relref "#fireedge-sunstone-new-view" %}}). Each view defines a set of UI components, so each user accesses and views the relevant parts of the cloud for their role. Default views:
+Using the Sunstone views, you can provide a simplified UI aimed at end users of an OpenNebula cloud. Sunstone Views are fully customizable, so you can easily enable or disable specific information tabs or action buttons. [You can define multiple views for different user groups]({{% relref "#fireedge-sunstone-new-view" %}}). Each view defines a set of UI components, so each user accesses and views the relevant parts of the cloud for their role. Default views:
 
 - [Admin View]({{% relref "#fireedge-sunstone-admin-view" %}}).
 - [User View]({{% relref "#fireedge-sunstone-user-view" %}}).
 - [Groupadmin View]({{% relref "#fireedge-sunstone-groupadmin-view" %}}).
 - [Cloud View]({{% relref "#fireedge-sunstone-cloud-view" %}}).
 
-Each view is in an individual directory, `admin`, `user`, `groupadmin` and `cloud` that OpenNebula proposes by default, as described in the next section.
+Each view is in an individual directory, `admin`, `user`, `groupadmin`, and `cloud` that OpenNebula proposes by default, as described in the next section.
 
 ### Default Views
 
@@ -129,7 +129,7 @@ Each view is in an individual directory, `admin`, `user`, `groupadmin` and `clou
 
 ### Admin View
 
-This view provides complete control of the Virtual Machines, Templates, and Marketplace apps. Details can be configured in the `/etc/one/fireedge/sunstone/admin/` directory.
+This view provides complete control of the Virtual Machines, Templates, and Marketplace apps. Details can be configured in the `/etc/one/fireedge/sunstone/views/admin/` directory.
 
 ![fireedge_sunstone_admin_view](/images/fireedge_sunstone_admin_view.png)
 
@@ -137,7 +137,7 @@ This view provides complete control of the Virtual Machines, Templates, and Mark
 
 ### User View
 
-Based on the Admin View. It is an advanced user view intended for users with fewer privileges than an admin user, allowing them to manage Virtual Machines and Templates. Users will not be able to manage or retrieve the hosts and clusters of the cloud. Details can be configured in the `/etc/one/fireedge/sunstone/user/` directory.
+Based on the Admin View. It is an advanced user view intended for users with fewer privileges than an admin user, allowing them to manage Virtual Machines and Templates. Users will not be able to manage or retrieve the Hosts and clusters of the cloud. Details can be configured in the `/etc/one/fireedge/sunstone/views/user/` directory.
 
 ![fireedge_sunstone_user_view](/images/fireedge_sunstone_user_view.png)
 
@@ -145,22 +145,22 @@ Based on the Admin View. It is an advanced user view intended for users with few
 
 ### Groupadmin View
 
-This view it’s like a limited version of the cloud administrator view to be used by the administrators of a group. Details can be configured in the `/etc/one/fireedge/sunstone/groupadmin/` directory. More details on [Group admin view]({{% relref "groupadmin_view#group-admin-view" %}})
+This view is like a limited version of the cloud administrator view to be used by the administrators of a group. Details can be configured in the `/etc/one/fireedge/sunstone/views/groupadmin/` directory. More details on [Group admin view]({{% relref "groupadmin_view#group-admin-view" %}})
 
 <a id="fireedge-sunstone-cloud-view"></a>
 
 ### Cloud View
 
-This is a simplified view intended for cloud consumers that just require a portal where they can provision new VMs easily. Details can be configured in the `/etc/one/fireedge/sunstone/cloud/` directory. More details on [Cloud view]({{% relref "cloud_view#cloud-view" %}})
+This is a simplified view intended for cloud consumers that just require a portal where they can provision new VMs easily. Details can be configured in the `/etc/one/fireedge/sunstone/views/cloud/` directory. More details on [Cloud view]({{% relref "cloud_view#cloud-view" %}})
 
 <a id="fireedge-sunstone-new-view"></a>
 
 ### Defining a New View
 
-The views definitions are placed in the `/etc/one/fireedge/sunstone/` directory. Each view is defined by a folder (named as the view) with the needed configuration files inside.
+The views definitions are placed in the `/etc/one/fireedge/sunstone/views` directory. Each view is defined by a folder (named as the view) with the necessary configuration files inside.
 
 ```default
-/etc/one/fireedge/sunstone/
+/etc/one/fireedge/sunstone/views
 ...
 |-- admin/
 |   |-- backup-tab.yaml           <--- the Backup tab configuration file
@@ -187,13 +187,13 @@ The views definitions are placed in the `/etc/one/fireedge/sunstone/` directory.
 ...
 ```
 
-The easiest way to create a custom view is to copy the `admin` or `user` folder and modify its content as needed. After that, add the new view into `/etc/one/fireedge/sunstone/sunstone-views.yaml`.
+The easiest way to create a custom view is to copy the `admin` or `user` folder and modify its content as needed. After that, add the new view into `/etc/one/fireedge/sunstone/views/sunstone-views.yaml`.
 
 ### View Customization
 
 On Sunstone each view is defined by a folder that has the YAML files for the configured tabs. The content for those files is divided into sections that are described in the following sections.
 
-In the following tables, the description field contains the expected behavior when is set to `true`.
+In the following tables, the description field contains the expected behavior when it is set to `true`.
 
 {{< alert title="Note" color="success" >}}
 The attributes can be modified only if they come in the YAML file by default. If an attribute is not present, it has the same behavior as when it is set to false.{{< /alert >}} 
@@ -284,7 +284,7 @@ The attributes described here indicate the available actions on each info tab on
 | `actions`           | Describes a list of available actions on this tab that can be disabled.          |
 | `attributes_panel`  | Describes the behavior for the `attributes` panel in the resource<br/>info tab.  |
 | `capacity_panel`    | Describes the behavior for the `capacity` panel in the resource info tab.        |
-| `enabled`           | This tab will be showed in the resource info.                                    |
+| `enabled`           | This tab will be shown in the resource info.                                     |
 | `information_panel` | Describes the behavior for the `information` panel in the resource<br/>info tab. |
 | `lxc_panel`         | Describes the behavior for the `LXC` panel in the resource info tab.             |
 | `monitoring_panel`  | Describes the behavior for the `monitoring` panel in the resource<br/>info tab.  |
@@ -293,7 +293,6 @@ The attributes described here indicate the available actions on each info tab on
 | `permissions_panel` | Describes the behavior for the `permissions` panel in the resource<br/>info tab. |
 | `qos_panel`         | Describes the behavior for the `QoS` panel in the resource info tab.             |
 | `rules_panel`       | Describes the behavior for the `rules` panel in the resource info tab.           |
-| `vcenter_panel`     | Describes the behavior for the `vCenter` panel in the resource info tab.         |
 
 The available actions in the info tabs are described in the following table.
 
@@ -367,7 +366,6 @@ The attributes described here indicate the available actions on each dialog on t
 | `sched_action` | Scheduled Actions section will be displayed. |
 | `showback`     | Showback section will be displayed.          |
 | `storage`      | Storage section will be displayed.           |
-| `vcenter`      | vCenter section will be displayed.           |
 | `vm_group`     | VM groups section will be displayed.         |
 
 <a id="fireedge-remote-connections"></a>
@@ -376,16 +374,16 @@ The attributes described here indicate the available actions on each dialog on t
 
 ### OpenNebula VNC remote connection.
 
-Sunstone allows direct connections to VMs using VNC. It admits parameters such as configuring the host and port for remote connections, configuring the keyboard layout (needed for qemu KVM hosts), and setting a connection password.
+Sunstone allows direct connections to VMs using VNC. It admits parameters such as configuring the Host and port for remote connections, configuring the keyboard layout (needed for qemu KVM Hosts), and setting a connection password.
 
-To set these VNC connection configurations, we must:
+To set these VNC connection configurations we must:
 
 1. Go to the VM template configuration and click on create or update an existing one.
 2. Go to the “Advanced options” step and click on Input/Output.
-3. Under the “Graphics” section, you can see all the VNC configurations.
+3. Under the “Graphics” section there are all the VNC configurations.
 
 {{< alert title="Note" color="success" >}}
-To have the correct layout on your Virtual Machine, you must set the same keymap inside the Virtual Machine as the `KEYMAP` attribute configured in the OpenNebula VM graphics section, and it must be the same as your keyboard layout.{{< /alert >}} 
+To have the correct layout on your Virtual Machine you must set the same keymap inside the Virtual Machine as the `KEYMAP` attribute configured in the OpenNebula VM graphics section, and it must be the same as your keyboard layout.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 Due to hypervisor limitations it is not possible to share the clipboard with the VM. For this we recommend the use of RDP or SSH.{{< /alert >}} 
@@ -406,18 +404,18 @@ Sunstone does not connect directly to the VNC port, located in the VM template. 
 
 ### OpenNebula RDP remote connection.
 
-Sunstone also admits direct connections using RDP. This kind of connection is bound to a network interface, meaning that to enable it, you must follow the following steps:
+Sunstone also admits direct connections using RDP. This kind of connection is bound to a network interface, meaning that to enable it you must follow the following steps:
 
 1. Go to the VM template tab and click on create or update an existing one.
 2. Go to the “Advanced options” step.
 3. Click on “Network”.
 4. Click on attach nic or update an existing one.
-5. Go to the “Advanced options” step, and enable the RDP connection and all the desired configuration parameters for the connection.
+5. Go to the “Advanced options” step and enable the RDP connection and all the desired configuration parameters for the connection.
 
 ![fireedge_sunstone_rdp](/images/sunstone-rdp.png)
 
 {{< alert title="Note" color="success" >}}
-To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want to have it.{{< /alert >}} 
+To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 For RDP connections to work, a service such as [XRPD](https://www.xrdp.org/) is required on the VM to which you want to connect. Also, depending on the configuration of your RDP service, the following parameters can be added in the context of the VM:
@@ -441,18 +439,18 @@ At the top of the console you can find the buttons for the following actions:
 
 ### OpenNebula SSH remote connection.
 
-Sunstone also allows direct connections using SSH. This kind of connection is bound to a network interface, meaning that to enable it, you must follow the following steps:
+Sunstone also allows direct connections using SSH. This kind of connection is bound to a network interface, meaning that to enable it you must follow the following steps:
 
 1. Go to the VM template tab and click on create or update an existing one.
 2. Go to the “Advanced options” step.
 3. Click on “Network”.
 4. Click on attach nic or update an existing one.
-5. Go to the “Advanced options” step, and enable the SSH connection.
+5. Go to the “Advanced options” step and enable the SSH connection.
 
 ![fireedge_sunstone_ssh](/images/sunstone-ssh.png)
 
 {{< alert title="Note" color="success" >}}
-To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want to have it.{{< /alert >}} 
+To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 To make the connection by this means, it must be done with username and password. it is not possible to send the SSH key.{{< /alert >}} 
@@ -465,8 +463,8 @@ At the top of the console you can find the buttons for the following actions:
 - **Screenshot**: Take a screenshot from the VNC console.
 - **Reconnect**: Reconnect the VNC console.
 - **Configurations**:
-  : - **SSH Command**: Reconnect the console, by executing the command placed
-    - **Schema**: Changes the color scheme to be used for the terminal session. It consists of a series of name-value pairs separated by semicolons. Each name-value pair is separated by a colon and assigns a value to a color in the terminal emulator palette. For example.
+  : - **SSH Command**: Reconnect the console by executing the command placed
+    - **Schema**: Changes the color scheme to be used for the terminal session. It consists of a series of name-value pairs separated by semicolons. Each name-value pair is separated by a colon and assigns a value to a color in the terminal emulator palette. For example:
       > ```default
       > foreground: rgb:00/00/ff;
       > background: rgb:ff/ff/ff;
@@ -474,13 +472,13 @@ At the top of the console you can find the buttons for the following actions:
       > ```
 
       > Possible color names are:
-      > > - **foreground**: Set the default foreground color
+      > > - **foreground**: Set the default foreground color.
       > > - **background**: Set the default background color.
       > > - **colorN**: Set the color at index N on the Xterm 256-color palette. For example, color9 refers to the red color.
-      > >   : - **rgb:RR/GG/BB**: Use the specified color in RGB format, with each component in hexadecimal. For example, `rgb:ff/00/00`
+      > >   : - **rgb:RR/GG/BB**: Use the specified color in RGB format, with each component in hexadecimal. For example: `rgb:ff/00/00`
       > >     - **colorN**: Use the color currently assigned to index `N` on the Xterm 256-color palette.
     <br/>
-      > For backward compatibility, Will also accept four special values as the color scheme parameter:
+      > For backward compatibility, it will also accept four special values as the color scheme parameter:
       > > - **black-white**: Black text over a white background.
       > > - **gray-black**: Gray text over a black background. This is the default color scheme.
       > > - **green-black**: Green text over a black background.

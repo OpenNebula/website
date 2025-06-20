@@ -18,17 +18,11 @@ weight: "5"
 
 <!--# FireEdge Configuration -->
 
-The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning (OneProvision GUI) as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
+The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
 
 ## Main Features
 
 - **Guacamole Proxy** for Sunstone to remotely access the VMs (incl., VNC, RDP, and SSH)
-- **OneProvision GUI**: to manage deployments of fully operational Clusters on remote Edge Cloud providers, see [Provisioning an Edge Cluster]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/provisioning_edge_cluster#first-edge-cluster" %}}). Accessible from the following URL:
-
-```default
-http://<OPENNEBULA-FRONTEND>:2616/fireedge/provision
-```
-
 - **FireEdge Sunstone**: new iteration of Sunstone written in React/Redux. Accessible through the following URL:
 
 ```default
@@ -39,7 +33,7 @@ http://<OPENNEBULA-FRONTEND>:2616
 
 ### Configuration
 
-The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 
@@ -69,48 +63,42 @@ After a configuration change, the FireEdge server must be [restarted]({{% relref
 | `auth_redirect`                 |                              | This configuration is for the login button redirect. The available options are: **/**, **.** or a **URL**                                                                                                                                                                         |
 
 {{< alert title="Note" color="success" >}}
-JWT is a acronym of JSON Web Token{{< /alert >}} 
-
-<a id="oneprovision-configuration"></a>
-
-**OneProvision GUI**
-
-![oneprovision_dashboard](/images/oneprovision_dashboard.png)
-
-| Parameter                              | Default Value   | Description                                                                                                      |
-|----------------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
-| `oneprovision_prepend_command`         |                 | Command prefix for `oneprovision` command                                                                        |
-| `oneprovision_optional_create_command` |                 | Optional options for `oneprovision create` command. Check `oneprovision create --help` for more information. |
+JWT is an acronym of JSON Web Token{{< /alert >}} 
 
 <a id="fireedge-sunstone-configuration"></a>
 
 **FireEdge Sunstone**
 
+The Sunstone server configuration file can be found in `/etc/one/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+
+{{< alert title="Note" color="success" >}}
+After a configuration change the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}}    (#fireedge-sunstone-configuration)
+
 ![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
 
-| Parameter                 | Default Value                           | Description                                                                     |
-|---------------------------|-----------------------------------------|---------------------------------------------------------------------------------|
-| `support_url`             | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                                             |
-| `token_remote_support`    |                                         | Support enterprise token                                                        |
-| `vcenter_prepend_command` |                                         | Command prefix for `onevcenter` command                                         |
-| `sunstone_prepend`        |                                         | Optional parameter for `Sunstone commands` command                              |
-| `tmpdir`                  | `/var/tmp`                              | Directory to store temporal files when uploading images                     |
-| `max_upload_file_size`    | `10737418240`                           | Max size upload file (bytes). Default is 10GB                                   |
-| `proxy`                   |                                         | Enable an http proxy for the support portal and to download MarketPlaceApps |
-| `leases`                  |                                         | Enable the vm leases                                                            |
-| `supported_fs`            |                                         | Support filesystem                                                              |
-| `currency`                | `EUR`                                   | Currency formatting                                                             |
-| `default_lang`            | `en`                                    | Default language setting                                                        |
-| `langs`                   |                                         | List of server localizations                                                    |
-| `keep_me_logged_in`       | `true`                                  | True to display ‘Keep me logged in’ option                                      |
-| `currentTimeZone`         |                                         | Time Zone                                                                       |
-| `rowStyle`                |                                         | Changes the style of rows in datatables, values can be `card` or `list`.    |
+| Parameter              | Default Value                           | Description                                                  |
+| ---------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| `support_url`          | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                          |
+| `token_remote_support` |                                         | Support enterprise token                                     |
+| `sunstone_prepend`     |                                         | Optional parameter for `Sunstone commands` command           |
+| `tmpdir`               | `/var/tmp`                              | Directory to store temporal files when uploading images      |
+| `max_upload_file_size` | `10737418240`                           | Max size upload file (bytes). Default is 10GB                |
+| `proxy`                |                                         | Enable an http proxy for the support portal and to download MarketPlaceApps |
+| `leases`               |                                         | Enable the vm leases                                         |
+| `supported_fs`         |                                         | Support filesystem                                           |
+| `currency`             | `EUR`                                   | Currency formatting                                          |
+| `default_lang`         | `en`                                    | Default language setting                                     |
+| `langs`                |                                         | List of server localizations                                 |
+| `keep_me_logged_in`    | `true`                                  | True to display ‘Keep me logged in’ option                   |
+| `currentTimeZone`      |                                         | Time Zone                                                    |
+| `rowStyle`             | `card`                                  | Changes the style of rows in tables. Values can be `card` or `list`. |
+| `fullViewMode`         | `false`                                 | Changes to full mode view when see details of a resource. Values can be `true` or `false`. |
 
 Once the server is initialized, it creates the file `/var/lib/one/.one/fireedge_key`, used to encrypt communication with Guacd.
 
 <a id="fireedge-in-ha"></a>
 
-In HA environments, `fireedge_key` needs to be copied from the first leader to the followers. Optionally, in order to have the provision logs available in all the HA nodes, `/var/lib/one/fireedge` need to be shared between nodes.
+In HA environments, `fireedge_key` needs to be copied from the first leader to the followers. Optionally, in order to have the provision logs available in all the HA nodes, `/var/lib/one/fireedge` needs to be shared between nodes.
 
 <a id="fireedge-configuration-for-sunstone"></a>
 
@@ -120,9 +108,9 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 ## Branding FireEdge
 
-You can add your logo to the login, main, favicon and loading screens by updating the `logo:` attribute as follows:
+You can add your logo to the login, main, favicon, and loading screens by updating the `logo:` attribute as follows:
 
-- The logo configuration is done in the `/etc/one/fireedge/sunstone/sunstone-views.yaml` file.
+- The logo configuration is done in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
 - The logo of the main UI screen is defined for each view.
 
 The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/logos`.
@@ -130,7 +118,7 @@ The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/image
 The following example shows how you can change the logo to a generic linux one (included by default in all FireEdge installations):
 
 ```yaml
-# /etc/one/fireedge/sunstone/sunstone-views.yaml
+# /etc/one/fireedge/sunstone/views/sunstone-views.yaml
 ---
 logo: linux.png
 
@@ -149,15 +137,55 @@ The logo can be updated without having to restart the FireEdge server!{{< /alert
 
 <a id="fireedge-conf-guacamole"></a>
 
-## Configure DataTables
+## Configure Tables
 
-You can change the style of the rows depending on your preferences. in case they are changed in the fireedge-server.conf file. this change will be priority. and it will adjust the view to all users.
+Tables in Sunstone can be configured to visualize data as a list of plain text or as a list of cards:
 
 ![fireedge_sunstone_list_datatable](/images/sunstone_list_datatable.png)
 
-Each user can also do it from his configuration.
+![fireedge_sunstone_card_datatable](/images/sunstone_card_datatable.png)
+
+This configuration could be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `rowStyle`. See [table below](#fireedge-sunstone-configuration).
+
+Moreover, Suntone has the capacity to show the detail of a resource in a full screen mode or in a split mode:
+
+![fireedge_sunstone_resource_full_mode](/images/sunstone_resource_full_mode.png)
+
+![fireedge_sunstone_resource_split_mode](/images/sunstone_resource_split_mode.png)
+
+This configuration can be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `fullViewMode`. See [table below](#fireedge-sunstone-configuration).
+
+Also, both configurations will be overridden for a specific user if the user changes the configuration in the settings section.
 
 ![fireedge_sunstone_setting_list_datatable](/images/sunstone_setting_list_datatable.png)
+
+## Customize colors
+
+Sunstone will store the colors used in its components in two different files:
+
+- For light mode: `src/modules/providers/theme/palettes/light.js`
+- For dark mode: `src/modules/providers/theme/palettes/dark.js`
+
+These two files store a JSON object that has the same structure but with different values in order to set colors for light and dark mode.
+
+| Key             | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| mainContainer   | Defines the background color of the app.                     |
+| buttons         | Defines the different colors used in buttons.                |
+| tables          | Defines the different colors used in resource tables.        |
+| tabs            | Defines the different colors used in the component tabs, the one used in the details of a resource. |
+| searchBar       | Defines the different colors used in the search bar placed over all the resource tables. |
+| sidebar         | Defines the different colors used in the sidebar menu.       |
+| scrollbar       | Defines the color of the scrollbar.                          |
+| login           | Defines the different colors used in login.                  |
+| switchViewTable | Defines the different colors used in the button to switch between view types. |
+| breadCrumb      | Defines the different colors used in the breadcrumb.         |
+| topbar          | Defines the different colors used in the topbar of the app.  |
+| footer          | Defines the different colors used in the footer of the app.  |
+| graphs          | Defines the different colors used in the different graphs used in the app. |
+
+{{< alert title="Warning" color="warning" >}}
+Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
 
 ## Configure Guacamole
 
@@ -168,7 +196,7 @@ Guacamole supports multiple connection methods such as **VNC, RDP, and SSH** and
 {{< alert title="Note" color="success" >}}
 The OpenNebula **binary packages** provide Guacamole proxy daemon (package `opennebula-guacd` and service `opennebula-guacd`), which is installed alongside FireEdge. In the default configuration, the Guacamole proxy daemon is automatically started along with FireEdge, and FireEdge is configured to connect to the locally-running Guacamole. No extra steps are required!{{< /alert >}} 
 
-If Guacamole is running on a different host to the FireEdge, following FireEdge configuration parameters have to be customized:
+If Guacamole is running on a different Host to the FireEdge, the following FireEdge configuration parameters have to be customized:
 
 - `guacd/host`
 - `guacd/port`
@@ -179,7 +207,7 @@ If Guacamole is running on a different host to the FireEdge, following FireEdge 
 
 Change the server running state by managing the operating system service `opennebula-fireedge`.
 
-To start, restart or stop the server, execute one of:
+To start, restart, or stop the server, execute one of:
 
 ```default
 $ systemctl start   opennebula-fireedge
@@ -194,7 +222,7 @@ $ systemctl enable  opennebula-fireedge
 $ systemctl disable opennebula-fireedge
 ```
 
-Server **logs** are located in `/var/log/one` in the following file:
+Server **logs** are located in `/var/log/one` in the following files:
 
 - `/var/log/one/fireedge.log`: operational log.
 - `/var/log/one/fireedge.error`: errors and exceptions log.
@@ -204,13 +232,6 @@ Other logs are also available in Journald. Use the following command to show the
 ```default
 $ journalctl -u opennebula-fireedge.service
 ```
-
-**OneProvision GUI Logs**
-
-FireEdge OneProvision GUI app also creates logs for provisions created with it. These logs are saved in two phases, while the provisions are created, the logs are stored in `/var/lib/one/fireedge/provision/<user_id>/tmp/`, once they are created the logs are moved to `/var/lib/one/fireedge/provision/<user_id>/<provision_id>/stdouterr.log`.
-
-{{< alert title="Note" color="success" >}}
-The OneProvision GUI logs get rotated automatically when the log size gets over 100kb and perform any action to the provision.{{< /alert >}} 
 
 ### Troubleshooting
 
@@ -222,4 +243,4 @@ A common issue when starting FireEdge is a used port:
 Error: listen EADDRINUSE: address already in use 0.0.0.0:2616
 ```
 
-If another service is using the port, you can change FireEdge configuration (`/etc/one/fireedge-server.conf`) to use another host/port.
+If another service is using the port, you can change FireEdge configuration (`/etc/one/fireedge-server.conf`) to use another Host/port.

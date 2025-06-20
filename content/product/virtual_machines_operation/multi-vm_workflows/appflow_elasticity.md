@@ -12,7 +12,7 @@ weight: "3"
 
 <!--# OneFlow Services Auto-scaling -->
 
-A Service Role’s cardinality can be adjusted either manually, or automatically in two ways: based on metrics or based on a schedule.
+A Service Role’s cardinality can be adjusted either manually or automatically in two ways: based on metrics or based on a schedule.
 
 ## Overview
 
@@ -36,7 +36,7 @@ After the scaling, the Role and Service are in the `COOLDOWN` state for the conf
 
 ## Set the Cardinality of a Role Manually
 
-The command `oneflow scale` starts the scalability immediately.
+The command `oneflow scale` starts the scalability immediately:
 
 ```default
 $ oneflow scale <serviceid> <role_name> <cardinality>
@@ -68,10 +68,10 @@ Both elasticity_policies and scheduled_policies elements define an automatic adj
 
 Each Role can have an array of `elasticity_policies`. These policies define an expression that will trigger a cardinality adjustment.
 
-These expressions can use performance data from
+These expressions can use performance data from:
 
 - The VM guest. Using the [OneGate server]({{% relref "onegate_usage#onegate-usage" %}}), applications can send custom monitoring metrics to OpenNebula.
-- The VM, at hypervisor level. The [Virtualization Drivers]({{% relref "../../../software/life_cycle_management/installation" %}}) return information about the VM, such as `CPU`, `NETTX` and `NETRX`.
+- The VM, at hypervisor level. The [Virtualization Drivers]({{% relref "../../../software/installation_process" %}}) return information about the VM, such as `CPU`, `NETTX`, and `NETRX`.
 
 ```javascript
 "elasticity_policies" : [
@@ -127,7 +127,7 @@ Combined with the elasticity policies, each Role can have an array of `scheduled
 
 ## Visualize in the CLI
 
-The `oneflow show` command show the defined policies:
+The `oneflow show` command shows the defined policies:
 
 ```default
 SERVICE 7 INFORMATION

@@ -7,14 +7,24 @@
     {{ $pages = (where $pages ".Params.hide_summary" "!=" true) -}}
     {{ $pages = (where $pages ".Parent" "!=" nil) -}}
     {{ $pages = (where $pages ".Parent.File" "!=" nil) -}}
+
 {{ if .Page.Sections -}}
+{{ $seclevel := "" }}
+{{ $hasSubsections := false }}
+{{ range .Sections }}
+  {{ if gt (len .Sections) 0 }}
+    {{ $hasSubsections = true }}
+  {{ end }}
+{{ end }}
+
     {{ if $page.File -}}
         {{ $pages = (where $pages "Parent.File.UniqueID" "==" $page.File.UniqueID) -}}
     {{ end -}}
     {{ if or $page.Params.no_list (eq (len $pages) 0) -}}
+
     {{/* If no_list is true or we don't have subpages we don't show a list of subpages */}}
+
     {{ else if $page.Params.simple_list -}}
-    {{/* If simple_list is true we show a bulleted list of subpages */}}
         <ul>
             {{ range $pages -}}
                 {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
@@ -22,39 +32,154 @@
             {{ end -}}
         </ul>
     {{ else -}}
+
     {{/* Otherwise show cards with list of subpages with page descriptions */}}
-    <hr class="panel-line">
+
+  {{/* {{ $thedepth := partial "render-section-depth-below" . }} */}}
+  {{/* {{ $thedepth }} */}}
+    
+  {{/* {{ if eq (len .Ancestors) 1 }} */}}
+  {{ if $hasSubsections }}
+      {{/* {{ if gt (len .Sections) 0 }} */}}
+
+    {{/* <hr class="panel-line" width="100%"> */}}
+
+    {{/* H2 SECTION HEADER - before cards begin */}}
+
         {{ range $pages -}}
             {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-            <div class="entry">
-	      <div class="td-card card border me-4">
-		<div class="card-header">
-      		  <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
-		</div>
-	      <div class="card-body">
-	      {{ if .Description -}}
-                <p>{{ .Description | markdownify -}}</p>
-	      {{ end -}}
-      {{/* Lists sections within the card body, after the description */}}
+            <div class="td-content">
+      		  <h2><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a></h2>
+            </div>
+
+               {{ if .Description -}}
+                    <p>{{ .Description | markdownify -}}</p>
+       	       {{ end -}}
+
+    {{/* <hr class="panel-line" width="100%"> */}}
+    {{/* <p>H3 SUBSECTIONS</p> */}}
+    {{/* H3 SUBSECTION HEADER, e.g. High Availability */}}
+
+      <div class="td-card card border me-4">
+     {{ if eq (len .Sections) 0 }}
+     <div class="card">
+         <div class="card-header">
+          In this section:
+         </div>
+         <div class="card-body">
+         <div class="td-content">
+     {{/* {{ end }} */}}
       {{ range .Pages -}}
-		{{ $manualsecLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-		<inl>
-      		  <a href="{{ $manualsecLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
-		</inl>
-             {{ end -}} 
+      
+      {{ if not .Page.IsNode -}} {{/* if 1 level under current page */}}
+
+        <inl>
+		    <a href="{{ .Page.Permalink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
+		  </inl>
+      {{ end -}}
+      {{ end -}}
+    </div>      
+    </div>
+    {{/* </div> - FOR CARD in line 65 */}}
+    </div>
+
+      {{/* </div> */}}
+    {{ end }}
+
+      <div class="card-columns">
+        <div class="entry">
+
+      {{/* Lists subsections within the card body, after the description */}}
+      {{ range .Page.Sections -}} {{/* 1 */}}
+      {{ if .Page.Section -}}
+		{{ $manualsubsecLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+
+    {{/* begin H3 card */}}
+    {{/* header */}}
+    
+              <div class="card">
+                <div class="card-header">
+      		  <a href="{{ $manualsubsecLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
+		</div>
+      <div class="card-body">
+               {{ if .Description -}}
+                    <p></p><p><inl>{{ .Description | markdownify -}}</inl></p>
+       	       {{ end -}}
+		{{ range .Pages -}} {{/* 2 */}}
+		  {{ $manualpageLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+		  <inl>
+		    <a href="{{ $manualpageLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
+		  </inl>
+		{{ end -}}
+		{{ end -}}  {{/* 2 */}}
+	      <p></p>
 	      </div>
+	      </div>
+	 
+      {{ end -}}  {{/* 1 */}}
+          </div>
          </div>
         </div>
         {{ end -}}
     {{ end -}}
-</div>
-{{ else -}}
+    </div>
+  </div>
+    {{/* end H3 card */}}
+  {{ end -}}	{{/* end if .Ancestors 1 */}}
+  {{ if eq (len .Ancestors) 2 }}
+    {{ $seclevel := "2" }}
+
+  {{/* {{ if $seclevel = "2" }} */}}
+  {{ if not $hasSubsections }}
+
+    <div class="td-card card border me-4">
+      <div class="card-columns">
+	<div class="entry">
+   {{ range .Pages -}} {{/* 1 */}}
+    {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+   
+	  <div class="card">
+	   <div class="card-header">
+            <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+      </div>
+      <div class="card-body">
+        <p></p>
+                  {{ if .Description -}}
+                  <p><inl>{{ .Description | markdownify -}}</inl></p>
+                  {{ end -}}
+	{{ range .Pages -}} {{/* 2 */}}
+	    {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+                <inl>
+                    <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+                </inl>
+	{{ end -}} {{/* 2 */}}
+              <p></p>
+      </div>        
+	 </div>
+
+     {{ end -}} {{/* 1 */}}
+	    </div>
+          </div>
+          </div>
+       </div>
+     </div>
+   </div>
+  {{ end -}}
+  {{ end -}}
+  {{ end -}}
+
+{{ if not .Page.Sections -}}
+
+  {{/* CARD WITH PAGES ONLY (if no subsections) */}}
+
     <div class="entry">
       <div class="td-card card border me-4">
-        <div class="card-header">
+        <div class="card">
+          <div class="card-header">
 	In this section:
 	     </div>
-	<p></p>
+	<div class="card-body">
+	 <p></p>
     {{ range .Pages -}}
     {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
             <div class="td-content">
@@ -64,8 +189,11 @@
 		  {{ if .Description -}}
 		  <p>{{ .Description | markdownify -}}</p>
 		  {{ end -}}
+		  	    </div>
      {{ end -}}
 	      <p></p>
-	    </div>
       </div>
-{{ end -}}
+      </div>
+    </div>
+{{ end }}
+

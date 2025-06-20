@@ -26,12 +26,12 @@ This is the list of the individual platform components that have been through th
 | AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/life_cycle_management/installation/database#mysql" %}})                                                                               |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 | Ruby Gems                | Versions installed by opennebula-rubygems  | Detailed information in `/usr/share/one/Gemfile`                                                                                                                                            |
 
 {{< alert title="Note" color="success" >}}
-Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}} 
+Support for nodes’ operating system ensures that the latest two LTS releases feature certified packages.{{< /alert >}}
 
 ### KVM Nodes
 
@@ -56,7 +56,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### [Linux and Windows Contextualization Packages](https://github.com/OpenNebula/one-apps/wiki/linux_release)
 
-Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/software/latest)
+Refer to: [one-apps release](https://github.com/OpenNebula/one-apps/releases/latest)
 
 More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
@@ -64,23 +64,23 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component           | Version                                    | More information                                                                                                                             |
 |---------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan#hm-vlan" %}})             |
-| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/openvswitch#openvswitch" %}}) |
-| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan#vxlan" %}})                    |
+| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
+| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
+| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../product/cluster_configuration/networking_system/vxlan#vxlan" %}})                    |
 
 ### Open Cloud Storage Infrastructure
 
 | Component   | Version                                    | More information                                                                                                                         |
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/lvm_drivers#lvm-drivers" %}}) |
-| Ceph        | Quincy v17.2.x<br/>Reef   v18.2.x          | [The Ceph Datastore]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/storage_system_configuration/ceph_ds#ceph-ds" %}})  |
+| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
+| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
+| Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}})  |
 
 ### Authentication
 
 | Component             | Version                                    | More information                                                                                                        |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| net-ldap ruby library | 0.12.1 or 0.16.1                           | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
+| net-ldap ruby library | 0.19.0                                     | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Monitoring and Backups
@@ -88,7 +88,8 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Component                     | Version   | More information                                                                                                                    |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
-| Restic backup backend         | 0.65.0    | [Backup Datastore: Restic]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/backup_system_configuration/restic.md#vm-backups-restic" %}})                                        |
+| Restic backup backend         | 0.16.5    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
+| Veeam                         | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../integrations/backup_extensions/veeam.md" %}}) |
 
 ### Sunstone
 
@@ -98,32 +99,10 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Firefox   | 59.0 - 92.0 |
 
 {{< alert title="Note" color="success" >}}
-For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}} 
+For Windows desktops using **Chrome** or **Firefox** you should disable the option `touch-events` for your browser:{{< /alert >}}
 
 **Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
 **Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
-
-<a id="edge-cluster-provision-workloads-compatibility"></a>
-
-## Compatibility of Workloads on Certified Edge Clusters
-
-Edge Clusters can be *virtual* or *metal* depending of the instance type used to build the cluster. Note that not all providers offer both instance types.
-
-{{< alert title="Important" color="success" >}}
-Providers based on *virtual* instances have been disabled by default.{{< /alert >}} 
-
-| Edge/Cloud Provider                                                                                                                  | Edge Cluster   | Hypervisor   |
-|--------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [Equinix]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/equinix_cluster#equinix-cluster" %}}) | metal          | KVM and LXC  |
-| [AWS]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/aws_cluster#aws-cluster" %}})             | metal          | KVM and LXC  |
-| [On-prem]({{% relref "../../../product/automated_hybrid_cluster_provisioning/edge_cluster_provisions/onprem_cluster#onprem-cluster" %}})   | metal          | KVM and LXC  |
-
-The Edge Cluster type determines the hypervisor and workload that can be run in the cluster. The following table summarizes the Edge Cluster you need to run specific workloads:
-
-| Use Case                                                                                                                                                                                             | Edge Cluster   | Hypervisor   |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------------|
-| [I want to run virtual servers…]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/running_virtual_machines#running-virtual-machines" %}})            | metal          | KVM, LXC     |
-| [I want to run a Kubernetes cluster…]({{% relref "../../../quick_start/try_opennebula/opennebula_evaluation_environment/running_kubernetes_clusters#running-kubernetes-clusters" %}}) | metal          | KVM          |
 
 ## Certified Infrastructure Scale
 
@@ -142,7 +121,6 @@ The following applies to all Front-Ends:
 
 The following items apply to all distributions:
 
-* Since OpenNebula 4.14 there is a new monitoring probe that gets information about PCI devices. By default it retrieves all the PCI devices in a Host. To limit the PCI devices for which it gets info and appear in `onehost show`, refer to [PCI Passthrough]({{% relref "../../../product/cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough#kvm-pci-passthrough" %}}).
 * When using qcow2 storage drivers you can make sure that the data is written to disk when doing snapshots by setting the `cache` parameter to `writethrough`. This change will make writes slower than other cache modes but safer. To do this edit the file `/etc/one/vmm_exec/vmm_exec_kvm.conf` and change the line for `DISK`:
 
 ```default
@@ -187,16 +165,3 @@ unix_sock_rw_perms = "0770"
 
 OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
 You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.
-
-### vCenter 7.0 Platform Notes
-
-{{< alert title="Important" color="success" >}}
-The legacy vCenter driver is currently included in the distribution, but no longer receives updates or bug fixes.{{< /alert >}} 
-
-#### Problem with Boot Order
-
-Currently in vCenter 7.0 changing the boot order is only supported in Virtual Machines at deployment time.
-
-### Debian 10 and Ubuntu 18 Upgrade
-
-When upgrading your nodes from Debian 10 or Ubuntu 18 you may need to update the opennebula sudoers file because of the  */usr merge* feature implemented for Debian11/Ubuntu20. You can [find more information and a recommended work around in this issue](https://github.com/OpenNebula/one/issues/6090).

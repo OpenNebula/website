@@ -41,7 +41,7 @@ This method is designed to delegate the authentication process to high level too
 
 OpenNebula ships with a GUI server - [Sunstone]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-setup" %}}). When a user interacts with one of them, the server authenticates the request and then forwards the requested operation to the OpenNebula Daemon. The forwarded requests are encrypted using a symmetric key. The following guide shows how to strengthen the security of these requests using X.509 certificates. This is especially relevant if you are running your server in a machine other than the Front-end.
 
-- [Cloud Servers Authentication]({{% relref "../../../software/life_cycle_management/building_from_source_code/cloud_auth#cloud-auth" %}})
+- [Cloud Servers Authentication]({{% relref "../../../software/installation_process/build_from_source_code/cloud_auth#cloud-auth" %}})
 
 ## How Should I Read This Chapter
 
@@ -49,8 +49,8 @@ When designing the architecture of your cloud you will have to choose where to s
 
 Usable with API, CLI and Sunstone:
 
-* [Built-in User/Password and token authentication]({{% relref "../multitenancy/manage_users#manage-users" %}})
 * [LDAP Authentication]({{% relref "ldap#ldap" %}})
+* Additionally, you can check [Users]({{% relref "../multitenancy/manage_users" %}}) in the [Multitenancy]({{% relref "../multitenancy" %}}) section for information in built-in User/Password and token authentication.
 
 Usable only with API and CLI:
 

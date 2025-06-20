@@ -20,7 +20,7 @@ For Virtual Machines that are part of a Multi-VM Application ([OneFlow Service](
 
 ## OneGate Workflow Explained
 
-OneGate is a server that listens to http connections from the Virtual Machines. OpenNebula assigns an individual token to each VM instance, and Applications running inside the VM use this token to interact with the OneGate API. This token is generated using VM information and signed with the owner User template attribute `TOKEN_PASSWORD`. This password can be changed updating the User template, but tokens from existing VMs will not work anymore.
+OneGate is a server that listens to http connections from the Virtual Machines. OpenNebula assigns an individual token to each VM instance and Applications running inside the VM use this token to interact with the OneGate API. This token is generated using VM information and signed with the owner User template attribute `TOKEN_PASSWORD`. This password can be changed by updating the User template, but tokens from existing VMs will not work anymore.
 
 ![onegate_arch](/images/onegate_arch.png)
 
@@ -28,7 +28,7 @@ OneGate is a server that listens to http connections from the Virtual Machines. 
 
 First, the cloud administrator must configure and start the [OneGate server]({{% relref "../../operation_references/opennebula_services_configuration/onegate#onegate-conf" %}}).
 
-### Setup the VM Template
+### Set up the VM Template
 
 Your VM Template must set the `CONTEXT/TOKEN` attribute to `YES`.
 
@@ -49,7 +49,7 @@ or check the OneGate checkbox in Sunstone:
 
 ![onegate_context](/images/onegate_context.png)
 
-When this Template is instantiated, OpenNebula will automatically add the `ONEGATE_ENDPOINT` context variable, and a `token.txt` will be placed in the [context cdrom]({{% relref "../virtual_machine_images/vm_templates#context-overview" %}}). This `token.txt` file is only accessible from inside the VM.
+When this Template is instantiated, OpenNebula will automatically add the `ONEGATE_ENDPOINT` context variable, and a `token.txt` will be placed in the [context cdrom]({{% relref "../virtual_machine_definitions/vm_templates#context-overview" %}}). This `token.txt` file is only accessible from inside the VM.
 
 ```none
 ...
@@ -63,17 +63,17 @@ CONTEXT=[
 
 ### Using the OneGate Client inside the Guest VM
 
-A Ruby client that implements the OneGate API is included in the official [OpenNebula context packages](https://github.com/OpenNebula/one-apps). This is a simple command line interface to interact with the OneGate server, it will handle the authentication and requests complexity.
+A Ruby client that implements the OneGate API is included in the official [OpenNebula context packages](https://github.com/OpenNebula/one-apps). This is a simple command line interface to interact with the OneGate server, it will handle the complex authentication and requests.
 
 ### OneGate Client Usage
 
 Available commands and usage are shown with `onegate -h`.
 
-With the appropriate policies implemented in the Service, these mechanisms allow Services to be self-managed, enabling self-configuration, self-healing, self-optimization and self-protection.
+With the appropriate policies implemented in the Service, these mechanisms allow Services to be self-managed, enabling self-configuration, self-healing, self-optimization, and self-protection.
 
 #### Self-Awareness
 
-There are several actions available to retrieve information of the Virtual Machine and the Service it belongs to. A Virtual Machine can also retrieve information of other Virtual Machines that are part of the Service.
+There are several actions available to retrieve the information of the Virtual Machine and the Service it belongs to. A Virtual Machine can also retrieve information of other Virtual Machines that are part of the Service.
 
 {{< alert title="Note" color="success" >}}
 For a detailed version use the `--json` option and all the information will be returned in JSON format. Use the option `--extended` to increase the information retrieved.{{< /alert >}} 
@@ -91,7 +91,7 @@ IP                  : 192.168.122.23
 ```
 
 {{< alert title="Note" color="success" >}}
-Specifying a VM ID different of a different VM will only works to retrieve information of VMs in the same OneFlow Service or the same Virtual Router.{{< /alert >}} 
+Specifying a VM ID different of a different VM will only work to retrieve information of VMs in the same OneFlow Service or the same Virtual Router.{{< /alert >}} 
 
 ##### Retrieving information of the Service
 
@@ -112,7 +112,7 @@ VM 9
 NAME                : slave_0_(service_1)
 ```
 
-You can use the option `onegate service show --extended` to get all the information from virtual machines.
+You can use the option `onegate service show --extended` to get all the information from Virtual Machines.
 
 ```default
 $ onegate service show --extended
@@ -155,13 +155,13 @@ $ onegate vnet show 0
 ```
 
 {{< alert title="Note" color="success" >}}
-This option is only available for Virtual Routers and only Virtual Networks related to that Virtual Router (i.e Virtual Network attached or related somehow in the reservation hierarchy with another attached Virtual Network) can be retrieved.{{< /alert >}} 
+This option is only available for Virtual Routers and only for Virtual Networks related to that Virtual Router, i.e., only Virtual Networks attached or related somehow in the reservation hierarchy to another attached Virtual Network can be retrieved.{{< /alert >}} 
 
 ##### Updating the VM Information
 
-The Virtual Machine can update the information of itself or other Virtual Machine of the Service. This information can be retrieved from any of the Virtual Machines.
+The Virtual Machine can update its own information or that of other Virtual Machines of the Service. This information can be retrieved from any of the Virtual Machines.
 
-For example, the master Virtual Machine can change the `ACTIVE` attribute from one Virtual Machine to another one. Then, this information can be used to trigger any kind of action in the other Virtual Machine.
+For example, the master Virtual Machine can change the `ACTIVE` attribute from one Virtual Machine to another. Then, this information can be used to trigger any kind of action in the other Virtual Machine.
 
 ```default
 $ onegate vm update 9 --data ACTIVE=YES
@@ -189,7 +189,7 @@ $ onegate vm show 9 --json
 }
 ```
 
-##### Deleting attribute from VM Information
+##### Deleting attributes from VM Information
 
 The Virtual Machine can delete attributes from its own template or from other Virtual Machines in its Service.
 
@@ -222,7 +222,7 @@ $ onegate vm show 9 --json
 
 #### Self-Configuration
 
-There are several actions to adapt the Service to a given situation. Actions on any of the Virtual Machines can be performed individually. Also, the size of the Service can be customized just specifying a cardinality for each of the roles.
+There are several actions to adapt the Service to a given situation. Actions on any of the Virtual Machines can be performed individually. Also, the size of the Service can be customized simply by specifying a cardinality for each of the Roles.
 
 ##### Performing actions on a VM
 
@@ -239,7 +239,7 @@ The following actions can be performed in any of the Virtual Machines of the Ser
 * `onegate vm hold`
 * `onegate vm release`
 
-Check [this guide]({{% relref "../virtual_machine_instances/vm_instances#vm-instances" %}}) to know more about states and operations.
+Check [this guide]({{% relref "../virtual_machine_definitions/vm_instances#vm-instances" %}}) to know more about states and operations.
 
 ##### Change Service cardinality
 

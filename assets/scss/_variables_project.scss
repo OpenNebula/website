@@ -1,5 +1,7 @@
 
-$google_font_name: 'Lato';
+$td-enable-google-fonts: true;
+$google_font_name: 'Inter';
+$google_font_family: 'Inter:300,300i,400,400i,700,700i';
 
 a:link {
   text-decoration: none;
@@ -21,7 +23,7 @@ a:active {
 inl { 
     display: list-item;
     list-style: none outside none;
-    margin: 0 0;
+    margin-right: 1rem;
     padding: 0 0 0 40px;
 }
 
@@ -41,3 +43,31 @@ bxctr {
   margin: 40 40 40 40;
   padding: 30px 30px 30px 30px;
 }
+
+// Temporary for section-index.html
+bxctrsp {
+  display: block;
+  color: #3B7399 !important;
+  padding: 0px 10px 15px 60px; // for h4
+  margin-block-start: 2rem;
+  margin-block-end: 2rem;
+  margin-bottom: -1rem;
+  margin-left: 2rem;
+  
+  //margin-top: 0rem;
+  //margin-bottom: 0rem;
+}
+
+// Navbar text color
+$navbar-dark-color: #F5F5F5;
+
+// Buttons
+$btn-border-radius: 96px;
+$btn-padding-y: 8px;
+$btn-padding-x: 24px;
+
+// card columns
+//$card-columns-margin: 10px !important;
+$card-columns-gap: 10px !important;
+$card-spacer-y: 10px;
+$card-spacer-x: 10px;

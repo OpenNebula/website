@@ -12,15 +12,15 @@ weight: "2"
 
 <!--# Scalability Testing and Tuning -->
 
-Determining the scalability of your cloud, and how to improve it, requires you to balance many variables. There are several aspects that can limit the scalability of a cloud, from the storage to the network Back-end, and no one solution meets everyone’s scalability goals. This guide firstly presents the scale limits of a single OpenNebula instance (single zone), and then provides some recommendations to tune your deployment for a larger scale.
+Determining the scalability of your cloud, and how to improve it, requires you to balance many variables. There are several aspects that can limit the scalability of a cloud, from the storage to the network backend, and no one solution meets everyone’s scalability goals. This guide first presents the scale limits of a single OpenNebula instance (single Zone), and then provides some recommendations to tune your deployment for a larger scale.
 
-The general recommendation is to have no more than 2,500 servers and 10,000 VMs managed by a single instance. Better performance and higher scalability can be achieved with specific tuning of other components like the DB, or better hardware. In any case, to grow the size of your cloud beyond these limits, you can horizontally scale your cloud by adding new OpenNebula zones within a [federated deployment]({{% relref "../data_center_federation/overview#introf" %}}). The largest OpenNebula deployment consists of 16 data centers and 300,000 cores.
+The general recommendation is to have no more than 2,500 servers and 10,000 VMs managed by a single instance. Better performance and higher scalability can be achieved with specific tuning of other components like the DB or better hardware. In any case, to grow the size of your cloud beyond these limits, you can horizontally scale your cloud by adding new OpenNebula Zones within a [federated deployment]({{% relref "../data_center_federation/overview#introf" %}}). The largest OpenNebula deployment consists of 16 data centers and 300,000 cores.
 
 ## Scalability Testing
 
 ### Front-end (oned) Scalability
 
-This section focuses on the scale limits of oned, the controller component, for a single OpenNebula zone. The limits recommended here are associated with a given API load. You may consider reducing or increasing the limits based on your actual API requests. Notice that the maximum number of servers (virtualization hosts) that can be managed by a single OpenNebula instance strongly depends on the performance and scalability of the underlying platform infrastructure, mainly the storage subsystem.
+This section focuses on the scale limits of oned, the controller component, for a single OpenNebula Zone. The limits recommended here are associated with a given API load. You may consider reducing or increasing the limits based on your actual API requests. Notice that the maximum number of servers (virtualization Hosts) that can be managed by a single OpenNebula instance strongly depends on the performance and scalability of the underlying platform infrastructure, mainly the storage subsystem.
 The following results have been obtained with synthetic workloads that stress oned running on a physical server with the following specifications:
 
 | CPU model:   | Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz   |
@@ -31,7 +31,7 @@ The following results have been obtained with synthetic workloads that stress on
 | OpenNebula:  | Version 6.10                             |
 | Database:    | MySQL  Version 8.0.37-0ubuntu0.22.04.3   |
 
-In a single zone, OpenNebula (oned) can work with the following limits:
+In a single Zone, OpenNebula (oned) can work with the following limits:
 
 | Number of hosts          | 1,250   |
 |--------------------------|---------|
@@ -40,7 +40,7 @@ In a single zone, OpenNebula (oned) can work with the following limits:
 
 In production environments, we do not recommend exceeding in the same installation this number of servers (1,250) and VMs (20,000), as well as a load of 30 API requests/s to avoid the system becoming excessively slow. Better performance can be achieved with specific tuning of other components, like the database, or better hardware.
 
-The four most common API calls were used to stress the core at the same time in approximately the same ratio experienced on real deployments. The total numbers of API calls per second used were: 10, 20 and 30. In these conditions, with a host-monitoring interval of 30 hosts/second, in a pool of 1,250 hosts and a monitoring period on each host of 180 seconds, the response times in seconds of the oned process for the most common XML-RPC calls are shown below:
+The four most common API calls were used to stress the core at the same time in approximately the same ratio experienced on real deployments. The total numbers of API calls per second used were: 10, 20, and 30. In these conditions, with a Host-monitoring interval of 30 Hosts/second, in a pool of 1,250 Hosts and a monitoring period on each Host of 180 seconds, the response times in seconds of the oned process for the most common XML-RPC calls are shown below:
 
 |                     |                    |                    | Response Time (seconds)   |
 |---------------------|--------------------|--------------------|---------------------------|
@@ -54,7 +54,7 @@ The four most common API calls were used to stress the core at the same time in 
 
 ### Hypervisor Scalability
 
-The number of VMs, micro-VMs or containers that a virtualization node can run is limited by the virtualization technology, hardware configuration and OpenNebula node components (drivers). This section presents the performance of OpenNebula and the virtualization and monitoring drivers for KVM, based on the following host specs:
+The number of VMs, micro-VMs, or containers that a virtualization node can run is limited by the virtualization technology, hardware configuration, and OpenNebula node components (drivers). This section presents the performance of OpenNebula and the virtualization and monitoring drivers for KVM, based on the following Host specs:
 
 | CPU model:   | Intel(R) Xeon(TM) E5-2650 v4 @2.2GHz, 2 sockets 24 cores (HT)   |
 |--------------|-----------------------------------------------------------------|
@@ -75,24 +75,19 @@ The number of VMs, micro-VMs or containers that a virtualization node can run is
 |--------------|-------------------------|----------------------------|
 | KVM          | 52s (500 VMs)           | 0.11s                      |
 
-Note: These values can be used as a baseline to adjust the probe frequency in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#dmon-conf" %}}).
+Note: These values can be used as a baseline to adjust the probe frequency in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf" %}}).
 
 ## Tuning for Large Scale
 
 ### Monitoring Tuning
 
-Following OpenNebula 5.12, the monitoring system uses TCP/UDP to send monitoring information to Monitor Daemon. This model is highly scalable and its limit (in terms of the number of VMs monitored per second) is bound by the performance of the server running oned and the database server. Read more in the [Monitoring guide]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#dmon-conf#mon" %}}).
+Following OpenNebula 5.12, the monitoring system uses TCP/UDP to send monitoring information to Monitor Daemon. This model is highly scalable and its limit (in terms of the number of VMs monitored per second) is bound by the performance of the server running oned and the database server. Read more in the [Monitoring guide]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf#mon" %}}).
 
-For vCenter environments, OpenNebula uses the VI API offered by vCenter to monitor the state of the hypervisor and all the Virtual Machines running in all the imported vCenter clusters. The driver is optimized to cache common VM information.
-
-In both environments, our scalability testing achieves the monitoring of tens of thousands of VMs in a few minutes.
-
-{{< alert title="Important" color="success" >}}
-The vCenter driver is a legacy component. It is currently included in the distribution, but no longer receives updates or bug fixes.{{< /alert >}} 
+Our scalability testing achieves the monitoring of tens of thousands of VMs in a few minutes.
 
 ### Core Tuning
 
-OpenNebula keeps the monitoring history for a defined time in a database table. These values are then used to draw the plots in Sunstone. These monitoring entries can take up quite a bit of storage in your database. The amount of storage used will depend on the size of your cloud and the following configuration attributes in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/monitoring_and_alerting/configuration#dmon-conf#mon-conf" %}}):
+OpenNebula keeps the monitoring history for a defined time in a database table. These values are then used to draw the plots in Sunstone. These monitoring entries can take up quite a bit of storage in your database. The amount of storage used will depend on the size of your cloud and the following configuration attributes in [/etc/one/monitord.conf]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#dmon-conf#mon-conf" %}}):
 
 - `MONITORING_INTERVAL_HOST`: Time in seconds between each monitoring cycle. Default: 180. This parameter sets the timeout to proactively restart the monitoring probe in the standard `udp-push` model.
 - `HOST_MONITORING_EXPIRATION_TIME`: Time in seconds before monitoring information expires. Default: 12h.
@@ -219,7 +214,7 @@ Optionally, a second load balancer can be added on another server and an active-
 
 To connect to the cluster from another server you can use one of the two following options, or both:
 
-- Using the CLI: Create a `ONE_XMLRPC` variable with the new endpoint. E.g.
+- Using the CLI: Create a `ONE_XMLRPC` variable with the new endpoint. E.g.:
 
 ```default
 export ONE_XMLRPC=http://ENDPOINT_IP:2633/RPC2
@@ -235,7 +230,7 @@ OpenNebula drivers have by default 15 threads. This is the maximum number of act
 
 ### Database Tuning
 
-For non-test installations use a MySQL/MariaDB database. SQLite is too slow for more than a couple of hosts and a few VMs.
+For non-test installations use a MySQL/MariaDB database. SQLite is too slow for more than a couple of Hosts and a few VMs.
 
 Be sure to review the [recommended maintenance procedures]({{% relref "../../operation_references/opennebula_services_configuration/database#mysql-maintenance" %}}) for the MySQL database backend.
 

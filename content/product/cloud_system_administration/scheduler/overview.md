@@ -14,7 +14,7 @@ weight: "3"
 
 The OpenNebula resource scheduler framework is a modular system that applies different scheduling algorithms to allocate three types of resources:
 
-- **Hosts** – Determines the hosts where VMs will run.
+- **Hosts** – Determines the Hosts where VMs will run.
 - **System Datastores** – Selects the storage location for VM virtual disk images.
 - **Virtual Networks** – Assigns Virtual Networks for VM interfaces when set to auto mode.
 
@@ -92,7 +92,7 @@ SCHED_REQUIREMENTS = "QOS != GOLD & HYPERVISOR = kvm"
 
 ### Datastore Requirements
 
-To optimize I/O performance across multiple disks, LUNs, or storage backends, OpenNebula allows multiple System Datastores per Cluster. Scheduling algorithms factor in VM disk requirements to select the best execution host based on storage capacity and performance metrics.
+To optimize I/O performance across multiple disks, LUNs, or storage backends, OpenNebula allows multiple System Datastores per Cluster. Scheduling algorithms factor in VM disk requirements to select the best execution Host based on storage capacity and performance metrics.
 
 Administrators can control which Datastores a VM uses via `SCHED_DS_REQUIREMENTS`, a boolean expression that evaluates to `true` for valid System Datastores.
 
@@ -134,9 +134,9 @@ Alternatively, the [OpenNebula Distributed Resource Scheduler]({{% relref "drs#s
 
 ### VM Re-scheduling
 
-When a Virtual Machine is in the `running` or `poweroff` state, it can be rescheduled to a different host. By issuing the `onevm resched` command, the VM is labeled for rescheduling. In the next scheduling interval, the VM will be rescheduled to a different host, if:
+When a Virtual Machine is in the `running` or `poweroff` state, it can be rescheduled to a different Host. By issuing the `onevm resched` command, the VM is labeled for rescheduling. In the next scheduling interval, the VM will be rescheduled to a different Host, if:
 
-* There is a suitable host for the VM.
+* There is a suitable Host for the VM.
 * The VM is not already running on it.
 
 This feature can be used by other components to trigger the rescheduling action when certain conditions are met.

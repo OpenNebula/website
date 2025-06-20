@@ -516,7 +516,7 @@ onehost sync is not performed by the core, it is done by the ruby command onehos
 
 ### one.template.clone
 
-- **Description**: Clones an existing virtual machine template.
+- **Description**: Clones an existing Virtual Machine template.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                        |
@@ -547,7 +547,7 @@ onehost sync is not performed by the core, it is done by the ruby command onehos
 
 ### one.template.instantiate
 
-- **Description**: Instantiates a new virtual machine from a template.
+- **Description**: Instantiates a new Virtual Machine from a template.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                            |
@@ -569,7 +569,7 @@ MEMORY=4096\nCPU=4\nVCPU=4
 ```
 
 {{< alert title="Note" color="success" >}}
-Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrites the template `DISK` attribute and as such, must contain the entire `DISK` definition.{{< /alert >}} 
+Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrites the template `DISK` attribute and as such must contain the entire `DISK` definition.{{< /alert >}} 
 
 ### one.template.update
 
@@ -659,7 +659,7 @@ Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrit
 
 ### one.templatepool.info
 
-- **Description**: Retrieves information for all or part of the Resources in the pool.
+- **Description**: Retrieves information for all or part of the resources in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -710,7 +710,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vm.allocate
 
-- **Description**: Allocates a new virtual machine in OpenNebula.
+- **Description**: Allocates a new Virtual Machine in OpenNebula.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                    |
@@ -725,7 +725,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vm.deploy
 
-- **Description**: initiates the instance of the given vmid on the target host.
+- **Description**: initiates the instance of the given vmid on the target Host.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                 |
@@ -743,7 +743,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vm.action
 
-- **Description**: submits an action to be performed on a virtual machine.
+- **Description**: submits an action to be performed on a Virtual Machine.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -777,7 +777,7 @@ The action String must be one of the following:
 
 ### one.vm.migrate
 
-- **Description**: migrates one virtual machine (vid) to the target host (hid).
+- **Description**: migrates one Virtual Machine (vid) to the target Host (hid).
 - **Parameters**
 
 | Type   | Data Type   | Description                                                            |
@@ -877,7 +877,7 @@ The action String must be one of the following:
 
 ### one.vm.attach
 
-- **Description**: Attaches a new disk to the virtual machine
+- **Description**: Attaches a new disk to the Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                           |
@@ -897,7 +897,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.detach
 
-- **Description**: Detaches a disk from a virtual machine
+- **Description**: Detaches a disk from a Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -911,7 +911,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.diskresize
 
-- **Description**: Resizes a disk of a virtual machine
+- **Description**: Resizes a disk of a Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -927,7 +927,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.attachnic
 
-- **Description**: Attaches a new network interface to the virtual machine
+- **Description**: Attaches a new network interface to the Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                          |
@@ -942,7 +942,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.detachnic
 
-- **Description**: Detaches a network interface from a virtual machine
+- **Description**: Detaches a network interface from a Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -958,7 +958,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.updatenic
 
-- **Description**: Updates (appends) a NIC attributes
+- **Description**: Updates (appends) NIC attributes
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                            |
@@ -1005,7 +1005,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.chmod
 
-- **Description**: Changes the permission bits of a virtual machine.
+- **Description**: Changes the permission bits of a Virtual Machine.
 - **Parameters**
 
 | Type   | Data Type   | Description                                         |
@@ -1028,7 +1028,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.chown
 
-- **Description**: Changes the ownership of a virtual machine.
+- **Description**: Changes the ownership of a Virtual Machine.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                            |
@@ -1044,7 +1044,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.rename
 
-- **Description**: Renames a virtual machine
+- **Description**: Renames a Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1059,7 +1059,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.snapshotcreate
 
-- **Description**: Creates a new virtual machine snapshot
+- **Description**: Creates a new Virtual Machine snapshot
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1073,7 +1073,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.snapshotrevert
 
-- **Description**: Reverts a virtual machine to a snapshot
+- **Description**: Reverts a Virtual Machine to a snapshot
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1087,7 +1087,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.snapshotdelete
 
-- **Description**: Deletes a virtual machine snapshot
+- **Description**: Deletes a Virtual Machine snapshot
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1101,7 +1101,7 @@ DISK=[IMAGE_ID=42, TYPE=RBD, DEV_PREFIX=vd, SIZE=123456, TARGET=vdc]
 
 ### one.vm.resize
 
-- **Description**: Changes the capacity of the virtual machine
+- **Description**: Changes the capacity of the Virtual Machine
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                           |
@@ -1167,7 +1167,7 @@ Visit the [Virtual Machine Template reference]({{% relref "../../../product/oper
 
 ### one.vm.recover
 
-- **Description**: Recovers a stuck VM that is waiting for a driver operation. The recovery may be done by failing or succeeding the pending operation. You need to manually check the vm status on the host, to decide if the operation was successful or not.
+- **Description**: Recovers a stuck VM that is waiting for a driver operation. The recovery may be done by failing or succeeding the pending operation. You need to manually check the vm status on the Host to decide if the operation was successful or not.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                            |
@@ -1182,7 +1182,7 @@ Visit the [Virtual Machine Template reference]({{% relref "../../../product/oper
 
 ### one.vm.info
 
-- **Description**: Retrieves information for the virtual machine.
+- **Description**: Retrieves information for the Virtual Machine.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                      |
@@ -1199,7 +1199,7 @@ Visit the [Virtual Machine Template reference]({{% relref "../../../product/oper
 
 ### one.vm.monitoring
 
-- **Description**: Returns the virtual machine monitoring records.
+- **Description**: Returns the Virtual Machine monitoring records.
 - **Parameters**
 
 | Type   | Data Type   | Description                                           |
@@ -1486,7 +1486,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vmpool.monitoring
 
-- **Description**: Returns all the virtual machine monitoring records.
+- **Description**: Returns all the Virtual Machine monitoring records.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -1529,7 +1529,7 @@ Sample output:
 
 ### one.vmpool.accounting
 
-- **Description**: Returns the virtual machine history records.
+- **Description**: Returns the Virtual Machine history records.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -1546,7 +1546,7 @@ The XML output is explained in detail in the [‘’oneacct’’ guide]({{% rel
 
 ### one.vmpool.showback
 
-- **Description**: Returns the virtual machine showback records
+- **Description**: Returns the Virtual Machine showback records
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                         |
@@ -1610,7 +1610,7 @@ The XML output will be similar to this one:
 
 ### one.host.allocate
 
-- **Description**: Allocates a new host in OpenNebula
+- **Description**: Allocates a new Host in OpenNebula
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                               |
@@ -1627,7 +1627,7 @@ The XML output will be similar to this one:
 
 ### one.host.delete
 
-- **Description**: Deletes the given host from the pool
+- **Description**: Deletes the given Host from the pool
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1641,7 +1641,7 @@ The XML output will be similar to this one:
 
 ### one.host.status
 
-- **Description**: Sets the status of the host
+- **Description**: Sets the status of the Host
 - **Parameters**
 
 | Type   | Data Type   | Description                                         |
@@ -1656,7 +1656,7 @@ The XML output will be similar to this one:
 
 ### one.host.update
 
-- **Description**: Replaces the host’s template contents.
+- **Description**: Replaces the Host’s template contents.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                      |
@@ -1671,7 +1671,7 @@ The XML output will be similar to this one:
 
 ### one.host.rename
 
-- **Description**: Renames a host.
+- **Description**: Renames a Host.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1686,7 +1686,7 @@ The XML output will be similar to this one:
 
 ### one.host.info
 
-- **Description**: Retrieves information for the host.
+- **Description**: Retrieves information for the Host.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                      |
@@ -1703,7 +1703,7 @@ The XML output will be similar to this one:
 
 ### one.host.monitoring
 
-- **Description**: Returns the host monitoring records.
+- **Description**: Returns the Host monitoring records.
 - **Parameters**
 
 | Type   | Data Type   | Description                                           |
@@ -1737,7 +1737,7 @@ For example:
 
 ### one.hostpool.info
 
-- **Description**: Retrieves information for all the hosts in the pool.
+- **Description**: Retrieves information for all the Hosts in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -1750,7 +1750,7 @@ For example:
 
 ### one.hostpool.monitoring
 
-- **Description**: Returns all the host monitoring records.
+- **Description**: Returns all the Host monitoring records.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                       |
@@ -1836,7 +1836,7 @@ Sample output:
 
 ### one.cluster.addhost
 
-- **Description**: Adds a host to the given cluster.
+- **Description**: Adds a Host to the given cluster.
 - **Parameters**
 
 | Type   | Data Type   | Description                                   |
@@ -1851,7 +1851,7 @@ Sample output:
 
 ### one.cluster.delhost
 
-- **Description**: Removes a host from the given cluster.
+- **Description**: Removes a Host from the given cluster.
 - **Parameters**
 
 | Type   | Data Type   | Description                                   |
@@ -1971,7 +1971,7 @@ Sample output:
 
 ### one.vn.allocate
 
-- **Description**: Allocates a new virtual network in OpenNebula.
+- **Description**: Allocates a new Virtual Network in OpenNebula.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                |
@@ -1986,7 +1986,7 @@ Sample output:
 
 ### one.vn.delete
 
-- **Description**: Deletes the given virtual network from the pool.
+- **Description**: Deletes the given Virtual Network from the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -2000,7 +2000,7 @@ Sample output:
 
 ### one.vn.add_ar
 
-- **Description**: Adds address ranges to a virtual network.
+- **Description**: Adds address ranges to a Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                         |
@@ -2034,7 +2034,7 @@ AR = [
 
 ### one.vn.rm_ar
 
-- **Description**: Removes an address range from a virtual network.
+- **Description**: Removes an address range from a Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                      |
@@ -2112,7 +2112,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.free_ar
 
-- **Description**: Frees a reserved address range from a virtual network.
+- **Description**: Frees a reserved address range from a Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -2127,7 +2127,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.hold
 
-- **Description**: Holds a virtual network Lease as used.
+- **Description**: Holds a Virtual Network Lease as used.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                    |
@@ -2142,7 +2142,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.release
 
-- **Description**: Releases a virtual network Lease on hold.
+- **Description**: Releases a Virtual Network Lease on hold.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                       |
@@ -2157,7 +2157,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.update
 
-- **Description**: Replaces the virtual network template contents.
+- **Description**: Replaces the Virtual Network template contents.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                      |
@@ -2173,7 +2173,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.chmod
 
-- **Description**: Changes the permission bits of a virtual network.
+- **Description**: Changes the permission bits of a Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                         |
@@ -2196,7 +2196,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.chown
 
-- **Description**: Changes the ownership of a virtual network.
+- **Description**: Changes the ownership of a Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                            |
@@ -2212,7 +2212,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.rename
 
-- **Description**: Renames a virtual network.
+- **Description**: Renames a Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -2227,7 +2227,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 
 ### one.vn.info
 
-- **Description**: Retrieves information for the virtual network.
+- **Description**: Retrieves information for the Virtual Network.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                      |
@@ -2282,7 +2282,7 @@ The ACL rules do not apply to VNET reservations in the same way as they do to no
 
 ### one.vn.recover
 
-- **Description**: Recovers a stuck Virtual Network which is waiting for a driver operation. The recovery may be done by failing or succeeding the pending operation. You need to manually check the VN status, to decide if the operation was successful or not.
+- **Description**: Recovers a stuck Virtual Network which is waiting for a driver operation. The recovery may be done by failing or succeeding the pending operation. You need to manually check the VN status to decide if the operation was successful or not.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                        |
@@ -2297,7 +2297,7 @@ The ACL rules do not apply to VNET reservations in the same way as they do to no
 
 ### one.vnpool.info
 
-- **Description**: Retrieves information for all or part of the virtual networks in the pool.
+- **Description**: Retrieves information for all or part of the Virtual Networks in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -2378,7 +2378,7 @@ The ACL rules do not apply to VNET reservations in the same way as they do to no
 
 ### one.secgroup.commit
 
-- **Description**: Commit security group changes to associated VMs. This is intended for retrying updates of VMs or reinitialize the updating process if oned stopped or failed after a one.secgroup.update call.
+- **Description**: Commit security group changes to associated VMs. This is intended for retrying updates of VMs or reinitializing the updating process if oned stopped or failed after a one.secgroup.update call.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                             |
@@ -3026,7 +3026,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.image.snapshotflatten
 
-- **Description**: Flatten the snapshot of image and discards others
+- **Description**: Flattens the snapshot of image and discards others
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3126,7 +3126,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.allocate
 
-- **Description**: Allocates a new marketplace in OpenNebula.
+- **Description**: Allocates a new Marketplace in OpenNebula.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                            |
@@ -3140,7 +3140,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.delete
 
-- **Description**: Deletes the given marketplace from the pool.
+- **Description**: Deletes the given Marketplace from the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3154,7 +3154,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.update
 
-- **Description**: Replaces the marketplace template contents.
+- **Description**: Replaces the Marketplace template contents.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                      |
@@ -3169,7 +3169,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.chmod
 
-- **Description**: Changes the permission bits of a marketplace.
+- **Description**: Changes the permission bits of a Marketplace.
 - **Parameters**
 
 | Type   | Data Type   | Description                                         |
@@ -3192,7 +3192,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.chown
 
-- **Description**: Changes the ownership of a marketplace.
+- **Description**: Changes the ownership of a Marketplace.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                            |
@@ -3208,7 +3208,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.rename
 
-- **Description**: Renames a marketplace.
+- **Description**: Renames a Marketplace.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3238,7 +3238,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.market.info
 
-- **Description**: Retrieves information for the marketplace.
+- **Description**: Retrieves information for the Marketplace.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                      |
@@ -3253,7 +3253,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketpool.info
 
-- **Description**: Retrieves information for all or part of the marketplaces in the pool.
+- **Description**: Retrieves information for all or part of the Marketplaces in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3268,7 +3268,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.allocate
 
-- **Description**: Allocates a new marketplace app in OpenNebula.
+- **Description**: Allocates a new Marketplace app in OpenNebula.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                |
@@ -3283,7 +3283,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.delete
 
-- **Description**: Deletes the given marketplace app from the pool.
+- **Description**: Deletes the given Marketplace app from the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3297,7 +3297,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.enable
 
-- **Description**: Enables or disables a marketplace app.
+- **Description**: Enables or disables a Marketplace app.
 - **Parameters**
 
 | Type   | Data Type   | Description                                  |
@@ -3312,7 +3312,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.update
 
-- **Description**: Replaces the marketplace app template contents.
+- **Description**: Replaces the Marketplace app template contents.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                      |
@@ -3327,7 +3327,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.chmod
 
-- **Description**: Changes the permission bits of a marketplace app.
+- **Description**: Changes the permission bits of a Marketplace app.
 - **Parameters**
 
 | Type   | Data Type   | Description                                         |
@@ -3350,7 +3350,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.chown
 
-- **Description**: Changes the ownership of a marketplace app.
+- **Description**: Changes the ownership of a Marketplace app.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                            |
@@ -3366,7 +3366,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.rename
 
-- **Description**: Renames a marketplace app.
+- **Description**: Renames a Marketplace app.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3381,7 +3381,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.info
 
-- **Description**: Retrieves information for the marketplace app.
+- **Description**: Retrieves information for the Marketplace app.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                      |
@@ -3396,7 +3396,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.lock
 
-- **Description**: Locks a MarketPlaceApp. Lock certain actions depending on blocking level
+- **Description**: Locks a Marketplace app. Lock certain actions depending on blocking level
 
 > - **USE**: locks Admin, Manage and Use actions.
 > - **MANAGE**: locks Manage and Use actions.
@@ -3417,7 +3417,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapp.unlock
 
-- **Description**: Unlocks a MarketPlaceApp.
+- **Description**: Unlocks a Marketplace app.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3431,7 +3431,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.marketapppool.info
 
-- **Description**: Retrieves information for all or part of the marketplace apps in the pool.
+- **Description**: Retrieves information for all or part of the Marketplace apps in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -3480,7 +3480,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vrouter.instantiate
 
-- **Description**: Instantiates a new virtual machine from a virtual router.
+- **Description**: Instantiates a new Virtual Machine from a virtual router.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                            |
@@ -3508,7 +3508,7 @@ Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrit
 
 ### one.vrouter.attachnic
 
-- **Description**: Attaches a new network interface to the virtual router and the virtual machines
+- **Description**: Attaches a new network interface to the virtual router and the Virtual Machines
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                          |
@@ -3523,7 +3523,7 @@ Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrit
 
 ### one.vrouter.detachnic
 
-- **Description**: Detaches a network interface from the virtual router and the virtual machines
+- **Description**: Detaches a network interface from the virtual router and the Virtual Machines
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3622,7 +3622,7 @@ Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrit
 
 ### one.vrouter.lock
 
-- **Description**: Locks a Virtual Router. Lock certain actions depending on blocking level
+- **Description**: Locks a virtual router. Lock certain actions depending on blocking level
 
 > - **USE**: locks Admin, Manage and Use actions.
 > - **MANAGE**: locks Manage and Use actions.
@@ -3643,7 +3643,7 @@ Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrit
 
 ### one.vrouter.unlock
 
-- **Description**: Unlocks a Virtual Router.
+- **Description**: Unlocks a virtual router.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3657,7 +3657,7 @@ Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrit
 
 ### one.vrouterpool.info
 
-- **Description**: Retrieves information for all or part of the Resources in the pool.
+- **Description**: Retrieves information for all or part of the resources in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -3796,7 +3796,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.user.addgroup
 
-- **Description**: Adds the User to a secondary group.
+- **Description**: Adds the user to a secondary group.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3810,7 +3810,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.user.delgroup
 
-- **Description**: Removes the User from a secondary group
+- **Description**: Removes the user from a secondary group
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3952,7 +3952,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.group.addadmin
 
-- **Description**: Adds a User to the Group administrators set
+- **Description**: Adds a user to the Group administrators set
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -3966,7 +3966,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.group.deladmin
 
-- **Description**: Removes a User from the Group administrators set
+- **Description**: Removes a user from the Group administrators set
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -4179,7 +4179,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vdc.addhost
 
-- **Description**: Adds a host to the VDC
+- **Description**: Adds a Host to the VDC
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -4194,7 +4194,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vdc.delhost
 
-- **Description**: Deletes a host from the VDC
+- **Description**: Deletes a Host from the VDC
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -4611,7 +4611,7 @@ Let’s say you want to store documents representing Chef recipes, and EC2 secur
 
 ### one.document.lock
 
-- **Description**: Locks a Document. Lock certain actions depending on blocking level:
+- **Description**: Locks a document. Lock certain actions depending on blocking level:
 
 > - **USE**: locks Admin, Manage and Use actions.
 > - **MANAGE**: locks Manage and Use actions.
@@ -4632,7 +4632,7 @@ Let’s say you want to store documents representing Chef recipes, and EC2 secur
 
 ### one.document.unlock
 
-- **Description**: Unlocks a Document.
+- **Description**: Unlocks a document.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
@@ -4646,7 +4646,7 @@ Let’s say you want to store documents representing Chef recipes, and EC2 secur
 
 ### one.documentpool.info
 
-- **Description**: Retrieves information for all or part of the Resources in the pool.
+- **Description**: Retrieves information for all or part of the resources in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -4705,7 +4705,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vntemplate.clone
 
-- **Description**: Clones an existing virtual network template.
+- **Description**: Clones an existing Virtual Network template.
 - **Parameters**
 
 | Type   | Data Type   | Description                                      |
@@ -4734,7 +4734,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.vntemplate.instantiate
 
-- **Description**: Instantiates a new virtual network from a vntemplate.
+- **Description**: Instantiates a new Virtual Network from a vntemplate.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                              |
@@ -4873,7 +4873,7 @@ Declaring a field overwrites the vntemplate. Thus, declaring `VN_MAD=[...]` over
 
 ### one.vntemplatepool.info
 
-- **Description**: Retrieves information for all or part of the Resources in the pool.
+- **Description**: Retrieves information for all or part of the resources in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |
@@ -4893,7 +4893,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.hook.allocate
 
-- **Description**: Allocates a new Hook in OpenNebula.
+- **Description**: Allocates a new hook in OpenNebula.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                              |
@@ -5011,7 +5011,7 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.hookpool.info
 
-- **Description**: Retrieves information for all or part of the Resources in the pool.
+- **Description**: Retrieves information for all or part of the resources in the pool.
 - **Parameters**
 
 | Type   | Data Type   | Description                                                                                                                                                                                                                                                       |

@@ -16,7 +16,7 @@ weight: "2"
 
 OpenNebula offers a **simple** but **feature-rich** and **flexible solution** to build and manage data center virtualization and enterprise clouds. This page provides a summary of its key features(\*).
 
-To learn more about the infrastructure platforms and services supported in each version of OpenNebula, refer to the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes.md#uspng" %}}) for each version.
+To learn more about the infrastructure platforms and services supported in each version of OpenNebula, please refer to the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes.md#uspng" %}}) for each version.
 
 For high-level overviews and in-depth technical guides, please refer to OpenNebula’s [White Papers](https://opennebula.io/white-papers/).
 
@@ -55,7 +55,7 @@ For high-level overviews and in-depth technical guides, please refer to OpenNebu
 
 **HIGH AVAILABILITY AND BUSINESS CONTINUITY**
 
-* High-Availability architecture
+* High-availability architecture
 * Persistent database backend with support for high-availability configurations
 * Configurable behavior in the event of failure, for cost-effective failover solutions
 
@@ -64,7 +64,7 @@ For high-level overviews and in-depth technical guides, please refer to OpenNebu
 * Virtual infrastructure management adjusted for enterprise data centers
 * Complete life cycle management of virtual resources
 * Powerful hooking system
-* Full control, monitoring and accounting of virtual infrastructure resources
+* Full control, monitoring, and accounting of virtual infrastructure resources
 * Fine-grained multi-tenancy
 
 **TRUE HYBRID AND EDGE CLOUD**
@@ -81,7 +81,7 @@ For high-level overviews and in-depth technical guides, please refer to OpenNebu
 **SECURITY**
 
 * Fine-grained ACLs and user quotas
-* Powerful user, group and role management
+* Powerful user, group, and role management
 * Integration with enterprise and open source user management services
 * Login token functionality
 * Fine-grained auditing and support for isolation at different levels
@@ -90,7 +90,7 @@ For high-level overviews and in-depth technical guides, please refer to OpenNebu
 
 * Modular and extensible architecture
 * Customizable plug-ins for integration with any third-party data center service
-* API for integration with higher-level tools such as billing, self-service portals…
+* API for integration with higher-level tools such as billing, self-service portals, and more
 
 **LICENSING**
 
@@ -100,12 +100,12 @@ For high-level overviews and in-depth technical guides, please refer to OpenNebu
 
 * Automatic import of existing environments
 * All key functionalities for enterprise cloud in a single install
-* Long-term stability & performance through a single patching and upgrade process
+* Long-term stability and performance through a single patching and upgrade process
 
 **QUALITY ASSURANCE**
 
 * Internal quality assurance process
-* Technology matured through a large, active and engaged community
+* Technology matured through a large, active, and engaged community
 * Scalability and performance tested on many massive scalable deployments
 
 **PRODUCT SUPPORT**
@@ -116,6 +116,6 @@ For high-level overviews and in-depth technical guides, please refer to OpenNebu
 (\*) *Because OpenNebula leverages the functionality exposed by the underlying platform services, its functionality and performance may be affected by the limitations imposed by those services.*
 
 - *The list of features may change on the different platform configurations*
-- *Not all platform configurations exhibit a similar performance and stability*
+- *Not all platform configurations exhibit similar performance and stability*
 - *The features may change to offer users more features and integration with other virtualization and cloud components*
 - *The features may change due to changes in the functionality provided by underlying virtualization services*

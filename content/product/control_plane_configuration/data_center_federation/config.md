@@ -22,7 +22,7 @@ In this document, each configuration step starts with **Master** or **Slave** to
 *Master* and *slave* servers need to talk to each other through their XML-RPC API. You may need to update the `LISTEN_ADDRESS`, and or `PORT` in [/etc/one/oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}}), or any firewall rule blocking this communication. Note that by default this traffic is not secure, so if you are using public links you need to secure the communication.{{< /alert >}} 
 
 {{< alert title="Important" color="success" >}}
-When using a HA environment, every change at any configuration file included in the steps below should be applied to every HA cluster node.{{< /alert >}} 
+When using an HA environment, every change at any configuration file included in the steps below should be applied to every HA cluster node.{{< /alert >}} 
 
 {{< alert title="Important" color="success" >}}
 The federation can be set up with MySQL/MariaDB or SQLite as backends, but you can’t mix them across Zones. MySQL/MariaDB is recommended for production deployments.{{< /alert >}} 
@@ -34,7 +34,7 @@ Start by picking an OpenNebula to act as master of the federation. The *master* 
 {{< alert title="Note" color="success" >}}
 When installing a new *master* from scratch be sure to start it at least once to properly bootstrap the database.{{< /alert >}} 
 
-- **Master**: Edit the *master* Zone endpoint. This can be done via Sunstone, or with the onezone command. Write down this endpoint to use it later when configuring the *slaves*.
+- **Master**: Edit the *master* Zone endpoint. This can be done via Sunstone or with the onezone command. Write down this endpoint to use it later when configuring the *slaves*.
 
 ```default
 $ onezone update 0
@@ -61,7 +61,7 @@ You are now ready to add *slave* Zones.
 
 - **Slave**: Install OpenNebula on the *slave* as usual following the [installation guide]({{% relref "front_end_installation" %}}). Start OpenNebula at least once to bootstrap the Zone database.
 - **Slave**: Stop OpenNebula.
-- **Master**: Create a Zone for the *slave*, and write down the new Zone ID. This can be done via Sunstone, or with the onezone command.
+- **Master**: Create a Zone for the *slave* and write down the new Zone ID. This can be done via Sunstone or with the onezone command.
 
 ```default
 $ vim /tmp/zone.tmpl
@@ -102,7 +102,7 @@ onegate_auth
 sunstone_auth
 ```
 
-- **Slave**: Update `/etc/one/oned.conf` to change the mode to **slave**, set the *master’s* URL and the `ZONE_ID` obtained when the zone was created on *master*:
+- **Slave**: Update `/etc/one/oned.conf` to change the mode to **slave**, set the *master’s* URL and the `ZONE_ID` obtained when the Zone was created on *master*:
 
 ```default
 FEDERATION = [
@@ -120,7 +120,7 @@ Sqlite database backup restored in one.db
 ```
 
 - **Slave**: Start OpenNebula.
-- **Slave**: In each Slave node you must place the configuration so that it is able to know which zone it represents. for this you must modify the `/etc/one/fireedge-server.conf` file with the zone information.
+- **Slave**: In each Slave node you must place the configuration so that it is able to know which Zone it represents. For this you must modify the `/etc/one/fireedge-server.conf` file with the zone information.
 
 ```default
 default_zone:
@@ -130,7 +130,7 @@ default_zone:
 ```
 
 {{< alert title="Note" color="success" >}}
-In case the default [PORT]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) of the FireEdge (Master or Slave) is changed, it is required that the zone that this fireedge represents has the `FIREEDGE_ENDPOINT` field added with the endpoint that the other FireEdge receives HTTPS requests.{{< /alert >}} 
+In case the default [PORT]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) of the FireEdge (Master or Slave) is changed, it is required that the Zone that this FireEdge represents has the `FIREEDGE_ENDPOINT` field added with the endpoint that the other FireEdge receives HTTPS requests.{{< /alert >}} 
 
 - **Slave**: Start FireEdge.
 
@@ -145,24 +145,24 @@ It is important to double check that the federation is working before adding HA 
 
 ## Step 4. Show Service Information by Zone in Sunstone (Optional)
 
-To see services information for a specific zone within Sunstone, you need to do the following:
+To see services information for a specific Zone within Sunstone, you need to do the following:
 
-- Adjust the `:host` field in `/etc/one/oneflow-server.conf` of the slave zone to allow listening for requests outside of 127.0.0.1
+- Adjust the `:host` field in `/etc/one/oneflow-server.conf` of the slave Zone to allow listening for requests outside of 127.0.0.1
 
 {{< alert title="Note" color="success" >}}
-So that the oneflow-server listens for requests from anywhere, the host field can be set to 0.0.0.0{{< /alert >}} 
+So that the oneflow-server listens for requests from anywhere, the Host field can be set to 0.0.0.0{{< /alert >}} 
 
-- Update the slave zone in the master zone. Adding the `ONEFLOW_ENDPOINT=http://<slave-zone-ip>:2474/` field with the public address of the slave zone with the following command `onezone update <id-slave-zone>`
+- Update the slave Zone in the master Zone. Adding the `ONEFLOW_ENDPOINT=http://<slave-zone-ip>:2474/` field with the public address of the slave Zone with the following command `onezone update <id-slave-zone>`
 - Restart the Sunstone service
 
 ## Importing Existing OpenNebula Zones
 
 There is no automatic procedure to import existing users and groups into a running federation. However, you can preserve everything else like datastores, VMs, networks…
 
-- **Slave**: Back-up details of users, groups, and VDCs you want to recreate in the federated environment.
+- **Slave**: Back up details of users, groups, and VDCs you want to recreate in the federated environment.
 - **Slave**: Stop OpenNebula. If the Zone was running an HA cluster, stop all servers and pick one of them to add the Zone to the federation. Put this server in solo mode by setting `SERVER_ID` to `-1` in `/etc/one/oned.conf`.
 - **Master, Slave**: Follow the procedure described in Step 2 to add a new Zone.
-- **Slave**: Recreate any user, group or VDC you need to preserve in the federated environment.
+- **Slave**: Recreate any user, group, or VDC you need to preserve in the federated environment.
 
 The Zone is now ready to use. If you want to add more HA servers, follow the standard procedure.
 
@@ -170,8 +170,8 @@ The Zone is now ready to use. If you want to add more HA servers, follow the sta
 
 OpenNebula database has two different version numbers:
 
-- federated (shared) tables version,
-- local tables version.
+- federated (shared) tables version
+- local tables version
 
 {{< alert title="Important" color="success" >}}
 To federate OpenNebula Zones, they must run the same version of the federated tables (which are pretty stable).{{< /alert >}} 
@@ -180,6 +180,6 @@ Upgrades to a version that does not increase the federated version can be done a
 
 ## Administration Account Configuration
 
-A Federation will have a unique oneadmin account. This is required to perform API calls across Zones. It’s recommended to not use this account directly in a production environment but to create an account in the ‘oneadmin’ group for each Zone administrator instead.
+A Federation will have a unique oneadmin account. This is required to perform API calls across Zones. It’s recommended not to use this account directly in a production environment but to create an account in the ‘oneadmin’ group for each Zone administrator instead.
 
 When additional access restrictions are needed, the Federation Administrator can create a special administrative group with total permissions for one Zone only.

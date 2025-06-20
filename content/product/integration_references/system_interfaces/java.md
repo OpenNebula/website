@@ -54,7 +54,7 @@ To use the OpenNebula Cloud API for Java in your Java project, you have to add t
 This is a small code snippet. As you can see, the code flow would be as follows:
 
 - Create a `org.opennebula.client.Client` object, setting up the authorization string and the endpoint. You only need to create it once.
-- Create a pool (e.g. `HostPool`) or element (e.g. `VirtualNetwork`) object.
+- Create a pool (e.g., `HostPool`) or element (e.g., `VirtualNetwork`) object.
 - You can perform “actions” over these objects right away, like `myVNet.delete();`
 - If you want to query any information (like what objects the pool contains, or one of the element attributes), you have to issue an `info()` call before, so the object retrieves the data from OpenNebula.
 

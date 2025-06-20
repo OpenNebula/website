@@ -12,11 +12,11 @@ weight: "7"
 
 <!--# Accounting Client -->
 
-The accounting toolset visualizes and reports resource usage data. This accounting tool addresses the accounting of the virtual resources. It includes resource consumption of the virtual machines as reported from the hypervisor.
+The accounting toolset visualizes and reports resource usage data. This accounting tool addresses the accounting of the virtual resources. It includes resource consumption of the Virtual Machines as reported from the hypervisor.
 
 ## Usage
 
-`oneacct` - prints accounting information for virtual machines
+`oneacct` - prints accounting information for Virtual Machines
 
 ```default
 Usage: oneacct [options]
@@ -41,9 +41,9 @@ Usage: oneacct [options]
  --endpoint endpoint       URL of OpenNebula XML-RPC front-end
 ```
 
-The time can be written as `month/day/year hour:minute:second`, or any other similar format, e.g `month/day hour:minute`.
+The time can be written as `month/day/year hour:minute:second`, or any other similar format, e.g., `month/day hour:minute`.
 
-To integrate this tool with other systems you can use `-j`, `-x` or `--csv` flags to get all the information in an easy computer readable format.
+To integrate this tool with other systems you can use `-j`, `-x`, or `--csv` flags to get all the information in an easy computer readable format.
 
 ## Accounting Output
 
@@ -66,9 +66,9 @@ Showing active history records from 2016-05-01 00:00:00 +0200 to 2016-06-02 00:0
   29 host02          none             none 05/27 17:09:28              -   256M   1   2.4M   1.3K    10G
 ```
 
-The record shows the complete history record, and total network consumption. It will not reflect the consumption made only during the month of May.
+The record shows the complete history record and total network consumption. It will not reflect the consumption made only during the month of May.
 
-Other important thing to pay attention to is that active history records, those with `END_TIME` **‘-’**, refresh their monitoring information each time the VM is monitored. Once the VM is shut down, migrated or stopped, the `END_TIME` is set and the monitoring information stored is frozen. The final values reflect the total for accumulative attributes, like `NETRX`/`NETTX`.
+Other important thing to pay attention to is that active history records, those with `END_TIME` **‘-’**, refresh their monitoring information each time the VM is monitored. Once the VM is shut down, migrated, or stopped, the `END_TIME` is set and the monitoring information stored is frozen. The final values reflect the total for accumulative attributes, like `NETRX`/`NETTX`.
 
 ### Sample Output
 
@@ -132,7 +132,7 @@ $ oneacct -u 0 --split
   29 host02          none             none 05/27 17:09:28              -   256M   1   2.4M   1.3K    10G
 ```
 
-In case you use CSV output (`--csv`) you will het a header with the name of each column and then the data. For example:
+In case you use CSV output (`--csv`) you will get a header with the name of each column and then the data. For example:
 
 ```default
 $ oneacct --csv
@@ -379,4 +379,4 @@ There are two kinds of monitoring values:
 * Instantaneous values: For example, `VM/CPU` or `VM/MEMORY` show the memory consumption last reported by the monitoring probes.
 * Accumulative values: For example, `VM/NETRX` and `VM/NETTX` show the total network consumption since the history record started.
 
-Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.accounting method](http://docs.opennebula.io/doc/6.4/oca/ruby/OpenNebula/VirtualMachinePool.html#accounting-instance_method) to retrieve accounting information filtering and ordering by multiple parameters.
+Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.accounting method](http://docs.opennebula.io/doc/6.4/oca/ruby/OpenNebula/VirtualMachinePool.html#accounting-instance_method) to retrieve accounting information and filter and order by multiple parameters.

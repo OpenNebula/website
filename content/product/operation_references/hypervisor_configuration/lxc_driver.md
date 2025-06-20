@@ -16,16 +16,16 @@ weight: "3"
 
 ## Requirements
 
-- LXC version >= 3.0.3 installed on the host.
-- cgroup version 1 or 2 hosts are required to implement resource control operations (e.g. CPU pinning, memory or swap limitations).
+- LXC version >= 3.0.3 installed on the Host.
+- cgroup version 1 or 2 Hosts are required to implement resource control operations (e.g., CPU pinning, memory or swap limitations).
 
 ## Considerations & Limitations
 
 ### Privileged Containers and Security
 
-In order to ensure the security in a multitenant environment, by default, the containers created by the LXC driver will be unprivileged. The unprivileged containers will be deployed as `root`. It will use `600100001-600165537` sub UID/GID range for mapping users/groups in order to increase security in case a malicious agent is able to escape the container.
+In order to ensure security in a multitenant environment, by default the containers created by the LXC driver will be unprivileged. The unprivileged containers will be deployed as `root`. Sub UID/GID range `600100001-600165537` will be used for mapping users/groups in order to increase security in case a malicious agent is able to escape the container.
 
-To create a privileged container, the attribute `LXC_UNPRIVILEGED = "no"` needs to be added to the VM Template. The generated container will include a file with a set of container configuration parameters for privileged containers. This file is located in the frontend at **/var/lib/one/remotes/etc/vmm/lxc/profiles/profile_privileged** (see below for its contents). You can be fine tune this file if needed (don’t forget to sync the file using the command onehost sync).
+To create a privileged container, the attribute `LXC_UNPRIVILEGED = "no"` needs to be added to the VM template. The generated container will include a file with a set of container configuration parameters for privileged containers. This file is located in the Front-end at **/var/lib/one/remotes/etc/vmm/lxc/profiles/profile_privileged** (see below for its contents). You can be fine-tune this file if needed (don’t forget to sync the file using the command onehost sync).
 
 ```default
 lxc.mount.entry = 'mqueue dev/mqueue mqueue rw,relatime,create=dir,optional 0 0'
@@ -50,7 +50,7 @@ lxc.cgroup.devices.allow = 'c 10:200 rwm'
 
 ### CPU and NUMA Pinning
 
-You can pin containers to host CPUs and NUMA nodes simply by adding a `TOPOLOGY` attribute to the VM Template, [see the use Virtual Topology and CPU Pinning guide]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/numa#numa" %}})
+You can pin containers to Host CPUs and NUMA nodes simply by adding a `TOPOLOGY` attribute to the VM template, [see the use Virtual Topology and CPU Pinning guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}})
 
 ### Supported Storage Formats
 
@@ -61,8 +61,7 @@ You can pin containers to host CPUs and NUMA nodes simply by adding a `TOPOLOGY`
 
 ### Container Actions
 
-There are a number of regular features that are not implemented yet:
-Some of the actions supported by OpenNebula for VMs are not implemented yet for LXC. The following actions are not currently supported:
+Some of the actions supported by OpenNebula for VMs are not yet implemented for LXC. The following actions are not currently supported:
 
 - `migration`
 - `live migration`
@@ -79,7 +78,7 @@ PCI Passthrough is not currently supported for LXC containers.
 
 ### Wild Containers
 
-Importing wilds containers that weren’t deployed by OpenNebula is not currently supported.
+Importing wild containers that weren’t deployed by OpenNebula is not currently supported.
 
 ## Configuration
 
@@ -89,35 +88,35 @@ The LXC driver is enabled by default in OpenNebula `/etc/one/oned.conf` on your 
 
 ### Driver
 
-LXC driver-specific configuration is available in `/var/lib/one/remotes/etc/vmm/lxc/lxcrc` on the OpenNebula Front-end node. The following list contains the supported configuration attributes and a brief description:
+LXC driver-specific configuration is available in `/var/lib/one/remotes/etc/vmm/lxc/lxcrc` on the OpenNebula Front-end node. The following list contains the supported configuration attributes and a brief description of each:
 
 | Parameter             | Description                                                                                                                     |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | `:vnc`                | Options to customize the VNC access to the<br/>microVM. `:width`, `:height`, `:timeout`, and<br/>`:command` can be set          |
-| `:datastore_location` | Default path for the datastores. This only need to be<br/>changed if the corresponding value in oned.conf has<br/>been modified |
+| `:datastore_location` | Default path for the datastores. This only needs to be<br/>changed if the corresponding value in oned.conf has<br/>been modified |
 | `:default_lxc_config` | Path to the LXC default configuration file. This file<br/>will be included in the configuration of every LXC<br/>container      |
 
-Mount options configuration section also in lxcrc
+Mount options configuration section also in lxcrc:
 
-| `:bindfs`     | Comma separated list of mount options used when shifting the<br/>uid/gid with bindfs. See <bindfs -o> command help   |
+| `:bindfs`     | Comma-separated list of mount options used when shifting the<br/>uid/gid with bindfs. See <bindfs -o> command help   |
 |---------------|----------------------------------------------------------------------------------------------------------------------|
-| `:dev_<fs>`   | Mount options for disk devices (in the host). Options are set per<br/>fs type (e.g. dev_xfs, dev_ext3…)              |
+| `:dev_<fs>`   | Mount options for disk devices (in the Host). Options are set per<br/>fs type (e.g. dev_xfs, dev_ext3…)              |
 | `:disk`       | Mount options for data DISK in the container (lxc.mount.entry)                                                       |
 | `:rootfs`     | Mount options for root fs in the container (lxc.rootfs.options)                                                      |
 | `:mountpoint` | Default Path to mount data disk in the container. This can be<br/>set per DISK using the TARGET attribute            |
 
 ## Storage
 
-LXC containers need a root file system image in order to boot. This image can be downloaded directly to OpenNebula from [Linux Containers](https://uk.images.linuxcontainers.org/) Marketplace. Check the [Public Marketplaces]({{% relref "../../apps-marketplace/public_marketplaces/index#public-marketplaces" %}}) chapter for more information. You can use LXC with NAS (file-based), SAN (lvm) or Ceph Datastores.
+LXC containers need a root file system image in order to boot. This image can be downloaded directly to OpenNebula from [Linux Containers](https://images.linuxcontainers.org/) Marketplace. Check the [Public Marketplaces]({{% relref "../../apps-marketplace/public_marketplaces/index#public-marketplaces" %}}) chapter for more information. You can use LXC with NAS (file-based), SAN (lvm) or Ceph Datastores.
 
-When using XFS images it is recommended to use images with a block size of 4K, as it is the default block size for mounting the file system. Otherwise is possible to get an error like the one below:
+When using XFS images it is recommended to use images with a block size of 4K as it is the default block size for mounting the file system. Otherwise it's possible you will get an error like the one below:
 
 ```none
 Mon Apr  4 22:20:25 2022 [Z0][VMM][I]: mount: /var/lib/one/datastores/0/30/mapper/disk.1: mount(2) system call failed: Function not implemented.
 ```
 
 {{< alert title="Note" color="success" >}}
-Custom images can also be created by using common linux tools like the `mkfs` command for creating the file system and `dd` for copying an existing file system inside the new one. Also OpenNebula will preserve any custom id map present on the filesystem.{{< /alert >}} 
+Custom images can also be created by using common linux tools like the `mkfs` command for creating the file system and `dd` for copying an existing file system inside the new one. Also, OpenNebula will preserve any custom id map present on the filesystem.{{< /alert >}}
 
 ## Networking
 
@@ -127,7 +126,7 @@ LXC containers are fully integrated with every OpenNebula networking driver.
 
 ### Container Template
 
-Container Templates can be defined by using the same attributes described in [Virtual Machine Template section]({{% relref "../../virtual_machines_operation/virtual_machine_images/vm_templates#vm-templates" %}}).
+Container templates can be defined by using the same attributes described in [Virtual Machine Template section]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-templates" %}}).
 
 ```default
 CPU="1"
@@ -147,11 +146,11 @@ NIC=[
   SECURITY_GROUPS="0" ]
 ```
 
-The LXC driver will create a swap limitation equal to the amount of memory defined in the VM Template. The attribute `LXC_SWAP` can be used to declare extra swap for the container.
+The LXC driver will create a swap limitation equal to the amount of memory defined in the VM template. The attribute `LXC_SWAP` can be used to declare extra swap for the container.
 
 ### Remote Access
 
-Containers supports remote access via VNC protocol which allows easy access to them. The following section must be added to the container template to configure the VNC access:
+Containers support remote access via VNC protocol which allows easy access to them. The following section must be added to the Container template to configure the VNC access:
 
 ```default
 GRAPHICS=[
@@ -161,7 +160,7 @@ GRAPHICS=[
 
 ### Additional Attributes
 
-The `RAW` attribute allows us to add raw LXC configuration attributes to the final container deployment file. This permits us to set configuration attributes that are not directly supported by OpenNebula.
+The `RAW` attribute allows us to add raw LXC configuration attributes to the final container deployment file. This permits us to set configuration attributes that are not directly supported by OpenNebula:
 
 ```default
 RAW = [
@@ -170,9 +169,9 @@ RAW = [
 ```
 
 {{< alert title="Note" color="success" >}}
-Each line of the `DATA` attribute must contain only an LXC configuration attribute and its corresponding value. If a provided attribute is already set by OpenNebula, it will be discarded and the original value will take precedence.{{< /alert >}} 
+Each line of the `DATA` attribute must contain only an LXC configuration attribute and its corresponding value. If a provided attribute is already set by OpenNebula, it will be discarded and the original value will take precedence.{{< /alert >}}
 
-The `LXC_PROFILES` attribute implements a similar behavior than [LXD profiles](https://linuxcontainers.org/lxd/advanced-guide/#profiles). It allows to include pre-defined LXC configuration to a container. In order to use a profile, the corresponding LXC configuration file must be available at `/var/lib/one/remotes/etc/vmm/lxc/profiles`.
+The `LXC_PROFILES` attribute implements a similar behavior to [LXD profiles](https://linuxcontainers.org/lxd/advanced-guide/#profiles). It allows users to include pre-defined LXC configuration to a container. In order to use a profile, the corresponding LXC configuration file must be available at `/var/lib/one/remotes/etc/vmm/lxc/profiles`.
 
 For example, if you want to use the profiles `production` and `extra-performance`, you need to create the corresponding files containing the LXC configuration attributes (using lxc config syntax):
 
@@ -184,12 +183,32 @@ $ ls -l /var/lib/one/remotes/etc/vmm/lxc/profiles
 ```
 
 {{< alert title="Warning" color="warning" >}}
-After defining the profiles, make sure `oneadmin` user has enough permission for reading them. Also, remember to use `onehost sync` command to make sure the changes are synced in the host. If the profile is not available in the host, the container will be deployed without including the corresponding profile configuration.{{< /alert >}} 
+After defining the profiles, make sure `oneadmin` user has enough permission to read them. Also, remember to use `onehost sync` command to make sure the changes are synced in the Host. If the profile is not available in the Host, the container will be deployed without including the corresponding profile configuration.{{< /alert >}}
 
-After defining the profiles they can be used by adding the `PROFILES` attribute to the VM Template:
+After defining the profiles they can be used by adding the `PROFILES` attribute to the VM template:
 
 ```default
 PROFILES = "extra-performance, production"
 ```
 
-Profiles, are implemented by using the LXC `include` configuration attribute, note that the profiles will be included in the provided order and this order might affect the final configuration of the container.
+Profiles are implemented by using the LXC `include` configuration attribute. Note that the profiles will be included in the provided order and this order might affect the final configuration of the container.
+
+### Troubleshooting
+
+On top of the regular OpenNebula logs at `/var/log/one` the LXC driver generates additional logs for more specific LXC operations. Sometimes a container might fail to start or not behave as intended. You can find out more about what happened by inspecting the log files at `/var/log/lxc/`
+
+- `one-<vm_id>.console` - Contains the console output seen when starting a container. This contains information regarding how the init process within the container starts. It can also help identify problems that occur after a successful start yet a failed initialization.
+- `one-<vm_id>.log` - Contains information about how LXC handles different container operations.
+
+You can also verify the low level configuration of the container generated by OpenNebula when inspecting the file `/var/lib/lxc/one-<vm_id>/config`.
+
+#### Common issues
+
+- Sometimes it might happen that the Guest OS refuses to start completely or some systemd services fail to start. In this cases it might be worth using [Privileged Containers](#privileged-containers-and-security)
+- When running Linux distributions with [AppArmor](https://documentation.ubuntu.com/server/how-to/security/apparmor/index.html), it might be necessary to relax this configuration, otherwise services like [one-context]({{% relref "kvm_contextualization#kvm-contextualization" %}}) have dependencies which do not start. For this you can set the following [RAW configuration](#additional-attributes)
+
+```
+RAW = [
+  TYPE = "lxc",
+  DATA = "lxc.apparmor.profile=unconfined" ]
+```

@@ -12,19 +12,19 @@ weight: "7"
 
 <!--# OneGate Configuration -->
 
-The OneGate server allows **Virtual Machines to pull and push information from/to OpenNebula**. It can be used with all hypervisor Host types (KVM, LXC, and the legacy vCenter driver) if the guest operating system has preinstalled the OpenNebula [contextualization package]({{% relref "../../virtual_machines_operation/guest_operating_systems/creating_images#os-install" %}}). It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-gate` with the system service `opennebula-gate`.
+The OneGate server allows **Virtual Machines to pull and push information from/to OpenNebula**. It can be used with both the KVM and LXC hypervisors if the guest operating system has preinstalled the OpenNebula [contextualization package]({{% relref "../../virtual_machines_operation/guest_operating_systems/creating_images#os-install" %}}). It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-gate` with the system service `opennebula-gate`.
 
 Read more in [OneGate Usage]({{% relref "../../virtual_machines_operation/multi-vm_workflows/onegate_usage#onegate-usage" %}}).
 
 ## Recommended Network Setup
 
-To use the OneGate Service, VMs must have connectivity to the service. We recommend setting up a dedicated virtual network, ideally on a separate VLAN, for OneGate access. To accomplish this, simply add a virtual network interface (NIC) to the OneGate Service network for the VMs requiring access to the service. In cases where you’re deploying a multi-tier service, you can just add the virtual router to the OneGate Service network. The recommended network layout is illustrated in the diagram below:
+To use the OneGate Service, VMs must have connectivity to the service. We recommend setting up a dedicated Virtual Network, ideally on a separate VLAN, for OneGate access. To accomplish this, simply add a Virtual Network Interface (NIC) to the OneGate Service network for the VMs requiring access to the service. In cases where you’re deploying a multi-tier service, you can just add the virtual router to the OneGate Service network. The recommended network layout is illustrated in the diagram below:
 
 ![onegate_net](/images/onegate_net.png)
 
 ## Configuration
 
-The OneGate configuration file can be found in `/etc/one/onegate-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+The OneGate configuration file can be found in `/etc/one/onegate-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the OneGate server must be [restarted]({{% relref "#onegate-conf-service" %}}) to take effect.{{< /alert >}} 
@@ -41,7 +41,7 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `:ssl_server`               | SSL proxy URL that serves the API (set if is being used)                                                                                                                                                                                                                                                                                                                 |
 | **Authentication**          |                                                                                                                                                                                                                                                                                                                                                                          |
 | `:auth`                     | Authentication driver for incoming requests.<br/><br/>* `onegate` based on tokens provided in VM context                                                                                                                                                                                                                                                                 |
-| `:core_auth`                | Authentication driver to communicate with OpenNebula core<br/><br/>* `cipher` for symmetric cipher encryption of tokens<br/>* `x509` for X.509 certificate encryption of tokens<br/><br/>For more information, visit the [Cloud Server Authentication]({{% relref "../../../software/life_cycle_management/building_from_source_code/cloud_auth#cloud-auth" %}}) reference. |
+| `:core_auth`                | Authentication driver to communicate with OpenNebula core<br/><br/>* `cipher` for symmetric cipher encryption of tokens<br/>* `x509` for X.509 certificate encryption of tokens<br/><br/>For more information, visit the [Cloud Server Authentication]({{% relref "../../../software/installation_process/build_from_source_code/cloud_auth#cloud-auth" %}}) reference. |
 | **OneFlow Endpoint**        |                                                                                                                                                                                                                                                                                                                                                                          |
 | `:oneflow_server`           | Endpoint where the OneFlow server is listening                                                                                                                                                                                                                                                                                                                           |
 | **Permissions**             |                                                                                                                                                                                                                                                                                                                                                                          |
@@ -54,7 +54,7 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `:expire_delta`             | Default interval for timestamps. Tokens will be generated using the same timestamp for this interval of time. THIS VALUE CANNOT BE LOWER THAN EXPIRE_MARGIN.                                                                                                                                                                                                             |
 | `:expire_margin`            | Tokens will be generated if time > EXPIRE_TIME - EXPIRE_MARGIN                                                                                                                                                                                                                                                                                                           |
 
-In the default configuration, the OneGate server will only listen to requests coming from `localhost`. Because the OneGate needs to be accessible remotely from the Virtual Machines, you need to change `:host` parameter in `/etc/one/onegate-server.conf` to a public IP of your Front-end host or to `0.0.0.0` (to work on all IP addresses configured on host).
+In the default configuration, the OneGate server will only listen to requests coming from `localhost`. Because the OneGate needs to be accessible remotely from the Virtual Machines, you need to change `:host` parameter in `/etc/one/onegate-server.conf` to a public IP of your Front-end Host or to `0.0.0.0` (to work on all IP addresses configured on Host).
 
 ### Configure OpenNebula
 
@@ -72,7 +72,7 @@ Restart the OpenNebula service to apply changes.
 
 Change the server running state by managing the operating system service `opennebula-gate`.
 
-To start, restart or stop the server, execute one of:
+To start, restart, or stop the server, execute one of:
 
 ```default
 # systemctl start   opennebula-gate
@@ -80,19 +80,19 @@ To start, restart or stop the server, execute one of:
 # systemctl stop    opennebula-gate
 ```
 
-To enable or disable automatic start on Host boot, execute one of:
+To enable or disable automatic start upon Host boot, execute one of:
 
 ```default
 # systemctl enable  opennebula-gate
 # systemctl disable opennebula-gate
 ```
 
-Server **logs** are located in `/var/log/one` in following files:
+Server **logs** are located in `/var/log/one` in the following files:
 
 - `/var/log/one/onegate.log`
 - `/var/log/one/onegate.error`
 
-Other logs are also available in Journald. Use the following command to show:
+Other logs are also available in Journald. Use the following command to show these:
 
 ```default
 # journalctl -u opennebula-gate.service
@@ -112,7 +112,7 @@ Add the following config snippet to the `~oneadmin/remotes/etc/vnm/OpenNebulaNet
   :remote_port: 5030
 ```
 
-Propagate config to Hypervisor hosts, execute as `oneadmin` on the leader Front-end machine:
+Propagate config to hypervisor Hosts, execute as `oneadmin` on the leader Front-end machine:
 
 ```default
 $ onehost sync -f
@@ -129,7 +129,7 @@ Read more in [Transparent Proxies]({{% relref "../../virtual_machines_operation/
 <!-- Example: Deployment Behind TLS Proxy
 ------------------------------------
 
-This is an **example** of how to configure Nginx as a SSL/TLS proxy for OneGate on Ubuntu.
+This is an **example** of how to configure Nginx as an SSL/TLS proxy for OneGate on Ubuntu.
 
 1. Update your package lists and install Nginx:
 
