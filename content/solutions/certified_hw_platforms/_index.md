@@ -5,5 +5,5 @@ weight: 2
 ---
 
 {{< alert color="success" >}}
-These configurations have been certified through the Hardware Platform – Ready Certification Program, ensuring optimal deployment of OpenNebula across different environments. Certified solutions include platforms from Ampere, NVIDIA, Dell Technologies, and other OpenNebula Systems partners.
+These configurations have been certified through the Hardware Platform – Ready Certification Program, ensuring optimal deployment of OpenNebula across different environments. Certified solutions include platforms from Ampere, NVIDIA, Dell Technologies, NetApp, PureStorage and other OpenNebula Systems partners.
 {{< /alert >}}
