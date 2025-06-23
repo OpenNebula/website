@@ -641,7 +641,6 @@ edk
 ee
 eebc
 eht
-elastsic
 emulatorpin
 entrypoint
 epel
@@ -989,6 +988,7 @@ preloaded
 prem
 premigrate
 prepend
+privnet
 programme
 prolog
 prometheus

@@ -241,6 +241,33 @@ Use following to login:
   password: lCmPUb5Gwk
 ```
 
+Once installation is finished, ensure that the local KVM Host is in sync, by following these steps:
+
+Switch to the `oneadmin` user:
+
+```bash
+su - oneadmin
+```
+
+Sync the KVM Host with:
+
+```bash
+onehost rync --force
+```
+
+Verify that the host is in sync:
+
+```bash
+onehost list
+```
+
+In the output, the `STAT` column on the right should display `on`:
+
+```default
+  ID NAME                                                            CLUSTER    TVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
+   0 localhost                                                       default      0      0 / 9600 (0%)   0K / 188.5G (0%) on
+```
+
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
 
 {{< alert title="Important" color="success" >}}
@@ -277,3 +304,5 @@ Congratulations — you have deployed an OpenNebula Front-end node, which is rea
 During installation, miniONE downloaded the template for a Virtual Machine with Alpine Linux 3.20 preinstalled. You can quickly deploy this VM to the KVM hypervisor on your AWS instance, following the instructions in [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione/#deploying-a-virtual-machine-locally" %}}).
 
 Additionally, we recommend checking [Validate the miniONE Environment]({{% relref "validate_the_minione_environment" %}}), which  describes how to explore the resources installed with miniONE, and how to download and run appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/).
+
+Finally, you can use your OpenNebula installation to [Run a Kubernetes Cluster on OpenNebula]({{% relref "running_kubernetes_clusters" %}}) with minimal steps -- first downloading the OneKE Service from the OpenNebula Public Marketplace, then  deploying a full-fledged K8s cluster with a test application.
