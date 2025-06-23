@@ -24,6 +24,22 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
 
+## Migration
+
+- When upgrading to 7.0 the `onedb` migration might fail if the `/etc/one/sunstone-views.yaml` file contains a single, unclosed value under the **labels_groups** key, example:
+
+  ```yaml
+  labels_groups:
+    default:
+  ```
+
+  This can be mitigated by declaring an empty array as the value instead, example:
+
+  ```yaml
+  labels_groups:
+    default: []
+  ```
+
 ## Install Linux Graphical Desktop on KVM Virtual Machines
 
 OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by default. It could happen that after installing a graphical desktop on a Linux VM, the Xorg window system does not load the appropriate video driver. You can force a VESA mode by configuring the kernel parameter `vga=VESA_MODE` in the GNU GRUB configuration file. [Here](https://en.wikipedia.org/wiki/VESA_BIOS_Extensions#Linux_video_mode_numbers/) you can find the VESA mode numbers. For example, adding `vga=791` as kernel parameter will select the 16-bit 1024×768 resolution mode.

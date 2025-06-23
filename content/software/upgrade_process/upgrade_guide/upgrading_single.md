@@ -13,10 +13,10 @@ weight: "3"
 <!--# Upgrading Single Front-end Deployments -->
 
 {{< alert title="Important" color="success" >}}
-Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration). In order to use these non-commercial migrators to upgrade to the latest CE release (OpenNebula 6.8.0), you will need to upgrade your existing OpenNebula environment first to CE Patch Release 6.6.0.1{{< /alert >}} 
+Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration). In order to use these non-commercial migrators to upgrade to the latest CE release (OpenNebula 6.8.0), you will need to upgrade your existing OpenNebula environment first to CE Patch Release 6.6.0.1{{< /alert >}}
 
 {{< alert title="Important" color="success" >}}
-If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}} 
+If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
 
 ## Upgrading from 6.x and higher
 
@@ -37,10 +37,10 @@ $ onehost disable <host_id>
 Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
 {{< alert title="Important" color="success" >}}
-If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}} 
+If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}}
 
 {{< alert title="Warning" color="warning" >}}
-Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.{{< /alert >}} 
+Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.{{< /alert >}}
 
 ### Step 4. Back up OpenNebula Configuration
 
@@ -75,7 +75,7 @@ $ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-provision op
 
 If upgrading OpenNebula CE, you will need to install the `opennebula-migration-community` package on your Front-end.
 
-If you are upgrading to the *latest* version, you will need to download the package from the [Get Migration Packages](https://opennebula.io/get-migration) page.
+If you are upgrading to the _latest_ version, you will need to download the package from the [Get Migration Packages](https://opennebula.io/get-migration) page.
 
 If you are upgrading to any prior version (such as upgrading from 6.6 to 6.8), then the migration package is already included in the OpenNebula repositories.
 
@@ -96,7 +96,7 @@ $ dpkg -i opennebula-migration-community*.deb
 {{< alert title="Note" color="success" >}}
 Before downloading the migration package it’s a good idea to double-check the URL in your software repository file. Ensure that the URL includes the software major and minor version (in `<major>.<minor>` format), but not the exact release.
 
-For example, for OpenNebula version 6.8, the file should point to `https://downloads.opennebula.io/repo/6.8` and not `https://downloads.opennebula.io/repo/6.8.0`. The first case will include migration packages for 6.8.\* whereas the second case will exclude minor versions such as 6.8.0.1.{{< /alert >}}  
+For example, for OpenNebula version 6.8, the file should point to `https://downloads.opennebula.io/repo/6.8` and not `https://downloads.opennebula.io/repo/6.8.0`. The first case will include migration packages for 6.8.\* whereas the second case will exclude minor versions such as 6.8.0.1.{{< /alert >}}
 
 ### Step 7. Update Configuration Files
 
@@ -112,6 +112,9 @@ In order to update the configuration files with your existing customizations you
 #### Enterprise Edition
 
 If you have modified configuration files, use `onecfg` to automate the configuration file upgrades.
+
+{{< alert title="Note" color="success" >}}
+In order to migrate all labels to the new Sunstone interface, you need to back up the **sunstone-views.yaml** file, usually located at `/etc/one/sunstone-views.yaml`. Then you need to restore this file to the same location after the `onecfg` upgrade has been performed.{{< /alert >}}
 
 Before upgrading OpenNebula you need to ensure that the configuration state is clean without any pending migrations from past or outdated configurations. Run `onecfg status` to check the configuration state.
 
@@ -179,7 +182,7 @@ If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade 
 ### Step 8. Upgrade the Database Version
 
 {{< alert title="Important" color="success" >}}
-Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration).{{< /alert >}} 
+Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration).{{< /alert >}}
 
 Make sure at this point that OpenNebula is not running. If you installed from packages, the service may have been started automatically. Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`.
 
@@ -201,7 +204,7 @@ Total errors found: 0
 Start OpenNebula and any other related services: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
 {{< alert title="Important" color="success" >}}
-If you are running FireEdge service behind Apache/Nginx, please start also the Apache/Nginx service.{{< /alert >}} 
+If you are running FireEdge service behind Apache/Nginx, please start also the Apache/Nginx service.{{< /alert >}}
 
 ### Step 11. Restore Custom Probes
 
@@ -212,7 +215,7 @@ If you have any custom monitoring probes, follow [these instructions]({{% relref
 {{< alert title="Warning" color="warning" >}}
 The hypervisor node operating system must meet the minimum version required according to the [KVM]({{% relref "../../release_information/release_notes_70/platform_notes.md#kvm-nodes" %}}) or [LXC]({{% relref "../../release_information/release_notes_70/platform_notes#lxc-nodes" %}}) platform notes. Running a Front-end node with a newer OpenNebula version controlling hypervisor nodes running in old unsupported platforms, like CentOS 7, can result in a myriad of dependency problems. A very common issue is the old ruby version shipped in CentOS 7 not being able to run the newer driver code.{{< /alert >}}
 
-Update the virtualization, storage, and networking drivers.  As the `oneadmin` user, execute:
+Update the virtualization, storage, and networking drivers. As the `oneadmin` user, execute:
 
 ```default
 $ onehost sync
@@ -233,10 +236,10 @@ $ yum upgrade opennebula-node-<hypervisor>
 ```
 
 {{< alert title="Note" color="success" >}}
-Note that the `<hypervisor>` tag should be replaced by the name of the corresponding hypervisor (i.e., `kvm` or `lxc`).{{< /alert >}} 
+Note that the `<hypervisor>` tag should be replaced by the name of the corresponding hypervisor (i.e., `kvm` or `lxc`).{{< /alert >}}
 
 {{< alert title="Important" color="success" >}}
-For KVM hypervisor it’s also necessary to restart the libvirt service{{< /alert >}} 
+For KVM hypervisor it’s also necessary to restart the libvirt service{{< /alert >}}
 
 ### Step 13. Enable Hosts
 
@@ -252,7 +255,7 @@ If upgrading from a version earlier than 6.0, please see [Upgrading from Previou
 
 OpenNebula will continue the monitoring and management of your previous Hosts and VMs.
 
-As a measure of caution, look for any error messages in `oned.log`, and check that all drivers are loaded successfully. You may also try some  **show** subcommand for some resources to check everything is working (e.g., `onehost show` or `onevm show`).
+As a measure of caution, look for any error messages in `oned.log`, and check that all drivers are loaded successfully. You may also try some **show** subcommand for some resources to check everything is working (e.g., `onehost show` or `onevm show`).
 
 ### Restoring the Previous Version
 
