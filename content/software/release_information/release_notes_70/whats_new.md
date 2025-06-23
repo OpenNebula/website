@@ -12,14 +12,13 @@ weight: "2"
 
 <!--# What’s New in 7.0 -->
 
-We’re excited to introduce OpenNebula 7.0 *Phoenix* Beta 1, the first public preview of our next major release. This development version includes all the major new functionality planned for 7.0, and from this point onward the development team will focus on ironing out bugs, with only minor features potentially added before the final release.
+We’re excited to introduce OpenNebula 7.0 *Phoenix* RC 1, the first release candidate of our next major release. This version includes all the major new functionality planned for 7.0, and from this point onward the development team will focus on ironing out bugs, with only minor features potentially added before the final release.
 
 The name *Phoenix* reflects a broader transformation in cloud infrastructure—symbolizing resilience and rebirth for organizations rethinking their architecture in the face of AI, multi-cloud, and edge computing trends.
 
-This beta represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and help shape the final 7.0 release.
-Stay tuned—OpenNebula 7.0 *Phoenix* is almost here.
+OpenNebula 7.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and help shape the final 7.0 release. Stay tuned—OpenNebula 7.0 *Phoenix* is almost here.
 
-Please note that this beta version is not upgradeable from 6.10.x, nor to the final 7.0.0 release. It's intended for testing and feedback, not production use. We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
+Please note that this version is not upgradeable from 6.10.x, nor to the final 7.0.0 release. It's intended for testing and feedback, not production use. We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
 
 ## OpenNebula Core
 
