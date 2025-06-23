@@ -69,25 +69,6 @@ This tutorial includes a preliminary section to avoid known problems related to 
 
 In this tutorial we’ll perform a basic install of the Kubernetes cluster. The OneKE appliance offers options such as High Availability, Longhorn storage, load balancing and CNI plugins, which are out of the scope of this guide. For the full documentation of the OneKE appliance, please see the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
 
-## A Preliminary Step: Remove `REPLICA_HOST`
-
-It’s a known issue in AWS Edge Clusters that the `REPLICA_HOST` parameter in the template for the cluster’s datastore may cause QCOW2 image corruption, which causes VMs to boot incorrectly. To avoid the possibility of sporadic VM boot failures, remove the `REPLICA_HOST` parameter from the datastore template.
-
-Follow these steps:
-
-> 1. Log in to Sunstone as user `oneadmin`.
-> 2. Open the left-hand pane (by hovering your mouse over the icons on the left), then select **Storage** -> **Datastores**.
->    ![image](/images/sunstone-storage-datastores.png)
-> 3. Select the **system** datastore for the AWS cluster. (If you began this Quick Start Guide on a clean install, it will probably display ID `100`.)
->    ![image](/images/sunstone-aws_edge_cluster_sys_ds.png)
-> 4. Sunstone will display the **Info** panel for the datastore. Scroll down to the **Attributes** section and find the `REPLICA_HOST` attribute. Hover your mouse to the right, to display the **Copy**/**Edit**/**Delete** icons ![icon3](/images/icons/sunstone/parameter_manipulation_icons.png) for the attribute value:
->    ![image](/images/sunstone-aws_cluster_replica_host.png)
->    <br/>
-> 5. Click the **Delete** icon ![icon4](/images/icons/sunstone/trash.png).
-> 6. When Sunstone requests to confirm the action, click **Yes**.
-
-You have deleted the `REPLICA_HOST` parameter from the datastore. In the next step we’ll download the OneKE appliance.
-
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
 The [OpenNebula Public Marketplace](https://marketplace.opennebula.io) is a repository of Virtual Machines and appliances which are curated, tested and certified by OpenNebula.
@@ -99,9 +80,9 @@ Open the left-hand pane, then select **Storage** -> **Apps**. Sunstone will disp
 ![image](/images/sunstone-apps_list.png)
 <br/>
 
-In the search field at the top, type `oneke` to filter by name. Then, select **Service OneKE <version number>** with the highest version number, in this case **Service OneKE 1.29** highlighted below.
+In the search field at the top, type `oneke` to filter by name. Then, select **Service OneKE <version number>** with the highest version number, in this case **Service OneKE 1.31** highlighted below.
 
-![image](/images/sunstone-service_oneke_1.29.png)
+![image](/images/sunstone-service_oneke.png)
 <br/>
 
 Click the **Import** button.
@@ -110,59 +91,59 @@ As with the WordPress appliance, Sunstone displays the **Download App to OpenNeb
 
 ![image](/images/sunstone-aws_cluster_download_oneke.png)
 
-In the second screen you will need to select a datastore for the appliance. Select the **aws-edge-cluster-image** datastore.
+In the second screen you will need to select a datastore for the appliance. Select the **default** datastore.
 
 ![kubernetes-qs-marketplace-datastore](/images/aws_cluster_images_datastore.png)
 
-Click **Finish**. Sunstone will display the appliance template and download the appliance in the background. Wait for the appliance **State** to switch from **LOCKED** to **READY**. The appliance comprises a 25GB download, so this may take several minutes.
+Click **Finish**. Sunstone will import the appliance template and display a message at bottom right. To see the imported template, in the left-hand menu select **Templates** -> **Service Templates**:
+
+![image](/images/sunstone-service_templates.png)
 
 ## Step 2. Instantiate a Private Network on the Cloud Cluster
 
-In this step we will instantiate the private network on the Cloud Cluster, it and assign a range of IPs to it.
+In this step we will create a new virtual network and assign a range of private IPs to. This will network will be used by the OneKE service for internal communication.
 
-In Sunstone, open the left-hand pane, then select **Network** -> **Network Templates**.
+In Sunstone, open the left-hand pane, then select **Network** -> **Network Templates**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
 
-Select the **aws-edge-cluster-private** Virtual Network template, then click the **Instantiate** ![icon2](/images/icons/sunstone/instantiate.png) icon at the top.
+![image](/images/sunstone-virtual_networks.png)
 
-![image](/images/sunstone-aws_cluster_private_net_template.png)
-<br/>
+Click the **Create** button at the top. Sunstone will display the **Create Virtual Network** screen. Enter a name for the network -- for this example we will use `privnet`. Then, click **Next**.
 
-Sunstone displays the **Instantiate Network Template** wizard. In the first screen, choose a name for the network, e.g. `aws-private`.
+In the next screen, activate the **Use only private host networking** switch:
 
-![kubernetes-aws-private-network](/images/kubernetes_aws_private_network.png)
+![image](/images/sunstone-create_priv_network.png)
 
-Click **Next**. In the next screen, click the **Address Range** box to select an IP address range for the network.
+Then, click the **Addresses** tab. Here we will enter a range of private IP addresses. For this example, enter `192.168.200.2` for the base network address, and set the network size to `100`.
 
-![image](/images/sunstone-aws_cluster_private_net_template-add_addr.png)
-<br/>
-
-Sunstone displays the **Address Range** dialog box. Here you can define an address range by selecting the first address and the size of the address range. Select a range of private IPv4 addresses, for example `172.20.0.1`. In this example we’ll set a size of `100`.
-
-![kubernetes-aws-private-network-range](/images/kubernetes_aws_private_network_address_range.png)
-
-Click **Accept**.
-
-Lastly, you will need to add a DNS server for the network. Select the **Context** tab, then the **DNS** input field. Type the address for the DNS server, such as `8.8.8.8` or `1.1.1.1`.
-
-![kubernetes-aws-dns](/images/kubernetes_aws_dns.png)
+![image](/images/sunstone-create_priv_network_2.png)
 
 Click **Finish**.
-
-At this point, you have instantiated a private network for the Edge Cluster where Kubernetes will be deployed, and are ready to instantiate the Kubernetes Service.
 
 ## Step 3. Instantiate the Kubernetes Service
 
 In the left-hand pane, select **Templates** -> **Service Templates**.
 
-Select **Service OneKE 1.29**, then click the **Instantiate** icon ![icon2](/images/icons/sunstone/instantiate.png).
+Select **Service OneKE 1.31**, then click the **Instantiate** icon ![icon2](/images/icons/sunstone/instantiate.png).
 
-Sunstone displays the **Instantiate Service Template** wizard. In the first screen you can give your service a name and specify the number of instances to instantiate. In this example we’ll use `OneKE 1.29` and start a single instance.
+Sunstone displays the **Instantiate Service Template** wizard. In the first screen you can give your service a name and specify the number of instances to instantiate. In this example we’ll leave the default name `Service OneKE 1.31` and start a single instance.
 
-![kubernetes-qs-service-start](/images/kubernetes_service_start-1.29.png)
+![kubernetes-qs-service-start](/images/sunstone-oneke_instantiate-1.png)
 
-Click **Next** to go to the next screen, **User Inputs**.
+Click **Next** to go to the next screen, **Networks**.
 
-Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others grouped in the following tabs:
+Here we will select the private and the public network for the OneKE service.
+
+To select the public network, click the **Public** tab on the left, then select network **vnet**. For the private network, click the **Private** tab, then select **privnet**.
+
+![image](/images/sunstone-oneke_instantiate-2.png)
+
+Click **Next**. Sunstone displays the **Service Inputs** screen:
+
+![image](/images/sunstone-instantiate_oneke-sevice_inputs.png)
+
+Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others.
+
+<!--
 
 ![image](/images/sunstone-kubernetes-user_inputs_vrouter.png)
 
@@ -175,57 +156,17 @@ Here you can define parameters for the cluster, including a custom domain, plugi
 ![image](/images/sunstone-kubernetes-user_inputs_others.png)
 <br/>
 
-### Optional: Add a Custom Domain
+-->
 
-To enable access with the `kubectl` command from outside the cluster, you can add a custom domain for the Kubernetes SANs. Enter your custom domain in the **ApiServer extra certificate SANs** field, as shown below.
+For this tutorial we'll apply the following configuration:
 
-![kubernetes-qs-add-sans](/images/kubernetes-qs-add-sans.png)
+In the **Kubernetes Cluster** tab, scroll down and activate **Enable Longhorn**. Then scroll down to the bottom of the page and **Enable Traefik**.
 
-You can use a public DNS server or add the custom domain to your local `/etc/hosts` file, for example:
+Click **Next**.
 
-```bash
-127.0.0.1 localhost
-1.2.3.4 k8s.yourdomain.it
-```
+In the last screen, click **Finish**.
 
-{{< alert title="Important" color="success" >}}
-When using a custom SAN, to access the cluster using a kubeconfig file you will need to modify the variable `clusters[0].cluster.server` in the file to include the name of the cluster, e.g. `server: https://k8s.yourdomain.it:6443`. The path of the kubeconfig file is set in the `KUBECONFIG` variable in the Kubernetes master node.
-
-To define the variable in the kubeconfig file, follow these high-level steps:
-
-1. Log in to the Kubernetes master node (see [Step 4]({{% relref "#step-4" %}}) below).
-2. Find the kubeconfig file by checking the value of the `KUBECONFIG` variable, e.g. by running `echo $KUBECONFIG`.
-3. Edit the file and modify the value of `clusters[0].cluster.server` with your domain name, e.g. `server: https://k8s.yourdomain.it:6443`.{{< /alert >}} 
-
-### Enable **Traefik/HaProxy**
-
-To expose an example application on the public network, you will need to enable OneKE’s Traefik solution for ingress traffic. In **User Inputs**, go to Page 2, then click the **Enable Traefik** switch.
-
-![kubernetes-qs-enable-ingress](/images/kubernetes-qs-enable-ingress.png)
-
-Click **Next** to go to the next screen, **Network**.
-
-### Select the Public and Private Networks
-
-The Kubernetes cluster needs access to the private and the public network defined for the Edge Cluster. First we’ll select the public network.
-
-Set the **Network ID** drop-down menu to `Public`, and the **Network Type** drop-down menu to `Existing`.
-
-<!-- image::/images/sunstone_kubernetes_netw_dropdowns.png -->
-
-Check that the **Network ID** drop-down menu displays `Public`, then select the **metal-aws-edge-cluster-public** network.
-
-![kubernetes-qs-pick-networks-public](/images/kubernetes-qs-pick-networks-public-1.29.png)
-
-To select the private network, change the **Network ID** drop-down to `Private`, then select **aws-private**.
-
-![kubernetes-qs-pick-networks-private](/images/kubernetes-qs-pick-networks-private-1.29.png)
-
-Once the public and private networks for the cluster are specified, the Kubernetes service template is ready to be instantiated. Click **Next** to go to the final screen of the wizard.
-
-In the final screen, click **Finish**.
-
-The OpenNebula Front-end will deploy the Kubernetes service to the Edge Cluster. Wait for the cluster **State** to switch to **READY**.
++++
 
 ### Verify the Cluster Deployment
 

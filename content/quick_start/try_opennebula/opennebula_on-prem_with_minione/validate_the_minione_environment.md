@@ -104,7 +104,7 @@ To access the Marketplace, first log in to Sunstone on your OpenNebula Front-end
 
 Open the left-hand pane (by hovering the mouse over the icons on the left), then select **Storage**, then **Apps**:
 
-![image](/images/sunstone-select_apps.png)
+![><](/images/sunstone-select_apps.png)
 <br/>
 
 Sunstone will display the **Apps** screen, showing the first page of apps that are available for download:

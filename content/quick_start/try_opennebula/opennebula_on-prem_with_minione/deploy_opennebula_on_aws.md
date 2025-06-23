@@ -241,6 +241,33 @@ Use following to login:
   password: lCmPUb5Gwk
 ```
 
+Once installation is finished, ensure that the local KVM Host is in sync, by following these steps:
+
+Switch to the `oneadmin` user:
+
+```bash
+su - oneadmin
+```
+
+Sync the KVM Host with:
+
+```bash
+onehost rync --force
+```
+
+Verify that the host is in sync:
+
+```bash
+onehost list
+```
+
+In the output, the `STAT` column on the right should display `on`:
+
+```default
+  ID NAME                                                            CLUSTER    TVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
+   0 localhost                                                       default      0      0 / 9600 (0%)   0K / 188.5G (0%) on
+```
+
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
 
 {{< alert title="Important" color="success" >}}
