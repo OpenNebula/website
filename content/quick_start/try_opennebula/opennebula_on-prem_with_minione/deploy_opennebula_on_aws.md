@@ -304,3 +304,5 @@ Congratulations — you have deployed an OpenNebula Front-end node, which is rea
 During installation, miniONE downloaded the template for a Virtual Machine with Alpine Linux 3.20 preinstalled. You can quickly deploy this VM to the KVM hypervisor on your AWS instance, following the instructions in [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione/#deploying-a-virtual-machine-locally" %}}).
 
 Additionally, we recommend checking [Validate the miniONE Environment]({{% relref "validate_the_minione_environment" %}}), which  describes how to explore the resources installed with miniONE, and how to download and run appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/).
+
+Finally, you can use your OpenNebula installation to [Run a Kubernetes Cluster on OpenNebula]({{% relref "running_kubernetes_clusters" %}}) with minimal steps -- first downloading the OneKE Service from the OpenNebula Public Marketplace, then  deploying a full-fledged K8s cluster with a test application.

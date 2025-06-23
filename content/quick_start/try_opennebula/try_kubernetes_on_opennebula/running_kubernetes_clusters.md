@@ -12,49 +12,13 @@ weight: "7"
 
 <!--# Running Kubernetes Clusters -->
 
-<!-- We continue from the Deploy miniONE on Bare Metal.
+## Overview
 
-4 roles:
-VNF
-master
-worker
-storage
+This tutorial is intended as a continuation of [Deploy OpenNebula on AWS with miniONE]({{% relref "deploy_opennebula_on_aws" %}}). If you followed that first tutorial you should have an OpenNebula Front-end running on an AWS bare-metal instance, complete with a KVM Host.
 
-Steps:
+In this tutorial, you can deploy a full-fledged Kubernetes cluster on the KVM hypervisor on AWS, and test it by running a sample application.
 
-1. Create a private net
-Go to Networks, then Virtual Networks - 1.network.png -, click **Create**.
-Select host-only (see 2.network...png)
-Add **Addresses**: Click **Address Range** - 1st 192.168.200.2 - size 100
-You don't need any other config for the network since all VMs will communicate through the VNF
-
-2. Donwload **Service OneKE 1.31** from the OpenNebula Marketplace
-Go to Storage -> Apps, filter for the thing, select **Import**
-Several things will be imported: service template itself, VM templates, and VM images.
-
-3. Instantiate **Service OneKE 1.31**
-Go to **Service Templates**, select it and click the Play Icon
-  - Select a Name (at least 3 chars)
-  - 1 instance to be deployed , then lcick Next
-  Next screen: **Networks**:
-  Select vnet for Public and privnet for Private
-    BEAR IN MIND that with this setup you will have to use the VNF node to connect to the VMs 
-  Click Next.
-  Next screen: **Service Inputs**
-    Virtual IPs: VIP for the VNF node. If you change this, you will need to add your IP to the ApiServer extracertificate SANs box or you'll get an error when trying to run kubectl.
-    Scroll down and click **Enable Longhorn** and **Enable Traefik**.
-    In **Virtual Network Functions** ensure **Enable DNS recursor" and **NAT4** and **ROUTER4** are activated. 
- Next screen: **Charter** - leave as is -->
-
-{{< alert title="Warning" color="warning" >}}
-The deployment described in this page has not been tested for this Beta version.
-{{< /alert >}}
-
-{{< alert color="success" >}}
-The definitive version of this page will be published with the upcoming 7.0 stable release. Stay tuned!
-{{< /alert >}}
-
-This page illustrates how to download a Kubernetes cluster from the OpenNebula Marketplace and deploy it on a remote cloud cluster. For this example, the cloud cluster is provisioned on AWS, and has at least two virtual networks configured: a private and a public network, that pre-allocates elastsic IPs.
+You can also use this tutorial to deploy to an on-premises host -- for example, if you followed the previous tutorial [Deploy OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}).
 
 Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
 
@@ -65,9 +29,7 @@ To deploy the Kubernetes cluster, we’ll follow these high-level steps:
 > 3. Instantiate the Kubernetes Service.
 > 4. Deploy an application on Kubernetes.
 
-This tutorial includes a preliminary section to avoid known problems related to a datastore parameter in AWS, and a [Known Issues]({{% relref "#k8s-known-issues" %}}) section at the end for troubleshooting.
-
-In this tutorial we’ll perform a basic install of the Kubernetes cluster. The OneKE appliance offers options such as High Availability, Longhorn storage, load balancing and CNI plugins, which are out of the scope of this guide. For the full documentation of the OneKE appliance, please see the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
+In this tutorial we'll perform a basic install of the Kubernetes cluster, with the Traefik ingress router and Longhorn storage. The OneKE appliance offers options such as High Availability, load balancing and CNI plugins, which are out of the scope of this guide. For the full documentation of the OneKE appliance, please see the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
@@ -162,54 +124,75 @@ For this tutorial we'll apply the following configuration:
 
 In the **Kubernetes Cluster** tab, scroll down and activate **Enable Longhorn**. Then scroll down to the bottom of the page and **Enable Traefik**.
 
+![image](/images/sunstone-instantiate_oneke-lhorn_traef.png)
+
 Click **Next**.
 
 In the last screen, click **Finish**.
 
-+++
+### Verify the OneKE Service Deployment
 
-### Verify the Cluster Deployment
+To verify that the OneKE Service has correctly deployed, you can either use the Sunstone UI, or the command line the Front-end node.
 
-To verify that the Kubernetes cluster and its VMs have correctly deployed, you can either use the Sunstone UI, or run the `onevm` command on the Front-end node.
+To verify in the Sunstone GUI, open the left-hand pane, then Select **Instances** -> **Services**. You should see the OneKE service up and running. Its running VMs should be visible in the **Roles** tab.
 
-To verify in the Sunstone GUI, open the left-hand pane, then Select **Instances** -> **Services**. You should see the OneKE service up and running, with its running VMs visible in the **Roles** tab.
+![image](/images/sunstone-oneke_running.png)
 
-To verify the deployment using the command line, log in to the Front-end node as user `oneadmin`, then run `oneflow list`. In the command output, check that the State is `RUNNING`, as shown below.
+To verify the deployment using the command line, log in to the Front-end node as user `oneadmin`, then run `oneflow list`. In the command output, check that the State is `RUNNING`, as shown below. Bear in mind that the service may take a few moments to display the `RUNNING` state.
 
 ```default
 [oneadmin@FN]$ oneflow list
-ID USER     GROUP    NAME                                 STARTTIME STAT
-3 oneadmin oneadmin Service OneKE 1.29              04/29 08:18:17  RUNNING
+ID USER     GROUP    NAME                                                     STARTTIME STAT
+1 oneadmin oneadmin Service OneKE 1.31                                   04/29 08:18:17 RUNNING
 ```
 
-To verify that the VMs for the cluster were correctly deployed, you can use the `onevm list` command. In the example below, the command lists the VMs for the cluster (and, in this case, the WordPress VM deployed in the previous tutorial):
+To verify that the VMs for the cluster were correctly deployed, you can use the `onevm list` command. In the example below, the command lists the VMs for the cluster:
 
 ```default
-[oneadmin@FN]$ onevm list
-ID USER     GROUP    NAME                                            STAT  CPU     MEM HOST                                          TIME
- 3 oneadmin oneadmin worker_0_(service_3)                            runn    2      3G <cluster_public_IP>                       0d 00h31
- 2 oneadmin oneadmin master_0_(service_3)                            runn    2      3G <cluster_public_IP>                       0d 00h31
- 1 oneadmin oneadmin vnf_0_(service_3)                               runn    1    512M <cluster_public_IP>                       0d 00h31
- 0 oneadmin oneadmin Service WordPress - KVM-0                       runn    1    768M <cluster_public_IP>                       0d 01h22
+oneadmin@ip-172-31-47-22:~$ onevm list
+  ID USER     GROUP    NAME                                         STAT  CPU     MEM HOST                                TIME
+   6 oneadmin oneadmin worker_0_(service_2)                         runn    2      3G localhost                       0d 00h00
+   5 oneadmin oneadmin master_0_(service_2)                         runn    2      3G localhost                       0d 00h00
+   4 oneadmin oneadmin vnf_0_(service_2)                            runn    1    512M localhost                       0d 00h00
 ```
 
-At this point you have successfully instantiated the Kubernetes cluster. Before deploying an application, you need to find out the **public** IP address of the VNF node, since we will use it later to connect to the master Kubernetes node.
+At this point you have successfully instantiated the Kubernetes cluster on your local hypervisor.
+
+If the state of the OneKE service as reported by `oneflow list` remains in `DEPLOYING`, see [below](#oneflow-service-is-stuck-in-deploying).
+
+Before deploying the test application described in this tutorial, you will need to find out the IP address of the VNF node on the **public** network -- in this case, the **vnet** network that we set as public network when instantiating the OneKE service -- since this is the address that we will use to connect to the application.
 
 <a id="check-vnf"></a>
 
 ### Check the IP Address for the VNF Node
 
-To check the VNF node IP in Sunstone, in the left-hand pane go to **Instances** -> **VMs**, then check the information displayed under **vnf_0_(service_<ID>)**. The IP is displayed on the right, highlighted in the image below (note that all public IPs have been blurred in the image):
+To check the VNF node IP in Sunstone, in the left-hand pane go to **Instances** -> **VMs**, then check the information displayed under **vnf_0_(service_<ID>)**. In the image below, the VNF is **vnf_0_(service_2) and the relevant IP address is `172.16.100.2`.
 
-> ![image](/images/sunstone-aws_k8s_vms_list.png)
 
-Alternatively, to check on the command line, log in to the Front-end and run:
+![image](/images/oneke_vms.png)
+
+Alternatively, to check on the command line, on the Front-end node as user `oneadmin` run:
 
 ```bash
-onevm show -j <VNF_VM_ID>|jq -r .VM.TEMPLATE.NIC[0].EXTERNAL_IP
+onevm show <VM ID> | less
 ```
 
-Replace `<VNF_VM_ID>` with the ID of the VNF VM as listed by the `onevm list` command (ID `1` in the example above).
+(Replace `VM ID` for the VM ID number as shown by `onevm show`, in this case `4`.)
+
+This displays the complete information for the VM, piped through the `less` pager. Use the up and down arrow to scroll, until you find the `VM NICS` table:
+
+```default
+VM NICS                                                                         
+ ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
+  0 vnet                 minionebr    172.16.100.2    02:00:ac:10:64:02
+  1 privnet              onebr1       192.168.200.2   02:00:c0:a8:c8:02
+  2 vnet                 minionebr    172.16.100.3    02:00:ac:10:64:03
+  3 privnet              onebr1       192.168.200.3   02:00:c0:a8:c8:03
+```
+
+The relevant IP is the first displayed for the `vnet` network, `172.16.100.2`.
+
+To stop displaying the information for the VM, press `q`.
 
 If you do not see all VMs listed, or if the OneKE Service is stuck in `DEPLOYING`, see [Known Issues]({{% relref "#k8s-known-issues" %}}) below.
 
@@ -221,110 +204,309 @@ Once the OneFlow service has deployed, you can add more worker nodes. In Sunston
 3. Select the **Roles** tab.
 4. Click **Worker**, then the green **Scale** button.{{< /alert >}}  
 
-{{< alert title="Note" color="success" >}}
-The VNC icon ![icon5](/images/icons/sunstone/VNC.png) displayed by Sunstone does not work for accessing the VMs on Edge Clusters, since this access method is considered insecure and is disabled by OpenNebula.{{< /alert >}} 
-
 <a id="step-4"></a>
 
-## Step 4. Deploy an Application
+## Step 5. Deploy an Application
 
-To deploy an application, we will first connect to the master Kubernetes node via SSH.
+In this tutorial we will deploy a very simple application designed for training purposes: a MariaDB database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
 
-For connecting to the master Kubernetes node, you need to know the public address (AWS elastic IP) of the VNF node, as described [above]({{% relref "#check-vnf" %}}).
+### Enable Longhorn Storage
 
-Once you know the correct IP, from the Front-end node connect to the master Kubernetes node with the below command (replace “1.2.3.4” with the public IP address of the VNF node):
+We can enable Longhorn storage with a single command:
 
 ```bash
-$ ssh -A -J root@1.2.3.4 root@172.20.0.2
+oneflow scale <OneKE service ID> storage 1
 ```
 
-In this example, `172.20.0.2` is the private IP address of the Kubernetes master node (the second address in the private network).
-
-{{< alert title="Tip" color="info" >}}
-If you don’t use `ssh-agent` then you may skip the `-A` flag in the above command. You will need to copy your *private* ssh key (used to connect to VNF) into the VNF node itself, at the location `~/.ssh/id_rsa`. Make sure that the file permissions are correct, i.e. `0600` (or `u=rw,go=`). For example:
+Most probably, the `OneKE service ID` should be `1`. You can find out with the `oneflow list` command:
 
 ```default
-ssh root@1.2.3.4 install -m u=rwx,go= -d /root/.ssh/ # make sure ~/.ssh/ exists
-scp ~/.ssh/id_rsa root@1.2.3.4:/root/.ssh/           # copy the key
-ssh root@1.2.3.4 chmod u=rw,go= /root/.ssh/id_rsa    # make sure the key is secured
+[oneadmin@FN]$ oneflow list
+ID USER     GROUP    NAME                                                     STARTTIME STAT
+1 oneadmin oneadmin Service OneKE 1.31                                   04/29 08:18:17 RUNNING
 ```
-{{< /alert >}}
+
+In the example above, the ID is `1`, so:
+
+```bash
+oneflow scale 1 storage 1
+```
+
+This will create a Virtual Machine as part of the OneKE Service which will serve as Longhorn storage for the Kubernetes cluster.
+
+The command will take a moment to execute. During that time the OneKE service will change state, from `RUNNING` to `COOLDOWN` and back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the cluster by running (as `oneadmin` on the Front-end node):
+
+```bash
+oneflow top
+```
+
+This produces the output of `oneflow list`, updated continously. Once the status is `RUNNING`, to exit the command type `Ctrl+C`.
+
+On the Front-end node, we can check the status of the newly-created storage VM with `onevm list`:
+
+```
+oneadmin@ip-172-31-47-22:~$ onevm list
+  ID USER     GROUP    NAME                                             STAT  CPU     MEM HOST                                   TIME
+   7 oneadmin oneadmin storage_0_(service_2)                            runn    2      3G localhost                          0d 04h38
+   6 oneadmin oneadmin worker_0_(service_2)                             runn    2      3G localhost                          0d 05h36
+   5 oneadmin oneadmin master_0_(service_2)                             runn    2      3G localhost                          0d 05h36
+   4 oneadmin oneadmin vnf_0_(service_2)                                runn    1    512M localhost                          0d 05h36
+```
+
+### Log into the Master Node and Deploy the Application
+
+First, we will need to connect to the Kubernetes master node via SSH. To this, we need to use the VNF node as "jump host", i.e. we connect first to the VNF node and from there to the Kubernetes master node.
+
+As we have seen [above](#check-the-ip-address-for-the-vnf-node), in this example the IP address of the VNF is `172.16.100.2`. With our network configuration, the IP address for the Kubernetes master node is probably `192.168.200.4` (the second IP address in the private network `privnet` that we assigned to the OneKE service). Of course if your configuration varies (for example if you installed additional networked Virtual Machines before deploying the OneKE service), then you will have to use the appropriate IPs.
+
+To connect to the Kubernetes master node, from the Front-end, as user `root` run:
+
+```bash
+ssh -A -J root@192.168.200.4 root@172.16.100.2
+```
+
+An example run as user `root`:
+
+```default
+root@ip-172-31-47-22:~# ssh -A -J 172.16.100.2 192.168.200.4
+Warning: Permanently added '172.16.100.2' (ED25519) to the list of known hosts.
+The authenticity of host '192.168.200.4 (<no hostip for proxy command>)' can't be established.
+ED25519 key fingerprint is SHA256:8fbzSN9OgOGZ1+2Zfdiq9r/6e+yEIJe1Ar6cqLpZ2Cw.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.200.4' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-126-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun  4 10:10:11 UTC 2025
+
+  System load:           0.61
+  Usage of /:            4.8% of 24.05GB
+  Memory usage:          8%
+  Swap usage:            0%
+  Processes:             106
+  Users logged in:       0
+  IPv4 address for eth0: 10.0.2.15
+  IPv6 address for eth0: fec0::211:22ff:fe33:4455
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+   ___   _ __    ___
+  / _ \ | '_ \  / _ \   OpenNebula Service Appliance
+ | (_) || | | ||  __/
+  \___/ |_| |_| \___|
+
+
+ 2/3 Configuration step is in progress...
+
+ * * * * * * * *
+ * PLEASE WAIT *
+ * * * * * * * *
+```
+
+In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message.
 
 Once you have connected to the Kubernetes master node, check if `kubectl` is working, by running `kubectl get nodes`:
 
-```default
-root@oneke-ip-172-20-0-2:~# kubectl get nodes
-NAME                  STATUS   ROLES                       AGE   VERSION
-oneke-ip-172-20-0-2   Ready    control-plane,etcd,master   18m   v1.29.4+rke2r1
-oneke-ip-172-20-0-3   Ready    <none>                      16m   v1.29.4+rke2r1
+```
+root@oneke-ip-192-168-200-4:~# kubectl get nodes
+NAME                     STATUS   ROLES                       AGE     VERSION
+oneke-ip-192-168-200-4   Ready    control-plane,etcd,master   5h32m   v1.31.3+rke2r1
+oneke-ip-192-168-200-6   Ready    <none>                      5h32m   v1.31.3+rke2r1
+oneke-ip-192-168-200-8   Ready    <none>                      4h38m   v1.31.3+rke2r1
 ```
 
-Now we are ready to deploy an application on the cluster. To deploy nginx:
+The last row in the output is the `storage` role in the cluster created in the previous step, with IP `172.168.200.8`.
 
-```default
-root@oneke-ip-172-20-0-2:~# kubectl run nginx --image=nginx --port 80
-pod/nginx created
+Now we are ready to download and deploy our example application.
+
+We can download the application from the master node itself, by running:
+
+```bash
+wget https://github.com/alpeon/training-files/raw/refs/heads/main/OneKE/test-app.tar
 ```
 
-After a few seconds, you should be able to see the nginx pod running:
+This downloads the `test-app.tar` package file. Unpack it with:
 
-```default
-root@oneke-ip-172-20-0-2:~# kubectl get pods
-NAME    READY   STATUS    RESTARTS   AGE
-nginx   1/1     Running   0          86s
+```bash
+tar xvf test-app.tar
 ```
 
-In order to access the application, we need to create a Service and IngressRoute objects that expose the application.
+This creates the `test-app` directory, which contains the YAML manifest files we will use to deploy the application.
 
-### Accessing the nginx Application
+Switch to the `test-app` directory:
 
-On the Kubernetes master node, create a file called `expose-nginx.yaml` with the following contents:
-
-```yaml
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-spec:
-  selector:
-    run: nginx
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
----
-# In Traefik < 3.0.0 it used to be "apiVersion: traefik.containo.us/v1alpha1".
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  name: nginx
-spec:
-  entryPoints: [web]
-  routes:
-    - kind: Rule
-      match: Path(`/`)
-      services:
-        - kind: Service
-          name: nginx
-          port: 80
-          scheme: http
+```bash
+cd test-app
 ```
 
-Apply the manifest using `kubectl`:
+Create all of the applications in the directory:
+
+```bash
+kubectl apply -f .
+```
+
+For example:
 
 ```default
-root@oneke-ip-172-20-0-2:~# kubectl apply -f expose-nginx.yaml
-service/nginx created
-ingressroute.traefik.containo.us/nginx created
+root@oneke-ip-192-168-200-4:~/test-app# kubectl apply -f .
+deployment.apps/mariadb created
+persistentvolumeclaim/mariadb-data created
+service/mariadb created
+deployment.apps/test-app created
+ingressroute.traefik.io/test-app-ingress created
+service/test-app-service created
 ```
 
-To access the application, point your browser to the public IP of the VNF node in plain HTTP:
+Check the status of the applications:
 
-![external_ip_nginx_welcome_page](/images/external_ip_nginx_welcome_page.png)
+```bash
+kubectl get pods
+```
 
-Congratulations! You have successfully deployed a fully functional Kubernetes cluster at the edge, and have completed the Quick Start Guide.
+This should display the status of the database and the `test-app` application:
+
+```default
+NAME                        READY   STATUS    RESTARTS   AGE
+mariadb-55496464b6-66kl9    1/1     Running   0          45s
+test-app-56b5745c76-bxxld   1/1     Running   0          45s
+```
+
+The process may take some seconds to complete. When both pods display status `Running`, we are ready to connect to the application.
+
+### Connect to the Application
+
+From the Front-end node, as user `oneadmin` run `curl <VNF node IP>`. In our case:
+
+```bash
+curl 172.16.100.2
+```
+
+You should be greeted with:
+
+```default
+oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaceship: Nebula Explorer</title>
+</head>
+
+<body>
+
+  <div>
+      <h1>
+        'sup Space Man, want to explore some Nebula?
+      </h1>
+
+      <div>
+        Visit /create-db to create the database
+        <br>
+        Visit /insert-dummy to insert some dummy data
+        <br>
+        Visit /get-data to print out the dummy data
+
+        </div>
+        
+        <div>
+          <h2>
+            See you, Space Cowboy!
+          </h2>
+          <pre>
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢦⣤⣤⣤⣄⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⢨⡿⠟⠛⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢲⣤⣤⣀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣉⠻⣿⣿⣿⣿⣿⡏⠉⠉⠉⠉⢩⣿
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣩⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⡭⢝⣻⣿⣿⣿⣷⣿⣿⣿⣿
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣭⡿⠛⣻⣿⣿⣿⣿
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⣻⣿⣿⣿⣿
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣥⣬⣭⣿
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠰⠚⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⡍⠹⠿
+          ⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣴⣶⣶⣾
+          ⠀⠀⠀⡄⠀⠀⣠⢟⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⠋⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢛⡛⣹⣿
+          ⠀⠀⠀⣷⡀⠀⢱⠟⢻⣿⣿⣿⣿⣿⣿⣿⡿⢫⣽⣿⣿⣿⣿⣿⣿⣿⣏⢹⠏⣼⣿⣟⣛⣙⡒⣾⣿⣀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢛⣣⣿⣿
+          ⡄⠀⢀⣿⣇⣤⣾⢾⣿⣿⣿⣿⣿⣿⣿⣿⡇⣾⢿⣿⣿⣿⣿⣿⣿⣿⢿⣇⠀⠙⠿⠿⣿⡏⠛⢿⡮⠙⢻⡿⢡⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⢶⣿⡿⣿⣿⣿
+          ⣇⠀⢸⣿⡏⠁⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣧⢧⡸⡿⠟⣿⣿⣿⣿⣿⠈⣿⠀⠀⠀⠀⠀⠀⠀⠬⡷⠖⠋⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠋⠁⠀⠙⠻⢶⣍⡛
+          ⡿⢿⡇⢹⡿⢦⡀⠙⠛⢿⣿⣿⣿⣿⣿⣿⣿⣎⢻⡛⠂⣿⣿⡿⠙⠃⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⣿⡟⢛⣦⣹⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⠾⠀⠀⠀⠀⠀⠀⠉⠻
+          ⣦⣿⡉⠻⣿⣯⠹⠀⣐⢦⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⣠⠘⢿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⢿⠟⢠⣿⣿⣿⣿⣿⣿⢿⡛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⢻⠙⢿⣦⡈⠛⣄⡀⠈⠀⠉⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⢸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠄⠀⣾⣿⣿⣿⣿⣿⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠘⠀⠀⠙⢻⣶⣄⠙⢦⡀⠀⠀⠈⠹⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⢀⡆⣼⣿⣿⣿⢻⡍⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠀⠀⠀⠀⠀⠈⠻⢷⣄⠈⠦⡀⣀⣴⢶⣿⣟⠛⠫⠍⠉⠉⠉⠙⠛⠛⠛⠛⠛⠛⠛⠛⢻⣿⣟⡽⠶⠚⢿⣷⡾⠋⡰⠋⢹⣟⠙⢷⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠀⠀⠀⠀⠀⢀⣀⣀⠻⢿⡟⠉⠻⠶⠧⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⠿⢯⡥⣤⠤⣤⣀⣻⢅⡴⠃⠀⢸⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠀⠀⣀⠀⢰⣿⡿⠿⢧⣤⣾⡿⠛⠻⢿⡛⠲⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢾⡿⠋⠀⠠⣄⣈⢛⣄⡹⣧⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠀⠀⠈⠁⢺⣿⡇⣠⣶⣿⣿⣿⣿⣿⣿⣿⣷⣶⣭⡳⢤⡀⠀⠀⠐⢤⣠⢞⣵⠋⠀⠀⠀⠀⠈⠛⠿⠋⣹⣾⡛⠶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠀⠀⠀⠀⣸⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⢿⣷⣶⣶⣿⣵⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⣼⠃⠀⠙⠲⡌⠳⣄⠀⠀⠀⠀⣀⡤⠶⠶⠦⣤⣀⠀⢀⣀⡀⠀⠀⠀⠀⠀
+          ⠀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣝⣿⣧⣝⣻⡿⣿⣿⣿⣷⣦⣄⣀⣀⣼⣿⡷⣄⠀⠀⠙⢦⣸⣧⠔⣛⣿⠷⠋⠙⠲⠶⣄⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀
+          ⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣝⢿⣄⣉⣷⢬⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⣷⣄⠀⠀⠛⠛⠛⠉⠀⠀⠀⠀⠀⠀⠈⢷⡄⠀⠀⠀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠹⣿⣷⣿⣿⣿⣿⣿⡿⠛⠉⠀⠀⠀⠈⠛⢷⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣄⢀⠀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠈⠻⣿⣿⣿⣿⣮⡳⣄⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠲⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣶⡄⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠘⣿⣿⣏⠉⠻⣽⣧⣤⣴⣖⣲⠶⠬⠽⠿⠶⠖⠷⣬⡉⠉⠂⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠶⠶⡂
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡃⠈⢻⣿⢧⢀⣠⣙⣻⣿⣿⣿⣷⣄⠀⠀⠀⠀⡀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣤⠟⢿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⢰⡷⣿⣇⣀⣀⣀⣴⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠇⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⡗⢒⣋⣉⣉⣭⣏⠻⣶⡖⢽⣏⠳⣤⡀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⠀⠈⣿⡿⣿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣿⡏⠉⠳⢤⡉⢺⣿⡆⠀⠉⠂⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⣹⣿⣶⣝⠿⣿⣿⣿⢿⣿⣿⣿⣿⡇⠀⠀⠀⠙⣾⣿⢻⡄⠀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠙⣿⣿⣷⣌⠛⢿⣌⢻⣿⣿⣿⣿⣷⣴⡤⠀⣿⣿⢰⣿⠀⠀⠀⠀⠀⠀
+          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⡘⢿⣿⣿⣿⣦⡙⠿⣿⣿⣿⣿⣿⣿⠀⠀⣿⣿⣾⣿⣷⠀⠀⠀⠀⠀
+        </pre>
+
+```
+
+Now we can create the database with:
+
+```bash
+curl 172.16.100.2/create-db
+```
+
+This should return the following:
+
+```
+oneadmin@ip-172-31-47-282:~$ curl 172.16.100.2/create-db
+{"message":"Table 'data' created successfully"}
+```
+
+To insert some dummy data into the database:
+
+```bash
+curl 172.16.100.2/insert-dummy
+```
+
+Repeat this commands to insert more than one data point. Then, verify the inserted data with:
+
+```bash
+curl 172.16.100.2/get-data
+```
+
+For example:
+
+```default
+oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2/get-data
+[{"data1":"2025-06-23 11:51:27","data2":"50","id":1},{"data1":"2025-06-23 11:51:54","data2":"63","id":2},{"data1":"2025-06-23 11:52:09","data2":"84","id":3}]
+```
+
+And that's it -- you have successfully deployed a Kubernetes cluster, and deployed and tested an application.
 
 For more information including additional features for the OneKE Appliance, please refer to the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
 
