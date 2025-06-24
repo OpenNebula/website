@@ -14,7 +14,7 @@ This section details a step-by-step procedure to provision the reference infrast
 The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/).   
 Build the configuration shown below, taking into account the details described in the [Hardware and Software Specification]({{% relref "hardware_and_software_specs" %}}) section.
 
-![image][dcd-layout]
+![><][dcd-layout]
 
 ### Building with DCD 
 
