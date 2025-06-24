@@ -12,36 +12,173 @@ weight: "6"
 
 <!--# SAN Datastore -->
 
-This storage configuration assumes that Hosts have access to storage devices (LUNs) exported by an Storage Area Network (SAN) server using a suitable protocol like iSCSI or Fiber Channel. The Hosts will interface the devices through the LVM abstraction layer. Virtual Machines run from an LV (logical volume) device instead of plain files. This reduces the overhead of having a filesystem in place and thus it may increase I/O performance.
+This storage configuration assumes that Hosts have access to storage devices (LUNs) exported by an
+Storage Area Network (SAN) server using a suitable protocol like iSCSI or Fibre Channel. The Hosts
+will interface the devices through the LVM abstraction layer. Virtual Machines run from an LV
+(logical volume) device instead of plain files. This reduces the overhead of having a filesystem in
+place and thus it may increase I/O performance.
 
-Disk images are stored in file format in the Image Datastore and then dumped into an LV when a Virtual Machine is created. The image files are transferred to the Host through the SSH protocol. Additionally, [LVM Thin]({{% relref "#lvm-thin" %}}) can be enabled to support creating thin snapshots of the VM disks.
+Disk images are stored in file format in the Image Datastore and then dumped into an LV when a
+Virtual Machine is created. The image files are transferred to the Host through the SSH protocol.
+Additionally, [LVM Thin]({{% relref "#lvm-thin" %}}) can be enabled to support creating thin
+snapshots of the VM disks.
 
-## Front-end Setup
+## SAN Appliance Configuration
 
-The Front-end needs to have access to the Image Datastores by mounting the associated directory in `/var/lib/one/datastores/<datastore_id>`. You can mount any storage medium in the datastore directory.
+First of all, you need to configure your SAN appliance to export the LUN(s) where VMs will be
+deployed. Depending on the manufacturer the process may be slightly different, so please refer to
+the specific guides if your hardware is on the supported list. Otherwise, just continue to the
+generic guide below.
 
-The Front-end also needs access to the shared LVM, either directly (see the configuration requirements below) or through a Host by specifying the `BRIDGE_LIST` attribute in the datastore template.
+- [NetApp specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/netapp_-_lvm_thin_validation/" %}})
+- [PureStorage specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/purestorage_-_lvm-thin_validation/" %}})
 
-## Hosts Setup
+### Generic Setup
 
-### Base Hosts Configuration
+In the end, the abstraction required to access LUNs is just block devices. This means that there are
+several ways to set them up, although it will usually involve using a network block protocol such as
+iSCSI or Fibre Channel, as well as some way to make it redundant, like DM Multipath.
 
-* LVM2 must be available on Hosts.
-* `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
-* `oneadmin` needs to belong to the `disk` group.
-* All the nodes need to have access to the same LUNs.
-* A LVM VG needs to be created in the shared LUNs for each datastore with the following name: `vg-one-<system_ds_id>`. This just needs to be done in one Host.
+Here is a sample session for setting up access via iSCSI and multipath:
+
+```
+# === ISCSI ===
+
+TARGET_IP="192.168.1.100"                             # IP of SAN appliance
+TARGET_IQN="iqn.2023-01.com.example:storage.target1"  # iSCSI Qualified Name
+
+# === Install tools ===
+# RedHat derivates:
+sudo dnf install -y iscsi-initiator-utils
+# Ubuntu/Debian:
+sudo apt update && sudo apt install -y open-iscsi
+
+# === Enable iSCSI services ===
+# RedHat derivates:
+sudo systemctl enable --now iscsid
+# Ubuntu/Debian:
+sudo systemctl enable --now open-iscsi
+
+# === Discover targets ===
+sudo iscsiadm -m discovery -t sendtargets -p "$TARGET_IP"
+
+# === Log in to the target ===
+sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" --login
+
+# === Make login persistent across reboots ===
+sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" \
+     --op update -n node.startup -v automatic
+
+
+# === MULTIPATH ===
+
+# === Install tools ===
+# RedHat derivates:
+sudo dnf install -y device-mapper-multipath
+# Ubuntu/Debian:
+sudo apt update && sudo apt install -y multipath-tools
+
+# === Enable multipath daemon ===
+sudo systemctl enable --now multipathd
+
+# === Create multipath config file ===
+sudo tee /etc/multipath.conf > /dev/null <<EOF
+defaults {
+    user_friendly_names yes
+    find_multipaths yes
+}
+# Optional: blacklist local boot disks if needed
+# blacklist {
+#     devnode "^sd[a-z]"
+# }
+EOF
+
+# === Reload multipath ===
+sudo multipath -F    # Flush existing config (safely if not in use)
+sudo multipath       # Re-scan for multipath devices
+sudo systemctl restart multipathd
+
+# === Show current multipath devices ===
+sudo multipath -ll
+```
+
+<a id="design-considerations"></a>
+
+## Design considerations
+
+Now is a good time to ask some questions about infrastructure, as depending on the choices made,
+some configuration will be different.
+
+### Access to SAN from Front-end
+
+The Front-end needs access to the shared SAN server in order to perform LVM operations. It can
+either access it directly, or using some host(s) as proxy/bridge.
+
+For **direct access**, the Front-end will need to be configured in the same way as hosts (following the
+previous section), and no further configuriation will be needed. Example for illustration purposes:
+
+```
+-------------
+| Front-end | ---- /dev/mapper/mpath* ------+
+-------------     (iSCSI + multipath)       |
+                                            v
+  ---------                              --------------
+  | host2 | ---- /dev/mapper/mpath* ---> | SAN server |
+  ---------     (iSCSI + multipath)      --------------
+                                            ^
+                                            |
+  ---------                                 |
+  | hostN | ---- /dev/mapper/mpath* --------+
+  ---------     (iSCSI + multipath)
+```
+
+Otherwise, one or several hosts can be used to perform the required operations by **defining the
+`BRIDGE_LIST` attribute** on the Image Datastore later:
+
+```
+BRIDGE_LIST=host2
+
+-------------
+| Front-end |
+-------------
+      |
+      | use as proxy for operations
+      |
+      v
+  ---------                              --------------
+  | host2 | ---- /dev/mapper/mpath* ---> | SAN server |
+  ---------     (iSCSI + multipath)      --------------
+                                            ^
+                                            |
+  ---------                                 |
+  | hostN | ---- /dev/mapper/mpath* --------+
+  ---------     (iSCSI + multipath)
+```
+
+<a id="lvm-thin"></a>
+
+### LVM Thin
+
+You have the option to enable the LVM Thin functionality by setting the `LVM_THIN_ENABLE` attribute
+to `YES` in the **Image** Datastore. It is recommended that you enable this mode, as it allows some
+operations that are not possible to do in the standard, non-thin mode:
+
+- Creation of thin snapshots
+- Consistent live backups
 
 {{< alert title="Note" color="success" >}}
-In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).{{< /alert >}}
+The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.
+{{< /alert >}}
 
-Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
+You can take a look at the [Datastore Internals]({{% relref "#datastore-internals" %}}) section for
+more info about the differences in thin and non-thin operation.
 
 <a id="lvm-drivers-templates"></a>
 
 ## OpenNebula Configuration
 
-Once the Host and Front-end storage is set up, the OpenNebula configuration comprises the creation of the Image and System Datastores.
+First, we need to create the two required OpenNebula datastores: Image and System. Both of them will
+use the `fs_lvm_ssh` transfer driver (TM_MAD).
 
 ### Create System Datastore
 
@@ -57,14 +194,25 @@ To create a new SAN/LVM System Datastore, you need to set the following (templat
 For example:
 
 ```default
-> cat ds.conf
+> cat ds_system.conf
 NAME   = lvm_system
 TM_MAD = fs_lvm_ssh
 TYPE   = SYSTEM_DS
 DISK_TYPE = BLOCK
 
-> onedatastore create ds.conf
+> onedatastore create ds_system.conf
 ID: 100
+```
+
+Afterwards, a **LVM VG needs to be created** in the shared LUNs for the system datastore **with the
+following name: `vg-one-<system_ds_id>`**. This step just needs to be done once, either in one host,
+or the front-end if it has access. This VG is where the actual VM images will be located at runtime,
+and OpenNebula will take care of creating the LVs (one for each VM disk). For example, assuming
+`/dev/mpatha` is the LUN (iSCSI/multipath) block device:
+
+```
+# pvcreate /dev/mpatha
+# vgcreate vg-one-100 /dev/mpatha
 ```
 
 ### Create Image Datastore
@@ -81,21 +229,88 @@ To create a new LVM Image Datastore, you need to set following (template) parame
 | `BRIDGE_LIST`     | List of Hosts with access to the file system where image files are stored before dumping to logical volumes |
 | `LVM_THIN_ENABLE` | (default: `NO`) `YES` to enable [LVM Thin]({{% relref "#lvm-thin" %}}) functionality.                                      |
 
-The following examples illustrate the creation of an LVM datastore using a template. In this case we will use the Host `host01` as one of our OpenNebula LVM-enabled Hosts.
+The following example illustrates the creation of an LVM Image Datastore. In this case we will use the nodes `node1` and `node2` as our OpenNebula LVM-enabled Hosts.
 
 ```default
-> cat ds.conf
-NAME = production
+> cat ds_image.conf
+NAME = lvm_image
 DS_MAD = fs
 TM_MAD = fs_lvm_ssh
 DISK_TYPE = "BLOCK"
 TYPE = IMAGE_DS
-BRIDGE_LIST = "node1.kvm.lvm node2.kvm.lvm"
+BRIDGE_LIST = "node1 node2"
+LVM_THIN_ENABLE = yes
 SAFE_DIRS="/var/tmp /tmp"
 
-> onedatastore create ds.conf
+> onedatastore create ds_image.conf
 ID: 101
 ```
+
+{{< alert title="Warning" color="success" >}}
+Please adapt this example to your case, in particular the `BRIDGE_LIST` and `LVM_THIN_ENABLE`
+attributes, as discussed [previously]({{% relref "#design-considerations" %}}).
+{{< /alert >}}
+
+#### Front-end setup
+
+The OpenNebula Front-end will keep the images used in the newly created Image Datastore in its
+`/var/lib/one/datastores/<datastore_id>/` directory. The simplest case will just use the local
+storage in the Front-end, but you can mount any storage medium in that directory to support more
+advanced scenarios, such as sharing it via NFS in a Front-end HA setup (TODO link) or even using
+another LUN in the same SAN to keep everything in the same place. Here are some (non-exhaustive)
+examples of typical setups for the image datastore:
+
+Option 1: image datastore local to frontend. Assuming the image datastore has ID 100:
+
+```
+# mkdir -p /var/lib/one/datastores/100/
+# chown oneadmin:oneadmin /var/lib/one/datastores/100/
+```
+
+Option 2: image datastore in NFS. Assuming the image datastore has ID 100, and `nfs-server` exposes
+a share `/srv/path_to_share`:
+
+```
+# echo "nfs-server:/srv/path_to_share /var/lib/one/datastores/100/ nfs4 defaults 0 2" >> /etc/fstab
+# mount /var/lib/one/datastores/100/
+# chown oneadmin:oneadmin /var/lib/one/datastores/100/
+```
+
+Option 3: image datastore in LVM. Assuming the image datastore has ID 100, and `/dev/sdb` contains
+some block device (either local to frontend, or SAN):
+
+```
+# pvcreate /dev/sdb
+# vgcreate image-vg /dev/sdb
+# lvcreate -l 100%FREE -n image-lv image-vg
+# mkfs.ext4 /dev/image-vg/image-lv
+# mkdir -p /var/lib/one/datastores/100/
+# echo "/dev/image-vg/image-lv /var/lib/one/datastores/100/ ext4 defaults 0 2" >> /etc/fstab
+# mount /var/lib/one/datastores/100/
+# chown oneadmin:oneadmin /var/lib/one/datastores/100/
+```
+
+{{< alert title="Note" color="success" >}}
+Keep in mind that this last setup, from the OpenNebula point of view, is no different from the other
+two. So, for example, no extra `vg-one-<dsid>` will need to be created for the image datastore,
+that's only required for the system one.
+{{< /alert >}}
+
+## Hosts Setup
+
+### Base Hosts Configuration
+
+* LVM2 must be available on Hosts.
+* `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
+* `oneadmin` needs to belong to the `disk` group.
+* All the nodes need to have access to the same LUNs.
+
+TODO
+{{< alert title="Note" color="success" >}}
+In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).
+{{< /alert >}}
+
+Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
 
 <a id="lvm-driver-conf"></a>
 
@@ -130,6 +345,8 @@ The following attribute can be set for every datastore type:
 {{< alert title="Warning" color="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in all Hosts including Front-end and hypervisors. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
 
+<a id="datastore-internals"></a>
+
 ## Datastore Internals
 
 Images are stored as regular files (under the usual path: `/var/lib/one/datastores/<id>`) in the Image Datastore, but they will be dumped into a Logical Volumes (LV) upon Virtual Machine creation. The Virtual Machines will run from Logical Volumes in the Host.
@@ -153,18 +370,9 @@ For example, consider a system with two Virtual Machines (`9` and `10`) using a 
   lv-one-9-0  vg-one-0 -wi------- 2.20g
 ```
 
-<a id="lvm-thin"></a>
-
 ### LVM Thin internals
 
-You have the option to enable the LVM Thin functionality by setting the `LVM_THIN_ENABLE` attribute to `YES` in the **Image** Datastore.
-
-{{< alert title="Note" color="success" >}}
-The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.{{< /alert >}}
-
-This mode leverages the thin provisioning features provided by LVM to enable the creation of **thin snapshots** of VM disks.
-
-The setup for this mode is quite similar to the standard (non-thin) mode: a `vg-one-<system_ds_id>` is required, and LVs will be created over it as needed. The difference is that, in this mode, every launched VM will allocate a dedicated **Thin Pool**, containing one **Thin LV** per disk. So, a VM (with id 11) with two disks would be instantiated as follows:
+In this mode, every launched VM will allocate a dedicated **Thin Pool**, containing one **Thin LV** per disk. So, a VM (with id 11) with two disks would be instantiated as follows:
 
 ```default
 # lvs
@@ -194,3 +402,30 @@ Let’s create a couple of snapshots over the first disk of the previous VM. As 
 ```
 
 For more details about the inner workings of LVM, please refer to the [lvmthin(7)](https://man7.org/linux/man-pages/man7/lvmthin.7.html) main page.
+
+
+## Troubleshooting
+
+### LVM devicesfile
+
+**Problem:** LVM does not show my iSCSI/multipath devices (with e.g., `pvs`), although I can see them
+with `multipath -ll` or `lsblk`.
+
+**Possible solution:**
+
+The LVM version in some operating systems or Linux distributions, by default,
+doesn't scan the whole `/dev` directory for possible disks. Instead, you need to explicitly
+**whitelist** them in `/etc/lvm/devices/system.devices`. You can check whether that's your case by
+running:
+
+```
+lvmconfig --type full devices/use_devicesfile
+```
+
+If it returns `devices/use_devicesfile=1`, then the devicesfile is being used and enforced. In that
+case, just add the device path to the whitelist and check again:
+
+```
+# echo /dev/mapper/mpatha >> /etc/lvm/devices/system.devices
+# pvs
+```
