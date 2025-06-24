@@ -14,22 +14,35 @@ weight: "7"
 
 ## Overview
 
-In this tutorial, you can deploy a full-fledged Kubernetes cluster on the KVM hypervisor on AWS, and test it by running a sample application.
+Previous tutorials of this Quick Start guide show how to use miniONE to:
 
-This tutorial is intended as a continuation of [Deploy OpenNebula on AWS with miniONE]({{% relref "deploy_opennebula_on_aws" %}}). If you followed that first tutorial you should have an OpenNebula Front-end running on an AWS bare-metal instance, complete with a KVM Host.
+- [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
+- [Install an OpenNebula Front-end and a KVM Host on AWS]({{% relref "deploy_opennebula_on_aws" %}})
+- [Validate the environment]({{% relref "validate_the_minione_environment" %}}) created by miniONE, by running a Virtual Machine
 
-However, you should also be able to complete this tutorial on your own on-premises installation -- for example if you followed [Deploy OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}). The basic requisites for this tutorial are a server with an OpenNebula Front-end node and a KVM Host.
+This tutorial builds on the infrastructure created in those previous tutorials. By following it, you can:
 
-The Kubernetes cluster deployed in this tutorial is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
+- Download a complete Kubernetes cluster from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
+- Deploy the cluster on the KVM Host installed by miniONE
+- Validate the cluster by running a simple test application
 
-To deploy the Kubernetes cluster, we’ll follow these high-level steps:
+This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula On-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
 
-> 1. Download the OneKE Service from the OpenNebula Marketplace.
-> 2. Instantiate a private network on the Edge Cluster.
-> 3. Instantiate the Kubernetes Service.
-> 4. Deploy an application on Kubernetes.
 
-In this tutorial we'll perform a basic install of the Kubernetes cluster, with the Traefik ingress router and Longhorn storage. The OneKE appliance offers options such as High Availability, load balancing and CNI plugins, which are out of the scope of this guide. For the full documentation of the OneKE appliance, please see the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
+As mentioned above, the Kubernetes cluster deployed in this tutorial is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
+
+To deploy the Kubernetes cluster, we'll follow these high-level steps:
+
+1. Download the OneKE Service from the OpenNebula Marketplace.
+2. Instantiate a private network on the Edge Cluster.
+3. Instantiate the Kubernetes Service.
+4. Deploy an application on Kubernetes.
+
+In this tutorial we'll perform a basic install of the Kubernetes cluster plus the Traefik ingress router and Longhorn storage. The OneKE appliance offers additional options such as High Availability, load balancing and CNI plugins, which are out of the scope of this guide.
+
+{{< alert title="Tip" color="success" >}}
+For more information about OneKE, please see [OneKE Service (Kubernetes)]({{% relref "../../../integrations/marketplace_appliances/oneke" %}}). The full documentation for OneKE is available in the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
+{{< /alert >}}
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
