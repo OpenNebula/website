@@ -1,7 +1,7 @@
 ---
 title: "Deploy OpenNebula On-prem with miniONE"
 date: "2025-02-17"
-description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
+#description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
 categories: [Introduction, Evaluation, Learning]
 pageintoc: "15"
 tags: [miniONE]
@@ -12,7 +12,9 @@ weight: "2"
 
 <!--# Create an Emulated Environment with miniONE -->
 
-The miniONE tool is a simple Bash script that allows you to install an OpenNebula Front-end with a single command. It installs quickly and easily and is a great tool for learning and evaluation. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
+In this tutorial, we'll install an OpenNebula Front-end in under ten minutes, using **miniONE**, the installation tool provided by OpenNebula.
+
+The miniONE tool is a simple script that allows you to install an OpenNebula Front-end with a single command. It installs quickly and easily and is a great tool for learning and evaluation. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
 
 This tutorial covers installation of a Front-end and KVM hypervisor node on the local machine. The resulting installation uses a private IP for communication between the Front-end and Virtual Machines, so it is not suitable for deploying resources to remote infrastructure.
 
@@ -55,7 +57,7 @@ To run the miniONE script, you will need a physical or virtual server with a fre
   - Ubuntu 22.04 or 24.04
 
 **Minimum hardware:**
-: - 4 GiB RAM
+: - 4 GiB RAM (16 GiB recommended for [deploying a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}))
   - 80 GiB free disk space
 
 **Configuration:**
@@ -63,8 +65,7 @@ To run the miniONE script, you will need a physical or virtual server with a fre
   - An SSH server running on port 22
   - Open ports:
     : - 22 (SSH)
-      - 80 (for the Ruby Sunstone GUI)
-      - 2616 (for the FireEdge GUI)
+      - 80 (for the web UI)
 
 This tutorial was tested on on Ubuntu 22.04 and 24.04.
 
@@ -76,7 +77,7 @@ To quickly download miniONE, run:
 
 ```bash
 wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
-````
+```
 
 After downloading, open a terminal and use the `sudo` to become the `root` user. For example, run:
 
@@ -110,7 +111,7 @@ OpenNebula 6.99 was installed
 Sunstone is running on:
   http://192.168.1.130/
 FireEdge is running on:
-  http://192.168.1.130:2616/
+  http://192.168.1.130:80/
 Use following to login:
   user: oneadmin
   password: ZMCoOWUsBg
@@ -126,9 +127,9 @@ At this point, you have successfully installed miniONE. OpenNebula services shou
 
 ## Step 3: Verify the Installation
 
-We will verify the installation by logging in to OpenNebula's FireEdge Sunstone GUI.
+We will verify the installation by logging in to OpenNebula's Edge Sunstone GUI.
 
-Point your browser to the FireEdge IP and port provided by the miniONE report, in this case `192.168.1.130:2616`, or simply to `http://localhost:2616`. You should be greeted with the Sunstone login screen:
+Point your browser to the Edge IP and port provided by the miniONE report, in this case `192.168.1.130:80`, or simply to `http://localhost`. You should be greeted with the Sunstone login screen:
 
 ![image](/images/sunstone-login.png)
 <br/>

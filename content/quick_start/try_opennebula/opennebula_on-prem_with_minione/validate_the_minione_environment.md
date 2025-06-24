@@ -1,7 +1,7 @@
 ---
 title: "Validate the miniONE Environment"
 date: "2025-02-17"
-description: "Explore the resources automatically installed with **miniONE**, and download and install appliances from the **OpenNebula Marketplace**"
+#description: "Explore the resources automatically installed with **miniONE**, and download and install appliances from the **OpenNebula Marketplace**"
 categories: [Learning, Evaluation, Introduction, Deployment]
 pageintoc: "24"
 tags: ['Quick Start', 'Edge Cluster']
