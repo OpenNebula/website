@@ -39,7 +39,7 @@ Add a `PASSWORD` field and specify the desired root password for the VM, then cl
 <a id="one-vm-config"></a>
 ![image][one-vm-config]
 
-Log in to the VM via VNC (click the icon highlighted below). Log in as user `root` with the password that you specified in the previous step.
+Log in to the VM via VNC (click the screen icon on the right). Log in as user `root` with the password that you specified in the previous step.
 
 <a id="one-vnc-connect"></a>
 ![image][one-vnc-connect]

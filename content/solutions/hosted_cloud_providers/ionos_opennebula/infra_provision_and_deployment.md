@@ -7,7 +7,7 @@ tags:
 weight: 3
 ---
 
-This section details a step-by-step procedure to provision the reference infrastructure on the IONOS Cloud, demonstrated by screenshots. It provides guidance on how to extract the list of essential parameters of the provisioned infrastructure, which are used for the automation of the OpenNebula deployment.
+This section details a step-by-step procedure to provision the reference infrastructure on the IONOS Cloud, demonstrated by screenshots. It provides guidance on how to extract the list of required parameters of the provisioned infrastructure, which are used for the automation of the OpenNebula deployment.
 
 ## Infrastructure Provisioning
 
@@ -58,11 +58,11 @@ At the [IONOS Data Center Designer web UI](https://dcd.ionos.com/), open the can
 <a id="dcd-uuid"></a>
 ![><][dcd-uuid]
 
-## Saving Essential Parameters
+## Saving Required Parameters
 
-At this point, all required infrastructure components should be deployed and configured in the IONOS DCD. To proceed with OpenNebula deployment, we need to extract and save some essential parameters that the deployment automation relies on.
+At this point, all required infrastructure components should be deployed and configured in the IONOS DCD. To proceed with OpenNebula deployment, we need to extract and save some required parameters that the deployment automation relies on.
 
-### Table 1: List of Essential Parameters
+### Table 1: List of Required Parameters
 
 | Description | How to obtain the parameter |
 | :----- | :----- |
@@ -84,18 +84,18 @@ If the first and second NICs were consistently used to connect the servers to th
 
 ## Deployment and Automated Verification Procedure
 
-The complete OpenNebula deployment procedure and all of the required resources are available in the [OpenNebula hosted IONOS repo](https://github.com/OpenNebula/opennebula-hosted-ionos), also referred to as the **deployment repository**. For instructions on how to use the essential parameters extracted from the provisioned IONOS infrastructure, please check the `README` file in the repo.
+The complete OpenNebula deployment procedure and all of the required resources are available in the [OpenNebula hosted IONOS repo](https://github.com/OpenNebula/opennebula-hosted-ionos), also referred to as the **deployment repository**. For instructions on how to use the required parameters extracted from the provisioned IONOS infrastructure, please check the `README` file in the repo.
 
 The deployment procedure consists of the following high-level steps:
 
 1. Initialize the deployment repository.
-2. Update the deployment repository with the essential parameters gathered above.
+2. Update the deployment repository with the required parameters gathered above.
 3. Customize the networking configuration of the provisioned servers.
 4. Launch the deployment automation commands.
 5. Launch the automated verification command.
 
 {{< alert title="Note" color="success" >}}
-For detailed information about how to use the essential parameters and which configuration files to modify, please refer to the README of the [OpenNebula hosted IONOS repo](https://github.com/OpenNebula/opennebula-hosted-ionos).
+For detailed information about how to use the required parameters and which configuration files to modify, please refer to the README of the [OpenNebula hosted IONOS repo](https://github.com/OpenNebula/opennebula-hosted-ionos).
 {{< /alert >}}
 
 [dcd-layout]: /images/solutions/ionos/dcd-layout.png
