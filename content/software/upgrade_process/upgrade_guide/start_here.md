@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Start Here -->
 
-This guide describes the upgrade procedure for systems that are already running an OpenNebula Enterprise Edition 5.12.x or older. The upgrade to OpenNebula EE {{< version >}} can be done directly by following this section; you don’t need to perform intermediate version upgrades (for CE deployments, please see the Important Note below). The upgrade will preserve all current users, Hosts, resources, and configurations for both SQLite and MySQL/MariaDB backends.
+This guide describes the upgrade procedure for systems that are already running an OpenNebula Enterprise Edition 6.0.x or newer. The upgrade to OpenNebula EE {{< version >}} can be done directly by following this section; you don’t need to perform intermediate version upgrades (for CE deployments, please see the Important Note below). The upgrade will preserve all current users, hosts, resources, and configurations, for both SQLite and MySQL/MariaDB back-ends.
 
 Read the [Compatibility Guide]({{% relref "../../release_information/release_notes_70/compatibility#compatibility" %}}) and [Release Notes](http://opennebula.org/software/release/) to know what’s new in OpenNebula {{< version >}}.
 
@@ -26,7 +26,7 @@ Users of the Community Edition of OpenNebula can upgrade to the latest version o
 Enterprise Edition is distributed with a tool `onecfg` as part of the main server package (in 5.12 and earlier it was provided via the OneScape project and repository). This tool simplifies the upgrade process of configuration files and always comes in the latest version of OpenNebula.
 
 {{< alert title="Important" color="success" >}}
-**For each OpenNebula upgrade (even between minor versions, e.g., 5.10.2 and 5.10.3), configuration files must be processed via `onecfg upgrade`**. If you skip the configuration upgrade step for an OpenNebula upgrade, the tool will lose the current version state and you’ll have to handle the files upgrade manually and [reinitialize]({{% relref "../configuration_management_ee/usage#cfg-init" %}}) the configuration version management state.
+**For each OpenNebula upgrade (even between minor versions, e.g. 6.10.2 and 6.10.3), configuration files must be processed via `onecfg upgrade`**. If you skip the configuration upgrade step for an OpenNebula upgrade, the tool will lose the current version state and you’ll have to handle the files upgrade manually and [reinitialize]({{% relref "../configuration_management_ee/usage#cfg-init" %}}) the configuration version management state.
 
 ```default
 $ onecfg upgrade
@@ -62,8 +62,8 @@ Check the configuration state via `onecfg status`. There should be no errors and
 ```default
 $ onecfg status
 --- Versions ------------------------------
-OpenNebula:  5.10.2
-Config:      5.10.0
+OpenNebula:  6.10.2
+Config:      6.10.0
 
 --- Available Configuration Updates -------
 No updates available.
