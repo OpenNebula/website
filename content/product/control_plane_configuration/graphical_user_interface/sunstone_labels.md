@@ -33,4 +33,4 @@ This will open the **Create Label** modal, which can be used to create user and 
 ![labels_create_modal](/images/sunstone_labels_create_modal.png)
 
 {{< alert title="Warning" color="warning" >}}
-Only groupadmins can apply and create group labels. However they will still be visible to all members of the group.{{< /alert >}}
+Only group admins can apply and create group labels. However they will still be visible to all members of the group.{{< /alert >}}

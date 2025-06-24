@@ -240,7 +240,7 @@ The command will take a moment to execute. During that time the OneKE service wi
 oneflow top
 ```
 
-This produces the output of `oneflow list`, updated continously. Once the status is `RUNNING`, to exit the command type `Ctrl+C`.
+This produces the output of `oneflow list`, updated continuously. Once the status is `RUNNING`, to exit the command type `Ctrl+C`.
 
 On the Front-end node, we can check the status of the newly-created storage VM with `onevm list`:
 
