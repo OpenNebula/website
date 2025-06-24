@@ -14,13 +14,13 @@ weight: "7"
 
 ## Overview
 
-This tutorial is intended as a continuation of [Deploy OpenNebula on AWS with miniONE]({{% relref "deploy_opennebula_on_aws" %}}). If you followed that first tutorial you should have an OpenNebula Front-end running on an AWS bare-metal instance, complete with a KVM Host.
-
 In this tutorial, you can deploy a full-fledged Kubernetes cluster on the KVM hypervisor on AWS, and test it by running a sample application.
 
-You can also use this tutorial to deploy to an on-premises host -- for example, if you followed the previous tutorial [Deploy OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}).
+This tutorial is intended as a continuation of [Deploy OpenNebula on AWS with miniONE]({{% relref "deploy_opennebula_on_aws" %}}). If you followed that first tutorial you should have an OpenNebula Front-end running on an AWS bare-metal instance, complete with a KVM Host.
 
-Like the WordPress VM, the Kubernetes cluster is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
+However, you should also be able to complete this tutorial on your own on-premises installation -- for example if you followed [Deploy OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}). The basic requisites for this tutorial are a server with an OpenNebula Front-end node and a KVM Host.
+
+The Kubernetes cluster deployed in this tutorial is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
 
 To deploy the Kubernetes cluster, we’ll follow these high-level steps:
 
@@ -539,58 +539,6 @@ oneflow recover --delete <service_ID>
 ```
 
 Then, re-instantiate the service from the Sunstone UI: in the left-hand pane, **Service Templates** -> **OneKE 1.29**, then click the **Instantiate** icon.
-
-#### Lack of Connectivity to the OneGate Server
-
-Another possible cause for VMs in the Kubernetes cluster failing to run is lack of contact between the VNF node in the cluster and the OneGate server on the Front-end.
-
-As described in [Quick Start Using miniONE on AWS]({{% relref "deploy_opennebula_on_aws#try-opennebula-on-kvm" %}}), the AWS instance where the Front-end is running must allow incoming connections for port 5030. If you do not want to open the port for all addresses, check the **public** IP address of the VNF node (the AWS Elastic IP, see [above]({{% relref "#check-vnf" %}})), and create an inbound rule in the AWS security groups for that IP.
-
-In cases of lack of connectivity with the OneGate server, the `/var/log/one/oneflow.log` file on the Front-end will display messages like the following:
-
-```default
-[EM] Timeout reached for VM [0] to report
-```
-
-In this scenario only the VNF node is successfully deployed, but no Kubernetes nodes.
-
-To troubleshoot, follow these steps:
-
-1. Find out the IP address of the VNF node, as described [above]({{% relref "#check-vnf" %}}).
-2. Log in to the VNF node via ssh as root.
-3. Check if the VNF node is able to contact the OneGate server on the Front-end node, by running this command:
-
-```default
-onegate vm show
-```
-
-A successful response should look like:
-
-```default
-[root@VNF]$ onegate vm show
-  VM 0
-  NAME             : vnf_0_(service_3)
-```
-
-And a failure gives a timeout message:
-
-```default
- [root@VNF]$ onegate vm show
- Timeout while connected to server (Failed to open TCP connection to <AWS elastic IP of FN>:5030 (execution expired)).
- Server: <AWS elastic IP of FN>:5030
-```
-
-In this case, the VNF node cannot communicate with the OneGate service on the Front-end node. Possible causes include:
-
-> * **Wrong Front-end node for the AWS IP**: The VNF node may be trying to connect to the OneGate server on the wrong IP address. In the VNF node, the IP address for the Front-end node is defined by the value of `ONEGATE_ENDPOINT`, in the scripts found in the `/run/one-context` directory. You can check the value with:
-
->> ```default
->> grep -r ONEGATE /run/one-context*
->> ```
-
-If the value of `ONEGATE_ENDPOINT` does not match the IP address where OneGate is listening on the Front-end node, edit the parameter with the correct IP address. Then, terminate the OneKE service from the Front-end (see [above]({{% relref "#terminate-oneflow" %}})) and re-deploy.
-
-> * **Filtered incoming connections**: On the Front-end node, the OneGate server listens on port 5030, so you must ensure that this port accepts incoming connections. If necessary, create an inbound rule in the AWS security groups for the elastic IP of the VNF node.
 
 #### One or more VMs Fail to Report Ready
 
