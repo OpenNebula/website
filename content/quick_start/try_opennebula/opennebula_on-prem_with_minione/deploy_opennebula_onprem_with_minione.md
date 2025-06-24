@@ -12,7 +12,9 @@ weight: "2"
 
 <!--# Create an Emulated Environment with miniONE -->
 
-The miniONE tool is a simple Bash script that allows you to install an OpenNebula Front-end with a single command. It installs quickly and easily and is a great tool for learning and evaluation. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
+In this tutorial, we'll install an OpenNebula Front-end in under ten minutes, using **miniONE**, the installation tool provided by OpenNebula.
+
+The miniONE tool is a simple script that allows you to install an OpenNebula Front-end with a single command. It installs quickly and easily and is a great tool for learning and evaluation. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
 
 This tutorial covers installation of a Front-end and KVM hypervisor node on the local machine. The resulting installation uses a private IP for communication between the Front-end and Virtual Machines, so it is not suitable for deploying resources to remote infrastructure.
 
