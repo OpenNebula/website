@@ -32,7 +32,7 @@ Browse user stories from organizations using OpenNebula [here](https://opennebul
 
 ## Case Studies
 
-Learn more from OpenNebula users about how they are putting OpenNebula to work! See how its flexibility and simplicity, its true hybrid and edge capabilities, along with its compatibility with other open source platforms and third-party technologies such as Kubernetes, Ansible and Terraform make it the ideal versatile solution for complex environments, no matter what the industry may be.
+Learn more from OpenNebula users about how they are putting OpenNebula to work! See how its flexibility and simplicity, its true hybrid and edge capabilities, along with its compatibility with other open source platforms and third-party technologies such as Kubernetes, Ansible, and Terraform make it the ideal versatile solution for complex environments, no matter what the industry may be.
 
 ![image3](/images/case_studies.png)
 

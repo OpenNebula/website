@@ -18,7 +18,7 @@ weight: "2"
 
 Backups can be operated in two modes:
 
-- Single VM (described in this guide). Backup operations are defined and managed for a single VM. You can use this method to manage the backups of few VMs.
+- Single VM (described in this guide): Backup operations are defined and managed for a single VM. You can use this method to manage the backups of a few VMs.
 - Backup Jobs are described in the [backup jobs guide]({{% relref "backup_jobs#vm-backup-jobs" %}}). They allow you to define backup operations involving multiple VMs and efficiently manage all the backups as a cohesive unit.
 
 ### Backup Types
@@ -40,7 +40,7 @@ Also, for **RBD** disks (Ceph), FULL and INCREMENT backups are currently stored 
 
 ### The Backup Process
 
-VM backups can be taken live or while the VM is powered-off, the operation comprises three steps:
+VM backups can be taken live or while the VM is powered off. The operation comprises three steps:
 
 - *Pre-backup*: Disks (or increments) are prepared for backup. When the VM is running the filesystems of the guest are frozen (see below) and temporal disks are created so the VM can continue its normal operation. Note: backups are taken at the same time for all the VM disks (qcow2/raw images) to guarantee **crash consistent backups**.
 - *Backup*: Full disk copies (or increments) are uploaded to the backup server. In this step, OpenNebula will use the specific datastore drivers for the backup system.
@@ -55,10 +55,11 @@ In order to save space in the backup system, RAW disk backups are converted and 
 - Live backups are only supported for KVM
 - Attaching a disk to a VM that had an incremental backup previously made will yield an error. The –reset option for the backup operation is required to recreate a new incremental chain
 - Incremental backups on VMs with disk or system snapshots is not supported
+- `KEEP_LAST` option is not supported for Incremental backups of Ceph disks
 
 ## Preparing VMs for Backups
 
-Before making backups you need to configure some aspects of the backup process (e.g. the backup mode). This can be done for VM templates or Virtual Machines.
+Before making backups you need to configure some aspects of the backup process (e.g., the backup mode). This can be done for VM templates or Virtual Machines.
 
 ### Virtual Machine Templates
 
@@ -84,7 +85,7 @@ To configure using the Sunstone GUI, select the **Backup** tab:
 
 ### Virtual Machines
 
-For running VMs you can set (or update) backup configuration attributes through the `updateconf` API call or CLI command. For example to configure a VM with the above settings, add the following attribute:
+For running VMs you can set (or update) backup configuration attributes through the `updateconf` API call or CLI command. For example, to configure a VM with the above settings, add the following attribute:
 
 ```default
 $ onevm updateconf 0
@@ -121,11 +122,11 @@ LAST_INCREMENT_ID="-1"
 MODE="INCREMENT"
 ```
 
-To configure using the Sunstone GUI, click on the virtual machine, select the **Configuration** tab and click on the **Update VM Configuration** button:
+To configure using the Sunstone GUI, click on the virtual machine, select the **Backup** tab and click on the **Backup config** button:
 
 ![vm_cfg](/images/backup_vm_configuration.png)
 
-Sunstone will display the screen to update the VM Configuration. Select the **Backup** tab to update the backup configuration.
+Sunstone will display the screen to update the VM Configuration.
 
 ![vm_cfg_tab](/images/backup_vm_configuration_tab.png)
 
@@ -143,16 +144,16 @@ Sunstone will display the screen to update the VM Configuration. Select the **Ba
 | `INCREMENTAL_BACKUP_ID` | For `INCREMENT` points to the backup image where increment chain is stored (read-only)                           |
 | `LAST_INCREMENT_ID`     | For `INCREMENT` the ID of the last incremental backup taken (read-only)                                          |
 
-## Taking VM backups
+## Taking VM Backups
 
-Backup actions may potentially take some time, leaving some resources in use for a long time. In order to make an efficient use of resources, backups are planned by the OpenNebula scheduler [through the schedule actions interface]({{% relref "../virtual_machine_instances/vm_instances#schedule-actions" %}}).
+Backup actions may potentially take some time, leaving some resources in use for a long time. In order to make efficient use of resources, backups are planned by the OpenNebula scheduler [through the schedule actions interface]({{% relref "../virtual_machine_definitions/vm_instances#schedule-actions" %}}).
 
 ### One-shot Backups
 
-You can take backups (one-shot) using the `onevm backup` operation (or the equivalent Sunstone action).The backup will use the configured attributes for the VM (e.g. `MODE`) and two additional arguments:
+You can take backups (one-shot) using the `onevm backup` operation (or the equivalent Sunstone action). The backup will use the configured attributes for the VM (e.g., `MODE`) and two additional arguments:
 
 - **Datastore ID**: The datastore where the backup will be stored
-- **Reset** (optional): When doing incremental backups, you can close the current active chain and create a new one by passing this flag.
+- **Reset** (optional): When doing incremental backups, you can close the current active chain and create a new one by passing this flag
 
 **Important**, only the `oneadmin` account can initiate backups directly, regular users needs to schedule the operation. See example:
 
@@ -165,7 +166,7 @@ Using Sunstone to take one-shot backup:
 
 ![vm_backup_action](/images/vm_backup_action.png)
 
-After the backup is complete you should see: the backup information in the VM details, as well as the associated backup image. For example:
+After the backup is complete you should see the backup information in the VM details, as well as the associated backup image. For example:
 
 ```default
 $ onevm show 0
@@ -231,7 +232,7 @@ BACKUP INCREMENTS
   1   0 I 0M        12/01 14:22:46 6968545c
 ```
 
-The `SOURCE` attribute in the backup images (and increments) is an opaque reference to the backup in the backup system used by the datastore. For restic this correspond to the snapshot ID, for example:
+The `SOURCE` attribute in the backup images (and increments) is an opaque reference to the backup in the backup system used by the datastore. For restic, this corresponds to the snapshot ID, for example:
 
 ```default
 $ restic snapshots
@@ -247,11 +248,11 @@ ID        Time                 Host                                  Tags       
 
 ### Scheduling Backups
 
-You can program periodic backups [through the schedule actions interface]({{% relref "../virtual_machine_instances/vm_instances#schedule-actions" %}}). Note that in this case, you have to pass the target datastore ID as argument of the action. You can create a periodic backup with the `--schedule` option in the CLI, or through Sunstone in the Schedule Action dialog (to open the dialog, click the Sched Actions tab, then click Add action).
+You can program periodic backups [through the schedule actions interface]({{% relref "../virtual_machine_definitions/vm_instances#schedule-actions" %}}). Note that in this case, you have to pass the target datastore ID as argument of the action. You can create a periodic backup with the `--schedule` option in the CLI, or through Sunstone in the Schedule Action dialog (to open the dialog, click the Sched Actions tab then click Add action).
 
 ![vm_schedule](/images/backup_schedule.png)
 
-**Note**: As any other schedule action you can plan for several backup operations, or add a pre-set backup schedule in the VM template.
+**Note**: As with any other schedule action, you can plan for several backup operations or add a pre-set backup schedule in the VM template.
 
 <a id="vm-backups-scheduler"></a>
 
@@ -262,13 +263,13 @@ The schedule actions are in control of OpenNebula core. You can tune the number 
 | Attribute          | Description                                                                                   |
 |--------------------|-----------------------------------------------------------------------------------------------|
 | `MAX_BACKUPS`      | Max active backup operations in the cloud. No more backups will be started beyond this limit. |
-| `MAX_BACKUPS_HOST` | Max number of backups per host                                                                |
+| `MAX_BACKUPS_HOST` | Max number of backups per Host                                                                |
 
 ### Cancel Backup
 
-You can cancel ongoing backup operation using the `onevm backup-cancel`. The command will try to gracefully terminate backup operation. If the command succeeds the VM will return to running (or poweroff) state. Note that not all stages of the backup operation can be canceled and some files may be left on the VM folder in the system datastore. These files will be cleaned up in during a subsequent backup.
+You can cancel an ongoing backup operation by using the `onevm backup-cancel`. The command will try to gracefully terminate backup operation. If the command succeeds the VM will return to running (or poweroff) state. Note that not all stages of the backup operation can be canceled and some files may be left on the VM folder in the system datastore. These files will be cleaned up during a subsequent backup.
 
-If the backup operation is not running, but the VM stays in the backup state, use command `onevm recover` to return VM back to running state.
+If the backup operation is not running but the VM stays in the backup state, use command `onevm recover` to return the VM back to running state.
 
 <a id="vm-backups-restore"></a>
 
@@ -283,7 +284,7 @@ There are two main methods for restoring VM backups:
 
 In this mode, the disks of an existing VM are replaced with a copy from a backup. This operation requires that the VM is in a powered-off state. During the restoration process, you have the option to restore all disks or only the selected one.
 
-For example, let’s consider a scenario with VM 83 in a powered-off state and an image backup (176) of this VM with three increments. It’s important to note that the VM remains powered off during this process.
+For example, let’s consider a scenario with VM 83 in a powered-off state and an image backup (176) of this VM with three increments. It’s important to note that the VM remains powered off during this process:
 
 ```default
 $ oneimage show 176
@@ -303,7 +304,7 @@ BACKUP INCREMENTS
   2   1 I 1M        05/06 08:52:46 046843
 ```
 
-and the corresponding VM.
+and the corresponding VM:
 
 ```default
 $ onevm show 83
@@ -345,22 +346,22 @@ Note that all snapshots of the VM will be deleted upon restoring the backup.
 
 ### Full Restore
 
-When you perform a full restore a VM backup OpenNebula will create:
+When you perform a full restore of a VM backup, OpenNebula will create:
 
-- A Virtual Machine Template, with an equivalent definition to that of the VM when the backup was taken (i.e. NICs, capacity…)
+- A Virtual Machine Template, with an equivalent definition to that of the VM when the backup was taken (i.e., NICs, capacity…)
 - A disk image for each of the disks stored in the backup.
 
-Note that in this case the VM does not have to exists. This operation is not tied to the original VM where the backup was made.
+Note that in this case the VM does not have to exist. This operation is not tied to the original VM where the backup was made.
 
 When you restore the backup you may choose to:
 
-- Not keep the NIC addressing (i.e. IPs, or MAC)
+- Not keep the NIC addressing (i.e., IPs, or MAC)
 - Not keep any NIC definition
 - In the case of incremental backups you can choose which increment to restore (or last by default)
-- Finally, you can pick a base name for the VM Templates and disk Images that will be created
+- Pick a base name for the VM templates and disk Images that will be created
 - Restore only an individual disk, without the associated VM template
 
-After you restore the VM, we recommend to review the restored template to fine-tune any additional parameter. The following example shows the recovering procedure:
+After you restore the VM, we recommend reviewing the restored template to fine-tune any additional parameter. The following example shows the recovery procedure:
 
 ```default
 $ oneimage restore -d default --no_ip 1
@@ -386,7 +387,7 @@ SOURCE         : /var/lib/one//datastores/1/d7784b595d33b757bb2593661346c51c
 PATH           : restic://100/0:25f4b298,1:6968545c//var/lib/one/datastores/0/0/backup/disk.0
 ```
 
-The complete list of attributes removed from a template described in the table below:
+The complete list of attributes removed from a template are described in the table below:
 
 #### VM Template attributes removed upon restore
 
@@ -416,16 +417,16 @@ The complete list of attributes removed from a template described in the table b
 
 ### Quotas and Access Control
 
-Backup Datastores follows the same datastore abstraction as the Image and System Datastore. Hence the same operations are supported for Backup Datastores. In particular you can easily set quotas to limit:
+Backup Datastores follow the same datastore abstraction as the Image and System Datastore. Hence the same operations are supported for Backup Datastores. In particular you can easily set quotas to limit:
 
 - The overall size that backups can take from the backup storage for a given group or user
 - The number of backups a user can create (**Important**: increments counts just as a single backup)
 
-In the same way, you can limit which backup datastore a given user or group can use, by simply adjusting the permissions or, if you need a finer grain, by setting an ACL.
+In the same way, you can limit which backup datastore a given user or group can use by simply adjusting the permissions or, if you need a finer grain, by setting an ACL.
 
-### Multi-tier backup policies (Full backups)
+### Multi-tier Backup Policies (Full Backups)
 
-If you are using `FULL` backups you can schedule backups in different servers (i.e. different datastores) using different schedules. For example:
+If you are using `FULL` backups you can schedule backups in different servers (i.e., different datastores) using different schedules. For example:
 
 - Schedule a backup in the Datastore “in-house” every Friday.
 - Schedule a backup in the Datastore “cloud-storage” once every month.

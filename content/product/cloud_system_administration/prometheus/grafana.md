@@ -14,7 +14,7 @@ weight: "3"
 
 ## Requirements
 
-This guide assumes you already have a up and running Grafana service. If you do not already have Grafana installed, refer to the following guides:
+This guide assumes you already have an up-and-running Grafana service. If you do not already have Grafana installed, please refer to the following guides:
 
 > - [Download and Installation](https://grafana.com/grafana/download).
 > - [Add a new Prometheus Data sources](https://grafana.com/blog/2022/01/26/video-how-to-set-up-a-prometheus-data-source-in-grafana/).
@@ -31,7 +31,7 @@ We provide three dashboard templates that can be customized to your needs:
 
 You can easily import these dashboards by copying the contents of these files in the **Dashboards** > **+ Import** form.
 
-The Virtual Machine and Host dashboards are by default indexed by ID but it can easily changed in the Settings > Variables dialog to use one_vm_name and one_host_name, respectively.
+The Virtual Machine and Host dashboards are by default indexed by ID but this can easily be changed in the Settings > Variables dialog to use one_vm_name and one_host_name, respectively.
 
 ![grafana-dashboard](/images/grafana-dashboard.png)
 
@@ -57,7 +57,7 @@ EOF
 
 {{< alert title="Important" color="success" >}}
 In the case that your Grafana instance is running alongside Prometheus on the same OpenNebula server,{{< /alert >}} 
-then the **http://localhost:9090** above, can be accessed with ssh tunneling:
+then the **http://localhost:9090** above can be accessed with ssh tunneling:
 
 ```default
 $ ssh -L 9090:localhost:9090 user@opennebula-server-running-prometheus

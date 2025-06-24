@@ -12,7 +12,7 @@ weight: "5"
 
 <!--# Rank Scheduler -->
 
-The OpenNebula Rank Scheduler is responsible for **allocating pending Virtual Machines to available hypervisor Nodes**. It’s a dedicated daemon installed alongside the OpenNebula Daemon (`oned`), but can be deployed independently on a different machine. The Scheduler is distributed as part of the operating system package `opennebula` with the system service `opennebula-scheduler`.
+The OpenNebula Rank Scheduler is responsible for **allocating pending Virtual Machines to available hypervisor nodes**. It’s a dedicated daemon installed alongside the OpenNebula Daemon (`oned`), but can be deployed independently on a different machine. The Scheduler is distributed as part of the operating system package `opennebula` with the system service `opennebula-scheduler`.
 
 <a id="scheduler-rank-matchmaking"></a>
 
@@ -42,20 +42,20 @@ You can define the policy to place a VM in one of two places:
 
 The Scheduler configuration file is `/etc/one/schedulers/rank.conf` on the Front-end, and can be customized with the parameters listed in the table below.
 
-* `MAX_HOST`: Maximum number of Virtual Machines dispatched to a given host in each scheduling action (Default: 1)
+* `MAX_HOST`: Maximum number of Virtual Machines dispatched to a given Host in each scheduling action (Default: 1)
 * `MEMORY_SYSTEM_DS_SCALE`: This factor scales the VM’s usage of the system DS according to memory size. This factor can be used to make the scheduler consider the overhead caused by checkpoint files (*system_ds_usage = system_ds_usage + memory_system_ds_scale \* memory*).
 * `DIFFERENT_VNETS`: When set (`YES`) the NICs of a VM will be assigned to different Virtual Networks.
 
-The default scheduling policies for hosts, datastores and virtual networks are defined as follows:
+The default scheduling policies for Hosts, Datastores and Virtual Networks are defined as follows:
 
 * `DEFAULT_SCHED`: Definition of the default scheduling algorithm.
-  > * `RANK`: Arithmetic expression to rank suitable *hosts* based on their attributes.
+  > * `RANK`: Arithmetic expression to rank suitable *Hosts* based on their attributes.
   > * `POLICY`: A predefined policy, can be set to:
 
 |   Policy | Description                                                                                                                                                |
 |----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|        0 | [Packing]({{% relref "#sched-conf-packing" %}}): Minimize the number of hosts in use by packing the VMs in the hosts to reduce VM fragmentation                             |
-|        1 | [Striping]({{% relref "#sched-conf-striping" %}}): Maximize resources available for the VMs by spreading the VMs in the hosts                                               |
+|        0 | [Packing]({{% relref "#sched-conf-packing" %}}): Minimize the number of Hosts in use by packing the VMs in the Hosts to reduce VM fragmentation                             |
+|        1 | [Striping]({{% relref "#sched-conf-striping" %}}): Maximize resources available for the VMs by spreading the VMs in the Hosts                                               |
 |        2 | [Load-aware]({{% relref "#sched-conf-load" %}}): Maximize resources available for the VMs by using those nodes with less load                                               |
 |        3 | **Custom**: Use a custom `RANK`, see [Rank Expression Syntax]({{% relref "../../operation_references/configuration_references/template#template-rank" %}}). Example: `RANK="- (RUNNING_VMS * 50  + FREE_CPU)"` |
 |        4 | [Fixed]({{% relref "#sched-conf-fixed" %}}): Hosts will be ranked according to the PRIORITY attribute found in the Host or Cluster template                                 |
@@ -69,14 +69,14 @@ The default scheduling policies for hosts, datastores and virtual networks are d
 |        1 | [Striping]({{% relref "#sched-conf-ds-striping" %}}): Tries to optimize I/O by distributing the VMs across datastores                         |
 |        2 | **Custom**: Use a custom RANK, see [Rank Expression Syntax]({{% relref "../../operation_references/configuration_references/template#template-rank" %}})                         |
 |        3 | [Fixed]({{% relref "#sched-conf-ds-fixed" %}}): Datastores will be ranked according to the PRIORITY attribute found in the Datastore template |
-* `DEFAULT_NIC_SCHED`: Definition of the default virtual network scheduling algorithm.
+* `DEFAULT_NIC_SCHED`: Definition of the default Virtual Network scheduling algorithm.
   * `RANK`: Arithmetic expression to rank suitable **networks** based on their attributes.
   * `POLICY`: A predefined policy, can be set to:
 
 |   Policy | Description                                                                                          |
 |----------|------------------------------------------------------------------------------------------------------|
-|        0 | **Packing**:: Tries to pack address usage by selecting the virtual networks with less free leases    |
-|        1 | **Striping**: Tries to distribute address usage across virtual networks                              |
+|        0 | **Packing**:: Tries to pack address usage by selecting the Virtual Networks with less free leases    |
+|        1 | **Striping**: Tries to distribute address usage across Virtual Networks                              |
 |        2 | **Custom**: Use a custom RANK                                                                        |
 |        3 | **Fixed**: Networks will be ranked according to the PRIORITY attribute found in the Network template |
 * `EXTERNAL_SCHEDULER`: Configuration to contact an external scheduler module:
@@ -94,11 +94,11 @@ The default scheduling policies for hosts, datastores and virtual networks are d
   * `SYSTEM`: Defines the logging system. Use `file` to log to the `sched.log` file, `syslog` to use syslog, `std` to use the default log stream (stderr).
   * `DEBUG_LEVEL`: Logging level. Use `0` for ERROR, `1` for WARNING, `2` for INFO, `3` for DEBUG, `4` for DDEBUG, `5` for DDDEBUG.
 
-The optimal values of the scheduler parameters depend on the hypervisor, storage subsystem, and a number of physical hosts. The values can be derived by finding out the max. number of VMs that can be started in your setup without getting hypervisor-related errors.
+The optimal values of the scheduler parameters depend on the hypervisor, storage subsystem, and a number of physical Hosts. The values can be derived by finding out the max. number of VMs that can be started in your setup without getting hypervisor-related errors.
 
 ### User Policies
 
-VMs are dispatched to hosts in a FIFO fashion. You can alter this behavior by giving each VM (or the base template) a priority. Just set the attribute `USER_PRIORITY` to sort the VMs based on this attribute and so alter the dispatch order. For example, the `USER_PRIORITY` can be set in the VM templates for a specific user group if you want to prioritize the templates in that group. Note that this priority is also used for rescheduling.
+VMs are dispatched to Hosts in a FIFO fashion. You can alter this behavior by giving each VM (or the base template) a priority. Just set the attribute `USER_PRIORITY` to sort the VMs based on this attribute and so alter the dispatch order. For example, the `USER_PRIORITY` can be set in the VM templates for a specific user group if you want to prioritize the templates in that group. Note that this priority is also used for rescheduling.
 
 ## Pre-defined Placement Policies
 
@@ -144,7 +144,7 @@ RANK = FREE_CPU
 
 ### Fixed Policy
 
-* **Target**: Sort the hosts manually
+* **Target**: Sort the Hosts manually
 * **Heuristic**: Use the `PRIORITY` attribute
 * **Implementation**: Use those nodes with more `PRIORITY` first
 
@@ -154,7 +154,7 @@ RANK = PRIORITY
 
 ### Pre-defined Storage Policies
 
-The following list describes the predefined storage policies for `DEFAULT_DS_SCHED` configuration parameter:
+The following list describes the pre-defined storage policies for `DEFAULT_DS_SCHED` configuration parameter:
 
 <a id="sched-conf-ds-packing"></a>
 

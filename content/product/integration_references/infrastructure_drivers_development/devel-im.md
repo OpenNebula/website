@@ -12,7 +12,7 @@ weight: "4"
 
 <!--# Monitoring Driver -->
 
-The Monitoring Drivers (or IM drivers) collect host and virtual machine monitoring data by executing a monitoring agent in the hosts. The agent periodically executes probes to collect data and periodically send them to the frontend.
+The Monitoring Drivers (or IM drivers) collect Host and Virtual Machine monitoring data by executing a monitoring agent in the Hosts. The agent periodically executes probes to collect data and periodically send this to the Front-end.
 
 This guide describes the internals of the monitoring system. It is also a starting point on how to create a new IM driver from scratch.
 
@@ -27,18 +27,18 @@ MESSAGE_TYPE ID RESULT TIMESTAMP PAYLOAD
 | Name         | Description                                                    |
 |--------------|----------------------------------------------------------------|
 | MESSAGE_TYPE | SYSTEM_HOST, MONITOR_HOST, BEACON_HOST, MONITOR_VM or STATE_VM |
-| ID           | ID of the host, which generates the message.                   |
+| ID           | ID of the Host, which generates the message.                   |
 | RESULT       | Result of the action, possible values SUCCESS or FAILURE       |
 | TIMESTAMP    | Timestamp of the message as unix epoch time                    |
 | PAYLOAD      | Message data, depends on MESSAGE_TYPE                          |
 
 Description of message types:
 
-- **SYSTEM_HOST** - General information about the host, which doesn’t change too often (e.g. total memory, disk capacity, datastores, pci devices, NUMA nodes, …)
-- **MONITOR_HOST** - Monitoring information: used memory, used cpu, network traffic, …
+- **SYSTEM_HOST** - General information about the Host, which doesn’t change too often (e.g., total memory, disk capacity, datastores, pci devices, NUMA nodes…)
+- **MONITOR_HOST** - Monitoring information: used memory, used cpu, network traffic…
 - **BEACON_HOST** - notification message, indicating that the agent is still alive
-- **MONITOR_VM** - VMs monitoring information: used memory, used CPUs, disk io, …
-- **STATE_VM** - VMs state: running, poweroff, …
+- **MONITOR_VM** - VMs monitoring information: used memory, used CPUs, disk io…
+- **STATE_VM** - VMs state: running, poweroff…
 
 The provided hypervisors compose each message from data provided by probes in a specific directory:
 
@@ -48,7 +48,7 @@ The provided hypervisors compose each message from data provided by probes in a 
 - MONITOR_VM - `im/<hypervisor>-probes.d/vm/monitor`
 - STATE_VM - `im/<hypervisor>-probes.d/vm/status`
 
-Each IM probe is composed of one or several scripts that write to `stdout` information in this form:
+Each IM probe is composed of one or several scripts that write information to `stdout` in this form:
 
 ```default
 KEY1="value"
@@ -65,7 +65,7 @@ Mandatory values for each category are described below:
 
 | Key         | Description                                                                                                 |
 |-------------|-------------------------------------------------------------------------------------------------------------|
-| HYPERVISOR  | Name of the hypervisor of the host, useful for<br/>selecting the hosts with an specific technology.         |
+| HYPERVISOR  | Name of the hypervisor of the Host, useful for<br/>selecting the hosts with an specific technology.         |
 | TOTALCPU    | Number of CPUs multiplied by 100. For example,<br/>a 16 cores machine will have a value of 1600.            |
 | CPUSPEED    | Speed in Mhz of the CPUs.                                                                                   |
 | TOTALMEMORY | Maximum memory that could be used for VMs. It is advised<br/>to take out the memory used by the hypervisor. |
@@ -100,7 +100,7 @@ VM = [ ID="1",
 | Key         | Description                                                                                |
 |-------------|--------------------------------------------------------------------------------------------|
 | ID          | ID of the VM in OpenNebula.                                                                |
-| UUID        | Unique ID, must be unique across all hosts.                                                |
+| UUID        | Unique ID, must be unique across all Hosts.                                                |
 | MONITOR     | Base64 encoded monitoring information, the monitoring information includes following data: |
 | TIMESTAMP   | Timestamp of the measurement.                                                              |
 | CPU         | Percentage of 1 CPU consumed (two fully consumed cpu is 200).                              |
@@ -132,8 +132,8 @@ VM=[
 | Key       | Description                                             |
 |-----------|---------------------------------------------------------|
 | ID        | ID of the VM in OpenNebula.                             |
-| DEPLOY_ID | ID of the VM in the hypervisor, usually unique in host. |
-| UUID      | Unique ID, must be unique across all hosts.             |
+| DEPLOY_ID | ID of the VM in the hypervisor, usually unique in Host. |
+| UUID      | Unique ID, must be unique across all Hosts.             |
 | STATE     | State of the VM (running, poweroff, …).                 |
 
 <a id="devel-im-vm-information"></a>
@@ -184,7 +184,7 @@ The DATASTORE LOCATION is the path where the datastores are mounted. By default,
 
 ### Choosing the Execution Engine
 
-OpenNebula provides two IM probe execution engines: `one_im_sh` and `one_im_ssh`. `one_im_sh` is used to execute probes in the frontend, for example `vcenter` uses this engine as it collects data via an API call executed in the frontend. On the other hand, `one_im_ssh` is used when probes need to be run remotely in the hosts, which is the case for `KVM`.
+OpenNebula provides two IM probe execution engines: `one_im_sh` and `one_im_ssh`. `one_im_sh` is used to execute probes in the Front-end; `one_im_ssh` is used when probes need to be run remotely on the Hosts, which is the case for `KVM`.
 
 ### Populating the Probes
 

@@ -24,14 +24,14 @@ You can either use the system package `python3-pyone` or install it using `pip i
 
 ## Usage
 
-You need to configure your XML-RPC Server endpoint and credentials when instantiate the OneServer class:
+You need to configure your XML-RPC Server endpoint and credentials when instantiating the OneServer class:
 
 ```python
 import pyone
 one = pyone.OneServer("http://one:2633/RPC2", session="oneadmin:onepass")
 ```
 
-If you are connecting to a test platform with a self signed certificate you can disable
+If you are connecting to a test platform with a self-signed certificate you can disable
 certificate verification as:
 
 ```python
@@ -40,11 +40,11 @@ import ssl
 one = pyone.OneServer("https://one:8443/RPC2", session="oneadmin:onepass", https_verify=False)
 ```
 
-It is also possible to modify the default connection timeout, but note that the setting will modify the TCP socket default timeout of your Python VM, ensure that the chosen timeout is suitable to any other connections running in your project.
+It is also possible to modify the default connection timeout, but note that the setting will modify the TCP socket default timeout of your Python VM. Ensure that the chosen timeout is suitable for any other connections running in your project.
 
 ### Making Calls
 
-Calls match the API documentation provided by OpenNebula, so for example to XML api call [one.hostpool.info]({{% relref "api#api-hostpool-info" %}}) corresponds following code:
+Calls match the API documentation provided by OpenNebula, so for example the following code corresponds to XML api call [one.hostpool.info]({{% relref "api#api-hostpool-info" %}}):
 
 ```python
 import pyone
@@ -69,7 +69,7 @@ print "Marketplace name is " + m0.NAME
 
 ### Structured Parameters
 
-When making calls, the library will translate flat dictionaries into attribute=value vectors. Such as:
+When making calls, the library will translate flat dictionaries into attribute=value vectors, such as:
 
 ```python
 one.host.update(0,  {"LABELS": "HD"}, 1)
@@ -89,7 +89,7 @@ one.vm.update(1,
   }, 1)
 ```
 
-When, there are multiple entries with the same key like DISK or NIC, you can use array (from the version 6.8+).
+When there are multiple entries with the same key like DISK or NIC, you can use array (from the version 6.8+).
 
 ```python
 one.vm.update(1,
@@ -118,14 +118,14 @@ one.template.allocate(
   ''')
 ```
 
-generateDS creates members from most returned parameters, however, some elements in the XSD are marked as anyType and generateDS cannot generate members automatically, TEMPLATE and USER_TEMPLATE are the common ones. Pyone will allow accessing its contents as a plain python dictionary.
+generateDS creates members from most returned parameters, however, some elements in the XSD are marked as anyType and generateDS cannot generate members automatically, TEMPLATE and USER_TEMPLATE are the common ones. PyONE will allow its contents to be accessed as a plain python dictionary:
 
 ```python
 host = one.host.info(0)
 arch = host.TEMPLATE['ARCH']
 ```
 
-This makes it possible to read a TEMPLATE as dictionary, modify it and use it as parameter for an update method, as following:
+This makes it possible to read a TEMPLATE as dictionary, modify it, and use it as parameter for an update method, as in the following:
 
 ```python
 host = one.host.info(0)
@@ -135,7 +135,7 @@ one.host.update(0,host.TEMPLATE,1)
 
 ### Constants
 
-Some methods will return encoded values such as those representing the STATE of a resource. Constants are provided to better handle those.
+Some methods will return encoded values such as those representing the STATE of a resource. Constants are provided to better handle those:
 
 ```python
 from pyone import MARKETPLACEAPP_STATES
@@ -150,20 +150,20 @@ import pyone
 one = pyone.OneServer("http://one:2633/RPC2", session="oneadmin:onepass" )
 ```
 
-Allocate localhost as new host
+Allocate localhost as new host:
 
 ```python
 one.host.allocate('localhost', 'kvm', 'kvm', 0)
 ```
 
-See host template
+See host template:
 
 ```python
 host = one.hostpool.info().HOST[0]
 dict(host.TEMPLATE)
 ```
 
-See VM template
+See VM template:
 
 ```python
 vm_template = one.templatepool.info(-1, -1, -1).VMTEMPLATE[0]
@@ -171,13 +171,13 @@ vm_template.get_ID()
 vm_template.get_NAME()
 ```
 
-Instantiate it
+Instantiate it:
 
 ```python
 one.template.instantiate(0, "my_VM")
 ```
 
-See it
+See it:
 
 ```python
 my_vm = one.vmpool.info(-1,-1,-1,-1).VM[0]
@@ -186,7 +186,7 @@ my_vm.get_NAME()
 my_vm.get_TEMPLATE()
 ```
 
-Terminate it
+Terminate it:
 
 ```python
 one.vm.action('terminate', 0)

@@ -1,5 +1,5 @@
 ---
-title: "OpenNebula Distributed Resource Scheduler"
+title: "Distributed Resource Scheduler"
 
 description:
 categories:
@@ -12,7 +12,7 @@ weight: "6"
 
 <!--# OpenNebula Distributed Resource Scheduler (DRS) -->
 
-The **OpenNebula Distributed Resource Scheduler (DRS)** optimizes resource allocation and prevents resource contention within a single OpenNebula [cluster]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/cluster_guide#cluster-guide" %}}). It integrates with OpenNebula’s built-in monitoring and forecasting systems, considering real-time Virtual Machine (VM) and Host usage metrics as well as predictions of future resource consumption.
+The **OpenNebula Distributed Resource Scheduler (DRS)** optimizes resource allocation and prevents resource contention within a single OpenNebula [cluster]({{% relref "../../cluster_configuration/hosts_and_clusters/cluster_guide#cluster-guide" %}}). It integrates with OpenNebula’s built-in monitoring and forecasting systems, considering real-time Virtual Machine (VM) and Host usage metrics as well as predictions of future resource consumption.
 
 OpenNebula DRS offers flexible automation levels, allowing recommendations to be generated and applied either automatically or manually. Administrators can review and execute migration suggestions through the OpenNebula Sunstone GUI.
 
@@ -20,7 +20,7 @@ OpenNebula DRS offers flexible automation levels, allowing recommendations to be
 
 OpenNebula DRS employs an integer linear programming (ILP) solver to optimize cluster workload distribution. Key features include:
 
-- **Cluster Load Balancing**: Distributes VM workloads across hosts to balance resource usage, reducing contention and improving performance.
+- **Cluster Load Balancing**: Distributes VM workloads across Hosts to balance resource usage, reducing contention and improving performance.
 - **Predictive DRS**: Uses resource usage forecasts to provide proactive migration recommendations.
 - **Migration Recommendations**: Generates migration suggestions, allowing administrators to manually approve or automate actions.
 
@@ -30,7 +30,7 @@ To enable OneDRS: In Sunstone, select the **Cluster** tab, then enable **OneDRS*
 
 Configuring OneDRS for the cluster requires setting the following options:
 
-- **Policies**: Defines how workloads are distributed across hosts.
+- **Policies**: Defines how workloads are distributed across Hosts.
 - **Usage Metrics and Predictions**: Specifies which resource metrics (CPU, Memory, Network, Disk) to consider for balancing.
 - **Migration Threshold**: Limits the number of migrations generated in an optimization cycle.
 
@@ -38,8 +38,8 @@ Configuring OneDRS for the cluster requires setting the following options:
 
 OneNebula DRS migrates VMs according to the defined policy:
 
-- **Packing**: Minimizes the number of active hosts to save energy or prepare for maintenance.
-- **Load Balancing**: Distributes VMs across available hosts to prevent resource contention.
+- **Packing**: Minimizes the number of active Hosts to save energy or prepare for maintenance.
+- **Load Balancing**: Distributes VMs across available Hosts to prevent resource contention.
 
 #### Load Balancing Objectives
 
@@ -67,7 +67,7 @@ By default, DRS uses only monitored values.
 
 Since migrations add overhead, administrators can set a **migration threshold** to limit the number of migrations per optimization cycle. You need to balance this setting: an aggressive threshold may negatively impact performance, while a conservative approach could overlook opportunities for improving the performance of the cluster.
 
-By default, the number of migrations is not limited (i.e. the migration threshold is `-1`).
+By default, the number of migrations is not limited (i.e., the migration threshold is `-1`).
 
 #### Automation Levels
 
@@ -79,7 +79,7 @@ Administrators can choose between different automation levels:
 
 ## Initial Placement
 
-OneDRS can also handle the **initial placement** of pending VMs, selecting the most suitable hosts. Unlike the default Rank Scheduler, which considers one VM at a time, OneDRS evaluates all pending VMs together for optimal placement.
+OneDRS can also handle the **initial placement** of pending VMs, selecting the most suitable Hosts. Unlike the default Rank Scheduler, which considers one VM at a time, OneDRS evaluates all pending VMs together for optimal placement.
 
 Initial placement is configured in `/etc/one/oned.conf` by modifying the `SCHED_MAD` section:
 
@@ -105,7 +105,7 @@ The main DRS configuration file is `/etc/one/schedulers/one_drs.conf`. This file
 - `OPTIMIZE`: Defines workload optimization settings.
 - `PREDICTIVE`: Weight of forecasted resource usage.
 - `MEMORY_SYSTEM_DS_SCALE`: Adjusts for system datastore overhead.
-- `DIFFERENT_VNETS`: Ensures NICs are assigned to different virtual networks.
+- `DIFFERENT_VNETS`: Ensures NICs are assigned to different Virtual Networks.
 
 ### Solver Configuration
 
@@ -117,15 +117,15 @@ OneDRS uses the **PuLP** library for ILP solvers, supporting:
 
 Configuration:
 
-- `SOLVER`: Defines the solver (e.g. `CBC`, `GLPK`, `Gurobi`).
+- `SOLVER`: Defines the solver (e.g., `CBC`, `GLPK`, `Gurobi`).
 - `SOLVER_PATH`: Specifies the path to the solver binary.
 
 ### Scheduling Policies
 
 Scheduling policies define optimization objectives:
 
-- `PACK`: Consolidates VMs on fewer hosts to minimize active hardware.
-- `BALANCE`: Distributes VMs across hosts to reduce resource contention.
+- `PACK`: Consolidates VMs on fewer Hosts to minimize active hardware.
+- `BALANCE`: Distributes VMs across Hosts to reduce resource contention.
 
 Example:
 

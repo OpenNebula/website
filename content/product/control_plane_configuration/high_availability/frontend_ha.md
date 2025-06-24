@@ -340,8 +340,6 @@ HA deployment requires the filesystem view of most datastores (by default in `/v
 
 OpenNebula stores virtual machine logs inside `/var/log/one/` as files named `${VMID}.log`. It is not recommended to share the whole log directory between the Front-ends as there are also other OpenNebula logs which would be randomly overwritten. It is up to the cloud administrator to periodically back-up the virtual machine logs on the cluster *leader*, and in case of fail-over to restore from the backup of a new *leader* (e.g. as part of the raft hook). You can use the `USE_VMS_LOCATION` option in `oned.conf` to generate the log files in `/var/lib/one/vms/${VMID}/vm.log`, this could simplify the synchronization process across servers.
 
-Optionally, if you are planning to use the FireEdge OneProvision GUI, in order to have all provision logs available in all HA nodes (hence, available on leader change), all nodes need to share the same `/var/lib/one/fireedge` folder.
-
 ## FireEdge
 
 There are several types of FireEdge deployments in an HA environment. The basic one is FireEdge running on **each OpenNebula Front-end node** configured with the local OpenNebula. Only one server, the *leader* with floating IP, is used by the clients.
@@ -367,12 +365,6 @@ The Raft algorithm can be tuned by several parameters in the configuration file 
 
 {{< alert title="Warning" color="warning" >}}
 Any change in these parameters can lead to unexpected behavior during the fail-over and result in whole-cluster malfunction. After any configuration change, always check the crash scenarios for the correct behavior.{{< /alert >}} 
-
-## Compatibility with the Earlier HA
-
-In OpenNebula <= 5.2, HA was configured using a classic active-passive approach, using Pacemaker and Corosync. While this still works for OpenNebula > 5.2, it is not the recommended way to set up a cluster. However, it is fine if you want to continue using that HA method if you’re coming from earlier versions.
-
-This is documented here: [Front-end HA Setup](http://docs.opennebula.io/5.2/advanced_components/ha/frontend_ha_setup.html).
 
 <a id="server-sync-ha"></a>
 

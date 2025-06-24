@@ -12,10 +12,10 @@ weight: "3"
 
 <!--# Linux Containers MarketPlace -->
 
-The [Linux Containers image server](https://images.linuxcontainers.org/) hosts a public image server with container images for LXC. OpenNebula’s Linux Containers marketplace enable users to easily download, contextualize and add Linux containers images to an OpenNebula datastore.
+The [Linux Containers image server](https://images.linuxcontainers.org/) hosts a public image server with container images for LXC. OpenNebula’s Linux Containers Marketplace enable users to easily download, contextualize, and add Linux container images to an OpenNebula datastore.
 
 {{< alert title="Note" color="success" >}}
-A log file (`/var/log/chroot.log`) is created inside the imported image filesystem with information about the operations done during the setup process; in case of issues it could be a useful source of information.{{< /alert >}} 
+A log file (`/var/log/chroot.log`) is created inside the imported image filesystem with information about the operations done during the setup process; in case of issues this can be a useful source of information.{{< /alert >}} 
 
 ## Requirements
 

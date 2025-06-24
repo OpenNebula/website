@@ -12,13 +12,13 @@ weight: "7"
 
 <!--# OneFlow Specification -->
 
-The OpenNebula OneFlow API is a RESTfull service to create, control and monitor services composed of interconnected Virtual Machines with deployment dependencies between them. Each group of Virtual Machines is deployed and managed as a single entity, and is completely integrated with the advanced OpenNebula user and group management. There are two kind of resources; services templates and services. All data is sent and received as JSON.
+The OpenNebula OneFlow API is a RESTful service to create, control, and monitor services composed of interconnected Virtual Machines with deployment dependencies between them. Each group of Virtual Machines is deployed and managed as a single entity, and is completely integrated with the advanced OpenNebula user and group management. There are two kind of resources: services templates and services. All data is sent and received as JSON.
 
 This guide is intended for developers. The OpenNebula distribution includes a [cli]({{% relref "../../../product/operation_references/configuration_references/cli#cli" %}}) to interact with OneFlow and it is also fully integrated in the [Sunstone GUI]({{% relref "../../../product/operation_references/opennebula_services_configuration/oneflow#oneflow-conf-sunstone" %}}).
 
 ## Authentication & Authorization
 
-User authentication will be [HTTP Basic access authentication](http://tools.ietf.org/html/rfc1945#section-11). The credentials passed should be the User name and password.
+User authentication will be [HTTP Basic access authentication](http://tools.ietf.org/html/rfc1945#section-11). The credentials passed should be the username and password.
 
 ```default
 $ curl -u "username:password" https://oneflow.server
@@ -29,9 +29,9 @@ $ curl -u "username:password" https://oneflow.server
 The OneFlow API uses the following subset of HTTP Status codes:
 
 * **200 OK** : the request has succeeded.
-* **201 Created** : request was successful and a new resource has being created.
-* **202 Accepted** : the request has been accepted for processing, but the processing has not been completed.
-* **204 No Content** : the request has been accepted for processing, but no info in the response.
+* **201 Created** : request was successful and a new resource has been created.
+* **202 Accepted** : the request has been accepted for processing but the processing has not been completed.
+* **204 No Content** : the request has been accepted for processing but no info in the response.
 * **400 Bad Request** : malformed syntax.
 * **401 Unauthorized** : bad authentication.
 * **403 Forbidden** : bad authorization.
@@ -56,7 +56,7 @@ The OneFlow API uses the following subset of HTTP Status codes:
 }
 ```
 
-The methods specified below are described without taking into account **4xx** (can be inferred from authorization information in section above) and **5xx** errors (which are method independent). HTTP verbs not defined for a particular entity will return a **501 Not Implemented**.
+The methods specified below are described without taking into account **4xx** (this can be inferred from the authorization information in the section above) and **5xx** errors (which are method independent). HTTP verbs not defined for a particular entity will return a **501 Not Implemented**.
 
 ## Methods
 
@@ -65,12 +65,12 @@ The methods specified below are described without taking into account **4xx** (c
 | Method     | URL                                | Meaning / Entity Body                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Response                                                              |
 |------------|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 | **GET**    | `/service`                         | **List** the contents of the `SERVICE` collection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | **200 OK**: A JSON representation of the collection in the HTTP body. |
-| **GET**    | `/service/<id>`                    | **Show** the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | **200 OK**: A JSON representation of the collection in the HTTP body. |
-| **DELETE** | `/service/<id>`                    | **Delete** the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
-| **POST**   | `/service/<id>/action`             | **Perform** an action on the `SERVICE` resource identified by <id>. Available actions: shutdown, recover, chown, chgrp, chmod, release. It can also be used to perform an action in all the Virtual Machines. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete. | **204**:                                                              |
-| **PUT**    | `/service/<id>`                    | **Update** the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
-| **POST**   | `/service/<id>/scale`              | **Perform** an scale operation on the `SERVICE` resource identified by <id>.                                                                                                                                                                                                                                                                                                                                                                                                                                               | **204**:                                                              |
-| **POST**   | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by <name> of the `SERVICE` resource identified by <id>. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete.                                                                  | **204**:                                                              |
+| **GET**    | `/service/<id>`                    | **Show** the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | **200 OK**: A JSON representation of the collection in the HTTP body. |
+| **DELETE** | `/service/<id>`                    | **Delete** the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
+| **POST**   | `/service/<id>/action`             | **Perform** an action on the `SERVICE` resource identified by `<id>`. Available actions: shutdown, recover, chown, chgrp, chmod, release. It can also be used to perform an action in all the Virtual Machines. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete. | **204**:                                                              |
+| **PUT**    | `/service/<id>`                    | **Update** the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | **204**:                                                              |
+| **POST**   | `/service/<id>/scale`              | **Perform** an scale operation on the `SERVICE` resource identified by `<id>`.                                                                                                                                                                                                                                                                                                                                                                                                                                               | **204**:                                                              |
+| **POST**   | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by <name> of the `SERVICE` resource identified by `<id>`. Available actions: shutdown, shutdown-hard, undeploy, undeploy-hard, hold, release, stop, suspend, resume, boot, delete, delete-recreate, reboot, reboot-hard, poweroff, poweroff-hard, snapshot-create, snapshot-revert, snapshot-delete, disk-snapshot-create, disk-snapshot-revert, disk-snapshot-delete.                                                                  | **204**:                                                              |
 | **POST**   | `/service/<id>/role_action`        | **Add** or **remove** a role from running service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | **204**:                                                              |
 
 ### Service Pool
@@ -84,11 +84,11 @@ The methods specified below are described without taking into account **4xx** (c
 | Method     | URL                             | Meaning / Entity Body                                                                                                             | Response                                                                                        |
 |------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
 | **GET**    | `/service_template`             | **List** the contents of the `SERVICE_TEMPLATE` collection.                                                                       | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
-| **GET**    | `/service_template/<id>`        | **Show** the `SERVICE_TEMPLATE` resource identified by <id>.                                                                      | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
-| **DELETE** | `/service_template/<id>`        | **Delete** the `SERVICE_TEMPLATE` resource identified by <id>.                                                                    | **204**:                                                                                        |
+| **GET**    | `/service_template/<id>`        | **Show** the `SERVICE_TEMPLATE` resource identified by `<id>`.                                                                      | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
+| **DELETE** | `/service_template/<id>`        | **Delete** the `SERVICE_TEMPLATE` resource identified by `<id>`.                                                                    | **204**:                                                                                        |
 | **POST**   | `/service_template`             | **Create** a new `SERVICE_TEMPLATE` resource.                                                                                     | **201 Created**: A JSON representation of the new `SERVICE_TEMPLATE` resource in the HTTP body. |
-| **PUT**    | `/service_template/<id>`        | **Update** the `SERVICE_TEMPLATE` resource identified by <id>.                                                                    | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
-| **POST**   | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by <id>. Available actions: instantiate, chown, chgrp, chmod. | **201**:                                                                                        |
+| **PUT**    | `/service_template/<id>`        | **Update** the `SERVICE_TEMPLATE` resource identified by `<id>`.                                                                    | **200 OK**: A JSON representation of the collection in the HTTP body.                           |
+| **POST**   | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by `<id>`. Available actions: instantiate, chown, chgrp, chmod. | **201**:                                                                                        |
 
 ## Resource Representation
 
@@ -99,12 +99,12 @@ A Service is defined with JSON syntax templates.
 | Attribute           | Type           | Mandatory   | Description                                                                                                                                                                                                                                                                                                      |
 |---------------------|----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `name`              | string         | **NO**      | Name of the service.                                                                                                                                                                                                                                                                                             |
-| `deployment`        | string         | **NO**      | Deployment strategy:<br/>**none**: All roles are deployed at the same time.<br/>**straight**: Each Role is deployed when all its parent Roles are running.<br/>Defaults to none.                                                                                                                                 |
+| `deployment`        | string         | **NO**      | Deployment strategy:<br/>**none**: All Roles are deployed at the same time.<br/>**straight**: Each Role is deployed when all its parent Roles are running.<br/>Defaults to none.                                                                                                                                 |
 | `shutdown_action`   | string         | **NO**      | VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in `oneflow-server.conf` will be used.                                                                                                                                                                                      |
-| `ready_status_gate` | boolean        | **NO**      | If ready_status_gate is set to true, a VM will only be considered to be in running state the following points are true: VM is in running state for OpenNebula. Which specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate. |
+| `ready_status_gate` | boolean        | **NO**      | If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate. |
 | `on_hold`           | boolean        | **NO**      | If on_hold is set to true, all VMs of the service will be created in `HOLD` state.                                                                                                                                                                                                                               |
 | `user_inputs`       | hash           | **NO**      | Hash of custom attributes to use in the service.                                                                                                                                                                                                                                                                 |
-| `networks`          | hash           | **NO**      | Hash of virtual networks to use in the service.                                                                                                                                                                                                                                                                  |
+| `networks`          | hash           | **NO**      | Hash of Virtual Networks to use in the service.                                                                                                                                                                                                                                                                  |
 | `roles`             | array of Roles | **YES**     | Array of Roles, see below.                                                                                                                                                                                                                                                                                       |
 
 Each Role is defined as:
@@ -113,11 +113,11 @@ Each Role is defined as:
 |-----------------------|-------------------|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `name`                | string            | **YES**                         | Role name, only word characters (letter, number, underscore) are allowed.                                                                                                                                        |
 | `cardinality`         | integer           | **NO**                          | Number of VMs to deploy. Defaults to 1.                                                                                                                                                                          |
-| `template_id`         | integer           | **YES**                         | OpenNebula VM Template ID. See the [OpenNebula documentation for VM Templates]({{% relref "../../../product/virtual_machines_operation/virtual_machine_images/vm_templates#vm-guide" %}}).                                |
-| `type`                | string            | **YES**                         | Defines the role type, `vm` for VM role and `vr` for VR roles.                                                                                                                                                   |
-| `parents`             | array of string   | **NO**                          | Names of the roles that must be deployed before this one.                                                                                                                                                        |
+| `template_id`         | integer           | **YES**                         | OpenNebula VM Template ID. See the [OpenNebula documentation for VM Templates]({{% relref "../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-guide" %}}).                                |
+| `type`                | string            | **YES**                         | Defines the Role type, `vm` for VM Role and `vr` for VR Roles.                                                                                                                                                   |
+| `parents`             | array of string   | **NO**                          | Names of the Roles that must be deployed before this one.                                                                                                                                                        |
 | `shutdown_action`     | string            | **NO**                          | VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the one set for the Service will be used.                                                                                                   |
-| `on_hold`             | boolean           | **NO**                          | If on_hold is set to true, all VMs of the role (and their child roles) will be created in `HOLD` state. If on_hold is already defined at the service level, it is not necessary to specify it at the role level. |
+| `on_hold`             | boolean           | **NO**                          | If on_hold is set to true, all VMs of the Role (and their child Roles) will be created in `HOLD` state. If on_hold is already defined at the service level, it is not necessary to specify it at the Role level. |
 | `min_vms`             | integer           | **NO** (**YES** for elasticity) | Minimum number of VMs for elasticity adjustments.                                                                                                                                                                |
 | `max_vms`             | integer           | **NO** (**YES** for elasticity) | Maximum number of VMs for elasticity adjustments.                                                                                                                                                                |
 | `cooldown`            | integer           | **NO**                          | Cooldown period duration after a scale operation, in seconds. If it is not set, the default set in `oneflow-server.conf` will be used.                                                                           |
@@ -613,7 +613,7 @@ curl http://127.0.0.1:2474/service_template -u 'oneadmin:password' -v --data '{
 
 | Method   | URL                      | Meaning / Entity Body                                       | Response                                                              |
 |----------|--------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
-| **GET**  | `/service_template/<id>` | **Show** the `SERVICE_TEMPLATE` resource identified by <id> | **200 OK**: A JSON representation of the collection in the HTTP body. |
+| **GET**  | `/service_template/<id>` | **Show** the `SERVICE_TEMPLATE` resource identified by `<id>` | **200 OK**: A JSON representation of the collection in the HTTP body. |
 ```default
 curl -u 'oneadmin:password' http://127.0.0.1:2474/service_template/4 -v
 ```
@@ -711,7 +711,7 @@ curl -u 'oneadmin:password' http://127.0.0.1:2474/service_template -v
 
 | Method   | URL                      | Meaning / Entity Body                                          | Response    |
 |----------|--------------------------|----------------------------------------------------------------|-------------|
-| **PUT**  | `/service_template/<id>` | **Update** the `SERVICE_TEMPLATE` resource identified by <id>. | **200 OK**: |
+| **PUT**  | `/service_template/<id>` | **Update** the `SERVICE_TEMPLATE` resource identified by `<id>`. | **200 OK**: |
 ```default
 curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X PUT --data '{
   "name":"web-application",
@@ -823,7 +823,7 @@ curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X PUT -
 
 | Method   | URL                             | Meaning / Entity Body                                                                                                                     | Response   |
 |----------|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| **POST** | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by <id>. Available actions: `instantiate`, `chown`, `chgrp`, `chmod`. | **201**:   |
+| **POST** | `/service_template/<id>/action` | **Perform** an action on the `SERVICE_TEMPLATE` resource identified by `<id>`. Available actions: `instantiate`, `chown`, `chgrp`, `chmod`. | **201**:   |
 ```default
 curl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{
   "action": {
@@ -885,7 +885,7 @@ The following attributes can be also passed using the `merge_template`:
 * `user_inputs_values`
 * `template_contents`
 
-For example, instantiate a service template with custom VM capacity
+For example, to instantiate a service template with custom VM capacity:
 
 ```default
 curl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{
@@ -911,7 +911,7 @@ curl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -
 
 | Method     | URL                      | Meaning / Entity Body                                          | Response   |
 |------------|--------------------------|----------------------------------------------------------------|------------|
-| **DELETE** | `/service_template/<id>` | **Delete** the `SERVICE_TEMPLATE` resource identified by <id>. | **204**:   |
+| **DELETE** | `/service_template/<id>` | **Delete** the `SERVICE_TEMPLATE` resource identified by `<id>`. | **204**:   |
 ```default
 curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X DELETE
 ```
@@ -936,7 +936,7 @@ curl http://127.0.0.1:2474/service_template/4 -u 'oneadmin:password' -v -X DELET
 
 | Method   | URL             | Meaning / Entity Body                               | Response                                                              |
 |----------|-----------------|-----------------------------------------------------|-----------------------------------------------------------------------|
-| **GET**  | `/service/<id>` | **Show** the `SERVICE` resource identified by <id>. | **200 OK**: A JSON representation of the collection in the HTTP body. |
+| **GET**  | `/service/<id>` | **Show** the `SERVICE` resource identified by `<id>`. | **200 OK**: A JSON representation of the collection in the HTTP body. |
 ```default
 curl http://127.0.0.1:2474/service/5 -u 'oneadmin:password' -v
 ```
@@ -1163,16 +1163,16 @@ curl http://127.0.0.1:2474/service -u 'oneadmin:password' -v
 
 | Method   | URL                    | Meaning / Entity Body                                               | Response   |
 |----------|------------------------|---------------------------------------------------------------------|------------|
-| **POST** | `/service/<id>/action` | **Perform** an action on the `SERVICE` resource identified by <id>. | **201**:   |
+| **POST** | `/service/<id>/action` | **Perform** an action on the `SERVICE` resource identified by `<id>`. | **201**:   |
 
 Available actions:
 
-* **recover**: Recover a failed service, cleaning the failed VMs.
+* **recover**: Recover a failed service by cleaning the failed VMs.
   : * From `FAILED_DEPLOYING` continues deploying the Service.
     * From `FAILED_SCALING` continues scaling the Service.
     * From `FAILED_UNDEPLOYING` continues shutting down the Service.
-    * From `COOLDOWN` the Service is set to running ignoring the cooldown duration.
-    * `"delete" : true` in `params` will delete the service and its VMs no matter in what state the service is
+    * From `COOLDOWN` the Service is set to running, ignoring the cooldown duration.
+    * `"delete" : true` in `params` will delete the service and its VMs no matter what state the service is in.
 * **chown**
 * **chmod**
 * **chgrp**
@@ -1192,11 +1192,9 @@ curl http://127.0.0.1:2474/service/5/action -u 'oneadmin:password' -v -X POST --
 
 | Method   | URL                                | Meaning / Entity Body                                                                                                                        | Response   |
 |----------|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| **POST** | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by <name> of the `SERVICE` resource identified by <id>. | **201**:   |
+| **POST** | `/service/<id>/role/<name>/action` | **Perform** an action on all the Virtual Machines belonging to the `ROLE` identified by `<name>` of the `SERVICE` resource identified by `<id>`. | **201**:   |
 
-You can use this call to perform a VM action on all the Virtual Machines belonging to a role. For example, if you want to suspend the Virtual Machines of the worker Role:
-
-These are the commands that can be performed:
+You can use this call to perform a VM action on all the Virtual Machines belonging to a Role. For example, if you want to suspend the Virtual Machines of the worker Role, these are the commands that can be performed:
 
 * `shutdown`
 * `shutdown-hard`
@@ -1238,11 +1236,11 @@ curl http://127.0.0.1:2474/service/5/role/frontend/action -u 'oneadmin:password'
 }'
 ```
 
-### Add a role to a running service
+### Add a Role to a Running Service
 
 | Method   | URL                         | Meaning / Entity Body                              | Response   |
 |----------|-----------------------------|----------------------------------------------------|------------|
-| **POST** | `/service/<id>/role_action` | **Add** or **remove** a role from running service. | **204**:   |
+| **POST** | `/service/<id>/role_action` | **Add** or **remove** a Role from running service. | **204**:   |
 ```default
 curl http://127.0.0.1:2474/service/5/role_action -u 'oneadmin:password' -v -X POST --data '{
   "action": {
@@ -1263,11 +1261,11 @@ curl http://127.0.0.1:2474/service/5/role_action -u 'oneadmin:password' -v -X PO
 }'
 ```
 
-### Remove a role from a running service
+### Remove a Role from a Running Service
 
 | Method   | URL                         | Meaning / Entity Body                              | Response   |
 |----------|-----------------------------|----------------------------------------------------|------------|
-| **POST** | `/service/<id>/role_action` | **Add** or **remove** a role from running service. | **204**:   |
+| **POST** | `/service/<id>/role_action` | **Add** or **remove** a Role from running service. | **204**:   |
 ```default
 curl http://127.0.0.1:2474/service/5/role_action -u 'oneadmin:password' -v -X POST --data '{
   "action": {
@@ -1279,11 +1277,11 @@ curl http://127.0.0.1:2474/service/5/role_action -u 'oneadmin:password' -v -X PO
 }'
 ```
 
-### Update a service
+### Update a Service
 
 | Method   | URL             | Meaning / Entity Body                                 | Response    |
 |----------|-----------------|-------------------------------------------------------|-------------|
-| **PUT**  | `/service/<id>` | **Update** the `SERVICE` resource identified by <id>. | **200 OK**: |
+| **PUT**  | `/service/<id>` | **Update** the `SERVICE` resource identified by `<id>`. | **200 OK**: |
 
 Append can be used to append information to the service, in this case the request body must include the following information:
 

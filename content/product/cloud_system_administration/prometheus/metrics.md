@@ -16,7 +16,7 @@ weight: "5"
 
 | Name                                | Description                                                                                                                   | Type   |
 |-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|--------|
-| `opennebula_host_total`             | Total number of hosts defined in OpenNebula                                                                                   | gauge  |
+| `opennebula_host_total`             | Total number of Hosts defined in OpenNebula                                                                                   | gauge  |
 | `opennebula_host_state`             | Host state `0`:init `2`:monitored `3`:error `4`:disabled `8`:offline                                                          | gauge  |
 | `opennebula_host_mem_total_bytes`   | Total memory capacity                                                                                                         | gauge  |
 | `opennebula_host_mem_maximum_bytes` | Total memory capacity considering overcommitment                                                                              | gauge  |
@@ -24,7 +24,7 @@ weight: "5"
 | `opennebula_host_cpu_total_ratio`   | Total CPU capacity                                                                                                            | gauge  |
 | `opennebula_host_cpu_maximum_ratio` | Total CPU capacity considering overcommitment                                                                                 | gauge  |
 | `opennebula_host_cpu_usage_ratio`   | Total CPU capacity allocated to VMs                                                                                           | gauge  |
-| `opennebula_host_vms`               | Number of VMs allocated to the host                                                                                           | gauge  |
+| `opennebula_host_vms`               | Number of VMs allocated to the Host                                                                                           | gauge  |
 | `opennebula_datastore_total`        | Total number of datastores defined in OpenNebula                                                                              | gauge  |
 | `opennebula_datastore_total_bytes`  | Total capacity of the datastore                                                                                               | gauge  |
 | `opennebula_datastore_used_bytes`   | Capacity being used in the datastore                                                                                          | gauge  |
@@ -68,7 +68,7 @@ weight: "5"
 | `opennebula_libvirt_vcpu_maximum`               | Maximum number of online virtual CPUs                                                                                              | gauge     |
 | `opennebula_libvirt_vcpu_state`                 | State of the virtual CPU `0`:offline, `1`:running, `2`:blocked                                                                     | gauge     |
 | `opennebula_libvirt_vcpu_time_seconds_total`    | virtual cpu time spent by virtual CPU                                                                                              | gauge     |
-| `opennebula_libvirt_vcpu_wait_seconds_total`    | Time the vCPU wants to run, but the host scheduler has something else running ahead of it                                          | gauge     |
+| `opennebula_libvirt_vcpu_wait_seconds_total`    | Time the vCPU wants to run, but the Host scheduler has something else running ahead of it                                          | gauge     |
 | `opennebula_libvirt_net_devices`                | Total number of network interfaces on this domain                                                                                  | gauge     |
 | `opennebula_libvirt_net_rx_total_bytes`         | Total bytes received by the vNIC                                                                                                   | gauge     |
 | `opennebula_libvirt_net_rx_packets`             | Total number of packets received by the vNIC                                                                                       | gauge     |

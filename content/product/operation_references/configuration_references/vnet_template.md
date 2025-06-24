@@ -22,22 +22,22 @@ When writing a Virtual Network template in a file, it follows the same syntax as
 
 ## Physical Network Attributes
 
-It defines the **underlying networking infrastructure** that will support the Virtual Network, such as the `VLAN ID` or the hypervisor interface to bind the Virtual Network to.
+These define the **underlying networking infrastructure** that will support the Virtual Network, such as the `VLAN ID` or the hypervisor interface to bind the Virtual Network to.
 
 | Attribute           | Description                                                                                                                                                                    | Value                                                      | Mandatory                                       | Drivers                                                    |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|-------------------------------------------------|------------------------------------------------------------|
 | `NAME`              | Name of the Virtual Network.                                                                                                                                                   | String                                                     | **YES**                                         | All                                                        |
-| `VN_MAD`            | The network driver to implement the network.                                                                                                                                   | 802.1Q<br/>fw<br/>ovswitch<br/>vxlan<br/>vcenter<br/>dummy | **YES**                                         | All                                                        |
-| `BRIDGE`            | Device to attach the virtual machines to,<br/>depending on the network driver it may refer to<br/>different technologies or require host setups.                               | String                                                     | `YES` for dummy, ovswitch,<br/>fw and vcenter   | dummy<br/>802.1Q<br/>vxlan<br/>ovswitch<br/>fw<br/>        |
+| `VN_MAD`            | The network driver to implement the network.                                                                                                                                   | 802.1Q<br/>fw<br/>ovswitch<br/>vxlan<br/>dummy | **YES**                                         | All                                                        |
+| `BRIDGE`            | Device to attach the Virtual Machines to,<br/>depending on the network driver it may refer to<br/>different technologies or require Host setups.                               | String                                                     | `YES` for dummy, ovswitch and fw | dummy<br/>802.1Q<br/>vxlan<br/>ovswitch<br/>fw<br/>        |
 | `VLAN_ID`           | Identifier for the VLAN.                                                                                                                                                       | Integer                                                    | `YES` unless<br/>`AUTOMATIC_VLAN_ID` for 802.1Q | 802.1Q<br/>vxlan<br/>ovswitch<br/>                         |
-| `AUTOMATIC_VLAN_ID` | If set to YES, OpenNebula will generate a VLAN ID<br/>automatically if VLAN_ID is not defined.<br/>Mandatory YES for 802.1Q if VLAN_ID is not<br/>defined, optional otherwise. | String                                                     | `YES` unless `VLAN_ID`<br/>for 802.1Q           | 802.1Q<br/>vxlan<br/>ovswitch<br/>                         |
-| `PHYDEV`            | Name of the physical network device that will be<br/>attached to the bridge.                                                                                                   | String                                                     | `YES`<br/><br/>Optional for vCenter             | 802.1Q<br/>vxlan<br/>                                      |
+| `AUTOMATIC_VLAN_ID` | If set to YES, OpenNebula will generate a VLAN ID<br/>automatically if VLAN_ID is not defined.<br/>Mandatory YES for 802.1Q if VLAN_ID is not<br/>defined, optional otherwise. | String                                                     | `YES` unless `VLAN_ID`<br/>for 802.1Q           | 802.1Q<br/>vxlan<br/>ovswitch<br/>                          
+| `PHYDEV`            | Name of the physical network device that will be<br/>attached to the bridge.                                                                                                   | String                                                     | `YES`<br/><br/>                                 | 802.1Q<br/>vxlan<br/>                                      |
 
 ## Quality of Service Attributes
 
 <a id="vnet-template-qos"></a>
 
-This set of attributes limit the bandwidth of each NIC attached to the Virtual Network. Note that the limits are applied to each NIC individually and are not averaged over all the NICs (e.g. a VM with two interfaces in the same network).
+This set of attributes limit the bandwidth of each NIC attached to the Virtual Network. Note that the limits are applied to each NIC individually and are not averaged over all the NICs (e.g., a VM with two interfaces in the same network).
 
 | Attribute          | Description                                                                 | Drivers                             |
 |--------------------|-----------------------------------------------------------------------------|-------------------------------------|
@@ -69,7 +69,7 @@ For Outbound QoS when using Open vSwitch, you can leverage the [Open vSwitch QoS
 ### IPv6 Address Range
 
 {{< alert title="Important" color="success" >}}
-IPv6 Address Ranges can use SIZE up to 2^128. However note that a MAC address (48 bits)  is also assigned to each lease. MAC addresses will be reused when the number of IPv6 addresses is bigger than 2^48.{{< /alert >}} 
+IPv6 Address Ranges can use SIZE up to 2^128. However, note that a MAC address (48 bits)  is also assigned to each lease. MAC addresses will be reused when the number of IPv6 addresses is bigger than 2^48.{{< /alert >}} 
 
 | Attribute       | Description                                                                          | Mandatory   |
 |-----------------|--------------------------------------------------------------------------------------|-------------|
@@ -145,7 +145,7 @@ The no-SLAAC IPv6 version supports the following attributes:
 | `IP6_METHOD`      | Sets IPv6 guest conf. method for NIC in this network. |
 | `SEARCH_DOMAIN`   | Default search domains for DNS resolution.            |
 
-These attributes can be set in the (in precedence order): VM Template NIC section, Address Range (AR) and Virtual Network Template.
+These attributes can be set in the (in order of precedence): VM Template NIC section, Address Range (AR), and Virtual Network Template.
 
 <a id="vnet-template-interface-creation"></a>
 
@@ -166,9 +166,9 @@ OVS_BRIDGE_CONF="stp_enable=true"
 IP_LINK_CONF="tos=10,udpcsum=,udp6zerocsumrx=__delete__"
 ```
 
-Options can have empty value when they don’t need a parameter. Also the special value “_\_delete_\_” can be used to delete parameters set here.
+Options can have an empty value when they don’t need a parameter. Also, the special value “_\_delete_\_” can be used to delete parameters set here.
 
-You can find more information about these parameters in [802.1Q]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/vlan#hm-vlan" %}}) and [VXLAN]({{% relref "../../cloud_clusters_infrastructure_configuration/networking_system_configuration/vxlan#vxlan" %}}) documentation.
+You can find more information about these parameters in [802.1Q]({{% relref "../../cluster_configuration/networking_system/vlan#hm-vlan" %}}) and [VXLAN]({{% relref "../../cluster_configuration/networking_system/vxlan#vxlan" %}}) documentation.
 
 <a id="vnet-template-example"></a>
 
