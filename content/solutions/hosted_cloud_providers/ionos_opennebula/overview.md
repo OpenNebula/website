@@ -3,14 +3,14 @@ title: Overview
 weight: 1
 ---
 
-This guide provides a complete deployment and verification path to create an OpenNebula Hosted Cloud using IONOS infrastructure, as part of the OpenNebula Ready Certification Program. It includes an OpenNebula Architecture specifically tailored for the IONOS infrastructure, as well as the hardware specification from the IONOS offering.
+[IONOS](https://www.ionos.com/) is an internet service provider whose offerings include cloud infrastructure, services and hosting. OpenNebula supports deploying a cloud on hosted IONOS infrastructure, and managing cloud resources through the OpenNebula control interfaces. The resulting OpenNebula hosted infrastructure has been validated as part of the OpenNebula Cloud-Ready Certification Program.
 
-The guide provides instructions on how to request these resources using the IONOS interface and perform a ZeroTouch deployment of OpenNebula over them. It also provides an automated verification procedure to ensure the correct functioning of the resulting cloud.
+This guide provides a complete deployment and verification path to create an OpenNebula Hosted Cloud using IONOS infrastructure. It includes an OpenNebula Architecture specifically tailored for the IONOS infrastructure, as well as the hardware specification from the IONOS offering.
 
-Lastly, it includes a guide covering the basics to start using the OpenNebula Hosted Cloud.
+Following this guide, you can:
 
-The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. The figure below also shows the target reference VMs to be deployed for testing purposes. At least one VM must be accessible to configure with a public IP, and all of them shall be connected to the VXLAN network.
+- Request the necessary hardware resources using the IONOS interface.
+- Perform a Zero-touch deployment of OpenNebula over these resources.
+- Ensure the correct operation of the resulting cloud using an automated verification procedure.
 
-![><][high-level]
-
-[high-level]: /images/solutions/ionos/high-level-architecture.png
+Additionally, this guide includes a brief description of how to instantiate a Virtual Machine, to help you get started on your OpenNebula Hosted Cloud.
