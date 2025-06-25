@@ -11,11 +11,17 @@ This section details a step-by-step procedure to provision the reference infrast
 
 ## Infrastructure Provisioning
 
+<<<<<<<< HEAD:content/solutions/hosted_cloud_providers/ionos_opennebula/auto_deploy_and_config.md
 The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/).
 
 Build the configuration shown below, taking into account the details described in the [Hardware and Software Specification]({{% relref "hw_spec_and_arch" %}}) section.
+========
+The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/). After deploying the virtual servers, in the DCD you should see your newly-created infrastructure as shown below:
+>>>>>>>> ionos_rev_2:content/solutions/hosted_cloud_providers/ionos_opennebula/ionos_auto_deploy_and_config.md
 
 ![><][dcd-layout]
+
+This page will guide you in building this configuration. You will need to take into account the details described in the [Hardware and Software Specification]({{% relref "ionos_hw_spec_and_arch" %}}) section.
 
 ### Building with DCD 
 
@@ -26,7 +32,11 @@ To achieve the deployment base shown in the figure above, follow the below steps
 3. Connect all servers to the internet access. Ensure to consistently use the first NIC in each server.
 4. Connect each server's second NIC to the private LAN between the servers. Ensure to consistently use each server's second NIC.
 5. Add HDD instances and specify the base image for the operating systems:
+<<<<<<<< HEAD:content/solutions/hosted_cloud_providers/ionos_opennebula/auto_deploy_and_config.md
    1. Choose the specifications as shown in [Table 1]({{% relref "hw_spec_and_arch#table-1-front-end-requirements" %}}) of [Hardware and Software Specification]({{% relref "hw_spec_and_arch" %}}).
+========
+   1. Choose the specifications as shown in [Table 1]({{% relref "ionos_hw_spec_and_arch#table-1-front-end-requirements" %}}) of [Hardware and Software Specification]({{% relref "ionos_hw_spec_and_arch" %}}).
+>>>>>>>> ionos_rev_2:content/solutions/hosted_cloud_providers/ionos_opennebula/ionos_auto_deploy_and_config.md
    2. Add the SSH key of the host from which the access is needed.
    3. Set it as a boot device.
 
