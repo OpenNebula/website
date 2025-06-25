@@ -9,8 +9,8 @@ This guide provides a complete deployment and verification path to create an Ope
 
 Following this guide, you can:
 
-- Request the necessary hardware resources using the IONOS interface
-- Perform a Zero-touch deployment of OpenNebula over these resources
-- Ensure the correct operation of the resulting cloud using an automated verification procedure
+- Request the necessary hardware resources using the IONOS interface.
+- Perform a Zero-touch deployment of OpenNebula over these resources.
+- Ensure the correct operation of the resulting cloud using an automated verification procedure.
 
-Additionally, this guide includes a brief overview of performing basic operations on your OpenNebula Hosted Cloud.
+Additionally, this guide includes a brief description of how to instantiate a Virtual Machine, to help you get started on your OpenNebula Hosted Cloud.
