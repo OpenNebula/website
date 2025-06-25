@@ -7,7 +7,8 @@
 // Main
 .td-max-width-on-larger-screens {
   @include media-breakpoint-up(lg) {
-    max-width: 100%;
+    //max-width: 100%;
+    max-width: 85%;
   }
 }
 
@@ -252,7 +253,7 @@ img[alt$="><"] {
     border-color: #8F9392 !important;
   }
 
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
     .card {
       flex: 0 1 100%;
       columns: 1 !important;
