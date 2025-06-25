@@ -1,5 +1,6 @@
 ---
-title: "Hardware and Software Specification"
+#title: "Hardware and Software Specification"
+title: "Hardware Specification and Architecture"
 description:
 categories:
 pageintoc: ""
@@ -8,10 +9,19 @@ weight: 2
 ---
 
 
-This section contains the specification of the used hardware and software resources for the reference OpenNebula deployment on IONOS cloud.
+This section describes the cloud architecture used in this guide, and provides the specification of hardware and software resources for the reference OpenNebula deployment on IONOS cloud.
+
+## Architecture
+
+The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. The figure below also shows the target reference VMs to be deployed for testing purposes. At least one VM must be accessible to configure with a public IP, and all of them shall be connected to the VXLAN network.
+
+![><][high-level]
+
+[high-level]: /images/solutions/ionos/high-level-architecture.png
+
+## Hardware Specification
 
 The tables below detail the characteristics for the Front-end, virtualization host, storage, networking and provisioning model.
-
 
 ### Table 1: Front-end Requirements
 
