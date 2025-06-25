@@ -27,13 +27,34 @@ snapshots of the VM disks.
 
 First of all, you need to configure your SAN appliance to export the LUN(s) where VMs will be
 deployed. Depending on the manufacturer the process may be slightly different, so please refer to
-the specific guides if your hardware is on the supported list. Otherwise, just continue to the
-generic guide below.
+the specific guides if your hardware is on the supported list, or your hardware vendor guides
+otherwise:
 
 - [NetApp specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/netapp_-_lvm_thin_validation/" %}})
 - [PureStorage specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/purestorage_-_lvm-thin_validation/" %}})
 
-### Generic Setup
+## Hypervisor Configuration
+
+First we need to configure hypervisors for LVM operations over the shared SAN storage.
+
+<a id="hosts-lvm-configuration"></a>
+
+### Hosts LVM Configuration
+
+* LVM2 must be available on Hosts.
+* `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
+* `oneadmin` needs to belong to the `disk` group.
+* All the nodes need to have access to the same LUNs.
+
+{{< alert title="Note" color="success" >}}
+In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).
+{{< /alert >}}
+
+Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
+
+<a id="hosts-san-configuration"></a>
+
+### Hosts SAN Configuration
 
 In the end, the abstraction required to access LUNs is just block devices. This means that there are
 several ways to set them up, although it will usually involve using a network block protocol such as
@@ -102,20 +123,17 @@ sudo systemctl restart multipathd
 sudo multipath -ll
 ```
 
-<a id="design-considerations"></a>
-
-## Design considerations
-
-Now is a good time to ask some questions about infrastructure, as depending on the choices made,
-some configuration will be different.
+<a id="san-frontend"></a>
 
 ### Access to SAN from Front-end
 
 The Front-end needs access to the shared SAN server in order to perform LVM operations. It can
 either access it directly, or using some host(s) as proxy/bridge.
 
-For **direct access**, the Front-end will need to be configured in the same way as hosts (following the
-previous section), and no further configuriation will be needed. Example for illustration purposes:
+For **direct access**, the Front-end will need to be configured in the same way as hosts (following
+the two [previous]({{% relref "#hosts-lvm-configuration" %}}) [sections]({{% relref
+"#hosts-san-configuration" %}})), and no further configuriation will be needed. Example for
+illustration purposes:
 
 ```
 -------------
@@ -154,26 +172,6 @@ BRIDGE_LIST=host2
   | hostN | ---- /dev/mapper/mpath* --------+
   ---------     (iSCSI + multipath)
 ```
-
-<a id="lvm-thin"></a>
-
-### LVM Thin
-
-You have the option to enable the LVM Thin functionality by setting the `LVM_THIN_ENABLE` attribute
-to `YES` in the **Image** Datastore. It is recommended that you enable this mode, as it allows some
-operations that are not possible to do in the standard, non-thin mode:
-
-- Creation of thin snapshots
-- Consistent live backups
-
-{{< alert title="Note" color="success" >}}
-The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.
-{{< /alert >}}
-
-You can take a look at the [Datastore Internals]({{% relref "#datastore-internals" %}}) section for
-more info about the differences in thin and non-thin operation.
-
-<a id="lvm-drivers-templates"></a>
 
 ## OpenNebula Configuration
 
@@ -219,15 +217,15 @@ and OpenNebula will take care of creating the LVs (one for each VM disk). For ex
 
 To create a new LVM Image Datastore, you need to set following (template) parameters:
 
-| Attribute         | Description                                                                                               |
-|-------------------|-----------------------------------------------------------------------------------------------------------|
-| `NAME`            | Name of Datastore                                                                                         |
-| `TYPE`            | `IMAGE_DS`                                                                                                |
-| `DS_MAD`          | `fs`                                                                                                      |
-| `TM_MAD`          | `fs_lvm_ssh`                                                                                              |
-| `DISK_TYPE`       | `BLOCK`                                                                                                   |
+| Attribute         | Description                                                                                                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| `NAME`            | Name of Datastore                                                                                           |
+| `TYPE`            | `IMAGE_DS`                                                                                                  |
+| `DS_MAD`          | `fs`                                                                                                        |
+| `TM_MAD`          | `fs_lvm_ssh`                                                                                                |
+| `DISK_TYPE`       | `BLOCK`                                                                                                     |
 | `BRIDGE_LIST`     | List of Hosts with access to the file system where image files are stored before dumping to logical volumes |
-| `LVM_THIN_ENABLE` | (default: `NO`) `YES` to enable [LVM Thin]({{% relref "#lvm-thin" %}}) functionality.                                      |
+| `LVM_THIN_ENABLE` | (default: `NO`) `YES` to enable [LVM Thin]({{% relref "#lvm-thin" %}}) functionality (RECOMMENDED).         |
 
 The following example illustrates the creation of an LVM Image Datastore. In this case we will use the nodes `node1` and `node2` as our OpenNebula LVM-enabled Hosts.
 
@@ -247,18 +245,19 @@ ID: 101
 ```
 
 {{< alert title="Warning" color="success" >}}
-Please adapt this example to your case, in particular the `BRIDGE_LIST` and `LVM_THIN_ENABLE`
-attributes, as discussed [previously]({{% relref "#design-considerations" %}}).
+Please adapt this example to your case, in particular the [`BRIDGE_LIST`]({{% relref
+"lvm_drivers#san-frontend" %}}) attribute, as discussed previously.
 {{< /alert >}}
 
-#### Front-end setup
+#### Front-end setup (Image Datastore)
 
 The OpenNebula Front-end will keep the images used in the newly created Image Datastore in its
 `/var/lib/one/datastores/<datastore_id>/` directory. The simplest case will just use the local
 storage in the Front-end, but you can mount any storage medium in that directory to support more
-advanced scenarios, such as sharing it via NFS in a Front-end HA setup (TODO link) or even using
-another LUN in the same SAN to keep everything in the same place. Here are some (non-exhaustive)
-examples of typical setups for the image datastore:
+advanced scenarios, such as sharing it via NFS in a [Front-end HA setup]({{% relref
+"/product/control_plane_configuration/high_availability/frontend_ha/" %}}) or even using another LUN
+in the same SAN to keep everything in the same place. Here are some (non-exhaustive) examples of
+typical setups for the image datastore:
 
 Option 1: image datastore local to frontend. Assuming the image datastore has ID 100:
 
@@ -296,21 +295,23 @@ two. So, for example, no extra `vg-one-<dsid>` will need to be created for the i
 that's only required for the system one.
 {{< /alert >}}
 
-## Hosts Setup
+<a id="lvm-thin"></a>
 
-### Base Hosts Configuration
+### LVM Thin
 
-* LVM2 must be available on Hosts.
-* `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
-* `oneadmin` needs to belong to the `disk` group.
-* All the nodes need to have access to the same LUNs.
+You have the option to toggle the LVM Thin functionality with the `LVM_THIN_ENABLE` attribute in the
+**Image** Datastore. It is recommended that you enable this mode, as it allows some operations that
+are not possible to do in the standard, non-thin mode:
 
-TODO
+- Creation of thin snapshots
+- Consistent live backups
+
 {{< alert title="Note" color="success" >}}
-In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).
+The `LVM_THIN_ENABLE` attribute can only be modified while there are no images on the datastore.
 {{< /alert >}}
 
-Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
+You can take a look at the [Datastore Internals]({{% relref "#datastore-internals" %}}) section for
+more info about the differences in thin and non-thin operation.
 
 <a id="lvm-driver-conf"></a>
 
