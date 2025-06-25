@@ -30,7 +30,7 @@ This completely fresh user experience is available by accessing `http://<OPENNEB
 
 Sunstone users can change their current view from the top-right dropdown menu:
 
-![fireedge_sunstone_change_view_dropdown](/images/fireedge_sunstone_change_view_dropdown.png)
+![><](/images/fireedge_sunstone_change_view_dropdown.png)
 
 They can also configure several options from the [settings tab]({{% relref "#fireedge-sunstone-settings-tab" %}}).
 
