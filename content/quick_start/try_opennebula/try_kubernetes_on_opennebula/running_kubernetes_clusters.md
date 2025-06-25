@@ -551,7 +551,7 @@ To recreate the VM instance, you must first terminate the OneKE service. A servi
 oneflow recover --delete <service_ID>
 ```
 
-Then, re-instantiate the service from the Sunstone UI: in the left-hand pane, **Service Templates** -> **OneKE 1.29**, then click the **Instantiate** icon.
+Then, re-instantiate the service from the Sunstone UI: in the left-hand pane, **Service Templates** -> **OneKE 1.31**, then click the **Instantiate** icon.
 
 #### One or more VMs Fail to Report Ready
 
@@ -560,55 +560,55 @@ Another possible cause for failure of the OneKE Service to leave the `DEPLOYING`
 For example on the Front-end, the output of `onevm list` shows all VMs running:
 
 ```default
-onevm list
-  ID USER     GROUP    NAME                                            STAT  CPU     MEM HOST                         TIME
-   3 oneadmin oneadmin worker_0_(service_3)                            runn    2      3G <public IP>              0d 01h02
-   2 oneadmin oneadmin master_0_(service_3)                            runn    2      3G <public IP>              0d 01h02
-   1 oneadmin oneadmin vnf_0_(service_3)                               runn    1    512M <public IP>              0d 01h03
-   0 oneadmin oneadmin Service WordPress - KVM-0                       runn    1    768M <public IP>              0d 01h53
+oneadmin@ip-172-31-47-22:~$ onevm list
+  ID USER     GROUP    NAME                                             STAT  CPU     MEM HOST                                   TIME
+   6 oneadmin oneadmin worker_0_(service_2)                             runn    2      3G localhost                          0d 01h36
+   5 oneadmin oneadmin master_0_(service_2)                             runn    2      3G localhost                          0d 01h36
+   4 oneadmin oneadmin vnf_0_(service_2)                                runn    1    512M localhost                          0d 01h37
 ```
 
-Yet `oneflow list` shows:
+Yet `oneflow list` indicates the OneKE service is `DEPLOYING`:
 
 ```default
 ID USER     GROUP    NAME                                                                   STARTTIME STAT
- 3 oneadmin oneadmin OneKE 1.29                                                        08/30 12:30:07 DEPLOYING
+ 2 oneadmin oneadmin OneKE 1.31                                                        06/20 12:30:07 DEPLOYING
 ```
 
 In this case you can manually instruct the VMs to report `READY` to the OneGate server. Follow these steps:
 
-1. From the Front-end node, log in to the VNF node by running:
+1. From the Front-end node, log in to the VNF node as user `root`, by running:
    ```default
    ssh root@<VNF IP>
    ```
 
    (To find out the IP address of the VNF node, see [above]({{% relref "#check-vnf" %}}).)
 
-2. For each VM in the OneKE service, run the following command:
-   ```default
+2. For each VM in the OneKE service, run:
+
+   ```bash
    onegate vm update <ID> --data "READY=YES"
    ```
 
-   For example, `onegate vm update 2 --data "READY=YES"`.
+   For each VM, use the ID reported by the `onevm list` command. For example, given the `onevm` output shown above, to update the Kubernetes master node run `onegate vm update 5 --data "READY=YES"`.
 
-   Then, you can check the status of the service with `onegate vm show`:
+   Then, on the VNF node you can check the status of the service with `onegate vm show`:
+   
    ```default
-   onegate service show
    SERVICE 3
-   NAME                : OneKE 1.29
+   NAME                : OneKE 1.31
    STATE               : RUNNING
 
    ROLE vnf
    VM 1
-   NAME                : vnf_0_(service_3)
+   NAME                : vnf_0_(service_2)
 
    ROLE master
    VM 2
-   NAME                : master_0_(service_3)
+   NAME                : master_0_(service_2)
 
    ROLE worker
    VM 3
-   NAME                : worker_0_(service_3)
+   NAME                : worker_0_(service_2)
 
    ROLE storage
    ```
@@ -616,17 +616,17 @@ In this case you can manually instruct the VMs to report `READY` to the OneGate 
    ```default
    [oneadmin@FN]$ oneflow list
    ID USER     GROUP    NAME                                                                    STARTTIME STAT
-    3 oneadmin oneadmin OneKE 1.29                                                         08/30 12:35:21 RUNNING
+    2 oneadmin oneadmin OneKE 1.31                                                         08/30 12:35:21 RUNNING
    ```
 
 #### One or more VMs is Ready, but Unreachable
 
-In a similar situation as above when `onevm list` shows all VMs running, but the service is still in `DEPLOYING` state and the VM is not reachable through SSH (e.g. to run the `onegate vm update` command).
+As in the previous situation, here `onevm list` shows all VMs running, but the service is stuck in `DEPLOYING`; additionally, the VNF VM is not reachable through SSH -- and hence you cannot run the `onegate vm update` command.
 
-In this case, we can try to scale down and up the role of the problematic VM from [Sunstone]({{% relref "fireedge_sunstone.md" %}}), the Front-end UI:
+In this case, we can try to scale down and up the role of the problematic VM from [Sunstone]({{% relref "fireedge_sunstone.md" %}}), web UI:
 
 > 1. In Sunstone, go to **Services**, then select the **OneKE** Service.
-> 2. In the **Roles** tab, choose the problematic VM’s role (e.g. `worker`).
+> 2. In the **Roles** tab, choose the problematic VM's role (e.g. `worker`).
 > 3. Scale the role to `0`.
 > 4. Wait until VM shuts down and the scaling and cooldown period of the service finishes.
 > 5. Scale the role to `1`.
