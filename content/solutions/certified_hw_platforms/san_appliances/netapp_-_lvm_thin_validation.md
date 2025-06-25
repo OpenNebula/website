@@ -20,13 +20,19 @@ In order to make the LUN we will create available on all of the hosts we need to
 
 For the "Initiator group members" section below it should have **Host initiators** selected.  You can either use the existing initiator names on your hosts, found in `/etc/iscsi/initiatorname.iscsi` after iscsid has been started once, or you can define your own initiator name in that file by changing its contents to something like `InitiatorName=iqn.2024-01.com.example.netapp:some.host.id` then restarting iscsid. Whichever method you choose, click the **+ Add initiator** and insert the initiator name along with a description for each of your hosts.
 
+![image0](/images/netapp_add_igroup.png)
+
+{{< alert title="Note" color="success" >}}
 When you add or remove hosts from your OpenNebula installation, you should update the initiator group as well to ensure their access to the LUN.
+{{< /alert >}}
 
 ### Volume and LUN
 
 Since we are just going to have a single LUN in a Volume for this we can just create the LUN without first making the Volume.  Creating a LUN directly in ONTAP System Manager will automatically create a backing Volume for it. You could also create one inside of an existing volume if you prefer.
 
 Navigate to **Storage → LUNs** and click the **+ Add** button here. Select the **More Options** button to expand this form.  Define a name for the LUN. Since you're only creating one, the name itself can serve as the prefix. In the next section, Storage and Optimization, set **Number of LUNs** to 1 and then define the proper size for your datastore. Performance Service Level is tied to your Storage VM's backing aggregates. In most cases there is only one aggregate, so the default is fine.
+
+![image1](/images/netapp_add_lun.png)
 
 Under **Protection** you do not need to enable Snapshots or SnapMirror. These snapshots would be for the entire volume so they could be quite large, and LVM has a snapshot system to snapshot the individual logical volumes anyways.
 
