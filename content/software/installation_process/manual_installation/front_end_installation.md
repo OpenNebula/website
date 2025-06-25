@@ -31,19 +31,19 @@ Not all OpenNebula dependencies are in base distribution repositories. On select
 **AlmaLinux 8,9**
 
 ```default
-# yum -y install epel-release
+yum -y install epel-release
 ```
 
 **RHEL 8**
 
 ```default
-# rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 **RHEL 9**
 
 ```default
-# rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
 <a id="packages"></a>
@@ -80,15 +80,17 @@ Install all OpenNebula Front-end components by executing the following commands 
 
 ### AlmaLinux / RHEL
 
-```default
-# yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow opennebula-provision
+```bash
+yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 ### Debian / Ubuntu
 
-```default
-# apt-get update
-# apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow opennebula-provision
+```bash
+apt-get update
+```
+```bash
+apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 ### Optional: Install dependencies for OpenNebula Edge Clusters provisioning
@@ -97,9 +99,11 @@ There are two main dependencies which needs to be installed on the FE for runnin
 
 1. **Terraform** – is needed to provision resources on public cloud providers, download the binary as follows:
 
-```default
-# curl 'https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip' | zcat >/usr/bin/terraform
-# chmod 0755 /usr/bin/terraform
+```bash
+curl 'https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip' | zcat >/usr/bin/terraform
+```
+```bash
+chmod 0755 /usr/bin/terraform
 ```
 
 2. **Ansible** – is used to configure the provisioned resources (cloud or on-premise). Ansible system package is installed
@@ -107,13 +111,13 @@ as a dependency of the OpenNebula provision package. However, for HCI provisioni
 ansible version may not be sufficient as it requires ansible-core 2.15+. It is advised to use the latest Ubuntu for the FE if
 Ceph HCI provision is needed or to install ansible 2.15+ on the system and make it default for oneadmin user.
 
-## Step 3. Enabling MySQL/MariaDB (Optional)
+## Step 4. Enabling MySQL/MariaDB (Optional)
 
 You can skip this step if you want to deploy OpenNebula as quickly as possible for evaluation.
 
 If you are deploying Front-end for production/serious use, make sure you read the [Database Setup]({{% relref "database#database-setup" %}}) guide and select the suitable database backend. Although it **is** possible to switch from (default) SQLite to MySQL/MariaDB backend later, it’s not easy and straightforward, so **we suggest to deploy and use MySQL/MariaDB backend from the very beginning**.
 
-## Step 4. Configuring OpenNebula
+## Step 5. Configuring OpenNebula
 
 ### OpenNebula Daemon
 
@@ -124,14 +128,14 @@ OpenNebula’s initial deployment on first usage creates a user `oneadmin` **ins
 
 1. Log in as the `oneadmin` system user with this command:
 
-```default
-# sudo -u oneadmin /bin/sh
+```bash
+sudo -u oneadmin /bin/sh
 ```
 
 2. Create file `/var/lib/one/.one/one_auth` with initial password in the format `oneadmin:<password>`
 
-```default
-$ echo 'oneadmin:changeme123' > /var/lib/one/.one/one_auth
+```bash
+echo 'oneadmin:changeme123' > /var/lib/one/.one/one_auth
 ```
 
 {{< alert title="Warning" color="warning" >}}
@@ -155,13 +159,13 @@ The OneGate server allows communication between VMs and OpenNebula. It’s optio
 
 1. To configure OneGate, edit `/etc/one/onegate-server.conf` and update the `:host` parameter with service listening address accordingly. For example, use `0.0.0.0` to work on all configured network interfaces on the Front-end:
 
-```default
+```bash
 :host: 0.0.0.0
 ```
 
 2. To configure OpenNebula Daemon, edit `/etc/one/oned.conf` and set the `ONEGATE_ENDPOINT` with the URL and port of your OneGate server (domain or IP-based). The endpoint address **must be reachable directly from your future Virtual Machines**. You need to decide which virtual networks and addresses will be used in your cloud. For example:
 
-```default
+```bash
 ONEGATE_ENDPOINT="http://one.example.com:5030"
 ```
 
@@ -174,7 +178,7 @@ For advanced setup, follow the OneGate [configuration reference]({{% relref "one
 
 The OneFlow server orchestrates the services and multi-VM deployments. While for most cases the default configuration fits well, you might need to reconfigure the service to be able to control the OneFlow **remotely** over API. Edit the `/etc/one/oneflow-server.conf` and update `:host:` parameter with service listening address accordingly. For example, use `0.0.0.0` to work on all configured network interfaces on the Front-end:
 
-```default
+```bash
 :host: 0.0.0.0
 ```
 
@@ -185,7 +189,7 @@ For advanced setup, follow the OneFlow [configuration reference]({{% relref "one
 
 <a id="frontend-services"></a>
 
-## Step 5. Starting and Managing OpenNebula Services
+## Step 6. Starting and Managing OpenNebula Services
 
 The complete list of operating system services provided by OpenNebula:
 
@@ -207,7 +211,7 @@ Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula
 You are ready to **start** all OpenNebula services with the following command (NOTE: you might want to remove the services from the command arguments if you skipped their configuration steps above):
 
 ```default
-# systemctl start opennebula opennebula-fireedge opennebula-gate opennebula-flow
+systemctl start opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 {{< alert title="Warning" color="warning" >}}
@@ -216,12 +220,12 @@ Make sure all required [network ports]({{% relref "#frontend-fw" %}}) are enable
 Other OpenNebula services might be started as a dependency but you don’t need to care about them unless they need to be explicitly restarted or stopped. To start these **services automatically on server boot**, it’s necessary to enable them by the following command:
 
 ```default
-# systemctl enable opennebula opennebula-fireedge opennebula-gate opennebula-flow
+systemctl enable opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 <a id="verify-frontend-section"></a>
 
-## Step 6. Verifying the Installation
+## Step 7. Verifying the Installation
 
 After OpenNebula is started for the first time, you should check that the commands can connect to the OpenNebula Daemon. You can do this in the Linux CLI or the graphical user interface Sunstone.
 
@@ -318,21 +322,27 @@ OpenNebula connects to the hypervisor nodes over SSH (port 22). Additionally, th
 
 You should open the outgoing connections to these services.
 
-## Step 7. Stop and Restart Services (Optional)
+## Step 8. Stop and Restart Services (Optional)
 
 To stop, start, or restart any of the listed individual [services]({{% relref "#frontend-services" %}}), follow the examples below for a selected service:
 
-```default
-# systemctl stop        opennebula
-# systemctl start       opennebula
-# systemctl restart     opennebula
-# systemctl try-restart opennebula
+```bash
+systemctl stop opennebula
+```
+```bash
+systemctl start opennebula
+```
+```bash
+systemctl restart opennebula
+```
+```bash
+systemctl try-restart opennebula
 ```
 
 Use following command to **stop all** OpenNebula services:
 
-```default
-# systemctl stop opennebula opennebula-hem opennebula-fireedge \
+```bash
+systemctl stop opennebula opennebula-hem opennebula-fireedge \
     opennebula-gate opennebula-flow opennebula-guacd \
     opennebula-novnc opennebula-showback.timer \
     opennebula-ssh-agent opennebula-ssh-socks-cleaner.timer
@@ -340,8 +350,8 @@ Use following command to **stop all** OpenNebula services:
 
 Use the following command to **restart all** already running OpenNebula services:
 
-```default
-# systemctl try-restart opennebula-hem opennebula-fireedge \
+```bash
+systemctl try-restart opennebula-hem opennebula-fireedge \
     opennebula-gate opennebula-flow opennebula-guacd \
     opennebula-novnc opennebula-ssh-agent
 ```
@@ -355,7 +365,7 @@ In production environments the services should be stopped in a specific order an
 3. Check and wait until there are no active operations with VMs and images.
 4. Stop **opennebula** and rest services.
 
-## Step 8. Next Steps
+## Step 9. Next Steps
 
 Now that you have successfully started your OpenNebula services, you can continue with adding content to your cloud. Add hypervisor nodes, storage, and virtual networks. Or you can provision users with groups and permissions, images, define and run Virtual Machines.
 
