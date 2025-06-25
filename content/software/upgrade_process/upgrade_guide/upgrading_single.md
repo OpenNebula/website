@@ -28,8 +28,8 @@ Before proceeding, make sure you don’t have any VMs in a transient state (prol
 
 Set all Hosts to disable mode to stop all monitoring processes.
 
-```default
-$ onehost disable <host_id>
+```bash
+onehost disable <host_id>
 ```
 
 ### Step 3. Stop OpenNebula
@@ -46,10 +46,14 @@ Make sure that every OpenNebula process is stopped. The output of `systemctl lis
 
 Back up the configuration files located in `/etc/one` and `/var/lib/one/remotes/etc`. You don’t need to do a manual backup of your database; the `onedb` command will perform one automatically.
 
-```default
-$ cp -ra /etc/one /etc/one.$(date +'%Y-%m-%d')
-$ cp -ra /var/lib/one/remotes/etc /var/lib/one/remotes/etc.$(date +'%Y-%m-%d')
-$ onedb backup
+```bash
+cp -ra /etc/one /etc/one.$(date +'%Y-%m-%d')
+```
+```bash
+cp -ra /var/lib/one/remotes/etc /var/lib/one/remotes/etc.$(date +'%Y-%m-%d')
+```
+```bash
+onedb backup
 ```
 
 ### Step 5. Upgrade OpenNebula Packages Repository
@@ -60,15 +64,17 @@ In order to be able to retrieve the packages for the latest version, you need to
 
 Ubuntu/Debian
 
-```default
-$ apt-get update
-$ apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-provision opennebula-fireedge python3-pyone
+```bash
+apt-get update
+```
+```bash
+apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge python3-pyone
 ```
 
 RHEL
 
-```default
-$ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-provision opennebula-fireedge python3-pyone
+```bash
+yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge python3-pyone
 ```
 
 #### Community Edition
@@ -83,14 +89,14 @@ To install the migration package:
 
 On RHEL:
 
-```default
-$ rpm -i opennebula-migration-community*.rpm
+```bash
+rpm -i opennebula-migration-community*.rpm
 ```
 
 On Debian/Ubuntu:
 
-```default
-$ dpkg -i opennebula-migration-community*.deb
+```bash
+dpkg -i opennebula-migration-community*.deb
 ```
 
 {{< alert title="Note" color="success" >}}
@@ -217,22 +223,22 @@ The hypervisor node operating system must meet the minimum version required acco
 
 Update the virtualization, storage, and networking drivers. As the `oneadmin` user, execute:
 
-```default
-$ onehost sync
+```bash
+onehost sync
 ```
 
 Then log in to your hypervisor Hosts and update the `opennebula-node` packages:
 
 Ubuntu/Debian
 
-```default
-$ apt-get install --only-upgrade opennebula-node-<hypervisor>
+```bash
+apt-get install --only-upgrade opennebula-node-<hypervisor>
 ```
 
 RHEL
 
-```default
-$ yum upgrade opennebula-node-<hypervisor>
+```bash
+yum upgrade opennebula-node-<hypervisor>
 ```
 
 {{< alert title="Note" color="success" >}}
@@ -245,8 +251,8 @@ For KVM hypervisor it’s also necessary to restart the libvirt service{{< /aler
 
 Enable all Hosts, disabled in step 2:
 
-```default
-$ onehost enable <host_id>
+```bash
+onehost enable <host_id>
 ```
 
 If upgrading from a version earlier than 6.0, please see [Upgrading from Previous Versions]({{% relref "upgrade_from_previous_versions" %}}).
