@@ -121,6 +121,13 @@ The backup datastore needs to have enough space to hold the disks of the VMs tha
 
 If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
 
+We provide alongside the ovirtapi package the ``/usr/share/one/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
+
+    0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
+
+{{< alert title="Remember" color="success" >}}
+For the ``/usr/share/one/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}} 
+
 ## Step 3: Install and configure the oVirtAPI module
 
 In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backup server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
@@ -203,9 +210,18 @@ If everything is set properly, you should be able to see the available Virtual M
 
 ![image](/images/veeam/verification.png)
 
+### Logging information
+
+The ovirtapi server will generate logs in the following directory depending on the operating system used:
+
+* Ubuntu/Debian: ``/var/log/apache2``
+* Alma/RHEL: ``/var/log/httpd``
+
+If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
+
 ## Current limitations and issues
 
-- Volatile disks cannot be backed up. 
+- Volatile disks cannot be backed up. They will not be displayed in the Veeam interface. 
 - Veeam will not attempt incremental backups, so all backups will be full.
 - When trying to start a backup job, the following error may appear. It can be solved by refreshing the backup job properties (even if no configuration is changed):
 
