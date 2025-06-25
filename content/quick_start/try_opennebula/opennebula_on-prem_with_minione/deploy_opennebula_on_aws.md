@@ -70,7 +70,7 @@ You can deploy miniONE on a virtual machine or a bare-metal server. In this tuto
   - Ubuntu 22.04 or 24.04
 
 **Minimum hardware:**
-: - 4 GiB RAM
+  - 4 GiB RAM (16 GiB recommended for [deploying a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}))
   - 20 GiB free disk space (80 GiB recommended for adding VM images)
 
 **Configuration:**
@@ -95,7 +95,7 @@ Below are examples of successfully-tested configurations:
 
 - Region: Frankfurt
 - Operating System: Ubuntu Server 24.04 LTS (HVM) or 22.04 LTS
-- Tier: `c5.metal` or `t2.medium`
+- Tier: `c5.metal` or `t2.medium` (without KVM)
 - Open ports: 22, 80
 - Storage: 80 GB SSD
 
@@ -181,7 +181,15 @@ Your AWS VM is now ready. In the next steps, we’ll download the miniONE script
 
 ## Step 2: Download and install miniONE
 
-To download miniONE, please fill [the required form](https://opennebula.io/get-minione/).
+You can download miniONE from the [GitHub repository](https://github.com/OpenNebula/minione).
+
+To quickly download miniONE, run:
+
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```
+
+This should download the latest version to your current directory.
 
 ### Step 2.1. Copy the miniONE script to the AWS VM
 
