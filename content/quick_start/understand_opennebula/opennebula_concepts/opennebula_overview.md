@@ -18,7 +18,7 @@ This page provides a high-level overview of the OpenNebula cloud model, architec
 
 OpenNebula is a **powerful, but easy-to-use, open source platform to build and manage enterprise clouds and virtualized Data Centers**. It combines existing virtualization technologies with advanced features for multi-tenancy, automatic provision and elasticity on private, hybrid, and edge environments. It unifies management of IT infrastructure and applications, preventing vendor lock-in and reducing complexity, resource consumption, and operational costs.
 
-![image1](/images/overview_key-features.png)
+![><](/images/overview_key-features.png)
 
 ## OpenNebula Infrastructure and Management
 
@@ -32,7 +32,7 @@ OpenNebula can manage both single VMs and complex multi-tier services composed o
 
 OpenNebula supports the automated deployment of Kubernetes clusters through a virtual appliance, **OneKE**, the OpenNebula Kubernetes Engine. OneKE is an enterprise-grade, CNCF-certified Kubernetes distribution based on SUSE Rancher RKE2. In its basic configuration it comprises four Virtual Machines: the Kubernetes master node, a VNF node, a storage node, and a worker node. It can be configured as a multi-master cluster for high availability, and easily scaled up to include more worker nodes, either before deployment or dynamically during operation, by using elasticity rules. It includes features such as MetalLB load balancing, Multus and Cilium CNI plugins, and Longhorn storage. It is available as a multi-VM appliance on the OpenNebula Marketplace and can be installed in minutes using Sunstone, OpenNebula’s web UI.
 
-![image2](/images/overview_containers.png)
+![><](/images/overview_containers.png)
 
 ### Management Model and Tools
 
@@ -40,7 +40,7 @@ OpenNebula’s management model provides multi-tenancy by design, offering diffe
 
 Management tools include the **Sunstone Web UI**, an easy-to-use visual interface for managing cloud infrastructure. The UI implements the full multi-tenancy features of the underlying system, allowing access to users with different roles, access, and management permissions.
 
-![sunstone](/images/sunstone-full_dashboard.png)
+![><](/images/sunstone-full_dashboard.png)
 
 Among other features, Sunstone offers support for easily managing single VMs and multi-VM services, as well as datastores, Hosts and clusters; visualizing metrics and logs; and creating and editing templates for VMs, services, networks, and devices.
 
@@ -53,7 +53,7 @@ OpenNebula’s cloud provisioning model is based on Virtual Data Centers (VDCs) 
 
 A key management task in an OpenNebula infrastructure environment involves determining who can use the cloud administrative interfaces, and what tasks those users are authorized to perform. The person with the role of cloud service administrator is authorized to assign the appropriate rights required by other users. OpenNebula includes three default user roles: **cloud users**, **cloud operators**, and **cloud administrators**. OpenNebula further offers the possibility of designing custom roles. The OpenNebula documentation provides general guidelines and best practices for determining cloud user roles, please see [Cloud Access Models and Roles]({{% relref "cloud_access_model_and_roles#understand" %}}) for more information.
 
-![image3](/images/overview_vdc.png)
+![><](/images/overview_vdc.png)
 
 ## The OpenNebula Model for Cloud Infrastructure Deployment
 
@@ -64,7 +64,7 @@ A standard OpenNebula Cloud Architecture consists of:
 
 Infrastructure components may reside at different geographical locations. They are interconnected by multiple networks for internal storage and node management, and for private and public VM communications.
 
-![image4](/images/overview_resources.png)
+![><](/images/overview_resources.png)
 
 In general, there are two types of cluster models that can be used with OpenNebula:
 
@@ -75,7 +75,7 @@ In general, there are two types of cluster models that can be used with OpenNebu
 
 OpenNebula includes its own Edge Cluster configuration. Based on solid open source storage and networking technologies, OpenNebula’s Edge Cluster model is a much simpler approach than those of customized cloud architectures made of more complex, general purpose, and separate infrastructure components. An OpenNebula Edge Cluster can be deployed on-demand on virtual resources, on-premises, or on public cloud or edge providers to enable seamless hybrid cloud deployments.
 
-![image5](/images/overview_edge-cluster.png)
+![><](/images/overview_edge-cluster.png)
 
 <!-- overview_edge-cluster.png -->
 
@@ -85,7 +85,7 @@ OpenNebula is certified to work on top of multiple combinations of hypervisors, 
 
 If you are interested in an OpenNebula cloud fully based on open source platforms and technologies, please refer to our [Open Cloud Reference Architecture](https://support.opennebula.pro/hc/en-us/articles/204210319).
 
-![image6](/images/overview_customized-cluster.png)
+![><](/images/overview_customized-cluster.png)
 
 <!-- overview_customized-cluster.png -->
 
@@ -97,7 +97,7 @@ Organizations’ and users’ needs are varied, and constantly evolve over time.
 
 OpenNebula was designed to be easily adapted to any infrastructure and easily extended with new components. The result is a modular system that can implement a variety of cloud architectures and interface with multiple data center services.
 
-![image7](/images/overview_architecture.png)
+![><](/images/overview_architecture.png)
 
 <!-- overview-architecture.png -->
 
