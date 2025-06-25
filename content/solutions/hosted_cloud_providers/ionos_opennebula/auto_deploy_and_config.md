@@ -1,5 +1,5 @@
 ---
-title: "Provisioning, Automated Deployment and Verification"
+title: "Automated Deployment and Configuration"
 description:
 categories:
 pageintoc: ""
@@ -11,8 +11,9 @@ This section details a step-by-step procedure to provision the reference infrast
 
 ## Infrastructure Provisioning
 
-The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/).   
-Build the configuration shown below, taking into account the details described in the [Hardware and Software Specification]({{% relref "hardware_and_software_specs" %}}) section.
+The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/).
+
+Build the configuration shown below, taking into account the details described in the [Hardware and Software Specification]({{% relref "hw_spec_and_arch" %}}) section.
 
 ![><][dcd-layout]
 
@@ -25,7 +26,7 @@ To achieve the deployment base shown in the figure above, follow the below steps
 3. Connect all servers to the internet access. Ensure to consistently use the first NIC in each server.
 4. Connect each server's second NIC to the private LAN between the servers. Ensure to consistently use each server's second NIC.
 5. Add HDD instances and specify the base image for the operating systems:
-   1. Choose the specifications as shown in [Table 1]({{% relref "hardware_and_software_specs#table-1-front-end-requirements" %}}) of [Hardware and Software Specification]({{% relref "hardware_and_software_specs" %}})
+   1. Choose the specifications as shown in [Table 1]({{% relref "hw_spec_and_arch#table-1-front-end-requirements" %}}) of [Hardware and Software Specification]({{% relref "hw_spec_and_arch" %}}).
    2. Add the SSH key of the host from which the access is needed.
    3. Set it as a boot device.
 
