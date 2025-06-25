@@ -1,3 +1,65 @@
+---
+title: "Hardware and Software Specification"
+description:
+categories:
+pageintoc: ""
+tags:
+weight: 2
+---
+
+This section contains the specification of the used Ampere hardware and software resources for the reference OpenNebula deployment.
+
+The tables below detail the characteristics for the Front-end, virtualization host, storage, networking and provisioning model.
+
+
+### Table 1: Front-end Requirements
+
+Two identical servers where used. One of them acts as Front-end and both of them acts as hosts.
+
+| FRONT-END  |
+| :---- | :---- |
+| Number of Zones | 1 |
+| Cloud Manager | OpenNebula {{< release >}} |
+| Server Specs | Ampere(R) Altra(R), details in the [table below](#table-6-server-specifications) |
+| Operating System | Ubuntu 24.04.2 LTS |
+| High Availability | No (1 Front-end) |
+| Authorization | Builtin |
+
+
+### Table 2: Host Requirements
+
+| VIRTUALIZATION HOSTS  |
+| :---- | :---- |
+| Number of Nodes | 2 |
+| Server Specs | Ampere(R) Altra(R), details in the [table below](#table-6-server-specifications) |
+| Operating System | Ubuntu 24.04.2 LTS |
+| Hypervisor | KVM |
+| Special Devices | None |
+
+### Table 3: Storage Specification
+
+| STORAGE   |
+| :---- | :---- |
+| Type | Local disk |
+| Capacity | 1 Datastore |
+
+
+### Table 4: Network Requirements
+
+| NETWORK   |
+| :---- | :---- |
+| Networking | VXLAN |
+| Number of Networks | 1 networks: VXLAN |
+
+### Table 5: Provisioning Model
+
+| PROVISIONING MODEL  |
+| :---- | :---- |
+| Manual on-prem | The two servers have been manually provisioned and configured on-prem. |
+
+
+### Table 6: Server Specifications
+
 | Parameter                | Ampere Server                                                                              |
 |--------------------------|-------------------------------------------------------------------------------------------|
 | **Architecture**         | aarch64 (ARM 64-bit)                                                                      |
