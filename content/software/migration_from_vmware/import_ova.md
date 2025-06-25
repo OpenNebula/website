@@ -13,33 +13,30 @@ weight: "2"
 
 OpenNebula supports importing OVAs that have been exported from vCenter / ESXi environments, generating the necessary VM Template and Images.
 
-It is possible to import .ova files or a folder containing the OVF files (VMDK disk files and manifest file in .ovf format). The import tool will inject context packages in the target Images, automatically detecting the guest operating system.
+It is possible to import **.ova** files or a folder containing the OVF files (VMDK disk files and manifest file in **.ovf** format). The import tool will inject [context packages]({{% relref "kvm_contextualization#kvm-contextualization" %}}) in the target Images, automatically detecting the guest operating system.
 
-The same command allows users to import single VMDK disks as OpenNebula Images, converting the VMDK to qcow2 format and then creating the associated Image. It is possible to inject context, install virtio drivers and uninstall VMware Tools.
+The same command allows users to import single VMDK disks as OpenNebula Images, converting the VMDK to qcow2 format and then creating the associated Image. It is possible to inject context, install [virtio drivers](#windows-virtio-drivers) and uninstall VMware Tools.
 
 <a id="import-ova"></a>
 
 <!--# OVA/VMDK Import -->
 
-## Requirements
+## Install
 
-The [OneSwap](https://github.com/OpenNebula/one-swap) VM import tool will assume that the provided OVA has been exported from a VMware environment. Users must make sure that the provided OVA is compatible with VMware environments. Other sources are currently not supported (i.e., Xen or VirtualBox).
+OneSwap is developed and maintained by OpenNebula on a [dedicated github repository](https://github.com/OpenNebula/one-swap). Starting from OpenNebula 7.0, OneSwap is being shipped as a package called `opennebula-swap` in the [OpenNebula Repositories]({{% relref "../installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}) for Ubuntu 24.04, AlmaLinux 9 and Debian 12. Install the `opennebula-swap` package with your package manager.
 
-When converting an OVA or VMDK you will need enough space both in the `/tmp` folder (can be changed with `--work-dir`) and in the destination DS where the disk images are going to be imported.
+### Configure
 
-## Supported Platforms
+You can configure the tool by editing the file `/etc/one/oneswap.yaml`. In here you can configure items like vCenter credentials, so you don't pass then on the CLI. For examle
 
-This procedure is supported on all platforms listed in the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes/" %}}).
+```yaml
+# vCenter Authentication
+#:vcenter: '172.20.0.123'                 # vCenter hostname or IP
+#:vuser: 'administrator@vsphere.local'    # vCenter username
+#:vpass: 'changeme123'                    # vCenter password
+#:port: 443                               # vCenter port
+```
 
-{{< alert title = "Warning" color = "warning" >}}
-The following platforms listed in the above Platform Notes are _not supported_ for this procedure:
-
-- Debian 11
-- Debian 12
-- Almalinux 8
-
-Attempting to import an OVA or VMDK on these systems may result in unexpected issues.
-{{< /alert >}}
 
 ### Windows VirtIO Drivers
 
@@ -49,6 +46,23 @@ Before converting Windows VMs, download the required VirtIO drivers for the Wind
 The converted VM will reboot several times after instantiation in order to install and configure the VirtIO drivers.{{< /alert >}}
 
 ## Usage
+
+The full documentation for OneSwap is maintained in the [OneSwap Wiki](https://github.com/OpenNebula/one-swap/wiki).
+
+OneSwap will assume that the provided OVA has been exported from a VMware environment. Users must make sure that the provided OVA is compatible with VMware environments. Other sources are currently not supported (i.e., Xen or VirtualBox).
+
+When converting an OVA or VMDK you will need enough space both in the `/tmp` folder (can be changed with `--work-dir`) and in the destination DS where the disk images are going to be imported.
+
+The parent OVA directory name should match the name of the OVA files inside it. For example
+
+```
+ovf_test/
+├── ovf_test-1.vmdk
+├── ovf_test-2.nvram
+├── ovf_test.mf
+└── ovf_test.ovf
+```
+
 
 It is possible to specify the target Datastore and VNET for the OVA to be imported. Refer to `man oneswap` for the complete documentation of the oneswap command. Available options for the `oneswap import` command are:
 
@@ -67,9 +81,9 @@ The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used tog
 
 If multiple network interfaces are detected when importing an OVA and only one VNET ID or not enough VNET IDs are provided for all interfaces using `--network ID`, the last one will be used for the rest of the interfaces after the last coincidence. The same will apply to Datastores using the `--datastore ID` option.
 
-### Example of Importing an OVF
+### Example of Importing an OVA
 
-Example command on how to import an OVF using the Datastore ID 101 and VNET ID 1:
+Example command on how to import an OVA using the Datastore ID 101 and VNET ID 1:
 
 ```default
 $ oneswap import --ova /ovas/vm-alma9/ --datastore 101 --network 1
