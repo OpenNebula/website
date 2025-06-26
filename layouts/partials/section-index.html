@@ -64,6 +64,7 @@
 
       <div class="td-card card border me-4">
      {{ if eq (len .Sections) 0 }}
+     {{ if ge (len .Pages) 1 }}
      <div class="card">
          <div class="card-header">
           In this section:
@@ -80,9 +81,12 @@
 		  </inl>
       {{ end -}}
       {{ end -}}
+
     </div>      
     </div>
+
     {{/* </div> - FOR CARD in line 65 */}}
+   {{ end -}}
     </div>
 
       {{/* </div> */}}
