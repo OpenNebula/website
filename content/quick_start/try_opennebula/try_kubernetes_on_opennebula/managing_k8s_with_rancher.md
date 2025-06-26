@@ -1,5 +1,5 @@
 ---
-title: "Integrate Rancher with OpenNebula"
+title: "Managing Kubernetes with Rancher and the Cluster API Integration"
 date: "2025-02-17"
 description:
 ---

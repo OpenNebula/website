@@ -53,7 +53,9 @@
             </div>
 
                {{ if .Description -}}
+                  <div class="td-content">
                     <p>{{ .Description | markdownify -}}</p>
+                  </div>
        	       {{ end -}}
 
     {{/* <hr class="panel-line" width="100%"> */}}
@@ -62,6 +64,7 @@
 
       <div class="td-card card border me-4">
      {{ if eq (len .Sections) 0 }}
+     {{ if ge (len .Pages) 1 }}
      <div class="card">
          <div class="card-header">
           In this section:
@@ -78,9 +81,12 @@
 		  </inl>
       {{ end -}}
       {{ end -}}
+
     </div>      
     </div>
+
     {{/* </div> - FOR CARD in line 65 */}}
+   {{ end -}}
     </div>
 
       {{/* </div> */}}
@@ -171,6 +177,8 @@
 {{ if not .Page.Sections -}}
 
   {{/* CARD WITH PAGES ONLY (if no subsections) */}}
+  
+  {{ if not $page.Params.no_list -}}
 
     <div class="entry">
       <div class="td-card card border me-4">
@@ -195,5 +203,5 @@
       </div>
       </div>
     </div>
+  {{ end }}
 {{ end }}
-

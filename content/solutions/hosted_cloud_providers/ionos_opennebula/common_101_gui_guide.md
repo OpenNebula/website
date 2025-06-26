@@ -54,27 +54,6 @@ Finally, as a cleanup step, terminate the VM by clicking the red “Trash can”
 <a id="one-terminate-vm"></a>
 ![image][one-terminate-vm]
 
-## Manually Verifying VM Connectivity
-
-Currently the automatic verification does not verify the correct behavior of the VXLAN networking deployed between the VMs.
-
-To verify VXLAN networking, deploy the test VMs shown below. These VM deployments have been demonstrated on the target architecture. For each VM deployment, follow the UI guide as detailed above with screenshots.
-
-Log into each VM and verify the following connectivity matrix of the deployed VMs, as shown in the table below.
-
-### Table 1: Connectivity Matrix
-
-Connectivity matrix to manually test VXLAN networking between the deployed VMs.
-
-| Source | <th class="head" rowspan="4" style="text-align: center; font-weight: bold !important; vertical-align: bottom !important;">Targets</th> |
-| :---- | :---- | :---- | :---- | :---- |
-| VM1 | VM2 | VM3 | `8.8.8.8` (or any public IP) |
-| **VM1** | \- | TEST | TEST | TEST |
-| **VM2** | To vxlan: TEST | \- | TEST | \- |
-| **VM3** | To vxlan: TEST | TEST | \- | \- |
-| **Local laptop (or any public IP)** | To public: TEST | \- | \- | \- |
-
-
 [one-marketplace]: /images/solutions/ionos/one-marketplace.png
 [one-new-vm]: /images/solutions/ionos/one-new-vm.png
 [attach-nic]: /images/solutions/ionos/attach-nic.png

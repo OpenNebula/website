@@ -25,6 +25,15 @@ To access additional material including white papers, guides and screencasts, se
   display: flex !important;
   flex: 0 2 45% !important;
 }
+.card-text {
+  margin-left: 1rem !important;
+}
+.card-group {
+  margin-bottom: 0rem !important;
+}
+.me-4 {
+    margin-right: 1rem !important;
+}
 </style>
 
 <div class="card-columns">

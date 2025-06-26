@@ -8,6 +8,7 @@
 .td-max-width-on-larger-screens {
   @include media-breakpoint-up(lg) {
     max-width: 100%;
+    //max-width: 85%;
   }
 }
 
@@ -41,10 +42,13 @@
     font-size: 1.2rem;
     border-top-left-radius: 12px !important;
     border-top-right-radius: 12px !important;
+    //padding-left: 1rem !important;
+    padding-left: 0.8rem !important;
   }
 
   .card-body {
     border-radius: 12px !important;
+    // padding-left: 0.1rem !important;
   }
 }
 
@@ -252,7 +256,7 @@ img[alt$="><"] {
     border-color: #8F9392 !important;
   }
 
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
     .card {
       flex: 0 1 100%;
       columns: 1 !important;
