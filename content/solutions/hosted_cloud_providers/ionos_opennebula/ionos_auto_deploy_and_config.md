@@ -37,7 +37,7 @@ To achieve the deployment base shown in the figure above, follow the below steps
 
 Then, book the following two IP ranges, as shown below.
 
-* **booked-for-servers**: These are the management IPs for each servers. Book an IP block with enough addresses for the servers, assigning one IP address per server.
+* **booked-for-servers**: These are the management IPs for each server. Book an IP block with enough addresses for the servers, assigning one IP address per server.
 * **booked-for-vms**: These are the traffic IPs for the public-facing VMs that will be deployed using OpenNebula. Book a block big enough for the VMs.
 
 <a id="ip-man"></a>
