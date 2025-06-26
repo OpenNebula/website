@@ -17,12 +17,13 @@
   }
   @include media-breakpoint-up(lg) {
     padding-left: 48px !important;
-    padding-right: 96px !important;
+    padding-right: 48px !important;
   }
   @include media-breakpoint-up(xl) {
-    //padding-left: 96px !important;
-    padding-left: 10rem !important;
-    padding-right: 0.2rem !important;
+    //padding-left: 48px !important;
+    padding-left: 5rem !important;
+    //padding-right: 48px !important;
+    padding-right: 5rem !important;
   }
 }
 

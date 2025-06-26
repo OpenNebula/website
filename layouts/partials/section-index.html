@@ -173,6 +173,8 @@
 {{ if not .Page.Sections -}}
 
   {{/* CARD WITH PAGES ONLY (if no subsections) */}}
+  
+  {{ if not $page.Params.no_list -}}
 
     <div class="entry">
       <div class="td-card card border me-4">
@@ -197,5 +199,5 @@
       </div>
       </div>
     </div>
+  {{ end }}
 {{ end }}
-
