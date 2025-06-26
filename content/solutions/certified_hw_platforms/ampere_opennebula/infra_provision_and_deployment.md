@@ -15,8 +15,6 @@ This guide does not cover how to provision the Ampere infrastructure on-premise.
 
 To proceed with OpenNebula deployment, we need to extract and save some required parameters that the deployment automation relies on.
 
-### Table 1: List of Required Parameters
-
 | Description | How to obtain the parameter |
 | :----- | :----- |
 | Front-end Host IP | A reachable IP of the server, that is used by the automated deployment. |
