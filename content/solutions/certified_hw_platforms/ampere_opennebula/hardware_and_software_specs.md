@@ -14,7 +14,7 @@ The tables below detail the characteristics for the Front-end, virtualization ho
 
 ### Table 1: Front-end Requirements
 
-Two identical servers where used. One of them acts as Front-end and both of them acts as hosts.
+Two identical servers were used. One of them acts as Front-end and both of them acts as hosts.
 
 | FRONT-END  |
 | :---- | :---- |
