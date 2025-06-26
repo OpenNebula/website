@@ -39,3 +39,48 @@ Click on the volume you just created, and on the **Connected Host Groups** card,
 Once connected, the volume will be exposed to all hosts in the group. You can update the host group if you add/remove hosts from your OpenNebula installation.
 
 After this is complete, the volume should be visible on your OpenNebula hosts after rescanning iSCSI sessions (via `iscsiadm -m session --rescan`) and finding the new device with `multipath -ll` and `lsblk`. You can then proceed with the LVM Thin volume group creation and OpenNebula LVM Thin Datastore Setup as usual.
+
+## OpenNebula System Configuration
+
+The Frontend and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
+
+~~~
+defaults {
+        polling_interval       10
+}
+
+devices {
+    device {
+        vendor                      "NVME"
+        product                     "Pure Storage FlashArray"
+        path_selector               "queue-length 0"
+        path_grouping_policy        group_by_prio
+        prio                        ana
+        failback                    immediate
+        fast_io_fail_tmo            10
+        user_friendly_names         no
+        no_path_retry               0
+        features                    0
+        dev_loss_tmo                60
+    }
+    device {
+        vendor                   "PURE"
+        product                  "FlashArray"
+        path_selector            "service-time 0"
+        hardware_handler         "1 alua"
+        path_grouping_policy     group_by_prio
+        prio                     alua
+        failback                 immediate
+        path_checker             tur
+        fast_io_fail_tmo         10
+        user_friendly_names      no
+        no_path_retry            0
+        features                 0
+        dev_loss_tmo             600
+    }
+}
+~~~
+
+If you have an existing multipath configuration file please merge them together if possible.
+
+Please ensure you restart your multipath daemon to pick up the changes: `systemctl restart multipathd`

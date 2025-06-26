@@ -43,3 +43,30 @@ Under **Host Information** select the Host Operating System as Linux, then LUN f
 </center>
 
 Once done here, click Save to complete creating the LUN which should also map the LUN to the proper initiator group.  At this point the device should be accessible on the hosts and frontend after rescanning iSCSI busses using `iscsiadm -m session --rescan` and running `multipath -ll`.  After this, you should be able to continue with the OpenNebula LVM Thin Datastore Setup
+
+## OpenNebula System Configuration
+
+The Frontend and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
+
+~~~
+devices {
+    device {
+        vendor "NETAPP"
+        product "LUN.*"
+        no_path_retry queue
+        path_checker tur
+        user_friendly_names yes
+        alias_prefix "mpath"
+    }
+}
+
+blacklist {
+    devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"
+    devnode "^hd[a-z][[0-9]*]"
+    devnode "^cciss!c[0-9]d[0-9]*[p[0-9]*]"
+}
+~~~
+
+If you have an existing multipath configuration file please merge them together if possible.
+
+Please ensure you restart your multipath daemon to pick up the changes: `systemctl restart multipathd`
