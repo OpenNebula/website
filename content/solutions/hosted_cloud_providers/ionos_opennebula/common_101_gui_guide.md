@@ -62,10 +62,6 @@ To verify VXLAN networking, deploy the test VMs shown below. These VM deployment
 
 Log into each VM and verify the following connectivity matrix of the deployed VMs, as shown in the table below.
 
-### Table 1: Connectivity Matrix
-
-Connectivity matrix to manually test VXLAN networking between the deployed VMs.
-
 | Source | <th class="head" rowspan="4" style="text-align: center; font-weight: bold !important; vertical-align: bottom !important;">Targets</th> |
 | :---- | :---- | :---- | :---- | :---- |
 | VM1 | VM2 | VM3 | `8.8.8.8` (or any public IP) |

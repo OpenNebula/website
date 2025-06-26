@@ -1,5 +1,4 @@
 ---
-#title: "Hardware and Software Specification"
 title: "Hardware Specification and Architecture"
 description:
 categories:
@@ -13,7 +12,7 @@ This section describes the cloud architecture used in this guide, and provides t
 
 ## Architecture
 
-The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. The figure below also shows the target reference VMs to be deployed for testing purposes. At least one VM must be accessible to configure with a public IP, and all of them shall be connected to the VXLAN network.
+The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. Additional public IPs are required to access running Virtual Machines. The proposed model connects VMs internally using VXLAN networks, with at least one VM assigned a public IP to act as a gateway, NATing traffic to and from the internal network.
 
 ![><][high-level]
 
@@ -21,9 +20,7 @@ The target high-level cloud architecture overview is shown below. Two hosts are 
 
 ## Hardware Specification
 
-The tables below detail the characteristics for the Front-end, virtualization host, storage, networking and provisioning model.
-
-### Table 1: Front-end Requirements
+### Front-end Requirements
 
 | FRONT-END  |
 | :---- | :---- |
@@ -35,7 +32,7 @@ The tables below detail the characteristics for the Front-end, virtualization ho
 | Authorization | Builtin |
 
 
-### Table 2: Host Requirements
+### Host Requirements
 
 | VIRTUALIZATION HOSTS  |
 | :---- | :---- |
@@ -45,23 +42,17 @@ The tables below detail the characteristics for the Front-end, virtualization ho
 | Hypervisor | KVM |
 | Special Devices | None |
 
-### Table 3: Storage Specification
+### Storage Specification
 
 | STORAGE   |
 | :---- | :---- |
-| Type | Local disk |
-| Capacity | 1 Datastore |
+| Type | SSH drivers using local disks |
+| Capacity | Full size of servers local disks |
 
 
-### Table 4: Network Requirements
+### Network Requirements
 
 | NETWORK   |
 | :---- | :---- |
 | Networking | VXLAN, Public routed network |
 | Number of Networks | 2 networks: VXLAN  Public routed network, with each host machine having a NIC and a public IP |
-
-### Table 5: Provisioning Model
-
-| PROVISIONING MODEL  |
-| :---- | :---- |
-| VDCs | 1 VDC with 1 cluster (2 nodes). Users will be able to provision and manage VMs via the OpenNebula web interface, using the public IP of the Front-end node. |

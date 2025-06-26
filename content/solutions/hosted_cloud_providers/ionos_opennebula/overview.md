@@ -22,7 +22,7 @@ Additionally, this guide includes a brief description of how to instantiate a Vi
 Performing the deployment involves these high-level steps:
 
 1. Create the deployment base of networked servers on IONOS.
-2. Initialize the OpenNebula GitHub repository on your deployment machine.
+2. Clone the dedicated OpenNebula Hosted Cloud for IONOS GitHub repository on your deployment machine.
 3. Modify the repository with the parameters for your IONOS infrastructure.
 4. Perform the automated deployment to the IONOS infrastructure.
 5. Verify the deployment by running the automated verification command.
