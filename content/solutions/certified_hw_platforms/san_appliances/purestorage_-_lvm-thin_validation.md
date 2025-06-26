@@ -4,11 +4,11 @@ title: PureStorage - LVM-thin Validation
 
 This setup assumes you're using a PureStorage FlashArray with iSCSI and want to use it as a backend for OpenNebula's LVM Thin datastore. The configuration is straightforward and uses standard volume and host mappings. If you're already familiar with the PureStorage interface, you can create the required resources however you prefer — this just outlines a typical setup.
 
-## Required PureStorage Configuration
+## PureStorage Configuration
 
 ### Host and Host Group
 
-For each of the hosts and frontend you'll need to either gather or define their iSCSI Initiator Name. If you have already started iscsid at least once on the machine it should have a name generated in `/etc/iscsi/initiatorname.iscsi`. If you would prefer to define it, you can modify that file's contents to something like `InitiatorName=iqn.2024-01.com.example.pure:some.host.id` then restarting iscsid (and then reconnect any active iscsi sessions, if already connected).  Each name must be unique. 
+For each of the hosts and frontend you'll need to either gather or define their iSCSI Initiator Name. If you have already started iscsid at least once on the machine it should have a name generated in `/etc/iscsi/initiatorname.iscsi`. If you would prefer to define it, you can modify that file's contents to something like `InitiatorName=iqn.2024-01.com.example.pure:some.host.id` then restarting iscsid (and then reconnect any active iscsi sessions, if already connected).  Each name must be unique.
 
 Navigate to **Storage → Hosts** in the PureStorage dashboard. For each OpenNebula host and frontend, select the **+** in the top right of the Hosts card and set a **Name** that clearly identifies the host, and leave the Personality as **None**.  You can also use the "Create Multiple…" if you have many hosts.
 
@@ -40,7 +40,7 @@ Once connected, the volume will be exposed to all hosts in the group. You can up
 
 After this is complete, the volume should be visible on your OpenNebula hosts after rescanning iSCSI sessions (via `iscsiadm -m session --rescan`) and finding the new device with `multipath -ll` and `lsblk`. You can then proceed with the LVM Thin volume group creation and OpenNebula LVM Thin Datastore Setup as usual.
 
-## OpenNebula System Configuration
+## Front-end and Hosts Configuration
 
 The Frontend and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
 

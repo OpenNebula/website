@@ -4,7 +4,7 @@ title: NetApp - LVM-thin Validation
 
 This setup assumes you are using NetApp ONTAP with iSCSI and are trying to use it as a backend for OpenNebula's LVM Thin datastore.  The configuration is standard and doesn't require any special feature beyond basic LUN management, so if you are already comfortable with the NetApp ONTAP interface and its functionality, feel free to create the resources as you see fit.
 
-## Required NetApp Configuration
+## NetApp Configuration
 
 ### SVM (Storage Virtual Machine)
 
@@ -16,7 +16,7 @@ If you are updating an existing Storage VM, first click the name of the SVM to g
 
 ### Initiator Group
 
-In order to make the LUN we will create available on all of the hosts we need to create an initiator group to assign the LUN to.  Navigate to **Hosts → SAN initiator groups → + Add**. On this form, provide an identifiable Name and set the Host Operating System to Linux.  
+In order to make the LUN we will create available on all of the hosts we need to create an initiator group to assign the LUN to.  Navigate to **Hosts → SAN initiator groups → + Add**. On this form, provide an identifiable Name and set the Host Operating System to Linux.
 
 For the "Initiator group members" section below it should have **Host initiators** selected.  You can either use the existing initiator names on your hosts, found in `/etc/iscsi/initiatorname.iscsi` after iscsid has been started once, or you can define your own initiator name in that file by changing its contents to something like `InitiatorName=iqn.2024-01.com.example.netapp:some.host.id` then restarting iscsid. Whichever method you choose, click the **+ Add initiator** and insert the initiator name along with a description for each of your hosts.
 
@@ -44,7 +44,7 @@ Under **Host Information** select the Host Operating System as Linux, then LUN f
 
 Once done here, click Save to complete creating the LUN which should also map the LUN to the proper initiator group.  At this point the device should be accessible on the hosts and frontend after rescanning iSCSI busses using `iscsiadm -m session --rescan` and running `multipath -ll`.  After this, you should be able to continue with the OpenNebula LVM Thin Datastore Setup
 
-## OpenNebula System Configuration
+## Front-end and Host Configuration
 
 The Frontend and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
 
