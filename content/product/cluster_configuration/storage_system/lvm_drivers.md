@@ -33,11 +33,11 @@ otherwise:
 - [NetApp specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/netapp_-_lvm_thin_validation/" %}})
 - [PureStorage specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/purestorage_-_lvm-thin_validation/" %}})
 
+<a id="hosts-configuration"></a>
+
 ## Hypervisor Configuration
 
 First we need to configure hypervisors for LVM operations over the shared SAN storage.
-
-<a id="hosts-lvm-configuration"></a>
 
 ### Hosts LVM Configuration
 
@@ -51,8 +51,6 @@ In case of the virtualization Host reboot, the volumes need to be activated to b
 {{< /alert >}}
 
 Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
-
-<a id="hosts-san-configuration"></a>
 
 ### Hosts SAN Configuration
 
@@ -123,17 +121,16 @@ sudo systemctl restart multipathd
 sudo multipath -ll
 ```
 
-<a id="san-frontend"></a>
+<a id="frontend-configuration"></a>
 
-### Access to SAN from Front-end
+## Front-end Configuration
 
 The Front-end needs access to the shared SAN server in order to perform LVM operations. It can
 either access it directly, or using some host(s) as proxy/bridge.
 
-For **direct access**, the Front-end will need to be configured in the same way as hosts (following
-the two [previous]({{% relref "#hosts-lvm-configuration" %}}) [sections]({{% relref
-"#hosts-san-configuration" %}})), and no further configuriation will be needed. Example for
-illustration purposes:
+For direct access, **the Front-end will need to be configured in the same way as hosts** (following
+the [previous section]({{% relref "#hosts-configuration" %}})), and no further configuriation will
+be needed. Example for illustration purposes:
 
 ```
 -------------
@@ -246,7 +243,7 @@ ID: 101
 
 {{< alert title="Warning" color="success" >}}
 Please adapt this example to your case, in particular the [`BRIDGE_LIST`]({{% relref
-"lvm_drivers#san-frontend" %}}) attribute, as discussed previously.
+"lvm_drivers#frontend-configuration" %}}) attribute, as discussed previously.
 {{< /alert >}}
 
 #### Front-end setup (Image Datastore)
@@ -371,7 +368,7 @@ For example, consider a system with two Virtual Machines (`9` and `10`) using a 
   lv-one-9-0  vg-one-0 -wi------- 2.20g
 ```
 
-### LVM Thin internals
+### LVM Thin Internals
 
 In this mode, every launched VM will allocate a dedicated **Thin Pool**, containing one **Thin LV** per disk. So, a VM (with id 11) with two disks would be instantiated as follows:
 
