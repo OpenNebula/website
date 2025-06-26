@@ -12,7 +12,9 @@ For each of the hosts and frontend you'll need to either gather or define their 
 
 Navigate to **Storage → Hosts** in the PureStorage dashboard. For each OpenNebula host and frontend, select the **+** in the top right of the Hosts card and set a **Name** that clearly identifies the host, and leave the Personality as **None**.  You can also use the "Create Multiple…" if you have many hosts.
 
-![image0](/images/purestorage_add_hostgroup.png)
+<center>
+{{< image path=/images/purestorage_add_hostgroup.png width=500 alt="image0" >}}
+</center>
 
 Once each host is populated in the list, click into each of them and then on the **Host Ports** card, select the Menu (**⋮**) button and select **Configure IQNs**. Paste the initiator name from `/etc/iscsi/initiatorname.iscsi` from the proper host here.
 
@@ -30,7 +32,9 @@ You don’t need to configure snapshots, protection policies, or replication unl
 
 Click on the volume you just created, and on the **Connected Host Groups** card, click the Menu (**⋮**) button and click **Connect…**. Select your host group (or individual hosts if you’re not using a group), and confirm the connection.
 
-![image1](/images/purestorage_connect_hostgroup.png)
+<center>
+{{< image path=/images/purestorage_connect_hostgroup.png width=500 alt="image0" >}}
+</center>
 
 Once connected, the volume will be exposed to all hosts in the group. You can update the host group if you add/remove hosts from your OpenNebula installation.
 
