@@ -2,6 +2,7 @@ AAVMF
 Acknowledgements
 ACL
 ACLs
+ACOD
 ACPI
 ADDITONAL
 AddressRange
@@ -11,6 +12,7 @@ AllInstances
 AllocateSpace
 Almalinux
 AlmaLinux
+Altra
 Ansible
 APIC
 APIs
@@ -21,6 +23,7 @@ ARGS
 ARP
 ARs
 ASC
+ASPEED
 AssignVMToPool
 Auth
 Authenticator
@@ -98,6 +101,7 @@ DRS
 DRV
 DSs
 Ebtables
+efi
 Entrypoint
 ENV
 EPEL
@@ -112,6 +116,7 @@ FFRouting
 FileManagement
 Filesystem
 FireEdge
+FlashArray
 FlexClone
 FQDN
 FreeBSD
@@ -172,6 +177,7 @@ IPSec
 IPSEC
 IPv
 IQN
+IQNs
 IRQ
 Javascript
 Journald
@@ -180,6 +186,7 @@ JWT
 JWTs
 Keepalive
 Kerberos
+KiB
 Kube
 Kubeadm
 Kubernetes
@@ -212,6 +219,7 @@ MetalLB
 Mhz
 MinIO
 MiniONE
+MiB
 MITM
 MMU
 Morefs
@@ -224,6 +232,9 @@ Multipath
 Multitenancy
 Multus
 NAS
+NAT
+NATing
+Neoverse
 NetApp
 NETAPP
 Netplan
@@ -311,6 +322,7 @@ Realtime
 RebootInLast
 RedHat
 Redux
+Renesas
 ResponseError
 Restic
 RHEL
@@ -327,6 +339,7 @@ ScheduledAction
 SchedulerDown
 Schemas
 Scons
+SCP
 Screencasts
 SDK
 SDNAT
@@ -505,7 +518,6 @@ backupjobpool
 balancer
 balancers
 baremetal
-bbbbbbbbbbbb
 bdf
 behavior
 behaviour
@@ -561,6 +573,8 @@ cpuset
 cputune
 crb
 cron
+cronjob
+crontab
 cryptographic
 css
 csv
@@ -695,6 +709,7 @@ het
 hoc
 hooklog
 hookpool
+hostgroup
 hostname
 hostnames
 hostpool
@@ -716,6 +731,7 @@ hyrbid
 iconoir
 ide
 ie
+igroup
 im
 imagen
 imagepool
@@ -1028,6 +1044,7 @@ repo
 repos
 req
 rescan
+rescanning
 resched
 resetserver
 resourcesidentifier
@@ -1092,6 +1109,7 @@ shouldn
 showback
 sinatra
 snakeoil
+SnapMirror
 snapshotcreate
 snapshotdelete
 snapshotflatten
@@ -1188,6 +1206,7 @@ updatear
 updateconf
 updatenic
 upgradeable
+uPD
 uplink
 uplinks
 upstreams

@@ -27,7 +27,7 @@ OneSwap is developed and maintained by OpenNebula on a [dedicated github reposit
 
 ### Configure
 
-You can configure the tool by editing the file `/etc/one/oneswap.yaml`. In here you can configure items like vCenter credentials, so you don't pass then on the CLI. For examle
+You can configure the tool by editing the file `/etc/one/oneswap.yaml`. In here you can configure items like vCenter credentials, so you don't have to pass them on the CLI. For example:
 
 ```yaml
 # vCenter Authentication
