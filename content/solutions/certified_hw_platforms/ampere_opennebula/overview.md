@@ -5,9 +5,9 @@ weight: 1
 
 [Ampere](https://amperecomputing.com/) is a semiconductor design company that develops server-grade processors for cloud environments, with a focus on high performance and energy efficiency.
 
-To deploy and verify an OpenNebula cloud Ampere hardware, OpenNebula provides a [Certified Ampere Hardware with OpenNebula software](https://github.com/OpenNebula/certified-hardware-ampere), a set of Ansible playbooks that allows you to deploy and verify an OpenNebula cloud with a few simple commands.
+You can deploy and verify an OpenNebula cloud on Ampere hardware, by using [Certified Ampere Hardware with OpenNebula software](https://github.com/OpenNebula/certified-hardware-ampere), a set of Ansible playbooks that allows you to deploy and verify an OpenNebula cloud with a few simple commands.
 
-This guide provides a reference Ampere hardware specification, that has been used to verify OpenNebula. It includes instructions on how to perform a ZeroTouch deployment of OpenNebula on the certified hardware, and provides a reference architecture and configuration.
+This guide provides a reference Ampere hardware specification that has been used to verify OpenNebula. It includes instructions on how to perform a ZeroTouch deployment of OpenNebula on the certified hardware, and provides a reference architecture and configuration.
 
 Following this guide, you can:
 

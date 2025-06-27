@@ -7,9 +7,19 @@ tags:
 weight: 3
 ---
 
-## Infrastructure Provisioning
+To perform the automated deployment of an OpenNebula cloud, the Ampere infrastructure of connected servers must be previously configured and available. This guide provides guidance on how to extract the list of required parameters of the provisioned infrastructure -- which will later be used for the automation of the OpenNebula deployment -- and an outline of the process for the automated deployment of an OpenNebula cloud.
 
-This guide does not cover how to provision the Ampere infrastructure on premises. As a starting point, it is assumed that the servers are provisioned, networking and storage are configured, the required operating system is installed, and the servers are reachable from the machine where the below commands are executed.
+## Ampere Infrastructure Provisioning
+
+Provisioning the Ampere infrastructure on premises is out of the scope of this guide. To perform the automated deployment of an OpenNebula cloud, the Ampere infrastructure must meet the following conditions:
+
+- Servers are provisioned
+- Networking is configured
+- Storage is configured
+- The required operating system is installed
+- Servers in the infrastructure are reachable from the machine where the deployment commands will be run
+
+For the reference architecture and HW/SW specifications, please refer to the [previous section]({{% relref "ampere_hw_spec_and_arch" %}}).
 
 ## Save Required Parameters
 
