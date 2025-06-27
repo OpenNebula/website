@@ -129,7 +129,7 @@ The Front-end needs access to the shared SAN server in order to perform LVM oper
 either access it directly, or using some host(s) as proxy/bridge.
 
 For direct access, **the Front-end will need to be configured in the same way as hosts** (following
-the [previous section]({{% relref "#hosts-configuration" %}})), and no further configuriation will
+the [previous section]({{% relref "#hosts-configuration" %}})), and no further configuration will
 be needed. Example for illustration purposes:
 
 ```
@@ -404,7 +404,7 @@ For more details about the inner workings of LVM, please refer to the [lvmthin(7
 
 ## Troubleshooting
 
-### LVM devicesfile
+### LVM Devices File
 
 **Problem:** LVM does not show my iSCSI/multipath devices (with e.g., `pvs`), although I can see them
 with `multipath -ll` or `lsblk`.
@@ -420,7 +420,7 @@ running:
 lvmconfig --type full devices/use_devicesfile
 ```
 
-If it returns `devices/use_devicesfile=1`, then the devicesfile is being used and enforced. In that
+If it returns `devices/use_devicesfile=1`, then the devices file is being used and enforced. In that
 case, just add the device path to the whitelist and check again:
 
 ```
