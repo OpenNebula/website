@@ -160,7 +160,7 @@ Read-only operations enforce any ACL restriction or ownership checks.{{< /alert 
 
 Any other API call is forwarded to the active oned process. In this case, the cache server is acting as a simple proxy. The architecture recommended to be used with the cache server is depicted in the following figure:
 
-![scala](/images/one_scalability.jpg)
+![><](/images/one_scalability.png)
 
 When the Master oned is actually a RAFT cluster, you can simply point the API servers to the VIP address of the cluster. Note also that the MySQL server in each RAFT server should be configured to listen to the VIP address to let the API servers query the database.
 
