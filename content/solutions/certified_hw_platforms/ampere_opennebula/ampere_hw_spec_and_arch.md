@@ -1,5 +1,5 @@
 ---
-title: "Hardware and Software Specification"
+title: "Hardware Specification and Architecture"
 description:
 categories:
 pageintoc: ""
