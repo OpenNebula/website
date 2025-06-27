@@ -11,10 +11,6 @@ weight: "3"
 <a id="upgrade-single"></a>
 
 <!--# Upgrading Single Front-end Deployments -->
-
-{{< alert title="Important" color="success" >}}
-Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration). In order to use these non-commercial migrators to upgrade to the latest CE release (OpenNebula 6.8.0), you will need to upgrade your existing OpenNebula environment first to CE Patch Release 6.6.0.1{{< /alert >}}
-
 {{< alert title="Important" color="success" >}}
 If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
 
@@ -34,13 +30,18 @@ onehost disable <host_id>
 
 ### Step 3. Stop OpenNebula
 
-Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
+Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services. For example (note `opennebula-scheduler` is no longer used in 7.0 or newer):
+```bash
+systemctl stop opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-scheduler.service opennebula-fireedge.service
+```
+
+Now make sure every OpenNebula process is stopped. For example:
+```bash
+systemctl is-active opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-scheduler.service opennebula-fireedge.service
+```
 
 {{< alert title="Important" color="success" >}}
 If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}}
-
-{{< alert title="Warning" color="warning" >}}
-Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.{{< /alert >}}
 
 ### Step 4. Back up OpenNebula Configuration
 
@@ -62,135 +63,104 @@ In order to be able to retrieve the packages for the latest version, you need to
 
 ### Step 6. Upgrade to the New Version
 
+{{< alert title="Important" color="success" >}}
+When prompted by the package manager, select the option to keep your current (modified) configuration files. The upgrade of these files will be handled in the next step.{{< /alert >}}
+
 Ubuntu/Debian
 
 ```bash
 apt-get update
-```
-```bash
-apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge python3-pyone
+apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
 ```
 
 RHEL
 
 ```bash
-yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge python3-pyone
+yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
 ```
-
-#### Community Edition
-
-If upgrading OpenNebula CE, you will need to install the `opennebula-migration-community` package on your Front-end.
-
-If you are upgrading to the _latest_ version, you will need to download the package from the [Get Migration Packages](https://opennebula.io/get-migration) page.
-
-If you are upgrading to any prior version (such as upgrading from 6.6 to 6.8), then the migration package is already included in the OpenNebula repositories.
-
-To install the migration package:
-
-On RHEL:
-
-```bash
-rpm -i opennebula-migration-community*.rpm
-```
-
-On Debian/Ubuntu:
-
-```bash
-dpkg -i opennebula-migration-community*.deb
-```
-
-{{< alert title="Note" color="success" >}}
-Before downloading the migration package it’s a good idea to double-check the URL in your software repository file. Ensure that the URL includes the software major and minor version (in `<major>.<minor>` format), but not the exact release.
-
-For example, for OpenNebula version 6.8, the file should point to `https://downloads.opennebula.io/repo/6.8` and not `https://downloads.opennebula.io/repo/6.8.0`. The first case will include migration packages for 6.8.\* whereas the second case will exclude minor versions such as 6.8.0.1.{{< /alert >}}
 
 ### Step 7. Update Configuration Files
 
-In HA setups it is necessary to replace in the file `/etc/one/monitord.conf` the default value `auto` of `MONITOR_ADDRESS` attributed to the virtual IP address used in RAFT_LEADER_HOOK and RAFT_FOLLOWER_HOOK in `/etc/one/oned.conf`.
-
-#### Community Edition
-
-In order to update the configuration files with your existing customizations you’ll need to:
-
-- Compare the old and new configuration files: `diff -ur /etc/one.YYYY-MM-DD /etc/one` and `diff -ur /var/lib/one/remotes/etc.YYYY-MM-DD /var/lib/one/remotes/etc`. You can use graphical diff-tools like `meld` to compare both directories; they are very useful in this step.
-- Edit the **new** files and port all the customizations from the previous version.
-
-#### Enterprise Edition
-
-If you have modified configuration files, use `onecfg` to automate the configuration file upgrades.
+In High Availability (HA) setups, you must replace the default value auto of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
 
 {{< alert title="Note" color="success" >}}
-In order to migrate all labels to the new Sunstone interface, you need to back up the **sunstone-views.yaml** file, usually located at `/etc/one/sunstone-views.yaml`. Then you need to restore this file to the same location after the `onecfg` upgrade has been performed.{{< /alert >}}
+When upgrading from versions prior to 7.0, you must back up the ``/etc/one/sunstone-views.yaml`` file. After completing the onecfg upgrade step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.{{< /alert >}}
 
-Before upgrading OpenNebula you need to ensure that the configuration state is clean without any pending migrations from past or outdated configurations. Run `onecfg status` to check the configuration state.
-
-A clean state might look like this:
+Before upgrading OpenNebula, ensure that the configuration state is clean, with no pending migrations from previous or outdated configurations. To verify this, run `onecfg status`. A clean state should resemble the following output:
 
 ```default
 $ onecfg status
 --- Versions ------------------------------
-OpenNebula:  6.8.3
-Config:      6.8.0
+OpenNebula:  7.0.0
+Config:      6.10.0
+
+--- Backup to Process ---------------------
+Snapshot:    /var/lib/one/backups/config/2025-06-27_11:05:47-v6.10.0
+(will be used as one-shot source for next update)
 
 --- Available Configuration Updates -------
-No updates available.
+New config:  7.0.0
+- from 6.10.0 to 6.10.2 (YAML, Ruby)
+- from 6.10.2 to 7.0.0 (YAML, Ruby)
 ```
 
-#### Unknown Configuration Version Error
+{{<alert title="Note" color="success">}}
+After running onecfg status, you might encounter one of the following messages:
 
-If you get an error message about an unknown configuration version, you don’t need to do anything. The configuration version will be automatically initialized during the OpenNebula upgrade. The configuration of the current version will be based on the former OpenNebula version.
+* *Unknown Configuration Version Error*. No action is required. The configuration version will be initialized automatically during the OpenNebula upgrade based on the existing version.
 
-```default
-$ onecfg status
---- Versions ------------------------------
-OpenNebula:  6.8.3
-Config:      unknown
-ERROR: Unknown config version
-```
+* *Configuration Metadata Outdated Error*. This indicates that a configuration upgrade was skipped during a previous OpenNebula upgrade. To resolve this, reinitialize the configuration state with `onecfg init --force`. This will discard any unprocessed configuration upgrades.{{</alert>}}
 
-#### Configuration Metadata Outdated Error
-
-If the configuration tool complains about outdated metadata, you have not run a configuration upgrade during some of the past OpenNebula upgrades. Please note, configuration must be upgraded or processed even for OpenNebula’s maintenance releases.
-
-The following invalid state:
+After confirming the configuration state, in most cases you can proceed with the following command, which uses OpenNebula’s internal version tracking to apply the appropriate configuration updates:
 
 ```default
-$ onecfg status
---- Versions ------------------------------
-OpenNebula:  6.8.3
-Config:      6.8.0
-ERROR: Configurations metadata are outdated.
-```
-
-needs to be fixed by reinitialization of the configuration state. Any unprocessed upgrades will be lost and the current state will be initialized based on your current OpenNebula version and configurations located in system directories.
-
-```default
-$ onecfg init --force
-$ onecfg status
---- Versions ------------------------------
-OpenNebula:  6.8.3
-Config:      6.8.3
-
---- Available Configuration Updates -------
-No updates available.
-```
-
-After checking the state of configuration, in most cases running the following command without any extra parameters will suffice, as it will upgrade the probes based on the internal configuration version tracking of the currently installed OpenNebula.
-
-```default
-$ onecfg upgrade
-ANY   : Backup stored in '/tmp/onescape/backups/2020-6...
-ANY   : Configuration updated to 6.2.1
+# onecfg upgrade
+ANY   : Found backed up configuration to process!
+ANY   : Snapshot to update from '/var/lib/one/backups/config/2025-06-27_11:05:47-v6.10.0'
+ANY   : Backup stored in '/var/lib/one/backups/config/2025-06-27_11:39:36_30392'
+ANY   : Configuration updated to 7.0.0
 ```
 
 If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade basic usage documentation]({{% relref "../configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../configuration_management_ee/usage#cfg-upgrade" %}}) and the [troubleshooting section]({{% relref "../configuration_management_ee/conflicts#cfg-conflicts" %}}).
 
+Finally, check the configuration state via `onecfg status`. There should be no errors and no new updates available. Your configuration should be up to date for the currently installed OpenNebula version. For example:
+
+```default
+--- Versions ------------------------------
+OpenNebula:  7.0.0
+Config:      7.0.0
+
+--- Available Configuration Updates -------
+No updates available.
+```
+
 ### Step 8. Upgrade the Database Version
 
-{{< alert title="Important" color="success" >}}
-Users of the Community Edition of OpenNebula can upgrade from the previous stable version if they are running a non-commercial OpenNebula cloud. In order to access the migrator package a request needs to be made through this [online form](https://opennebula.io/get-migration).{{< /alert >}}
+Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
 
-Make sure at this point that OpenNebula is not running. If you installed from packages, the service may have been started automatically. Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`.
+```default
+$ onedb upgrade -v
+Version read:
+Shared tables 6.10.0 : OpenNebula 6.10.0 (5d6b8571) daemon bootstrap
+Local tables  6.10.0 : OpenNebula 6.10.0 (5d6b8571) daemon bootstrap
+
+Sqlite database backup stored in /var/lib/one/one.db_2025-6-27_11:45:51.bck
+Use 'onedb restore' to restore the DB.
+
+>>> Running migrators for shared tables
+  > Running migrator /usr/lib/one/ruby/onedb/shared/6.10.0_to_7.0.0.rb
+  > Done in 0.00s
+
+Database migrated from 6.10.0 to 7.0.0 (OpenNebula 7.0.0) by onedb command.
+
+>>> Running migrators for local tables
+  > Running migrator /usr/lib/one/ruby/onedb/local/6.10.0_to_7.0.0.rb
+  > Done in 0.08s
+
+Database migrated from 6.10.0 to 7.0.0 (OpenNebula 7.0.0) by onedb command.
+
+Total time: 0.12s
+```
 
 ### Step 9. Check DB Consistency
 
@@ -207,7 +177,17 @@ Total errors found: 0
 
 ### Step 10. Start OpenNebula
 
-Start OpenNebula and any other related services: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
+Start OpenNebula and any other related services: OneFlow, OneGate & FireEdge. First reload the new systemd unit files
+
+```bash
+systemctl daemon-reload
+```
+
+And restart the services:
+
+```bash
+systemctl start opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-fireedge.service
+```
 
 {{< alert title="Important" color="success" >}}
 If you are running FireEdge service behind Apache/Nginx, please start also the Apache/Nginx service.{{< /alert >}}
@@ -227,11 +207,12 @@ Update the virtualization, storage, and networking drivers. As the `oneadmin` us
 onehost sync
 ```
 
-Then log in to your hypervisor Hosts and update the `opennebula-node` packages:
+Then log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described above.
 
 Ubuntu/Debian
 
 ```bash
+apt-get update
 apt-get install --only-upgrade opennebula-node-<hypervisor>
 ```
 

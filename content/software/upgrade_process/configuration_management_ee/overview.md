@@ -12,10 +12,7 @@ weight: "1"
 
 <!--# Overview -->
 
-{{< alert title="Important" color="success" >}}
-The complete feature is available in the OpenNebula **Enterprise Edition**. Only a single functionality is included in the **Community Edition**.{{< /alert >}}
-
-OpenNebula has tens of configuration files, where cloud administrators can fine-tune the behavior of their cloud environment. When carrying out an upgrade to a newer minor OpenNebula version (`X.Y`), unfortunately all custom changes in configuration files must be migrated to new configuration files. OpenNebula **Enterprise Edition** comes with a dedicated tool (`onecfg`) which automates and simplifies the upgrade of configuration files.
+OpenNebula has tens of configuration files, where cloud administrators can fine-tune the behavior of their cloud environment. When carrying out an upgrade to a newer minor OpenNebula version (`X.Y`), unfortunately all custom changes in configuration files must be migrated to new configuration files. OpenNebula includes a dedicated tool (`onecfg`) which automates and simplifies the upgrade of configuration files.
 
 This Chapter describes how to use the configuration management tool to:
 
