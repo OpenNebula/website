@@ -7,7 +7,7 @@ tags:
 weight: 3
 ---
 
-This section details a step-by-step procedure to provision the reference infrastructure on the IONOS Cloud, demonstrated by screenshots. It provides guidance on how to extract the list of required parameters of the provisioned infrastructure, which are used for the automation of the OpenNebula deployment.
+This section details a step-by-step procedure to provision the reference infrastructure on the IONOS Cloud, demonstrated by screenshots. It provides guidance on how to extract the list of required parameters of the provisioned infrastructure, which will later be used for the automation of the OpenNebula deployment.
 
 ## Infrastructure Provisioning
 
