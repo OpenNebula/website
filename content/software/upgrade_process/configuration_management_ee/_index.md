@@ -1,5 +1,5 @@
 ---
-title: "Configuration Management (EE)"
+title: "Configuration Management"
 date: "2025-02-17"
 description: "Use a command-line tool to migrate your configuration files for upgrading"
 categories:
