@@ -19,12 +19,12 @@ After successfully verifying the infrastructure deployed by the automations, to 
 
 To log in, use the default username `oneadmin`, and the password specified in the `one_pass` variable of the inventory file.
 
-The image below shows the Virtual Machine included in the OpenNebula installation:
+The image below shows the **Alpine Linux 3.20** Virtual Machine included in the OpenNebula installation:
 
 <a id="one-marketplace"></a>
 ![><][one-marketplace]
 
-To instantiate the VM, in the Sunstone UI's left-hand menu go to **Instances** --> **VMs**. Click the icon highlighted below, then select the Virtual Machine image.
+To instantiate the VM, in the Sunstone UI's left-hand menu go to **Instances** --> **VMs**. Click the **Create** icon highlighted below, then select the Virtual Machine image.
 
 <a id="one-new-vm"></a>
 ![><][one-new-vm]
