@@ -27,14 +27,19 @@ OneSwap is developed and maintained by OpenNebula on a [dedicated github reposit
 
 ### Configure
 
-You can configure the tool by editing the file `/etc/one/oneswap.yaml`. In here you can configure items like vCenter credentials, so you don't have to pass them on the CLI. For example:
+You can configure the tool by editing the file `/etc/one/oneswap.yaml`. In here you can configure multiple items related to several aspects of OneSwap. For example, the OVA import process takes place by default at `/tmp`. The resulting qcow2 image is then imported with a `one.image.allocate` call that takes `/tmp/<qcow2_disk>.qcow2` as the path argument. By setting a `:work_dir` you can customize where these two operations take place.
 
 ```yaml
-# vCenter Authentication
-#:vcenter: '172.20.0.123'                 # vCenter hostname or IP
-#:vuser: 'administrator@vsphere.local'    # vCenter username
-#:vpass: 'changeme123'                    # vCenter password
-#:port: 443                               # vCenter port
+# virt-v2v Options
+#:work_dir: '/tmp'                        # Directory where disk conversion takes place, will make subdir for each VM
+#:format: 'qcow2'                         # Disk format [ qcow2 | raw ]
+#:vddk_path:                              # Path to VDDK library
+#:qemu_ga_win:                            # Path to QEMU Guest Agent ISO for Windows
+#:qemu_ga_linux:                          # Install QEMU Guest Agent for Linux
+#:virtio_path:                            # Path to VirtIO drivers for Windows
+#:virt_tools: /usr/local/share/virt-tools # Path to the directory containing rhsrvany.exe
+#:v2v_path: 'virt-v2v'                    # Path to virt-v2v
+#:root: 'first'                           # Choose the root filesystem to be converted
 ```
 
 
