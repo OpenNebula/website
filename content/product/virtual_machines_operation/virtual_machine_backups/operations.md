@@ -130,6 +130,28 @@ Sunstone will display the screen to update the VM Configuration.
 
 ![vm_cfg_tab](/images/backup_vm_configuration_tab.png)
 
+### Bridge List
+
+The `BRIDGE_LIST` parameter in a Backup Datastore defines which Hosts are responsible for transferring VM backups from the hypervisor to the Backup Datastore.
+
+{{< alert title="Note" color="success" >}}
+This feature is only supported for **shared system datastores** (currently only with **Ceph**).{{< /alert >}}
+
+All Hosts listed in `BRIDGE_LIST` must meet the following requirements:
+
+- Must have **network access** to the Backup Datastore.
+- Must be able to establish **passwordless SSH connections** to:
+  - The **OpenNebula Frontend**
+  - The **Backup Server**
+
+During the backup process:
+
+- OpenNebula automatically selects one of the hosts from the `BRIDGE_LIST`.
+- This host is used to:
+  - Retrieve the snapshot created by the hypervisor.
+  - Export it to the Backup Datastore.
+- The name of the selected Host is recorded in the VM's backup configuration, under the `LAST_BRIDGE` field.
+
 <a id="vm-backups-config-attributes"></a>
 
 ### Reference: Backup Configuration Attributes
@@ -143,6 +165,7 @@ Sunstone will display the screen to update the VM Configuration.
 | `INCREMENT_MODE`        | Incremental backup type `CBT` (default) or `SNAPSHOT`                                                            |
 | `INCREMENTAL_BACKUP_ID` | For `INCREMENT` points to the backup image where increment chain is stored (read-only)                           |
 | `LAST_INCREMENT_ID`     | For `INCREMENT` the ID of the last incremental backup taken (read-only)                                          |
+| `LAST_BRIDGE`           | Hostname of the bridge host used to export the backup to the backup datastore                                    |
 
 ## Taking VM Backups
 
