@@ -47,7 +47,7 @@ This will run the spellcheck including the words in the dictionary provided in t
 
 You can also run the command from the provided script, `spellcheck.sh`.
 
-For installation details on Linux and macOS please see [SPELLCHECKING.md](/SPELLCHECKING.md).
+For installation details on Linux and macOS please see [SPELLCHECKING.md](/SPELLCHECK.md).
 
 ## More Info
 
