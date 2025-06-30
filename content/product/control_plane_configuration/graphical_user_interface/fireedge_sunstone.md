@@ -106,7 +106,7 @@ From this section, users can define multiple configuration options for themselve
 - **Two Factor Authentication**: allows users to register an app to perform [Two Factor Authentication]({{% relref "../../cloud_system_administration/authentication_configuration/sunstone_auth#sunstone-2f-auth" %}}).
 
 {{< alert title="Note" color="success" >}}
-All the configurations set in this section will be in the user template.{{< /alert >}} 
+All the configurations set in this section will be in the user template.{{< /alert >}}
 
 ![fireedge_sunstone_settings](/images/fireedge_sunstone_settings.png)
 
@@ -196,14 +196,14 @@ On Sunstone each view is defined by a folder that has the YAML files for the con
 In the following tables, the description field contains the expected behavior when it is set to `true`.
 
 {{< alert title="Note" color="success" >}}
-The attributes can be modified only if they come in the YAML file by default. If an attribute is not present, it has the same behavior as when it is set to false.{{< /alert >}} 
+The attributes can be modified only if they come in the YAML file by default. If an attribute is not present, it has the same behavior as when it is set to false.{{< /alert >}}
 
 ### Actions
 
 The attributes described here indicate which buttons are visible to operate over the resources. The following attributes must be nested in an `actions` tag.
 
 | Attribute            | Description                                                                                                   |
-|----------------------|---------------------------------------------------------------------------------------------------------------|
+| -------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `backup`             | Users will be able to create a Virtual Machine backup.                                                        |
 | `change_cluster`     | Users will be able to change the resource cluster.                                                            |
 | `chgrp`              | Users will be able to change the resource group.                                                              |
@@ -261,7 +261,7 @@ The attributes described here indicate which buttons are visible to operate over
 The attributes described here indicate which filters are visible to select resources. The following attributes must be nested in a `filters` tag.
 
 | Attribute     | Description                                                         |
-|---------------|---------------------------------------------------------------------|
+| ------------- | ------------------------------------------------------------------- |
 | `group`       | Filtering by the resource group will be enabled.                    |
 | `hostname`    | Filtering by the resource hostname will be enabled.                 |
 | `ips`         | Filtering by the resource IPs will be enabled.                      |
@@ -280,7 +280,7 @@ The attributes described here indicate which filters are visible to select resou
 The attributes described here indicate the available actions on each info tab on the resource. The following attributes must be nested in an `info-tabs` and the corresponding tab.
 
 | Attribute           | Description                                                                      |
-|---------------------|----------------------------------------------------------------------------------|
+| ------------------- | -------------------------------------------------------------------------------- |
 | `actions`           | Describes a list of available actions on this tab that can be disabled.          |
 | `attributes_panel`  | Describes the behavior for the `attributes` panel in the resource<br/>info tab.  |
 | `capacity_panel`    | Describes the behavior for the `capacity` panel in the resource info tab.        |
@@ -297,7 +297,7 @@ The attributes described here indicate the available actions on each info tab on
 The available actions in the info tabs are described in the following table.
 
 | Action                 | Description                                                           |
-|------------------------|-----------------------------------------------------------------------|
+| ---------------------- | --------------------------------------------------------------------- |
 | `add`                  | Users will be able to add information to that panel.                  |
 | `add_ar`               | Users will be able to add an address range.                           |
 | `add_secgroup`         | Users will be able to add a security group.                           |
@@ -341,7 +341,7 @@ The available actions in the info tabs are described in the following table.
 The attributes described here indicate which features are used for the resources. The following attributes must be nested in a `features` tag.
 
 | Attribute    | Description                                     |
-|--------------|-------------------------------------------------|
+| ------------ | ----------------------------------------------- |
 | `hide_cpu`   | Users won’t be able to change the CPU settings. |
 | `cpu_factor` | Users won’t be able to scale the CPU.           |
 
@@ -352,7 +352,7 @@ The attributes described here indicate which features are used for the resources
 The attributes described here indicate the available actions on each dialog on the resource.
 
 | Attribute      | Description                                  |
-|----------------|----------------------------------------------|
+| -------------- | -------------------------------------------- |
 | `backup`       | Backup section will be displayed.            |
 | `booting`      | Booting section will be displayed.           |
 | `capacity`     | Capacity section will be displayed.          |
@@ -383,10 +383,12 @@ To set these VNC connection configurations we must:
 3. Under the “Graphics” section there are all the VNC configurations.
 
 {{< alert title="Note" color="success" >}}
-To have the correct layout on your Virtual Machine you must set the same keymap inside the Virtual Machine as the `KEYMAP` attribute configured in the OpenNebula VM graphics section, and it must be the same as your keyboard layout.{{< /alert >}} 
+In case the VNC client is blurry or has any kind of visual tearing, try switching to the **virtio** video device type instead. This can be done by selecting the VM and going to the `Configuration` tab.
+![fireedge_sunstone_update_vm_config](/images/sunstone_update_vm_config.png)
+{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-Due to hypervisor limitations it is not possible to share the clipboard with the VM. For this we recommend the use of RDP or SSH.{{< /alert >}} 
+Due to hypervisor limitations it is not possible to share the clipboard with the VM. For this we recommend the use of RDP or SSH.{{< /alert >}}
 
 ![fireedge_sunstone_vnc](/images/sunstone-vnc.png)
 
@@ -400,7 +402,7 @@ At the top of the console you can find the buttons for the following actions:
 - **Lock/Unlock**: Lock/Unlock the use of the keyboard and mouse.
 
 {{< alert title="Note" color="success" >}}
-Sunstone does not connect directly to the VNC port, located in the VM template. Sunstone creates an SSH tunnel to the VNC port on any available port.{{< /alert >}} 
+Sunstone does not connect directly to the VNC port, located in the VM template. Sunstone creates an SSH tunnel to the VNC port on any available port.{{< /alert >}}
 
 ### OpenNebula RDP remote connection.
 
@@ -415,16 +417,17 @@ Sunstone also admits direct connections using RDP. This kind of connection is bo
 ![fireedge_sunstone_rdp](/images/sunstone-rdp.png)
 
 {{< alert title="Note" color="success" >}}
-To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}} 
+To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
 For RDP connections to work, a service such as [XRPD](https://www.xrdp.org/) is required on the VM to which you want to connect. Also, depending on the configuration of your RDP service, the following parameters can be added in the context of the VM:
 
-| Attribute      | Description                                                          |
-|----------------|----------------------------------------------------------------------|
+| Attribute      | Description                                                                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `RDP_SECURITY` | You can change the type of security that the `opennebula-guacd` service will use (it must be the same as the one configured in the RDP service of the VM). By default it uses `rdp`. |
-| `RDP_PORT`     | You can change the port that the `opennebula-guacd` service will use. By default it uses port `3389`. |
-{{< /alert >}} 
+| `RDP_PORT`     | You can change the port that the `opennebula-guacd` service will use. By default it uses port `3389`.                                                                                |
+
+{{< /alert >}}
 
 ### Actions in RDP console
 
@@ -435,7 +438,7 @@ At the top of the console you can find the buttons for the following actions:
 - **Reconnect**: Reconnect the VNC console.
 - **Download connection file**: Download the connection file for use with [Microsoft Remote Desktop](https://apps.microsoft.com/detail/9wzdncrfj3ps?hl=es-es&gl=ES).
   > {{< alert title="Note" color="success" >}}
-  > In order to be able to connect from an external application, you must have access to the IP address that appears in the file.{{< /alert >}} 
+  > In order to be able to connect from an external application, you must have access to the IP address that appears in the file.{{< /alert >}}
 
 ### OpenNebula SSH remote connection.
 
@@ -450,10 +453,10 @@ Sunstone also allows direct connections using SSH. This kind of connection is bo
 ![fireedge_sunstone_ssh](/images/sunstone-ssh.png)
 
 {{< alert title="Note" color="success" >}}
-To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}} 
+To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-To make the connection by this means, it must be done with username and password. it is not possible to send the SSH key.{{< /alert >}} 
+To make the connection by this means, it must be done with username and password. it is not possible to send the SSH key.{{< /alert >}}
 
 ### Actions in SSH console
 
@@ -464,27 +467,31 @@ At the top of the console you can find the buttons for the following actions:
 - **Reconnect**: Reconnect the VNC console.
 - **Configurations**:
   : - **SSH Command**: Reconnect the console by executing the command placed
-    - **Schema**: Changes the color scheme to be used for the terminal session. It consists of a series of name-value pairs separated by semicolons. Each name-value pair is separated by a colon and assigns a value to a color in the terminal emulator palette. For example:
-      > ```default
-      > foreground: rgb:00/00/ff;
-      > background: rgb:ff/ff/ff;
-      > color9: rgb:80/00/80
-      > ```
 
-      > Possible color names are:
-      > > - **foreground**: Set the default foreground color.
-      > > - **background**: Set the default background color.
-      > > - **colorN**: Set the color at index N on the Xterm 256-color palette. For example, color9 refers to the red color.
-      > >   : - **rgb:RR/GG/BB**: Use the specified color in RGB format, with each component in hexadecimal. For example: `rgb:ff/00/00`
-      > >     - **colorN**: Use the color currently assigned to index `N` on the Xterm 256-color palette.
-    <br/>
-      > For backward compatibility, it will also accept four special values as the color scheme parameter:
-      > > - **black-white**: Black text over a white background.
-      > > - **gray-black**: Gray text over a black background. This is the default color scheme.
-      > > - **green-black**: Green text over a black background.
-      > > - **white-black**: White text over a black background.
-    - **Font Name**: The name of the font to use. This parameter is optional. If not specified, the default of “mono-space” will be used instead.
-    - **Font Size**: The size of the font to use, in points. This parameter is optional. If not specified, the default of 12 will be used instead.
+  - **Schema**: Changes the color scheme to be used for the terminal session. It consists of a series of name-value pairs separated by semicolons. Each name-value pair is separated by a colon and assigns a value to a color in the terminal emulator palette. For example:
+
+    > ```default
+    > foreground: rgb:00/00/ff;
+    > background: rgb:ff/ff/ff;
+    > color9: rgb:80/00/80
+    > ```
+
+    > Possible color names are:
+    >
+    > > - **foreground**: Set the default foreground color.
+    > > - **background**: Set the default background color.
+    > > - **colorN**: Set the color at index N on the Xterm 256-color palette. For example, color9 refers to the red color.
+    > >   : - **rgb:RR/GG/BB**: Use the specified color in RGB format, with each component in hexadecimal. For example: `rgb:ff/00/00` - **colorN**: Use the color currently assigned to index `N` on the Xterm 256-color palette.
+    > >   <br/>
+    > >   For backward compatibility, it will also accept four special values as the color scheme parameter:
+    > > - **black-white**: Black text over a white background.
+    > > - **gray-black**: Gray text over a black background. This is the default color scheme.
+    > > - **green-black**: Green text over a black background.
+    > > - **white-black**: White text over a black background.
+
+  - **Font Name**: The name of the font to use. This parameter is optional. If not specified, the default of “mono-space” will be used instead.
+  - **Font Size**: The size of the font to use, in points. This parameter is optional. If not specified, the default of 12 will be used instead.
+
 - **Download connection file**: Download the connection file for use with [TigerVNC Viewer](https://tigervnc.org/).
   > {{< alert title="Note" color="success" >}}
-  > In order to be able to connect from an external application, you must have access to the IP address that appears in the file.{{< /alert >}} 
+  > In order to be able to connect from an external application, you must have access to the IP address that appears in the file.{{< /alert >}}
