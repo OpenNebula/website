@@ -140,7 +140,7 @@ This feature is only supported for **shared system datastores** (currently only 
 All Hosts listed in `BRIDGE_LIST` must meet the following requirements:
 
 - Must have **network access** to the Backup Datastore.
-- Must be able to establish **password-less SSH connections** to:
+- Must be able to establish **passwordless SSH connections** to:
   - The **OpenNebula Frontend**
   - The **Backup Server**
 
@@ -150,7 +150,7 @@ During the backup process:
 - This host is used to:
   - Retrieve the snapshot created by the hypervisor.
   - Export it to the Backup Datastore.
-- The selected host’s name is recorded in the VM’s backup configuration under the `LAST_BRIDGE` field.
+- The name of the selected Host is recorded in the VM's backup configuration, under the `LAST_BRIDGE` field.
 
 <a id="vm-backups-config-attributes"></a>
 
