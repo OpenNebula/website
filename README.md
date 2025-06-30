@@ -1,6 +1,6 @@
 # OpenNebula 7.0 Documentation
 
-This is the official repository of OpenNebula's Documentation, currently in development. This documentation is live at:
+This is the official repository of OpenNebula's technical documentation. This documentation is live at:
 [http://docs.opennebula.io/7.0](http://docs.opennebula.io/7.0).
 
 You are encouraged to fork this repo and send us pull requests!
@@ -11,7 +11,7 @@ To create issues to report changes and requests, please use the [OpenNebula main
 
 To build the documentation, you will need:
 
-- The [Hugo](https://gohugo.io/) static site generator and web server: **extended version** between `0.128.0` and `0.145.0` (`0.145.0` recommended)
+- The [Hugo](https://gohugo.io/) static site generator and web server: **extended version** between `0.128.0` and `0.145.0`. Version `0.145.0` is **highly** recommended since the documentation was built with this version
 - [Go](https://go.dev/doc/install)
 - [Node.js LTS](https://github.com/nodesource/distributions/blob/master/README.md#using-debian-as-root-nodejs-current)
 - [npm](https://www.npmjs.com/)
@@ -47,7 +47,7 @@ This will run the spellcheck including the words in the dictionary provided in t
 
 You can also run the command from the provided script, `spellcheck.sh`.
 
-For installation details on Linux and macOS please see SPELLCHECKING.md.
+For installation details on Linux and macOS please see [SPELLCHECKING.md](/SPELLCHECKING.md).
 
 ## More Info
 
