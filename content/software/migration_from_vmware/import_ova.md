@@ -75,6 +75,8 @@ It is possible to specify the target Datastore and VNET for the OVA to be import
 | `--virtio /path/to/virtio.iso`         | Path to the ISO file with the VirtIO drivers for the Windows version.                                                                                                                                           |
 | `--skip-context`                       | Skip injection of the context package.                                                                                                                                                                                                 |
 | `--remove_vmtools`                     | Add contextualization script to force remove VMware tools from the VM.                                                                                                                                                                      |
+| `--uefi-path /path/to/uefi`            | Path to the UEFI file to be configured in the VM template. It will be automatically selected if not set. |
+| `--uefi-sec-path /path/to/uefi.secboot` | Path to the UEFI Secure file to be configured in the VM template. It will be automatically selected if not set. |
 
 {{< alert title="Note" color="success" >}}
 The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used together.{{< /alert >}}
