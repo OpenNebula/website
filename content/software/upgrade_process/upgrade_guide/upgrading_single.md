@@ -30,12 +30,12 @@ onehost disable <host_id>
 
 ### Step 3. Stop OpenNebula
 
-Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services. For example (note `opennebula-scheduler` is no longer used in 7.0 or newer):
+Stop OpenNebula and any other related services you may have running: OneFlow, OneGate and FireEdge. To stop OpenNebula, it's preferable to use the system tools, like `systemctl` or `service` running as user `root`. For example (note that `opennebula-scheduler` is no longer used in 7.0 or newer):
 ```bash
 systemctl stop opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-scheduler.service opennebula-fireedge.service
 ```
 
-Now make sure every OpenNebula process is stopped. For example:
+Then make sure every OpenNebula process is stopped. For example:
 ```bash
 systemctl is-active opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-scheduler.service opennebula-fireedge.service
 ```
@@ -81,12 +81,12 @@ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge openn
 
 ### Step 7. Update Configuration Files
 
-In High Availability (HA) setups, you must replace the default value auto of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
+In High Availability (HA) setups, you must replace the default value `auto` of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
 
 {{< alert title="Note" color="success" >}}
-When upgrading from versions prior to 7.0, you must back up the ``/etc/one/sunstone-views.yaml`` file. After completing the onecfg upgrade step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.{{< /alert >}}
+When upgrading from versions prior to 7.0, you must back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg upgrade` step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.{{< /alert >}}
 
-Before upgrading OpenNebula, ensure that the configuration state is clean, with no pending migrations from previous or outdated configurations. To verify this, run `onecfg status`. A clean state should resemble the following output:
+Before upgrading OpenNebula, ensure that the configuration state is clean, with no pending migrations from previous or outdated configurations. To verify this, run `onecfg status`. A clean state should produce output similar to:
 
 ```default
 $ onecfg status
@@ -105,13 +105,13 @@ New config:  7.0.0
 ```
 
 {{<alert title="Note" color="success">}}
-After running onecfg status, you might encounter one of the following messages:
+After running `onecfg status`, you might encounter one of the following messages:
 
-* *Unknown Configuration Version Error*. No action is required. The configuration version will be initialized automatically during the OpenNebula upgrade based on the existing version.
+* `Unknown Configuration Version Error`: No action is required. The configuration version will be initialized automatically during the OpenNebula upgrade, based on the existing version.
 
-* *Configuration Metadata Outdated Error*. This indicates that a configuration upgrade was skipped during a previous OpenNebula upgrade. To resolve this, reinitialize the configuration state with `onecfg init --force`. This will discard any unprocessed configuration upgrades.{{</alert>}}
+* `Configuration Metadata Outdated Error`: This indicates that a configuration upgrade was skipped during a previous OpenNebula upgrade. To resolve this, reinitialize the configuration state with `onecfg init --force`. This will discard any unprocessed configuration upgrades.{{</alert>}}
 
-After confirming the configuration state, in most cases you can proceed with the following command, which uses OpenNebula’s internal version tracking to apply the appropriate configuration updates:
+After confirming the configuration state, in most cases you can proceed with the following command, which uses OpenNebula's internal version tracking to apply the appropriate configuration updates:
 
 ```default
 # onecfg upgrade
@@ -121,7 +121,7 @@ ANY   : Backup stored in '/var/lib/one/backups/config/2025-06-27_11:39:36_30392'
 ANY   : Configuration updated to 7.0.0
 ```
 
-If you get conflicts when running `onecfg` upgrade refer to the [onecfg upgrade basic usage documentation]({{% relref "../configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../configuration_management_ee/usage#cfg-upgrade" %}}) and the [troubleshooting section]({{% relref "../configuration_management_ee/conflicts#cfg-conflicts" %}}).
+If you get conflicts when running the `onecfg` upgrade, refer to the [onecfg upgrade basic usage documentation]({{% relref "../configuration_management_ee/usage#cfg-usage" %}}) on how to upgrade and troubleshoot the configurations, in particular the [onecfg upgrade doc]({{% relref "../configuration_management_ee/usage#cfg-upgrade" %}}) and the [Troubleshooting section]({{% relref "../configuration_management_ee/conflicts#cfg-conflicts" %}}).
 
 Finally, check the configuration state via `onecfg status`. There should be no errors and no new updates available. Your configuration should be up to date for the currently installed OpenNebula version. For example:
 
@@ -177,13 +177,13 @@ Total errors found: 0
 
 ### Step 10. Start OpenNebula
 
-Start OpenNebula and any other related services: OneFlow, OneGate & FireEdge. First reload the new systemd unit files
+Start OpenNebula and any other related services: OneFlow, OneGate and FireEdge. First reload the new systemd unit files:
 
 ```bash
 systemctl daemon-reload
 ```
 
-And restart the services:
+Then restart the services:
 
 ```bash
 systemctl start opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-fireedge.service
@@ -207,7 +207,7 @@ Update the virtualization, storage, and networking drivers. As the `oneadmin` us
 onehost sync
 ```
 
-Then log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described above.
+Then log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described [above](#step-5-upgrade-opennebula-packages-repository).
 
 Ubuntu/Debian
 
