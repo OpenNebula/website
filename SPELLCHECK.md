@@ -1,7 +1,7 @@
 
 # Checking Spelling in this Repo
 
-To quickly check spelling including the words in the provided dictionary, you can use PySpelling with Aspell and the `aspell-en` U.S. English dictionary.
+To quickly check spelling including the words in the provided dictionary (`dicts/OpenNebula.dic`), you can use PySpelling with Aspell and the `aspell-en` U.S. English dictionary.
 
 ## Requisites:
 
@@ -30,6 +30,26 @@ brew install aspell
 ```
 
 On macOS, you will have to download a dictionary and place it in `/Library/Spelling`. You can obtain Aspell dictionaries from `https://ftp.gnu.org/gnu/aspell/dict/en/`.
+
+#### The Aspell Dictionary
+
+The dictionary in use is `aspell-en-us` version 2018.04.16:
+
+- [aspell6-en-2018.04.16-0.tar.bz2](https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2018.04.16-0.tar.bz2)
+
+To download, uncompress and unpack it:
+
+```
+wget https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2018.04.16-0.tar.bz2
+```
+
+```
+bunzip2 aspell6-en-2018.04.16-0.tar.bz2
+```
+
+```
+tar xvf aspell6-en-2018.04.16-0.tar
+```
 
 ### Installing PysPelling
 
