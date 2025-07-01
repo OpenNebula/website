@@ -1,0 +1,136 @@
+/**
+* This file defines all the styles that needs breakpoint definitions
+*/
+
+// Main
+[role="main"] {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  @include media-breakpoint-up(md) {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+  @include media-breakpoint-up(xl) {
+    //padding-left: 48px !important;
+    padding-left: 5rem !important;
+    //padding-right: 48px !important;
+    padding-right: 5rem !important;
+  }
+}
+
+// Footer
+.one-footer-links-container {
+  width: 285px;
+
+  @include media-breakpoint-up(sm) {
+    width: 375px;
+  }
+  @include media-breakpoint-up(md) {
+    width: 450px;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 300px;
+  }
+  @include media-breakpoint-up(xl) {
+    width: 300px;
+  }
+}
+.one-footer-second-row {
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  @include media-breakpoint-up(md) {
+    margin-top: 31px;
+    margin-bottom: 16px;
+  }
+  @include media-breakpoint-up(lg) {
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+  @include media-breakpoint-up(xl) {
+    margin-top: 64px;
+    margin-bottom: 32px;
+  }
+}
+.one-footer-copyright {
+  padding-top: 1px;
+  padding-bottom: 8px;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 1px;
+    padding-bottom: 16px;
+  }
+  @include media-breakpoint-up(md) {
+    padding-top: 1px;
+    padding-bottom: 12px;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-top: 1px;
+    padding-bottom: 12px;
+  }
+  @include media-breakpoint-up(xl) {
+    padding-top: 1px;
+    padding-bottom: 12px;
+  }
+}
+.one-footer-acks {
+  padding-top: 12px;
+  padding-bottom: 1px;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 8px;
+    padding-bottom: 1px;
+  }
+  @include media-breakpoint-up(md) {
+    padding-top: 6px;
+    padding-bottom: 1px;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-top: 3px;
+    padding-bottom: 1px;
+  }
+  @include media-breakpoint-up(xl) {
+    padding-top: 6px;
+    padding-bottom: 1px;
+  }
+}
+.one-footer-links-container {
+  margin-bottom: 20px;
+
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 20px;
+  }
+  @include media-breakpoint-up(md) {
+    margin-bottom: 20px;
+  }
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 20px;
+  }
+  @include media-breakpoint-up(xl) {
+    margin-bottom: 20px;
+  }
+
+// Section index
+.section-index {
+
+  @include media-breakpoint-up(sm) {
+    width: 375px;
+  }
+  @include media-breakpoint-up(md) {
+    width: 450px;
+  }
+ }
+}
