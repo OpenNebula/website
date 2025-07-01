@@ -90,6 +90,7 @@ After a configuration change the FireEdge server must be [restarted]({{% relref 
 | `default_lang`         | `en`                                    | Default language setting                                     |
 | `langs`                |                                         | List of server localizations                                 |
 | `keep_me_logged_in`    | `true`                                  | True to display ‘Keep me logged in’ option                   |
+| `use_extended_vmpool`  | `true`                                  | True to use the extended information fetch for vm pools      |
 | `currentTimeZone`      |                                         | Time Zone                                                    |
 | `rowStyle`             | `card`                                  | Changes the style of rows in tables. Values can be `card` or `list`. |
 | `fullViewMode`         | `false`                                 | Changes to full mode view when see details of a resource. Values can be `true` or `false`. |
