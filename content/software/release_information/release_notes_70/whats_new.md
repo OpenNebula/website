@@ -124,3 +124,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix Restic backup driver when the server is not deployed together with the Front-end](https://github.com/OpenNebula/one/issues/7054).
 - [Fix HA in case of wrong SQL query](https://github.com/OpenNebula/one/issues/7025).
 - [Fix an issue with `fs_lvm_ssh` not honoring BRIDGE_LIST in the image datastore](https://github.com/OpenNebula/one/issues/7070).
+- [Fix cdrom DISK_TYPE=BLOCK during attach](https://github.com/OpenNebula/one/issues/6688).
