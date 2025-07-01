@@ -12,13 +12,13 @@ weight: "2"
 
 <!--# What’s New in 7.0 -->
 
-We’re excited to introduce OpenNebula 7.0 *Phoenix* RC 1, the first release candidate of our next major release. This version includes all the major new functionality planned for 7.0, and from this point onward the development team will focus on ironing out bugs, with only minor features potentially added before the final release.
+We’re excited to introduce OpenNebula 7.0.0 *Phoenix*, the new major OpenNebula release.
 
 The name *Phoenix* reflects a broader transformation in cloud infrastructure—symbolizing resilience and rebirth for organizations rethinking their architecture in the face of AI, multi-cloud, and edge computing trends.
 
-OpenNebula 7.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and help shape the final 7.0 release. Stay tuned—OpenNebula 7.0 *Phoenix* is almost here.
+OpenNebula 7.0.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and give your feedback on this final 7.0.0 release.
 
-Please note that this version is not upgradeable from 6.10.x, nor to the final 7.0.0 release. It's intended for testing and feedback, not production use. We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
+We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
 
 ## OpenNebula Core
 
@@ -36,7 +36,7 @@ Please note that this version is not upgradeable from 6.10.x, nor to the final 7
 
 ## Scheduler
 
-- OpenNebula 7.0 features a [complete re-write of the scheduling framework](../../../product/cloud_system_administration/scheduler/overview/#opennebula-scheduler-framework-architecture) to easily support multiple scheduling algorithms, and more responsive and reliable execution of scheduling plans.
+- OpenNebula 7.0.0 features a [complete re-write of the scheduling framework](../../../product/cloud_system_administration/scheduler/overview/#opennebula-scheduler-framework-architecture) to easily support multiple scheduling algorithms, and more responsive and reliable execution of scheduling plans.
 - [Intelligent DRS](../../../product/cloud_system_administration/scheduler/drs), a full-featured alternative to VMware DRS, including predictive scheduling, customizable policies, and automated VM migrations.
 
 ## Storage & Backups

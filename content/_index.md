@@ -11,7 +11,7 @@ breadcrumb_disable: true
 
 # Welcome to OpenNebula 7.0
 
-### *Version RC 1*
+<p></p>
 
 [OpenNebula](https://opennebula.io) is a powerful, but easy-to-use open source platform for enterprise, private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence.
 
