@@ -3,7 +3,7 @@ name: Build Hugo Site and Publish
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["one-7.0"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -62,7 +62,7 @@ jobs:
           npx postcss --version # Verify PostCSS installation
           hugo \
             --minify \
-            --baseURL "https://docs.opennebula.io/7.0/"
+            --baseURL "https://docs.opennebula.io/6.99/"
       
 # ------------------------------------------------------------------------------
 # Publish content
