@@ -137,7 +137,7 @@ No updates available.
 ### Step 8. Upgrade the Database Version
 
 {{< alert title="Important" color="danger" >}}
-Restore `/etc/one/sunstone-views.yaml` file to `/etc/one` before execute the following command.{{< /alert >}}
+For versions prior to 7.0, restore `/etc/one/sunstone-views.yaml` file to `/etc/one` before execute the following command.{{< /alert >}}
 
 Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
 
@@ -181,7 +181,7 @@ Total errors found: 0
 ### Step 10. Start OpenNebula
 
 {{< alert title="Important" color="danger" >}}
-Now, you can safely delete `/etc/one/sunstone-views.yaml`.{{< /alert >}}
+For versions prior to 7.0, now you can safely delete `/etc/one/sunstone-views.yaml`.{{< /alert >}}
 
 Start OpenNebula and any other related services: OneFlow, OneGate and FireEdge. First reload the new systemd unit files:
 
