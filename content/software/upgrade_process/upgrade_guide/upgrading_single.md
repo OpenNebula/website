@@ -83,7 +83,7 @@ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge openn
 
 In High Availability (HA) setups, you must replace the default value `auto` of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Important" color="danger" >}}
 When upgrading from versions prior to 7.0, you must back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg upgrade` step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.{{< /alert >}}
 
 Before upgrading OpenNebula, ensure that the configuration state is clean, with no pending migrations from previous or outdated configurations. To verify this, run `onecfg status`. A clean state should produce output similar to:
@@ -136,6 +136,9 @@ No updates available.
 
 ### Step 8. Upgrade the Database Version
 
+{{< alert title="Important" color="danger" >}}
+Restore `/etc/one/sunstone-views.yaml` file to `/etc/one` before execute the following command.{{< /alert >}}
+
 Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
 
 ```default
@@ -176,6 +179,9 @@ Total errors found: 0
 ```
 
 ### Step 10. Start OpenNebula
+
+{{< alert title="Important" color="danger" >}}
+Now, you can safely delete `/etc/one/sunstone-views.yaml`.{{< /alert >}}
 
 Start OpenNebula and any other related services: OneFlow, OneGate and FireEdge. First reload the new systemd unit files:
 
