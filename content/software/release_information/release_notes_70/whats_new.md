@@ -16,7 +16,7 @@ We’re excited to introduce OpenNebula 7.0.0 *Phoenix*, the new major OpenNebul
 
 The name *Phoenix* reflects a broader transformation in cloud infrastructure—symbolizing resilience and rebirth for organizations rethinking their architecture in the face of AI, multi-cloud, and edge computing trends.
 
-OpenNebula 7.0.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and give your feedback on this final 7.0.0 release.
+OpenNebula 7.0.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and give your feedback on this final release.
 
 We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
 
