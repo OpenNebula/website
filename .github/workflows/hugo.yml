@@ -62,7 +62,7 @@ jobs:
           npx postcss --version # Verify PostCSS installation
           hugo \
             --minify \
-            --baseURL "https://docs.opennebula.io/6.99/"
+            --baseURL "https://docs.opennebula.io/devel/"
       
 # ------------------------------------------------------------------------------
 # Publish content
