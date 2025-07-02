@@ -22,6 +22,8 @@ To familiarize yourself with deployment and daily operations, or if you want to 
 
 As you follow the tutorials you will learn the basic usage and operation of your cloud. This trial of a real cloud deployment can help you to plan for the most suitable features for performance and scalability, to get the most out of your OpenNebula cloud.
 
+To install a production-ready OpenNebula cloud, we recommend using [OneDeploy]({{% relref "automatic_installation_with_onedeploy" %}}), a tool for automated installation. With OneDeploy you can install a complete cloud by defining your desired configuration and running a few simple commands. The tutorials provide step-by-step instructions with complete commands for sample deployment scenarios.
+
 For a sequential outline of the tasks involved in designing an OpenNebula cloud, read on.
 
 ## Step 1. Install the Front-end
