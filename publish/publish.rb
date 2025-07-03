@@ -94,7 +94,7 @@ error(run("ssh #{ssh_op} #{host} 'mkdir #{branch_build_path}'"))
 error(run("tar -C './public/' --mode='a+r' -cf - . | " \
           "ssh #{ssh_op} #{host} 'tar -C '#{branch_build_path}' -xvf -'"))
 
-# update the symlink 
+# update the symlink
 error(
     run(
         "ssh #{ssh_op} #{host} " \
