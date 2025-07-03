@@ -78,7 +78,7 @@ Click **Finish**. Sunstone will import the appliance template and display a mess
 
 In this step we will create a new virtual network and assign a range of private IPs to. This will network will be used by the OneKE service for internal communication.
 
-In Sunstone, open the left-hand pane, then select **Network** -> **Network Templates**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
+In Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
 
 ![image](/images/sunstone-virtual_networks.png)
 
