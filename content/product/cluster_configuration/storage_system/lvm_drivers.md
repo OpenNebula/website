@@ -33,6 +33,8 @@ otherwise:
 - [NetApp specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/netapp_-_lvm_thin_validation/" %}})
 - [PureStorage specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/purestorage_-_lvm-thin_validation/" %}})
 
+Also included in the above guides is a specific multipath configuration for both the front-end and virtualization hosts, which recommended over the more general multipath configuration presented below.
+
 <a id="hosts-configuration"></a>
 
 ## Hypervisor Configuration
@@ -87,8 +89,9 @@ sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" --login
 # === Make login persistent across reboots ===
 sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" \
      --op update -n node.startup -v automatic
+```
 
-
+```
 # === MULTIPATH ===
 
 # === Install tools ===
