@@ -9,7 +9,7 @@ no_list: true
 breadcrumb_disable: true
 ---
 
-# Welcome to OpenNebula 7.0
+# Welcome to OpenNebula {{< version >}}
 
 <p></p>
 
