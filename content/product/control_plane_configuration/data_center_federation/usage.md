@@ -29,7 +29,7 @@ Uploading Virtual Machine Images over Sunstone works only for the main Zone to w
 
 ## CLI
 
-Users can show and switch Zones through the command line using the [onezone](https://docs.opennebula.io/doc/6.4/cli/onezone.1.html) command. See following examples to understand the Zone management through the CLI.
+Users can show and switch Zones through the command line using the [onezone](https://docs.opennebula.io/doc/{{< version >}}/cli/onezone.1.html) command. See following examples to understand the Zone management through the CLI.
 
 ```default
 $ onezone list
@@ -38,7 +38,7 @@ C    ID NAME                      ENDPOINT
     104 ZoneB                     http://ultron.c12g.com:2634/RPC2
 ```
 
-We can see in the above command output that the user has access to Zones **OpenNebula** and **ZoneB**, and is currently using the **OpenNebula** Zone. The active Zone can be changed by `set` subcommand of [onezone](https://docs.opennebula.io/doc/6.4/cli/onezone.1.html):
+We can see in the above command output that the user has access to Zones **OpenNebula** and **ZoneB**, and is currently using the **OpenNebula** Zone. The active Zone can be changed by `set` subcommand of [onezone](https://docs.opennebula.io/doc/{{< version >}}/cli/onezone.1.html):
 
 ```none
 $ onezone set 104
