@@ -100,7 +100,7 @@ enable = false
   name = "OpenNebula on Facebook"
   url = "https://www.facebook.com/p/OpenNebula-100057184252936/"
   icon = "fab fa-facebook"
-  desc = "Follow OpenNebula on Facebook"  
+  desc = "Follow OpenNebula on Facebook"
 [[params.links.user]]
   name = "OpenNebula on LinkedIn"
   url = "https://www.linkedin.com/company/opennebula"
@@ -140,8 +140,6 @@ offlineSearchSummaryLength = 800
 version = "7.0"
 # The full version, including alpha/beta/rc tags
 release = "7.0"
-# The context packages released version
-context_release = "7.0.0"
 # Docs version is part of the URL & invoked by the alert shortcode
 # Setting here in case it ever needs to differ from SW version
 docs_version = "7.0"
@@ -154,6 +152,11 @@ version_menu = "Versions"
   #  version = "Development"
   #  url = "https://docs.opennebula.io/7.99/"
 
+  #devel is for master branch
+  [[params.versions]]
+    version = "devel"
+    url = "https://docs.opennebula.io/devel/"
+
   [[params.versions]]
     version = "v7.0"
     url = "https://docs.opennebula.io/7.0/"
@@ -161,14 +164,6 @@ version_menu = "Versions"
   [[params.versions]]
     version = "v6.10"
     url = "https://docs.opennebula.io/6.10/"
-
-  [[params.versions]]
-    version = "v6.8"
-    url = "https://docs.opennebula.io/6.8/"
-
-  [[params.versions]]
-    version = "v5.10"
-    url = "https://docs.opennebula.io/5.10/"
 
 [module]
   proxy = "direct"

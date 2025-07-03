@@ -35,13 +35,15 @@ def error(rc)
     exit(-1)
 end
 # ------------------------------------------------------------------------------
+# load config
 # ------------------------------------------------------------------------------
 
 config = YAML.load_file('publish/config.yaml')
 
-unless config['mapping'].include?(ARGV[0])
-    puts "Aborting, branch '#{ARGV[0]}' is not published"
-    exit(0)
+branch = ARGV[0]
+unless config['mapping'].include?(branch)
+  puts "Aborting, branch '#{branch}' is not published"
+  exit(0)
 end
 
 # ------------------------------------------------------------------------------
@@ -50,20 +52,49 @@ end
 host      = ENV['HOST']
 host_path = ENV['HOST_PATH']
 
+branch_dir = config['mapping'][branch]
+ssh_op     = '-o StrictHostKeyChecking=no -i /tmp/id_rsa'
+
+# Ensure dir base exist
+error(run("ssh #{ssh_op} #{host} 'test -d #{host_path} && touch #{host_path}'"))
+
 # ------------------------------------------------------------------------------
-# Publish documentation
+# Devel branch
 # ------------------------------------------------------------------------------
+
+if branch_dir == 'devel'
+  puts "[INFO] Deploying to 'devel' folder (no symlinks/timestamp)"
+
+  # Remove old folder if exist
+  error(run("ssh #{ssh_op} #{host} 'rm -rf #{host_path}/devel'"))
+
+  # Creates a new devel folder
+  error(run("ssh #{ssh_op} #{host} 'mkdir -p #{host_path}/devel'"))
+
+  # Copy/publish the new website content
+  error(run("tar -C './public/' --mode='a+r' -cf - . | " \
+            "ssh #{ssh_op} #{host} 'tar -C #{host_path}/devel -xvf -'"))
+
+  exit(0)
+end
+
+# ------------------------------------------------------------------------------
+# Versioned branch
+# ------------------------------------------------------------------------------
+
 date_time           = DateTime.now.strftime('%Y%m%d%H%M%S')
-branch_dir          = config['mapping'][ARGV[0]]
 branch_symlink_path = "#{host_path}/#{branch_dir}"
 branch_build_path   = "#{branch_symlink_path}.#{date_time}"
-ssh_op              = '-o StrictHostKeyChecking=no -i /tmp/id_rsa'
 
-error(run("ssh #{ssh_op} #{host} 'test -d #{host_path} && touch #{host_path}'"))
+
+# creates new versioned dir
 error(run("ssh #{ssh_op} #{host} 'mkdir #{branch_build_path}'"))
 
+# copy/publish the website content
 error(run("tar -C './public/' --mode='a+r' -cf - . | " \
           "ssh #{ssh_op} #{host} 'tar -C '#{branch_build_path}' -xvf -'"))
+
+# update the symlink 
 error(
     run(
         "ssh #{ssh_op} #{host} " \
@@ -85,6 +116,7 @@ rc = run("ssh #{ssh_op} #{host} 'test -L #{branch_symlink_path} || " <<
              " echo \"#{branch_symlink_path} is not a symlink\" >&2'")
 error(rc)
 
+# cleanup old versions
 builds = rc[0].split
 
 exit(0) if builds.length <= 3
