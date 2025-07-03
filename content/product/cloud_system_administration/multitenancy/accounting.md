@@ -379,4 +379,4 @@ There are two kinds of monitoring values:
 * Instantaneous values: For example, `VM/CPU` or `VM/MEMORY` show the memory consumption last reported by the monitoring probes.
 * Accumulative values: For example, `VM/NETRX` and `VM/NETTX` show the total network consumption since the history record started.
 
-Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.accounting method](http://docs.opennebula.io/doc/6.4/oca/ruby/OpenNebula/VirtualMachinePool.html#accounting-instance_method) to retrieve accounting information and filter and order by multiple parameters.
+Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.accounting method](http://docs.opennebula.io/doc/{{< version >}}/oca/ruby/OpenNebula/VirtualMachinePool.html#accounting-instance_method) to retrieve accounting information and filter and order by multiple parameters.
