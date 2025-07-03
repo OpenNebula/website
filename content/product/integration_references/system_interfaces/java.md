@@ -18,7 +18,7 @@ This page contains the OpenNebula Cloud API Specification for Java. It has been 
 
 You can download the `.jar` file compiled using Java 11, the required libraries, and the javadoc packaged in a tar.gz file [following this link](http://downloads.opennebula.io/packages) in the OpenNebula version you have installed.
 
-You can also consult the [javadoc online](https://docs.opennebula.io/doc/6.4/oca/java/).
+You can also consult the [javadoc online](https://docs.opennebula.io/doc/{{< version >}}/oca/java/).
 
 ## Compilation
 
