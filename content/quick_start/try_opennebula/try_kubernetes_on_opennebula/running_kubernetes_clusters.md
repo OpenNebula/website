@@ -275,7 +275,7 @@ As we have seen [above](#check-the-ip-address-for-the-vnf-node), in this example
 To connect to the Kubernetes master node, from the Front-end, as user `root` run:
 
 ```bash
-ssh -A -J root@192.168.200.4 root@172.16.100.2
+ssh -A -J root@172.16.100.2 root@192.168.200.4
 ```
 
 An example run as user `root`:
