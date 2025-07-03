@@ -30,6 +30,13 @@
   } 
 }
 
+// Button color for copying code on highlighted code blocks
+.td-content {
+  button.td-click-to-copy {
+    color: #cecece !important;
+  }
+}
+
 .td-card-group.card-group {
   @extend .td-max-width-on-larger-screens;
 }
