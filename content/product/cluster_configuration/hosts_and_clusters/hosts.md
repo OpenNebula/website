@@ -17,7 +17,7 @@ weight: "2"
 In order to use your existing physical nodes, you have to add them to OpenNebula as Hosts. To add a Host only its hostname and type is needed.
 
 {{< alert title="Warning" color="warning" >}}
-Before adding a Linux Host check that you can SSH to it without being prompted for a password.{{< /alert >}} 
+Before adding a Linux Host check that you can SSH to it without being prompted for a password.{{< /alert >}}
 
 ## Creating and Deleting Hosts
 
@@ -92,7 +92,7 @@ KVM_MACHINES="pc-i440fx-5.2 pc pc-q35-5.2 q35 pc-i440fx-2.12 pc-i440fx-2.0 pc-q3
 MODELNAME="Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz"
 RESERVED_CPU=""
 RESERVED_MEM=""
-VERSION="{{< release >}}"
+VERSION="7.0.0"
 VM_MAD="kvm"
 
 NUMA NODES
@@ -256,7 +256,7 @@ This tag can be used at a later time for scheduling purposes, [see more details 
 
 ### Updating Host Files
 
-When OpenNebula monitors a Host it copies driver files to `/var/tmp/one`. When these files are updated they need to be copied again to the Hosts with the `sync` command. To keep track of the probes version there’s a file in `/var/lib/one/remotes/VERSION`. By default this holds the OpenNebula version (e.g., ‘6.99.0’). This version can be seen in the Hosts by using `onehost show <host>`:
+When OpenNebula monitors a Host it copies driver files to `/var/tmp/one`. When these files are updated they need to be copied again to the Hosts with the `sync` command. To keep track of the probes version there’s a file in `/var/lib/one/remotes/VERSION`. By default this holds the OpenNebula version (e.g., ‘7.0.0’). This version can be seen in the Hosts by using `onehost show <host>`:
 
 ```default
 $ onehost show 0
@@ -264,11 +264,11 @@ HOST 0 INFORMATION
 ID                    : 0
 [...]
 MONITORING INFORMATION
-VERSION="|release|"
+VERSION="7.0.0"
 [...]
 ```
 
-The command `onehost sync` only updates the Hosts with `VERSION` lower than the one in the file `/var/lib/one/remotes/VERSION`. In case you modify the probes this `VERSION` file should be modified with a greater value, for example “6.99.0.01”.
+The command `onehost sync` only updates the Hosts with `VERSION` lower than the one in the file `/var/lib/one/remotes/VERSION`. In case you modify the probes this `VERSION` file should be modified with a greater value, for example “7.0.0.1”.
 
 In case you want to force an upgrade, that is, without any `VERSION` checking, you can do it by using the `--force` option:
 
@@ -304,7 +304,7 @@ WILD VIRTUAL MACHINES
 ```
 
 {{< alert title="Warning" color="warning" >}}
-Wild VMs’ support and limitations may differ depending on the virtualization driver used (e.g., KVM or LXC). In order to find more specific information for the virtualization driver you’re using, please check the corresponding driver guide.{{< /alert >}} 
+Wild VMs’ support and limitations may differ depending on the virtualization driver used (e.g., KVM or LXC). In order to find more specific information for the virtualization driver you’re using, please check the corresponding driver guide.{{< /alert >}}
 
 ## Using Sunstone to Manage Hosts
 
