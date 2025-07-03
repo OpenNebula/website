@@ -7,16 +7,16 @@ weight: 4
 
 A common scenario is that the source cluster, in this guide "**Site A**", suffers a failure, and we want to fail over to the target cluster, **Site B**.
 
-In a simplified scenario, the basic high-level steps are:
+To move production from Site A to Site B, the basic high-level steps are:
 
-1. On Site A, export the VM image file for the VM that will run on Site B.
-1. On Site B, create the VM image file from the export in the previous step.
-1. On Site A, export the VM template for the VM that will run on Site B.
+1. On Site A, export the VM image file for each VM that will run on Site B.
+1. On Site B, for each VM create the VM image file, from the export in the previous step.
+1. On Site A, export the VM template for each VM that will run on Site B.
 1. On Site B, promote the desired RBD images or the whole image pool.
-1. On Site B, create the VM from the VM template .
+1. On Site B, for each VM create the VM from the VM template previously exported.
 1. On Site B, instantiate the VM.
 
-This guide describes these steps in more detail, and provides additional steps such as for testing the failover procedure with both Ceph clusters active.
+This guide describes these steps with example commands, and provides additional steps for testing the failover procedure with both Ceph clusters active.
 
 
 ## Failover Procedure
@@ -226,23 +226,30 @@ onevm create <VM template file>
 
 Then, you proceed to instantiate and operate the VM as normal.
 
-### Failback
+## Failback
 
-Once Site A is restored and operational, you can reverse the process to resynchronize data back or migrate services permanently.
+Failback is the process by which you return production to the original location, in this case Site A. Once Site A is restored and operational, you can resynchronize data back to the source Ceph cluster.
 
-1. First we need to demote the images on site A (only in case it was disaster failover):
+If recovering from a disaster on Site A, then most probably the images on Site A were not demoted. In this case, the first step is to demote them. If you are performing failback as part of a Disaster Recovery test, then you should have demoted the images in the source target cluster (as described [above](#demote-ceph-images-or-pool-on-site-a)), and should skip the below step.
 
-```default
-root@site-a $ rbd mirror pool demote one
+On Site A, demote the image pool with:
+
+```bash
+rbd mirror pool demote one
+```
+When the `rbd-mirror` on Site A is up and running, the images will need to be flagged for a resync. Until the resync operation is performed, the `rbd-mirror` daemon on Site A will log problems. For each image, resync by running, on Site A:
+
+```bash
+rbd mirror image resync one/one-0-0-0
 ```
 
-2. The RBD mirror daemon on site A is up and running, the images need to be flagged for a resync. Until then, the RBD mirror daemon on site A will log problems. Run the following command for each image to sync
+After a short time the images should be mirrored from Site B to Site A. You can verify this by running the below command on Site A for each image, and checking the `last_update` line:
 
-```default
-root@site-a $ rbd mirror image resync one/one-0-0-0
+```bash
+rbd mirror image status <pool>/<image>
 ```
 
-3. After a short time, the images should be mirrored from site B to site A. You can verify it by running the following and by checking the _last_update_ line for required image:
+For example:
 
 ```default
 root@site-a $ rbd mirror image status one/one-0-0-0
@@ -254,37 +261,43 @@ one-0-0-0:
   last_update: 2025-06-17 17:26:11
 ```
 
-4. Terminate the VM at site B and wait for another successful mirroring to site A.
+Then, terminate the VM at Site B and wait for the image to mirror successfully to Site A. To terminate the VM, at Site B run:
 
-```default
-root@site-b $ onevm terminate 1
+```bash
+onevm terminate <VM ID>
 ```
 
-5. Once we are sure that the disk images have been mirrored after we have terminated the VM, we can demote the image on site B and promote them on site A.
+Run the `rbd mirror image status` command for the image, to ensure that it has been successfully mirrored to Site A. Once the mirroring is complete, you can demote the image on Site B and promote it on Site A.
 
-```default
-root@site-b $ rbd mirror image demote one/one-0-0-0
+To demote the image on Site B:
+
+```bash
+rbd mirror image demote one/one-0-0-0
 ```
 
-6. Or, demote all images in pool (only if all images are synced to site A):
+Or -- after all images are synced to Site A -- you can demote all images in the pool:
 
-```default
-root@site-b $ rbd mirror pool demote one
+```bash
+rbd mirror pool demote one
 ```
 
-7. Promote single image on site A:
+Then you will need to promote the images on Site A.
 
-```default
-root@site-a $ rbd mirror image promote one/one-0-0-0
+### Promote Cpeh Images or Pool on Site A
+
+To promote single image on site A:
+
+```bash
+rbd mirror image promote one/one-0-0-0
 ```
 
-8. Or, alternatively, promote all images (only if all images are synced to site A, and all of them were demoted):
+Or -- if all images were demoted, and all of them are already synced -- you can promote the whole pool:
 
-```default
-root@site-b $ rbd mirror pool demote one
+```bash
+rbd mirror pool promote one
 ```
 
-9. Now the image became primary on site A:
+Now the image is primary on site A:
 
 ```default
 root@site-a $ rbd mirror image status one/one-0-0-0
@@ -295,20 +308,20 @@ one-0-0-0:
   service: 	ubuntu2204-kvm-ceph-squid-6-10-cxzjz-0 on ubuntu2204-kvm-ceph-squid-6-10-cxzjz-0
   last_update: 2025-06-17 17:45:11
 ```
-10. Check state for specific image:
+To check state for specific image, on Site A run:
 
-```default
-root@site-a $ rbd mirror image status one/one-0-0-0
+```bash
+rbd mirror image status one/one-0-0-0
 ```
 
-11. Or, check states for all images:
+Or to check states for all images:
 
-```default
-root@site-a $ rbd mirror pool status one --verbose
+```bash
+rbd mirror pool status one --verbose
 ```
 
-12. Finally, we can start the VM at site A:
+Finally, we can start the VM at site A:
 
-```default
-root@site-a $ onevm resume 0
+```bash
+onevm resume <VM ID>
 ```
