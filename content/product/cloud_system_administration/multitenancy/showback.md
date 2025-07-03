@@ -147,4 +147,4 @@ YEAR,MONTH,VM_ID,COST
 2015,11,4258,34248600
 ```
 
-Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.showback method](http://docs.opennebula.io/doc/6.4/oca/ruby/OpenNebula/VirtualMachinePool.html#showback-instance_method) to retrieve showback information and filter and order by multiple parameters.
+Developers interacting with OpenNebula using the Ruby bindings can use the [VirtualMachinePool.showback method](http://docs.opennebula.io/doc/{{< version >}}/oca/ruby/OpenNebula/VirtualMachinePool.html#showback-instance_method) to retrieve showback information and filter and order by multiple parameters.
