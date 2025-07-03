@@ -78,7 +78,7 @@ Click **Finish**. Sunstone will import the appliance template and display a mess
 
 In this step we will create a new virtual network and assign a range of private IPs to. This will network will be used by the OneKE service for internal communication.
 
-In Sunstone, open the left-hand pane, then select **Network** -> **Network Templates**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
+In Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
 
 ![image](/images/sunstone-virtual_networks.png)
 
@@ -275,7 +275,7 @@ As we have seen [above](#check-the-ip-address-for-the-vnf-node), in this example
 To connect to the Kubernetes master node, from the Front-end, as user `root` run:
 
 ```bash
-ssh -A -J root@192.168.200.4 root@172.16.100.2
+ssh -A -J root@172.16.100.2 root@192.168.200.4
 ```
 
 An example run as user `root`:
