@@ -16,7 +16,7 @@ This page contains the OpenNebula Cloud API Specification for Ruby. It has been 
 
 ## API Documentation
 
-You can consult the [doc online](https://docs.opennebula.io/doc/6.4/oca/ruby/).
+You can consult the [doc online](https://docs.opennebula.io/doc/{{< version >}}/oca/ruby/).
 
 ## Usage
 
