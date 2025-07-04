@@ -81,137 +81,13 @@ To download and install the Hugo web server and site dependencies, you can follo
 
 ### Pre-requisites
 
-1. Install Go
-2. Install Node.js LTS & NPM
-3. Clone the Docs Repo
-4. Install node dependencies
-5. Download and Install Hugo
+1. **Install Go**, you can use your distribution packages, for reference, see the [Go Installation Guide](https://go.dev/doc/install)
+2. **Install Node.js LTS & NPM**, You will need to install Node v22 and NPM. To avoid possible errors, the recommended installation method is to use NVM (Node Version Manager, check the [installation instructions](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script))
+3. **Clone** this Github repository
+4. **Install node dependencies**, trun ``npm install`` in the root directory of the repository.
+5. **Download and Install Hugo**, It is recommended to install Hugo 0.145.0 (note that 0.146.0 will not work because of changes in template system). For reference, see: [https://gohugo.io/installation/](https://gohugo.io/installation/).)
 
 The docs site uses Hugo \+ the [Docsy theme](https://www.docsy.dev/), which is a Hugo module. When you deploy the site locally for the first time, Hugo should automatically download the theme.
-
-#### Install Go
-
-(For reference, see the [Go Installation Guide](https://go.dev/doc/install).)
-
-You will need to install the Go programming language. On Debian-based Linux:
-
-```
-sudo apt install golang
-```
-
-#### Install Node.js LTS & NPM
-
-You will need to install Node v22 and NPM. To avoid possible errors, the recommended installation method is to use NVM (Node Version Manager), which will install Node v22 and the correct version of NPM at the same time.
-
-To install NVM, check the [installation instructions](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script) or alternatively execute the following command:
-
-```shell
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-```
-
-To apply the changes and use NVM, follow one of these alternatives:
-
-- Close and reopen the terminal.
-- Reload your environment, for example with `source ~/.bashrc`.
-- Run the below commands:
->
->```shell
->export NVM_DIR="$HOME/.nvm"
->```
->```
->[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
->```
->```
->[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
->```
-
-Install Node version 22 using nvm:
-
-```
-nvm install v22
-```
-
-```
-nvm use v22
-```
-
-Check that `node` and `npm` are installed:
-
-```
-node --version
-```
-
-Should return `v22.16.0`.
-
-```
-npm --version
-```
-
-Should return: `10.9.2`.
-
-> [!NOTE]
->
-> Don't worry if the versions are not exactly the same. The NPM version may be different, but the important point is that node version >= 22.
-
-#### Clone the Docs Repo
-
-Clone with:
-
-```
-git clone git@github.com:OpenNebula/website.git
-```
-
-For the time being this clones the default `one-7.0` branch.
-
-#### Install Node Dependencies
-
-Once the code is downloaded, run the following command in the root directory of the repository. For instance, if you've cloned the repository in `/home/user/website`, execute the command in that path:
-
-```shell
-npm install
-```
-
-#### Download and Install Hugo
-
-> [!WARNING]
-> It is recommended to install Hugo 0.145.0, the version used by GitHub Actions. Do not install a version higher than 0.145.0, since version 0.146.0 (released April 10 2025\) introduced changes in the template system, and the won't build on this version.
-
-(For reference, see: [https://gohugo.io/installation/](https://gohugo.io/installation/).)
-
-You can install Hugo 0.145.0 from that version's [release page](https://github.com/gohugoio/hugo/releases/tag/v0.145.0). You will need to install the **extended** version, for example ([hugo_extended_0.145.0_linux-amd64.tar.gz](https://github.com/gohugoio/hugo/releases/download/v0.145.0/hugo_extended_0.145.0_linux-amd64.tar.gz).
-
-> [!NOTE]
-> Ensure to install the **extended** version, or the site will not build.
-
-If you download the .tar.gz file, you will just need to uncompress and unpack the file, place the `hugo` binary in your path and set the appropriate permissions:
-
-```
-wget https://github.com/gohugoio/hugo/releases/download/v0.145.0/hugo_extended_0.145.0_Linux-64bit.tar.gz 
-```
-```
-tar zxvf hugo_extended_0.145.0_Linux-64bit.tar.gz
-```
-```
-sudo mv hugo /usr/local/bin/
-```
-```
-sudo chown root: /usr/local/bin/hugo
-```
-```
-sudo chmod 755 /usr/local/bin/hugo
-```
-
-
-
-To test that Hugo runs correctly:
-
-```
-hugo version
-```
-
-Make sure that the output contains `extended`, e.g. `hugo v0.145.0-666444f0a52132f9fec9f71cf25b441cc6a4f355+extended`.
-
-
 
 ## Preview the Docs in Hugo
 
@@ -252,26 +128,6 @@ If you change the contents of a doc page in the docs repo, the page shown in the
 > Useful options for running Hugo in server mode:  
 > `--disableFastRender` \- Enables full renders on changes  
 > `--noHTTPCache` \- Prevent HTTP caching
-
-Sometimes, even with the HTTP cache disabled Hugo fails to re-render a page when it is updated. In those cases, kill the Hugo server with `Ctrl`\+`C` in the terminal and restart it.
-
-### Testing Page Auto-updates
-
-If you want to quickly test whether pages update correctly:
-
-1. Point your browser to [`http://localhost:1313/7.0/quick_start/`](http://localhost:1313/docs/quick_start/).  
-2. In your text editor, open the file `<site root>/content/docs/quick_start/_index.md`.  
-3. Near the top of the file (after the “front matter” YAML section) create an empty line, type something, then save the file. Your typed string should instantly appear on the page in your browser.
-
-### Other Hugo Runtime Options
-
-If you want Hugo to build the HTML pages only, without starting the web server, from the root directory of the site run `hugo` without parameters. This will build the HTML pages in `<site root>/public`.
-
-For a list of runtime options:
-
-```
-hugo -h
-```
 
 ## Basic Hugo Site Structure
 
