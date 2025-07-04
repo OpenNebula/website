@@ -136,7 +136,6 @@ If you change the contents of a doc page in the docs repo, the page shown in the
 The docs repo contents are similar to this:
 
 ```
-<docs_root_folder>$ ls
 assets/  content/  go.sum     layouts/  node_modules/  package-lock.json  README.md   static/
 CNAME    go.mod    hugo.toml  LICENSE   package.json   public/            resources/
 ```
@@ -145,12 +144,7 @@ The docs Markdown files are in `content/`. When you run Hugo, it builds the comp
 
 `assets/images/` contains all images for the site. New images should be placed here.
 
-The directory structure of the local site in Markdown is the same as the finished site in HTML. You can find a specific page in the Markdown files by simply following the URL in the online, e.g. `product/cloud_system_administration/multitenancy/auth_overview/`.
-
-```
-<docs_root_folder>$ ls content/product/cloud_system_administration/multitenancy/auth_overview.md 
-content/product/cloud_system_administration/multitenancy/auth_overview.md
-```
+The directory structure of the local site in Markdown is the same as the finished site in HTML. You can find a specific page in the Markdown files by simply following the URL in the online, e.g. `product/cloud_system_administration/multitenancy/auth_overview/` corresponds to `content/product/cloud_system_administration/multitenancy/auth_overview.md`
 
 For instance, the directories for the "Cloud Architecture and Design" section:
 
