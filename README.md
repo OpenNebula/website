@@ -668,7 +668,7 @@ export PATH="$PATH:~/local/.bin"
 
 Then, log out and log back in or reload your environment with `source ~/.bashrc`.
 
-##### Running the Spellchecker
+##### Running the Spell Checker
 
 Run the spell checker indicating the config file, `.spellcheck.yml`.
 
@@ -694,7 +694,7 @@ If you wish to only check the files that you wrote or modified:
 Or using the script:
 
 ```
-./spellchecker.sh --source <file>
+./spellcheck.sh --source <file>
 ```
 
 For example:
@@ -704,7 +704,7 @@ pyspelling --name Markdown -c .spellcheck.yml --source content/product/my_new_se
 ```
 
 ```
-./spellchecker.sh --source content/product/my_new_section/*.md
+./spellcheck.sh --source content/product/my_new_section/*.md
 ```
 
 Both of the above commands check every Markdown file (\*md) in the specified section. Note that if not using `spellcheck.sh`, in order to check only specific file(s) you have to pass the `--name Markdown` parameter.
