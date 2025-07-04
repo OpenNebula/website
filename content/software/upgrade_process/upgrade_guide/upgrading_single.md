@@ -84,15 +84,9 @@ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge openn
 In High Availability (HA) setups, you must replace the default value `auto` of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
 
 {{< alert title="Important" color="danger" >}}
-When upgrading from versions prior to 7.0, you must back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg upgrade` step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.
+**Note**: This step **only applies to installations prior to version 7.0** that have defined custom default label groups in `/etc/one/sunstone-views.yaml` and wish to preserve them.
 
-If you have not defined any default labels, make sure to explicitly add an empty label set before proceeding with the migration. To do this, edit the file `/etc/one/sunstone-views.yaml` and update the `default` value at the end of the file as shown:
-```yaml
-...
-labels_groups:
-    default: []
-```
-{{< /alert >}}
+Before proceeding, back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg` upgrade step, restore the file to its original location. Once the upgrade is fully finalized and the custom labels are confirmed to be migrated, the file may be safely removed. {{< /alert >}}
 
 Before upgrading OpenNebula, ensure that the configuration state is clean, with no pending migrations from previous or outdated configurations. To verify this, run `onecfg status`. A clean state should produce output similar to:
 
@@ -145,7 +139,7 @@ No updates available.
 ### Step 8. Upgrade the Database Version
 
 {{< alert title="Important" color="danger" >}}
-For versions prior to 7.0, restore `/etc/one/sunstone-views.yaml` file to `/etc/one` before execute the following command.{{< /alert >}}
+If you have backed up `/etc/one/sunstone-views.yaml` restore the file to `/etc/one` now before execute the following command.{{< /alert >}}
 
 Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
 
