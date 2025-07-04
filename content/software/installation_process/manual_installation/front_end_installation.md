@@ -206,6 +206,7 @@ The complete list of operating system services provided by OpenNebula:
 | **opennebula-showback**          | Service for periodic recalculation of showback                                                                              | opennebula          |
 | **opennebula-ssh-agent**         | Dedicated SSH agent for OpenNebula Daemon                                                                                   | opennebula          |
 | **opennebula-ssh-socks-cleaner** | Periodic cleaner of SSH persistent connections                                                                              | opennebula          |
+| **opennebula-prometheus**        | OpenNebula Prometheus server                                                                                                |                     |
 
 {{< alert title="Note" color="success" >}}
 Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service, which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}}
