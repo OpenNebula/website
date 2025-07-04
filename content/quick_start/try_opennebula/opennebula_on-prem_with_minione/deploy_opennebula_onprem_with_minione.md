@@ -107,7 +107,7 @@ The miniONE script will begin the installation, logging output to the terminal. 
 
 ```default
 ### Report
-OpenNebula 6.99 was installed
+OpenNebula 7.0 was installed
 Sunstone is running on:
   http://192.168.1.130/
 Use following to login:
