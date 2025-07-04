@@ -84,14 +84,14 @@ Configure both the Front-end and nodes with persistent iSCSI connections:
 
 ## OpenNebula Configuration
 
-Create both datastores for optimal performance (instant cloning/moving capabilities):
+Create both datastores as NetApp (instant cloning/moving capabilities):
 
 - **System Datastore**
 - **Image Datastore**
 
 ### Create System Datastore
 
-**Template parameters:**
+**Template required parameters:**
 
 | Attribute             | Description                                     |
 | --------------------- | ----------------------------------------------- |
@@ -131,7 +131,7 @@ ID: 101
 
 ### Create Image Datastore
 
-**Template parameters:**
+**Template required parameters:**
 
 | Attribute           | Description                                     |
 | ------------------- | ----------------------------------------------- |
@@ -167,6 +167,23 @@ $ onedatastore create netapp_image.ds
 ID: 102
 ~~~
 
+### Datastore Optional Attributes
+
+Since Volumes contain the LUNs and snapshots, they are by default configured to contain 10% extra space and reserve this for snapshots. You can override these settings with the following datastore attributes, which should be same for both datastores:
+
+**Template optional parameters:**
+
+| Attribute                 | Description                                           |
+| ------------------------- | ----------------------------------------------------- |
+| `NETAPP_SUFFIX`           | Volume/LUN name suffix.                               |
+| `NETAPP_GROW_THRESHOLD`   | Volume autogrow threshold in percent. Default: 96     |
+| `NETAPP_GROW_RATIO`       | Volume maximum autogrow ratio. Default: 2             |
+| `NETAPP_SNAPSHOT_RESERVE` | Volume snapshot reserve in percent. Default: 10       |
+
+{{< alert title="Note" color="success" >}}
+Volumes will be created with the extra reservation space in mind, which will be `size * ( 1 + NETAPP_SNAPSHOT_RESERVE / 100 )`.
+{{< /alert >}}
+
 ## Datastore Internals
 
 **Storage architecture details:**
@@ -184,6 +201,10 @@ Symbolic links from the System datastore will be created for each Virtual Machin
 {{< alert title="Note" color="success" >}}
 The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
 {{< /alert >}}
+
+## Known Issues
+
+Currently the NetApp password on the Datastore is not encrypted due to a typo in the configuration file `/etc/one/oned.conf`. To encrypt this password, the Encrypted Attributes section of this file you must change `DATASTORE_ENCRYPTED_ATTR = "NETAPP_PASSWORD"` to `DATASTORE_ENCRYPTED_ATTR = "NETAPP_PASS"` and then restart OpenNebula.
 
 ## System Considerations
 
