@@ -84,7 +84,15 @@ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge openn
 In High Availability (HA) setups, you must replace the default value `auto` of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
 
 {{< alert title="Important" color="danger" >}}
-When upgrading from versions prior to 7.0, you must back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg upgrade` step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.{{< /alert >}}
+When upgrading from versions prior to 7.0, you must back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg upgrade` step, restore this file to its original location. Once the upgrade process is finalized, the file can be safely deleted.
+
+If you have not defined any default labels, make sure to explicitly add an empty label set before proceeding with the migration. To do this, edit the file `/etc/one/sunstone-views.yaml` and update the `default` value at the end of the file as shown:
+```yaml
+...
+labels_groups:
+    default: []
+```
+{{< /alert >}}
 
 Before upgrading OpenNebula, ensure that the configuration state is clean, with no pending migrations from previous or outdated configurations. To verify this, run `onecfg status`. A clean state should produce output similar to:
 
