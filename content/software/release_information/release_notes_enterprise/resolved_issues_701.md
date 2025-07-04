@@ -16,3 +16,4 @@ The following new features have been backported to 7.0.1:
 The following issues has been solved in 7.0.1:
 
   - Rename 'Edit' button to 'Rename' to change a VM disk snapshot name [#6803](https://github.com/OpenNebula/one/issues/6803)
+  - Removes sensitive information from FireEdge logs [#7106](https://github.com/OpenNebula/one/issues/7106)
