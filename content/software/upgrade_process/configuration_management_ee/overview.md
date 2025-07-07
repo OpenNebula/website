@@ -23,9 +23,9 @@ This Chapter describes how to use the configuration management tool to:
 - Validate configuration files.
 
 {{< alert title="Important" color="success" >}}
-You can upgrade to OpenNebula {{< version >}} from OpenNebula EE or CE.
+You can upgrade to OpenNebula {{< version >}} from any previous installation of OpenNebula EE or CE.
 
-OpenNebula version {{< version >}} includes migrators for the database ([`onedb`]({{% relref "upgrading_single/#step-8-upgrade-the-database-version" %}})) and for configuration files (`onecfg`, described in this section). These migrators, as well as the `opennebula-migration` package, are available in both the Enterprise and Community Edition, and support migrating from OpenNebula 6.* EE or CE.
+OpenNebula version {{< version >}} includes migrators for the database ([`onedb`]({{% relref "upgrading_single/#step-8-upgrade-the-database-version" %}})) and for configuration files (`onecfg`, described in this section). These migrators, included in the `opennebula-migration` package, are available in both the Enterprise and Community Edition, and support migrating from all previous OpenNebula EE or CE versions.
 {{< /alert >}}
 
 ## How Should I Read This Chapter
