@@ -16,7 +16,9 @@ We’re excited to introduce OpenNebula 7.0.0 *Phoenix*, the new major OpenNebul
 
 The name *Phoenix* reflects a broader transformation in cloud infrastructure—symbolizing resilience and rebirth for organizations rethinking their architecture in the face of AI, multi-cloud, and edge computing trends.
 
-OpenNebula 7.0.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. We invite you to explore the features, join the community conversations, and give your feedback on this final release.
+OpenNebula 7.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. An important highlight is that the migration packages are now included in the Community Edition, making it easier for community users to stay up to date and take full advantage of the latest innovations.
+
+We invite you to explore the features, join the community conversations, and give your feedback on this final release.
 
 We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
 
@@ -28,6 +30,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - [Cluster-level quotas](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), define per-user or per-group resource limits across clusters—especially useful in distributed edge environments. Allow setting per-user or per-group resource limits at the cluster level, enabling precise control over resource consumption across different locations—particularly valuable in distributed edge deployments.
 - [Generic quota definitions](../../../product/cloud_system_administration/capacity_planning/quotas/#compute-quotas), track and control usage of custom resources such as vGPUs, licenses, or any administrator-defined metrics.
 - [Improve database search queries and performance](https://github.com/OpenNebula/one/issues/5861)
+- The Community Edition now includes the migrator packages for upgrading from previous versions: [`onedb`]({{% relref "upgrading_single/#step-8-upgrade-the-database-version" %}}) for upgrading the database, [`onecfg`]({{% relref "configuration_management_ee" %}}) for configuration files.
 
 
 ## Monitoring
