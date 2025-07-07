@@ -139,7 +139,7 @@ No updates available.
 ### Step 8. Upgrade the Database Version
 
 {{< alert title="Important" color="danger" >}}
-If you have backed up `/etc/one/sunstone-views.yaml` restore the file to `/etc/one` now before execute the following command.{{< /alert >}}
+If you have backed up `/etc/one/sunstone-views.yaml` restore the file to `/etc/one` now before executing the following command.{{< /alert >}}
 
 Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
 
