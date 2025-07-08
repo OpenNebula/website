@@ -36,7 +36,7 @@ http://<OPENNEBULA-FRONTEND>:2616
 The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
-After a configuration change, the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 
+After a configuration change, the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 
 
 | Parameter                       | Default Value                | Description                                                                                                                                                                                                                                                                               |
 |---------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -72,7 +72,7 @@ JWT is an acronym of JSON Web Token{{< /alert >}}
 The Sunstone server configuration file can be found in `/etc/one/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
-After a configuration change the FireEdge server must be [restarted]({{% relref "#fireedge-conf-service" %}}) to take effect.{{< /alert >}}    (#fireedge-sunstone-configuration)
+After a configuration change the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}}
 
 ![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
 
@@ -103,11 +103,11 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 <a id="fireedge-configuration-for-sunstone"></a>
 
-### Tuning and Extending
+## Tuning and Extending
 
 <a id="fireedge-branding"></a>
 
-## Branding FireEdge
+### Branding FireEdge
 
 You can add your logo to the login, main, favicon, and loading screens by updating the `logo:` attribute as follows:
 
@@ -138,7 +138,7 @@ The logo can be updated without having to restart the FireEdge server!{{< /alert
 
 <a id="fireedge-conf-guacamole"></a>
 
-## Configure Tables
+### Configure Tables
 
 Tables in Sunstone can be configured to visualize data as a list of plain text or as a list of cards:
 
@@ -146,7 +146,7 @@ Tables in Sunstone can be configured to visualize data as a list of plain text o
 
 ![fireedge_sunstone_card_datatable](/images/sunstone_card_datatable.png)
 
-This configuration could be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `rowStyle`. See [table below](#fireedge-sunstone-configuration).
+This configuration could be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `rowStyle`. See [table below](fireedge#fireedge-sunstone-configuration).
 
 Moreover, Suntone has the capacity to show the detail of a resource in a full screen mode or in a split mode:
 
@@ -160,7 +160,7 @@ Also, both configurations will be overridden for a specific user if the user cha
 
 ![fireedge_sunstone_setting_list_datatable](/images/sunstone_setting_list_datatable.png)
 
-## Customize colors
+### Customize colors
 
 Sunstone will store the colors used in its components in two different files:
 
@@ -188,7 +188,7 @@ These two files store a JSON object that has the same structure but with differe
 {{< alert title="Warning" color="warning" >}}
 Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
 
-## Configure Guacamole
+### Configure Guacamole
 
 FireEdge uses [Apache Guacamole](http://guacamole.apache.org), a free and open source web application that allows you to access a remote console or desktop of the Virtual Machine anywhere using a modern web browser. It is a clientless **remote desktop gateway** which only requires Guacamole installed on a server and a web browser supporting HTML5.
 
@@ -234,9 +234,9 @@ Other logs are also available in Journald. Use the following command to show the
 $ journalctl -u opennebula-fireedge.service
 ```
 
-### Troubleshooting
+## Troubleshooting
 
-## Conflicting Port
+### Conflicting Port
 
 A common issue when starting FireEdge is a used port:
 

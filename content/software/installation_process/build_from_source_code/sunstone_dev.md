@@ -169,9 +169,9 @@ Where:
   * `Component`: The exported name of the component that renders the tab’s content.
 
 {{< alert title="Note" color="success" >}}
-The client searches for the `Component` from the base of the `<ModuleIdentifier>` and does not support nested imports. All modules should expose their exports through a global barrel file, see [Module webpack configuration]({{% relref "#exporting-remote-modules" %}}) for more details.{{< /alert >}} 
+The client searches for the `Component` from the base of the `<ModuleIdentifier>` and does not support nested imports. All modules should expose their exports through a global barrel file, see [Module webpack configuration]({{% relref "sunstone_dev#exporting-remote-modules" %}}) for more details.{{< /alert >}} 
 
-### Adding a new tab
+### Adding a New Tab
 
 In order to develop a new tab, you need to make sure it has the correct webpack configuration and has been added to the `tab-manifest.json` & `remotes-config.json` files. In this example we will use the [OpenNebula ONE repo](https://github.com/OpenNebula/one) to create a new module and add it to the Sunstone client.
 
@@ -265,7 +265,7 @@ Now let's create a new module called `CustomContainersModule`, based off the ori
    Notice how we import from the `@ComponentsModule` instead of using a relative path to the `src/modules/components` directory. This is because the import goes through the module federation and is resolved dynamically at runtime, as opposed to being bundled within our new module directly.{{< /alert >}} 
 
    {{< alert title="Important" color="success" >}}
-   Cross-module imports should *NEVER* be done relative to one another, only inside subdirectories of the module itself should you use relative import paths like `import ... from @modules/<moduleName>`. See [importing from other modules]({{% relref "#importing-remote-modules" %}}) for more information.{{< /alert >}} 
+   Cross-module imports should *NEVER* be done relative to one another, only inside subdirectories of the module itself should you use relative import paths like `import ... from @modules/<moduleName>`. See [importing from other modules]({{% relref "sunstone_dev#importing-remote-modules" %}}) for more information.{{< /alert >}}
 
 7. Now let's rename our component to “UsersAndGroups” and modify the code so that we return a two column grid with both our tables inside
 
@@ -348,7 +348,7 @@ Now let's create a new module called `CustomContainersModule`, based off the ori
    ```
 
    {{< alert title="Note" color="success" >}}
-   Here the `@modules` name is an alias we use in our webpack configuration, which gets resolved to the `src/modules` directory when building. You can examine this more closely inside the `webpack.config.prod.customcontainer.js` file. In this case, exporting relative to our parent directory is fine as we are not doing any cross-module referencing. See the [module webpack configuration]({{% relref "#module-webpack-configuration" %}}) section for more information.{{< /alert >}} 
+   Here the `@modules` name is an alias we use in our webpack configuration, which gets resolved to the `src/modules` directory when building. You can examine this more closely inside the `webpack.config.prod.customcontainer.js` file. In this case, exporting relative to our parent directory is fine as we are not doing any cross-module referencing. See the [module webpack configuration]({{% relref "sunstone_dev#module-webpack-configuration" %}}) section for more information.{{< /alert >}} 
 
 9. Time to build our module (for the sake of convenience we will save the build command inside our `package.json` file)
 
@@ -636,7 +636,7 @@ This should match the key property in the `configuredRemotes` object, as mention
 All remote module exports should be done using a global barrel file. This means that all nested exports should be accessible from the top-level index file of the module.
 
 {{< alert title="Important" color="success" >}}
-Default exports should not be used. You should use named exports only, when exposing imports according to the default webpack configuration used [here]({{% relref "#default-module-webpack" %}}).{{< /alert >}} 
+Default exports should not be used. You should use named exports only, when exposing imports according to the default webpack configuration used [here]({{% relref "sunstone_dev#default-module-webpack" %}}).{{< /alert >}}
 
 An example of the barrel file from the `ContainersModule`
 
