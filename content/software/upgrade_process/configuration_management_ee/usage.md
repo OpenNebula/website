@@ -26,7 +26,8 @@ This command must be always run under privileged user `root` directly or via `su
 
 ```default
 $ sudo onecfg status
-```{{< /alert >}}  
+```
+{{< /alert >}}
 
 The tool comes with help for each subcommand and command-line option. Simply run without any parameter or run with the parameter `--help` to print the brief documentation (e.g., `onecfg status --help`).
 
@@ -42,7 +43,7 @@ The `status` subcommand provides an overview of the OpenNebula installation. It 
 - Available updates with the corresponding migrators.
 
 {{< alert title="Note" color="success" >}}
-If status subcommand fails on an **unknown** configuration version, check the section on [init]({{% relref "#cfg-init" %}}) subcommand below.{{< /alert >}} 
+If status subcommand fails on an **unknown** configuration version, check the section on [init]({{% relref "software/upgrade_process/configuration_management_ee/usage#cfg-init" %}}) subcommand below.{{< /alert >}} 
 
 Example:
 
