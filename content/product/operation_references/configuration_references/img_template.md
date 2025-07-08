@@ -15,7 +15,7 @@ weight: "2"
 This page describes how to define a new image template. An image template follows the same syntax as the [VM template]({{% relref "template#template" %}}).
 
 {{< alert title="Warning" color="warning" >}}
-Some template attributes can compromise the security of the system or the security of other VMs, and can be used **only** by users in the `oneadmin` group. These attributes can be configured in [oned.conf]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}). In the following tables, default attributes are marked with `*`. For the complete list, see the [Restricted Attributes]({{% relref "#img-template-restricted-attributes" %}}) section.{{< /alert >}} 
+Some template attributes can compromise the security of the system or the security of other VMs, and can be used **only** by users in the `oneadmin` group. These attributes can be configured in [oned.conf]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}). In the following tables, default attributes are marked with `*`. For the complete list, see the [Restricted Attributes]({{% relref "img_template#img-template-restricted-attributes" %}}) section.{{< /alert >}}
 
 ## Template Attributes
 

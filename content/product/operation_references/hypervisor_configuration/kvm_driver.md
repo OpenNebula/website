@@ -79,7 +79,7 @@ The following attributes can be overridden at Cluster and Host level, but not wi
 * `EMULATOR_CPUS`: Value used for KVM option <cputune><emulatorpin cpuset=…>
 
 {{< alert title="Warning" color="warning" >}}
-These values are only used during VM creation; for other actions like nic or disk attach/detach the default values must be set in `/var/lib/one/remotes/etc/vmm/kvm/kvmrc`. For more info check [Files and Parameters]({{% relref "#kvmg-files-and-parameters" %}}) section.{{< /alert >}} 
+These values are only used during VM creation; for other actions like nic or disk attach/detach the default values must be set in `/var/lib/one/remotes/etc/vmm/kvm/kvmrc`. For more info check [Files and Parameters]({{% relref "kvm_driver#kvmg-files-and-parameters" %}}) section.{{< /alert >}}
 
 For example (check the actual state in the configuration file on your Front-end):
 

@@ -26,7 +26,7 @@ It’s recommended to install the database backend now. Later, when doing the [F
 {{< alert title="Note" color="success" >}}
 The information about SQLite is only for information, default installation is preconfigured for SQLite and no actions are required!{{< /alert >}} 
 
-The **SQLite** backend is the default database backend. It’s not recommended for production use as it doesn’t perform well under load and on bigger infrastructures. For most cases, it’s recommended to use [MySQL/MariaDB]({{% relref "#mysql-setup" %}}).
+The **SQLite** backend is the default database backend. It's not recommended for production use as it doesn’t perform well under load and on bigger infrastructures. For most cases, it’s recommended to use [MySQL/MariaDB]({{% relref "#mysql-setup" %}}).
 
 ### Install
 
