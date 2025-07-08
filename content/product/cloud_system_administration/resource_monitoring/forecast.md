@@ -94,7 +94,7 @@ Outliers in monitoring data can negatively affect forecasts. Investigate unusual
 
 ## Configuration and Optimization
 
-The Resource Forecast configuration file is located at `/var/lib/one/remotes/kvm-probes.d/forecast.conf`.
+The Resource Forecast configuration file is located at `/var/lib/one/remotes/etc/im/kvm-probes.d/forecast.conf`.
 
 Default configuration:
 
