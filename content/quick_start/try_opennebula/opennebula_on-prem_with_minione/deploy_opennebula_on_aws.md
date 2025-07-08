@@ -232,14 +232,14 @@ chmod +x minione
 To install miniONE, run as root:
 
 ```bash
-./minione --version 6.99 --force
+./minione
 ```
 
 The miniONE script will begin the installation, logging output to the terminal. Installation may take about a minute. When it’s finished, miniONE shows a report with connection parameters and login credentials:
 
 ```
 ### Report
-OpenNebula 6.99 was installed
+OpenNebula 7.0 was installed
 Sunstone is running on:
   http://[omitted]/
 FireEdge is running on:
