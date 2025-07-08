@@ -1,0 +1,321 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OneFlow API",
+    "version": "v1",
+    "description": "RESTful API to create, control, and monitor services composed of interconnected virtual machines with deployment dependencies."
+  },
+  "servers": [
+    {
+      "url": "https://oneflow.server:2474",
+      "description": "OpenNebula Frontend server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "service_templates",
+      "description": "Service templates description"
+    },
+    {
+      "name": "services",
+      "description": "Services description"
+    }
+	],
+  "paths": {
+    "/service_template": {
+      "get": {
+				"tags": ["service_templates"],
+        "summary": "List SERVICE_TEMPLATE resources",
+        "responses": {
+          "200": {
+            "description": "JSON representation of the collection",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+				"tags": ["service_templates"],
+        "summary": "Create a new SERVICE_TEMPLATE",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ServiceTemplate" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "SERVICE_TEMPLATE created",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/service_template/{id}": {
+      "get": {
+				"tags": ["service_templates"],
+        "summary": "Get a SERVICE_TEMPLATE by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON representation of the resource",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+				"tags": ["service_templates"],
+        "summary": "Update a SERVICE_TEMPLATE by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ServiceTemplate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SERVICE_TEMPLATE updated",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+				"tags": ["service_templates"],
+        "summary": "Delete a SERVICE_TEMPLATE by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "/service_template/{id}/action": {
+      "post": {
+				"tags": ["service_templates"],
+        "summary": "Perform an action on a SERVICE_TEMPLATE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "object",
+                    "properties": {
+                      "perform": { "type": "string" },
+                      "params": { "type": "object" }
+                    },
+                    "required": ["perform"]
+                  }
+                },
+                "required": ["action"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Action performed"
+          }
+        }
+      }
+    },
+    "/service": {
+      "get": {
+				"tags": ["services"],
+        "summary": "List SERVICE resources",
+        "responses": {
+          "200": {
+            "description": "JSON representation of the collection",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/service/{id}": {
+      "get": {
+				"tags": ["services"],
+        "summary": "Get a SERVICE by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON representation of the resource",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+				"tags": ["services"],
+        "summary": "Update a SERVICE by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Service" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SERVICE updated"
+          }
+        }
+      },
+      "delete": {
+				"tags": ["services"],
+        "summary": "Delete a SERVICE by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "/service/{id}/action": {
+      "post": {
+				"tags": ["services"],
+        "summary": "Perform an action on a SERVICE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "object",
+                    "properties": {
+                      "perform": { "type": "string" },
+                      "params": { "type": "object" }
+                    },
+                    "required": ["perform"]
+                  }
+                },
+                "required": ["action"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Action performed"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceTemplate": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "deployment": { "type": "string" },
+          "roles": {
+            "type": "array",
+            "items": { "type": "object" }
+          },
+          "shutdown_action": { "type": "string" }
+        },
+        "required": ["name", "roles"]
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "deployment": { "type": "string" },
+          "roles": {
+            "type": "array",
+            "items": { "type": "object" }
+          },
+          "shutdown_action": { "type": "string" }
+        },
+        "required": ["name", "roles"]
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
