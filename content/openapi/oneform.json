@@ -2,13 +2,13 @@
   "openapi": "3.0.0",
   "info": {
     "title": "OneForm API",
-    "version": "1.0.0",
+    "version": "v1",
     "description": "This specification defines all RESTful operations for the OneForm system, including provider templates, providers, provision templates, and provisions.\n"
   },
   "servers": [
     {
-      "url": "https://api.oneform.example.com/v1",
-      "description": "Primary production server"
+      "url": "https://api.oneform.example.com/api/v1/",
+      "description": "OpenNebula Frontend server"
     }
   ],
   "tags": [
