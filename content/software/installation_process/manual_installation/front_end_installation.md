@@ -218,7 +218,7 @@ systemctl start opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 {{< alert title="Warning" color="warning" >}}
-Make sure all required [network ports]({{% relref "#frontend-fw" %}}) are enabled on your firewall (on Front-end or the router).{{< /alert >}}
+Make sure all required [network ports]({{% relref "front_end_installation#frontend-fw" %}}) are enabled on your firewall (on Front-end or the router).{{< /alert >}}
 
 Other OpenNebula services might be started as a dependency but you don’t need to care about them unless they need to be explicitly restarted or stopped. To start these **services automatically on server boot**, it’s necessary to enable them by the following command:
 
