@@ -219,9 +219,12 @@ The ovirtapi server will generate logs in the following directory depending on t
 
 If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
 
+### Volatile disk backups
+
+In order to backup volatile disks, you need to enable so in the OpenNebula virtual machine configuration by setting the ``BACKUP_VOLATILE`` parameter to ``YES``, otherwise the disk won't be listed in Veeam. For more information regarding backups of volatile disks in OpenNebula please refer to the [backup documentation page]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations.md" %}}). 
+
 ## Current limitations and issues
 
-- Volatile disks cannot be backed up. They will not be displayed in the Veeam interface. 
 - Veeam will not attempt incremental backups, so all backups will be full.
 - When trying to start a backup job, the following error may appear. It can be solved by refreshing the backup job properties (even if no configuration is changed):
 

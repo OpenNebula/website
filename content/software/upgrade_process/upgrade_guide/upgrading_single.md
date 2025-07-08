@@ -139,7 +139,7 @@ No updates available.
 ### Step 8. Upgrade the Database Version
 
 {{< alert title="Important" color="danger" >}}
-If you have backed up `/etc/one/sunstone-views.yaml` restore the file to `/etc/one` now before execute the following command.{{< /alert >}}
+If you have backed up `/etc/one/sunstone-views.yaml` restore the file to `/etc/one` now before executing the following command.{{< /alert >}}
 
 Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
 
@@ -209,13 +209,7 @@ If you have any custom monitoring probes, follow [these instructions]({{% relref
 {{< alert title="Warning" color="warning" >}}
 The hypervisor node operating system must meet the minimum version required according to the [KVM]({{% relref "../../release_information/release_notes_70/platform_notes.md#kvm-nodes" %}}) or [LXC]({{% relref "../../release_information/release_notes_70/platform_notes#lxc-nodes" %}}) platform notes. Running a Front-end node with a newer OpenNebula version controlling hypervisor nodes running in old unsupported platforms, like CentOS 7, can result in a myriad of dependency problems. A very common issue is the old ruby version shipped in CentOS 7 not being able to run the newer driver code.{{< /alert >}}
 
-Update the virtualization, storage, and networking drivers. As the `oneadmin` user, execute:
-
-```bash
-onehost sync
-```
-
-Then log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described [above](#step-5-upgrade-opennebula-packages-repository).
+Log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described [above](#step-5-upgrade-opennebula-packages-repository).
 
 Ubuntu/Debian
 
@@ -235,6 +229,12 @@ Note that the `<hypervisor>` tag should be replaced by the name of the correspon
 
 {{< alert title="Important" color="success" >}}
 For KVM hypervisor it’s also necessary to restart the libvirt service{{< /alert >}}
+
+Then update the virtualization, storage, and networking drivers. As the `oneadmin` user, execute:
+
+```bash
+onehost sync
+```
 
 ### Step 13. Enable Hosts
 

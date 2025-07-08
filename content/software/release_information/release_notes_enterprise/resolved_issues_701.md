@@ -19,3 +19,6 @@ The following issues has been solved in 7.0.1:
   - Removes sensitive information from FireEdge logs [#7106](https://github.com/OpenNebula/one/issues/7106)
   - NetApp: Implemented volume autogrow/shrink so if snapshots exceed their reserve percentage, the volume is expanded
   - NetApp: Volumes are expanded by snapshot reserve percentage to avoid space issues
+  - opennebula-ovirtapi: Adds the ability to backup volatile disks [#7148](https://github.com/OpenNebula/one/issues/7148)
+  - opennebula-ovirtapi: Keeps VM ownership after restore [#7147](https://github.com/OpenNebula/one/issues/7147)
+  - Fix Windows Optimized OS Profile [#7146](https://github.com/OpenNebula/one/issues/7146)

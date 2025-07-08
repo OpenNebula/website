@@ -22,6 +22,12 @@ This Chapter describes how to use the configuration management tool to:
 - Apply changes to configuration files based on differential file (available also in **Community Edition**).
 - Validate configuration files.
 
+{{< alert title="Important" color="success" >}}
+You can upgrade to OpenNebula {{< version >}} from any previous installation of OpenNebula EE or CE.
+
+OpenNebula version {{< version >}} includes migrators for the database ([`onedb`]({{% relref "upgrading_single/#step-8-upgrade-the-database-version" %}})) and for configuration files (`onecfg`, described in this section). These migrators, included in the `opennebula-migration` package, are available in both the Enterprise and Community Edition, and support migrating from all previous OpenNebula EE or CE versions.
+{{< /alert >}}
+
 ## How Should I Read This Chapter
 
 In this Chapter, you’ll find all the information about how to manage your configuration files. Although this knowledge is not so important for new installations, it’s essential for the OpenNebula upgrades that might happen in the near future.

@@ -25,3 +25,9 @@ You only need to read this chapter if you are upgrading OpenNebula to a newer re
 The first stop is the [Start Here]({{% relref "start_here#start-here" %}}) section that lays out the workflow needed to upgrade. The system will upgrade from the currently installed release to the latest release. If you need to upgrade from a version older than 6.0, please read [Upgrade from Previous Versions]({{% relref "upgrade_from_previous_versions#upgrade-from-previous" %}}). In case something goes awry you can always [restore OpenNebula]({{% relref "restoring_version#restoring-version" %}}) to the state previous to the update.
 
 After the upgrade procedure you can continue using your upgraded OpenNebula Cloud.
+
+{{< alert title="Important" color="success" >}}
+You can upgrade to OpenNebula {{< version >}} from any previous installation of OpenNebula EE or CE.
+
+OpenNebula version {{< version >}} includes migrators for the database ([`onedb`]({{% relref "upgrading_single/#step-8-upgrade-the-database-version" %}})) and for configuration files (`onecfg`, described in [Configuration Management]({{% relref "configuration_management_ee" %}})). These migrators, part of the `opennebula-migration` package, are available in both the Enterprise and Community Edition, and support migrating from all previous OpenNebula EE or CE versions.
+{{< /alert >}}
