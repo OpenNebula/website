@@ -60,3 +60,29 @@ Environment="no_proxy=domain1,domain2"
 ```
 
 Where `proxy_server` is the proxy server to be used and `no_proxy` is a list of the domains or IP ranges that must not be accessed via proxy by opennebula. After that, reload systemd service configuration with `systemctl daemon-reload` and restart opennebula with a `systemctl restart opennebula`
+
+## Monitoring
+
+When configuring resource usage forecasts, it is important to ensure that the `forecast period` is **not shorter** than the `probe period` defined for `MONITOR_HOST`and `MONITOR_VM`in the `/etc/one/monitord.conf`. If the forecast period is set to a value smaller than the monitoring interval, the prediction probe will raise an error and may disable monitoring for the affected Host and VMs.
+
+By default, the monitoring interval for a Host is two minutes. In the following example, the forecast period is set to one minute, which is shorter than the host's monitoring interval (two minutes). This **misconfiguration** will result in an error and place the host in an error state:
+
+```yaml
+host:
+  db_retention: 4 # Number of weeks
+  forecast:
+      enabled: true
+      period: 1 # Number of minutes
+      lookback: 60 # The look-back windows in minutes to use for the predictions
+```
+
+To avoid this error, always set the forecast period a value **equal to or greater** than the monitoring interval. For example, if the Host monitoring interval is two minutes, the forecast period should be set to at least two minutes:
+
+```yaml
+host:
+  db_retention: 4 # Number of weeks
+  forecast:
+      enabled: true
+      period: 2 # Number of minutes
+      lookback: 60 # Look-back window in minutes for predictions
+```
