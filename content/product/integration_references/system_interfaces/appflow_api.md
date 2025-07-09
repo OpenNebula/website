@@ -17,5 +17,14 @@ The OpenNebula OneFlow API is a RESTfull service to create, control and monitor 
 
 This guide is intended for developers. The OpenNebula distribution includes a [cli]({{% relref "../../../product/operation_references/configuration_references/cli#cli" %}}) to interact with OneFlow and it is also fully integrated in the [Sunstone GUI]({{% relref "../../../product/operation_references/opennebula_services_configuration/oneflow#oneflow-conf-sunstone" %}}).
 
+## Authentication & Authorization
 
-{{< swaggerui src="openapi/oneflow.json" >}}
+User authentication will be [HTTP Basic access authentication](http://tools.ietf.org/html/rfc1945#section-11). The credentials passed should be the username and password.
+
+```default
+$ curl -u "username:password" https://oneflow.server
+```
+
+## API Endpoints
+
+{{< swaggerui src="openapi/oneflow_v1.json" >}}

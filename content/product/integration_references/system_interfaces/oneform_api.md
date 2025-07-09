@@ -9,4 +9,14 @@ The OpenNebula Formation API is a RESTful service designed to register, configur
 
 This guide is intended for developers and integrators. For other purposes, OneForm is accessible via its own [OneForm Command Line Interface]().
 
-{{< swaggerui src="openapi/oneform.json" >}}
+## Authentication & Authorization
+
+User authentication will be [HTTP Basic access authentication](http://tools.ietf.org/html/rfc1945#section-11). The credentials passed should be the username and password.
+
+```default
+$ curl -u "username:password" https://oneform.server
+```
+
+## API Resources
+
+{{< swaggerui src="openapi/oneform_v1.json?" >}}

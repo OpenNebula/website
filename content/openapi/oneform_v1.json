@@ -14,19 +14,19 @@
   "tags": [
     {
       "name": "provider-templates",
-      "description": "Operations involving the registry of provider templates."
+      "description": "Manage provider template definitions"
     },
     {
       "name": "providers",
-      "description": "Operations for instantiated providers."
+      "description": "Manage active provider instances"
     },
     {
       "name": "provision-templates",
-      "description": "Operations involving the registry of provision templates."
+      "description": "Manage templates for provisioning resources"
     },
     {
       "name": "provisions",
-      "description": "Operations for instantiated provisions."
+      "description": "Manage deployed resource provisions"
     }
   ],
   "paths": {
