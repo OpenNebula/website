@@ -133,83 +133,9 @@ For example, a system with an Image Datastore (`1`) with three images and three 
 ```
 
 {{< alert title="Note" color="success" >}}
-The canonical path for `/var/lib/one/datastores` can be changed in [/etc/one/oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}}) by modifying the `DATASTORE_LOCATION` configuration attribute.{{< /alert >}} 
+The canonical path for `/var/lib/one/datastores` can be changed in [/etc/one/oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}}) by modifying the `DATASTORE_LOCATION` configuration attribute.{{< /alert >}}
 
 In this case, the System Datastore is distributed among the Hosts. The **local** transfer driver uses the Hosts' local storage to place the images of running Virtual Machines. All of the operations are then performed locally, but images still need to be copied to the Hosts, which can be a very resource-demanding operation.
 
 ![><](/images/fs_ssh.png)
 
-## Distributed Cache
-
-To improve the speed of VM provisioning and reduce bandwidth consumption when using Local Storage Datastores, OpenNebula supports a two-tier distributed cache mechanism. This section describes how to enable and use the cache, and the benefits it provides.
-
-### What is the Distributed Cache?
-
-The distributed cache maintains VM disk images in two levels:
-
-1. **Local Cache (per Host)**: Each compute host keeps a small cache of the images it has already retrieved.
-
-2. **Central (Upstream) Cache**: One or more “central” cache nodes (typically the hosts with the most resources) maintain a larger pool of images shared by the entire cluster.
-
-When a VM is instantiated, the Host first checks its *local cache* for the needed image. If missing, it then checks the *central cache*. Only if the image is not found in either cache does the Host request it from the Image Datastore on the Front-end. Once retrieved from the Front-end, the image is stored in both caches for future reuse.
-
-![><](/images/local_ds_cache.png)
-
-## How to Enable and Configure the Cache
-
-The Cache is configured per **Image Datastore**. In other words, each Image Datastore in OpenNebula that uses the local TM driver defines its own cache settings. The cache settings are described in the next table:
-
-
-| Attribute         | Description                                                                                                                                                           | Deault value         |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| `ENABLE_CACHE`    | Set to `yes` to enable the distributed cache for this Image Datastore, or `no` to disable it.                                                                         | `NO`                 |
-| `CACHE_PATH`      | Absolute directory where cached images will be stored (e.g., `/var/lib/one/cache`).                                                                                   | `/var/lib/one/cache` |
-| `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` resides) allocated for caching. For example, "10" means 10 % of that disk may be used. | `10`                 |
-| `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                   | `''` (no upstreams)  |
-| `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         | `0`                  |
-
-
-For example, to configure a Distributed Cache update the image datastore template with the following parameters:
-
-```default
-ENABLE_CACHE    = "YES"
-CACHE_PATH      = "/var/lib/one/cache"
-CACHE_MAX_SIZE  = "10"
-CACHE_UPSTREAMS = "hostname0,hostname2"
-CACHE_MIN_AGE   = "3600"
-```
-
-{{< alert title="Note" color="success" >}}
-For the distributed cache to work, the `oneadmin` user (see [Node installation]({{% relref "../../../product/operation_references/hypervisor_configuration" %}})) must have SSH passwordless authentication configured on all Hosts.{{< /alert >}}
-
-## Using the Cache
-
-When a VM is launched or migrated, the cache manager performs the following three steps:
-
-1. **Local Cache Check:** The cache manager checks the local cache for the image. If it is found and still valid (modtime matches the one in the Image Datastore), it returns the local path.
-
-2. **Upstream Cache Check:** If missing locally (or invalid), the cache manager iterates through each `CACHE_UPSTREAMS`. If an image is found on an upstream Host, it stores a copy locally and returns that path.
-
-3. **Fallback to Front-End:** If not found in any cache, it falls back to retrieving the image from the Image Datastore on the Front-end, then stores it both locally and on the central cache.
-
-In each Host's cache path (e.g. `/var/lib/one/cache/`) cached images appear as two files:
-
-```default
-/var/lib/one/cache/1/
-├── c3af91e2b1d2ab9f64a25d99f9a2fbd2
-└── c3af91e2b1d2ab9f64a25d99f9a2fbd2-metadata
-```
-
-The metadata is a YAML file which contains:
-
-```default
-last_used: "2025-05-30T14:22:10Z"       # ISO 8601 timestamp of the most recent cache hit
-modtime:   "1725552553"                 # Last OpenNebula image modification time
-```
-
-## Eviction Policy.
-
-When the total size of cached files exceeds the `CACHE_MAX_SIZE` threshold, the cache manager automatically removes the Least-Recently-Used (LRU) entries until there is enough room for the incoming image. If after evicting all eligible entries there is still insufficient space to store a new image, the caching operation fails and the VM instantiation proceeds by fetching directly from the Front-end without caching.
-
-{{< alert title="Warning" color="warning" >}}
-Images used within the last `CACHE_MIN_AGE` seconds are exempt from eviction.{{< /alert >}}
