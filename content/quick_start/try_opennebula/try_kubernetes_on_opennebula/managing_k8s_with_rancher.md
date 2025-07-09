@@ -260,7 +260,7 @@ curl --insecure -sfL https://172.16.100.3.sslip.io/v3/import/<name>.yaml | kubec
 
 Copy the command from the screen (clicking on the command in the Rancher screen should copy it to the clipboard). You will need to enter the command in the Kubectl Shell for the Management Cluster.
 
-To go to the Kubectl Shell for the Management Cluster, go to Cluster Management. Then, in the **Clusters** screen select the `local` cluster and click the 3-dot icon ![icon](/images/icons/rancher/3_dots_menu.png) on the right.
+To go to the Kubectl Shell for the Management Cluster, go to Cluster Management. Then, in the **Clusters** screen select the `local` cluster and click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) on the right.
 
 ![><](/images/rancher_open_kubectl_shell.png)
 
@@ -314,7 +314,7 @@ Rancher should display screen for Longhorn:
 
 Click the **Install** button at top right.
 
-The Rancher UI will take you to the **Installed Apps** screen, where Longhorn should be displayed as "Deployed".
+The Rancher UI will take you to the **Installed Apps** screen, where Longhorn should be displayed as "Deployed" (near the bottom of the image below).
 
 ![><](/images/rancher_apps_longhorn_deployed.png)
 
@@ -330,10 +330,170 @@ Rancher will display the **PersistentVolumeClaims** screen. To create a new PVC,
 
 Fill in the required parameters for the PVC:
 
-- In the **Name** field, `nginx`
+- In the **Name** field, type `nginx`
 - In **Source**, leave at its default option, "Use a Storage Class to provision a new Persistent Volume"
+- In the **Storage Class** drop-down, select `longhorn`
 - In **Request Storage**, you can modify the default value of 10 GiB to your needs. In this example we will set it to 2 GiB
 
-![><](/images/rancher_create_pvc.png)
+![><](/images/rancher_create_pvc_2.png)
 
 Click **Create**.
+
+The PVC should be listed in the **Storage** -> **PersistentVolumeClaims** tab for the cluster, shown below.
+
+![><](/images/rancher_pvc_created.png)
+
+### Creating an Nginx Deployment
+
+In this step we will see how to define new resources directly using YAML, by creating a new Nginx deployment from a YAML definition.
+
+Go to the **Cluster Dashboard** (in the left-hand nav pane click the icon for the cluster, then in the menu to the right click **Cluster**). Then, in the top bar click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png):
+
+![><](/images/rancher_import_yaml.png)
+
+Rancher displays the **Import YAML** screen. To deploy Nginx, here you can copy and paste the following definition:
+
+```yaml
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: http
+        image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - mountPath: "/persistent/"
+          name: nginx
+      volumes:
+      - name: nginx
+        persistentVolumeClaim:
+          claimName: nginx
+```
+
+To import the definition, click **Import**. Rancher will create a simple Nginx deployment that mounts the previously-created PVC.
+
+![><](/images/rancher_yaml_imported.png)
+
+To see the Nginx deployment, in the menu for the cluster select **Deployments**, and in the `default` namespace look for `nginx`.
+
+![><](/images/rancher_nginx_deployment.png)
+
+Clicking `nginx` displays additional information for the deployment, including the IP:
+
+![><](/images/rancher_nginx_deployment_2.png)
+
+The node where Nginx is running is the Virtual Machine created by OpenNebula as part of the workload cluster, which you can see in Sunstone (**Instances** -> **VMs**):
+
+![><](/images/sunstone_capone_vms.png)
+
+If you want to check the Nginx deployment from OpenNebula without logging into Rancher, you can log in to the VM from the Front-end node with `onevm ssh <VM ID>` (in this case `4`):
+
+```bash
+onevm ssh 4
+```
+
+And run `curl` against the deployment's IP (in this case `10.42.0.32`):
+
+```default
+root@capone4-ljm6z:/var/log# curl 10.42.0.32
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@capone4-ljm6z:/var/log#
+```
+
+### Exposing the Nginx Deployment
+
+A quick and simple way to expose the Nginx deployment is to create a **NodePort** service.
+
+To create the service, click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png) in the top bar. Then, copy-paste the below definition:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+  type: NodePort
+```
+
+This will expose port 80 of the pod running the `nginx` service on port 30080 of the master node in the `capone4` cluster.
+
+After clicking **Import**, you should see `nginx-service` in the cluster's **Services** tab:
+
+![><](/images/rancher_nginx-service.png)
+
+Now your Nginx deployment should be visible on the external IP of the node -- which in this example setup is `192.168.100.4` -- on port 30080:
+
+![><](/images/rancher_nginx_welcome_screen.png)
+
+## Additional Tasks
+
+### Adding Worker Nodes to the Cluster
+
+To add a Worker Node to the cluster, you would use CAPI to create a replica of the cluster.
+
+In Rancher, go to **Cluster Management**, then in the left-hand nav pane **CAPI** -> **Machine Deployments**. Rancher should display the current deployment of the `capone4` cluster. Clicking the deployment name shows the YAML file for the deployment. To add a replica, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) at top right, then select **Edit YAML**. Find the string `replicas: 1` and change the number to the desired number of replicas.
+
+![><](/images/rancher_create_replica.png)
+
+### Upgrading the Workload Cluster
+
+To upgrade the cluster to the latest version from within Rancher, select **Cluster Management** at bottom left, then **Clusters** on the left-hand pane. Click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) for the cluster, then select **Edit Config** from the drop-down.
+
+![><](/images/rancher_edit_config.png)
+
+Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading.
+
+![><](/images/rancher_cluster_conf_screen.png)
+
+Rancher should display the **Clusters** where the cluster should display status `Upgrading`. The upgrade can take several minutes. To see the upgrade process, click the **Explore** button to the right of the cluster to see the Cluster Dashboard where upgrade messages are displayed.
+
+When the upgrade is finished, the **Clusters** screen should display the cluster with the new version.
+
+![><](/images/rancher_cluster_upgraded.png)
+
+
+
