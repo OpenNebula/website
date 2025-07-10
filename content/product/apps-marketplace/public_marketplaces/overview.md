@@ -22,7 +22,7 @@ OpenNebula will configure by default the following Marketplaces in your installa
 {{< alert title="Important" color="success" >}}
 The OpenNebula Front-end needs access to the Internet to use the Public Marketplaces.{{< /alert >}} 
 
-Only the OpenNebula Public mMrketplace is enabled by default. Other Marketplaces are initialized as disabled. To enable them use `onemarket enable <market_id>`.
+Only the OpenNebula Public Marketplace is enabled by default. Other Marketplaces are initialized as disabled. To enable them use `onemarket enable <market_id>`.
 
 You can list the Marketplaces configured in OpenNebula with `onemarket list`. The output for the default installation of OpenNebula will look similar to:
 
