@@ -6,51 +6,71 @@ weight: 3
 
 ## Basic Configuration
 
-To set up Ceph RBD mirroring between two OpenNebula sites, you need to configure asynchronous block-level replication of RBD images to ensure that Virtual Machine disk images are synchronized.
+To set up Ceph RBD mirroring between two OpenNebula sites, you will need to configure asynchronous block-level replication of RBD images in order to ensure that Virtual Machine disk images are synchronized.
 
-First, you deploy two independent Ceph clusters, one per site (**Site A** and **Site B**). These clusters must have matching RBD pool names (in this case, `one` pool). To avoid duplicate image names, Site B does not have any images in the same pool.
+First, you deploy two independent Ceph clusters, one per site (**Site A** and **Site B**). These clusters must use matching RBD pool names. (In this guide, we will use a pool called `one`). To avoid duplicate image names, Site B does not have any images in the same pool.
 
 On Site A, you need to:
 
-- Set the VM images as **persistent** in the OpenNebula database. This means that modifications you make to the image will be preserved after the VM is terminated. You can set a VM image as persistent when creating the image or later, using the `oneimage`. For details [Creating Images]({{% relref "images#creating-images" %}}) and [Changing the Persistent Mode]({{% relref "images#changing-the-persistent-mode" %}}) in the Images documentation.
+- Set the VM images as **persistent** in the OpenNebula database. This means that modifications you make to each image will be preserved after the VM is terminated. You can set a VM image as persistent when you create the image or later, using the `oneimage` command. For details see [Creating Images]({{% relref "images#creating-images" %}}) and [Changing the Persistent Mode]({{% relref "images#changing-the-persistent-mode" %}}) in the Images documentation.
 
 On Site B, you need to:
 
-- Retrieve the metadata for each VM, which you can do with `onevm show`. For details on this and other Virtual Machine operations, see [Virtual Machine Instances]({{% relref "vm_instances" %}}).
+- Retrieve the metadata for each VM. You can do this with `onevm show`. For full details on this and other Virtual Machine operations, see [Virtual Machine Instances]({{% relref "vm_instances" %}}).
 
 ### Create Ceph Users
 
-You will need to set up two users for the Ceph clusters, one for the `rbd-mirror` daemon on the source Ceph cluster (Site A) and one for the daemon on the target Ceph cluster (Site B). These users will enable the `rbd-mirror` daemon on each Ceph cluster to authenticate against each other.
+To use RBD mirroring, you will need to set up two users for the Ceph clusters: one for the `rbd-mirror` daemon on the source Ceph cluster (Site A) and one for the daemon on the target Ceph cluster (Site B). These users will enable the `rbd-mirror` daemon on each Ceph cluster to authenticate against each other.
 
-To create the user in the source Ceph cluster (site A), run as `root`:
+This section lists the commands to create the Ceph user on the Ceph clusters for Site and Site B.
+
+{{< alert title="Note" color="success" >}}
+Throughout this guide, `one` is used as the pool name, and `site-a` and `site-b` as the Ceph cluster names.
+
+Unless otherwise specified, all commands in this guide should be run as `root`.
+{{< /alert >}}
+
+#### On Site A
+
+To create the user in the source Ceph cluster, run:
 
 ```bash
 ceph auth get-or-create client.rbd-mirror-peer-a mon 'profile rbd' osd 'profile rbd' -o /etc/ceph/site-a.client.rbd-mirror-peer-a.keyring
 ```
 
-The above creates a secret key for the user and outputs it to the file `/etc/ceph/site-a.client.rbd-mirror-peer-a.keyring`. You will need to copy this file to the Ceph cluster at Site B. To copy the contents to all host on Site B you can run a one-line script:
+This creates a secret key for the user and outputs it to the file `/etc/ceph/site-a.client.rbd-mirror-peer-a.keyring`. You will need to copy this file to the Ceph cluster at Site B. To copy the contents to all hosts on Site B, you can run this one-line script, (replacing the node and site names if necessary):
 
 ```bash
 for host in node{0..3}-site-b; do echo $host; scp /etc/ceph/site-a.client.rbd-mirror-peer-a.keyring root@$host:/etc/ceph/site-a.client.rbd-mirror-peer-a.keyring; done
 ```
 
-Then, change the ownership of the file to user `ceph`:
+Then, on each host change the ownership of the file to user `ceph`:
 
 ```bash
-for host in node{0..3}-site-b; do echo $host;ssh $host chown ceph:ceph /etc/ceph/site-a.client.rbd-mirror-peer-a.keyring; done
+for host in node{0..3}-site-b; do echo $host; ssh $host chown ceph:ceph /etc/ceph/site-a.client.rbd-mirror-peer-a.keyring; done
 ```
+<a id="site-b-user"></a>
+#### On Site B
 
 On the target Ceph cluster (Site B), you will need to create a local user for the `rbd-mirror` daemon. Here we will use `$(hostname)` to match the unique ID to that used for other Ceph services such as monitors.
 
-```default
-root@site-b $ ceph auth get-or-create client.rbd-mirror.$(hostname) mon 'profile rbd-mirror' osd 'profile rbd' -o /etc/ceph/ceph.client.rbd-mirror.$(hostname).keyring
+```bash
+ceph auth get-or-create client.rbd-mirror.$(hostname) mon 'profile rbd-mirror' osd 'profile rbd' -o /etc/ceph/ceph.client.rbd-mirror.$(hostname).keyring
 ```
 
 {{< alert title="Note" color="success" >}}
-If you wish to restrict the user permissions to this specific pool, you can use `profile rdb pool=one`.
+If you wish to restrict the user permissions to this specific pool, you can use `profile rdb pool=one`:
+
+```bash
+ceph auth get-or-create client.rbd-mirror.$(hostname) mon 'profile rbd-mirror' osd 'profile rbd pool=one' -o /etc/ceph/ceph.client.rbd-mirror.$(hostname).keyring
+```
 {{< /alert >}}
 
-To enable the `rbd-mirror` daemon to access the Ceph cluster on Site A, we need to copy the `ceph.conf` file from Site A to Site B and name it `site-a.conf`:
+### Enabling Daemon Access to the "Site A" Ceph Cluster
+
+To enable the `rbd-mirror` daemon on Site B to access the Ceph cluster on Site A, you will need to copy the `ceph.conf` file from Site A to Site B, and name it `site-a.conf`.
+
+On Site A, you can run the command below to copy the file to all nodes on Site B (replacing the node and site names if necessary):
 
 ```bash
 for host in node{0..3}-site-b; do echo $host; scp /etc/ceph/ceph.conf root@$host:/etc/ceph/site-a.conf; done
@@ -63,13 +83,12 @@ Then, to change ownership of the file to system user `ceph`:
 for host in node{0..3}-site-b; do echo $host; ssh $host chown ceph:ceph /etc/ceph/site-a.conf; done
 ```
 
-Make sure that the name of the config file matches the name used in the keyring that stores the authentication infos.
+Make sure that the name of the config file matches the name used in the keyring that stores the authentication information.
 
 ## Enable Mirroring
 
-
 {{< alert title="Note" color="success" >}}
-When RBD mirroring is enabled for the entire pool, all newly-created images will inherit the `journal` and `exclusive-lock` attributes. However, only template images that do not need to be synchronized will be automatically synchronized to the opposite site, and VM images will not be synchronized even if they inherit the `journal` and `exclusive-lock` attributes, because that requires _flattening_.
+When RBD mirroring is enabled for the entire pool, all newly-created images will inherit the `journal` and `exclusive-lock` attributes. However, only template images that do not need to be synchronized will be automatically synchronized to the opposite site, and VM images will not be synchronized even if they inherit the `journal` and `exclusive-lock` attributes, since that would require _flattening_ the image.
 
 Site A can be configured with mirroring in `image` mode, but Site B always needs to use mirroring in `pool` mode.
 {{< /alert >}}
@@ -126,7 +145,7 @@ Direction: rx-tx
 Client: client.rbd-mirror-peer-a
 ```
 
-The direction should be `rx-tx` and the client should be set correctly to match the keyring file. The name should also be shown correctly (`site-a`).
+The `Direction` field should display `rx-tx` and the client should be set correctly to match the keyring file. The name should also be shown correctly (`site-a`).
 
 ### Install the `rbd-mirror` Daemon on Site B
 
@@ -146,7 +165,7 @@ systemctl enable ceph-rbd-mirror.target
 cp /usr/lib/systemd/system/ceph-rbd-mirror@.service /etc/systemd/system/ceph-rbd-mirror@.service
 ```
 
-Next, we need to create and start the mirroring service. Make sure to call it as we named the local user for the target cluster that we created earlier, otherwise the daemon won't be able to authenticate against the target cluster.
+Next, you will need to create and start the mirroring service. Ensure to give it the same name as the local user for the Site B cluster created earlier (see [above](#site-b-user)), or the Site A daemon won't be able to authenticate against the Site B cluster.
 
 ```bash
 systemctl enable --now ceph-rbd-mirror@rbd-mirror.$(hostname).service
@@ -154,7 +173,7 @@ systemctl enable --now ceph-rbd-mirror@rbd-mirror.$(hostname).service
 
 If we check the status and logs of the `ceph-rbd-mirror@rbd-mirror.<hostname>.service_` service, we should see that it comes up and does not log any authentication errors.
 
-To check the status, run:
+To check service status, run:
 
 ```bash
 systemctl status ceph-rbd-mirror@rbd-mirror.ubuntu2204-kvm-ceph-squid-6-10-cqyoo-0.service
@@ -228,7 +247,7 @@ service 14595:
 
 If you want to use `image` mode for Site A mirroring, you will need to define which images should be mirrored, and enable the `exclusive-lock` and `journal` features for the images.
 
-To enable journal-based mirroring for an image, run the command:
+To enable journal-based mirroring for an image (in this example, image `one-0-0-0`), run:
 
 ```bash
 rbd mirror image enable one/one-0-0-0 exclusive-lock,journal
@@ -265,7 +284,7 @@ root@site-a $ rbd image 'one-0-0-0':
 	mirroring primary: true
 ```
 
-Next, since VM disks are just the snapshots based on the image, we will need to flatten the required image:
+Next, since VM disks are just snapshots based on the image, we will need to flatten the required image:
 
 ```bash
 rbd flatten one/one-0-0-0
