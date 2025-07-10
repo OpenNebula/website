@@ -20,7 +20,7 @@ In this tutorial, we’ll use [OneDeploy](https://github.com/OpenNebula/one-depl
 
 This sample architecture uses a basic network configuration, a flat (bridged) network, where each VM’s IP is part of the same network as the Hypervisors.
 
-![image](/images/one_deploy_arch_local.png)
+![><](/images/one_deploy_arch_local.png)
 
 Throughout the tutorial we’ll use three server machines, please be sure to replace these references to your own IP addresses:
 
@@ -158,7 +158,7 @@ Below are sample contents for `example.yml`. You will probably need to modify pa
 all:
   vars:
     ansible_user: root
-    one_version: '6.10'
+    one_version: '{{< version >}}'
     one_pass: opennebulapass
     vn:
       admin_net:
@@ -428,7 +428,7 @@ The `STATE` column should display `rdy`.
 
 Next we can connect to the Sunstone UI on the Front-end. On any machine with connectivity to the Front-end node, point your browser to `<Front-end IP>:2616`, in this case `http://172.20.0.2:2616`. You should be greeted with the Sunstone login screen:
 
-![image](/images/sunstone_login_dark.png)
+![><](/images/sunstone_login_dark.png)
 <br/>
 
 You can log in as user `oneadmin`, with the password provided as the `one_pass` parameter in the `example.yml` file (in this example, `opennebulapass`).
