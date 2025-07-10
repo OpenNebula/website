@@ -28,6 +28,9 @@ This tutorial builds on the infrastructure created in those previous tutorials. 
 
 This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula On-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
 
+{{< alert title="Tip" color="success" >}}
+If deploying on-prem, you can also [install and manage Kubernetes with Rancher]({{% relref "managing_k8s_with_rancher" %}}) as part of this Quick Start guide.
+{{< /alert >}}
 
 As mentioned above, the Kubernetes cluster deployed in this tutorial is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
 
