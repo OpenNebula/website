@@ -10,7 +10,7 @@ A complete list of solved issues for 7.0.1 can be found in the [project developm
 
 The following new features have been backported to 7.0.1:
 
--
+- [Add multi-tier caching system for local drivers](../../../product/cluster_configuration/storage_system/local_ds#distributed-cache)
 
 The following issues has been solved in 7.0.1:
 

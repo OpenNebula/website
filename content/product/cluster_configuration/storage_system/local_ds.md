@@ -162,21 +162,21 @@ The Cache is configured per **Image Datastore**. In other words, each Image Data
 
 | Attribute         | Description                                                                                                                                                           | Deault value         |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| `ENABLE_CACHE`    | Set to `yes` to enable the distributed cache for this Image Datastore, or `no` to disable it.                                                                         | `NO`                 |
+| `CACHE_ENABLE`    | Set to `yes` to enable the distributed cache for this Image Datastore, or `no` to disable it.                                                                         | `NO`                 |
 | `CACHE_PATH`      | Absolute directory where cached images will be stored (e.g., `/var/lib/one/cache`).                                                                                   | `/var/lib/one/cache` |
 | `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` resides) allocated for caching. For example, "10" means 10 % of that disk may be used. | `10`                 |
 | `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                   | `''` (no upstreams)  |
-| `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         | `0`                  |
+| `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         | `900`                |
 
 
 For example, to configure a Distributed Cache update the image datastore template with the following parameters:
 
 ```default
-ENABLE_CACHE    = "YES"
+CACHE_ENABLE    = "YES"
 CACHE_PATH      = "/var/lib/one/cache"
 CACHE_MAX_SIZE  = "10"
 CACHE_UPSTREAMS = "hostname0,hostname2"
-CACHE_MIN_AGE   = "3600"
+CACHE_MIN_AGE   = "900"
 ```
 
 {{< alert title="Note" color="success" >}}
