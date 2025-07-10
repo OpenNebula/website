@@ -244,7 +244,7 @@
           "service_templates"
         ],
         "summary": "Perform an action on a Service template",
-        "description": "Perform an action on the Service template resource identified by ID.\nAvailable actions:\n- instantiate\n- chown\n- chgrp\n- chmod.\n\nAdditional parameters can be passed using the merge_template inside the params. For example, if we want to change the name when instantiating:\n\n```bash\ncurl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\":\"instantiate\",\n    \"params\": {\"merge_template\":{\"name\":\"new_name\"}}\n  }\n}'\n```\n\nThe following attributes can also be passed using the merge_template:\n\n- network_values\n- user_inputs_values\n- template_contents\n\nFor example, to instantiate a service template with custom VM capacity:\n\n```bash\ncurl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\":\"instantiate\",\n    \"params\":{\n      \"merge_template\": {\n        \"template_contents\": {\n          \"HOT_RESIZE\": {\n            \"CPU_HOT_ADD_ENABLED\": \"YES\",\n            \"MEMORY_HOT_ADD_ENABLED\": \"YES\"\n          },\n          \"MEMORY_RESIZE_MODE\": \"BALLOONING\",\n          \"VCPU_MAX\": \"2\",\n          \"MEMORY_MAX\": \"128\"\n        }\n      }\n    }\n  }\n}'\n```",
+        "description": "Perform an action on the Service template resource identified by ID.\nAvailable actions:\n- instantiate\n- chown\n- chgrp\n- chmod.\n\nAdditional parameters can be passed using the `merge_template` inside the params. For example, if we want to change the name when instantiating:\n\n```bash\ncurl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\":\"instantiate\",\n    \"params\": {\"merge_template\":{\"name\":\"new_name\"}}\n  }\n}'\n```\n\nThe following attributes can also be passed using the `merge_template`:\n\n- network_values\n- user_inputs_values\n- template_contents\n\nFor example, to instantiate a service template with custom VM capacity:\n\n```bash\ncurl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\":\"instantiate\",\n    \"params\":{\n      \"merge_template\": {\n        \"template_contents\": {\n          \"HOT_RESIZE\": {\n            \"CPU_HOT_ADD_ENABLED\": \"YES\",\n            \"MEMORY_HOT_ADD_ENABLED\": \"YES\"\n          },\n          \"MEMORY_RESIZE_MODE\": \"BALLOONING\",\n          \"VCPU_MAX\": \"2\",\n          \"MEMORY_MAX\": \"128\"\n        }\n      }\n    }\n  }\n}'\n```",
         "parameters": [
           {
             "name": "id",
@@ -380,7 +380,7 @@
           "services"
         ],
         "summary": "Update a Service by ID",
-        "description": "Append information to the service.\n\nTo use this action, the request body must include:\n- append: set to true.\n- template: JSON representation of the template to append.",
+        "description": "Append information to the service.\n\nTo use this action, the request body must include:\n- `append`: set to true.\n- `template`: JSON representation of the template to append.",
         "parameters": [
           {
             "name": "id",
@@ -474,7 +474,7 @@
           "services"
         ],
         "summary": "Perform an action on a Service",
-        "description": "Perform an action on the Service resource identified by ID. Available actions:\n- shutdown\n- recover\n- chown\n- chgrp\n- chmod\n- release\n\nThe recover action can be used to recover a failed service by cleaning the failed VMs.\n- From 'FAILED_DEPLOYING' it continues deploying the Service.\n- From 'FAILED_SCALING' it continues scaling the Service.\n- From 'FAILED_UNDEPLOYING' it continues shutting down the Service.\n- From COOLDOWN, the Service is set to running, ignoring the cooldown duration.\n\nPassing \"'delete': 'true'\" in params will delete the service and its VMs, regardless of the current state of the service.",
+        "description": "Perform an action on the Service resource identified by ID. Available actions:\n- shutdown\n- recover\n- chown\n- chgrp\n- chmod\n- release\n\nThe recover action can be used to recover a failed service by cleaning the failed VMs.\n- From `FAILED_DEPLOYING` it continues deploying the Service.\n- From `FAILED_SCALING` it continues scaling the Service.\n- From `FAILED_UNDEPLOYING` it continues shutting down the Service.\n- From `COOLDOWN`, the Service is set to running, ignoring the cooldown duration.\n\nPassing `'delete': 'true'` in params will delete the service and its VMs, regardless of the current state of the service.",
         "parameters": [
           {
             "name": "id",
@@ -599,7 +599,7 @@
           "services"
         ],
         "summary": "Perform an action on all VMs of a Role",
-        "description": "Perform an action on all the Virtual Machines belonging to the Role identified by 'name' of the Service resource identified by ID.\n\nAvailable actions:\n- shutdown\n- shutdown-hard\n- undeploy\n- undeploy-hard\n- hold\n- release\n- stop\n- suspend\n- resume\n- boot\n- delete\n- delete-recreate\n- reboot\n- reboot-hard\n- poweroff\n- poweroff-hard\n- snapshot-create\n- snapshot-revert\n- snapshot-delete\n- disk-snapshot-create\n- disk-snapshot-revert\n- disk-snapshot-delete\n\nInstead of performing the action immediately on all the VMs, you can execute it on small groups of VMs using the following optional parameters:\n- period: seconds between each group of actions\n- number: number of VMs to apply the action to each period\n\nExample:\n```bash\ncurl http://127.0.0.1:2474/service/5/role/frontend/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\": \"stop\",\n    \"params\": {\n      \"period\": 60,\n      \"number\": 2\n    }\n  }\n}'\n```",
+        "description": "Perform an action on all the Virtual Machines belonging to the Role identified by 'name' of the Service resource identified by ID.\n\nAvailable actions:\n- shutdown\n- shutdown-hard\n- undeploy\n- undeploy-hard\n- hold\n- release\n- stop\n- suspend\n- resume\n- boot\n- delete\n- delete-recreate\n- reboot\n- reboot-hard\n- poweroff\n- poweroff-hard\n- snapshot-create\n- snapshot-revert\n- snapshot-delete\n- disk-snapshot-create\n- disk-snapshot-revert\n- disk-snapshot-delete\n\nInstead of performing the action immediately on all the VMs, you can execute it on small groups of VMs using the following optional parameters:\n- `period`: seconds between each group of actions\n- `number`: number of VMs to apply the action to each period\n\nExample:\n```bash\ncurl http://127.0.0.1:2474/service/5/role/frontend/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\": \"stop\",\n    \"params\": {\n      \"period\": 60,\n      \"number\": 2\n    }\n  }\n}'\n```",
         "parameters": [
           {
             "name": "id",
@@ -665,7 +665,7 @@
           "services"
         ],
         "summary": "Add or remove a role from a running Service",
-        "description": "Add or remove a role from a running Service resource identified by ID, allowing dynamic modification of the service roles while the service is running. The action must be specified using the perform key in the request body.\n\nAvailable actions:\n- add_role: Adds a new role to the running service. The role field must contain the name or definition of the role to add.\n- remove_role: Removes an existing role from the running service. The role field must indicate the name of the role to remove.",
+        "description": "Add or remove a role from a running Service resource identified by ID, allowing dynamic modification of the service roles while the service is running. The action must be specified using the perform key in the request body.\n\nAvailable actions:\n- `add_role`: Adds a new role to the running service. The role field must contain the name or definition of the role to add.\n- `remove_role`: Removes an existing role from the running service. The role field must indicate the name of the role to remove.",
         "parameters": [
           {
             "name": "id",

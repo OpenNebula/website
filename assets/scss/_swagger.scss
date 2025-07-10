@@ -8,6 +8,7 @@ $opblock-tag-margin-bottom: 12px !default;
 $render-text-size: var(--bs-body-font-size) !default;
 $render-text-color: var(--bs-body-color) !default;
 $render-header-color: var(--bs-body-bg) !default;
+$render-code-color-bg: var(--bs-table-striped-bg) !default;
 
 // -------------------------------------------------------------
 // Global Layout Adjustments
@@ -177,4 +178,33 @@ tbody {
 
 .opblock-tag-section.is-open > h3 {
   margin-bottom: $opblock-tag-margin-bottom !important;
+}
+
+// -------------------------------------------------------------
+// Code blocks
+// -------------------------------------------------------------
+
+.swagger-ui .renderedMarkdown code {
+  display: inline-block !important;
+  background-color: $render-code-color-bg !important;
+  color: $render-text-color !important;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  padding: 2px 6px !important;
+  white-space: pre-wrap !important;
+  font-weight: normal !important;
+}
+
+.swagger-ui .renderedMarkdown pre > code {
+  display: block !important;
+  padding: 10px !important;
+  background-color: $render-header-color !important;
+  overflow-x: auto !important;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+
+.swagger-ui .renderedMarkdown li {
+  color: $render-text-color !important;
+  font-size: 14px !important;
 }
