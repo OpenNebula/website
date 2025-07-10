@@ -8,7 +8,21 @@ description:
 
 ## Overview
 
-OpenNebula's CAPI appliance, provides a ready-to-use solution for managing Kubernetes clusters through the [Rancher web UI](https://www.rancher.com). The appliance includes a fully configured lightweight K3s cluster with the Rancher interface already installed, and is fully integrated to support OpenNebula as an infrastructure provider via the [Cluster API Provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula).
+Previous tutorials of this Quick Start guide show how to use miniONE to:
+This Quick Start guide contains two tutorials for installing OpenNebula on premises, using miniONE:
+
+- [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
+- [Validate the environment]({{% relref "validate_the_minione_environment" %}}) created by miniONE, by running a Virtual Machine
+
+This tutorial builds on the infrastructure created in those previous tutorials. It has been tested in on-premises installations, and shows how to download an OpenNebula appliance that automatically installs a lightweight K3s cluster with the [Rancher web UI](https://www.rancher.com). From the Rancher UI you can quickly and easily deploy workload clusters and services, as well as configure and upgrade the cluster itself.
+
+{{< alert title="Tip" color="success" >}}
+To see how you can quickly deploy a production-grade Kubernetes cluster on Amazon AWS, see the [Run a Kubernetes Cluster]({{% relref "running_kubernetes_clusters" %}}) tutorial.
+{{< /alert >}}
+
+### OpenNebula's CAPI Appliance
+
+The Kubernetes Cluster API (CAPI) appliance provides a ready-to-use solution for managing Kubernetes clusters through [Rancher](https://www.rancher.com). The appliance is fully integrated to support OpenNebula as an infrastructure provider via the [Cluster API Provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula).
 
 You can download the the CAPI appliance from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io/) (where it is available as **Service Capi**) or on your OpenNebula Front-end using the [command line]({{% relref "marketapps#exploring-marketplace-appliances" %}}) or the [Sunstone web UI]({{% relref "marketapps#using-sunstone-to-manage-marketplace-appliances" %}}). The CAPI appliance eliminates the need for manual configuration, greatly reducing operational overhead and allowing you to effortlessly create, manage, and upgrade CAPI-managed RKE2 clusters.
 
@@ -16,26 +30,45 @@ This tutorial shows how to:
 
 - Download and install the CAPI Appliance
 - Log in to Rancher and deploy an RKE2 cluster
-- Importing and operating a workload cluster
-- Deploying a sample application
+- Import and operate a workload cluster
+- Deploy a sample application
+- Deploy additional services
+- Upgrade the workload cluster
 
 This tutorial was designed and tested in an on-premises installation. You can use it, for example, as a continuation of [OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}).
 
-## Pre-requisites
+### Pre-requisites
 
 To follow this tutorial you will need:
 
-- An [OpenNebula Front-end running on premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) (version >=6.10) running on a machine that meets the [Rancher installation requirements](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements#rke2-kubernetes):
+- An [OpenNebula Front-end running on premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) (version >=6.10) on a machine that meets the [Rancher installation requirements](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements#rke2-kubernetes):
    - 4 vCPUs
    - 16 GiB RAM
 - The [OneGate service]({{% relref "onegate_usage" %}}) must be running on the Front-end (it is enabled by default if you installed with miniONE).
-- A public and a private virtual network on your Front-end. The public network is installed automatically by miniONE; creating a private network is explained in the next step.
+- A public and a private virtual network on your Front-end. The public network is installed automatically by miniONE; creating a private network is explained below.
 
-## Instantiate a Private Network on the Front-end
+### Tutorial Outline
 
-In this step we will create a new virtual network and assign a range of private IPs to. This will network will be used by the Virtual Machines in the workload Kubernetes cluster.
+For completing this tutorial, we'll follow these high-level steps:
 
-In Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page showing the public network, **vnet**:
+1. Create a private network on the Front-end.
+1. Download the CAPI Appliance.
+1. Instantiate the CAPI Appliance.
+1. Connect to the Rancher UI.
+1. Deploy an OpenNebula RKE2 cluster.
+1. Import the workload cluster into Rancher.
+
+Additionally, we'll perform various operations on the cluster:
+   - Install Longhorn
+   - Deploy an Nginx service
+   - Add a worker node to the cluster
+   - Upgrade the workload cluster to the newest version
+
+## Step 1. Create a Private Network on the Front-end
+
+In this step we will create a new virtual network and assign a range of private IPs to it. This network will be used by the Virtual Machines in the workload Kubernetes cluster.
+
+To create the network in Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page. If you installed using miniONE, this screen shows the public network automatically installed, **vnet**:
 
 ![image](/images/sunstone-virtual_networks.png)
 
@@ -45,13 +78,13 @@ In the next screen, activate the **Use only private host networking** switch:
 
 ![image](/images/sunstone-create_priv_network.png)
 
-Then, click the **Addresses** tab. Here we will enter a range of private IP addresses. For this example, enter `192.168.200.2` for the base network address, and set the network size to `100`.
+Then, click the **Addresses** tab. Here we will enter a range of private IP addresses. For this example, enter `192.168.200.2` for the first network address, and set the network size to `100`.
 
 ![image](/images/sunstone-create_priv_network_2.png)
 
 Click **Finish**.
 
-## Download the CAPI Appliance
+## Step 2. Download the CAPI Appliance
 
 From your OpenNebula Front-end, you can download the CAPI appliance from the Sunstone UI or from the command line.
 
@@ -59,10 +92,10 @@ From your OpenNebula Front-end, you can download the CAPI appliance from the Sun
 
 You can download the CAPI appliance by following the same steps as when [downloading the WordPress VM]({{% relref "validate_the_minione_environment#step-1-download-the-wordpress-appliance-from-the-opennebula-marketplace" %}}):
 
-   1. On the left-hand pane, go to **Storage** -> **Apps**.
-   1. On the **Apps** showing the available apps, filter for `capi`.
-   1. Click **Service Capi** to select it, then click **Import**.
-   1. In the import wizard, select the **default** image datastore, then click **Finish**.
+1. On the left-hand pane, go to **Storage** -> **Apps**.
+1. On the **Apps** screen showing the available apps, filter for `capi`.
+1. Click **Service Capi** to select it, then click **Import**.
+1. In the import wizard, select the **default** image datastore, then click **Finish**.
 
 ### From the Command Line
 
@@ -74,7 +107,7 @@ onemarketapp export 'Service Capi' Capi --datastore default
 
 This automatically downloads the **Service Capi** appliance into the default datastore.
 
-## Instantiate the CAPI Appliance
+## Step 3. Instantiate the CAPI Appliance
 
 ### From the Sunstone UI
 
@@ -93,7 +126,7 @@ Wait a few moments until the VM displays the **RUNNING** state.
 
 ### From the Command Line
 
-To instantiate the Capi appliance template without additional usere inputs, as user `oneadmin` run:
+To instantiate the Capi appliance template without additional user inputs, as user `oneadmin` run:
 
 ```bash
 onetemplate instantiate Capi --nic vnet
@@ -117,13 +150,13 @@ VM ID:
 2
 ```
 
-The last number in the command output is the ID for the Virtual Machine, in this case `2`.
+If you leave the Rancher password empty, it will default to `capi1234` (username `admin`). The last number in the command output is the ID for the Virtual Machine, in this case `2`.
 
-## Connecting to the Rancher UI
+You will need to wait some minutes for the K3s cluster and the Rancher web UI to become available, depending on the Front-end machine and the resources assigned to the cluster. With the default resource values, the configuration process may take 6-8 minutes to complete.
 
-You may need to wait a few minutes for the K3s cluster and the Rancher web UI to become available.
+## Step 4. Connect to the Rancher UI
 
-To connect to the Rancher interface, fire up a web browser and go to `https://<VM IP>.sslip.io`. You can obtain the VM's IP from the Sunstone UI (see image above), or by running:
+To connect to the Rancher interface, fire up a web browser and go to `https://<VM IP>.sslip.io`. In this tutorial, the IP is `172.16.100.3`. You can obtain the VM's IP from the Sunstone UI (see image above), or by running:
 
 ```bash
 onevm show <VM ID>
@@ -142,7 +175,7 @@ oneadmin@frontend:~$ onevm show 2 | grep ETH0_IP=
   ETH0_IP="172.16.100.3",
 ```
 
-In this case we would connect to `https://172.16.100.3.sslip.io`.
+In this case we will connect to `https://172.16.100.3.sslip.io`.
 
 ![><](images/rancher_login.png)
 
@@ -170,9 +203,9 @@ kubectl get pods -A
 ```
 {{< /alert >}}
 
-## Deploying an OpenNebula RKE2 Cluster
+## Step 5. Deploy an OpenNebula RKE2 Cluster
 
-To deploy an OpenNebula RKE2 cluster, you can import a YAML file for the cluster or use the Helm charts provided by OpenNebula for Kubeadm and RKE2. For this tutorial we will install via the GUI using the RKE2 Helm chart.
+To deploy an OpenNebula RKE2 cluster, you can import a YAML file for the cluster or use the Helm charts provided by OpenNebula for Kubeadm and RKE2. For this tutorial we will install via the GUI, using the RKE2 Helm chart.
 
 To install from the Helm chart, follow these steps:
 
@@ -216,11 +249,11 @@ PRIVATE_NETWORK_NAME: private
 PUBLIC_NETWORK_NAME: vnet
 ```
 
-After modifying the parameters, click the **Install** on the bottom right corner.
+After modifying the parameters, click the **Install** button on the bottom right corner.
 
-The application should install and deploy; this process can take a few minutes.
+The cluster should install and deploy; this process can take a few minutes.
 
-To see the deployed application, in Rancher's left nav pane go to the Management Cluster, then select **Apps** -> **Installed Apps**. The list of applications should show the name of the cluster you deployed (in this example, `capone4`), with status `Deployed`.
+In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Installed Apps**. The list of applications should show the name of the cluster you deployed (in this example, `capone4`), with status `Deployed`.
 
 ![><](/images/rancher_capone_deployed.png)
 
@@ -242,7 +275,7 @@ This shows the Virtual Router `vr-capone4-cp-0`, the master node `capone4-ljm6z`
 - On the Sunstone UI, you can see the list of instantiated VMs by going to the left-hand pane and selecting **Instances** -> **VMs**.
 {{< /alert >}}
 
-## Importing the Workload Cluster into Rancher
+## Step 6. Import the Workload Cluster into Rancher
 
 To manage the workload cluster in the Rancher UI, you must first import it into Rancher.
 
@@ -439,7 +472,7 @@ root@capone4-ljm6z:/var/log#
 
 ### Exposing the Nginx Deployment
 
-A quick and simple way to expose the Nginx deployment is to create a **NodePort** service.
+For this tutorial, we'll expose the Nginx deployment by creating a **NodePort** service.
 
 To create the service, click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png) in the top bar. Then, copy-paste the below definition:
 
@@ -494,6 +527,4 @@ Rancher should display the **Clusters** where the cluster should display status 
 When the upgrade is finished, the **Clusters** screen should display the cluster with the new version.
 
 ![><](/images/rancher_cluster_upgraded.png)
-
-
 
