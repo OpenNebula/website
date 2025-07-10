@@ -63,9 +63,9 @@ Where `proxy_server` is the proxy server to be used and `no_proxy` is a list of 
 
 ## Monitoring
 
-When configuring resource usage forecasts, it is important to ensure that the `forecast period` is **not shorter** than the `probe period` defined for `MONITOR_HOST`and `MONITOR_VM`in the `/etc/one/monitord.conf`. If the forecast period is set to a value smaller than the monitoring interval, the prediction probe will raise an error and may disable monitoring for the affected Host and VMs.
+When configuring resource usage forecasts, it is important to ensure that the `forecast period` is _not shorter_ than the `probe period` defined for `MONITOR_HOST` and `MONITOR_VM` in `/etc/one/monitord.conf`. If the forecast period is set to a value smaller than the monitoring interval, the prediction probe will raise an error and may disable monitoring for the affected Host and VMs.
 
-By default, the monitoring interval for a Host is two minutes. In the following example, the forecast period is set to one minute, which is shorter than the host's monitoring interval (two minutes). This **misconfiguration** will result in an error and place the host in an error state:
+By default, the monitoring interval for a Host is two minutes. In the following example, the forecast period is set to one minute, which is shorter than the Host's monitoring interval of two minutes. This **misconfiguration** will result in an error and place the Host in an error state:
 
 ```yaml
 host:
@@ -76,7 +76,7 @@ host:
       lookback: 60 # The look-back windows in minutes to use for the predictions
 ```
 
-To avoid this error, always set the forecast period a value **equal to or greater** than the monitoring interval. For example, if the Host monitoring interval is two minutes, the forecast period should be set to at least two minutes:
+To avoid this error, always set the forecast period to a value _equal to or greater_ than the monitoring interval. For example, if the Host monitoring interval is two minutes, the forecast period should be set to at least two minutes:
 
 ```yaml
 host:
