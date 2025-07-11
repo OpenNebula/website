@@ -5,7 +5,6 @@ description: "Define resource usage and quotas by VMs, VM groups, and cloud user
 categories:
 pageintoc: "133"
 tags:
-no_list: "true"
 weight: "3"
 ---
 
