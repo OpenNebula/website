@@ -9,6 +9,8 @@ tags:
 weight: "7"
 ---
 
+<!--# It hides the tablist nav, remove this css rule if more oneflow api version are added -->
+<style>ul.nav.nav-tabs[role="tablist"] > li { display: none; }</style>
 <a id="appflow-api"></a>
 
 <!--# OneFlow Specification -->
@@ -17,14 +19,27 @@ The OpenNebula OneFlow API is a RESTfull service to create, control and monitor 
 
 This guide is intended for developers. The OpenNebula distribution includes a [cli]({{% relref "../../../product/operation_references/configuration_references/cli#cli" %}}) to interact with OneFlow and it is also fully integrated in the [Sunstone GUI]({{% relref "../../../product/operation_references/opennebula_services_configuration/oneflow#oneflow-conf-sunstone" %}}).
 
-## Authentication & Authorization
+## API Authentication
 
 User authentication will be [HTTP Basic access authentication](http://tools.ietf.org/html/rfc1945#section-11). The credentials passed should be the username and password.
 
 ```default
-$ curl -u "username:password" https://oneflow.server
+$ curl -u "username:password" https://oneflow.example.server:2474
 ```
 
-## API Endpoints
+{{< alert title="Note" color="success" >}}
+By default, the OneFlow API listens at `http://localhost:2474`. This value, along with other API service settings, can be customized in the `/etc/one/oneflow-server.conf` file.
+For more information, please refer to the [OneFlow Configuration Guide]().
+{{< /alert >}}
+
+## API Methods
+
+{{< tabpane text=true right=false >}}
+{{% tab header="v1" %}}
+
+> **Base URL**: *oneflow.example.server*
 
 {{< swaggerui src="openapi/oneflow_v1.json" >}}
+
+{{% /tab %}}
+{{< /tabpane >}}

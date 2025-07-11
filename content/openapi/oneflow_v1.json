@@ -7,8 +7,17 @@
   },
   "servers": [
     {
-      "url": "https://oneflow.server:2474",
-      "description": "OpenNebula Frontend server"
+      "url": "http://oneflow.example.server:{port}",
+      "description": "Default OneFlow API server",
+      "variables": {
+        "port": {
+          "default": "2474",
+          "description": "Port where the OneFlow API is listening",
+          "enum": [
+            "2474"
+          ]
+        }
+      }
     }
   ],
   "tags": [
@@ -104,7 +113,7 @@
         "tags": [
           "service_templates"
         ],
-        "summary": "Get a Service template by ID",
+        "summary": "Get a specific Service template by ID",
         "parameters": [
           {
             "name": "id",
@@ -265,11 +274,13 @@
               },
               "example": {
                 "perform": "instantiate",
-                "merge_template": {
-                  "name": "my_service_name",
-                  "user_inputs_values": {
-                    "cpu": "2",
-                    "env": "gold"
+                "params": {
+                  "merge_template": {
+                    "name": "my_service_name",
+                    "user_inputs_values": {
+                      "cpu": "2",
+                      "env": "gold"
+                    }
                   }
                 }
               }
@@ -335,7 +346,7 @@
         "tags": [
           "services"
         ],
-        "summary": "Get a Service by ID",
+        "summary": "Get a specific Service by ID",
         "parameters": [
           {
             "name": "id",
@@ -716,121 +727,252 @@
   },
   "components": {
     "schemas": {
-      "ServiceTemplate": {
+      "OpenNebulaJSONDocument": {
         "type": "object",
+        "description": "Generic representation of an OpenNebula JSON document, which includes metadata and body information.",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the service."
-          },
-          "roles": {
-            "type": "array",
-            "description": "Array of Roles.",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/VMrole"
-                },
-                {
-                  "$ref": "#/components/schemas/VRrole"
+          "DOCUMENT": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "ID of the resource in OpenNebula"
+              },
+              "UID": {
+                "type": "string",
+                "description": "User ID"
+              },
+              "GID": {
+                "type": "string",
+                "description": "Group ID"
+              },
+              "UNAME": {
+                "type": "string",
+                "description": "Username"
+              },
+              "GNAME": {
+                "type": "string",
+                "description": "Group name"
+              },
+              "NAME": {
+                "type": "string",
+                "description": "Name of the object"
+              },
+              "TYPE": {
+                "type": "string",
+                "description": "Type identifier of the object"
+              },
+              "PERMISSIONS": {
+                "type": "object",
+                "description": "Permission bits for the object (U: Use, M: Manage, A: Admin)",
+                "properties": {
+                  "OWNER_U": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OWNER_M": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OWNER_A": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "GROUP_U": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "GROUP_M": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "GROUP_A": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OTHER_U": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OTHER_M": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OTHER_A": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  }
                 }
-              ]
+              },
+              "TEMPLATE": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceTemplate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Service"
+                  }
+                ]
+              }
             }
-          },
-          "deployment": {
-            "type": "string",
-            "description": "Deployment strategy:\n- none: All Roles are deployed at the same time.\n- straight: Each Role is deployed when all its parent Roles are running.\nDefaults to none."
-          },
-          "shutdown_action": {
-            "type": "string",
-            "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in oneflow-server.conf will be used."
-          },
-          "ready_status_gate": {
-            "type": "boolean",
-            "description": "If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate."
-          },
-          "on_hold": {
-            "type": "boolean",
-            "description": "If on_hold is set to true, all VMs of the service will be created in HOLD state."
-          },
-          "user_inputs": {
-            "type": "object",
-            "description": "Hash of custom attributes to use in the service.",
-            "additionalProperties": true
-          },
-          "networks": {
-            "type": "object",
-            "description": "Hash of Virtual Networks to use in the service.",
-            "additionalProperties": true
           }
         },
         "required": [
-          "name",
-          "roles"
+          "DOCUMENT"
         ]
+      },
+      "ServiceTemplate": {
+        "type": "object",
+        "properties": {
+          "BODY": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the service."
+              },
+              "roles": {
+                "type": "array",
+                "description": "Array of Roles.",
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/VMrole"
+                    },
+                    {
+                      "$ref": "#/components/schemas/VRrole"
+                    }
+                  ]
+                }
+              },
+              "deployment": {
+                "type": "string",
+                "description": "Deployment strategy:\n- none: All Roles are deployed at the same time.\n- straight: Each Role is deployed when all its parent Roles are running.\nDefaults to none."
+              },
+              "shutdown_action": {
+                "type": "string",
+                "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in oneflow-server.conf will be used."
+              },
+              "ready_status_gate": {
+                "type": "boolean",
+                "description": "If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate."
+              },
+              "on_hold": {
+                "type": "boolean",
+                "description": "If on_hold is set to true, all VMs of the service will be created in HOLD state."
+              },
+              "user_inputs": {
+                "type": "object",
+                "description": "Hash of custom attributes to use in the service.",
+                "additionalProperties": true
+              },
+              "networks": {
+                "type": "object",
+                "description": "Hash of Virtual Networks to use in the service.",
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "name",
+              "roles"
+            ]
+          }
+        }
       },
       "Service": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the service."
-          },
-          "roles": {
-            "type": "array",
-            "description": "Array of Roles.",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/VMrole"
-                },
-                {
-                  "$ref": "#/components/schemas/VRrole"
+          "BODY": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the service."
+              },
+              "roles": {
+                "type": "array",
+                "description": "Array of Roles.",
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/VMrole"
+                    },
+                    {
+                      "$ref": "#/components/schemas/VRrole"
+                    }
+                  ]
                 }
-              ]
-            }
-          },
-          "deployment": {
-            "type": "string",
-            "description": "Deployment strategy:\n- none: All Roles are deployed at the same time.\n- straight: Each Role is deployed when all its parent Roles are running.\nDefaults to none."
-          },
-          "shutdown_action": {
-            "type": "string",
-            "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in oneflow-server.conf will be used."
-          },
-          "ready_status_gate": {
-            "type": "boolean",
-            "description": "If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate."
-          },
-          "on_hold": {
-            "type": "boolean",
-            "description": "If on_hold is set to true, all VMs of the service will be created in HOLD state."
-          },
-          "user_inputs": {
-            "type": "object",
-            "description": "Hash of custom attributes to use in the service.",
-            "additionalProperties": true
-          },
-          "user_inputs_values": {
-            "type": "object",
-            "description": "Hash containing custom attributes and their values provided by the user.",
-            "additionalProperties": true
-          },
-          "networks": {
-            "type": "object",
-            "description": "Hash of Virtual Networks to use in the service.",
-            "additionalProperties": true
-          },
-          "network_values": {
-            "type": "object",
-            "description": "Hash containing all network values used in the Service, such as NIC_IDs, names, and other related information.",
-            "additionalProperties": true
+              },
+              "deployment": {
+                "type": "string",
+                "description": "Deployment strategy:\n- none: All Roles are deployed at the same time.\n- straight: Each Role is deployed when all its parent Roles are running.\nDefaults to none."
+              },
+              "shutdown_action": {
+                "type": "string",
+                "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in oneflow-server.conf will be used."
+              },
+              "ready_status_gate": {
+                "type": "boolean",
+                "description": "If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate."
+              },
+              "on_hold": {
+                "type": "boolean",
+                "description": "If on_hold is set to true, all VMs of the service will be created in HOLD state."
+              },
+              "user_inputs": {
+                "type": "object",
+                "description": "Hash of custom attributes to use in the service.",
+                "additionalProperties": true
+              },
+              "user_inputs_values": {
+                "type": "object",
+                "description": "Hash containing custom attributes and their values provided by the user.",
+                "additionalProperties": true
+              },
+              "networks": {
+                "type": "object",
+                "description": "Hash of Virtual Networks to use in the service.",
+                "additionalProperties": true
+              },
+              "network_values": {
+                "type": "object",
+                "description": "Hash containing all network values used in the Service, such as NIC_IDs, names, and other related information.",
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "name",
+              "roles"
+            ]
           }
-        },
-        "required": [
-          "name",
-          "roles"
-        ]
+        }
       },
       "VMrole": {
         "type": "object",
@@ -839,10 +981,6 @@
             "type": "string",
             "description": "Role name, only word characters (letter, number, underscore) are allowed."
           },
-          "cardinality": {
-            "type": "integer",
-            "description": "Number of VMs to deploy. Defaults to 1."
-          },
           "template_id": {
             "type": "integer",
             "description": "OpenNebula VM Template ID. See the OpenNebula documentation for VM Templates."
@@ -850,6 +988,10 @@
           "type": {
             "type": "string",
             "description": "Defines the Role type, vm for VM Role and vr for VR Roles."
+          },
+          "cardinality": {
+            "type": "integer",
+            "description": "Number of VMs to deploy. Defaults to 1."
           },
           "parents": {
             "type": "array",
@@ -883,14 +1025,14 @@
             "items": {
               "$ref": "#/components/schemas/ElasticityPolicy"
             },
-            "description": "Array of Elasticity Policies, see below."
+            "description": "Array of Elasticity Policies."
           },
           "scheduled_policies": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ScheduledPolicy"
             },
-            "description": "Array of Scheduled Policies, see below."
+            "description": "Array of Scheduled Policies."
           }
         },
         "required": [
@@ -906,10 +1048,6 @@
             "type": "string",
             "description": "Role name, only word characters (letter, number, underscore) are allowed."
           },
-          "cardinality": {
-            "type": "integer",
-            "description": "Number of VMs to deploy. Defaults to 1. Setting a value greater than 1 enables VRouter HA mode."
-          },
           "template_id": {
             "type": "integer",
             "description": "OpenNebula VM Template ID. See the OpenNebula documentation for VM Templates."
@@ -917,6 +1055,10 @@
           "type": {
             "type": "string",
             "description": "Defines the Role type, vm for VM Role and vr for VR Roles."
+          },
+          "cardinality": {
+            "type": "integer",
+            "description": "Number of VMs to deploy. Defaults to 1. Setting a value greater than 1 enables VRouter HA mode."
           },
           "parents": {
             "type": "array",
@@ -944,20 +1086,6 @@
           "cooldown": {
             "type": "integer",
             "description": "Cooldown period duration after a scale operation, in seconds. If it is not set, the default set in oneflow-server.conf will be used."
-          },
-          "elasticity_policies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ElasticityPolicy"
-            },
-            "description": "Array of Elasticity Policies, see below."
-          },
-          "scheduled_policies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ScheduledPolicy"
-            },
-            "description": "Array of Scheduled Policies, see below."
           },
           "vrouter_ips": {
             "type": "array",
