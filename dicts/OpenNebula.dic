@@ -110,6 +110,7 @@ ESX
 ESXi
 EVPN
 FaaS
+Failback
 Failover
 Fargate
 FFRouting
@@ -255,6 +256,7 @@ Onecfg
 OnedDown
 OneDeploy
 OneDepoy
+OneDR
 OneDRS
 Oneflow
 OneForm
@@ -288,7 +290,6 @@ PciDevices
 PCIe
 PCIs
 PEM
-Peristent
 PERS
 Persistency
 PersistentVolumeClaim
@@ -319,7 +320,9 @@ Qemu
 QinQ
 Qos
 QoS
+RDB
 RDP
+RADOS
 README
 Realtime
 RebootInLast
@@ -678,6 +681,7 @@ extraConfig
 facto
 failmigrate
 failover
+fallback
 fallbacks
 favicon
 filesystem
@@ -1056,6 +1060,10 @@ resetserver
 resourcesidentifier
 restic
 resubmission
+resync
+resynchronize
+resynchronized
+resynchronizing
 rhel
 rhsrvany
 rke
@@ -1308,6 +1316,7 @@ websockets
 weren
 wordlist
 wr
+writeable
 writeback
 writethrough
 wss
