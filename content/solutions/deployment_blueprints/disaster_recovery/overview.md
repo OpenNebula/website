@@ -8,12 +8,12 @@ Disaster Recovery (DR) involves anticipating and designing an adequate response 
 
 In this configuration, Ceph asynchronously replicates Virtual Machine disk images from the source Site **A** to the target Site **B**, ensuring up-to-date data copies. During failover, OpenNebula metadata is synchronized to enable quick deployment of Virtual Machines on Site B. In the event of a disaster at Site A, Site B can promote mirrored volumes and start VMs with minimal downtime. This setup ensures business continuity, data integrity, and faster recovery during outages.
 
-This guide provides the complete architecture specification, configuration settings and necessary steps to enable DR using Ceph RBD mirroring, as well as full instructions for recovery procedures including example configuration files and commands.
+This guide provides the complete architecture specification, configuration settings and necessary steps to enable DR using Ceph RBD mirroring, as well as full instructions for recovery procedures (failover and failback) including example configuration files and commands.
 
 Following this guide, you can:
 
 - Set up the DR solution
-- Design your own recovery procedures based on the provided examples
+- Design your own recovery procedures for failover and failback, based on the provided examples
 - Test the DR solution
 
 {{< alert title="Note" color="success" >}}

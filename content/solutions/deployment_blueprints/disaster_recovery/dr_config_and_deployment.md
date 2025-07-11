@@ -165,6 +165,8 @@ systemctl enable ceph-rbd-mirror.target
 cp /usr/lib/systemd/system/ceph-rbd-mirror@.service /etc/systemd/system/ceph-rbd-mirror@.service
 ```
 
+### Create the Mirroring Service on Site B
+
 Next, you will need to create and start the mirroring service. Ensure to give it the same name as the local user for the Site B cluster created earlier (see [above](#site-b-user)), or the Site A daemon won't be able to authenticate against the Site B cluster.
 
 ```bash
@@ -294,4 +296,9 @@ After performing these steps, to enable mirroring on Site B go back to the secti
 
 ### Enable Two-way Mirroring for Failback
 
-In order to failback Virtual Machines to Site A when it becomes available after disaster, you will need to set up the `rbd-mirror` daemon on Site A, which will connect to Site B. On Site A, install the `rbd-mirror` daemon and enable the service by following the same steps as when [installing `rbd-mirror` on Site B](#install-the-rbd-mirror-daemon-on-site-b).
+**Failback** is the process by which Virtual Machines are restored to the primary site, once normal operation on the site has resumed.
+
+To failback Virtual Machines to Site A when it becomes available again after an outage, you will need to set up the `rbd-mirror` daemon on Site A. The daemon will connect to Site B during failback. On Site A, install the `rbd-mirror` daemon and enable the service by following the same steps described above for Site B:
+
+- [Install the `rbd-mirror` daemon](#install-the-rbd-mirror-daemon-on-site-b)
+- [Create the mirroring service](#create-the-mirroring-service-on-site-b)
