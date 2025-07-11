@@ -3,10 +3,6 @@ title: "Failback"
 weight: 5
 ---
 
-## Failback and Failover
-
-The previous page in this Disaster Recovery guide covered [failover]({{% relref "failover" %}}), the process of moving operations from the primary site to the target site --- in this guide, from Site A to Site B.
-
 This page covers **failback**, the process of moving business operations back to Site A, after Site A's normal operation has been restored. This process involves resynchronizing data back to the source Ceph cluster.
 
 ## High-level Steps for Failback
@@ -105,7 +101,7 @@ one-0-0-0:
   service: 	ubuntu2204-kvm-ceph-squid-6-10-cxzjz-0 on ubuntu2204-kvm-ceph-squid-6-10-cxzjz-0
   last_update: 2025-06-17 17:45:11
 ```
-To check the state for specific image, on Site A run:
+To check the state for a specific image, on Site A run:
 
 ```bash
 rbd mirror image status one/one-0-0-0
