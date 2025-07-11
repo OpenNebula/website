@@ -35,7 +35,7 @@ KERNEL, RAMDISK, and CONTEXT file Images can be registered only in Files & Kerne
 
 Images of the previous types can also operate in two modes:
 
-* **Peristent**, the modifications you make to persistent images will be preserved after terminating the VM. There can be **only one VM** using a persistent Image at any given time.
+* **Persistent**, the modifications you make to persistent images will be preserved after terminating the VM. There can be **only one VM** using a persistent Image at any given time.
 * **Non-Persistent**, the modifications will not be preserved after terminating the VM. Non-persistent Images can be used by multiple VMs at the same time as each one will work on its own copy.
 
 <a id="images-states"></a>
