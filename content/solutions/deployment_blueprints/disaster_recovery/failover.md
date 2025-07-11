@@ -3,13 +3,7 @@ title: "Failover"
 weight: 4
 ---
 
-## Failback and Failover
-
-**Failover** is the process of moving business operations from a primary site which has suffered an outage, to a temporary site designated and preconfigured for such emergencies.
-
-**Failback** is the process of moving business operations back to the primary site, after the site's normal operation has been restored.
-
-The last two pages in this Disaster Recovery guide cover the procedures for failover (this page) and [failback]({{% relref "failback" %}}).
+This page covers **failover**, the process of moving business operations from Site A to Site B in the event of an outage at Site A.
 
 ## High-level Steps for Failover
 
