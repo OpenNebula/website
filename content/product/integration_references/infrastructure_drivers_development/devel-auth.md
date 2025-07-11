@@ -88,13 +88,13 @@ To be able to use the new driver we need to add its name to the list of enabled 
 ```default
 AUTH_MAD = [
     executable = "one_auth_mad",
-    authn = "ssh,x509,ldap,server_cipher,server_x509,length"
+    authn = "ssh,x509,ldap,server_cipher,server_x509,saml,length"
 ]
 ```
 
 ## Managed Groups
 
-The authentication driver may also assign users to groups, this requires the `DRIVER_MANAGED_GROUPS` option to be set to `YES`, e.g., like for the `ldap` driver
+The authentication driver may also assign users to groups, this requires the `DRIVER_MANAGED_GROUPS` option to be set to `YES`, e.g., like for the `ldap` or `saml` drivers
 
 ```default
 AUTH_MAD_CONF = [

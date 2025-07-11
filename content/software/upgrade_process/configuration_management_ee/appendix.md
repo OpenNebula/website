@@ -23,6 +23,7 @@ managed by the `onecfg` tool:
 | ---------------------------------------------------------------- | ---------------------- |
 | `/etc/one/alertmanager/alertmanager.yml`                         | YAML                   |
 | `/etc/one/auth/ldap_auth.conf`                                   | YAML w/ ordered arrays |
+| `/etc/one/auth/saml_auth.conf`                                   | YAML                   |
 | `/etc/one/auth/server_x509_auth.conf`                            | YAML                   |
 | `/etc/one/auth/x509_auth.conf`                                   | YAML                   |
 | `/etc/one/az_driver.conf`                                        | YAML                   |
