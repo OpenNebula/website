@@ -126,7 +126,7 @@ The information of a Host contains:
 * **General information** of the Host including its name and the drivers used to interact with it.
 * **Capacity** (*Host Shares*) for CPU and memory.
 * **Local datastore information** (*Local System Datastore*) if the Host is configured to use a local datastore (e.g., in Local transfer mode).
-* **Monitoring Information**, including PCI devices and NUMA information of the node. You can also find hypervisor specific information here.
+* **Monitoring Information**, including PCI devices and NUMA information of the node. CPU models listed are only those supported by the hypervisor architecture for virtualization, excluding unsupported or unavailable ones. You can also find hypervisor specific information [here](../../../product/operation_references/hypervisor_configuration).
 * **Virtual Machines** allocated to the Host. *Wild* are Virtual Machines running on the Host but not started by OpenNebula.
 
 To see a list of all the Hosts:
