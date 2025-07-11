@@ -4,7 +4,6 @@ description: "Set up and configure the OpenNebula monitoring and resource usage 
 categories:
 pageintoc: ""
 tags:
-no_list: "true"
 weight: "5"
 ---
 
