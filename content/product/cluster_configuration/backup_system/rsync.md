@@ -90,6 +90,29 @@ However, it’s possible to modify this path to utilize alternative locations, s
 
 To change the base folder to store disk backups for **all** Hosts, edit `/var/lib/one/remotes/etc/datastore.conf` and set the `BACKUP_BASE_PATH` variable. Please note this file uses shell syntax.
 
+### Bridge List
+
+The `BRIDGE_LIST` parameter in a Backup Datastore defines which Hosts are responsible for transferring VM backups from the hypervisor to the Backup Datastore.
+
+{{< alert title="Note" color="success" >}}
+This feature is only supported for **shared system datastores** (currently only with **Ceph**).{{< /alert >}}
+
+All Hosts listed in `BRIDGE_LIST` must meet the following requirements:
+
+- Must have **network access** to the Backup Datastore.
+- Must be able to establish **passwordless SSH connections** to:
+  - The **OpenNebula Frontend**
+  - The **Backup Server**
+
+During the backup process:
+
+- OpenNebula automatically selects one of the hosts from the `BRIDGE_LIST`.
+- This host is used to:
+  - Retrieve the snapshot created by the hypervisor.
+  - Export it to the Backup Datastore.
+- The name of the selected Host is recorded in the VM's backup configuration, under the `LAST_BRIDGE` field.
+
+
 ## Reference: rsync Datastore Attributes
 
 | Attribute         | Description                                                                                          |
@@ -104,3 +127,4 @@ To change the base folder to store disk backups for **all** Hosts, edit `/var/li
 | `RSYNC_MAX_WIOPS` | Run backups in a systemd slice, limiting the max number of write iops                                |
 | `RSYNC_CPU_QUOTA` | Run backups in a systemd slice with a given cpu quota (percentage). Use > 100 for using several CPUs |
 | `RSYNC_SPARSIFY`  | Runs `virt-sparsify` on flatten backups to reduce backup size. It requires `libguestfs` package.     |
+| `BRIDGE_LIST`     | List of hosts responsible for transferring VM backups from the hypervisor to the Backup Datastore    |
