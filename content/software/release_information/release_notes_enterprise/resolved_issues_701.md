@@ -22,4 +22,5 @@ The following issues has been solved in 7.0.1:
 - Fix opennebula-ovirtapi: Keeps VM ownership after restore [#7147](https://github.com/OpenNebula/one/issues/7147)
 - Fix Windows Optimized OS Profile [#7146](https://github.com/OpenNebula/one/issues/7146)
 - Fix select image validation message [#7139](https://github.com/OpenNebula/one/issues/7139)
-- Fix OneDRS for non consitent input parameters and weights [#7161](https://github.com/OpenNebula/one/issues/7161)
+- Fix OneDRS for non-consistent input parameters and weights [#7161](https://github.com/OpenNebula/one/issues/7161)
+- Fix listing of CPU models for KVM hosts to only list supported models [#7081](https://github.com/OpenNebula/one/issues/7081)
