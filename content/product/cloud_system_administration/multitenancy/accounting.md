@@ -340,6 +340,7 @@ targetNamespace="http://opennebula.org/XMLSchema" xmlns="http://opennebula.org/X
                                                 <xs:element name="LAST_BACKUP_ID" type="xs:string" minOccurs="0" maxOccurs="1"/>
                                                 <xs:element name="LAST_BACKUP_SIZE" type="xs:string" minOccurs="0" maxOccurs="1"/>
                                                 <xs:element name="LAST_DATASTORE_ID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                                                <xs:element name="LAST_BRIDGE" type="xs:string" minOccurs="0" maxOccurs="1"/>
                                                 <xs:element name="LAST_INCREMENT_ID" type="xs:string" minOccurs="0" maxOccurs="1"/>
                                                 <xs:element name="MODE" type="xs:string" minOccurs="0" maxOccurs="1"/>
                                                 </xs:sequence>
