@@ -55,7 +55,7 @@ username = [" ", ":", "\t", "\n", "\v", "\f", "\r"]
 password = [" ", "\t", "\n", "\v", "\f", "\r"]{{< /alert >}}  
 ```
 
-Some auth drivers do not require passwords (ldap); in this case a user can be created without it:
+Some auth drivers do not require passwords (ldap, saml); in this case a user can be created without it:
 
 ```default
 $ oneuser create --driver ldap <user_name>
