@@ -27,3 +27,4 @@ The following issues has been solved in 7.0.1:
 - Fix OneDRS for non-consistent input parameters and weights [#7161](https://github.com/OpenNebula/one/issues/7161)
 - Fix listing of CPU models for KVM hosts to only list supported models [#7081](https://github.com/OpenNebula/one/issues/7081)
 - Fix timeout for datastore actions (honor -w DS_MAD option) [#7076](https://github.com/OpenNebula/one/issues/7076)
+- Fix 'Download Default Virtual Router Image' modal [#7138](https://github.com/OpenNebula/one/issues/7138)
