@@ -28,3 +28,5 @@ The following issues has been solved in 7.0.1:
 - Fix listing of CPU models for KVM hosts to only list supported models [#7081](https://github.com/OpenNebula/one/issues/7081)
 - Fix timeout for datastore actions (honor -w DS_MAD option) [#7076](https://github.com/OpenNebula/one/issues/7076)
 - Fix 'Download Default Virtual Router Image' modal [#7138](https://github.com/OpenNebula/one/issues/7138)
+- Fix user_inputs order not considered when instantiating a template through the CLI [#7041](https://github.com/OpenNebula/one/issues/7041)
+- Fix the `kvmrc` configuration file parser that was preventing more than one parameter [#7069](https://github.com/OpenNebula/one/issues/7069)
