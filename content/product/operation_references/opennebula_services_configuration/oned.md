@@ -558,7 +558,7 @@ Sample configuration:
 ```default
 AUTH_MAD = [
     executable = "one_auth_mad",
-    authn = "ssh,x509,ldap,server_cipher,server_x509,saml"
+    authn = "ssh,x509,ldap,server_cipher,server_x509"
 ]
 
 SESSION_EXPIRATION_TIME = 900
@@ -568,7 +568,7 @@ SESSION_EXPIRATION_TIME = 900
 DEFAULT_UMASK = 177
 ```
 
-The `DEFAULT_AUTH` can be used to point to the desired default authentication driver, for example `ldap` or `saml`:
+The `DEFAULT_AUTH` can be used to point to the desired default authentication driver, for example `ldap`:
 
 ```default
 DEFAULT_AUTH = "ldap"
