@@ -24,6 +24,8 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
 
+- Backups increments tab currently produces a react crash when accessed. This is caused by an invalid import in the client and has been fixed in the upcoming maintenance release. You can refer to [this](https://github.com/OpenNebula/one/issues/7173) issue for more details.
+
 ## Migration
 
 - When upgrading to 7.0 the `onedb` migration might fail if the `/etc/one/sunstone-views.yaml` file contains a single, unclosed value under the **labels_groups** key, example:
@@ -71,9 +73,9 @@ By default, the monitoring interval for a Host is two minutes. In the following 
 host:
   db_retention: 4 # Number of weeks
   forecast:
-      enabled: true
-      period: 1 # Number of minutes
-      lookback: 60 # The look-back windows in minutes to use for the predictions
+    enabled: true
+    period: 1 # Number of minutes
+    lookback: 60 # The look-back windows in minutes to use for the predictions
 ```
 
 To avoid this error, always set the forecast period to a value _equal to or greater_ than the monitoring interval. For example, if the Host monitoring interval is two minutes, the forecast period should be set to at least two minutes:
@@ -82,7 +84,7 @@ To avoid this error, always set the forecast period to a value _equal to or grea
 host:
   db_retention: 4 # Number of weeks
   forecast:
-      enabled: true
-      period: 2 # Number of minutes
-      lookback: 60 # Look-back window in minutes for predictions
+    enabled: true
+    period: 2 # Number of minutes
+    lookback: 60 # Look-back window in minutes for predictions
 ```
