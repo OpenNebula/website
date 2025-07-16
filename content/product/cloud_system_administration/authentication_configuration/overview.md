@@ -12,7 +12,7 @@ weight: "1"
 
 <!--# Overview -->
 
-OpenNebula comes with a default internal user authentication system based on username/password, where information and secrets are stored in the OpenNebula (see the [Users & Groups Subsystem guide]({{% relref "../multitenancy/auth_overview#auth-overview" %}})). Dedicated external user authentication drivers can be used to leverage additional authentication mechanisms or sources of information about the users (e.g., LDAP, SAML). This chapter describes the available user authentication and management options.
+OpenNebula comes with a default internal user authentication system based on username/password, where information and secrets are stored in the OpenNebula (see the [Users & Groups Subsystem guide]({{% relref "../multitenancy/auth_overview#auth-overview" %}})). Dedicated external user authentication drivers can be used to leverage additional authentication mechanisms or sources of information about the users (e.g., LDAP). This chapter describes the available user authentication and management options.
 
 ## Authentication
 
@@ -22,13 +22,12 @@ In this figure you can see three authentication configurations you can customize
 
 **a) CLI/API Authentication**
 
-You can choose from the following authentication drivers to access OpenNebula:
+You can choose from the following authentication drivers to access OpenNebula from the command line:
 
 - [Built-in User/Password and token authentication]({{% relref "../multitenancy/manage_users#manage-users" %}})
 - [SSH Authentication]({{% relref "ssh#ssh-auth" %}})
 - [X.509 Authentication]({{% relref "x509#x509-auth" %}})
 - [LDAP Authentication]({{% relref "ldap#ldap" %}})
-- [SAML Authentication]({{% relref "saml#saml" %}})
 
 **b) Sunstone Authentication**
 
@@ -58,7 +57,7 @@ Usable only with API and CLI:
 * [SSH Authentication]({{% relref "ssh#ssh-auth" %}})
 
 Usable only with Sunstone:
-* [SAML Authentication]({{% relref "saml#saml" %}})
+
 * [Sunstone Authentication]({{% relref "sunstone_auth#sunstone-auth" %}})
 
 ## Hypervisor Compatibility
