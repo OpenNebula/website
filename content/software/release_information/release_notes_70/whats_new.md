@@ -128,3 +128,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix HA in case of wrong SQL query](https://github.com/OpenNebula/one/issues/7025).
 - [Fix an issue with `fs_lvm_ssh` not honoring BRIDGE_LIST in the image datastore](https://github.com/OpenNebula/one/issues/7070).
 - [Fix cdrom DISK_TYPE=BLOCK during attach](https://github.com/OpenNebula/one/issues/6688).
+- [Fix user_inputs order not considered when instantiating a template through the CLI](https://github.com/OpenNebula/one/issues/7040)
