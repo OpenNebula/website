@@ -129,3 +129,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix an issue with `fs_lvm_ssh` not honoring BRIDGE_LIST in the image datastore](https://github.com/OpenNebula/one/issues/7070).
 - [Fix cdrom DISK_TYPE=BLOCK during attach](https://github.com/OpenNebula/one/issues/6688).
 - [Fix user_inputs order not considered when instantiating a template through the CLI](https://github.com/OpenNebula/one/issues/7040)
+- [Fix the KVMRC Ruby parser regexp that was preventing more than one parameter](https://github.com/OpenNebula/one/issues/7069)
