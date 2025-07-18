@@ -150,44 +150,23 @@ be needed. Example for illustration purposes:
   ---------     (iSCSI + multipath)
 ```
 
-Otherwise, one or several hosts can be used to perform the required operations by **defining the
-`BRIDGE_LIST` attribute** on the Image Datastore later:
-
-```
-BRIDGE_LIST=host2
-
--------------
-| Front-end |
--------------
-      |
-      | use as proxy for operations
-      |
-      v
-  ---------                              --------------
-  | host2 | ---- /dev/mapper/mpath* ---> | SAN server |
-  ---------     (iSCSI + multipath)      --------------
-                                            ^
-                                            |
-  ---------                                 |
-  | hostN | ---- /dev/mapper/mpath* --------+
-  ---------     (iSCSI + multipath)
-```
+Alternatively, you can delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in the System datastore. The front-end will then use one of the hosts in the list to proxy SAN operations. Note that only a reduced set of operations are initiated in the front-end, only for undeployed VMs.
 
 ## OpenNebula Configuration
 
-First, we need to create the two required OpenNebula datastores: Image and System. Both of them will
-use the `fs_lvm_ssh` transfer driver (TM_MAD).
+First, we need to create the two required OpenNebula datastores: Image and System. Both of them use the `fs_lvm_ssh` transfer driver (TM_MAD).
 
 ### Create System Datastore
 
 To create a new SAN/LVM System Datastore, you need to set the following (template) parameters:
 
-| Attribute     | Description                       |
-|---------------|-----------------------------------|
-| `NAME`        | Name of Datastore                 |
-| `TYPE`        | `SYSTEM_DS`                       |
-| `TM_MAD`      | `fs_lvm_ssh`                      |
-| `DISK_TYPE`   | `BLOCK` (used for volatile disks) |
+| Attribute     | Description                                                  |
+|---------------|--------------------------------------------------------------|
+| `NAME`        | Name of the Datastore                                        |
+| `TYPE`        | `SYSTEM_DS`                                                  |
+| `TM_MAD`      | `fs_lvm_ssh`                                                 |
+| `DISK_TYPE`   | `BLOCK` (used for volatile disks)                            |
+| `BRIDGE_LIST` | Front-end will use hosts in the list to proxy SAN operations |
 
 For example:
 
@@ -206,11 +185,11 @@ Afterwards, a **LVM VG needs to be created** in the shared LUNs for the system d
 following name: `vg-one-<system_ds_id>`**. This step just needs to be done once, either in one host,
 or the front-end if it has access. This VG is where the actual VM images will be located at runtime,
 and OpenNebula will take care of creating the LVs (one for each VM disk). For example, assuming
-`/dev/mpatha` is the LUN (iSCSI/multipath) block device:
+`/dev/mapper/mpatha` is the LUN (iSCSI/multipath) block device:
 
 ```
-# pvcreate /dev/mpatha
-# vgcreate vg-one-100 /dev/mpatha
+# pvcreate /dev/mapper/mpatha
+# vgcreate vg-one-100 /dev/mapper/mpatha
 ```
 
 ### Create Image Datastore
@@ -224,10 +203,9 @@ To create a new LVM Image Datastore, you need to set following (template) parame
 | `DS_MAD`          | `fs`                                                                                                        |
 | `TM_MAD`          | `fs_lvm_ssh`                                                                                                |
 | `DISK_TYPE`       | `BLOCK`                                                                                                     |
-| `BRIDGE_LIST`     | List of Hosts with access to the file system where image files are stored before dumping to logical volumes |
 | `LVM_THIN_ENABLE` | (default: `NO`) `YES` to enable [LVM Thin]({{% relref "#lvm-thin" %}}) functionality (RECOMMENDED).         |
 
-The following example illustrates the creation of an LVM Image Datastore. In this case we will use the nodes `node1` and `node2` as our OpenNebula LVM-enabled Hosts.
+The following example illustrates the creation of an LVM Image Datastore:
 
 ```default
 > cat ds_image.conf
@@ -236,18 +214,12 @@ DS_MAD = fs
 TM_MAD = fs_lvm_ssh
 DISK_TYPE = "BLOCK"
 TYPE = IMAGE_DS
-BRIDGE_LIST = "node1 node2"
 LVM_THIN_ENABLE = yes
 SAFE_DIRS="/var/tmp /tmp"
 
 > onedatastore create ds_image.conf
 ID: 101
 ```
-
-{{< alert title="Warning" color="success" >}}
-Please adapt this example to your case, in particular the [`BRIDGE_LIST`]({{% relref
-"lvm_drivers#frontend-configuration" %}}) attribute, as discussed previously.
-{{< /alert >}}
 
 #### Front-end setup (Image Datastore)
 
