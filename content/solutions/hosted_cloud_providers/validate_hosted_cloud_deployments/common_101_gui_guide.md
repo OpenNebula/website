@@ -1,13 +1,14 @@
 ---
-title: "Basic OpenNebula UI Guide: VM Instantiation"
-description:
+title: "Validate Hosted Cloud Deployments"
+date: "2025-07-16"
+description: "This short guide explains how to access a Hosted OpenNebula Cloud Deployment via the web UI and instantiate and access a Virtual Machine."
 categories:
 pageintoc: ""
 tags:
 weight: 4
 ---
 
-This short guide explains how to access your OpenNebula cloud via the web UI and instantiate a Virtual Machine that was automatically imported when the OpenNebula cloud was created.
+<a id="validate-hosted-cloud"></a>
 
 {{< alert title="Tip" color="success" >}}
 This guide provides the basic steps. If you wish to see a more detailed guide, please refer to [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione#deploying-a-virtual-machine-locally" %}}).
@@ -54,10 +55,10 @@ Finally, as a cleanup step, terminate the VM by clicking the red “Trash can”
 <a id="one-terminate-vm"></a>
 ![image][one-terminate-vm]
 
-[one-marketplace]: /images/solutions/ionos/one-marketplace.png
-[one-new-vm]: /images/solutions/ionos/one-new-vm.png
-[attach-nic]: /images/solutions/ionos/attach-nic.png
-[one-vm-config]: /images/solutions/ionos/one-vm-config.png
-[one-vnc-connect]: /images/solutions/ionos/one-vnc-connect.png
-[one-vnc-connectivity-test]: /images/solutions/ionos/one-vnc-connectivity-test.png
-[one-terminate-vm]: /images/solutions/ionos/one-terminate-vm.png
+[one-marketplace]: /images/guides/common_101_ui/one-marketplace.png
+[one-new-vm]: /images/guides/common_101_ui/one-new-vm.png
+[attach-nic]: /images/guides/validate_cloud_deployment_101_ui/attach-nic.png
+[one-vm-config]: /images/guides/common_101_ui/one-vm-config.png
+[one-vnc-connect]: /images/guides/common_101_ui/one-vnc-connect.png
+[one-vnc-connectivity-test]: /images/guides/validate_cloud_deployment_101_ui/one-vnc-connectivity-test.png
+[one-terminate-vm]: /images/guides/common_101_ui/one-terminate-vm.png
