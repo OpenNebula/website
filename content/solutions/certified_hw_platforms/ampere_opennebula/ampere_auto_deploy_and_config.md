@@ -47,7 +47,3 @@ The deployment procedure consists of the following high-level steps:
 For detailed information about how to use the required parameters and which configuration files to modify, please refer to the `README` of the [Certified Hardware Ampere for OpenNebula](https://github.com/OpenNebula/certified-hardware-ampere).
 {{< /alert >}}
 
-<!-- TODO: we should find a way how to do this properly in Hugo framework -->
-{{< alert title="Tip" color="success" >}}
-After the deployment is successful, you can test your installation by instantiating a Virtual Machine and accessing it through the OpenNebula web UI, by following the screenshot-driven [Basic OpenNebula UI Guide: VM Instantiation]({{% relref "../../hosted_cloud_providers/ionos_opennebula/common_101_gui_guide" %}}).
-{{< /alert >}}
