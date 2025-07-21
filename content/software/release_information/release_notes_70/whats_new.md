@@ -12,15 +12,40 @@ weight: "2"
 
 <!--# What’s New in 7.0 -->
 
-We’re excited to introduce OpenNebula 7.0.0 *Phoenix*, the new major OpenNebula release.
+We’re excited to introduce **OpenNebula 7.0 “Phoenix”** as the first major release in the new 7.x series, marking a significant evolution of the platform. Just like the mythological bird rising from its ashes, this release symbolizes resilience and transformation—a fitting name for a platform reinventing itself in the face of emerging trends in AI and multi-cloud. With 7.0, OpenNebula takes a giant leap forward to help organizations modernize their infrastructure, embrace next-generation workloads, and break free from legacy virtualization platforms like VMware.
 
-The name *Phoenix* reflects a broader transformation in cloud infrastructure—symbolizing resilience and rebirth for organizations rethinking their architecture in the face of AI, multi-cloud, and edge computing trends.
+> ![image](/images/cloud-view-dashboard-rns.png)
 
-OpenNebula 7.0 represents a major leap forward, especially for those migrating from VMware or modernizing their stack for next-generation workloads. A key highlight is that the migration packages are now included in the Community Edition, making it easier for community users to stay up to date and take full advantage of the latest innovations.
+A key highlight of OpenNebula 7.0 is the inclusion of migration packages in the Community Edition, making it easier for community users to stay up to date and take full advantage of the latest innovations.
 
-We invite you to explore the features, join the community conversations, and give your feedback on this final release.
+Another big plus of 7.0 is the introduction of OpenNebula Distributed Resource Scheduler (OneDRS) [INTERNAL LINK], delivering predictive scheduling, customizable policies, and automated VM migrations to ensure optimal resource utilization across your infrastructure. OneDRS analyzes historical and real-time metrics to anticipate demand spikes and proactively balance workloads—minimizing contention and maximizing performance.
 
-We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
+OpenNebula 7.0 is designed for modern workloads, with enhancements to support:
+
+- GPU passthrough and PCI device hotplugging
+- Improved OneFlow for AI workflows and batch deployments
+- OVA Import
+- Better integration with Ceph, LVM, and containerized applications
+- Integration with Veeam, allowing policy-based backup and restore operations
+- Native drivers for NetApp
+- NUMA-aware PCIe topology
+- … and many more, check below.
+
+OpenNebula 7.0 continues the effort to streamline the platform by removing or deprecating legacy and little-used components, simplifying the architecture, and ensuring the long-term maintainability of the platform. The FireEdge-based Sunstone UI is now the standard web interface, with a growing list of UI components and dashboards.
+
+| Component         | Status   | Replacement / Notes           |
+|------------------|----------|-------------------------------|
+| Ruby Sunstone     | Removed  | Fully replaced by FireEdge UI |
+| vCenter driver    | Legacy   | Use KVM migration tools        |
+| LXD & Docker drivers | Removed  | OneKE & LXC                    |
+
+OpenNebula 7.0 is named after the [Phoenix Nebula](https://www.instagram.com/p/Cz66tq7yo6J/), a spectacular cosmic structure located in the [constellation](https://en.wikipedia.org/wiki/Phoenix_(constellation)) of the same name. This nebula is a dynamic region of gas and dust shaped by intense stellar winds and supernova activity—an evocative symbol of transformation, power, and renewal. Like the Phoenix Nebula rising from the remnants of massive stars, OpenNebula 7.0 rises as a robust, flexible, and modern open source cloud platform ready for the AI-driven future.
+
+OpenNebula 7.0 “Phoenix” is a stable, production-ready release, available to all users. We encourage you to:
+- Review the [Known Issues]({{% relref "known_issues" %}}) before upgrading
+- Join our [community forums](https://forum.opennebula.io/) and [GitHub](https://github.com/OpenNebula/one).
+
+We’d like to thank our global community and partners who have helped shape this release, and specailly to those that [support the project]({{% relref "acknowledgements" %}}). OpenNebula is what it is because of your support—keep being awesome!
 
 ## OpenNebula Core
 
