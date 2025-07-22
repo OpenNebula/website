@@ -18,7 +18,7 @@ We’re excited to introduce **OpenNebula 7.0 “Phoenix”** as the first major
 
 A key highlight of OpenNebula 7.0 is the inclusion of migration packages in the Community Edition, making it easier for community users to stay up to date and take full advantage of the latest innovations.
 
-Another big plus of 7.0 is the introduction of OpenNebula Distributed Resource Scheduler (OneDRS) [INTERNAL LINK], delivering predictive scheduling, customizable policies, and automated VM migrations to ensure optimal resource utilization across your infrastructure. OneDRS analyzes historical and real-time metrics to anticipate demand spikes and proactively balance workloads—minimizing contention and maximizing performance.
+Another big plus of 7.0 is the introduction of [OpenNebula Distributed Resource Scheduler (OneDRS)](../../../product/cloud_system_administration/scheduler/drs), delivering predictive scheduling, customizable policies, and automated VM migrations to ensure optimal resource utilization across your infrastructure. OneDRS analyzes historical and real-time metrics to anticipate demand spikes and proactively balance workloads—minimizing contention and maximizing performance.
 
 OpenNebula 7.0 is designed for modern workloads, with enhancements to support:
 
