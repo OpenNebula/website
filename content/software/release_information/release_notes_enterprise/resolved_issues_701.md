@@ -31,3 +31,4 @@ The following issues has been solved in 7.0.1:
 - Fix user_inputs order not considered when instantiating a template through the CLI [#7041](https://github.com/OpenNebula/one/issues/7041)
 - Fix the `kvmrc` configuration file parser that was preventing more than one parameter [#7069](https://github.com/OpenNebula/one/issues/7069)
 - Fix react crash when accessing increments subtab for a backup image [#7173](https://github.com/OpenNebula/one/issues/7173)
+- Fix Sunstone should prioritize user views [#7082](https://github.com/OpenNebula/one/issues/7082)
