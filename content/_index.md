@@ -55,5 +55,11 @@ To access additional material including white papers, guides and screencasts, se
   Extend functionalities for orchestration, storage, backup, billing, and application management.
   {{< /card >}}
 {{< /cardpane >}}
+
+{{< cardpane >}}
+  {{< card header="[Ecosystem](/ecosystem)" >}}
+  Extend functionalities for orchestration, storage, backup, billing, and application management.
+  {{< /card >}}
+{{< /cardpane >}}
 </div>
 </div>
