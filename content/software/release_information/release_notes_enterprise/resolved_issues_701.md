@@ -12,6 +12,7 @@ The following new features have been backported to 7.0.1:
 
 - [Add multi-tier caching system for local drivers](../../../product/cluster_configuration/storage_system/local_ds#distributed-cache)
 - [Add support for `BRIDGE_LIST` for Backup Datastores (Restic and rsync) and Ceph drivers](../../../product/cluster_configuration/backup_system/restic#bridge-list)
+- [Add support for incremental backup with LVM Thin](../../../product/cluster_configuration/backup_system/overview/#hypervisor--storage-compatibility)
 - [Add support for incremental backup flatten using Ceph](../../../product/cluster_configuration/backup_system/overview/#hypervisor--storage-compatibility)
 
 The following issues has been solved in 7.0.1:
