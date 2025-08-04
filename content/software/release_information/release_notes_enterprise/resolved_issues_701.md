@@ -34,5 +34,6 @@ The following issues has been solved in 7.0.1:
 - Fix the `kvmrc` configuration file parser that was preventing more than one parameter [#7069](https://github.com/OpenNebula/one/issues/7069)
 - Fix react crash when accessing increments sub tab for a backup image [#7173](https://github.com/OpenNebula/one/issues/7173)
 - Fix Sunstone should prioritize user views [#7082](https://github.com/OpenNebula/one/issues/7082)
+- Fix OpenvSwitch.rb VXLAN failure add-port already exists on bridge [#7059] (https://github.com/OpenNebula/one/issues/7059)
 - Fix Extend details tab [#7152](https://github.com/OpenNebula/one/issues/7152)
 - Fix Datastore handling by DRS scheduler in some scenarios [#7176](https://github.com/OpenNebula/one/issues/7176)
