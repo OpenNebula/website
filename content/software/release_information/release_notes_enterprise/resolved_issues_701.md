@@ -12,6 +12,7 @@ The following new features have been backported to 7.0.1:
 
 - [Add multi-tier caching system for local drivers](../../../product/cluster_configuration/storage_system/local_ds#distributed-cache)
 - [Add support for `BRIDGE_LIST` for Backup Datastores (Restic and rsync) and Ceph drivers](../../../product/cluster_configuration/backup_system/restic#bridge-list)
+- [Add support for incremental backup with LVM Thin](../../../product/cluster_configuration/backup_system/overview/#hypervisor--storage-compatibility)
 - [Add support for incremental backup flatten using Ceph](../../../product/cluster_configuration/backup_system/overview/#hypervisor--storage-compatibility)
 
 The following issues has been solved in 7.0.1:
@@ -31,6 +32,8 @@ The following issues has been solved in 7.0.1:
 - Fix 'Download Default Virtual Router Image' modal [#7138](https://github.com/OpenNebula/one/issues/7138)
 - Fix user_inputs order not considered when instantiating a template through the CLI [#7041](https://github.com/OpenNebula/one/issues/7041)
 - Fix the `kvmrc` configuration file parser that was preventing more than one parameter [#7069](https://github.com/OpenNebula/one/issues/7069)
-- Fix react crash when accessing increments subtab for a backup image [#7173](https://github.com/OpenNebula/one/issues/7173)
+- Fix react crash when accessing increments sub tab for a backup image [#7173](https://github.com/OpenNebula/one/issues/7173)
 - Fix Sunstone should prioritize user views [#7082](https://github.com/OpenNebula/one/issues/7082)
 - Fix OpenvSwitch.rb VXLAN failure add-port already exists on bridge [#7059] (https://github.com/OpenNebula/one/issues/7059)
+- Fix Extend details tab [#7152](https://github.com/OpenNebula/one/issues/7152)
+- Fix Datastore handling by DRS scheduler in some scenarios [#7176](https://github.com/OpenNebula/one/issues/7176)
