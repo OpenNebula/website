@@ -36,7 +36,7 @@ Incremental backups of **qcow2** disks can use two different modes via the `INCR
 Also, for **RBD** disks (Ceph), FULL and INCREMENT backups are currently stored in a different way, although the difference should be transparent to the user:
 
 - **Full** backups (`FORMAT=raw`) store the RBD export converted to a qcow2 file. The restore process involves converting it to a RAW file and importing it to the Ceph pool.
-- **Incremental** backups (`FORMAT=rbd`) store the initial RBD export, as well as zero or more increment files, in the native format of Ceph exports (rbd export –export-format 2 / rbd export-diff). The restore process involves importing the initial export and applying the diff files in the same order, one by one.
+- **Incremental** backups (`FORMAT=rbd`) store the initial full export and subsequent incrementals as QCOW2 images. Each new backup is a QCOW2 file that references the previous one, forming a chain of dependent images. The incremental data is obtained using the native Ceph tool rbd export-diff. During restore, the chain is applied in order by mounting the base and its dependent layers.
 
 ### The Backup Process
 
@@ -55,7 +55,6 @@ In order to save space in the backup system, RAW disk backups are converted and 
 - Live backups are only supported for KVM
 - Attaching a disk to a VM that had an incremental backup previously made will yield an error. The –reset option for the backup operation is required to recreate a new incremental chain
 - Incremental backups on VMs with disk or system snapshots is not supported
-- `KEEP_LAST` option is not supported for Incremental backups of Ceph disks
 
 ## Preparing VMs for Backups
 
