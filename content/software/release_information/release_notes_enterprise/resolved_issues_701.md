@@ -38,4 +38,5 @@ The following issues has been solved in 7.0.1:
 - Fix Extend details tab [#7152](https://github.com/OpenNebula/one/issues/7152)
 - Fix Don't let add the ssh key more than one time [#7140](https://github.com/OpenNebula/one/issues/7140)
 - Fix Datastore handling by DRS scheduler in some scenarios [#7176](https://github.com/OpenNebula/one/issues/7176)
+- Fix Sunstone Update VM Configuration wizard doesn't scale correctly [#7062](https://github.com/OpenNebula/one/issues/7062)
 - Fix Style bug with Disable animations switch [#7136](https://github.com/OpenNebula/one/issues/7136)
