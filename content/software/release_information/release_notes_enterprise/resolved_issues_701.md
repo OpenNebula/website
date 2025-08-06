@@ -37,3 +37,4 @@ The following issues has been solved in 7.0.1:
 - Fix OpenvSwitch.rb VXLAN failure add-port already exists on bridge [#7059] (https://github.com/OpenNebula/one/issues/7059)
 - Fix Extend details tab [#7152](https://github.com/OpenNebula/one/issues/7152)
 - Fix Datastore handling by DRS scheduler in some scenarios [#7176](https://github.com/OpenNebula/one/issues/7176)
+- Fix Style bug with Disable animations switch [#7136](https://github.com/OpenNebula/one/issues/7136)
