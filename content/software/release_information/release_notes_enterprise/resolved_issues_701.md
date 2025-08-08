@@ -41,4 +41,5 @@ The following issues has been solved in 7.0.1:
 - Fix Sunstone Update VM Configuration wizard doesn't scale correctly [#7062](https://github.com/OpenNebula/one/issues/7062)
 - Fix Style bug with Disable animations switch [#7136](https://github.com/OpenNebula/one/issues/7136)
 - Fix OneDRS storage requirements computation for VMs without history records [#7194](https://github.com/OpenNebula/one/issues/7194)
+- Fix VIRTIO_QUEUES not applying to hot plugged virtio NICs [#7195](https://github.com/OpenNebula/one/issues/7195)
 
