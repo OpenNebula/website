@@ -1,40 +1,26 @@
 ---
 title: "Appliances Development"
-date: 2025-08-07T16:02:30+03:00
-#description: "A step-by-step guide on how to develop own appliance ready to be added into the OpenNebula Community Marketplace."
+type: docs
+linkTitle: "Appliances Development"
+description: "A step-by-step guide on how to develop own appliance ready to be added into the OpenNebula Community Marketplace."
+weight: 5
 ---
 
-<!--
----
-title: "Appliances Development"
-date: "2025-08-07"
-#description: "A step-by-step guide on how to develop own appliance ready to be added into the OpenNebula Community Marketplace."
-categories: [Introduction, Evaluation, Learning]
-pageintoc: "15"
-tags: [Appliances]
-weight: "2"
-
----
--->
-
-<a id="appliances-development"></a>
-
-<!--# Step by step guide on appliance contribution process -->
 # General procedure
 
 The new appliance contribution to the community marketplace process consists of a set of steps listed below.
-> 1. Create Linux VM to develop and build your appliance
-> 2. Create an user to be used for all needed operations
-> 3. Install required software
-> 4. Clone the OpenNebula/marketplace-community repository and create a new branch for your appliance
-> 5. Create a set of needed folders and files for your new appliance under marketplace-community folder of cloned GH repo
-> 6. Build an image with required OS to be used for your appliance
-> 7. Build an image with your appliance
-> 8. Test appliance
-> 9. Create tests for new appliance under new branch of forked OpenNebula/marketplace-community
-> 10. Commit & push new branch to forked repo OpenNebula/marketplace-community
-> 11. Create pull request to OpenNebula/marketplace-community repo
-> 12. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
+1. Create Linux VM to develop and build your appliance
+2. Create an user to be used for all needed operations
+3. Install required software
+4. Clone the OpenNebula/marketplace-community repository and create a new branch for your appliance
+5. Create a set of needed folders and files for your new appliance under marketplace-community folder of cloned GH repo
+6. Build an image with required OS to be used for your appliance
+7. Build an image with your appliance
+8. Test appliance
+9. Create tests for new appliance under new branch of forked OpenNebula/marketplace-community
+10. Commit & push new branch to forked repo OpenNebula/marketplace-community
+11. Create pull request to OpenNebula/marketplace-community repo
+12. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
 
 # Examples
 
