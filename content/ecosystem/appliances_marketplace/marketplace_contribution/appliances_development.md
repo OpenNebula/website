@@ -3,7 +3,7 @@ title: "Appliances Development"
 type: docs
 linkTitle: "Appliances Development"
 description: "A step-by-step guide on how to develop own appliance ready to be added into the OpenNebula Community Marketplace."
-weight: 5
+weight: 2
 ---
 
 # General procedure
@@ -21,6 +21,191 @@ The new appliance contribution to the community marketplace process consists of 
 10. Commit & push new branch to forked repo OpenNebula/marketplace-community
 11. Create pull request to OpenNebula/marketplace-community repo
 12. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
+
+# Basic OpenNebula deployment
+## Setting up OpenNebula basic environment
+
+Since the appliance needs to be validated against the appliance specific tests before submitting it to the Community Marketplace it seems reasonable to use the same environment for building and testing.
+
+The needed environment can be deployed on a single VM with nested virtualization enabled and assumes the OpenNebula software installed, enough CPU, MEMORY and DISK resources should be provided as well as the network properly configured (i.e. the VM running in such test environment has to have an access to the Internet to download required packages).
+
+One of the following approaches can be used in order to have such setup in place:
+
+1) use [minione](https://github.com/OpenNebula/minione) tool,  
+2) use [one-deploy](https://github.com/OpenNebula/one-deploy) tool,  
+3) manually perform required operations following OpenNebula documentation.
+
+This document describes the first approach e.g. minione tool. Please, check the steps below.
+
+If you decide to follow  the one-deploy based approach one can use an inventory file provided as a reference at [lib/community/ansible/inventory.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/lib/community/ansible/inventory.yaml).
+
+Create the VM with nested virtualization enabled (steps below are written for Ubuntu 22.04 LTS).
+
+Log into that VM and download the `minione` tool:
+
+```
+wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```
+
+Execute minione as shown below to install OpenNebula front-end as well as KVM related packages on the same host:
+
+```
+bash minione
+```
+
+The `oneadmin` user created during the OpenNebula packages installation will be used for the building and testing of the appliance image.
+
+Add that use to admin group:
+
+```
+usermod -a -G admin oneadmin
+```
+
+Become `oneadmin` user and update the packages:
+
+```
+su - oneadmin
+
+sudo apt update
+
+sudo apt upgrade
+```
+
+Reboot the host in order to boot into the updated kernel if any.
+
+Apart from OpenNebula packages there are some other packages that need to be installed too. For that purpose we are going to use an ansible playbook.
+Install ansible-core (needed for dependency installation via ansible playbook):
+
+```
+sudo apt install python3-pip
+
+sudo pip3 install ansible-core
+```
+
+Create ansible playbook as below:
+
+```
+cat << EOF > requirements.yaml
+---
+- hosts: localhost
+  become: false
+
+  tasks:
+  - name: Install OS packages
+    ansible.builtin.package:
+      name: "{{ _packages[ansible_os_family] }}"
+      update_cache: true
+    vars:
+      _packages:
+        Debian: [bash, cloud-utils, genisoimage, libguestfs0, libguestfs-tools, make, nginx, qemu-utils, rpm, rsync, ruby, qemu, qemu-system-x86]
+    register: package
+    until: package is success
+    retries: 3
+    delay: 10
+
+  - name: Install packer binary
+    ansible.builtin.unarchive:
+      src: "https://releases.hashicorp.com/packer/{{ _version }}/packer_{{ _version }}_linux_amd64.zip"
+      dest: /usr/local/bin/
+      remote_src: true
+      creates: /usr/local/bin/packer
+    vars:
+      _version: 1.10.0
+
+  - name: Install ruby gems
+    ansible.builtin.shell:
+      cmd: gem install --no-document backports fpm rspec
+      executable: /bin/bash
+      creates: /usr/local/bin/fpm
+EOF
+```
+
+Run that playbook:
+
+```
+sudo ansible-playbook requirements.yaml
+```
+
+## Verification
+
+### Using command line interface
+
+Become `oneadmin` user and try to perform basic operations like list hosts, templates, images, vnets, etc:
+
+```
+su - oneadmin
+onehost list
+onevnet list
+onetemplate list
+oneimage list
+```
+
+Try to instantiate a test VM from pre-uploaded VM template:
+
+```
+onetemplate list
+onetemplate instantate <template_id>
+```
+
+Check if the VM status:
+
+```
+onevm status
+```
+
+Try to access it over the network:
+
+```
+onevm ssh <vm_id>
+```
+
+### Using graphical web-based user interface \- FireEdge Sunstone
+
+By default the FireEdge Sunstone is running on the 2616 port. The exact URL is shown at the end of  the minione tool execution process  as well as the oneadmin credentials.
+
+Point your browser to that URL and log into the FireEdge using the oneadmin credentials provided:
+
+![image](/images/sunstone-login.png)
+
+To get a list of hosts one needs to open the Dashboard menu bar from the left side and go to “Infrastructure” \-\> “Hosts”:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_hosts.png)
+
+To list the existing virtual networks (vnets) one can click either “Virtual Networks” light brown tile or go to the “Networks” section and click on the “Virtual Networks” item of the menu:
+
+![image](/images/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vnets.png)
+
+To list the VM templates available one can either click on the “VM templates” magenta tile or go to “Templates” \-\> “VM Templates”:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vmtemplates.png)
+
+To list available images one can either click on the “Images” turquoise tile or go to “Storage” \-\> “Images”:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_images.png)
+
+ Try to instantiate  the test VM from a  pre-uploaded VM template. For that purpose go to “VM template” menu item as it was shown above, select desired VM template (it’s ‘alpine’ linux in our example below) and click on a button with triangle icon:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_instantiate_1.png)
+
+Specify the VM name in the corresponding field, tune some other parameters upon your needs and click “Next” button:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_instantiate_2.png)
+
+Click “Finish” button on the next screen to finish with VM instantiation:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_instantiate_3.png)
+
+After that you will be redirected to the menu with a list of instantiated VMs. Check the test VM status there:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_status.png)
+
+One can connect to the VM via VNC console by clicking on the corresponding icon:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_vnc_icon.png)
+
+Check if the test VM was booted successfully and if there is login prompt:
+
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_vnc_console.png)
 
 # Examples
 
