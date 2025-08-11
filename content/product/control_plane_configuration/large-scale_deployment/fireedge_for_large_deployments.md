@@ -111,7 +111,7 @@ server {
                 proxy_redirect off;
                 log_not_found off;
                 proxy_buffering off;
-                proxy_cache_bypass $http_upgrade
+                proxy_cache_bypass $http_upgrade;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
@@ -213,7 +213,7 @@ server {
                 proxy_redirect off;
                 log_not_found off;
                 proxy_buffering off;
-                proxy_cache_bypass $http_upgrade
+                proxy_cache_bypass $http_upgrade;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
