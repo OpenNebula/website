@@ -5,4 +5,4 @@ linkTitle: "Overview"
 weight: 2
 ---
 
-This section describes the whole contribution process to the Community Markteplace.
+This section describes the whole contribution process to the Community Marketplace.
