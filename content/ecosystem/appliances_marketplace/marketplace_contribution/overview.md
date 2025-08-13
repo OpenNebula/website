@@ -2,7 +2,7 @@
 title: "Overview"
 type: docs
 linkTitle: "Overview"
-weight: 2
+weight: 1
 ---
 
-This section describes the whole contribution process to the Community Marketplace.
+This section describes the whole contribution process to the Community Markteplace.

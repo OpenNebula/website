@@ -3,7 +3,7 @@ title: "Example Appliance Development"
 type: docs
 linkTitle: "Example Appliance Development"
 description: "This section describes how to create a new appliance for the Community Marketplace using Zabbix server as an example. The whole process will be showcased from the creation of the appliance code to the necessary steps to contribute to the marketplace. An appliance for Zabbix server will be created using Ubuntu 24.04 as a base image."
-weight: 5
+weight: 6
 ---
 
 ## Overview

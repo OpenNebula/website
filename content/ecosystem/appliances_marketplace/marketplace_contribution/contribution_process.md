@@ -3,7 +3,7 @@ title: "Contribution Process"
 type: docs
 linkTitle: "Contribution Process"
 description: "This document outlines the process for contributing virtual appliances to the OpenNebula Community Marketplace. It details the procedures for submission, testing, certification, and ongoing maintenance of appliances, including requirements for documentation and compatibility with OpenNebula versions. It also describes the infrastructure and tools used to support the contribution process, such as automatic certification testing and an alerting mechanism for contributors."
-weight: 1
+weight: 2
 ---
 
 # Introduction to Appliance Marketplaces

@@ -3,7 +3,7 @@ title: "Appliances Development"
 type: docs
 linkTitle: "Appliances Development"
 description: "A step-by-step guide on how to develop own appliance ready to be added into the OpenNebula Community Marketplace."
-weight: 2
+weight: 3
 ---
 
 # General procedure

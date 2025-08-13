@@ -1,9 +1,9 @@
 ---
-title: "Appliances Certification Tests"
+title: "Certification Tests"
 type: docs
-linkTitle: "Appliances Certification Tests"
+linkTitle: "Certification Tests"
 description: "The section outlines the process for certifying appliances for OpenNebula."
-weight: 3
+weight: 4
 ---
 
 # Scope
