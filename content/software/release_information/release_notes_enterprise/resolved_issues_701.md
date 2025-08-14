@@ -42,4 +42,4 @@ The following issues has been solved in 7.0.1:
 - Fix Style bug with Disable animations switch [#7136](https://github.com/OpenNebula/one/issues/7136)
 - Fix OneDRS storage requirements computation for VMs without history records [#7194](https://github.com/OpenNebula/one/issues/7194)
 - Fix VIRTIO_QUEUES not applying to hot plugged virtio NICs [#7195](https://github.com/OpenNebula/one/issues/7195)
-
+- Fix upgrade iconoir-react library [#6422](https://github.com/OpenNebula/one/issues/6422)
