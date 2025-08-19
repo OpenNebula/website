@@ -58,6 +58,18 @@ Please, find more details on some of these stages below.
 ## Learning Materials
 This section describes the necessary knowledge users need to understand to develop a new appliance and includes links to all the relevant documentation and learning materials.
 
+Users that want to contribute to the Community Marketplace should be familiar with OpenNebula and its components. The following materials will be helpful for the contribution process:
+
+**Understanding VM Templates and User Inputs**: Appliances for the Community Marketplace are composed of an Image and a VM Template. Therefore, users need to be able to create custom VM Templates.
+- Refer to the [VM Templates](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/) and [User Inputs](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/#user-inputs) documentation for foundational knowledge.
+- The [Virtual Machine Template Reference](product/operation_references/configuration_references/template/) provides a comprehensive list of available attributes and their syntax.
+
+**Contextualization**: OpenNebula offers various contextualization packages for different operating systems, enabling customization of deployed VMs. More details can be found in the [Contextualization](product/virtual_machines_operation/guest_operating_systems/kvm_contextualization/) documentation.
+
+**one-apps Framework**: Appliances for the Community Marketplace are built using the one-apps framework, which includes contextualization packages and Packer build scripts. Introductory webinars on one-apps are available:
+- [Introduction to the one-apps project](https://www.youtube.com/watch?v=UstX_KyOi0k)
+- [How to build VM Images with one-apps](https://www.youtube.com/watch?v=Pl5AUAC1x5I)
+
 ## Community Marketplace Contribution Process
 
 ### Form submission
