@@ -8,14 +8,14 @@ weight: 6
 
 ## Overview
 
-The following sections describe how to build an appliance from scratch, and include:
+This example uses the information available in the [Appliances Development](ecosystem/appliances_marketplace/marketplace_contribution/appliances_development) section. The following sections describe how to build an appliance for Zabbix from scratch.
 
 - Prepare Environment. Prepare the work directory and files, using the `example` appliance as the base. Then customize the Packer build scripts for this appliance.
 - User Inputs. Define User Inputs for the appliance, which will allow for customizations when instantiating it.
 - Appliance Code. Code that installs and configures the Zabbix software using Ubuntu 24.04 as a base image.
 - Generating Image. Instructions on how to build the disk image for the appliance locally.
 - VM Template. How to create a VM Template using the local image and instantiate a VM.
-- Tests. Definition of tests that need to be contributed to validate the appliance.
+- Tests. Definition of tests that need to be contributed to validate the appliance. More detailed information about tests can be found in the [Certification Tests](ecosystem/appliances_marketplace/marketplace_contribution/certification_tests) documentation.
 - Metadata. Metadata files that are needed to contribute the appliance to the Community Marketplace.
 - Pull Request. Prepare a pull request to the GitHub repository to start the contribution process.
 
@@ -71,6 +71,8 @@ Needs to be replaced with:
     destination = "/etc/one-appliance/service.d/"
   }
 ```
+
+<a id="appliance-zabbix-user-inputs"></a>
 
 ## User Inputs
 
@@ -357,7 +359,7 @@ The contributor does not need to generate and upload the image file, since this 
 
 ## VM Template
 
-In order to test the appliance, a VM template can be created with the defined user inputs in `appliances/zabbix/config.rb`.
+In order to test the appliance, a VM template can be created with the defined User Inputs in `appliances/zabbix/config.rb` as described [before](#user-inputs).
 
 ```bash
 [onepoc@nebulito ~]$ cat zabbix.tmpl
@@ -399,7 +401,7 @@ VCPU="2"
 ID: 148
 ```
 
-It should be possible to instantiate the VM template, providing the needed user inputs:
+It should be possible to instantiate the VM template, providing the needed User Inputs:
 
 ```bash
 [onepoc@nebulito ~]$ onetemplate instantiate 148
@@ -417,7 +419,7 @@ There are some parameters that require user input. Use the string <<EDITOR>> to 
 VM ID: 259
 ```
 
-The user inputs are also available when instantiating the template from Sunstone, as it can be seen below.
+The User Inputs are also available when instantiating the template from Sunstone, as it can be seen below.
 
 ![Zabbix appliance working directory](/images/community-marketplace/community_marketplace_sunstone_user_inputs.png)
 
@@ -626,6 +628,7 @@ After the appliance code is ready and the tests have been validated, the applian
 - metadata.yaml. Has all the needed information to run the tests once the pull request has been created. It is important to check locally that the context parameters and VM template attributes are valid before contributing.
 - UUID.yaml. This file contains all the information about the appliance including the version, publisher and template options amongst other things. The `publisher_email` is specially important since it's the address that will be used for notifying about the status of the contribution process. In this Zabbix appliance, the file has been created:
 ```yaml
+
 ---
 name: Zabbix
 version: 7.0-LTS
@@ -692,7 +695,103 @@ images:
     sha256: 90de590ea070c33809924ad85bfab59e299a50328a2c19c89bb937569d8e65d2
 ```
 
+## Documentation
+
+Appliances contributed to the Community Marketplace must have a descriptive documentation following the rules in [Appliance Documentation](ecosystem/appliances_marketplace/marketplace_contribution/contribution_process/#appliance-documentation).
+
+The README.md file for the Zabbix appliance has been created with the information about the appliance:
+
+```md
+# Overview
+
+[Zabbix](https://www.zabbix.com/documentation/current/en/manual) is an open source distributed monitoring system that monitors network, servers, virtual machines, applications, databases and more.
+
+This appliance deploys a Zabbix instance running on Ubuntu 24.04 with Nginx configured to serve the web interface.
+
+## Download
+
+The latest version of the Zabbix appliance can be downloaded from the OpenNebula Community Marketplace:
+
+* [Zabbix](http://community-marketplace.opennebula.io/appliance/d36cd66f-31ea-465e-a481-bc1de22f27d7)
+
+## Requirements
+
+* OpenNebula version: >= 6.10
+* [Recommended Specs](https://www.zabbix.com/documentation/7.0/en/manual/installation/requirements): 2vCPU, 8GB RAM
+
+# Release Notes
+
+The Zabbix appliance is based on Ubuntu 24.04 LTS (for x86-64).
+
+| Component | Version                         |
+| --------- | ------------------------------- |
+| Zabbix    | [7.0 LTS](https://www.zabbix.com/rn/rn7.0.17rc1) |
+| Nginx     | 8 |
+| PostgreSQL | 16.9 |
+| PHP | 8.3 |
+
+
+# Quick Start
+
+The default template will instantiate a Zabbix instance and expose the web interface in port 8080, configuring the PostgreSQL database and the Nginx web server.
+
+Steps to deploy a Single-Node instance:
+
+1. Download the Zabbix appliance from the OpenNebula Community Marketplace. This will download the VM template and the image for the OS.
+
+   $ onemarketapp export 'Zabbix' Zabbix --datastore default
+
+2. Adjust the VM template as desired (i.e. CPU, MEMORY, disk, network).
+3. Instantiate Zabbix template:
+   $ onetemplate instantiate Zabbix
+
+   This will prompt the user for the contextualization parameters.
+4. Access your new Zabbix instance on https://vm-ip-address:8080 and finish the installation in the web interface.
+
+# Features and usage
+
+This appliance comes with a preinstalled Zabbix server, including the following features:
+
+- Based on Zabbix release on Ubuntu 24.04 LTS
+- Option to configure the server name and exposed port
+- Option to configure database settings: database name, user name and password
+
+## Contextualization
+The [contextualization](https://docs.opennebula.io/7.0/product/virtual_machines_operation/guest_operating_systems/kvm_contextualization/) parameters  in the VM template control the configuration of the service, see the table below:
+
+| Parameter            | Default          | Description    |
+| -------------------- | ---------------- | -------------- |
+| ``ONEAPP_ZABBIX_DB_USER`` | ``zabbix`` | User for the Zabbix database |
+| ``ONEAPP_ZABBIX_DB_PASSWORD`` |  | Password for Zabbix database user |
+| ``ONEAPP_ZABBIX_DB_NAME`` | ``zabbix`` | Name for the Zabbix database |
+| ``ONEAPP_ZABBIX_PORT`` | ``8080`` | Listen port for Nginx configuration |
+| ``ONEAPP_ZABBIX_SERVER_NAME``   | ``example.com`` | Enable TLS configuration |
+```
+
+Information about the release of the appliance is in the CHANGELOG.md file:
+
+
+```md
+# Changelog
+
+All notable changes to this appliance will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [7.0-LTS] - 2025-07-10
+
+### Added
+
+Create new Zabbix appliance.
+
+- Based on Zabbix 7.0 LTS release on Ubuntu 24.04 LTS
+- Option to configure the server name and exposed port
+- Option to configure database settings: database name, user name and password
+```
+
 ## Pull Request
 
+A pull request needs to be created from the forked repository to the master branch of the marketplace-community GitHub repository.
 
 ![Zabbix appliance working directory](/images/community-marketplace/community_marketplace_pull_request.png)
