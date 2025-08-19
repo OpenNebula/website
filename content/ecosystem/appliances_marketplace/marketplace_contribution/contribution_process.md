@@ -69,6 +69,19 @@ It looks as on the figure below.
 ### Appliance Development
 Please, check a separate section "[Appliances Development](appliances_development.md)".
 
+### Appliance Documentation
+
+Any appliance contributed to the Community Marketplace must be properly documented. For this, two files need to be provided:
+
+- [README.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/README.md) will contain the documentation for the appliance where basic information about the appliance and instructions on how to use it will be provided. This file must include at least the following sections:
+
+  - Release Notes. Details about the current version of the appliance, including versions of each component.
+  - Overview. A summary of the appliance, including what software it comes with and basic information.
+  - Quick Start. A quick guide on how to instantiate the appliance once imported from the marketplace.
+  - Features. All features available in the appliance should be described in detail.
+
+- [CHANGELOG.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/CHANGELOG.md). Comprehensive changelog of the appliance, following guidelines at [keepachangelog.com](http://keepachangelog.com).
+
 ### Pull Request Submission
 As soon as appliance contributors make sure the appliance certification tests are passed successfully one needs to submit a pull request (PR) to the OpenNebula Community Marketplace GH repository.
 
@@ -79,12 +92,7 @@ Such PR consists of the following parts:
    - **Metadata file** ([metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml)).
    - **Tests description file** ([tests.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/tests.yaml)).
    - Tests folder with appliance’s **tests** written in Ruby (following [00-example_basic.rb](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/tests/00-example_basic.rb)).
-   - **Documentation** for the appliance in the file README.md. This file must include at least the following sections:
-      - Release Notes
-      - Overview
-      - Quick Start
-      - Features
-    - Comprehensive **changelog** of the appliance in the `CHANGELOG.md` file,  following guidelines at [keepachangelog.com](http://keepachangelog.com).
+   - **Documentation**  for the appliance (README.md and CHANGELOG.md) following the guidelines described in the previous section.
 * A change to apps-code/community-apps/**Makefile.config** file with new appliance candidate added.
 * A set of files at `apps-code/community-apps/packer/<appliance_name>/` for **packer** tool.
 * An image file with appliance’s **logo**, with 1:1 ratio and preferably PNG or SVG format, in the logos/ directory at repo root.
