@@ -49,7 +49,7 @@ First we need to configure hypervisors for LVM operations over the shared SAN st
 * All the nodes need to have access to the same LUNs.
 
 {{< alert title="Note" color="success" >}}
-In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm/activate` from the remote scripts may be executed on the Host to do the job).
+In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm_ssh/activate` from the remote scripts may be executed on the Host to do the job).
 {{< /alert >}}
 
 Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
@@ -289,13 +289,13 @@ more info about the differences in thin and non-thin operation.
 
 ### Driver Configuration
 
-By default the LVM driver will zero any LVM volume so that VM data cannot leak to other instances. However, this process takes some time and may delay the deployment of a VM. The behavior of the driver can be configured in the file `/var/lib/one/remotes/etc/fs_lvm/fs_lvm.conf`, in particular:
+By default the LVM driver will zero any LVM volume so that VM data cannot leak to other instances. However, this process takes some time and may delay the deployment of a VM. The behavior of the driver can be configured in the file `/var/lib/one/remotes/etc/tm/fs_lvm/fs_lvm.conf`, in particular:
 
-| Attribute            | Description                                    |
-|----------------------|------------------------------------------------|
-| `ZERO_LVM_ON_CREATE` | Zero LVM volumes when they are created/resized |
-| `ZERO_LVM_ON_DELETE` | Zero LVM volumes when VM disks are deleted     |
-| `DD_BLOCK_SIZE`      | Block size for dd operations (default: 64kB)   |
+| Attribute              | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| `ZERO_LVM_ON_CREATE`   | Zero LVM volumes when they are created/resized (default: yes) |
+| `ZERO_LVM_ON_DELETE`   | Zero LVM volumes when VM disks are deleted (default: yes)     |
+| `DD_BLOCK_SIZE`        | Block size for dd operations (default: 64kB)                  |
 
 Example:
 
@@ -310,13 +310,18 @@ ZERO_LVM_ON_DELETE=yes
 DD_BLOCK_SIZE=32M
 ```
 
+{{< alert title="Warning" color="warning" >}}
+Attributes related to disk zeroing (**ZERO_LVM_ON_\***) are ignored when LVM Thin mode is active. In this case, new volumes are always zeroed on creation.
+{{< /alert >}}
+
 The following attribute can be set for every datastore type:
 
 * `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
 * `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
 
 {{< alert title="Warning" color="warning" >}}
-Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in all Hosts including Front-end and hypervisors. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
+Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in all Hosts including Front-end and hypervisors. If an unsupported FS is used by the user the default one will be used.
+{{< /alert >}}
 
 <a id="datastore-internals"></a>
 
