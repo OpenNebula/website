@@ -40,23 +40,23 @@ There are different Image Datastores depending on how the images are stored on t
 
 Each datastore supports different features, here is a basic overview:
 
-|                                                                                                | [NFS/NAS]({{% relref "nas_ds#nas-ds" %}})   | [Local]({{% relref "local_ds#local-ds" %}})   | [Ceph]({{% relref "ceph_ds#ceph-ds" %}})   | [SAN]({{% relref "lvm_drivers#lvm-drivers" %}})   | [iSCSI]({{% relref "iscsi_ds#iscsi-ds" %}})   |
-|------------------------------------------------------------------------------------------------|----------------------------|------------------------------|---------------------------|----------------------------------|------------------------------|
-| Disk snapshots                                                                                 | yes                        | yes                          | yes                       | no                               | yes                          |
-| VM snapshots                                                                                   | yes                        | yes                          | no                        | no                               | no                           |
-| Live migration                                                                                 | yes                        | yes                          | yes                       | yes                              | yes                          |
-| Fault tolerance<br/>([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes                        | no                           | yes                       | yes                              | yes                          |
+|                                                                                                                 | [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}) | [Local]({{% relref "local_ds#local-ds" %}}) | [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) | [SAN]({{% relref "lvm_drivers#lvm-drivers" %}}) | [iSCSI]({{% relref "iscsi_ds#iscsi-ds" %}}) |
+| ------------------------------------------------------------------------------------------------                | ----------------------------              | ------------------------------              | ---------------------------              | ----------------------------------              | ------------------------------              |
+| Disk snapshots                                                                                                  | yes                                       | yes                                         | yes                                      | yes (LVM Thin only)                             | yes                                         |
+| VM snapshots                                                                                                    | yes                                       | yes                                         | no                                       | no                                              | no                                          |
+| Live migration                                                                                                  | yes                                       | yes                                         | yes                                      | yes                                             | yes                                         |
+| Fault tolerance<br/>([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes                                       | no                                          | yes                                      | yes                                             | yes                                         |
 
 {{< alert title="NetApp SAN Datastore (EE)" >}}
 
 The NetApp SAN Datastore is provided as an Enterprise Extension. Its basic features are listed below.
 
-|                          |     |
-|--------------------------|-----|
-| Disk snapshots           | yes |
-| VM snapshots             | no  |
-| Live migration           | yes |
-| Fault tolerance ([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes |
+| Feature                                                                                                     | Supported |
+| ----------------------------------------------------------------------------------------------------------- | --------- |
+| Disk snapshots                                                                                              | yes       |
+| VM snapshots                                                                                                | no        |
+| Live migration                                                                                              | yes       |
+| Fault tolerance ([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes       |
 
 {{< /alert >}}
 
