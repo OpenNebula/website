@@ -7,7 +7,7 @@ Veeam is a backup and recovery software that provides data protection and disast
 
 ## Compatibility
 
-The oVirtAPI module is compatible with Veeam Backup & Replication 12.0.
+The oVirtAPI module is compatible with the Veeam Backup & Replication version specified in the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes/#monitoring-and-backups" %}}).
 
 The following table summarizes the supported backup modes for each storage system:
 
