@@ -12,7 +12,7 @@ This section describes the cloud architecture used in this guide, and provides t
 
 ## Architecture
 
-The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. Additional public IPs are required to access running Virtual Machines. The proposed model connects VMs internally using VXLAN networks, with at least one VM assigned a public IP to act as a gateway, NATing traffic to and from the internal network.
+The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. Additional public IPs are required to access running Virtual Machines. For internal networking between the VMs a VXLAN network is used, that is isolated from the public traffic.
 
 ![><][high-level]
 
@@ -55,4 +55,4 @@ The target high-level cloud architecture overview is shown below. Two hosts are 
 | NETWORK   |
 | :---- | :---- |
 | Networking | VXLAN, Public routed network |
-| Number of Networks | 2 networks: VXLAN  Public routed network, with each host machine having a NIC and a public IP |
+| Number of Networks | 2 networks: VXLAN  internal network, public network for external access |
