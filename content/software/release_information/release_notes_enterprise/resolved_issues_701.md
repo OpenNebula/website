@@ -43,3 +43,4 @@ The following issues has been solved in 7.0.1:
 - Fix OneDRS storage requirements computation for VMs without history records [#7194](https://github.com/OpenNebula/one/issues/7194)
 - Fix VIRTIO_QUEUES not applying to hot plugged virtio NICs [#7195](https://github.com/OpenNebula/one/issues/7195)
 - Fix upgrade for iconoir-react library [#6422](https://github.com/OpenNebula/one/issues/6422)
+- Fix performance issue in DRS scheduler [#7211](https://github.com/OpenNebula/one/issues/7211)
