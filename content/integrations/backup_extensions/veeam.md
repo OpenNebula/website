@@ -231,3 +231,11 @@ The ovirtapi server will generate logs in the following directory depending on t
 * Alma/RHEL: ``/var/log/httpd``
 
 If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
+
+## Current limitations and issues
+
+- Volatile disks cannot be backed up. They will not be displayed in the Veeam interface. 
+- Veeam will not attempt incremental backups, so all backups will be full.
+- When trying to start a backup job, the following error may appear. It can be solved by refreshing the backup job properties (even if no configuration is changed):
+
+![image](/images/veeam_infra_error.png)
