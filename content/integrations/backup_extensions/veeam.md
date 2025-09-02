@@ -232,7 +232,7 @@ The ovirtapi server will generate logs in the following directory depending on t
 
 If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
 
-## Current limitations and issues
+## Limitations and Known Issues
 
 - Volatile disks cannot be backed up. They will not be displayed in the Veeam interface. 
 - Veeam will not attempt incremental backups, so all backups will be full.
