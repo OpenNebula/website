@@ -49,9 +49,10 @@ Here is an overview of the different steps and processes that the contribution p
 2. **Feedback (Optional):** If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
 3. **Training:** If the appliance is deemed valid, the contributor will be contacted to undergo training to ensure (s)he understands the ongoing requirements and processes.
 4. **Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
-5. **Submission:** Once the appliance has developed and tested their extension, they will need to submit it into the community marketplace GH repository through a Pull Request.
-6. **Testing:** Before accepting the Pull Request, the appliance will be tested by OpenNebula to ensure that it is both functional and safe to distribute.
-7. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
+5. **Contributor's testing** Apart from providing an appliance  Contributor must also provide a way of certifying that the appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
+6. **Submission:** Once the appliance has developed and tested their extension, they will need to submit it into the community marketplace GH repository through a Pull Request.
+7. **Testing:** Before accepting the Pull Request, the appliance will be tested by OpenNebula to ensure that it is both functional and safe to distribute.
+8. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
 
 Please, find more details on some of these stages below.
 
