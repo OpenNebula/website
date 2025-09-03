@@ -11,7 +11,7 @@ This section details a step-by-step procedure to provision the reference infrast
 
 ## Infrastructure Provisioning
 
-The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/). After deploying the virtual servers, in the DCD you should see your newly-created infrastructure as shown below:
+The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/). Start by creating a new Virtual Data Center (VDC) and selecting a location. The processor models available for the servers depend on the chosen location—for example, Intel Skylake may not be available everywhere. After deploying the virtual servers, in the DCD you should see your newly-created infrastructure as shown below:
 
 ![><][dcd-layout]
 
@@ -21,9 +21,9 @@ This page will guide you in building this configuration. You will need to take i
 
 To achieve the deployment base shown in the figure above, follow the below steps:
 
-1. Add two Dedicated Core Servers, ensuring to select the specifications as shown in [Front-end]({{% relref "ionos_hw_spec_and_arch#front-end-requirements" %}}) for the first server and [Host]({{% relref "ionos_hw_spec_and_arch#host-requirements" %}}) for the second.
-   1. Select the **Dedicated Core Server** option.
-   2. Choose the **Intel Skylake** processor.
+1. Add two servers, ensuring to select the specifications as shown in [Front-end]({{% relref "ionos_hw_spec_and_arch#front-end-requirements" %}}) for the first server and [Host]({{% relref "ionos_hw_spec_and_arch#host-requirements" %}}) for the second.
+   1. Choose a server type with dedicated cores.
+   2. Select an available processor model for your location (for example, **Intel Skylake**).
    3. Set the number of cores to **2**.
    4. Set the RAM to **8 GB**.
    5. Select **Debian 12** as the operating system.
@@ -33,7 +33,8 @@ To achieve the deployment base shown in the figure above, follow the below steps
 4. Connect each server's second NIC to the private LAN between the servers. Ensure to consistently use each server's second NIC.
 5. Add HDD instances and specify the base image for the operating systems:
    1. Add the SSH key of the host from which the access is needed.
-   2. Set it as a boot device.
+   2. Specify an administrative password for each VM so you can access it via the remote console if SSH becomes unavailable. Make sure to save this password; it cannot be retrieved later.
+   3. Set it as a boot device.
 
 Then, book the following two IP ranges, as shown below.
 
@@ -49,6 +50,8 @@ Assign the booked IP addresses to the servers, as shown below. Note that, withou
 ![><][ip-booked-for-server]
 
 To effect the changes, click the **Provision changes** button in the DCD. Implementing the changes should take a few minutes; the  result is reported in the DCD.
+
+These steps can also be automated using the [IONOS Cloud API](https://api.ionos.com/docs/cloud/v6/), [SDKs](https://docs.ionos.com/reference/software-development-kits/sdks/cloud-api-sdks), or the [Terraform provider](https://docs.ionos.com/terraform-provider).
 
 ### Generate IONOS Token
 
