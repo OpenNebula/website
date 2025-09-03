@@ -45,3 +45,4 @@ The following issues has been solved in 7.0.1:
 - Fix upgrade for iconoir-react library [#6422](https://github.com/OpenNebula/one/issues/6422)
 - Fix performance issue in DRS scheduler [#7211](https://github.com/OpenNebula/one/issues/7211)
 - Fix race condition when monitor probes update VM status [#7058](https://github.com/OpenNebula/one/issues/7058)
+- Fix way back to tables when creating and updating resources [#7131](https://github.com/OpenNebula/one/issues/7131)
