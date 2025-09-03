@@ -24,6 +24,7 @@ The following issues has been solved in 7.0.1:
 - Fix netApp: Volumes are expanded by snapshot reserve percentage to avoid space issues
 - Fix opennebula-ovirtapi: Adds the ability to backup volatile disks [#7148](https://github.com/OpenNebula/one/issues/7148)
 - Fix opennebula-ovirtapi: Keeps VM ownership after restore [#7147](https://github.com/OpenNebula/one/issues/7147)
+- Fix opennebula-ovirtapi: Add support for multi-process running [#7220](https://github.com/OpenNebula/one/issues/7220)
 - Fix Windows Optimized OS Profile [#7146](https://github.com/OpenNebula/one/issues/7146)
 - Fix select image validation message [#7139](https://github.com/OpenNebula/one/issues/7139)
 - Fix OneDRS for non-consistent input parameters and weights [#7161](https://github.com/OpenNebula/one/issues/7161)
