@@ -101,9 +101,12 @@ Any appliance contributed to the Community Marketplace must be properly document
   - The `:infra` section must not be modified, this is used by OpenNebula.
 
 ### Pull Request Submission
-As soon as appliance contributors make sure the appliance certification tests are passed successfully one needs to submit a pull request (PR) to the OpenNebula Community Marketplace GH repository.
+As soon as appliance contributors make sure the appliance certification tests are passed successfully they need to submit a pull request (PR) to the OpenNebula Community Marketplace GH repository.
 
-Such PR consists of the following parts:
+{{< alert title="Note" color="success" >}}
+Please, note that it is not expected that the appliance contributor uploads the appliance image. It’s expected to have in the PR just the code which can be used to generate the appliance image. As soon as OpenNebula has the complete PR the image will be generated and uploaded to the corresponding endpoint, the appliance’s metadata will be modified accordingly with the link to the image and made available on the Community Marketplace.{{< /alert >}}
+
+The PR should contain, at least, the following files:
 * **Appliance directory.** New directory `appliances/<appliance_name>` that includes:
    - **YAML file with an appliance description.** One can use a [template](https://github.com/OpenNebula/marketplace-community?tab=readme-ov-file#image-with-optional-vm-template) as an example and/or check  already [existing](https://github.com/OpenNebula/marketplace-community/tree/master/appliances) in the Community Marketplace Github repository similar files. It should be named `<UUID>.yaml`, where `<UUID>` is a unique identifier generated at the time of the appliance creation
    - **Appliance script.** Appliances can be written in Ruby (`appliance.rb`) or bash ([appliance.sh](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/appliance.sh)).
@@ -113,9 +116,9 @@ Such PR consists of the following parts:
    - **Documentation**  for the appliance (README.md and CHANGELOG.md) following the guidelines described in the previous section.
 * A change to apps-code/community-apps/**Makefile.config** file with new appliance candidate added.
 * A set of files at `apps-code/community-apps/packer/<appliance_name>/` for **packer** tool.
-* An image file with appliance’s **logo**, with 1:1 ratio and preferably PNG or SVG format, in the logos/ directory at repo root.
+* An image file with the appliance’s **logo**, with 1:1 ratio and preferably PNG or SVG format, in the logos/ directory at repo root.
 
-Continue with the example started in the [Appliances Development]({{< relref "appliances_development.md" >}}) section the output of the `git status` command executed inside `marketplace-community` directory should look like below:
+Using the the example available in the [Appliances Development]({{< relref "appliances_development.md" >}}) section, the output of the `git status` command executed inside `marketplace-community` directory should look like below after finishing that chapter:
 ```
 git status
 On branch test
@@ -139,7 +142,7 @@ git add apps-code/community-apps/Makefile.config appliances/test/a0fae8be-3a24-4
 apps-code/community-apps/packer/test/
 ```
 
-One can execute the `git status` command one more time to check what files have been added to be committed.
+Execute the `git status` command one more time to check what files have been added to be committed.
 
 Commit changes:
 ```
@@ -150,5 +153,3 @@ Push changes to remote separate branch of marketplace-community repository:
 ```
 git push -u origin test
 ```
-{{< alert title="Note" color="success" >}}
-Please, note it is not expected that the appliance contributor uploads the appliance image. It’s expected to have in the PR  just a code which can be used to generate the appliance image. As soon as we have the complete PR the image will be generated  and uploaded to the corresponding S3 bucket, the appliance’s metadata will be modified accordingly with the link to the image and made available on the Community Marketplace.{{< /alert >}}
