@@ -45,7 +45,7 @@ OpenNebula ships with the [OpenNebula Systems Marketplace](http://marketplace.op
 
 ## Contribution Process Overview
 Here is an overview of the different steps and processes that the contribution process will encompass:
-1. **Form Submissions:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the GH template. The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information.
+1. **Form Submissions:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information.
 2. **Feedback (Optional):** If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
 3. **Training:** If the appliance is deemed valid, the contributor will be contacted to undergo training to ensure (s)he understands the ongoing requirements and processes.
 4. **Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
@@ -95,6 +95,11 @@ Any appliance contributed to the Community Marketplace must be properly document
 
 - [CHANGELOG.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/CHANGELOG.md). Comprehensive changelog of the appliance, following guidelines at [keepachangelog.com](http://keepachangelog.com).
 
+- [metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml) defines the basic metadata elements of the appliance so it can be built and tested once it's been contributed. 
+
+  - The attribute `:base` is the base distro used to build the appliance, which is the same that is defined in the packer script. The base image of an appliance can be any of the base Operating System Images built in from one-apps repository. Check the [distros available in the Makefile.config file](https://github.com/OpenNebula/one-apps/blob/800f5bd5c243be7c654a519547aef73f5f11cf86/Makefile.config#L10) for a quick reference.
+  - The `:infra` section must not be modified, this is used by OpenNebula.
+
 ### Pull Request Submission
 As soon as appliance contributors make sure the appliance certification tests are passed successfully one needs to submit a pull request (PR) to the OpenNebula Community Marketplace GH repository.
 
@@ -102,7 +107,7 @@ Such PR consists of the following parts:
 * **Appliance directory.** New directory `appliances/<appliance_name>` that includes:
    - **YAML file with an appliance description.** One can use a [template](https://github.com/OpenNebula/marketplace-community?tab=readme-ov-file#image-with-optional-vm-template) as an example and/or check  already [existing](https://github.com/OpenNebula/marketplace-community/tree/master/appliances) in the Community Marketplace Github repository similar files. It should be named `<UUID>.yaml`, where `<UUID>` is a unique identifier generated at the time of the appliance creation
    - **Appliance script.** Appliances can be written in Ruby (`appliance.rb`) or bash ([appliance.sh](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/appliance.sh)).
-   - **Metadata file** ([metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml)).
+   - **Metadata file**.
    - **Tests description file** ([tests.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/tests.yaml)).
    - Tests folder with appliance’s **tests** written in Ruby (following [00-example_basic.rb](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/tests/00-example_basic.rb)).
    - **Documentation**  for the appliance (README.md and CHANGELOG.md) following the guidelines described in the previous section.
