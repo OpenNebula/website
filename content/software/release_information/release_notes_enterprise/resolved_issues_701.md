@@ -47,3 +47,4 @@ The following issues has been solved in 7.0.1:
 - Fix performance issue in DRS scheduler [#7211](https://github.com/OpenNebula/one/issues/7211)
 - Fix race condition when monitor probes update VM status [#7058](https://github.com/OpenNebula/one/issues/7058)
 - Fix way back to tables when creating and updating resources [#7131](https://github.com/OpenNebula/one/issues/7131)
+- Fix iptables flags to not use unsupported options (based on iptables version) [#7215](https://github.com/OpenNebula/one/issues/7215)
