@@ -12,7 +12,7 @@ weight: "2"
 
 ## Cluster Types
 
-The **On-Premises** clusters utilize existing physical or virtual servers as OpenNebula Hosts. These clusters can operate using LXC or KVM hypervisors.
+The **On-Premises** clusters utilize existing physical or virtual servers as OpenNebula Hosts. These clusters can operate using KVM hypervisors.
 
 ## On-Premises Cluster Implementation
 
@@ -33,7 +33,6 @@ The following resources, associated with each On-Premises Cluster, will be creat
 4. Virtual network - for public networking (configured manually)
 5. Virtual network template - for private networking
 
-
 ## How to Create An On-Prem Provision
 
 The following process describes how to create an On-Prem provision in your OpenNebula installation:
@@ -44,41 +43,22 @@ To create a provision in On-Prem, first [you must have an On-Prem provider alrea
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 
 ### Listing templates
 
-Once the On-Prem provider has been registered in the system, provision templates should appear listed using the `oneprovision-template list` command:
+You can create an on-premises provision using the `oneprovider create <name> --provider-id <id>` command, specifying `onprem` as the provider type and the ID of the associated provider to this provision. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
+
 
 ```default
-$ oneprovision-template list
-  ID USER       GROUP      NAME               REGTIME
-  0  oneadmin   oneadmin   On-Prem SSH Cluster    06/05 10:45:22
-```
-
-In this example, we have one provision template available: **On-Prem SSH Cluster**. These templates define the structure and configuration of infrastructure that can be deployed on top of the On-Prem cloud.
-
-### Instantiating a template
-
-You can now instantiate a provision template by its ID. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
-
-```default
-$ oneprovision-template instantiate 0 --provider-id 1
+$ oneprovision create onprem --provider-id 1
 There are some parameters that require user input.
-  * (cidr_block) CIDR block for the VPC [type: string, default: 10.0.0.0/16]
-    > 10.0.0.0/16
-  * (oneform_hosts) Number of instances to create [type: number, default: 1]
-    > 2
-  * (instance_type) Instance type [type: list: c5.metal, m5.large]
-    > 0
-  * (instance_os_name) OS [type: list: ubuntu_2204, ubuntu_2404]
-    0: ubuntu_2204
-    1: ubuntu_2404
-
-    Press enter for default (ubuntu_2204). Please type the selection number: 0
-  * (instance_disk_size) Disk size in GB [type: number, min: 32, max: 1024]
-    > 128
-  * (instance_public_ips) Number of public IPs [type: number, min: 0, max: 5]
+  * (oneform_onprem_hosts) Number of instances to create [type: number, default: 1]
     > 1
 
 ID: 1
@@ -102,7 +82,7 @@ NAME                : On-Prem SSH Cluster
 DESCRIPTION         : It deploys a SSH cluster on On-Prem
 USER                : oneadmin
 GROUP               : oneadmin
-STATE               : PENDING
+STATE               : RUNNING
 PROVIDER ID         : 1
 REGISTRATION TIME   : 06/05 10:52:29
 
@@ -112,12 +92,7 @@ GROUP               : ---
 OTHER               : ---
 
 PROVISION VALUES
-cidr_block          : 10.0.0.0/16
-oneform_hosts       : 0
-instance_disk_size  : 128
-instance_os_name    : ubuntu_2204
-instance_public_ips : 0
-instance_type       : c5.metal
+oneform_onprem_hosts : 0
 
 OPENNEBULA RESOURCES
 CLUSTER
@@ -140,8 +115,24 @@ ID   TYPE            NAME
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "driver": "onprem",
+    "deployment_type": "ssh_cluster",
+    "provider_id": 1,
+    "user_inputs_values": {
+      "oneform_onprem_hosts": 1
+    },
+    "name": "OnPrem Cluster",
+    "description": "Provision in OnPrem"
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}

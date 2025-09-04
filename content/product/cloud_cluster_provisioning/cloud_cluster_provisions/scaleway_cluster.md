@@ -52,32 +52,21 @@ To create a provision in Scaleway, first [you must have an Scaleway provider alr
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 
-### Listing templates
-
-Once the Scaleway provider has been registered in the system, provision templates should appear listed using the `oneprovision-template list` command:
+You can create a Scaleway provision using the `oneprovider create <name> --provider-id <id>` command, specifying `scaleway` as the provider type and the ID of the associated provider to this provision. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
 ```default
-$ oneprovision-template list
-  ID USER       GROUP      NAME                    REGTIME
-  0  oneadmin   oneadmin   Scaleway SSH Cluster    06/05 10:45:22
-```
-
-In this example, we have one provision template available: **Scaleway SSH Cluster**. These templates define the structure and configuration of infrastructure that can be deployed on top of the Scaleway cloud.
-
-### Instantiating a template
-
-You can now instantiate a provision template by its ID. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
-
-```default
-$ oneprovision-template instantiate 0 --provider-id 1
+$ oneprovision create scaleway --provider-id 1
 There are some parameters that require user input.
-  * (cidr_block) CIDR block for the VPC [type: string, default: 10.0.0.0/16]
-    > 10.0.0.0/16
   * (oneform_hosts) Number of instances to create [type: number, default: 1]
-    > 2
-  * (instance_type) Instance type [type: list: c5.metal, m5.large]
+    > 1
+  * (instance_type) Instance type [type: list: em_a115x_ssd]
     > 0
   * (instance_os_name) OS [type: list: ubuntu_2204, ubuntu_2404]
     0: ubuntu_2204
@@ -110,7 +99,7 @@ NAME                : Scaleway SSH Cluster
 DESCRIPTION         : It deploys a SSH cluster on Scaleway
 USER                : oneadmin
 GROUP               : oneadmin
-STATE               : PENDING
+STATE               : RUNNING
 PROVIDER ID         : 1
 REGISTRATION TIME   : 06/05 10:52:29
 
@@ -149,8 +138,28 @@ ID   TYPE            NAME
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "driver": "scaleway",
+    "deployment_type": "ssh_cluster",
+    "provider_id": 1,
+    "user_inputs_values": {
+      "oneform_hosts": 1,
+      "instance_disk_size": 128,
+      "instance_os_name": "ubuntu_2204",
+      "instance_public_ips": 0,
+      "instance_type": "em_a115x_ssd"
+    },
+    "name": "Scaleway Cluster",
+    "description": "Provision in Scaleway"
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}

@@ -16,4 +16,4 @@ Provisions in the form of Edge Clusters or HCI Clusters provide you with the too
 
 ## Hypervisor Compatibility
 
-Provisions are compatible with the KVM and LXC hypervisors.
+Provisions are compatible with the KVM hypervisors.

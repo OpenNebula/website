@@ -102,7 +102,7 @@ locals {
 }
 ```
 
-With this change, users can now select the new zone `us-east-1c` from the provided dropdown list when instantiating the provision.
+With this change, users can now select the new zone `us-east-1c` from the provided dropdown list when creating the provision.
 
 ## Adding new Images and OS Versions
 

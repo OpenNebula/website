@@ -20,7 +20,7 @@ An Equinix provider contains the credentials to interact with Equinix and also t
 * California (US)
 
 {{< alert title="Note" color="success" >}}
-More zones can be added modifying the provider configuration. You can learn more about how to modify or expand a provider behaviour in this [Guide]().
+More zones can be added modifying the provider configuration. You can learn more about how to modify or expand a provider behaviour in this [Guide](/product/integration_references/edge_provider_driver_development/customizing_driver.md).
 {{< /alert >}}
 
 In order to define an Equinix provider, you need the following information:
@@ -30,39 +30,26 @@ In order to define an Equinix provider, you need the following information:
 * **Plans and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Please note even though Equinix support multiple OSs, the automation tools are tailored to works with `Ubuntu 22.04`. If you use another OS, please be aware that it might required some adjustments, and things might not work as expected. Avoid using a different OS in production environment unless you’ve properly tested it before.
+Please note even though Equinix support multiple OSs, the automation tools are tailored to works with `Ubuntu 24.04`. If you use another OS, please be aware that it might required some adjustments, and things might not work as expected. Avoid using a different OS in production environment unless you’ve properly tested it before.
 {{< /alert >}}
 
 ## How to Create an Equinix Provider
 
-The following process describes how to register the Equinix provider in your OpenNebula installation and makes it available for future provisioning operations:
-
-{{< alert title="Note" color="success" >}}
-The Equinix driver is included by default with OpenNebula, so no additional setup is required before registration.
-{{< /alert >}}
+The following process describes how to create an Equinix provider in your OpenNebula database and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 
-To register the Equinix driver and create all associated templates, simply use the `oneform register` command:
+You can create an Equinix provider using the `oneprovider create <name>` command, specifying the external cloud provider name (`equinix` in this case). During instantiation, OneForm will prompt you to enter the required Equinix credentials and region.
 
 ```default
-$ oneform register equinix
-```
-
-Once registered, a provider template will be automatically created and stored in the OpenNebula database. You can verify its existence using the `oneprovider-template list` command:
-
-```default
-$ oneprovider-template list
-  ID USER       GROUP      NAME                       REGTIME
-  0  oneadmin   oneadmin   Equinix                    06/05 07:38:45
-```
-
-This template can now be instantiated using the `oneprovider-template instantiate` command. During instantiation, OneForm will prompt you for the necessary Equinix credentials and region:
-
-```default
-$ oneprovider-template instantiate 0
+$ oneprovider create equinix
 There are some parameters that require user input.
   * (auth_token) Equinix Auth Token [type: string]
     *************************
@@ -79,7 +66,7 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once the provider has been instantiated, you can review its details using the `oneprovider show <id>` command:
+Once the provider has been created, you can review its details using the `oneprovider show <id>` command:
 
 ```default
 $ oneprovider show 1
@@ -89,7 +76,7 @@ NAME                : Equinix
 DESCRIPTION         : Equinix Metal Cloud
 USER                : oneadmin
 GROUP               : oneadmin
-CLOUD PROVIDER      : equinix
+DRIVER              : equinix
 VERSION             : 1.0.0
 REGISTRATION TIME   : 06/05 09:00:00
 
@@ -109,20 +96,27 @@ IDS:                : --
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/providers" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "driver": "equinix",
+    "connection_values": {
+      "region": "am",
+      "auth_token": "YOUR_EQUINIX_AUTH_TOKEN",
+      "project_id": "YOUR_EQUINIX_PROJECT_ID"
+    },
+    "name": "My Equinix Provider",
+    "description": "Provider for Equinix infrastructure in Amsterdam"
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}
-
-{{< alert title="Next steps" color="info" >}}
-Congratulations! 👏 If you've completed the previous steps, you've successfully created your Equinix provider in OpenNebula.
-To learn more about the operations you can perform with providers, check out the [Provider Operations Guide]().
-{{< /alert >}}
-
-{{< alert title="Note" color="success" >}}
-If you're interested in adjusting the driver's behavior, such as adding new user inputs or extending the list of available zones, take a look at the [How to Customize a Provisioning Driver Guide]().
-{{< /alert >}}
 
 ## Known Issues
 

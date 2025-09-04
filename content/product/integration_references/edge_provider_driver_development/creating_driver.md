@@ -20,7 +20,7 @@ A driver in OneForm is a self-contained directory that bundles everything requir
 
 An OneForm driver must include at least the following elements:
 
-- A **`provider.yaml`** file: Defines the basic metadata and UI configuration.
+- A **`driver.conf`** file: Defines the basic metadata and UI configuration.
 - A **`terraform/`** directory: Contains all the Terraform logic used to provision resources.
 - An **`ansible/`** directory: Contains playbooks and templates to configure the infrastructure after it has been deployed.
 
@@ -33,7 +33,7 @@ Here’s what a typical driver directory structure looks like:
 
 ```default
 mycloud/
-├── provider.yaml
+├── driver.conf
 ├── terraform/
 │   ├── main.tf
 │   ├── variables.tf
@@ -60,7 +60,7 @@ Each of these elements plays a specific role in the provisioning and configurati
 
 ## Basic driver information
 
-The `provider.yaml` file contains the basic metadata for your driver. It defines key information about the provider and how it should appear in the OneForm interface.
+The `driver.conf` file contains the basic metadata for your driver. It defines key information about the driver and how it should appear across OneForm interfaces.
 
 Here is a standard structure:
 
@@ -76,8 +76,8 @@ Below is a summary of the fields:
 
 | Field           | Description                                                        |
 | --------------- | ------------------------------------------------------------------ |
-| `name`          | A short, unique name to identify the provider.                     |
-| `description`   | A short description of the provider and its purpose.               |
+| `name`          | A short, unique name to identify the driver.                       |
+| `description`   | A short description of the driver and its purpose.                 |
 | `version`       | The driver version. Useful for tracking compatibility and updates. |
 | `fireedge.logo` | Path to a logo image to be displayed in the Sunstone UI.           |
 
@@ -166,9 +166,9 @@ variable "oneform_tags" {
 > - Avoid to use the prefix `oneform_`, since it is reserved for variables that affect OneForm behavior (like `oneform_hosts`).
 > - **Always** add descriptions to each variable, as these descriptions are used to display the variables purpose to users who interact with the driver.
 
-OneForm automatically parses each variable declared in `variables.tf`, using the `type` and `default` fields to build its user input interface. These user inputs are then exposed to the user when instantiating a provision template, and validated against the expected type. If no value is supplied, the `default` will be used.
+OneForm automatically parses each variable declared in `variables.tf`, using the `type` and `default` fields to build its user input interface. These user inputs are then exposed to the user when creating a provision, and validated against the expected type. If no value is supplied, the `default` will be used.
 
-Here is an example of how OneForm interprets these variables and add them to a provision template:
+Here is an example of how OneForm interprets these variables and add them to a provision body:
 
 ```json
 {
@@ -224,9 +224,9 @@ output "provisioned_hosts" {
 
 ### provider.tf
 
-This file defines provider-specific configuration, usually including credentials and region parameters. This file is especially important since all variables declared in `provider.tf` are automatically parsed by OneForm and exposed as required inputs when a user instantiates a provider template.
+This file defines provider-specific configuration, usually including credentials and region parameters. This file is especially important since all variables declared in `provider.tf` are automatically parsed by OneForm and exposed as required inputs when a user creates a provider.
 
-In addition, OneForm automatically builds the `connection` section of the provider template using these variables. This section is used internally when provisioning infrastructure so that the driver has access to the required authentication and configuration details.
+In addition, OneForm automatically builds the `connection` section of the provider body using these variables. This section is used internally when provisioning infrastructure so that the driver has access to the required authentication and configuration details.
 
 Here’s an example of a `provider.tf` file containing Terraform variables:
 
@@ -258,7 +258,7 @@ provider "mycloud" {
 }
 ```
 
-From this, OneForm will automatically generate the following structure in the provider template:
+From this, OneForm will automatically generate the following structure in the provider body:
 
 ```json
 {
@@ -360,7 +360,6 @@ Each validator, when interpreted by OneForm, is added to the `match` section of 
   "description": "Instance type to use",
   "type": "string",
   "default": "standard.medium",
-  "component": "terraform",
   "match": {
     "type": "list",
     "values": ["standard.small", "standard.medium", "standard.large"]
@@ -484,7 +483,7 @@ plugin: opennebula_form
 
 ### Jinja2 templates
 
-Each file inside the `templates/` directory that uses Jinja2 syntax and includes the necessary metadata block (commented YAML at the top) is treated by OneForm as a separate provision template:
+Each file inside the `templates/` directory that uses Jinja2 syntax and includes the necessary metadata block (commented YAML at the top) is treated by OneForm as a separate deployment configuration type:
 
 ```yaml
 {#
@@ -509,7 +508,7 @@ user_inputs:
 # Jinja2 template content
 ```
 
-This metadata is used by OneForm to define the provision template name, description and any custom user inputs. These user inputs can include validation rules using the same format shown earlier in the `variables.tf` and `validators.tf` sections.
+This metadata is used by OneForm to define the provision name, description and any custom user inputs. These user inputs can include validation rules using the same format shown earlier in the `variables.tf` and `validators.tf` sections.
 
 In addition to defining how infrastructure is mapped into Ansible groups, these templates also specify the objects that OneForm will register as part of the `one_objects` structure. This includes virtual networks, datastores, and host definitions that will be configured during provisioning.
 
@@ -529,11 +528,29 @@ For example, OneForm will extract the following from a template like this:
 }
 ```
 
-These values are parsed from the metadata and Jinja structure and become part of the internal representation of the provision template within OneForm.
+These values are parsed from the metadata and Jinja structure and become part of the internal representation of the provision body within OneForm.
 
 Here’s an example of a Jinja2 inventory template that includes metadata and defines the full infrastructure mapping:
 
 ```jinja2
+{#
+name: Custom SSH Cluster
+description: It deploys a SSH cluster
+fireedge:
+  logo: "ssh_cluster.png"
+user_inputs:
+  - name: instance_public_ips
+    description: Number of public IPs to allocate
+    type: number
+    default: 0
+    match:
+      type: number
+      values:
+        min: 0
+        max: 5
+#}
+
+---
 ---
 all:
   vars:
@@ -617,7 +634,7 @@ Inside the `one` object, the following fields are available:
 | `version`      | OpenNebula version which provision is configuring.                  |
 | `frontend_ip`  | IP address of the OpenNebula frontend used for remote config.       |
 | `nodes`        | List of host IPs that have been provisioned and will be configured. |
-| `network_ids`  | IDs of the networks created during provisioning.                    |
+| `network_ids`  | Array of IDs of the networks created during provisioning.           |
 | `system_ds_id` | ID of the system datastore assigned to the provision.               |
 | `image_ds_id`  | ID of the image datastore assigned to the provision.                |
 
@@ -634,7 +651,7 @@ user_value: {{ user_inputs.custom_value }}
 
 In addition to Terraform and Ansible logic, drivers may also include optional support for Elastic and IPAM drivers:
 
-- **Elastic driver**: Automates the request and release of public IP addresses from the cloud provider. This is useful for virtual etworks that require internet access.
+- **Elastic driver**: Automates the request and release of public IP addresses from the cloud provider. This is useful for services that require access from the internet.
 - **IPAM driver**: Manages internal IP address allocation and ensures each VM receives a valid and unique IP during provisioning.
 
 Both components are fully supported by OneForm and integrated into the networking phase. For detailed information on how to implement and configure them, refer to the dedicated [Elastic and IPAM Drivers section]().

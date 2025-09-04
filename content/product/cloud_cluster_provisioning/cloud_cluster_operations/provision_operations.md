@@ -12,7 +12,7 @@ weight: "3"
 
 <!--# Managing Provisions -->
 
-In OneForm, **provisions** represent fully-deployed clusters or infrastructure stacks created from provision templates. Each provision is associated with a specific cloud or on-premise provider and contains OpenNebula resources such as Hosts, Datastores, and Virtual Networks.
+In OneForm, **provisions** represent fully-deployed clusters or infrastructure stacks. Each provision is associated with a specific cloud or on-premise provider and contains OpenNebula resources such as Hosts, Datastores, and Virtual Networks.
 
 This section explains how to:
 
@@ -25,6 +25,11 @@ This section explains how to:
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 To increase or decrease the number of hosts in a running provision, use the `add-host` or `del-host` commands. These operations will trigger an update of the infrastructure through Terraform and Ansible.
 
@@ -56,9 +61,35 @@ To increase or decrease the number of hosts in a running provision, use the `add
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+* **Add Hosts**
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/scale" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "direction": "up",
+    "nodes": 2
+  }'
+```
+
+* **Remove Hosts**
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/scale" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "direction": "down",
+    "nodes": [ "node1" ],
+    "opts": {
+      "force": true
+    }
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}
 
@@ -66,6 +97,11 @@ To increase or decrease the number of hosts in a running provision, use the `add
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 For provisions that support public networking (e.g., AWS, Equinix), you can manage Elastic IPs dynamically through the following commands:
 
@@ -96,9 +132,30 @@ For provisions that support public networking (e.g., AWS, Equinix), you can mana
 > To view current IP allocations, use `oneprovision show <id>` and inspect the associated public network address ranges (ARs).
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+* **Add Public IPs**
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/add-ip" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 3
+  }'
+```
+
+* **Remove a Public IP**
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/remove-ip" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "ar_id": 42
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}
 
@@ -106,6 +163,11 @@ For provisions that support public networking (e.g., AWS, Equinix), you can mana
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 If a provision fails during deployment, you can attempt to recover it by re-triggering the failed step:
 
@@ -120,20 +182,31 @@ $ oneprovision retry <provision_id> --force
 ```
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
 
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/retry" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 {{< /tabpane >}}
 
 {{< alert title="Note" color="success" >}}
-Retrying provisions is non-destructive and attempts to resume from the last recoverable state in the internal lifecycle.
+Retrying a provision is a non-destructive operation that attempts to resume from the last recoverable state within its internal lifecycle.
 {{< /alert >}}
 
 ## Deprovisioning a Cluster
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 
 To cleanly undeploy all infrastructure associated with a provision and remove its corresponding OpenNebula resources:
@@ -146,9 +219,18 @@ This action will trigger Terraform destroy, Ansible cleanup tasks, and OpenNebul
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/undeploy" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "force": true
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}
 

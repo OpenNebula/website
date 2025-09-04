@@ -18,6 +18,10 @@ A Scaleway provider contains the credentials to interact with Scaleway and also 
 * Netherlands - Amsterdam (NL-AMS-1 )
 * Poland - Warsaw (PL-WAW-3)
 
+{{< alert title="Note" color="success" >}}
+More zones can be added modifying the driver configuration. You can learn more about how to modify or expand a driver behaviour in this [Guide](/product/integration_references/edge_provider_driver_development/customizing_driver.md).
+{{< /alert >}}
+
 In order to define a Scaleway provider, you need the following information:
 
 * **Credentials**: these are used to interact with the remote provider. You need to provide `access_key`, `secret_key` and `project_id`. You can follow [this guide](https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys//) to get this data.
@@ -25,39 +29,26 @@ In order to define a Scaleway provider, you need the following information:
 * **Offers and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Please note even though Scaleway support multiple OSs, the automation tools are tailored to works with `Ubuntu 22.04`. If you use another OS, please be aware that it might required some adjustments, and things might not work as expected. Avoid using a different OS in production environment unless you’ve properly tested it before.
+Please note even though Scaleway support multiple OSs, the automation tools are tailored to works with `Ubuntu 24.04`. If you use another OS, please be aware that it might required some adjustments, and things might not work as expected. Avoid using a different OS in production environment unless you’ve properly tested it before.
 {{< /alert >}}
 
 ## How to Create an Scaleway Provider
 
-The following process describes how to register the Scaleway provider in your OpenNebula installation and makes it available for future provisioning operations:
-
-{{< alert title="Note" color="success" >}}
-The Scaleway driver is included by default with OpenNebula, so no additional setup is required before registration.
-{{< /alert >}}
+The following process describes how to create a Scaleway provider in your OpenNebula database and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 
-To register the Scaleway driver and create all associated templates, simply use the `oneform register` command:
+You can now instantiate a provision template by its ID. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
 ```default
-$ oneform register scaleway
-```
-
-Once registered, a provider template will be automatically created and stored in the OpenNebula database. You can verify its existence using the `oneprovider-template list` command:
-
-```default
-$ oneprovider-template list
-  ID USER       GROUP      NAME                       REGTIME
-  0  oneadmin   oneadmin   Scaleway                   06/05 10:02:38
-```
-
-This template can now be instantiated using the `oneprovider-template instantiate` command. During instantiation, OneForm will prompt you for the necessary Scaleway credentials and region:
-
-```default
-$ oneprovider-template instantiate 0
+$ oneprovider create scaleway
 There are some parameters that require user input.
   * (access_key) Scaleway Access Key [type: string]
     ***************
@@ -81,7 +72,7 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once the provider has been instantiated, you can review its details using the `oneprovider show <id>` command:
+Once the provider has been created, you can review its details using the `oneprovider show <id>` command:
 
 ```default
 $ oneprovider show 1
@@ -91,7 +82,7 @@ NAME                : Scaleway
 DESCRIPTION         : Scaleway Bare Metal Provider
 USER                : oneadmin
 GROUP               : oneadmin
-CLOUD PROVIDER      : scaleway
+DRIVER              : scaleway
 VERSION             : 1.0.0
 REGISTRATION TIME   : 06/05 10:09:44
 
@@ -113,17 +104,26 @@ IDS:                : --
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/providers" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "driver": "equinix",
+    "connection_values": {
+      "region": "fr-par",
+      "zone": "fr-par-2",
+      "access_key": "YOUR_SCALEWAY_AUTH_TOKEN",
+      "secret_key": "YOUR_SCALEWAY_SECRET_KEY",
+      "project_id": "YOUR_SCALEWAY_PROJECT_ID"
+    },
+    "name": "My Scaleway Provider",
+    "description": "Provider for Scaleway infrastructure in Paris"
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}
-
-{{< alert title="Next steps" color="info" >}}
-Congratulations! 👏 If you've completed the previous steps, you've successfully created your Scaleway provider in OpenNebula.
-To learn more about the operations you can perform with providers, check out the [Provider Operations Guide]().
-{{< /alert >}}
-
-{{< alert title="Note" color="success" >}}
-If you're interested in adjusting the driver's behavior, such as adding new user inputs or extending the list of available zones, take a look at the [How to Customize a Provisioning Driver Guide]().
-{{< /alert >}}

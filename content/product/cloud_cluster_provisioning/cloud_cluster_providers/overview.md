@@ -40,73 +40,79 @@ This elements are combined through an JSON document stored in the OpenNebula dab
 
 ```json
 {
-    "name": "Example provider",
-    "description": "Example provider for demostration",
-    "version": "1.0.0",
-    "fireedge": {
-        "logo": "example.png"
-    },
-    "cloud_provider": "example",
-    "connection": {
-        "api_key": "$api_key",
-        "region": "$region"
-    },
-    "user_inputs": [
-    {
-        "name": "api_key",
-        "description": "Example API Key",
-        "type": "string",
-    },
-    {
-        "name": "region",
-        "description": "Example Region",
-        "type": "string",
-        "default": "region-1",
-        "match": {
-        "type": "list",
-        "values": [
-            "region-1",
-            "region-2"
-        ]
-        }
+  "ID": "0",
+  "UID": "0",
+  "GID": "0",
+  "UNAME": "oneadmin",
+  "GNAME": "oneadmin",
+  "NAME": "AWS Provider",
+  "TYPE": "103",
+  "PERMISSIONS": {
+    "OWNER_U": "1",
+    "OWNER_M": "1",
+    "OWNER_A": "0",
+    "GROUP_U": "0",
+    "GROUP_M": "0",
+    "GROUP_A": "0",
+    "OTHER_U": "0",
+    "OTHER_M": "0",
+    "OTHER_A": "0"
+  },
+  "TEMPLATE": {
+    "PROVIDER_BODY": {
+      "name": "AWS Provider",
+      "description": "AWS Provider in Virginia",
+      "driver": "aws",
+      "version": "1.0.0",
+      "fireedge": {
+        "logo": "aws.png"
+      },
+      "connection": {
+        "access_key": "******************",
+        "secret_key": "*************************",
+        "region": "us-east-1"
+      },
+      "provision_ids": [
+        1
+      ],
+      "registration_time": 1756468598
     }
-    ],
-    "registration_time": 1748504203
+  }
 }
 ```
 
-For more information about Provider datamodel and configuration please refer to [Provider configuration]({{% relref "../../operation_references/configuration_references/provider_template#provider-template" %}}) section.
+For more information about Provider datamodel and configuration please refer to [Provider configuration](/product/operation_references/configuration_references/provider.md) section.
 
 ## Provider Structure
 
-A Provider in OpenNebula follows a standardized, modular directory structure designed to encapsulate all components required for infrastructure provisioning and configuration. Each provider is defined by a top-level directory identified by a unique name (e.g., `aws`, `scaleway`, `onprem`). The default location for provider directories is `/usr/share/one/providers`, but this can be customized via the `ONE_LOCATION` setting in your OpenNebula installation.
+A Provider in OpenNebula is based on information extracted from the drivers located in a modular directory structure that encapsulates all components required for infrastructure provisioning and configuration. Each driver is defined by a top-level directory identified by a unique name (e.g., `aws`, `scaleway`, `onprem`). The default location for driver directories is `/usr/share/one/oneform/drivers`, but this can be customized via the `ONE_LOCATION` setting in your OpenNebula installation.
 
-The following illustrates the usual directory structure of a provider:
+The following illustrates the usual directory structure of a driver:
 
 ```default
-providers/
+drivers/
 ├── aws
 │   ├── ansible/
 │   ├── terraform/
 │   ├── elastic/           # Optional
 │   ├── ipam/              # Optional
-│   └── provider.yaml
+│   └── driver.conf
 └── onprem
     ├── ansible/
     ├── terraform/
-    └── provider.yaml
+    └── driver.conf
 ```
 
-Each component within the provider directory serves a specific purpose:
+Each component within the driver directory serves a specific purpose:
 
 - **terraform/**: Contains Terraform modules that define and provision the required infrastructure resources, such as hosts, networks, and storage.
 - **ansible/**: Stores OneDeploy Ansible playbooks, roles, and templates used for post-provisioning tasks, such as configuring services, installing software packages, and integrating the resources with OpenNebula.
 - **ipam/** *(Optional)*: Includes scripts responsible for IP Address Management, handling allocation, registration, and release of IP addresses within the provider.
 - **elastic/** *(Optional)*: Holds logic for managing Elastic IPs, including assigning and releasing floating IP addresses to and from Virtual Machines dynamically.
-- **provider.yaml**: A YAML file containing essential metadata about the provider, such as its name, description, version, and configuration parameters.
+- **driver.conf**: A YAML file containing essential metadata about the driver, such as its name, description, version, and other configuration parameters.
 
-For more information about how to create or modify an existing provider, refer to the [Provider Development Guide]().
+For more information about how to create or modify an existing driver, refer to the [Provider Development Guide](/product/integration_references/edge_provider_driver_development/_index.md).
 
 ## Hypervisor Compatibility
 
-Cloud Providers are compatible with KVM. Compatibility with additional hypervisors, such as LXC, will be added in the future.
+OneForm drivers are compatible with KVM. Compatibility with additional hypervisors, such as LXC, will be added in the future.

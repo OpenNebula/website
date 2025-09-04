@@ -12,15 +12,15 @@ weight: "2"
 
 <!--# Amazon AWS Provider -->
 
-An AWS provider contains the credentials to interact with Amazon and also the region to deploy your Provisions. By default, OpenNebula comes with four pre-defined AWS providers in the following regions:
+An AWS provider contains the credentials to interact with Amazon and also the region to deploy your Provisions. By default, OpenNebula comes with four pre-defined regions for the AWS provider:
 
-* Frankfurt
-* London
-* North Virginia (US)
-* North California (US)
+* Frankfurt (`eu-central-1`)
+* London (`eu-west-1`)
+* North Virginia (US) (`us-east-1`)
+* North California (US) (`us-west-1`)
 
 {{< alert title="Note" color="success" >}}
-More zones can be added modifying the provider configuration. You can learn more about how to modify or expand a provider behaviour in this [Guide]().
+More zones can be added modifying the driver configuration. You can learn more about how to modify or expand a driver behaviour in this [Guide](/product/integration_references/edge_provider_driver_development/customizing_driver.md).
 {{< /alert >}}
 
 In order to define an AWS provider, you need the following information:
@@ -35,34 +35,21 @@ Please note even though custom AMIs (i.e other than the default one) can be used
 
 ## How to Create an AWS Provider
 
-The following process describes how to register the AWS provider in your OpenNebula installation and makes it available for future provisioning operations:
-
-{{< alert title="Note" color="success" >}}
-The AWS driver is included by default with OpenNebula, so no additional setup is required before registration.
-{{< /alert >}}
+The following process describes how to create an AWS provider in your OpenNebula database and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+Still under development.
+{{% /tab %}}
+
 {{% tab header="CLI"%}}
 
-To register the AWS driver and create all associated templates, simply use the `oneform register` command:
+You can create an AWS provider using the `oneprovider create <name>` command, specifying the external cloud provider name (`aws` in this case). During instantiation, OneForm will prompt you to enter the required AWS credentials and region.
 
 ```default
-$ oneform register aws
-```
-
-Once registered, a provider template will be automatically created and stored in the OpenNebula database. You can verify its existence using the `oneprovider-template list` command:
-
-```default
-$ oneprovider-template list
-  ID USER       GROUP      NAME                       REGTIME
-  0  oneadmin   oneadmin   AWS                        06/05 07:36:43
-```
-
-This template can now be instantiated using the `oneprovider-template instantiate` command. During instantiation, OneForm will prompt you for the necessary AWS credentials and region:
-
-```default
-$ oneprovider-template instantiate 0
+$ oneprovider create aws
 There are some parameters that require user input.
   * (access_key) AWS Access Key [type: string]
     ***************
@@ -77,7 +64,7 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once the provider has been instantiated, you can review its details using the `oneprovider show <id>` command:
+Once the provider has been created, you can review its details using the `oneprovider show <id>` command:
 
 ```default
 $ oneprovider show 1
@@ -87,7 +74,7 @@ NAME                : AWS
 DESCRIPTION         : Amazon Web Services
 USER                : oneadmin
 GROUP               : oneadmin
-CLOUD PROVIDER      : aws
+DRIVER              : aws
 VERSION             : 1.0.0
 REGISTRATION TIME   : 06/05 09:00:30
 
@@ -107,22 +94,24 @@ IDS:                : --
 
 {{% /tab %}}
 
-{{< tab header="Sunstone">}}
-    Still under development.
-{{< /tab >}}
+{{% tab header="API"%}}
+
+```bash
+curl -X POST "https://oneform.example.server/api/v1/providers" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "driver": "aws",
+    "connection_values": {
+      "region": "us-east-1",
+      "access_key": "YOUR_AWS_ACCESS_KEY",
+      "secret_key": "YOUR_AWS_SECRET_KEY"
+    },
+    "name": "My AWS Provider",
+    "description": "Provider for AWS infrastructure in us-east-1"
+  }'
+```
+
+For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
 
 {{< /tabpane >}}
-
-{{< alert title="Next steps" color="info" >}}
-Congratulations! 👏 If you've completed the previous steps, you've successfully created your AWS provider in OpenNebula.
-To learn more about the operations you can perform with providers, check out the [Provider Operations Guide]().
-{{< /alert >}}
-
-{{< alert title="Note" color="success" >}}
-If you're interested in adjusting the driver's behavior, such as adding new user inputs or extending the list of available zones, take a look at the [How to Customize a Provisioning Driver Guide]().
-{{< /alert >}}
-
-
-{{< alert title="Note" color="success" >}}
-The AWS driver is included by default with OpenNebula, so no additional setup is required before registration.
-{{< /alert >}}
