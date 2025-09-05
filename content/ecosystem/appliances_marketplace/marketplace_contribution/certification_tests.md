@@ -2,18 +2,25 @@
 title: "Certification Tests"
 type: docs
 linkTitle: "Certification Tests"
+description: "The section outlines the process for certifying appliances for OpenNebula."
 weight: 4
 ---
 
-Certification Tests intend to provide a way of certifying that a contributor submitted appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features. Such Tests must be developed by contributors, looking to create an appliance for OpenNebula end users. This document should help during the contribution process.
-Please, find below a guide regarding how to develop and run tests. 
+# Scope
 
-The tests can be divided into two sections:
+## What is the objective of the Certification Tests?
+Certification Tests intend to provide a way of certifying that a contributor submitted appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
+
+## Who is the target audience?
+Certification Tests must be developed by contributors, looking to create an appliance for OpenNebula end users. This document should help during the contribution process.
+
+## What is the objective of the document?
+This document intends to provide a guide regarding how to develop and run tests. The tests can be divided into two sections
 
 * **App Specific tests:** The appliance features must be tested. For this we provide some example tests and libraries to aid in the process of developing these. The test suite is built around the usage of [rspec](https://rspec.info/).  
 * **General Context tests:** The appliance features are built on top of the [contextualization service](https://github.com/OpenNebula/one-apps/wiki/linux_feature). While the purpose of the appliance is to provide its specific features, compliance with the baseline context features must be guaranteed. 
 
-## General Contextualization tests
+# General Contextualization tests
 
 To keep appliances provided via Marketplace fully operational on any supported version of the OpenNebula and platforms there are tests performed on a regular basis on the OpenNebula Systems Company’s internal infrastructure. To integrate the VM guests with the OpenNebula services a set of contextualization packages for different operating systems are provided. The OpenNebula contextualization process allows to automatically do the following:
 
@@ -29,13 +36,13 @@ The tools from the [OneApps project](https://github.com/OpenNebula/one-apps) can
 
 These appliances need to be validated against contextualization tests as well as a set of tests specific for that particular appliance (such tests are provided by the appliance’s contributor). The appliance  contributor’s responsibility is to provide the tests which are specific for the contributing appliance only. The contributing appliance will be validated against the OpenNebula contextualization tests by the OpenNebula team. That means there is no need for the contributor to test the appliance against such OpenNebula contextualization tests.
 
-## Specific Appliance tests
+# Specific Appliance tests
 
 The tests are built around [rspec](https://rspec.info/). You describe certain tests, called examples, and define conditions where the test fails or succeeds based on expectations. The tests are assumed to be executed in the OpenNebula frontend. This means the opennebula **systemd** unit runs in the same host where the tests are executed.
 
 We are going to showcase the contribution process with a database appliance. For a more visual showcase please refer to this [webinar](https://www.youtube.com/watch?v=UstX_KyOi0k).
 
-### App structure
+## App structure
 
 The application logic resides at `appliances/<appliance>` folder in the Community Marketplace GitHub [repository](https://github.com/OpenNebula/marketplace-community). Within that directory resides also the appliance metadata and the tests directory.
 
@@ -54,7 +61,7 @@ appliances/example/
 
 The file `00-example_basic.rb` contains some tests that verify the mysql database within the Virtual Machine.
 
-### Example tests
+## Example tests
 
 The appliance provides the following custom contextualization parameters
 
@@ -204,7 +211,7 @@ Only the tests defined at `tests.yaml` will be executed. The `example` appliance
 ```
 With this you can define multiple test files to verify independent workflows and also test them separately.
 
-## Creating rSpec Example Groups
+## **Creating rspec example groups from scratch**
 
 In order to develop your Certification Tests test, you will need to create your example group(s).
 
