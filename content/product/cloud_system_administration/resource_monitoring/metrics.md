@@ -43,6 +43,17 @@ The MONITOR information includes the following data:
 | `NETRX`       | Received bytes from the network.                               |
 | `NETTX`       | Sent bytes to the network.                                     |
 
+
+If a GPU is detected as a PCI device on the VM (currently only NVIDIA GPUs are supported), the following additional metrics will be available:
+
+| Key                      | Description                                                      |
+|--------------------------|------------------------------------------------------------------|
+| `GPU_COUNT`              | Number of GPUs detected and monitored. (Aggregated metrics)      |
+| `GPU_UTILIZATION`        | Percentage of GPU’s cores actively processing                    |
+| `GPU_MEMORY_UTILIZATION` | Percentage of GPU’s memory  actively transferring data.          |
+| `GPU_MEMORY_FREE`        | Free GPU memory (in MiB, e.g., 5M).                              |
+| `GPU_POWER_USAGE`        | Power usage of the GPU (in watts).                               |
+
 The metrics above are directly read from and stored in the monitoring database.
 
 Additionally, the following derived metrics are calculated from the stored metrics and used for forecasting. These derived metrics are not stored in the database but are computed on-demand:
