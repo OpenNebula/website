@@ -1,7 +1,7 @@
 ---
-title: "Adding the Community Marketplace to OpenNebula"
+title: "Using the Community Marketplace"
 type: docs
-linkTitle: "Adding the Community Marketplace to OpenNebula"
+linkTitle: "Using the Community Marketplace"
 weight: 2
 ---
 

@@ -2,89 +2,38 @@
 title: "Maintenance Process"
 type: docs
 linkTitle: "Maintenance Process"
-description: "This document provides a comprehensive overview of the maintenance process, from routine compatibility testing and updates to our formal removal policy. Understanding these steps will help you keep your appliance healthy, secure, and available to the community."
 weight: 6
 ---
 
-## Compatibility Testing and Recertification
+# Appliance Maintenance
 
 To ensure the quality and reliability of the Marketplace, all Appliances are periodically tested for compatibility with both the Long-Term Support (LTS) and the latest stable release of OpenNebula. In the event of a test failure, a notification with relevant logs and details will be sent to the contributor's email. To remain listed, an Appliance must be compatible with at least one of these two target versions. If it is found to be incompatible with both, the formal Appliance Removal process will be initiated to remove the Appliance from the  Marketplace.
 
-### Testing Targets: LTS and Latest Stable
-
+{{< alert title="Important: Active OpenNebula Releases" color="success" >}}
 To avoid removal, an appliance must pass tests for at least one of the active OpenNebula releases. The two active releases are:
 
     Latest Release: 7.0.0
     LTS Version: 6.10
 
-### Automated Testing Process
+Note: These version numbers will change as new versions of OpenNebula are released.{{< /alert >}} 
 
-Appliances are subject to two forms of testing:
+# Appliance Update
 
-1. **Periodic Testing:** On a regular basis, a continuous integration system automatically tests all appliances against the active OpenNebula releases. These tests typically consist on our contextualization tests and the tests provided by the contributor.
+Contributors can update their existing appliances by submitting a new Pull Request. The process is similar to contributing a new appliance.
 
-2. **Recertification for New Releases:** When a new major or LTS version of OpenNebula is in development or about to be released, we run the entire appliance catalog against it. This proactive process helps us identify compatibility issues early, giving you ample time to make necessary updates.
+1. Submit a new Pull Request against the ``community-marketplace`` repository.
+2. The Pull Request should update the files for an existing appliance, not add a new one.
+3. The submission will then follow the same validation and testing processes as a new appliance.
 
-### Failure Notifications
+# Appliance Recertification
 
-Our testing process is designed to run in the background without bothering you. You will only be notified via email if your appliance fails a test.
+When new versions of OpenNebula are released (or about to be released), existing appliances will need to be recertified to ensure they pass all tests. This process will be run internally, and contributors will only be notified in case anything goes wrong via email. If any changes are needed, the contributor will need to kick off the Appliance Update process to be able to keep the appliance in the Marketplace. 
 
-A failure notification email will contain reports on the failed tests with a body as follows:
+# Appliance Removal
 
-    Dear <contributor name>,
+An appliance may be removed from the Marketplace if it fails to meet compatibility or security standards. Removal can be triggered under two conditions:
 
-    Your community marketplace appliance <appliance name> has recently failed the testing against OpenNebula version <opennebula version>. We kindly request that you take a look into these issues. You will find attached to this email a report on the failed appliance tests.
+1. **Compatibility Failure:** The appliance fails certification tests against all active OpenNebula releases, and the issues are not fixed by the contributor within 6 weeks of notification.
+2. **Security Vulnerabilities:** A security issue is discovered, and the contributor does not provide a fix within 6 weeks of being notified.
 
-    Keep in mind that in order to keep the appliance in the marketplace, tests must pass against either the OpenNebula LTS version, currently 6.10, or against the latest release, currently 7.0.
-
-    Best regards,
-    OpenNebula team
-
-
-## Appliance Update Process
-
-Keeping your appliance up-to-date is essential for fixing bugs, addressing security vulnerabilities, or adding new features.
-
-### When to Submit an Update
-
-You should initiate the update process in any of the following scenarios:
-
-- You receive a test failure notification from our team.
-- A security vulnerability (CVE) is discovered in your appliance's base OS or software.
-- You want to upgrade software within the appliance or add new functionality.
-
-### Update Steps
-
-The process for updating an appliance is identical to the initial submission process, ensuring consistency and re-validating the entire appliance.
-
-1. **Prepare Your Changes:** Make the necessary modifications to your appliance files.
-
-2. **Submit a Pull Request:** Open a new Pull Request against the main branch of the community-marketplace repository.
-
-3. **Provide a Clear Description:** In your Pull Request, clearly describe the changes you made. If you are fixing a compatibility issue or a security vulnerability, please mention it.
-
-4. **Await Validation:** Your submission will automatically trigger the same validation and testing pipeline as a new appliance. The same communication channels used during the initial appliance contribution will be used.
-
-
-## Appliance Removal
-
-To protect users from outdated, insecure, or non-functional appliances, we will occasionally remove an appliance from the Marketplace. This is a final step taken only after a contributor has been given a reasonable amount of time to resolve critical issues.
-
-### Grounds for removal
-
-The removal process is initiated under two specific conditions:
-
-- **Prolonged Compatibility Failure:** The appliance fails certification tests against all active OpenNebula releases, and the contributor does not submit a working fix within **6 weeks** of the initial email notification.
-- **Unpatched Security Vulnerability:** A critical security issue is reported, and the contributor does not provide a patch within **6 weeks** of being notified.
-
-### The 6-Week Grace Period
-
-The 6-week window is a grace period designed to give you sufficient time to investigate, fix, and submit an update without pressure. We may send a reminder notification before the period expires. We understand that contributors are often volunteers, and we aim to be flexible. If you need more time, please respond to the notification email to discuss the situation.
-
-### Consequences of Removal
-
-If an appliance is removed, its entry and associated files are pruned from the Marketplace repository. To get it listed again, you must resubmit it as a new appliance, starting the contribution process from scratch. This ensures it passes the latest version of our entire validation and security pipeline before being made available to users again.
-
-### Voluntary Removal
-
-If you no longer wish to maintain your appliance, you can request its removal. To do so, please open an issue in the community-marketplace repository requesting deprecation.
+If an appliance is removed for failing tests for longer than 6 weeks, it will need to be resubmitted as a new appliance.
