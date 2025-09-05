@@ -2,11 +2,10 @@
 title: "Appliances Development"
 type: docs
 linkTitle: "Appliances Development"
-description: "A step-by-step guide on how to develop own appliance ready to be added into the OpenNebula Community Marketplace."
 weight: 3
 ---
 
-# General procedure
+## General procedure
 
 The new appliance contribution to the community marketplace process consists of a set of steps listed below.
 1. Create Linux VM to develop and build your appliance
@@ -22,8 +21,23 @@ The new appliance contribution to the community marketplace process consists of 
 11. Create pull request to OpenNebula/marketplace-community repo
 12. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
 
-# Basic OpenNebula deployment
-## Setting up OpenNebula basic environment
+## Learning Materials
+This section describes the necessary knowledge users need to understand to develop a new appliance and includes links to all the relevant documentation and learning materials.
+
+Users that want to contribute to the Community Marketplace should be familiar with OpenNebula and its components. The following materials will be helpful for the contribution process:
+
+**Understanding VM Templates and User Inputs**: Appliances for the Community Marketplace are composed of an Image and a VM Template. Therefore, users need to be able to create custom VM Templates.
+- Refer to the [VM Templates](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/) and [User Inputs](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/#user-inputs) documentation for foundational knowledge.
+- The [Virtual Machine Template Reference](product/operation_references/configuration_references/template/) provides a comprehensive list of available attributes and their syntax.
+
+**Contextualization**: OpenNebula offers various contextualization packages for different operating systems, enabling customization of deployed VMs. More details can be found in the [Contextualization](product/virtual_machines_operation/guest_operating_systems/kvm_contextualization/) documentation.
+
+**one-apps Framework**: Appliances for the Community Marketplace are built using the one-apps framework, which includes contextualization packages and Packer build scripts. Introductory webinars on one-apps are available:
+- [Introduction to the one-apps project](https://www.youtube.com/watch?v=UstX_KyOi0k)
+- [How to build VM Images with one-apps](https://www.youtube.com/watch?v=Pl5AUAC1x5I)
+
+## Basic OpenNebula deployment
+### Setting up OpenNebula basic environment
 
 Since the appliance needs to be validated against the appliance specific tests before submitting it to the Community Marketplace it seems reasonable to use the same environment for building and testing.
 
@@ -126,9 +140,9 @@ Run that playbook:
 sudo ansible-playbook requirements.yaml
 ```
 
-## Verification
+### Verification
 
-### Using command line interface
+#### Using command line interface
 
 Become `oneadmin` user and try to perform basic operations like list hosts, templates, images, vnets, etc:
 
@@ -159,7 +173,7 @@ Try to access it over the network:
 onevm ssh <vm_id>
 ```
 
-### Using graphical web-based user interface \- FireEdge Sunstone
+#### Using graphical web-based user interface \- FireEdge Sunstone
 
 By default the FireEdge Sunstone is running on the 2616 port. The exact URL is shown at the end of  the minione tool execution process  as well as the oneadmin credentials.
 
@@ -173,7 +187,7 @@ To get a list of hosts one needs to open the Dashboard menu bar from the left si
 
 To list the existing virtual networks (vnets) one can click either “Virtual Networks” light brown tile or go to the “Networks” section and click on the “Virtual Networks” item of the menu:
 
-![image](/images/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vnets.png)
+![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vnets.png)
 
 To list the VM templates available one can either click on the “VM templates” magenta tile or go to “Templates” \-\> “VM Templates”:
 
@@ -207,14 +221,14 @@ Check if the test VM was booted successfully and if there is login prompt:
 
 ![image](/images/marketplaces/community_mp/basic_deployment_verification_fsunstone_vm_vnc_console.png)
 
-# Examples
+## Examples
 
 Please, find below particular steps and commands to go through the whole procedure for building a new appliance. First we will show how to build the image for the ‘example’ appliance with all necessary files for which are already present in the OpenNebula Community Marketplace Github repository. So no need to do any modifications just to build the image for that appliance. Then we will describe the steps required to build a custom appliance (which is based on the Lithops one).
 
-## Setting up the environment
+### Setting up the environment
 Since the appliance needs to be validated against the appliance specific tests before submitting it to the Community Marketplace it seems reasonable to use the same environment for building and testing. Please, find the particular steps on setting up the required environment in the “Basic OpenNebula Deployment” document.
 
-## Building example appliance
+### Building example appliance
 Clone marketplace-community GH repository:
 ```
 git clone --recurse-submodules https://github.com/OpenNebula/marketplace-community.git
@@ -250,7 +264,7 @@ sudo env PATH=$PATH make example
 In case of successful build the appliance image is expected to appear in the `~/marketplace-community/apps-code/community-apps/export/` directory.
 
 
-## Building test appliance
+### Building test appliance
 Create a branch for the new appliance:
 ```
 cd marketplace-community

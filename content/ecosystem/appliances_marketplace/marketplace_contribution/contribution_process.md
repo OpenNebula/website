@@ -2,11 +2,10 @@
 title: "Contribution Process"
 type: docs
 linkTitle: "Contribution Process"
-description: "This document outlines the process for contributing virtual appliances to the OpenNebula Community Marketplace. It details the procedures for submission, testing, certification, and ongoing maintenance of appliances, including requirements for documentation and compatibility with OpenNebula versions. It also describes the infrastructure and tools used to support the contribution process, such as automatic certification testing and an alerting mechanism for contributors."
 weight: 2
 ---
 
-# Introduction to Appliance Marketplaces
+## Introduction to Appliance Marketplaces
 
 OpenNebula Marketplaces provide a simple way to integrate your cloud with popular application/image providers. They can be treated as external datastores.
 A Marketplace stores Marketplace Appliances. A MarketPlace Appliance includes one or more Images and, possibly, some associated metadata like VM Templates or OpenNebula Multi-VM service definitions.
@@ -47,44 +46,21 @@ OpenNebula ships with the [OpenNebula Systems Marketplace](http://marketplace.op
 Here is an overview of the different steps and processes that the contribution process will encompass:
 1. **Form Submissions:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information.
 2. **Feedback (Optional):** If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
-3. **Training:** If the appliance is deemed valid, the contributor will be contacted to undergo training to ensure (s)he understands the ongoing requirements and processes.
-4. **Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
-5. **Contributor's testing** Apart from providing an appliance  Contributor must also provide a way of certifying that the appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
-6. **Submission:** Once the appliance has developed and tested their extension, they will need to submit it into the community marketplace GH repository through a Pull Request.
-7. **Testing:** Before accepting the Pull Request, the appliance will be tested by OpenNebula to ensure that it is both functional and safe to distribute.
-8. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
+3. **Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
+4. **Contributor's testing** Apart from providing an appliance  Contributor must also provide a way of certifying that the appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
+5. **Submission:** Once the appliance has developed and tested their extension, they will need to submit it into the community marketplace GH repository through a Pull Request.
+6. **Testing:** Before accepting the Pull Request, the appliance will be tested by OpenNebula to ensure that it is both functional and safe to distribute.
+7. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
 
 Please, find more details on some of these stages below.
-
-## Communication Channels
-
-During the contribution process, the following channels will be used:
-- **GitHub Issues:** This is the designated starting point for proposing a new appliance. By creating an issue first, you can discuss the appliance's purpose and features with the OpenNebula team. This initial conversation ensures your contribution aligns with the Marketplace goals before you begin development work.
-- **GitHub Pull Request:** This is the primary workspace for all technical collaboration. When you submit your appliance files (or an update), the Pull Request becomes the central hub for code reviews, configuration feedback, and discussions with our engineers.
-- **Email:** We use email for direct and official communication, particularly after your appliance has been published in the Marketplace. For example, if your live appliance fails a periodic compatibility test, you will receive an automated notification via email containing the relevant logs and details.
-- **OpenNebula Forum:** This is our main channel for community-wide interaction. It's the ideal place to ask general questions about the contribution process or to seek help from other community members. We also encourage you to use the forum to engage with and provide support to the end-users of your appliance.
-
-## Learning Materials
-This section describes the necessary knowledge users need to understand to develop a new appliance and includes links to all the relevant documentation and learning materials.
-
-Users that want to contribute to the Community Marketplace should be familiar with OpenNebula and its components. The following materials will be helpful for the contribution process:
-
-**Understanding VM Templates and User Inputs**: Appliances for the Community Marketplace are composed of an Image and a VM Template. Therefore, users need to be able to create custom VM Templates.
-- Refer to the [VM Templates](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/) and [User Inputs](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/#user-inputs) documentation for foundational knowledge.
-- The [Virtual Machine Template Reference](product/operation_references/configuration_references/template/) provides a comprehensive list of available attributes and their syntax.
-
-**Contextualization**: OpenNebula offers various contextualization packages for different operating systems, enabling customization of deployed VMs. More details can be found in the [Contextualization](product/virtual_machines_operation/guest_operating_systems/kvm_contextualization/) documentation.
-
-**one-apps Framework**: Appliances for the Community Marketplace are built using the one-apps framework, which includes contextualization packages and Packer build scripts. Introductory webinars on one-apps are available:
-- [Introduction to the one-apps project](https://www.youtube.com/watch?v=UstX_KyOi0k)
-- [How to build VM Images with one-apps](https://www.youtube.com/watch?v=Pl5AUAC1x5I)
 
 ## Community Marketplace Contribution Process
 
 ### Form submission
 As it was stated above the initial contact between appliance contributor and OpenNebula Team is a form submission with details about contributing appliance.
-That form is accessible in the `Issues` tab in the OpenNebula community marketplace GH [repository](https://github.com/OpenNebula/marketplace-community) when you press the `New Issue` green button.
+That form is accessible in the [Issues](https://github.com/OpenNebula/marketplace-community/issues) tab in the OpenNebula community marketplace GH [repository](https://github.com/OpenNebula/marketplace-community) when you press the `New Issue` green button.
 It looks as on the figure below.
+
 ![image](/images/marketplaces/community_mp/appliance_contrib_gh_template.png)
 
 ### Appliance Development
