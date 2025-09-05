@@ -56,6 +56,14 @@ Here is an overview of the different steps and processes that the contribution p
 
 Please, find more details on some of these stages below.
 
+## Communication Channels
+
+During the contribution process, the following channels will be used:
+- **GitHub Issues:** This is the designated starting point for proposing a new appliance. By creating an issue first, you can discuss the appliance's purpose and features with the OpenNebula team. This initial conversation ensures your contribution aligns with the Marketplace goals before you begin development work.
+- **GitHub Pull Request:** This is the primary workspace for all technical collaboration. When you submit your appliance files (or an update), the Pull Request becomes the central hub for code reviews, configuration feedback, and discussions with our engineers.
+- **Email:** We use email for direct and official communication, particularly after your appliance has been published in the Marketplace. For example, if your live appliance fails a periodic compatibility test, you will receive an automated notification via email containing the relevant logs and details.
+- **OpenNebula Forum:** This is our main channel for community-wide interaction. It's the ideal place to ask general questions about the contribution process or to seek help from other community members. We also encourage you to use the forum to engage with and provide support to the end-users of your appliance.
+
 ## Learning Materials
 This section describes the necessary knowledge users need to understand to develop a new appliance and includes links to all the relevant documentation and learning materials.
 
