@@ -1,7 +1,7 @@
 ---
-title: "Adding the Community Marketplace to OpenNebula"
+title: "Using the Community Marketplace"
 type: docs
-linkTitle: "Adding the Community Marketplace to OpenNebula"
+linkTitle: "Using the Community Marketplace"
 weight: 2
 ---
 
@@ -13,9 +13,11 @@ To add the OpenNebula Community Marketplace (CM) via OpenNebula graphical web in
 Log into Firedge Sunstone web interface as `oneadmin` user.
 
 Go to **Storage** -> **Marketplaces**:
+
 ![image](/images/marketplaces/community_mp/adding_community_mp_menu.png)
 
 Click on **Create** button:
+
 ![image](/images/marketplaces/community_mp/adding_community_mp_create.png)
 
 Provide the values for **Name** (e.g. "OpenNebula Community"), **Description** (e.g. "OpenNebula Community Marketplace") and **Storage backend** ("OpenNebula Systems" has to be chosen) fields. Then click on the **Next** button located at the right top corner of the screen as shown on the picture below:
@@ -23,9 +25,11 @@ Provide the values for **Name** (e.g. "OpenNebula Community"), **Description** (
 ![image](/images/marketplaces/community_mp/adding_community_mp_values.png)
 
 Specify ``https://community-marketplace.opennebula.io`` in the **Endpoint URL for marketplace** field and click **Finish** button:
+
 ![image](/images/marketplaces/community_mp/adding_community_mp_url.png)
 
 After all these steps the OpenNebula Community Marketplace should appear in the list of available marketplaces:
+
 ![image](/images/marketplaces/community_mp/adding_community_mp_list.png)
 
 
@@ -35,7 +39,7 @@ One can check the `oned.log` file against monitoring queries:
 egrep -i "Marketplace OpenNebula Community" /var/log/one/oned.log
 ```
 
-## CLI
+## Command Line Interface
 Create config file for community-marketplace:
 ```
 cat << EOF > community-marketplace.conf  

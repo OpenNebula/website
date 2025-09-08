@@ -2,6 +2,10 @@
 title: "Maintenance Process"
 type: docs
 linkTitle: "Maintenance Process"
+<<<<<<< HEAD
+description: "This document provides a comprehensive overview of the maintenance process, from routine compatibility testing and updates to our formal removal policy. Understanding these steps will help you keep your appliance healthy, secure, and available to the community."
+=======
+>>>>>>> 6be3296 (M OpenNebula/engineering#415: Fix minor issues (after sync call 2025-9-5))
 weight: 6
 ---
 

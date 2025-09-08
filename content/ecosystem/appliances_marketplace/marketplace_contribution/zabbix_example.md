@@ -1,23 +1,23 @@
 ---
-title: "Example Appliance Development"
+title: "Zabbix Appliance Example"
 type: docs
-linkTitle: "Example Appliance Development"
-description: "This section describes how to create a new appliance for the Community Marketplace using Zabbix server as an example. The whole process will be showcased from the creation of the appliance code to the necessary steps to contribute to the marketplace. An appliance for Zabbix server will be created using Ubuntu 24.04 as a base image."
+linkTitle: "Zabbix Appliance Example"
 weight: 6
 ---
 
 ## Overview
+This document describes how to create a new appliance for the Community Marketplace using Zabbix server as an example. The whole process will be showcased from the creation of the appliance code to the necessary steps to contribute to the Marketplace. An appliance for Zabbix server will be created using Ubuntu 24.04 as a base image.
 
-This example uses the information available in the [Appliances Development](ecosystem/appliances_marketplace/marketplace_contribution/appliances_development) section. The following sections describe how to build an appliance for Zabbix from scratch.
+This guide uses the information available in the [Appliances Development](ecosystem/appliances_marketplace/marketplace_contribution/appliances_development) section. The following sections describe how to build an appliance for Zabbix from scratch.
 
-- Prepare Environment. Prepare the work directory and files, using the `example` appliance as the base. Then customize the Packer build scripts for this appliance.
-- User Inputs. Define User Inputs for the appliance, which will allow for customizations when instantiating it.
-- Appliance Code. Code that installs and configures the Zabbix software using Ubuntu 24.04 as a base image.
-- Generating Image. Instructions on how to build the disk image for the appliance locally.
-- VM Template. How to create a VM Template using the local image and instantiate a VM.
-- Tests. Definition of tests that need to be contributed to validate the appliance. More detailed information about tests can be found in the [Certification Tests](ecosystem/appliances_marketplace/marketplace_contribution/certification_tests) documentation.
-- Metadata. Metadata files that are needed to contribute the appliance to the Community Marketplace.
-- Pull Request. Prepare a pull request to the GitHub repository to start the contribution process.
+- **Prepare Environment**. Prepare the work directory and files, using the `example` appliance as the base. Then customize the Packer build scripts for this appliance.
+- **User Inputs**. Define User Inputs for the appliance, which will allow for customizations when instantiating it.
+- **Appliance Code**. Code that installs and configures the Zabbix software using Ubuntu 24.04 as a base image.
+- **Generating Image**. Instructions on how to build the disk image for the appliance locally.
+- **VM Template**. How to create a VM Template using the local image and instantiate a VM.
+- **Tests**. Definition of tests that need to be contributed to validate the appliance. More detailed information about tests can be found in the [Certification Tests](ecosystem/appliances_marketplace/marketplace_contribution/certification_tests) documentation.
+- **Metadata**. Metadata files that are needed to contribute the appliance to the Community Marketplace.
+- **Pull Request**. Prepare a pull request to the GitHub repository to start the contribution process.
 
 ## Prepare Environment
 

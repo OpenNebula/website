@@ -13,9 +13,11 @@ To add one of the appliances from Community Marketplace via OpenNebula graphical
 Log into Firedge Sunstone web interface as any cloud user eligible to save the images into one of the datastores as well as to create new templates.
 
 Go to **Storage** -> **Apps**:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_menu.png)
 
 Click on **Filter** button to open an additional menu and select "OpenNebula Community" as a value in the **Marketplace** field:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_filter.png)
 
 Selected filters are applied automatically. Click on any empty space outside of the drop-down filter menu to make it disappeared. Scroll down a list of Community Marketplace appliances and select a desired one (we are going to **NixOS** appliance as an example in that guide):
@@ -23,25 +25,30 @@ Selected filters are applied automatically. Click on any empty space outside of 
 ![image](/images/marketplaces/community_mp/importing_appliance_nixos.png)
 
 Press **Import** button to open a dialog on importing an appliance:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_import.png)
 
 One can modify an image and VM template names or keep the original ones:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_import_next.png)
 
 As soon as you finish with that press **Next** button to proceed next dialog screen.
 Select a datastore you want to save the selected image and press **Finish** button:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_import_finish.png)
 
 One can check the status of imported image in the **Storage** -> **Images** menu:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_images.png)
 
 As soon as its state becomes **READY** as on the picture below:
+
 ![image](/images/marketplaces/community_mp/importing_appliance_image_ready.png)
 
 
 one can proceed to **VM template** menu and instantiate a VM from corresponding VM template (check ["Running Appliance"](running_appliance.md) section for details).
 
-## CLI
+## Command Line Interface
 List the appliances from the Community Marketplace:
 ```
 onemarketapp list -f MARKET="OpenNebula Community"
