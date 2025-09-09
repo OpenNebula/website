@@ -36,6 +36,8 @@ A failure notification email will contain reports on the failed tests with a bod
 
     Keep in mind that in order to keep the appliance in the marketplace, tests must pass against either the OpenNebula LTS version, currently 6.10, or against the latest release, currently 7.0.
 
+    For more information regarding maintenance, please refer to our documentation page: https://docs.opennebula.io/stable/ecosystem/appliances_marketplace/marketplace_contribution/maintenance_process/
+
     Best regards,
     OpenNebula team
 

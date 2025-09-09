@@ -17,9 +17,10 @@ The new appliance contribution to the community marketplace process consists of 
 7. Build an image with your appliance
 8. Test appliance
 9. Create tests for new appliance under new branch of forked OpenNebula/marketplace-community
-10. Commit & push new branch to forked repo OpenNebula/marketplace-community
-11. Create pull request to OpenNebula/marketplace-community repo
-12. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
+10. Create user documentation for the appliance
+11. Commit & push new branch to forked repo OpenNebula/marketplace-community
+12. Create pull request to OpenNebula/marketplace-community repo
+13. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
 
 ## Learning Materials
 This section describes the necessary knowledge users need to understand to develop a new appliance and includes links to all the relevant documentation and learning materials.
@@ -362,3 +363,21 @@ In case of successful build the appliance image is expected to appear in the `~/
 
 Test appliance locally e.g. on your linux machine used for new appliance development
 Please, proceed with the “Appliances Certification tests” document.
+
+## Appliance Documentation
+
+Any appliance contributed to the Community Marketplace must be properly documented. For this, two files need to be provided:
+
+- [README.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/README.md) will contain the documentation for the appliance where basic information about the appliance and instructions on how to use it will be provided. This file must include at least the following sections:
+
+  - Release Notes. Details about the current version of the appliance, including versions of each component.
+  - Overview. A summary of the appliance, including what software it comes with and basic information.
+  - Quick Start. A quick guide on how to instantiate the appliance once imported from the marketplace.
+  - Features. All features available in the appliance should be described in detail.
+
+- [CHANGELOG.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/CHANGELOG.md). Comprehensive changelog of the appliance, following guidelines at [keepachangelog.com](http://keepachangelog.com).
+
+- [metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml) defines the basic metadata elements of the appliance so it can be built and tested once it's been contributed.
+
+  - The attribute `:base` is the base distro used to build the appliance, which is the same that is defined in the packer script. The base image of an appliance can be any of the base Operating System Images built in from one-apps repository. Check the [distros available in the Makefile.config file](https://github.com/OpenNebula/one-apps/blob/800f5bd5c243be7c654a519547aef73f5f11cf86/Makefile.config#L10) for a quick reference.
+  - The `:infra` section must not be modified, this is used by OpenNebula.

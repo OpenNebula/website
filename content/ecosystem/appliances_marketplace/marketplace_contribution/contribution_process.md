@@ -5,57 +5,40 @@ linkTitle: "Contribution Process"
 weight: 2
 ---
 
-## Contribution Process Overview
-Here is an overview of the different steps and processes that the contribution process will encompass:
-1. **Form Submissions:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information.
-2. **Feedback (Optional):** If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
-3. **Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
-4. **Contributor's testing** Apart from providing an appliance  Contributor must also provide a way of certifying that the appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
-5. **Submission:** Once the appliance has developed and tested their extension, they will need to submit it into the community marketplace GH repository through a Pull Request.
-6. **Testing:** Before accepting the Pull Request, the appliance will be tested by OpenNebula to ensure that it is both functional and safe to distribute.
-7. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
+## High Level Overview
+Here is an overview of the different stages that the contribution process will encompass:
+1. **Form Submission:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information. If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
+2. **Appliance Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
+3. **Appliance Certification** Apart from providing an appliance  Contributor must also provide a way of certifying that the appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
+4. **Pull Request Submission:** After completing local development, the contributor will need to submit a Pull Request to the community marketplace GitHub repository. This action formally begins our review process, where the OpenNebula team will review the code and test the appliance to ensure that it is both functional and safe to distribute. 
+5. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
 
 Please, find more details on some of these stages below.
 
 ## Communication Channels
 
 During the contribution process, the following channels will be used:
-- **GitHub Issues:** This is the designated starting point for proposing a new appliance. By creating an issue first, you can discuss the appliance's purpose and features with the OpenNebula team. This initial conversation ensures your contribution aligns with the Marketplace goals before you begin development work.
-- **GitHub Pull Request:** This is the primary workspace for all technical collaboration. When you submit your appliance files (or an update), the Pull Request becomes the central hub for code reviews, configuration feedback, and discussions with our engineers.
-- **Email:** We use email for direct and official communication, particularly after your appliance has been published in the Marketplace. For example, if your live appliance fails a periodic compatibility test, you will receive an automated notification via email containing the relevant logs and details.
-- **OpenNebula Forum:** This is our main channel for community-wide interaction. It's the ideal place to ask general questions about the contribution process or to seek help from other community members. We also encourage you to use the forum to engage with and provide support to the end-users of your appliance.
+- **GitHub Issues:** This is the designated starting point for proposing a new appliance. By creating an issue first, you can discuss the appliance's purpose and features with the OpenNebula team. This initial conversation ensures your contribution aligns with the Marketplace goals before you begin development work. This channel will mainly be used during stage 1. 
+- **GitHub Pull Request:** This is the primary workspace for all technical collaboration. When you submit your appliance files (or an update), the Pull Request becomes the central hub for code reviews, configuration feedback, and discussions with our engineers. This channel will be used during stage 4.
+- **Email:** We use email for direct and official communication, particularly after your appliance has been published in the Marketplace. For example, if your live appliance fails a periodic compatibility test, you will receive an automated notification via email containing the relevant logs and details. This channel will be mainly used during for maintenance, but may also be used in stage 4 if the appliance fails the initial tests.
+- **OpenNebula Forum:** This is our main channel for community-wide interaction. It's the ideal place to ask general questions about the contribution process or to seek help from other community members. We also encourage you to use the forum to engage with and provide support to the end-users of your appliance. This channel will be used during stages 2 and 3 in case of questions regarding development. It will also be the main communication channel after release for maintenance purposes.
 
-## Community Marketplace Contribution Process
+## Contribution Process Steps
 
-### Form submission
+### 1. Form submission
 As it was stated above the initial contact between appliance contributor and OpenNebula Team is a form submission with details about contributing appliance.
 That form is accessible in the [Issues](https://github.com/OpenNebula/marketplace-community/issues) tab in the OpenNebula community marketplace GH [repository](https://github.com/OpenNebula/marketplace-community) when you press the `New Issue` green button.
 It looks as on the figure below.
 
 ![image](/images/marketplaces/community_mp/appliance_contrib_gh_template.png)
 
-### Appliance Development
+### 2. Appliance Development
 Please, check a separate section "[Appliances Development](appliances_development.md)".
 
-### Appliance Documentation
+### 3. Appliance Certification
+Please, check a separate section "[Certification Tests](certification_tests.md)".
 
-Any appliance contributed to the Community Marketplace must be properly documented. For this, two files need to be provided:
-
-- [README.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/README.md) will contain the documentation for the appliance where basic information about the appliance and instructions on how to use it will be provided. This file must include at least the following sections:
-
-  - Release Notes. Details about the current version of the appliance, including versions of each component.
-  - Overview. A summary of the appliance, including what software it comes with and basic information.
-  - Quick Start. A quick guide on how to instantiate the appliance once imported from the marketplace.
-  - Features. All features available in the appliance should be described in detail.
-
-- [CHANGELOG.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/CHANGELOG.md). Comprehensive changelog of the appliance, following guidelines at [keepachangelog.com](http://keepachangelog.com).
-
-- [metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml) defines the basic metadata elements of the appliance so it can be built and tested once it's been contributed.
-
-  - The attribute `:base` is the base distro used to build the appliance, which is the same that is defined in the packer script. The base image of an appliance can be any of the base Operating System Images built in from one-apps repository. Check the [distros available in the Makefile.config file](https://github.com/OpenNebula/one-apps/blob/800f5bd5c243be7c654a519547aef73f5f11cf86/Makefile.config#L10) for a quick reference.
-  - The `:infra` section must not be modified, this is used by OpenNebula.
-
-### Pull Request Submission
+### 4. Pull Request Submission
 As soon as appliance contributors make sure the appliance certification tests are passed successfully they need to submit a pull request (PR) to the OpenNebula Community Marketplace GH repository.
 
 {{< alert title="Note" color="success" >}}
@@ -108,3 +91,19 @@ Push changes to remote separate branch of marketplace-community repository:
 ```
 git push -u origin test
 ```
+
+### 5. Acceptance
+
+Once your appliance code has been accepted, your pull request will be merged into the marketplace repository and you will receive an email like the following:
+
+    Dear <contributor name>,
+
+    We are pleased to inform you that your community marketplace appliance, <appliance name>, has passed all testing and your Pull Request has been accepted and merged.
+
+    Your contribution is now live and available to all users in the OpenNebula Marketplace. Thank you for your excellent work and for helping to improve the ecosystem.
+
+    As a reminder, all appliances are periodically re-tested to ensure ongoing compatibility. For more information regarding this maintenance process, please refer to our documentation:
+    https://docs.opennebula.io/stable/ecosystem/appliances_marketplace/marketplace_contribution/maintenance_process/
+
+    Best regards,
+    The OpenNebula Team
