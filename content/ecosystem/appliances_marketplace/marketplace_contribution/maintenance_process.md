@@ -86,8 +86,4 @@ If an appliance is removed, its entry and associated files are pruned from the M
 
 ### Voluntary Removal
 
-<<<<<<< HEAD
 If you no longer wish to maintain your appliance, you can request its removal. To do so, please open an issue in the community-marketplace repository requesting deprecation.
-=======
-If you no longer wish to maintain your appliance, you can request its removal. To do so, please open an issue in the community-marketplace repository requesting deprecation.
->>>>>>> 6be3296 (M OpenNebula/engineering#415: Fix minor issues (after sync call 2025-9-5))
