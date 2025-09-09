@@ -17,6 +17,7 @@ This guide uses the information available in the [Appliances Development](ecosys
 - **VM Template**. How to create a VM Template using the local image and instantiate a VM.
 - **Tests**. Definition of tests that need to be contributed to validate the appliance. More detailed information about tests can be found in the [Certification Tests](ecosystem/appliances_marketplace/marketplace_contribution/certification_tests) documentation.
 - **Metadata**. Metadata files that are needed to contribute the appliance to the Community Marketplace.
+- **Documentation**. Documentation for the appliance, including README.md and CHANGELOG.md as described in the [Appliance Documentation](ecosystem/appliances_marketplace/marketplace_contribution/contribution_process/#appliance-documentation) section of the Contribution Process.
 - **Pull Request**. Prepare a pull request to the GitHub repository to start the contribution process.
 
 ## Prepare Environment
@@ -33,7 +34,7 @@ The first step is to fork and clone the [marketplace-community](https://github.c
 
 The language of choice for this appliance is Ruby instead of bash, so the file `appliances/zabbix/appliance.sh` needs to be deleted and two new files need to be created: `appliances/zabbix/main.rb` and `appliances/zabbix/config.rb`. The working directory should look like this:
 
-![Zabbix appliance working directory](/images/community-marketplace/community_marketplace_working_dir.png)
+![Zabbix appliance working directory](/images/marketplaces/community_mp/zabbix_example_working_dir.png)
 
 The packer script needs to be adjusted so it has the correct files for ruby instead of bash. The following code in `apps-code/community-apps/packer/zabbix/zabbix.pkr.hcl`:
 
@@ -421,11 +422,11 @@ VM ID: 259
 
 The User Inputs are also available when instantiating the template from Sunstone, as it can be seen below.
 
-![Zabbix appliance working directory](/images/community-marketplace/community_marketplace_sunstone_user_inputs.png)
+![Zabbix appliance working directory](/images/marketplaces/community_mp/zabbix_example_sunstone_user_inputs.png)
 
 After the VM has booted and the contextualization scripts executed, the Zabbix server should be available from a web browser in the VM's IP address:
 
-![Zabbix appliance working directory](/images/community-marketplace/community_marketplace_zabbix_install.png)
+![Zabbix appliance working directory](/images/marketplaces/community_mp/zabbix_example_zabbix_install.png)
 
 ## Tests
 
@@ -794,4 +795,4 @@ Create new Zabbix appliance.
 
 A pull request needs to be created from the forked repository to the master branch of the marketplace-community GitHub repository.
 
-![Zabbix appliance working directory](/images/community-marketplace/community_marketplace_pull_request.png)
+![Zabbix appliance working directory](/images/marketplaces/community_mp/zabbix_example_pull_request.png)

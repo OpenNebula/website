@@ -45,9 +45,9 @@ The needed environment can be deployed on a single VM with nested virtualization
 
 One of the following approaches can be used in order to have such setup in place:
 
-1) use [minione](https://github.com/OpenNebula/minione) tool,  
-2) use [one-deploy](https://github.com/OpenNebula/one-deploy) tool,  
-3) manually perform required operations following OpenNebula documentation.
+1) use [minione](https://github.com/OpenNebula/minione) tool,
+2) use [one-deploy](software/installation_process/automatic_installation_with_onedeploy/) tool,
+3) manually perform required operations following OpenNebula's [Manual Installation documentation](software/installation_process/manual_installation/).
 
 This document describes the first approach e.g. minione tool. Please, check the steps below.
 

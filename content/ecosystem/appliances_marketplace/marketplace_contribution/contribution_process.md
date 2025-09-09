@@ -5,43 +5,6 @@ linkTitle: "Contribution Process"
 weight: 2
 ---
 
-## Introduction to Appliance Marketplaces
-
-OpenNebula Marketplaces provide a simple way to integrate your cloud with popular application/image providers. They can be treated as external datastores.
-A Marketplace stores Marketplace Appliances. A MarketPlace Appliance includes one or more Images and, possibly, some associated metadata like VM Templates or OpenNebula Multi-VM service definitions.
-A Marketplace can be:
-* **Public**: accessible universally by all OpenNebula installations.
-* **Private**: local within an organization and specific for a single.
-
-OpenNebula (a single zone) or shared by a federation (a collection of zones).
-The list of the Public Marketplaces configured by default is presented in table below.
-
-|Marketplace&nbsp;Name|Description|
-|----------------|-----------|
-|OpenNebula Public|The official public [OpenNebula Systems Marketplace](http://marketplace.opennebula.systems). It is a catalog of virtual appliances ready to run in OpenNebula environments available at the specified link above.|
-|Linux Containers|The public LXD/LXC [image repository](https://images.linuxcontainers.org). It hosts a public image server with container images for LXC and LXD. OpenNebula’s Linux Containers marketplace enables users to easily download, contextualize and add Linux container images to an OpenNebula datastore.|
-
-It’s important to note the OpenNebula front-end needs access to the Internet to use the public Marketplaces.
-
-Besides the `public` Marketplaces (leveraging various remote public repositories with existing Appliances and accessible universally by all OpenNebula instances), the `private` ones allow the cloud administrators to create the `private` Marketplaces within a single organization in a specific OpenNebula (single zone) or shared by a Federation (collection of zones). `Private` Marketplaces provide their users with an easy way of privately publishing, downloading and sharing their own custom Appliances.
-
-As it was written above a Marketplace is a repository of Marketplace Appliances. There are three types of Appliances:
-* **Image**: an image that can be downloaded and used (optionally it can have an associated virtual machine template)
-* **Virtual Machine Template**: a virtual machine template that contains a list of images that are allocated in the Marketplaces.
-* **Service Template**: a template to be used in OneFlow that contains a list of virtual machine templates that are allocated in the Marketplaces.
-
-Using `private` Marketplaces is very convenient, as it will allow you to move images across different kinds of datastores (using the Marketplace as an exchange point). It is a way to share OpenNebula images in a Federation, as these resources are federated. In an OpenNebula deployment where the different Virtual Data Centers (VDCs) don’t share any resources, a Marketplace will act like a shared datastore for all the users.
-
-Although a marketplace created in a zone will be seen in every zone of the Federation and every image can be imported from the marketplace on any zone, only the zone where the marketplace was created will be able to upload appliances to the marketplace.
-
-Marketplaces store the actual Marketplace Appliances. How they do so depends on the back-end driver. Currently, the list of the supported back-end drivers is given in table below.
-|Driver|Upload|Description|
-|------|------|-----------|
-|http|Yes|When an image is uploaded to a Marketplace of this kind, the image is written into a file in a specified folder, which is in turn available via a web server.|
-|S3|Yes|Images are stored to an S3 API-capable service. This means they can be stored in the official [AWS S3 service](https://aws.amazon.com/s3/) , or in services that implement that API like [Ceph Object Gateway S3](https://docs.ceph.com/en/latest/radosgw/s3/).|
-
-OpenNebula ships with the [OpenNebula Systems Marketplace](http://marketplace.opennebula.systems/) pre-registered, so users can access it directly.
-
 ## Contribution Process Overview
 Here is an overview of the different steps and processes that the contribution process will encompass:
 1. **Form Submissions:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information.
@@ -87,7 +50,7 @@ Any appliance contributed to the Community Marketplace must be properly document
 
 - [CHANGELOG.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/CHANGELOG.md). Comprehensive changelog of the appliance, following guidelines at [keepachangelog.com](http://keepachangelog.com).
 
-- [metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml) defines the basic metadata elements of the appliance so it can be built and tested once it's been contributed. 
+- [metadata.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/metadata.yaml) defines the basic metadata elements of the appliance so it can be built and tested once it's been contributed.
 
   - The attribute `:base` is the base distro used to build the appliance, which is the same that is defined in the packer script. The base image of an appliance can be any of the base Operating System Images built in from one-apps repository. Check the [distros available in the Makefile.config file](https://github.com/OpenNebula/one-apps/blob/800f5bd5c243be7c654a519547aef73f5f11cf86/Makefile.config#L10) for a quick reference.
   - The `:infra` section must not be modified, this is used by OpenNebula.
@@ -102,7 +65,7 @@ The PR should contain, at least, the following files:
 * **Appliance directory.** New directory `appliances/<appliance_name>` that includes:
    - **YAML file with an appliance description.** One can use a [template](https://github.com/OpenNebula/marketplace-community?tab=readme-ov-file#image-with-optional-vm-template) as an example and/or check  already [existing](https://github.com/OpenNebula/marketplace-community/tree/master/appliances) in the Community Marketplace Github repository similar files. It should be named `<UUID>.yaml`, where `<UUID>` is a unique identifier generated at the time of the appliance creation
    - **Appliance script.** Appliances can be written in Ruby (`appliance.rb`) or bash ([appliance.sh](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/appliance.sh)).
-   - **Metadata file**.
+   - **Metadata file**, following the guidelines described in the previous section.
    - **Tests description file** ([tests.yaml](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/tests.yaml)).
    - Tests folder with appliance’s **tests** written in Ruby (following [00-example_basic.rb](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/tests/00-example_basic.rb)).
    - **Documentation**  for the appliance (README.md and CHANGELOG.md) following the guidelines described in the previous section.
