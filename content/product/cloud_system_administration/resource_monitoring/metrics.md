@@ -31,17 +31,24 @@ In general, you can find the following monitoring information for a VM. Note tha
 
 The MONITOR information includes the following data:
 
-| Key           | Description                                                    |
-|---------------|----------------------------------------------------------------|
-| `TIMESTAMP`   | Timestamp of the measurement.                                  |
-| `CPU`         | Percentage of 1 CPU consumed (two fully consumed CPUs is 2.0). |
-| `MEMORY`      | MEMORY consumption in kilobytes.                               |
-| `DISKRDBYTES` | Amount of bytes read from disk.                                |
-| `DISKRDIOPS`  | Number of IO read operations.                                  |
-| `DISKWRBYTES` | Amount of bytes written to disk.                               |
-| `DISKWRIOPS`  | Number of IO write operations.                                 |
-| `NETRX`       | Received bytes from the network.                               |
-| `NETTX`       | Sent bytes to the network.                                     |
+| Key                       | Description                                                    |
+|---------------------------|----------------------------------------------------------------|
+| `TIMESTAMP`               | Timestamp of the measurement.                                  |
+| `CPU`                     | Percentage of 1 CPU consumed (two fully consumed CPUs is 2.0). |
+| `MEMORY`                  | MEMORY consumption in kilobytes.                               |
+| `DISKRDBYTES`             | Amount of bytes read from disk.                                |
+| `DISKRDIOPS`              | Number of IO read operations.                                  |
+| `DISKWRBYTES`             | Amount of bytes written to disk.                               |
+| `DISKWRIOPS`              | Number of IO write operations.                                 |
+| `NETRX`                   | Received bytes from the network.                               |
+| `NETTX`                   | Sent bytes to the network.                                     |
+| `GPU_COUNT`*              | Number of GPUs detected and monitored. (Aggregated metrics)    |
+| `GPU_UTILIZATION`*        | Percentage of GPU’s cores actively processing                  |
+| `GPU_MEMORY_UTILIZATION`* | Percentage of GPU’s memory  actively transferring data.        |
+| `GPU_MEMORY_FREE`*        | Free GPU memory (in MiB, e.g., 5M).                            |
+| `GPU_POWER_USAGE`*        | Power usage of the GPU (in watts).                             |
+
+*GPU metrics are only available for VMs with GPUs attached as PCI devices (currently supported for NVIDIA GPUs).
 
 The metrics above are directly read from and stored in the monitoring database.
 
