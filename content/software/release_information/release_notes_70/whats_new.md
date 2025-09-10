@@ -61,6 +61,7 @@ We’d like to thank our global community and partners who have helped shape thi
 ## Monitoring
 
 - [Resource Usage Forecast](../../../product/cloud_system_administration/resource_monitoring/forecast/): Introduces predictive analytics for Host and VM resource consumption, enabling proactive infrastructure management. By analyzing trends in CPU, memory, disk, and network usage, OpenNebula 7.0 supports improved capacity planning, optimized workload scheduling, and early detection of performance bottlenecks.
+- [VM GPU Monitoring](../../../product/cloud_system_administration/resource_monitoring/metrics.md): This feature adds GPU-level telemetry collection inside VMs by leveraging the QEMU Guest Agent to run nvidia-smi. It enables OpenNebula to monitor critical GPU metrics such as utilization, memory usage, and power consumption.
 
 ## Scheduler
 
