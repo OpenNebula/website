@@ -50,7 +50,7 @@ one can proceed to **VM template** menu and instantiate a VM from corresponding 
 
 ## Command Line Interface
 List the appliances from the Community Marketplace:
-```
+```bash
 onemarketapp list -f MARKET="OpenNebula Community"
   ID NAME                            VERSION  SIZE    ARCH HYPERVISOR STAT TYPE  REGTIME MARKET     ZONE
  118 UERANSIM                     6.10.0-3-2   10G  x86_64 kvm         rdy  img 04/04/25 OpenNebula    0
@@ -65,17 +65,17 @@ onemarketapp list -f MARKET="OpenNebula Community"
 ```
 Note the applinace ID you want to import (we will use the appliance **NixOS** with ID #116 in our example below).
 List your datastores and note the datastore ID where you want to import the appliance:
-```
+```bash
 onedatastore list
 ```
 
 Save desired appliance (an image and corresponding VM template) into specified datastore:
-```
+```bash
 onemarketapp export 116 NixOS -d 101
 ```
 
 Note the saved appliance ID to refer it while checking its status e.g. with the command as below:
-```
+```bash
 oneimage list -f ID=5 -l STAT --no-header
 ```
 

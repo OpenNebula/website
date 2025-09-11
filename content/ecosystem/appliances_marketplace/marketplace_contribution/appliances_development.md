@@ -58,13 +58,13 @@ Create the VM with nested virtualization enabled (steps below are written for Ub
 
 Log into that VM and download the `minione` tool:
 
-```
+```bash
 wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
 ```
 
 Execute minione as shown below to install OpenNebula front-end as well as KVM related packages on the same host:
 
-```
+```bash
 bash minione
 ```
 
@@ -72,13 +72,13 @@ The `oneadmin` user created during the OpenNebula packages installation will be 
 
 Add that use to admin group:
 
-```
+```bash
 usermod -a -G admin oneadmin
 ```
 
 Become `oneadmin` user and update the packages:
 
-```
+```bash
 su - oneadmin
 
 sudo apt update
@@ -91,7 +91,7 @@ Reboot the host in order to boot into the updated kernel if any.
 Apart from OpenNebula packages there are some other packages that need to be installed too. For that purpose we are going to use an ansible playbook.
 Install ansible-core (needed for dependency installation via ansible playbook):
 
-```
+```bash
 sudo apt install python3-pip
 
 sudo pip3 install ansible-core
@@ -99,7 +99,7 @@ sudo pip3 install ansible-core
 
 Create ansible playbook as below:
 
-```
+```bash
 cat << EOF > requirements.yaml
 ---
 - hosts: localhost
@@ -137,7 +137,7 @@ EOF
 
 Run that playbook:
 
-```
+```bash
 sudo ansible-playbook requirements.yaml
 ```
 
@@ -147,7 +147,7 @@ sudo ansible-playbook requirements.yaml
 
 Become `oneadmin` user and try to perform basic operations like list hosts, templates, images, vnets, etc:
 
-```
+```bash
 su - oneadmin
 onehost list
 onevnet list
@@ -157,20 +157,20 @@ oneimage list
 
 Try to instantiate a test VM from pre-uploaded VM template:
 
-```
+```bash
 onetemplate list
 onetemplate instantate <template_id>
 ```
 
 Check if the VM status:
 
-```
+```bash
 onevm status
 ```
 
 Try to access it over the network:
 
-```
+```bash
 onevm ssh <vm_id>
 ```
 
@@ -227,38 +227,38 @@ Check if the test VM was booted successfully and if there is login prompt:
 Please, find below particular steps and commands to go through the whole procedure for building a new appliance. First we will show how to build the image for the ‘example’ appliance with all necessary files for which are already present in the OpenNebula Community Marketplace Github repository. So no need to do any modifications just to build the image for that appliance. Then we will describe the steps required to build a custom appliance (which is based on the Lithops one).
 
 ### Setting up the environment
-Since the appliance needs to be validated against the appliance specific tests before submitting it to the Community Marketplace it seems reasonable to use the same environment for building and testing. Please, find the particular steps on setting up the required environment in the “Basic OpenNebula Deployment” document.
+Since the appliance needs to be validated against the appliance specific tests before submitting it to the Community Marketplace it seems reasonable to use the same environment for building and testing. Please, find the particular steps on setting up the required environment in the [Basic OpenNebula Deployment]({{< relref "#basic-opennebula-deployment" >}}) document.
 
 ### Building example appliance
 Clone marketplace-community GH repository:
-```
+```bash
 git clone --recurse-submodules https://github.com/OpenNebula/marketplace-community.git
 ```
 
 The `example` appliance relies on the usage of `alma8` image. So build it first:
 
-```
+```bash
 cd ~/marketplace-community/apps-code/one-apps/
 
 sudo make alma8
 ```
 
 If you have `secure_path` enabled in the sudo settings then it might be needed to preserve the value for the `PATH` environment as shown below:
-```
+```bash
 sudo env PATH=$PATH make alma8
 ```
 
 The OS image is stored in the `~/marketplace-community/apps-code/one-apps/export/` dir.
 
 Build the example appliance image:
-```
+```bash
 cd ~/marketplace-community/apps-code/community-apps/
 
 sudo make example
 ```
 
 or with the following command if the `secure_path` defined in the sudo settings:
-```
+```bash
 sudo env PATH=$PATH make example
 ```
 
@@ -267,23 +267,23 @@ In case of successful build the appliance image is expected to appear in the `~/
 
 ### Building test appliance
 Create a branch for the new appliance:
-```
+```bash
 cd marketplace-community
 git checkout -b test
 ```
 
 Create a new folder for new appliance in the `~/marketplace-community/appliances` dir:
-```
+```bash
 mkdir -p ~/marketplace-community/appliances/test
 ```
 
 or copy already existing appliance folder (in our example the `lithops` appliance will be used):
-```
+```bash
 cp -r ~/marketplace-community/appliances/{lithops,test}
 ```
 
 If you have copied already existing appliance folder, please, generate new UUID and rename a corresponding metadata YAML file in the `~/marketplace-community/appliances/test` directory because these files have to have unique filenames:
-```
+```bash
 cd ~/marketplace-community/appliances/test
 mv 695ab19e-23dc-11ef-a2b8-59beec9fdf86.yaml $(uuidgen).yaml
 ```
@@ -293,45 +293,44 @@ In our `test` appliance the one copied during the previous step is used. So modi
 
 
 Create `~/marketplace-community/apps-code/community-apps/packer/test` folder and needed files there (based on `example` or other existing ones):
-
-```
+```bash
 mkdir ~/marketplace-community/apps-code/community-apps/packer/test
 ```
 
 In our example the `lithops` appliance folder will be used:
-```
+```bash
 cp -r  ~/marketplace-community/apps-code/community-apps/packer/{lithops,test}
 ```
 
 Rename `pkr.hcl` file:
-```
+```bash
 mv ~/marketplace-community/apps-code/community-apps/packer/test/{lithops,test}.pkr.hcl
 ```
 
 Replace all `lithops` mentionings with `test` ones:
-```
+```bash
 sed -i 's/lithops/test/g' ~/marketplace-community/apps-code/community-apps/packer/test/test.pkr.hcl
 ```
 
 Change the values from `lithops` to `test` for the variables in the `~/marketplace-community/apps-code/community-apps/packer/test/variables.pkr.hcl` file:
-```
+```bash
 sed -i 's/lithops/test/g' -i ~/marketplace-community/apps-code/community-apps/packer/test/variables.pkr.hcl
 ```
 
 Build base image for the new appliance first (possible values for supported distros can be found in the `DISTROS` variable in the `~/marketplace-community/apps-code/one-apps/Makefile.config` file):
-```
+```bash
 cd ~/marketplace-community/apps-code/one-apps/
 
 sudo make ubuntu2204
 ```
 
 If you have `secure_path` enabled for the sudo then it might be needed to preserve the value for PATH environment:
-```
+```bash
 sudo env PATH=$PATH make ubuntu2204
 ```
 
 Check if a value for the `iso_url` variable points to a proper image and if it exists:
-```
+```bash
 grep -i iso_url ~/marketplace-community/apps-code/community-apps/packer/service_test/test.pkr.hcl
 iso_url = "../one-apps/export/ubuntu2204.qcow2"
 
@@ -344,29 +343,28 @@ The path for the `iso_url` is relative to the `~/marketplace-community/apps-code
 
 
 Edit `~/marketplace-community/apps-code/community-apps/Makefile.config` file to add new appliance, based on `test`:
-```
+```bash
 sed -i '/^SERVICES/s/$/ test/' ~/marketplace-community/apps-code/community-apps/Makefile.config
 ```
 
 Build appliance image:
-```
+```bash
 cd ~/marketplace-community/apps-code/community-apps/
 sudo make test
 ```
 
 or if the `secure_path` enabled for the sudo then it might be needed to preserve the value for `PATH` environment:
-```
+```bash
 sudo env PATH=$PATH make test
 ```
 
 In case of successful build the appliance image is expected to appear in the `~/marketplace-community/apps-code/community-apps/export/` directory.
 
-Test appliance locally e.g. on your linux machine used for new appliance development
-Please, proceed with the “Appliances Certification tests” document.
+Test appliance locally e.g. on your linux machine used for new appliance development. Please, proceed with the [Appliances Certification tests](certification_tests.md) document.
 
 ## Appliance Documentation
 
-Any appliance contributed to the Community Marketplace must be properly documented. For this, two files need to be provided:
+Any appliance contributed to the Community Marketplace must be properly documented. As part of the submission, provide the following files:
 
 - [README.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/README.md) will contain the documentation for the appliance where basic information about the appliance and instructions on how to use it will be provided. This file must include at least the following sections:
 

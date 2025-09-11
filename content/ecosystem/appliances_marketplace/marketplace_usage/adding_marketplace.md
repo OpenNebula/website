@@ -35,13 +35,13 @@ After all these steps the OpenNebula Community Marketplace should appear in the 
 
 It might take a while (several minutes) the appliances from the Community Marketplace appear in the list of appliances in your OpenNebula installation.
 One can check the `oned.log` file against monitoring queries:
-```
+```bash
 egrep -i "Marketplace OpenNebula Community" /var/log/one/oned.log
 ```
 
 ## Command Line Interface
 Create config file for community-marketplace:
-```
+```bash
 cat << EOF > community-marketplace.conf  
 NAME        = "OpenNebula Community"
 MARKET_MAD  = one
@@ -51,12 +51,12 @@ EOF
 ```
 
 Create a marketplace from that configuration file:
-```
+```bash
 onemarket create community-marketplace.conf
 ```
 
 Check if the community marketplace has been created:
-```
+```bash
 onemarket list
 ```
 

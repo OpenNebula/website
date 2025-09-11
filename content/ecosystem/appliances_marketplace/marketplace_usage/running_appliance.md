@@ -46,7 +46,7 @@ After that you will be automatically redirected to a screen with VMs. Check your
 To instantiate a VM from the VM template using CLI one needs to know either VM template ID or name which can be retrieved from the output of the `onetemplate list` command.
 
 To instantiate a VM from the corresponding VM template you need to execute the command as below specifying either VM template name or ID:
-```
+```bash
 onetemplate instantiate NixOS
 ```
 

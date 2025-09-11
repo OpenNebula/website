@@ -38,8 +38,7 @@ We are going to showcase the contribution process with a database appliance. For
 ### App structure
 
 The application logic resides at `appliances/<appliance>` folder in the Community Marketplace GitHub [repository](https://github.com/OpenNebula/marketplace-community). Within that directory resides also the appliance metadata and the tests directory.
-
-```
+```bash
 appliances/example/
 ├── CHANGELOG.md
 ├── README.md
@@ -82,14 +81,12 @@ To run the tests one needs to have the infrastructure with a proper software env
 The [Basic OpenNebula Deployment](basic_deployment.md) section contains particular steps required to build the basic OpenNebula environment.
 
 Clone community-marketplace GH repository:
-
-```
+```bash
 git clone --recurse-submodules https://github.com/OpenNebula/marketplace-community.git
 ```
 
 Before running the tests make sure you have rspec gem installed 
-
-```
+```bash
 gem info rspec
 ```
 
@@ -107,20 +104,17 @@ The tests assume certain conditions to be met on the host running OpenNebula:
 * an existence of a hypervisor node where the test VMs are expected to be run.
 
 If you used the `miniONE` tool to create an OpenNebula environment then the virtual network should already exist. One can check that from the CLI with help of the following command:
-
-```
+```bash
 onevnet list
 ```
 
 The `metadata.yaml` file within \[:one:\]\[:template:\]-\> NIC \-\> NETWORK tags and attributes mentions vnet name (by default it is called ‘service’). So it might be needed either to change vnet name in the `metadata.yaml` file or rename the vnet (preferable) with help of the command as below:
-
-```
+```bash
 onevnet rename <vnet_id> service
 ```
 
 One of the possible ways to create a VM template is to export it from OpenNebula Public Marketplace:
-
-```
+```bash
 onemarketapp export <marketapp_id> <appliance_template_name> -d <datastore_id>
 ```
 
@@ -130,9 +124,8 @@ where
 * `<appliance_template_name>` is the VM template name and   
 * `<datastore_id>` is the ID of the datastore where the exporting from the marketplace appliance image needs to be stored.
 
- For example,
-
-```
+For example,
+```bash
 onemarketapp export 81 base -d 1
 ```
 
@@ -143,22 +136,19 @@ Do not forget to align the VM template attributes and values according to the on
 Since the tests are going to be executed inside the running VM there is a need to have a hypervisor (HV) node capable of having such a VM running.
 
 The execution of the following command should help you to understand if there is such HV node:
-
-```
+```bash
 onehost list
 ```
 
 Before running the tests it needs to do the following:
 
 1) copy the `example.qcow2` file to one of the dirs specified in `SAFE_DIRS` attribute of the datastore where the image is going to be registered
-
-```
+```bash
 cp ~/marketplace-community/apps-code/community-apps/export/example.qcow2 /var/tmp/
 ```
 
 2) make the changes in the `metadata.yaml` file:
-
-```
+```bash
 diff ../../example/metadata.yaml{,.orig}
 43c43
 <   :apps_path: /var/tmp # directory where one-apps exports the appliances to
@@ -167,14 +157,12 @@ diff ../../example/metadata.yaml{,.orig}
 ```
 
 3) define `IMAGES_URL` variable pointing to the same location (note the required trailing slash):
-
-```
+```bash
 export IMAGES_URL="/var/tmp/"
 ```
 
 To run the tests, go to the directory `~/marketplace-community/lib/community/` and then execute the `./app_readiness.rb <app_name> <app_image_name>`, as follows:
-
-```
+```bash
 ./app_readiness.rb example example.qcow2
 
 Appliance Certification
@@ -198,7 +186,7 @@ Finished in 1 minute 10.07 seconds (files took 0.20889 seconds to load)
 ```
 
 Only the tests defined at `tests.yaml` will be executed. The `example` appliance has them defined as below:
-```
+```yaml
 ---
 - '00-example_basic.rb'
 ```
@@ -209,8 +197,7 @@ With this you can define multiple test files to verify independent workflows and
 In order to develop your Certification Tests test, you will need to create your example group(s).
 
 Taking a look at the file `00-example_basic.rb` we have the group `Appliance Certification` with 6 examples. Each example is an `it` block. Within the blocks there is some regular code and some code that **checks expectations**. An example of this special code is
-
-```
+```ruby
 expect(execution.exitstatus).to eq(0)
 expect(execution.stdout).to include('All set and ready to serve')
 ```
@@ -219,7 +206,7 @@ The test in this case succeeds, given that the command runs without errors and i
 
 Here is an example that does nothing useful, yet still runs
 
-```
+```bash
 # /tmp/new_app_test.rb file
 describe 'Useless test' do
     it 'Checks running state' do
@@ -235,8 +222,7 @@ end
 ```
 
 If you run this with `rspec -f d /tmp/new_app_test.rb` you'll get
-
-```
+```bash
 Useless test
   Checks running state
   Checks state (FAILED - 1)
@@ -285,8 +271,7 @@ As it was stated above these tests assume certain conditions on the host running
 You can use [one-deploy](https://github.com/OpenNebula/one-deploy) tool to quickly create a compatible test scenario. A simple node containing both the frontend and a kvm node will do. An inventory file is provided as a reference at `lib/community/ansible/inventory.yaml`.
 
 Lastly you have to define a `metadata.yaml` file. This describes the appliance, showcasing information like the `CONTEXT` attributes used to control the App and the Linux distro used.
-
-```
+```yaml
 ---
 :app:
   :name: example # name used to make the app with the makefile
@@ -309,7 +294,7 @@ Lastly you have to define a `metadata.yaml` file. This describes the appliance, 
 
 :infra:
   :disk_format: qcow2 # one-apps built image disk format
-  :apps_path: /opt/one-apps/export # directory where one-apps exports the appliances to
+  :apps_path: /var/tmp # directory where one-apps exports the appliances to
 ```
 
 After executing the tests, the `context.yaml` file is generated. This file should be included in the Pull Request as well. We will use it to pass the **context** tests in our infrastructure.

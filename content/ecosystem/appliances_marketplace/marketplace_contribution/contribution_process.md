@@ -57,7 +57,7 @@ The PR should contain, at least, the following files:
 * An image file with the appliance’s **logo**, with 1:1 ratio and preferably PNG or SVG format, in the logos/ directory at repo root.
 
 Using the the example available in the [Appliances Development]({{< relref "appliances_development.md" >}}) section, the output of the `git status` command executed inside `marketplace-community` directory should look like below after finishing that chapter:
-```
+```bash
 git status
 On branch test
 Changes not staged for commit:
@@ -75,7 +75,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
 Add modified and untracked files:
-```
+```bash
 git add apps-code/community-apps/Makefile.config appliances/test/a0fae8be-3a24-46a2-9fd0-a102698d7cd6.yaml appliances/test/
 apps-code/community-apps/packer/test/
 ```
@@ -83,12 +83,12 @@ apps-code/community-apps/packer/test/
 Execute the `git status` command one more time to check what files have been added to be committed.
 
 Commit changes:
-```
+```bash
 git commit -s -m "Appliance contribution Test"
 ```
 
 Push changes to remote separate branch of marketplace-community repository:
-```
+```bash
 git push -u origin test
 ```
 
