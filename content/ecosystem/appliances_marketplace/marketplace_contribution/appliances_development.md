@@ -16,11 +16,11 @@ The new appliance contribution to the community marketplace process consists of 
 6. Build an image with required OS to be used for your appliance
 7. Build an image with your appliance
 8. Test appliance
-9. Create tests for new appliance under new branch of forked OpenNebula/marketplace-community
+9. Create tests for new appliance under new branch of forked `OpenNebula/marketplace-community` repository
 10. Create user documentation for the appliance
-11. Commit & push new branch to forked repo OpenNebula/marketplace-community
-12. Create pull request to OpenNebula/marketplace-community repo
-13. As soon as new PRs appear in the OpenNebula/marketplace-community repo the OpenNebula team will get notification and start evaluation procedure.
+11. Commit & push new branch to forked `OpenNebula/marketplace-community` repository
+12. Create a pull request for said repository
+13. As soon as new PRs appear in that repository the OpenNebula team will get notification and start evaluation procedure.
 
 ## Learning Materials
 This section describes the necessary knowledge users need to understand to develop a new appliance and includes links to all the relevant documentation and learning materials.
@@ -369,8 +369,8 @@ Any appliance contributed to the Community Marketplace must be properly document
 - [README.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/README.md) will contain the documentation for the appliance where basic information about the appliance and instructions on how to use it will be provided. This file must include at least the following sections:
 
   - Release Notes. Details about the current version of the appliance, including versions of each component.
-  - Overview. A summary of the appliance, including what software it comes with and basic information.
-  - Quick Start. A quick guide on how to instantiate the appliance once imported from the marketplace.
+  - Overview. A summary of the appliance with basic information and the included software.
+  - Quick start. Once you import the appliance, a general guide on creating the instance of said appliance.
   - Features. All features available in the appliance should be described in detail.
 
 - [CHANGELOG.md](https://github.com/OpenNebula/marketplace-community/blob/master/appliances/example/CHANGELOG.md). Comprehensive changelog of the appliance, following guidelines at [keepachangelog.com](http://keepachangelog.com).

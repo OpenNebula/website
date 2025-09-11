@@ -6,10 +6,10 @@ weight: 2
 ---
 
 ## High Level Overview
-Here is an overview of the different stages that the contribution process will encompass:
-1. **Form Submission:** an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The form is designed to capture the Appliance’s nature, objective, structure and requirements, in order to evaluate if it is a valid candidate for addition to the Community Marketplace. Moreover, the form requests information about the vendor or company, including contact information. If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
-2. **Appliance Development:** In this step the contributor will need to develop the appliance itself, all according to a set of standards.
-3. **Appliance Certification** Apart from providing an appliance  Contributor must also provide a way of certifying that the appliance is working as intended according to the features it provides while still being compatible at Operating System level with the basic contextualization features.
+1. **Form Submission:** This is an overview of the different stages of the contribution process:
+Form Submission: an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The contributor submits the form with relevant information such as the Appliance’s nature, objective, structure and requirements. These details are used to evaluate if the appliance is a valid candidate for addition to the Community Marketplace. The contributor can include additional information like the vendor or company, as well as contact information. If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
+2. **Appliance Development:** The contributor develops the appliance itself, all according to a set of standards. Please, check a separate section [Appliances Development](appliances_development.md).
+3. **Appliance Certification:** In addition to the appliance, the contributor must provide a way to certify that the appliance is working as intended. The appliance should be compatible at the operating system level with the basic contextualization features.
 4. **Pull Request Submission:** After completing local development, the contributor will need to submit a Pull Request to the community marketplace GitHub repository. This action formally begins our review process, where the OpenNebula team will review the code and test the appliance to ensure that it is both functional and safe to distribute. 
 5. **Acceptance:** If the testing goes well, the Pull Request will be accepted and the appliance incorporated into the Community  Marketplace. Otherwise, the reviewer may ask for additional changes to the Appliance.
 
@@ -23,10 +23,10 @@ During the contribution process, the following channels will be used:
 - **Email:** We use email for direct and official communication, particularly after your appliance has been published in the Marketplace. For example, if your live appliance fails a periodic compatibility test, you will receive an automated notification via email containing the relevant logs and details. This channel will be mainly used during for maintenance, but may also be used in stage 4 if the appliance fails the initial tests.
 - **OpenNebula Forum:** This is our main channel for community-wide interaction. It's the ideal place to ask general questions about the contribution process or to seek help from other community members. We also encourage you to use the forum to engage with and provide support to the end-users of your appliance. This channel will be used during stages 2 and 3 in case of questions regarding development. It will also be the main communication channel after release for maintenance purposes.
 
-## Contribution Process Steps
+## Contribution process: detailed view
 
 ### 1. Form submission
-As it was stated above the initial contact between appliance contributor and OpenNebula Team is a form submission with details about contributing appliance.
+This is the initial contact between the appliance contributor and OpenNebula Team. The contributor submits the appliance details through a specific form designed for this purpose.
 That form is accessible in the [Issues](https://github.com/OpenNebula/marketplace-community/issues) tab in the OpenNebula community marketplace GH [repository](https://github.com/OpenNebula/marketplace-community) when you press the `New Issue` green button.
 It looks as on the figure below.
 
@@ -94,7 +94,7 @@ git push -u origin test
 
 ### 5. Acceptance
 
-Once your appliance code has been accepted, your pull request will be merged into the marketplace repository and you will receive an email like the following:
+Once OpenNebula has accepted your appliance, your pull request will be merged into the marketplace repository and you will receive an email like the following:
 
     Dear <contributor name>,
 

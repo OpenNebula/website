@@ -13,8 +13,8 @@ To ensure the quality and reliability of the Marketplace, all Appliances are per
 
 To avoid removal, an appliance must pass tests for at least one of the active OpenNebula releases. The two active releases are:
 
-    Latest Release: 7.0.0
-    LTS Version: 6.10
+* Latest Release: 7.0.0
+* LTS Version: 6.10
 
 ### Automated Testing Process
 
