@@ -5,6 +5,8 @@ linkTitle: "Contribution Process"
 weight: 2
 ---
 
+![image](/images/marketplaces/community_mp/contribution_process.png)
+
 ## High Level Overview
 1. **Form Submission:** This is an overview of the different stages of the contribution process:
 Form Submission: an initial contact between the contributor and OpenNebula is a GitHub (GH) issue submitted by the contributor via the [GH template](https://github.com/OpenNebula/marketplace-community/issues/new?template=new-appliance-contrib.yml). The contributor submits the form with relevant information such as the Appliance’s nature, objective, structure and requirements. These details are used to evaluate if the appliance is a valid candidate for addition to the Community Marketplace. The contributor can include additional information like the vendor or company, as well as contact information. If necessary, OpenNebula will provide some feedback regarding the proposed appliance.
