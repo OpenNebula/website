@@ -103,6 +103,13 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 **Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
 **Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
 
+### Billing
+
+| Component   | Version     |
+|-----------|-------------|
+| WHMCS     | 8.13.1 |
+|
+
 ## Certified Infrastructure Scale
 
 A single instance of OpenNebula (i.e., a single `oned` process) has been stress-tested to cope with 500 hypervisors without performance degradation. This is the maximum recommended configuration for a single instance, and depending on the underlying configuration of storage and networking, it is mainly recommended to switch to a federated scenario for any larger number of hypervisors.
