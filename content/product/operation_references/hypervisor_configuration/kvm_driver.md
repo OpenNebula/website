@@ -245,6 +245,10 @@ The allowed values are:
 * `<UEFI_PATH>`: one the valid paths to a Unified Extensible Firmware Interface
   (UEFI) blob defined in `OVMF_UEFIS` (See [Driver Defaults]({{% relref "#kvmg-default-attributes" %}})).
 
+{{< alert title="Note" color="success" >}}
+`UEFI NVRAM` files in `raw` format will be converted to `qcow2` to allow creation of snapshots for OpenNebula UEFI VMs.
+{{< /alert >}}
+
 The `OS/FIRMWARE_SECURE` attribute can be used to configure *Secure Boot*. If
 this attribute is not defined, no Secure Boot is used by default.
 The allowed values are:
