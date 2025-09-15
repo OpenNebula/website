@@ -22,7 +22,7 @@ The quota system tracks user and group usage of system resources, and allows the
 The quota system allows you to track and limit usage on:
 
 * **Datastores**, to control the amount of storage capacity allocated to each user/group for each datastore.
-* **Compute**, to limit the overall memory, CPU, or VM instances.
+* **Compute**, to limit the overall memory, CPU, PCI devices, or VM instances.
 * **Network**, to limit the number of IPs a user/group can obtain from a given network. This is especially interesting for networks with public IPs, which are usually a limited resource.
 * **Images**, you can limit how many VM instances from a given user/group are using a given image. You can take advantage of this quota when the image contains consumable resources (e.g., software licenses).
 
@@ -46,16 +46,20 @@ The attribute name is `DATASTORE`.
 
 The attribute name is `VM`.
 
-| VM Attribute       | Description                                                                                                                                                                                                                                                                                                        |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CLUSTER_IDS`      | An optional attribute used to define which clusters are included in this<br/>quota. Leave this attribute empty to apply the quota globally.                                                                                                                                                                        |
-| `VMS`              | Maximum number of VMs that can be created                                                                                                                                                                                                                                                                          |
-| `MEMORY`           | Maximum memory in MB that can be requested by user/group VMs                                                                                                                                                                                                                                                       |
-| `CPU`              | Maximum CPU capacity that can be requested by user/group VMs                                                                                                                                                                                                                                                       |
-| `RUNNING VMS`      | Maximum number of VMs that can be running                                                                                                                                                                                                                                                                          |
-| `RUNNING MEMORY`   | Maximum memory in MB that can be running by user/group VMs                                                                                                                                                                                                                                                         |
-| `RUNNING CPU`      | Maximum CPU capacity that can be running by user/group VMs                                                                                                                                                                                                                                                         |
-| `SYSTEM_DISK_SIZE` | Maximum size (in MB) of system disks that can be requested by user/group VMs.<br/>It includes size of volatile and non-persistent disks (including disk<br/>snapshots) and VM snapshots (reduced by<br/>[VM_SNAPSHOT_FACTOR]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-datastores" %}})). |
+| VM Attribute       | Description                                                                                                                                     |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CLUSTER_IDS`      | An optional attribute used to define which clusters are included in this<br/>quota. Leave this attribute empty to apply the quota globally.     |
+| `VMS`              | Maximum number of VMs that can be created                                                                                                       |
+| `MEMORY`           | Maximum memory in MB that can be requested by user/group VMs                                                                                    |
+| `CPU`              | Maximum CPU capacity that can be requested by user/group VMs                                                                                    |
+| `PCI_DEV`          | Maximum number of PCI devices that can be requested by user/group VMs. Excluding netowrk PCIs                                                   |
+| `PCI_NIC`          | Maximum number of PCI network devices that can be requested by user/group VMs                                                                   |
+| `RUNNING VMS`      | Maximum number of VMs that can be running                                                                                                       |
+| `RUNNING MEMORY`   | Maximum memory in MB that can be running by user/group VMs                                                                                      |
+| `RUNNING CPU`      | Maximum CPU capacity that can be running by user/group VMs                                                                                      |
+| `RUNNING_PCI_DEV`  | Maximum number of PCI devices that can be running by user/group VMs. Excluding netowrk PCIs                                                     |
+| `RUNNING_PCI_NIC`  | Maximum number of PCI network devices that can be running by user/group VMs                                                                     |
+| `SYSTEM_DISK_SIZE` | Maximum size (in MB) of system disks that can be requested by user/group VMs. It includes size of volatile and non-persistent disks (including disk snapshots) and VM snapshots (reduced by [VM_SNAPSHOT_FACTOR]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-datastores" %}})). |
 
 The actual size given on the system and image datastores depends on the storage driver used. The behavior of the driver is described by the `CLONE_TARGET` and `LN_TARGET` attributes, see [Transfer Driver configuration]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-transfer-driver" %}})
 
@@ -240,15 +244,15 @@ USER TEMPLATE
 
 VMS USAGE & QUOTAS
 
-CLUSTERS         VMS              MEMORY                 CPU    SYSTEM_DISK_SIZE
-               1 / 4        1M /       -      2.00 /        -      0M /        -
-     100       0 /          0M /   128G       0.00 /    10.00      0M /        -
+CLUSTERS     VMS       MEMORY            CPU   PCI DEV   PCI NIC   SYSTEM_DISK_SIZE
+           1 / 4   1M /     -   2.00 /     -    1 /  5    0 /  3      0M /        -
+     100   0 / -   0M /  128G   0.00 / 10.00    0 /  5    0 /  3      0M /        -
 
 VMS USAGE & QUOTAS - RUNNING
 
-CLUSTERS       RUNNING VMS       RUNNING MEMORY          RUNNING CPU
-               1 /       -        1M /        -      2.00 /        -
-     100       0 /       2        0M /     128G      0.00 /        -
+CLUSTERS    RUN VMS     RUN MEMORY        RUN CPU    PCI DEV    PCI NIC
+            1 /   -    1M /      -    2.00 /    -     1 /  5     0 /  3
+     100    0 /   2    0M /   128G    0.00 /    -     0 /  5     0 /  3
 
 DATASTORE USAGE & QUOTAS
 
@@ -272,13 +276,13 @@ ID
 
 VMS USAGE & QUOTAS
 
-          VMS               MEMORY                  CPU     SYSTEM_DISK_SIZE
-  1 /       4        1M /        -      2.00 /        -        0M /        -
+CLUSTERS     VMS       MEMORY            CPU   PCI DEV   PCI NIC   SYSTEM_DISK_SIZE
+           1 / 8   1M /     -   2.00 /     -    1 / 10    0 /  6      0M /        -
 
 VMS USAGE & QUOTAS - RUNNING
 
-    RUNNING VMS       RUNNING MEMORY          RUNNING CPU
-    1 /       -        1M /       2M      2.00 /        -
+CLUSTERS    RUN VMS     RUN MEMORY        RUN CPU    PCI DEV    PCI NIC
+            1 /   -    1M /      -    2.00 /    -     1 / 10     0 /  6
 
 DATASTORE USAGE & QUOTAS
 
