@@ -65,6 +65,75 @@ The Virtual Network used for the alias can be different from that of the NIC of 
 
 [See Network Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-network-section" %}}).
 
+### TPM
+
+A virtual TPM (vTPM) can be added to KVM virtual machines by specifying the [TPM attribute]({{%
+relref "../../operation_references/configuration_references/template#tpm-section" %}}). When doing
+so, every VM instance will also spawn a companion TPM emulator process (swtpm) in charge of
+emulating a physical TPM device for its VM.
+
+#### Initial host setup
+
+{{< alert title="Note" color="info" >}}
+**Only required for manual installations**. This setup is automatically done when installing the
+`opennebula-node-kvm` package.
+{{< /alert >}}
+
+`swtpm` processes need to be launched with user/group `oneadmin`, as it opens a socket which will be
+controlled by the qemu process, generate state files which need to be moved by OpenNebula, etc. So,
+this is the required setup procedure to be executed **in each KVM host** beforehand in order to
+deploy TPM-enabled VMs:
+
+1) Edit `/etc/libvirt/qemu.conf` and set
+
+```
+swtpm_user = "oneadmin"
+swtpm_group = "oneadmin"
+```
+
+2) Change the owner of the swtpm's CA directory:
+
+```
+chown -R oneadmin:oneadmin /var/lib/swtpm-localca/
+```
+
+3) Restart libvirtd. For example:
+
+```
+systemctl restart libvirtd
+```
+
+#### vTPM state quirks
+
+The emulator needs to store a state and this introduces some additional complexities, although most
+of them will be handled by either OpenNebula or libvirt itself:
+
+- VM migration implies moving the TPM state too. This is done by libvirt automatically for both
+  offline and live migrations.
+- VM backups will also store the TPM state. OpenNebula will internally treat the TPM as an special
+  kind of disk, so it will be stored in the backup server in a similar way.
+- Then, recovering from a backup image will put the saved TPM state into the new VM template as a
+  Base64 encoded attribute (`TPM_STATE`), which will be used to initialize the TPM during VM
+  instantiation.
+- When restoring a virtual machine (VM) from a backup, the user may choose to restore all disks or
+  only a single disk. Restoring all disks also restores the TPM state, while restoring a single disk
+  will only restore the TPM state if the selected disk is the root disk (ID 0), which is assumed to
+  contain the operating system.
+- Performing operations which involve temporally destroying the libvirt VM, such as
+  poweroff/undeploy or stop/suspend, make libvirt destroy the TPM state too. In those cases,
+  OpenNebula takes care of saving and restoring it in a transparent way.
+
+{{< alert title="Warning" color="warning" >}}
+You must be extra careful with manual operations, such as shutting down the VM using `virsh`, as the
+TPM state is not persisted the same way as disks and could be deleted by libvirt. Depending on the
+way the VM uses the TPM, losing its state ranges from being innocuous to quite catastrophic, for
+example, when using it to store the keys of an encrypted disk. As a rule of thumb, remember to
+always use the OpenNebula provided interfaces (Sunstone, CLI, etc) to operate VMs, particularly the
+ones depending on a TPM state.
+{{< /alert >}}
+
+[See TPM Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#tpm-section" %}}).
+
 ### A Complete Example
 
 The following example shows a VM Template file with a couple of disks and a network interface. A VNC section and an alias were also added:
@@ -86,6 +155,9 @@ NIC_ALIAS = [ NETWORK = "Public", PARENT = "private_net" ]
 GRAPHICS = [
   TYPE    = "vnc",
   LISTEN  = "0.0.0.0"]
+
+TPM = [
+  MODEL = "tpm-crb" ]
 ```
 
 {{< alert title="Important" color="success" >}}
