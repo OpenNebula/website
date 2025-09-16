@@ -1132,7 +1132,6 @@ The following attributes can use to define a NUMA topology for the VM.
 
 | TOPOLOGY attribute   | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
-|                      |                                                                       |
 | `PIN_POLICY`         | vCPU pinning preference: `CORE`, `THREAD`, `SHARED`, `NONE`.          |
 | `SOCKETS`            | Number of sockets or NUMA nodes.                                      |
 | `CORES`              | Number of cores per node.                                             |
@@ -1154,7 +1153,6 @@ Asymmetric NUMA configurations, i.e., not distributing the VM resources evenly a
 
 | NUMA_NODE attribute   | Description                               |
 |-----------------------|-------------------------------------------|
-|                       |                                           |
 | `MEMORY`              | Memory allocated in the node, in MB.      |
 | `TOTAL_CPUS`          | Total number of CPU units, CORE\*THREADS. |
 
@@ -1168,6 +1166,35 @@ NUMA_NODE = [ MEMORY = 2048, TOTAL_CPUS = 4 ]
 ```
 
 Please [check the NUMA guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}}) for more information.
+
+<a id="tpm-section"></a>
+
+## TPM Section
+
+The following attributes can be used to attach a TPM to the VM.
+
+
+| TPM attribute  | Description                               | KVM   | vCenter   | LXC   |
+|----------------|-------------------------------------------|-------|-----------|-------|
+| `MODEL`        | vTPM device model: `tpm-crb`, `tpm-tis`.  | O     | -         | -     |
+
+Example:
+
+```default
+TPM = [
+  MODEL = "tpm-crb" ]
+```
+
+That will translate to the following libvirt stanza:
+
+```
+<tpm model='tpm-crb'>
+    <backend type='emulator' version='2.0'/>
+    <alias name='tpm0'/>
+</tpm>
+```
+
+Please [check the TPM guide]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates/#tpm" %}}) for more information.
 
 <a id="sunstone-template-section"></a>
 
