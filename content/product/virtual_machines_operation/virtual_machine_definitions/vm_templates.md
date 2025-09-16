@@ -115,11 +115,10 @@ of them will be handled by either OpenNebula or libvirt itself:
 - Then, recovering from a backup image will put the saved TPM state into the new VM template as a
   Base64 encoded attribute (`TPM_STATE`), which will be used to initialize the TPM during VM
   instantiation.
-- Restoring an already existing VM from a backup presents an interesting dilemma, because the user
-  can chose whether to restore all disks or a single one. Restoring all disks will also restore the
-  TPM state, but **when a single disk is selected**, OpenNebula will **only restore the TPM state if
-  it's the root disk (ID 0)**, as it is assumed to be the one in which the operating system was
-  installed.
+- When restoring a virtual machine (VM) from a backup, the user may choose to restore all disks or
+  only a single disk. Restoring all disks also restores the TPM state, while restoring a single disk
+  will only restore the TPM state if the selected disk is the root disk (ID 0), which is assumed to
+  contain the operating system.
 - Performing operations which involve temporally destroying the libvirt VM, such as
   poweroff/undeploy or stop/suspend, make libvirt destroy the TPM state too. In those cases,
   OpenNebula takes care of saving and restoring it in a transparent way.
