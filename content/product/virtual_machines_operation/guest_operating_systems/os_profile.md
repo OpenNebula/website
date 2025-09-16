@@ -306,6 +306,7 @@ NICs are configured under `Network→NIC` and PCI devices under `Network→PCI`{
 | →→ SD_DISK_BUS        | string  | SD disk bus type                         | “scsi”, “sata”                                                                      |
 | →→ MACHINE            | string  | Machine type                             | Dependent on Host support                                                           |
 | →→ FIRMWARE           | string  | Firmware type                            | “BIOS”, “UEFI” & Host<br/>supported e.g.,<br/>“/usr/share/AAVMF/<br/>AAVMF_CODE.fd” |
+| →→ FIRMWARE_FORMAT    | string  | Firmware desired format                  | “qcow2“, “raw“ (default)
 | →→ BOOT               | string  | Boot device order                        | Comma-separated list<br/>e.g., “disk0,disk1,nic0”                                   |
 | →→ KERNEL             | string  | Kernel image path                        | Any valid path                                                                      |
 | →→ KERNEL_DS          | string  | Kernel file reference                    | e.g., $FILE[IMAGE_ID=123]                                                           |
