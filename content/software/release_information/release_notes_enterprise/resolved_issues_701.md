@@ -14,8 +14,9 @@ The following new features have been backported to 7.0.1:
 - [Add support for `BRIDGE_LIST` for Backup Datastores (Restic and rsync) and Ceph drivers](../../../product/cluster_configuration/backup_system/restic#bridge-list)
 - [Add support for incremental backup with LVM Thin](../../../product/cluster_configuration/backup_system/overview/#hypervisor--storage-compatibility)
 - [Add support for incremental backup flatten using Ceph](../../../product/cluster_configuration/backup_system/overview/#hypervisor--storage-compatibility)
+- [Add support for internal snapshots in UEFI VMs](../../../product/operation_references/hypervisor_configuration/kvm_driver.md/#firmware)
 - [Add support for GPU monitoring and forecasting](../../../product/cloud_system_administration/resource_monitoring/metrics.md)
-- [Add support for virtual TPM devices](../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates.md#tpm)
+- [Add support for virtual TPM devices for KVM virtual machines](../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates.md#tpm)
 
 The following issues has been solved in 7.0.1:
 
