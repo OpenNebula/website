@@ -348,7 +348,7 @@ Live Memory resize needs QEMU version 2.4. Live VCPU resize needs QEMU version 2
 ### MEMORY_RESIZE_MODE
 
 `BALLOONING` consists in dynamically adjusting the amount of RAM allocated to VMs. It enables KVM to reclaim unused memory from one VM and allocate it to another VM that needs it more, without shutting down or pausing the VMs. The parameter sets up a **balloon driver** within the VM that communicates with the Host:
-* When the Host needs to reclaim memory, the driver _inflates_, reserving some of the VM’s unused memory for the Host. 
+* When the Host needs to reclaim memory, the driver _inflates_, reserving some of the VM’s unused memory for the Host.
 * When the VM needs additional memory, the driver _deflates_, releasing reserved memory back to the VM.
 
 From the VM’s standpoint, it seems like the available memory is decreasing or increasing. The OS inside the VM will think it’s using more memory when the balloon inflates and think it’s using less when the balloon deflates. This can go back and forth many times during the VM’s lifecycle, always ensuring that each VM has as much memory as it needs, up to `MEMORY_MAX`, but no more than that.
