@@ -27,7 +27,7 @@ When **updating the VM configuration live** by using `one.vm.updateconf`, althou
 The full list of configuration attributes are:
 
 ```default
-OS        = ["ARCH", "MACHINE", "KERNEL", "INITRD", "BOOTLOADER", "BOOT", "KERNEL_CMD", "ROOT", "SD_DISK_BUS", "UUID", "FIRMWARE"]
+OS        = ["ARCH", "MACHINE", "KERNEL", "INITRD", "BOOTLOADER", "BOOT", "KERNEL_CMD", "ROOT", "SD_DISK_BUS", "UUID", "FIRMWARE", "FIRMWARE_FORMAT"]
 FEATURES  = ["ACPI", "PAE", "APIC", "LOCALTIME", "HYPERV", "GUEST_AGENT", "VIRTIO_SCSI_QUEUES", "VIRTIO_BLK_QUEUES", "IOTHREADS"]
 INPUT     = ["TYPE", "BUS"]
 GRAPHICS  = ["TYPE", "LISTEN", "PASSWD", "KEYMAP", "COMMAND" ]
@@ -55,7 +55,7 @@ The KVM driver is enabled by default in OpenNebula `/etc/one/oned.conf` on your 
 There are some attributes required for KVM to boot a VM. You can set a suitable default for them so all the VMs get the required values. These attributes are set in `/etc/one/vmm_exec/vmm_exec_kvm.conf`. Default values from the configuration file can be overriden in the Cluster, Host, or VM template. The following attributes can be set for KVM:
 
 * `EMULATOR`: path to the KVM executable.
-* `OS`: attributes `KERNEL`, `INITRD`, `ROOT`, `KERNEL_CMD`, `MACHINE`,  `ARCH`, `SD_DISK_BUS`, `FIRMWARE`, `FIMRWARE_SECURE` and `BOOTLOADER`.
+* `OS`: attributes `KERNEL`, `INITRD`, `ROOT`, `KERNEL_CMD`, `MACHINE`,  `ARCH`, `SD_DISK_BUS`, `FIRMWARE`, `FIRMWARE_FORMAT`, `FIMRWARE_SECURE` and `BOOTLOADER`.
 * `VCPU`
 * `VCPU_MAX`
 * `MEMORY_SLOTS`
@@ -244,6 +244,15 @@ The allowed values are:
 * `BIOS`: use Basic Input/Output System (BIOS).
 * `<UEFI_PATH>`: one the valid paths to a Unified Extensible Firmware Interface
   (UEFI) blob defined in `OVMF_UEFIS` (See [Driver Defaults]({{% relref "#kvmg-default-attributes" %}})).
+
+The `OS/FIRMWARE_FORMAT` attribute can be used to define the format of the UEFI NVRAM image. The NVRAM file will be automatically converted to the specified format if the source file differs. The allowed values are:
+
+* `qcow2`: store the `UEFI NVRAM` as a `qcow2` image (requires `libvirt >= 10.10`).
+* `raw`: store the `UEFI NVRAM` as a `raw` image (default value).
+
+{{< alert title="Warning" color="warning" >}}
+Internal UEFI VMs snapshots are only supported with `qcow2 UEFI NVRAM` images.
+{{< /alert >}}
 
 The `OS/FIRMWARE_SECURE` attribute can be used to configure *Secure Boot*. If
 this attribute is not defined, no Secure Boot is used by default.
@@ -607,6 +616,7 @@ The following OS section is recommended for an ARM64 Host template. Here, `virt`
 OS=[
   ARCH="aarch64",
   FIRMWARE="/usr/share/AAVMF/AAVMF_CODE.fd",
+  FIRMWARE_FORMAT='raw',
   FIRMWARE_SECURE="no",
   MACHINE="virt"
 ]

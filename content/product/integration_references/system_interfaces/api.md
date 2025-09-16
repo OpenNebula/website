@@ -1152,7 +1152,7 @@ The supported attributes are:
 
 | Attribute       | Sub-attributes                                                                                                           |
 |-----------------|--------------------------------------------------------------------------------------------------------------------------|
-| `OS`            | `ARCH`, `MACHINE`, `KERNEL`, `INITRD`, `BOOTLOADER`, `BOOT`,<br/>`KERNEL_CMD`, `ROOT`, `SD_DISK_BUS`, `UUID`, `FIRMWARE` |
+| `OS`            | `ARCH`, `MACHINE`, `KERNEL`, `INITRD`, `BOOTLOADER`, `BOOT`,<br/>`KERNEL_CMD`, `ROOT`, `SD_DISK_BUS`, `UUID`, `FIRMWARE`, `FIRMWARE_FORMAT` |
 | `CPU_MODEL`     | `MODEL`, `FEATURES`                                                                                                      |
 | `FEATURES`      | `ACPI`, `PAE`, `APIC`, `LOCALTIME`, `HYPERV`, `GUEST_AGENT`,<br/>`VIRTIO_SCSI_QUEUES`, `VIRTIO_BLK_QUEUES`, `IOTHREADS`  |
 | `INPUT`         | `TYPE`, `BUS`                                                                                                            |
