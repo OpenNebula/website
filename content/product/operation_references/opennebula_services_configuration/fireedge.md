@@ -33,7 +33,7 @@ http://<OPENNEBULA-FRONTEND>:2616
 
 ### Configuration
 
-The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
+The FireEdge server configuration file can be found in `/etc/one/fireedge/sunstone/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change, the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 
@@ -69,7 +69,7 @@ JWT is an acronym of JSON Web Token{{< /alert >}}
 
 **FireEdge Sunstone**
 
-The Sunstone server configuration file can be found in `/etc/one/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
+The Sunstone server configuration file can be found in `/etc/one/fireedge/sunstone/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After a configuration change the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}}
@@ -146,7 +146,7 @@ Tables in Sunstone can be configured to visualize data as a list of plain text o
 
 ![fireedge_sunstone_card_datatable](/images/sunstone_card_datatable.png)
 
-This configuration could be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `rowStyle`. See [table below](fireedge#fireedge-sunstone-configuration).
+This configuration could be modified in the `/etc/one/fireedge/sunstone/sunstone-server.conf` file modifying the parameter `rowStyle`. [See this table](fireedge#fireedge-sunstone-configuration).
 
 Moreover, Suntone has the capacity to show the detail of a resource in a full screen mode or in a split mode:
 
@@ -154,7 +154,10 @@ Moreover, Suntone has the capacity to show the detail of a resource in a full sc
 
 ![fireedge_sunstone_resource_split_mode](/images/sunstone_resource_split_mode.png)
 
-This configuration can be modified in the `/etc/one/fireedge/sunstone/views/sunstone-server.conf` file modifying the parameter `fullViewMode`. See [table below](#fireedge-sunstone-configuration).
+This configuration can be modified in the `/etc/one/fireedge/sunstone/sunstone-server.conf` file modifying the parameter `fullViewMode`. [See this table](#fireedge-sunstone-configuration).
+
+{{< alert title="Warning" color="warning" >}}
+Changes will not be visible for users whose template has the `TEMPLATE/FIREEDGE/FULL_SCREEN_INFO` attribute configured, as this value takes precedence over the general Sunstone configuration.{{< /alert >}} 
 
 Also, both configurations will be overridden for a specific user if the user changes the configuration in the settings section.
 
