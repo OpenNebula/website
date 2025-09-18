@@ -113,7 +113,6 @@ However, there are several OpenNebula users managing significantly higher number
 
 The following applies to all Front-Ends:
 
-* XML-RPC tuning parameters (`MAX_CONN`, `MAX_CONN_BACKLOG`, `KEEPALIVE_TIMEOUT`, `KEEPALIVE_MAX_CONN` and `TIMEOUT`) are only available with packages distributed by us, as they are compiled with a newer xmlrpc-c library.
 * Only **Ruby versions >= 2.0 are supported**.
 
 ## Nodes Platform Notes

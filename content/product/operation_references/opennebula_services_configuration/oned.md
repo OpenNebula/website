@@ -220,9 +220,6 @@ For showback the CPU and memory cost are counted if the resource is reserved on 
 #LOG_CALL_FORMAT    = "Req:%i UID:%u %m invoked %l"
 ```
 
-{{< alert title="Warning" color="warning" >}}
-This functionality is only available when compiled with xmlrpc-c libraries >= 1.32. Currently only the packages distributed by OpenNebula are linked with this library.{{< /alert >}} 
-
 ## Virtual Networks
 
 - `NETWORK_SIZE`: Here you can define the default size for the Virtual Networks.
@@ -398,7 +395,7 @@ TM_MAD = [
 The configuration for each driver is defined in the `TM_MAD_CONF` section.
 
 {{< alert title="Important" color="success" >}}
-These values define the datastore behavior and thus should not be modified. They are used when creating a new datastore of given type and also when developing new drivers.{{< /alert >}} 
+These values define the datastore behavior and thus should not be modified. They are used when creating a new datastore of given type and also when developing new drivers.{{< /alert >}}
 
 - `NAME`: name of the transfer driver, listed in the `-d` option of the `TM_MAD` section
 - `LN_TARGET`: determines how persistent images will be cloned when a new VM is instantiated:
@@ -854,4 +851,4 @@ Other logs are also available in Journald, use the following command to show the
 ```
 
 {{< alert title="Important" color="success" >}}
-See [Troubleshooting]({{% relref "troubleshooting#troubleshoot-additional" %}}) guide to learn about the logging of individual OpenNebula Daemon subsystems and drivers.{{< /alert >}} 
+See [Troubleshooting]({{% relref "troubleshooting#troubleshoot-additional" %}}) guide to learn about the logging of individual OpenNebula Daemon subsystems and drivers.{{< /alert >}}
