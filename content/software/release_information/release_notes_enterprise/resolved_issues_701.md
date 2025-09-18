@@ -52,3 +52,4 @@ The following issues has been solved in 7.0.1:
 - Fix way back to tables when creating and updating resources [#7131](https://github.com/OpenNebula/one/issues/7131)
 - Fix iptables flags to not use unsupported options (based on iptables version) [#7215](https://github.com/OpenNebula/one/issues/7215)
 - Fix translation text when creating VMs [#7222](https://github.com/OpenNebula/one/issues/7222)
+- Fix `Host not permitted` error on Sinatra server when is behind from NGINX proxy [#7231](https://github.com/OpenNebula/one/issues/7231)
