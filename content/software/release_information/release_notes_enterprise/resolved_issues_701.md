@@ -53,5 +53,6 @@ The following issues has been solved in 7.0.1:
 - Fix iptables flags to not use unsupported options (based on iptables version) [#7215](https://github.com/OpenNebula/one/issues/7215)
 - Fix Ethernet text on Address Ranges when create VMs [#6955](https://github.com/OpenNebula/one/issues/6955)
 - Fix `Host not permitted` error on Sinatra server when is behind from NGINX proxy [#7231](https://github.com/OpenNebula/one/issues/7231)
+- Fix ownership issue when instanciate Vm as a different user [#7013](https://github.com/OpenNebula/one/issues/7013)
 - Fix re-arrange time orders when adding a scheduled action in Creating VMs. [#7031](https://github.com/OpenNebula/one/issues/7031)
 - Fix translation text when creating VMs [#7222](https://github.com/OpenNebula/one/issues/7222)
