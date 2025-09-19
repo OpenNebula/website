@@ -51,13 +51,15 @@ The following table summarizes the supported backup modes for each storage syste
       <td style="border: 1px solid"><p>LVM</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>Yes**</p></td>
+      <td style="border: 1px solid"><p>Yes**</p></td>
     </tr>
   </tbody>
 </table>
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e., NFS/SAN or Local.
+
+<sup>\**</sup> Supported for LVM-thin environments.
 
 ## Requirements & Architecture
 
@@ -143,6 +145,13 @@ During installation a self-signed certificate is generated at ``/etc/one/ovirtap
 After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the Front-end server. 
 
 Finally, start the service with either ``systemctl start apache2`` (ubuntu/debian) or ``systemctl start httpd`` (alma).
+
+{{< alert title="Performance Improvements" color="success" >}}
+To increase the performance of the oVirtAPI module, you may want to modify the ammount of processes assigned to it to better utilize the CPUs available in the backup server. To do so, modify the ``PassengerMaxPoolSize`` parameters in the Apache configuration file to match the available CPUs. Depending on your distro it can be located in the following directories:
+
+* Debian/Ubuntu: ``/etc/apache2/sites-available/ovirtapi-server.conf``
+* Alma/RHEL: ``/etc/httpd/conf.d/ovirtapi-server.conf``
+{{< /alert >}} 
 
 ## Step 4: Add OpenNebula to Veeam
 

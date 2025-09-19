@@ -56,3 +56,4 @@ The following issues has been solved in 7.0.1:
 - Fix ownership issue when instanciate Vm as a different user [#7013](https://github.com/OpenNebula/one/issues/7013)
 - Fix re-arrange time orders when adding a scheduled action in Creating VMs. [#7031](https://github.com/OpenNebula/one/issues/7031)
 - Fix translation text when creating VMs [#7222](https://github.com/OpenNebula/one/issues/7222)
+- Fix opennebula-ovirtapi: Add LVM-thin incrementals to the Veeam integration [#7236](https://github.com/OpenNebula/one/issues/7236)
