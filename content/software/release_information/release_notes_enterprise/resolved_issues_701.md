@@ -17,6 +17,7 @@ The following new features have been backported to 7.0.1:
 - [Add support for internal snapshots in UEFI VMs](../../../product/operation_references/hypervisor_configuration/kvm_driver.md/#firmware)
 - [Add support for GPU monitoring and forecasting](../../../product/cloud_system_administration/resource_monitoring/metrics.md)
 - [Add support for virtual TPM devices for KVM virtual machines](../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates.md#tpm)
+- [Better onecfg error messages](../../../software/upgrade_process/configuration_management_ee/overview.md)
 
 The following issues has been solved in 7.0.1:
 
