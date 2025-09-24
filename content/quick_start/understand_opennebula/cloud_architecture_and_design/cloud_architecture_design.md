@@ -1,5 +1,6 @@
 ---
 title: "Cloud Architecture Design"
+linkTitle: "Cloud Architecture Design"
 date: "2025-02-17"
 description:
 categories: [Introduction, Overview]

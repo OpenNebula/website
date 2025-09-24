@@ -1,5 +1,6 @@
 ---
 title: "Validate the miniONE Environment"
+linkTitle: "Validate Deployment"
 date: "2025-02-17"
 #description: "Explore the resources automatically installed with **miniONE**, and download and install appliances from the **OpenNebula Marketplace**"
 categories: [Learning, Evaluation, Introduction, Deployment]

@@ -1,5 +1,6 @@
 ---
 title: "Deploy OpenNebula On-prem with miniONE"
+linkTitle: "OpenNbula On-prem"
 date: "2025-02-17"
 #description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
 categories: [Introduction, Evaluation, Learning]
