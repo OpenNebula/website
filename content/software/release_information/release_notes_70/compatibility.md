@@ -141,3 +141,9 @@ group:
         E:
           F:
 ```
+
+## Contextualization guide
+
+OpenNebula Contextualization packages with versions lower than 7.0 are not compatible with the OneGate
+shipped in OpenNebula 7.0, please update context packages accordingly. Future versions of OpenNebula,
+including next maintenance release, will fix this backwards compatibility issue.
