@@ -1,5 +1,6 @@
 ---
 title: "VM HA"
+linkTitle: "Virtual Machine"
 date: "2025-02-17"
 description:
 categories:
