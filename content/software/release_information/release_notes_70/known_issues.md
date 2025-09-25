@@ -23,8 +23,8 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 ## Sunstone
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
-
 - Backups increments tab currently produces a react crash when accessed. This is caused by an invalid import in the client and has been fixed in the upcoming maintenance release. You can refer to [this](https://github.com/OpenNebula/one/issues/7173) issue for more details.
+- The Windows Optimized [OS Profile](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md) yaml file at `/etc/one/fireedge/sunstone/profiles/windows_optimized.yaml` has the wrong configuration. Utilizing such profile in Sunstone will lead to a VM that libvirt fails to create. You have to edit the file and replace its contents with the [documentation yaml content](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md#profile-chain-loading).
 
 ## Migration
 
@@ -88,3 +88,8 @@ host:
     period: 2 # Number of minutes
     lookback: 60 # Look-back window in minutes for predictions
 ```
+
+### OneGate
+
+- [Avoid Host not permitted on Sinatra server when is behind NGINX proxy](https://github.com/OpenNebula/one/issues/7231)
+- [OneGate does not update well VM user template when `--erase` is declared](https://github.com/OpenNebula/one/issues/7239)
