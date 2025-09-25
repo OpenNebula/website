@@ -1,5 +1,6 @@
 ---
 title: "Database Setup"
+linkTitle: "Database"
 date: "2025-02-17"
 description:
 categories:

@@ -1,5 +1,6 @@
 ---
 title: "Appendix - List of Configurations"
+linkTitle: "Configuration Files"
 date: "2025-02-17"
 description:
 categories:

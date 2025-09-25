@@ -1,5 +1,6 @@
 ---
 title: "Cloud Deployment - Local Storage"
+linkTitle: "Deployment - Local Storage"
 date: "2025-02-17"
 description:
 categories:

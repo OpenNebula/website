@@ -4,12 +4,8 @@ description:
 categories:
 pageintoc: ""
 tags:
-weight: "2"
+weight: "3"
 ---
-
-<a id="ova-management-overview"></a>
-
-## Overview
 
 OpenNebula supports importing OVAs that have been exported from vCenter / ESXi environments, generating the necessary VM Template and Images.
 
