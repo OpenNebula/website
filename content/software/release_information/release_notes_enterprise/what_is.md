@@ -1,5 +1,6 @@
 ---
 title: "What is OpenNebula Enterprise Edition"
+linktTitle: "What is OpenNebula EE"
 
 description:
 categories:
