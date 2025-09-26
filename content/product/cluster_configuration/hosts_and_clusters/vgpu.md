@@ -1,5 +1,6 @@
 ---
 title: "NVIDIA GPU"
+linkTitle: "NVIDIA vGPU"
 date: "2025-02-17"
 description:
 categories:

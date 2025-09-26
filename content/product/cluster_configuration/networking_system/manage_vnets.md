@@ -1,5 +1,6 @@
 ---
 title: "Defining and Managing Virtual Networks"
+linkTitle: "Virtual Networks"
 date: "2025-02-17"
 description:
 categories:

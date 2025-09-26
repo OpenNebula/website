@@ -1,5 +1,6 @@
 ---
 title: NetApp - LVM-thin Validation
+weight: "5"
 ---
 
 This setup assumes you are using NetApp ONTAP with iSCSI and are trying to use it as a backend for OpenNebula's LVM Thin datastore.  The configuration is standard and doesn't require any special feature beyond basic LUN management, so if you are already comfortable with the NetApp ONTAP interface and its functionality, feel free to create the resources as you see fit.

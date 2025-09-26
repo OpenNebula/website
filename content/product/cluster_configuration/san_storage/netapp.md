@@ -1,6 +1,6 @@
 ---
 title: "NetApp SAN Datastore (EE)"
-weight: "1"
+weight: "6"
 ---
 
 This datastore is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.

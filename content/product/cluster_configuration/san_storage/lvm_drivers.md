@@ -1,16 +1,19 @@
 ---
-title: "SAN Datastore"
+title: "SAN Storage Configuration"
+linktitle: "Configuration"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "72"
 tags:
-weight: "6"
+weight: "4"
 ---
 
 <a id="lvm-drivers"></a>
 
 <!--# SAN Datastore -->
+
+## SAN Storage
 
 This storage configuration assumes that Hosts have access to storage devices (LUNs) exported by an
 Storage Area Network (SAN) server using a suitable protocol like iSCSI or Fibre Channel. The Hosts
@@ -30,8 +33,8 @@ deployed. Depending on the manufacturer the process may be slightly different, s
 the specific guides if your hardware is on the supported list, or your hardware vendor guides
 otherwise:
 
-- [NetApp specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/netapp_-_lvm_thin_validation/" %}})
-- [PureStorage specific guide]({{% relref "/solutions/certified_hw_platforms/san_appliances/purestorage_-_lvm-thin_validation/" %}})
+- [NetApp specific guide]({{% relref "/product/cluster_configuration/san_storage/netapp_-_lvm_thin_validation/" %}})
+- [PureStorage specific guide]({{% relref "/product/cluster_configuration/san_storage/purestorage_-_lvm-thin_validation/" %}})
 
 Also included in the above guides is a specific multipath configuration for both the front-end and virtualization hosts, which recommended over the more general multipath configuration presented below.
 

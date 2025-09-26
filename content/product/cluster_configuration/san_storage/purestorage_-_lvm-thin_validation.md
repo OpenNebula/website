@@ -1,5 +1,6 @@
 ---
 title: PureStorage - LVM-thin Validation
+weight: "4"
 ---
 
 This setup assumes you're using a PureStorage FlashArray with iSCSI and want to use it as a backend for OpenNebula's LVM Thin datastore. The configuration is straightforward and uses standard volume and host mappings. If you're already familiar with the PureStorage interface, you can create the required resources however you prefer — this just outlines a typical setup.

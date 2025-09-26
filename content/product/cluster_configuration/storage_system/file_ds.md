@@ -1,5 +1,6 @@
 ---
 title: "Kernels and Files Datastore"
+linktitle: "Kernels and Files"
 date: "2025-02-17"
 description:
 categories:

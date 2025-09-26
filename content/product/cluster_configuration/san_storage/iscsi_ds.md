@@ -1,11 +1,12 @@
 ---
 title: "iSCSI - Libvirt Datastore"
+linkTitle: "iSCSI - Libvirt"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "74"
 tags:
-weight: "8"
+weight: "7"
 ---
 
 <a id="iscsi-ds"></a>
