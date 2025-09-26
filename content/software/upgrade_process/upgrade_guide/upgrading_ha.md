@@ -1,5 +1,6 @@
 ---
 title: "Upgrading High Availability Clusters"
+linkTitle: "High Availability Clusters"
 date: "2025-02-17"
 description:
 categories:

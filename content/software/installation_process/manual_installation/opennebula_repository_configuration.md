@@ -1,5 +1,6 @@
 ---
 title: "OpenNebula Repositories"
+linkTitle: "Repositories"
 date: "2025-02-17"
 description:
 categories:

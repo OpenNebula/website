@@ -1,5 +1,6 @@
 ---
 title: "Upgrading Single Front-End"
+linkTitle: "Single Front-End"
 date: "2025-02-17"
 description:
 categories:

@@ -5,7 +5,7 @@ description: "The OneSwap command-line tool allows a convenient migration of Vir
 categories:
 pageintoc: "268"
 tags:
-weight: "1"
+weight: "2"
 ---
 
 <a id="oneswap"></a>
@@ -48,12 +48,12 @@ OneSwap requirements for virtual conversion from VMWare to OpenNebula are the fo
   - Set up the transfer method options (oneswap parameters `http_transfer`, `http_host` and `http_port`).
 
 {{< alert color="success" title="OneSwap configuration" >}}
-Most OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml` but **the user running `oneswap` must be able to run CLI commands on the destination OpenNebula frontend** (i.e. being able to run `onevm list`). If `oneswap` is ran from the frontend as `oneadmin` user this works directly. 
+Most OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml` but **the user running `oneswap` must be able to run CLI commands on the destination OpenNebula frontend** (i.e. being able to run `onevm list`). If `oneswap` is ran from the frontend as `oneadmin` user this works directly.
 {{< /alert >}}
 
 {{< alert color="warning" title="OpenNebula CLI" >}}
 If `oneswap` runs from a server different than OpenNebula frontend, [check the documentation]({{% relref "command_line_interface#cli-configuration" %}}) about installing the CLI commands and xport the variables `ONE_XMLRPC` and `ONE_AUTH` accordingly.<br/>
-Normally that means populating the file `$HOME/.one/one_auth` with `username:password` and adding `export ONE_XMLRPC=http://opennebula_frontend:2633/RPC2` on the user profile, but it is recommended to check the documentation. 
+Normally that means populating the file `$HOME/.one/one_auth` with `username:password` and adding `export ONE_XMLRPC=http://opennebula_frontend:2633/RPC2` on the user profile, but it is recommended to check the documentation.
 {{< /alert >}}
 
 ### Optional requirements and required tools
@@ -71,7 +71,7 @@ Ubuntu 24.04 and AlmaLinux/RHEL 9 provide up to date versions of the packages
 
 There are two requirements to convert Windows Virtual Machines:
 - [VirtIO ISO drivers](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) must be stored in the `/usr/local/share/virtio-win` directory.
-- [RHsrvany, an Open Source srvany implementation](https://github.com/rwmjones/rhsrvany) to create the needed Windows services during the migration. 
+- [RHsrvany, an Open Source srvany implementation](https://github.com/rwmjones/rhsrvany) to create the needed Windows services during the migration.
   - In Alma Linux and RHEL this package is a dependency of OneSwap and will be installed automatically
   - In Ubuntu [the package can be downloaded from fedoraproject.org](https://kojipkgs.fedoraproject.org/packages/mingw-srvany/1.1/11.eln153/noarch/mingw-srvany-redistributable-1.1-11.eln153.noarch.rpm). <br/>
 For compatibility with older versions of virt2v the following symlinks are needed
@@ -148,7 +148,7 @@ There are four methods to transfer the images from ESX to OpenNebula. Ordered fr
 
 A custom conversion option is also provided, which is only recommended as a fallback, that does not use virt-v2v. It relies on RbVmomi2, using qemu-img and virt-customize/guestfish to prepare the image for OpenNebula.
 
-### Importing VMs 
+### Importing VMs
 
 Before migrations, `oneswap` can query ESX VMs and datacenters
 

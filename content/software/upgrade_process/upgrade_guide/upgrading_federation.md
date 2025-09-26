@@ -1,5 +1,6 @@
 ---
 title: "Upgrading Federated Instances"
+linkTitle: "Federated Instances"
 date: "2025-02-17"
 description:
 categories:

@@ -1,5 +1,6 @@
 ---
 title: "Building from Source Code"
+linkTitle: "Building"
 date: "2025-02-17"
 description:
 categories:
