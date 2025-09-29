@@ -234,7 +234,7 @@ The update operation will trigger driver action to live update the network confi
 | fw                                | - PHYDEV<br/>- INBOUND_AVG_BW<br/>- INBOUND_PEAK_BW<br/>- INBOUND_PEAK_KB<br/>- OUTBOUND_AVG_BW<br/>- OUTBOUND_PEAK_BW                                                                           |
 | 802.1Q<br/>vxlan                  | - PHYDEV<br/>- VLAN_ID<br/>- MTU<br/>- INBOUND_AVG_BW<br/>- INBOUND_PEAK_BW<br/>- INBOUND_PEAK_KB<br/>- OUTBOUND_AVG_BW<br/>- OUTBOUND_PEAK_BW                                                   |
 > {{< alert title="Important" color="success" >}}
-> QoS attributes (INBOUND and OUTBOUND) can be updated for single VMs with [onevm nic-update]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_instances#nic-update" %}}).{{< /alert >}} 
+> QoS attributes (INBOUND and OUTBOUND) can be updated for single VMs with [onevm nic-update]({{% relref "../../virtual_machines_operation/virtual_machines/vm_instances#nic-update" %}}).{{< /alert >}} 
 
 > {{< alert title="Important" color="success" >}}
 > For SR-IOV-based NICs you can update all the attributes that can be set for this type of interfaces.{{< /alert >}} 
@@ -394,7 +394,7 @@ The [Security Groups]({{% relref "../../virtual_machines_operation/virtual_machi
 
 ### Configuring the Virtual Machine Network
 
-Hypervisors will set the MAC address for the NIC of the Virtual Machines, but not the IP address. The IP configuration inside the guest is performed by the contextualization process, check the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}) to learn how to prepare your Virtual Machines to automatically configure the network
+Hypervisors will set the MAC address for the NIC of the Virtual Machines, but not the IP address. The IP configuration inside the guest is performed by the contextualization process, check the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) to learn how to prepare your Virtual Machines to automatically configure the network
 
 {{< alert title="Note" color="success" >}}
 Alternatively, a custom external service can configure the Virtual Machine network (e.g., your own DHCP server in a separate Virtual Machine){{< /alert >}} 

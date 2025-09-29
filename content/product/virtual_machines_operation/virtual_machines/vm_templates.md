@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machine Templates"
+linkTitle: "Templates"
 date: "2025-02-17"
 description:
 categories:
@@ -343,7 +344,7 @@ Due to the elements with TYPE equal to GROUP, CONFIG group has the title Configu
 
 ### Schedule Actions
 
-If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g.,  *“Shut down the VM 5 hours after it started”*. You can also add a Scheduled action at [VM instantiation]({{% relref "../virtual_machine_definitions/vm_instances#vm-guide2-scheduling-actions" %}}).
+If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g.,  *“Shut down the VM 5 hours after it started”*. You can also add a Scheduled action at [VM instantiation]({{% relref "../virtual_machines/vm_instances#vm-guide2-scheduling-actions" %}}).
 
 [See Schedule Actions Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}).
 
@@ -366,7 +367,7 @@ There are a few features of the [Cloud View]({{% relref "../../control_plane_con
 
 If a Template is meant to be consumed by end users, its Images should not be persistent. A persistent Image can only be used by one VM at a time. The next user will find the changes made by the previous user.
 
-If the users need persistent storage, they can use the [“instantiate to persistent” functionality]({{% relref "../virtual_machine_definitions/vm_instances#vm-guide2-clone-vm" %}}).
+If the users need persistent storage, they can use the [“instantiate to persistent” functionality]({{% relref "../virtual_machines/vm_instances#vm-guide2-clone-vm" %}}).
 
 ### Prepare the Network Interfaces
 
@@ -465,7 +466,7 @@ The OpenNebula Scheduler will automatically deploy the VMs in one of the availab
 
 Use `onevm terminate` to shutdown and delete a running VM.
 
-Continue to the [Managing Virtual Machine Instances Guide]({{% relref "../virtual_machine_definitions/vm_instances#vm-guide-2" %}}) to learn more about the VM States and the available operations that can be performed.
+Continue to the [Managing Virtual Machine Instances Guide]({{% relref "../virtual_machines/vm_instances#vm-guide-2" %}}) to learn more about the VM States and the available operations that can be performed.
 
 <a id="instantiate-as-uid-gid"></a>
 

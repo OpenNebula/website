@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machine Instances"
+linkTitle: "Instances"
 date: "2025-02-17"
 description:
 categories:
@@ -14,7 +15,7 @@ weight: "3"
 
 <!--# Managing Virtual Machines Instances -->
 
-This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machine_definitions/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
+This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machines/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
 
 <a id="vm-life-cycle-and-states"></a>
 
@@ -54,7 +55,7 @@ Note that this is a simplified version. If you are a developer you may want to t
 ## Create and List Virtual Machines
 
 {{< alert title="Note" color="success" >}}
-Read the [Creating Virtual Machines guide]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
+Read the [Creating Virtual Machines guide]({{% relref "../virtual_machines/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 Read the complete reference for [Virtual Machine templates]({{% relref "../../operation_references/configuration_references/template#template" %}}).{{< /alert >}} 
@@ -70,7 +71,7 @@ $ onetemplate instantiate vm-example --name my_vm
 VM ID: 0
 ```
 
-If the template has [USER INPUTS]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide-user-inputs" %}}) defined, the CLI will prompt the user for these values:
+If the template has [USER INPUTS]({{% relref "../virtual_machines/vm_templates#vm-guide-user-inputs" %}}) defined, the CLI will prompt the user for these values:
 
 ```default
 $ onetemplate instantiate vm-example --name my_vm
@@ -439,7 +440,7 @@ Depending on the `DISK/CACHE` attribute the live snapshot may or may not work co
 
 ### Persistent Images and Disk Snapshots
 
-These actions are available for both persistent and non-persistent Images. In the case of persistent Images the snapshots **will** be preserved upon VM termination and will be able to be used by other VMs using that Image. See the [snapshots]({{% relref "../virtual_machine_images/images#images-snapshots" %}}) section in the Images guide for more information.
+These actions are available for both persistent and non-persistent Images. In the case of persistent Images the snapshots **will** be preserved upon VM termination and will be able to be used by other VMs using that Image. See the [snapshots]({{% relref "../virtual_machines/images#images-snapshots" %}}) section in the Images guide for more information.
 
 <a id="disk-save-as-action"></a>
 
@@ -488,7 +489,7 @@ Hotplug is only implemented for KVM. Added CPUs will be in offline state after t
 If the disks assigned to a Virtual Machine need more size, this can achieved at instantiation time of the VM. The SIZE parameter of the disk can be adjusted and, if it is bigger than the original size of the Image, OpenNebula will:
 
 - Increase the size of the disk container prior to launching the VM
-- Using the [contextualization packages]({{% relref "../virtual_machine_definitions/vm_templates#context-overview" %}}), at boot time the VM will grow the filesystem to adjust to the new size.
+- Using the [contextualization packages]({{% relref "../virtual_machines/vm_templates#context-overview" %}}), at boot time the VM will grow the filesystem to adjust to the new size.
 
 You can override the size of a `DISK` in a VM template at instantiation:
 
@@ -920,7 +921,7 @@ Note: By default, the above operations do not check the target Host capacity. Yo
 
 **Troubleshooting:**
 
-- `recover`: If the VM is stuck in any other state (or the boot operation does not work), you can recover the VM with the following options. Read the [Virtual Machine Failures guide]({{% relref "../../operation_references/opennebula_services_configuration/troubleshooting#ftguide-virtual-machine-failures" %}}) for more information.
+- `recover`: If the VM is stuck in any other state (or the boot operation does not work), you can recover the VM with the following options. Read the [Virtual Machine Failures guide]({{% relref "../../virtual_machines_operation/troubleshooting#ftguide-virtual-machine-failures" %}}) for more information.
   - `--success`: simulates the success of the missing driver action
   - `--failure`: simulates the failure of the missing driver action
   - `--retry`: tries to perform the current driver action again. Optionally the `--interactive` can be combined if it's a Transfer Manager problem

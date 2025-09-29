@@ -22,7 +22,7 @@ This is a simplified view intended for cloud consumers that just require a porta
 
 In this scenario the cloud administrator must prepare a set of Templates and Images to make them available to the cloud users. These resources must be **ready** to be used.
 
-For example, when template attributes are defined as mandatory, users can optionally **customize the VM capacity**, **resize disks**, **add new Network Interfaces**, and **provide values required by the template**. Read tips on how to [prepare VM Templates for End-Users]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-templates-endusers" %}}).
+For example, when template attributes are defined as mandatory, users can optionally **customize the VM capacity**, **resize disks**, **add new Network Interfaces**, and **provide values required by the template**. Read tips on how to [prepare VM Templates for End-Users]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#vm-templates-endusers" %}}).
 
 ![sunstone_cloud_create_vm](/images/sunstone_cloud_create_vm.png)
 
@@ -30,7 +30,7 @@ For example, when template attributes are defined as mandatory, users can option
 
 ### Access the VMs with SSH Keys
 
-Any user can provide his own SSH public key to be included in the VMs created through this view. This requires the VM guest to be [contextualized]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}), and the Template must have the SSH **contextualization enabled**.
+Any user can provide his own SSH public key to be included in the VMs created through this view. This requires the VM guest to be [contextualized]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}), and the Template must have the SSH **contextualization enabled**.
 
 ![sunstone_cloud_add_ssh_key](/images/sunstone_cloud_add_ssh_key.png)
 
@@ -80,7 +80,7 @@ If you delete this template, all the disk contents will be also lost.{{< /alert 
 {{< alert title="Note" color="success" >}}
 **Avoid making a persistent copy of a persistent copy!** Although there are use cases where it is justified, you will end up with a long list of Templates and the disk usage quota will decrease quickly.{{< /alert >}} 
 
-For more details about the limitations of saved VM, continue to the [Managing Virtual Machines guide]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_instances#vm-guide2-clone-vm" %}}).
+For more details about the limitations of saved VM, continue to the [Managing Virtual Machines guide]({{% relref "../../virtual_machines_operation/virtual_machines/vm_instances#vm-guide2-clone-vm" %}}).
 
 ### Create Service
 
