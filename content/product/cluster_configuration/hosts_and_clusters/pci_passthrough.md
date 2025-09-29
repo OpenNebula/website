@@ -220,6 +220,22 @@ Example:
 
 <a id="pci-usage"></a>
 
+### Per-Host Device Filtering
+
+The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) contains the definition of PCI device filtering rules which are applied globally across all hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific hosts, these attributes can be configured on a per-host or per-cluster basis within the corresponding host template:
+
+| Parameter        | Description                                                                        |
+|------------------|------------------------------------------------------------------------------------|
+| `PCI_FILTER`        | *(List)* Filters by PCI `vendor:device:class` patterns (same as for `lspci`)       |
+| `PCI_SHORT_ADDRESS` | *(List)* Filters by short PCI address `bus:device.function`                        |
+
+Example: The command below filters by PCI with the `10de:*` pattern and addresses using the `e1` bus`
+```default
+$ onehost show 0 | grep PCI
+PCI_FILTER="10de:*"
+PCI_SHORT_ADDRESS="e1:00.0"
+```
+
 ## Usage
 
 The basic workflow is to inspect the Host information, either in the CLI or in Sunstone, to find out the available PCI devices and to add the desired device to the template. PCI devices can be added by specifying `VENDOR`, `DEVICE` and `CLASS`, or simply `CLASS`. Alternatively, you can select and specific device by its address with (`SHORT_ADDRESS`).
