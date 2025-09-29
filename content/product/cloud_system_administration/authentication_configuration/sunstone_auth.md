@@ -1,5 +1,6 @@
 ---
 title: "Sunstone Authentication"
+linkTitle: "Sunstone"
 date: "2025-02-17"
 description:
 categories:
