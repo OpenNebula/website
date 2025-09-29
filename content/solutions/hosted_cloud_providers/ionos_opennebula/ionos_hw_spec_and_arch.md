@@ -26,7 +26,7 @@ The target high-level cloud architecture overview is shown below. Two hosts are 
 | :---- | :---- |
 | Number of Zones | 1 |
 | Cloud Manager | OpenNebula {{< release >}} |
-| Server Specs | IONOS “Dedicated Core Server”, Intel Skylake, 2 Cores,  8GB RAM |
+| Server Specs | IONOS server with 2 dedicated cores and 8GB RAM (CPU model depends on the selected location) |
 | Operating System | Debian 12 |
 | High Availability | No (1 Front-end) |
 | Authorization | Builtin |
@@ -37,7 +37,7 @@ The target high-level cloud architecture overview is shown below. Two hosts are 
 | VIRTUALIZATION HOSTS  |
 | :---- | :---- |
 | Number of Nodes | 1 |
-| Server Specs | IONOS "Dedicated Core Server", Intel Skylake, 2 Cores,  8GB RAM |
+| Server Specs | IONOS server with 2 dedicated cores and 8GB RAM (CPU model depends on the selected location) |
 | Operating System | Debian 12 |
 | Hypervisor | KVM |
 | Special Devices | None |
