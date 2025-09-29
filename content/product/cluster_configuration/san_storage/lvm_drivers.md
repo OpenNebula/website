@@ -1,6 +1,6 @@
 ---
 title: "SAN Storage Configuration"
-linktitle: "Configuration"
+linktitle: "LVM Thin - FS"
 date: "2025-02-17"
 description:
 categories:

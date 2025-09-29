@@ -90,7 +90,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
-| Veeam B&R                    | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../integrations/backup_extensions/veeam.md" %}}) |
+| Veeam B&R                    | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
 
 ### Sunstone
 

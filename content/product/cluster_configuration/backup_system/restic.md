@@ -1,5 +1,6 @@
 ---
 title: "Backup Datastore: Restic"
+linkTitle: "Restic"
 date: "2025-02-17"
 description:
 categories:

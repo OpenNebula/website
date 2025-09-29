@@ -1,5 +1,6 @@
 ---
 title: "NetApp SAN Datastore (EE)"
+linkTitle: "NetApp - Native (EE)"
 weight: "6"
 ---
 

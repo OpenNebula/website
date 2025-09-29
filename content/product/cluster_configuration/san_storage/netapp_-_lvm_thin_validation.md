@@ -1,5 +1,6 @@
 ---
 title: NetApp - LVM-thin Validation
+linkTitle: "LVM Thin - NetApp"
 weight: "5"
 ---
 

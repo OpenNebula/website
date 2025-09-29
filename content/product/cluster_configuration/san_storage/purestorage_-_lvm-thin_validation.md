@@ -1,5 +1,6 @@
 ---
 title: PureStorage - LVM-thin Validation
+linkTitle: "LVM Thin - PureStorage"
 weight: "4"
 ---
 
