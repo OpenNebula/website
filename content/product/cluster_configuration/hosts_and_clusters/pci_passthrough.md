@@ -222,7 +222,7 @@ Example:
 
 ### Per-Host Device Filtering
 
-The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) allows the definition of PCI device filtering rules that are applied globally across all hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific hosts, the following attributes may be configured on a per-host or per-cluster basis within the corresponding host template:
+The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) contains the definition of PCI device filtering rules which are applied globally across all hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific hosts, these attributes can be configured on a per-host or per-cluster basis within the corresponding host template:
 
 | Parameter        | Description                                                                        |
 |------------------|------------------------------------------------------------------------------------|
