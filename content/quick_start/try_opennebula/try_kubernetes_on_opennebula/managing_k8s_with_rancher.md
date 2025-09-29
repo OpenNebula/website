@@ -1,5 +1,6 @@
 ---
 title: "Managing Kubernetes with Rancher and the Cluster API Integration"
+linkTitle: "Rancher and Cluster API"
 date: "2025-02-17"
 description:
 ---

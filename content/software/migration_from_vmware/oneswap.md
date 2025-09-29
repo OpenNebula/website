@@ -1,11 +1,11 @@
 ---
 title: "Migrating VMs with OneSwap"
 date: "2025-02-17"
-description: "The OneSwap command-line tool allows you to quickly migrate Virtual Machines and appliances from VMware."
+description: 
 categories:
 pageintoc: "268"
 tags:
-weight: "1"
+weight: "2"
 ---
 
 <a id="oneswap"></a>

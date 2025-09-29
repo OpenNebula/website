@@ -1,5 +1,6 @@
 ---
 title: "LXC Node Installation"
+linkTitle: "LXC Node"
 date: "2025-02-17"
 description:
 categories:

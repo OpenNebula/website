@@ -1,5 +1,6 @@
 ---
 title: "Deploy OpenNebula on AWS with miniONE"
+linkTitle: "OpenNebula on AWS"
 date: "2025-02-17"
 description:
 categories: [Introduction, Learning, Deployment, Evaluation]

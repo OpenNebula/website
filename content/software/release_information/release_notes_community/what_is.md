@@ -1,5 +1,6 @@
 ---
 title: "What is OpenNebula Community Edition"
+linkTitle: "What is OpenNebula CE"
 description:
 categories:
 pageintoc: ""

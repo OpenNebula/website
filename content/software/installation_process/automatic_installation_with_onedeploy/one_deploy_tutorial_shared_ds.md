@@ -1,5 +1,6 @@
 ---
 title: "Cloud Deployment - Shared Storage"
+linkTitle: "Deployment - Shared Storage"
 date: "2025-02-17"
 description:
 categories:

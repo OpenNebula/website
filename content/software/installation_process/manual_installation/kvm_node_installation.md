@@ -1,5 +1,6 @@
 ---
 title: "KVM Node Installation"
+linkTitle: "KVM Node"
 date: "2025-02-17"
 description:
 categories:

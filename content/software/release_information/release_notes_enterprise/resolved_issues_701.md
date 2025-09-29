@@ -17,7 +17,7 @@ The following new features have been backported to 7.0.1:
 - [Add support for internal snapshots in UEFI VMs](../../../product/operation_references/hypervisor_configuration/kvm_driver.md/#firmware)
 - [Add support for GPU monitoring and forecasting](../../../product/cloud_system_administration/resource_monitoring/metrics.md)
 - [Add support for virtual TPM devices for KVM virtual machines](../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates.md#tpm)
-- [Better onecfg error messages](../../../software/upgrade_process/configuration_management_ee/overview.md)
+- [Add better onecfg error messages](../../../software/upgrade_process/configuration_management_ee/overview.md)
 
 The following issues has been solved in 7.0.1:
 
@@ -54,8 +54,10 @@ The following issues has been solved in 7.0.1:
 - Fix iptables flags to not use unsupported options (based on iptables version) [#7215](https://github.com/OpenNebula/one/issues/7215)
 - Fix Ethernet text on Address Ranges when create VMs [#6955](https://github.com/OpenNebula/one/issues/6955)
 - Fix `Host not permitted` error on Sinatra server when is behind from NGINX proxy [#7231](https://github.com/OpenNebula/one/issues/7231)
-- Fix ownership issue when instanciate Vm as a different user [#7013](https://github.com/OpenNebula/one/issues/7013)
-- Fix re-arrange time orders when adding a scheduled action in Creating VMs. [#7031](https://github.com/OpenNebula/one/issues/7031)
+- Fix ownership issue when instantiate VM as a different user [#7013](https://github.com/OpenNebula/one/issues/7013)
+- Fix re-arrange time orders when adding a scheduled action in Creating VMs [#7031](https://github.com/OpenNebula/one/issues/7031)
 - Fix translation text when creating VMs [#7222](https://github.com/OpenNebula/one/issues/7222)
-- Fix opennebula-ovirtapi: Add LVM-thin incrementals to the Veeam integration [#7236](https://github.com/OpenNebula/one/issues/7236)
 - Fix duplicated NICs during OneFlow service creation [#7192](https://github.com/OpenNebula/one/issues/7192)
+- Fix opennebula-ovirtapi: Add LVM-thin incremental backup to the Veeam integration [#7236](https://github.com/OpenNebula/one/issues/7236)
+- Fix fsck to update history ETIME using EETIME or RETIME [#7250](https://github.com/OpenNebula/one/issues/7250)
+- Fix update a VM configuration removes some attributes [#6987](https://github.com/OpenNebula/one/issues/6987)
