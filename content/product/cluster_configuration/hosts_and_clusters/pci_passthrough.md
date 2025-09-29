@@ -229,7 +229,7 @@ The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.co
 | `PCI_FILTER`        | *(List)* Filters by PCI `vendor:device:class` patterns (same as for `lspci`)       |
 | `PCI_SHORT_ADDRESS` | *(List)* Filters by short PCI address `bus:device.function`                        |
 
-Example:
+Example: The command below filters by PCI with the `10de:*` pattern and addresses using the `e1` bus`
 ```default
 $ onehost show 0 | grep PCI
 PCI_FILTER="10de:*"
