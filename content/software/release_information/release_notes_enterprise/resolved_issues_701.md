@@ -59,3 +59,4 @@ The following issues has been solved in 7.0.1:
 - Fix translation text when creating VMs [#7222](https://github.com/OpenNebula/one/issues/7222)
 - Fix opennebula-ovirtapi: Add LVM-thin incremental backup to the Veeam integration [#7236](https://github.com/OpenNebula/one/issues/7236)
 - Fix fsck to update history ETIME using EETIME or RETIME [#7250](https://github.com/OpenNebula/one/issues/7250)
+- Fix VM placement expression parsing in Sunstone [#7158](https://github.com/OpenNebula/one/issues/7158)
