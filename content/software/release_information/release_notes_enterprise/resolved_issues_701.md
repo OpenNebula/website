@@ -64,3 +64,4 @@ The following issues has been solved in 7.0.1:
 - Fix physical CPU tooltip in Sunstone [#6867](https://github.com/OpenNebula/one/issues/6867)
 - Fix update a VM configuration removes some attributes [#6987](https://github.com/OpenNebula/one/issues/6987)
 - Fix remove tmp files after creating Image [#7252](https://github.com/OpenNebula/one/issues/7252)
+- Fix prometheus patch_datasources.rb ipv6 addresses handling [#7107](https://github.com/OpenNebula/one/issues/7107)
