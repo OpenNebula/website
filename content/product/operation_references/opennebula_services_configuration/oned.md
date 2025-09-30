@@ -1,5 +1,6 @@
 ---
 title: "OpenNebula Configuration"
+linkTitle: "OpenNebula Daemon"
 date: "2025-02-17"
 description:
 categories:

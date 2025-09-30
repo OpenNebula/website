@@ -1,5 +1,6 @@
 ---
 title: "Virtual Network Template"
+linkTitle: "Virtual Network"
 date: "2025-02-17"
 description:
 categories:

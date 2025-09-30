@@ -170,7 +170,7 @@ Simple Templates can be also created using the command line instead of creating 
 $ onetemplate create --name test-vm --memory 128 --cpu 1 --disk "Arch Linux" --nic Public
 ```
 
-For a complete reference of all the available options for `onetemplate create`, go to the [CLI reference]({{% relref "../../operation_references/configuration_references/cli#cli" %}}), or run `onetemplate create -h`.
+For a complete reference of all the available options for `onetemplate create`, go to the [CLI reference]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}), or run `onetemplate create -h`.
 
 {{< alert title="Note" color="success" >}}
 OpenNebula Templates are designed to be hypervisor-agnostic, but there are additional attributes that are supported for each hypervisor. Check the corresponding hypervisor guide for specific details.{{< /alert >}} 

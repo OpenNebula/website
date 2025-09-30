@@ -14,7 +14,7 @@ weight: "7"
 
 The OpenNebula OneFlow API is a RESTful service to create, control, and monitor services composed of interconnected Virtual Machines with deployment dependencies between them. Each group of Virtual Machines is deployed and managed as a single entity, and is completely integrated with the advanced OpenNebula user and group management. There are two kind of resources: services templates and services. All data is sent and received as JSON.
 
-This guide is intended for developers. The OpenNebula distribution includes a [cli]({{% relref "../../../product/operation_references/configuration_references/cli#cli" %}}) to interact with OneFlow and it is also fully integrated in the [Sunstone GUI]({{% relref "../../../product/operation_references/opennebula_services_configuration/oneflow#oneflow-conf-sunstone" %}}).
+This guide is intended for developers. The OpenNebula distribution includes a [cli]({{% relref "../../../product/operation_references/command_line_interface/cli#cli" %}}) to interact with OneFlow and it is also fully integrated in the [Sunstone GUI]({{% relref "../../../product/operation_references/opennebula_services_configuration/oneflow#oneflow-conf-sunstone" %}}).
 
 ## Authentication & Authorization
 

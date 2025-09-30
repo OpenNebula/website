@@ -921,7 +921,7 @@ Note: By default, the above operations do not check the target Host capacity. Yo
 
 **Troubleshooting:**
 
-- `recover`: If the VM is stuck in any other state (or the boot operation does not work), you can recover the VM with the following options. Read the [Virtual Machine Failures guide]({{% relref "../../virtual_machines_operation/troubleshooting#ftguide-virtual-machine-failures" %}}) for more information.
+- `recover`: If the VM is stuck in any other state (or the boot operation does not work), you can recover the VM with the following options. Read the [Virtual Machine Failures guide]({{% relref "../../operation_references/opennebula_services_configuration/troubleshooting#ftguide-virtual-machine-failures" %}}) for more information.
   - `--success`: simulates the success of the missing driver action
   - `--failure`: simulates the failure of the missing driver action
   - `--retry`: tries to perform the current driver action again. Optionally the `--interactive` can be combined if it's a Transfer Manager problem

@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "34"
 tags:
-weight: "3"
+weight: "7"
 ---
 
 <a id="ftguide"></a>
@@ -95,4 +95,4 @@ do
 done
 ```
 
-Continue with [Troubleshooting]({{% relref "../../virtual_machines_operation/troubleshooting#ftguide-virtual-machine-failures" %}}) guide to understand how to **recover failed VMs**.
+Continue with [Troubleshooting]({{% relref "../../operation_references/opennebula_services_configuration/troubleshooting#ftguide-virtual-machine-failures" %}}) guide to understand how to **recover failed VMs**.

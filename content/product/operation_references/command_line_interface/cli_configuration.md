@@ -1,63 +1,24 @@
 ---
-title: "Command Line Interface"
+title: "Command Line Interface Configuration"
+linkTitle: "Configuration"
 date: "2025-02-17"
 description:
 categories:
+toc: true
 pageintoc: "152"
 tags:
-weight: "4"
+weight: "3"
 ---
 
-<a id="cli"></a>
+<a id="cli-configuration"></a>
 
-<!--# Command Line Interface -->
+<!--# Command Line Interface Configuration -->
 
-OpenNebula provides a set of commands to interact with the system:
-
-## CLI
-
-* [oneacct](https://docs.opennebula.io/doc/{{< version >}}/cli/oneacct.1.html): gets accounting data from OpenNebula.
-* [oneacl](https://docs.opennebula.io/doc/{{< version >}}/cli/oneacl.1.html): manages OpenNebula ACLs.
-* [onecfg](https://docs.opennebula.io/doc/{{< version >}}/cli/onecfg.1.html): manages OpenNebula configuration files upgrade.
-* [onecluster](https://docs.opennebula.io/doc/{{< version >}}/cli/onecluster.1.html): manages OpenNebula clusters.
-* [onedatastore](https://docs.opennebula.io/doc/{{< version >}}/cli/onedatastore.1.html): manages OpenNebula datastores.
-* [onedb](https://docs.opennebula.io/doc/{{< version >}}/cli/onedb.1.html): OpenNebula database migration tool.
-* [onegroup](https://docs.opennebula.io/doc/{{< version >}}/cli/onegroup.1.html): manages OpenNebula groups.
-* [onehook](https://docs.opennebula.io/doc/{{< version >}}/cli/onehook.1.html): manages OpenNebula hooks.
-* [onehost](https://docs.opennebula.io/doc/{{< version >}}/cli/onehost.1.html): manages OpenNebula Hosts.
-* [oneimage](https://docs.opennebula.io/doc/{{< version >}}/cli/oneimage.1.html): manages OpenNebula images.
-* [onemarket](https://docs.opennebula.io/doc/{{< version >}}/cli/onemarket.1.html): manages internal and external Marketplaces.
-* [onemarketapp](https://docs.opennebula.io/doc/{{< version >}}/cli/onemarketapp.1.html): manages appliances from Marketplaces.
-* [onesecgroup](https://docs.opennebula.io/doc/{{< version >}}/cli/onesecgroup.1.html): manages OpenNebula security groups.
-* [oneshowback](https://docs.opennebula.io/doc/{{< version >}}/cli/oneshowback.1.html): OpenNebula Showback tool.
-* [onetemplate](https://docs.opennebula.io/doc/{{< version >}}/cli/onetemplate.1.html): manages OpenNebula templates.
-* [oneuser](https://docs.opennebula.io/doc/{{< version >}}/cli/oneuser.1.html): manages OpenNebula users.
-* [onevdc](https://docs.opennebula.io/doc/{{< version >}}/cli/onevdc.1.html): manages OpenNebula Virtual Datacenters.
-* [onevm](https://docs.opennebula.io/doc/{{< version >}}/cli/onevm.1.html): manages OpenNebula Virtual Machines.
-* [onevmgroup](https://docs.opennebula.io/doc/{{< version >}}/cli/onevmgroup.1.html): manages OpenNebula VMGroups.
-* [onevnet](https://docs.opennebula.io/doc/{{< version >}}/cli/onevnet.1.html): manages OpenNebula networks.
-* [onevntemplate](https://docs.opennebula.io/doc/{{< version >}}/cli/onevntemplate.1.html): manages OpenNebula networks templates.
-* [onevrouter](https://docs.opennebula.io/doc/{{< version >}}/cli/onevrouter.1.html): manages OpenNebula Virtual Routers.
-* [onezone](https://docs.opennebula.io/doc/{{< version >}}/cli/onezone.1.html): manages OpenNebula Zones.
-* [oneirb](https://docs.opennebula.io/doc/{{< version >}}/cli/oneirb.1.html): opens an irb session.
-* [onelog](https://docs.opennebula.io/doc/{{< version >}}/cli/onelog.1.html): access to OpenNebula services log files.
-
-The output of these commands can be customized by modifying the configuration files found in `/etc/one/cli/`. They also can be customized on a per-user basis, in this case the configuration files should be placed in `$HOME/.one/cli`.
-
-List operation for each command will open a `less` session for a better user experience. First elements will be printed right away while the rest will begin to be requested and added to a cache, providing faster response times, especially on big deployments. Less session will automatically be canceled if a pipe is used for better interaction with scripts, providing the traditional, non-interactive output.
-
-## OneFlow Commands
-
-* [oneflow](https://docs.opennebula.io/doc/{{< version >}}/cli/oneflow.1.html): OneFlow Service management.
-* [oneflow-template](https://docs.opennebula.io/doc/{{< version >}}/cli/oneflow-template.1.html): OneFlow Service Template management.
-
-## OneGate Commands
-
-* [onegate](https://docs.opennebula.io/doc/{{< version >}}/cli/onegate.1.html): OneGate Service management.
+There are necessary environment variables and command-line arguments for OpenNebula users to authenticate and communicate with the core services, ensuring proper function of the one* CLI tools. You will also find about the use of command-line parameters (--user, --password, --endpoint) as an alternative to environment variables and notes configuration for OneFlow and OneGate services.
 
 <a id="cli-shell"></a>
 
-## Shell Environment
+# Shell Environment
 
 OpenNebula users should have the following environment variables set, you may want to place them in the `.bashrc` of the user’s Unix account for convenience:
 
@@ -145,7 +106,7 @@ You shouldn't use `--password` parameter in a shared machine. Process parameters
 
 <a id="cli-views"></a>
 
-## CLI views
+# CLI views
 
 You can customize how certain commands are displayed by default. Each command has a yaml file associated to it, located at `/etc/one/cli/`
 
@@ -203,7 +164,9 @@ But you can change the default columns, increase the column width and disable ex
 5947 market-builder-5947              poff 172.20.0.26
 ```
 
-### Shell Environment for Self-Contained Installations
+
+
+## Shell Environment for Self-Contained Installations
 
 If OpenNebula was installed from sources in **self-contained mode** (this is not the default, and not recommended), these two variables must be also set. These are not needed if you installed from packages, or performed a system-wide installation from sources.
 

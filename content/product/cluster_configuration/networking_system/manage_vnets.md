@@ -208,7 +208,7 @@ $ onevnet show 1
   IP                                 10.0.0.150                         10.0.0.200
 ```
 
-Check the `onevnet` command help or the [reference guide]({{% relref "../../operation_references/configuration_references/cli#cli" %}}) for more options to list the Virtual Networks.
+Check the `onevnet` command help or the [reference guide]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}) for more options to list the Virtual Networks.
 
 ### Virtual Network Tips
 

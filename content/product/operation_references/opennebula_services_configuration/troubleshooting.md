@@ -14,7 +14,7 @@ weight: "6"
 
 ## Logging
 
-Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in `/var/log/one/` on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end users in [CLI]({{% relref "product/operation_references/configuration_references/cli#cli" %}}) tools or the [Sunstone GUI]({{% relref "fireedge#fireedge" %}}).
+Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in `/var/log/one/` on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end users in [CLI]({{% relref "product/operation_references/command_line_interface/cli#cli" %}}) tools or the [Sunstone GUI]({{% relref "fireedge#fireedge" %}}).
 
 ### Configure Logging System
 

@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machine Template"
+linkTitle: "Virtual Machine"
 date: "2025-02-17"
 description:
 categories:

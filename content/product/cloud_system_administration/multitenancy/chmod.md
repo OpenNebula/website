@@ -111,7 +111,7 @@ The default permissions given to newly created resources are:
 These permissions are reduced by the UMASK, which can be set:
 
 - Globally, with the **DEFAULT_UMASK** attribute in [oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}})
-- Individually for each user, using the [oneuser umask command]({{% relref "../../operation_references/configuration_references/cli#cli" %}}).
+- Individually for each user, using the [oneuser umask command]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}).
 
 These mask attributes work in a similar way to the [Unix umask command](http://en.wikipedia.org/wiki/Umask). The expected value is a three-digit base-8 number. Each digit is a mask that **disables** permissions for the **owner**, **group**, and **other**, respectively.
 
@@ -231,7 +231,7 @@ The following one allows users in group 106 to deploy VMs in Hosts assigned to t
 
 ## Managing ACL Rules via Console
 
-The ACL rules are managed using the [oneacl command]({{% relref "../../operation_references/configuration_references/cli#cli" %}}). The ‘oneacl list’ output looks like this:
+The ACL rules are managed using the [oneacl command]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}). The ‘oneacl list’ output looks like this:
 
 ```default
 $ oneacl list

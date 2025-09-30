@@ -1,5 +1,6 @@
 ---
 title: "Host States Reference"
+linkTitle: "Host States"
 date: "2025-02-17"
 description:
 categories:
