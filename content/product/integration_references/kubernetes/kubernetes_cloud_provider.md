@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes Cloud Provider"
+linkTitle: "Cloud Provider"
 date: "2025-05-19"
 description:
 categories:

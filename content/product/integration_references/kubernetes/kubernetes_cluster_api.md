@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes Cluster API Integration"
+linkTitle: "Cluster API"
 date: "2025-02-17"
 description:
 categories:

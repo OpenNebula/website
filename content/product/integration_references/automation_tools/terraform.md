@@ -1,11 +1,12 @@
 ---
 title: "Terraform Provider for OpenNebula"
+linkTitle: "Terraform Provider"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "266"
 tags:
-weight: "1"
+weight: "2"
 ---
 
 <a id="terraform"></a>

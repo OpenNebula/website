@@ -5,7 +5,7 @@ description: "Connect OpenNebula with external billing platforms to enable usage
 categories:
 pageintoc: "142"
 tags:
-weight: "5"
+weight: "4"
 ---
 
 <a id="whmcs-tenants"></a>
