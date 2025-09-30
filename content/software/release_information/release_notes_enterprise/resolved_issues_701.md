@@ -18,6 +18,9 @@ The following new features have been backported to 7.0.1:
 - [Add support for GPU monitoring and forecasting](../../../product/cloud_system_administration/resource_monitoring/metrics.md)
 - [Add support for virtual TPM devices for KVM virtual machines](../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates.md#tpm)
 - [Add better onecfg error messages](../../../software/upgrade_process/configuration_management_ee/overview.md)
+- [Add SAML authentication support](../../../product/cloud_system_administration/authentication_configuration/saml.md) *
+
+\* To use SAML authentication in this maintenance release, the configuration file needs to be created manually. To do so, please create the following file in the OpenNebula frontend: ``/etc/one/auth/saml_auth.conf``. You can find the reference template for this file [here](https://github.com/OpenNebula/one/blob/3b7ac7f70e8dde9843fd7ee1adf5d7e63e1127e5/src/authm_mad/remotes/saml/saml_auth.conf). Afterwards you will need to modify it following the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md).
 
 The following issues has been solved in 7.0.1:
 
