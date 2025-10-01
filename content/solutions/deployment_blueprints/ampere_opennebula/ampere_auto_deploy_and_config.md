@@ -1,5 +1,6 @@
 ---
 title: "Automated Deployment and Configuration"
+linkTitle: "Configuration and Deployment"
 description:
 categories:
 pageintoc: ""
