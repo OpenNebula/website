@@ -70,3 +70,4 @@ The following issues has been solved in 7.0.1:
 - Fix prometheus patch_datasources.rb ipv6 addresses handling [#7107](https://github.com/OpenNebula/one/issues/7107)
 - Fix OneGate server error output [#7251](https://github.com/OpenNebula/one/issues/7251)
 - Fix incremental backups to cleanup not needed bitmaps [#7092](https://github.com/OpenNebula/one/issues/7092)
+- Fix errors when canceling a backup operation [#6981](https://github.com/OpenNebula/one/issues/6981)
