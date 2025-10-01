@@ -5,7 +5,7 @@ description:
 categories:
 pageintoc: "165"
 tags:
-weight: "9"
+weight: "6"
 ---
 
 <a id="troubleshoot"></a>
@@ -14,14 +14,14 @@ weight: "9"
 
 ## Logging
 
-Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in `/var/log/one/` on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end users in [CLI]({{% relref "../configuration_references/cli#cli" %}}) tools or the [Sunstone GUI]({{% relref "fireedge#fireedge" %}}).
+Every OpenNebula server generates logs with a configurable verbosity (level of detail) and through different means (file, syslog, or standard error output) to allow cloud administrators to troubleshoot the potential problems. Logs are stored in `/var/log/one/` on a Front-end Host with a particular component. Some valuable error messages can be also seen by the end users in [CLI]({{% relref "product/operation_references/command_line_interface/cli#cli" %}}) tools or the [Sunstone GUI]({{% relref "fireedge#fireedge" %}}).
 
 ### Configure Logging System
 
 Follow the guides of each component to find the logs’ location and configuration of log verbosity:
 
 - OpenNebula Daemon: [logs]({{% relref "oned#oned-conf-service" %}}), [configuration]({{% relref "oned#oned-conf" %}}) (parameter `LOG/DEBUG_LEVEL`)
-- Monitoring: [logs]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf-service" %}}), [configuration]({{% relref "../../cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) (parameter `LOG/DEBUG_LEVEL`)
+- Monitoring: [logs]({{% relref "product/cloud_system_administration/resource_monitoring/monitoring_system#mon-conf-service" %}}), [configuration]({{% relref "product/cloud_system_administration/resource_monitoring/monitoring_system#mon-conf" %}}) (parameter `LOG/DEBUG_LEVEL`)
 - FireEdge: [logs]({{% relref "fireedge#fireedge-conf-service" %}}), [configuration]({{% relref "fireedge#fireedge-conf" %}}) (parameter `log`)
 - OneFlow: [logs]({{% relref "oneflow#oneflow-conf-service" %}}), [configuration]({{% relref "oneflow#oneflow-conf" %}}) (parameter `:debug_level`)
 - OneGate: [logs]({{% relref "onegate#onegate-conf-service" %}}), [configuration]({{% relref "onegate#onegate-conf" %}}) (parameter `:debug_level`)

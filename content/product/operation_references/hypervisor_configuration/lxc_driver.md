@@ -126,7 +126,7 @@ LXC containers are fully integrated with every OpenNebula networking driver.
 
 ### Container Template
 
-Container templates can be defined by using the same attributes described in [Virtual Machine Template section]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-templates" %}}).
+Container templates can be defined by using the same attributes described in [Virtual Machine Template section]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#vm-templates" %}}).
 
 ```default
 CPU="1"

@@ -1,5 +1,6 @@
 ---
 title: "OneFlow Services Auto-scaling"
+linkTitle: "Auto-scaling"
 date: "2025-02-17"
 description:
 categories:

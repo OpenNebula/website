@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machines Networking"
+linkTitle: "Virtual Networks"
 date: "2025-02-17"
 description: "Create, configure and manage virtual networks"
 categories:

@@ -44,7 +44,7 @@ All methods expect a session string associated to the connected user as the firs
 {{< alert title="Note" color="success" >}}
 Each XML-RPC request has to be authenticated and authorized. See the [Auth Subsystem documentation]({{% relref "../../../product/cloud_system_administration/multitenancy/auth_overview#auth-overview" %}}) for more information.{{< /alert >}} 
 
-The information strings returned by the `one.*.info` methods are XML-formatted. The complete XML Schemas (XSD) reference is included at the end of this page. We encourage you to use the `-x` option of the [command line interface]({{% relref "../../../product/operation_references/configuration_references/cli#cli" %}}) to collect sample outputs from your own infrastructure.
+The information strings returned by the `one.*.info` methods are XML-formatted. The complete XML Schemas (XSD) reference is included at the end of this page. We encourage you to use the `-x` option of the [command line interface]({{% relref "../../../product/operation_references/command_line_interface/cli#cli" %}}) to collect sample outputs from your own infrastructure.
 
 The methods that accept XML templates require the root element to be TEMPLATE. For instance, this template:
 

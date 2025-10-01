@@ -45,7 +45,7 @@ To deploy the Kubernetes cluster, we'll follow these high-level steps:
 In this tutorial we'll perform a basic install of the Kubernetes cluster plus the Traefik ingress router and Longhorn storage. The OneKE appliance offers additional options such as High Availability, load balancing and CNI plugins, which are out of the scope of this guide.
 
 {{< alert title="Tip" color="success" >}}
-For more information about OneKE, please see [OneKE Service (Kubernetes)]({{% relref "../../../integrations/marketplace_appliances/oneke" %}}). The full documentation for OneKE is available in the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
+For more information about OneKE, please see [OneKE Service (Kubernetes)]({{% relref "product/integration_references/marketplace_appliances/oneke" %}}). The full documentation for OneKE is available in the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
 {{< /alert >}}
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace

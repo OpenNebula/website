@@ -1,5 +1,6 @@
 ---
 title: "NFS/NAS Datastore"
+linkTitle: "NFS/NAS"
 date: "2025-02-17"
 description:
 categories:

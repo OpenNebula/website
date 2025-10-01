@@ -71,11 +71,11 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component   | Version                                    | More information                                                                                                                         |
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
-| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
+| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}) |
+| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}) |
 | Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}})  |
-| NetApp      | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../integrations/storage_extensions/netapp" %}}) |
-| LVM-thin    | NetApp ONTAP 9.16.1P1 & Pure Storage 6.7.2 | [LVM Thin]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-thin" %}}) |
+| NetApp      | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../product/cluster_configuration/san_storage/netapp" %}}) |
+| LVM-thin    | NetApp ONTAP 9.16.1P1 & Pure Storage 6.7.2 | [LVM Thin]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-thin" %}}) |
 
 ### Authentication
 
@@ -90,7 +90,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
-| Veeam B&R                    | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../integrations/backup_extensions/veeam.md" %}}) |
+| Veeam B&R                    | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
 
 ### Sunstone
 
