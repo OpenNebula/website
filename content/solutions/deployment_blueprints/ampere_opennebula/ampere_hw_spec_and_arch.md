@@ -1,5 +1,6 @@
 ---
 title: "Hardware Specification and Architecture"
+linkTitle: "Architecture and Specifications"
 description:
 categories:
 pageintoc: ""

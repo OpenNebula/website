@@ -1,7 +1,7 @@
 ---
 title: "Certified Hardware Platforms"
 description: "This section will present certified hardware configurations optimized for OpenNebula. These recommendations ensure full compatibility, performance, and support"
-weight: 2
+weight: 3
 ---
 
 {{< alert color="success" >}}
