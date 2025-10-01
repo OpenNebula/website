@@ -6,6 +6,7 @@ description: "Get a high-level overview of OpenNebula and discover the essential
 categories:
 pageintoc: "2"
 tags:
+type: docs
 weight: "1"
 ---
 

@@ -6,6 +6,7 @@ description:
 categories: [Introduction, Overview]
 pageintoc: "10"
 tags:
+type: docs
 weight: "1"
 ---
 
@@ -15,7 +16,7 @@ weight: "1"
 
 This page describes the high-level steps to design and deploy an OpenNebula cloud.
 
-To familiarize yourself with deployment and daily operations, or if you want to quickly try an Edge, Hybrid or Multi-cloud deployment, we strongly recommend you begin with the [Quick Start Guide]({{% relref "quick_start" %}}). In the Quick Start, you can:
+To familiarize yourself with deployment and daily operations, or if you want to quickly try an Edge, Hybrid or Multi-cloud deployment, we strongly recommend you begin with the [Quick Start Guide]({{% relref "understand_opennebula" %}}). In the Quick Start, you can:
 
 > * [Install an OpenNebula Front-end]({{% relref "try_opennebula" %}})
 > * Deploy [Virtual Machines]({{% relref "validate_the_minione_environment" %}}) to validate the installed infrastructure
@@ -69,7 +70,7 @@ Now you should have an OpenNebula cloud up and running with at least one virtual
 - **Networking setup** with [802.1Q VLANs]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}}), [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) or [VXLAN]({{% relref "../../../product/cluster_configuration/networking_system/vxlan#vxlan" %}}).
 - **Storage setup** with [NFS/NAS datastore]({{% relref "../../../product/cluster_configuration/storage_system/nas_ds#nas-ds" %}}), [Local Storage datastore]({{% relref "../../../product/cluster_configuration/storage_system/local_ds#local-ds" %}}), [SAN datastore]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}), [Ceph]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}}), [Dev]({{% relref "../../../product/cluster_configuration/storage_system/dev_ds#dev-ds" %}}), or [iSCSI]({{% relref "../../../product/cluster_configuration/san_storage/iscsi_ds#iscsi-ds" %}}) datastore.
 - **Host setup** with the configuration options for the [KVM hosts]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}}), [LXC hosts]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxdmg" %}}), [Monitoring subsystem]({{% relref "../../../product/cloud_system_administration/resource_monitoring" %}}), [Virtual Machine HA]({{% relref "../../../product/control_plane_configuration/high_availability/vm_ha#ftguide" %}}) or [PCI Passthrough]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/pci_passthrough#kvm-pci-passthrough" %}}).
-- **Authentication setup**, OpenNebula includes by default an internal **user/password authentication system**, but it can also use an external authentication driver such as [SSH]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ssh#ssh-auth" %}}), [x509]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}), [LDAP]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}}), [SAML]({{% relref "../../../product/cloud_system_administration/authentication_configuration/saml#saml" %}}) or [Active Directory]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}}).
+- **Authentication setup**, OpenNebula includes by default an internal **user/password authentication system**, but it can also use an external authentication driver such as [SSH]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ssh#ssh-auth" %}}), [x509]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}), [LDAP]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}}) or [Active Directory]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}}).
 
 ### 3.4. Configure Cloud Services
 

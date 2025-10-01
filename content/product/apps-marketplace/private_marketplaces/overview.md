@@ -46,7 +46,7 @@ Using the Marketplace is recommended in many scenarios. To name a few:
 
 ## How Should I Read This Chapter
 
-Before reading this Chapter make sure you have read the [Quick Start]({{% relref "../../../quick_start" %}}) guide.
+Before reading this Chapter make sure you have read the [Getting Started]({{% relref "../../../getting_started" %}}) guide.
 
 Read the [Public Marketplaces]({{% relref "../public_marketplaces/index#public-marketplaces" %}}) as it’s global for all OpenNebula installations. Then, read the specific guide for the Private Marketplace type you are interested in. Finally, read the [Managing Marketplace Apps]({{% relref "../../apps-marketplace/managing_marketplaces/marketapps" %}}) to understand what operations you can perform on Marketplace Apps.
 

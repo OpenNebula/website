@@ -6,6 +6,7 @@ description: "A comprehensive overview of OpenNebula, covering its key features,
 categories:
 pageintoc: "3"
 tags: 
+type: docs
 weight: "1"
 ---
 

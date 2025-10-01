@@ -6,6 +6,7 @@ description:
 categories: [Introduction, Learning, Deployment, Evaluation]
 pageintoc: "19"
 tags: ['Quick Start', AWS, Tutorial, miniONE]
+type: docs
 weight: "3"
 ---
 

@@ -5,6 +5,7 @@ description:
 categories: [Introduction]
 pageintoc: "12"
 tags: ['White Paper', 'Reference Architectures']
+type: docs
 weight: "3"
 ---
 

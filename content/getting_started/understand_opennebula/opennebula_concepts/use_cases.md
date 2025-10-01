@@ -5,6 +5,7 @@ description:
 categories: [Introduction]
 pageintoc: "8"
 tags: ['Use cases', 'Case Studies']
+type: docs
 weight: "5"
 ---
 

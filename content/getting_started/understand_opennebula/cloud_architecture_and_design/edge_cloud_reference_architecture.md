@@ -5,6 +5,7 @@ description:
 categories: [Introduction]
 pageintoc: "11"
 tags: ['White Paper', 'Edge Cloud', 'Reference Architectures']
+type: docs
 weight: "2"
 ---
 

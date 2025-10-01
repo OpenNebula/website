@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-us{{ end }}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ .Title }}</title>
+</head>
+<body>
+    <main>
+        <h1>{{ .Title }}</h1>
+        <article>
+            {{ .Content }} 
+        </article>
+    </main>
+</body>
+</html>

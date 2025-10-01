@@ -6,6 +6,7 @@ description:
 categories: [Learning, Evaluation, Deployment, Introduction]
 pageintoc: "23"
 tags: ['Quick Start', Kubernetes, Tutorial, OneKE]
+type: docs
 weight: "7"
 ---
 

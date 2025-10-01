@@ -7,6 +7,7 @@ hide_feedback: true
 categories:
 pageintoc: "9"
 tags:
+type: docs
 weight: "2"
 ---
 

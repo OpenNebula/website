@@ -5,6 +5,7 @@ description:
 categories: [Introduction]
 pageintoc: "7"
 tags: [Enterprise, 'Knowledge Base']
+type: docs
 weight: "4"
 ---
 

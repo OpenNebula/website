@@ -39,7 +39,7 @@ To access additional material including white papers, guides and screencasts, se
 <div class="card-columns">
 <div class="entry">
 {{< cardpane >}}
-  {{< card header="[Quick Start](/quick_start)" >}}
+  {{< card header="[Getting Started](/getting_started)" >}}
   Gain a high-level view of OpenNebula, and easily deploy a cloud for evaluation and testing.
   {{< /card >}}
   {{< card header="[Product](/product)" >}}

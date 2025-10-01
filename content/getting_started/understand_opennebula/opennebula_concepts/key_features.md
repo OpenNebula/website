@@ -5,6 +5,7 @@ description:
 categories: [Introduction, Overview]
 pageintoc: "5"
 tags: [Features]
+type: docs
 weight: "2"
 ---
 

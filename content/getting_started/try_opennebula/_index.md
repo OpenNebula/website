@@ -6,6 +6,7 @@ description: "Sequential tutorials to help you install and explore OpenNebula in
 categories:
 pageintoc: "13"
 tags:
+type: docs
 weight: "2"
 ---
 

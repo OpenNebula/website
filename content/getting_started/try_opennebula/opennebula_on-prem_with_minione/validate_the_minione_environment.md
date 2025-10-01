@@ -6,6 +6,7 @@ date: "2025-02-17"
 categories: [Learning, Evaluation, Introduction, Deployment]
 pageintoc: "24"
 tags: ['Quick Start', 'Edge Cluster']
+type: docs
 weight: "4"
 ---
 
