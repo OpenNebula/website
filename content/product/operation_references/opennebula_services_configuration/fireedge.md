@@ -1,11 +1,12 @@
 ---
 title: "FireEdge Configuration"
+linkTitle: "FireEdge"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "161"
 tags:
-weight: "5"
+weight: "3"
 ---
 
 <a id="fireedge"></a>

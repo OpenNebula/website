@@ -1,11 +1,12 @@
 ---
 title: "OneFlow Configuration"
+linktitle: "OneFlow"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "162"
 tags:
-weight: "6"
+weight: "4"
 ---
 
 <a id="appflow-configure"></a>
@@ -65,7 +66,7 @@ Sunstone tabs for OneFlow (*Services* and *Service Templates*) are enabled in Su
 
 ### Configure CLI
 
-OneFlow CLI (`oneflow` and `oneflow-template`) uses same credentials as other [command-line tools]({{% relref "../configuration_references/cli#cli" %}}). The login and password are taken from the file referenced by environment variable `$ONE_AUTH` (defaults to `$HOME/.one/one_auth`). Remote endpoint and (optionally) distinct user/password access to the above is configured in environment variable `$ONEFLOW_URL` (defaults to `http://localhost:2474`), `$ONEFLOW_USER` and `$ONEFLOW_PASSWORD`.
+OneFlow CLI (`oneflow` and `oneflow-template`) uses same credentials as other [command-line tools]({{% relref "../command_line_interface/cli#cli" %}}). The login and password are taken from the file referenced by environment variable `$ONE_AUTH` (defaults to `$HOME/.one/one_auth`). Remote endpoint and (optionally) distinct user/password access to the above is configured in environment variable `$ONEFLOW_URL` (defaults to `http://localhost:2474`), `$ONEFLOW_USER` and `$ONEFLOW_PASSWORD`.
 
 Example:
 

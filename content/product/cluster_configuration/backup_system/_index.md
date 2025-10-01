@@ -5,7 +5,7 @@ description: "Set up a backup system for Virtual Machines"
 categories:
 pageintoc: "76"
 tags:
-weight: "4"
+weight: "5"
 ---
 
 <a id="backup-system-configuration"></a>

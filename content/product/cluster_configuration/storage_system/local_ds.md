@@ -1,5 +1,6 @@
 ---
 title: "Local Storage Datastore"
+linkTitle: "Local Storage"
 date: "2025-02-17"
 description:
 categories:

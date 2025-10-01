@@ -1,5 +1,6 @@
 ---
 title: "OneFlow Services Management"
+linkTitle: "Management"
 date: "2025-02-17"
 description:
 categories:
@@ -243,7 +244,7 @@ The `oneflow-template clone` (with the optional `--recursive flag`) can be used 
 If the name of the VM template + Service template exceeds 128 chars, VM template name will be cropped.
 
 {{< alert title="Note" color="success" >}}
-[Scheduled Actions]({{% relref "../virtual_machine_definitions/vm_instances#vm-guide2-scheduling-actions" %}}) cannot be defined in VM templates if they are intended to be used as part of Service templates. Please remove them prior to instantiate a service to avoid indeterministic behavior.{{< /alert >}} 
+[Scheduled Actions]({{% relref "../virtual_machines/vm_instances#vm-guide2-scheduling-actions" %}}) cannot be defined in VM templates if they are intended to be used as part of Service templates. Please remove them prior to instantiate a service to avoid indeterministic behavior.{{< /alert >}} 
 
 <a id="appflow-use-cli-automatic-delete"></a>
 
@@ -396,7 +397,7 @@ A step called Service Inputs will render the User Inputs for the service:
 
 ![sunstone_oneflow_serviceinputs_noconvention](/images/sunstone_oneflow_serviceinputs_noconvention.png)
 
-In order to improve the user experience, Sunstone can render these user inputs in a different way, easier to understand for the Sunstone user. To do that, Sunstone uses rules based on the name of the User Inputs. [These rules are the same as the ones used in Virtual Machines templates]({{% relref "../virtual_machine_definitions/vm_templates#sunstone-layout-rules" %}}).
+In order to improve the user experience, Sunstone can render these user inputs in a different way, easier to understand for the Sunstone user. To do that, Sunstone uses rules based on the name of the User Inputs. [These rules are the same as the ones used in Virtual Machines templates]({{% relref "../virtual_machines/vm_templates#sunstone-layout-rules" %}}).
 
 So, if the previous template is modified as follows:
 
@@ -413,7 +414,7 @@ The user inputs will be grouped in a tab called APACHE with a group called CONFI
 
 If the service has a Role with a Virtual Machine template that has User Inputs that do not exist on the Service template, these User Inputs that belong to the Virtual Machine template will be rendered in a different step called Roles Inputs.
 
-So, if the Service template references to the [virtual machine template defined in]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide-user-inputs-sunstone" %}}) Sunstone look like this:
+So, if the Service template references to the [virtual machine template defined in]({{% relref "../virtual_machines/vm_templates#vm-guide-user-inputs-sunstone" %}}) Sunstone look like this:
 
 ![sunstone_oneflow_serviceinputs_noconvention_template](/images/sunstone_oneflow_serviceinputs_noconvention_template.png)
 
@@ -459,7 +460,7 @@ Remember that any User Input that doesn’t meet convention name will be place o
 
 ### Configuring Dynamic Networks in a Service Template
 
-Each Service Role is assigned either a [Virtual Machine Template]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide" %}}) or a [Virtual Router Template]({{% relref "../virtual_machines_networking/vrouter#vrouter" %}}), depending on whether its type is `vm` or `vr`, through the `template_id` attribute of each Role. This template defines the capacity and other characteristics of the instance, including network interfaces configuration. In addition to specifying Virtual Networks in the template, the Service template can also define a set of dynamic networks.
+Each Service Role is assigned either a [Virtual Machine Template]({{% relref "../virtual_machines/vm_templates#vm-guide" %}}) or a [Virtual Router Template]({{% relref "../virtual_machines_networking/vrouter#vrouter" %}}), depending on whether its type is `vm` or `vr`, through the `template_id` attribute of each Role. This template defines the capacity and other characteristics of the instance, including network interfaces configuration. In addition to specifying Virtual Networks in the template, the Service template can also define a set of dynamic networks.
 
 A Service template can define three different dynamic network modes, determining how the networks will be used, and these must be declared in the template body under the `network_values` field. These three types are explained below:
 
@@ -561,7 +562,7 @@ As you can see in the picture above, each Role of the service can be attached to
 
 A Service template can be instantiated as a Service. Each newly created Service will be deployed by OneFlow following its deployment strategy.
 
-Each Service Role creates [Virtual Machines]({{% relref "../virtual_machine_definitions/vm_instances#vm-instances" %}}) in OpenNebula from [VM Templates]({{% relref "../virtual_machine_definitions/vm_templates#vm-guide" %}}), that must be created beforehand.
+Each Service Role creates [Virtual Machines]({{% relref "../virtual_machines/vm_instances#vm-instances" %}}) in OpenNebula from [VM Templates]({{% relref "../virtual_machines/vm_templates#vm-guide" %}}), that must be created beforehand.
 
 <a id="appflow-use-cli-service-body"></a>
 
@@ -924,7 +925,7 @@ From Sunstone, this can be achieved by selecting the Recover button from the too
 
 Services are deployed automatically by the Life Cycle Manager. To undeploy a running Service, users can use the command `oneflow delete`.
 
-The command `oneflow delete` will perform a graceful `terminate` on all the running VMs (see [onevm terminate]({{% relref "../virtual_machine_definitions/vm_instances#vm-instances" %}})). If the `straight` deployment strategy is used, the Roles will be shut down in the reverse order of the deployment.
+The command `oneflow delete` will perform a graceful `terminate` on all the running VMs (see [onevm terminate]({{% relref "../virtual_machines/vm_instances#vm-instances" %}})). If the `straight` deployment strategy is used, the Roles will be shut down in the reverse order of the deployment.
 
 If any of the VM terminate operations can’t be performed, the Service state will show `FAILED` state, indicating that manual intervention is required to complete the cleanup. In any case, the Service can be completely removed using the command `oneflow recover --delete`.
 
@@ -1155,7 +1156,7 @@ In many cases, the networks and the IP of the router are dynamically assigned. T
 
 ### Service Charters
 
-This functionality automatically adds scheduling actions in VM when the service is instantiated; for more information about this, please check the [VM Charter]({{% relref "../virtual_machine_definitions/vm_instances#vm-charter" %}})
+This functionality automatically adds scheduling actions in VM when the service is instantiated; for more information about this, please check the [VM Charter]({{% relref "../virtual_machines/vm_instances#vm-charter" %}})
 
 ![image1](/images/charterts_on_services.png)
 

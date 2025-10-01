@@ -1,5 +1,6 @@
 ---
 title: "SSH Authentication"
+linkTitle: "SSH"
 date: "2025-02-17"
 description:
 categories:

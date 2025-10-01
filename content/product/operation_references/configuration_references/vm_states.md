@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machine States Reference"
+linkTitle: "Virtual Machine States"
 date: "2025-02-17"
 description:
 categories:

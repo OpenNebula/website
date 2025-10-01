@@ -1,11 +1,12 @@
 ---
 title: "OneGate Configuration"
+linkTitle: "OneGate"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "163"
 tags:
-weight: "7"
+weight: "5"
 ---
 
 <a id="onegate-conf"></a>

@@ -317,7 +317,7 @@ For SR-IOV interfaces you can configure some parameters, in particular the follo
 > - `SPOOFCHK`
 > - `TRUST`
 
-The [context packages]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}) support the configuration of the following attributes:
+The [context packages]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) support the configuration of the following attributes:
 
 * `MAC`: It will change the mac address of the corresponding network interface to the MAC assigned by OpenNebula.
 * `IP`: It will assign an IPv4 address to the interface, assuming a `/24` netmask.

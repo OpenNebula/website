@@ -1,5 +1,6 @@
 ---
 title: "Scheduler Configuration"
+linkTitle: "Configuration"
 
 description:
 categories:

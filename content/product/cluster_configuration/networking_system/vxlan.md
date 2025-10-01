@@ -1,5 +1,6 @@
 ---
 title: "VXLAN Networks"
+linkTitle: "VXLAN"
 date: "2025-02-17"
 description:
 categories:
@@ -56,6 +57,22 @@ and reload the configuration:
 ```default
 # sysctl -p
 ```
+
+<a id="vxlan-node"></a>
+
+## Node Setup
+
+### Requirements
+
+* The OpenNebula node packages are installed. See the [KVM node]({{% relref "kvm_node_installation#kvm-node" %}}) and [LXC node]({{% relref "lxc_node_installation#lxc-node" %}}) installation sections for more details.
+* The node must run a Linux kernel (>3.7.0) that natively supports the VXLAN protocol and the associated iproute2 package.
+* When all the nodes are connected to the same broadcasting domain, be sure that the multicast traffic is not filtered by any iptable rule in the nodes. Note that if the multicast traffic needs to traverse routers a multicast protocol like IGMP needs to be configured in your network.
+
+### Configuration
+
+No additional configuration is needed.
+
+
 
 ## OpenNebula Configuration
 

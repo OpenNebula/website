@@ -1,6 +1,6 @@
 ---
 title: "Grafana Visualization"
-
+linkTitle: "Grafana"
 description:
 categories:
 pageintoc: ""

@@ -1,5 +1,6 @@
 ---
 title: "Sunstone Labels"
+linkTitle: "Labels"
 date: "2025-02-17"
 description:
 categories:

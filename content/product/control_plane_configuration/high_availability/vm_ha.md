@@ -1,11 +1,12 @@
 ---
 title: "VM HA"
+linkTitle: "Virtual Machine"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "34"
 tags:
-weight: "3"
+weight: "7"
 ---
 
 <a id="ftguide"></a>

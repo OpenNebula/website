@@ -14,7 +14,7 @@ weight: "6"
 
 Most OpenNebula resources have associated permissions for the **owner**, the users in the owner's **group**, and **others**. For each one of these groups there are three rights that can be set: **USE**, **MANAGE**, and **ADMIN**. These permissions are very similar to those of UNIX file system.
 
-The resources with associated permissions are [Templates]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-guide" %}}), [VMs]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_instances#vm-guide-2" %}}), [Images]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}}) and [Virtual Networks]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}). The exceptions are [Users]({{% relref "manage_users#manage-users" %}}), [Groups]({{% relref "manage_users#manage-users" %}}) and [Hosts]({{% relref "../../cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
+The resources with associated permissions are [Templates]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#vm-guide" %}}), [VMs]({{% relref "../../virtual_machines_operation/virtual_machines/vm_instances#vm-guide-2" %}}), [Images]({{% relref "../../virtual_machines_operation/virtual_machines/images#images" %}}) and [Virtual Networks]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}). The exceptions are [Users]({{% relref "manage_users#manage-users" %}}), [Groups]({{% relref "manage_users#manage-users" %}}) and [Hosts]({{% relref "../../cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
 
 ## Managing Permission through the CLI
 
@@ -111,7 +111,7 @@ The default permissions given to newly created resources are:
 These permissions are reduced by the UMASK, which can be set:
 
 - Globally, with the **DEFAULT_UMASK** attribute in [oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}})
-- Individually for each user, using the [oneuser umask command]({{% relref "../../operation_references/configuration_references/cli#cli" %}}).
+- Individually for each user, using the [oneuser umask command]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}).
 
 These mask attributes work in a similar way to the [Unix umask command](http://en.wikipedia.org/wiki/Umask). The expected value is a three-digit base-8 number. Each digit is a mask that **disables** permissions for the **owner**, **group**, and **other**, respectively.
 
@@ -231,7 +231,7 @@ The following one allows users in group 106 to deploy VMs in Hosts assigned to t
 
 ## Managing ACL Rules via Console
 
-The ACL rules are managed using the [oneacl command]({{% relref "../../operation_references/configuration_references/cli#cli" %}}). The ‘oneacl list’ output looks like this:
+The ACL rules are managed using the [oneacl command]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}). The ‘oneacl list’ output looks like this:
 
 ```default
 $ oneacl list

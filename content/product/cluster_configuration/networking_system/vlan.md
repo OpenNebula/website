@@ -1,5 +1,6 @@
 ---
 title: "802.1Q VLAN Networks"
+linkTitle: "802.1Q VLAN"
 date: "2025-02-17"
 description:
 categories:
@@ -15,6 +16,23 @@ weight: "5"
 This guide describes how to enable network isolation provided through Host-managed VLANs. This driver will create a bridge for each OpenNebula Virtual Network and attach a VLAN-tagged network interface to the bridge. This mechanism is compliant with [IEEE 802.1Q](http://en.wikipedia.org/wiki/IEEE_802.1Q).
 
 The VLAN ID will be the same for every interface in a given network, automatically computed by OpenNebula. It may also be forced by specifying a `VLAN_ID` parameter in the [Virtual Network template]({{% relref "../../operation_references/configuration_references/vnet_template#vnet-template" %}}).
+
+
+<a id="vlan-node"></a>
+
+## Node Setup
+
+### Requirements
+
+* The OpenNebula node packages are installed. See the [KVM node]({{% relref "kvm_node_installation#kvm-node" %}}) and [LXC node]({{% relref "lxc_node_installation#lxc-node" %}}) installation sections for more details.
+* The `8021q` module must be loaded in the kernel.
+* A network switch capable of forwarding VLAN tagged traffic. The physical switch ports should be VLAN trunks.
+
+### Configuration
+
+No additional configuration is needed.
+
+
 
 ## OpenNebula Configuration
 

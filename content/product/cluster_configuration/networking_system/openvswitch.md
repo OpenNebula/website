@@ -1,5 +1,6 @@
 ---
 title: "Open vSwitch Networks"
+linkTitle: "Open vSwitch"
 date: "2025-02-17"
 description:
 categories:
@@ -18,6 +19,35 @@ The VLAN ID will be the same for every interface in a given network, calculated 
 
 {{< alert title="Warning" color="warning" >}}
 This driver doesn’t support Security Groups.{{< /alert >}} 
+
+
+<a id="openvswitch-node"></a>
+
+## Node Setup
+
+### Requirements
+
+* The OpenNebula node packages are installed. See the [KVM node]({{% relref "kvm_node_installation#kvm-node" %}}) and [LXC node]({{% relref "lxc_node_installation#lxc-node" %}}) installation sections for more details.
+* You need to install Open vSwitch on each node. Please refer to the Open vSwitch documentation to do so.
+
+### Configuration
+
+* No additional configuration is needed. If `BRIDGE` configured in the virtual network does not exist, a Linux bridge and a Open vSwitch bridge will be created when the VM is instantiated. For example:
+
+```default
+# ovs-vsctl show
+61a35859-c8a3-4fd0-a30e-185aa568956f
+    Bridge "ovsbr0"
+        Port "enp0s8"
+            Interface "enp0s8"
+        Port "one-19-0"
+            tag: 4
+            Interface "one-19-0"
+        Port "ovsbr0"
+            Interface "ovsbr0"
+                type: internal
+```
+
 
 ## OpenNebula Configuration
 

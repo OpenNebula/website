@@ -18,6 +18,19 @@ This guide describes how to deploy Bridged networks. In this mode, the Virtual M
 * **Bridged**, no filtering is made, managed bridge.
 * **Bridged with Security Groups**, iptables rules are installed to implement security groups rules.
 
+<a id="bridged-node"></a>
+
+## Node Setup
+
+### Requirements
+
+* The OpenNebula node packages are installed. See the [KVM node]({{% relref "kvm_node_installation#kvm-node" %}}) and [LXC node]({{% relref "lxc_node_installation#lxc-node" %}}) installation sections for more details.
+
+### Configuration
+
+* No additional configuration is needed. If `BRIDGE` configured in the virtual network does not exist, a new Linux bridge will be created when the VM is instantiated.
+
+
 <a id="bridged-conf"></a>
 
 ## OpenNebula Configuration

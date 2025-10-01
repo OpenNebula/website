@@ -1,5 +1,6 @@
 ---
-title: "NVIDIA vGPU & MIG"
+title: "NVIDIA GPU"
+linkTitle: "NVIDIA vGPU & MIG"
 date: "2025-02-17"
 description:
 categories:

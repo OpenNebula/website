@@ -31,7 +31,7 @@ Security Groups are not supported in the Open vSwitch modes.{{< /alert >}}
 
 Before reading this Chapter make sure you are familiar with the [Open Cloud Storage]({{% relref "../storage_system/overview#storage" %}}). It’s necessary to be aware of requirements for your selected storage solution in order to be able to design the network architecture of your hypervisor nodes.
 
-Read the common [Node Setup]({{% relref "node#networking-node" %}}) section to learn how to configure your Hosts, and then proceed to the specific section for the networking mode that you are interested in.
+In each specific section, you will find instructions to configure nodes and the procedures to deploy the networking mode of your interest.
 
 Additionally, if you are interested in optional integration with the IP Address Manager (IPAM), the external mechanism that allocates and assigns the IP addresses for the Virtual Machines, you can consult [IPAM driver]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-ipam" %}}) in the [Integration References]({{% relref "integration_references" %}}).
 

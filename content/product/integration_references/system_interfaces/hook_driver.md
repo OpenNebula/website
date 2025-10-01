@@ -146,7 +146,7 @@ RESOURCE = IMAGE
 ```
 
 {{< alert title="Note" color="success" >}}
-Check each resource guide for info about [Image states]({{% relref "../../../product/virtual_machines_operation/virtual_machine_images/images#images-states" %}}), [VM states]({{% relref "../../../product/operation_references/configuration_references/vm_states#vm-states" %}}) and [Host states]({{% relref "../../../product/operation_references/configuration_references/host_states#host-states" %}}){{< /alert >}} 
+Check each resource guide for info about [Image states]({{% relref "../../../product/virtual_machines_operation/virtual_machines/images#images-states" %}}), [VM states]({{% relref "../../../product/operation_references/configuration_references/vm_states#vm-states" %}}) and [Host states]({{% relref "../../../product/operation_references/configuration_references/host_states#host-states" %}}){{< /alert >}} 
 
 ## Managing Hooks
 

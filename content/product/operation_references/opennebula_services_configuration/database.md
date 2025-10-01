@@ -5,7 +5,7 @@ description:
 categories:
 pageintoc: "164"
 tags:
-weight: "8"
+weight: "6"
 ---
 
 <a id="database-maintenance"></a>
@@ -33,7 +33,7 @@ All the commands should be run with OpenNebula stopped, except the ones that hav
 
 This section describes the OpenNebula database maintenance command-line tool `onedb`. It can be used to get information from an OpenNebula database, backup and restore, upgrade to new versions of an OpenNebula database, clean up unused content, or fix inconsistency problems.
 
-Available subcommands (visit the [manual page]({{% relref "../configuration_references/cli#cli" %}}) for full reference):
+Available subcommands (visit the [manual page]({{% relref "../command_line_interface/cli#cli" %}}) for full reference):
 
 - [version]({{% relref "#onedb-version" %}}) - Shows current database schema version
 - [history]({{% relref "#onedb-history" %}}) - Lists history of schema upgrades

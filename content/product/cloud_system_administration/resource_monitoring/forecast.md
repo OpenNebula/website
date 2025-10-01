@@ -1,6 +1,6 @@
 ---
 title: "Resource Usage Forecast"
-
+linkTitle: "Usage Forecast"
 description:
 categories:
 pageintoc: ""

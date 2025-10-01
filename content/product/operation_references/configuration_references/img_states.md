@@ -1,5 +1,6 @@
 ---
 title: "Image States Reference"
+linkTitle: "Image States"
 date: "2025-02-17"
 description:
 categories:
@@ -14,7 +15,7 @@ weight: "6"
 
 This page is a complete reference of all the Image states that will be useful for developers and administrators doing troubleshooting.
 
-The simplified life-cycle is explained in the [Virtual Machines Images guide]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images-states" %}}). This simplified diagram uses a smaller number of state names. That section should be enough for end users and everyday administration tasks.
+The simplified life-cycle is explained in the [Virtual Machines Images guide]({{% relref "../../virtual_machines_operation/virtual_machines/images#images-states" %}}). This simplified diagram uses a smaller number of state names. That section should be enough for end users and everyday administration tasks.
 
 ## List of States
 
