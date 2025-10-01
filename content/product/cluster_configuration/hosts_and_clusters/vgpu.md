@@ -146,7 +146,7 @@ MIG (Multi-Instance GPU) allows partitioning a single GPU into multiple isolated
 This is useful for running multiple workloads delivered with a guaranteed Quality of Service (QoS) through hardware-level isolation.
 
 {{< alert title="Important" color="success" >}}
-Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. To check MIG-supported GPUs, refer to [NVIDIA's official documentation](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}} 
+Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. To check MIG-supported GPUs, refer to [NVIDIA's official documentation](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}}
 
 For more information about MIG and additional configuration resources, refer to the NVIDIA documentation [here](https://docs.nvidia.com/datacenter/tesla/pdf/NVIDIA_MIG_User_Guide.pdf).
 
@@ -166,7 +166,7 @@ $ nvidia-smi -i 0 -q | grep "MIG Mode" -A1  # Check MIG status
 ```
 
 {{< alert title="Important" color="success" >}}
-Depending on the GPU model, a GPU reset or system reboot may be required after enabling MIG mode.{{< /alert >}} 
+Depending on the GPU model, a GPU reset or system reboot may be required after enabling MIG mode.{{< /alert >}}
 
 2. List Available MIG Profiles
 
@@ -252,7 +252,7 @@ After creating new MIG partitions, profiles take time to update depending on the
 
 
 {{< alert title="Important" color="success" >}}
-Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.{{< /alert >}} 
+Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.{{< /alert >}}
 
 4. Inspect MIG Partitioning
 

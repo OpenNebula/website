@@ -16,7 +16,7 @@ weight: "7"
 
 ## Overview
 
-In this tutorial, you will deploy a Kubernetes cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes cluster with minimal effort and configuration and deploy applications on it.  
+In this tutorial, you will deploy a Kubernetes cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes cluster with minimal effort and configuration and deploy applications on it.
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
@@ -95,7 +95,7 @@ Click **Next**. Sunstone displays the **Service Inputs** screen, select the **Ku
 
 In this page you can define various parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
 
-* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes. 
+* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes.
 * **Traefik**: An automated edge router and ingress controller that handles external traffic and load balancing for your applications without manual configuration.
 
 Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** and **Enable Traefik** to the enabled position:
@@ -172,8 +172,8 @@ onevm show <VM ID> | less
 This displays the complete information for the VM, piped through the `less` pager. Use the up and down arrow to scroll, until you find the `VM NICS` table:
 
 ```default
-VM NICS                                                                         
- ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
+VM NICS
+ ID NETWORK              BRIDGE       IP              MAC               PCI_ID
   0 vnet                 minionebr    172.16.100.2    02:00:ac:10:64:02
   1 privnet              onebr1       192.168.200.2   02:00:c0:a8:c8:02
 ```
@@ -240,7 +240,7 @@ An example run as user `root`:
 ```default
 root@ip-172-31-47-22:~# ssh -A -J 172.16.100.2 192.168.200.4
 Warning: Permanently added '172.16.100.2' (ED25519) to the list of known hosts.
-The authenticity of host '192.168.200.3 (<no hostip for proxy command>)' can't be 
+The authenticity of host '192.168.200.3 (<no hostip for proxy command>)' can't be
 established.
 
 ...
@@ -379,7 +379,7 @@ oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2
         Visit /get-data to print out the dummy data
 
         </div>
-        
+
         <div>
           <h2>
             See you, Space Cowboy!
@@ -527,7 +527,7 @@ In this case you can manually instruct the VMs to report `READY` to the OneGate 
    For each VM, use the ID reported by the `onevm list` command. For example, given the `onevm` output shown above, to update the Kubernetes master node run `onegate vm update 5 --data "READY=YES"`.
 
    Then, on the VNF node you can check the status of the service with `onegate vm show`:
-   
+
    ```default
    SERVICE 3
    NAME                : OneKE 1.31
