@@ -148,7 +148,7 @@ MIG (Multi-Instance GPU) allows partitioning a single GPU into multiple isolated
 This is useful for running multiple workloads with guaranteed/isolated resources.
 
 {{< alert title="Important" color="success" >}}
-Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup.
+Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup.{{< /alert >}} 
 
 1. Enable MIG Mode
 
@@ -160,7 +160,7 @@ $ nvidia-smi -i 0 -q | grep "MIG Mode" -A1  # Check MIG status
 ```
 
 {{< alert title="Important" color="success" >}}
-A GPU reset (or system reboot) may be required after enabling MIG mode.
+A GPU reset (or system reboot) may be required after enabling MIG mode.{{< /alert >}} 
 
 2. List Available MIG Profiles
 
@@ -200,7 +200,7 @@ Each MIG instance you create will be represented as a vGPU profile by the NVIDIA
 When assigning vGPUs to VMs, these profiles appear as selectable devices corresponding to the MIG slices you configured.
 
 {{< alert title="Important" color="success" >}}
-Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.
+Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.{{< /alert >}} 
 
 4. Inspect MIG Partitioning
 
