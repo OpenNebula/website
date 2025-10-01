@@ -43,9 +43,9 @@ Defines the basic attributes of the VM including its NAME, amount of RAM (`MEMOR
 
 Each disk is defined with a DISK attribute. A VM can use three types of disk:
 
-* **Use a persistent Image**: changes to the disk Image will persist after the VM is terminated.
-* **Use a non-persistent Image**: a copy of the source Image is used, changes made to the VM disk will be lost.
-* **Volatile**: disks are created on-the-fly on the target Host. After the VM is terminated the disk is disposed.
+- **Use a persistent Image**: changes to the disk Image will persist after the VM is terminated.
+- **Use a non-persistent Image**: a copy of the source Image is used, changes made to the VM disk will be lost.
+- **Volatile**: disks are created on-the-fly on the target Host. After the VM is terminated the disk is disposed.
 
 [See Disks Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-disks-section" %}}).
 
@@ -61,7 +61,7 @@ Network **interface alias** allows you to have more than one IP on each network 
 The alias takes a lease from the network which it belongs to. So, for the OpenNebula it is the same as an NIC and exposes the same management interface, it is just different in terms of the associated Virtual Network interface within the VM.
 
 {{< alert title="Note" color="success" >}}
-The Virtual Network used for the alias can be different from that of the NIC of which it is an alias.{{< /alert >}} 
+The Virtual Network used for the alias can be different from that of the NIC of which it is an alias.{{< /alert >}}
 
 [See Network Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-network-section" %}}).
 
@@ -71,6 +71,9 @@ A virtual TPM (vTPM) can be added to KVM virtual machines by specifying the [TPM
 relref "../../operation_references/configuration_references/template#tpm-section" %}}). When doing
 so, every VM instance will also spawn a companion TPM emulator process (swtpm) in charge of
 emulating a physical TPM device for its VM.
+
+In Sunstone the TPM attribute can be added to a VM Template in the Update/Create dialog, in the second step (Advanced options) under the "OS & CPU" tab.
+![sunstone_vtpm_selector](/images/sunstone_vtpm_selector.png)
 
 #### Initial host setup
 
@@ -84,20 +87,20 @@ controlled by the qemu process, generate state files which need to be moved by O
 this is the required setup procedure to be executed **in each KVM host** beforehand in order to
 deploy TPM-enabled VMs:
 
-1) Edit `/etc/libvirt/qemu.conf` and set
+1. Edit `/etc/libvirt/qemu.conf` and set
 
 ```
 swtpm_user = "oneadmin"
 swtpm_group = "oneadmin"
 ```
 
-2) Change the owner of the swtpm's CA directory:
+2. Change the owner of the swtpm's CA directory:
 
 ```
 chown -R oneadmin:oneadmin /var/lib/swtpm-localca/
 ```
 
-3) Restart libvirtd. For example:
+3. Restart libvirtd. For example:
 
 ```
 systemctl restart libvirtd
@@ -161,7 +164,7 @@ TPM = [
 ```
 
 {{< alert title="Important" color="success" >}}
-Check the [VM definition file for a complete reference]({{% relref "../../operation_references/configuration_references/template#template" %}}){{< /alert >}} 
+Check the [VM definition file for a complete reference]({{% relref "../../operation_references/configuration_references/template#template" %}}){{< /alert >}}
 
 Simple Templates can be also created using the command line instead of creating a Template file. For example, a similar Template as the previous example can be created with the following command:
 
@@ -172,7 +175,7 @@ $ onetemplate create --name test-vm --memory 128 --cpu 1 --disk "Arch Linux" --n
 For a complete reference of all the available options for `onetemplate create`, go to the [CLI reference]({{% relref "../../operation_references/configuration_references/cli#cli" %}}), or run `onetemplate create -h`.
 
 {{< alert title="Note" color="success" >}}
-OpenNebula Templates are designed to be hypervisor-agnostic, but there are additional attributes that are supported for each hypervisor. Check the corresponding hypervisor guide for specific details.{{< /alert >}} 
+OpenNebula Templates are designed to be hypervisor-agnostic, but there are additional attributes that are supported for each hypervisor. Check the corresponding hypervisor guide for specific details.{{< /alert >}}
 
 <a id="context-overview"></a>
 
@@ -192,12 +195,12 @@ Besides the basic VM definition attributes, you can set up some extra options in
 
 The capacity attributes (`CPU`, `MEMORY`, `VCPU`) can be modified each time a VM Template is instantiated. The Template owner can decide if and how each attribute can be customized. The modification options available are:
 
-* **fixed** (`fixed`): The value cannot be modified.
-* **any value** (`text`): The value can be changed to any number by the user instantiating the Template.
-* **range** (`range`): Users will be offered a range slider between the given minimum and maximum values.
-* **list** (`list`): Users will be offered a drop-down menu to select one of the given options.
+- **fixed** (`fixed`): The value cannot be modified.
+- **any value** (`text`): The value can be changed to any number by the user instantiating the Template.
+- **range** (`range`): Users will be offered a range slider between the given minimum and maximum values.
+- **list** (`list`): Users will be offered a drop-down menu to select one of the given options.
 
-If you are using a Template file instead of Sunstone, the modification is defined with user input (`USER_INPUT`) attributes ([see below]({{% relref "#vm-guide-user-inputs" %}})). The absence of user input is an implicit *any value*. For example:
+If you are using a Template file instead of Sunstone, the modification is defined with user input (`USER_INPUT`) attributes ([see below]({{% relref "#vm-guide-user-inputs" %}})). The absence of user input is an implicit _any value_. For example:
 
 ```none
 CPU    = "1"
@@ -210,7 +213,7 @@ USER_INPUTS = [
 ```
 
 {{< alert title="Note" color="success" >}}
-Use float types for CPU, and integer types for MEMORY and VCPU. More information in [the Template reference documentation]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).{{< /alert >}} 
+Use float types for CPU, and integer types for MEMORY and VCPU. More information in [the Template reference documentation]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
 This capacity customization can be forced to be disabled for any Template in the cloud view. Read more in the [Cloud View Customization documentation]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/cloud_view.md" %}}).{{< /alert >}}
@@ -233,10 +236,10 @@ CONTEXT=[
 ```
 
 {{< alert title="Note" color="success" >}}
-If a VM Template with user inputs is used by a [Service Template Role]({{% relref "../multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}}), the user will be also asked for these inputs when the Service is created.{{< /alert >}} 
+If a VM Template with user inputs is used by a [Service Template Role]({{% relref "../multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}}), the user will be also asked for these inputs when the Service is created.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-You can use the flag `--user-inputs ui1,ui2,ui3` to use them in a non-interactive way.{{< /alert >}} 
+You can use the flag `--user-inputs ui1,ui2,ui3` to use them in a non-interactive way.{{< /alert >}}
 
 [See User Inputs Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).
 
@@ -266,6 +269,7 @@ The result will be a step with all the user inputs that are defined in the Templ
 In order to improve the user experience, Sunstone can render these user inputs in a different way that is easy to understand for the Sunstone user. To do that, Sunstone uses rules based on the name of the user inputs. These rules are:
 
 <a id="sunstone-layout-rules"></a>
+
 - User input name has to meet the following convention `ONEAPP_<APP>_<GROUP>_<FIELD>` where all the user inputs that meet this convention will be grouped by APP and GROUP. An APP will be rendered as a tab in Sunstone and a GROUP will group the user inputs that belong to this group.
 - If `FIELD` displays the word `ENABLED` and the user input type is boolean, all the user inputs that have the same APP and GROUP will be hidden until the ENABLED user input is turned on.
 - If a user input does not meet the convention, it will be placed in a tab called Others.
@@ -305,7 +309,7 @@ In order to help the Sunstone user, the Virtual Machine templates can be extende
 [See User Inputs Section Metadata in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-user-inputs-metadata" %}}).
 
 {{< alert title="Note" color="success" >}}
-The attribute `USER_INPUTS_METADATA` only will be used in Sunstone, not in other components of OpenNebula.{{< /alert >}} 
+The attribute `USER_INPUTS_METADATA` only will be used in Sunstone, not in other components of OpenNebula.{{< /alert >}}
 
 So, if we use the previous Template and add the following information:
 
@@ -343,7 +347,7 @@ Due to the elements with TYPE equal to GROUP, CONFIG group has the title Configu
 
 ### Schedule Actions
 
-If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g.,  *“Shut down the VM 5 hours after it started”*. You can also add a Scheduled action at [VM instantiation]({{% relref "../virtual_machine_definitions/vm_instances#vm-guide2-scheduling-actions" %}}).
+If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g., _“Shut down the VM 5 hours after it started”_. You can also add a Scheduled action at [VM instantiation]({{% relref "../virtual_machine_definitions/vm_instances#vm-guide2-scheduling-actions" %}}).
 
 [See Schedule Actions Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}).
 
@@ -359,8 +363,8 @@ Each VM Template can have a cost per hour. This cost is set by the CPU unit and 
 
 There are a few features of the [Cloud View]({{% relref "../../control_plane_configuration/graphical_user_interface/cloud_view#cloud-view" %}}) that will work if you configure the Template to make use of them:
 
-* The Cloud View gives access to the VM’s VNC, but only if it is configured in the Template.
-* End users can upload their public ssh key. This requires the VM guest to be [contextualized]({{% relref "#context-overview" %}}), and the Template must have the ssh contextualization enabled.
+- The Cloud View gives access to the VM’s VNC, but only if it is configured in the Template.
+- End users can upload their public ssh key. This requires the VM guest to be [contextualized]({{% relref "#context-overview" %}}), and the Template must have the ssh contextualization enabled.
 
 ### Make the Images Non-Persistent
 
@@ -444,7 +448,7 @@ NIC=[
 A user can delete the second disk but cannot delete the first disk because it has a restricted attribute.
 
 {{< alert title="Warning" color="warning" >}}
-The provided attributes replace the existing ones. To add a new disk, the current one needs to be added also.{{< /alert >}} 
+The provided attributes replace the existing ones. To add a new disk, the current one needs to be added also.{{< /alert >}}
 
 ```default
 $ onetemplate instantiate 0 --disk BaseOS,"Ubuntu 16.04"
