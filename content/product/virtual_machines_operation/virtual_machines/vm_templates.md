@@ -348,7 +348,7 @@ Due to the elements with TYPE equal to GROUP, CONFIG group has the title Configu
 
 ### Schedule Actions
 
-If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g., _“Shut down the VM 5 hours after it started”_. You can also add a Scheduled action at [VM instantiation]({{% relref "./vm_instances" %}}).
+If you want to perform a pre-defined operation on a VM, you can use the Scheduled Actions. The selected operation will be performed on the VM at a specific time, e.g., _“Shut down the VM 5 hours after it started”_. You can also add a Scheduled action at [VM instantiation]({{% relref "./vm_instances#scheduled-actions-for-virtual-machines" %}}).
 
 [See Schedule Actions Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}).
 
