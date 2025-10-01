@@ -1,27 +1,107 @@
 ---
-title: "Automated Deployment and Configuration"
-description:
-categories:
-pageintoc: ""
-tags:
-weight: 3
+title: IONOS
+weight: 1
 ---
 
-This section details a step-by-step procedure to provision the reference infrastructure on the IONOS Cloud, demonstrated by screenshots. It provides guidance on how to extract the list of required parameters of the provisioned infrastructure, which will later be used for the automation of the OpenNebula deployment.
+[IONOS](https://www.ionos.com/) is an internet service provider whose offerings include cloud infrastructure, services and hosting. OpenNebula supports deploying a cloud on hosted IONOS infrastructure, and managing cloud resources through the OpenNebula control interfaces. The resulting OpenNebula hosted infrastructure has been validated as part of the OpenNebula Cloud-Ready Certification Program.
 
-## Infrastructure Provisioning
+To deploy and verify an OpenNebula cloud on hosted IONOS infrastructure, OpenNebula provides [Hosted Cloud IONOS](https://github.com/OpenNebula/hosted-cloud-ionos), a set of Ansible playbooks that allows you to deploy and verify an OpenNebula cloud with a few simple commands.
+
+This guide provides a complete deployment and verification path to create an OpenNebula Hosted Cloud using IONOS infrastructure. It includes an OpenNebula Architecture specifically tailored for the IONOS infrastructure, as well as the hardware specification from the IONOS offering.
+
+Following this guide, you can:
+
+- Request the necessary hardware resources using the IONOS interface.
+- Perform a Zero-touch deployment of OpenNebula over these resources.
+- Ensure the correct operation of the resulting cloud using an automated verification procedure.
+
+Additionally, this guide includes a brief description of how to instantiate a Virtual Machine, to help you get started on your OpenNebula Hosted Cloud.
+
+## Basic Outline of the Deployment Procedure
+
+Performing the deployment involves these high-level steps:
+
+1. Create the deployment base of networked servers on IONOS.
+2. Clone the dedicated OpenNebula Hosted Cloud for IONOS GitHub repository on your deployment machine.
+3. Modify the repository with the parameters for your IONOS infrastructure.
+4. Perform the automated deployment to the IONOS infrastructure.
+5. Verify the deployment by running the automated verification command.
+
+## Additional Information Resources
+
+- [IONOS Data Center Designer documentation](https://docs.ionos.com/cloud/set-up-ionos-cloud/data-center-designer)
+- [OpenNebula Hosted Cloud IONOS](https://github.com/OpenNebula/hosted-cloud-ionos)
+- [Ansible documentation](https://docs.ansible.com/)
+
+
+<a id="ionos_hw_spec_and_arch"></a>
+
+## Hardware Specification and Architecture
+
+### Architecture
+
+The target high-level cloud architecture overview is shown below. Two hosts are deployed: the first for hosting the OpenNebula Front-end services and VMs, the second for hosting VMs only. Both machines should have a public IP, which is used to manage the nodes. Additional public IPs are required to access running Virtual Machines. The proposed model connects VMs internally using VXLAN networks, with at least one VM assigned a public IP to act as a gateway, NATing traffic to and from the internal network.
+
+![><][high-level]
+
+[high-level]: /images/solutions/ionos/high-level-architecture.png
+
+### Hardware Specification
+
+
+#### Front-end Requirements
+
+| FRONT-END  |
+| :---- | :---- |
+| Number of Zones | 1 |
+| Cloud Manager | OpenNebula {{< release >}} |
+| Server Specs | IONOS server with 2 dedicated cores and 8GB RAM (CPU model depends on the selected location) |
+| Operating System | Debian 12 |
+| High Availability | No (1 Front-end) |
+| Authorization | Builtin |
+
+
+#### Host Requirements
+
+| VIRTUALIZATION HOSTS  |
+| :---- | :---- |
+| Number of Nodes | 1 |
+| Server Specs | IONOS server with 2 dedicated cores and 8GB RAM (CPU model depends on the selected location) |
+| Operating System | Debian 12 |
+| Hypervisor | KVM |
+| Special Devices | None |
+
+#### Storage Specification
+
+| STORAGE   |
+| :---- | :---- |
+| Type | SSH drivers using local disks |
+| Capacity | Full size of servers local disks |
+
+
+#### Network Requirements
+
+| NETWORK   |
+| :---- | :---- |
+| Networking | VXLAN, Public routed network |
+| Number of Networks | 2 networks: VXLAN  Public routed network, with each host machine having a NIC and a public IP |
+
+
+## Automated Deployment and Configuration
+
+### Infrastructure Provisioning
 
 The virtual servers can be deployed through the IONOS [Data Center Designer (DCD)](https://dcd.ionos.com/). Start by creating a new Virtual Data Center (VDC) and selecting a location. The processor models available for the servers depend on the chosen location—for example, Intel Skylake may not be available everywhere. After deploying the virtual servers, in the DCD you should see your newly-created infrastructure as shown below:
 
 ![><][dcd-layout]
 
-This page will guide you in building this configuration. You will need to take into account the details described in the [Hardware and Software Specification]({{% relref "ionos_hw_spec_and_arch" %}}) section.
+This page will guide you in building this configuration. You will need to take into account the details described in the [Hardware and Software Specification](#ionos_hw_spec_and_arch) section.
 
-### Build with DCD
+#### Build with DCD
 
 To achieve the deployment base shown in the figure above, follow the below steps:
 
-1. Add two servers, ensuring to select the specifications as shown in [Front-end]({{% relref "ionos_hw_spec_and_arch#front-end-requirements" %}}) for the first server and [Host]({{% relref "ionos_hw_spec_and_arch#host-requirements" %}}) for the second.
+1. Add two servers, ensuring to select the specifications as shown in [Front-end](#front-end-requirements) for the first server and [Host](#host-requirements) for the second.
    1. Choose a server type with dedicated cores.
    2. Select an available processor model for your location (for example, **Intel Skylake**).
    3. Set the number of cores to **2**.
@@ -53,21 +133,21 @@ To effect the changes, click the **Provision changes** button in the DCD. Implem
 
 These steps can also be automated using the [IONOS Cloud API](https://api.ionos.com/docs/cloud/v6/), [SDKs](https://docs.ionos.com/reference/software-development-kits/sdks/cloud-api-sdks), or the [Terraform provider](https://docs.ionos.com/terraform-provider).
 
-### Generate IONOS Token
+#### Generate IONOS Token
 
 Access the [IONOS Token Manager](https://dcd.ionos.com/latest/#/tokens), generate a new token, and save the token's value. As indicated in the screenshot below, you will not be able to access this value later, so make sure you save it securely.
 
 <a id="token-manager"></a>
 ![><][token-manager]
 
-### Retrieve Data Center UUID
+#### Retrieve Data Center UUID
 
 At the [IONOS Data Center Designer web UI](https://dcd.ionos.com/), open the canvas where the infrastructure was designed. Copy and save the virtual data center's UUID by clicking the **API** icon, as shown below.
 
 <a id="dcd-uuid"></a>
 ![><][dcd-uuid]
 
-## Save Required Parameters
+### Save Required Parameters
 
 At this point, all required infrastructure components should be deployed and configured in the IONOS DCD. To proceed with OpenNebula deployment, we need to extract and save some required parameters that the deployment automation relies on.
 
@@ -87,7 +167,7 @@ To find the value of the `PHYDEV` parameter for the VXLAN and the public bridge,
 
 If the first and second NICs were consistently used to connect the servers to the internet and the LAN respectively, the names of the interfaces should be the same on all servers -- that is, the output of `ip address` should display the same names for the first and second NICs. Verify that this is indeed the case, by accessing multiple servers and inspecting the output of the `ip address` command.
 
-## Deployment and Verification
+### Deployment and Verification
 
 The complete OpenNebula deployment procedure and all of the required resources are available in the [OpenNebula hosted IONOS repo](https://github.com/OpenNebula/cloud-hosted-ionos), also referred to as the **deployment repository**. For instructions on how to use the required parameters extracted from the provisioned IONOS infrastructure, please check the `README` file in the repo.
 
