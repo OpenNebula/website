@@ -31,7 +31,7 @@ There are different Image Datastores depending on how the images are stored on t
 : - [NFS/NAS]({{% relref "nas_ds#nas-ds" %}})
   - [Local Storage]({{% relref "local_ds#local-ds" %}})
   - [Ceph]({{% relref "ceph_ds#ceph-ds" %}})
-  - [SAN]({{% relref "lvm_drivers#lvm-drivers" %}})
+  - [SAN]({{% relref "../san_storage/lvm_drivers#lvm-drivers" %}})
   - [Raw Device Mapping]({{% relref "dev_ds#dev-ds" %}})
   - [iSCSI - Libvirt]({{% relref "iscsi_ds#iscsi-ds" %}}), to access iSCSI devices through the built-in QEMU support
   - [NetApp]({{% relref "netapp" %}}) - Datastore to register a NetApp SAN appliance, provided as an Enterprise Extension
@@ -40,7 +40,7 @@ There are different Image Datastores depending on how the images are stored on t
 
 Each datastore supports different features, here is a basic overview:
 
-|                                                                                                                 | [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}) | [Local]({{% relref "local_ds#local-ds" %}}) | [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) | [SAN]({{% relref "lvm_drivers#lvm-drivers" %}}) | [iSCSI]({{% relref "iscsi_ds#iscsi-ds" %}}) |
+|                                                                                                                 | [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}) | [Local]({{% relref "local_ds#local-ds" %}}) | [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) | [SAN]({{% relref "../san_storage/lvm_drivers#lvm-drivers" %}}) | [iSCSI]({{% relref "iscsi_ds#iscsi-ds" %}}) |
 | ------------------------------------------------------------------------------------------------                | ----------------------------              | ------------------------------              | ---------------------------              | ----------------------------------              | ------------------------------              |
 | Disk snapshots                                                                                                  | yes                                       | yes                                         | yes                                      | yes (LVM Thin only)                             | yes                                         |
 | VM snapshots                                                                                                    | yes                                       | yes                                         | no                                       | no                                              | no                                          |

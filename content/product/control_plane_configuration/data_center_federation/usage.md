@@ -1,5 +1,6 @@
 ---
 title: "Federation Usage"
+linkTitle: "Usage"
 date: "2025-02-17"
 description:
 categories:
