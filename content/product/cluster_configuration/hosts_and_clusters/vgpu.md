@@ -1,5 +1,5 @@
 ---
-title: "NVIDIA GPU"
+title: "NVIDIA vGPU & MIG"
 linkTitle: "NVIDIA vGPU"
 date: "2025-02-17"
 description:
@@ -11,9 +11,9 @@ weight: "6"
 
 <a id="kvm-vgpu"></a>
 
-<!--# NVIDIA vGPU support -->
+<!--# NVIDIA vGPU & MIG support -->
 
-This section describes how to configure the hypervisor in order to use NVIDIA vGPU features.
+This section describes how to configure the hypervisor in order to use NVIDIA vGPU & MIG features.
 
 ## BIOS
 
@@ -142,12 +142,91 @@ $ udevadm control --reload-rules && udevadm trigger
 {{< alert title="Note" color="success" >}}
 Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}}
 
+## (Optional) Using MIG-backed vGPU for GPU partitioning
+
+MIG (Multi-Instance GPU) allows partitioning a single GPU into multiple isolated GPU instances.
+This is useful for running multiple workloads with guaranteed/isolated resources.
+
+{{< alert title="Important" color="success" >}}
+Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup.
+
+1. Enable MIG Mode
+
+Enable MIG on a specific GPU (example: index 0):
+
+```default
+$ nvidia-smi -i 0 -mig 1
+$ nvidia-smi -i 0 -q | grep "MIG Mode" -A1  # Check MIG status
+```
+
+{{< alert title="Important" color="success" >}}
+A GPU reset (or system reboot) may be required after enabling MIG mode.
+
+2. List Available MIG Profiles
+
+MIG profiles define how the GPU can be split into slices.
+Each profile specifies the fraction of GPU compute and memory.
+
+We can list aviable MIG Profiles with:
+
+```default
+$ nvidia-smi mig -lgip
+```
+Based on the output we can split the GPU on instances using profiles IDs.
+
+3. Create MIG Instances
+
+You can create GPU Instances (GI) and Compute Instances (CI).
+The -cgi option creates both in a single command.
+
+Examples (H100 94GB):
+
+- Create 2 homogeneous instances:
+
+```default
+$ nvidia-smi mig -cgi 19,19 -C
+```
+
+- Create 3 heterogeneous instances:
+
+```default
+$ nvidia-smi mig -cgi 14,14,19 -C
+```
+
+You can add more instances later as long as GPU resources are available (check aviable profiles with nvidia-smi mig -lgip).
+Similarly, you can remove specific instances (see step 5) to free resources and reconfigure the partitioning without resetting the whole GPU.
+
+Each MIG instance you create will be represented as a vGPU profile by the NVIDIA driver.
+When assigning vGPUs to VMs, these profiles appear as selectable devices corresponding to the MIG slices you configured.
+
+{{< alert title="Important" color="success" >}}
+Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.
+
+4. Inspect MIG Partitioning
+
+We can use the following commands in order to show existing MIG partitioning:
+
+```default
+$ nvidia-smi mig -lgi   # list existing GPU instances
+$ nvidia-smi mig -lci   # list existing compute instances
+$ nvidia-smi mig -L     # list existing MIG devices
+```
+
+5. Destroy MIG Instances
+
+To remove MIG partitions, destroy Compute Instances (CI) first, then GPU Instances (GI):
+
+```default
+$ nvidia-smi mig -dci -i <GPU_ID> -gi <GI_ID> -ci <Compute_ID>
+$ nvidia-smi mig -dgi -i <GPU_ID> -gi <GI_ID>
+```
+
 ## Using the vGPU
 
 Once the setup is complete, you can follow the [general steps]({{% relref "pci_passthrough#pci-config" %}}) for adding PCI devices to a VM. For NVIDIA GPUs, please consider the following:
 
 - OpenNebula supports both the legacy mediated device interface and the new vendor-specific interface introduced with Ubuntu 24.04. The vGPU device configuration is handled automatically by the virtualization and monitoring drivers. The monitoring process automatically sets the appropriate mode for each device using the `MDEV_MODE` attribute.
-- NVIDIA vGPUs can be configured using different profiles, which define the vGPU’s characteristics and hardware capabilities. These profiles are retrieved from the drivers by the monitoring process, allowing you to easily select the one that best suits your application’s requirements.
+- NVIDIA vGPUs can be configured using different profiles, which define the vGPU’s characteristics and hardware capabilities. These profiles are retrieved from the drivers by the monitoring process, allowing you to easily select the one that best suits your application’s requirements. When using MIG, each MIG instance you created appears as a separate vGPU profile.
 
 The following example shows the monitoring information for a NVIDIA vGPU device:
 
