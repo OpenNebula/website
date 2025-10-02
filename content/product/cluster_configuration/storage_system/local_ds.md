@@ -193,7 +193,7 @@ For the distributed cache to work, the `oneadmin` user (see [Node installation](
 
 ## Using the Cache
 
-When a VM is launched or migrated, the cache manager performs the following steps:
+When you launch or migrate a VM, the cache manager performs the following steps:
 
 1. **Check Local Cache:** Looks for the image in the host's local cache. If found and valid, it returns the local path.
 
