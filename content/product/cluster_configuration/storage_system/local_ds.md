@@ -158,7 +158,7 @@ When a VM is launched:
 - If the image is not there, it checks the _central cache_.
 - If the image is not in either cache, the host retrieves it from the Image Datastore on the Front-end.
 
-Once downloaded, the image is stored in both the _local_ and _central_ caches for future use.
+Once the cache manager downloads the image, this is stored in both the _local_ and _central_ caches for future use.
 
 ![><](/images/local_ds_cache.png)
 
