@@ -147,3 +147,7 @@ group:
 OpenNebula Contextualization packages with versions lower than 7.0 are not compatible with the OneGate
 shipped in OpenNebula 7.0, please update context packages accordingly. Future versions of OpenNebula,
 including next maintenance release, will fix this backwards compatibility issue.
+
+## Migration to System xmlrpc-c Library
+
+Prior to OpenNebula 7.0.1, we shipped a precompiled xmlrpc-c library linked with OpenNebula. Since all supported operating systems now provide a sufficiently recent version of this library, bundling it is no longer necessary. The OpenNebula core now relies on the system-provided xmlrpc-c packages.
