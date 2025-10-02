@@ -108,7 +108,7 @@ $ virsh nodedev-dumpxml pci_0000_41_00_0
 ### Enabling Virtual Functions
 
 {{< alert title="Important" color="success" >}}
-You may need to perform this operation every time you reboot your server.{{< /alert >}}
+You need to perform this operation every time you reboot your server.{{< /alert >}}
 
 ```default
 $ # /usr/lib/nvidia/sriov-manage -e slot:bus:domain.function
