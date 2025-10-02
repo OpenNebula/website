@@ -240,14 +240,13 @@ The distributed cache maintains VM disk images in two levels:
 
 2. **Central (Upstream) Cache**: One or more “central” cache nodes (typically the hosts with the most resources) maintain a larger pool of images shared by the entire cluster.
 
-When a VM is instantiated, the Host first checks its *local cache* for the needed image. If missing, it then checks the *central cache*. Only if the image is not found in either cache does the Host request it from the Image Datastore on the Front-end. Once retrieved from the Front-end, the image is stored in both caches for future reuse.
+When a VM is instantiated, the Host first checks its _local cache_ for the needed image. If missing, it then checks the _central cache_. Only if the image is not found in either cache does the Host request it from the Image Datastore on the Front-end. Once retrieved from the Front-end, the image is stored in both caches for future reuse.
 
 ![><](/images/local_ds_cache.png)
 
 ## How to Enable and Configure the Cache
 
 The Cache is configured per **Image Datastore**. In other words, each Image Datastore in OpenNebula that uses the local TM driver defines its own cache settings. The cache settings are described in the next table:
-
 
 | Attribute         | Description                                                                                                                                                           | Deault value         |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
@@ -256,7 +255,6 @@ The Cache is configured per **Image Datastore**. In other words, each Image Data
 | `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` resides) allocated for caching. For example, "10" means 10 % of that disk may be used. | `10`                 |
 | `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                   | `''` (no upstreams)  |
 | `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         | `900`                |
-
 
 For example, to configure a Distributed Cache update the image datastore template with the following parameters:
 
@@ -267,6 +265,10 @@ CACHE_MAX_SIZE  = "10"
 CACHE_UPSTREAMS = "hostname0,hostname2"
 CACHE_MIN_AGE   = "900"
 ```
+
+When you create a new Datastore, configure these settings through Sunstone .
+
+![sunstone_ds_cache_config](/images/sunstone_ds_cache_config.png)
 
 {{< alert title="Note" color="success" >}}
 For the distributed cache to work, the `oneadmin` user (see [Node installation]({{% relref "../../../product/operation_references/hypervisor_configuration" %}})) must have SSH passwordless authentication configured on all Hosts.{{< /alert >}}
