@@ -140,7 +140,7 @@ $ udevadm control --reload-rules && udevadm trigger
 ```
 
 {{< alert title="Note" color="success" >}}
-You can check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}}
+Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}}
 
 ## Using the vGPU
 
