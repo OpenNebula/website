@@ -74,7 +74,7 @@ The following attributes can be overridden at Cluster and Host level, but not wi
 
 - `OVMF_UEFIS`: to specify allowed file paths for Open Virtual Machine Firmware
 - `Q35_ROOT_PORTS`: to modify the number of PCI devices that can be attached in q35 VMs (defaults to 16)
-- `Q35_NUMA_PCIE`: Generate a NUMA-aware PCIe topology for pinned VMs
+- `Q35_NUMA_PCIE`: to generate a NUMA-aware PCIe topology for pinned VMs
 - `CGROUPS_VERSION`: Use ‘2’ to use Cgroup V2, all other values or undefined: use Cgroup V1
 - `EMULATOR_CPUS`: Value used for KVM option <cputune><emulatorpin cpuset=…>
 
