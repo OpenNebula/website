@@ -164,7 +164,7 @@ Once downloaded, the image is stored in both the _local_ and _central_ caches fo
 
 ## How to Enable and Configure the Cache
 
-The cache is configured **per Image Datastore**. As a result, each datastore will have its own cache settings. The cache settings are described in the next table:
+The cache is configured **per Image Datastore**. As a result, each datastore has its own cache settings. The cache settings are described in the next table:
 
 | Attribute         | Description                                                                                                                                                                          | Deault value         |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
