@@ -72,3 +72,6 @@ The following issues has been solved in 7.0.1:
 - Fix incremental backups to cleanup not needed bitmaps [#7092](https://github.com/OpenNebula/one/issues/7092)
 - Fix errors when canceling a backup operation [#6981](https://github.com/OpenNebula/one/issues/6981)
 - Fix incorrect default views in FireEdge Sunstone for CLI-created users/groups [#7183](https://github.com/OpenNebula/one/issues/7183)
+- Fix VM user template update in OneGate when using `--erase` [#7239](https://github.com/OpenNebula/one/issues/7239)
+- Fix add edit/delete buttons for VM attributes [#7201](https://github.com/OpenNebula/one/issues/7201)
+- Fix rule addition for security group creation. [#7206](https://github.com/OpenNebula/one/issues/7206)
