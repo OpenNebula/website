@@ -129,7 +129,7 @@ export FORCE_DESTROY=yes
 
 Optionally, you can set up cgroups to control resources on your Hosts. By default KVM VMs will be placed in the `machine.slice`, the resources assigned in this slice can be adjusted for each hypervisor. The [libvirt cgroups documentation](https://libvirt.org/cgroups.html) describes all the cases and the way the cgroups are managed by libvirt/KVM.
 
-OpenNebula will compute the `shares` attribute of the Libvirt domain using the `CPU` parameter and the base share value, which depends on the cgroups version of the hypervisor. For example, a VM with `CPU=2` will get a cgroup value of `cpu.shares = 2048` (or `cpu.weight=200` for cgroups version 2), twice the default value. Note that if you have a mix of cgroups version 1 and 2 Hosts, you may have inconsistent resource distribution when live-migrating a VM across different versions.
+OpenNebula computes the `shares` attribute of the Libvirt domain using the `CPU` parameter and the base share value, which depends on the cgroups version of the hypervisor. For example, a VM with `CPU=2` will get a cgroup value of `cpu.shares = 2048` (or `cpu.weight=200` for cgroups version 2), twice the default value. If you have a mix of cgroups combining version 1 and 2 Hosts, there will be an inconsistent resource distribution when live-migrating a VM across different versions.
 
 <a id="kvmg-memory-cleanup"></a>
 
