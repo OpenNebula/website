@@ -160,6 +160,7 @@ all:
     ansible_user: root
     one_version: '{{< version >}}'
     one_pass: opennebulapass
+    ensure_hosts: true
     vn:
       admin_net:
         managed: true
@@ -188,16 +189,17 @@ node:
 
 The table below lists some of the parameters, please update them to your setup:
 
-| Parameter     | Description                                                                                   |
-|---------------|-----------------------------------------------------------------------------------------------|
-| `one_version` | The OpenNebula version to install.                                                            |
-| `one_pass`    | Password for the OpenNebula user `oneadmin`.                                                  |
-| `vn`          | Parameters for the OpenNebula virtual network (`admin_net`) that will be created for the VMs. |
-| `PHYDEV`      | The physical interface on the servers that will attach to the virtual network.                |
-| `AR`          | Address range (first `IP` and `SIZE`) available to assign to the VMs.                         |
-| `GATEWAY`     | Default gateway for the network.                                                              |
-| `DNS`         | DNS server of the network.                                                                    |
-| `f1,n1,n2`    | `ansible_host` IP address for the Front-end (`f1`) and Hypervisors (`n1` and `n2`) .          |
+| Parameter      | Description                                                                                                           |
+|----------------|-----------------------------------------------------------------------------------------------------------------------|
+| `one_version`  | The OpenNebula version to install.                                                                                    |
+| `one_pass`     | Password for the OpenNebula user `oneadmin`.                                                                          |
+| `ensure_hosts` | Boolean to populate `/etc/hosts` on all nodes using `ansible_host` IPs and inventory hostnames (`f1`, `n1` and `n2`). |
+| `vn`           | Parameters for the OpenNebula virtual network (`admin_net`) that will be created for the VMs.                         |
+| `PHYDEV`       | The physical interface on the servers that will attach to the virtual network.                                        |
+| `AR`           | Address range (first `IP` and `SIZE`) available to assign to the VMs.                                                 |
+| `GATEWAY`      | Default gateway for the network.                                                                                      |
+| `DNS`          | DNS server of the network.                                                                                            |
+| `f1,n1,n2`     | `ansible_host` IP address for the Front-end (`f1`) and Hypervisors (`n1` and `n2`).                                   |
 
 In this example, the Front-end will be installed on the server with IP 172.20.0.2, and the two Hypervisors on 0.3 and 0.4, respectively. The virtual network will be bridged through the `eth0` interface of the hypervisors, and VMs will get IP addresses within the range 172.20.0.100 - 172.20.0.147, using 172.20.0.1 as the default gateway.
 
