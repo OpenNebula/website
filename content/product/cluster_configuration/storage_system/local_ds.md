@@ -93,7 +93,7 @@ Be sure to use the same `TM_MAD` for both the System and Image datastores. When 
 - `DD_BLOCK_SIZE`: Block size for dd operations (default: 64kB). Configured in `/var/lib/one/remotes/etc/datastore/fs/fs.conf`.
 - `SUPPORTED_FS`: Comma-separated list of every filesystem supported for creating formatted datablocks. Configured in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
 - `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Configured in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
-- `SPARSE`: If set to `NO` the images and disks in the image and system Datastore, respectively, will not be sparsed (i.e. the files will use all assigned space on the Datastore filesystem).
+- `SPARSE`: When the value is `NO`, the images and disks in the image and System Datastore, respectively, will not be sparsed (i.e. the files will use all assigned space on the Datastore filesystem).
 
 {{< alert title="Warning" color="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
