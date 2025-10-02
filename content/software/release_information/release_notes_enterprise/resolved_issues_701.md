@@ -71,3 +71,4 @@ The following issues has been solved in 7.0.1:
 - Fix OneGate server error output [#7251](https://github.com/OpenNebula/one/issues/7251)
 - Fix incremental backups to cleanup not needed bitmaps [#7092](https://github.com/OpenNebula/one/issues/7092)
 - Fix errors when canceling a backup operation [#6981](https://github.com/OpenNebula/one/issues/6981)
+- Fix incorrect default views in FireEdge Sunstone for CLI-created users/groups [#7183](https://github.com/OpenNebula/one/issues/7183)
