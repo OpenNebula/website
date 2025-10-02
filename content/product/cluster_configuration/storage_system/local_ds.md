@@ -58,7 +58,7 @@ ID: 101
 ```
 
 {{< alert title="Note" color="success" >}}
-When different System Datastores are available, the `TM_MAD_SYSTEM` attribute will be set after selecting the Datastore.{{< /alert >}}
+When different System Datastores are available, select one to have the the `TM_MAD_SYSTEM` attribute set.{{< /alert >}}
 
 ### Create Image Datastore
 
