@@ -178,7 +178,7 @@ CACHE_UPSTREAMS = "hostname0,hostname2"
 CACHE_MIN_AGE   = "3600"
 ```
 
-These settings can be configured through Sunstone when creating a new datastore.
+When you create a new Datastore, configure these settings through Sunstone .
 
 ![sunstone_ds_cache_config](/images/sunstone_ds_cache_config.png)
 
