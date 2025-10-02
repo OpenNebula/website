@@ -155,7 +155,7 @@ The following are template attributes specific to KVM. Please refer to the [temp
 
 #### DISK
 
-- `TYPE`: This attribute defines the type of media to be exposed to the VM; possible values are `disk` (default) or `cdrom`. This attribute corresponds to the `media` option of the `-driver` argument of the `kvm` command.
+- `TYPE`: this attribute defines the type of media to be exposed to the VM; possible values are `disk` (default) or `cdrom`. This attribute corresponds to the `media` option of the `-driver` argument of the `kvm` command.
 - `DRIVER`: specifies the format of the disk image; possible values are `raw`, `qcow2`… This attribute corresponds to the `format` option of the `-driver` argument of the `kvm` command.
 - `CACHE`: specifies the optional cache mechanism; possible values are `default`, `none`, `writethrough`, and `writeback`.
 - `IO`: sets IO policy; possible values are `threads` and `native`.
