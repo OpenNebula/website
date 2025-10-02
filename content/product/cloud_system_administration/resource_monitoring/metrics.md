@@ -52,6 +52,12 @@ The MONITOR information includes the following data:
 
 The metrics above are directly read from and stored in the monitoring database.
 
+{{< alert title="Note" color="success" >}}
+GPU metrics represent combined values across all detected GPUs. This may be a sum or average depending on the metric.{{< /alert >}}
+
+{{< alert title="Note" color="success" >}}
+GPU load can spike very quickly (e.g. during inference). Since probes run at configurable intervals (MONITOR_VM, default 30s in monitord.conf), short spikes may not be captured. Lower the interval to capture more details. You can check monitoring configuration [here]({{% relref "../../../product/cloud_system_administration/resource_monitoring/monitoring_system" %}}). {{< /alert >}} 
+
 Additionally, the following derived metrics are calculated from the stored metrics and used for forecasting. These derived metrics are not stored in the database but are computed on-demand:
 
 | Key             | Description                                              |
