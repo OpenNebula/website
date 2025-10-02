@@ -385,7 +385,7 @@ QEMU Guest Agent allows the communication of some actions with the guest OS. Thi
 The agent package needed in the Guest OS is available in most distributions. It’s called `qemu-guest-agent` in most of them. If you need more information you can follow these links:
 
 - [QEMU Guest Agent - libvirt](http://wiki.libvirt.org/page/Qemu_guest_agent)
-- [QEMU Guest Agent - rhel](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Virtualization_Deployment_and_Administration_Guide/chap-QEMU_Guest_Agent.html)
+- [QEMU Guest Agent - rhel](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_virtualization/assembly_enabling-virtualization-in-rhel-9_configuring-and-managing-virtualization#enabling-qemu-guest-agent-features-on-your-virtual-machines_assembly_enabling-virtualization-in-rhel-9)
 - [Guest Agent Features](https://wiki.qemu.org/Features/GuestAgent)
 
 The communication channel with guest agent is enabled in the domain XML when the `GUEST_AGENT` feature is selected in the VM Template.
