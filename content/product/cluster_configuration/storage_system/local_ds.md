@@ -31,8 +31,7 @@ Just make sure that there is enough space under `/var/lib/one/datastores` to sto
 Local datastore requires that:
 - The **Frontend hostnames are resolvable** from all Hosts.
 - Every Host (including the Front-end) can **SSH to every other Host**, including themselves.
-
-Otherwise, migrations and image transfers may fail.{{< /alert >}}  
+{{< /alert >}}  
 
 ## OpenNebula Configuration
 
