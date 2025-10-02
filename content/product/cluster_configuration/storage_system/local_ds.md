@@ -99,7 +99,7 @@ Be sure to use the same `TM_MAD` for both the System and Image datastores. When 
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-When using a Local Storage Datastore the `QCOW2_OPTIONS` attribute is ignored since the cloning script uses the `tar` command instead of `qemu-img`.{{< /alert >}}
+When using a Local Storage Datastore, the `QCOW2_OPTIONS` attribute is ignored because the cloning script uses the `tar` command instead of `qemu-img`.{{< /alert >}}
 
 ## Datastore Drivers
 
