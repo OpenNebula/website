@@ -223,5 +223,5 @@ If the total cache size exceeds `CACHE_MAX_SIZE`, the cache manager removes the 
 If there is still not enough space after eviction, the new image is fetched directly from the Front-end without caching.
 
 {{< alert title="Warning" color="warning" >}}
-Images used within the last `CACHE_MIN_AGE` seconds cannot be eviction.{{< /alert >}}
+Images used within the last `CACHE_MIN_AGE` seconds cannot be evicted.{{< /alert >}}
 
