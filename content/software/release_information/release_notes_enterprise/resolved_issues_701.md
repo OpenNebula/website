@@ -71,3 +71,4 @@ The following issues has been solved in 7.0.1:
 - Fix OneGate server error output [#7251](https://github.com/OpenNebula/one/issues/7251)
 - Fix incremental backups to cleanup not needed bitmaps [#7092](https://github.com/OpenNebula/one/issues/7092)
 - Fix errors when canceling a backup operation [#6981](https://github.com/OpenNebula/one/issues/6981)
+- Fix rule addition for security group creation. [#7206](https://github.com/OpenNebula/one/issues/7206)
