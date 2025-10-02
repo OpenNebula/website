@@ -18,4 +18,4 @@ In a small installation with a few Hosts you can use OpenNebula without giving m
 {{< image path="/images/overview_vdc.svg" alt="Cloud provisioning model based on Virtual Data Centers (VDCs)" align="center" width="90%" pb="20px" >}}
 
 {{< alert title="Note" color="success" >}}
-The White Paper of the Cloud Provisioning Models and User Roles is publicly available for [download](https://support.opennebula.pro/hc/en-us/articles/360018778938-Cloud-Provisioning-Models-and-User-Roles).{{< /alert >}} 
+The White Paper of the Cloud Provisioning Models and User Roles is publicly available for [download](https://support.opennebula.pro/hc/en-us/articles/360018778938-Cloud-Provisioning-Models-and-User-Roles).{{< /alert >}}

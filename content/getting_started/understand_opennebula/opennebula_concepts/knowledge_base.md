@@ -18,4 +18,4 @@ The OpenNebula Customer Portal provides exclusive answers to common questions an
 ![image](/images/knowledge_base.png)
 
 {{< alert title="Note" color="success" >}}
-Open content in our [Enterprise Portal](https://support.opennebula.pro/hc/en-us/categories/360003026332-Solutions-and-Best-Practices).{{< /alert >}} 
+Open content in our [Enterprise Portal](https://support.opennebula.pro/hc/en-us/categories/360003026332-Solutions-and-Best-Practices).{{< /alert >}}

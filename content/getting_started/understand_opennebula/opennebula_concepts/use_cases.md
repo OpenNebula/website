@@ -20,7 +20,7 @@ Browse the ever-expanding catalog of screencasts created by the OpenNebula Team 
 ![image1](/images/use_cases.png)
 
 {{< alert title="Note" color="success" >}}
-Browse the catalog of screencasts and tutorial videos [here](https://opennebula.io/screencasts/).{{< /alert >}} 
+Browse the catalog of screencasts and tutorial videos [here](https://opennebula.io/screencasts/).{{< /alert >}}
 
 ## User Stories
 
@@ -29,7 +29,7 @@ OpenNebula is used to implement different types of cloud deployments, from cloud
 ![image2](/images/user_stories.png)
 
 {{< alert title="Note" color="success" >}}
-Browse user stories from organizations using OpenNebula [here](https://opennebula.io/opennebula-user-stories/).{{< /alert >}} 
+Browse user stories from organizations using OpenNebula [here](https://opennebula.io/opennebula-user-stories/).{{< /alert >}}
 
 ## Case Studies
 
@@ -38,4 +38,4 @@ Learn more from OpenNebula users about how they are putting OpenNebula to work! 
 ![image3](/images/case_studies.png)
 
 {{< alert title="Note" color="success" >}}
-Browse case studies from organizations using OpenNebula [here](https://opennebula.io/case-studies/).{{< /alert >}} 
+Browse case studies from organizations using OpenNebula [here](https://opennebula.io/case-studies/).{{< /alert >}}
