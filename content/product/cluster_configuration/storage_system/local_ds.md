@@ -197,7 +197,7 @@ When you launch or migrate a VM, the cache manager performs the following steps:
 
 1. **Check Local Cache:** Looks for the image in the host's local cache. If found and valid, it returns the local path.
 
-2. **Check Upstream Cache:** If missing locally (or invalid), checks each host in `CACHE_UPSTREAMS`. If found, it copies it locally and returns that path.
+2. **Check Upstream Cache:** If the image is missing locally (or invalid), the cache manager checks each host in `CACHE_UPSTREAMS`. If found, it copies the image locally and returns that path.
 
 3. **Fallback to Front-End:** If not found in any cache, retrieves the image from the Image Datastore on the Front-end. Then stores it locally and on the central cache.
 
