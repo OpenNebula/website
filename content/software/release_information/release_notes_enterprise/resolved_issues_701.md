@@ -75,3 +75,4 @@ The following issues has been solved in 7.0.1:
 - Fix VM user template update in OneGate when using `--erase` [#7239](https://github.com/OpenNebula/one/issues/7239)
 - Fix add edit/delete buttons for VM attributes [#7201](https://github.com/OpenNebula/one/issues/7201)
 - Fix rule addition for security group creation. [#7206](https://github.com/OpenNebula/one/issues/7206)
+- Fix Security Group Role Description for IPs. [#7186](https://github.com/OpenNebula/one/issues/7186)
