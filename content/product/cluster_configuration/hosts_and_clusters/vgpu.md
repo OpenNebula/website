@@ -1,6 +1,6 @@
 ---
 title: "NVIDIA GPU"
-linkTitle: "NVIDIA vGPU"
+linkTitle: "NVIDIA vGPU & MIG"
 date: "2025-02-17"
 description:
 categories:
@@ -11,9 +11,9 @@ weight: "6"
 
 <a id="kvm-vgpu"></a>
 
-<!--# NVIDIA vGPU support -->
+<!--# NVIDIA vGPU & MIG support -->
 
-This section describes how to configure the hypervisor in order to use NVIDIA vGPU features.
+This section describes how to configure the hypervisor in order to use NVIDIA vGPU & MIG features.
 
 ## BIOS
 
@@ -142,12 +142,164 @@ $ udevadm control --reload-rules && udevadm trigger
 {{< alert title="Note" color="success" >}}
 Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}}
 
+## (Optional) Using MIG-backed vGPU for GPU partitioning
+
+MIG (Multi-Instance GPU) allows partitioning a single GPU into multiple isolated GPU instances.
+This is useful for running multiple workloads with guaranteed/isolated resources.
+
+{{< alert title="Important" color="success" >}}
+Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. You can check MIG supported GPUs [here](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}} 
+
+{{< alert title="Note" color="success" >}}
+For more information about MIG and additional configuration resources, you can check NVIDIA documentation [here](https://docs.nvidia.com/datacenter/tesla/pdf/NVIDIA_MIG_User_Guide.pdf).{{< /alert >}} 
+
+
+1. Enable MIG Mode
+
+Enable MIG on a specific GPU (example: index 0):
+
+```default
+$ nvidia-smi -i 0 -mig 1
+Enabled MIG Mode for GPU 00000000:e1:00.0
+All done.
+
+$ nvidia-smi -i 0 -q | grep "MIG Mode" -A1  # Check MIG status
+    MIG Mode
+        Current                           : Enabled
+```
+
+{{< alert title="Important" color="success" >}}
+A GPU reset (or system reboot) may be required after enabling MIG mode.{{< /alert >}} 
+
+2. List Available MIG Profiles
+
+MIG profiles define how the GPU can be split into slices.
+Each profile specifies the fraction of GPU compute and memory.
+
+We can list aviable MIG Profiles with:
+
+```default
+$ nvidia-smi mig -lgip
++-----------------------------------------------------------------------------+
+| GPU instance profiles:                                                      |
+| GPU   Name             ID    Instances   Memory     P2P    SM    DEC   ENC  |
+|                              Free/Total   GiB              CE    JPEG  OFA  |
+|=============================================================================|
+|   0  MIG 1g.12gb       19     7/7        10.62      No     16     1     0   |
+|                                                             1     1     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 1g.12gb+me    20     1/1        10.62      No     16     1     0   |
+|                                                             1     1     1   |
++-----------------------------------------------------------------------------+
+|   0  MIG 1g.24gb       15     4/4        21.50      No     26     1     0   |
+|                                                             1     1     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 2g.24gb       14     3/3        21.50      No     32     2     0   |
+|                                                             2     2     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 3g.47gb        9     2/2        46.12      No     60     3     0   |
+|                                                             3     3     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 4g.47gb        5     1/1        46.12      No     64     4     0   |
+|                                                             4     4     0   |
++-----------------------------------------------------------------------------+
+|   0  MIG 7g.94gb        0     1/1        92.62      No     132    7     0   |
+|                                                             8     7     1   |
++-----------------------------------------------------------------------------+
+```
+Based on the output we can split the GPU on instances using profiles IDs.
+
+3. Create MIG Instances
+
+You can create GPU Instances (GI) and Compute Instances (CI).
+The -cgi option creates both in a single command.
+
+Examples (H100 94GB):
+
+- Create 2 homogeneous instances:
+
+```default
+$ nvidia-smi mig -cgi 19,19 -C
+Successfully created GPU instance ID 2 on GPU 0 using profile MIG 1g.12gb (ID 9)
+Successfully created compute instance ID 0 on GPU 0 GPU instance ID 2 using
+ profile MIG 1g.12gb (ID 19)
+Successfully created GPU instance ID 1 on GPU 0 using profile MIG 1g.12gb (ID 9)
+Successfully created compute instance ID 0 on GPU 0 GPU instance ID 1 using
+ profile MIG 1g.12gb (ID 19)
+```
+
+- Create 3 heterogeneous instances:
+
+```default
+$ nvidia-smi mig -cgi 14,14,19 -C
+Successfully created GPU instance ID 3 on GPU 0 using profile MIG 1g.12gb (ID 9)
+Successfully created compute instance ID 0 on GPU 0 GPU instance ID 3 using
+ profile MIG 1g.12gb (ID 19)
+Successfully created GPU instance ID 2 on GPU 0 using profile MIG 2g.24gb (ID 9)
+Successfully created compute instance ID 0 on GPU 0 GPU instance ID 2 using
+ profile MIG 2g.24gb (ID 14)
+Successfully created GPU instance ID 1 on GPU 0 using profile MIG 2g.24gb (ID 9)
+Successfully created compute instance ID 0 on GPU 0 GPU instance ID 1 using
+ profile MIG 2g.24gb (ID 14)
+```
+
+You can add more instances later as long as GPU resources are available (check aviable profiles with nvidia-smi mig -lgip).
+Similarly, you can remove specific instances (see step 5) to free resources and reconfigure the partitioning without resetting the whole GPU.
+
+Each MIG instance you create will be represented as a vGPU profile by the NVIDIA driver.
+When assigning vGPUs to VMs, these profiles appear as selectable devices corresponding to the MIG slices you configured.
+
+{{< alert title="Important" color="success" >}}
+After creating new MIG partitions, profiles may take some time to update depending on the monitoring configuration. To update the profiles immediately, you can use the `onehost forceupdate <hostid>` command.
+{{< /alert >}}
+
+
+{{< alert title="Important" color="success" >}}
+Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.{{< /alert >}} 
+
+4. Inspect MIG Partitioning
+
+We can use the following commands in order to show existing MIG partitioning:
+
+```default
+$ nvidia-smi mig -lgi   # list existing GPU instances
++-------------------------------------------------------+
+| GPU instances:                                        |
+| GPU   Name             Profile  Instance   Placement  |
+|                          ID       ID       Start:Size |
+|=======================================================|
+|   0  MIG 1g.12gb         19       13          6:1     |
++-------------------------------------------------------+
+|   0  MIG 2g.24gb         14        3          0:2     |
++-------------------------------------------------------+
+|   0  MIG 2g.24gb         14        4          2:2     |
++-------------------------------------------------------+
+|   0  MIG 2g.24gb         14        5          4:2     |
++-------------------------------------------------------+
+
+$ nvidia-smi -L     # list existing devices
+GPU 0: NVIDIA H100 NVL (UUID: GPU-81495ec7-da36-8ea5-9f7d-5804aa3fef20)
+  MIG 2g.24gb     Device  0: (UUID: MIG-7839bf6f-ba33-59f0-89eb-01c8d8c4134d)
+  MIG 2g.24gb     Device  1: (UUID: MIG-433a63e2-53a4-58c0-9b8d-a4dba3eb8f36)
+  MIG 2g.24gb     Device  2: (UUID: MIG-34fa791a-69d2-560b-969f-f2aa1d900c44)
+  MIG 1g.12gb     Device  3: (UUID: MIG-dbf12406-b888-52e8-80ee-025b6412f6e4)
+```
+
+5. Destroy MIG Instances
+
+To remove MIG partitions, destroy Compute Instances (CI) first, then GPU Instances (GI):
+
+```default
+$ nvidia-smi mig -dci -i <GPU_ID> -gi <GI_ID> -ci <Compute_ID>
+$ nvidia-smi mig -dgi -i <GPU_ID> -gi <GI_ID>
+```
+
 ## Using the vGPU
 
 Once the setup is complete, you can follow the [general steps]({{% relref "pci_passthrough#pci-config" %}}) for adding PCI devices to a VM. For NVIDIA GPUs, please consider the following:
 
 - OpenNebula supports both the legacy mediated device interface and the new vendor-specific interface introduced with Ubuntu 24.04. The vGPU device configuration is handled automatically by the virtualization and monitoring drivers. The monitoring process automatically sets the appropriate mode for each device using the `MDEV_MODE` attribute.
-- NVIDIA vGPUs can be configured using different profiles, which define the vGPU’s characteristics and hardware capabilities. These profiles are retrieved from the drivers by the monitoring process, allowing you to easily select the one that best suits your application’s requirements.
+- NVIDIA vGPUs can be configured using different profiles, which define the vGPU’s characteristics and hardware capabilities. These profiles are retrieved from the drivers by the monitoring process, allowing you to easily select the one that best suits your application’s requirements. When using MIG, each MIG instance you created appears as a separate vGPU profile.
 
 The following example shows the monitoring information for a NVIDIA vGPU device:
 
