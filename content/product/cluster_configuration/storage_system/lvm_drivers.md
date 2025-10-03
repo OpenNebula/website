@@ -329,8 +329,7 @@ Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the cor
 
 Images are stored as regular files (under the usual path: `/var/lib/one/datastores/<id>`) in the Image Datastore, but they will be dumped into a Logical Volumes (LV) upon Virtual Machine creation. The Virtual Machines will run from Logical Volumes in the Host.
 
-![image0](/images/fs_lvm_datastore.png)
-
+![image0](/images/fs_lvm_datastore.svg)
 {{< alert title="Note" color="success" >}}
 Files are dumped directly from the Front-end to the LVs in the Host, using the SSH protocol.{{< /alert >}}
 
