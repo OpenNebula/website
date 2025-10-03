@@ -76,3 +76,4 @@ The following issues has been solved in 7.0.1:
 - Fix add edit/delete buttons for VM attributes [#7201](https://github.com/OpenNebula/one/issues/7201)
 - Fix rule addition for security group creation. [#7206](https://github.com/OpenNebula/one/issues/7206)
 - Fix FireEdge Sunstone deletes RAW section from the template instantiation [#7200](https://github.com/OpenNebula/one/issues/7200)
+- Fix Security Group Role Description for IPs. [#7186](https://github.com/OpenNebula/one/issues/7186)
