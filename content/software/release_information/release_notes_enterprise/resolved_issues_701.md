@@ -21,7 +21,7 @@ The following new features have been backported to 7.0.1:
 - [Add SAML authentication support](../../../product/cloud_system_administration/authentication_configuration/saml.md) *
 - [Add LVM-thin incremental backup to the Veeam integration](../../../integrations/backup_extensions/veeam.md#compatibility)
 
-\* To use SAML authentication in this maintenance release, the configuration file needs to be created manually. To do so, please create the following file in the OpenNebula frontend: ``/etc/one/auth/saml_auth.conf``. You can find the reference template for this file [here](https://github.com/OpenNebula/one/blob/3b7ac7f70e8dde9843fd7ee1adf5d7e63e1127e5/src/authm_mad/remotes/saml/saml_auth.conf). Make sure to follow the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md#configuration) and modify the ``/etc/one/oned.conf`` file, as SAML isn't enabled by default in 7.0.1.
+\* To use SAML authentication in this maintenance release, make sure to follow the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md#configuration) and modify the ``/etc/one/oned.conf`` file, as SAML isn't enabled by default in 7.0.1.
 
 The following issues has been solved in 7.0.1:
 
