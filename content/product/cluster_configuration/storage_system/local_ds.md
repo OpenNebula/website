@@ -142,31 +142,37 @@ In this case, the System Datastore is distributed among the Hosts. The **local**
 
 ## Distributed Cache
 
-To improve the speed of VM provisioning and reduce bandwidth consumption when using Local Storage Datastores, OpenNebula supports a two-tier distributed cache mechanism. This section describes how to enable and use the cache, and the benefits it provides.
+OpenNebula can speed up VM provisioning and reduce bandwidth usage when using Local Storage Datastores by using a **two-level distributed cache**. This section explains what the distributed cache is, how to enable it, and how it works.
 
 ### What is the Distributed Cache?
 
-The distributed cache maintains VM disk images in two levels:
+The distributed cache stores VM disk images in two levels:
 
 1. **Local Cache (per Host)**: Each compute host keeps a small cache of the images it has already retrieved.
 
-2. **Central (Upstream) Cache**: One or more “central” cache nodes (typically the hosts with the most resources) maintain a larger pool of images shared by the entire cluster.
+2. **Central (Upstream) Cache**: One or more “central” cache nodes (usually the hosts with the most resources) store a larger pool of images shared by the entire cluster.
 
-When a VM is instantiated, the Host first checks its _local cache_ for the needed image. If missing, it then checks the _central cache_. Only if the image is not found in either cache does the Host request it from the Image Datastore on the Front-end. Once retrieved from the Front-end, the image is stored in both caches for future reuse.
+When a VM is launched:
+
+- The host first checks its _local cache_.
+- If the image is not there, it checks the _central cache_.
+- If the image is not in either cache, the host retrieves it from the Image Datastore on the Front-end.
+
+Once the cache manager downloads the image, this is stored in both the _local_ and _central_ caches for future use.
 
 ![><](/images/local_ds_cache.png)
 
 ## How to Enable and Configure the Cache
 
-The Cache is configured per **Image Datastore**. In other words, each Image Datastore in OpenNebula that uses the local TM driver defines its own cache settings. The cache settings are described in the next table:
+The cache is configured **per Image Datastore**. As a result, each datastore has its own cache settings. The cache settings are described in the next table:
 
-| Attribute         | Description                                                                                                                                                           | Deault value         |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| `CACHE_ENABLE`    | Set to `yes` to enable the distributed cache for this Image Datastore, or `no` to disable it.                                                                         | `NO`                 |
-| `CACHE_PATH`      | Absolute directory where cached images will be stored (e.g., `/var/lib/one/cache`).                                                                                   | `/var/lib/one/cache` |
-| `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` resides) allocated for caching. For example, "10" means 10 % of that disk may be used. | `10`                 |
-| `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                   | `''` (no upstreams)  |
-| `CACHE_MIN_AGE`   | Minimum age in seconds before a cached image can be evicted. For example, "3600" means that any image used within the last hour cannot be removed from cache.         | `900`                |
+| Attribute         | Description                                                                                                                                                                          | Deault value         |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
+| `CACHE_ENABLE`    | Set to `yes` to enable the distributed cache , or `no` to disable it.                                                                                                                | `NO`                 |
+| `CACHE_PATH`      | Directory where cached images are stored.                                                                                                                                            | `/var/lib/one/cache` |
+| `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` is located) that can be used for caching. For example, `10` means up to 10% of that disk can be used. | `10`                 |
+| `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                                  | `''` (no upstreams)  |
+| `CACHE_MIN_AGE`   | Minimum time in seconds before a cached image can be evicted. For example, `3600` means images used within the last hour cannot be removed from cache.                               | `900`                |
 
 For example, to configure a Distributed Cache update the image datastore template with the following parameters:
 
@@ -182,20 +188,20 @@ When you create a new Datastore, configure these settings through Sunstone .
 
 ![sunstone_ds_cache_config](/images/sunstone_ds_cache_config.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Warning" color="warning" >}}
 For the distributed cache to work, the `oneadmin` user (see [Node installation]({{% relref "../../../product/operation_references/hypervisor_configuration" %}})) must have SSH passwordless authentication configured on all Hosts.{{< /alert >}}
 
 ## Using the Cache
 
-When a VM is launched or migrated, the cache manager performs the following three steps:
+When you launch or migrate a VM, the cache manager performs the following steps:
 
-1. **Local Cache Check:** The cache manager checks the local cache for the image. If it is found and still valid (modtime matches the one in the Image Datastore), it returns the local path.
+1. **Check Local Cache:** Looks for the image in the host's local cache. If found and valid, it returns the local path.
 
-2. **Upstream Cache Check:** If missing locally (or invalid), the cache manager iterates through each `CACHE_UPSTREAMS`. If an image is found on an upstream Host, it stores a copy locally and returns that path.
+2. **Check Upstream Cache:** If the image is missing locally (or invalid), the cache manager checks each host in `CACHE_UPSTREAMS`. If found, it copies the image locally and returns that path.
 
-3. **Fallback to Front-End:** If not found in any cache, it falls back to retrieving the image from the Image Datastore on the Front-end, then stores it both locally and on the central cache.
+3. **Fallback to Front-End:** If not found in any cache, retrieves the image from the Image Datastore on the Front-end. Then stores it locally and on the central cache.
 
-In each Host's cache path (e.g. `/var/lib/one/cache/`) cached images appear as two files:
+Cached images are stored in the cache directory (e.g., `/var/lib/one/cache/`) like this:
 
 ```default
 /var/lib/one/cache/1/
@@ -203,17 +209,19 @@ In each Host's cache path (e.g. `/var/lib/one/cache/`) cached images appear as t
 └── c3af91e2b1d2ab9f64a25d99f9a2fbd2-metadata
 ```
 
-The metadata is a YAML file which contains:
+The metadata file (YAML) contains:
 
 ```default
 last_used: "2025-05-30T14:22:10Z"       # ISO 8601 timestamp of the most recent cache hit
 modtime:   "1725552553"                 # Last OpenNebula image modification time
 ```
 
-## Eviction Policy.
+## Eviction Policy
 
-When the total size of cached files exceeds the `CACHE_MAX_SIZE` threshold, the cache manager automatically removes the Least-Recently-Used (LRU) entries until there is enough room for the incoming image. If after evicting all eligible entries there is still insufficient space to store a new image, the caching operation fails and the VM instantiation proceeds by fetching directly from the Front-end without caching.
+If the total cache size exceeds `CACHE_MAX_SIZE`, the cache manager removes the Least Recently Used (LRU) images until there is enough space.
+
+If there is still not enough space after eviction, the new image is fetched directly from the Front-end without caching.
 
 {{< alert title="Warning" color="warning" >}}
-Images used within the last `CACHE_MIN_AGE` seconds are exempt from eviction.{{< /alert >}}
+Images used within the last `CACHE_MIN_AGE` seconds cannot be evicted.{{< /alert >}}
 

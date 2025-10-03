@@ -61,7 +61,7 @@ This is a simplified view mainly intended for end users that just require a port
 
 ## Configuring Access to the Views
 
-By default, the `admin` view is only available to the `oneadmin` group. New users will use the default `cloud` view. The views assigned to a given group can be defined in the group creation form or by updating an existing group to implement different OpenNebula models. For more information on the different OpenNebula models please check the [Understanding OpenNebula documentation]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}).
+By default, the `admin` view is only available to the `oneadmin` group. New users will use the default `cloud` view. The views assigned to a given group can be defined in the group creation form or by updating an existing group to implement different OpenNebula models. For more information on the different OpenNebula models please check the [Understanding OpenNebula documentation]({{% relref "../../../getting_started/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}).
 
 ![fireedge_sunstone_group_defview](/images/fireedge_sunstone_group_defview.png)
 
