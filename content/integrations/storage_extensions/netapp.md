@@ -213,6 +213,10 @@ Incremental backups are created by first creating the base full backup from the 
 You can configure the block size ( Defualt 2097152 B / 2 MB ) for incremental backups by modifing the file at `/var/tmp/one/etc/tm/san/backup.conf`
 {{< /alert >}}
 
+{{< alert title="Warning" color="warning" >}}
+The incremental backup feature of NetApp requires the `nbd` kernel module to be loaded and the `nbdfuse` package to be installed on all OpenNebula nodes.
+{{< /alert >}}
+
 ## System Considerations
 
 Occasionally, under network interruptions or if a volume is deleted directly from NetApp, the iSCSI connection may drop or fail. This can cause the system to hang on a `sync` command, which in turn may lead to OpenNebula operation failures on the affected Host. Although the driver is designed to manage these issues automatically, it’s important to be aware of these potential iSCSI connection challenges.
