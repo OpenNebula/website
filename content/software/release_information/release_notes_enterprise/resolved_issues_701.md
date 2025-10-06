@@ -18,10 +18,10 @@ The following new features have been backported to 7.0.1:
 - [Add support for GPU monitoring and forecasting](../../../product/cloud_system_administration/resource_monitoring/metrics.md)
 - [Add support for virtual TPM devices for KVM virtual machines](../../../product/virtual_machines_operation/virtual_machine_definitions/vm_templates.md#tpm)
 - [Add better onecfg error messages](../../../software/upgrade_process/configuration_management_ee/overview.md)
-- [Add SAML authentication support](../../../product/cloud_system_administration/authentication_configuration/saml.md) *
+- [Add SAML authentication support](../../../product/cloud_system_administration/authentication_configuration/saml.md) \*
 - [Add LVM-thin incremental backup to the Veeam integration](../../../integrations/backup_extensions/veeam.md#compatibility)
 
-\* To use SAML authentication in this maintenance release, make sure to follow the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md#configuration) and modify the ``/etc/one/oned.conf`` file, as SAML isn't enabled by default in 7.0.1.
+\* To use SAML authentication in this maintenance release, make sure to follow the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md#configuration) and modify the `/etc/one/oned.conf` file, as SAML isn't enabled by default in 7.0.1.
 
 The following issues has been solved in 7.0.1:
 
@@ -80,3 +80,4 @@ The following issues has been solved in 7.0.1:
 - Fix Security Group Role Description for IPs. [#7186](https://github.com/OpenNebula/one/issues/7186)
 - Fix history ETIME after resize, disk-resize and pci-(de)attach for VMs in undeployed state. [#7249](https://github.com/OpenNebula/one/issues/7249)
 - Fix DRS timeout for VM poweroff migrate. [#7224](https://github.com/OpenNebula/one/issues/7224)
+- Fix wrong QCOW2_STANDALONE option in NFS System Datastore . [#7212](https://github.com/OpenNebula/one/issues/7212)
