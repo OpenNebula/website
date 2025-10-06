@@ -6,7 +6,7 @@ title: "Resolved Issues in 7.0.1"
 
 <!--# Resolved Issues 7.0.1 -->
 
-A complete list of solved issues for 7.0.1 can be found in the [project development portal](https://github.com/OpenNebula/one/milestone/72).
+A complete list of solved issues for 7.0.1 are listed in the [project development portal](https://github.com/OpenNebula/one/milestone/72).
 
 The following new features have been backported to 7.0.1:
 
@@ -21,9 +21,9 @@ The following new features have been backported to 7.0.1:
 - [Add SAML authentication support](../../../product/cloud_system_administration/authentication_configuration/saml.md) \*
 - [Add LVM-thin incremental backup to the Veeam integration](../../../integrations/backup_extensions/veeam.md#compatibility)
 
-\* To use SAML authentication in this maintenance release, make sure to follow the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md#configuration) and modify the `/etc/one/oned.conf` file, as SAML isn't enabled by default in 7.0.1.
+**Add SAML authentication support**. Make sure to follow the [SAML configuration guide](../../../product/cloud_system_administration/authentication_configuration/saml.md#configuration) and modify the `/etc/one/oned.conf´ file, because SAML is not enabled by default in 7.0.1.
 
-The following issues has been solved in 7.0.1:
+The following issues have been solved in 7.0.1:
 
 - Fix rename 'Edit' button to 'Rename' to change a VM disk snapshot name [#6803](https://github.com/OpenNebula/one/issues/6803)
 - Fix validation issue during Group + Group Admin creation at the same time [#6873](https://github.com/OpenNebula/one/issues/6873)
