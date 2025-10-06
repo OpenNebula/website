@@ -79,3 +79,5 @@ The following issues has been solved in 7.0.1:
 - Fix FireEdge Sunstone deletes RAW section from the template instantiation [#7200](https://github.com/OpenNebula/one/issues/7200)
 - Fix Security Group Role Description for IPs. [#7186](https://github.com/OpenNebula/one/issues/7186)
 - Fix typo in sunstone server config file. [#7154](https://github.com/OpenNebula/one/issues/7154)
+- Fix history ETIME after resize, disk-resize and pci-(de)attach for VMs in undeployed state. [#7249](https://github.com/OpenNebula/one/issues/7249)
+- Fix DRS timeout for VM poweroff migrate. [#7224](https://github.com/OpenNebula/one/issues/7224)
