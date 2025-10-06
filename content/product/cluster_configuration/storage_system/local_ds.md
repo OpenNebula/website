@@ -29,7 +29,10 @@ Simply make sure that there is enough space under `/var/lib/one/datastores` to s
 Just make sure that there is enough space under `/var/lib/one/datastores` to store the disks of running VMs on that Host.
 
 {{< alert title="Warning" color="warning" >}}
-Ensure that all Hosts, including the Front-end, can remotely connect via SSH to any other Host (and themselves);   otherwise, migrations will not perform as expected.{{< /alert >}}
+Local datastore requires that:
+- The **Frontend hostnames are resolvable** from all Hosts.
+- Every Host (including the Front-end) can **SSH to every other Host**, including themselves.
+{{< /alert >}}
 
 ## OpenNebula Configuration
 
