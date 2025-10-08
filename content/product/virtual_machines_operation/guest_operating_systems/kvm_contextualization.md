@@ -20,7 +20,7 @@ OpenNebula provides a set of contextualization packages for different operating 
 * Resize disk partitions as needed.
 * Execute custom actions during boot.
 
-All the OS appliances available in the [OpenNebula Marketplace](https://marketplace.opennebula.io/appliance) come with all the software pre-installed. If you want to build these images yourself, take a look at the [OpenNebula Apps project](https://github.com/OpenNebula/one-apps).
+All the OS appliances available in the [OpenNebula Marketplace](https://marketplace.opennebula.io) come with all the software pre-installed. If you want to build these images yourself, take a look at the [OpenNebula Apps project](https://github.com/OpenNebula/one-apps).
 
 ## Install the Context Packages
 
