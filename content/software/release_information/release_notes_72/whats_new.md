@@ -70,7 +70,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - The [public marketplaces](../../../product/apps-marketplace/public_marketplaces/overview#-overview) appliances generate [scheduling requirements](../../../product/cloud_system_administration/scheduler/overview.md#host-requirements) and [OS configurations](../../../product/operation_references/hypervisor_configuration/kvm_driver#arm64specifics) based on the architecture.
 
 
-## Features Backported to 6.10.x
+## Features Backported to 7.0.x
 <!--keeping some examples-->
 Additionally, the following functionalities are present that were not in OpenNebula 6.10.0, although they debuted in subsequent maintenance releases of the 6.10.x series:
 
