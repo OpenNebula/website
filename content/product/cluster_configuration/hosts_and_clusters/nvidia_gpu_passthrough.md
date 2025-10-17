@@ -222,7 +222,7 @@ TOPOLOGY = [
 
 ### PCI Device Passthrough
 
-Finally, assign the GPU to the VM using the `PCI` attribute. You can select a specific GPU by its address. Once the VM is running, you can verify that the guest OS can see the device by executing the `lspci` command inside the VM.
+Finally, assign the GPU to the VM using the `PCI` attribute. You can select a specific GPU by its address. Once the VM is running, you can verify that the guest OS recognizes the device by executing the `lspci` command inside the VM.
 
 *   **Attribute**: `PCI`
 *   **Value**: `SHORT_ADDRESS="<pci_address>"`
