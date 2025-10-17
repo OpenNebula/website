@@ -235,11 +235,7 @@ PCI = [
 
 ## Sample VM Template
 
-Here is a sample VM Template that incorporates all the recommended attributes for an AI workload VM with an NVIDIA H100 GPU.
-
-Here is a sample VM Template that incorporates all the recommended attributes for an AI workload VM with an NVIDIA H100 GPU. This template is a reference. To meet your specific requirements, specify `MEMORY`, `VCPU`, `IMAGE_ID`, and other parameters. 
-This template is a reference. You should adapt `MEMORY`, `VCPU`, `IMAGE_ID`, and other parameters to your specific needs.
-{{< /alert >}}
+Here is a sample VM Template that incorporates all the recommended attributes for an AI workload VM with an NVIDIA H100 GPU. This template is a reference. To meet your specific requirements, specify `MEMORY`, `VCPU`, `IMAGE_ID`, and other parameters.
 
 ```default
 CONTEXT=[
