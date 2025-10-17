@@ -44,7 +44,7 @@ After saving the file, update the GRUB configuration and reboot the hypervisor:
 # reboot
 ```
 
-After rebooting, you can verify that IOMMU is enabled by checking the kernel messages:
+After rebooting, verify that IOMMU is enabled by checking the kernel messages:
 
 ```default
 # dmesg | grep -i iommu
