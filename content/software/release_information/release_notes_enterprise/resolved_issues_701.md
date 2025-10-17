@@ -82,3 +82,4 @@ The following issues have been solved in 7.0.1:
 - Fix Sunstone drop Context when create VM from Template [#7202](https://github.com/OpenNebula/one/issues/7202)
 - Fix Impossible to edit/delete the Custom Variables via Sunstone [#7098](https://github.com/OpenNebula/one/issues/7098)
 - Fix bash regex in FS Datastore [#6853](https://github.com/OpenNebula/one/issues/6853)
+- Fix Cluster deletion leaving records in DB table `cluster_vnc_bitmap` [#6951](https://github.com/OpenNebula/one/issues/6951)
