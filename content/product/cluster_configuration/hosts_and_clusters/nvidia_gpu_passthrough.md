@@ -147,6 +147,13 @@ To make the GPUs available in OpenNebula, you need to configure the PCI probe on
 
 After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
+{{< alert title="Note" color="success" >}}
+By default, the host system monitoring probe may take up to **10 minutes** to detect new PCI devices. To run the host monitoring probe immediately, you can force it with:
+```default
+$ onehost forceupdate <HOST_ID>
+```
+{{< /alert >}}
+
 ## VM Template Best Practices for AI Workloads
 
 For the GPU to be correctly recognized and function inside the VM, and to achieve optimal performance for AI/ML workloads, it is crucial to configure the VM Template with the following settings:
