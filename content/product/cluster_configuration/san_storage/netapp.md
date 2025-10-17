@@ -4,7 +4,69 @@ linkTitle: "NetApp - Native (EE)"
 weight: "6"
 ---
 
-This datastore is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
+OpenNebula’s **NetApp SAN Datastore** provides production-grade, native control of NetApp ONTAP block storage directly from OpenNebula. This integration enables the full lifecycle of Volumes, LUNs, and Snapshots — including FlexClone-based cloning and SAN-snapshot incremental backups — with secure HTTPS control and robust iSCSI/multipath host orchestration.
+
+{{< alert title="At a Glance" color="success" >}}
+Fully automated block storage lifecycle management using NetApp ONTAP — from provisioning to cleanup — directly within OpenNebula.
+{{< /alert >}}
+
+### Key Benefits
+
+| Area | Benefit | Description |
+|------|----------|--------------|
+| **Automation** | Full lifecycle control | End-to-end creation, cloning, resizing, renaming, and cleanup of Volumes and LUNs directly from OpenNebula. |
+| **Efficiency** | Space-efficient FlexClone and snapshot management | Uses NetApp’s native FlexClone for instant, zero-copy clones of non-persistent images. |
+| **Performance** | Optimized host I/O path | Native multipath and iSCSI management per host for high throughput and availability. |
+| **Reliability** | Job-aware REST orchestration | Each ONTAP operation is tracked via ONTAP’s job system with retries and error mapping. |
+| **Data Protection** | Incremental SAN-snapshot backups (7.0.1+) | Enables block-level incremental backups based on array snapshots—no guest agents required. |
+| **Security** | HTTPS control path | All ONTAP communication is performed securely via authenticated HTTPS REST calls. |
+| **Scalability** | Parallel host operations | Safe concurrent attach/detach with per-path coordination and multipath support. |
+
+### Supported NetApp Native Functionality
+
+| NetApp Feature | Supported | Notes |
+|----------------|------------|-------|
+| **FlexClone** | Yes | Used for instant cloning of non-persistent images; optional split for persistent ones. |
+| **Snapshot (manual)** | Yes | Created, listed, and deleted directly from OpenNebula; job-aware. |
+| **Snapshot restore** | Yes | Volume restoration from snapshot UUID or name. |
+| **Snapshot autogrow** | Yes | Tunable via `NETAPP_GROW_THRESHOLD` and `NETAPP_GROW_RATIO`. |
+| **Incremental backups (SAN snapshot diff)** | Yes | New in 7.0.1; generates block-level sparse deltas without guest agents. |
+| **Volume autosize** | Yes | Automatic growth and shrink; configurable thresholds. |
+| **LUN mapping / igroup management** | Yes | Handled automatically per host; safe detach and cleanup. |
+| **Multipath I/O** | Yes | Fully orchestrated; automatic detection, resize, and removal of maps. |
+| **Snapshot policy management** | Yes | Driver enforces “no automatic snapshots”; OpenNebula controls all snapshots. |
+| **Data encryption (at-rest)** | Yes | Supported transparently if enabled in ONTAP; not managed by OpenNebula. |
+| **SnapMirror replication** | No (planned) | Not yet supported; may be added in future roadmap. |
+| **QoS policy groups** | No | Not currently exposed through the datastore driver. |
+| **SVM DR / MetroCluster** | No | Supported by ONTAP, but not orchestrated by OpenNebula. |
+
+
+## Limitations and Unsupported Features
+
+While the NetApp integration covers the full VM disk lifecycle and most SAN-level operations, it focuses strictly on **primary datastore management** using **iSCSI block devices**.
+Some advanced ONTAP-specific or VMware-exclusive capabilities are intentionally not part of this driver.
+
+{{< alert title="Important" color="warning" >}}
+This integration targets block-level provisioning for OpenNebula environments.
+It does **not** expose advanced replication or NAS-protocol features available in other ecosystems (e.g. VMware vVols or SnapMirror).
+{{< /alert >}}
+
+| Category | Unsupported Feature | Rationale / Alternative |
+|-----------|--------------------|--------------------------|
+| **Replication & DR** | SnapMirror, SnapVault | Planned for future releases; can be managed externally through ONTAP. |
+| **NAS protocols** | NFS / CIFS shares | Driver focuses on iSCSI block storage only. |
+| **ONTAP-managed automatic snapshots** | Automated snapshot schedules | OpenNebula requires full control of snapshot lifecycle. |
+| **Storage QoS / Performance tiers** | Policy group integration | Manual setup possible in ONTAP, not exposed in driver. |
+| **Storage efficiency analytics** | Deduplication & compression metrics | Handled internally by ONTAP, not shown in OpenNebula UI. |
+| **Encryption management** | Per-volume encryption toggling | Configure at SVM level outside OpenNebula. |
+| **Advanced VMware features** | VAAI offloads, Storage DRS, vVols | VMware-specific APIs, not applicable to OpenNebula. |
+| **Multi-instance sharing** | Shared datastore IDs | Explicitly unsupported — datastore IDs must be unique per OpenNebula instance. |
+| **SVM HA features** | MetroCluster, SyncMirror | Can be used under the SVM, but not managed by OpenNebula. |
+
+
+## NetApp ONTAP Setup
+
+This set of datastore and transfer manager driver is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
 
 The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be useful during this setup.
 
@@ -12,7 +74,6 @@ The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be us
 Sharing datastores between multiple OpenNebula instances is not supported and may cause issues if they share datastore IDs.
 {{< /alert >}}
 
-## NetApp ONTAP Setup
 
 The NetApp system requires specific configurations. This driver operates using a Storage VM that provides iSCSI connections, with volumes/LUNs mapped directly to each Host after creation. Configure and enable the iSCSI protocol according to your infrastructure requirements.
 
