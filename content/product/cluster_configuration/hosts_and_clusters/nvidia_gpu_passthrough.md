@@ -203,7 +203,7 @@ CPU_MODEL = [
 
 ### NUMA and CPU Pinning
 
-CPU pinning is crucial for performance as it dedicates physical CPU cores to the VM, preventing them from being shared with other VMs. When a `PIN_POLICY` is defined, the OpenNebula scheduler automatically places the VM on a NUMA node that is physically close to the requested GPU and pins the vCPUs to the cores of that node, minimizing latency. For a more in-depth explanation of this topic, please refer to the [Virtual Topology and CPU Pinning]({{% relref "numa.md" %}}) guide.
+CPU pinning is crucial for performance as it dedicates physical CPU cores to the VM, preventing them from being shared with other VMs. When a `PIN_POLICY` is defined, the OpenNebula scheduler automatically places the VM on a NUMA node that is physically close to the requested GPU and pins the vCPUs to the cores of that node, minimizing latency. For a more in-depth explanation of this topic, refer to the [Virtual Topology and CPU Pinning]({{% relref "numa.md" %}}) guide.
 
 {{< alert title="Important" color="warning" >}}
 For VM pinning to work, you must also enable the pinning policy on the Host. You can do this by editing the Host's template and setting `PIN_POLICY="PINNED"`, or by selecting the `PINNED` policy in the Host's `NUMA` tab in Sunstone.
