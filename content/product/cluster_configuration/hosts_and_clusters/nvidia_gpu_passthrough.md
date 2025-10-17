@@ -156,7 +156,7 @@ $ onehost forceupdate <HOST_ID>
 
 ## VM Template Best Practices for AI Workloads
 
-For the GPU to be correctly recognized and function inside the VM, and to achieve optimal performance for AI/ML workloads, it is crucial to configure the VM Template with the following settings:
+To achieve proper GPU operation inside the VM, including optimal performance for AI/ML workloads, configure the VM Template with the following settings:
 
 ### Firmware (UEFI)
 
