@@ -259,7 +259,7 @@ Created MIG instances (GPU/Compute Instances) are not persistent across a GPU re
 
 4. Inspect MIG Partitioning
 
-We can use the following commands in order to show existing MIG partitioning:
+Use the following commands to show existing MIG partitioning:
 
 ```default
 $ nvidia-smi mig -lgi   # list existing GPU instances
