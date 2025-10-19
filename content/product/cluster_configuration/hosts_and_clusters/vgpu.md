@@ -243,7 +243,7 @@ Successfully created compute instance ID 0 on GPU 0 GPU instance ID 1 using
  profile MIG 2g.24gb (ID 14)
 ```
 
-You can add more instances later as long as GPU resources are available (check aviable profiles with nvidia-smi mig -lgip).
+You can add more instances later as long as GPU resources are available. To check available profiles, use the `nvidia-smi mig -lgip` command.
 Similarly, you can remove specific instances (see step 5) to free resources and reconfigure the partitioning without resetting the whole GPU.
 
 Each MIG instance you create will be represented as a vGPU profile by the NVIDIA driver.
