@@ -173,7 +173,7 @@ A GPU reset (or system reboot) may be required after enabling MIG mode.{{< /aler
 
 2. List Available MIG Profiles
 
-MIG profiles define how the GPU can be split into slices.
+The MIG profile specifies the exact configuration by which a physical GPU is subdivided into multiple, independent  slices.
 Each profile specifies the fraction of GPU compute and memory.
 
 We can list aviable MIG Profiles with:
