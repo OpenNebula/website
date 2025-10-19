@@ -148,7 +148,7 @@ MIG (Multi-Instance GPU) allows partitioning a single GPU into multiple isolated
 This is useful for running multiple workloads delivered with a guaranteed Quality of Service (QoS) through hardware-level isolation.
 
 {{< alert title="Important" color="success" >}}
-Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. You can check MIG supported GPUs [here](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}} 
+Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. To check MIG-supported GPUs, refer to [NVIDIA's official documentation](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
 For more information about MIG and additional configuration resources, you can check NVIDIA documentation [here](https://docs.nvidia.com/datacenter/tesla/pdf/NVIDIA_MIG_User_Guide.pdf).{{< /alert >}} 
