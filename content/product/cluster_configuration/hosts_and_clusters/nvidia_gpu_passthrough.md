@@ -147,12 +147,10 @@ To make the GPUs available in OpenNebula, configure the PCI probe on the front-e
 
 After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
-{{< alert title="Note" color="success" >}}
 By default, the host system monitoring probe may take up to **10 minutes** to detect new PCI devices. To run the host monitoring probe immediately, you can force it with:
 ```default
 $ onehost forceupdate <HOST_ID>
 ```
-{{< /alert >}}
 
 ## VM Template Best Practices for AI Workloads
 
@@ -205,9 +203,7 @@ CPU_MODEL = [
 
 CPU pinning is crucial for performance as it dedicates physical CPU cores to the VM, preventing them from being shared with other VMs. When a `PIN_POLICY` is defined, the OpenNebula scheduler automatically places the VM on a NUMA node that is physically close to the requested GPU and pins the vCPUs to the cores of that node, minimizing latency. For a more in-depth explanation of this topic, refer to the [Virtual Topology and CPU Pinning]({{% relref "numa.md" %}}) guide.
 
-{{< alert title="Important" color="warning" >}}
 For VM pinning to work, you must also enable the pinning policy on the Host. You can do this by editing the Host's template and setting `PIN_POLICY="PINNED"`, or by selecting the `PINNED` policy in the Host's `NUMA` tab in Sunstone.
-{{< /alert >}}
 
 *   **Attribute**: `TOPOLOGY`
 *   **Values**: `PIN_POLICY`, `CORES`, `SOCKETS`
