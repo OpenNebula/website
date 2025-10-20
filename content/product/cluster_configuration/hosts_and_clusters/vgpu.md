@@ -298,7 +298,7 @@ $ nvidia-smi mig -dgi -i <GPU_ID> -gi <GI_ID>
 Once the setup is complete, you can follow the [general steps]({{% relref "pci_passthrough#pci-config" %}}) for adding PCI devices to a VM. For NVIDIA GPUs, please consider the following:
 
 - OpenNebula supports both the legacy mediated device interface and the new vendor-specific interface introduced with Ubuntu 24.04. The vGPU device configuration is handled automatically by the virtualization and monitoring drivers. The monitoring process automatically sets the appropriate mode for each device using the `MDEV_MODE` attribute.
-- NVIDIA vGPUs can be configured using different profiles, which define the vGPU’s characteristics and hardware capabilities. These profiles are retrieved from the drivers by the monitoring process, allowing you to easily select the one that best suits your application’s requirements. When using MIG, each MIG instance you created appears as a separate vGPU profile.
+- An NVIDIA vGPU configuration is based on a profile which defines the vGPU’s characteristics and hardware capabilities. This profile is retrieved from the drivers by the monitoring process, allowing you to select the one that best suits your application’s requirements. When using MIG, each MIG instance you created appears as a separate vGPU profile.
 
 The following example shows the monitoring information for a NVIDIA vGPU device:
 
