@@ -129,7 +129,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
 
 ### Monitoring PCI Devices
 
-To make the GPUs available in OpenNebula, you need to configure the PCI probe on the Front-end node to monitor NVIDIA devices.
+To make the GPUs available in OpenNebula, configure the PCI probe on the front-end node to monitor NVIDIA devices.
 
 1.  Edit the PCI probe configuration file at `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf`.
 2.  Add a filter for NVIDIA devices:
