@@ -169,7 +169,7 @@ $ nvidia-smi -i 0 -q | grep "MIG Mode" -A1  # Check MIG status
 ```
 
 {{< alert title="Important" color="success" >}}
-A GPU reset (or system reboot) may be required after enabling MIG mode.{{< /alert >}} 
+Depending on the GPU model, a GPU reset or system reboot may be required after enabling MIG mode.{{< /alert >}} 
 
 2. List Available MIG Profiles
 
