@@ -62,7 +62,7 @@ Once IOMMU is enabled, the GPU must be unbound from the default host driver (e.g
     # apt install driverctl
     ```
 
-2.  **Ensure `vfio-pci` module is loaded on boot**:
+2.  Ensure `vfio-pci` module is loaded on boot:
 
     ```default
     # echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
