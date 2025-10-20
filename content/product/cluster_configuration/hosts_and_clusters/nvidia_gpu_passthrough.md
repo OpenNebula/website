@@ -190,7 +190,7 @@ OS = [
 
 ### CPU Model (Host Passthrough)
 
-Exposing the host CPU exact model and feature set to the VM results in better hardware support and performance. It's often a hard requirement for some modern high-performance GPUs like the NVIDIA H100 as its drivers require access to advanced CPU instruction sets to initialize and function correctly.
+Exposing the host CPU exact model and feature set to the VM results in better hardware support and performance. Having the full list of CPU features is a hard requirement for modern high-performance GPUs like the NVIDIA H100, because its drivers require access to advanced CPU instruction sets to initialize and function correctly.
 
 *   **Attribute**: `CPU_MODEL`
 *   **Value**: `MODEL="host-passthrough"`
