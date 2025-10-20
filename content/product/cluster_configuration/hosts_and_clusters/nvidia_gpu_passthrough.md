@@ -76,7 +76,7 @@ Once IOMMU is enabled, the GPU must be unbound from the default host driver (e.g
     0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
     ```
 
-4.  **Set the driver override**:
+4.  Set the driver override:
     Use the PCI address from the previous step to set an override for the device to use the `vfio-pci` driver.
 
     ```default
