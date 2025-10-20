@@ -103,7 +103,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     ```
     In this example, the IOMMU group is `85`.
 
-2.  **Create a `udev` rule**:
+2.  Create a `udev` rule:
     Create the file `/etc/udev/rules.d/99-vfio.rules` with the following content:
 
     ```default
