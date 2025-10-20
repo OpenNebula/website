@@ -110,7 +110,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     SUBSYSTEM=="vfio", GROUP="kvm", MODE="0666"
     ```
 
-3.  **Reload `udev` rules**:
+3.  Reload `udev` rules:
 
     ```default
     # udevadm control --reload
