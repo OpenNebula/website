@@ -176,7 +176,7 @@ Depending on the GPU model, a GPU reset or system reboot may be required after e
 The MIG profile specifies the exact configuration by which a physical GPU is subdivided into multiple, independent  slices.
 Each profile specifies the fraction of GPU compute and memory.
 
-We can list aviable MIG Profiles with:
+List the available MIG Profiles with the command below. After the command, you will see an output sample:
 
 ```default
 $ nvidia-smi mig -lgip
