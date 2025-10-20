@@ -4,11 +4,7 @@ linkTitle: "NetApp - Native (EE)"
 weight: "6"
 ---
 
-OpenNebula’s **NetApp SAN Datastore** provides production-grade, native control of NetApp ONTAP block storage directly from OpenNebula. This integration enables the full lifecycle of Volumes, LUNs, and Snapshots — including FlexClone-based cloning and SAN-snapshot incremental backups — with secure HTTPS control and robust iSCSI/multipath host orchestration.
-
-{{< alert title="At a Glance" color="success" >}}
-Fully automated block storage lifecycle management using NetApp ONTAP — from provisioning to cleanup — directly within OpenNebula.
-{{< /alert >}}
+OpenNebula’s **NetApp SAN Datastore** provides production-grade, native control of NetApp ONTAP block storage, from provisioning to cleanup, directly from OpenNebula. This integration enables the full lifecycle of Volumes, LUNs, and Snapshots — including FlexClone-based cloning and SAN-snapshot incremental backups — with secure HTTPS control and robust iSCSI/multipath host orchestration. This datastore driver is part of OpenNebula Enterprise Edition (EE).
 
 ### Key Benefits
 
@@ -48,7 +44,7 @@ Some advanced ONTAP-specific or VMware-exclusive capabilities are intentionally 
 
 {{< alert title="Important" color="warning" >}}
 This integration targets block-level provisioning for OpenNebula environments.
-It does **not** expose advanced replication or NAS-protocol features available in other ecosystems (e.g. VMware vVols or SnapMirror).
+It does not expose advanced replication or NAS-protocol features available in other ecosystems (e.g. VMware vVols or SnapMirror).
 {{< /alert >}}
 
 | Category | Unsupported Feature | Rationale / Alternative |
@@ -66,7 +62,7 @@ It does **not** expose advanced replication or NAS-protocol features available i
 
 ## NetApp ONTAP Setup
 
-This set of datastore and transfer manager driver is used to register an existing NetApp SAN appliance. It utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
+This set of datastore and transfer manager driver is used to register an existing NetApp SAN appliance, operating the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
 
 The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be useful during this setup.
 
