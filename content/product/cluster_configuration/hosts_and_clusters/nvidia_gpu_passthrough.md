@@ -117,7 +117,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     # udevadm trigger
     ```
 
-4.  **Verify ownership**:
+4.  Verify ownership:
     Check the ownership of the device file corresponding to your GPU's IOMMU group.
 
     ```default
