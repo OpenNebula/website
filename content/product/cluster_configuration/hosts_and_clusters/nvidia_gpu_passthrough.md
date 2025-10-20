@@ -26,7 +26,7 @@ The following configurations must be performed on the KVM hypervisors that will 
 
 The IOMMU (Input-Output Memory Management Unit) is a hardware feature that allows the hypervisor to isolate I/O devices and is a prerequisite for PCI passthrough. To enable it, you need to add kernel parameters to the hypervisor's boot configuration.
 
-Edit the GRUB configuration file at `/etc/default/grub` and add the appropriate parameter to the `GRUB_CMDLINE_LINUX_DEFAULT` line:
+1. Edit the GRUB configuration file at `/etc/default/grub` and add the appropriate parameter to the `GRUB_CMDLINE_LINUX_DEFAULT` line:
 
 *   **For Intel CPUs**: `intel_iommu=on iommu=pt`
 *   **For AMD CPUs**: `amd_iommu=on iommu=pt`
