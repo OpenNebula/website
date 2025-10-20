@@ -56,7 +56,7 @@ Alternatively, to confirm that IOMMU is active proceed to check that the `/sys/k
 
 Once IOMMU is enabled, the GPU must be unbound from the default host driver (e.g., `nouveau`) and bound to the `vfio-pci` driver, which is designed for PCI passthrough.
 
-1.  **Install `driverctl` utility**:
+1.  Install `driverctl` utility:
 
     ```default
     # apt install driverctl
