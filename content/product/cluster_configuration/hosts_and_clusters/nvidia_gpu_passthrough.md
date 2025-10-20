@@ -12,7 +12,7 @@ weight: "7"
 
 <!--# NVIDIA GPU Passthrough -->
 
-This guide provides detailed instructions for configuring PCI passthrough for high-performance NVIDIA® GPUs on x86_64 hypervisors (this guide is not applicable to ARM-based systems). The procedures described here have been validated with NVIDIA H100 GPUs but can be adapted for other similar high-performance NVIDIA GPUs. This allows Virtual Machines to get exclusive access to the GPU, which is recommended for AI/ML workloads. It builds upon the concepts explained in the general [PCI Passthrough]({{% relref "pci_passthrough.md" %}}) guide.
+This guide provides detailed instructions for configuring PCI passthrough for high-performance NVIDIA&reg; GPUs on x86_64 hypervisors (this guide is not applicable to ARM-based systems). The procedures described here have been validated with NVIDIA H100 GPUs but can be adapted for other similar high-performance NVIDIA GPUs. This allows Virtual Machines to get exclusive access to the GPU, which is recommended for AI/ML workloads. It builds upon the concepts explained in the general [PCI Passthrough]({{% relref "pci_passthrough.md" %}}) guide.
 
 {{< alert title="Note" color="success" >}}
 As an alternative to PCI passthrough, OpenNebula also supports NVIDIA vGPU, which allows a single physical GPU to be partitioned and shared among multiple VMs. While PCI passthrough is the recommended approach for demanding AI/ML workloads, especially model training, vGPU can be a suitable option for less intensive tasks like model inference or development environments. For more information, see the [NVIDIA vGPU guide]({{% relref "vgpu.md" %}}).
@@ -50,7 +50,7 @@ After rebooting, verify that IOMMU is enabled by checking the kernel messages:
 # dmesg | grep -i iommu
 ```
 
-An alternative way to confirm that IOMMU is active is by checking that the `/sys/kernel/iommu_groups/` directory exists and is populated with subdirectories. An empty directory might indicate that IOMMU is not correctly enabled in the kernel or BIOS.
+Alternatively, to confirm that IOMMU is active proceed to check that the `/sys/kernel/iommu_groups/` directory exists and is populated with subdirectories. An empty directory might indicate that IOMMU is not correctly enabled in the kernel or BIOS.
 
 ### VFIO Driver Binding
 
