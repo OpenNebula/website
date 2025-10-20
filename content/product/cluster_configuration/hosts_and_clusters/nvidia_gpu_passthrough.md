@@ -175,7 +175,7 @@ OS = [
 
 ### Machine Type (q35)
 
-The `q35` machine type provides a modern PCIe-based chipset, improving compatibility and performance for PCIe devices like GPUs. Additionally, if the q35 machine type is used, OpenNebula will mimic the hypervisor PCI topology into the guest VM. This gives AI frameworks visibility into the PCI layout, allowing them to optimize data transfers and reduce latency.
+The `q35` machine type provides a modern PCIe-based chipset, improving compatibility and performance for PCIe devices like GPUs. Additionally, if the q35 machine type is used, OpenNebula replicates the hypervisor PCI topology into the guest VM. This gives AI frameworks visibility into the PCI layout, allowing them to optimize data transfers and reduce latency.
 
 *   **Attribute**: `MACHINE`
 *   **Section**: `OS`
