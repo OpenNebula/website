@@ -37,7 +37,7 @@ Example for an Intel-based hypervisor:
 GRUB_CMDLINE_LINUX_DEFAULT="intel_iommu=on iommu=pt"
 ```
 
-After saving the file, update the GRUB configuration and reboot the hypervisor:
+2. After saving the file, update the GRUB configuration and reboot the hypervisor:
 
 ```default
 # update-grub
