@@ -207,7 +207,7 @@ $ nvidia-smi mig -lgip
 |                                                             8     7     1   |
 +-----------------------------------------------------------------------------+
 ```
-Based on the output we can split the GPU on instances using profiles IDs.
+Based on the output,  you can use profile IDs to split the GPU on instances.
 
 3. Create MIG Instances
 
