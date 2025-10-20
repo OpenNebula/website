@@ -95,7 +95,7 @@ Once IOMMU is enabled, the GPU must be unbound from the default host driver (e.g
 
 For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be owned by the `root:kvm` user and group. This is achieved by creating a `udev` rule.
 
-1.  **Identify the IOMMU group** for your GPU using its PCI address:
+1.  Identify the IOMMU group for your GPU using its PCI address:
 
     ```default
     # find /sys/kernel/iommu_groups/ -type l | grep e1:00.0
