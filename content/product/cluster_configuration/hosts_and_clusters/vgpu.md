@@ -249,7 +249,7 @@ Each MIG instance you create will be represented as a vGPU profile by the NVIDIA
 When assigning vGPUs to VMs, these profiles appear as selectable devices corresponding to the MIG slices you configured.
 
 {{< alert title="Important" color="success" >}}
-After creating new MIG partitions, profiles may take some time to update depending on the monitoring configuration. To update the profiles immediately, you can use the `onehost forceupdate <hostid>` command.
+After creating new MIG partitions, profiles take time to update depending on the monitoring configuration; this time depends on the [installation's monitoring configuration]({{% relref "../../..//product/cloud_system_administration/resource_monitoring/monitoring_system#monitor-alert-configuration" %}}). To update the profiles immediately, run the `onehost forceupdate <hostid>` command.
 {{< /alert >}}
 
 
