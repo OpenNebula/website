@@ -211,7 +211,7 @@ Based on the output,  you can use profile IDs to split the GPU on instances.
 
 3. Create MIG Instances
 
-You can create GPU Instances (GI) and Compute Instances (CI).
+Enabling MIG makes partitioning possible, in this step create the GPU Instances (GIs) and Compute Instances (CIs) to define and activate those partitions.
 The -cgi option creates both in a single command.
 
 Examples (H100 94GB):
