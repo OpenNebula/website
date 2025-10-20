@@ -13,7 +13,7 @@ weight: "6"
 
 <!--# NVIDIA vGPU & MIG support -->
 
-Configuring the hypervisor for NVIDIA vGPU and MIG (Multi-Instance GPU) capabilities facilitates centralized management, flexibility in resource allocation, and enhanced security isolation across all virtualized GPU workloads.
+Configuring the hypervisor for NVIDIA&reg;  vGPU and MIG (Multi-Instance GPU) capabilities facilitates centralized management, flexibility in resource allocation, and enhanced security isolation across all virtualized GPU workloads.
 
 ## BIOS
 
