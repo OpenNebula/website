@@ -150,7 +150,7 @@ This is useful for running multiple workloads delivered with a guaranteed Qualit
 {{< alert title="Important" color="success" >}}
 Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. To check MIG-supported GPUs, refer to [NVIDIA's official documentation](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}} 
 
-For more information about MIG and additional configuration resources, you can check NVIDIA documentation [here](https://docs.nvidia.com/datacenter/tesla/pdf/NVIDIA_MIG_User_Guide.pdf).
+For more information about MIG and additional configuration resources, refer to the NVIDIA documentation [here](https://docs.nvidia.com/datacenter/tesla/pdf/NVIDIA_MIG_User_Guide.pdf).
 
 
 1. Enable MIG Mode
