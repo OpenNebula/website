@@ -44,7 +44,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="intel_iommu=on iommu=pt"
 # reboot
 ```
 
-After rebooting, verify that IOMMU is enabled by checking the kernel messages:
+3. After rebooting, verify that IOMMU is enabled by checking the kernel messages:
 
 ```default
 # dmesg | grep -i iommu
