@@ -83,7 +83,7 @@ Once IOMMU is enabled, the GPU must be unbound from the default host driver (e.g
     # driverctl set-override 0000:e1:00.0 vfio-pci
     ```
 
-5.  **Verify the driver binding**:
+5.  Verify the driver binding:
     Check that the GPU is now using the `vfio-pci` driver.
 
     ```default
