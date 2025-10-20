@@ -50,7 +50,7 @@ After rebooting, verify that IOMMU is enabled by checking the kernel messages:
 # dmesg | grep -i iommu
 ```
 
-Alternatively, you can confirm that IOMMU is active by checking that the `/sys/kernel/iommu_groups/` directory exists and is populated with subdirectories. An empty directory might indicate that IOMMU is not correctly enabled in the kernel or BIOS.
+An alternative way to confirm that IOMMU is active is by checking that the `/sys/kernel/iommu_groups/` directory exists and is populated with subdirectories. An empty directory might indicate that IOMMU is not correctly enabled in the kernel or BIOS.
 
 ### VFIO Driver Binding
 
