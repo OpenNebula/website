@@ -138,9 +138,7 @@ $ echo 'SUBSYSTEM=="vfio", GROUP="kvm", MODE="0666"' > /etc/udev/rules.d/openneb
 # Reload udev rules:
 $ udevadm control --reload-rules && udevadm trigger
 ```
-
-{{< alert title="Note" color="success" >}}
-Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}}
+Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).
 
 ## (Optional) Using MIG-backed vGPU for GPU partitioning
 
