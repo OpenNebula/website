@@ -69,7 +69,7 @@ Once IOMMU is enabled, the GPU must be unbound from the default host driver (e.g
     # modprobe vfio-pci
     ```
 
-3.  **Identify the GPU's PCI address**:
+3.  Identify the GPU's PCI address:
 
     ```default
     # lspci -D | grep -i nvidia
