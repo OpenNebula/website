@@ -11,7 +11,7 @@ weight: "6"
 
 <a id="kvm-vgpu"></a>
 
-<!--# NVIDIA vGPU & MIG support -->
+<!--# NVIDIA vGPU and MIG support -->
 
 Configuring the hypervisor for NVIDIA&reg;  vGPU and MIG (Multi-Instance GPU) capabilities facilitates centralized management, flexibility in resource allocation, and enhanced security isolation across all virtualized GPU workloads.
 
