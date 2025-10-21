@@ -84,7 +84,7 @@ A server should be configured to expose both the Rsync Backup datastore and the 
 The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. An additional property called ``VEEAM_DS`` must exist in the backup datastore template and be set to ``YES``.
 
 {{< alert title="Remember" color="success" >}}
-The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}} 
+The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}}
 
 **Rsync Datastore**
 
@@ -112,13 +112,13 @@ Here is an example of how to create an Rsync datastore in a Host named `backup-h
 
 {{< alert title="SELinux/AppArmor issues" color="success" >}}
 SELinux and AppArmor may cause some issues in the backup server if not configured properly. Either disable them or make sure to whitelist the datastore directories (``/var/lib/one/datastores``).
-{{< /alert >}} 
+{{< /alert >}}
 
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
 
 **Sizing recommendations**
 
-The backup datastore needs to have enough space to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup datastore and the Veeam Backup storage. This is something inherent to the Veean integration with oVirt, as further backups of a Virtual Machine will be incremental and only the changed disk regions will be retrieved.
+The backup datastore needs to have enough space to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup datastore and the Veeam Backup storage. This is something inherent to the Veeam integration with oVirt, as further backups of a Virtual Machine will be incremental and only the changed disk regions will be retrieved.
 
 If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
 
@@ -127,7 +127,7 @@ We provide alongside the ovirtapi package the ``/usr/share/one/backup_clean.rb``
     0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
 
 {{< alert title="Remember" color="success" >}}
-For the ``/usr/share/one/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}} 
+For the ``/usr/share/one/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
 
 ## Step 3: Install and configure the oVirtAPI module
 
@@ -141,13 +141,13 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 
 During installation a self-signed certificate is generated at ``/etc/one/ovirtapi-ssl.crt`` for encryption. You can replace this certificate with your own and change the ``cert_path`` configuration variable.
 
-After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the Front-end server. 
+After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the Front-end server.
 
 Finally, start the service with either ``systemctl start apache2`` (Ubuntu/Debian) or ``systemctl start httpd`` (RHEL/Alma).
 
 {{< alert title="Important" color="success" >}}
 Once the package is installed, a ``oneadmin`` user will be created. Please make sure that this user and the same ``oneadmin`` user in the frontend can establish passwordless ssh connections in both directions.
-{{< /alert >}} 
+{{< /alert >}}
 
 {{< alert title="Package dependency" color="success" >}}
 In RHEL and Alma environments, you may face issues with the passenger package dependencies (``mod_passenger`` and ``mod_ssl``). You may add the correct repository and install the packages with the following:
@@ -155,7 +155,7 @@ In RHEL and Alma environments, you may face issues with the passenger package de
     curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
     dnf install -y passenger mod_passenger mod_ssl
 
-{{< /alert >}} 
+{{< /alert >}}
 
 ## Step 4: Add OpenNebula to Veeam
 
@@ -201,7 +201,7 @@ This will open a new wizard to deploy the appliance. You should choose to deploy
 
 ![image](/images/veeam/new_appliance.png)
 
-Next you should choose the cluster on which to deploy the appliance, as well as a name and the storage domain where the appliance image should be stored: 
+Next you should choose the cluster on which to deploy the appliance, as well as a name and the storage domain where the appliance image should be stored:
 
 ![image](/images/veeam/appliance_virtual_machine.png)
 
@@ -234,7 +234,7 @@ If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, th
 
 ## Limitations and Known Issues
 
-- Volatile disks cannot be backed up. They will not be displayed in the Veeam interface. 
+- Volatile disks cannot be backed up. They will not be displayed in the Veeam interface.
 - Veeam will not attempt incremental backups, so all backups will be full.
 - When trying to start a backup job, the following error may appear. It can be solved by refreshing the backup job properties (even if no configuration is changed):
 
