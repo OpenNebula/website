@@ -114,7 +114,6 @@ $ cat netapp_system.ds
 NAME              = "netapp_system"
 TYPE              = "SYSTEM_DS"
 DISK_TYPE         = "BLOCK"
-DS_MAD            = "netapp"
 TM_MAD            = "netapp"
 NETAPP_HOST       = "10.1.234.56"
 NETAPP_USER       = "admin"
@@ -154,6 +153,7 @@ $ cat netapp_image.ds
 NAME              = "netapp_image"
 TYPE              = "IMAGE_DS"
 DISK_TYPE         = "BLOCK"
+DS_MAD            = "netapp"
 TM_MAD            = "netapp"
 NETAPP_HOST       = "10.1.234.56"
 NETAPP_USER       = "admin"
@@ -176,7 +176,7 @@ Since Volumes contain the LUNs and snapshots, they are by default configured to 
 | Attribute                 | Description                                           |
 | ------------------------- | ----------------------------------------------------- |
 | `NETAPP_SUFFIX`           | Volume/LUN name suffix.                               |
-| `NETAPP_GROW_THRESHOLD`   | Volume autogrow threshold in percent. Default: 96     |
+| `NETAPP_GROW_THRESHOLD`   | Volume autogrow threshold in percent. Default: 90     |
 | `NETAPP_GROW_RATIO`       | Volume maximum autogrow ratio. Default: 2             |
 | `NETAPP_SNAPSHOT_RESERVE` | Volume snapshot reserve in percent. Default: 10       |
 | `NETAPP_STANDALONE`       | Volume FlexClones always split. Default: NO           |
