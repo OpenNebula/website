@@ -62,7 +62,7 @@ It does not expose advanced replication or NAS-protocol features available in ot
 
 ## NetApp ONTAP Setup
 
-This set of datastore and transfer manager driver is used to register an existing NetApp SAN appliance, operating the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
+OpenNebula runs the set of datastore and transfer manager driver to register an existing NetApp SAN appliance. This set utilizes the NetApp ONTAP API to create volumes with a single LUN, which will be treated as Virtual Machine disks using the iSCSI interface. Both the Image and System datastores should use the same NetApp SAN appliance with identical Storage VM configurations (aggregates, etc.), as volumes (disks) are either cloned or renamed depending on the image type. Persistent images are renamed to the System datastore, while non‐persistent images are cloned using FlexClone and then split.
 
 The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be useful during this setup.
 
