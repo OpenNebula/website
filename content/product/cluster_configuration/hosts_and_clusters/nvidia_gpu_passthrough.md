@@ -12,7 +12,7 @@ weight: "7"
 
 <!--# NVIDIA GPU Passthrough -->
 
-This guide provides detailed instructions for configuring PCI passthrough for high-performance NVIDIA&reg; GPUs on x86_64 hypervisors (this guide is not applicable to ARM-based systems). The procedures described here have been validated with NVIDIA H100 GPUs but can be adapted for other similar high-performance NVIDIA GPUs. This allows Virtual Machines to get exclusive access to the GPU, which is recommended for AI/ML workloads. It builds upon the concepts explained in the general [PCI Passthrough]({{% relref "pci_passthrough.md" %}}) guide.
+Here you will find detailed instructions for configuring PCI passthrough for high-performance NVIDIA&reg; GPUs on x86_64 hypervisors. The procedures described here have been validated with NVIDIA H100 GPUs but can be adapted for other similar high-performance NVIDIA GPUs. This allows Virtual Machines to get exclusive access to the GPU, which is recommended for AI/ML workloads. It builds upon the concepts explained in the general [PCI Passthrough]({{% relref "pci_passthrough.md" %}}) guide. This guide is not applicable to ARM-based systems.
 
 {{< alert title="Note" color="success" >}}
 As an alternative to PCI passthrough, OpenNebula also supports NVIDIA vGPU, which allows a single physical GPU to be partitioned and shared among multiple VMs. While PCI passthrough is the recommended approach for demanding AI/ML workloads, especially model training, vGPU can be a suitable option for less intensive tasks like model inference or development environments. For more information, see the [NVIDIA vGPU guide]({{% relref "vgpu.md" %}}).
