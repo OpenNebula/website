@@ -145,7 +145,7 @@ The recommended hardware specifications are:
 
 ## Installation and Configuration
 
-### Step 1: Prepare the environment for the oVirtAPI Server
+1. Prepare the environment for the oVirtAPI Server
 
 A server should be configured to expose both the Rsync Backup datastore and the oVirtAPI Server. This server should be accessible from all the clusters that you want to be able to back up via the management network shown in the architecture diagram. The oVirtAPI Server is going to act as the communication gateway between Veeam and OpenNebula.
 
