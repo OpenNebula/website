@@ -188,3 +188,11 @@ For detailed information about how to use the required parameters and which conf
 [ip-booked-for-server]: /images/solutions/ionos/ip-booked-for-server.png
 [token-manager]: /images/solutions/ionos/token-manager.png
 [dcd-uuid]: /images/solutions/ionos/dcd-uuid.png
+
+## Extending with a New Host
+
+During the operation of the hosted OpenNebula cloud, the deployment can be flexibly extended by adding new hosts. The extension procedure consists of these high-level steps:
+
+1. Provision the new host using the IONOS Data Center Designer as described in [Infrastructure Provisioning](#infrastructure-provisioning),
+1. Save the required parameters of the new host, as shown in [Save Required Parameters](#save-required-parameters),
+1. Re-execute the deployment and verification commands, as described in the [Deployment and Verification](#deployment-and-verification) section.

@@ -40,7 +40,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 | AlmaLinux                | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
-| KVM/Libvirt              | Support for version included in the Linux distribution.<br/>For RHEL the packages from `qemu-ev` are used. | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
+| KVM/Libvirt              | Support for version included in the Linux distribution.                                                    | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
 
 ### LXC Nodes
 
@@ -81,7 +81,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component             | Version                                    | More information                                                                                                        |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| net-ldap ruby library | 0.19.0                                     | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
+| net-ldap ruby library | 0.19.0 or 0.20                             | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Monitoring and Backups
@@ -90,7 +90,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
-| Veeam B&R                    | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
+| Veeam B&R                     | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
 
 ### Sunstone
 
@@ -104,6 +104,13 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 
 **Chrome**: `chrome://flags` -> `#touch-events`: `disabled`.
 **Firefox**: `about:config` -> `dom.w3c_touch_events`: `disabled`.
+
+### Billing
+
+| Component   | Version     |
+|-------------|-------------|
+| WHMCS       | 8.13.1      |
+
 
 ## Certified Infrastructure Scale
 
@@ -126,21 +133,6 @@ The following items apply to all distributions:
 ```default
 DISK = [ driver = "qcow2", cache = "writethrough" ]
 ```
-
-* Most Linux distributions using a kernel 5.X (i.e. Debian 11) mount cgroups v2 via systemd natively. If you have hosts with a previous version of the distribution mounting cgroups via fstab or in v1 compatibility mode (i.e. Debian 10) and their libvirt version is <5.5, during the migration of VMs from older hosts to new ones you can experience errors like
-
-```default
-WWW MMM DD hh:mm:ss yyyy: MIGRATE: error: Unable to write to '/sys/fs/cgroup/machine.slice/machine-qemu/..../cpu.weight': Numerical result out of range Could not migrate VM_UID to HOST ExitCode: 1
-```
-
-This happens in every single VM migration from a host with the previous OS version to a host with the new one.
-
-To solve this, there are 2 options: Delete the VM and recreate it scheduled in a host with the new OS version or mount cgroups in v1 compatibility mode in the nodes with the new OS version. To do this
-
-> 1. Edit the bootloader default options (normally under `/etc/defaults/grub.conf`)
-> 2. Modify the default commandline for the nodes (usually `GRUB_CMDLINE_LINUX="..."`) and add the option `systemd.unified_cgroup_hierarchy=0`
-> 3. Recreate the grub configuration file (in most cases executing a `grub-mkconfig -o /boot/grub/grub.cfg`)
-> 4. Reboot the host. The change will be persistent if the kernel is updated
 
 ### RedHat 8 Platform Notes
 

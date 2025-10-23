@@ -15,8 +15,8 @@ weight: "2"
 
 OpenNebula maintains two appliance marketplaces:
 
-- The [Public OpenNebula Marketplace](http://marketplace.opennebula.io/appliance), with appliances maintained by OpenNebula Systems.
-- The [Community Marketplace](http://community-marketplace.opennebula.io/appliance), with appliances maintained by external contributors.
+- The [Public OpenNebula Marketplace](http://marketplace.opennebula.io), with appliances maintained by OpenNebula Systems.
+- The [Community Marketplace](http://community-marketplace.opennebula.io), with appliances maintained by external contributors.
 
 ## Configuration Attributes
 
