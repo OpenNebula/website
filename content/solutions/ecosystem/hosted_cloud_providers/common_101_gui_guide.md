@@ -1,9 +1,6 @@
 ---
 title: "Validate Hosted Cloud Deployments"
-<<<<<<<< HEAD:content/solutions/hosted_cloud_providers/validate_hosted_cloud_deployments/common_101_gui_guide.md
-========
 linkTitle: "Validation"
->>>>>>>> one-7.0-maintenance:content/solutions/ecosystem/hosted_cloud_providers/common_101_gui_guide.md
 date: "2025-07-16"
 description: "This short guide explains how to access a Hosted OpenNebula Cloud Deployment via the web UI and instantiate and access a Virtual Machine."
 categories:
