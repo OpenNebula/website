@@ -53,7 +53,50 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
   </tbody>
 </table>
 
-## Compatibility
+The OpenNebula-Veeam&reg; Backup Integration provides robust, agentless backup and recovery for OpenNebula VMs using Veeam Backup & Replication. The integration works by exposing a native **oVirt-compatible REST API** (via the ovirtAPI server component), allowing Veeam to connect to OpenNebula as if it were an oVirt/RHV hypervisor.
+
+The OpenNebula-Veeam Backup Integration enables Veeam to perform image-level backups, incremental backups by using Changed Block Tracking, as well as granular restores like Full VM and file-level directly from the Veeam console. This integration is part of OpenNebula Enterprise Edition (EE).
+
+### Features
+
+<table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th class="head" style="min-width: 100px; border: 1px solid; vertical-align: middle; padding: 5px;"><p>Area</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid; vertical-align: middle; padding: 5px;"><p>Benefit</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid; vertical-align: middle; padding: 5px;"><p>Description</p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Data Protection</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Agentless, Image-Level Backups</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Protect entire VMs without installing or managing agents inside the guest OS.</p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Efficiency</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Incremental Backups (CBT)</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Leverages Change Block Tracking (CBT) via the API to back up only the data that has changed, reducing backup windows.</p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Native Integration</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Uses Standard Veeam Workflow</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Connect OpenNebula as a standard "oVirt" hypervisor in Veeam. No additional custom Veeam plug-ins are required.</p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Recovery</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Flexible Restore Options</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Enables Full VM restores, instant VM recovery, and file-level restores directly from the Veeam B&amp;R console.</p></td>
+    </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Automation</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Full Discovery</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).</p></td>
+    </tr>
+  </tbody>
+</table>
+
+### Compatibility
 
 The oVirtAPI module is compatible with the Veeam Backup & Replication version specified in the [Platform Notes]({{% relref "../../../software/release_information/release_notes/platform_notes/#monitoring-and-backups" %}}).
 
