@@ -475,7 +475,7 @@ To install the hooks, create a definition file for each one. The `autostart-host
 NAME = autostart-host
 TYPE = state
 COMMAND = autostart/host
-ARGUMENTS = \$TEMPLATE
+ARGUMENTS = $TEMPLATE
 ARGUMENTS_STDIN = yes
 RESOURCE = HOST
 STATE = MONITORED
@@ -487,7 +487,7 @@ Similarly for the VM hook, the `autostart-vm.tmpl` definition file will be as fo
 NAME = autostart-vm
 TYPE = state
 COMMAND = autostart/vm
-ARGUMENTS = \$TEMPLATE
+ARGUMENTS = $TEMPLATE
 ARGUMENTS_STDIN = yes
 RESOURCE = VM
 STATE = POWEROFF
