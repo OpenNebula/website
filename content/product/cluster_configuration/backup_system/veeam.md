@@ -151,7 +151,7 @@ A server should be configured to expose both the Rsync Backup datastore and the 
 
 2. Create a backup datastore
 
-The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. 
+The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. An additional property called ``VEEAM_DS`` must exist in the backup datastore template and be set to ``YES``.
 
 {{< alert title="Remember" color="success" >}}
 The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}} 
@@ -180,14 +180,15 @@ Here is an example of how to create an Rsync datastore in a Host named `backup-h
     # Add the datastore to the cluster with "onecluster adddatastore <cluster-name> <datastore-name>"
     onecluster adddatastore somecluster VeeamDS
 
-{{< alert title="Remember" color="success" >}}
-Note that the ``VEEAM_DS`` property must exist and be set to ``YES``.{{< /alert >}} 
+{{< alert title="SELinux/AppArmor issues" color="success" >}}
+SELinux and AppArmor may cause some issues in the backup server if not configured properly. Either disable them or make sure to whitelist the datastore directories (``/var/lib/one/datastores``).
+{{< /alert >}}
 
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
 
 **Sizing recommendations**
 
-The backup datastore needs to have enough space to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup datastore and the Veeam Backup storage. This is something inherent to the Veean integration with oVirt, as further backups of a Virtual Machine will be incremental and only the changed disk regions will be retrieved.
+The backup datastore needs to have enough space to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup datastore and the Veeam Backup storage. This is something inherent to the Veeam integration with oVirt, as further backups of a Virtual Machine will be incremental and only the changed disk regions will be retrieved.
 
 If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
 
@@ -212,7 +213,19 @@ During installation a self-signed certificate is generated at ``/etc/one/ovirtap
 
 After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the Front-end server. 
 
-Finally, start the service with either ``systemctl start apache2`` (ubuntu/debian) or ``systemctl start httpd`` (alma).
+Finally, start the service with either ``systemctl start apache2`` (Ubuntu/Debian) or ``systemctl start httpd`` (RHEL/Alma).
+
+{{< alert title="Important" color="success" >}}
+Once the package is installed, a ``oneadmin`` user will be created. Please make sure that this user and the same ``oneadmin`` user in the frontend can establish passwordless ssh connections in both directions.
+{{< /alert >}}
+
+{{< alert title="Package dependency" color="success" >}}
+In RHEL and Alma environments, you may face issues with the passenger package dependencies (``mod_passenger`` and ``mod_ssl``). You may add the correct repository and install the packages with the following:
+
+    curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
+    dnf install -y passenger mod_passenger mod_ssl
+
+{{< /alert >}}
 
 #### Performance Improvements
 To increase the performance of the oVirtAPI module, you may want to modify the ammount of processes assigned to it to better utilize the CPUs available in the backup server. To do so, modify the ``PassengerMaxPoolSize`` parameters in the Apache configuration file to match the available CPUs. Depending on your distro it can be located in the following directories:
