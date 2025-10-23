@@ -73,4 +73,4 @@ This Chapter applies to KVM and LXC.
 {{< alert title="Warning" color="warning" >}}
 Hypervisor limitations:
 
-- **LXC** nodes only support [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}), [Local Storage]({{% relref "local_ds#local-ds" %}}) and [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) datastores.{{< /alert >}} 
+- **LXC** nodes only support [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}), [Local Storage]({{% relref "local_ds#local-ds" %}}) and [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) datastores.{{< /alert >}}
