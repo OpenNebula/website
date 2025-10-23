@@ -89,4 +89,3 @@ The following issues have been solved in 7.0.1:
 - Fix Sunstone have snapshot button for the volatile disks but the operation is not permitted [#7184](https://github.com/OpenNebula/one/issues/7184)
 - Fix DRS: Parser sends incorrect datastore information to Optimizer [#7196](https://github.com/OpenNebula/one/issues/7196)
 - Fix OneFlow user_inputs are not per roles [#7213](https://github.com/OpenNebula/one/issues/7213)
-- Fix automatically update PCI available profiles. [#7268](https://github.com/OpenNebula/one/issues/7268)
