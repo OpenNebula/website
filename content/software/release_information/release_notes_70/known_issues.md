@@ -91,4 +91,3 @@ host:
 ### OneGate
 
 - [Avoid Host not permitted on Sinatra server when is behind NGINX proxy](https://github.com/OpenNebula/one/issues/7231)
-- [OneGate does not update well VM user template when `--erase` is declared](https://github.com/OpenNebula/one/issues/7239)
