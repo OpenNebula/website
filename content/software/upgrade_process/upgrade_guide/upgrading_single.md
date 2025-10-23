@@ -32,7 +32,7 @@ When a critical bug requires an exception to the previous rules it will be expli
 
 ### Step 1. Stop OpenNebula Services
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migr, epil, save). Wait until these VMs get to a final state (run, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../product/virtual_machines_operation/virtual_machine_definitions/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migr, epil, save). Wait until these VMs get to a final state (run, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../product/virtual_machines_operation/virtual_machines/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
 
 Now you are ready to stop OpenNebula and any other related services you may have running, e.g. Sunstone or OneFlow. It’s preferable to use the system tools, like systemctl or service as root in order to stop the services.
 
