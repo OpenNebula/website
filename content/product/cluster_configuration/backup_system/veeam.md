@@ -274,7 +274,7 @@ For the appliance credentials, you should choose the same ones that you set up w
 
 ![image](/images/veeam/appliance_credentials.png)
 
-In the **Network Settings** tab, choose the management network that the appliance should use. It is recommended to manually choose the IP address configuration that the appliance should use. If no DHCP service is setup, use the first available free IP in the range of the management network.
+In the **Network Settings** tab, choose the management network that the appliance will use. It is recommended to manually choose the IP address configuration that the appliance will use. If no DHCP service is setup, use the first available free IP in the range of the management network.
 
 ![image](/images/veeam/appliance_network.png)
 
