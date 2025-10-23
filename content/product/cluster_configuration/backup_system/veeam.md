@@ -250,7 +250,7 @@ As a last step, you can click finish and the new ovirtAPI server should be liste
 
 ![image](/images/veeam/hypervisor_added.png)
 
-#### Step 4.2: Deploy the KVM appliance
+4.2 Deploy the KVM appliance
 
 In order for Veeam to be able to perform backup and restore operations, it must deploy a dedicated Virtual Machine to act as a worker. To deploy it, go to the **Backup Infrastructure** tab, then **Backup Proxies**, and click **Add Proxy**:
 
