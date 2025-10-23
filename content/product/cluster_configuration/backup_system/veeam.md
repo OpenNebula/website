@@ -222,7 +222,7 @@ To increase the performance of the oVirtAPI module, you may want to modify the a
 
 After performing changes, restart the ``httpd`` or ``apache`` service.
 
-### Step 4: Add OpenNebula to Veeam
+4. Add OpenNebula to Veeam
 
 To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step or follow the next steps:
 
