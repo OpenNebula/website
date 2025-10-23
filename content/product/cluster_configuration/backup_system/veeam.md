@@ -109,7 +109,7 @@ The following table summarizes the supported backup modes for each storage syste
 
 Here is a list of the known missing features or bugs related to the Veeam integration with OpenNebula:
 
-- Setting the ``PassengerMaxPoolSize`` variable to values higher than 1 may cause issues depending on the system properties of the backup server and the ammount of concurent transfers, showing an error in the Veeam B&R console. If this happens too frequently, we kindly ask to reduce the ammount of concurrent Passenger processes to 1 until this issue is fixed.
+- Setting the ``PassengerMaxPoolSize`` variable to values higher than 1 can trigger issues depending on the system properties of the backup server and the amount of concurrent transfers, showing an error in the Veeam Backup & Replication console. If this happens too frequently, reduce the amount of concurrent Passenger processes to 1 until this issue is fixed.
 - The KVM appliance in step 4.2 does not include context packages, meaning that in order to configure the networking of said appliance the user must either manually choose the first available free IP in the management network (as seen in the guide) or set up a DHCP service router.
 
 ### Architecture
