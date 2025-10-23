@@ -227,4 +227,3 @@ If there is still not enough space after eviction, the new image is fetched dire
 
 {{< alert title="Warning" color="warning" >}}
 Images used within the last `CACHE_MIN_AGE` seconds cannot be evicted.{{< /alert >}}
-
