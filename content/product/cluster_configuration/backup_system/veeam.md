@@ -198,7 +198,7 @@ We provide alongside the ovirtapi package the ``/usr/share/one/backup_clean.rb``
 {{< alert title="Remember" color="success" >}}
 For the ``/usr/share/one/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}} 
 
-### Step 3: Install and configure the oVirtAPI module
+3. Install and configure the oVirtAPI module
 
 In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backup server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
 
