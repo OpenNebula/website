@@ -11,10 +11,88 @@ weight: "3"
 
 <a id="upgrade-single"></a>
 
+If you are upgrading from a 7.0.x installation you only need to follow a reduced set of steps. If you are running a 6.10.x version or older, please check [these set of steps]({{% relref "./upgrading_single.html#upgrade-6" %}}) (some additional ones may apply, please review them at the end of the section).
+
 <!--# Upgrading Single Front-end Deployments -->
 {{< alert title="Important" color="success" >}}
 If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
 
+
+<a id="upgrade-7"></a>
+## Upgrading from 7.0.x
+
+This section describes the installation procedure for systems that are already running a 7.0.x OpenNebula. The upgrade to OpenNebula 7.0 can be done directly following this section, you don’t need to perform intermediate version upgrades. The upgrade will preserve all current users, hosts, resources and configurations.
+
+When performing a minor upgrade OpenNebula adheres to the following convention to ease the process:
+
+- No changes are made to the configuration files, so no configuration file will be changed during the upgrade.
+- Database versions are preserved, so no upgrade of the database schema is needed.
+
+When a critical bug requires an exception to the previous rules it will be explicitly noted in this guide.
+
+### Step 1. Stop OpenNebula Services
+
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migr, epil, save). Wait until these VMs get to a final state (run, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../product/virtual_machines_operation/virtual_machine_definitions/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
+
+Now you are ready to stop OpenNebula and any other related services you may have running, e.g. Sunstone or OneFlow. It’s preferable to use the system tools, like systemctl or service as root in order to stop the services.
+
+### Step 2. Upgrade Front-end to the New Version
+
+Upgrade the OpenNebula software using the package manager of your OS. Refer to the [Single Front-end Installation guide]({{% relref "../../../software/installation_process/manual_installation/front_end_installation#frontend-installation" %}}) for a complete list of the OpenNebula packages installed on your system. Package repos need to be pointing to the latest version (7.0).
+
+For example, in CentOS/RHEL simply execute:
+
+```bash
+yum upgrade opennebula
+```
+
+For Debian/Ubuntu use:
+
+```bash
+apt-get update
+apt-get install --only-upgrade opennebula
+```
+
+### Step 3. Upgrade Hypervisors to the New Version
+
+Upgrade the OpenNebula node KVM or LXC packages, using the package manager of your OS.
+
+For example, in a rpm-based Linux distribution simply execute:
+
+```bash
+yum upgrade opennebula-node-kvm
+```
+
+For deb-based distros use:
+
+```bash
+apt-get update
+apt-get install --only-upgrade opennebula-node-kvm
+```
+
+{{< alert title="Note" color="success" >}}
+If you are using LXC the package is `opennebula-node-lxc`.
+{{< /alert >}} 
+
+### Step 4. Update the Drivers
+
+You should now be able to start OpenNebula as usual, running `service opennebula start` as `root`. At this point, as `oneadmin` user, execute `onehost sync` to update the new drivers in the Hosts.
+
+{{< alert title="Note" color="success" >}}
+You can skip this step if you are not using KVM Hosts, or any Hosts that use remote monitoring probes.
+{{< /alert >}} 
+
+### Testing
+
+OpenNebula will continue the monitoring and management of your previous Hosts and VMs.
+
+As a measure of caution, look for any error messages in oned.log, and check that all drivers are loaded successfully. After that, keep an eye on oned.log while you issue the onevm, onevnet, oneimage, oneuser, onehost **list** commands. Try also using the **show** subcommand for some resources.
+
+### Restoring the Previous Version
+
+If for any reason you need to restore your previous OpenNebula, simply uninstall OpenNebula 7.0, and install again your previous version. After that, update the drivers if needed, as outlined in the Step 12 below.
+
+<a id="upgrade-6"></a>
 ## Upgrading from 6.x and higher
 
 ### Step 1. Check Virtual Machine Status
