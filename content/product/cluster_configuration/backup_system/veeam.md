@@ -118,7 +118,7 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
 
 - Backup Server: to host both the **OpenNebula Backup datastore** and the **OpenNebula oVirtAPI Server**.
 - Veeam Backup Appliance: this is automatically deployed by Veeam when OpenNebula is added as a hypervisor.
-- **Management Network:** A common management network must be established to provide connectivity between all of the following components:
+- Management Network: to provide connectivity between all of the following components:
      - OpenNebula Front-end
      - OpenNebula Backup server
      - All OpenNebula Hosts (running the VMs to be backed up)
