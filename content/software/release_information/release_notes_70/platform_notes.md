@@ -108,9 +108,9 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 ### Billing
 
 | Component   | Version     |
-|-----------|-------------|
-| WHMCS     | 8.13.1 |
-|
+|-------------|-------------|
+| WHMCS       | 8.13.1      |
+
 
 ## Certified Infrastructure Scale
 
