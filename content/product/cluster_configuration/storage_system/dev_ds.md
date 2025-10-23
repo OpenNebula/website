@@ -1,5 +1,6 @@
 ---
 title: "Raw Device Mapping Datastore"
+linkTitle: "Raw Device Mapping"
 date: "2025-02-17"
 description:
 categories:

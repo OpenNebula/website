@@ -1,11 +1,12 @@
 ---
 title: "What is OpenNebula Enterprise Edition"
+linktTitle: "What is OpenNebula EE"
 
 description:
 categories:
 pageintoc: ""
 tags:
-weight: ""
+weight: "1"
 ---
 
 <a id="enterprise-edition-what-is"></a>

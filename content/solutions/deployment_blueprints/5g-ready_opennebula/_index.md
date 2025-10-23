@@ -1,8 +1,6 @@
 ---
-title: "5G Telco - Deployment Blueprint"
-linkTitle: "5G Telco"
+title: "5G/Edge - Deployment Blueprint"
+linkTitle: "5G/Edge"
 description: "TBC"
-draft: true
-toc_hide: true
-weight: 2
+weight: 3
 ---

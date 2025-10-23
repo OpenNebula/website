@@ -1,5 +1,6 @@
 ---
 title: "NVIDIA GPU"
+linkTitle: "NVIDIA vGPU"
 date: "2025-02-17"
 description:
 categories:
@@ -57,7 +58,7 @@ Wed Feb  9 12:36:07 2022
 ## Enable the NVIDIA vGPU
 
 {{< alert title="Warning" color="warning" >}}
-The following steps assume that your graphic card supports SR-IOV. If not, please refer to official NVIDIA documentation in order to activate vGPU.{{< /alert >}} 
+The following steps assume that your graphic card supports SR-IOV. If not, please refer to official NVIDIA documentation in order to activate vGPU.{{< /alert >}}
 
 ### Finding the PCI
 
@@ -107,7 +108,7 @@ $ virsh nodedev-dumpxml pci_0000_41_00_0
 ### Enabling Virtual Functions
 
 {{< alert title="Important" color="success" >}}
-You may need to perform this operation every time you reboot your server.{{< /alert >}} 
+You need to perform this operation every time you reboot your server.{{< /alert >}}
 
 ```default
 $ # /usr/lib/nvidia/sriov-manage -e slot:bus:domain.function
@@ -139,7 +140,7 @@ $ udevadm control --reload-rules && udevadm trigger
 ```
 
 {{< alert title="Note" color="success" >}}
-You can check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}} 
+Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/grid-vgpu-user-guide.pdf).{{< /alert >}}
 
 ## Using the vGPU
 
@@ -177,5 +178,9 @@ $ onehost show -j 13
       }
 ```
 
+This monitoring information is also available under the VMs PCI tab in the instances section.
+
+![sunstone_gpu_graph](/images/sunstone_gpu_graph.png)
+
 {{< alert title="Important" color="success" >}}
-When using NVIDIA cards, ensure that only the GPU (for PCI passthrough) or vGPUs (for SR-IOV) are exposed through the PCI monitoring probe. Do not mix both types of devices in the same configuration.{{< /alert >}} 
+When using NVIDIA cards, ensure that only the GPU (for PCI passthrough) or vGPUs (for SR-IOV) are exposed through the PCI monitoring probe. Do not mix both types of devices in the same configuration.{{< /alert >}}

@@ -1,5 +1,6 @@
 ---
 title: "OpenNebula Configuration"
+linkTitle: "OpenNebula Daemon"
 date: "2025-02-17"
 description:
 categories:
@@ -220,9 +221,6 @@ For showback the CPU and memory cost are counted if the resource is reserved on 
 #LOG_CALL_FORMAT    = "Req:%i UID:%u %m invoked %l"
 ```
 
-{{< alert title="Warning" color="warning" >}}
-This functionality is only available when compiled with xmlrpc-c libraries >= 1.32. Currently only the packages distributed by OpenNebula are linked with this library.{{< /alert >}} 
-
 ## Virtual Networks
 
 - `NETWORK_SIZE`: Here you can define the default size for the Virtual Networks.
@@ -281,7 +279,7 @@ Here you can configure the default values for the Datastores and Image templates
 - `DEFAULT_IMAGE_PERSISTENT_NEW`: Control the default value for the `PERSISTENT` attribute on image creation (`oneimage create`). By default images are not persistent if this is not set.
 - `VM_SNAPSHOT_FACTOR`: Snapshot size is usually much smaller than original disk size. This attribute controls how much disk size should be counted for the VM snapshot. Value should be in range [0,1]. Default value for backward compatibility is 0.
 
-More information on the image repository can be found in the [Managing Virtual Machine Images guide]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}}).
+More information on the image repository can be found in the [Managing Virtual Machine Images guide]({{% relref "../../virtual_machines_operation/virtual_machines/images#images" %}}).
 
 Sample configuration:
 
@@ -398,7 +396,7 @@ TM_MAD = [
 The configuration for each driver is defined in the `TM_MAD_CONF` section.
 
 {{< alert title="Important" color="success" >}}
-These values define the datastore behavior and thus should not be modified. They are used when creating a new datastore of given type and also when developing new drivers.{{< /alert >}} 
+These values define the datastore behavior and thus should not be modified. They are used when creating a new datastore of given type and also when developing new drivers.{{< /alert >}}
 
 - `NAME`: name of the transfer driver, listed in the `-d` option of the `TM_MAD` section
 - `LN_TARGET`: determines how persistent images will be cloned when a new VM is instantiated:
@@ -558,7 +556,7 @@ Sample configuration:
 ```default
 AUTH_MAD = [
     executable = "one_auth_mad",
-    authn = "ssh,x509,ldap,server_cipher,server_x509"
+    authn = "ssh,x509,ldap,server_cipher,server_x509,saml"
 ]
 
 SESSION_EXPIRATION_TIME = 900
@@ -568,7 +566,7 @@ SESSION_EXPIRATION_TIME = 900
 DEFAULT_UMASK = 177
 ```
 
-The `DEFAULT_AUTH` can be used to point to the desired default authentication driver, for example `ldap`:
+The `DEFAULT_AUTH` can be used to point to the desired default authentication driver, for example `ldap` or `saml`:
 
 ```default
 DEFAULT_AUTH = "ldap"
@@ -854,4 +852,4 @@ Other logs are also available in Journald, use the following command to show the
 ```
 
 {{< alert title="Important" color="success" >}}
-See [Troubleshooting]({{% relref "troubleshooting#troubleshoot-additional" %}}) guide to learn about the logging of individual OpenNebula Daemon subsystems and drivers.{{< /alert >}} 
+See [Troubleshooting]({{% relref "troubleshooting#troubleshoot-additional" %}}) guide to learn about the logging of individual OpenNebula Daemon subsystems and drivers.{{< /alert >}}

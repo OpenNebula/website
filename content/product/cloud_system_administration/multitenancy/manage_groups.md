@@ -16,7 +16,7 @@ weight: "3"
 
 A group in OpenNebula makes it possible to isolate users and resources. A user can see and use the [shared resources]({{% relref "chmod#chmod" %}}) of other users.
 
-The group is an authorization boundary for the users, but you can also partition your cloud infrastructure and define which resources are available to each group by using [Virtual Data Centers (VDC)]({{% relref "manage_vdcs#manage-vdcs" %}}). You can read more about OpenNebula’s approach to VDCs and the cloud from the perspective of different user roles in the [Understanding OpenNebula]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}) guide.
+The group is an authorization boundary for the users, but you can also partition your cloud infrastructure and define which resources are available to each group by using [Virtual Data Centers (VDC)]({{% relref "manage_vdcs#manage-vdcs" %}}). You can read more about OpenNebula’s approach to VDCs and the cloud from the perspective of different user roles in the [Understanding OpenNebula]({{% relref "../../../getting_started/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}) guide.
 
 ## Adding and Deleting Groups
 
@@ -103,10 +103,10 @@ Any user can be configured to be Admin of a group with the commands `onegroup ad
 
 You can make the following virtual resources available to group users:
 
-* [Virtual Machine Templates]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-guide" %}})
+* [Virtual Machine Templates]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#vm-guide" %}})
 * [Service Templates]({{% relref "../../virtual_machines_operation/multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}})
-* [Images]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}})
-* [Files & Kernels]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#img-guide-kernel-and-ramdisk" %}})
+* [Images]({{% relref "../../virtual_machines_operation/virtual_machines/images#images" %}})
+* [Files & Kernels]({{% relref "../../virtual_machines_operation/virtual_machines/images#img-guide-kernel-and-ramdisk" %}})
 
 To make a virtual resource owned by oneadmin available to users of the new group, you have two options:
 

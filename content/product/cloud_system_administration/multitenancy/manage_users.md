@@ -55,7 +55,7 @@ username = [" ", ":", "\t", "\n", "\v", "\f", "\r"]
 password = [" ", "\t", "\n", "\v", "\f", "\r"]{{< /alert >}}  
 ```
 
-Some auth drivers do not require passwords (ldap); in this case a user can be created without it:
+Some auth drivers do not require passwords (ldap, saml); in this case a user can be created without it:
 
 ```default
 $ oneuser create --driver ldap <user_name>
@@ -110,7 +110,7 @@ PASSWORD        : c24783ba96a35464632a624d9f829136edc0175e
 {{< alert title="Note" color="success" >}}
 OpenNebula does not store the plain password but a hashed version in the database, as shown by the oneuser example above.{{< /alert >}} 
 
-Check [this guide]({{% relref "../../operation_references/configuration_references/cli#cli-shell" %}}) to discover how you can customize shell variables.
+Check [this guide]({{% relref "../../operation_references/command_line_interface/cli#cli-shell" %}}) to discover how you can customize shell variables.
 
 <a id="user-tokens"></a>
 

@@ -1,6 +1,6 @@
 ---
 title: "Monitoring System"
-
+linkTitle: "Monitoring"
 description:
 categories:
 pageintoc: ""

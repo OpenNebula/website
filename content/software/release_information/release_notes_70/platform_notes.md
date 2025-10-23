@@ -22,8 +22,8 @@ This is the list of the individual platform components that have been through th
 
 | Component                | Version                                    | More information                                                                                                                                                                            |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
-| AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| Red Hat Enterprise Linux | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| AlmaLinux                | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
 | MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
@@ -36,8 +36,8 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 | Component                | Version                                                                                                    | More information                                                                                                                     |
 |--------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
-| AlmaLinux                | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Red Hat Enterprise Linux | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| AlmaLinux                | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | KVM/Libvirt              | Support for version included in the Linux distribution.<br/>For RHEL the packages from `qemu-ev` are used. | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
@@ -48,7 +48,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | Debian        | 11, 12                                                 | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| AlmaLinux     | 8, 9                                                   | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}}) |
 
 <a id="context-supported-platforms"></a>
@@ -71,11 +71,11 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | Component   | Version                                    | More information                                                                                                                         |
 |-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
-| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-drivers" %}}) |
+| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}) |
+| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}) |
 | Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}})  |
-| NetApp      | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../integrations/storage_extensions/netapp" %}}) |
-| LVM-thin    | NetApp ONTAP 9.16.1P1 & Pure Storage 6.7.2 | [LVM Thin]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers#lvm-thin" %}}) |
+| NetApp      | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../product/cluster_configuration/san_storage/netapp" %}}) |
+| LVM-thin    | NetApp ONTAP 9.16.1P1 & Pure Storage 6.7.2 | [LVM Thin]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-thin" %}}) |
 
 ### Authentication
 
@@ -90,7 +90,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
-| Veeam B&R                    | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../integrations/backup_extensions/veeam.md" %}}) |
+| Veeam B&R                     | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
 
 ### Sunstone
 
@@ -122,7 +122,6 @@ However, there are several OpenNebula users managing significantly higher number
 
 The following applies to all Front-Ends:
 
-* XML-RPC tuning parameters (`MAX_CONN`, `MAX_CONN_BACKLOG`, `KEEPALIVE_TIMEOUT`, `KEEPALIVE_MAX_CONN` and `TIMEOUT`) are only available with packages distributed by us, as they are compiled with a newer xmlrpc-c library.
 * Only **Ruby versions >= 2.0 are supported**.
 
 ## Nodes Platform Notes

@@ -27,7 +27,7 @@ When **updating the VM configuration live** by using `one.vm.updateconf`, althou
 The full list of configuration attributes are:
 
 ```default
-OS        = ["ARCH", "MACHINE", "KERNEL", "INITRD", "BOOTLOADER", "BOOT", "KERNEL_CMD", "ROOT", "SD_DISK_BUS", "UUID", "FIRMWARE"]
+OS        = ["ARCH", "MACHINE", "KERNEL", "INITRD", "BOOTLOADER", "BOOT", "KERNEL_CMD", "ROOT", "SD_DISK_BUS", "UUID", "FIRMWARE", "FIRMWARE_FORMAT"]
 FEATURES  = ["ACPI", "PAE", "APIC", "LOCALTIME", "HYPERV", "GUEST_AGENT", "VIRTIO_SCSI_QUEUES", "VIRTIO_BLK_QUEUES", "IOTHREADS"]
 INPUT     = ["TYPE", "BUS"]
 GRAPHICS  = ["TYPE", "LISTEN", "PASSWD", "KEYMAP", "COMMAND" ]
@@ -54,29 +54,29 @@ The KVM driver is enabled by default in OpenNebula `/etc/one/oned.conf` on your 
 
 There are some attributes required for KVM to boot a VM. You can set a suitable default for them so all the VMs get the required values. These attributes are set in `/etc/one/vmm_exec/vmm_exec_kvm.conf`. Default values from the configuration file can be overriden in the Cluster, Host, or VM template. The following attributes can be set for KVM:
 
-* `EMULATOR`: path to the KVM executable.
-* `OS`: attributes `KERNEL`, `INITRD`, `ROOT`, `KERNEL_CMD`, `MACHINE`,  `ARCH`, `SD_DISK_BUS`, `FIRMWARE`, `FIMRWARE_SECURE` and `BOOTLOADER`.
-* `VCPU`
-* `VCPU_MAX`
-* `MEMORY_SLOTS`
-* `FEATURES`: attributes `ACPI`, `PAE`, `APIC`, `HEPRV`, `LOCALTIME`, `GUEST_AGENT`, `VIRTIO_SCSI_QUEUES`, `VIRTIO_BLK_QUEUES`, `IOTHREADS`.
-* `CPU_MODEL`: attribute `MODEL`, `FEATURES`.
-* `DISK`: attributes `DRIVER`, `CACHE`, `IO`, `DISCARD`, `TOTAL_BYTES_SEC`, `TOTAL_BYTES_SEC_MAX`, `TOTAL_BYTES_SEC_MAX_LENGTH`, `TOTAL_IOPS_SEC`, `TOTAL_IOPS_SEC_MAX`, `TOTAL_IOPS_SEC_MAX_LENGTH`, `READ_BYTES_SEC`, `READ_BYTES_SEC_MAX`, `READ_BYTES_SEC_MAX_LENGTH`, `WRITE_BYTES_SEC`, `WRITE_BYTES_SEC_MAX`, `WRITE_BYTES_SEC_MAX_LENGTH`, `READ_IOPS_SEC`, `READ_IOPS_SEC_MAX`, `READ_IOPS_SEC_MAX_LENGTH`, `WRITE_IOPS_SEC`, `WRITE_IOPS_SEC_MAX`, `WRITE_IOPS_SEC_MAX_LENGTH`, `SIZE_IOPS_SEC`.
-* `NIC`: attribute `FILTER`, `MODEL`.
-* `GRAPHICS`: attributes `TYPE`, `LISTEN`, `PASSWD`, `KEYMAP`, `RANDOM_PASSWD`. The VM instance must have at least empty `GRAPHICS = []` section to read these default attributes from the config file and to generate cluster unique `PORT` attribute.
-* `VIDEO`: attributes: `TYPE`, `IOMMU`, `ATS`, `VRAM`, `RESOLUTION`.
-* `RAW`: to add libvirt attributes to the domain XML file.
-* `HYPERV_OPTIONS`: to enable hyperv extensions.
-* `HYPERV_TIMERS`: timers added when HYPERV is set to yes in FEATURES.
-* `SPICE_OPTIONS`: to add default devices for SPICE.
+- `EMULATOR`: path to the KVM executable.
+- `OS`: attributes `KERNEL`, `INITRD`, `ROOT`, `KERNEL_CMD`, `MACHINE`, `ARCH`, `SD_DISK_BUS`, `FIRMWARE`, `FIRMWARE_FORMAT`, `FIMRWARE_SECURE` and `BOOTLOADER`.
+- `VCPU`
+- `VCPU_MAX`
+- `MEMORY_SLOTS`
+- `FEATURES`: attributes `ACPI`, `PAE`, `APIC`, `HEPRV`, `LOCALTIME`, `GUEST_AGENT`, `VIRTIO_SCSI_QUEUES`, `VIRTIO_BLK_QUEUES`, `IOTHREADS`.
+- `CPU_MODEL`: attribute `MODEL`, `FEATURES`.
+- `DISK`: attributes `DRIVER`, `CACHE`, `IO`, `DISCARD`, `TOTAL_BYTES_SEC`, `TOTAL_BYTES_SEC_MAX`, `TOTAL_BYTES_SEC_MAX_LENGTH`, `TOTAL_IOPS_SEC`, `TOTAL_IOPS_SEC_MAX`, `TOTAL_IOPS_SEC_MAX_LENGTH`, `READ_BYTES_SEC`, `READ_BYTES_SEC_MAX`, `READ_BYTES_SEC_MAX_LENGTH`, `WRITE_BYTES_SEC`, `WRITE_BYTES_SEC_MAX`, `WRITE_BYTES_SEC_MAX_LENGTH`, `READ_IOPS_SEC`, `READ_IOPS_SEC_MAX`, `READ_IOPS_SEC_MAX_LENGTH`, `WRITE_IOPS_SEC`, `WRITE_IOPS_SEC_MAX`, `WRITE_IOPS_SEC_MAX_LENGTH`, `SIZE_IOPS_SEC`.
+- `NIC`: attribute `FILTER`, `MODEL`.
+- `GRAPHICS`: attributes `TYPE`, `LISTEN`, `PASSWD`, `KEYMAP`, `RANDOM_PASSWD`. The VM instance must have at least empty `GRAPHICS = []` section to read these default attributes from the config file and to generate cluster unique `PORT` attribute.
+- `VIDEO`: attributes: `TYPE`, `IOMMU`, `ATS`, `VRAM`, `RESOLUTION`.
+- `RAW`: to add libvirt attributes to the domain XML file.
+- `HYPERV_OPTIONS`: to enable hyperv extensions.
+- `HYPERV_TIMERS`: timers added when HYPERV is set to yes in FEATURES.
+- `SPICE_OPTIONS`: to add default devices for SPICE.
 
 The following attributes can be overridden at Cluster and Host level, but not within individual VM configuration:
 
-* `OVMF_UEFIS`: to add allowed file paths for Open Virtual Machine Firmware
-* `Q35_ROOT_PORTS`: to modify the number of PCI devices that can be attached in q35 VMs (defaults to 16)
-* `Q35_NUMA_PCIE`: Generate a NUMA-aware PCIe topology for pinned VMs
-* `CGROUPS_VERSION`: Use ‘2’ to use Cgroup V2, all other values or undefined: use Cgroup V1
-* `EMULATOR_CPUS`: Value used for KVM option <cputune><emulatorpin cpuset=…>
+- `OVMF_UEFIS`: to specify allowed file paths for Open Virtual Machine Firmware
+- `Q35_ROOT_PORTS`: to modify the number of PCI devices that can be attached in q35 VMs (defaults to 16)
+- `Q35_NUMA_PCIE`: to generate a NUMA-aware PCIe topology for pinned VMs
+- `CGROUPS_VERSION`: Use ‘2’ to use Cgroup V2, all other values or undefined: use Cgroup V1
+- `EMULATOR_CPUS`: specifies which of the host physical CPUs runs the main QEMU emulator threadValue used for KVM option <cputune><emulatorpin cpuset=…>
 
 {{< alert title="Warning" color="warning" >}}
 These values are only used during VM creation; for other actions like nic or disk attach/detach the default values must be set in `/var/lib/one/remotes/etc/vmm/kvm/kvmrc`. For more info check [Files and Parameters]({{% relref "kvm_driver#kvmg-files-and-parameters" %}}) section.{{< /alert >}}
@@ -129,7 +129,7 @@ export FORCE_DESTROY=yes
 
 Optionally, you can set up cgroups to control resources on your Hosts. By default KVM VMs will be placed in the `machine.slice`, the resources assigned in this slice can be adjusted for each hypervisor. The [libvirt cgroups documentation](https://libvirt.org/cgroups.html) describes all the cases and the way the cgroups are managed by libvirt/KVM.
 
-OpenNebula will compute the `shares` attribute of the Libvirt domain using the `CPU` parameter and the base share value, which depends on the cgroups version of the hypervisor. For example, a VM with `CPU=2` will get a cgroup value of `cpu.shares = 2048` (or `cpu.weight=200` for cgroups version 2),  twice the default value. Note that if you have a mix of cgroups version 1 and 2 Hosts, you may have inconsistent resource distribution when live-migrating a VM across different versions.
+OpenNebula computes the `shares` attribute of the Libvirt domain using the `CPU` parameter and the base share value, which depends on the cgroups version of the hypervisor. For example, a VM with `CPU=2` will get a cgroup value of `cpu.shares = 2048` (or `cpu.weight=200` for cgroups version 2), twice the default value. If you have a mix of cgroups combining version 1 and 2 Hosts, there will be an inconsistent resource distribution when live-migrating a VM across different versions.
 
 <a id="kvmg-memory-cleanup"></a>
 
@@ -155,44 +155,44 @@ The following are template attributes specific to KVM. Please refer to the [temp
 
 #### DISK
 
-* `TYPE`: This attribute defines the type of media to be exposed to the VM; possible values are `disk` (default) or `cdrom`. This attribute corresponds to the `media` option of the `-driver` argument of the `kvm` command.
-* `DRIVER`: specifies the format of the disk image; possible values are `raw`, `qcow2`… This attribute corresponds to the `format` option of the `-driver` argument of the `kvm` command.
-* `CACHE`: specifies the optional cache mechanism; possible values are `default`, `none`, `writethrough`, and `writeback`.
-* `IO`: sets IO policy; possible values are `threads` and `native`.
-* `IOTHREAD`: thread id used by this disk. It can only be used for virtio disk controllers and if `IOTHREADS` > 0.
-* `DISCARD`: controls what to do with trim commands; the options are `ignore` or `unmap`. It can only be used with virtio-scsi.
-* IO Throttling support - You can limit TOTAL/READ/WRITE throughput or IOPS. Also, burst control for these IO operations can be set for each disk. [See the reference guide for the attributed names and purpose]({{% relref "../../operation_references/configuration_references/template#reference-vm-template-disk-section" %}}).
+- `TYPE`: this attribute defines the type of media to be exposed to the VM; possible values are `disk` (default) or `cdrom`. This attribute corresponds to the `media` option of the `-driver` argument of the `kvm` command.
+- `DRIVER`: specifies the format of the disk image; possible values are `raw`, `qcow2`… This attribute corresponds to the `format` option of the `-driver` argument of the `kvm` command.
+- `CACHE`: specifies the optional cache mechanism; possible values are `default`, `none`, `writethrough`, and `writeback`.
+- `IO`: sets IO policy; possible values are `threads` and `native`.
+- `IOTHREAD`: thread id used by this disk. It can only be used for virtio disk controllers and if `IOTHREADS` > 0.
+- `DISCARD`: controls what to do with trim commands; the options are `ignore` or `unmap`. It can only be used with virtio-scsi.
+- IO Throttling support - You can limit TOTAL/READ/WRITE throughput or IOPS. Also, burst control for these IO operations can be set for each disk. [See the reference guide for the attributed names and purpose]({{% relref "../../operation_references/configuration_references/template#reference-vm-template-disk-section" %}}).
 
 #### NIC
 
-* `TARGET`: name for the tun device created for the VM. It corresponds to the `ifname` option of the ‘-net’ argument of the `kvm` command.
-* `SCRIPT`: name of a shell script to be executed after creating the tun device for the VM. It corresponds to the `script` option of the ‘-net’ argument of the `kvm` command.
-* QoS to control the network traffic. We can define different kinds of controls over network traffic:
-  > * `INBOUND_AVG_BW`
-  > * `INBOUND_PEAK_BW`
-  > * `INBOUND_PEAK_KW`
-  > * `OUTBOUND_AVG_BW`
-  > * `OUTBOUND_PEAK_BW`
-  > * `OUTBOUND_PEAK_KW`
-* `MODEL`: ethernet hardware to emulate. You can get the list of available models with this command:
+- `TARGET`: name for the tun device created for the VM. It corresponds to the `ifname` option of the ‘-net’ argument of the `kvm` command.
+- `SCRIPT`: name of a shell script to be executed after creating the tun device for the VM. It corresponds to the `script` option of the ‘-net’ argument of the `kvm` command.
+- QoS to control the network traffic. We can define different kinds of controls over network traffic:
+  > - `INBOUND_AVG_BW`
+  > - `INBOUND_PEAK_BW`
+  > - `INBOUND_PEAK_KW`
+  > - `OUTBOUND_AVG_BW`
+  > - `OUTBOUND_PEAK_BW`
+  > - `OUTBOUND_PEAK_KW`
+- `MODEL`: ethernet hardware to emulate. You can get the list of available models with this command:
 
 ```default
 $ kvm -net nic,model=? -nographic /dev/null
 ```
 
-* `FILTER` to define a network filtering rule for the interface. Libvirt includes some predefined rules (e.g., clean-traffic) that can be used. [Check the Libvirt documentation](http://libvirt.org/formatnwfilter.html#nwfelemsRules) for more information; you can also list the rules in your system with:
+- `FILTER` to define a network filtering rule for the interface. Libvirt includes some predefined rules (e.g., clean-traffic) that can be used. [Check the Libvirt documentation](http://libvirt.org/formatnwfilter.html#nwfelemsRules) for more information; you can also list the rules in your system with:
 
 ```default
 $ virsh -c qemu:///system nwfilter-list
 ```
 
-* `VIRTIO_QUEUES` to define how many queues will be used for the communication between CPUs and Network drivers. This attribute is only available with `MODEL="virtio"`. The `auto` keyword automatically set the number of queues to the number of vCPUs.
+- `VIRTIO_QUEUES` to define how many queues will be used for the communication between CPUs and Network drivers. This attribute is only available with `MODEL="virtio"`. The `auto` keyword automatically set the number of queues to the number of vCPUs.
 
 #### Graphics
 
 If properly configured, libvirt and KVM can work with SPICE ([check here for more information](http://www.spice-space.org/)). To select it, just add the following to the `GRAPHICS` attribute:
 
-* `TYPE = SPICE`
+- `TYPE = SPICE`
 
 Enabling SPICE will also make the driver inject a specific configuration for these machines. The configuration can be changed in the driver configuration file, variable `SPICE_OPTIONS`.
 
@@ -202,11 +202,11 @@ Enabling SPICE will also make the driver inject a specific configuration for the
 
 If configured, libvirt will attach a video device to the Virtual Machine with the specified attributes. Available attributes are:
 
-* `TYPE`: Defines the device type. Can be `none`, `vga`, `cirrus`, and `virtio`.  Utilizing `virtio` is required for `IOMMU` and `ATS` options.
-* `IOMMU`: Enables the device to use emulated IOMMU.  Requires `virtio` type.
-* `ATS`: Enables the device to use Address Translation Service.  Requires `virtio` type.
-* `VRAM`: Defines the amount of VRAM to allocate to the video device, in kB.
-* `RESOLUTION`: Defines the preferred resolution of the video device. Should be two numbers separated by an `x`. Example: `1920x1080`
+- `TYPE`: Defines the device type. Can be `none`, `vga`, `cirrus`, and `virtio`. Utilizing `virtio` is required for `IOMMU` and `ATS` options.
+- `IOMMU`: Enables the device to use emulated IOMMU. Requires `virtio` type.
+- `ATS`: Enables the device to use Address Translation Service. Requires `virtio` type.
+- `VRAM`: Defines the amount of VRAM to allocate to the video device, in kB.
+- `RESOLUTION`: Defines the preferred resolution of the video device. Should be two numbers separated by an `x`. Example: `1920x1080`
 
 <a id="kvmg-virtio"></a>
 
@@ -216,8 +216,8 @@ Virtio is the framework for IO virtualization in KVM. You will need a Linux kern
 
 If you want to use the virtio drivers, add the following attributes to your devices:
 
-* `DISK`, add the attribute `DEV_PREFIX="vd"`
-* `NIC`, add the attribute `MODEL="virtio"`
+- `DISK`, add the attribute `DEV_PREFIX="vd"`
+- `NIC`, add the attribute `MODEL="virtio"`
 
 For disks you can also use SCSI bus (`sd`) and it will use the virtio-scsi controller. This controller also offers high speed as it is not emulating real hardware, but it also adds support to trim commands to free disk space when the disk has the attribute `DISCARD="unmap"`. If needed, you can change the number of vCPU queues this way:
 
@@ -241,19 +241,32 @@ The `OS/FIRMWARE` attribute can be defined to load a specific firmware interface
 for Virtual Machines.
 The allowed values are:
 
-* `BIOS`: use Basic Input/Output System (BIOS).
-* `<UEFI_PATH>`: one the valid paths to a Unified Extensible Firmware Interface
+- `BIOS`: use Basic Input/Output System (BIOS).
+- `<UEFI_PATH>`: one the valid paths to a Unified Extensible Firmware Interface
   (UEFI) blob defined in `OVMF_UEFIS` (See [Driver Defaults]({{% relref "#kvmg-default-attributes" %}})).
 
-The `OS/FIRMWARE_SECURE` attribute can be used to configure *Secure Boot*. If
+The `OS/FIRMWARE_FORMAT` attribute can be used to define the format of the UEFI NVRAM image. The NVRAM file will be automatically converted to the specified format if the source file differs. The allowed values are:
+
+- `qcow2`: store the `UEFI NVRAM` as a `qcow2` image (requires `libvirt >= 10.10`).
+- `raw`: store the `UEFI NVRAM` as a `raw` image (default value).
+
+{{< alert title="Warning" color="warning" >}}
+Internal UEFI VMs snapshots are only supported with `qcow2 UEFI NVRAM` images.
+{{< /alert >}}
+
+The `OS/FIRMWARE_SECURE` attribute can be used to configure _Secure Boot_. If
 this attribute is not defined, no Secure Boot is used by default.
 The allowed values are:
 
-* `true`: use Secure Boot.
-* `false`: do not use Secure Boot.
+- `true`: use Secure Boot.
+- `false`: do not use Secure Boot.
 
 {{< alert title="Warning" color="warning" >}}
-If Secure Boot is enabled, the attribute `OS/MACHINE` must be set to `q35`.{{< /alert >}}  
+If Secure Boot is enabled, the attribute `OS/MACHINE` must be set to `q35`.{{< /alert >}}
+
+All the OS & CPU options can be accessed in Sunstone from the VM Template Update/Create dialog, in the second step (Advanced options) under the "OS & CPU" tab.
+
+![sunstone_os_cpu_tab](/images/sunstone_os_cpu_tab.png)
 
 #### Additional Attributes
 
@@ -330,11 +343,13 @@ how many times the memory can be added.</p></td>
 <!-- End HTML table. -->
 
 {{< alert title="Note" color="success" >}}
-Live Memory resize needs QEMU version 2.4. Live VCPU resize needs QEMU version 2.7.{{< /alert >}} 
+Live Memory resize needs QEMU version 2.4. Live VCPU resize needs QEMU version 2.7.{{< /alert >}}
 
 ### MEMORY_RESIZE_MODE
 
-`BALLOONING` is about dynamically adjusting the amount of RAM allocated to VMs. It allows KVM to reclaim unused memory from one VM and allocate it to another VM that needs it more, without shutting down or pausing the VMs. The parameter sets up a **balloon driver** within the VM that communicates with the Host. When the Host needs to **reclaim memory**, the driver *inflates*, reserving some of the VM’s unused memory for the Host. When the VM needs additional memory, the driver *deflates*, releasing reserved memory back to the VM.
+`BALLOONING` consists in dynamically adjusting the amount of RAM allocated to VMs. It enables KVM to reclaim unused memory from one VM and allocate it to another VM that needs it more, without shutting down or pausing the VMs. The parameter sets up a **balloon driver** within the VM that communicates with the Host:
+* When the Host needs to reclaim memory, the driver _inflates_, reserving some of the VM’s unused memory for the Host. 
+* When the VM needs additional memory, the driver _deflates_, releasing reserved memory back to the VM.
 
 From the VM’s standpoint, it seems like the available memory is decreasing or increasing. The OS inside the VM will think it’s using more memory when the balloon inflates and think it’s using less when the balloon deflates. This can go back and forth many times during the VM’s lifecycle, always ensuring that each VM has as much memory as it needs, up to `MEMORY_MAX`, but no more than that.
 
@@ -344,12 +359,12 @@ In `HOTPLUG` mode the Guest OS will perceive a new virtual RAM stick being plugg
 
 KVM supports hotplugging to the `virtio` and the `SCSI` buses. For disks, the bus the disk will be attached to is inferred from the `DEV_PREFIX` attribute of the disk template.
 
-* `vd`: `virtio`
-* `sd`: `SCSI` (default)
-* `hd`: `IDE`
+- `vd`: `virtio`
+- `sd`: `SCSI` (default)
+- `hd`: `IDE`
 
 {{< alert title="Note" color="success" >}}
-Hotplugging is not supported for CD-ROM and floppy.{{< /alert >}} 
+Hotplugging is not supported for CD-ROM and floppy.{{< /alert >}}
 
 If `TARGET` is passed instead of `DEV_PREFIX` the same rules apply (what happens behind the scenes is that OpenNebula generates a `TARGET` based on the `DEV_PREFIX` if no `TARGET` is provided).
 
@@ -365,13 +380,13 @@ For Disks and NICs, if the guest OS is a Linux flavor, the guest needs to be exp
 
 ### Enabling QEMU Guest Agent
 
-QEMU Guest Agent allows the communication of some actions with the guest OS. This agent uses a virtio serial connection to send and receive commands. One of the interesting actions is that it allows you to freeze the filesystem before doing a snapshot. This way the snapshot won’t contain half-written data. Filesystem freeze will only be used  with `CEPH` and `qcow2` storage drivers.
+QEMU Guest Agent allows the communication of some actions with the guest OS. This agent uses a virtio serial connection to send and receive commands. One of the interesting actions is that it allows you to freeze the filesystem before doing a snapshot. This way the snapshot won’t contain half-written data. Filesystem freeze will only be used with `CEPH` and `qcow2` storage drivers.
 
 The agent package needed in the Guest OS is available in most distributions. It’s called `qemu-guest-agent` in most of them. If you need more information you can follow these links:
 
-* [QEMU Guest Agent - libvirt](http://wiki.libvirt.org/page/Qemu_guest_agent)
-* [QEMU Guest Agent - rhel](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Virtualization_Deployment_and_Administration_Guide/chap-QEMU_Guest_Agent.html)
-* [Guest Agent Features](https://wiki.qemu.org/Features/GuestAgent)
+- [QEMU Guest Agent - libvirt](http://wiki.libvirt.org/page/Qemu_guest_agent)
+- [QEMU Guest Agent - rhel](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_virtualization/assembly_enabling-virtualization-in-rhel-9_configuring-and-managing-virtualization#enabling-qemu-guest-agent-features-on-your-virtual-machines_assembly_enabling-virtualization-in-rhel-9)
+- [Guest Agent Features](https://wiki.qemu.org/Features/GuestAgent)
 
 The communication channel with guest agent is enabled in the domain XML when the `GUEST_AGENT` feature is selected in the VM Template.
 
@@ -383,7 +398,7 @@ By default an example command is provided, this effectively allows us to detect 
 
 ```yaml
 :commands:
-  :vm_qemu_ping: "one-$vm_id '{\"execute\":\"guest-ping\"}' --timeout 5"
+  :vm_qemu_ping: 'one-$vm_id ''{"execute":"guest-ping"}'' --timeout 5'
 ```
 
 As a result you’ll see on the MONITORING section an output containing the result of executing said command and parsing the `return` key, which is `{}`
@@ -416,7 +431,7 @@ As a result you’ll see on the MONITORING section an output containing the resu
 
 If a VM doesn’t have the qemu guest agent or libvirt cannot query it, you’ll get in the `VM_QEMU_PING` section an output like `error: Guest agent is not responding: QEMU guest agent is not connected`.
 
-You can define your custom commands. For example, the guest agent command `virsh qemu-agent-command one-159 '{"execute":"guest-info"}' | jq .`  showcases detailed guest information:
+You can define your custom commands. For example, the guest agent command `virsh qemu-agent-command one-159 '{"execute":"guest-info"}' | jq .` showcases detailed guest information:
 
 ```json
 {
@@ -473,8 +488,8 @@ You can translate that into a command on the configuration file as follows
 ```yaml
 :enabled: true
 :commands:
-  :vm_qemu_ping: "one-$vm_id '{\"execute\":\"guest-ping\"}' --timeout 5"
-  :guest_info: "one-$vm_id '{\"execute\":\"guest-info\"}' --timeout 5"
+  :vm_qemu_ping: 'one-$vm_id ''{"execute":"guest-ping"}'' --timeout 5'
+  :guest_info: 'one-$vm_id ''{"execute":"guest-info"}'' --timeout 5'
 ```
 
 ## Tuning & Extending
@@ -526,14 +541,14 @@ $ sudo systemctl restart opennebula-scheduler
 
 The driver consists of the following files:
 
-* `/usr/lib/one/mads/one_vmm_exec` : generic VMM driver.
-* `/var/lib/one/remotes/vmm/kvm` : commands executed to perform actions.
+- `/usr/lib/one/mads/one_vmm_exec` : generic VMM driver.
+- `/var/lib/one/remotes/vmm/kvm` : commands executed to perform actions.
 
 And the following driver configuration files:
 
-* `/etc/one/vmm_exec/vmm_exec_kvm.conf` : This file contains default values for KVM domain definitions (in other words, OpenNebula templates). It is generally a good idea to configure defaults for the KVM-specific attributes here, that is, attributes mandatory in the KVM driver that are not mandatory for other hypervisors. Non-mandatory attributes for KVM but specific to them are also recommended to have a default. Changes to this file **require opennebula to be restarted**.
+- `/etc/one/vmm_exec/vmm_exec_kvm.conf` : this file contains default values for KVM domain definitions;  in other words, OpenNebula templates. It is a good practice to configure defaults for the KVM-specific attributes here, that is, attributes mandatory in the KVM driver that are not mandatory for other hypervisors. Non-mandatory attributes for KVM but specific to them are also recommended to have a default. Changes to this file **require opennebula to be restarted**.
 
-- `/var/lib/one/remotes/etc/vmm/kvm/kvmrc` : This file holds instructions to be executed before the actual driver load to perform specific tasks or to pass environmental variables to the driver. The syntax used for the former is plain shell script that will be evaluated before the driver execution. For the latter, the syntax is the familiar:
+* `/var/lib/one/remotes/etc/vmm/kvm/kvmrc` : this file holds instructions to be executed before the actual driver load to perform specific tasks or to pass environmental variables to the driver. The syntax used for the former is plain shell script that will be evaluated before the driver execution. For the latter, the syntax is the familiar:
 
 ```default
 ENVIRONMENT_VARIABLE=VALUE
@@ -542,18 +557,18 @@ ENVIRONMENT_VARIABLE=VALUE
 The parameters that can be changed here are as follows:
 
 | Parameter                                   | Description                                                                                                                                                                                                        |
-|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `LIBVIRT_URI`                               | Connection string to libvirtd.                                                                                                                                                                                      |
-| `QEMU_PROTOCOL`                             | Protocol used for live migrations.                                                                                                                                                                                  |
-| `SHUTDOWN_TIMEOUT`                          | Seconds to wait after shutdown until timeout.                                                                                                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `LIBVIRT_URI`                               | Connection string to libvirtd.                                                                                                                                                                                     |
+| `QEMU_PROTOCOL`                             | Protocol used for live migrations.                                                                                                                                                                                 |
+| `SHUTDOWN_TIMEOUT`                          | Seconds to wait after shutdown until timeout.                                                                                                                                                                      |
 | `VIRSH_RETRIES`                             | Number of “virsh” command retries when required. Currently used in detach-interface and restore.                                                                                                                   |
 | `VIRSH_TIMEOUT`                             | Default “virsh” timeout for operations which might block indefinitely.                                                                                                                                             |
 | `SYNC_TIME`                                 | Trigger VM time synchronization from RTC on resume and after migration. QEMU guest agent must be running.<br/>Valid values: `no` or `yes` (default).                                                               |
-| `FORCE_DESTROY`                             | Force VM cancellation after shutdown timeout.                                                                                                                                                                       |
-| `CANCEL_NO_ACPI`                            | Force VMs without ACPI enabled to be destroyed on shutdown.                                                                                                                                                         |
-| `MIGRATE_OPTIONS`                           | Set options for the virsh migrate command.                                                                                                                                                                          |
-| `CLEANUP_MEMORY_ON_START`                   | Compact memory before running the VM. Values `yes` or `no` (default).                                                                                                                                               |
-| `CLEANUP_MEMORY_ON_STOP`                    | Compact memory after VM stops. Values `yes` or `no` (default).                                                                                                                                                      |
+| `FORCE_DESTROY`                             | Force VM cancellation after shutdown timeout.                                                                                                                                                                      |
+| `CANCEL_NO_ACPI`                            | Force VMs without ACPI enabled to be destroyed on shutdown.                                                                                                                                                        |
+| `MIGRATE_OPTIONS`                           | Set options for the virsh migrate command.                                                                                                                                                                         |
+| `CLEANUP_MEMORY_ON_START`                   | Compact memory before running the VM. Values `yes` or `no` (default).                                                                                                                                              |
+| `CLEANUP_MEMORY_ON_STOP`                    | Compact memory after VM stops. Values `yes` or `no` (default).                                                                                                                                                     |
 | `DEFAULT_ATTACH_CACHE`                      | This parameter will set the default cache type for new attached disks. It will be used in case the attached disk does<br/>not have a specific cache method set (can be set using templates when attaching a disk). |
 | `DEFAULT_ATTACH_DISCARD`                    | Default discard option for newly attached disks, if the attribute is missing in the template.                                                                                                                      |
 | `DEFAULT_ATTACH_IO`                         | Default I/O policy for newly attached disks, if the attribute is missing in the template.                                                                                                                          |
@@ -607,6 +622,7 @@ The following OS section is recommended for an ARM64 Host template. Here, `virt`
 OS=[
   ARCH="aarch64",
   FIRMWARE="/usr/share/AAVMF/AAVMF_CODE.fd",
+  FIRMWARE_FORMAT='raw',
   FIRMWARE_SECURE="no",
   MACHINE="virt"
 ]

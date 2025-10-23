@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machine Backups"
+linkTitle: "Backups"
 date: "2025-02-17"
 description: "Define and run backups and backup jobs for Virtual Machines"
 categories:

@@ -5,7 +5,7 @@ description: "References for OpenNebula component drivers"
 categories:
 pageintoc: "290"
 tags:
-weight: "2"
+weight: "6"
 ---
 
 <!--# Infrastructure Integration -->

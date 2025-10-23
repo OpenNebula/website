@@ -23,8 +23,8 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 ## Sunstone
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
-- Backups increments tab currently produces a react crash when accessed. This is caused by an invalid import in the client and has been fixed in the upcoming maintenance release. You can refer to [this](https://github.com/OpenNebula/one/issues/7173) issue for more details.
 - The Windows Optimized [OS Profile](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md) yaml file at `/etc/one/fireedge/sunstone/profiles/windows_optimized.yaml` has the wrong configuration. Utilizing such profile in Sunstone will lead to a VM that libvirt fails to create. You have to edit the file and replace its contents with the [documentation yaml content](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md#profile-chain-loading).
+- Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/blob/release-7.0.0/src/fireedge/etc/sunstone/sunstone-server.conf#L128).
 
 ## Migration
 
@@ -48,7 +48,6 @@ OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by defau
 
 ## Backups
 
-- Ceph Incremental Backups: Currently, incremental backups cannot be flattened. Support for this functionality is under development and is expected to be included in the next maintenance release.
 
 ## Market proxy settings
 
@@ -73,9 +72,9 @@ By default, the monitoring interval for a Host is two minutes. In the following 
 host:
   db_retention: 4 # Number of weeks
   forecast:
-    enabled: true
-    period: 1 # Number of minutes
-    lookback: 60 # The look-back windows in minutes to use for the predictions
+      enabled: true
+      period: 1 # Number of minutes
+      lookback: 60 # The look-back windows in minutes to use for the predictions
 ```
 
 To avoid this error, always set the forecast period to a value _equal to or greater_ than the monitoring interval. For example, if the Host monitoring interval is two minutes, the forecast period should be set to at least two minutes:
@@ -84,12 +83,11 @@ To avoid this error, always set the forecast period to a value _equal to or grea
 host:
   db_retention: 4 # Number of weeks
   forecast:
-    enabled: true
-    period: 2 # Number of minutes
-    lookback: 60 # Look-back window in minutes for predictions
+      enabled: true
+      period: 2 # Number of minutes
+      lookback: 60 # Look-back window in minutes for predictions
 ```
 
 ### OneGate
 
 - [Avoid Host not permitted on Sinatra server when is behind NGINX proxy](https://github.com/OpenNebula/one/issues/7231)
-- [OneGate does not update well VM user template when `--erase` is declared](https://github.com/OpenNebula/one/issues/7239)

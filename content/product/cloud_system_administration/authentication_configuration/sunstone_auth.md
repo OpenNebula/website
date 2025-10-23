@@ -1,11 +1,12 @@
 ---
 title: "Sunstone Authentication"
+linkTitle: "Sunstone"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "126"
 tags:
-weight: "5"
+weight: "6"
 ---
 
 <a id="sunstone-auth"></a>
@@ -111,6 +112,24 @@ The login screen will not display the username and password fields anymore, as a
 
 {{< alert title="Note" color="success" >}}
 To configure this function it's mandatory to have an [Apache/Nginx]({{% relref "../../control_plane_configuration/large-scale_deployment/index#large-scale-deployment" %}})  Below are the rules for each one{{< /alert >}} 
+
+## SAML Auth
+
+This method logs in to OpenNebula based on the Assertion Consumer Service provided by the SAML service. OpenNebula will validate the assertion and create the user if they do not exist.
+
+To enable this login method, set the `:auth:` option in `/etc/one/fireedge-server.conf` to `remote` and restart FireEdge:
+
+```yaml
+:auth: remote
+```
+
+To enable the link at the bottom of the Fireedge login, you must configure `:auth_redirect: <SAML_LOGIN_ENDPOINT>` and restart Fireedge. Example: if using Keycloak as a SAML service, the URL must have this pattern:
+
+```yaml
+:auth_redirect: ‘http://<URL_SAML_SERVICE>/realms/<REALM>/protocol/saml/clients/<CLIENT>’
+```
+
+![sunstone_remote_login_saml](/images/sunstone_login_remote_saml.png)
 
 ### Apache
 

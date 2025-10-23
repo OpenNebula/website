@@ -1,5 +1,6 @@
 ---
 title: "Building from Source Code"
+linkTitle: "Building"
 date: "2025-02-17"
 description:
 categories:
@@ -15,10 +16,10 @@ weight: "2"
 This page will show you how to compile and install OpenNebula from the sources.
 
 {{< alert title="Warning" color="warning" >}}
-Do not forget to check the [Building Dependencies]({{% relref "build_deps#build-deps" %}}) for a list of specific software requirements to build OpenNebula.{{< /alert >}} 
+Do not forget to check the [Building Dependencies]({{% relref "build_deps#build-deps" %}}) for a list of specific software requirements to build OpenNebula.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please get in touch at <[community-manager@opennebula.io](mailto:community-manager@opennebula.io)>.{{< /alert >}} 
+If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please get in touch at <[community-manager@opennebula.io](mailto:community-manager@opennebula.io)>.{{< /alert >}}
 
 ## Compiling the Software
 
@@ -36,7 +37,7 @@ $ scons [OPTION=VALUE]
 
 ```default
 $ scons -j 4 [OPTION=VALUE]
-```{{< /alert >}} 
+```{{< /alert >}}
 
 The argument expression [OPTION=VALUE] is used to set non-default values for :
 
@@ -45,9 +46,7 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 | sqlite_dir |           | path-to-sqlite-install                                    |
 | sqlite     | yes       | **no** if you don’t want to build Sqlite support          |
 | mysql      | no        | **yes** if you want to build MySQL support                |
-| xmlrpc     |           | path-to-xmlrpc-install                                    |
 | parsers    | no        | **yes** if you want to rebuild Flex/Bison files.          |
-| new_xmlrpc | no        | **yes** if you have an xmlrpc-c version >= 1.31           |
 | sunstone   | no        | **yes** if you want to build Ruby Sunstone minified files |
 | fireedge   | no        | **yes** if you want to build FireEdge minified files      |
 | systemd    | no        | **yes** if you want to build systemd support              |
@@ -55,12 +54,7 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 | svncterm   | yes       | **no** to skip building VNC support for LXD drivers       |
 | context    | no        | **yes** to download guest contextualization packages      |
 | download   | no        | **yes** to download 3rd-party tools (Restic, Prometheus…) |
-
-If the following error appears then you need to remove the option ‘new_xmlrpc=yes’ or install xmlrpc-c version >= 1.31:
-
-```default
-error: 'class xmlrpc_c::serverAbyss::constrOpt' has no member named 'maxConn'
-```
+| xmlrpc_pkgconf | no    | **el8/el9/el10** if you want to use pkg-config for xmlrpc-c libs dependency (otherwise xmlrpc-c-config is used) |
 
 - OpenNebula can be installed in two modes: `system-wide` or in `self-contained` directory. In either case, you do not need to run OpenNebula as root. These options can be specified when running the install script:
 
@@ -69,7 +63,7 @@ error: 'class xmlrpc_c::serverAbyss::constrOpt' has no member named 'maxConn'
 ```
 
 {{< alert title="Note" color="success" >}}
-To install OpenNebula with the `system-wide` mode you should have super user privileges.{{< /alert >}} 
+To install OpenNebula with the `system-wide` mode you should have super user privileges.{{< /alert >}}
 
 ```default
 $ sudo ./install.sh <install_options>
@@ -106,7 +100,7 @@ If you choose the `system-wide` installation, OpenNebula will be installed in th
   - /var/log/one
   - /var/run/one
 
-By using `./install.sh -r`, dynamically generated files will not be removed.{{< /alert >}} 
+By using `./install.sh -r`, dynamically generated files will not be removed.{{< /alert >}}
 
 The packages do a `system-wide` installation. To create a similar environment, create a `oneadmin` user and group, and execute:
 

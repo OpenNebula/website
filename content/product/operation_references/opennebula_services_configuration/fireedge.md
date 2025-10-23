@@ -1,11 +1,12 @@
 ---
 title: "FireEdge Configuration"
+linkTitle: "FireEdge"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "161"
 tags:
-weight: "5"
+weight: "3"
 ---
 
 <a id="fireedge"></a>
@@ -29,6 +30,10 @@ The OpenNebula FireEdge server provides a **next-generation web-management inter
 http://<OPENNEBULA-FRONTEND>:2616
 ```
 
+{{< alert title="Note" color="info" >}}
+We are continually expanding the feature set of FireEdge Sunstone, and hence its configuration files are in constant change. In versions 7.0.1 and later, configuration files in `/etc/one/fireedge/` can be replaced by the ones that can be downloaded from [here](https://bit.ly/701-config) in order to activate the latest features.
+{{< /alert >}}
+
 <a id="fireedge-install-configuration"></a>
 
 ### Configuration
@@ -36,34 +41,34 @@ http://<OPENNEBULA-FRONTEND>:2616
 The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
-After a configuration change, the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}} 
+After a configuration change, the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}}
 
-| Parameter                       | Default Value                | Description                                                                                                                                                                                                                                                                               |
-|---------------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `log`                           | `prod`                       | Log debug: `prod` or `dev`                                                                                                                                                                                                                                                                |
-| `cors`                          | `true`                       | Enable CORS (cross-origin resource sharing)                                                                                                                                                                                                                                               |
-| `host`                          | `0.0.0.0`                    | IP on which the FireEdge server will listen                                                                                                                                                                                                                                               |
-| `port`                          | `2616`                       | Port on which the FireEdge server will listen                                                                                                                                                                                                                                             |
-| `one_xmlrpc`                    | `http://localhost:2633/RPC2` | Endpoint of OpenNebula XML-RPC API. It needs to match the **ENDPOINT** attribute of `onezone show 0`                                                                                                                                                                              |
-| `oneflow_server`                | `http://localhost:2474`      | Endpoint of OneFlow server                                                                                                                                                                                                                                                                |
-| `session_expiration`            | `180`                        | JWT expiration time (minutes)                                                                                                                                                                                                                                                             |
-| `session_remember_expiration`   | `3600`                       | JWT expiration time when using remember check box (minutes)                                                                                                                                                                                                                           |
-| `default_zone`                  |                              | Shows the default resources of that zone                                                                                                                                                                                                                                                  |
-| `default_zone/id`               | `0`                          | Id of the zone to which this fireedge belongs                                                                                                                                                                                                                                             |
-| `default_zone/name`             | `OpenNebula`                 | Name of the zone to which this fireedge belongs                                                                                                                                                                                                                                           |
-| `default_zone/endpoint`         | `http://localhost:2633/RPC2` | XML-RPC url of the zone to which this fireedge belongs                                                                                                                                                                                                                                |
-| `minimun_opennebula_expiration` | `30`                         | Minimum time to reuse previously generated JWTs (minutes)                                                                                                                                                                                                                             |
-| `subscriber_endpoint`           | `tcp://localhost:2101`       | Endpoint to subscribe for OpenNebula events                                                                                                                                                                                                                                               |
-| `debug_level`                   | `2`                          | Log debug level                                                                                                                                                                                                                                                                           |
-| `truncate_max_length`           | `150`                        | Log message max length                                                                                                                                                                                                                                                                    |
-| `api_timeout`                   | `120_000`                    | Global API timeout limit                                                                                                                                                                                                                                                                  |
-| `guacd/port`                    | `4822`                       | Connection port of guacd server                                                                                                                                                                                                                                                           |
-| `guacd/host`                    | `localhost`                  | Connection hostname/IP of guacd server                                                                                                                                                                                                                                                    |
+| Parameter                       | Default Value                | Description                                                                                                                                                                                                                                                           |
+| ------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `log`                           | `prod`                       | Log debug: `prod` or `dev`                                                                                                                                                                                                                                            |
+| `cors`                          | `true`                       | Enable CORS (cross-origin resource sharing)                                                                                                                                                                                                                           |
+| `host`                          | `0.0.0.0`                    | IP on which the FireEdge server will listen                                                                                                                                                                                                                           |
+| `port`                          | `2616`                       | Port on which the FireEdge server will listen                                                                                                                                                                                                                         |
+| `one_xmlrpc`                    | `http://localhost:2633/RPC2` | Endpoint of OpenNebula XML-RPC API. It needs to match the **ENDPOINT** attribute of `onezone show 0`                                                                                                                                                                  |
+| `oneflow_server`                | `http://localhost:2474`      | Endpoint of OneFlow server                                                                                                                                                                                                                                            |
+| `session_expiration`            | `180`                        | JWT expiration time (minutes)                                                                                                                                                                                                                                         |
+| `session_remember_expiration`   | `3600`                       | JWT expiration time when using remember check box (minutes)                                                                                                                                                                                                           |
+| `default_zone`                  |                              | Shows the default resources of that zone                                                                                                                                                                                                                              |
+| `default_zone/id`               | `0`                          | Id of the zone to which this fireedge belongs                                                                                                                                                                                                                         |
+| `default_zone/name`             | `OpenNebula`                 | Name of the zone to which this fireedge belongs                                                                                                                                                                                                                       |
+| `default_zone/endpoint`         | `http://localhost:2633/RPC2` | XML-RPC url of the zone to which this fireedge belongs                                                                                                                                                                                                                |
+| `minimun_opennebula_expiration` | `30`                         | Minimum time to reuse previously generated JWTs (minutes)                                                                                                                                                                                                             |
+| `subscriber_endpoint`           | `tcp://localhost:2101`       | Endpoint to subscribe for OpenNebula events                                                                                                                                                                                                                           |
+| `debug_level`                   | `2`                          | Log debug level                                                                                                                                                                                                                                                       |
+| `truncate_max_length`           | `150`                        | Log message max length                                                                                                                                                                                                                                                |
+| `api_timeout`                   | `120_000`                    | Global API timeout limit                                                                                                                                                                                                                                              |
+| `guacd/port`                    | `4822`                       | Connection port of guacd server                                                                                                                                                                                                                                       |
+| `guacd/host`                    | `localhost`                  | Connection hostname/IP of guacd server                                                                                                                                                                                                                                |
 | `auth`                          | `opennebula`                 | Authentication driver for incoming requests: **OpenNebula** the authentication will be done by the OpenNebula core using the driver defined for the user. **remote** performs the login based on a Kerberos X-Auth-Username header provided by authentication backend |
-| `auth_redirect`                 |                              | This configuration is for the login button redirect. The available options are: **/**, **.** or a **URL**                                                                                                                                                                         |
+| `auth_redirect`                 |                              | This configuration is for the login button redirect. The available options are: **/**, **.** or a **URL**                                                                                                                                                             |
 
 {{< alert title="Note" color="success" >}}
-JWT is an acronym of JSON Web Token{{< /alert >}} 
+JWT is an acronym of JSON Web Token{{< /alert >}}
 
 <a id="fireedge-sunstone-configuration"></a>
 
@@ -76,23 +81,23 @@ After a configuration change the FireEdge server must be [restarted]({{% relref 
 
 ![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
 
-| Parameter              | Default Value                           | Description                                                  |
-| ---------------------- | --------------------------------------- | ------------------------------------------------------------ |
-| `support_url`          | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                          |
-| `token_remote_support` |                                         | Support enterprise token                                     |
-| `sunstone_prepend`     |                                         | Optional parameter for `Sunstone commands` command           |
-| `tmpdir`               | `/var/tmp`                              | Directory to store temporal files when uploading images      |
-| `max_upload_file_size` | `10737418240`                           | Max size upload file (bytes). Default is 10GB                |
-| `proxy`                |                                         | Enable an http proxy for the support portal and to download MarketPlaceApps |
-| `leases`               |                                         | Enable the vm leases                                         |
-| `supported_fs`         |                                         | Support filesystem                                           |
-| `currency`             | `EUR`                                   | Currency formatting                                          |
-| `default_lang`         | `en`                                    | Default language setting                                     |
-| `langs`                |                                         | List of server localizations                                 |
-| `keep_me_logged_in`    | `true`                                  | True to display ‘Keep me logged in’ option                   |
-| `use_extended_vmpool`  | `true`                                  | True to use the extended information fetch for vm pools      |
-| `currentTimeZone`      |                                         | Time Zone                                                    |
-| `rowStyle`             | `card`                                  | Changes the style of rows in tables. Values can be `card` or `list`. |
+| Parameter              | Default Value                           | Description                                                                                |
+| ---------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `support_url`          | `https://opennebula.zendesk.com/api/v2` | Zendesk support URL                                                                        |
+| `token_remote_support` |                                         | Support enterprise token                                                                   |
+| `sunstone_prepend`     |                                         | Optional parameter for `Sunstone commands` command                                         |
+| `tmpdir`               | `/var/tmp`                              | Directory to store temporal files when uploading images                                    |
+| `max_upload_file_size` | `10737418240`                           | Max size upload file (bytes). Default is 10GB                                              |
+| `proxy`                |                                         | Enable an http proxy for the support portal and to download MarketPlaceApps                |
+| `leases`               |                                         | Enable the vm leases                                                                       |
+| `supported_fs`         |                                         | Support filesystem                                                                         |
+| `currency`             | `EUR`                                   | Currency formatting                                                                        |
+| `default_lang`         | `en`                                    | Default language setting                                                                   |
+| `langs`                |                                         | List of server localizations                                                               |
+| `keep_me_logged_in`    | `true`                                  | True to display ‘Keep me logged in’ option                                                 |
+| `use_extended_vmpool`  | `true`                                  | True to use the extended information fetch for vm pools                                    |
+| `currentTimeZone`      |                                         | Time Zone                                                                                  |
+| `rowStyle`             | `card`                                  | Changes the style of rows in tables. Values can be `card` or `list`.                       |
 | `fullViewMode`         | `false`                                 | Changes to full mode view when see details of a resource. Values can be `true` or `false`. |
 
 Once the server is initialized, it creates the file `/var/lib/one/.one/fireedge_key`, used to encrypt communication with Guacd.
@@ -124,15 +129,15 @@ The following example shows how you can change the logo to a generic linux one (
 logo: linux.png
 
 groups:
-    oneadmin:
-        - admin
-        - user
-default:
+  oneadmin:
+    - admin
     - user
+default:
+  - user
 ```
 
 {{< alert title="Note" color="success" >}}
-The logo can be updated without having to restart the FireEdge server!{{< /alert >}} 
+The logo can be updated without having to restart the FireEdge server!{{< /alert >}}
 
 ![fireedge_sunstone_linux_login_logo](/images/fireedge_login_linux_logo.png) ![fireedge_sunstone_linux_drawer_logo](/images/fireedge_drawer_linux_logo.png)
 
@@ -157,7 +162,7 @@ Moreover, Suntone has the capacity to show the detail of a resource in a full sc
 This configuration can be modified in the `/etc/one/fireedge/sunstone/sunstone-server.conf` file modifying the parameter `fullViewMode`. [See this table](#fireedge-sunstone-configuration).
 
 {{< alert title="Warning" color="warning" >}}
-Changes will not be visible for users whose template has the `TEMPLATE/FIREEDGE/FULL_SCREEN_INFO` attribute configured, as this value takes precedence over the general Sunstone configuration.{{< /alert >}} 
+Changes will not be visible for users whose template has the `TEMPLATE/FIREEDGE/FULL_SCREEN_INFO` attribute configured, as this value takes precedence over the general Sunstone configuration.{{< /alert >}}
 
 Also, both configurations will be overridden for a specific user if the user changes the configuration in the settings section.
 
@@ -172,24 +177,24 @@ Sunstone will store the colors used in its components in two different files:
 
 These two files store a JSON object that has the same structure but with different values in order to set colors for light and dark mode.
 
-| Key             | Description                                                  |
-| --------------- | ------------------------------------------------------------ |
-| mainContainer   | Defines the background color of the app.                     |
-| buttons         | Defines the different colors used in buttons.                |
-| tables          | Defines the different colors used in resource tables.        |
+| Key             | Description                                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------------- |
+| mainContainer   | Defines the background color of the app.                                                            |
+| buttons         | Defines the different colors used in buttons.                                                       |
+| tables          | Defines the different colors used in resource tables.                                               |
 | tabs            | Defines the different colors used in the component tabs, the one used in the details of a resource. |
-| searchBar       | Defines the different colors used in the search bar placed over all the resource tables. |
-| sidebar         | Defines the different colors used in the sidebar menu.       |
-| scrollbar       | Defines the color of the scrollbar.                          |
-| login           | Defines the different colors used in login.                  |
-| switchViewTable | Defines the different colors used in the button to switch between view types. |
-| breadCrumb      | Defines the different colors used in the breadcrumb.         |
-| topbar          | Defines the different colors used in the topbar of the app.  |
-| footer          | Defines the different colors used in the footer of the app.  |
-| graphs          | Defines the different colors used in the different graphs used in the app. |
+| searchBar       | Defines the different colors used in the search bar placed over all the resource tables.            |
+| sidebar         | Defines the different colors used in the sidebar menu.                                              |
+| scrollbar       | Defines the color of the scrollbar.                                                                 |
+| login           | Defines the different colors used in login.                                                         |
+| switchViewTable | Defines the different colors used in the button to switch between view types.                       |
+| breadCrumb      | Defines the different colors used in the breadcrumb.                                                |
+| topbar          | Defines the different colors used in the topbar of the app.                                         |
+| footer          | Defines the different colors used in the footer of the app.                                         |
+| graphs          | Defines the different colors used in the different graphs used in the app.                          |
 
 {{< alert title="Warning" color="warning" >}}
-Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
+Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}}
 
 ### Configure Guacamole
 
@@ -198,7 +203,7 @@ FireEdge uses [Apache Guacamole](http://guacamole.apache.org), a free and open s
 Guacamole supports multiple connection methods such as **VNC, RDP, and SSH** and is made up of two separate parts - server and client. The Guacamole server consists of the native server-side libraries required to connect to the server and the Guacamole proxy daemon (`guacd`), which accepts the user’s requests and connects to the remote desktop on their behalf.
 
 {{< alert title="Note" color="success" >}}
-The OpenNebula **binary packages** provide Guacamole proxy daemon (package `opennebula-guacd` and service `opennebula-guacd`), which is installed alongside FireEdge. In the default configuration, the Guacamole proxy daemon is automatically started along with FireEdge, and FireEdge is configured to connect to the locally-running Guacamole. No extra steps are required!{{< /alert >}} 
+The OpenNebula **binary packages** provide Guacamole proxy daemon (package `opennebula-guacd` and service `opennebula-guacd`), which is installed alongside FireEdge. In the default configuration, the Guacamole proxy daemon is automatically started along with FireEdge, and FireEdge is configured to connect to the locally-running Guacamole. No extra steps are required!{{< /alert >}}
 
 If Guacamole is running on a different Host to the FireEdge, the following FireEdge configuration parameters have to be customized:
 

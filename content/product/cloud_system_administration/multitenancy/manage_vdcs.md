@@ -14,7 +14,7 @@ weight: "4"
 
 <!--# Managing VDCs -->
 
-A VDC (Virtual Data Center) defines an assignment of one or several [groups]({{% relref "manage_groups#manage-groups" %}}) to a pool of physical resources. This pool of physical resources consists of resources from one or several Clusters that could belong to different Zones or public external clouds for hybrid cloud computing. You can read more about OpenNebula’s approach to VDCs and the cloud from the perspective of different user roles in the [Understanding OpenNebula]({{% relref "../../../quick_start/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}) guide.
+A VDC (Virtual Data Center) defines an assignment of one or several [groups]({{% relref "manage_groups#manage-groups" %}}) to a pool of physical resources. This pool of physical resources consists of resources from one or several Clusters that could belong to different Zones or public external clouds for hybrid cloud computing. You can read more about OpenNebula’s approach to VDCs and the cloud from the perspective of different user roles in the [Understanding OpenNebula]({{% relref "../../../getting_started/understand_opennebula/opennebula_concepts/cloud_access_model_and_roles#understand" %}}) guide.
 
 ## The Default VDC
 

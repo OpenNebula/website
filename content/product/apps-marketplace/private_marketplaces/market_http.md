@@ -1,5 +1,6 @@
 ---
 title: "HTTP Marketplace"
+linkTitle: "HTTP"
 date: "2025-02-17"
 description:
 categories:

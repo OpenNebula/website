@@ -1,5 +1,6 @@
 ---
 title: "Virtual Machine Template"
+linkTitle: "Virtual Machine"
 date: "2025-02-17"
 description:
 categories:
@@ -138,11 +139,12 @@ The hypervisor column states that the attribute is **O**ptional, **M**andatory, 
 | `ROOT`             | device to be mounted as root.                                                                                                                                             | O (for kernel)   | -     |
 | `KERNEL_CMD`       | arguments for the booting kernel.                                                                                                                                         | O (for kernel)   | -     |
 | `BOOTLOADER`       | path to the bootloader executable.                                                                                                                                        | O                | -     |
-| `BOOT`             | comma-separated list of boot devices types, by order of preference (first device in the list is the first device used for boot). Possible values: `disk#`,`nic#`. | M                | O         |
-| `SD_DISK_BUS`      | bus for disks with **sd** prefix, either `scsi` or `sata`. If attribute is missing, libvirt chooses itself.                                                           | O                | -
-| `UUID`             | unique ID of the VM. It’s referenced as machine ID inside the VM. Could be used to force ID for licensing purposes.                                                   | O                | -     |
-| `FIRMWARE`         | firmware type or firmware path. Possible values: `BIOS`, `UEFI` or path.                                                                                              | O                | -     |
-| `FIRMWARE_SECURE`  | enable Secure Boot. Possible values: `true`, `false`.                                                                                                                 | O                | -     |
+| `BOOT`             | comma-separated list of boot devices types, by order of preference (first device in the list is the first device used for boot). Possible values: `disk#`,`nic#`.         | M                | O     |
+| `SD_DISK_BUS`      | bus for disks with **sd** prefix, either `scsi` or `sata`. If attribute is missing, libvirt chooses itself.                                                               | O                | -     |
+| `UUID`             | unique ID of the VM. It’s referenced as machine ID inside the VM. Could be used to force ID for licensing purposes.                                                       | O                | -     |
+| `FIRMWARE`         | firmware type or firmware path. Possible values: `BIOS`, `UEFI` or path.                                                                                                  | O                | -     |
+| `FIRMWARE_FORMAT`  | desired UEFI NVRAM image format.  Possible values: `qcow2` or `raw` (default).                                                                                            | O                | -     |
+| `FIRMWARE_SECURE`  | enable Secure Boot. Possible values: `true`, `false`.                                                                                                                     | O                | -     |
 
 (!!) Use one of `KERNEL_DS` or KERNEL (and `INITRD` or `INITRD_DS`).
 
@@ -290,9 +292,9 @@ If the `TARGET` attribute is not set for a disk, OpenNebula will automatically a
 - `CDROM` type Images.
 - The rest of `DATABLOCK` and `OS` Images, and `Volatile` disks.
 
-Please visit the guide for [managing images]({{% relref "../../virtual_machines_operation/virtual_machine_images/images#images" %}}) and the [image template reference]({{% relref "img_template#img-template" %}}) to learn more about the different image types.
+Please visit the guide for [managing images]({{% relref "../../virtual_machines_operation/virtual_machines/images#images" %}}) and the [image template reference]({{% relref "img_template#img-template" %}}) to learn more about the different image types.
 
-You can find a complete description of the contextualization features in the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}).
+You can find a complete description of the contextualization features in the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}).
 
 The default device prefix `sd` can be changed to `hd` or other prefix that suits your virtualization hypervisor requirements. You can find more information in the [daemon configuration guide]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}).
 
@@ -589,7 +591,7 @@ Context information is passed to the Virtual Machine via an ISO mounted as a par
 | `REPORT_READY`                  | The VM will send the READY signal to the onegate server. After this, the VM template will contain `READY=YES` in the `USER_TEMPLATE` section                                                                                                                                                                                                                                                                                                                                                                       | O         |
 | `READY_SCRIPT`                  | `READY=YES` will only be sent if the script is successfully executed                                                                                                                                                                                                                                                                                                                                                                                                                                               | Linux     |
 | `READY_SCRIPT_PATH`             | Similar to READY_SCRIPT but the script exists in the Guest FS                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Linux     |
-| `NETWORK`                       | `YES` to automatically fill the networking parameters for each NIC, used by the [Contextualization packages]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#context-overview" %}}).                                                                                                                                                                                                                                                                                              | O         |
+| `NETWORK`                       | `YES` to automatically fill the networking parameters for each NIC, used by the [Contextualization packages]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}).                                                                                                                                                                                                                                                                                              | O         |
 | `NETCFG_TYPE`                   | Network configuration service inside guest VM responsible for configuring the NICs: empty (autodetects suitable service inside VM), `bsd` (for FreeBSD network configuration), `interfaces` (for Debian-style configuration via `/etc/network/interfaces`), `netplan` (for Netplan, set custom Netplan renderer via `NETCFG_NETPLAN_RENDERER`) `networkd` (for systemd-networkd), `nm` (for NetworkManager), `scripts` (for legacy Red Hat-style configuration via `ifcfg-ethX` files)                             | Linux     |
 | `NETCFG_NETPLAN_RENDERER`       | Netplan renderer (effective only when `NETCFG_TYPE=netplan`): empty or `networkd` (for systemd-networkd), `NetworkManager` (for NetworkManager)                                                                                                                                                                                                                                                                                                                                                                    | Linux     |
 | `SET_HOSTNAME`                  | This parameter value will be the hostname of the VM.                                                                                                                                                                                                                                                                                                                                                                                                                                                               | O         |
@@ -1056,7 +1058,7 @@ In Sunstone, the `USER_INPUTS` can be ordered with the mouse.
 
 <a id="template-user-inputs-metadata"></a>
 
-`USER_INPUTS_METADATA` provides the template creator with the possibility to add titles and descriptions to the user inputs. To understand how Sunstone renders user inputs metadata, [see User Inputs in Sunstone]({{% relref "../../virtual_machines_operation/virtual_machine_definitions/vm_templates#vm-guide-user-inputs-sunstone" %}}).
+`USER_INPUTS_METADATA` provides the template creator with the possibility to add titles and descriptions to the user inputs. To understand how Sunstone renders user inputs metadata, [see User Inputs in Sunstone]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#vm-guide-user-inputs-sunstone" %}}).
 
 {{< alert title="Note" color="success" >}}
 `USER_INPUTS_METADATA` will only be used in Sunstone, not in other components of OpenNebula.{{< /alert >}} 
@@ -1131,7 +1133,6 @@ The following attributes can use to define a NUMA topology for the VM.
 
 | TOPOLOGY attribute   | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
-|                      |                                                                       |
 | `PIN_POLICY`         | vCPU pinning preference: `CORE`, `THREAD`, `SHARED`, `NONE`.          |
 | `SOCKETS`            | Number of sockets or NUMA nodes.                                      |
 | `CORES`              | Number of cores per node.                                             |
@@ -1153,7 +1154,6 @@ Asymmetric NUMA configurations, i.e., not distributing the VM resources evenly a
 
 | NUMA_NODE attribute   | Description                               |
 |-----------------------|-------------------------------------------|
-|                       |                                           |
 | `MEMORY`              | Memory allocated in the node, in MB.      |
 | `TOTAL_CPUS`          | Total number of CPU units, CORE\*THREADS. |
 
@@ -1167,6 +1167,35 @@ NUMA_NODE = [ MEMORY = 2048, TOTAL_CPUS = 4 ]
 ```
 
 Please [check the NUMA guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}}) for more information.
+
+<a id="tpm-section"></a>
+
+## TPM Section
+
+The following attributes can be used to attach a TPM to the VM.
+
+
+| TPM attribute  | Description                               | KVM   | vCenter   | LXC   |
+|----------------|-------------------------------------------|-------|-----------|-------|
+| `MODEL`        | vTPM device model: `tpm-crb`, `tpm-tis`.  | O     | -         | -     |
+
+Example:
+
+```default
+TPM = [
+  MODEL = "tpm-crb" ]
+```
+
+That will translate to the following libvirt stanza:
+
+```
+<tpm model='tpm-crb'>
+    <backend type='emulator' version='2.0'/>
+    <alias name='tpm0'/>
+</tpm>
+```
+
+Please [check the TPM guide]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates/#tpm" %}}) for more information.
 
 <a id="sunstone-template-section"></a>
 

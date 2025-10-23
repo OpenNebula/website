@@ -71,8 +71,8 @@ Performing a VM backup may require some support from the hypervisor or the disk 
 <tr class="row-even"><td><p>LVM</p></td>
 <td><p>Yes<sup>‡</sup></p></td>
 <td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
+<td><p>Yes<sup>***</sup></p></td>
+<td><p>Yes<sup>***</sup></p></td>
 </tr>
 <tr class="row-odd"><td rowspan="3"><p>LXC</p></td>
 <td><p>File (any format)</p></td>
@@ -100,4 +100,6 @@ Performing a VM backup may require some support from the hypervisor or the disk 
 
 <sup>\*\*</sup> Ceph full/incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#vm-backups-operations" %}}) for more details.
 
-<sup>†</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cluster_configuration/storage_system/lvm_drivers/#lvm-thin" %}}).
+<sup>\*\*\*</sup> LVM Incremental backups only supported in [thin mode]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers/#lvm-thin" %}}).
+
+<sup>†</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers/#lvm-thin" %}}).

@@ -1,5 +1,6 @@
 ---
 title: "Local Storage Datastore"
+linkTitle: "Local Storage"
 date: "2025-02-17"
 description:
 categories:
@@ -18,8 +19,8 @@ This storage configuration uses the local storage area of each Host to run VMs. 
 
 The Front-end needs to prepare the storage area for:
 
-* **Image Datastores** to store the image repository.
-* **System Datastores** to hold temporary disks and files for VMs `stopped` and `undeployed`.
+- **Image Datastores** to store the image repository.
+- **System Datastores** to hold temporary disks and files for VMs `stopped` and `undeployed`.
 
 Simply make sure that there is enough space under `/var/lib/one/datastores` to store images and the disks of the `stopped` and `undeployed` Virtual Machines. Note that `/var/lib/one/datastores` **can be mounted from any NAS/SAN server in your network**.
 
@@ -31,7 +32,7 @@ Just make sure that there is enough space under `/var/lib/one/datastores` to sto
 Local datastore requires that:
 - The **Frontend hostnames are resolvable** from all Hosts.
 - Every Host (including the Front-end) can **SSH to every other Host**, including themselves.
-{{< /alert >}}  
+{{< /alert >}}
 
 ## OpenNebula Configuration
 
@@ -41,11 +42,11 @@ Once the Hosts and Front-end storage is set up, configuring OpenNebula comprises
 
 To create a new System Datastore, you need to set the following (template) parameters:
 
-| Attribute   | Description       |
-|-------------|-------------------|
-| `NAME`      | Name of datastore |
-| `TYPE`      | `SYSTEM_DS`       |
-| `TM_MAD`    | `local`           |
+| Attribute | Description       |
+| --------- | ----------------- |
+| `NAME`    | Name of datastore |
+| `TYPE`    | `SYSTEM_DS`       |
+| `TM_MAD`  | `local`           |
 
 You can do this either in Sunstone or through the CLI; for example, to create a local System Datastore simply enter:
 
@@ -60,18 +61,18 @@ ID: 101
 ```
 
 {{< alert title="Note" color="success" >}}
-When different System Datastores are available, the `TM_MAD_SYSTEM` attribute will be set after selecting the Datastore.{{< /alert >}} 
+When different System Datastores are available, select one to have the the `TM_MAD_SYSTEM` attribute set.{{< /alert >}}
 
 ### Create Image Datastore
 
 To create a new Image Datastore, you need to set the following (template) parameters:
 
-| Attribute   | Description                                              |
-|-------------|----------------------------------------------------------|
-| `NAME`      | Name of datastore                                        |
-| `DS_MAD`    | `fs`                                                     |
-| `TM_MAD`    | `local`                                                  |
-| `CONVERT`   | `yes` (default) or `no`. Change Image format to `DRIVER` |
+| Attribute | Description                                              |
+| --------- | -------------------------------------------------------- |
+| `NAME`    | Name of datastore                                        |
+| `DS_MAD`  | `fs`                                                     |
+| `TM_MAD`  | `local`                                                  |
+| `CONVERT` | `yes` (default) or `no`. Change Image format to `DRIVER` |
 
 For example, the following illustrates the creation of a Local Datastore:
 
@@ -88,20 +89,20 @@ ID: 100
 Also note that there are additional attributes that can be set. Check the [datastore template attributes]({{% relref "datastores#datastore-common" %}}).
 
 {{< alert title="Warning" color="warning" >}}
-Be sure to use the same `TM_MAD` for both the System and Image datastores. When combining different transfer modes, check the section below.{{< /alert >}} 
+Be sure to use the same `TM_MAD` for both the System and Image datastores. When combining different transfer modes, check the section below.{{< /alert >}}
 
 ### Additional Configuration
 
-* `DD_BLOCK_SIZE`: Block size for dd operations (default: 64kB). Can be set in `/var/lib/one/remotes/etc/datastore/fs/fs.conf`.
-* `SUPPORTED_FS`: Comma-separated list of every filesystem supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
-* `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
-* `SPARSE`: If set to `NO` the images and disks in the image and system Datastore, respectively, will not be sparsed (i.e. the files will use all assigned space on the Datastore filesystem).
+- `DD_BLOCK_SIZE`: Block size for dd operations (default: 64kB). Configured in `/var/lib/one/remotes/etc/datastore/fs/fs.conf`.
+- `SUPPORTED_FS`: Comma-separated list of every filesystem supported for creating formatted datablocks. Configured in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
+- `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Configured in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
+- `SPARSE`: When the value is `NO`, the images and disks in the image and System Datastore, respectively, will not be sparsed (i.e. the files will use all assigned space on the Datastore filesystem).
 
 {{< alert title="Warning" color="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-When using a Local Storage Datastore the `QCOW2_OPTIONS` attribute is ignored since the cloning script uses the `tar` command instead of `qemu-img`.{{< /alert >}} 
+When using a Local Storage Datastore, the `QCOW2_OPTIONS` attribute is ignored because the cloning script uses the `tar` command instead of `qemu-img`.{{< /alert >}}
 
 ## Datastore Drivers
 
@@ -142,3 +143,87 @@ In this case, the System Datastore is distributed among the Hosts. The **local**
 
 ![><](/images/fs_ssh.png)
 
+## Distributed Cache
+
+OpenNebula can speed up VM provisioning and reduce bandwidth usage when using Local Storage Datastores by using a **two-level distributed cache**. This section explains what the distributed cache is, how to enable it, and how it works.
+
+### What is the Distributed Cache?
+
+The distributed cache stores VM disk images in two levels:
+
+1. **Local Cache (per Host)**: Each compute host keeps a small cache of the images it has already retrieved.
+
+2. **Central (Upstream) Cache**: One or more “central” cache nodes (usually the hosts with the most resources) store a larger pool of images shared by the entire cluster.
+
+When a VM is launched:
+
+- The host first checks its _local cache_.
+- If the image is not there, it checks the _central cache_.
+- If the image is not in either cache, the host retrieves it from the Image Datastore on the Front-end.
+
+Once the cache manager downloads the image, this is stored in both the _local_ and _central_ caches for future use.
+
+![><](/images/local_ds_cache.png)
+
+## How to Enable and Configure the Cache
+
+The cache is configured **per Image Datastore**. As a result, each datastore has its own cache settings. The cache settings are described in the next table:
+
+| Attribute         | Description                                                                                                                                                                          | Deault value         |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
+| `CACHE_ENABLE`    | Set to `yes` to enable the distributed cache , or `no` to disable it.                                                                                                                | `NO`                 |
+| `CACHE_PATH`      | Directory where cached images are stored.                                                                                                                                            | `/var/lib/one/cache` |
+| `CACHE_MAX_SIZE`  | Maximum percentage (integer value) of the local filesystem (where `CACHE_PATH` is located) that can be used for caching. For example, `10` means up to 10% of that disk can be used. | `10`                 |
+| `CACHE_UPSTREAMS` | Comma-separated list of one or more “central” cache hostnames or IPs (e.g., `'hostname0,hostname1'`). Leave empty (`''`) to disable central caches.                                  | `''` (no upstreams)  |
+| `CACHE_MIN_AGE`   | Minimum time in seconds before a cached image can be evicted. For example, `3600` means images used within the last hour cannot be removed from cache.                               | `900`                |
+
+For example, to configure a Distributed Cache update the image datastore template with the following parameters:
+
+```default
+CACHE_ENABLE    = "YES"
+CACHE_PATH      = "/var/lib/one/cache"
+CACHE_MAX_SIZE  = "10"
+CACHE_UPSTREAMS = "hostname0,hostname2"
+CACHE_MIN_AGE   = "900"
+```
+
+When you create a new Datastore, configure these settings through Sunstone .
+
+![sunstone_ds_cache_config](/images/sunstone_ds_cache_config.png)
+
+{{< alert title="Warning" color="warning" >}}
+For the distributed cache to work, the `oneadmin` user (see [Node installation]({{% relref "../../../product/operation_references/hypervisor_configuration" %}})) must have SSH passwordless authentication configured on all Hosts.{{< /alert >}}
+
+## Using the Cache
+
+When you launch or migrate a VM, the cache manager performs the following steps:
+
+1. **Check Local Cache:** Looks for the image in the host's local cache. If found and valid, it returns the local path.
+
+2. **Check Upstream Cache:** If the image is missing locally (or invalid), the cache manager checks each host in `CACHE_UPSTREAMS`. If found, it copies the image locally and returns that path.
+
+3. **Fallback to Front-End:** If not found in any cache, retrieves the image from the Image Datastore on the Front-end. Then stores it locally and on the central cache.
+
+Cached images are stored in the cache directory (e.g., `/var/lib/one/cache/`) like this:
+
+```default
+/var/lib/one/cache/1/
+├── c3af91e2b1d2ab9f64a25d99f9a2fbd2
+└── c3af91e2b1d2ab9f64a25d99f9a2fbd2-metadata
+```
+
+The metadata file (YAML) contains:
+
+```default
+last_used: "2025-05-30T14:22:10Z"       # ISO 8601 timestamp of the most recent cache hit
+modtime:   "1725552553"                 # Last OpenNebula image modification time
+```
+
+## Eviction Policy
+
+If the total cache size exceeds `CACHE_MAX_SIZE`, the cache manager removes the Least Recently Used (LRU) images until there is enough space.
+
+If there is still not enough space after eviction, the new image is fetched directly from the Front-end without caching.
+
+{{< alert title="Warning" color="warning" >}}
+Images used within the last `CACHE_MIN_AGE` seconds cannot be evicted.{{< /alert >}}
