@@ -78,6 +78,7 @@ The following issues have been solved in 7.0.1:
 - Fix history ETIME after resize, disk-resize and pci-(de)attach for VMs in undeployed state. [#7249](https://github.com/OpenNebula/one/issues/7249)
 - Fix DRS timeout for VM poweroff migrate. [#7224](https://github.com/OpenNebula/one/issues/7224)
 - Fix wrong QCOW2_STANDALONE option in NFS System Datastore . [#7212](https://github.com/OpenNebula/one/issues/7212)
+- Fix automatically update PCI available profiles. [#7268](https://github.com/OpenNebula/one/issues/7268)
 - Fix Sunstone drop Context when create VM from Template [#7202](https://github.com/OpenNebula/one/issues/7202)
 - Fix Impossible to edit/delete the Custom Variables via Sunstone [#7098](https://github.com/OpenNebula/one/issues/7098)
 - Fix bash regex in FS Datastore [#6853](https://github.com/OpenNebula/one/issues/6853)
