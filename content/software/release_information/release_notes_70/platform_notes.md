@@ -22,8 +22,8 @@ This is the list of the individual platform components that have been through th
 
 | Component                | Version                                    | More information                                                                                                                                                                            |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
-| AlmaLinux                | 8, 9                                       | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| Red Hat Enterprise Linux | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
+| AlmaLinux                | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Debian                   | 11, 12                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
 | MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
@@ -36,8 +36,8 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 | Component                | Version                                                                                                    | More information                                                                                                                     |
 |--------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
-| AlmaLinux                | 8, 9                                                                                                       | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Red Hat Enterprise Linux | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| AlmaLinux                | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | KVM/Libvirt              | Support for version included in the Linux distribution.<br/>For RHEL the packages from `qemu-ev` are used. | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
@@ -48,7 +48,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | Debian        | 11, 12                                                 | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| AlmaLinux     | 8, 9                                                   | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}}) |
 
 <a id="context-supported-platforms"></a>
