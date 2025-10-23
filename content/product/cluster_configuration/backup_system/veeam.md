@@ -299,4 +299,4 @@ If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, th
 
 ## Volatile disk backups
 
-In order to backup volatile disks, you need to enable so in the OpenNebula virtual machine configuration by setting the ``BACKUP_VOLATILE`` parameter to ``YES``, otherwise the disk won't be listed in Veeam. For more information regarding backups of volatile disks in OpenNebula please refer to the [backup documentation page]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations.md" %}}).
+To perform a backup of volatile disks, enable this functionality in the OpenNebula virtual machine configuration by setting the ``BACKUP_VOLATILE`` parameter to ``YES``, otherwise the disk won't be listed in Veeam. For more information regarding backups of volatile disks in OpenNebula please refer to the [backup documentation page]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations.md" %}}).
