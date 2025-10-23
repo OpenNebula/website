@@ -149,7 +149,7 @@ The recommended hardware specifications are:
 
 A server should be configured to expose both the Rsync Backup datastore and the oVirtAPI Server. This server should be accessible from all the clusters that you want to be able to back up via the management network shown in the architecture diagram. The oVirtAPI Server is going to act as the communication gateway between Veeam and OpenNebula.
 
-### Step 2: Create a backup datastore
+2. Create a backup datastore
 
 The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. 
 
