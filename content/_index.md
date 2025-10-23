@@ -51,8 +51,8 @@ To access additional material including white papers, guides and screencasts, se
   {{< card header="[Software](/software)" >}}
   Release notes, upgrade guides, available installation methods, and migration tools.
   {{< /card >}}
-  {{< card header="[Integrations](/integrations)" >}}
-  Extend functionalities for orchestration, storage, backup, billing, and application management.
+  {{< card header="[Solutions](/solutions)" >}}
+  OpenNebula deployment scenarios, showcasing how the platform can be adapted to meet diverse infrastructure needs.
   {{< /card >}}
 {{< /cardpane >}}
 </div>
