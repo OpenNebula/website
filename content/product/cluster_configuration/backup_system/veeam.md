@@ -220,7 +220,7 @@ To increase the performance of the oVirtAPI module, you may want to modify the a
 * Debian/Ubuntu: ``/etc/apache2/sites-available/ovirtapi-server.conf``
 * Alma/RHEL: ``/etc/httpd/conf.d/ovirtapi-server.conf``
 
-After any changes, restart the ``httpd`` or ``apache`` service.
+After performing changes, restart the ``httpd`` or ``apache`` service.
 
 ### Step 4: Add OpenNebula to Veeam
 
