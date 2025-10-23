@@ -226,7 +226,7 @@ After performing changes, restart the ``httpd`` or ``apache`` service.
 
 To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step or follow the next steps:
 
-#### Step 4.1: Add the new virtualization manager
+4.1 Add the new virtualization manager
 
 The first step should be to add the ovirtAPI Backup server to Veeam. Head over to **Backup Infrastructure**, then to **Managed Servers**, and then click **Add Manager**:
 
