@@ -9,7 +9,7 @@ title: "Resolved Issues in 7.0.2"
 A complete list of solved issues for 7.0.2 are listed in the [project development portal](https://github.com/OpenNebula/one/milestone/86).
 
 The following new features have been backported to 7.0.2:
-
+- [Add automatic VM index for multiple persistent VM instantiation](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#instantiate-to-persistent)
 
 The following issues have been solved in 7.0.2:
 
