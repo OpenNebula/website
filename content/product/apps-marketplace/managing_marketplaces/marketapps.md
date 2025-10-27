@@ -213,7 +213,7 @@ VMTEMPLATE
     ID: -1
 ```
 
-When an appliance is downloaded, short hashes may be appended to names to guarantee uniqueness. This applies to sub-objects (e.g. VM templates and disks). To make them recognizable, the original sub-object name is preserved and placed before the hash and index. For example:
+When an appliance is downloaded from the Marketplace, short hash values may be appended to object names to ensure uniqueness. This convention also applies to additional objects created during the download process, such as virtual machine templates and disks. To keep names easily identifiable, the original object name is preserved and placed before the appended hash and index. For example:
 ```default
 $ oneimage list
   ID USER     GROUP    NAME                                                                       DATASTORE     SIZE TYPE PER STAT RVMS
