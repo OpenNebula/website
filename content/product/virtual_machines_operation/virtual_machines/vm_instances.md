@@ -578,11 +578,11 @@ VM ID: 2
 VM ID: 3
 
 $ onevm list
-  ID USER     GROUP    NAME                            STAT  CPU     MEM HOST                        TIME
- 3 oneadmin oneadmin 1-test                          hold    1    768M                         0d 00h00
- 2 oneadmin oneadmin 0-test                          hold    1    768M                         0d 00h00
- 1 oneadmin oneadmin test-1                          hold    1    768M                         0d 00h00
- 0 oneadmin oneadmin test-0                          hold    1    768M                         0d 00h00
+  ID USER         GROUP        NAME       STAT     CPU      MEM     HOST      TIME
+   3 oneadmin     oneadmin     1-test     hold       1     768M           0d 00h00
+   2 oneadmin     oneadmin     0-test     hold       1     768M           0d 00h00
+   1 oneadmin     oneadmin     test-1     hold       1     768M           0d 00h00
+   0 oneadmin     oneadmin     test-0     hold       1     768M           0d 00h00
 ```
 
 Equivalently, in Sunstone activate the “Persistent” switch next to the Create button.
