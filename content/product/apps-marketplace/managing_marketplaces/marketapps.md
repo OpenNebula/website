@@ -213,6 +213,15 @@ VMTEMPLATE
     ID: -1
 ```
 
+When an appliance is downloaded from the Marketplace, short hash values may be appended to object names to ensure uniqueness. This convention also applies to additional objects created during the download process, such as virtual machine templates and disks. To keep names easily identifiable, the original object name is preserved and placed before the appended hash and index. For example:
+```default
+$ oneimage list
+  ID USER     GROUP    NAME                                                                       DATASTORE     SIZE TYPE PER STAT RVMS
+  2 oneadmin oneadmin Windows VM Template_0-Contextualization Packages-aa38438e4a-2              default         2M CD    No rdy     0
+  1 oneadmin oneadmin Windows VM Template_0-Windows VirtIO Drivers - v0.1.285-e3cf06243b-1       default       754M CD    No rdy     0
+  0 oneadmin oneadmin Windows VM Template_0-Empty disk-fcee73d9e5-0                              default         5G OS    No rdy     0
+```
+
 <a id="marketapp-download"></a>
 
 You can also download an app to a standalone file in your desktop:
