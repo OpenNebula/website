@@ -33,7 +33,7 @@ ls /sys/kernel/iommu_groups/
 
 If this directory exists and contains subdirectories (e.g., `0/`, `1/`, etc.), IOMMU is likely active. An empty directory or a non-existent directory indicates that IOMMU is not correctly enabled in your kernel or BIOS/UEFI.
 
-If IOMMU is not active, you need to add the appropriate parameter to your kernel's boot command line:
+If IOMMU is not active, add the appropriate parameter to the kernel's boot command line:
 
 *   For Intel CPUs: `intel_iommu=on`
 *   For AMD CPUs: `amd_iommu=on`
