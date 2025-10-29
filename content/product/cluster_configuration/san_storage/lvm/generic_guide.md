@@ -7,8 +7,8 @@ weight: "6"
 
 ### Hosts SAN Configuration
 
-In the end, the abstraction required to access LUNs is just block devices. This means that there are
-several ways to set them up, although it will usually involve using a network block protocol such as
+The abstraction required to access LUNs consists of block devices. This means that there are
+several ways to set them up, although it usually involves using a network block protocol such as
 iSCSI or Fibre Channel, as well as some way to make it redundant, like DM Multipath.
 
 Here is a sample session for setting up access via iSCSI and multipath:
@@ -101,7 +101,7 @@ further configuration will be needed. Example for illustration purposes:
   ---------     (iSCSI + multipath)
 ```
 
-Alternatively, you can delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in the System datastore. The front-end will then use one of the hosts in the list to proxy SAN operations. Note that only a reduced set of operations are initiated in the front-end, only for undeployed VMs.
+Alternatively, delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in the System datastore. The front-end refers to one of the hosts in the list to proxy SAN operations. Only a reduced set of operations are initiated in the front-end, such as the ones intended for undeployed VMs.
 
 ## Troubleshooting
 

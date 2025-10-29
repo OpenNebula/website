@@ -4,7 +4,7 @@ linkTitle: "PureStorage: SAN setup"
 weight: "4"
 ---
 
-This setup assumes you're using a PureStorage FlashArray with iSCSI and want to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration is straightforward and uses standard volume and host mappings. If you're already familiar with the PureStorage interface, you can create the required resources however you prefer — this just outlines a typical setup.
+This setup assumes you are using a PureStorage FlashArray with iSCSI and want to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the PureStorage interface, create the required resources as desired.
 
 ## PureStorage Configuration
 
@@ -40,7 +40,7 @@ Click on the volume you just created, and on the **Connected Host Groups** card,
 
 Once connected, the volume will be exposed to all hosts in the group. You can update the host group if you add/remove hosts from your OpenNebula installation.
 
-After this is complete, the volume should be visible on your OpenNebula hosts after rescanning iSCSI sessions (via `iscsiadm -m session --rescan`) and finding the new device with `multipath -ll` and `lsblk`. You can then proceed with the LVM volume group creation and OpenNebula LVM Datastore Setup as usual.
+After this is complete, the volume is visible on your OpenNebula hosts after rescanning iSCSI sessions via `iscsiadm -m session --rescan`, and finding the new device with `multipath -ll` and `lsblk`. Proceed with the LVM volume group creation and OpenNebula LVM Datastore Setup as usual.
 
 ## Front-end and Hosts Configuration
 

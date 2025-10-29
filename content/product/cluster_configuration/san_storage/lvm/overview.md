@@ -16,8 +16,8 @@ place and thus it may increase I/O performance.
 
 ## SAN Appliance Setup
 
-Before going on setting up LVM, you need to configure your SAN appliance to export the LUN(s) where
-VMs will be deployed. Depending on the manufacturer the process may be slightly different, so please
+Before performing the configuration of the LVM, you must configure your SAN appliance to export the LUN(s) where
+VMs will be deployed. Depending on the manufacturer the process may be slightly different; hence,
 refer to the specific guides if your hardware is on the supported list, or the generic guide
 otherwise:
 
@@ -28,11 +28,11 @@ otherwise:
 ## LVM Datastore options
 
 OpenNebula offers two main ways to leverage LVM technology as a way to exploit SAN storage in a
-vendor-independent way. Please refer to the corresponding section for the specific configuration.
+vendor-independent way. Refer to the corresponding section for the specific configuration.
 Also, for a technical comparison and supported features of each option, refer to the [Storage
 portfolio]({{% relref "../../storage_system/overview#storage-portfolio" %}}).
 
 Datastore guides:
 
-- [LVM]({{% relref "lvm" %}}) (EE only) - Images stored as LVs in a SAN, activated directly.
-- [FS+LVM Hybrid]({{% relref "filemode" %}}) - Images stored in frontend, transferred to hosts via SSH, and copied to the SAN on instantiation.
+- [LVM]({{% relref "lvm" %}}) (EE only): images stored as LVs in a SAN, activated directly.
+- [FS+LVM Hybrid]({{% relref "filemode" %}}): images stored in front-end, transferred to hosts via SSH, and copied to the SAN on instantiation.

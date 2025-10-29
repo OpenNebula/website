@@ -121,6 +121,6 @@ Performing a VM backup may require some support from the hypervisor or the disk 
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e. NFS/SAN or Local.
 
-<sup>†</sup> Ceph full/incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#backup-types" %}}) for more details.
+<sup>†</sup> Ceph full and incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#backup-types" %}}) for more details.
 
 <sup>‡</sup> Only supported in [thin mode]({{% relref "../../../product/cluster_configuration/san_storage/lvm/filemode#lvm-thin" %}}).

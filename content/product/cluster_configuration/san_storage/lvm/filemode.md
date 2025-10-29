@@ -9,14 +9,14 @@ tags:
 weight: "3"
 ---
 
-In this setup, disk images are stored in file format (raw/qcow2) in the Image Datastore, and then
+In this setup, disk images are stored in file format, such as raw and qcow2, in the Image Datastore, and then
 dumped into a LVM Logical Volume in the SAN when a Virtual Machine is created. **The image files are
 transferred from Frontend to Hosts through the SSH protocol.** Additionally, [LVM Thin]({{% relref
 "#lvm-thin" %}}) can be enabled to support creating thin snapshots of the VM disks.
 
 ## How Should I Read This Chapter
 
-Before reading this Chapter make sure you have already configured access to the SAN following one of the setup guides in the [LVM Overview]({{% relref "overview#san-appliance-setup" %}}) section.
+Before performing the procedures outlined in this chapter you must configure access to the SAN following one of the setup guides in the [LVM Overview]({{% relref "overview#san-appliance-setup" %}}) section.
 
 ## Hypervisor Configuration
 
@@ -30,7 +30,7 @@ First we need to configure hypervisors for LVM operations over the shared SAN st
 * All the nodes need to have access to the same LUNs.
 
 {{< alert title="Note" color="success" >}}
-The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
+The LVM Datastore does not need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
 {{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
@@ -42,7 +42,7 @@ Virtual Machine disks are symbolic links to the block devices. However, addition
 
 ## OpenNebula Configuration
 
-To interface with the SAN, we need to create the two required OpenNebula datastores: Image and System. Both of them use the `fs_lvm_ssh` transfer driver (TM_MAD).
+To interface with the SAN, create the two required OpenNebula datastores: Image and System. Both of them use the `fs_lvm_ssh` transfer driver (TM_MAD).
 
 ### Create System Datastore
 
