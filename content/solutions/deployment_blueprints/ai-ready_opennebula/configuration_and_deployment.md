@@ -122,7 +122,7 @@ The inventory file shown above is a basic example. You should adjust it to match
 Key configuration parameters to setup:
 
 *   `pci_passthrough_enabled: true`: this boolean flag enables the PCI passthrough configuration for a specific node.
-*   `pci_devices`: This is a list of PCI devices to be configured for passthrough on that node.
+*   `pci_devices`: this is a list of PCI devices to be configured for passthrough on that node.
     *   `address`: The full PCI address of the device (e.g., `"0000:09:00.0"`). You can find this using the `lspci -D` command on the hypervisor. Note that you must provide the full address, as short addresses are not supported by this `one-deploy` feature.
 
 ### Step 2: Run the Deployment
