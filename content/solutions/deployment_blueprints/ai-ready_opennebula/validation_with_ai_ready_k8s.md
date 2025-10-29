@@ -1,11 +1,11 @@
 ---
-title: Validation with AI-Ready Kubernetes
+title: Validation of AI-Ready Kubernetes with NVIDIA Dynamo
 weight: 5
 ---
 
 ## Overview
 
-[NVIDIA® Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, i.e. across any framework, architecture or deployment scale, in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
+[NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
 
 Encapsulating the different inference engines, AI models and dependencies into a single container improves the workload portability and isolation. With this approach, each container is deployed consistently across different environments, including all its dependencies, avoiding conflicts and reproducibility issues.
 
@@ -24,12 +24,12 @@ This section contains the hardware specifications of the used hardware and softw
 
 The diagram below depicts the top-level architecture of the NVIDIA Dynamo framework setup in an OpenNebula deployment over two servers. One server hosts the OpenNebula frontend,  and the second one contains two NVIDIA L40S GPU PCI cards which operate as the host server for the K8s Cluster VMs. For this reference setup, the VMs share a simple bridged network.
 
-![image0](/images/solutions/deployment_blueprints/ai-ready_opennebula/k8s_architecture_opennebula.svg)
+![Architecture of NVIDIA Dynamo in OpenNebula over two servers](/images/solutions/deployment_blueprints/ai-ready_opennebula/k8s_architecture_opennebula.svg)
 
 
 To deploy the GPU-enabled Kubernetes workload cluster, first deploy a VM with the OpenNebula “CAPI Service” marketplace appliance which contains a light Kubernetes management cluster based in K3s and includes a Rancher and CAPONE controller deployment. This instance is used to provision the GPU-enabled Kubernetes workload cluster nodes in a declarative way.
 
-This GPU-enabled Kubernetes workload cluster consists of three VMs that operate as a control plane node and two worker nodes. Each worker node uses one of the two NVIDIA L40S GPU PCI cards. Deploy the NVIDIA GPU Operator in this cluster for automatic configuration of the nodes that make the GPU available to its workloads, and the NVIDIA Dynamo framework operator to deploy inference graphs in a declarative manner.
+The GPU-enabled Kubernetes workload cluster consists of three VMs that operate as a control plane node and two worker nodes. Each worker node uses one of the two NVIDIA L40S GPU PCI cards. Deploy the NVIDIA GPU Operator in this cluster for automatic configuration of the nodes that make the GPU available to its workloads, and the NVIDIA Dynamo framework operator to deploy inference graphs in a declarative manner.
 
 ### Hardware Specification
 
@@ -107,14 +107,14 @@ The server specifications are based on a two-server setup: one server operates a
 
 Here is a brief glossary of the components described in this section:
 
-- Management Cluster: A lightweight Kubernetes cluster that contains Cluster API provider components for creating workload Kubernetes declaratively, based on CRDs and yaml manifests/Helm charts.
-- Workload Cluster: The Kubernetes clusters created through the Cluster API that manage the actual workloads.
-- CAPI service Appliance: OpenNebula Cluster API VM appliance that contains a k3s-based management cluster prebuilt with the OpenNebula Cluster API Provider (CAPONE)  and other Cluster API providers, and a Rancher instance. This appliance is ready for deploying and managing workload clusters without any previous setup.
-- CAPONE: The OpenNebula Cluster API Provider is a Kubernetes  Cluster API infrastructure provider that contacts with the OpenNebula frontend API for provisioning the necessary infrastructure for running workload clusters over OpenNebula VMs.
+- Management Cluster: a lightweight Kubernetes cluster that contains Cluster API provider components for creating workload Kubernetes declaratively, based on CRDs and yaml manifests/Helm charts.
+- Workload Cluster: the Kubernetes clusters created through the Cluster API that manage the actual workloads.
+- CAPI service Appliance:an OpenNebula Cluster API VM appliance that contains a k3s-based management cluster prebuilt with the OpenNebula Cluster API Provider (CAPONE)  and other Cluster API providers, and a Rancher instance. This appliance is ready for deploying and managing workload clusters without any previous setup.
+- CAPONE: the OpenNebula Cluster API Provider which is a Kubernetes  Cluster API infrastructure provider that contacts with the OpenNebula frontend API for provisioning the necessary infrastructure for running workload clusters over OpenNebula VMs.
 
 ### Infrastructure Provisioning
 
-This setup requires OpenNebula running on a GPU-ready environment, i.e. an OpenNebula host configured with PCI-Passthrough for exposing the GPU cards to the node workloads.
+This setup requires OpenNebula running on a GPU-ready environment, such as an OpenNebula host configured with PCI-Passthrough for exposing the GPU cards to the node workloads.
 
 ### Kubernetes GPU Workload Cluster Provisioning with CAPONE
 
@@ -138,7 +138,7 @@ Where `datastore_id` is your image datastore identifier. In this example, use th
 oneadmin@frontend$ onemarketapp export "Service Capi" service_Capi -d 1
 ```
 
-2. Update the service\_Capi template by adding the necessary scheduling requirements for deploying in to the desired host, in this case host with ID: 1,  and topology necessary for CPU pinning:
+2. Update the `service_Capi template by adding the necessary scheduling requirements for deploying in to the desired host, in this case host with ID: 1,  and topology necessary for CPU pinning:
 
 ```
 oneadmin@frontend$ onetemplate update service_Capi
@@ -516,7 +516,7 @@ Allocatable:
 
 ### NVIDIA Dynamo Cloud Platform Installation
 
-Once the GPU Operator is up and running, proceed to install  Dynamo Cloud Platform.
+Once the GPU Operator is up and running, proceed to install Dynamo Cloud Platform.
 
 As a prerequisite, you need a storage provider installed to supply PersistentVolumes to the platform. For testing purposes, use the [rancher local-path-provisioner](https://github.com/rancher/local-path-provisioner) that references to a local path from the pod host as storage, and creates a Default storage class using it:
 
@@ -821,7 +821,7 @@ service/disagg-frontend                 ClusterIP   10.43.92.113    <none>      
 
 ## (Optional) Querying the API Locally
 
-In case you want to query the API client locally, forward the vllm frontend service through Kubernetes using the following command:
+In case you want to query the API client locally, forward the `vllm frontend service through Kubernetes using the following command:
 
 ```shell
 laptop$ kubectl port-forward svc/<frontend_service> <local_port>:8000 &
