@@ -62,7 +62,7 @@ The `one-deploy` tool is a collection of Ansible playbooks that streamline the i
 2.  **Install dependencies**:
     `one-deploy` requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, follow the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki.
 
-For a general guide on how to execute the playbooks for different cloud architectures, see the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
+For guidance on how to execute the playbooks in different cloud architectures, see the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
 
 ### Step 1: Configure the Inventory for PCI Passthrough
 
