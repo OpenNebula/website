@@ -52,7 +52,7 @@ Use `one-deploy` to automate the deployment of our OpenNebula cloud with PCI pas
 
 ### Setting Up one-deploy
 
-The `one-deploy` tool is a collection of Ansible playbooks that streamline the installation of OpenNebula. Before you can use it, you need to prepare your control node (the machine where you will run the Ansible commands).
+The `one-deploy` tool is a collection of Ansible playbooks that streamline the installation of OpenNebula. Before running this collection, prepare your control node which is the machine where you will execute the Ansible commands.
 
 1.  **Clone the repository**:
     ```shell
