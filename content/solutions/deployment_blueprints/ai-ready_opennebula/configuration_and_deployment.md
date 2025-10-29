@@ -23,7 +23,7 @@ You must enable this feature in your server's BIOS/UEFI. Refer to your hardware 
 
 ### Kernel Configuration (Manual Step)
 
-The `one-deploy` tool automates many aspects of the configuration, but **you must manually enable IOMMU support in the kernel** on each hypervisor node. This is a critical step that `one-deploy` does not perform automatically.
+The `one-deploy` tool automates many aspects of the configuration, but you must manually enable IOMMU support in the kernel on each hypervisor node. This is a critical step that `one-deploy` does not perform automatically.
 
 Before modifying your kernel parameters, you should check if IOMMU is already active. You can do this by inspecting the `/sys/kernel/iommu_groups/` directory on your hypervisor.
 
