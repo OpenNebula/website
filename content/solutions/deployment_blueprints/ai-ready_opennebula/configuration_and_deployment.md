@@ -48,7 +48,7 @@ Avoid pre-installing NVIDIA drivers on the hypervisor nodes before running the `
 
 ## Deployment with one-deploy
 
-We will use `one-deploy` to automate the deployment of our OpenNebula cloud with PCI passthrough configured for our GPUs.
+Use `one-deploy` to automate the deployment of our OpenNebula cloud with PCI passthrough configured for our GPUs.
 
 ### Setting Up one-deploy
 
