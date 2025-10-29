@@ -11,13 +11,12 @@ weight: "2"
 
 With the rapid and widespread adoption of Large Language Models (LLMs), optimizing and validating their inference performance has become critical. Efficient inference ensures that deployed models deliver high-quality results while maintaining scalability, responsiveness, and cost efficiency.
 
-Before deploying any LLM in production, it must be properly tested, benchmarked, and certified. There is a clear distinction between an **LLM benchmark** and an **LLM inference benchmark**:
+Before deploying any LLM in production, it must be properly tested, benchmarked, and certified. There is a clear distinction between an LLM benchmark and an LLM inference benchmark:
 
-- **LLM Benchmarks** evaluate the quality of a model’s outputs — such as accuracy, reasoning, and linguistic quality — using standardized test suites (e.g., **GLUE**, **MMLU**, **SWE-bench**, etc.).
-- **LLM Inference Benchmarks**, on the other hand, measure performance metrics such as **latency**, **throughput**, and **stability** during inference. These tests assess the efficiency of model serving rather than the quality of the generated text.
+- LLM Benchmarks: evaluate the quality of a model’s outputs — such as accuracy, reasoning, and linguistic quality — using standardized test suites. Examples: GLUE, MMLU, and SWE-bench.
+- LLM Inference Benchmarks: measure performance metrics such as latency, throughput, and stability during inference. These tests assess the efficiency of model serving rather than the quality of the generated text.
 
-This document defines the **scope**, **methodology**, and **evaluation criteria** for the LLM inference benchmarking process conducted by **OpenNebula**.  
-The goal is to test and certify LLM deployments within OpenNebula appliances under controlled hardware and software environments.
+This document defines the scope, methodology, and evaluation criteria for the LLM inference benchmarking process conducted by OpenNebula. The goal is to test and certify LLM deployments within OpenNebula appliances under controlled hardware and software environments.
 
 The LLM inference benchmarking process includes the following tasks:
 
@@ -28,14 +27,14 @@ The LLM inference benchmarking process includes the following tasks:
 
 ## Scope of the Testing
 
-The objective of this benchmarking task is to evaluate **LLM inference performance** within a controlled OpenNebula environment, using the **vLLM inference framework** on a single node equipped with one or more GPUs.
+The objective of this benchmarking task is to evaluate LLM inference performance within a controlled OpenNebula environment, using the vLLM inference framework on a single node equipped with one or more GPUs.
 
 
 ## Inference Framework
 
-Although multiple inference frameworks are available, this benchmark focuses exclusively on **vLLM**, a production-grade, high-performance inference engine designed for large-scale LLM serving.
+Although multiple inference frameworks are available, this benchmark focuses exclusively on vLLM, a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
-The **vLLM appliance** is (or will soon be) available through the **OpenNebula Marketplace** for enterprise subscriptions, offering a streamlined setup process suitable for both novice and experienced users.
+The vLLM appliance will be available through the OpenNebula Marketplace for enterprise subscriptions, offering a streamlined setup process suitable for both novice and experienced users.
 
 **Main characteristics:**
 
@@ -50,23 +49,23 @@ The **vLLM appliance** is (or will soon be) available through the **OpenNebula M
 To test the vLLM appliance, the benchmark uses two distinct environments, each with specific hardware configurations:
 
 ### **Environment 1 — vgpu1**
-- Two nodes running **OpenNebula v7+**
-- Each node equipped with **two NVIDIA L40S GPUs**
+- Two nodes running OpenNebula v7+
+- Each node equipped with two NVIDIA L40S GPUs
 
 ### **Environment 2 — vgpu4**
-- One node running **OpenNebula v7+**
-- Equipped with **one NVIDIA H100L GPU**
+- One node running OpenNebula v7+
+- Equipped with one NVIDIA H100L GPU
 
 
 ## Models to Test
 
-The certification includes two LLM architectures — **Qwen** and **Llama** — each tested in two different parameter sizes.
+The certification includes two LLM architectures — Qwen and Llama — each tested in two different parameter sizes.
 
-### **Qwen Models**
+### Qwen Models
 - `Qwen/Qwen2.5-3B-Instruct`
 - `Qwen/Qwen2.5-14B-Instruct`
 
-### **Llama Models**
+### Llama Models
 - `meta-llama/Llama-3.2-3B-Instruct`
 - `meta-llama/Llama-3.2-7B-Instruct`
 
@@ -75,39 +74,37 @@ Additional models will be included in future releases to expand the certificatio
 
 ## Methodology
 
-The benchmark process is based on **GuideLLM**, the native benchmarking tool provided by vLLM for optimizing and testing deployed models.  
-GuideLLM supports **OpenAPI-compatible testing** of any deployed endpoint.
+The benchmark process is based on GuideLLM, the native benchmarking tool provided by vLLM for optimizing and testing deployed models.  
+GuideLLM supports OpenAPI-compatible testing of any deployed endpoint.
 
 There are two general testing modes:
 
-- **Containerized mode:** runs the benchmark inside an image or container, specifying the model and deployment details.  
-- **Endpoint mode:** uses an API endpoint (URL) and model name to send benchmark requests directly.
+- Containerized mode: runs the benchmark inside an image or container, specifying the model and deployment details.  
+- Endpoint mode: uses an API endpoint (URL) and model name to send benchmark requests directly.
 
-For the purposes of this benchmarking, **OpenNebula chooses endpoint mode** for simplicity and efficiency, avoiding unnecessary container orchestration overhead.
+For the purposes of this benchmarking, OpenNebula chooses endpoint mode for simplicity and efficiency, avoiding unnecessary container orchestration overhead.
 
 Once the LLM is deployed, the developer executes the `benchmark.sh` script located in the appliance’s root directory.  
 This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI.
 
-![image1](https://raw.githubusercontent.com/vllm-project/guidellm/main/docs/assets/sample-benchmarks.gif)
-
-> **ALT text:** GuideLLM with progress updates through the CLI
+![GuideLLM with progress updates through the CLI](https://raw.githubusercontent.com/vllm-project/guidellm/main/docs/assets/sample-benchmarks.gif)
 
 GuideLLM CLI updates the results and the steps along the benchmarking process, based on this procedure.
 
-To test performance and stability, the script sends **hundreds of requests in parallel**.  
-OpenNebula uses **synthetic data** generated automatically to run this benchmark.
+To test performance and stability, the script sends hundreds of requests in parallel.  
+OpenNebula uses synthetic data generated automatically to run this benchmark.
 
 For the benchmark:
-- Input prompt: average **512 tokens**  
-- Output prompt: average **256 tokens**  
-- Total samples: **1000**
+- Input prompt: average 512 tokens  
+- Output prompt: average 256 tokens
+- Total samples: 1000
 
-GuideLLM identifies the **throughput** that the inference can handle.  
-Once the throughput is identified, **10 additional runs** are performed at a fixed requests-per-second rate (below the identified throughput) to determine **stability** and final results.
+GuideLLM identifies the throughput that the inference can handle.  
+Once the throughput is identified, 10 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
 
-As a result, the process generates an **HTML report** with all given information and produces an **output with metrics**, similar to the image below.
+As a result, the process generates an HTML report with all given information and produces an output with metrics, similar to the image below.
 
-There are more parameters available within the benchmarking such as **warmups**, **number of steps**, **seconds per step**, etc.  
+There are more parameters available within the benchmarking such as warmups*, number of steps, and seconds per step.
 These parameters are fixed but can be manually adapted if needed.
 
 
@@ -115,18 +112,18 @@ These parameters are fixed but can be manually adapted if needed.
 
 Each tested model produces the following key performance metrics:
 
-- **Request rate (throughput):** number of requests processed per second (req/s).  
-- **Time to first token (TTFT):** time elapsed before the first token is generated (ms).  
-- **Inter-token latency (ITL):** average time between consecutive tokens during generation (ms).  
-- **Latency:** time to process individual requests. Low latency is essential for interactive use cases.  
-- **Throughput:** number of requests handled per second. High throughput indicates good scalability.  
-- **Cost Efficiency:** cost per request, determined by GPU utilization and throughput. Optimization often requires balancing cost and latency.  
+- Request rate (throughput): number of requests processed per second (req/s).  
+- Time to first token (TTFT): time elapsed before the first token is generated (ms).  
+- Inter-token latency (ITL): average time between consecutive tokens during generation (ms).  
+- Latency: time to process individual requests. Low latency is essential for interactive use cases.  
+- Throughput: number of requests handled per second. High throughput indicates good scalability.  
+- Cost Efficiency: cost per request, determined by GPU utilization and throughput. Optimization often requires balancing cost and latency.  
 
 
 ## Service Level Objectives (SLOs)
 
 Different application types have distinct performance requirements.  
-The following **GuideLLM reference SLOs** provide general benchmarks for evaluating inference quality (times for 99% of requests):
+The following GuideLLM reference SLOs provide general benchmarks for evaluating inference quality (times for 99% of requests):
 
 | Use Case | Req. Latency (ms) | TTFT (ms) | ITL (ms) |
 |-----------|------------------|------------|-----------|
