@@ -38,7 +38,7 @@ If IOMMU is not active, add the appropriate parameter to the kernel's boot comma
 *   For Intel CPUs: `intel_iommu=on`
 *   For AMD CPUs: `amd_iommu=on`
 
-You may also need to add `iommu=pt` for pass-through specific configurations. For a detailed guide on how to perform this kernel configuration, refer to the [NVIDIA GPU Passthrough documentation]({{% relref "product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md" %}}).
+For a detailed guide on how to perform this kernel configuration, refer to the [NVIDIA GPU Passthrough documentation]({{% relref "product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md" %}}).
 
 ### Hypervisor Preparation
 
@@ -68,7 +68,8 @@ For guidance on how to execute the playbooks in different cloud architectures, s
 
 `one-deploy` uses an Ansible inventory file to define the hosts and their configurations. We'll use a dedicated inventory file to enable and specify the PCI devices for passthrough.
 
-Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough).
+Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring `one-deploy` for different architectures (such as shared or Ceph-based storage), please refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
+
 
 ```yaml
 ---
@@ -114,10 +115,6 @@ node:
       ansible_host: 192.168.122.5
       pci_passthrough_enabled: false
 ```
-
-{{< alert title="Note" color="info" >}}
-The inventory file shown above is a basic example. You should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring `one-deploy` for different architectures (like shared or Ceph-based storage), please refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
-{{< /alert >}}
 
 Key configuration parameters to setup:
 
