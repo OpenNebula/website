@@ -19,7 +19,7 @@ The virtualization hosts (hypervisors) must support I/O MMU virtualization:
 *   **Intel CPUs**: Must support **VT-d**.
 *   **AMD CPUs**: Must support **AMD-Vi**.
 
-This feature must be enabled in your server's BIOS/UEFI. Please consult your hardware vendor's documentation for instructions.
+You must enable this feature in your server's BIOS/UEFI. Refer to your hardware vendor's documentation for instructions.
 
 ### Kernel Configuration (Manual Step)
 
