@@ -68,7 +68,7 @@ For guidance on how to execute the playbooks in different cloud architectures, s
 
 For this configuration, use a dedicated inventory file to define the general cloud architecture, where you specify PCI devices for passthrough.
 
-Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring `one-deploy` for different architectures (such as shared or Ceph-based storage), please refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
+Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring OneDeploy for different architectures like shared or Ceph-based storage, refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
 
 
 ```yaml
@@ -132,9 +132,7 @@ make I=inventory/ai_factory.yml
 
 The `one-deploy` tool will automatically deploy your entire OpenNebula cloud. When you enable the PCI passthrough feature in your inventory, `one-deploy` handles all the necessary configuration steps automatically.
 
-On each hypervisor node, it prepares the specified GPUs for passthrough by binding them to the required `vfio-pci` driver. It also ensures the correct permissions are set so that OpenNebula can manage the devices.
-
-Simultaneously, on the OpenNebula front-end, `one-deploy` configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
+On each hypervisor node, it prepares the specified GPUs for passthrough by binding them to the required `vfio-pci` driver. It also ensures the correct permissions are set so that OpenNebula can manage the devices. Simultaneously, on the OpenNebula front-end, `one-deploy` configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
 
 ## Post-Deployment Validation
 
