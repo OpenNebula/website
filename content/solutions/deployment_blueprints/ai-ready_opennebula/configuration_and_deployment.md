@@ -15,7 +15,7 @@ Before you begin, ensure your environment meets the following prerequisites.
 
 ### Hardware Requirements
 
-Your virtualization hosts (hypervisors) must support I/O MMU virtualization:
+The virtualization hosts (hypervisors) must support I/O MMU virtualization:
 *   **Intel CPUs**: Must support **VT-d**.
 *   **AMD CPUs**: Must support **AMD-Vi**.
 
