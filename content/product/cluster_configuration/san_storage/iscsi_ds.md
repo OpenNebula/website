@@ -16,7 +16,8 @@ weight: "7"
 This Datastore is used to register already existing iSCSI volume available to the hypervisor Nodes.
 
 {{< alert title="Warning" color="warning" >}}
-The Datastore should only be usable by the administrators. Letting users create images in this Datastore is a huge **security risk**!{{< /alert >}} 
+The Datastore should only be usable by the administrators. Letting users create images in this Datastore is a huge **security risk**!
+{{< /alert >}}
 
 ## Front-end Setup
 
@@ -113,7 +114,7 @@ PERSISTENT = YES
 As this Datastore is just a container for existing devices, images does not take any size from it. All devices registered will render a size of 0 and the overall devices Datastore will show up with 1MB of available space{{< /alert >}} 
 
 {{< alert title="Note" color="success" >}}
-You may override any of the following: `ISCSI_HOST`, `ISCSI_USER``, `ISCSI_USAGE` and `ISCSI_IQN` parameters in the image template. These overridden parameters will come into effect for new Virtual Machines.{{< /alert >}} 
+You may override any of the following: `ISCSI_HOST`, `ISCSI_USER`, `ISCSI_USAGE` and `ISCSI_IQN` parameters in the image template. These overridden parameters will come into effect for new Virtual Machines.{{< /alert >}} 
 
 Here is an example of an iSCSI LUN template that uses the iSCSI transfer manager.
 

@@ -1,44 +1,22 @@
 ---
-title: "SAN Storage Configuration"
-linktitle: "LVM Thin - FS"
+title: "LVM (File Mode) SAN Datastore"
+linktitle: "LVM - File Mode"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "72"
 tags:
-weight: "4"
+weight: "3"
 ---
 
-<a id="lvm-drivers"></a>
+In this setup, disk images are stored in file format (raw/qcow2) in the Image Datastore, and then
+dumped into a LVM Logical Volume in the SAN when a Virtual Machine is created. **The image files are
+transferred from Frontend to Hosts through the SSH protocol.** Additionally, [LVM Thin]({{% relref
+"#lvm-thin" %}}) can be enabled to support creating thin snapshots of the VM disks.
 
-<!--# SAN Datastore -->
+## How Should I Read This Chapter
 
-## SAN Storage
-
-This storage configuration assumes that Hosts have access to storage devices (LUNs) exported by an
-Storage Area Network (SAN) server using a suitable protocol like iSCSI or Fibre Channel. The Hosts
-will interface the devices through the LVM abstraction layer. Virtual Machines run from an LV
-(logical volume) device instead of plain files. This reduces the overhead of having a filesystem in
-place and thus it may increase I/O performance.
-
-Disk images are stored in file format in the Image Datastore and then dumped into an LV when a
-Virtual Machine is created. The image files are transferred to the Host through the SSH protocol.
-Additionally, [LVM Thin]({{% relref "#lvm-thin" %}}) can be enabled to support creating thin
-snapshots of the VM disks.
-
-## SAN Appliance Configuration
-
-First of all, you need to configure your SAN appliance to export the LUN(s) where VMs will be
-deployed. Depending on the manufacturer the process may be slightly different, so please refer to
-the specific guides if your hardware is on the supported list, or your hardware vendor guides
-otherwise:
-
-- [NetApp specific guide]({{% relref "/product/cluster_configuration/san_storage/netapp_-_lvm_thin_validation/" %}})
-- [PureStorage specific guide]({{% relref "/product/cluster_configuration/san_storage/purestorage_-_lvm-thin_validation/" %}})
-
-Also included in the above guides is a specific multipath configuration for both the front-end and virtualization hosts, which recommended over the more general multipath configuration presented below.
-
-<a id="hosts-configuration"></a>
+Before reading this Chapter make sure you have already configured access to the SAN following one of the setup guides in the [LVM Overview]({{% relref "overview#san-appliance-setup" %}}) section.
 
 ## Hypervisor Configuration
 
@@ -52,112 +30,19 @@ First we need to configure hypervisors for LVM operations over the shared SAN st
 * All the nodes need to have access to the same LUNs.
 
 {{< alert title="Note" color="success" >}}
+The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
+{{< /alert >}}
+
+{{< alert title="Note" color="success" >}}
 In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm_ssh/activate` from the remote scripts may be executed on the Host to do the job).
 {{< /alert >}}
 
 Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
 
-### Hosts SAN Configuration
-
-In the end, the abstraction required to access LUNs is just block devices. This means that there are
-several ways to set them up, although it will usually involve using a network block protocol such as
-iSCSI or Fibre Channel, as well as some way to make it redundant, like DM Multipath.
-
-Here is a sample session for setting up access via iSCSI and multipath:
-
-```
-# === ISCSI ===
-
-TARGET_IP="192.168.1.100"                             # IP of SAN appliance
-TARGET_IQN="iqn.2023-01.com.example:storage.target1"  # iSCSI Qualified Name
-
-# === Install tools ===
-# RedHat derivates:
-sudo dnf install -y iscsi-initiator-utils
-# Ubuntu/Debian:
-sudo apt update && sudo apt install -y open-iscsi
-
-# === Enable iSCSI services ===
-# RedHat derivates:
-sudo systemctl enable --now iscsid
-# Ubuntu/Debian:
-sudo systemctl enable --now open-iscsi
-
-# === Discover targets ===
-sudo iscsiadm -m discovery -t sendtargets -p "$TARGET_IP"
-
-# === Log in to the target ===
-sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" --login
-
-# === Make login persistent across reboots ===
-sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" \
-     --op update -n node.startup -v automatic
-```
-
-```
-# === MULTIPATH ===
-
-# === Install tools ===
-# RedHat derivates:
-sudo dnf install -y device-mapper-multipath
-# Ubuntu/Debian:
-sudo apt update && sudo apt install -y multipath-tools
-
-# === Enable multipath daemon ===
-sudo systemctl enable --now multipathd
-
-# === Create multipath config file ===
-sudo tee /etc/multipath.conf > /dev/null <<EOF
-defaults {
-    user_friendly_names yes
-    find_multipaths yes
-}
-# Optional: blacklist local boot disks if needed
-# blacklist {
-#     devnode "^sd[a-z]"
-# }
-EOF
-
-# === Reload multipath ===
-sudo multipath -F    # Flush existing config (safely if not in use)
-sudo multipath       # Re-scan for multipath devices
-sudo systemctl restart multipathd
-
-# === Show current multipath devices ===
-sudo multipath -ll
-```
-
-<a id="frontend-configuration"></a>
-
-## Front-end Configuration
-
-The Front-end needs access to the shared SAN server in order to perform LVM operations. It can
-either access it directly, or using some host(s) as proxy/bridge.
-
-For direct access, **the Front-end will need to be configured in the same way as hosts** (following
-the [previous section]({{% relref "#hosts-configuration" %}})), and no further configuration will
-be needed. Example for illustration purposes:
-
-```
--------------
-| Front-end | ---- /dev/mapper/mpath* ------+
--------------     (iSCSI + multipath)       |
-                                            v
-  ---------                              --------------
-  | host2 | ---- /dev/mapper/mpath* ---> | SAN server |
-  ---------     (iSCSI + multipath)      --------------
-                                            ^
-                                            |
-  ---------                                 |
-  | hostN | ---- /dev/mapper/mpath* --------+
-  ---------     (iSCSI + multipath)
-```
-
-Alternatively, you can delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in the System datastore. The front-end will then use one of the hosts in the list to proxy SAN operations. Note that only a reduced set of operations are initiated in the front-end, only for undeployed VMs.
 
 ## OpenNebula Configuration
 
-First, we need to create the two required OpenNebula datastores: Image and System. Both of them use the `fs_lvm_ssh` transfer driver (TM_MAD).
+To interface with the SAN, we need to create the two required OpenNebula datastores: Image and System. Both of them use the `fs_lvm_ssh` transfer driver (TM_MAD).
 
 ### Create System Datastore
 
@@ -184,7 +69,7 @@ DISK_TYPE = BLOCK
 ID: 100
 ```
 
-Afterwards, a **LVM VG needs to be created** in the shared LUNs for the system datastore **with the
+Afterwards, a **LVM VG needs to be created** in the shared LUN for the system datastore **with the
 following name: `vg-one-<system_ds_id>`**. This step just needs to be done once, either in one host,
 or the front-end if it has access. This VG is where the actual VM images will be located at runtime,
 and OpenNebula will take care of creating the LVs (one for each VM disk). For example, assuming
@@ -333,13 +218,10 @@ Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the cor
 Images are stored as regular files (under the usual path: `/var/lib/one/datastores/<id>`) in the Image Datastore, but they will be dumped into a Logical Volumes (LV) upon Virtual Machine creation. The Virtual Machines will run from Logical Volumes in the Host.
 
 ![image0](/images/fs_lvm_datastore.svg)
-{{< alert title="Note" color="success" >}}
-Files are dumped directly from the Front-end to the LVs in the Host, using the SSH protocol.{{< /alert >}}
-
-This is the recommended driver to be used when a high-end SAN is available. The same LUN can be exported to all the Hosts while Virtual Machines will be able to run directly from the SAN.
 
 {{< alert title="Note" color="success" >}}
-The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.{{< /alert >}}
+The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
+{{< /alert >}}
 
 For example, consider a system with two Virtual Machines (`9` and `10`) using a disk, running in an LVM Datastore, with ID `0`. The Hosts have configured a shared LUN and created a volume group named `vg-one-0`. The layout of the Datastore would be:
 
@@ -382,30 +264,3 @@ Let’s create a couple of snapshots over the first disk of the previous VM. As 
 ```
 
 For more details about the inner workings of LVM, please refer to the [lvmthin(7)](https://man7.org/linux/man-pages/man7/lvmthin.7.html) main page.
-
-
-## Troubleshooting
-
-### LVM Devices File
-
-**Problem:** LVM does not show my iSCSI/multipath devices (with e.g., `pvs`), although I can see them
-with `multipath -ll` or `lsblk`.
-
-**Possible solution:**
-
-The LVM version in some operating systems or Linux distributions, by default,
-doesn't scan the whole `/dev` directory for possible disks. Instead, you need to explicitly
-**whitelist** them in `/etc/lvm/devices/system.devices`. You can check whether that's your case by
-running:
-
-```
-lvmconfig --type full devices/use_devicesfile
-```
-
-If it returns `devices/use_devicesfile=1`, then the devices file is being used and enforced. In that
-case, just add the device path to the whitelist and check again:
-
-```
-# echo /dev/mapper/mpatha >> /etc/lvm/devices/system.devices
-# pvs
-```
