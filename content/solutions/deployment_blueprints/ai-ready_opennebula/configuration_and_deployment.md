@@ -143,6 +143,10 @@ Simultaneously, on the OpenNebula front-end, `one-deploy` configures the monitor
 
 After the deployment is complete, verify that the GPUs are correctly configured and available to OpenNebula by checking the Host information in Sunstone:
 
-Log in to your OpenNebula Sunstone GUI, navigate to **Infrastructure -> Hosts**, and select one of the hypervisors you configured for passthrough (e.g., `h100-node`). Go to the **PCI** tab. You should see your GPU listed as an available PCI device.
+1. Log in to your OpenNebula Sunstone GUI
+2. Navigate to **Infrastructure -> Hosts**
+3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`). 
+4. Go to the **PCI** tab. 
+5. You will see your GPU listed as an available PCI device.
 
 If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
