@@ -119,7 +119,7 @@ node:
 The inventory file shown above is a basic example. You should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring `one-deploy` for different architectures (like shared or Ceph-based storage), please refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
 {{< /alert >}}
 
-**Key Configuration Parameters:**
+Key configuration parameters to setup:
 
 *   `pci_passthrough_enabled: true`: This boolean flag enables the PCI passthrough configuration for a specific node.
 *   `pci_devices`: This is a list of PCI devices to be configured for passthrough on that node.
