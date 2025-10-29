@@ -9,7 +9,7 @@ Here you will find the details to deploy and configure an AI-ready OpenNebula cl
 
 Machine Learning (ML) training and inference are resource-intensive tasks that often require the full power of a dedicated GPU. PCI passthrough allows a Virtual Machine to have exclusive access to a physical GPU, delivering bare-metal performance for the most demanding AI workloads.
 
-## Requirements
+## Prerequisites
 
 Before you begin, ensure your environment meets the following requirements.
 
