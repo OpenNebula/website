@@ -137,7 +137,7 @@ The `one-deploy` tool will automatically deploy your entire OpenNebula cloud. Wh
 
 On each hypervisor node, it prepares the specified GPUs for passthrough by binding them to the required `vfio-pci` driver. It also ensures the correct permissions are set so that OpenNebula can manage the devices.
 
-Simultaneously, on the OpenNebula front-end, it configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
+Simultaneously, on the OpenNebula front-end, `one-deploy` configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
 
 ## Post-Deployment Validation
 
