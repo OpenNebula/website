@@ -141,7 +141,7 @@ Simultaneously, on the OpenNebula front-end, `one-deploy` configures the monitor
 
 ## Post-Deployment Validation
 
-After the deployment is complete, you can verify that the GPUs are correctly configured and available to OpenNebula by checking the Host information in Sunstone.
+After the deployment is complete, verify that the GPUs are correctly configured and available to OpenNebula by checking the Host information in Sunstone:
 
 Log in to your OpenNebula Sunstone GUI, navigate to **Infrastructure -> Hosts**, and select one of the hypervisors you configured for passthrough (e.g., `h100-node`). Go to the **PCI** tab. You should see your GPU listed as an available PCI device.
 
