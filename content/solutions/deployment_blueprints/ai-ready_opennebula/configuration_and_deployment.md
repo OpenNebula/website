@@ -127,7 +127,7 @@ Key configuration parameters to setup:
 
 ### Step 2: Run the Deployment
 
-Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), you can run `one-deploy` to provision your OpenNebula cloud.
+Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), run `one-deploy` to provision your OpenNebula cloud.
 
 ```shell
 make I=inventory/ai_factory.yml
