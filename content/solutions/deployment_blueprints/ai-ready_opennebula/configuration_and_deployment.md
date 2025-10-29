@@ -5,7 +5,7 @@ date: "2025-10-21"
 weight: 3
 ---
 
-This guide details the process of deploying and configuring an AI-ready OpenNebula cloud using the [one-deploy](https://github.com/OpenNebula/one-deploy) tool. We will focus on a local environment, preparing it for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S.
+Here you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [one-deploy](https://github.com/OpenNebula/one-deploy) tool. This guide focuses on a local environment, preparing it for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S.
 
 Machine Learning (ML) training and inference are resource-intensive tasks that often require the full power of a dedicated GPU. PCI passthrough allows a Virtual Machine to have exclusive access to a physical GPU, delivering bare-metal performance for the most demanding AI workloads.
 
