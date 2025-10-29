@@ -66,7 +66,7 @@ For guidance on how to execute the playbooks in different cloud architectures, s
 
 ### Step 1: Configure the Inventory for PCI Passthrough
 
-`one-deploy` uses an Ansible inventory file to define the hosts and their configurations. We'll use a dedicated inventory file to enable and specify the PCI devices for passthrough.
+For this configuration, use a dedicated inventory file to define the general cloud architecture, where you specify PCI devices for passthrough.
 
 Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring `one-deploy` for different architectures (such as shared or Ceph-based storage), please refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
 
