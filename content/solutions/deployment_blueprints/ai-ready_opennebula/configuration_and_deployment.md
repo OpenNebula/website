@@ -42,7 +42,7 @@ You may also need to add `iommu=pt` for pass-through specific configurations. Fo
 
 ### Hypervisor Preparation
 
-For PCI passthrough to work correctly with NVIDIA GPUs, it is recommended to start with a clean state on the hypervisor nodes regarding NVIDIA drivers.
+For a correct performance of the PCI passthrough with NVIDIA GPUs, start with a clean state on the hypervisor nodes regarding NVIDIA drivers.
 
 It's a good practice to avoid pre-installing NVIDIA drivers on the hypervisor nodes before running the `one-deploy` playbook. An active proprietary NVIDIA driver will claim the GPU and prevent other drivers, like `vfio-pci`, from binding to the device. This will block the PCI passthrough configuration from succeeding.
 
