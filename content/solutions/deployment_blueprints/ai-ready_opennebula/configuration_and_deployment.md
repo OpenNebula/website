@@ -11,7 +11,7 @@ Machine Learning (ML) training and inference are resource-intensive tasks that o
 
 ## Prerequisites
 
-Before you begin, ensure your environment meets the following requirements.
+Before you begin, ensure your environment meets the following prerequisites.
 
 ### Hardware Requirements
 
