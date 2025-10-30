@@ -46,6 +46,11 @@ The OpenNebula-Veeam Backup Integration enables Veeam to perform image-level bac
       <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Full Discovery</p></td>
       <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).</p></td>
     </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Portability</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>VMWare import</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Enables restoring virtual machines backed up in Veeam from VMWare into OpenNebula.</p></td>
+    </tr>
   </tbody>
 </table>
 
@@ -109,12 +114,9 @@ The following table summarizes the supported backup modes for each storage syste
 
 Here is a list of the known missing features or bugs related to the Veeam integration with OpenNebula:
 
-- Setting the ``PassengerMaxPoolSize`` variable to values higher than 1 can trigger issues depending on the system properties of the backup server and the amount of concurrent transfers, showing an error in the Veeam Backup & Replication console. If this happens too frequently, reduce the amount of concurrent Passenger processes to 1 until this issue is fixed.
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
-- There is an identified bug with Ceph image datastores that avoids the opennebula-ovirtapi package from uploading images into these kind of datastores, making restores and appliance deployments fail.
-- If a virtual network is owned by a user other than oneadmin (or the user chosen as the Veeam administrator in step 4.1) you may face an error when listing available networks.
-- Alphine virtual machines cannot be backed up.
-- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected ``. This is expected and shouldn't affect performance.
+- Alpine virtual machines cannot be backed up.
+- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 
 ### Architecture
