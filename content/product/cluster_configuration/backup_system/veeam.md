@@ -111,6 +111,11 @@ Here is a list of the known missing features or bugs related to the Veeam integr
 
 - Setting the ``PassengerMaxPoolSize`` variable to values higher than 1 can trigger issues depending on the system properties of the backup server and the amount of concurrent transfers, showing an error in the Veeam Backup & Replication console. If this happens too frequently, reduce the amount of concurrent Passenger processes to 1 until this issue is fixed.
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
+- There is an identified bug with Ceph image datastores that avoids the opennebula-ovirtapi package from uploading images into these kind of datastores, making restores and appliance deployments fail.
+- If a virtual network is owned by a user other than oneadmin (or the user chosen as the Veeam administrator in step 4.1) you may face an error when listing available networks.
+- Alphine virtual machines cannot be backed up.
+- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected ``. This is expected and shouldn't affect performance.
+- Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 
 ### Architecture
 
@@ -142,6 +147,15 @@ The recommended hardware specifications are:
 - **CPU:** 4 cores
 - **Memory:** 16 GB RAM
 - **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
+
+## Veeam Backup Appliance Requirements
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following requirements:
+
+- **CPU:** 6 cores
+- **Memory:** 6 GB RAM
+- **Disk:** 100 GB
+
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement. 
 
 ## Installation and Configuration
 
@@ -192,12 +206,12 @@ The backup datastore needs to have enough space to hold the disks of the VMs tha
 
 If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
 
-We provide alongside the ovirtapi package the ``/usr/share/one/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
+We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
 
     0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
 
 {{< alert title="Remember" color="success" >}}
-For the ``/usr/share/one/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
+For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
 
 3. Install and configure the oVirtAPI module
 
@@ -205,9 +219,15 @@ In order to install the oVirtAPI module, you need to have the OpenNebula reposit
 
 The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You should change the following variables before starting the service:
 
-* ``one_xmlrpc``: Address of the OpenNebula Front-end.
+* ``one_xmlrpc``: Address of the OpenNebula Front-end. Please do not include any prefixes such as ``http://``, only the IP address itself is needed.
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
-* ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
+* ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server. 
+
+{{< alert title="Important" color="success" >}}
+You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
+
+You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
+{{< /alert >}}
 
 During installation a self-signed certificate is generated at ``/etc/one/ovirtapi-ssl.crt`` for encryption. You can replace this certificate with your own and change the ``cert_path`` configuration variable.
 
@@ -255,7 +275,9 @@ This will open a new dialog box. In the address field, you must make sure that i
 
 ![image](/images/veeam/new_manager.png)
 
-On the **Credentials** tab, you should set the user and password used to access the OpenNebula Front-end. You can either choose the oneadmin user or create a new user with the same privileges as oneadmin. If you are using the default certificate, you may receive an untrust certificate warning, which you can disregard:
+On the **Credentials** tab, you should set the user and password used to access the OpenNebula Front-end. You can either choose the oneadmin user or create a new user with the same privileges as oneadmin. Please remember that this user is an OpenNebula user, NOT a system user, meaning that this is a user such as the ones used to access the OpenNebula Fireedge web interface, which should be listed in the System/Users tab of Fireedge or through the CLI with ``oneuser list``.
+
+If you are using the default certificate, you may receive an untrust certificate warning, which you can disregard:
 
 ![image](/images/veeam/one_credentials.png)
 
@@ -308,7 +330,7 @@ The ovirtapi server will generate logs in the following directory depending on t
 * Ubuntu/Debian: ``/var/log/apache2``
 * Alma/RHEL: ``/var/log/httpd``
 
-If you use the cleanup script provided at ``/usr/share/one/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
+If you use the cleanup script provided at ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
 
 ## Volatile disk backups
 
