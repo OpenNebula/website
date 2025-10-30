@@ -4,8 +4,6 @@ linkTitle: AI-Ready Kubernetes
 weight: 5
 ---
 
-## Overview
-
 [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
 
 Encapsulating the different inference engines, AI models and dependencies into a single container improves the workload portability and isolation. With this approach, each container is deployed consistently across different environments, including all its dependencies, avoiding conflicts and reproducibility issues.
@@ -542,7 +540,7 @@ pod/local-path-provisioner-7f57b55d56-7qb42   1/1     Running   0          7d2h
 
 3. Create the following storageClass and set it as default.
 
-If you want to modify the `nodePath` parameter, ensure that it is available in the `nodePathMap` field of the provider config ([https://github.com/rancher/local-path-provisioner?tab=readme-ov-file\#customize-the-configmap](https://github.com/rancher/local-path-provisioner?tab=readme-ov-file#customize-the-configmap))
+If you want to modify the `nodePath` parameter, ensure that it is available in the `nodePathMap` field of the provider config as indicated in the [Customize the configmap](https://github.com/rancher/local-path-provisioner?tab=readme-ov-file#customize-the-configmap) guide.
 
 ```shell
 laptop$ cat <<EOF > storageClass.yaml
