@@ -289,6 +289,12 @@ You may see the 5554 port in the ``public_ip`` variable in the default settings,
 You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
 {{< /alert >}}
 
+{{< alert title="Important" color="success" >}}
+You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
+
+You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
+{{< /alert >}}
+
 During installation a self-signed certificate is generated at ``/etc/one/ovirtapi-ssl.crt`` for encryption. You can replace this certificate with your own and change the ``cert_path`` configuration variable.
 
 After installing the package, you should make sure that the oneadmin user in the backup server can perform passwordless ssh towards the oneadmin user in the Front-end server.
