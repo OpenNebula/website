@@ -1,5 +1,5 @@
 ---
-title: "LLM Inference for Model Certification"
+title: "LLM Inference Certification"
 date: "2025-10-28"
 description:
 categories:
@@ -84,8 +84,7 @@ There are two general testing modes:
 
 For the purposes of this benchmarking, OpenNebula chooses endpoint mode for simplicity and efficiency, avoiding unnecessary container orchestration overhead.
 
-Once the LLM is deployed, execute the `benchmark.sh` script located in the appliance’s root directory.  
-This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI.
+Once the LLM is deployed, execute the `benchmark.sh` script located in the appliance’s root directory. This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI; similar to the example below:
 
 ![GuideLLM with progress updates through the CLI](https://raw.githubusercontent.com/vllm-project/guidellm/main/docs/assets/sample-benchmarks.gif)
 
@@ -93,19 +92,16 @@ GuideLLM CLI updates the results and the steps along the benchmarking process, b
 
 - To test performance and stability, the script sends hundreds of requests in parallel.  
 - OpenNebula uses synthetic data generated automatically to run this benchmark, with these values:
-
-For the benchmark:
-- Input prompt: average 512 tokens  
-- Output prompt: average 256 tokens
-- Total samples: 1000
+    - Input prompt: average 512 tokens.
+    - Output prompt: average 256 tokens.
+    - Total samples: 1000.
 
 - GuideLLM identifies the throughput that the inference can handle.  
 - Once the throughput is identified, 10 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
 
-As a result, the process generates an HTML report with all given information and produces an output with metrics, similar to the image below.
+As a result, the process generates an HTML report with all given information and produces an output with metrics.
 
-There are more parameters available within the benchmarking such as warmups*, number of steps, and seconds per step.
-These parameters are fixed but can be manually adapted if needed.
+There are more parameters available within the benchmarking such as warmups*, number of steps, and seconds per step. These parameters are fixed but can be manually adapted if needed.
 
 
 ## Metrics
@@ -122,8 +118,7 @@ Each tested model produces the following key performance metrics:
 
 ## Service Level Objectives (SLOs)
 
-Different application types have distinct performance requirements.  
-The following GuideLLM reference SLOs provide general benchmarks for evaluating inference quality (times for 99% of requests):
+Different application types have distinct performance requirements. The following GuideLLM reference SLOs provide general benchmarks for evaluating inference quality (times for 99% of requests):
 
 | Use Case | Req. Latency (ms) | TTFT (ms) | ITL (ms) |
 |-----------|------------------|------------|-----------|
@@ -149,5 +144,4 @@ All results are saved in this table:
 | meta-llama/Llama-3.1-3B-Instruct  | 32     | 32 GB  | H100L | 30                 | 56         | 12        | 11.9       | 331            | 12.4          | 12.3           |
 
 
-OpenNebula includes the obtained results in controlled environments, with given hardware and using specific models.  
-This information can later be used to compare future results, assess deployments, and evaluate performance against known baselines.
+OpenNebula includes the obtained results in controlled environments, with given hardware and using specific models. This information can later be used to compare future results, assess deployments, and evaluate performance against known baselines.
