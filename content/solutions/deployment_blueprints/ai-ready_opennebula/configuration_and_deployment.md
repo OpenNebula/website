@@ -1,11 +1,10 @@
 ---
 title: "Configuration and Deployment"
 date: "2025-10-21"
-# description: "Learn how to configure and deploy an AI-ready OpenNebula cloud with PCI passthrough for GPUs using one-deploy."
 weight: 3
 ---
 
-Here you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [one-deploy](https://github.com/OpenNebula/one-deploy) tool. This guide focuses on a local environment, preparing it for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S.
+Here you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [OneDeploy](https://github.com/OpenNebula/one-deploy) tool. This guide focuses on a local environment, preparing it for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S.
 
 Machine Learning (ML) training and inference are resource-intensive tasks that often require the full power of a dedicated GPU. PCI passthrough allows a Virtual Machine to have exclusive access to a physical GPU, delivering bare-metal performance for the most demanding AI workloads.
 
@@ -23,7 +22,7 @@ You must enable this feature in your server's BIOS/UEFI. Refer to your hardware 
 
 ### Kernel Configuration (Manual Step)
 
-The `one-deploy` tool automates many aspects of the configuration, but you must manually enable IOMMU support in the kernel on each hypervisor node. This is a critical step that `one-deploy` does not perform automatically.
+The OneDeploy tool automates many aspects of the configuration, but you must manually enable IOMMU support in the kernel on each hypervisor node. This is a critical step that OneDeploy does not perform automatically.
 
 Before modifying the kernel parameters, check if IOMMU is already active by inspecting the `/sys/kernel/iommu_groups/` directory on the hypervisor.
 
@@ -44,15 +43,15 @@ For a detailed guide on how to perform this kernel configuration, refer to the [
 
 For a correct performance of the PCI passthrough with NVIDIA GPUs, start with a clean state on the hypervisor nodes regarding NVIDIA drivers.
 
-Avoid pre-installing NVIDIA drivers on the hypervisor nodes before running the `one-deploy` playbook. An active proprietary NVIDIA driver will claim the GPU and prevent other drivers, like `vfio-pci`, from binding to the device. This will block the PCI passthrough configuration from succeeding.
+Avoid pre-installing NVIDIA drivers on the hypervisor nodes before running the OneDeploy playbook. An active proprietary NVIDIA driver will claim the GPU and prevent other drivers, like `vfio-pci`, from binding to the device. This will block the PCI passthrough configuration from succeeding.
 
-## Deployment with one-deploy
+## Deployment with OneDeploy
 
-Use `one-deploy` to automate the deployment of our OpenNebula cloud with PCI passthrough configured for our GPUs.
+Use OneDeploy to automate the deployment of our OpenNebula cloud with PCI passthrough configured for our GPUs.
 
-### Setting Up one-deploy
+### Setting Up OneDeploy
 
-The `one-deploy` tool is a collection of Ansible playbooks that streamline the installation of OpenNebula. Before running this collection, prepare your control node which is the machine where you will execute the Ansible commands.
+The OneDeploy tool is a collection of Ansible playbooks that streamline the installation of OpenNebula. Before running this collection, prepare your control node which is the machine where you will execute the Ansible commands.
 
 1.  **Clone the repository**:
     ```shell
@@ -60,7 +59,7 @@ The `one-deploy` tool is a collection of Ansible playbooks that streamline the i
     cd one-deploy
     ```
 2.  **Install dependencies**:
-    `one-deploy` requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, follow the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki.
+    OneDeploy requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, follow the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki.
 
 For guidance on how to execute the playbooks in different cloud architectures, see the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
 
@@ -68,7 +67,7 @@ For guidance on how to execute the playbooks in different cloud architectures, s
 
 For this configuration, use a dedicated inventory file to define the general cloud architecture, where you specify PCI devices for passthrough.
 
-Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring OneDeploy for different architectures like shared or Ceph-based storage, refer to the official [one-deploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
+Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring OneDeploy for different architectures like shared or Ceph-based storage, refer to the official [OneDeploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
 
 
 ```yaml
@@ -124,15 +123,15 @@ Key configuration parameters to setup:
 
 ### Step 2: Run the Deployment
 
-Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), run `one-deploy` to provision your OpenNebula cloud.
+Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), run OneDeploy to provision your OpenNebula cloud.
 
 ```shell
 make I=inventory/ai_factory.yml
 ```
 
-The `one-deploy` tool will automatically deploy your entire OpenNebula cloud. When you enable the PCI passthrough feature in your inventory, `one-deploy` handles all the necessary configuration steps automatically.
+When you enable the PCI passthrough feature in your inventory, OneDeploy handles all the necessary configuration steps. On each hypervisor node, OneDeploy prepares the specified GPUs for passthrough by binding them to the required `vfio-pci` driver. It also ensures the correct permissions are set so that OpenNebula manages the devices.
 
-On each hypervisor node, it prepares the specified GPUs for passthrough by binding them to the required `vfio-pci` driver. It also ensures the correct permissions are set so that OpenNebula can manage the devices. Simultaneously, on the OpenNebula front-end, `one-deploy` configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
+Simultaneously, on the OpenNebula front-end, OneDeploy configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
 
 ## Post-Deployment Validation
 
