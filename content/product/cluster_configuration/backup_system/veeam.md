@@ -113,6 +113,9 @@ Here is a list of the known missing features or bugs related to the Veeam integr
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
 - There is an identified bug with Ceph image datastores that avoids the opennebula-ovirtapi package from uploading images into these kind of datastores, making restores and appliance deployments fail.
 - If a virtual network is owned by a user other than oneadmin (or the user chosen as the Veeam administrator in step 4.1) you may face an error when listing available networks.
+- Alphine virtual machines cannot be backed up.
+- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected ``. This is expected and shouldn't affect performance.
+- Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 
 ### Architecture
 
@@ -144,6 +147,15 @@ The recommended hardware specifications are:
 - **CPU:** 4 cores
 - **Memory:** 16 GB RAM
 - **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
+
+## Veeam Backup Appliance Requirements
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following requirements:
+
+- **CPU:** 6 cores
+- **Memory:** 6 GB RAM
+- **Disk:** 100 GB
+
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement. 
 
 ## Installation and Configuration
 
