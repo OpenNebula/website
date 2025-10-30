@@ -213,6 +213,15 @@ When adding OpenNebula as a platform into Veeam, a KVM appliance will be deploye
 
 Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
 
+## Veeam Backup Appliance Requirements
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following requirements:
+
+- **CPU:** 6 cores
+- **Memory:** 6 GB RAM
+- **Disk:** 100 GB
+
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
+
 ## Installation and Configuration
 
 ### 1. Prepare the environment for the oVirtAPI Server
