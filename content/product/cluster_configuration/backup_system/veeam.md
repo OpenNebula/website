@@ -92,6 +92,11 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
       <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Full Discovery</p></td>
       <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).</p></td>
     </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Portability</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>VMWare import</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Enables restoring virtual machines backed up in Veeam from VMWare into OpenNebula.</p></td>
+    </tr>
   </tbody>
 </table>
 
