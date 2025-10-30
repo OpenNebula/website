@@ -129,19 +129,19 @@ Deploy your Kubernetes management cluster through the CAPI Service in OpenNebula
 
 1. Download the CAPI Service from the marketplace:
 
-```
+```shell
 oneadmin@frontend$ onemarketapp export "Service Capi" service_Capi -d <datastore_id>
 ```
 
 Where `datastore_id` is your image datastore identifier. In this example, use the default one, with ID:`1`.
 
-```
+```shell
 oneadmin@frontend$ onemarketapp export "Service Capi" service_Capi -d 1
 ```
 
 2. Update the `service_Capi template by adding the necessary scheduling requirements for deploying in to the desired host, in this case host with ID: 1,  and topology necessary for CPU pinning:
 
-```
+```shell
 oneadmin@frontend$ onetemplate update service_Capi
 ---
 NIC=[ NETWORK="service" ]
@@ -152,7 +152,7 @@ TOPOLOGY=[ CORES="2", PIN_POLICY="THREAD", SOCKETS="1", THREADS="2" ]
 
 3. Instantiate the `service_Capi` appliance:
 
-```
+```shell
 oneadmin@frontend$ onetemplate instantiate service_Capi
 ```
 
@@ -162,13 +162,13 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
 
 1. Access the management cluster Kubernetes API. To achieve this, port-forward the 6443 port from the CAPI appliance VM to your localhost, e.g.
 
-```
+```shell
 laptop$ ssh -fNL 9443:<capi_appliance_vm_ip>:6443 oneadmin@<one_host_ip>
 ```
 
 2. Configure the management cluster kubeconfig:
 
-```
+```shell
 laptop$ ssh -J oneadmin@<frontend_ip> root@<control_plane_vm_ip> \
 cat /etc/rancher/k3s/k3s.yaml | \
 sed 's|server: https://127.0.0.1:6443|server: https://127.0.0.1:9443|'> \
@@ -177,7 +177,7 @@ kubeconfig_management.yaml
 
 3. Create a `values.yaml` file for parameterizing the workload cluster helm chart. You will see that the `values.yaml` file contains some default value overrides, like the images and templates applied for the workload nodes:
 
-```
+```yaml
 ONE_XMLRPC: "http://<frontend_host_ip>:2633/RPC2"
 ONE_AUTH: "oneadmin:<password>"
 
@@ -320,7 +320,7 @@ PRIVATE_NETWORK_NAME: service
 
 4. Once the `values.yaml` file is available, add the helm chart repo and apply the helm chart referencing the values file:
 
-```
+```shell
 # add opennebula capone helm repo
 laptop$ helm repo add capone \
 https://opennebula.github.io/cluster-api-provider-opennebula/charts/ \
@@ -341,7 +341,7 @@ k8s-gpu-test capone/capone-rke2 --values ./values.yaml
 
 The CAPONE and rke2 Cluster API controllers in the management cluster will deploy the workload cluster on the scheduled host. Check the logs of those controllers to review the progress:
 
-```
+```shell
 NAMESPACE                           NAME                                                             READY   STATUS
 capone-system                       capone-controller-manager-64db4f6867-49ppm                       1/1     Running
 rke2-bootstrap-system               rke2-bootstrap-controller-manager-676f89558c-85nxg               1/1     Running
@@ -350,7 +350,7 @@ rke2-control-plane-system           rke2-control-plane-controller-manager-76fb85
 
 When the cluster is deployed, you will see the list of VMs: 1 vRouter instance with control plane Kubernetes API as backend, 1 control plane node, and 2 worker nodes.
 
-```
+```shell
 oneadmin@frontend$ onevm list
 ---
   ID USER     GROUP    NAME                                  STAT  CPU     MEM HOST
@@ -364,13 +364,13 @@ oneadmin@frontend$ onevm list
 
 To establish a local connection to the Workload Cluster Kubernetes API, create a ssh tunnel from your localhost to the K8s workload cluster API, exposing through the vRouter instance. Specify the `vrouter_ip` parameter as the public IP address of the vRouter instance, and the `vr_host_ip` as the ip address of the OpenNebula host where the vRouter node is hosted: 
 
-```
+```shell
 laptop$ ssh -fNL 8443:<vrouter_ip>:6443 oneadmin@<vr_host_ip>
 ```
 
 To access the Kubernetes API from your localhost, use the kubeconfig file that is located in the `/etc/rancher/rke2/rke2.yaml` file of the workload cluster control plane node. Also, modify the local kubeconfig file for pointing to localhost, where `host_ip` is the ip address of the OpenNebula frontend IP address. and `control_plane_vm_ip` the workload cluster control plane VM IP address.
 
-```
+```shell
 laptop$ ssh -J oneadmin@<frontend_ip> root@<control_plane_vm_ip> \
 cat /etc/rancher/rke2/rke2.yaml | \
 sed 's|server: https://127.0.0.1:6443|server: https://127.0.0.1:8443|'> \
@@ -379,7 +379,7 @@ kubeconfig_workload.yaml
 
 Connect to the workload cluster through kubectl, checking for instance the workload cluster nodes:
 
-```
+```shell
 laptop$ kubectl --kubeconfig=kubeconfig_workload.yaml get nodes
 
 ---
@@ -392,7 +392,7 @@ k8s-gpu-test-qb8dl              Ready    control-plane,etcd,master   8d    v1.31
 
 If you want to avoid setting the `--kubeconfig` flag each time you use kubectl, export an env variable referencing the kubeconfig file. This will make kubectl refer to that kubeconfig by default on the shell that you are using:
 
-```
+```shell
 laptop$ export KUBECONFIG="$PWD/kubeconfig_workload.yaml"
 ```
 
@@ -412,7 +412,7 @@ The procedure to install the NVIDIA GPU Operator is as follows:
 
 1. Add the NVIDIA helm repo:
 
-```
+```shell
 laptop$ helm repo add nvidia https://helm.ngc.nvidia.com/nvidia \
 && helm repo update
 ```
@@ -420,7 +420,7 @@ laptop$ helm repo add nvidia https://helm.ngc.nvidia.com/nvidia \
 2. Export the `KUBECONFIG` variable.
 3. Deploy the gpu-operator on the workload cluster:
 
-```
+```shell
 # create gpu-operator namespace
 laptop$ kubectl create ns gpu-operator
 
@@ -447,7 +447,7 @@ Note that you have specified the `CONTAINERD_CONFIG` and `CONTAINERD_SOCKET` pat
 
 After a successful Helm installation, you will see this output:
 
-```
+```shell
 NAME: gpu-operator-1753949578
 LAST DEPLOYED: Thu Jul 31 10:13:01 2025
 NAMESPACE: gpu-operator
@@ -458,7 +458,7 @@ TEST SUITE: None
 
 4. Check that the deployed pods for the gpu-operator are up and running:
 
-```
+```shell
 laptop$ kubectl get pods -n gpu-operator
 ---
 NAME                                                              READY   STATUS      RESTARTS   AGE
@@ -484,7 +484,7 @@ nvidia-operator-validator-z52q7                                   1/1     Runnin
 
 5. Check if the Kubernetes nodes gpu autodiscovery operates as expected, by checking the workload nodes, for instance the `nvidia.com/*` labels and the allocatable gpu capacity:
 
-```
+```shell
 laptop$ kubectl describe $WORKLOAD_NODE
 >>>
 [...]
@@ -523,14 +523,14 @@ As a prerequisite, you need a storage provider installed to supply PersistentVol
 
 1. To install the provisioner, deploy the manifest from the GitHub repository:
 
-```
+```shell
 laptop$ kubectl apply -f \
 https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.32/deploy/local-path-storage.yaml
 ```
 
 2. Check that the storage provisioner is up and running:
 
-```
+```shell
 laptop$ kubectl -n local-path-storage get deploy,pods
 >>>
 NAME                                     READY   UP-TO-DATE   AVAILABLE   AGE
@@ -544,7 +544,7 @@ pod/local-path-provisioner-7f57b55d56-7qb42   1/1     Running   0          7d2h
 
 If you want to modify the `nodePath` parameter, ensure that it is available in the `nodePathMap` field of the provider config ([https://github.com/rancher/local-path-provisioner?tab=readme-ov-file\#customize-the-configmap](https://github.com/rancher/local-path-provisioner?tab=readme-ov-file#customize-the-configmap))
 
-```
+```shell
 laptop$ cat <<EOF > storageClass.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -565,7 +565,7 @@ laptop$ kubectl apply -f storageClass.yaml
 
 4. Check that this storage class is the default:
 
-```
+```shell
 laptop$ kubectl get storageClass
 
 ---
@@ -577,7 +577,7 @@ At this point, the Dynamo Cloud platform is ready for installation. Configure yo
 
 1. Install the CRDs:
 
-```
+```shell
 laptop$ helm install dynamo-crds \
 https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.4.1.tgz \
   --namespace dynamo-cloud --create-namespace \
@@ -586,7 +586,7 @@ https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.4.1.tgz \
 
 2. Install the operator, using the latest version available in the catalog.:
 
-```
+```shell
 laptop$ helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-platform-0.4.1.tgz \
   --namespace dynamo-cloud \
   --create-namespace \
@@ -596,7 +596,7 @@ laptop$ helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynam
 
 3. Check if the operator is up and running:
 
-```
+```shell
 laptop$ kubectl -n dynamo-cloud get deploy,pod,svc
 <<<
 NAME                                                                 READY   UP-TO-DATE   AVAILABLE   AGE
@@ -619,7 +619,7 @@ service/dynamo-platform-nats-headless   ClusterIP   None            <none>      
 
 4. To use some LLM models in the platform, you need a HuggingFace token for authenticating against the API. For this purpose, create a secret for that token that could be later referenced by Dynamo:
 
-```
+```shell
 laptop$ cat<<EOF > hf-secret.yaml
 apiVersion: v1
 kind: Secret
@@ -651,7 +651,7 @@ The latest vllm-runtime image is located in [`nvcr.io/nvidia/ai-dynamo/vllm-runt
 
 An example of a disaggregated deployment graph is available in [NVIDIA Dynamo’s github repository](https://github.com/ai-dynamo/dynamo/tree/v0.4.1/components/backends/vllm/deploy). For this guide, the example was adapted to work for a validated container runtime:
 
-```
+```yaml
 apiVersion: nvidia.com/v1alpha1
 kind: DynamoGraphDeployment
 metadata:
@@ -800,13 +800,13 @@ spec:
 
 Deploy the disaggregated deployment graph with kubectl:
 
-```
+```shell
 kubectl -n dynamo-cloud apply -f disagg_custom.yaml
 ```
 
 After some minutes (pulling the vllm runtime image takes its time), check that the pods are up and running:
 
-```
+```shell
 kubectl -n dynamo-cloud get pods,svc
 ---
 NAME                                                                  READY   STATUS      RESTARTS   AGE
@@ -830,17 +830,17 @@ laptop$ kubectl port-forward svc/<frontend_service> <local_port>:8000 &
 
 E.g.
 
-```
+```shell
 laptop$ kubectl port-forward svc/vllm-v1-disagg-router-frontend 9000:8000 &
 ```
 
  To test the loaded models, run requests to the frontend via curl for instance:
 
-```
+```shell
 laptop$ curl localhost:9000/v1/models | jq .
 ```
 
-```
+```json
 {
   "object": "list",
   "data": [
@@ -856,7 +856,7 @@ laptop$ curl localhost:9000/v1/models | jq .
 
 And also submit inference requests:
 
-```
+```shell
 laptop$ curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
     "model": "Qwen/Qwen3-0.6B",
     "prompt": "What is opennebula?",
@@ -867,7 +867,7 @@ laptop$ curl localhost:9000/v1/completions   -H "Content-Type: application/json"
 
 You will receive a response like this:
 
-```
+```json
 {
   "id": "cmpl-2c749514-9a81-4864-a119-d195d39a235b",
   "choices": [
@@ -894,7 +894,7 @@ You will receive a response like this:
 
 If you want to test the response in stream mode, set the parameter `stream: true` and delete the `jq` tool piping to that call:
 
-```
+```shell
 laptop$ curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
     "model": "Qwen/Qwen3-0.6B",
     "prompt": "What is opennebula?",
@@ -905,7 +905,7 @@ laptop$ curl localhost:9000/v1/completions   -H "Content-Type: application/json"
 
 You will see this streamed output:
 
-```
+```shell
 data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"<think>","index":0,"logprobs":null,"finish_reason":null}],"created":1756908478,"model":"Qwen/Qwen3-0.6B","system_fingerprint":null,"object":"text_completion","usage":{"prompt_tokens":15,"completion_tokens":1,"total_tokens":16,"prompt_tokens_details":null,"completion_tokens_details":null}}
 
 data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"\n","index":0,"logprobs":null,"finish_reason":null}],"created":1756908478,"model":"Qwen/Qwen3-0.6B","system_fingerprint":null,"object":"text_completion","usage":{"prompt_tokens":15,"completion_tokens":2,"total_tokens":17,"prompt_tokens_details":null,"completion_tokens_details":null}}
