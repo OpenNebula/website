@@ -111,9 +111,9 @@ PERSISTENT = YES
 ```
 
 {{< alert title="Warning" color="warning" >}}
-As this Datastore is just a container for existing devices, images does not take any size from it. All devices registered will render a size of 0 and the overall devices Datastore will show up with 1MB of available space{{< /alert >}} 
+As this Datastore is just a container for existing devices, images does not take any size from it. All devices registered will render a size of 0 and the overall devices Datastore will show up with 1MB of available space.
+{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
 To meet your specific requirements, configure any of the following: `ISCSI_HOST`, `ISCSI_USER`, `ISCSI_USAGE` and `ISCSI_IQN` parameters in the image template. These overridden parameters are reflected in new VMs.
 
 Here is an example of an iSCSI LUN template that uses the iSCSI transfer manager.

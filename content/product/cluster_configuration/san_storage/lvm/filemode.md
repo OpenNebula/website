@@ -9,10 +9,10 @@ tags:
 weight: "3"
 ---
 
-In this setup, disk images are stored in file format, such as raw and qcow2, in the Image Datastore, and then
-dumped into a LVM Logical Volume in the SAN when a Virtual Machine is created. **The image files are
-transferred from Frontend to Hosts through the SSH protocol.** Additionally, [LVM Thin]({{% relref
-"#lvm-thin" %}}) can be enabled to support creating thin snapshots of the VM disks.
+In this setup, disk images are stored in file format, such as raw and qcow2, in the Image Datastore,
+and then dumped into a LVM Logical Volume in the SAN when a Virtual Machine is created. The image
+files are transferred from Frontend to Hosts through the SSH protocol. Additionally, enable [LVM
+Thin]({{% relref "#lvm-thin" %}}) to support creating thin snapshots of the VM disks.
 
 ## How Should I Read This Chapter
 
@@ -24,6 +24,7 @@ First we need to configure hypervisors for LVM operations over the shared SAN st
 
 ### Hosts LVM Configuration
 
+Prerequisites:
 * LVM2 must be available on Hosts.
 * `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
 * `oneadmin` needs to belong to the `disk` group.
@@ -33,9 +34,9 @@ First we need to configure hypervisors for LVM operations over the shared SAN st
 The LVM Datastore does not need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
 {{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
-In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm_ssh/activate` from the remote scripts may be executed on the Host to do the job).
-{{< /alert >}}
+In case of rebooting the virtualization Host, the volumes need to be activated to have them available for the hypervisor again. There are two possibilities:
+* If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, they will be automatically activated.
+* Otherwise, manual activation will be required. For each volume device of the Virtual Machines running on the Host before the reboot, run `lvchange -ay $DEVICE`. You can also run on the Host the activation script `/var/tmp/one/tm/fs_lvm_ssh/activate`, located in the remote scripts.
 
 Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
 
@@ -202,10 +203,10 @@ DD_BLOCK_SIZE=32M
 Attributes related to disk zeroing (**ZERO_LVM_ON_\***) are ignored when LVM Thin mode is active. In this case, new volumes are always zeroed on creation.
 {{< /alert >}}
 
-The following attribute can be set for every datastore type:
+The following attributes can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`:
 
-* `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
-* `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
+* `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks.
+* `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set for each filesystem type.
 
 {{< alert title="Warning" color="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in all Hosts including Front-end and hypervisors. If an unsupported FS is used by the user the default one will be used.

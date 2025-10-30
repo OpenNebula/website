@@ -9,13 +9,13 @@ tags:
 weight: "2"
 ---
 
-With LVM SAN Datastore (EE), both disks images and actual VM drives are stored as Logical Volumes (LVs) in the SAN
-storage. This allows for fast and efficient VM instantiation, as no data needs to be copied or
-moved.
+With LVM SAN Datastore (EE), both disks images and actual VM drives are stored as Logical Volumes
+(LVs) in the SAN storage. This allows for fast and efficient VM instantiation, as no data needs to
+be copied or moved.
 
-This is the recommended driver to be used when a high-end SAN is available, and there is not a
-specific driver available for it (e.g., [NetApp]({{% relref "netapp" %}})). The same LUN can be
-exported to all the Hosts while Virtual Machines will be able to run directly from the SAN.
+Use this option for high-end Storage Area Networks (SANs) when a dedicated driver for that hardware,
+such as [NetApp]({{% relref "netapp" %}}), is not available. The same LUN can be exported to all the
+Hosts while Virtual Machines will be able to run directly from the SAN.
 
 ## How Should I Read This Chapter
 
@@ -26,6 +26,7 @@ Before performing the operations outlined in this chapter, you must configure ac
 In this first step, you will configure hypervisors for LVM operations over the shared SAN storage.
 
 ### Hosts LVM Configuration
+
 Prerequisites: 
 * LVM2 must be available on Hosts.
 * `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
@@ -36,11 +37,11 @@ Prerequisites:
 The LVM Datastore does not need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
 {{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
-In case of the virtualization Host reboot, the volumes need to be activated to be available for the hypervisor again. If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, the activation is done automatically. If not, each volume device of the Virtual Machines running on the Host before the reboot needs to be activated manually by running `lvchange -ay $DEVICE` (or, activation script `/var/tmp/one/tm/fs_lvm_ssh/activate` from the remote scripts may be executed on the Host to do the job).
-{{< /alert >}}
+In case of rebooting the virtualization Host, the volumes need to be activated to have them available for the hypervisor again. There are two possibilities:
+* If the [node package]({{% relref "kvm_node_installation#kvm-node" %}}) is installed, they will be automatically activated.
+* Otherwise, manual activation will be required. For each volume device of the Virtual Machines running on the Host before the reboot, run `lvchange -ay $DEVICE`. You can also run on the Host the activation script `/var/tmp/one/tm/lvm/activate`, located in the remote scripts.
 
-Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. Be sure that enough local space is present.
+Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. To prevent filling local disks, allocate plenty of space for these files.
 
 
 ## OpenNebula Configuration
@@ -117,10 +118,10 @@ For example, assuming `/dev/mapper/mpatha` is the LUN (iSCSI/multipath) block de
 
 ### Driver Configuration
 
-The following attribute can be set for every datastore type:
+The following attributes can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`:
 
-* `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
-* `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
+* `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks.
+* `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set for each filesystem type.
 
 {{< alert title="Warning" color="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list, verify that the corresponding `mkfs.<fs_name>` command is available in all Hosts including the front-end and hypervisors. The system will revert to the default filesystem if an unsupported one is detected.
@@ -188,9 +189,9 @@ Upon image deletion, the Thin Pool and all its Thin Volumes like disks and snaps
   img-one-27       vg-one-101 -ri------k 512.00m
 ```
 
-They are activated by creating a **Thin Snapshot** of each, named `vm-one-<vmid>-<diskid>`, inside a
-per-VM Thin Pool called `vm-one-<vmid>-pool`. For example, launching a VM containing the previous
-image as a disk, results in the following:
+On activation, a **Thin Snapshot** called `vm-one-<vmid>-<diskid>` is created inside a per-VM Thin
+Pool called `vm-one-<vmid>-pool`. For example, launching a VM containing the previous image as a
+disk results in the following:
 
 ```default
 # lvs
@@ -201,9 +202,9 @@ image as a disk, results in the following:
 ```
 
 Note the **o**rigin flag now being set on the base image, as it is now used as `vm-one-228-0`'s
-origin. As it's also set to **r**ead-only, the same image can be used as the origin of several
-disks. The disk volume (`vm-one-228-0`) is a thinly provisioned copy-on-write read-write volume that
-only stores the changed blocks from its origin.
+origin. Given that the base image is also set to **r**ead-only, the same image can be used as the
+origin of several disks. The disk volume (`vm-one-228-0`) is a thinly provisioned copy-on-write
+read-write volume that only stores the changed blocks from its origin.
 
 When the disk is not needed anymore (e.g., VM terminated or disk detached) the volume is deleted as
 well as its snapshots (if any).
