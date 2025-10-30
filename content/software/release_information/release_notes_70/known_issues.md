@@ -48,6 +48,7 @@ OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by defau
 
 ## Backups
 
+- For Veeam related issues, please referer to the [Veeam (EE) page](../../../product/cluster_configuration/backup_system/veeam.md).
 
 ## Market proxy settings
 
