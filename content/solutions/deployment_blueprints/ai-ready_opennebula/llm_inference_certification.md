@@ -40,7 +40,7 @@ The vLLM appliance will be available through the OpenNebula Marketplace for ente
 
 - Supports single-node deployments with one or more GPUs.  
 - Uses Python’s native multiprocessing for multi-GPU inference.  
-- Does not require additional frameworks (e.g., Ray) unless deploying across multiple nodes, which is out of scope for this benchmarking task.  
+- Does not require additional frameworks, such as Ray, unless deploying across multiple nodes, which is out of scope for this benchmarking task.  
 
 
 
@@ -84,23 +84,23 @@ There are two general testing modes:
 
 For the purposes of this benchmarking, OpenNebula chooses endpoint mode for simplicity and efficiency, avoiding unnecessary container orchestration overhead.
 
-Once the LLM is deployed, the developer executes the `benchmark.sh` script located in the appliance’s root directory.  
+Once the LLM is deployed, execute the `benchmark.sh` script located in the appliance’s root directory.  
 This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI.
 
 ![GuideLLM with progress updates through the CLI](https://raw.githubusercontent.com/vllm-project/guidellm/main/docs/assets/sample-benchmarks.gif)
 
-GuideLLM CLI updates the results and the steps along the benchmarking process, based on this procedure.
+GuideLLM CLI updates the results and the steps along the benchmarking process, based on this procedure:
 
-To test performance and stability, the script sends hundreds of requests in parallel.  
-OpenNebula uses synthetic data generated automatically to run this benchmark.
+- To test performance and stability, the script sends hundreds of requests in parallel.  
+- OpenNebula uses synthetic data generated automatically to run this benchmark, with these values:
 
 For the benchmark:
 - Input prompt: average 512 tokens  
 - Output prompt: average 256 tokens
 - Total samples: 1000
 
-GuideLLM identifies the throughput that the inference can handle.  
-Once the throughput is identified, 10 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
+- GuideLLM identifies the throughput that the inference can handle.  
+- Once the throughput is identified, 10 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
 
 As a result, the process generates an HTML report with all given information and produces an output with metrics, similar to the image below.
 
