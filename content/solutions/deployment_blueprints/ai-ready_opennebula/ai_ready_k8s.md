@@ -110,7 +110,7 @@ Here is a brief glossary of the components described in this section:
 
 - Management Cluster: a lightweight Kubernetes cluster that contains Cluster API provider components for creating workload Kubernetes declaratively, based on CRDs and yaml manifests/Helm charts.
 - Workload Cluster: the Kubernetes clusters created through the Cluster API that manage the actual workloads.
-- CAPI service Appliance: an OpenNebula Cluster API VM appliance that contains a k3s-based management cluster prebuilt with the OpenNebula Cluster API Provider (CAPONE)  and other Cluster API providers, and a Rancher instance. This appliance is ready for deploying and managing workload clusters without any previous setup.
+- CAPI service Appliance: an OpenNebula Cluster API VM appliance that contains a lightweight-Kubernetes-based (k3s) management cluster prebuilt with the OpenNebula Cluster API Provider (CAPONE) and other Cluster API providers, as well as a Rancher instance. This appliance is ready for deploying and managing workload clusters without any previous setup.
 - CAPONE: the OpenNebula Cluster API Provider which is a Kubernetes  Cluster API infrastructure provider that contacts with the OpenNebula frontend API for provisioning the necessary infrastructure for running workload clusters over OpenNebula VMs.
 
 ### Infrastructure Provisioning
