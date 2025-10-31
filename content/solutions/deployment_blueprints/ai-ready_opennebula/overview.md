@@ -17,10 +17,10 @@ Configure and validate a high-performance AI infrastructure using OpenNebula. He
 Configuring and validating a high-performance AI infrastructure using OpenNebula involves these steps:
 
 1. Familiarize with **Architecture and Specifications**.
-2. Explore [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md" %}}).
-3. Perform validation:  as a prerequisite, you must have followed the previous step in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md" %}}). To perform the validation, there are two alternatives:
+2. Explore [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
+3. Perform validation:  as a prerequisite, you must have followed the previous step in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}). To perform the validation, there are two alternatives:
     * **Validation with LLM Inferencing**: use 2 models and 2 sizes on H100 and L40S, and run benchmarking to show they work at performance.
-    * **Validation with AI-Ready Kubernetes**: use the H100 and L40S with the steps to start k8s and Dynamo on top. 
+    * [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}): use the H100 and L40S with the steps to start k8s and Dynamo on top. 
 
 
 ## Additional Information Resources
