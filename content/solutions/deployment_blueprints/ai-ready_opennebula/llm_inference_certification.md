@@ -1,5 +1,6 @@
 ---
-title: "LLM Inference Certification"
+title: "LLM Inference for Model Certification"
+linkTitle: "LLM Inference Certification"
 date: "2025-10-28"
 description:
 categories:
