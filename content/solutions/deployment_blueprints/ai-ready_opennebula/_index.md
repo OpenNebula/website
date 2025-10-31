@@ -1,7 +1,7 @@
 ---
-title: "AI-Ready OpenNebula - On-prem Cloud Solution"
+title: "AI-Ready OpenNebula for Cloud Solutions"
 linkTitle: "AI Factories"
-description: "TBC"
+description: "Build the simplest physical secure multi-tenant AI Factory with OpenNebula"
 tags:
 weight: "4"
 ---
