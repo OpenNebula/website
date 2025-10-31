@@ -10,6 +10,8 @@ The OpenNebula-Veeam&reg; Backup Integration provides robust, agentless backup a
 
 The OpenNebula-Veeam Backup Integration enables Veeam to perform image-level backups, incremental backups by using Changed Block Tracking, as well as granular restores like Full VM and file-level directly from the Veeam console. This integration is part of OpenNebula Enterprise Edition (EE).
 
+Additionally, Veeam natively offers the ability to restore virtual machines from VMWare into oVirt, which also gives this integration the capability of restoring VMWare virtual machines into OpenNebula through Veeam Backup & Replication.
+
 ### Features
 
 <table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: left;">
