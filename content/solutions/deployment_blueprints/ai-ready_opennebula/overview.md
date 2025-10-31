@@ -3,9 +3,9 @@ title: Overview
 weight: 1
 ---
 
-Artificial Intelligence (AI) is here, and OpenNebula is ready to provide the solutions required for your cloud deployment. Here you find the guidance through the process of establishing and validating a high-performance AI infrastructure using OpenNebula. All details cover everything from foundational hardware planning to automated deployment and final performance validation.
+The AI transformation is underway, and OpenNebula provides the critical cloud solutions essential for successful large-scale deployment. Empower your enterprise AI Factory with a scalable, secure, and flexible private cloud solution, built on open-source technology for maximum customization and efficiency.
 
-Following this guide you can:
+Configure and validate a high-performance AI infrastructure using OpenNebula. Here you will find all the details from foundational hardware planning to automated deployment and final performance validation. Following this guide you can:
 
 1. Find about the minimum hardware and network infrastructure necessary for your AI Factory. It also serves as a critical reference for advanced users, noting that while OpenNebula supports specialized high-performance architectures like Infiniband, SpectrumX, NVLink, and Scaleway, deployment for these environments is not automated and requires customized configuration.
 2. Follow comprehensive instructions for deploying your entire OpenNebula cloud using OneDeploy. This guide outlines the requirements and procedures for successful deployment across both local and general cloud environments.
@@ -16,15 +16,18 @@ Following this guide you can:
 
 Configuring and validating a high-performance AI infrastructure using OpenNebula involves these steps:
 
-1. Familiarize with “Architecture and Specifications”: this reference guide includes a brief description of minimum hardware and infrastucture required to build your AI Factory. OpenNebula also supports Infiniband, SpectrumX, NVLink and Scaleway but deployments are not automated because these architectures require a customized high performance infrastructure.
-2. Explore “Configuration and Deployment”: this deployment guide outlines the requirements and procedures to use OneDeploy in a local environment and in a cloud environment. 
-3. Perform validation:  as a prerequisite, you must have followed the previous step in "Configuration and Deployment". In this step, there are two alternatives for validation:
-* “Validation with LLM Inferencing”: use 2 models and 2 sizes on H100 and L40S, and run benchmarking to show they work at performance.
-* Validation with AI-Ready Kubernetes”: use the H100 and L40S with the steps to start k8s and Dynamo on top. 
+1. Familiarize with **Architecture and Specifications**.
+2. Explore [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md" %}}).
+3. Perform validation:  as a prerequisite, you must have followed the previous step in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md" %}}). To perform the validation, there are two alternatives:
+    * **Validation with LLM Inferencing**: use 2 models and 2 sizes on H100 and L40S, and run benchmarking to show they work at performance.
+    * **Validation with AI-Ready Kubernetes**: use the H100 and L40S with the steps to start k8s and Dynamo on top. 
 
 
 ## Additional Information Resources
 
+* [OpenNebula: Enterprise AI](https://opennebula.io/enterprise-ai/)
+    * Find about all the reasons and benefits to trust OpenNebula for your AI deployment.
+    * Contact our team of experts to explore and use OpenNebula's full potential for your AI infrastructure.
 * [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html)
 * [Supported NVIDIA&reg; Data Center GPUs and Systems](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/24.9.2/platform-support.html#supported-nvidia-data-center-gpus-and-systems)
 * [NVIDIA&reg; Container runtime](https://developer.nvidia.com/container-runtime)

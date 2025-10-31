@@ -271,3 +271,26 @@ img[alt$="><"] {
   }
 
 }
+
+/* assets/scss/_styles_project.scss - VANILLA CSS FIX */
+
+/* We'll use the hard-coded RGB values directly to avoid Sass function errors. */
+/* The desired DARK color is 33, 37, 41 */
+
+/* Target the specific selector that was making the paragraphs light. */
+/* The color value is now pure CSS, which the compiler cannot fail to understand. */
+[data-bs-theme="light"] p {
+    color: rgb(33, 37, 41) !important; 
+}
+
+/* OPTIONAL CLEANUP: 
+   If you have any other custom rules targeting lists (ul/ol) 
+   that are still setting the LIGHT color (87, 92, 91), 
+   you can set them to the dark color here:
+*/
+/*
+.td-content ul li, 
+.td-content ol li {
+    color: rgb(33, 37, 41) !important; 
+}
+*/
