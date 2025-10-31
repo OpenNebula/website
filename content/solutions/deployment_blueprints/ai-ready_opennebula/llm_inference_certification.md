@@ -85,7 +85,7 @@ There are two general testing modes:
 
 For the purposes of this benchmarking, OpenNebula chooses endpoint mode for simplicity and efficiency, avoiding unnecessary container orchestration overhead.
 
-Once the LLM is deployed, execute the `benchmark.sh` script located in the appliance’s root directory. This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI; similar to the example below:
+After the deployment of the LLM is deployed, the next step is to execute the `benchmark.sh` script located in the appliance’s root directory. This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI; similar to the example below:
 
 ![GuideLLM with progress updates through the CLI](https://raw.githubusercontent.com/vllm-project/guidellm/main/docs/assets/sample-benchmarks.gif)
 
