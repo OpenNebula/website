@@ -1,6 +1,6 @@
 ---
 title: "OpenNebula Overview"
-linkTitle: "OpenNebula Overview"
+linkTitle: "Overview"
 date: "2025-02-17"
 description:
 categories: [Introduction, Overview]
