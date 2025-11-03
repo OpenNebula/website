@@ -158,7 +158,7 @@ DEFAULT_AUTH = "ldap"
 
 ## User Management
 
-Enabling LDAP users auto-creation in the OpenNebula as described above eliminates a necessity for the administrator to create users with the `oneuser` command manually.
+Enabling LDAP users auto-creation in the OpenNebula as described above eliminates the need for the administrator to create users with the `oneuser` command manually.
 
 Users can store their credentials in a file referenced by environment variable `$ONE_AUTH` (usually `$HOME/.one/one_auth`) in this fashion:
 
