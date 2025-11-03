@@ -100,7 +100,7 @@ GuideLLM CLI updates the results and the steps along the benchmarking process, b
 - GuideLLM identifies the throughput that the inference can handle.  
 - Once the throughput is identified, 10 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
 
-As a result, the process generates an HTML report with all given information and produces an output with metrics.
+As a result, the process generates an HTML report with all given information and produces an output with metrics. There are more parameters available within the benchmarking such as warmups*, number of steps, and seconds per step. These parameters are fixed but can be manually adapted if needed.
 
 There are more parameters available within the benchmarking such as warmups*, number of steps, and seconds per step. These parameters are fixed but can be manually adapted if needed.
 
