@@ -51,7 +51,7 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 
 ### Other storage options
 
-There are some storage options whose usage should be restricted to administrators, as they give low-level access to hosts and could become a serious security risk. Please read carefully the corresponding documentation before using them:
+As an admin, restrict the usage of some storage options because these give low-level access to hosts and could become a serious security risk. Please read carefully the corresponding documentation before using them:
 
 | Use case                                      | Description                                           | Shared | Disk Format  | Disk snapshots | VM snapshots | Live migration | Fault tolerance | HV  | Availability |
 | --                                            | --                                                    | --     | --           | --             | --           | --             | --              | --  | --           |
