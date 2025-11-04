@@ -149,10 +149,9 @@ To enable the link at the bottom of the Fireedge login, you must configure `:aut
 ### Nginx
 
 ```yaml
-ssl_verify_client optional;
 location / {
     ...
-    proxy_set_header X-Client-Dn $client_dn;
+    proxy_set_header X-Client-Dn $ssl_client_s_dn;
 }
 ```
 
