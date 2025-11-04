@@ -6,7 +6,7 @@ categories: [Introduction]
 pageintoc: "6"
 tags: ['White paper', 'Access Model']
 type: docs
-weight: "3"
+weight: "4"
 ---
 
 <a id="understand"></a>
