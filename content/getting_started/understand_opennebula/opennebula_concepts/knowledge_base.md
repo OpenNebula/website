@@ -6,7 +6,7 @@ categories: [Introduction]
 pageintoc: "7"
 tags: [Enterprise, 'Knowledge Base']
 type: docs
-weight: "4"
+weight: "5"
 ---
 
 <a id="knowledge-base"></a>
