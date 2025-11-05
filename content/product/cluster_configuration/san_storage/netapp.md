@@ -8,6 +8,8 @@ OpenNebula’s **NetApp SAN Datastore** provides production-grade, native contro
 
 ### Key Benefits
 
+Using the native NetApp driver, mixed 4k/8k (70/30) workloads delivered up to ~3x higher IOPS with ~4 to 10x lower write latency than LVM-thin, especially as snapshots accumulate. In pgbench, the NetApp path sustained ~2x higher, steadier transactions per second (TPS). On 4k fsync micro-writes it showed ~10 to 25% lower write latency. In short, the NetApp array keeps latency flat under snapshot pressure while host-side LVM-thin degrades sooner due to copy on write.
+
 | Area | Benefit | Description |
 |------|----------|--------------|
 | **Automation** | Full lifecycle control | End-to-end creation, cloning, resizing, renaming, and cleanup of Volumes and LUNs directly from OpenNebula. |
