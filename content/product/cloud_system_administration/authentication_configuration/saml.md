@@ -121,12 +121,12 @@ In order to configure Keycloak as an Identity Provider for OpenNebula, your will
 
 Create a new client by clicking on `Create client`. Set the following general settings:
 - **Client type** - `SAML`
-- **Client ID** - Must match the :sp_entity_id attribute defined in `/etc/one/auth/saml_auth.conf`.
+- **Client ID** - Service provider entity ID, i.e. `opennebula-sp`. Must match the `:sp_entity_id` attribute defined in `/etc/one/auth/saml_auth.conf`.
 
 
 Click `Next` and set the following Login settings:
 - **IDP-Initiated SSO URL name** - Same value as `Client ID`.
-- **Master SAML Processing URL** - Refers to the ACS URL. Must match the value of the :acs_url field in the OpenNebula SAML configuration file. E.g.: `https://your-fireedge-domain.com/fireedge/api/auth/acs`
+- **Master SAML Processing URL** - Refers to the ACS URL. Must match the value of the  `:acs_url` field in the OpenNebula SAML configuration file. E.g.: `https://<FIREEDGE.DOMAIN.COM>/fireedge/api/auth/acs`
 
 Save the client configuration. Once the client has been successfully created, you can configure Keycloak to report group membership to OpenNebula:
 1. Navigate to the new Client
@@ -134,7 +134,7 @@ Save the client configuration. Once the client has been successfully created, yo
 3. On the **Mappers** tab, click on **Add mapper**. Select **By configuration**.  Choose **Group list** from the list of possible mappers.
 4. Use the following settings:
     - **Name**: `group_mapper`
-    - **Group attribute name**: Must match the :group_field attribute defined in `/etc/one/auth/saml_auth.conf` for the Identity Provider. Typical values are `member` and `memberOf`
+    - **Group attribute name**: Must match the `:group_field` attribute defined in `/etc/one/auth/saml_auth.conf` for the Identity Provider. Typical values are `member` and `memberOf`
     - **SAML Attribute NameFormat**: `Basic`
     - **Single Group Attribute**: `On`
     - **Full group path**: `On`
@@ -142,11 +142,14 @@ Save the client configuration. Once the client has been successfully created, yo
 5. Click **Save**.
 
 Once group membership reporting has been configured in Keycloak, you can proceed with the OpenNebula SAML auth driver configuration (`/etc/one/auth/saml_auth.conf`):
-- **:sp_entity_id** - must match your Keycloak **Client ID**
-- **:acs_url** - must match the URL configured in Keycloak as **Master SAML Processing URL**
+- **:sp_entity_id** - must match your Keycloak **Client ID**, i.e. `opennebula-sp`
+- **:acs_url** - must match the URL configured in Keycloak as **Master SAML Processing URL** (i.e. `https://<FIREEDGE.DOMAIN.COM>/fireedge/api/auth/acs`)
 - **:issuer** - defaults to `http(s)://<keycloak_ip>:<keycloak_port>/realms/<keycloak_realm_name>`. Can be obtained from the Keycloak web interface via the SAML Identity Provider metadata XML: Realm Settings => Endpoints => SAML 2.0 Identity Provider Metadata => **entityID** parameter.
 - **:idp_cert** - can be obtained from the Keycloak web interface: Realm Settings => Keys => Look for the RSA key used for signing (SIG) => Certificate. May also be obtained from the SAML Identity Provider metadata XML: Realm Settings => Endpoints => SAML 2.0 Identity Provider Metadata => **X509Certificate**.
-- **:group_field** - Must match the **Group attribute name** defined in the Keycloak group mapper.
+```bash
+curl http://<keycloak_ip>:<keycloak_port>/realms/<keycloak_realm_name>/protocol/saml/descriptor 2>/dev/null | xpath -e '/md:EntityDescriptor/md:IDPSSODescriptor/md:KeyDescriptor/ds:KeyInfo/ds:X509Data/ds:X509Certificate/text()' 2>/dev/null 
+```
+- **:group_field** - Must match the **Group attribute name** defined in the Keycloak group mapper (i.e. `member`)
 - **:mapping_mode** - `keycloak`. This mode includes special logic to handle Keycloak group nesting.
 
 All other IdP-specific configuration settings for the driver should be set up the same way as for any other Identity Provider.
