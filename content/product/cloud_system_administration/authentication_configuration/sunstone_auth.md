@@ -129,9 +129,9 @@ To enable the link at the bottom of the Fireedge login, you must configure `:aut
 :auth_redirect: ‘http://<URL_SAML_SERVICE>/realms/<REALM>/protocol/saml/clients/<CLIENT>’
 ```
 
-In case that the redirection is invalid, please check the `Master SAML Processing URL` on your provider (should be similar to `http(s)://<FIREEDGE_SERVER>/fireedge/api/auth/acs`)
-
 ![sunstone_remote_login_saml](/images/sunstone_login_remote_saml.png)
+
+In case that the redirection is invalid, please check the `Master SAML Processing URL` on your provider (should be similar to `http(s)://<FIREEDGE_SERVER>/fireedge/api/auth/acs`)
 
 ### Apache
 
