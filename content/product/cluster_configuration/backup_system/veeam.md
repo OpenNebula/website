@@ -107,7 +107,7 @@ The following table summarizes the supported backup modes for each storage syste
 
 ### Limitations
 
-Here is a list of the known missing features or bugs related to the Veeam integration with OpenNebula:
+Here is a list of the known issues and limitations affecting the Veeam integration with OpenNebula:
 
 - Setting the ``PassengerMaxPoolSize`` variable to values higher than 1 can trigger issues depending on the system properties of the backup server and the amount of concurrent transfers, showing an error in the Veeam Backup & Replication console. If this happens too frequently, reduce the amount of concurrent Passenger processes to 1 until this issue is fixed.
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
@@ -158,7 +158,7 @@ When adding OpenNebula as a platform into Veeam, a KVM appliance will be deploye
 - **Memory:** 6 GB RAM
 - **Disk:** 100 GB
 
-Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement. 
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
 
 ## Installation and Configuration
 
@@ -224,7 +224,7 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 
 * ``one_xmlrpc``: Address of the OpenNebula Front-end. Please do not include any prefixes such as ``http://``, only the IP address itself is needed.
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
-* ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server. 
+* ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
 
 {{< alert title="Important" color="success" >}}
 You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
