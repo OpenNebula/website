@@ -6,9 +6,12 @@ description:
 categories:
 pageintoc: "68"
 tags:
-weight: "2"
+weight: 4
 ---
 
+{{< alert title="Important" color="success" >}}
+As a prerequisite to perform LLM Inference for Model Certification, you must follow the procedure outlined in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
+{{< /alert >}} 
 
 With the rapid and widespread adoption of Large Language Models (LLMs), optimizing and validating their inference performance has become critical. Efficient inference ensures that deployed models deliver high-quality results while maintaining scalability, responsiveness, and cost efficiency.
 
