@@ -1,12 +1,12 @@
 ---
-title: "LLM Inference for Model Certification"
-linkTitle: "LLM Inference Certification"
+title: "Validation with LLM Inference for Model Certification"
+linkTitle: "LLM Inferencing"
 date: "2025-10-28"
 description:
 categories:
 pageintoc: "68"
 tags:
-weight: 4
+weight: 3
 ---
 
 {{< alert title="Important" color="success" >}}

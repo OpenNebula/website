@@ -1,7 +1,7 @@
 ---
 title: "Configuration and Deployment"
 date: "2025-10-21"
-weight: 3
+weight: 2
 ---
 
 <a id="ai_config_deploy"></a>

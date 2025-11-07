@@ -1,7 +1,7 @@
 ---
 title: Validation with AI-Ready Kubernetes and NVIDIA Dynamo
 linkTitle: AI-Ready Kubernetes
-weight: 5
+weight: 4
 ---
 
 <a id="ai_ready_k8s"></a>
