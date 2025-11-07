@@ -116,6 +116,9 @@ Here is a list of the known missing features or bugs related to the Veeam integr
 - Alphine virtual machines cannot be backed up.
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected ``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
+- Veeam may send multiple login token requests, which can cause to reach the OpenNebula token limit, causing backup failures if an backup was being performed when the token limit was reached.
+- Incremental backups may fail for VMs with more than 1 disk attached to them.
+- The number of VCPU in the KVM appliance may be set to 1 regardless of the configuration in Veeam. This can be solved by manually changing the number of vCPU in OpenNebula and restarting the VM. 
 
 ### Architecture
 
