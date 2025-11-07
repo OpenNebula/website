@@ -153,7 +153,7 @@ Here is a list of the limitations affecting the Veeam integration with OpenNebul
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 - Veeam may send multiple login token requests, which can cause to reach the OpenNebula token limit, causing backup failures if an backup was being performed when the token limit was reached.
 - Incremental backups may fail for VMs with more than 1 disk attached to them.
-- The number of VCPU in the KVM appliance may be set to 1 regardless of the configuration in Veeam. This can be solved by manually changing the number of vCPU in OpenNebula and restarting the VM. 
+- The number of VCPU in the KVM appliance may be set to 1 regardless of the configuration in Veeam. This can be solved by manually changing the number of vCPU in OpenNebula and restarting the VM.
 
 If facing other issues or bugs, we highly encourage to check the Veeam section of the [Known Issues page]({{% relref "../../../software/release_information/release_notes/known_issues/#backups---veeam" %}}).
 
