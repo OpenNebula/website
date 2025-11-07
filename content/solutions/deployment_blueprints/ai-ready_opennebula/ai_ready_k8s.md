@@ -7,7 +7,9 @@ weight: 5
 <a id="ai_ready_k8s"></a>
 
 {{< alert title="Important" color="success" >}}
-As a prerequisite to perform validation with AI-Ready Kubernetes and NVIDIA Dynamo, you must follow the procedure outlined in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
+To perform the validation with AI-Ready Kubernetes and NVIDIA Dynamo, you must comply with one of the prerequisites:
+* Have an AI Factory ready to be validated; or 
+* Configure an AI Factory by following the procedure outlined in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
 {{< /alert >}} 
 
 
@@ -919,3 +921,8 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 
 [...]
 ```
+
+
+{{< alert title="Tip" color="success" >}}
+Alternatively, after validating your AI Factory with AI-Ready Kubernetes, you may choose to follow [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
+{{< /alert >}} 
