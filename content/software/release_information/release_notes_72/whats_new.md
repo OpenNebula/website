@@ -80,4 +80,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 <!--keeping some examples-->
 - [Fix de-selecting hidden datatable entries](https://github.com/OpenNebula/one/issues/6781).
-
+- [Fireedge do not refresh actions on VM state change](https://github.com/OpenNebula/one/issues/7172).
