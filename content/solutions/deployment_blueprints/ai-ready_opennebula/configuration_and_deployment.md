@@ -146,3 +146,9 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 5. You will see your GPU listed as an available PCI device.
 
 If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
+
+{{< alert title="Tip" color="success" >}}
+After completing the steps to have your AI-ready OpenNebula cloud using the OneDeploy tool, validate your deployment following one of the alternative options: 
+* [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}})
+* [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}})
+{{< /alert >}} 

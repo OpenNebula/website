@@ -6,9 +6,14 @@ description:
 categories:
 pageintoc: "68"
 tags:
-weight: "2"
+weight: 4
 ---
 
+{{< alert title="Important" color="success" >}}
+To perform the validation with LLM Inference for Model Certification, you must comply with one of the prerequisites:
+* Have an AI Factory ready to be validated; or 
+* Configure an AI Factory by following the procedure outlined in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
+{{< /alert >}} 
 
 With the rapid and widespread adoption of Large Language Models (LLMs), optimizing and validating their inference performance has become critical. Efficient inference ensures that deployed models deliver high-quality results while maintaining scalability, responsiveness, and cost efficiency.
 
@@ -144,3 +149,7 @@ All results are saved in this table:
 
 
 OpenNebula includes the obtained results in controlled environments, with given hardware and using specific models. This information can later be used to compare future results, assess deployments, and evaluate performance against known baselines.
+
+{{< alert title="Tip" color="success" >}}
+Alternatively, after validating your AI Factory with LLM Inference, you may choose to follow [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
+{{< /alert >}} 
