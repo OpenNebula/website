@@ -117,10 +117,10 @@ To configure this function it's mandatory to have an [Apache/Nginx]({{% relref "
 
 This method logs in to OpenNebula based on the Assertion Consumer Service provided by the SAML service. OpenNebula will validate the assertion and create the user if they do not exist.
 
-To enable this login method, set the `:auth:` option in `/etc/one/fireedge-server.conf` to `saml` and restart FireEdge:
+To enable this login method, set the `:auth:` option in `/etc/one/fireedge-server.conf` to `remote` and restart FireEdge:
 
 ```yaml
-:auth: saml
+:auth: remote
 ```
 
 To enable the link at the bottom of the Fireedge login, you must configure `:auth_redirect: <SAML_LOGIN_ENDPOINT>` and restart Fireedge. Example: if using Keycloak as a SAML service, the URL must have this pattern:
@@ -130,8 +130,6 @@ To enable the link at the bottom of the Fireedge login, you must configure `:aut
 ```
 
 ![sunstone_remote_login_saml](/images/sunstone_login_remote_saml.png)
-
-In case that the redirection is invalid, please check the `Master SAML Processing URL` on your provider (should be similar to `http(s)://<FIREEDGE_SERVER>/fireedge/api/auth/acs`)
 
 ### Apache
 
