@@ -1,0 +1,15 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Hugo website",
+  "scripts": {
+    "build": "hugo --minify",
+    "setup": "./setup.sh",
+    "start": "hugo server"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "postcss-cli": "^11.0.0"
+  }
+}
