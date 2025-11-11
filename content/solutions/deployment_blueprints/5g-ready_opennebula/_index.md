@@ -1,6 +1,6 @@
 ---
-title: "5G/Edge - Deployment Blueprint"
+title: "5G/Edge: Deployment Blueprint"
 linkTitle: "5G/Edge"
-description: "TBC"
+description: "WIP"
 weight: 3
 ---

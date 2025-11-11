@@ -14,7 +14,7 @@ weight: "3"
 
 Organizations today are looking for flexible, open solutions to simplify their IT infrastructure, consolidate workloads, and build scalable private, hybrid, and edge clouds. By adopting a unified cloud management and virtualization platform, they can reduce operational complexity, lower costs (TCO), and gain complete control over their digital infrastructure.
 
-OpenNebula is a mature, open platform that provides complete cloud and virtualization management—combining in a single and a lightweight solution all the capabilities of a hypervisor manager such as VMware vSphere, a cloud orchestrator such as Nutanix Cloud Platform, as well as a hybrid/edge enabler.
+OpenNebula is a mature, open platform that provides complete cloud and virtualization management—combining in a single and a lightweight solution all the capabilities of a hypervisor manager such as VMware vSphere&reg;, a cloud orchestrator such as Nutanix Cloud Platform&reg;, as well as a hybrid/edge enabler.
 
 Unlike proprietary alternatives, OpenNebula offers:
 
@@ -24,21 +24,17 @@ Unlike proprietary alternatives, OpenNebula offers:
 * Integrated Kubernetes orchestration via the OpenNebula Cluster API Provider.  
 * Enterprise-grade scalability and automation, with high availability, multi-tenancy, and federation across sites.
 
-Thousands of organizations worldwide already rely on OpenNebula as an open alternative to VMware vSphere&reg;, Nutanix Cloud Platform&reg;, and Red Hat OpenStack/OpenShift&reg;. These organizations benefit from an agile, secure, and future-ready cloud infrastructure that gives them complete control over their technology stack.
-
-To assist with the preparation and completion of the numerous Requests for Proposal (RFPs) we receive every week, we have created the following table to help guide comparisons between OpenNebula and other cloud solutions.
-
-<div id="manual-toc">
-  <h2>Contents</h2>
-  <ul>
+To assist with the preparation and completion of the numerous Requests for Proposal (RFPs) we receive every week, we have created the following table to help guide comparisons between OpenNebula and other cloud solutions. You will find three areas of interest:
+ <ul>
     <li><a href="#overview">Overview</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#subscriptions">Subscriptions</a></li>
-    </ul>
-</div>
+ </ul>
+
+Thousands of organizations worldwide already rely on OpenNebula as an open alternative to VMware vSphere&reg;, Nutanix Cloud Platform&reg;, and Red Hat OpenStack/OpenShift&reg;. These organizations benefit from an agile, secure, and future-ready cloud infrastructure that gives them complete control over their technology stack. Choose OpenNebula as your cloud solution.
 
 
-| <h2 id="overview"> Overview </h2>                           |
+| <h2 id="comp-overview"> Overview </h2>                           |
 | ---------------------------- | :------------- |
 | **Product Scope** | <p>OpenNebula offers an end-to-end cloud and virtualization management solution, covering the entire stack—from the hypervisor layer to Kubernetes cluster management. While OpenNebula natively provides core capabilities for virtualization, networking, storage, and backup, it also integrates seamlessly with leading ecosystem technologies to extend its functionality.</p><p>Examples include disaggregated and HCI software-defined storage (SDS) solutions like Ceph, StorPool, and Linbit; enterprise SAN systems such as NetApp and Pure Storage; networking technologies including NVIDIA Spectrum, InfiniBand, and Open vSwitch; backup platforms like Veeam; automation tools such as Terraform and Ansible; and Kubernetes management solutions like Rancher and RKE2.</p> |
 | **Roadmap** | <p>OpenNebula’s roadmap focuses on expanding its hybrid and private cloud capabilities, with continued integration of container orchestration, AI/ML workloads, and advanced automation features. The two main solution areas are VMware replacement and AI Factories, with ongoing work on new advanced features, deeper integration with the vendor ecosystem, and enhanced migration tools. It also emphasizes improved scalability, security, and interoperability across diverse infrastructures, ensuring seamless operation from core data centers to distributed edge environments.</p><p>OpenNebula Systems is one of the core participants in the €3B IPCEI-CIS consortium, which brings together leading cloud and edge computing organizations to build the next generation of cloud and edge technologies.</p> |
