@@ -22,3 +22,4 @@ The following issues have been solved in 7.0.2:
 - Fix UI overlay issue on Fireedge VNC on 1280x760 resolution[#7175](https://github.com/OpenNebula/one/issues/7175)
 - Fix OneDRS Datastore filtering to include only the matching hosts [#7345](https://github.com/OpenNebula/one/issues/7345)
 - Fix 2FA reset in FireEdge after UI changes are made [#7105](https://github.com/OpenNebula/one/issues/7105)
+- Fix headers in the tables are not translated in list mode [#7357](https://github.com/OpenNebula/one/issues/7357)
