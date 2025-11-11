@@ -1,5 +1,6 @@
 ---
-title: "Disaster Recovery"
+title: "Disaster Recovery: Deployment Blueprint"
+linkTitle: "Disaster Recovery"
 date: 2025-06-30
 description: "Guide for configuring Disaster Recovery based on ceph mirroring"
 categories: ["Disaster Recovery"]
