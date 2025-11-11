@@ -117,42 +117,78 @@ This section includes configuration guides for some common SAML Identity Provide
 
 ### Keycloak
 
-In order to configure Keycloak as an Identity Provider for OpenNebula, your will need to create a SAML client. Navigate to your Keycloak realm (or create a new one for OpenNebula) and go to the Clients section.
+In order to configure Keycloak as an Identity Provider for OpenNebula, your will need to create a SAML client. Navigate to your Keycloak realm (or create a new one for OpenNebula)
 
-Create a new client by clicking on `Create client`. Set the following general settings:
+![keycloak_realm_selection](/images/auth/keycloak/realm_selection.png)
+
+Now go to the Clients section and create a new client by clicking on `Create client`. 
+
+![keycloak_realm_selection](/images/auth/keycloak/client_creation_1.png)
+
+Set the following general settings:
 - **Client type** - `SAML`
-- **Client ID** - Must match the :sp_entity_id attribute defined in `/etc/one/auth/saml_auth.conf`.
+- **Client ID** - Service provider entity ID, i.e. `opennebula-sp`. This value will be the `:sp_entity_id` attribute defined in `/etc/one/auth/saml_auth.conf`.
+- The name and the description are not compulsory.
 
+![keycloak_realm_selection](/images/auth/keycloak/client_settings_1.png)
 
 Click `Next` and set the following Login settings:
 - **IDP-Initiated SSO URL name** - Same value as `Client ID`.
-- **Master SAML Processing URL** - Refers to the ACS URL. Must match the value of the :acs_url field in the OpenNebula SAML configuration file. E.g.: `https://your-fireedge-domain.com/fireedge/api/auth/acs`
+- **Master SAML Processing URL** - Refers to the ACS URL. Must match the value of the  `:acs_url` field in the OpenNebula SAML configuration file. E.g.: `https://<FIREEDGE.DOMAIN.COM>/fireedge/api/auth/acs`
+
+![keycloak_realm_selection](/images/auth/keycloak/client_settings_2.png)
 
 Save the client configuration. Once the client has been successfully created, you can configure Keycloak to report group membership to OpenNebula:
-1. Navigate to the new Client
-2. Navigate to the **Client scopes** tab and select the scope with the `-dedicated` termination
-3. On the **Mappers** tab, click on **Add mapper**. Select **By configuration**.  Choose **Group list** from the list of possible mappers.
+1. Navigate to the new Client, select the **Client scopes** tab and select the scope with the `-dedicated` termination
+
+![keycloak_realm_selection](/images/auth/keycloak/scope_selection_1.png)
+
+2. On the **Mappers** tab, click on **Configure new mapper**.  
+
+![keycloak_realm_selection](/images/auth/keycloak/create_mapper_1.png)
+
+3. Choose **Group list** from the list of possible mappers.
+
+![keycloak_realm_selection](/images/auth/keycloak/create_mapper_2.png)
+
 4. Use the following settings:
     - **Name**: `group_mapper`
-    - **Group attribute name**: Must match the :group_field attribute defined in `/etc/one/auth/saml_auth.conf` for the Identity Provider. Typical values are `member` and `memberOf`
+    - **Group attribute name**: Must match the `:group_field` attribute defined in `/etc/one/auth/saml_auth.conf` for the Identity Provider. Typical values are `member` and `memberOf`
     - **SAML Attribute NameFormat**: `Basic`
     - **Single Group Attribute**: `On`
     - **Full group path**: `On`
     - For additional settings not specified here, use the default value.
+
+![keycloak_realm_selection](/images/auth/keycloak/create_mapper_3.png)
+
 5. Click **Save**.
 
 Once group membership reporting has been configured in Keycloak, you can proceed with the OpenNebula SAML auth driver configuration (`/etc/one/auth/saml_auth.conf`):
-- **:sp_entity_id** - must match your Keycloak **Client ID**
-- **:acs_url** - must match the URL configured in Keycloak as **Master SAML Processing URL**
-- **:issuer** - defaults to `http(s)://<keycloak_ip>:<keycloak_port>/realms/<keycloak_realm_name>`. Can be obtained from the Keycloak web interface via the SAML Identity Provider metadata XML: Realm Settings => Endpoints => SAML 2.0 Identity Provider Metadata => **entityID** parameter.
-- **:idp_cert** - can be obtained from the Keycloak web interface: Realm Settings => Keys => Look for the RSA key used for signing (SIG) => Certificate. May also be obtained from the SAML Identity Provider metadata XML: Realm Settings => Endpoints => SAML 2.0 Identity Provider Metadata => **X509Certificate**.
-- **:group_field** - Must match the **Group attribute name** defined in the Keycloak group mapper.
-- **:mapping_mode** - `keycloak`. This mode includes special logic to handle Keycloak group nesting.
+- **`:sp_entity_id`** - must match your Keycloak **Client ID**, i.e. `opennebula-sp`
+- **`:acs_url`** - must match the URL configured in Keycloak as **Master SAML Processing URL** (i.e. `https://<FIREEDGE.DOMAIN.COM>/fireedge/api/auth/acs`)
+- **`:issuer`** - defaults to `http(s)://<keycloak_ip>:<keycloak_port>/realms/<keycloak_realm_name>`. 
+  - Can be obtained from the Keycloak web interface via the SAML Identity Provider metadata XML: Realm Settings => Endpoints => SAML 2.0 Identity Provider Metadata => **`entityID`** parameter. If `xpath` is installed it can be obtained directly with the following command 
+
+```bash
+curl http://<keycloak_ip>:<keycloak_port>/realms/one_realm/protocol/saml/descriptor 2>/dev/null \
+| xpath -e '/md:EntityDescriptor/@entityID' 2>/dev/null | cut -d= -f2
+```
+
+- **`:idp_cert`** - can be obtained from the Keycloak web interface or from the SAML IDP metadata XML
+  - Realm Settings => Keys => Look for the RSA key used for signing (SIG) => Certificate. 
+  - Realm Settings => Endpoints => SAML 2.0 Identity Provider Metadata => **`X509Certificate`**. If `xpath` is installed it can be obtained directly with the following command 
+
+```bash
+curl http://<keycloak_ip>:<keycloak_port>/realms/<keycloak_realm_name>/protocol/saml/descriptor 2>/dev/null \
+| xpath -e '/md:EntityDescriptor/md:IDPSSODescriptor/md:KeyDescriptor/ds:KeyInfo/ds:X509Data/ds:X509Certificate/text()' 2>/dev/null 
+```
+- **`:group_field`** - Must match the **Group attribute name** defined in the Keycloak group mapper (i.e. `member`)
+- **`:mapping_mode`** - `keycloak`. This mode includes special logic to handle Keycloak group nesting.
 
 All other IdP-specific configuration settings for the driver should be set up the same way as for any other Identity Provider.
 
 {{< alert title="Note" color="success" >}}
-Be aware that, with this configuration, group nesting is enabled. This means that a user member of the Keycloak group /group1/subgroup1 is considered both a member of group1 and a member of subgroup1. In case of having mappings configured for both the group and the subgroup, the user will be considered a member of both OpenNebula groups. To disable this behavior you can set the **:mapping_mode** configuration attribute to `strict` and turn off **Full group path** in your Keycloak Group Mapper.{{< /alert >}}
+Be aware that, with this configuration, group nesting is enabled. This means that a user member of the Keycloak group `/group1/subgroup1` is considered both a member of `group1` and a member of `subgroup1`. In case of having mappings configured for both the group and the subgroup, the user will be considered a member of both OpenNebula groups. To disable this behavior you can set the **:mapping_mode** configuration attribute to `strict` and turn off **Full group path** in your Keycloak Group Mapper.{{< /alert >}}
 
 
 ### Okta
