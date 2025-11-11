@@ -211,7 +211,6 @@ The Backup Server acts as a staging area between OpenNebula and the Veeam reposi
 Ensure the `ONE_AUTH` variable is set to a valid OpenNebula `user:password` pair with permission to delete backup images. You may adjust `MAX_USED_PERCENTAGE` to a different threshold if desired.
 
 ## Veeam Backup Appliance Requirements
-
 When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
 
 - **CPU:** 6 cores
@@ -380,7 +379,7 @@ In the next step, Veeam will take care of deploying the appliance. Once finished
 
 ![image](/images/veeam/appliance_listed.png)
 
-4.3 Verification
+#### 4.3 Verification
 
 If everything is set properly, you should be able to see the available Virtual Machines in the **Inventory** tab under the **Virtual Infrastructure** -> **oVirt KVM** section.
 
