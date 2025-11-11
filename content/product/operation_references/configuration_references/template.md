@@ -645,6 +645,11 @@ Context information is passed to the Virtual Machine via an ISO mounted as a par
 | `EJECT_CDROM`                   | Value `YES` will signal to eject the CD with the `context.sh` file when (re)contextualization is finished.                                                                                                                                                                                                                                                                                                                                                                                                         | Windows   |
 
 {{< alert title="Note" color="success" >}}
+By default, FireEdge does not allow you to create or modify the `START_START` field. It can only be modified if the `START_SCRIPT_BASE64` field does not exist. 
+
+FireEdge prioritises the `START_SCRIPT_BASE64` field when the form field is filled in.{{< /alert >}}
+
+{{< alert title="Note" color="success" >}}
 If more than one of the password-changing attributes listed above is defined, only the one with highest priority will be applied. The priority is the same as the order of appearance in this table.{{< /alert >}} 
 
 The values referred to by `VARIABLE` can be defined as:
