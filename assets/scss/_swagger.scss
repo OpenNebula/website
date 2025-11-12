@@ -1,0 +1,225 @@
+// -------------------------------------------------------------
+// Variables
+// -------------------------------------------------------------
+$padding-horizontal: 10px !default;
+$gap-size: 0.5em !default;
+$tab-margin-bottom: 8px !default;
+$opblock-tag-margin-bottom: 12px !default;
+$render-text-size: var(--bs-body-font-size) !default;
+$render-text-color: var(--bs-body-color) !default;
+$render-header-color: var(--bs-body-bg) !default;
+$render-code-color-bg: var(--bs-table-striped-bg) !default;
+
+#docsy_swagger_ui {
+  // -------------------------------------------------------------
+  // Layout Adjustments
+  // -------------------------------------------------------------
+
+  > div.swagger-ui > div > div.wrapper {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  // -------------------------------------------------------------
+  // Theme & Color Customizations
+  // -------------------------------------------------------------
+
+  p,
+  button {
+    color: $render-text-color !important;
+  }
+
+  .opblock-tag span,
+  .opblock-summary-control > div,
+  .opblock-summary-path span {
+    color: $render-text-color !important;
+  }
+
+  .opblock-section-header {
+    background-color: $render-header-color !important;
+
+    h4 {
+      color: $render-text-color !important;
+    }
+  }
+
+  .swagger-ui {
+    .parameter__name,
+    .parameter__type {
+      color: $render-text-color !important;
+    }
+  }
+
+  .opblock-summary-method > span {
+    color: inherit !important;
+  }
+
+  .arrow use,
+  .models-control > svg > use {
+    fill: $render-text-color !important;
+  }
+
+  .model-title__text,
+  .model-title {
+    color: $render-text-color !important;
+  }
+
+  // -------------------------------------------------------------
+  // Hide Unnecessary / Unused Components
+  // -------------------------------------------------------------
+
+  .information-container,
+  .scheme-container,
+  .try-out__btn,
+  .response-controls,
+  .copy-to-clipboard,
+  .model-hint,
+  .execute-wrapper {
+    display: none !important;
+  }
+
+  td.parameters-col_description > select {
+    display: none !important;
+  }
+
+  .opblock-summary-control:focus,
+  .models-control:focus,
+  .model-box-control:focus {
+    outline: none !important;
+  }
+
+  // -------------------------------------------------------------
+  // Response Code & Parameters Column
+  // -------------------------------------------------------------
+
+  .response-col_status,
+  .parameters-col_name {
+    font-size: $render-text-size !important;
+    padding-left: $padding-horizontal !important;
+  }
+
+  .parameters-col_name {
+    align-items: center !important;
+    gap: $gap-size !important;
+    padding-right: $padding-horizontal !important;
+  }
+
+  .opblock-summary-control .arrow {
+    margin-right: 15px !important;
+  }
+
+  .parameters-col_description {
+    > input {
+      display: none !important;
+    }
+  }
+
+  // -------------------------------------------------------------
+  // Markdown Paragraph Adjustments
+  // -------------------------------------------------------------
+
+  .parameters-col_description > .renderedMarkdown > p,
+  .response-col_description__inner > .renderedMarkdown > p {
+    font-size: $render-text-size !important;
+    margin-top:    0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .inner-object > .model {
+    padding-top: 10px !important;
+  }
+
+  // -------------------------------------------------------------
+  // Model Example Tab Spacing
+  // -------------------------------------------------------------
+
+  .model-example {
+    > .tab {
+      margin-bottom: $tab-margin-bottom !important;
+    }
+  }
+
+  .model .renderedMarkdown p {
+    padding-right: 15px !important;
+  }
+
+  // -------------------------------------------------------------
+  // Table Layouts Adjustments
+  // -------------------------------------------------------------
+
+  table {
+    table-layout: fixed !important;
+    width: 100% !important;
+  }
+
+  .responses-header {
+    td:nth-child(3) {
+      display: none !important;
+    }
+  }
+
+  tbody {
+    tr.response {
+      td:nth-child(3) {
+        display: none !important;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------
+  // Spacing Between Resource Sections
+  // -------------------------------------------------------------
+
+  .opblock-tag-section {
+    margin-bottom: $opblock-tag-margin-bottom !important;
+  }
+
+  .opblock-tag-section.is-open > h3 {
+    margin-bottom: $opblock-tag-margin-bottom !important;
+  }
+
+  // -------------------------------------------------------------
+  // Code blocks
+  // -------------------------------------------------------------
+
+  // Inline code
+  .swagger-ui .renderedMarkdown code {
+    color: $render-text-color !important;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 0.95em !important;
+    font-weight: normal !important;
+    padding: 2px 6px !important;
+    border-radius: 4px;
+    white-space: pre-wrap !important;
+  }
+
+  // Block code (multiline)
+  .swagger-ui .renderedMarkdown pre > code {
+    display: block !important;
+    background-color: $render-header-color !important;
+    color: $render-text-color !important;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    padding: 12px 16px !important;
+    overflow-x: auto !important;
+    border-radius: 6px;
+    line-height: 1.5;
+  }
+
+  // List items in markdown
+  .swagger-ui .renderedMarkdown li {
+    color: $render-text-color !important;
+    font-size: 14px !important;
+    line-height: 1.6;
+    margin-bottom: 0.5em;
+  }
+
+  // First column in model tables
+  .swagger-ui .model-box td:first-child {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    width: auto !important;
+    vertical-align: top;
+  }
+}
