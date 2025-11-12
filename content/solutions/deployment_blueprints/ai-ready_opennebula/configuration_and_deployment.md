@@ -232,7 +232,7 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     EOF
     ```
 
-    Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it's different.
+   2.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
     ```default
     # netplan apply
     # sysctl -w net.ipv4.ip_forward=1
