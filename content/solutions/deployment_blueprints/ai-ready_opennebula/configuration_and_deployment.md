@@ -155,7 +155,10 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
 
 ### Instance Launch and Initial Checks
 
-Log in to your Scaleway console, navigate to **Bare Metal -> Elastic Metal**, and click **"Create Elastic Metal Server"**. Configure your server using the following steps in the portal:
+1. Log in to your Scaleway console.
+2. Navigate to **Bare Metal > Elastic Metal** 
+3. Click **"Create Elastic Metal Server"**. 
+4. Configure your server in the portal:
 
 1.  **Availability Zone:** Choose your preferred zone (e.g., `PARIS 2`) or select "Auto allocate".
 2.  **Billing Method:** Select either hourly or monthly. Note that hourly billing is often more cost-effective for short-term projects or testing.
