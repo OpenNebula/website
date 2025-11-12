@@ -40,15 +40,13 @@ The objective of this benchmarking task is to evaluate LLM inference performance
 
 Although multiple inference frameworks are available, this benchmark focuses exclusively on vLLM, a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
-The vLLM appliance will be available through the OpenNebula Marketplace for enterprise subscriptions, offering a streamlined setup process suitable for both novice and experienced users.
+The vLLM appliance will be available through the OpenNebula Marketplace for enterprise subscriptions, offering a [streamlined setup process](https://github.com/OpenNebula/one-apps/wiki/vllm_quick) suitable for both novice and experienced users.
 
 **Main characteristics:**
 
 - Supports single-node deployments with one or more GPUs.  
 - Uses Python’s native multiprocessing for multi-GPU inference.  
 - Does not require additional frameworks, such as Ray, unless deploying across multiple nodes, which is out of scope for this benchmarking task.  
-
-In order to install the vLLM appliance you can follow the steps in its corresponding [wiki](https://github.com/OpenNebula/one-apps/wiki/vllm_quick).
 
 
 
