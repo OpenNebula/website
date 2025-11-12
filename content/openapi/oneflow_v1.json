@@ -1,0 +1,1231 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OneFlow API",
+    "version": "v1",
+    "description": "RESTful API to create, control, and monitor services composed of interconnected virtual machines with deployment dependencies."
+  },
+  "servers": [
+    {
+      "url": "http://oneflow.example.server:{port}",
+      "description": "Default OneFlow API server",
+      "variables": {
+        "port": {
+          "default": "2474",
+          "description": "Port where the OneFlow API is listening",
+          "enum": [
+            "2474"
+          ]
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "service_templates",
+      "description": "Blueprints to define and deploy Services"
+    },
+    {
+      "name": "services",
+      "description": "Group of VMs deployed as one application"
+    }
+  ],
+  "paths": {
+    "/service_template": {
+      "get": {
+        "tags": [
+          "service_templates"
+        ],
+        "summary": "List all Service template resources",
+        "responses": {
+          "200": {
+            "description": "Array of Service templates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceTemplate"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "service_templates"
+        ],
+        "summary": "Create a new Service Template",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTemplate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service template created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceTemplate"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service_template/{id}": {
+      "get": {
+        "tags": [
+          "service_templates"
+        ],
+        "summary": "Get a specific Service template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service template ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service template details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceTemplate"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "service_templates"
+        ],
+        "summary": "Update a Service template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service template ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTemplate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service template updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceTemplate"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "service_templates"
+        ],
+        "summary": "Delete a Service template by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service template ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service_template/{id}/action": {
+      "post": {
+        "tags": [
+          "service_templates"
+        ],
+        "summary": "Perform an action on a Service template",
+        "description": "Perform an action on the Service template resource identified by ID.\nAvailable actions:\n- instantiate\n- chown\n- chgrp\n- chmod.\n\nAdditional parameters can be passed using the `merge_template` inside the params. For example, if we want to change the name when instantiating:\n\n```bash\ncurl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\":\"instantiate\",\n    \"params\": {\"merge_template\":{\"name\":\"new_name\"}}\n  }\n}'\n```\n\nThe following attributes can also be passed using the `merge_template`:\n\n- network_values\n- user_inputs_values\n- template_contents\n\nFor example, to instantiate a service template with custom VM capacity:\n\n```bash\ncurl http://127.0.0.1:2474/service_template/4/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\":\"instantiate\",\n    \"params\":{\n      \"merge_template\": {\n        \"template_contents\": {\n          \"HOT_RESIZE\": {\n            \"CPU_HOT_ADD_ENABLED\": \"YES\",\n            \"MEMORY_HOT_ADD_ENABLED\": \"YES\"\n          },\n          \"MEMORY_RESIZE_MODE\": \"BALLOONING\",\n          \"VCPU_MAX\": \"2\",\n          \"MEMORY_MAX\": \"128\"\n        }\n      }\n    }\n  }\n}'\n```",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service template ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Action"
+              },
+              "example": {
+                "perform": "instantiate",
+                "params": {
+                  "merge_template": {
+                    "name": "my_service_name",
+                    "user_inputs_values": {
+                      "cpu": "2",
+                      "env": "gold"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service": {
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "List all Service resources",
+        "responses": {
+          "200": {
+            "description": "Array of Service templates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Service"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service/{id}": {
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Get a specific Service by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceTemplate"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Update a Service by ID",
+        "description": "Append information to the service.\n\nTo use this action, the request body must include:\n- `append`: set to true.\n- `template`: JSON representation of the template to append.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Service"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Delete a Service by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service/{id}/action": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Perform an action on a Service",
+        "description": "Perform an action on the Service resource identified by ID. Available actions:\n- shutdown\n- recover\n- chown\n- chgrp\n- chmod\n- release\n\nThe recover action can be used to recover a failed service by cleaning the failed VMs.\n- From `FAILED_DEPLOYING` it continues deploying the Service.\n- From `FAILED_SCALING` it continues scaling the Service.\n- From `FAILED_UNDEPLOYING` it continues shutting down the Service.\n- From `COOLDOWN`, the Service is set to running, ignoring the cooldown duration.\n\nPassing `'delete': 'true'` in params will delete the service and its VMs, regardless of the current state of the service.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Action"
+              },
+              "example": {
+                "perform": "shutdown"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service/{id}/scale": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Scale a Service",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role_name": {
+                    "type": "string",
+                    "description": "Name of the role to be scaled"
+                  },
+                  "cardinality": {
+                    "type": "integer",
+                    "description": "New number of nodes for the specified role"
+                  },
+                  "force": {
+                    "type": "boolean",
+                    "description": "If true, forces the scaling operation"
+                  }
+                },
+                "required": [
+                  "role_name",
+                  "cardinality"
+                ]
+              },
+              "example": {
+                "role_name": "worker",
+                "cardinality": 5,
+                "force": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service/{id}/role/{name}/action": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Perform an action on all VMs of a Role",
+        "description": "Perform an action on all the Virtual Machines belonging to the Role identified by 'name' of the Service resource identified by ID.\n\nAvailable actions:\n- shutdown\n- shutdown-hard\n- undeploy\n- undeploy-hard\n- hold\n- release\n- stop\n- suspend\n- resume\n- boot\n- delete\n- delete-recreate\n- reboot\n- reboot-hard\n- poweroff\n- poweroff-hard\n- snapshot-create\n- snapshot-revert\n- snapshot-delete\n- disk-snapshot-create\n- disk-snapshot-revert\n- disk-snapshot-delete\n\nInstead of performing the action immediately on all the VMs, you can execute it on small groups of VMs using the following optional parameters:\n- `period`: seconds between each group of actions\n- `number`: number of VMs to apply the action to each period\n\nExample:\n```bash\ncurl http://127.0.0.1:2474/service/5/role/frontend/action -u 'oneadmin:password' -v -X POST --data '{\n  \"action\": {\n    \"perform\": \"stop\",\n    \"params\": {\n      \"period\": 60,\n      \"number\": 2\n    }\n  }\n}'\n```",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Role name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Action"
+              },
+              "example": {
+                "perform": "stop",
+                "params": {
+                  "period": 60,
+                  "number": 2
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/service/{id}/role_action": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Add or remove a role from a running Service",
+        "description": "Add or remove a role from a running Service resource identified by ID, allowing dynamic modification of the service roles while the service is running. The action must be specified using the perform key in the request body.\n\nAvailable actions:\n- `add_role`: Adds a new role to the running service. The role field must contain the name or definition of the role to add.\n- `remove_role`: Removes an existing role from the running service. The role field must indicate the name of the role to remove.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Service ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Action"
+              },
+              "example": {
+                "perform": "add_role",
+                "role": "frontend"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OpenNebulaJSONDocument": {
+        "type": "object",
+        "description": "Generic representation of an OpenNebula JSON document, which includes metadata and body information.",
+        "properties": {
+          "DOCUMENT": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "ID of the resource in OpenNebula"
+              },
+              "UID": {
+                "type": "string",
+                "description": "User ID"
+              },
+              "GID": {
+                "type": "string",
+                "description": "Group ID"
+              },
+              "UNAME": {
+                "type": "string",
+                "description": "Username"
+              },
+              "GNAME": {
+                "type": "string",
+                "description": "Group name"
+              },
+              "NAME": {
+                "type": "string",
+                "description": "Name of the object"
+              },
+              "TYPE": {
+                "type": "string",
+                "description": "Type identifier of the object"
+              },
+              "PERMISSIONS": {
+                "type": "object",
+                "description": "Permission bits for the object (U: Use, M: Manage, A: Admin)",
+                "properties": {
+                  "OWNER_U": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OWNER_M": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OWNER_A": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "GROUP_U": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "GROUP_M": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "GROUP_A": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OTHER_U": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OTHER_M": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "OTHER_A": {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  }
+                }
+              },
+              "TEMPLATE": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceTemplate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/Service"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "DOCUMENT"
+        ]
+      },
+      "ServiceTemplate": {
+        "type": "object",
+        "properties": {
+          "BODY": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the service."
+              },
+              "roles": {
+                "type": "array",
+                "description": "Array of Roles.",
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/VMrole"
+                    },
+                    {
+                      "$ref": "#/components/schemas/VRrole"
+                    }
+                  ]
+                }
+              },
+              "deployment": {
+                "type": "string",
+                "description": "Deployment strategy:\n- none: All Roles are deployed at the same time.\n- straight: Each Role is deployed when all its parent Roles are running.\nDefaults to none."
+              },
+              "shutdown_action": {
+                "type": "string",
+                "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in oneflow-server.conf will be used."
+              },
+              "ready_status_gate": {
+                "type": "boolean",
+                "description": "If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate."
+              },
+              "on_hold": {
+                "type": "boolean",
+                "description": "If on_hold is set to true, all VMs of the service will be created in HOLD state."
+              },
+              "user_inputs": {
+                "type": "object",
+                "description": "Hash of custom attributes to use in the service.",
+                "additionalProperties": true
+              },
+              "networks": {
+                "type": "object",
+                "description": "Hash of Virtual Networks to use in the service.",
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "name",
+              "roles"
+            ]
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "BODY": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the service."
+              },
+              "roles": {
+                "type": "array",
+                "description": "Array of Roles.",
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/VMrole"
+                    },
+                    {
+                      "$ref": "#/components/schemas/VRrole"
+                    }
+                  ]
+                }
+              },
+              "deployment": {
+                "type": "string",
+                "description": "Deployment strategy:\n- none: All Roles are deployed at the same time.\n- straight: Each Role is deployed when all its parent Roles are running.\nDefaults to none."
+              },
+              "shutdown_action": {
+                "type": "string",
+                "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the default set in oneflow-server.conf will be used."
+              },
+              "ready_status_gate": {
+                "type": "boolean",
+                "description": "If ready_status_gate is set to true, a VM will only be considered to be in running state if the following points are true: VM is in running state for OpenNebula. This specifically means that LCM_STATE==3 and STATE>=3; The VM has READY=YES in the user template, this can be reported by the VM using OneGate."
+              },
+              "on_hold": {
+                "type": "boolean",
+                "description": "If on_hold is set to true, all VMs of the service will be created in HOLD state."
+              },
+              "user_inputs": {
+                "type": "object",
+                "description": "Hash of custom attributes to use in the service.",
+                "additionalProperties": true
+              },
+              "user_inputs_values": {
+                "type": "object",
+                "description": "Hash containing custom attributes and their values provided by the user.",
+                "additionalProperties": true
+              },
+              "networks": {
+                "type": "object",
+                "description": "Hash of Virtual Networks to use in the service.",
+                "additionalProperties": true
+              },
+              "network_values": {
+                "type": "object",
+                "description": "Hash containing all network values used in the Service, such as NIC_IDs, names, and other related information.",
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "name",
+              "roles"
+            ]
+          }
+        }
+      },
+      "VMrole": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Role name, only word characters (letter, number, underscore) are allowed."
+          },
+          "template_id": {
+            "type": "integer",
+            "description": "OpenNebula VM Template ID. See the OpenNebula documentation for VM Templates."
+          },
+          "type": {
+            "type": "string",
+            "description": "Defines the Role type, vm for VM Role and vr for VR Roles."
+          },
+          "cardinality": {
+            "type": "integer",
+            "description": "Number of VMs to deploy. Defaults to 1."
+          },
+          "parents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Names of the Roles that must be deployed before this one."
+          },
+          "shutdown_action": {
+            "type": "string",
+            "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the one set for the Service will be used."
+          },
+          "on_hold": {
+            "type": "boolean",
+            "description": "If on_hold is set to true, all VMs of the Role (and their child Roles) will be created in HOLD state. If on_hold is already defined at the service level, it is not necessary to specify it at the Role level."
+          },
+          "min_vms": {
+            "type": "integer",
+            "description": "Minimum number of VMs for elasticity adjustments."
+          },
+          "max_vms": {
+            "type": "integer",
+            "description": "Maximum number of VMs for elasticity adjustments."
+          },
+          "cooldown": {
+            "type": "integer",
+            "description": "Cooldown period duration after a scale operation, in seconds. If it is not set, the default set in oneflow-server.conf will be used."
+          },
+          "elasticity_policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElasticityPolicy"
+            },
+            "description": "Array of Elasticity Policies."
+          },
+          "scheduled_policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledPolicy"
+            },
+            "description": "Array of Scheduled Policies."
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "template_id"
+        ]
+      },
+      "VRrole": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Role name, only word characters (letter, number, underscore) are allowed."
+          },
+          "template_id": {
+            "type": "integer",
+            "description": "OpenNebula VM Template ID. See the OpenNebula documentation for VM Templates."
+          },
+          "type": {
+            "type": "string",
+            "description": "Defines the Role type, vm for VM Role and vr for VR Roles."
+          },
+          "cardinality": {
+            "type": "integer",
+            "description": "Number of VMs to deploy. Defaults to 1. Setting a value greater than 1 enables VRouter HA mode."
+          },
+          "parents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Names of the Roles that must be deployed before this one."
+          },
+          "shutdown_action": {
+            "type": "string",
+            "description": "VM shutdown action: ‘shutdown’ or ‘shutdown-hard’. If it is not set, the one set for the Service will be used."
+          },
+          "on_hold": {
+            "type": "boolean",
+            "description": "If on_hold is set to true, all VMs of the Role (and their child Roles) will be created in HOLD state. If on_hold is already defined at the service level, it is not necessary to specify it at the Role level."
+          },
+          "min_vms": {
+            "type": "integer",
+            "description": "Minimum number of VMs for elasticity adjustments."
+          },
+          "max_vms": {
+            "type": "integer",
+            "description": "Maximum number of VMs for elasticity adjustments."
+          },
+          "cooldown": {
+            "type": "integer",
+            "description": "Cooldown period duration after a scale operation, in seconds. If it is not set, the default set in oneflow-server.conf will be used."
+          },
+          "vrouter_ips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Floating IP addresses of the Virtual Router role. Empty if VRouter HA mode is disabled."
+          },
+          "vrouter_id": {
+            "type": "integer",
+            "description": "Virtual Router ID used by the Service"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "template_id"
+        ]
+      },
+      "Action": {
+        "type": "object",
+        "properties": {
+          "perform": {
+            "type": "string",
+            "description": "Action to peform in the service"
+          },
+          "params": {
+            "type": "object",
+            "description": "Additional parameters that can be pased to the Service.",
+            "properties": {
+              "merge_template": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "required": [
+          "perform"
+        ]
+      },
+      "ElasticityPolicy": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of adjustment: CHANGE, CARDINALITY, PERCENTAGE_CHANGE."
+          },
+          "adjust": {
+            "type": "integer",
+            "description": "Positive or negative adjustment. Its meaning depends on 'type'."
+          },
+          "min_adjust_step": {
+            "type": "integer",
+            "description": "Optional parameter for PERCENTAGE_CHAGE adjustment type. If present, the policy will change the cardinality by at least the number of VMs set in this attribute."
+          },
+          "expression": {
+            "type": "string",
+            "description": "Expression to trigger elasticity."
+          },
+          "period_number": {
+            "type": "integer",
+            "description": "Number of periods that the expression must be true before the elasticity is triggered."
+          },
+          "period": {
+            "type": "integer",
+            "description": "Duration of each period in seconds."
+          },
+          "cooldown": {
+            "type": "integer",
+            "description": "Cooldown period after scale operation in seconds.  If it is not set, the one set for the Role will be used."
+          }
+        }
+      },
+      "ScheduledPolicy": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "required": true,
+            "description": "Type of adjustment: CHANGE, CARDINALITY, PERCENTAGE_CHANGE."
+          },
+          "adjust": {
+            "type": "integer",
+            "required": true,
+            "description": "Positive or negative adjustment. Its meaning depends on 'type'."
+          },
+          "min_adjust_step": {
+            "type": "integer",
+            "required": false,
+            "description": "Optional parameter for PERCENTAGE_CHAGE adjustment type. If present, the policy will change the cardinality by at least the number of VMs set in this attribute."
+          },
+          "recurrence": {
+            "type": "string",
+            "required": false,
+            "description": "Time for recurring adjustments in Unix cron syntax."
+          },
+          "start_time": {
+            "type": "string",
+            "required": false,
+            "description": "Exact time for the adjustment."
+          },
+          "cooldown": {
+            "type": "integer",
+            "required": false,
+            "description": "Cooldown period after scale operation in seconds. If it is not set, the one set for the Role will be used."
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "The request has succeeded"
+      },
+      "201": {
+        "description": "Request was successful and a new resource has been created"
+      },
+      "202": {
+        "description": "The request has been accepted for processing but the processing has not been completed"
+      },
+      "204": {
+        "description": "The request has been accepted for processing but no info in the response"
+      },
+      "400": {
+        "description": "Malformed syntax"
+      },
+      "401": {
+        "description": "Bad authentication"
+      },
+      "403": {
+        "description": "Bad authorization"
+      },
+      "404": {
+        "description": "Resource not found"
+      },
+      "500": {
+        "description": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+      },
+      "501": {
+        "description": "The functionality requested is not supported."
+      }
+    }
+  }
+}
