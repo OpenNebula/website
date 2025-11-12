@@ -174,7 +174,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     * **Cost Summary:** review the *Estimated Cost Summary* to ensure it matches your expectations.
     * **Create Server:** once you have verified all settings, click **"Create Elastic Metal Server"** to provision and launch your instance.
 
-After some minutes, once the instance is running, connect to it via SSH using its public IP address:
+5. After some minutes and once the instance is running, connect to it via SSH using its public IP address:
 ```default
 $ ssh ubuntu@<your_instance_public_ip>
 ```
