@@ -179,7 +179,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
 $ ssh ubuntu@<your_instance_public_ip>
 ```
 
-First, verify that the GPUs are detected as PCI devices:
+6. Verify that the GPUs are detected as PCI devices:
 ```default
 $ lspci -Dnnk | grep NVIDIA
 ```
