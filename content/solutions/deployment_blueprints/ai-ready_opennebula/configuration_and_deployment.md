@@ -240,7 +240,7 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     # iptables-save | uniq | iptables-restore
     ```
 
-### Step 3: OneDeploy Dependencies
+### OneDeploy Dependencies
 
 Now, clone the `one-deploy` repository and install its dependencies. Note that all these commands should be run as `root`.
 
