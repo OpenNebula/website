@@ -172,7 +172,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     * **Private Networks:** enabling 25Gbps Private Networks is not needed for a single-node setup.
     * **Environmental Summary:** review the Environmental Footprint Summary.
     * **Cost Summary:** review the *Estimated Cost Summary* to ensure it matches your expectations.
-13. **Create Server:** Once you have verified all settings, click **"Create Elastic Metal Server"** to provision and launch your instance.
+    * **Create Server:** once you have verified all settings, click **"Create Elastic Metal Server"** to provision and launch your instance.
 
 After some minutes, once the instance is running, connect to it via SSH using its public IP address:
 ```default
