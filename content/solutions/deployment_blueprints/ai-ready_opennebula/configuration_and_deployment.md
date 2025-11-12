@@ -168,7 +168,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     *  **Disk Partitions:** Configure the disk partition table so that the `/` path has the full disk space available.
     *  **Name and Tags:** Enter a name for your server and add any optional tags for organization.
     *  **SSH Keys:** add your public SSH key. This is essential for securely accessing your server.
-9.  **Public Bandwidth:** The default bandwidth is usually sufficient. You can increase it here if your use case requires higher public throughput.
+    *  **Public Bandwidth:** the default bandwidth is usually sufficient. You can increase it here if your use case requires higher public throughput.
 10. **Private Networks:** Enabling 25Gbps Private Networks is not neede for a single-node setup.
 11. **Environmental Summary:** Review the Environmental Footprint Summary.
 12. **Cost Summary:** Review the **Estimated Cost Summary** to ensure it matches your expectations.
