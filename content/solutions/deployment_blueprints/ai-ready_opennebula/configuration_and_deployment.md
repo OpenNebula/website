@@ -199,7 +199,7 @@ $ ls -la /sys/kernel/iommu_groups/
 ```
 If the directory is not empty, IOMMU is active, which is a prerequisite for PCI passthrough.
 
-### Step 2: Server Pre-configuration
+### Server Pre-configuration
 
 These steps prepare the server for the OneDeploy tool, which runs as the `root` user.
 
