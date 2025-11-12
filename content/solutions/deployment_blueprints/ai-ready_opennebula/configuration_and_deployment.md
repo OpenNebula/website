@@ -171,7 +171,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     *  **Public Bandwidth:** the default bandwidth is usually sufficient. You can increase it here if your use case requires higher public throughput.
     * **Private Networks:** enabling 25Gbps Private Networks is not needed for a single-node setup.
     * **Environmental Summary:** review the Environmental Footprint Summary.
-12. **Cost Summary:** Review the **Estimated Cost Summary** to ensure it matches your expectations.
+    * **Cost Summary:** review the *Estimated Cost Summary* to ensure it matches your expectations.
 13. **Create Server:** Once you have verified all settings, click **"Create Elastic Metal Server"** to provision and launch your instance.
 
 After some minutes, once the instance is running, connect to it via SSH using its public IP address:
