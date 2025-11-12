@@ -193,7 +193,7 @@ You should see an output similar to this, listing your NVIDIA GPUs:
 
 Make sure you note down the full PCI addresses for both GPUs.
 
-Next, confirm that IOMMU is enabled on the server. The `ls` command below should list several numbered subdirectories:
+7. Confirm that IOMMU is enabled on the server. The `ls` command below should list several numbered subdirectories:
 ```default
 $ ls -la /sys/kernel/iommu_groups/
 ```
