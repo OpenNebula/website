@@ -163,7 +163,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     *  **Availability Zone:** Choose your preferred zone, such as `PARIS 2`. Alternatively, select `Auto allocate.
     *  **Billing Method:** Select either hourly or monthly. Note that hourly billing is often more cost-effective for short-term projects or testing.
     *  **Server Type:** Select an instance. For GPU acceleration, you must choose an `Elastic Metal Titanium server.
-4.  **Image:** Choose **Ubuntu 24.04 LTS** as the operating system.
+    *  **Image:** Choose `Ubuntu 24.04 LTS` as the operating system.
 5.  **Cloud-init:** You can skip this step, as it is not used in this setup.
 6.  **Disk Partitions:** It is recommended to configure the disk partition table so that the `/` path has the full disk space (e.g., 3TB) available.
 7.  **Name and Tags:** Enter a name for your server and add any optional tags for organization.
