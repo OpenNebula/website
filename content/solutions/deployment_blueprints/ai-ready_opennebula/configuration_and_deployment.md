@@ -203,7 +203,7 @@ If the directory is not empty, IOMMU is active, which is a prerequisite for PCI 
 
 These steps prepare the server for the OneDeploy tool, which runs as the `root` user.
 
-1.  **Enable Local Root SSH Access**:
+1.  Enable Local Root SSH Access:
     Generate an SSH key pair for the `root` user and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
     ```default
     $ sudo su
