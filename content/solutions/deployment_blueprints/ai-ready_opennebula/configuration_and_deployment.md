@@ -153,7 +153,7 @@ Here you have a practical guide to deploy an AI-ready OpenNebula cloud on a sing
 
 The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the same bare metal server.
 
-### Step 1: Instance Launch and Initial Checks
+### Instance Launch and Initial Checks
 
 Log in to your Scaleway console, navigate to **Bare Metal -> Elastic Metal**, and click **"Create Elastic Metal Server"**. Configure your server using the following steps in the portal:
 
