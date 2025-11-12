@@ -211,7 +211,7 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     # cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
     ```
 
-2.  **Create a Virtual Network Bridge**:
+2.  Create a Virtual Network Bridge:
     To provide network connectivity to the VMs, create a virtual bridge with NAT. This will allow VMs to access the internet through the server's public network interface.
 
     Create the Netplan configuration file for the bridge:
