@@ -169,7 +169,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     *  **Name and Tags:** Enter a name for your server and add any optional tags for organization.
     *  **SSH Keys:** add your public SSH key. This is essential for securely accessing your server.
     *  **Public Bandwidth:** the default bandwidth is usually sufficient. You can increase it here if your use case requires higher public throughput.
-10. **Private Networks:** Enabling 25Gbps Private Networks is not neede for a single-node setup.
+    * **Private Networks:** enabling 25Gbps Private Networks is not needed for a single-node setup.
 11. **Environmental Summary:** Review the Environmental Footprint Summary.
 12. **Cost Summary:** Review the **Estimated Cost Summary** to ensure it matches your expectations.
 13. **Create Server:** Once you have verified all settings, click **"Create Elastic Metal Server"** to provision and launch your instance.
