@@ -165,7 +165,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
     *  **Server Type:** Select an instance. For GPU acceleration, you must choose an `Elastic Metal Titanium server.
     *  **Image:** Choose `Ubuntu 24.04 LTS` as the operating system.
     *  **Cloud-init:** You can skip this step, as it is not used in this setup.
-6.  **Disk Partitions:** It is recommended to configure the disk partition table so that the `/` path has the full disk space (e.g., 3TB) available.
+    *  **Disk Partitions:** Configure the disk partition table so that the `/` path has the full disk space available.
 7.  **Name and Tags:** Enter a name for your server and add any optional tags for organization.
 8.  **SSH Keys:** Add your public SSH key. This is essential for securely accessing your server.
 9.  **Public Bandwidth:** The default bandwidth is usually sufficient. You can increase it here if your use case requires higher public throughput.
