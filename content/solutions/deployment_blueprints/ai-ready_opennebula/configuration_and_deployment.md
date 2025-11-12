@@ -160,7 +160,7 @@ The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the
 3. Click **"Create Elastic Metal Server"**. 
 4. Configure your server in the portal:
 
-1.  **Availability Zone:** Choose your preferred zone (e.g., `PARIS 2`) or select "Auto allocate".
+    *  **Availability Zone:** Choose your preferred zone, such as `PARIS 2`. Alternatively, select `Auto allocate.
 2.  **Billing Method:** Select either hourly or monthly. Note that hourly billing is often more cost-effective for short-term projects or testing.
 3.  **Server Type:** Select your instance. For GPU acceleration, you must choose an **Elastic Metal Titanium** server.
 4.  **Image:** Choose **Ubuntu 24.04 LTS** as the operating system.
