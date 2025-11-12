@@ -48,6 +48,8 @@ The vLLM appliance will be available through the OpenNebula Marketplace for ente
 - Uses Python’s native multiprocessing for multi-GPU inference.  
 - Does not require additional frameworks, such as Ray, unless deploying across multiple nodes, which is out of scope for this benchmarking task.  
 
+In order to install the vLLM appliance you can follow the steps in its corresponding [wiki](https://github.com/OpenNebula/one-apps/wiki/vllm_quick).
+
 
 
 ## Testing Environments
