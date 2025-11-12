@@ -17,213 +17,6 @@ weight: "3"
 
 This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machines/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
 
-<a id="onevm-command"></a>
-
-## The `onevm` command
-
-The `onevm` command manages OpenNebula virtual machines. The general structure of the command is as follows:
-
- `onevm`<a href="#commands">`command`</a>[<a href="#args">*args*</a>] [<a href="#options">*options*</a>] 
-
-Click on each element to view available commands, arguments and options.
-
-| <h4 id="commands"> Commands </h4>  |
-|---------------------------------|:----------------------------------------------|
-| `backup vmid`                   | <ul><li>Creates a VM backup on the given datastore</li><li>States: RUNNING, POWEROFF</li><li>Valid options: datastore, end, hourly, monthly, reset, schedule, weekly, yearly</li></ul>|  
-| `backup-cancel vmid`            | Cancels an active VM backup operation. States: RUNNING, POWEROFF|
-| `backupmode vmid mode`          | Updates the backup mode of a VM. It can be FULL\|INCREMENT |
-| `chgrp range\|vmid_list groupid`| Changes the VM group                           |
-| `chmod range\|vmid_list octet`  | Changes the VM permissions                     |
-| `chown range\|vmid_list userid [groupid]`| Changes the VM owner and group        |
-| `create [file]`                 | <ul><li>Creates a new VM from the given description instead of using a previously defined template (see `onetemplate create` and `onetemplate instantiate`).</li><li>Valid options: arch, boot, context, cpu, disk, dry, files_ds, hold, init, memory, multiple, name, net_context, nic, raw, report_ready, spice, spice_keymap, spice_listen, spice_password, ssh, startscript, user_inputs, vcpu, video, video_ats, video_iommu, video_resolution, video_vram, vnc, vnc_keymap, vnc_listen, vnc_password</li><li>Examples:<ul><li>Using a template description file: `onevm create vm_description.tmpl`</li><li>New VM named "arch vm" with a disk and a nic: `onevm create --name "arch vm" --memory 128 --cpu 1 --disk arch \ --network private_lan`</li><li>A vm with two disks: `onevm create --name "test vm" --memory 128 --cpu 1 --disk arch,data`</li></ul></li></ul>|
-| `create-chart vmid`             | Adds a charter to the VM; these are some consecutive scheduled actions. You can configure the actions in `onevm.yaml` |
-| `delete-chart vmid sched_id`    | Deletes a charter from the VM. Deprecated, use `sched-delete` instead. |
-| `deploy range\|vmid_list hostid [datastoreid]` | <ul><li>Deploys the given VM in the specified Host. This command forces the deployment, in a standard installation the Scheduler is in charge of this decision.</li><li>A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing.</li><li>States: PENDING, HOLD, STOPPED, UNDEPLOYED</li><li>Valid options: enforce, file</li></ul>|
-| `disk-attach vmid`              | <ul><li>Attaches a disk to a running VM.</li><li>A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing. When using a template add only one DISK instance.</li><li>States: RUNNING, POWEROFF</li><li>Valid options: cache, discard, file, image, prefix, target</li> |
-| `disk-detach vmid diskid`       | Detaches a disk from a running VM. States: RUNNING, POWEROFF
-| `disk-resize vmid diskid size`  | <ul><li>Resizes a VM disk. The new size should be larger than the old one.</li><li>The valid units are: T (TiB), G (GiB), and M (MiB). By default it is MiB.</li><li>States: RUNNING, POWEROFF</li></ul>|
-| `disk-saveas vmid diskid img_name` | <ul><li>Saves the specified VM disk as a new Image. The Image is created immediately, and the contents of the VM disk will be saved to it.</li><li>States: ANY</li><li>Valid options: snapshot, type</li></ul> |
-| `disk-snapshot-create vmid diskid name` | <ul><li>Takes a new snapshot of the given disk. This operation needs support from the Datastore drivers: QCOW2 or Ceph.</li><li>States: RUNNING, POWEROFF, SUSPENDED</li><li> Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-|  `disk-snapshot-delete vmid diskid disk_snapshot_id` | <ul><li> Deletes a disk snapshot.</li><li>States: RUNNING, POWEROFF, SUSPENDED</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `disk-snapshot-list vmid diskid` | Lists the snapshots of a disk. |
-| `disk-snapshot-rename vmid diskid disk_snapshot_id new_snapshot_name` | Renames a disk snapshot. |
-| `disk-snapshot-revert vmid diskid disk_snapshot_id` | <ul><li>Reverts disk state to a previously taken snapshot.</li><li>States: POWEROFF, SUSPENDED</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `hold range\|vmid_list`           | <ul><li> Sets the given VM on hold. A VM on hold is not scheduled until it is released. It can be, however, deployed manually; see `onevm deploy`.</li><li>States: PENDING</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly </li></ul> |
-| `list [filterflag]`               | <ul><li> Lists VMs in the pool. The default columns and their layout can be configured in *onevm.yaml*</li><li>Valid options: adjust, csv, csv_del, delay, describe, expand, extended, filter, json, kilobytes, list, listconf, no_expand, no_header, no_pager, numeric, operator, search, size, xml, yaml</li></ul>|
-| `lock range\|vmid_list`           | <ul><li>Locks a VM to prevent certain actions defined by different levels. The show and monitoring action will never be locked.</li><li>States: All. </li><li> Valid options: all, admin, manage, use. [Admin]: locks only Admin actions. [Manage]: locks Manage and Use actions. [Use]: locks Admin, Manage and Use actions.</li></ul>|
-| `migrate range\|vmid_list hostid [datastoreid]` | <ul><li>Migrates the given running VM to another Host. If used with `--live` parameter the migration is done without downtime. Datastore migration is not supported for `--live` flag.</li><li>States: RUNNING</li><li>Valid options: enforce, live, poweroff, poweroff_hard</li></ul>|
-| `nic-attach vmid`                  | <ul><li>Attaches a NIC to a VM.</li><li>To attach a nic alias: A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing. When using a template add only one NIC instance.</li><li>To hotplug a PCI device and use it as a NIC interface in the VM select it with `--pci` (short_address) or `--pci_device` (device ID), `--pci_class` (class ID) and/or `--pci_vendor` (vendor ID).</li><li>States: RUNNING, POWEROFF</li><li>Valid options: alias, file, ip, network, nic_name, pci, pci_class, pci_device, pci_vendor</li></ul> |
-|  `nic-detach vmid nicid`            | Detaches a NIC from a running VM. States: RUNNING, POWEROFF |
-| `nic-update vmid nicid [file]`      | <ul><li>Updates a NIC for a VM. In case the VM is running, trigger NIC update on the host.</li><li>States: Almost all, except BOOT*, MIGRATE and HOTPLUG-NIC</li><li>Valid options: append</li></ul>|
-| `pci-attach vmid`                   | <ul><li>Attaches a PCI to a VM. You can specify the PCI device with `--pci` (short_address) or `--pci_device` (device ID), `--pci_class` (class ID) and/or `--pci_vendor` (vendor ID).</li><li>States: POWEROFF</li><li>Valid options: file, pci, pci_class, pci_device, pci_vendor</li></ul> |
-| `pci-detach vmid pciid`             | Detaches a PCI device from a VM. States: POWEROFF           |
-| `port-forward vmid [port]`          | Gets port forwarding from a NIC, e.g: 1.2.3.4@4000 -> 1, means that to connect to VM port 1, you need to connect to IP 1.2.3.4 in port 4000. Valid options: `nic_id` |
-| `poweroff range\|vmid_list`         | <ul><li>Powers off the given VM. The VM will remain in the poweroff state, and can be powered on with the `onevm resume` command.</li><li>States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `reboot range\|vmid_list`           | <ul><li>Reboots the given VM, this is equivalent to execute the reboot command from the VM console. The VM will be ungracefully rebooted if `--hard` is used.</li><li> States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `recover range\|vmid_list`          | <ul><li>Recovers a stuck VM that is waiting for a driver operation. The recovery may be done by failing, succeeding or retrying the current operation. *You need to manually check the VM status on the host*, to decide if the operation was successful or not, or if it can be retried.</li><li>Example: A VM is stuck in *migrate* because of a hardware failure. You need to check if the VM is running in the new host or not to recover the vm with `--success` or `--failure`, respectively.</li><li>States for success/failure recovers: Any ACTIVE state.</li><li> States for a retry recover: Any FAILURE state</li><li>States for delete: Any</li><li>States for recreate: Any but DONE</li><li>States for delete-db: Any</li><li>Valid options: delete, deletedb, failure, interactive, recreate, retry, success</li></ul>|
-| `release range\|vmid_list`           | <ul><li>Releases a VM on hold. See `onevm hold`</li><li>States: HOLD</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `rename vmid name`                   | Renames the VM.                       |
-| `resched range\|vmid_list`           | Sets the rescheduling flag for the VM. States: RUNNING, POWEROFF|
-| `resize vmid`                        | <ul><li>Resizes the capacity of a Virtual Machine.</li><li> A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing.</li><li>Valid options: cpu, enforce, file, memory, vcpu</li>|
-| `restore vmid imageid`               | Restores the Virtual Machine from the backup Image. The VM must be in poweroff state. Valid options: disk_id, increment |
-| `resume range\|vmid_list`            | <ul><li>Resumes the execution of a saved VM</li><li>States: STOPPED, SUSPENDED, UNDEPLOYED, POWEROFF, UNKNOWN</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `save vmid name`                     | <ul><li>Clones the VM's source Template, replacing the disks with live snapshots of the current disks. The VM capacity and NICs are also preserved</li><li>States: POWEROFF</li><li>Valid options: persistent</li></ul>|
-| `sched-delete vmid sched_id`         | Deletes a Scheduled Action from the VM. |
-| `sched-update vmid sched_id [file]`  | Updates a Scheduled Action from a VM. |
-| `sg-attach vmid nicid sgid`          | Attaches a Security Group to a VM. States: All, except BOOT, MIGRATE and HOTPLUG_NIC |
-| `sg-detach vmid nicid sgid`          | Detaches a Security Group from a VM. States: All, except BOOT, MIGRATE and HOTPLUG_NIC |
-| `show vmid`                          | Shows information for the given VM. Valid options: all, decrypt, json, xml, yaml|
-| `snapshot-create range\|vmid_list [name]` | Creates a new VM snapshot. Valid options: end, hourly, monthly, schedule, weekly, yearly |
-| `snapshot-delete vmid snapshot_id`   | Deletes a snapshot of a VM. Valid options: end, hourly, monthly, schedule, weekly, yearly |
-| `snapshot-list vmid`                 | Lists the snapshots of a VM. |
-| `snapshot-revert vmid snapshot_id`   | Reverts a VM to a saved snapshot. Valid options: end, hourly, monthly, schedule, weekly, yearly |
-| `ssh vmid [login]`                   | <ul><li>SSH into VM.</li><li>Options example:`-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null`</li><li>Valid options: cmd, nic_id, ssh_opts</li></ul>|
-| `stop range\|vmid_list`              | <ul><li> Stops a running VM. The VM state is saved and transferred back to the front-end along with the disk files</li><li>States: RUNNING</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `suspend range\|vmid_list`           | <ul><li>Saves a running VM. Similar to `onevm stop`, but the files are left in the remote machine to later restart the VM there. The resources are not freed and there is no need to re-schedule the VM.</li><li>States: RUNNING</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `terminate range\|vmid_list`         | <ul><li>Terminates the given VM. The VM life cycle will end. With `--hard` it unplugs the VM.</li><li>States: valid if no operation is being performed on the VM</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `top [filterflag]`                   | Lists Images continuously. Valid options: adjust, csv, csv_del, delay, expand, extended, filter, json, kilobytes, list, listconf, no_expand, no_header, no_pager, numeric, operator, size, xml, yaml |
-| `undeploy range\|vmid_list`          | <ul><li>Shuts down the given VM. The VM is saved in the system Datastore. With --hard it unplugs the VM.</li><li>States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul> |
-| `unlock range\|vmid_list`            | Unlocks a Virtual Machine. Valid states: All. |
-| `unresched range\|vmid_list`         | Clears the rescheduling flag for the VM. States: RUNNING, POWEROFF |
-| `update vmid [file]`                 | Updates the user template contents. If a path is not provided the editor will be launched to modify the current content. Valid options: append |
-| `update-chart vmid sched_id [file]`  | Updates a charter from a VM. Deprecated command: use `sched-update` instead. |
-| `updateconf vmid [file]`             | <ul><li>Updates the configuration of a VM.</li><li>This command accepts a template or opens an editor. A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing.</li><li>Valid states are: running, pending, failure, poweroff, undeploy, hold or cloning. In running state only changes in CONTEXT and BACKUP_CONFIG take effect immediately, other values may need a VM restart.</li>Configuration attributes include: <ul><li>OS        = ["ARCH", "MACHINE", "KERNEL", "INITRD", "BOOTLOADER", "BOOT", "KERNEL_CMD", "ROOT", "SD_DISK_BUS", "UUID", "FIRMWARE", "FIRMWARE_FORMAT"]</li><li>FEATURES  = ["ACPI", "PAE", "APIC", "LOCALTIME", "HYPERV", "GUEST_AGENT", "VIRTIO_SCSI_QUEUES", "VIRTIO_BLK_QUEUES", "IOTHREADS"]</li><li>INPUT     = ["TYPE", "BUS"]</li><li>GRAPHICS  = ["TYPE", "LISTEN", "PASSWD", "KEYMAP", "COMMAND"]</li><li>VIDEO     = ["TYPE", "IOMMU", "ATS", "VRAM", "RESOLUTION"]</li><li>RAW       = ["DATA", "DATA_VMX", "TYPE", "VALIDATE"]</li><li>CPU_MODEL = ["MODEL", "FEATURES"]</li><li>BACKUP_CONFIG = ["FS_FREEZE", "KEEP_LAST", "BACKUP_VOLATILE", "MODE", "INCREMENT_MODE"]</li><li>CONTEXT (any value, ETH* if CONTEXT_ALLOW_ETH_UPDATES set in oned.conf, *variable substitution will be made*)</li></ul><li>Valid options: append</li></ul>|
-| `vnc vmid`                            | Opens a VNC session to the VM. Valid options include: vnc|
-
-| <h4 id="args"> Args </h4> |
-|--------------------------------------- | -------------------------------|
-| `datastoreid`                          | OpenNebula DATASTORE name or id|
-| `disk_snapshot_id`                     | Disk_snapshot name or id       |
-| `diskid`                               | Disk id                        |
-| `file`                                 | Path to a file                 |
-| `filterflag <option>`                  | Option:<ul><li> a, all: all the known VMs</li><li> m, mine: the VM belonging to the user in ONE_AUTH</li><li> g, group: 'mine' plus the VM belonging to the groups the user is member of</li><li> G, primary group: The VM owned the user's primary group</li><li> uid: VM of the user identified by this uid </li><li> user: VM of the user identified by the username</li><ul>|
-| `groupid`                              | OpenNebula GROUP name or id    |
-| `hostid`                               | OpenNebula HOST name or id     |
-| `imageid`                              | OpenNebula IMAGE name or id    |
-| `nicid`                                | NIC name or id                 |
-| `pciid`                                | PCI id                         |
-| `range`                                | List of id's in the form 1,8..15 |
-| `sched_id`                             | Scheduled Action id            |
-| `sgid`                                 | Security Group id              |
-| `size`                                 | Disk size in MiB               |
-| `snapshot_id`                          | Snapshot name or id            |
-| `text`                                 | String                         |
-| `userid`                               | OpenNebula USER name or id     |
-| `vmid`                                 | OpenNebula VM name or id       |
-| `vmid_list`                            |Comma-separated list of OpenNebula VM names or ids |
-
-| <h4 id="options"> Options </h4> |
-|-------------------------------|:----------------------------------------------|
-| `--adjust x,y,z`              | Adjusts size to not truncate selected columns  |
-| `--admin`                     | Locks admin actions                            |
-| `-a, --alias alias`           | Attaches the NIC as an ALIAS                    |
-| `--all`                       | Shows all template data                        |
-| `-a, --append`                | Appends new attributes to the current template |
-| `--arch arch`                 | List details of the VM architecture. Example: i386 or x86_64  |
-| `--boot device_list`          | Sets boot device list e.g. disk0,disk2,nic0    | 
-| `--cache cache_mode`          | Configures hypervisor cache mode: default, none, writethrough, writeback, directsync or unsafe, (Only KVM driver)|
-| `--cmd cmd`                   | CMD to run when SSH                           |
-| `--context line1,line2,line3` | Replaces the context section with the specified lines |
-| `--cpu cpu`                   | Shows CPU percentage reserved for the VM (1=100% one CPU) |
-| `--csv`                       | Writes table in csv format                     |
-| `--csv-del del`               | Sets delimiter for csv output                  |
-| `-d`, `--datastore id\|name`  | Selects the datastore                         |
-| `--decrypt`                   | Gets decrypted attributes                      |
-| `-d`, `--delay x`             | Sets the delay in seconds for top command     |
-| `--delete`                    | Deletes the VM. **Important**: No recover action possible.    |
-| `--delete-db`                 | Deletes the VM from the DB. It does not trigger any action on the hypervisor.**Important**: No recover action possible.   |
-| `--describe`                  | Describes list columns                         |
-| `--discard discard_mode`      | Hypervisor discard mode: ignore or unmap. Only KVM driver. |
-| `--disk image0,image1`        | Disks to attach. To use an image owned by other user run `user[disk]`. Add any additional attributes separated by ':' and in the shape of KEY=VALUE. For example, if the disk must be resized, use `image0:size=1000`. Alternatively, `image0:size=1000:target=vda,image1:target=vdb` |
-| `--disk-id disk_id`           | Uses only selected disk ID                     |   
-| `--dry`                       | Just print the template                       |
-| `--end number\|TIME`          | ----                                          |
-| `--endpoint endpoint`         | URL of OpenNebula xmlrpc frontend             |
-| `-e`, `--enforce`             | Enforces that the host capacity is not exceeded|
-| `--expand [x=prop,y=prop]`    | Expands column size to fill the terminal. For example: `$onevm list --expand name=0.4,group=0.6` will expand name 40% and group 60%. `$onevm list --expand name,group` expands name and group based on its size. `$onevm list --expand` will expand all columns.    | 
-| `--extended`                  | Shows info extended. It only works with xml output. |
-| `--failure`                   | Recovers a VM by failing the pending action     |
-| `-f`, `--file file`           | Selectss the template file                      |
-| `--files_ds file1,file2`      | Adds files to the contextualization CD from the files datastore |
-| `-f`, `--filter x,y,z`        | Filters data. An array is specified with column=value pairs. Valid operators =,!=,<,<=,>,>=,~. Examples: `NAME=test` matches name with test, and  `NAME~test` matches every NAME containing the substring 'test' |
-| `--hard`                      | Does not communicate with the guest OS         |
-| `-h`, `--help`                | Shows this message                              |
-| `--hold`                      | Creates the new VM on hold state instead of pending |
-| `--hourly hour`               | Repeats the schedule action with the given hourly frequency. For example every 5 hours: `onevm resume 0 --schedule "09/23 14:15" --hourly 5` |
-| `-i`, `--image id\|name`      | Selects the image                              |  
-| `--increment increment_id`    | Uses the given increment ID to restore the backup. If not provided the last one will be used. |
-| `--init script1,script2`      | Script or scripts to start in context          |
-| `--interactive`               | Enables interactive recovery. Only works alongside the `--retry` option. |
-| `-i`, `--ip ip`               | IP address for the new NIC                     |
-| `-j`, `--json`                | Shows the resource in JSON format               |
-| `-k`, `--kilobytes`           | Shows units in kilobytes                        |
-| `-l`, `--list x,y,z`          | Selects columns to display with list command   |
-| `-c`, `--listconf conf`       | Selects a predefined column list               |
-| `--live`                      | Does the action with the VM running              |
-| `--manage`                    | Locks manage actions                            | 
-| `--memory memory`             | Memory amount given to the VM. By default the unit is megabytes. To use gigabytes add a `g`, floats can be used: 8g=8192, 0.5g=512 |
-| `--monthly days`              | Repeats the scheduled action the days of the month specified, it can be a number between 1,31 separated with commas. For example: `onevm resume 0 --schedule "09/23 14:15" --monthly 1,14`|
-| `-m`, `--multiple x`          | Instances multiple VMs                          |
-| `--name name`                 | Name for the new VM                            |
-| `--net_context`               | Adds network contextualization parameters       |
-| `-n`, `--network id\|name`     | Selects the virtual network                    |
-| `--nic network0,network1`     | Networks to attach. To use a network owned by another user run `user[network]`. Additional attributes are supported like with the `--disk` option. Also you can use `auto` if you want  OpenNebula to automatically select the network |
-| `--nic-id nic_id`             | NIC to use when SSH                            |
-| `--nic_name name`             | Name of the NIC                                |
-| `--no-expand`                 | Disable expand                                 |
-| `--no-header`                 | Hides the header of the table                  |
-| `--no-pager`                  | Disables pagination                             |  
-| `-n`, `--numeric`             | Does not translate user and group IDs            |
-| `--operator operator`         | Logical operator used on filters: AND, OR.Default: AND. |
-| `--password password`         | Password to authenticate with OpenNebula       |
-| `--pci short_address`         | Selects PCI device by its short address         |
-| `--pci_class class ID`        | Selects PCI device by its class ID              |
-| `--pci_device device ID`      | Selects PCI device by its device ID             |
-| `--pci_vendor vendor ID`      | Selects PCI device by its vendor ID             |
-| `--persistent`                | Makes the new images persistent                 |
-| `--poff`                      | Does the migrate by poweringoff the vm           |
-| `--poff-hard`                 | Does the migrate by poweringoff hard the vm      |
-| `--prefix prefix`             | Overrides the DEV_PREFIX of the image          | 
-| `--raw string`                | Raw string to add to the template. Not to be confused with the RAW attribute. |
-| `--recreate`                  | No recover action possible, delete and recreate the VM. |
-| `--report_ready`              | Sends READY=YES to OneGate, useful for OneFlow. |
-| `--reset`                     | Creates a new backup image, from a new full backup (only for incremental) |
-| `--retry`                     | Recovers a VM by retrying the last failed action. |
-| `--schedule TIME`             | Schedules this action to be executed after the given time. For example: `onevm resume 0 --schedule "09/23 14:15"` |
-| `--search search`             | Queries in PATH=VALUE format. For example: `onevmlist --search "VM.NAME=abc&VM.TEMPLATE.DISK[*].IMAGE=db1"`| 
-| `-s`, `--size x=size,y=size`    | Changes the size of selected columns. For example: `$ onevm list --size "name=20"` will make column *name* size 20. |
-| `-s`, `--snapshot snapshot`    | ID of the Snapshot to save.                    |
-| `--spice`                     | Adds spice server to the VM.                     |
-| `--spice-keymap keymap`       | Spice keyboard layout                           |
-| `--spice-listen ip`           | Spice IP where to listen for connections. By default, it is 0.0.0.0 (all interfaces).|
-| `--spice-password password`   | Spice password                                  | 
-| `--ssh [file]`                | Adds an ssh public key to the context. If the file is omited then the user variable SSH_PUBLIC_KEY will be used. |
-| `--ssh-options options`       | SSH options to use                              |
-| `--startscript [file]`        | Starts script to be executed                     |
-| `--success`                   | Recovers a VM by succeeding the pending action   |
-| `-t`, `--target target`       | Device where the image will be attached         |
-| `-t`, `--type type`           | Types of the new Image                           |
-| `--use`                       | Locks use actions                                |
-| `--user name`                 | User name to connect to OpenNebula              |
-| `--user-inputs ui1,ui2,ui3`   | Specifies the user inputs values when instantiating |
-| `--vcpu vcpu`                 | Number of virtualized CPUs                      |
-| `-v`, `--verbose`             | Verbose mode                                    |
-| `-V`, `--version`             | Shows version and copyright information          |
-| `--video type`                | Adds a custom video device (none, vga, cirrus, virtio) |
-| `--video-ats`                 | Enables ATS (Address Translation Services) for the video device. |
-| `--video-iommu`               | Enables IOMMU (I/O Memory Management Unit) for the video device. |
-| `--video-resolution resolution` | Video resolution, in format like: 1280x720 or 1920x1080 |
-| `--video-vram vram`           | VRAM allocated to the video device. By default the unit is megabytes. To use gigabytes add a `g`, floats can be used: 8g=8192, 0.5g=512 |
-| `--vnc`                       | Adds VNC server to the VM                        |
-| `--vnc-keymap keymap`         | VNC keyboard layout                             |
-| `--vnc-listen ip`             | VNC IP where to listen for connections. By default it is 0.0.0.0 (all interfaces). |
-| `--vnc-password password`     | VNC password                                    |
-| `--weekly days`               | Repeats the schedule action the specified days of the week. It can be a number between 0 (Sunday) to 6 (Saturday) separated with commas. For example: `onevm resume 0 --schedule "09/23 14:15" --weekly 0,2,4`|
-| `-x`, `--xml`                 | Shows the resource in xml format                 |
-| `-y`, `--yaml`                | Shows the resource in YAML format                |
-| `--yearly days`               | Repeats the schedule action the specififed days of the year. It can be a number between 0,365 separated with commas. For example: `onevm resume 0 --schedule "09/23 14:15" --yearly 30,60`|
-
-
 ## Basic Virtual Machine Operations
 
 ### Creating and Listing VMs
@@ -1275,3 +1068,214 @@ root@<guest-VM>:~$ adduser <username>
 
 {{< alert title="Note" color="success" >}}
 Guacamole SSH uses RSA encryption. Make sure the VM SSH accepts RSA, otherwise you need to explicitly enable it in the VM SSH configuration (HostkeyAlgorithms and PubkeyAcceptedAlgorithms set as ‘+ssh-rsa){{< /alert >}} 
+
+<a id="onevm-command"></a>
+
+## The `onevm` command
+
+The `onevm` command manages OpenNebula virtual machines. The general structure of the command is as follows:
+
+ `onevm`<a href="#commands">`command`</a>[<a href="#args">*args*</a>] [<a href="#options">*options*</a>] 
+
+
+| <h4 id="commands"> Commands </h4>  |
+|---------------------------------|:----------------------------------------------|
+| `backup vmid`                   | <ul><li>Creates a VM backup on the given datastore</li><li>States: RUNNING, POWEROFF</li><li>Valid options: datastore, end, hourly, monthly, reset, schedule, weekly, yearly</li></ul>|  
+| `backup-cancel vmid`            | Cancels an active VM backup operation. States: RUNNING, POWEROFF|
+| `backupmode vmid mode`          | Updates the backup mode of a VM. It can be FULL\|INCREMENT |
+| `chgrp range\|vmid_list groupid`| Changes the VM group                           |
+| `chmod range\|vmid_list octet`  | Changes the VM permissions                     |
+| `chown range\|vmid_list userid [groupid]`| Changes the VM owner and group        |
+| `create [file]`                 | <ul><li>Creates a new VM from the given description instead of using a previously defined template (see `onetemplate create` and `onetemplate instantiate`).</li><li>Valid options: arch, boot, context, cpu, disk, dry, files_ds, hold, init, memory, multiple, name, net_context, nic, raw, report_ready, spice, spice_keymap, spice_listen, spice_password, ssh, startscript, user_inputs, vcpu, video, video_ats, video_iommu, video_resolution, video_vram, vnc, vnc_keymap, vnc_listen, vnc_password</li><li>Examples:<ul><li>Using a template description file: `onevm create vm_description.tmpl`</li><li>New VM named "arch vm" with a disk and a nic: `onevm create --name "arch vm" --memory 128 --cpu 1 --disk arch \ --network private_lan`</li><li>A vm with two disks: `onevm create --name "test vm" --memory 128 --cpu 1 --disk arch,data`</li></ul></li></ul>|
+| `create-chart vmid`             | Adds a charter to the VM; these are some consecutive scheduled actions. You can configure the actions in `onevm.yaml` |
+| `delete-chart vmid sched_id`    | Deletes a charter from the VM. Deprecated, use `sched-delete` instead. |
+| `deploy range\|vmid_list hostid [datastoreid]` | <ul><li>Deploys the given VM in the specified Host. This command forces the deployment, in a standard installation the Scheduler is in charge of this decision.</li><li>A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing.</li><li>States: PENDING, HOLD, STOPPED, UNDEPLOYED</li><li>Valid options: enforce, file</li></ul>|
+| `disk-attach vmid`              | <ul><li>Attaches a disk to a running VM.</li><li>A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing. When using a template add only one DISK instance.</li><li>States: RUNNING, POWEROFF</li><li>Valid options: cache, discard, file, image, prefix, target</li> |
+| `disk-detach vmid diskid`       | Detaches a disk from a running VM. States: RUNNING, POWEROFF
+| `disk-resize vmid diskid size`  | <ul><li>Resizes a VM disk. The new size should be larger than the old one.</li><li>The valid units are: T (TiB), G (GiB), and M (MiB). By default it is MiB.</li><li>States: RUNNING, POWEROFF</li></ul>|
+| `disk-saveas vmid diskid img_name` | <ul><li>Saves the specified VM disk as a new Image. The Image is created immediately, and the contents of the VM disk will be saved to it.</li><li>States: ANY</li><li>Valid options: snapshot, type</li></ul> |
+| `disk-snapshot-create vmid diskid name` | <ul><li>Takes a new snapshot of the given disk. This operation needs support from the Datastore drivers: QCOW2 or Ceph.</li><li>States: RUNNING, POWEROFF, SUSPENDED</li><li> Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+|  `disk-snapshot-delete vmid diskid disk_snapshot_id` | <ul><li> Deletes a disk snapshot.</li><li>States: RUNNING, POWEROFF, SUSPENDED</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `disk-snapshot-list vmid diskid` | Lists the snapshots of a disk. |
+| `disk-snapshot-rename vmid diskid disk_snapshot_id new_snapshot_name` | Renames a disk snapshot. |
+| `disk-snapshot-revert vmid diskid disk_snapshot_id` | <ul><li>Reverts disk state to a previously taken snapshot.</li><li>States: POWEROFF, SUSPENDED</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `hold range\|vmid_list`           | <ul><li> Sets the given VM on hold. A VM on hold is not scheduled until it is released. It can be, however, deployed manually; see `onevm deploy`.</li><li>States: PENDING</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly </li></ul> |
+| `list [filterflag]`               | <ul><li> Lists VMs in the pool. The default columns and their layout can be configured in *onevm.yaml*</li><li>Valid options: adjust, csv, csv_del, delay, describe, expand, extended, filter, json, kilobytes, list, listconf, no_expand, no_header, no_pager, numeric, operator, search, size, xml, yaml</li></ul>|
+| `lock range\|vmid_list`           | <ul><li>Locks a VM to prevent certain actions defined by different levels. The show and monitoring action will never be locked.</li><li>States: All. </li><li> Valid options: all, admin, manage, use. [Admin]: locks only Admin actions. [Manage]: locks Manage and Use actions. [Use]: locks Admin, Manage and Use actions.</li></ul>|
+| `migrate range\|vmid_list hostid [datastoreid]` | <ul><li>Migrates the given running VM to another Host. If used with `--live` parameter the migration is done without downtime. Datastore migration is not supported for `--live` flag.</li><li>States: RUNNING</li><li>Valid options: enforce, live, poweroff, poweroff_hard</li></ul>|
+| `nic-attach vmid`                  | <ul><li>Attaches a NIC to a VM.</li><li>To attach a nic alias: A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing. When using a template add only one NIC instance.</li><li>To hotplug a PCI device and use it as a NIC interface in the VM select it with `--pci` (short_address) or `--pci_device` (device ID), `--pci_class` (class ID) and/or `--pci_vendor` (vendor ID).</li><li>States: RUNNING, POWEROFF</li><li>Valid options: alias, file, ip, network, nic_name, pci, pci_class, pci_device, pci_vendor</li></ul> |
+|  `nic-detach vmid nicid`            | Detaches a NIC from a running VM. States: RUNNING, POWEROFF |
+| `nic-update vmid nicid [file]`      | <ul><li>Updates a NIC for a VM. In case the VM is running, trigger NIC update on the host.</li><li>States: Almost all, except BOOT*, MIGRATE and HOTPLUG-NIC</li><li>Valid options: append</li></ul>|
+| `pci-attach vmid`                   | <ul><li>Attaches a PCI to a VM. You can specify the PCI device with `--pci` (short_address) or `--pci_device` (device ID), `--pci_class` (class ID) and/or `--pci_vendor` (vendor ID).</li><li>States: POWEROFF</li><li>Valid options: file, pci, pci_class, pci_device, pci_vendor</li></ul> |
+| `pci-detach vmid pciid`             | Detaches a PCI device from a VM. States: POWEROFF           |
+| `port-forward vmid [port]`          | Gets port forwarding from a NIC, e.g: 1.2.3.4@4000 -> 1, means that to connect to VM port 1, you need to connect to IP 1.2.3.4 in port 4000. Valid options: `nic_id` |
+| `poweroff range\|vmid_list`         | <ul><li>Powers off the given VM. The VM will remain in the poweroff state, and can be powered on with the `onevm resume` command.</li><li>States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `reboot range\|vmid_list`           | <ul><li>Reboots the given VM, this is equivalent to execute the reboot command from the VM console. The VM will be ungracefully rebooted if `--hard` is used.</li><li> States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `recover range\|vmid_list`          | <ul><li>Recovers a stuck VM that is waiting for a driver operation. The recovery may be done by failing, succeeding or retrying the current operation. *You need to manually check the VM status on the host*, to decide if the operation was successful or not, or if it can be retried.</li><li>Example: A VM is stuck in *migrate* because of a hardware failure. You need to check if the VM is running in the new host or not to recover the vm with `--success` or `--failure`, respectively.</li><li>States for success/failure recovers: Any ACTIVE state.</li><li> States for a retry recover: Any FAILURE state</li><li>States for delete: Any</li><li>States for recreate: Any but DONE</li><li>States for delete-db: Any</li><li>Valid options: delete, deletedb, failure, interactive, recreate, retry, success</li></ul>|
+| `release range\|vmid_list`           | <ul><li>Releases a VM on hold. See `onevm hold`</li><li>States: HOLD</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `rename vmid name`                   | Renames the VM.                       |
+| `resched range\|vmid_list`           | Sets the rescheduling flag for the VM. States: RUNNING, POWEROFF|
+| `resize vmid`                        | <ul><li>Resizes the capacity of a Virtual Machine.</li><li> A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing.</li><li>Valid options: cpu, enforce, file, memory, vcpu</li>|
+| `restore vmid imageid`               | Restores the Virtual Machine from the backup Image. The VM must be in poweroff state. Valid options: disk_id, increment |
+| `resume range\|vmid_list`            | <ul><li>Resumes the execution of a saved VM</li><li>States: STOPPED, SUSPENDED, UNDEPLOYED, POWEROFF, UNKNOWN</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `save vmid name`                     | <ul><li>Clones the VM's source Template, replacing the disks with live snapshots of the current disks. The VM capacity and NICs are also preserved</li><li>States: POWEROFF</li><li>Valid options: persistent</li></ul>|
+| `sched-delete vmid sched_id`         | Deletes a Scheduled Action from the VM. |
+| `sched-update vmid sched_id [file]`  | Updates a Scheduled Action from a VM. |
+| `sg-attach vmid nicid sgid`          | Attaches a Security Group to a VM. States: All, except BOOT, MIGRATE and HOTPLUG_NIC |
+| `sg-detach vmid nicid sgid`          | Detaches a Security Group from a VM. States: All, except BOOT, MIGRATE and HOTPLUG_NIC |
+| `show vmid`                          | Shows information for the given VM. Valid options: all, decrypt, json, xml, yaml|
+| `snapshot-create range\|vmid_list [name]` | Creates a new VM snapshot. Valid options: end, hourly, monthly, schedule, weekly, yearly |
+| `snapshot-delete vmid snapshot_id`   | Deletes a snapshot of a VM. Valid options: end, hourly, monthly, schedule, weekly, yearly |
+| `snapshot-list vmid`                 | Lists the snapshots of a VM. |
+| `snapshot-revert vmid snapshot_id`   | Reverts a VM to a saved snapshot. Valid options: end, hourly, monthly, schedule, weekly, yearly |
+| `ssh vmid [login]`                   | <ul><li>SSH into VM.</li><li>Options example:`-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null`</li><li>Valid options: cmd, nic_id, ssh_opts</li></ul>|
+| `stop range\|vmid_list`              | <ul><li> Stops a running VM. The VM state is saved and transferred back to the front-end along with the disk files</li><li>States: RUNNING</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `suspend range\|vmid_list`           | <ul><li>Saves a running VM. Similar to `onevm stop`, but the files are left in the remote machine to later restart the VM there. The resources are not freed and there is no need to re-schedule the VM.</li><li>States: RUNNING</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `terminate range\|vmid_list`         | <ul><li>Terminates the given VM. The VM life cycle will end. With `--hard` it unplugs the VM.</li><li>States: valid if no operation is being performed on the VM</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
+| `top [filterflag]`                   | Lists Images continuously. Valid options: adjust, csv, csv_del, delay, expand, extended, filter, json, kilobytes, list, listconf, no_expand, no_header, no_pager, numeric, operator, size, xml, yaml |
+| `undeploy range\|vmid_list`          | <ul><li>Shuts down the given VM. The VM is saved in the system Datastore. With --hard it unplugs the VM.</li><li>States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul> |
+| `unlock range\|vmid_list`            | Unlocks a Virtual Machine. Valid states: All. |
+| `unresched range\|vmid_list`         | Clears the rescheduling flag for the VM. States: RUNNING, POWEROFF |
+| `update vmid [file]`                 | Updates the user template contents. If a path is not provided the editor will be launched to modify the current content. Valid options: append |
+| `update-chart vmid sched_id [file]`  | Updates a charter from a VM. Deprecated command: use `sched-update` instead. |
+| `updateconf vmid [file]`             | <ul><li>Updates the configuration of a VM.</li><li>This command accepts a template or opens an editor. A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing.</li><li>Valid states are: running, pending, failure, poweroff, undeploy, hold or cloning. In running state only changes in CONTEXT and BACKUP_CONFIG take effect immediately, other values may need a VM restart.</li>Configuration attributes include: <ul><li>OS        = ["ARCH", "MACHINE", "KERNEL", "INITRD", "BOOTLOADER", "BOOT", "KERNEL_CMD", "ROOT", "SD_DISK_BUS", "UUID", "FIRMWARE", "FIRMWARE_FORMAT"]</li><li>FEATURES  = ["ACPI", "PAE", "APIC", "LOCALTIME", "HYPERV", "GUEST_AGENT", "VIRTIO_SCSI_QUEUES", "VIRTIO_BLK_QUEUES", "IOTHREADS"]</li><li>INPUT     = ["TYPE", "BUS"]</li><li>GRAPHICS  = ["TYPE", "LISTEN", "PASSWD", "KEYMAP", "COMMAND"]</li><li>VIDEO     = ["TYPE", "IOMMU", "ATS", "VRAM", "RESOLUTION"]</li><li>RAW       = ["DATA", "DATA_VMX", "TYPE", "VALIDATE"]</li><li>CPU_MODEL = ["MODEL", "FEATURES"]</li><li>BACKUP_CONFIG = ["FS_FREEZE", "KEEP_LAST", "BACKUP_VOLATILE", "MODE", "INCREMENT_MODE"]</li><li>CONTEXT (any value, ETH* if CONTEXT_ALLOW_ETH_UPDATES set in oned.conf, *variable substitution will be made*)</li></ul><li>Valid options: append</li></ul>|
+| `vnc vmid`                            | Opens a VNC session to the VM. Valid options include: vnc|
+
+<a href="#onevm-command">Back to The `onevm` Command</a>
+
+| <h4 id="args"> Args </h4> |
+|--------------------------------------- | -------------------------------|
+| `datastoreid`                          | OpenNebula DATASTORE name or id|
+| `disk_snapshot_id`                     | Disk_snapshot name or id       |
+| `diskid`                               | Disk id                        |
+| `file`                                 | Path to a file                 |
+| `filterflag <option>`                  | Option list:<ul><li> a, all: all the known VMs</li><li> m, mine: the VM belonging to the user in ONE_AUTH</li><li> g, group: 'mine' plus the VM belonging to the groups the user is member of</li><li> G, primary group: The VM owned the user's primary group</li><li> uid: VM of the user identified by this uid </li><li> user: VM of the user identified by the username</li><ul>|
+| `groupid`                              | OpenNebula GROUP name or id    |
+| `hostid`                               | OpenNebula HOST name or id     |
+| `imageid`                              | OpenNebula IMAGE name or id    |
+| `nicid`                                | NIC name or id                 |
+| `pciid`                                | PCI id                         |
+| `range`                                | List of id's in the form 1,8..15 |
+| `sched_id`                             | Scheduled Action id            |
+| `sgid`                                 | Security Group id              |
+| `size`                                 | Disk size in MiB               |
+| `snapshot_id`                          | Snapshot name or id            |
+| `text`                                 | String                         |
+| `userid`                               | OpenNebula USER name or id     |
+| `vmid`                                 | OpenNebula VM name or id       |
+| `vmid_list`                            |Comma-separated list of OpenNebula VM names or ids |
+
+<a href="#onevm-command">Back to The `onevm` Command</a>
+
+| <h4 id="options"> Options </h4> |
+|-------------------------------|:----------------------------------------------|
+| `--adjust x,y,z`              | Adjusts size to not truncate selected columns  |
+| `--admin`                     | Locks admin actions                            |
+| `-a, --alias alias`           | Attaches the NIC as an ALIAS                    |
+| `--all`                       | Shows all template data                        |
+| `-a, --append`                | Appends new attributes to the current template |
+| `--arch arch`                 | Lists details of the VM architecture. Example: i386 or x86_64  |
+| `--boot device_list`          | Sets boot device list e.g. disk0,disk2,nic0    | 
+| `--cache cache_mode`          | Configures hypervisor cache mode: default, none, writethrough, writeback, directsync or unsafe, (Only KVM driver)|
+| `--cmd cmd`                   | CMD to run when SSH                           |
+| `--context line1,line2,line3` | Replaces the context section with the specified lines |
+| `--cpu cpu`                   | Shows CPU percentage reserved for the VM (1=100% one CPU) |
+| `--csv`                       | Writes table in csv format                     |
+| `--csv-del del`               | Sets delimiter for csv output                  |
+| `-d`, `--datastore id\|name`  | Selects the datastore                         |
+| `--decrypt`                   | Gets decrypted attributes                      |
+| `-d`, `--delay x`             | Sets the delay in seconds for top command     |
+| `--delete`                    | Deletes the VM. **Important**: No recovery action possible.    |
+| `--delete-db`                 | Deletes the VM from the DB. It does not trigger any action on the hypervisor. **Important**: No recovery action possible.   |
+| `--describe`                  | Describes list of columns                         |
+| `--discard discard_mode`      | Hypervisor discard mode: ignore or unmap. Only KVM driver. |
+| `--disk image0,image1`        | Disks to attach. To use an image owned by other user run `user[disk]`. Add any additional attributes separated by ':' and in the shape of KEY=VALUE. For example, if the disk must be resized, use `image0:size=1000`. Alternatively, `image0:size=1000:target=vda,image1:target=vdb` |
+| `--disk-id disk_id`           | Uses only selected disk ID                     |   
+| `--dry`                       | Just prints the template                       |
+| `--end number\|TIME`          | ----                                          |
+| `--endpoint endpoint`         | URL of OpenNebula xmlrpc frontend             |
+| `-e`, `--enforce`             | Enforces that the host capacity is not exceeded|
+| `--expand [x=prop,y=prop]`    | Expands column size to fill the terminal. For example: `$onevm list --expand name=0.4,group=0.6` will expand name 40% and group 60%. `$onevm list --expand name,group` expands name and group based on its size. `$onevm list --expand` will expand all columns.    | 
+| `--extended`                  | Shows info extended. It only works with xml output. |
+| `--failure`                   | Recovers a VM by failing the pending action     |
+| `-f`, `--file file`           | Selects the template file                      |
+| `--files_ds file1,file2`      | Adds files to the contextualization CD from the files datastore |
+| `-f`, `--filter x,y,z`        | Filters data. An array is specified with column=value pairs. Valid operators =,!=,<,<=,>,>=,~. Examples: `NAME=test` matches name with test, and  `NAME~test` matches every NAME containing the substring 'test' |
+| `--hard`                      | Does not communicate with the guest OS          |
+| `-h`, `--help`                | Shows this message                              |
+| `--hold`                      | Creates the new VM on hold state instead of pending |
+| `--hourly hour`               | Repeats the schedule action with the given hourly frequency. For example every 5 hours: `onevm resume 0 --schedule "09/23 14:15" --hourly 5` |
+| `-i`, `--image id\|name`      | Selects the image                               |  
+| `--increment increment_id`    | Uses the given increment ID to restore the backup. If not provided the last one will be used. |
+| `--init script1,script2`      | Script or scripts to start in context           |
+| `--interactive`               | Enables interactive recovery. Only works alongside the `--retry` option. |
+| `-i`, `--ip ip`               | IP address for the new NIC                      |
+| `-j`, `--json`                | Shows the resource in JSON format               |
+| `-k`, `--kilobytes`           | Shows units in kilobytes                        |
+| `-l`, `--list x,y,z`          | Selects columns to display with list command    |
+| `-c`, `--listconf conf`       | Selects a predefined column list                |
+| `--live`                      | Performs the action while the VM is running     |
+| `--manage`                    | Locks manage actions                            | 
+| `--memory memory`             | Memory amount given to the VM. By default the unit is megabytes. To use gigabytes add a `g`, floats can be used: 8g=8192, 0.5g=512 |
+| `--monthly days`              | Repeats the scheduled action the days of the month specified, it can be a number between 1,31 separated with commas. For example: `onevm resume 0 --schedule "09/23 14:15" --monthly 1,14`|
+| `-m`, `--multiple x`          | Instances multiple VMs                          |
+| `--name name`                 | Name for the new VM                             |
+| `--net_context`               | Adds network contextualization parameters       |
+| `-n`, `--network id\|name`    | Selects the virtual network                     |
+| `--nic network0,network1`     | Networks to attach. To use a network owned by another user run `user[network]`. Additional attributes are supported like with the `--disk` option. Also you can use `auto` if you want  OpenNebula to automatically select the network |
+| `--nic-id nic_id`             | NIC to use when SSH                            |
+| `--nic_name name`             | Name of the NIC                                |
+| `--no-expand`                 | Disables expand                                 |
+| `--no-header`                 | Hides the header of the table                  |
+| `--no-pager`                  | Disables pagination                             |  
+| `-n`, `--numeric`             | Does not translate user and group IDs            |
+| `--operator operator`         | Logical operator used on filters: AND, OR.Default: AND. |
+| `--password password`         | Password to authenticate with OpenNebula       |
+| `--pci short_address`         | Selects PCI device by its short address         |
+| `--pci_class class ID`        | Selects PCI device by its class ID              |
+| `--pci_device device ID`      | Selects PCI device by its device ID             |
+| `--pci_vendor vendor ID`      | Selects PCI device by its vendor ID             |
+| `--persistent`                | Makes the new images persistent                 |
+| `--poff`                      | Does the migrate by poweringoff the vm           |
+| `--poff-hard`                 | Does the migrate by poweringoff hard the vm      |
+| `--prefix prefix`             | Overrides the DEV_PREFIX of the image          | 
+| `--raw string`                | Raw string to add to the template. Not to be confused with the RAW attribute. |
+| `--recreate`                  | Deletes and recreates the VM. No recovery action possible. |
+| `--report_ready`              | Sends READY=YES to OneGate, useful for OneFlow. |
+| `--reset`                     | Creates a new backup image, from a new full backup (only for incremental) |
+| `--retry`                     | Recovers a VM by retrying the last failed action. |
+| `--schedule TIME`             | Schedules this action to be executed after the given time. For example: `onevm resume 0 --schedule "09/23 14:15"` |
+| `--search search`             | Queries in PATH=VALUE format. For example: `onevmlist --search "VM.NAME=abc&VM.TEMPLATE.DISK[*].IMAGE=db1"`| 
+| `-s`, `--size x=size,y=size`  | Changes the size of selected columns. For example: `$ onevm list --size "name=20"` will make column *name* size 20. |
+| `-s`, `--snapshot snapshot`   | ID of the Snapshot to save.                    |
+| `--spice`                     | Adds spice server to the VM.                     |
+| `--spice-keymap keymap`       | Spice server keyboard layout                           |
+| `--spice-listen ip`           | Spice server IP where to listen for connections. By default, it is 0.0.0.0 (all interfaces).|
+| `--spice-password password`   | Spice server password                                  | 
+| `--ssh [file]`                | Adds an ssh public key to the context. If the file is omitted then the user variable SSH_PUBLIC_KEY will be used. |
+| `--ssh-options options`       | SSH options to use                              |
+| `--startscript [file]`        | Starts script to be executed                     |
+| `--success`                   | Recovers a VM by succeeding the pending action   |
+| `-t`, `--target target`       | Device where the image will be attached         |
+| `-t`, `--type type`           | Lists type of the new Image                           |
+| `--use`                       | Locks use actions                                |
+| `--user name`                 | User name to connect to OpenNebula              |
+| `--user-inputs ui1,ui2,ui3`   | Specifies the user inputs values when instantiating |
+| `--vcpu vcpu`                 | Number of virtualized CPUs                      |
+| `-v`, `--verbose`             | Verbose mode                                    |
+| `-V`, `--version`             | Shows version and copyright information          |
+| `--video type`                | Adds a custom video device (none, vga, cirrus, virtio) |
+| `--video-ats`                 | Enables ATS (Address Translation Services) for the video device. |
+| `--video-iommu`               | Enables IOMMU (I/O Memory Management Unit) for the video device. |
+| `--video-resolution resolution` | Video resolution, in format like: 1280x720 or 1920x1080 |
+| `--video-vram vram`           | VRAM allocated to the video device. By default the unit is megabytes. To use gigabytes add a `g`, floats can be used: 8g=8192, 0.5g=512 |
+| `--vnc`                       | Adds VNC server to the VM                        |
+| `--vnc-keymap keymap`         | VNC keyboard layout                             |
+| `--vnc-listen ip`             | VNC IP where to listen for connections. By default it is 0.0.0.0 (all interfaces). |
+| `--vnc-password password`     | VNC password                                    |
+| `--weekly days`               | Repeats the scheduled action on the specified days of the week. It can be a number between 0 (Sunday) to 6 (Saturday) separated with commas. For example: `onevm resume 0 --schedule "09/23 14:15" --weekly 0,2,4`|
+| `-x`, `--xml`                 | Shows the resource in xml format                 |
+| `-y`, `--yaml`                | Shows the resource in YAML format                |
+| `--yearly days`               | Repeats the scheduled action on the specififed days of the year. It can be a number between 0,365 separated with commas. For example: `onevm resume 0 --schedule "09/23 14:15" --yearly 30,60`|
+
+<a href="#onevm-command">Back to The `onevm` Command</a>
