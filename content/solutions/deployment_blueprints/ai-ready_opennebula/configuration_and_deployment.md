@@ -147,8 +147,181 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 
 If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
 
+## Deployment on Scaleway
+
+This section provides a practical guide for deploying an AI-ready OpenNebula cloud on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure. We will use an instance with NVIDIA L40S GPUs as an example.
+
+The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the same bare metal server.
+
+### Step 1: Instance Launch and Initial Checks
+
+Log in to your Scaleway console, navigate to **Bare Metal -> Elastic Metal**, and click **"Create Elastic Metal Server"**. Configure your server using the following steps in the portal:
+
+1.  **Availability Zone:** Choose your preferred zone (e.g., `PARIS 2`) or select "Auto allocate".
+2.  **Billing Method:** Select either hourly or monthly. Note that hourly billing is often more cost-effective for short-term projects or testing.
+3.  **Server Type:** Select your instance. For GPU acceleration, you must choose an **Elastic Metal Titanium** server.
+4.  **Image:** Choose **Ubuntu 24.04 LTS** as the operating system.
+5.  **Cloud-init:** You can skip this step, as it is not used in this setup.
+6.  **Disk Partitions:** It is recommended to configure the disk partition table so that the `/` path has the full disk space (e.g., 3TB) available.
+7.  **Name and Tags:** Enter a name for your server and add any optional tags for organization.
+8.  **SSH Keys:** Add your public SSH key. This is essential for securely accessing your server.
+9.  **Public Bandwidth:** The default bandwidth is usually sufficient. You can increase it here if your use case requires higher public throughput.
+10. **Private Networks:** Enabling 25Gbps Private Networks is not neede for a single-node setup.
+11. **Environmental Summary:** Review the Environmental Footprint Summary.
+12. **Cost Summary:** Review the **Estimated Cost Summary** to ensure it matches your expectations.
+13. **Create Server:** Once you have verified all settings, click **"Create Elastic Metal Server"** to provision and launch your instance.
+
+After some minutes, once the instance is running, connect to it via SSH using its public IP address:
+```default
+$ ssh ubuntu@<your_instance_public_ip>
+```
+
+First, verify that the GPUs are detected as PCI devices:
+```default
+$ lspci -Dnnk | grep NVIDIA
+```
+You should see an output similar to this, listing your NVIDIA GPUs:
+```
+0000:01:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
+    Subsystem: NVIDIA Corporation AD102GL [L40S] [10de:1851]
+0000:82:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
+    Subsystem: NVIDIA Corporation AD102GL [L40S] [10de:1851]
+```
+
+Make sure you note down the full PCI addresses for both GPUs.
+
+Next, confirm that IOMMU is enabled on the server. The `ls` command below should list several numbered subdirectories:
+```default
+$ ls -la /sys/kernel/iommu_groups/
+```
+If the directory is not empty, IOMMU is active, which is a prerequisite for PCI passthrough.
+
+### Step 2: Server Pre-configuration
+
+These steps prepare the server for the OneDeploy tool, which runs as the `root` user.
+
+1.  **Enable Local Root SSH Access**:
+    Generate an SSH key pair for the `root` user and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
+    ```default
+    $ sudo su
+    # ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
+    # cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
+    ```
+
+2.  **Create a Virtual Network Bridge**:
+    To provide network connectivity to the VMs, create a virtual bridge with NAT. This will allow VMs to access the internet through the server's public network interface.
+
+    Create the Netplan configuration file for the bridge:
+    ```default
+    # tee /etc/netplan/60-bridge.yaml > /dev/null << 'EOF'
+    network:
+      version: 2
+      bridges:
+        br0:
+          dhcp4: no
+          addresses: [192.168.100.1/24]
+          interfaces: []
+          parameters:
+            stp: false
+            forward-delay: 0
+          nameservers:
+            addresses: [1.1.1.1,8.8.8.8]
+    EOF
+    ```
+
+    Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it's different.
+    ```default
+    # netplan apply
+    # sysctl -w net.ipv4.ip_forward=1
+    # iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp129s0f0np0 -j MASQUERADE
+    # iptables-save | uniq | iptables-restore
+    ```
+
+### Step 3: OneDeploy Dependencies
+
+Now, clone the `one-deploy` repository and install its dependencies. Note that all these commands should be run as `root`.
+
+```default
+# cd /root
+# git clone https://github.com/OpenNebula/one-deploy.git
+# cd one-deploy/
+# apt update && apt install -y pipx make
+# pipx install hatch
+# pipx ensurepath
+# source ~/.bashrc
+# make requirements
+# hatch shell
+(one-deploy) #
+```
+For more details, refer to the [OneDeploy System Requirements](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs).
+
+### Step 4: Configure and Run OneDeploy
+
+Create an inventory file named `inventory/scaleway.yml` with the following content. This file defines a complete OpenNebula deployment on the local machine (`127.0.0.1`).
+
+```yaml
+---
+all:
+  vars:
+    ansible_user: root
+    one_version: '7.0'
+    one_pass: YOUR_SECURE_PASSWORD # Replace with a strong password
+    gate_endpoint: "http://192.168.100.1:5030"
+    ds:
+      mode: ssh
+    vn:
+      admin_net:
+        managed: true
+        template:
+          VN_MAD: bridge
+          BRIDGE: br0
+          AR:
+            TYPE: IP4
+            IP: 192.168.100.50
+            SIZE: 200
+          NETWORK_ADDRESS: 192.168.100.0
+          NETWORK_MASK: 255.255.255.0
+          GATEWAY: 192.168.100.1
+          DNS: 1.1.1.1
+
+frontend:
+  hosts:
+    f1: { ansible_host: 127.0.0.1 }
+
+node:
+  hosts:
+    h1:
+      ansible_host: 127.0.0.1
+      pci_passthrough_enabled: true
+      pci_devices:
+        - address: "0000:01:00.0" # First L40S GPU
+        - address: "0000:82:00.0" # Second L40S GPU
+```
+
+**Important:**
+*   Replace `YOUR_SECURE_PASSWORD` with a strong and unique password for the `oneadmin` user.
+*   The PCI device addresses (`0000:01:00.0`, `0000:82:00.0`) should match the ones you found earlier with `lspci`.
+
+Now, run the deployment:
+```default
+(one-deploy) # make I=inventory/scaleway.yml
+```
+
+### Step 5: Post-Deployment Validation
+
+Once the deployment is complete, you can access the OpenNebula Sunstone web interface at `http://<your_instance_public_ip>:2616`. Log in with the username `oneadmin` and the password you set in the inventory file.
+
+{{< alert title="Note" color="info" >}}
+For public-facing OpenNebula instances, it is highly recommended to configure a reverse proxy (e.g., Nginx or Apache) for SSL termination and rate handling, forwarding requests to `localhost:2616`. You would then change the `host` variable in `/etc/one/fireedge-server.conf` to listen only on `localhost`.
+{{< /alert >}}
+
+To verify the GPU passthrough configuration:
+1.  In Sunstone, navigate to **Infrastructure -> Hosts**.
+2.  Select the `127.0.0.1` host.
+3.  Go to the **PCI** tab. You should see both L40S GPUs listed and ready for passthrough.
+
 {{< alert title="Tip" color="success" >}}
-After completing the steps to have your AI-ready OpenNebula cloud using the OneDeploy tool, validate your deployment following one of the alternative options: 
+After completing the steps to have your AI-ready OpenNebula cloud using the OneDeploy tool, validate your deployment following one of the alternative options:
 * [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}})
 * [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}})
-{{< /alert >}} 
+{{< /alert >}}
