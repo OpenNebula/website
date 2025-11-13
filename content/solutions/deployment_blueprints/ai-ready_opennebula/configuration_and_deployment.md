@@ -258,7 +258,7 @@ As a `root` user, clone the `one-deploy` repository and install its dependencies
 ```
 For more details, refer to the [OneDeploy System Requirements](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs).
 
-### Step 4: Configure and Run OneDeploy
+### Configure and Run OneDeploy
 
 Create an inventory file named `inventory/scaleway.yml` with the following content. This file defines a complete OpenNebula deployment on the local machine (`127.0.0.1`).
 
