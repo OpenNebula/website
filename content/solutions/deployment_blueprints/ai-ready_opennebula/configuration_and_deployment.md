@@ -318,7 +318,7 @@ Once the deployment is complete:
 2. Log in with the username `oneadmin` and the password you set in the inventory file.
 
 {{< alert title="Note" color="info" >}}
-To improve the security of your deployment in public-facing OpenNebula instances, configure a reverse proxy (e.g., Nginx or Apache) for SSL termination and rate handling, forwarding requests to `localhost:2616`. Then change the `host` variable in `/etc/one/fireedge-server.conf` to listen only on `localhost`.
+To improve the security of your deployment in public-facing OpenNebula instances, configure a reverse proxy such as Nginx or Apache to handle SSL termination and rate limiting, forwarding requests to localhost:2616. Then, set the host variable in /etc/one/fireedge-server.conf so that it listens only on localhost.
 {{< /alert >}}
 
 Verify the GPU passthrough configuration:
