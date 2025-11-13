@@ -301,7 +301,7 @@ node:
         - address: "0000:82:00.0" # Second L40S GPU
 ```
 
-**Important:**
+{{< alert title="Important" color="success" >}}
 *   Replace `YOUR_SECURE_PASSWORD` with a strong and unique password for the `oneadmin` user.
 *   The PCI device addresses (`0000:01:00.0`, `0000:82:00.0`) should match the ones you found earlier with `lspci`.
 
