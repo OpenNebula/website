@@ -310,7 +310,7 @@ Now, run the deployment:
 (one-deploy) # make I=inventory/scaleway.yml
 ```
 
-### Step 5: Post-Deployment Validation
+### Post-Deployment Validation
 
 Once the deployment is complete, you can access the OpenNebula Sunstone web interface at `http://<your_instance_public_ip>:2616`. Log in with the username `oneadmin` and the password you set in the inventory file.
 
