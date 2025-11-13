@@ -312,7 +312,9 @@ Now, run the deployment:
 
 ### Post-Deployment Validation
 
-Once the deployment is complete, you can access the OpenNebula Sunstone web interface at `http://<your_instance_public_ip>:2616`. Log in with the username `oneadmin` and the password you set in the inventory file.
+Once the deployment is complete:
+1. Access the OpenNebula Sunstone web interface at `http://<your_instance_public_ip>:2616`. 
+2. Log in with the username `oneadmin` and the password you set in the inventory file.
 
 {{< alert title="Note" color="info" >}}
 For public-facing OpenNebula instances, it is highly recommended to configure a reverse proxy (e.g., Nginx or Apache) for SSL termination and rate handling, forwarding requests to `localhost:2616`. You would then change the `host` variable in `/etc/one/fireedge-server.conf` to listen only on `localhost`.
