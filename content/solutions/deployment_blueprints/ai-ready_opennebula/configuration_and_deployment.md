@@ -242,7 +242,7 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
 
 ### OneDeploy Dependencies
 
-Now, clone the `one-deploy` repository and install its dependencies. Note that all these commands should be run as `root`.
+As a `root` user, clone the `one-deploy` repository and install its dependencies.
 
 ```default
 # cd /root
