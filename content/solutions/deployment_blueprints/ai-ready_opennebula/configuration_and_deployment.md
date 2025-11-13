@@ -141,23 +141,23 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 
 1. Log in to your OpenNebula Sunstone GUI
 2. Navigate to **Infrastructure -> Hosts**
-3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`). 
-4. Go to the **PCI** tab. 
+3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`).
+4. Go to the **PCI** tab.
 5. You will see your GPU listed as an available PCI device.
 
 If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
 
 ## Deployment on Scaleway
 
-Here you have a practical guide to deploy an AI-ready OpenNebula cloud on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure. 
+Here you have a practical guide to deploy an AI-ready OpenNebula cloud on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
 
-The entire OpenNebula cloud (Frontend and a single Node) will be deployed on the same bare metal server.
+The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. An all-in-one OpenNebula cloud, including frontend and KVM node, is deployed on the same bare metal server.
 
 ### Instance Launch and Initial Checks
 
 1. Log in to your Scaleway console.
-2. Navigate to **Bare Metal > Elastic Metal** 
-3. Click **"Create Elastic Metal Server"**. 
+2. Navigate to **Bare Metal > Elastic Metal**
+3. Click **"Create Elastic Metal Server"**.
 4. Configure your server in the portal:
 
     *  **Availability Zone:** Choose your preferred zone, such as `PARIS 2`. Alternatively, select `Auto allocate.
@@ -304,6 +304,7 @@ node:
 {{< alert title="Important" color="success" >}}
 *   Replace `YOUR_SECURE_PASSWORD` with a strong and unique password for the `oneadmin` user.
 *   The PCI device addresses (`0000:01:00.0`, `0000:82:00.0`) must match the ones you found earlier with `lspci`.
+{{< /alert >}}
 
 Now, run the deployment:
 ```default
@@ -317,7 +318,7 @@ Once the deployment is complete:
 2. Log in with the username `oneadmin` and the password you set in the inventory file.
 
 {{< alert title="Note" color="info" >}}
-For public-facing OpenNebula instances, it is highly recommended to configure a reverse proxy (e.g., Nginx or Apache) for SSL termination and rate handling, forwarding requests to `localhost:2616`. You would then change the `host` variable in `/etc/one/fireedge-server.conf` to listen only on `localhost`.
+To improve security of your deployment in public-facing OpenNebula instances, configure a reverse proxy (e.g., Nginx or Apache) for SSL termination and rate handling, forwarding requests to `localhost:2616`. Then change the `host` variable in `/etc/one/fireedge-server.conf` to listen only on `localhost`.
 {{< /alert >}}
 
 To verify the GPU passthrough configuration:
