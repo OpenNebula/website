@@ -151,7 +151,7 @@ If the device is visible here, your AI-ready OpenNebula cloud is correctly confi
 
 Here you have a practical guide to deploy an AI-ready OpenNebula cloud on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
 
-The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. An all-in-one OpenNebula cloud, including frontend and KVM node, is deployed on the same bare metal server.
+The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. A converged OpenNebula cloud, including frontend and KVM node, is deployed on the same bare metal server.
 
 ### Instance Launch and Initial Checks
 
