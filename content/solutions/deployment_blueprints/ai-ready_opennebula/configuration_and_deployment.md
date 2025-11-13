@@ -6,15 +6,19 @@ weight: 2
 
 <a id="ai_config_deploy"></a>
 
-Here you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [OneDeploy](https://github.com/OpenNebula/one-deploy) tool. This guide focuses on a local environment, preparing it for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S.
+Here you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [OneDeploy](https://github.com/OpenNebula/one-deploy) tool. This guide covers the general process for preparing an environment for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S. It also provides a specific, practical guide for a single-node deployment on [Scaleway](https://www.scaleway.com/), using [Elastic Metal](https://www.scaleway.com/en/elastic-metal/) resources.
 
 Machine Learning (ML) training and inference are resource-intensive tasks that often require the full power of a dedicated GPU. PCI passthrough allows a Virtual Machine to have exclusive access to a physical GPU, delivering bare-metal performance for the most demanding AI workloads.
 
-## Prerequisites
+## Deployment with OneDeploy
+
+Use OneDeploy to automate the deployment of our OpenNebula cloud with PCI passthrough configured for our GPUs.
+
+### Prerequisites
 
 Before you begin, ensure your environment meets the following prerequisites.
 
-### Hardware Requirements
+#### Hardware Requirements
 
 The virtualization hosts (hypervisors) must support I/O MMU virtualization:
 *   **Intel CPUs**: Must support **VT-d**.
@@ -22,7 +26,7 @@ The virtualization hosts (hypervisors) must support I/O MMU virtualization:
 
 You must enable this feature in your server's BIOS/UEFI. Refer to your hardware vendor's documentation for instructions.
 
-### Kernel Configuration (Manual Step)
+#### Kernel Configuration (Manual Step)
 
 The OneDeploy tool automates many aspects of the configuration, but you must manually enable IOMMU support in the kernel on each hypervisor node. This is a critical step that OneDeploy does not perform automatically.
 
@@ -41,15 +45,11 @@ If IOMMU is not active, add the appropriate parameter to the kernel's boot comma
 
 For a detailed guide on how to perform this kernel configuration, refer to the [NVIDIA GPU Passthrough documentation]({{% relref "product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md" %}}).
 
-### Hypervisor Preparation
+#### Hypervisor Preparation
 
 For a correct performance of the PCI passthrough with NVIDIA GPUs, start with a clean state on the hypervisor nodes regarding NVIDIA drivers.
 
 Avoid pre-installing NVIDIA drivers on the hypervisor nodes before running the OneDeploy playbook. An active proprietary NVIDIA driver will claim the GPU and prevent other drivers, like `vfio-pci`, from binding to the device. This will block the PCI passthrough configuration from succeeding.
-
-## Deployment with OneDeploy
-
-Use OneDeploy to automate the deployment of our OpenNebula cloud with PCI passthrough configured for our GPUs.
 
 ### Setting Up OneDeploy
 
@@ -135,7 +135,7 @@ When you enable the PCI passthrough feature in your inventory, OneDeploy handles
 
 Simultaneously, on the OpenNebula front-end, OneDeploy configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
 
-## Post-Deployment Validation
+### Post-Deployment Validation
 
 After the deployment is complete, verify that the GPUs are correctly configured and available to OpenNebula by checking the Host information in Sunstone:
 
