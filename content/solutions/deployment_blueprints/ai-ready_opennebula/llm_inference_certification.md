@@ -40,7 +40,7 @@ The objective of this benchmarking task is to evaluate LLM inference performance
 
 Although multiple inference frameworks are available, this benchmark focuses exclusively on vLLM, a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
-The vLLM appliance will be available through the OpenNebula Marketplace for enterprise subscriptions, offering a streamlined setup process suitable for both novice and experienced users.
+The vLLM appliance is available through the OpenNebula Marketplace, offering a [streamlined setup process](https://github.com/OpenNebula/one-apps/wiki/vllm_quick) suitable for both novice and experienced users.
 
 **Main characteristics:**
 
