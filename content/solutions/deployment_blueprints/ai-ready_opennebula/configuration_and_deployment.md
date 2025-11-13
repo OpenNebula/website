@@ -320,7 +320,7 @@ Once the deployment is complete:
 For public-facing OpenNebula instances, it is highly recommended to configure a reverse proxy (e.g., Nginx or Apache) for SSL termination and rate handling, forwarding requests to `localhost:2616`. You would then change the `host` variable in `/etc/one/fireedge-server.conf` to listen only on `localhost`.
 {{< /alert >}}
 
-To verify the GPU passthrough configuration:
+Verify the GPU passthrough configuration:
 1.  In Sunstone, navigate to **Infrastructure -> Hosts**.
 2.  Select the `127.0.0.1` host.
 3.  Go to the **PCI** tab. You should see both L40S GPUs listed and ready for passthrough.
