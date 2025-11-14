@@ -645,7 +645,7 @@ Context information is passed to the Virtual Machine via an ISO mounted as a par
 | `EJECT_CDROM`                   | Value `YES` will signal to eject the CD with the `context.sh` file when (re)contextualization is finished.                                                                                                                                                                                                                                                                                                                                                                                                         | Windows   |
 
 {{< alert title="Note" color="success" >}}
-By default, FireEdge does not allow you to create or modify the `START_START` field. It can only be modified if the `START_SCRIPT_BASE64` field does not exist. 
+By default, FireEdge does not allow you to create or modify the `START_SCRIPT` field. It can only be modified if the `START_SCRIPT_BASE64` field does not exist. 
 
 FireEdge prioritises the `START_SCRIPT_BASE64` field when the form field is filled in.{{< /alert >}}
 
