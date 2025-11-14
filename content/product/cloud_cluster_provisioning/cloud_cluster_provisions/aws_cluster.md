@@ -12,46 +12,46 @@ weight: "3"
 
 <!--# AWS Edge Cluster -->
 
-## Edge Cluster Types
+AWS edge clusters provisioned through OneForm currently support KVM-based deployments. These clusters run on bare-metal EC2 instances and are fully integrated with OpenNebula’s virtualization and storage layers.
 
-AWS edge clusters provisioned through OneForm currently support **KVM-based deployments**. These clusters run on bare-metal EC2 instances and are fully integrated with OpenNebula’s virtualization and storage layers.
-
-AWS provisions offer an **SSH-based Storage Cluster** configuration, which uses the [OpenNebula SSH datastore driver]() to provision both system and image datastores.
+AWS provisions offer an SSH-based Storage Cluster configuration, which uses the [OpenNebula Local Storage Datastore](/product/cluster_configuration/storage_system/local_ds/) to provision both system and image datastores.
 
 ## AWS Edge Cluster Implementation
 
-An Edge Cluster in AWS creates the following resources:
+An Edge Cluster in AWS creates these resources:
 
-* **AWS instance**: Host to run virtual machines.
-* **AWS VPC**: it creates an isolated virtual network for all the deployed resources. There are some limits in the number of VPC that can be requested by the user, please refer to [this link](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) for more information.
-* **AWS subnet**: it allows communication between VMs that are running in the provisioned Hosts.
-* **AWS internet gateway**: it allows VMs to have public connectivity over Internet.
-* **AWS security group**: by default all the traffic is allowed, but custom security rules can be defined by the user to allow only specific traffic to the VMs.
+* **AWS instance**: host to run virtual machines.
+* **AWS VPC**: an isolated virtual network for all the deployed resources. There are some limits in the number of VPC that can be requested by the user. For more details, refer to [Amazon VPC Quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
+* **AWS subnet**: allows communication among VMs that are running in the provisioned Hosts.
+* **AWS internet gateway**: allows VMs to have public connectivity over Internet.
+* **AWS security group**: by default all the traffic is allowed. You can define custom security rules to allow only specific traffic to the VMs.
 
 The network model is implemented in the following way:
 
-* **Public Networking**: this is implemented using elastic IPs from AWS and the IPAM driver from OpenNebula. When the virtual network is created in OpenNebula, the elastic IPs are requested from AWS. Then, inside the Host, IP forwarding rules are applied so the VM can communicate over the public IP assigned by AWS. There are some limits to the number of elastic IPs that can be requested; please refer to [this link](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-limit) for more information.
-* **Private Networking**: this is implemented using (BGP-EVPN) and VXLAN.
+* **Public Networking**: relies on elastic IPs from AWS and the IPAM driver from OpenNebula. When you create the virtual network in OpenNebula, the elastic IPs are requested to AWS. IP forwarding rules are applied within the host, so the VM communicates over the public IP assigned by AWS. There are limits to the number of elastic IPs that can be requested. Refer to [Elastic IP address quota](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-limit) for more information.
+* **Private Networking**: uses BGP-EVPN and VXLAN.
 
-![image_cluster](/images/aws_deployment.png)
+![Network model implementation with public and private networking](/images/aws_deployment.png)
 
-## OpenNebula resources
+## OpenNebula Resources
 
-The following resources, associated to each Edge Cluster, will be created in OpenNebula:
+The following resources, which are associated to each Edge Cluster, are created in OpenNebula:
 
-1. Cluster - containing all other resources
-2. Hosts - for each AWS instance
-3. Datastores - image and system datastores with SSH transfer manager using first instance as a replica
-4. Virtual network - for public networking
-5. Virtual network template - for private networking
+1. Cluster: containing all other resources
+2. Hosts: for each AWS instance
+3. Datastores: image and system datastores with SSH transfer manager using first instance as a replica
+4. Virtual network: for public networking
+5. Virtual network template: for private networking
 
-## How to Create An AWS Provision
+## Creating an AWS Provision
 
-The following process describes how to create an AWS provision in your OpenNebula installation:
+### Prerequisites
 
-{{< alert title="Note" color="success" >}}
-To create a provision in AWS, first [you must have an AWS provider already created]().
-{{< /alert >}}
+To create a provision in AWS, you must have an [AWS provider](/product/cloud_cluster_provisioning/cloud_cluster_providers/aws_provider/) already created.
+
+### Procedure
+
+Select the relevant interface to create an AWS provision in your OpenNebula installation:
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
@@ -62,9 +62,9 @@ Still under development.
 
 {{% tab header="CLI"%}}
 
-You can create an AWS provision using the `oneprovider create <name> --provider-id <id>` command, specifying `aws` as the provider type and the ID of the associated provider to this provision. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create an AWS provision with the `oneprovider create <name> --provider-id <id>` command, specifying `aws` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
-```default
+```bash
 $ oneprovision create aws --provider-id 1
 There are some parameters that require user input.
   * (cidr_block) CIDR block for the VPC [type: string, default: 10.0.0.0/16]
@@ -86,17 +86,17 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-After the provision is created, you can see a list with all your provisions using the `oneprovision list` command:
+After you have created the provision, list all the existing provisions using the `oneprovision list` command:
 
-```default
+```bash
 $ oneprovision list
   ID USER     GROUP    NAME                  STATE            REGTIME
   1  oneadmin oneadmin AWS SSH Cluster       RUNNING          06/05 10:52:29
 ```
 
-To inspect the full details of a specific provision, including the generated OpenNebula objects such as hosts, datastores, and networks, run the `oneprovision show` command:
+To inspect the details of a specific provision, run the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:
 
-```default
+```bash
 $ oneprovision show 1
 PROVISION 1 INFORMATION
 ID                  : 1
@@ -165,6 +165,6 @@ curl -X POST "https://oneform.example.server/api/v1/provisions" \
   }'
 ```
 
-For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
 {{% /tab %}}
 {{< /tabpane >}}

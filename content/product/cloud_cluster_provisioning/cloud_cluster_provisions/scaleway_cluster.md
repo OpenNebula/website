@@ -12,56 +12,56 @@ weight: "5"
 
 <!--# Scaleway Edge Cluster -->
 
-## Edge Cluster Types
-
-Scaleway supports **metal** edge clusters that use bare-metal instances to create OpenNebula Hosts. Metal provisions can run the **LXC** or **KVM** hypervisors.
+Scaleway supports metal edge clusters that use bare-metal instances to create OpenNebula Hosts. Metal provisions run the LXC or KVM hypervisors.
 
 ## Scaleway Edge Cluster Implementation
 
 An Edge Cluster in Scaleway creates the following resources:
 
-* **Scaleway Elastic Metal Device**: Host to run virtual machines.
-* **Scaleway VPC**: it creates an isolated virtual network for all the deployed resources.
-* **Scaleway private subnet**: it allows communication between VMs that are running in the provisioned Hosts.
-* **Scaleway internet public gateway**: it allows VMs to have public connectivity over Internet.
+* **Scaleway Elastic Metal Device**: host to run virtual machines.
+* **Scaleway VPC**: isolated virtual network for all the deployed resources.
+* **Scaleway private subnet**: allows communication between VMs that are running in the provisioned Hosts.
+* **Scaleway internet public gateway**: allows VMs to have public connectivity over Internet.
 
 The network model is implemented in the following way:
 
-* **Public Networking**: this is implemented using elastic IPs from Scaleway and the IPAM driver from OpenNebula. When the virtual network is created in OpenNebula, the elastic IPs are requested from Scaleway. Then, inside the Host, IP forwarding rules are applied so the VM can communicate over the public IP assigned by Scaleway.
-* **Private Networking**: this is implemented using (BGP-EVPN) and VXLAN.
+* **Public Networking**: relies on elastic IPs from Scaleway and the IPAM driver from OpenNebula. When the virtual network is created in OpenNebula, the elastic IPs are requested from Scaleway. Then, inside the Host, IP forwarding rules are applied so the VM can communicate over the public IP assigned by Scaleway.
+* **Private Networking**: uses BGP-EVPN and VXLAN.
 
-![image_cluster](/images/scaleway-deployment.jpg)
+![Network model implementation with public and private networking](/images/scaleway-deployment.jpg)
 
-## OpenNebula resources
+## OpenNebula Resources
 
-The following resources, associated to each Edge Cluster, will be created in OpenNebula:
+The following resources, which are associated to each Edge Cluster, are created in OpenNebula:
 
-1. Cluster - containing all other resources.
-2. Hosts - for each Scaleway Elastic Metal Device.
-3. Datastores - image and system datastores with SSH transfer manager using first instance as a replica.
-4. Virtual network - for public networking.
-5. Virtual network template - for private networking.
+1. Cluster: containing all other resources.
+2. Hosts: for each Scaleway Elastic Metal Device.
+3. Datastores: image and system datastores with SSH transfer manager using first instance as a replica.
+4. Virtual network: for public networking.
+5. Virtual network template: for private networking.
 
-## How to Create An Scaleway Provision
+## Creating an Scaleway Provision
 
-The following process describes how to create an Scaleway provision in your OpenNebula installation:
+### Prerequisites
 
-{{< alert title="Note" color="success" >}}
-To create a provision in Scaleway, first [you must have an Scaleway provider already created]().
-{{< /alert >}}
+To create a provision in Scaleway, you must have a [Scaleway provider](/product/cloud_cluster_provisioning/cloud_cluster_providers/scaleway_provider/) already created.
+
+### Procedure
+
+Select the relevant interface to create a Scaleway provision in your OpenNebula installation:
+
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
-
 {{% tab header="Sunstone"%}}
 Still under development.
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
 
-You can create a Scaleway provision using the `oneprovider create <name> --provider-id <id>` command, specifying `scaleway` as the provider type and the ID of the associated provider to this provision. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create a Scaleway provision using the `oneprovider create <name> --provider-id <id>` command, specifying `scaleway` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
-```default
+```bash
 $ oneprovision create scaleway --provider-id 1
 There are some parameters that require user input.
   * (oneform_hosts) Number of instances to create [type: number, default: 1]
@@ -80,18 +80,17 @@ There are some parameters that require user input.
 
 ID: 1
 ```
+After you have created the provision, list all the existing provisions using the `oneprovision list` command:
 
-After the provision is created, you can see a list with all your provisions using the `oneprovision list` command:
-
-```default
+```bash
 $ oneprovision list
   ID USER     GROUP     NAME                  STATE            REGTIME
   1  oneadmin oneadmin  Scaleway SSH Cluster  RUNNING          06/05 10:52:29
 ```
 
-To inspect the full details of a specific provision, including the generated OpenNebula objects such as hosts, datastores, and networks, run the `oneprovision show` command:
+To inspect the details of a specific provision, run the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:
 
-```default
+```bash
 $ oneprovision show 1
 PROVISION 1 INFORMATION
 ID                  : 1
@@ -159,7 +158,7 @@ curl -X POST "https://oneform.example.server/api/v1/provisions" \
   }'
 ```
 
-For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
 {{% /tab %}}
 
 {{< /tabpane >}}
