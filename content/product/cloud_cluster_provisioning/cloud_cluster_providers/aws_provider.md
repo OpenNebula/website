@@ -12,30 +12,30 @@ weight: "2"
 
 <!--# Amazon AWS Provider -->
 
-An AWS provider contains the credentials to interact with Amazon and also the region to deploy your Provisions. By default, OpenNebula comes with four pre-defined regions for the AWS provider:
+An AWS provider contains the credentials to interact with Amazon and also the region to deploy your provisions. By default, OpenNebula comes with four pre-defined regions for the AWS provider:
 
 * Frankfurt (`eu-central-1`)
 * London (`eu-west-1`)
 * North Virginia (US) (`us-east-1`)
 * North California (US) (`us-west-1`)
 
-{{< alert title="Note" color="success" >}}
-More zones can be added modifying the driver configuration. You can learn more about how to modify or expand a driver behaviour in this [Guide](/product/integration_references/edge_provider_driver_development/customizing_driver.md).
-{{< /alert >}}
+It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
 
-In order to define an AWS provider, you need the following information:
+To define an AWS provider, specify the following information:
 
 * **Credentials**: these are used to interact with the remote provider. You need to provide `access_key` and `secret_key`. You can follow [this guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
 * **Region**: this is the location in the world where the resources are going to be allocated. All the available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
-* **Instance types and AMI’s**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
+* **Instance types and AMIs**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Please note even though custom AMIs (i.e other than the default one) can be used, the automation tools are tailored to works with these default ones. If you use a custom AMI, please be aware that it might required some adjustments, and things might not work as expected. Avoid using them in production environment unless you’ve properly tested it before.
+You can customize AMIs in addition to the default one provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI. 
+
+If you implement a custom AMI, your selected configuration might require additional adjustments, and you will likely observe some unexpected results. Avoid using customized AMIs in production environments, unless you have properly tested them before.
 {{< /alert >}}
 
-## How to Create an AWS Provider
+## Creating an AWS Provider
 
-The following process describes how to create an AWS provider in your OpenNebula database and make it available for future provisioning operations.
+The procedure below describes how to create an AWS provider in your OpenNebula database, and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
@@ -46,7 +46,7 @@ Still under development.
 
 {{% tab header="CLI"%}}
 
-You can create an AWS provider using the `oneprovider create <name>` command, specifying the external cloud provider name (`aws` in this case). During instantiation, OneForm will prompt you to enter the required AWS credentials and region.
+Create an AWS provider using the `oneprovider create <name>` command, specifying the external cloud provider name (`aws` in this case). During instantiation, OneForm will prompt you to enter the required AWS credentials and region.
 
 ```bash
 $ oneprovider create aws
@@ -64,7 +64,7 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once the provider has been created, you can review its details using the `oneprovider show <id>` command:
+Once you have created the provider, review its details using the `oneprovider show <id>` command:
 
 ```bash
 $ oneprovider show 1
@@ -111,7 +111,7 @@ curl -X POST "https://oneform.example.server/api/v1/providers" \
   }'
 ```
 
-For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
 {{% /tab %}}
 
 {{< /tabpane >}}
