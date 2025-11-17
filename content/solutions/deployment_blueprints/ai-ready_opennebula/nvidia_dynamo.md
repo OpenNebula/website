@@ -4,7 +4,7 @@ linkTitle: NVIDIA Dynamo
 weight: 5
 ---
 
-<a id="nvidia_dynamo_on_k8s"></a>
+<a id="nvidia_dynamo"></a>
 
 {{< alert title="Important" color="success" >}}
 To perform the validation with NVIDIA Dynamo Cloud Platform, you must follow the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) for creating an AI-Ready Kubernetes ready for running GPU workloads.

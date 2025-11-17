@@ -519,5 +519,5 @@ Allocatable:
 
 
 {{< alert title="Tip" color="success" >}}
-Alternatively, after validating your AI Factory with AI-Ready Kubernetes, you may choose to follow [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo_on_k8s" %}}) and [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
+Alternatively, after validating your AI Factory with AI-Ready Kubernetes, you may choose to follow [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
 {{< /alert >}}
