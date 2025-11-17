@@ -418,5 +418,4 @@ In the streamed output, you will receive multiple JSON responses with the respon
 
 {{< alert title="Tip" color="success" >}}
 Alternatively, after validating your AI Factory with NVIDIA Dynamo on Kubernetes, you may choose to follow [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
-llm_inference_certification" %}}).
 {{< /alert >}}
