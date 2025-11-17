@@ -35,4 +35,4 @@ portfolio]({{% relref "../../storage_system/overview#storage-portfolio" %}}).
 Datastore guides:
 
 - [LVM]({{% relref "lvm" %}}) (EE only): images stored as LVs in a SAN, activated directly.
-- [FS+LVM Hybrid]({{% relref "filemode" %}}): images stored in front-end, transferred to hosts via SSH, and copied to the SAN on instantiation.
+- [LVM (File mode)]({{% relref "filemode" %}}): images stored in front-end, transferred to hosts via SSH, and copied to the SAN on instantiation.
