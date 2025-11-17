@@ -1,5 +1,6 @@
 ---
 title: "Customizing a Provisioning Driver"
+linkTitle: "Customization"
 date: "2025-02-17"
 description:
 categories:
@@ -8,15 +9,15 @@ tags:
 weight: "3"
 ---
 
-This guide provides detailed instructions on customizing and extending existing drivers in OneForm. It covers common scenarios such as adding new zones, modifying resources, adding user inputs, and configuring new images or operating systems.
+Here you will find detailed instructions on customizing and extending existing drivers in OneForm. It covers common scenarios such as adding new zones, modifying resources, adding user inputs, and configuring new images or operating systems.
 
 ## Adding New User Inputs
 
-User inputs can be introduced in two primary ways:
+There are two ways to introduce user inputs: Terraform variables and Jinja2 templates.
 
 ### Inputs via Terraform Variables
 
-Declare the variable in `variables.tf`. You can optionally add custom validations in `validators.tf`.
+Declare the variable in `variables.tf`. Optionally, add custom validations in `validators.tf`.
 
 Example `variables.tf`:
 
@@ -43,7 +44,7 @@ locals {
 
 ### Inputs via Jinja2 Templates
 
-If the input affects provisioning configuration or other non-Terraform elements (e.g., IPAM configurations), define it in the Jinja2 metadata within `ansible/templates`.
+If the input affects provisioning configuration or other non-Terraform elements, like IPAM configurations, define it in the Jinja2 metadata within `ansible/templates`.
 
 Example `templates/mycluster.j2`:
 
@@ -72,9 +73,9 @@ all:
 
 ## Adding New Zones
 
-In OneForm drivers, zones are primarily used for logical grouping or for defining specific availability zones in cloud providers. Zones can be freely defined since any input provided by the user is directly passed to Terraform. However, usually, zone choices are constrained by validators.
+In OneForm drivers, zones are primarily used for logical grouping or for defining specific availability zones in cloud providers. Zones are freely defined because any input provided by the user is directly passed to Terraform. However, usually, zone choices are constrained by validators.
 
-To add new zones, you must extend the validators defined in `validators.tf` as it's shown below.
+To add new zones, you must extend the validators defined in `validators.tf` as shown below.
 
 Current validator configuration:
 
@@ -102,13 +103,13 @@ locals {
 }
 ```
 
-With this change, users can now select the new zone `us-east-1c` from the provided dropdown list when creating the provision.
+With this change, users are able to select the new zone `us-east-1c` from the provided dropdown list when creating the provision.
 
 ## Adding new Images and OS Versions
 
-Terraform enables dynamic configuration of machine images (AMIs, etc.) through data sources. These resources can be exposed as user-selectable inputs.
+Terraform enables dynamic configuration of machine images, like AMIs, through data sources. These resources can be exposed as user-selectable inputs.
 
-So for this example, you can define multiple OS images using Terraform data sources:
+For this example, define multiple OS images using Terraform data sources:
 
 ```hcl
 data "mycloud_image" "ubuntu_2204" {
@@ -166,9 +167,9 @@ resource "mycloud_instance" "vm" {
 
 ## Modifying Terraform Resources
 
-Since all infrastructure resources in OneForm are managed via Terraform, you can easily modify existing resources or create new ones following standard Terraform practices.
+Since all infrastructure resources in OneForm are managed via Terraform, modify existing resources or create new ones following standard Terraform practices.
 
-OneForm executes operations on the root Terraform module (`terraform/main.tf`). Any Terraform-compatible change to the resources declared in this module will be recognized by OneForm.
+OneForm executes operations on the root Terraform module (`terraform/main.tf`). Any Terraform-compatible change to the resources declared in this module is recognized by OneForm.
 
 For example, to modify an existing instance type:
 
@@ -190,7 +191,7 @@ resource "mycloud_instance" "vm" {
 }
 ```
 
-Alternatively, you can also use a variable to allow user customization of this new attribute:
+Alternatively, use a variable to allow user customization of this new attribute:
 
 ```hcl
 # variables.tf

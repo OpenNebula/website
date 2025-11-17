@@ -1,5 +1,6 @@
 ---
 title: "Developing a Provisioning Driver"
+linktitle: "Development"
 date: "2025-06-05"
 description:
 categories:
@@ -8,10 +9,10 @@ tags:
 weight: "3"
 ---
 
-This document provides a detailed step-by-step guide to creating a new provisioning driver for OpenNebula Formation. It covers all the necessary components starting with the basic configuration, infrastructure provisioned using Terraform, and post-deployment configuration handled by Ansible.
+Here you will find a detailed step-by-step guide to creating a new provisioning driver for OpenNebula Formation. It covers all the necessary components starting with the basic configuration, infrastructure provisioned using Terraform, and post-deployment configuration handled by Ansible.
 
 {{< alert title="Important" color="warning" >}}
-Please note that creating a driver requires working knowledge of both **Terraform** and **Ansible**, as they are fundamental to the provisioning and configuration workflows.
+Creating a driver requires working knowledge of both **Terraform** and **Ansible**, as they are fundamental to the provisioning and configuration workflows.
 {{< /alert >}}
 
 ## Getting Started from Scratch
@@ -20,16 +21,16 @@ A driver in OneForm is a self-contained directory that bundles everything requir
 
 An OneForm driver must include at least the following elements:
 
-- A **`driver.conf`** file: Defines the basic metadata and UI configuration.
-- A **`terraform/`** directory: Contains all the Terraform logic used to provision resources.
-- An **`ansible/`** directory: Contains playbooks and templates to configure the infrastructure after it has been deployed.
+- A `driver.conf` file: defines the basic metadata and UI configuration.
+- A `terraform/` directory: contains all the Terraform logic used to provision resources.
+- An `ansible/` directory: includes playbooks and templates to configure the infrastructure after it has been deployed.
 
-Optionally, but recommended if the cloud provider supports it, a driver can also include the following directories:
+Optionally, a driver contains the following directories if the cloud provider supports them:
 
-- **`ipam/`**: Contains optional scripts to manage IP address allocation and release. These scripts integrate with OpenNebula’s Virtual Network Manager to assign internal IPs to virtual machines dynamically.
-- **`elastic/`**: Implements logic to allocate and release public IP addresses from cloud providers. This is useful when creating public virtual networks that require internet-facing IPs.
+- `ipam/`: lists optional scripts to manage IP address allocation and release. These scripts integrate with OpenNebula’s Virtual Network Manager to assign internal IPs to virtual machines dynamically.
+- `elastic/`: implements logic to allocate and release public IP addresses from cloud providers. This is useful when creating public virtual networks that require internet-facing IPs.
 
-Here’s what a typical driver directory structure looks like:
+This is an overview of a typical driver directory structure. It outlines basic elements like `driver.conf`, `terraform/`and `ansible/`, as well as optional directories like `ipam/`and èlastic/`:
 
 ```default
 mycloud/
@@ -56,11 +57,11 @@ mycloud/
     └── mycloud_vnm.rb
 ```
 
-Each of these elements plays a specific role in the provisioning and configuration process. During the next sections, we are going to cover all the required files that are needed to create your own custom driver.
+Each of these elements plays a specific role in the provisioning and configuration process. In the following sections, you will find about the required files to create your own custom driver.
 
-## Basic driver information
+## Basic Driver Information
 
-The `driver.conf` file contains the basic metadata for your driver. It defines key information about the driver and how it should appear across OneForm interfaces.
+The `driver.conf` file contains the basic metadata for your driver. It defines key information about the driver and how it is referenced across OneForm interfaces.
 
 Here is a standard structure:
 
@@ -72,7 +73,7 @@ fireedge:
   logo: 'mycloud.png'
 ```
 
-Below is a summary of the fields:
+The table below summarizes the fields:
 
 | Field           | Description                                                        |
 | --------------- | ------------------------------------------------------------------ |
@@ -100,7 +101,7 @@ mycloud/
 
 This is the main file that contains the core deployment logic. Here you define all the Terraform resources required by your infrastructure, such as hosts, VPCs, subnets, and more.
 
-It's highly recommended to organize your code using modules, since this improves readability and maintainability, especially in complex deployments. You can create a module for each logical resource type (e.g., cluster, host) within the `terraform/` directory and reference them from `main.tf` as shown below:
+Organize your code using modules because this improves readability and maintainability, especially in complex deployments. Create a module for each logical resource type, such as a cluster or a host, within the `terraform/` directory and reference them from `main.tf` as depicted below:
 
 ```hcl
 module "cluster" {
@@ -117,10 +118,17 @@ module "host" {
   cloud_tags         = var.oneform_tags
 }
 ```
-
+<a id="variables"></a>
 ### variables.tf
 
-Defines the input variables required to deploy the infrastructure. These are automatically detected by OneForm to generate user inputs:
+Defines the input variables required to deploy the infrastructure. OneForm automatically parses each variable declared in `variables.tf`, using the `type` and `default` fields to build its user input interface. These user inputs are then exposed to the user when creating a provision, and validated against the expected type. If no value is supplied, the `default` will be used.
+
+Best Practices when working with `variables.tf`: 
+- Use the prefix `instance_` for variables related to the host configuration.
+- Avoid to use the prefix `oneform_`, since it is reserved for variables that affect OneForm behavior (like `oneform_hosts`).
+- **Always** add descriptions to each variable, as these descriptions are used to display the variables purpose to users who interact with the driver.
+
+Input variables are automatically detected by OneForm to generate user inputs: 
 
 ```hcl
 variable "cidr_block" {
@@ -160,14 +168,6 @@ variable "oneform_tags" {
 }
 ```
 
-> **Best Practices:**
->
-> - Use the prefix `instance_` for variables related to the host configuration.
-> - Avoid to use the prefix `oneform_`, since it is reserved for variables that affect OneForm behavior (like `oneform_hosts`).
-> - **Always** add descriptions to each variable, as these descriptions are used to display the variables purpose to users who interact with the driver.
-
-OneForm automatically parses each variable declared in `variables.tf`, using the `type` and `default` fields to build its user input interface. These user inputs are then exposed to the user when creating a provision, and validated against the expected type. If no value is supplied, the `default` will be used.
-
 Here is an example of how OneForm interprets these variables and add them to a provision body:
 
 ```json
@@ -196,18 +196,18 @@ Here is an example of how OneForm interprets these variables and add them to a p
 }
 ```
 
-While Terraform's native validation handles types and defaults, OneForm lets you define additional custom validation logic using the `validators.tf` file, covered later in this guide.
+While Terraform's native validation handles types and defaults, OneForm lets you define additional custom validation logic using the [`validators.tf`]({{% relref "creating_driver#validators" %}}) file.
 
 ### outputs.tf
 
-This file defines the output values that Terraform returns once infrastructure has been provisioned. These outputs are essential for OneForm to track and configure the deployed resources.
+This file defines the output values that Terraform returns once the infrastructure has been provisioned. These outputs are essential for OneForm to track and configure the deployed resources.
 
 It is mandatory that the root module of the Terraform code returns at least two values per deployed instance inside an array named as `provisioned_hosts`:
 
-- **`instance_id`**: This is the unique identifier of each virtual machine created by the provider. OneForm uses this value internally to track the instance lifecycle, associate public IPs, and manage resource orchestration.
-- **`instance_ip`**: This is the public (or private, depending on the deployment) IP address of the provisioned host. It is used to establish an SSH connection so Ansible can perform configuration tasks on the host.
+- **`instance_id`**: the unique identifier of each virtual machine created by the provider. OneForm uses this value internally to track the instance lifecycle, associate public IPs, and manage resource orchestration.
+- **`instance_ip`**: the public (or private, depending on the deployment) IP address of the provisioned host. It is used to establish an SSH connection so Ansible can perform configuration tasks on the host.
 
-If these outputs are not present, OneForm will not be able to proceed with post-provisioning operations like inventory generation or system setup.
+If these outputs are not present, OneForm will not proceed with post-provisioning operations like inventory generation or system setup.
 
 Here is a typical example:
 
@@ -228,7 +228,7 @@ This file defines provider-specific configuration, usually including credentials
 
 In addition, OneForm automatically builds the `connection` section of the provider body using these variables. This section is used internally when provisioning infrastructure so that the driver has access to the required authentication and configuration details.
 
-Here’s an example of a `provider.tf` file containing Terraform variables:
+Here is an example of a `provider.tf` file containing Terraform variables:
 
 ```hcl
 terraform {
@@ -258,7 +258,7 @@ provider "mycloud" {
 }
 ```
 
-From this, OneForm will automatically generate the following structure in the provider body:
+From this file, OneForm automatically generates the following structure in the provider body:
 
 ```json
 {
@@ -290,20 +290,21 @@ From this, OneForm will automatically generate the following structure in the pr
 }
 ```
 
-Just like with `variables.tf`, you can also extend the native validation by adding custom rules in the `validators.tf` file as it is explained in the next point.
+Similar to `variables.tf`, you can extend the native validation by adding custom rules in the [`validators.tf`]({{% relref "creating_driver#validators" %}}) file.
 
+<a id="validators"></a>
 ### validators.tf
 
-This optional file allows you to define additional custom validations for user inputs. It uses Terraform local variables to describe constraints that go beyond the native validation defined in `variables.tf`.
+This optional file allows you to define additional custom validations for user inputs. It uses Terraform local variables to describe constraints that go beyond the native validation defined in [`variables.tf`]({{% relref "creating_driver#variables" %}}).
 
-Each validator is declared inside a `locals` block under the `validators` object. Every key inside `validators` must exactly match the name of a variable declared in `variables.tf`. This is how OneForm links the validator definition with the corresponding input.
+Each validator is declared inside a `locals` block under the `validators` object. Every key inside `validators` must exactly match the name of a variable declared in [`variables.tf`]({{% relref "creating_driver#variables" %}}). This is how OneForm links the validator definition with the corresponding input.
 
 Each validator supports different types:
 
-- `list`: Validates that the input is one of the predefined values. You must provide a `values` array of accepted strings.
-- `number`: Validates that the input falls within a numeric range. Use the `values` object with `min`, `max`, or both.
-- `string`: Validates that the input matches a given regular expression pattern. In this case, the `values` field must include a `regex` key.
-- `map`: Allows for nested validations. You can use the `grouped_by` field to relate two variables (e.g., a zone must belong to a selected region). The `values` field must then contain a map where keys are the parent variable’s values and each key maps to a list of valid child values.
+- `list`: validates that the input is one of the predefined values. You must provide a `values` array of accepted strings.
+- `number`: validates that the input falls within a numeric range. Use the `values` object with `min`, `max`, or both.
+- `string`: validates that the input matches a given regular expression pattern. In this case, the `values` field must include a `regex` key.
+- `map`: Allows for nested validations. You can use the `grouped_by` field to relate two variables; for example, a zone must belong to a selected region. The `values` field must then contain a map where keys are the parent variable’s values and each key maps to a list of valid child values.
 
 Here’s a generic example:
 
@@ -386,14 +387,14 @@ mycloud/
 
 This file contains the base configuration needed for Ansible to interact correctly with OneForm and the dynamic inventory system.
 
-The following configuration block should be used as-is (although depending on the provider or the target host configuration, it might vary slightly). The only fields that may need to be adjusted are:
+The following configuration block should be used as-is. Although depending on the provider or the target host configuration, it might vary slightly. The only fields that require adjustments are:
 
-- `inventory_plugins`: This should point to the path where the dynamic inventory plugin `opennebula_form` is located.
-- `collections_path`: This should point to the directory where the OneDeploy Ansible collections are installed.
+- `inventory_plugins`: points to the path where the dynamic inventory plugin `opennebula_form` is located.
+- `collections_path`: points to the directory where the OneDeploy Ansible collections are installed.
 
 These paths may vary if OpenNebula has been installed in a custom location; if not, they can be left as their default values.
 
-Below is the recommended configuration:
+Below you have the recommended configuration:
 
 ```default
 [defaults]
@@ -418,15 +419,13 @@ ssh_args = -o ControlMaster=auto -o ControlPersist=60s
 
 ### site.yaml
 
-This is the main playbook executed by Ansible and must exist in every driver. It is responsible for orchestrating all post-deployment configuration steps.
+This is the main playbook executed by Ansible and must exist in every driver. It is responsible for orchestrating all post-deployment configuration steps. The following are best practices: 
 
-At a minimum, this file should import the main playbook from OneDeploy (`opennebula.deploy.main`) to ensure proper integration with OpenNebula.
+* To ensure proper integration with OpenNebula, configure this file to import the main playbook from OneDeploy (`opennebula.deploy.main`).
+* Include the host connectivity check at the beginning of the playbook. This step ensures that the remote servers are reachable and ready to be configured via SSH before proceeding with the rest of the playbook.
+* Define and configure as many custom tasks or playbooks as needed before or after the OneDeploy execution. This flexibility allows for further configuration steps such as installing custom software, registering metadata, or performing health checks.
 
-You can include as many custom tasks or additional playbooks as needed before or after the OneDeploy execution. This flexibility allows for additional configuration steps such as installing custom software, registering metadata, or performing health checks.
-
-It is strongly recommended to include the host connectivity check at the beginning of the playbook. This step ensures that the remote servers are reachable and ready to be configured via SSH before proceeding with the rest of the playbook.
-
-Additionally, every task, apart from OneDeploy, should include the tag `tags: always` to ensure its execution, since by default, OneForm only runs tasks tagged as `stage2` and `stage3` for post-provisioning steps, which is necessary for OneDeploy to function properly. These default tags can be customized in the OneForm configuration file located by default at `/etc/one/oneform-server.conf`.
+Besides OneDeploy, every task must include the `tags: always` tag to guarantee its execution. By default, OneForm only runs tasks tagged as `stage2` and `stage3` for post-provisioning steps, which are necessary for OneDeploy to function properly. These default tags can be customized in the OneForm configuration file located by default at `/etc/one/oneform-server.conf`.
 
 ```yaml
 ---
@@ -512,7 +511,7 @@ This metadata is used by OneForm to define the provision name, description and a
 
 In addition to defining how infrastructure is mapped into Ansible groups, these templates also specify the objects that OneForm will register as part of the `one_objects` structure. This includes virtual networks, datastores, and host definitions that will be configured during provisioning.
 
-For example, OneForm will extract the following from a template like this:
+For example, OneForm extracts the following from a template like this:
 
 ```json
 {
@@ -528,9 +527,9 @@ For example, OneForm will extract the following from a template like this:
 }
 ```
 
-These values are parsed from the metadata and Jinja structure and become part of the internal representation of the provision body within OneForm.
+These values are parsed from the metadata and Jinja2 structure and become part of the internal representation of the provision body within OneForm.
 
-Here’s an example of a Jinja2 inventory template that includes metadata and defines the full infrastructure mapping:
+Here is an example of a Jinja2 inventory template that includes metadata and defines the full infrastructure mapping:
 
 ```jinja2
 {#
@@ -638,9 +637,9 @@ Inside the `one` object, the following fields are available:
 | `system_ds_id` | ID of the system datastore assigned to the provision.               |
 | `image_ds_id`  | ID of the image datastore assigned to the provision.                |
 
-This information can be used to dynamically build inventories and infrastructure declarations.
+This information is used to dynamically build inventories and infrastructure declarations.
 
-Example usage:
+Example of use:
 
 ```jinja2
 one_version: {{ one.version }}
@@ -649,14 +648,14 @@ user_value: {{ user_inputs.custom_value }}
 
 ## Elastic and IPAM Integration
 
-In addition to Terraform and Ansible logic, drivers may also include optional support for Elastic and IPAM drivers:
+In addition to Terraform and Ansible logic, drivers include optional support for Elastic and IPAM drivers:
 
-- **Elastic driver**: Automates the request and release of public IP addresses from the cloud provider. This is useful for services that require access from the internet.
-- **IPAM driver**: Manages internal IP address allocation and ensures each VM receives a valid and unique IP during provisioning.
+- **Elastic driver**: automates the request and release of public IP addresses from the cloud provider. This is useful for services that require access from the internet.
+- **IPAM driver**: manages internal IP address allocation and ensures each VM receives a valid and unique IP during provisioning.
 
 Both components are fully supported by OneForm and integrated into the networking phase. For detailed information on how to implement and configure them, refer to the dedicated [Elastic and IPAM Drivers section]().
 
-Here is an example of how these drivers should be added to the driver directory:
+Here is an example of how these drivers are added to the driver directory:
 
 ```default
 mycloud/
