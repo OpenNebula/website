@@ -1,13 +1,13 @@
 ---
 title: NVIDIA Dynamo on Kubernetes
 linkTitle: NVIDIA Dynamo
-weight: 4
+weight: 5
 ---
 
 <a id="nvidia_dynamo_on_k8s"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the validation with NVIDIA Dynamo Cloud Platform, you must have available an AI-Ready Kubernetes cluster by following the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
+To perform the validation with NVIDIA Dynamo Cloud Platform, you must follow the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) for creating an AI-Ready Kubernetes ready for running GPU workloads.
 {{< /alert >}}
 
 [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
@@ -148,7 +148,7 @@ Once you access the Kubernetes API, proceed to deploy the inference graphs you d
 
 The latest vllm-runtime image is located in [`nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1`](http://nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1), but you can build your own runtime image following the [instructions](https://github.com/ai-dynamo/dynamo/blob/main/components/backends/vllm/README.md) in the Dynamo repository.
 
-An example of a disaggregated deployment graph is available in [NVIDIA Dynamo’s github repository](https://github.com/ai-dynamo/dynamo/tree/v0.4.1/components/backends/vllm/deploy). For this guide, the example was adapted to work for a validated container runtime:
+An example of a disaggregated deployment graph is available in the [NVIDIA Dynamo’s github repository](https://github.com/ai-dynamo/dynamo/tree/v0.4.1/components/backends/vllm/deploy). For this guide, the example was adapted to work for a validated container runtime:
 
 ```yaml
 apiVersion: nvidia.com/v1alpha1
@@ -321,19 +321,19 @@ service/disagg-frontend                 ClusterIP   10.43.92.113    <none>      
 
 ## (Optional) Querying the API Locally
 
-In case you want to query the API client locally, forward the `vllm frontend service through Kubernetes using the following command:
+In case you want to query the API client locally, forward the vllm frontend service through Kubernetes with this command:
 
 ```shell
 laptop$ kubectl port-forward svc/<frontend_service> <local_port>:8000 &
 ```
 
-E.g.
+Example:
 
 ```shell
 laptop$ kubectl port-forward svc/vllm-v1-disagg-router-frontend 9000:8000 &
 ```
 
- To test the loaded models, run requests to the frontend via curl for instance:
+ To test the loaded models, run requests to the frontend via curl:
 
 ```shell
 laptop$ curl localhost:9000/v1/models | jq .
@@ -413,3 +413,10 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 
 [...]
 ```
+
+In the streamed output, you will receive multiple JSON responses with the response tokens in the `text` field, with some metadata included.
+
+{{< alert title="Tip" color="success" >}}
+Alternatively, after validating your AI Factory with NVIDIA Dynamo on Kubernetes, you may choose to follow [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
+llm_inference_certification" %}}).
+{{< /alert >}}
