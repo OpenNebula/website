@@ -37,7 +37,7 @@ OpenNebula implements the NVIDIA Shared NVSwitch Virtualization Model through a 
 
 The host component also includes a monitoring probe that runs periodically. It queries the Fabric Manager VM to get the current NVSwitch partitions and maps the logical GPU module IDs to the physical PCI addresses on the host. This information (`NVSWITCH_PARTITION`) is reported to OpenNebula, making the partition status and the GPU topology visible in the host's monitoring data for scheduling and management.
 
-2.  **Frontend CLI (`onefabric`):** This is the primary user interface for the tool, run from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When a command is executed (e.g., `onefabric list`), the tool uses SSH to connect to the relevant KVM hosts and remotely execute commands inside the Fabric Manager VM using `virsh` and the QEMU guest agent. This allows an administrator to manage the NVSwitch hardware across all hosts from a single console.
+2.  **Frontend CLI (`onefabric`):** the primary user interface for the tool, managed from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When you run a command like `onefabric list`, the tool uses SSH to connect to the relevant KVM hosts and remotely execute commands inside the Fabric Manager VM using `virsh` and the QEMU guest agent. This allows an administrator to manage the NVSwitch hardware across all hosts from a single console.
 
 ### When to use OpenNebula NVIDIA Fabric Manager:
 
