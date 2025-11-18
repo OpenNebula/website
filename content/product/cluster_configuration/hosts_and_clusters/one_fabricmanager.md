@@ -77,7 +77,7 @@ To start the service, run the following command on each virtualization node:
 nvidia@opennebula-gpu01:~$ sudo systemctl start opennebula-fabricmanager.service
 ```
 
-Once started, it executes pre-start scripts to prepare the VM environment, define the one-fabricmanager domain, and start the VM.
+Once you start the service on each virtualization node, it executes pre-start scripts to prepare the VM environment, defines the `one-fabricmanager domain, and starts the VM.
 
 During the start process the service will perform attempts to download the Fabric Manager VM image from a public URL. If you are working on an air-gapped installation, edit `/etc/onefabricmanager.conf` on each node in order to set a custom accessible URL with the image hosted.
 
