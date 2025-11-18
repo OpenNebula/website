@@ -52,7 +52,7 @@ The host component also includes a monitoring probe that runs periodically. It q
 
 - NVIDIA NVSwitch Hardware: required on the KVM hosts.
 - Host Software Component: the `opennebula-kvm-node EE package must be installed on all NVSwitch-equipped hosts.
-- **VFIO-PCI Drivers:** The vfio-pci driver must be enabled and loaded for the NVSwitc and GPU devices to allow PCI passthrough to the Service VM.
+- VFIO-PCI Drivers: the `vfio-pci driver must be enabled and loaded for the NVSwitch and GPU devices to allow PCI passthrough to the Service VM.
 - **Service VM Image:** The required Fabric Manager VM image is handled and downloaded automatically during service startup.
 
 **OpenNebula Frontend:**
