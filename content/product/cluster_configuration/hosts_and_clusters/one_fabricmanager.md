@@ -39,7 +39,7 @@ The host component also includes a monitoring probe that runs periodically. It q
 
 2.  **Frontend CLI (`onefabric`):** the primary user interface for the tool, managed from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When you run a command like `onefabric list`, the tool uses SSH to connect to the relevant KVM hosts and remotely execute commands inside the Fabric Manager VM using `virsh` and the QEMU guest agent. This allows an administrator to manage the NVSwitch hardware across all hosts from a single console.
 
-### When to use OpenNebula NVIDIA Fabric Manager:
+### Key Scenarios for OpenNebula NVIDIA Fabric Manager
 
 - To enable Shared NVSwitch Virtualization for OpenNebula VMs.
 - To dynamically partition NVSwitch devices across compute hosts.
