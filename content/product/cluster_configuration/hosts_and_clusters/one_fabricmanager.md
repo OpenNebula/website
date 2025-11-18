@@ -92,7 +92,7 @@ During the start process the service will perform attempts to download the Fabri
 
 ### Validation (Post-Start)
 
-The service startup process performs validation steps:
+`opennebula-fabricmanager` as a service startup process performs validation steps:
 
 **NVSwitch Detection:** the service scans for NVSwitch devices (Vendor: 10de, Devices: 22a3) and confirms the `vfio-pci driver is in use. These devices are automatically added to the `one-fabricmanager VM. If the devices have different IDs, add them into the configuration file on `/etc/onefabricmanager.conf` on the hosts nodes.
 
