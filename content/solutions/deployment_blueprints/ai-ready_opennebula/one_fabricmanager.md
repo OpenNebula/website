@@ -12,7 +12,7 @@ The OpenNebula NVIDIA&reg; Fabric Manager integration provides a complete soluti
 
 ### NVIDIA Shared NVSwitch Virtualization Model
 
-This model is an evolution of simple GPU passthrough. It virtualizes the NVSwitch fabric to provide full NVLink bandwidth to multi-GPU Virtual Machines (VMs), even when the GPUs are allocated to separate VMs.
+The OpenNebula NVIDIA Fabric Manager integration relies on the NVIDIA Shared NVSwitch Virtualization Model. This model is an evolution of simple GPU passthrough. It virtualizes the NVSwitch fabric to provide full NVLink bandwidth to multi-GPU Virtual Machines (VMs), even when the GPUs are allocated to separate VMs.
 
 The following image shows the reference architecture proposed by NVIDIA&reg;:
 
