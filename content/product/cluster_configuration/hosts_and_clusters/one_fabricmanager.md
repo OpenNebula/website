@@ -146,7 +146,7 @@ oneadmin@opennebula-gpu01:~$ virsh list
  10   one-fabricmanager   running
 ```
 
-We can also do this validation using `opennebula-fabricmanager.rb` script on the host:
+Configure this validation by using `opennebula-fabricmanager.rb` script on the host:
 
 ```bash
 oneadmin@opennebula-gpu01:~$ /usr/lib/one/opennebula-fabricmanager.rb --status
