@@ -10,7 +10,7 @@ weight: 6
 To perform the validation with NVIDIA KAI Scheduler, you must follow the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
 {{< /alert >}}
 
-[NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, always ensuring optimal resource allocation and fairness across different users and teams. It also operates alongside other schedulers installed in a cluster.
+[NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
 
 Some of the key features are:
 - Share single or multiple GPU resources among multiple workloads for improving resource allocation.
@@ -28,7 +28,7 @@ In this guide you will learn how to perform a validation using NVIDIA KAI Schedu
 ### NVIDIA KAI Scheduler Installation
 
 To install the NVIDIA KAI Scheduler, you need to accomplish the following prerequisites:
-- An AI-Ready Kubernetes Cluster with the NVIDIA GPU Operator installed, as described [in this guide]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
+- An [AI-Ready Kubernetes Cluster with the NVIDIA GPU Operator]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) installed.
 - Helm CLI. For additional details, check the installation instructions in the [official documentation](https://helm.sh/docs/intro/install/).
 
 1. Create a dedicated namespace for the KAI Scheduler components in the Kubernetes cluster:
@@ -124,7 +124,7 @@ Allocate a portion of the GPU by:
 
 KAI Scheduler does not enforce memory allocation limits or performs memory isolation between processes, so it's important that the running processes allocate the GPU memory up to the requested amount. For instance, vLLM workloads by default consume the 90% of the GPU memory, so you will limit this consumption using the `--gpu-memory-utilization` parameter with the corresponding memory fracton such as `--gpu-memory-utilization=0.5`.
 
-To test the GPU sharing feature of KAI Scheduler you can follow those steps:
+To test the GPU sharing feature of KAI Scheduler, follow these steps:
 
 1. Create a namespace for the scheduled workloads
     ```shell
