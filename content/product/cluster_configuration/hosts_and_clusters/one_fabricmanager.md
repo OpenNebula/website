@@ -57,7 +57,7 @@ The host component also includes a monitoring probe that runs periodically. It q
 
 **OpenNebula Frontend:**
 
-- **onefabric CLI Tool:** Must be available on the OpenNebula frontend server (Installed by default on EE packages).
+- onefabric CLI Tool: must be available on the OpenNebula frontend server. Installed by default on EE packages.
 - **Passwordless SSH Access:** The frontend oneadmin user must have passwordless SSH access to the oneadmin user on all KVM hosts for remote command execution.
 
 
