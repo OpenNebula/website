@@ -1,7 +1,7 @@
 ---
 title: OpenNebula NVIDIA Fabric Manager
 linkTitle: NVIDIA Fabric Manager
-weight: 4
+weight: 7
 ---
 
 <a id="one_fabricmanager"></a>
