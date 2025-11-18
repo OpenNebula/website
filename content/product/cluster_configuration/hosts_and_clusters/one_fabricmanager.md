@@ -65,7 +65,7 @@ OpenNebula Frontend requirements:
 
 ### Host Preparation and Component Installation
 
-**KVM Node Package:** Ensure the opennebula-kvm-node EE package is installed on every KVM host that contains NVSwitch devices. This package will contain the opennebula-fabricmanager service.
+KVM Node Package: ensures that the `opennebula-kvm-node EE package is installed on every KVM host that contains NVSwitch devices. This package contains the `opennebula-fabricmanager` service.
 
 **NVSwitch PCI passthrough Setup:** The NVSwitch devices must be prepared for PCI passthrough using the vfio-pci driver. This can be done at OpenNebula deployment time using one-deploy, more information [here](content/solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md).
 
