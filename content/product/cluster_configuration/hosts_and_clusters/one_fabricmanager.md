@@ -71,7 +71,7 @@ KVM Node Package: ensures that the `opennebula-kvm-node EE package is installed 
 
 Start OpenNebula FabricManager service: the `opennebula-fabricmanager` service on the host is disabled by default, as it is designed to be started and stopped on demand or managed by the OpenNebula administrator. 
 
-In order to start the service you must run the following command on each virtualization node:
+To start the service, run the following command on each virtualization node:
 
 ```bash
 nvidia@opennebula-gpu01:~$ sudo systemctl start opennebula-fabricmanager.service
