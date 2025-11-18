@@ -48,7 +48,7 @@ The host component also includes a monitoring probe that runs periodically. It q
 
 ### Requirements
 
-**KVM Host Requirements:**
+KVM Host requirements:
 
 - NVIDIA NVSwitch Hardware: required on the KVM hosts.
 - Host Software Component: the `opennebula-kvm-node EE package must be installed on all NVSwitch-equipped hosts.
