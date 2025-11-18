@@ -61,7 +61,7 @@ OpenNebula Frontend requirements:
 - **Passwordless SSH Access:** The frontend oneadmin user must have passwordless SSH access to the oneadmin user on all KVM hosts for remote command execution.
 
 
-## Installation & Setup
+## Installation and Configuration
 
 ### Host Preparation and Component Installation
 
