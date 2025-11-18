@@ -23,7 +23,7 @@ Using the installed tools, the NVSwitch partitioning will be managed using that 
 
 Then, we will assign the GPUs (using PCI passthrough), that make up each of the partitions defined in the NVSwitches, to each of the deployed VMs.
 
-Key Components:
+Key components of the OpenNebula NVIDIA Fabric Manager integration:
 
 - **Service VM** (Fabric Manager VM): A persistent, minimal Virtual Machine runs on the KVM host.
 - **PCI Passthrough:** The NVSwitch hardware devices are passed directly to this Service VM.
