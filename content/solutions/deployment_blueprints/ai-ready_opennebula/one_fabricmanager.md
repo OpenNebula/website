@@ -19,7 +19,7 @@ The following image shows the reference architecture proposed by NVIDIA&reg;:
 {{< image alt="Architecture of NVIDIA_FabricManager OpenNebula" path=/images/solutions/deployment_blueprints/ai-ready_opennebula/shared-nvswitch-stack.png width=500 height=250 >}}
 
 
-Using the installed tools, the NVSwitch partitioning will be managed using that Service VM.
+Service VM manages the NVSwitch partitioning.
 
 Then, we will assign the GPUs (using PCI passthrough), that make up each of the partitions defined in the NVSwitches, to each of the deployed VMs.
 
