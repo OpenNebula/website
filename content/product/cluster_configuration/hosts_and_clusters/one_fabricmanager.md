@@ -134,7 +134,7 @@ The generated artifacts include:
 - *one-fabricmanager.xml*: the libvirt Domain XML file that defines the configuration for the Fabric Manager Service VM named `one-fabricmanager`. This XML includes essential settings like CPU, memory, and the PCI passthrough definitions that securely grant the VM direct access to the NVSwitch hardware devices on the KVM host.
 - `service_FabricManager-<version>.qcow2`: This is the disk image (QCOW2 format) for the Fabric Manager Service VM. It contains the minimal operating system, the NVIDIA® Fabric Manager tools (nv-partitioner, nvswitch-audit), and the necessary configuration files required for the VM to boot and manage the NVSwitch hardware.
 
-**VM Running:** The Service VM, named one-fabricmanager, should be running in virsh list.
+**VM Running:** the Service VM, named `one-fabricmanager, should be running in virsh list.
 
 Example:
 
