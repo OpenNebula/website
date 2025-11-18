@@ -69,7 +69,7 @@ KVM Node Package: ensures that the `opennebula-kvm-node EE package is installed 
 
 **NVSwitch PCI passthrough Setup:** The NVSwitch devices must be prepared for PCI passthrough using the vfio-pci driver. This can be done at OpenNebula deployment time using one-deploy, more information [here](content/solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md).
 
-**Start OpenNebula FabricManager service:** The opennebula-fabricmanager.service on the host is disabled by default, as it is designed to be started and stopped on demand or managed by the OpenNebula administrator. 
+Start OpenNebula FabricManager service: the `opennebula-fabricmanager` service on the host is disabled by default, as it is designed to be started and stopped on demand or managed by the OpenNebula administrator. 
 
 In order to start the service you must run the following command on each virtualization node:
 
