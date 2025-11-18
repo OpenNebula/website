@@ -32,7 +32,7 @@ Key Components:
 
 This allows NVIDIA&reg; Fabric Manager to reconfigure the switches dynamically and fix the bandwidth limitations seen in plain GPU passthrough.
 
-You can find more information about NVIDIA&reg; Shared NVSwitch Virtualization Model [here](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html#shared-nvswitch-virtualization-model).
+For additional information about NVIDIA Shared NVSwitch Virtualization Model, refer to the official [NVIDIA Fabric Manager](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html#shared-nvswitch-virtualization-model) documentation.
 
 
 ### The OpenNebula Approach
