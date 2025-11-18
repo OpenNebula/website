@@ -18,6 +18,10 @@ The following image shows the reference architecture proposed by NVIDIA:
 
 ![Reference architecture proposed by NVIDIA](/images/onefabric_virtualization_model.svg)
 
+In the previous example image, we have three VMs running on the hypervisor: two Guest VMs and one Service VM.
+
+The Service VM is responsible for managing the NVSwitches. It executes the commands to control GPU partitioning and configure the NVSwitches accordingly. The Guest VMs are configured with PCI passthrough for the GPUs and utilize the processing power. Each Guest VM is assigned the GPUs that comprise each of the active partitions of the NVSwitches.
+
 Key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
 - **Service VM** (Fabric Manager VM): a persistent, minimal Virtual Machine runs on the KVM host.
@@ -40,6 +44,8 @@ The host component also includes a monitoring probe that runs periodically. It q
 2.  **Frontend CLI (`onefabric`):** the primary user interface for the tool, managed from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When you run a command like `onefabric list`, the tool uses SSH to connect to the relevant KVM hosts and remotely execute commands inside the Fabric Manager VM using `virsh` and the QEMU guest agent. This allows an administrator to manage the NVSwitch hardware across all hosts from a single console.
 
 ### Key Scenarios for OpenNebula NVIDIA Fabric Manager
+
+The OpenNebula NVIDIA Fabric Manager Integration is essential for this cases:
 
 - To enable Shared NVSwitch Virtualization for OpenNebula VMs.
 - To dynamically partition NVSwitch devices across compute hosts.
@@ -65,11 +71,13 @@ OpenNebula Frontend requirements:
 
 ### Host Preparation and Component Installation
 
-KVM Node Package: ensures that the `opennebula-kvm-node EE package is installed on every KVM host that contains NVSwitch devices. This package contains the `opennebula-fabricmanager` service.
+To begin the installation and configuration, we must verify that we meet the following prerequisites:
 
-**NVSwitch PCI passthrough Setup:** The NVSwitch devices must be prepared for PCI passthrough using the vfio-pci driver. This can be done at OpenNebula deployment time using one-deploy, more information [here]({{% relref "../../../solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md" %}}). If this is not done during deployment, it is possible to manually configure the NVSwitches to use the virtio-pci driver by following the "Hypervisor Configuration" section from [NVIDIA GPU Passthrough]({{% relref "./nvidia_gpu_passthrough.md" %}}).
+KVM Node Package: ensures that the `opennebula-kvm-node` EE package is installed on every KVM host that contains NVSwitch devices. This package contains the `opennebula-fabricmanager` service.
 
-Start OpenNebula FabricManager service: the `opennebula-fabricmanager` service on the host is disabled by default, as it is designed to be started and stopped on demand or managed by the OpenNebula administrator. 
+NVSwitch PCI passthrough Setup: The NVSwitch devices must be prepared for PCI passthrough using the vfio-pci driver. This can be done at OpenNebula deployment time using one-deploy, more information [here]({{% relref "../../../solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment.md" %}}). If this is not done during deployment, it is possible to manually configure the NVSwitches to use the virtio-pci driver by following the "Hypervisor Configuration" section from [NVIDIA GPU Passthrough]({{% relref "./nvidia_gpu_passthrough.md" %}}).
+
+Once we have validated the prerequisites, we can start OpenNebula FabricManager service: the `opennebula-fabricmanager` service on the host is disabled by default, as it is designed to be started and stopped on demand or managed by the OpenNebula administrator. 
 
 To start the service, run the following command on each virtualization node:
 
