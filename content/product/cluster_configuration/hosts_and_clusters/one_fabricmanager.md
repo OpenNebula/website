@@ -16,7 +16,7 @@ The NVIDIA Fabric Manager integration relies on the NVIDIA Shared NVSwitch Virtu
 
 The following image shows the reference architecture proposed by NVIDIA:
 
-![image0](/images/onefabric_virtualization_model.svg)
+![Reference architecture proposed by NVIDIA](/images/onefabric_virtualization_model.svg)
 
 Key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
