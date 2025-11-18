@@ -55,7 +55,7 @@ The host component also includes a monitoring probe that runs periodically. It q
 - VFIO-PCI Drivers: the `vfio-pci driver must be enabled and loaded for the NVSwitch and GPU devices to allow PCI passthrough to the Service VM.
 - Service VM Image: the required Fabric Manager VM image is handled and downloaded automatically during service startup.
 
-**OpenNebula Frontend:**
+OpenNebula Frontend requirements:
 
 - onefabric CLI Tool: must be available on the OpenNebula frontend server. Installed by default on EE packages.
 - **Passwordless SSH Access:** The frontend oneadmin user must have passwordless SSH access to the oneadmin user on all KVM hosts for remote command execution.
