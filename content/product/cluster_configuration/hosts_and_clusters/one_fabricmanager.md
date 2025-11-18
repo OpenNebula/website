@@ -58,7 +58,7 @@ KVM Host requirements:
 OpenNebula Frontend requirements:
 
 - onefabric CLI Tool: must be available on the OpenNebula frontend server. Installed by default on EE packages.
-- **Passwordless SSH Access:** The frontend oneadmin user must have passwordless SSH access to the oneadmin user on all KVM hosts for remote command execution.
+- Passwordless SSH Access: the frontend *oneadmin* user must have passwordless SSH access to the oneadmin user on all KVM hosts for remote command execution.
 
 
 ## Installation and Configuration
