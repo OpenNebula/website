@@ -1,7 +1,7 @@
 ---
 title: OpenNebula NVIDIA Fabric Manager
 linkTitle: NVIDIA Fabric Manager
-weight: 7
+weight: 8
 ---
 
 <a id="one_fabricmanager"></a>
@@ -16,7 +16,7 @@ The NVIDIA Fabric Manager integration relies on the NVIDIA Shared NVSwitch Virtu
 
 The following image shows the reference architecture proposed by NVIDIA:
 
-{{< image alt="Architecture of NVIDIA_FabricManager OpenNebula" path=/images/solutions/deployment_blueprints/ai-ready_opennebula/shared-nvswitch-stack.png width=500 height=250 >}}
+{{< image alt="Architecture of NVIDIA_FabricManager OpenNebula" path=/images/shared-nvswitch-stack.png width=500 height=250 >}}
 
 Key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
