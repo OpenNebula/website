@@ -33,7 +33,7 @@ For additional information about NVIDIA Shared NVSwitch Virtualization Model, re
 
 OpenNebula implements the NVIDIA Shared NVSwitch Virtualization Model through a two-part system designed for automation and centralized management:
 
-1.  **Host Component (`opennebula-kvm-node` EE package):** The Enterprise Edition of the package is installed on each KVM host that contains NVSwitch devices. It provides a systemd service that manages a minimal, self-contained virtual machine (the "Fabric Manager VM"). This VM is given direct, secure access to the NVSwitch hardware via PCI passthrough and contains the necessary NVIDIA&reg; tools (`nv-partitioner`, `nvswitch-audit`) to manage the hardware.
+1.  **Host Component (`opennebula-kvm-node` EE package):** the Enterprise Edition of the package is installed on each KVM host that contains NVSwitch devices. It provides a systemd service that manages a minimal, self-contained VM known as the "Fabric Manager VM". This VM is given direct, secure access to the NVSwitch hardware via PCI passthrough and contains the necessary NVIDIA tools like `nv-partitioner` and `nvswitch-audit` to manage the hardware.
 
 The host component also includes a monitoring probe that runs periodically. It queries the Fabric Manager VM to get the current NVSwitch partitions and maps the logical GPU module IDs to the physical PCI addresses on the host. This information (`NVSWITCH_PARTITION`) is reported to OpenNebula, making the partition status and the GPU topology visible in the host's monitoring data for scheduling and management.
 
