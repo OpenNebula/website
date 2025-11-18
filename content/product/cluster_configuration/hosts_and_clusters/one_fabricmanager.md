@@ -161,7 +161,7 @@ VM state (libvirt): running
 
 ## Fabric Manager Usage
 
-The OpenNebula NVIDIA Fabric Manager is intended to use via `onefabric` commands, the central point of control, this tool will execute commands remotely via SSH against the KVM hosts and interacting with the Fabric Manager VM using the QEMU guest agent.
+The OpenNebula NVIDIA Fabric Manager is intended to use via `onefabric` commands, the central point of control. The  commands are remotely executed via SSH against the KVM hosts, interacting with the Fabric Manager VM through the QEMU guest agent.
 
 `onefabric` key Commands:
 
