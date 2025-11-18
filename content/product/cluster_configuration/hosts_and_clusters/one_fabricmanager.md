@@ -22,7 +22,7 @@ Key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
 - **Service VM** (Fabric Manager VM): a persistent, minimal Virtual Machine runs on the KVM host.
 - **PCI Passthrough:** The NVSwitch hardware devices are passed directly to this Service VM. The GPUs are passed directly to guest (workload) VMs.
-- **Fabric Manager:** The NVIDIA&reg; Fabric Manager and associated NVIDIA tools run inside the Service VM, allowing it to dynamically reconfigure and manage the NVSwitches.
+- **Fabric Manager:** the NVIDIA Fabric Manager and associated NVIDIA tools run inside the Service VM, allowing it to dynamically reconfigure and manage the NVSwitches.
 
 This allows NVIDIA&reg; Fabric Manager Service to reconfigure the switches dynamically and fix the bandwidth limitations seen in plain GPU passthrough.
 
