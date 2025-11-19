@@ -1,5 +1,5 @@
 ---
-title: NVIDIA Dynamo on Kubernetes
+title: Validation with NVIDIA Dynamo on Kubernetes
 linkTitle: NVIDIA Dynamo
 weight: 5
 ---
@@ -7,7 +7,7 @@ weight: 5
 <a id="nvidia_dynamo"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the validation with NVIDIA Dynamo Cloud Platform, you must follow the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) for creating an AI-Ready Kubernetes ready for running GPU workloads.
+To perform the validation with NVIDIA Dynamo on Kubernetes, you must follow the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) for creating an AI-Ready Kubernetes ready for running GPU workloads.
 {{< /alert >}}
 
 [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
