@@ -67,9 +67,9 @@ OpenNebula Frontend requirements:
 
 To begin the installation and configuration, verify these prerequisites:
 
-KVM Node Package: ensures that the `opennebula-kvm-node` EE package is installed on every KVM host that contains NVSwitch devices. This package contains the `opennebula-fabricmanager` service.
+* KVM Node Package: ensures that the `opennebula-kvm-node` EE package is installed on every KVM host that contains NVSwitch devices. This package contains the `opennebula-fabricmanager` service.
 
-NVSwitch PCI passthrough Setup: the NVSwitch devices must be prepared for PCI passthrough using the vfio-pci driver. Configure these devices at OpenNebula deployment time using one-deploy; check [here]({{% relref "../../../cluster_configuration/hosts_and_clusters/pci_passthrough/#vfio-device-binding" %}}) for instructions. If this is not done during deployment, it is possible to manually configure the NVSwitches to use the virtio-pci driver by following the "Hypervisor Configuration" section from [NVIDIA GPU Passthrough]({{% relref "./nvidia_gpu_passthrough" %}}).
+* NVSwitch PCI passthrough Setup: the NVSwitch devices must be prepared for PCI passthrough using the vfio-pci driver. Configure these devices at OpenNebula deployment time using one-deploy; check [here]({{% relref "../../../cluster_configuration/hosts_and_clusters/pci_passthrough/#vfio-device-binding" %}}) for instructions. If this is not done during deployment, it is possible to manually configure the NVSwitches to use the virtio-pci driver by following the "Hypervisor Configuration" section from [NVIDIA GPU Passthrough]({{% relref "./nvidia_gpu_passthrough" %}}).
 
 Once you have validated the prerequisites, start OpenNebula FabricManager service: the `opennebula-fabricmanager` service on the host is disabled by default, as it is designed to be started and stopped on demand or managed by you as the OpenNebula administrator. 
 
@@ -79,7 +79,7 @@ To start the service, run the following command on each virtualization node:
 nvidia@opennebula-gpu01:~$ sudo systemctl start opennebula-fabricmanager.service
 ```
 
-Once you start the service on each virtualization node, it executes pre-start scripts to prepare the VM environment, defines the `one-fabricmanager domain, and starts the VM.
+When you start OpenNebula FabricManager on each virtualization node, the service executes pre-start scripts to prepare the VM environment and define the `one-fabricmanager domain. Then, it starts the VM.
 
 During the start process the service will perform attempts to download the Fabric Manager VM image from a public URL. If you are working on an air-gapped installation, edit `/etc/onefabricmanager.conf` on each node in order to set a custom accessible URL with the image hosted.
 
