@@ -18,10 +18,6 @@ In the reference architecture proposed by NVIDIA, there are three VMs running on
 
 ![Reference architecture proposed by NVIDIA](/images/onefabric_virtualization_model.svg)
 
-In the previous example image, we have three VMs running on the hypervisor: two Guest VMs and one Service VM.
-
-The Service VM is responsible for managing the NVSwitches. It executes the commands to control GPU partitioning and configure the NVSwitches accordingly. The Guest VMs are configured with PCI passthrough for the GPUs and utilize the processing power. Each Guest VM is assigned the GPUs that comprise each of the active partitions of the NVSwitches.
-
 These are the key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
 - **Service VM** (Fabric Manager VM): a persistent, minimal Virtual Machine runs on the KVM host.
@@ -29,8 +25,6 @@ These are the key components of the NVIDIA Shared NVSwitch Virtualization Model:
 - **Fabric Manager:** the NVIDIA Fabric Manager and associated NVIDIA tools run inside the Service VM, allowing it to dynamically reconfigure and manage the NVSwitches.
 
 These virtualization model components allow NVIDIAFabric Manager Service to reconfigure the switches dynamically and fix the bandwidth limitations seen in plain GPU passthrough. For additional information about NVIDIA Shared NVSwitch Virtualization Model, refer to the official [NVIDIA Fabric Manager](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html#shared-nvswitch-virtualization-model) documentation.
-
-For additional information about NVIDIA Shared NVSwitch Virtualization Model, refer to the official [NVIDIA Fabric Manager](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html#shared-nvswitch-virtualization-model) documentation.
 
 
 ## The OpenNebula Approach
