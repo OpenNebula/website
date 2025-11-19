@@ -94,20 +94,7 @@
   background-color: #005675;
   padding-top: 0px;
 }
-.one-footer-copyright {
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-  border-top: #E0E4E733;
-  border-top-style: solid;
-  border-width: 1px;
-  p {
-    margin-top: 5px;;
-    margin-bottom: 0px;;
-  }
-}
-.one-footer-acks {
+body .one-footer-copyright {
   display: flex;
   font-size: 12px;
   font-style: normal;
@@ -116,10 +103,44 @@
   border-top: #E0E4E733;
   border-top-style: solid;
   border-width: 1px;
-  p {
-    margin-bottom: 7px;;
-  }
 }
+
+body .one-footer-copyright p {
+  color: #FFFFFF !important; 
+  margin-top: 5px;;
+  margin-bottom: 0px;;
+}
+
+/* Keep the specific selector for links */
+body .one-footer-copyright  a { 
+  color: #FFFFFF; 
+  text-decoration: underline; 
+}
+
+body .one-footer-acks {
+  display: flex;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  border-top: #E0E4E733;
+  border-top-style: solid;
+  border-width: 1px;
+
+}
+
+/* Use the ultra-specific selector for plain text */
+body .one-footer-acks p {
+  color: #FFFFFF !important; 
+  margin-bottom: 7px;
+}
+  
+/* Keep the specific selector for links */
+body .one-footer-acks a { 
+  color: #FFFFFF; 
+  text-decoration: underline; 
+}
+
 .td-footer svg {
   // width: 220.68px;
   width: 331.02px;
