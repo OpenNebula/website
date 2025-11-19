@@ -25,3 +25,4 @@ The following issues have been solved in 7.0.2:
 - Fix LDAP authentication issue by removing password encoding [#7344](https://github.com/OpenNebula/one/issues/7344)
 - Fix FireEdge Sunstone doesn't respect START_SCRIPT [#7064](https://github.com/OpenNebula/one/issues/7064)
 - Fix headers in the tables are not translated in list mode [#7357](https://github.com/OpenNebula/one/issues/7357)
+- Fix the deployment of NVIDIA GPU VMs by ensuring that monitord configuration is read from host local file system [#7376](https://github.com/OpenNebula/one/issues/7376)
