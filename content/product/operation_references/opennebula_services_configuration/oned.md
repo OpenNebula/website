@@ -472,9 +472,15 @@ Sample configuration:
 ```default
 MARKET_MAD = [
     EXECUTABLE = "one_market",
-    ARGUMENTS  = "-t 15 -m http,s3,one"
+    ARGUMENTS  = "-t 15 -m http,s3,one,hfhub"
 ]
 ```
+
+Available marketplace drivers:
+- `one`: OpenNebula Systems Marketplace
+- `http`: HTTP-based private marketplace
+- `s3`: S3-compatible private marketplace
+- `hfhub`: HuggingFace Hub marketplace for AI models (see [HFHUB Marketplace]({{% relref "../../../product/apps-marketplace/public_marketplaces/hfhub#market-hfhub" %}}))
 
 ## Hook System
 

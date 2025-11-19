@@ -19,6 +19,12 @@ OpenNebula will configure by default the following Marketplaces in your installa
 | OpenNebula Public  | The official public [OpenNebula Systems Marketplace](http://marketplace.opennebula.systems) |
 | Linux Containers   | The public LXC [image repository](https://images.linuxcontainers.org)                       |
 
+Additionally, you can configure the following Public Marketplaces:
+
+| Marketplace Name   | Description                                                                                 |
+|--------------------|---------------------------------------------------------------------------------------------|
+| HuggingFace Hub    | The [HuggingFace Hub Marketplace]({{% relref "hfhub#market-hfhub" %}}) provides a metadata-rich catalog of AI models from HuggingFace Hub for AI Factory workflows |
+
 {{< alert title="Important" color="success" >}}
 The OpenNebula Front-end needs access to the Internet to use the Public Marketplaces.{{< /alert >}} 
 
