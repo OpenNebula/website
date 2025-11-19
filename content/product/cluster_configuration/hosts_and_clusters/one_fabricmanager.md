@@ -16,7 +16,7 @@ The OpenNebula integration with Fabric Manager integration relies on the NVIDIA 
 
 In the reference architecture proposed by NVIDIA, there are three VMs running on the hypervisor: two Guest VMs and one Service VM. The Service VM is responsible for managing the NVSwitches, executes the commands to control GPU partitioning, and configures the NVSwitches accordingly. The Guest VMs are configured with PCI passthrough for the GPUs and utilize the processing power. Each Guest VM is assigned the GPUs that comprise each of the active partitions of the NVSwitches. See the reference architecture in the image below.
 
-![Reference architecture proposed by NVIDIA](/images/onefabric_virtualization_model.svg)
+![ Reference architecture. Adapted diagram based on the "Shared NVSwitch Virtualization Model" located in the NVIDIA Fabric Manager User Guide.](/images/onefabric_virtualization_model.svg)
 
 These are the key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
