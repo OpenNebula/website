@@ -417,11 +417,6 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 In the streamed output, you will receive multiple JSON responses with the response tokens in the `text` field, with some metadata included.
 
 {{< alert title="Tip" color="success" >}}
-Alternatively, after validating your AI Factory with NVIDIA Dynamo on Kubernetes, you may choose to follow [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
-{{< /alert >}}
-
-
-{{< alert title="Tip" color="success" >}}
 After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with [NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.
 
 Alternatively, you can explore [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).

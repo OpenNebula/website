@@ -1,6 +1,6 @@
 ---
 title: Validation with AI-Ready Kubernetes
-linkTitle: AI-Ready Kubernetes
+linkTitle: AI-ready Kubernetes
 weight: 5
 ---
 
