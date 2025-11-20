@@ -15,7 +15,7 @@ weight: "3"
 
 RSync is an open source file transfer utility that is included with most distributions of Linux. This backup utility is provided with the Community Edition (CE) of OpenNebula and supports both full and incremental backup methods.
 
-## Step 1. Set up the backup server
+## Configuring the backup server
 
 First, a server should be configured to receive and store these backup files.  The rsync backup server can be any server which is accessible from the oneadmin user on the Hosts.  This user on the nodes should have their key placed on the rsync server under the user specified in the rsync Backup Datastore configuration ( `~/.ssh/authorized_keys` by default ).
 
@@ -28,7 +28,7 @@ Perform the following steps:
 * (Optional) Mount a storage volume to /var/lib/one/datastores or to the Datastore ID directory under that.
 * Finally make sure **rsync** and **qemu-img** commands are installed in the backup server.
 
-## Step 2. Create OpenNebula Datastore
+## Creating the OpenNebula Datastore
 
 Once the rsync server is prepared to receive backup files from all of the nodes, we just need to create a datastore detailing the user and Host:
 
