@@ -1,7 +1,7 @@
 ---
 title: Validation with NVIDIA KAI Scheduler
 linkTitle: NVIDIA KAI Scheduler
-weight: 6
+weight: 7
 ---
 
 <a id="nvidia_kai_scheduler"></a>
@@ -337,5 +337,7 @@ Optionally, deploy another workload with a small GPU fraction on that node.
 With this validation, you have checked how you can efficiently share fractional GPU resources between workloads in an AI-Ready Kubernetes with KAI Scheduler.
 
 {{< alert title="Tip" color="success" >}}
-Alternatively, after validating your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may choose to follow [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) or [Validation with NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}).
+After powering your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may continue with [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) as an additional validation procedure built on top of K8s.
+
+Alternatively, you can explore [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
 {{< /alert >}}
