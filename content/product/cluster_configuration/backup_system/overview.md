@@ -37,69 +37,90 @@ Performing a VM backup may require some support from the hypervisor or the disk 
 
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head" rowspan="2"><p>Hypervisor</p></th>
-<th class="head" rowspan="2"><p>Storage</p></th>
-<th class="head" colspan="2"><p>Full</p></th>
-<th class="head" colspan="2"><p>Incremental</p></th>
+<tr class="row-odd">
+    <th class="head" rowspan="2"><p>Hypervisor</p></th>
+    <th class="head" rowspan="2"><p>Storage</p></th>
+    <th class="head" colspan="2"><p>Full</p></th>
+    <th class="head" colspan="2"><p>Incremental</p></th>
 </tr>
-<tr class="row-even"><th class="head"><p>Live</p></th>
-<th class="head"><p>Power off</p></th>
-<th class="head"><p>Live</p></th>
-<th class="head"><p>Power off</p></th>
+<tr class="row-even">
+    <th class="head"><p>Live</p></th>
+    <th class="head"><p>Power off</p></th>
+    <th class="head"><p>Live</p></th>
+    <th class="head"><p>Power off</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-odd"><td rowspan="4"><p>KVM</p></td>
-<td><p>File<sup>*</sup> (qcow2)</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
+<tr class="row-odd">
+    <td rowspan="5"><p>KVM</p></td>
+    <td><p>File<sup>*</sup> (qcow2)</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
 </tr>
-<tr class="row-even"><td><p>File<sup>*</sup> (raw)</p></td>
-<td><p>Yes</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
+<tr class="row-even">
+    <td><p>File<sup>*</sup> (raw)</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
+    <td><p>No</p></td>
+    <td><p>No</p></td>
 </tr>
-<tr class="row-odd"><td><p>Ceph</p></td>
-<td><p>Yes<sup>†</sup></p></td>
-<td><p>Yes<sup>†</sup>
-<td><p>Yes<sup>†</sup>
-<td><p>Yes<sup>†</sup>
+<tr class="row-odd">
+    <td><p>Ceph</p></td>
+    <td><p>Yes<sup>†</sup></p></td>
+    <td><p>Yes<sup>†</sup>
+    <td><p>Yes<sup>†</sup>
+    <td><p>Yes<sup>†</sup>
 </tr>
-<tr class="row-even"><td><p>LVM</p></td>
-<td><p>Yes<sup>‡</sup></p></td>
-<td><p>Yes</p></td>
-<td><p>Yes<sup>***</sup></p></td>
-<td><p>Yes<sup>***</sup></p></td>
+<tr class="row-even">
+    <td><p>LVM</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
 </tr>
-<tr class="row-odd"><td rowspan="3"><p>LXC</p></td>
-<td><p>File (any format)</p></td>
-<td><p>No</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
+<tr class="row-odd">
+    <td><p>LVM (File Mode)</p></td>
+    <td><p>Yes<sup>‡</sup></p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes<sup>‡</sup></p></td>
+    <td><p>Yes<sup>‡</sup></p></td>
 </tr>
-<tr class="row-even"><td><p>Ceph</p></td>
-<td><p>No</p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
+<tr class="row-even">
+    <td rowspan="4"><p>LXC</p></td>
+    <td><p>File (any format)</p></td>
+    <td><p>No</p></td>
+    <td><p>Yes</p></td>
+    <td><p>No</p></td>
+    <td><p>No</p></td>
 </tr>
-<tr class="row-odd"><td><p>LVM</p></td>
-<td><p>Yes<sup>‡</sup></p></td>
-<td><p>Yes</p></td>
-<td><p>No</p></td>
-<td><p>No</p></td>
+<tr class="row-odd">
+    <td><p>Ceph</p></td>
+    <td><p>No</p></td>
+    <td><p>Yes</p></td>
+    <td><p>No</p></td>
+    <td><p>No</p></td>
+</tr>
+<tr class="row-even">
+    <td><p>LVM</p></td>
+    <td><p>Yes</p></td>
+    <td><p>Yes</p></td>
+    <td><p>No</p></td>
+    <td><p>No</p></td>
+</tr>
+<tr class="row-odd">
+    <td><p>LVM (File Mode)</p></td>
+    <td><p>Yes<sup>‡</sup></p></td>
+    <td><p>Yes</p></td>
+    <td><p>No</p></td>
+    <td><p>No</p></td>
 </tr>
 </tbody>
 </table>
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e. NFS/SAN or Local.
 
-<sup>\*\*</sup> Ceph full/incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#vm-backups-operations" %}}) for more details.
+<sup>†</sup> Ceph full and incremental backups are currently stored in a different way, see [backup types]({{% relref "../../virtual_machines_operation/virtual_machine_backups/operations#backup-types" %}}) for more details.
 
-<sup>\*\*\*</sup> LVM Incremental backups only supported in [thin mode]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers/#lvm-thin" %}}).
-
-<sup>†</sup> Live LVM backups only supported in [thin mode]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers/#lvm-thin" %}}).
+<sup>‡</sup> Only supported in [thin mode]({{% relref "../../../product/cluster_configuration/san_storage/lvm/filemode#lvm-thin" %}}).

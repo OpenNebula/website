@@ -14,6 +14,12 @@ weight: "1"
 
 <!--# Overview -->
 
+## How Should I Read This Chapter
+
+Before performing the operations outlined in this chapter, familiarize with Node Deployment from the [Installation]({{% relref "../../../software/installation_process" %}}) guide.
+
+After that, proceed with the specific Datastore documentation you might be interested in.
+
 ## Datastore Types
 
 Storage in OpenNebula is designed around the concept of datastores. A datastore is any storage medium to store disk images. OpenNebula distinguishes between three different datastore types:
@@ -24,53 +30,31 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 
 ![image0](/images/datastoreoverview.png)
 
-### Image Datastores
+## Driver Types
 
-There are different Image Datastores depending on how the images are stored on the underlying storage technology:
 
-: - [NFS/NAS]({{% relref "nas_ds#nas-ds" %}})
-  - [Local Storage]({{% relref "local_ds#local-ds" %}})
-  - [Ceph]({{% relref "ceph_ds#ceph-ds" %}})
-  - [SAN]({{% relref "../san_storage/lvm_drivers#lvm-drivers" %}})
-  - [Raw Device Mapping]({{% relref "dev_ds#dev-ds" %}})
-  - [iSCSI - Libvirt]({{% relref "iscsi_ds#iscsi-ds" %}}), to access iSCSI devices through the built-in QEMU support
-  - [NetApp]({{% relref "netapp" %}}) - Datastore to register a NetApp SAN appliance, provided as an Enterprise Extension
 
-### System Datastores
+## Storage portfolio
 
-Each datastore supports different features, here is a basic overview:
+| Use case                                                                | Description                                                                                        | Shared | Disk Format                    | Disk snapshots | VM snapshots | Live migration | Fault tolerance | HV      | Availability |
+| --                                                                      | --                                                                                                 | --     | --                             | --             | --           | --             | --              | --      | --           |
+| [Local storage]({{% relref "local_ds" %}})                              | Images stored in frontend* and transferred to hosts via<br/>SSH on instantiation.                      | no     | raw/qcow2                      | yes            | yes          | yes            | yes             | KVM/LXC | EE/CE        |
+| [NFS/NAS]({{% relref "nas_ds" %}})                                      | Images stored in a NFS share, activated directly.                                                  | yes    | raw/qcow2                      | yes            | yes          | yes            | no              | KVM/LXC | EE/CE        |
+| [Ceph]({{% relref "ceph_ds" %}})                                        | Images stored in a Ceph pool, activated directly.                                                  | yes    | raw (RBD)                      | yes            | no           | yes            | yes             | KVM/LXC | EE/CE        |
+| [SAN - LVM]({{% relref "../san_storage/lvm/lvm" %}})                    | Images stored as LVs in a SAN, activated directly.                                                 | yes    | raw (LV)                       | yes            | no           | yes            | yes             | KVM     | **EE only**  |
+| [SAN - LVM<br/>(File Mode)]({{% relref "../san_storage/lvm/filemode" %}}) | Images stored in frontend\*, transferred to hosts via SSH,<br/>and copied to the SAN on instantiation. | yes    | raw (LV)<br/>Images: raw/qcow2 | yes**          | no           | yes            | yes             | KVM     | EE/CE        |
+| [SAN - NetApp]({{% relref "../san_storage/netapp" %}})                  | Images stored in a NetApp cabin, activated directly.                                               | yes    | raw (LUN)                      | yes            | no           | yes            | yes             | KVM     | **EE only**  |
 
-|                                                                                                                 | [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}) | [Local]({{% relref "local_ds#local-ds" %}}) | [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) | [SAN]({{% relref "../san_storage/lvm_drivers#lvm-drivers" %}}) | [iSCSI]({{% relref "iscsi_ds#iscsi-ds" %}}) |
-| ------------------------------------------------------------------------------------------------                | ----------------------------              | ------------------------------              | ---------------------------              | ----------------------------------              | ------------------------------              |
-| Disk snapshots                                                                                                  | yes                                       | yes                                         | yes                                      | yes (LVM Thin only)                             | yes                                         |
-| VM snapshots                                                                                                    | yes                                       | yes                                         | no                                       | no                                              | no                                          |
-| Live migration                                                                                                  | yes                                       | yes                                         | yes                                      | yes                                             | yes                                         |
-| Fault tolerance<br/>([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes                                       | no                                          | yes                                      | yes                                             | yes                                         |
+<sup>\*</sup> Additional options available by mounting remote filesystems in the frontend.
 
-{{< alert title="NetApp SAN Datastore (EE)" >}}
+<sup>\*\*</sup> Only with LVM Thin mode enabled.
 
-The NetApp SAN Datastore is provided as an Enterprise Extension. Its basic features are listed below.
+### Other storage options
 
-| Feature                                                                                                     | Supported |
-| ----------------------------------------------------------------------------------------------------------- | --------- |
-| Disk snapshots                                                                                              | yes       |
-| VM snapshots                                                                                                | no        |
-| Live migration                                                                                              | yes       |
-| Fault tolerance ([VM HA]({{% relref "../../control_plane_configuration/high_availability/vm_ha#vm-ha" %}})) | yes       |
+As an admin, restrict the usage of some storage options because these give low-level access to hosts and could become a serious security risk. Please read carefully the corresponding documentation before using them:
 
-{{< /alert >}}
+| Use case                                      | Description                                           | Shared | Disk Format  | Disk snapshots | VM snapshots | Live migration | Fault tolerance | HV  | Availability |
+| --                                            | --                                                    | --     | --           | --             | --           | --             | --              | --  | --           |
+| [Raw Device Mapping]({{% relref "dev_ds" %}}) | Images accessed as block devices directly from hosts. | yes    | raw (block)  | yes            | no           | yes            | no              | KVM | EE/CE        |
+| [SAN - iSCSI]({{% relref "iscsi_ds" %}})      | Images accessed as iSCSI LUNs directly from hosts.    | yes    | raw (volume) | yes            | no           | yes            | yes             | KVM | EE/CE        |
 
-## How Should I Read This Chapter
-
-Before reading this Chapter make sure you are familiar with Node Deployment from the [Installation]({{% relref "../../../software/installation_process" %}}) guide.
-
-After that, proceed with the specific Datastore documentation you might be interested in.
-
-## Hypervisor Compatibility
-
-This Chapter applies to KVM and LXC.
-
-{{< alert title="Warning" color="warning" >}}
-Hypervisor limitations:
-
-- **LXC** nodes only support [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}), [Local Storage]({{% relref "local_ds#local-ds" %}}) and [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) datastores.{{< /alert >}} 
