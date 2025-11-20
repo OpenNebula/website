@@ -10,9 +10,16 @@ weight: "1"
 
 <!--# Overview -->
 
-## How Should I Read This Chapter
+Cloud Cluster Operations involve managing providers and provisions. Provider management deals with maintaining the external resources that OpenNebula uses to build and manage clusters. On the other hand, provision management works with the core functionality of deploying and managing the cluster instances using the providers defined.
 
-Provisions in the form of Edge Clusters or HCI Clusters provide you with the tools needed to dynamically grow your cloud infrastructure on remote cloud providers or on-premises resources. This chapter describes how to [Manage Cloud or on-premises providers]({{% relref "provider_operations#provider-operations" %}}).
+
+## Basic Outline
+
+This guide is structured as follows:
+
+* [Managing Providers]({{% relref "provider_operations#provider-operations" %}}): use OneForm to define, instantiate and configure your deployment.
+* [Managing Provisions]({{% relref "provider_operations#provision-operations" %}}): dynamically grow your cloud infrastructure on remote cloud providers or on-premises resource.
+
 
 ## Hypervisor Compatibility
 
