@@ -1,18 +1,20 @@
 ---
-title: "Validation with LLM Inference for Model Certification"
-linkTitle: "LLM Inferencing"
+title: "Validation of the AI Factory with LLM Inference"
+linkTitle: "LLM Inference"
 date: "2025-10-28"
 description:
 categories:
 pageintoc: "68"
 tags:
-weight: 3
+weight: 4
 ---
 
 {{< alert title="Important" color="success" >}}
-To perform the validation with LLM Inference for Model Certification, you must comply with one of the prerequisites:
-* Have an AI Factory ready to be validated; or 
-* Configure an AI Factory by following the procedure outlined in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
+To perform the validation with LLM Inference you must comply with one of the prerequisites:
+* Have an AI Factory ready to be validated; or, 
+* Configure an AI Factory by following one of these options: 
+     * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
+     * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}} 
 
 With the rapid and widespread adoption of Large Language Models (LLMs), optimizing and validating their inference performance has become critical. Efficient inference ensures that deployed models deliver high-quality results while maintaining scalability, responsiveness, and cost efficiency.

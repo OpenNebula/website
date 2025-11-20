@@ -1,15 +1,17 @@
 ---
 title: Validation with AI-Ready Kubernetes
-linkTitle: AI-Ready Kubernetes
-weight: 4
+linkTitle: AI-ready Kubernetes
+weight: 5
 ---
 
 <a id="ai_ready_k8s"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the validation with AI-Ready Kubernetes and NVIDIA Dynamo, you must comply with one of the prerequisites:
-* Have an AI Factory ready to be validated; or
-* Configure an AI Factory by following the procedure outlined in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
+To perform the validation with AI-Ready Kubernetes, you must comply with one of the prerequisites:
+* Have an AI Factory ready to be validated; or,
+* Configure an AI Factory by following one of these options: 
+     * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
+     * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
 
 Tools like Kubernetes provide robust orchestration for deploying AI workloads at scale, being able to manage isolation between cluster workloads and GPU resources for AI inference tasks. With the use of NVIDIA GPU Operator,  you perform the provision of the necessary NVIDIA drivers and libraries for making GPU resources available to containers.
@@ -519,5 +521,7 @@ Allocatable:
 
 
 {{< alert title="Tip" color="success" >}}
-Alternatively, after validating your AI Factory with AI-Ready Kubernetes, you may choose to follow [Validation with NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}), [Validation with KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}) and [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
+After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Validation with NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Validation with KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}). 
+
+Alternatively, you can explore [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
 {{< /alert >}}

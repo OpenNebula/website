@@ -7,20 +7,24 @@ The AI transformation is underway, and OpenNebula provides the critical cloud so
 
 Configure and validate a high-performance AI infrastructure using OpenNebula, relying on an infrastructure optimized for speed, efficiency, and scale necessary for demanding AI operations. In this guide you will learn about the details from foundational hardware planning to automated deployment, as well as final performance validation. More specifically, you will discover aspects such as: 
 
-1. Identifying the minimum hardware and network infrastructure necessary for your AI Factory. These requirements  also serve as an essential reference for advanced users. While OpenNebula supports specialized high-performance architectures like Infiniband, SpectrumX, NVLink, and Scaleway, deployment for these environments is not automated and requires customized configuration.
-2. Following comprehensive instructions for deploying your entire OpenNebula cloud using OneDeploy. This guide outlines the requirements and procedures for successful deployment across both local and general cloud environments.
-3. Optionally, validating your deployment by applying the methodology for the formal acceptance of your new infrastructure. These instructions, which build upon the successful completion of the previous steps, focuses on validating the platform's performance capabilities using Large Language Model (LLM) inferencing, as well as  AI-ready Kubernetes and NVIDIA&reg; Dynamo. 
+1. Identifying the minimum hardware and network infrastructure necessary for your AI Factory. These requirements  also serve as an essential reference for advanced users. While OpenNebula supports specialized high-performance architectures like Infiniband, SpectrumX, and NVLink, deployment for these environments is not automated and requires customized configuration.
+2. Comprehensive instructions to configure an AI Factory with two alternatives: OneDeploy for on-premises, and Scaleway for cloud deployments.
+3. Optionally, validating your deployment by applying the methodology for the formal acceptance of your new infrastructure. These instructions, which build upon the successful completion of the previous steps, focuses on validating the platform's performance capabilities using Large Language Model (LLM) inferencing, AI-ready Kubernetes, NVIDIA&reg; Dynamo and NVIDIA&reg; KAI Scheduler. 
 
 
 ## Basic Outline
 
-Configuring and validating a high-performance AI infrastructure using OpenNebula involves these steps:
+Configuring, deploying and validating a high-performance AI infrastructure using OpenNebula involves these steps:
 
 1. Familiarize with **Architecture and Specifications**.
-2. Explore [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}).
-3. Perform validation:  as a prerequisite, you must have followed the steps in [Configuration and Deployment]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/configuration_and_deployment" %}}). To perform the validation, there are two alternatives:
-    * [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) : relies on two distinct models and two different model sizes across both H100 and L40S GPUs.
-    * [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}): uses H100 and L40S to start Kubernetes and NVIDIA Dynamo on top. 
+2. Configure your AI Factory with one of these alternatives:
+    * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}}): uses OneDeploy for on-prem environments.
+    * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud" %}}): relies on Scaleway for cloud environments.
+3. Perform validation:  as a prerequisite, you must have an AI Factory ready to be validated. These are the options to validate your AI Factory:
+    * [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) : works with two distinct models and two different model sizes across both H100 and L40S GPUs.
+    * [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}): uses H100 and L40S to start Kubernetes on top powered by the OpenNebula cloud platform. Once you have your AI-ready Kubernetes cluster, it is possible to perform additional validations such as:
+        * [Validation with NVIDIA Dynamo]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}): combine the GPU powered Kubernetes cluster with the NVIDIA Dynamo Cloud Platform to provision a solution for your AI workloads on top of the NVIDIA Dynamo framework. 
+        * [Validation with NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}): share GPU resources among different workloads using NVIDIA KAI Scheduler in an AI-Ready Kubernetes cluster. 
 
 
 ## Additional Information Resources
