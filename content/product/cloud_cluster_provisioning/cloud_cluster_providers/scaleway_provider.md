@@ -18,21 +18,23 @@ A Scaleway provider contains the credentials to interact with Scaleway and also 
 * Netherlands - Amsterdam (NL-AMS-1 )
 * Poland - Warsaw (PL-WAW-3)
 
-{{< alert title="Note" color="success" >}}
-More zones can be added modifying the driver configuration. You can learn more about how to modify or expand a driver behaviour in this [Guide](/product/integration_references/edge_provider_driver_development/customizing_driver.md).
-{{< /alert >}}
+It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
 
-In order to define a Scaleway provider, you need the following information:
 
-* **Credentials**: these are used to interact with the remote provider. You need to provide `access_key`, `secret_key` and `project_id`. You can follow [this guide](https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys//) to get this data.
+To define a Scaleway provider, specify the following information:
+
+* **Credentials**: these are used to interact with the remote provider. Provide `access_key`, `secret_key` and `project_id`. To retrieve the required details, follow this guide on [How to create API Keys](https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys//) from Scaleway.
 * **Zone**: this is the location in the world where the resources are going to be deployed. All the available [zones are listed here](https://www.scaleway.com/en/docs/console/account/reference-content/products-availability/).
 * **Offers and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Please note even though Scaleway support multiple OSs, the automation tools are tailored to works with `Ubuntu 24.04`. If you use another OS, please be aware that it might required some adjustments, and things might not work as expected. Avoid using a different OS in production environment unless you’ve properly tested it before.
+Scaleway supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*. 
+
+If you choose a different OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using a different OS than *Ubuntu 24.04* in production environments, unless you have properly tested it before.
 {{< /alert >}}
 
-## How to Create an Scaleway Provider
+
+## Creating an Scaleway Provider
 
 The following process describes how to create a Scaleway provider in your OpenNebula database and make it available for future provisioning operations.
 
@@ -45,9 +47,9 @@ Still under development.
 
 {{% tab header="CLI"%}}
 
-You can now instantiate a provision template by its ID. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Instantiate a provision template by its ID. This step initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
-```default
+```bash
 $ oneprovider create scaleway
 There are some parameters that require user input.
   * (access_key) Scaleway Access Key [type: string]
@@ -72,9 +74,9 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once the provider has been created, you can review its details using the `oneprovider show <id>` command:
+Once you have created the provider, review its details using the `oneprovider show <id>` command:
 
-```default
+```bash
 $ oneprovider show 1
 PROVIDER 1 INFORMATION
 ID                  : 1

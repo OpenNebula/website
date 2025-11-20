@@ -19,23 +19,23 @@ An Equinix provider contains the credentials to interact with Equinix and also t
 * Tokyo
 * California (US)
 
-{{< alert title="Note" color="success" >}}
-More zones can be added modifying the provider configuration. You can learn more about how to modify or expand a provider behaviour in this [Guide](/product/integration_references/edge_provider_driver_development/customizing_driver.md).
-{{< /alert >}}
+It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
 
-In order to define an Equinix provider, you need the following information:
+To define an Equinix provider, specify the following information:
 
-* **Credentials**: these are used to interact with the remote provider. You need to provide `token` and `project`. You can follow [this guide](https://metal.equinix.com/developers/api/) to get this data.
+* **Credentials**: these are used to interact with the remote provider. You need to provide `token` and `project`. To retrieve the required data, follow the [Equinix API](https://docs.equinix.com/equinix-api/) guide.
 * **Facility**: this is the location in the world where the resources are going to be deployed. All the available [facilities are listed here](https://www.equinix.com/data-centers/).
 * **Plans and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Please note even though Equinix support multiple OSs, the automation tools are tailored to works with `Ubuntu 24.04`. If you use another OS, please be aware that it might required some adjustments, and things might not work as expected. Avoid using a different OS in production environment unless you’ve properly tested it before.
+Equinix supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*. 
+
+If you choose a different OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using a different OS than *Ubuntu 24.04* in production environments,  unless you have properly tested it before.
 {{< /alert >}}
 
-## How to Create an Equinix Provider
+## Creating an Equinix Provider
 
-The following process describes how to create an Equinix provider in your OpenNebula database and make it available for future provisioning operations.
+The procedure below describes how to create an Equinix provider in your OpenNebula database, and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
@@ -46,9 +46,9 @@ Still under development.
 
 {{% tab header="CLI"%}}
 
-You can create an Equinix provider using the `oneprovider create <name>` command, specifying the external cloud provider name (`equinix` in this case). During instantiation, OneForm will prompt you to enter the required Equinix credentials and region.
+Create an Equinix provider using the `oneprovider create <name>` command, and specifying `equinix` as the external cloud provider. During instantiation, OneForm will prompt you to enter the required Equinix credentials and region.
 
-```default
+```bash
 $ oneprovider create equinix
 There are some parameters that require user input.
   * (auth_token) Equinix Auth Token [type: string]
@@ -66,9 +66,9 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once the provider has been created, you can review its details using the `oneprovider show <id>` command:
+Once you have created the provider, review its details using the `oneprovider show <id>` command:
 
-```default
+```bash
 $ oneprovider show 1
 PROVIDER 1 INFORMATION
 ID                  : 1
@@ -120,12 +120,12 @@ For further details about the API, please refer to the [OneForm API Reference Gu
 
 ## Known Issues
 
-### Insufficient capacity on Equinix Metal
+### Insufficient Capacity on Equinix Metal
 
-Sometimes there may not be enough hardware available at a given Equinix Metal facility for a given machine type, in which case the following error is shown:
+When there is not enough hardware available at a Equinix Metal facility for a given machine type, you will see the following error message:
 
 ```default
 The facility ams1 has no provisionable c3.small.x86 servers matching your criteria
 ```
 
-In this case, either select a different node type or Equinix Metal provider. You can check the current capacity status on the Equinix Metal API.
+To solve this issue, either select a different node type or Equinix Metal provider. You can check the current capacity status on the Equinix Metal API.
