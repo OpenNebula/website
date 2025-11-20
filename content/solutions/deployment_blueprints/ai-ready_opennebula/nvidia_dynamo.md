@@ -139,10 +139,10 @@ NVIDIA Dynamo orchestrates the deployment of inference graphs [through the Dynam
 
 The instructions of this guide do not expose the Dynamo API externally. You benefit from the Dynamo Kubernetes Operator by deploying the manifests of the inference graphs directly on the cluster.
 
-To access the Kubernetes cluster where Dynamo is deployed:
+For running your workloads as Dynamo Inference Graphs you need:
 
-- Ensure that you have an updated HuggingFace token set as Kubernetes secret with the `hf-token-secret` name and add the `runtimeClassName: nvidia` in the `spec.VllmDecodeWorker.extraPodSpec` field to assign a GPU to the worker pod.
-- Follow the instructions in [Accessing vGpu servers](https://docs.google.com/document/d/1nrXfr8zV7bD_6fkyU8fE5lj6mS1qqin0YRVGy6yjSZs/edit?tab=t.0#heading=h.d6bnzujacz4u) and [Connecting to workload Kubernetes API locally](https://docs.google.com/document/d/1nrXfr8zV7bD_6fkyU8fE5lj6mS1qqin0YRVGy6yjSZs/edit?tab=t.0#heading=h.avcvbins67bl).
+- In case that the used HuggingFace model needs authorization, ensure that you have an updated HF token set as Kubernetes secret with the `hf-token-secret` name.
+- Add the `runtimeClassName: nvidia` in the `spec.VllmDecodeWorker.extraPodSpec` field to assign a GPU to the worker pod.
 
 Once you access the Kubernetes API, proceed to deploy the inference graphs you defined in the corresponding manifest.
 
