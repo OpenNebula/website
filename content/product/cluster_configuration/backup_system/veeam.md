@@ -53,11 +53,10 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
   </tbody>
 </table>
 
-The OpenNebula-Veeam&reg; Backup Integration provides robust, agentless backup and recovery for OpenNebula VMs using Veeam Backup & Replication. The integration works by exposing a native **oVirt-compatible REST API** (via the ovirtAPI server component), allowing Veeam to connect to OpenNebula as if it were an oVirt/RHV hypervisor.
 
-The OpenNebula-Veeam Backup Integration enables Veeam to perform image-level backups, incremental backups by using Changed Block Tracking, as well as granular restores like Full VM and file-level directly from the Veeam console. This integration is part of OpenNebula Enterprise Edition (EE).
+The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-compatible REST API** via the ovirtAPI server component, allowing Veeam to connect to OpenNebula as if it were an oVirt/RHV hypervisor. This integration enables Veeam to perform image-level backups, incremental backups by using Changed Block Tracking, as well as granular restores like Full VM and file-level directly from the Veeam console. This integration is part of OpenNebula Enterprise Edition (EE).
 
-### Features
+## Features
 
 <table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: left;">
   <thead>
@@ -96,7 +95,7 @@ The OpenNebula-Veeam Backup Integration enables Veeam to perform image-level bac
   </tbody>
 </table>
 
-### Compatibility
+## Compatibility
 
 The oVirtAPI module is compatible with the Veeam Backup & Replication version specified in the [Platform Notes]({{% relref "../../../software/release_information/release_notes/platform_notes/#monitoring-and-backups" %}}).
 
