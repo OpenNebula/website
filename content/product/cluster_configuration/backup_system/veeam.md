@@ -4,15 +4,12 @@ linkTitle: "Veeam (EE)"
 weight: "4"
 ---
 
-## Overview
+<a id="vm-backups-veeam"></a>
 
-The OpenNebula-Veeam&reg; Backup Integration provides robust, agentless backup and recovery for OpenNebula VMs using Veeam Backup & Replication. The integration works by exposing a native **oVirt-compatible REST API** (via the ovirtAPI server component), allowing Veeam to connect to OpenNebula as if it were an oVirt/RHV hypervisor.
 
-The OpenNebula-Veeam Backup Integration enables Veeam to perform image-level backups, incremental backups by using Changed Block Tracking, as well as granular restores like Full VM and file-level directly from the Veeam console. This integration is part of OpenNebula Enterprise Edition (EE).
+The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-compatible REST API** via the ovirtAPI server component, allowing Veeam to connect to OpenNebula as if it were an oVirt/RHV hypervisor. This integration enables Veeam to perform image-level backups, incremental backups by using Changed Block Tracking, as well as granular restores like Full VM and file-level directly from the Veeam console. This integration is part of OpenNebula Enterprise Edition (EE).
 
-Additionally, Veeam natively offers the ability to restore virtual machines from VMWare into oVirt, which also gives this integration the capability of restoring VMWare virtual machines into OpenNebula through Veeam Backup & Replication.
-
-### Features
+## Features
 
 <table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: left;">
   <thead>
@@ -56,7 +53,7 @@ Additionally, Veeam natively offers the ability to restore virtual machines from
   </tbody>
 </table>
 
-### Compatibility
+## Compatibility
 
 The oVirtAPI module is compatible with the Veeam Backup & Replication version specified in the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes/#monitoring-and-backups" %}}).
 
@@ -112,7 +109,7 @@ The following table summarizes the supported backup modes for each storage syste
 
 <sup>\**</sup> Supported for LVM-thin environments.
 
-### Limitations
+## Limitations
 
 Here is a list of the known issues and limitations affecting the Veeam integration with OpenNebula:
 
@@ -121,7 +118,7 @@ Here is a list of the known issues and limitations affecting the Veeam integrati
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 
-### Architecture
+## Architecture
 
 To ensure a compatible integration between OpenNebula and Veeam Backup, the following components and network configuration are required:
 
