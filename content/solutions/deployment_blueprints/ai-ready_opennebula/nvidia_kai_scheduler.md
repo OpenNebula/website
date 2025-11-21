@@ -1,5 +1,5 @@
 ---
-title: Validation with NVIDIA KAI Scheduler
+title: Deployment of NVIDIA KAI Scheduler
 linkTitle: NVIDIA KAI Scheduler
 weight: 7
 ---
@@ -7,7 +7,7 @@ weight: 7
 <a id="nvidia_kai_scheduler"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the validation with NVIDIA KAI Scheduler, you must follow the procedure outlined in [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
+To perform the deployment of NVIDIA KAI Scheduler, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
 {{< /alert >}}
 
 [NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
@@ -17,7 +17,7 @@ Some of the key features are:
 - Batch scheduling of different types of workloads, including gang scheduling (i.e. all pods are scheduled together or none are scheduled until all resources are available).
 - Effective workload priority with hierarchical queues.
 - Resource distribution with custom quotas, limits, priorities and fairness policies.
-- Elastic workloads with dynamic workload scalation.
+- Elastic workloads with dynamic workload escalation.
 - Compatibility with other autoscalers like Karpenter.
 
 As the KAI Scheduler operates on top of Kubernetes, users benefit from its robust orchestration, scalability, and resource management capabilities, further enhancing deployment flexibility and reliability. Running both KAI Scheduler and Kubernetes on OpenNebula, this solution extends resource management to hybrid and multi-cloud environments, enabling dynamic and cost-effective scaling of AI workloads while maintaining control over infrastructure. This synergy leverages the strengths of all three technologies to deliver efficient, fair, and portable GPU scheduling from on-premises data centers to the cloud.
@@ -338,6 +338,4 @@ With this validation, you have checked how you can efficiently share fractional 
 
 {{< alert title="Tip" color="success" >}}
 After powering your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may continue with [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) as an additional validation procedure built on top of K8s.
-
-Alternatively, you can explore [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}).
 {{< /alert >}}
