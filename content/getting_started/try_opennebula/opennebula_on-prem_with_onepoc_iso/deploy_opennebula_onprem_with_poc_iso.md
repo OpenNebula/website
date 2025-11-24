@@ -24,7 +24,7 @@ The OpenNebula PoC ISO is based on AlmaLinux 9, and thus it shares the same requ
 | **Network** | - Not needed for installation<br />- At least a NIC for management | - At least 2 NICs (management and service) |
 
 {{< alert title="Warning" color="warning" >}}
-Installing the ISO will delete all the disk data on the server during the installation. 
+**Installing the ISO will delete all the disk data on the server during the installation.**
 {{< /alert >}}
 
 ## Downloading the image, preparing the media and installing
@@ -42,13 +42,13 @@ In Linux or MacOS, the image can be dumped on the USB with the following command
 dd if=/path/to/your/Almalinux-onepoc.iso of=/dev/sdXX
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" color="warning" >}}
 `/dev/sdXX` is the drive for the USB drive. It's recommended to check it twice to avoid catastrophic data lose{{< /alert >}}
 
 On windows, the USB drive can be created with Rufus.
 
-{{< alert title="Note" color="success" >}}
-The image has to be created using DD mode or else the USB drive won't be bootable.{{< /alert >}}
+{{< alert title="Note" color="warning" >}}
+The USB drive must be created using DD mode or else it won't be bootable.{{< /alert >}}
 
 With the media inserted (or virtually mounted) on the server, after rebooting it set the right boot device on the BIOS. Some BIOS may be able to boot the media as MBR and UEFI. We recommend to boot is as UEFI for compatibility reasons.
 
@@ -77,46 +77,81 @@ After the confirmation, the installation will start. It will show some informati
 
 Once the installation is finished in the frontend, no network card will be configured, so an access with the console must be provided. It will look like the following
 
-![frontend-issue_screen](/images/ISO/03-frontend-issue_screen.png)
+```bash
 
-Default user is root and default root password is `0p3nN3bul4`
+                         ╱╱        ╱╱╱╲╲
+                     ╱╱╳╳╳╱     ╱╲╳╱╱╳╲╲╱╳╲
+                   ╱╲╳╳╳╳╳╱    ╱╳╱       ╲╳╳   ╱╲╱╱╱╳╲╲      ╱╱╳╲╲╲    ╱╱╱╱╲╲╲╲
+         ╱╱╱╱╲╲╲╲ ╱╳╳╳╳╳╳╲     ╳╳         ╲╳╲  ╳╳╱    ╲╳╲  ╱╳╱    ╲╳╲  ╳╳╱   ╱╳╲
+      ╱╲╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╲╱ ╱    ╳╳         ╱╳╱  ╳╱      ╳╳ ╱╳╳╲╱╱╱╱╱╳╳  ╳╳    ╲╳╲
+     ╱╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╲╱ ╱╲╱    ╲╳╱╲      ╱╳╲   ╳╳     ╱╳╲  ╳╳╲    ╱╱╲  ╳╳    ╱╳╱
+    ╱╳╳╳╳╳╳╳╳╳╳╳╳╳╳╱  ╱╲╳╳╱      ╲╳╳╲╲╱╱╳╱╱    ╳╳╱╲╲╱╱╳╱    ╲╳╲╲╱╱╳╱   ╳╳    ╱╳╱
+    ╳╳╳╳╳╳╳╳╳╳╳╳╱   ╱╳╳╳╳╲╲                    ╳╳
+    ╲╳╳╳╳╳╳╳╱╱  ╱╱╳╳╳╳╲╱  ╱                    ╳╳
+    ╱╳╳╳╱╱   ╱╱╳╳╳╲╱╱  ╱╱╳╱
+  ╱╱╱   ╱╱╱╳╳╳╱╱   ╱╱╳╳╳╳╱╲    ╱╳╳╲     ╳╳               ╳╳                     ╱╳
+   ╱╱╱╳╳╱╱╱   ╱╱╱╳╳╳╱╱╱   ╱    ╱╳╲╱╲    ╳╳      ╱╱╲      ╳╳ ╱╱╲╲                ╱╳      ╱╱╲
+╱╱╱╱    ╳╱╱╱╳╳╱╱╱    ╱╱╲╳╳╱    ╱╳╱ ╱╱   ╳╳   ╱╲╲╱╱╱╲╳╲   ╳╳╲╱  ╲╱╳╲  ╳╳     ╳╳  ╱╳   ╱╳╱╱╳╲╲╲╳╱
+╲╱╱╱╱╱╱╱╱╱     ╱╱╱╳╳╳╳╳╳╱╱╲    ╱╳╱  ╲╱  ╳╳  ╱╳╱╲    ╲╳╲  ╳╲      ╳╳  ╳╳     ╳╳  ╱╳  ╱╳╱     ╲╳╱
+      ╱╱╱╱╱╳╲╱╱╱╱╱╱      ╱╱    ╱╳╱   ╲╳╲╳╳  ╲╳╳╱╱╱╱╱╱╱╱  ╳╳      ╲╳  ╳╳     ╳╳  ╱╳  ╲╳╲     ╲╳╱
+              ╱╱╱╱╱╱╳╳╳╳╳╳╱    ╱╳╱    ╲╳╳╳   ╲╳╲   ╱╱╱   ╳╳╱╱  ╲╲╳╱  ╲╳╲  ╱╲╳╳  ╱╳   ╱╳╲   ╱╳╳╱
+     ╲╲╲╲╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╲    ╱╱╲     ╲╱╱     ╲╲╲╱╱     ╱╲ ╲╲╱╱╱      ╲╲╱╱╱╱╱  ╱╱     ╲╲╱╱╱ ╱╲
+
+Welcome to OpenNebula Proof of Concept (onepoc) !
+
+- Please, log in as user `root`
+- For a basic configuration of the server, please execute `onefemenu`
+- After the network is configured, the sunstone interface will be running in
+
+  http://this_server:2616
+
+- Please, check the manual page onepoc-quickstart with a
+
+  $ man onepoc-quickstart 7
+
+Thank you!
+```
+
+{{< alert title="Note" color="success" >}}
+Default user is root and default root password is `0p3nN3bul4`.
 After the login, execute `onefemenu` in order to configure the frontend.
+{{< /alert >}}
 
 ![frontend-menu](/images/ISO/04-frontend-menu.png)
 
-Now is time to configure the network using the option `netconf` on the menu. This will launch `mtui` (the default ncurses configuration interface), which allows the setup of the network and hostname, as more complex network configuration (bonding, VLAN, etc.)
+Now is time to configure the network using the option [`netconf`](./advanced_configuration_of_poc_iso.md#netconf) on the menu. This will launch `nmtui` (the default ncurses configuration interface), which allows the setup of the network and hostname, as more complex network configuration (bonding, VLAN, etc.)
 
 ![frontend-network_setup](/images/ISO/05-frontend-network_setup.png)
-
-Once that is finished, a set of ansible scripts will be running to set up certain OpenNebula services that rely on the network. The hostname can also be set up here.
-
-![frontend-ansible_config](/images/ISO/06-frontend-ansible_config.png)
 
 ## Configure hosts
 
 To configure hosts:
 
-- log in as root (with the same password `0p3nN3bul4`)
-- execute `onehostmenu`
+- log in as root (by default they have the same password `0p3nN3bul4`)
+- execute [`onehostmenu`](./advanced_configuration_of_poc_iso.md#onehostmenu) 
 - setup the network with netconf, in the same manner as with the frontend
 
-The hosts do not need any other configuration on them but the network
+The hosts do not need any other configuration on them but the network.
 
 ## Adding hosts to the frontend
 
-To add the nodes the following information is needed:
+OpenNebula hosts can be added to the frontend using [the option `add_host` of `onefemenu`](./advanced_configuration_of_poc_iso.md#add_host). 
 
-- the management IP for the node
+To add OpenNebula hosts the following information is needed:
+
+- the management IP for the node. This means a **reachable IP from other nodes** (loopback interface won't work)
 - a user with sudo permissions (root is OK)
 - the password for that user (if ssh passwordless access is not configured)
 
-As the frontend itself is a node, it should be added up to the infrastructure as well. On the same onefemenu interface, navigate to add\_host and put there the same IP that has been already configured.
+As the frontend itself is a node, it can be added up to the infrastructure as well. On `onefemenu` interface, you can choose `add\_host` and add its management IP. The frontend has ssh passwordless access configured, so it won't ask for any password. 
 
-NOTE: It's important to set the same IP that was used to access externally (neither localhost nor a loopback 127.x.x.x)
+{{< alert title="Note" color="success" >}}
+When a node is added, always use it's management IP, neither `localhost` nor a loopback addres `127.x.x.x'.
+{{< /alert >}}
 
-The frontend has ssh passwordless access configured, so it won't ask for any password. If a second node is added, the password for that user will be asked in order to have a key interchange
+If a second node is added, the password for that user will be asked in order to have a key interchange. 
 
-After some Ansible configuration, the node will be added with all the necessary configuration set up
+After some Ansible configuration, the node will be added with all the necessary configuration set up. Please check [the option `add_host` of `onefemenu`](./advanced_configuration_of_poc_iso.md#add_host) for more information.
 
 **Graphical User Interface**
 
@@ -124,7 +159,9 @@ The GUI should be available in http://\<frontend\_ip\>:2616
 
 The oneadmin password can be obtained in onefemenu, in the option `show_oneadmin_pass`
 
-NOTE: take in account that oneadmin password is 32 chars long. We recommend to create other users to work with OpenNebula, which can be on the oneadmin group.
+{{< alert title="Note" color="success" >}}
+`oneadmin` default password is 32 hex chars long (128 bits of entropy). It's recommended to create another users to work with OpenNebula and let oneadmin user only for administrative tasks.
+{{< /alert >}}
 
 **Networking**
 
@@ -142,59 +179,7 @@ An address range must be created, in this case we chose an IPv4 range address st
 
 **IMPORTANT:**
 
-- the contextualization MTU size of this network MUST be the MTU of the interface minus 50 bytes (the size of the VXLAN encapsulation)
-- the physical device must have the same name on all the hosts. If the physical network interface name of the hosts is different (because they have different hardware), please check "Advanced configuration \-\> Setting interface altnames"
-- This Virtual Networks are totally internal and have no access to external networks. Please, check "Advanced configuration \-\> Configure Gateway and NAT" if external access to the network is needed.
-
-### Networking advanced Configuration
-
-**Configure Gateway and NAT**
-
-In order to access VMs via Network the virtual network must have a reachable gateway
-
-To set the gateway there are some helpers on the file /usr/lib/one/onepoc/one\_aliases.sh
-
-- The aliases `onevnet_add_gw` and `onevnet_del_gw` create or delete the gateway for the necessary bridge if the bridge exists in the frontend (a VM from the desired VNET is running on the frontend).
-- The aliases `enable_masquerade` and `disable_masquerade` allow ALL the virtual networks with a gateway to have access to the same external networks as the frontend has.
-
-**Setting interface altnames**
-
-If the hosts have different names for the physical interface that has the network (i.e., on one of the hosts the name is `enp3s0` and in another is `eno1`) alternative names can be set for every  interface.  For instance, the following file can be created in the host with interface `eno1`
-
-`/etc/systemd/system/altnames-opennebula.service`
-
-With the following contents
-
-```bash
-[Unit]
-Description=Set OpenNebula network interface alternative name
-
-[Service]
-Type=simple
-ExecStart=ip link property add dev eno1 altname one_if
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Note that the line `ExecStart` has the name of the interface (`eno1`) and the desired name for this physdev (`one_if').
-After that is finished, reload, enable and start the service:
-
-```bash
-systemctl daemon-reload
-systemctl enable altnames-opennebula.service
-systemctl start altnames-opennebula.service
-```
-
-This will set up the interface `one_if` on this server. It can be checked with the command `ip link show dev one_if`
-
-```default
-2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
-    link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
-    altname one_if
-```
-
-Repeat the same on the other hosts but changing eno1 for the required device name in the file.
-
-When all nodes have the altname for the interface, change the PHYDEV of the required virtual networks to `one_if`.
+- the contextualization MTU on this network MUST be the MTU of the interface minus 50 bytes (the size of the VXLAN encapsulation)
+- the physical device must have the same name on all the hosts. If the physical network interface name of the hosts is different (because they have different hardware), please check [**Setting interface altnames**](./advanced_configuration_of_poc_iso.md#altnames)
+- This Virtual Networks are totally internal and have no access to external networks. If external access to the network is needed check [**Configure Gateway and NAT**](./advanced_configuration_of_poc_iso.md#gateway)
 
