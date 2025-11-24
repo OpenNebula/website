@@ -18,16 +18,15 @@ No security credentials are persisted in the distributed appliances. Initial pas
 
 ## How Should I Read This Chapter
 
-    
 [OneKE Service (Kubernetes)]({{% relref "oneke" %}}): it describes the OneKE appliance, a minimal hyperconverged Kubernetes platform bundled with OpenNebula and based on RKE2 (Rancher's Next Generation Kubernetes Distribution). The appliance is designed for out-of-the-box functionality, featuring preinstalled components for essential cluster services, including Longhorn for storage persistence, Traefik for ingress traffic, and load balancing options like Cilium, MetalLB, or the ONE Cloud Provider.
 
 [Rancher CAPI]({{% relref "capi" %}}): provides a preconfigured environment for seamless management of Kubernetes clusters on OpenNebula. The appliance comes with Rancher running on a lightweight K3s cluster, integrated with the Turtles extension. It automatically imports the Cluster API provider for OpenNebula (CAPONE) as an infrastructure provider, allowing users to manage CAPI RKE2 clusters directly from the Rancher web interface.
 
-You will also find information including description, features and main references for these appliances: 
+You will also find information including description, features and main references for these appliances:
 * [Wordpress]({{% relref "wordpress" %}})
 * [VNF and Virtual Router]({{% relref "vnf" %}})
 * [minIO]({{% relref "minio" %}})
-* [Ray AI]({{% relref "ray" %}})
+* [vLLM AI]({{% relref "vllm" %}})
 
 
 ## Hypervisor Compatibility
