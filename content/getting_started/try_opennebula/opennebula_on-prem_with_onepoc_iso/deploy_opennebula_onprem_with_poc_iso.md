@@ -123,41 +123,79 @@ Now is time to configure the network using the option [`netconf`](./advanced_con
 
 ![frontend-network_setup](/images/ISO/05-frontend-network_setup.png)
 
-## Configure hosts
+## Add the server as an OpenNebula host
 
-To configure hosts:
+After the installation, the server runs only the frontend and needs to be added as a OpenNebula hypervisor to run VMs. The steps are:
 
-- log in as root (by default they have the same password `0p3nN3bul4`)
-- execute [`onehostmenu`](./advanced_configuration_of_poc_iso.md#onehostmenu) 
-- setup the network with netconf, in the same manner as with the frontend
-
-The hosts do not need any other configuration on them but the network.
-
-## Adding hosts to the frontend
-
-OpenNebula hosts can be added to the frontend using [the option `add_host` of `onefemenu`](./advanced_configuration_of_poc_iso.md#add_host). 
-
-To add OpenNebula hosts the following information is needed:
-
-- the management IP for the node. This means a **reachable IP from other nodes** (loopback interface won't work)
-- a user with sudo permissions (root is OK)
-- the password for that user (if ssh passwordless access is not configured)
-
-As the frontend itself is a node, it can be added up to the infrastructure as well. On `onefemenu` interface, you can choose `add\_host` and add its management IP. The frontend has ssh passwordless access configured, so it won't ask for any password. 
+- log in as root in the server
+- execute [`onehostmenu`](./advanced_configuration_of_poc_iso.md#onehostmenu)
+- select the option `add_host`
 
 {{< alert title="Note" color="success" >}}
-When a node is added, always use it's management IP, neither `localhost` nor a loopback addres `127.x.x.x'.
+When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
-If a second node is added, the password for that user will be asked in order to have a key interchange. 
+After selecting the option `add_host`, the IP for the host will be asked for
 
-After some Ansible configuration, the node will be added with all the necessary configuration set up. Please check [the option `add_host` of `onefemenu`](./advanced_configuration_of_poc_iso.md#add_host) for more information.
+```
+                                 ┌──────────────────────────────────────────────────────────┐
+                                 │ Insert the IP for the node                               │
+                                 │ ┌──────────────────────────────────────────────────────┐ │
+                                 │ │AA.BB.CC.DD                                           │ │
+                                 │ └──────────────────────────────────────────────────────┘ │
+                                 │                                                          │
+                                 ├──────────────────────────────────────────────────────────┤
+                                 │               <  OK  >        <Cancel>                   │
+                                 └──────────────────────────────────────────────────────────┘
+
+```
+
+Then, the user to log into the node will be asked. It MUST be root or have sudo root access without password
+
+```
+                                 ┌──────────────────────────────────────────────────────────┐
+                                 │ Insert the user for the node                             │
+                                 │ ┌──────────────────────────────────────────────────────┐ │
+                                 │ │root                                                  │ │
+                                 │ └──────────────────────────────────────────────────────┘ │
+                                 │                                                          │
+                                 ├──────────────────────────────────────────────────────────┤
+                                 │               <  OK  >        <Cancel>                   │
+                                 └──────────────────────────────────────────────────────────┘
+```
+
+A confirmation dialog like the following will be shown:
+
+```
+                       ┌──────────────────────────────────────────────────────────────────────────────┐
+                       │ Add node AA.BB.CC.DD logging as user root (with nopasswd root permissions)?  │
+                       │ Password will be asked. If not provided, an ssh connection using the ssh key │
+                       │ of onepoc user will be used                                                  │
+                       │                                                                              │
+                       │                                                                              │
+                       ├──────────────────────────────────────────────────────────────────────────────┤
+                       │                         < Yes >             < No  >                          │
+                       └──────────────────────────────────────────────────────────────────────────────┘
+```
+
+After that, an ansible playbook will run in order to execute all the needed operations on the frontend. This may take some minutes
+
+```
+...
+PLAY RECAP *********************************************************************
+...
+...
+AA.BB.CC.DD                : ok=52   changed=27   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+frontend                   : ok=43   changed=11   unreachable=0    failed=0    skipped=27   rescued=0    ignored=0
+
+Press any key to continue
+```
 
 **Graphical User Interface**
 
 The GUI should be available in http://\<frontend\_ip\>:2616
 
-The oneadmin password can be obtained in onefemenu, in the option `show_oneadmin_pass`
+The oneadmin password can be obtained in `onefemenu`, in the option `show_oneadmin_pass`
 
 {{< alert title="Note" color="success" >}}
 `oneadmin` default password is 32 hex chars long (128 bits of entropy). It's recommended to create another users to work with OpenNebula and let oneadmin user only for administrative tasks.
@@ -177,9 +215,35 @@ An address range must be created, in this case we chose an IPv4 range address st
 
 ![sunstone-network_context](/images/ISO/08-sunstone-network_context.png)
 
-**IMPORTANT:**
+{{< alert title="Note" color="warning" >}}
+The contextualization MTU on this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation). 1450 is a safe default (regular ethernet frame size).
+{{< /alert >}}
 
-- the contextualization MTU on this network MUST be the MTU of the interface minus 50 bytes (the size of the VXLAN encapsulation)
-- the physical device must have the same name on all the hosts. If the physical network interface name of the hosts is different (because they have different hardware), please check [**Setting interface altnames**](./advanced_configuration_of_poc_iso.md#altnames)
-- This Virtual Networks are totally internal and have no access to external networks. If external access to the network is needed check [**Configure Gateway and NAT**](./advanced_configuration_of_poc_iso.md#gateway)
+
+### Network considerations
+
+VXLAN networks are totally internal and have no access to external networks. By default they can be considered a totally isolated net. External access from/to this networks must be configured.
+
+- To determine the virtual network that needs external access use `onevnet list`. This command will list the existent virtual networks, for instance:
+
+```
+# onevnet list
+  ID USER     GROUP    NAME                                                           CLUSTERS   BRIDGE                            STATE                    LEASES OUTD ERRO
+   0 oneadmin oneadmin test_vnet                                                      0          XXXXX                             rdy                           0    0    0
+```
+
+- The `ID` and the `NAME` field of every row can be used for all operations on virtual networks. In this case, to create the default gateway on this virtual net, the following command should be executed
+
+```
+# onevnet_add_gw 0
+```
+
+To delete the gateway and make the network unreachable, reverting the behaviour, execute `onevnet_del_gw`
+
+- Virtual machines on this virtual net now are reachable, but they won't be able to access to the internet because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
+
+{{< alert title="Note" color="warning" >}}
+By default, the `enable_masquerade` command will allow ALL the virtual networks having a gateway. To disable this behaviour, execute `disable_masquerade`.
+{{< /alert >}}
+
 
