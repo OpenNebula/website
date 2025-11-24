@@ -1,5 +1,5 @@
 ---
-title: "AI Factory Deployment on Scaleway Cloud"
+title: "On-cloud Deployment on Scaleway"
 linkTitle: "Cloud Deployment"
 date: "2025-10-21"
 weight: 3
@@ -7,7 +7,7 @@ weight: 3
 
 <a id="cd_cloud"></a>
 
-Here you have a practical guide to deploy an AI-ready OpenNebula cloud on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
+Here you have a practical guide to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
 
 The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. A converged OpenNebula cloud, including frontend and KVM node, is deployed on the same bare metal server.
 
