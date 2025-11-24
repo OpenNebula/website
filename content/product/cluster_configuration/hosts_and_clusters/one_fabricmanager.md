@@ -1,5 +1,5 @@
 ---
-title: OpenNebula NVIDIA Fabric Manager Integration
+title: OpenNebula NVIDIA Fabric Manager
 linkTitle: NVIDIA Fabric Manager
 weight: 8
 ---
