@@ -2,7 +2,7 @@
 title: "Validate Hosted Cloud Deployments"
 linkTitle: "Validation"
 date: "2025-07-16"
-description: "This short guide explains how to access a Hosted OpenNebula Cloud Deployment via the web UI and instantiate and access a Virtual Machine."
+description: 
 categories:
 pageintoc: ""
 tags:
