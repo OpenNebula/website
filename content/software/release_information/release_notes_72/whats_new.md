@@ -47,11 +47,12 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 <!--keeping some examples-->
 - Dynamic Tabs to be able to add third party section in Sunstone in an easy way. Learn how in the [Sunstone Development](../../../software/installation_process/build_from_source_code/sunstone_dev.md#sunstone-dev") guide.
 
+- Sunstone no longer relies on the system-provided Node.js packages, which often varied significantly across supported platforms. OpenNebula now standardizes on Node.js 20 from NodeSource. The required `nodejs` RPM/DEB packages are shipped directly in the OpenNebula repository, eliminating the need for users to configure external NodeSource repositories.
 
 ## API and CLI
 <!--keeping some examples-->
 - [The `onedb purge-history` command now removes history records only within the specified `–start`, `–end` range for the `–id`, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
-- The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and 
+- The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and
 **ARCHITECTURE**.
 
 ## KVM & Networking
