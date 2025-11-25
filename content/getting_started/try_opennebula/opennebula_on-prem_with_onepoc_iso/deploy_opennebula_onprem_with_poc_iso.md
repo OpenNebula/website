@@ -42,12 +42,12 @@ In Linux or MacOS, the image can be dumped on the USB with the following command
 dd if=/path/to/your/Almalinux-onepoc.iso of=/dev/sdXX
 ```
 
-{{< alert title="Note" color="warning" >}}
+{{< alert title="Check the USB drive" color="warning" >}}
 `/dev/sdXX` is the drive for the USB drive. It's recommended to check it twice to avoid catastrophic data lose{{< /alert >}}
 
 On windows, the USB drive can be created with Rufus.
 
-{{< alert title="Note" color="warning" >}}
+{{< alert title="Rufus USB creation mode" color="warning" >}}
 The USB drive must be created using DD mode or else it won't be bootable.{{< /alert >}}
 
 With the media inserted (or virtually mounted) on the server, after rebooting it set the right boot device on the BIOS. Some BIOS may be able to boot the media as MBR and UEFI. We recommend to boot is as UEFI for compatibility reasons.
@@ -66,7 +66,7 @@ The installation interface will be in text mode and will only ask for confirmati
 
 ![validation_script](/images/ISO/01-validation_script.png)
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning: data will be deleted" color="warning" >}}
 **IMPORTANT: OpenNebula will be installed on the first disk found and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right server.**{{< /alert >}}
 
 After the confirmation, the installation will start. It will show some information related to the default settings and the packages that will be installed
@@ -75,7 +75,7 @@ After the confirmation, the installation will start. It will show some informati
 
 ## Frontend configuration
 
-Once the installation is finished in the frontend, no network card will be configured, so an access with the console must be provided. It will look like the following
+Once the installation is finished in the frontend, no network card will be configured, so an access with the console must be provided. It will look like the following (the colours and the font may vary)
 
 ```bash
 
@@ -112,36 +112,190 @@ Welcome to OpenNebula Proof of Concept (onepoc) !
 Thank you!
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Default user and password" color="success" >}}
 Default user is root and default root password is `0p3nN3bul4`.
 After the login, execute `onefemenu` in order to configure the frontend.
 {{< /alert >}}
 
-![frontend-menu](/images/ISO/04-frontend-menu.png)
+The frontend menu will look like the following one (the colours and the font may vary). The options can be navigated with the cursor keys and the options can be selected with ENTER:
 
-Now is time to configure the network using the option [`netconf`](./advanced_configuration_of_poc_iso.md#netconf) on the menu. This will launch `nmtui` (the default ncurses configuration interface), which allows the setup of the network and hostname, as more complex network configuration (bonding, VLAN, etc.)
+```
+                            ┌──────────────────────OpenNebula node Setup─────────────────────────┐
+                            │ Setup menu                                                         │
+                            │ ┌────────────────────────────────────────────────────────────────┐ │
+                            │ │          check_host          Check host requirements           │ │
+                            │ │          netconf             Configure network                 │ │
+                            │ │          enable_fw           Enable firewalld                  │ │
+                            │ │          disable_fw          Disable firewalld                 │ │
+                            │ │          add_host            Add OpenNebula Host               │ │
+                            │ │          proxy               Configure proxy settings          │ │
+                            │ │          tmate               Remote console support            │ │
+                            │ │          show_oneadmin_pass  Show oneadmin password            │ │
+                            │ │          quit                Exit to Shell                     │ │
+                            │ │                                                                │ │
+                            │ │                                                                │ │
+                            │ │                                                                │ │
+                            │ │                                                                │ │
+                            │ └────────────────────────────────────────────────────────────────┘ │
+                            ├────────────────────────────────────────────────────────────────────┤
+                            │                   <  OK  >          <Cancel>                       │
+                            └────────────────────────────────────────────────────────────────────┘
+```
 
-![frontend-network_setup](/images/ISO/05-frontend-network_setup.png)
+### Network and hostname setup
+
+Now is time to configure the network using the option `netconf` on the menu. This will launch `nmtui` (the default ncurses configuration interface), that allows the setup of the network and hostname, as more complex network configuration (bonding, VLAN, etc.)
+
+The following menu will appear
+
+```
+                                                   ┌─┤ NetworkManager TUI ├──┐
+                                                   │                         │
+                                                   │ Please select an option │
+                                                   │                         │
+                                                   │ Edit a connection       │
+                                                   │ Activate a connection   │
+                                                   │ Set system hostname     │
+                                                   │ Radio                   │
+                                                   │                         │
+                                                   │ Quit                    │
+                                                   │                         │
+                                                   │                    <OK> │
+                                                   │                         │
+                                                   └─────────────────────────┘
+```
+
+To configure the network, select `Edit a connection`. The following menu will appear showing all the available network interfaces. In this case the image only shows one, but there may be more than one. Select the one that will be used for OpenNebula management.
+
+```
+                                                  ┌───────────────────────────┐
+                                                  │                           │
+                                                  │ ┌─────────────┐           │
+                                                  │ │ Ethernet  ↑ │ <Add>     │
+                                                  │ │   enp3s0  ▒ │           │
+                                                  │ │ Loopback  ▒ │ <Edit...> │
+                                                  │ │   lo      ▒ │           │
+                                                  │ │           ▒ │ <Delete>  │
+                                                  │ │           ▒ │           │
+                                                  │ │           ▮ │           │
+                                                  │ │           ▒ │           │
+                                                  │ │           ▒ │           │
+                                                  │ │           ▒ │           │
+                                                  │ │           ▒ │           │
+                                                  │ │           ↓ │ <Back>    │
+                                                  │ └─────────────┘           │
+                                                  │                           │
+                                                  └───────────────────────────┘
+```
+
+{{< alert title="Network considerations" color="success" >}}
+Determine the network address of the frontend before configuring the network.
+In this document a static IP 172.20.0.7/24 with default gatewayi 172.20.0.1 and DNS 172.20.0.1, single port ethernet with MTU 1500 connection will be used.
+To set up special networking configuration, please check the documentation about `nmtui`.
+{{< /alert >}}
+
+Select the interface that must be configured for OpenNebula management access. After that, navigate to "IPv4 CONFIGURATION", press Enter and change the option to Manual. After that, select the field `Show` at the right side.
+
+```
+                           │                     ┌────────────┐                                      │
+                           │ ═ ETHERNET          │ Disabled   │                            <Show>    │
+                           │ ═ 802.1X SECURITY   │ Automatic  │                            <Show>    │
+                           │                     │ Link-Local │                                      │
+                           │ ╤ IPv4 CONFIGURATION│ Manual     │                            <Hide>    │
+                           │ │          Addresses│ Shared     │ ___________ <Remove>                 │
+                           │ │                   └────────────┘                                      │
+
+```
+
+The IPv4 Settings can be set up then. After setting up the IP/mask, default gateway and DNS servers, check `Require IPv4 addressing for this connection` and `Automatically connect`.
+
+```
+                           ┌───────────────────────────┤ Edit Connection ├───────────────────────────┐
+                           │                                                                         │
+                           │         Profile name enp3s0__________________________________           │
+                           │               Device enp3s0 (XX:XX:XX:XX:XX:XX)______________           │
+                           │                                                                         │
+                           │ ═ ETHERNET                                                    <Show>    │
+                           │ ═ 802.1X SECURITY                                             <Show>    │
+                           │                                                                         │
+                           │ ╤ IPv4 CONFIGURATION <Manual>                                 <Hide>    │
+                           │ │          Addresses 172.20.0.7/24____________ <Remove>                 │
+                           │ │                    <Add...>                                           │
+                           │ │            Gateway 172.20.0.1_______________                          │
+                           │ │        DNS servers 172.20.0.1_______________ <Remove>                 │
+                           │ │                    <Add...>                                           │
+                           │ │     Search domains <Add...>                                           │
+                           │ │                                                                       │
+                           │ │            Routing (No custom routes) <Edit...>                       │
+                           │ │ [ ] Never use this network for default route                          │
+                           │ │ [ ] Ignore automatically obtained routes                              │
+                           │ │ [ ] Ignore automatically obtained DNS parameters                      │
+                           │ │                                                                       │
+                           │ │ [X] Require IPv4 addressing for this connection                       │
+                           │ └                                                                       │
+                           │                                                                         │
+                           │ ═ IPv6 CONFIGURATION <Automatic>                              <Show>    │
+                           │                                                                         │
+                           │ [X] Automatically connect                                               │
+                           │ [X] Available to all users                                              │
+                           │                                                                         │
+                           │                                                           <Cancel> <OK> │
+                           │                                                                         │
+                           └─────────────────────────────────────────────────────────────────────────┘
+```
+
+The default hostname is `onepoc`, if it needs to be changed, the option `Set system hostname` of the menu will lead to the following text dialog that allow the hostname change.
+
+```
+
+                                                   ┌─┤ NetworkManager TUI ├──┐
+                                                   │                         │
+                                                   │ Please select an option │
+                                      ┌─────────────────┤ Set Hostname ├──────────────────┐
+                                      │                                                   │
+                                      │ Hostname ________________________________________ │
+                                      │                                                   │
+                                      │                                     <Cancel> <OK> │
+                                      │                                                   │
+                                      └───────────────────────────────────────────────────┘
+
+                                                   │                    <OK> │
+                                                   │                         │
+                                                   └─────────────────────────┘
+```
+
+After the modification of the configuration, choose `Quit` on the menu. An ansible playbook will configure the needed services, it may take some minutes until finished.
+
+```
+....
+
+PLAY RECAP *********************************************************************
+172.20.0.7                 : ok=44   changed=2    unreachable=0    failed=0    skipped=10   rescued=0    ignored=0
+frontend                   : ok=42   changed=8    unreachable=0    failed=0    skipped=28   rescued=0    ignored=0
+
+Press any key to continue
+```
 
 ## Add the server as an OpenNebula host
 
 After the installation, the server runs only the frontend and needs to be added as a OpenNebula hypervisor to run VMs. The steps are:
 
 - log in as root in the server
-- execute [`onehostmenu`](./advanced_configuration_of_poc_iso.md#onehostmenu)
+- execute `onefemenu`
 - select the option `add_host`
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Avoid the usage of loopback addresses" color="success" >}}
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
-After selecting the option `add_host`, the IP for the host will be asked for
+After selecting the option `add_host`, the IP for the host will be asked for. 
+In this case we are using the IP that was configured before, 172.20.0.7
 
 ```
                                  ┌──────────────────────────────────────────────────────────┐
                                  │ Insert the IP for the node                               │
                                  │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │AA.BB.CC.DD                                           │ │
+                                 │ │172.20.0.7                                            │ │
                                  │ └──────────────────────────────────────────────────────┘ │
                                  │                                                          │
                                  ├──────────────────────────────────────────────────────────┤
@@ -168,7 +322,7 @@ A confirmation dialog like the following will be shown:
 
 ```
                        ┌──────────────────────────────────────────────────────────────────────────────┐
-                       │ Add node AA.BB.CC.DD logging as user root (with nopasswd root permissions)?  │
+                       │ Add node  172.20.0.7 logging as user root (with nopasswd root permissions)?  │
                        │ Password will be asked. If not provided, an ssh connection using the ssh key │
                        │ of onepoc user will be used                                                  │
                        │                                                                              │
@@ -185,7 +339,7 @@ After that, an ansible playbook will run in order to execute all the needed oper
 PLAY RECAP *********************************************************************
 ...
 ...
-AA.BB.CC.DD                : ok=52   changed=27   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+172.20.0.7                 : ok=52   changed=27   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
 frontend                   : ok=43   changed=11   unreachable=0    failed=0    skipped=27   rescued=0    ignored=0
 
 Press any key to continue
@@ -197,53 +351,91 @@ The GUI should be available in http://\<frontend\_ip\>:2616
 
 The oneadmin password can be obtained in `onefemenu`, in the option `show_oneadmin_pass`
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Length of `oneadmin` password" color="success" >}}
 `oneadmin` default password is 32 hex chars long (128 bits of entropy). It's recommended to create another users to work with OpenNebula and let oneadmin user only for administrative tasks.
 {{< /alert >}}
 
 **Networking**
 
-The ISO PoC networking comes with no networks added, but FRR is configured to add BGP-EVPN so VXLANs should work for internal communication.
+The ISO PoC networking comes with no networks added, but FRR is configured to add BGP-EVPN so VXLANs should work for internal communication. VXLAN is a technology that allows isolation between Virtual networks, depending on an identifier between 1 and 16777215.
 
 That means that a virtual network over VXLAN can be created from the web interface, selecting the type VXLAN, setting up the physical device for the package transit, and filling the contextualization of the network (address, gateway, etc.).
 
-A VNET can be set up on the sunstone interface on Networks \-\> Virtual Networks \-\> Create Virtual Network, following the next model. In this case we are using the VXLAN 100, on the interface enp3s0 of the hosts. Please, note that the VXLAN mode must be `evpn` in all cases
+A VNET can be set up on the sunstone interface on Networks \-\> Virtual Networks \-\> Create Virtual Network, following the next model. In this case we are using the VXLAN 100 (a positive number under 16777215) on the interface enp3s0 of the frontend, but it must be adjusted to the external interface of the frontend.
 
-![sunstone-network_config](/images/ISO/07-sunstone-network_config.png)
+{{< alert title="VXLAN evpn" color="success" >}}
+To allow he VXLAN mode must be `evpn` in all cases.
+{{< /alert >}}
 
-An address range must be created, in this case we chose an IPv4 range address starting from 172.30.0.8 with 100 consecutive IPs. The network contextualization, in this case, has the following parameters
+![sunstone-network_config](/images/ISO/03-sunstone-network_config.png)
 
-![sunstone-network_context](/images/ISO/08-sunstone-network_context.png)
+An address range must be created, in this case we chose an IPv4 range address starting from 172.16.100.8 with 100 consecutive IPs.
 
-{{< alert title="Note" color="warning" >}}
-The contextualization MTU on this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation). 1450 is a safe default (regular ethernet frame size).
+![sunstone-network_ip_range](/images/ISO/04-sunstone-network_ip_range.png)
+
+The network contextualization has the following parameters
+
+![sunstone-network_context](/images/ISO/05-sunstone-network_context.png)
+
+{{< alert title="MTU size" color="warning" >}}
+The contextualization MTU on this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation) or smaller. 1450 is a safe default (regular ethernet frame size).
 {{< /alert >}}
 
 
-### Network considerations
+### Virtual network considerations
 
 VXLAN networks are totally internal and have no access to external networks. By default they can be considered a totally isolated net. External access from/to this networks must be configured.
 
-- To determine the virtual network that needs external access use `onevnet list`. This command will list the existent virtual networks, for instance:
+#### Determining the VM identifier
+
+To determine the virtual network that needs external access use `onevnet list`. This command will list the existent virtual networks, for instance:
 
 ```
 # onevnet list
-  ID USER     GROUP    NAME                                                           CLUSTERS   BRIDGE                            STATE                    LEASES OUTD ERRO
-   0 oneadmin oneadmin test_vnet                                                      0          XXXXX                             rdy                           0    0    0
+  ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
+   0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
-- The `ID` and the `NAME` field of every row can be used for all operations on virtual networks. In this case, to create the default gateway on this virtual net, the following command should be executed
+The `ID` and the `NAME` field of every row can be used for all operations on virtual networks. 
+
+#### Creating the virtual Network Gateway (access from the frontend)
+
+In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the virtual network should be executed. For example the following command will create the gateway for the network 0
 
 ```
 # onevnet_add_gw 0
 ```
 
-To delete the gateway and make the network unreachable, reverting the behaviour, execute `onevnet_del_gw`
+To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
 
-- Virtual machines on this virtual net now are reachable, but they won't be able to access to the internet because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
-
-{{< alert title="Note" color="warning" >}}
-By default, the `enable_masquerade` command will allow ALL the virtual networks having a gateway. To disable this behaviour, execute `disable_masquerade`.
+{{< alert title="Persistence of the gateway" color="warning" >}}
+This gateway is not persistent after reboots. If the frontend is rebooted, the command `onevnet_add_gw <NETWORK_ID>` must be issued again.
 {{< /alert >}}
 
+#### Setting up NAT (access to the same networks as the frontend)
 
+Virtual machines on this virtual network won't be able to access to the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
+
+{{< alert title="Security and persistence warning" color="warning" >}}
+By default, the `enable_masquerade` command will allow ALL the virtual networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
+{{< /alert >}}
+
+#### Add local route (access from external networks to the virtual network)
+
+After the gateway has been created and NAT masquerade has been enabled, the VMs in the virtual network 172.16.100.0/24:
+
+- can communicate (bidirectionally) with the frontend
+- can access to the same networks that the frontend (i.e. internet)
+
+Currently, any machine (even if it has access to the frontend) cannot reach ths virtual network because doesn't know how to arrive to it. For that, a route via the frontend external IP is needed. A route can be added locally.
+
+{{< alert title="Routing setup" color="Success" >}}
+This document must not be taken as a manual to configure routing. These are local solutions to test the access. None of this solutions will persist after a reboot of the workstation where they have been applied.
+{{< /alert >}}
+
+On a workstation with access to the frontend, a local route to the virtual net can be created with the following commands depending on the operating system
+- Linux: `sudo ip route add 172.16.100.0/24 via <frontend_ip>`
+- Windows: `route add 172.16.100.0 MASK 255.255.255.0 <frontend_ip>`
+- BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
+
+After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
