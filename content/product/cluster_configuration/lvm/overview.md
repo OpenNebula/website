@@ -30,7 +30,7 @@ otherwise:
 OpenNebula offers two main ways to leverage LVM technology as a way to exploit SAN storage in a
 vendor-independent way. Refer to the corresponding section for the specific configuration.
 Also, for a technical comparison and supported features of each option, refer to the [Storage
-portfolio]({{% relref "../../storage_system/overview#storage-portfolio" %}}).
+portfolio]({{% relref "/product/cluster_configuration/storage_system/overview#storage-portfolio" %}}).
 
 Datastore guides:
 

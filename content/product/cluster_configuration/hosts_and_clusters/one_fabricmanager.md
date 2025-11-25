@@ -8,42 +8,37 @@ weight: 8
 
 ## Introduction
 
-The OpenNebula NVIDIA&reg; Fabric Manager integration provides a complete solution for managing and virtualizing NVIDIA NVSwitch fabric within a cloud environment. The overall goal is to eliminate Input/Output (I/O) bottlenecks in multi-GPU workloads by ensuring that virtual machines (VMs) receive guaranteed and high-speed NVLink bandwidth, which is a significant advancement over standard GPU passthrough.
+The OpenNebula NVIDIA&reg; Fabric Manager integration provides a complete solution for managing NVIDIA NVSwitch fabric within a cloud environment.
 
 ## NVIDIA Shared NVSwitch Virtualization Model
 
-The OpenNebula integration with Fabric Manager integration relies on the NVIDIA Shared NVSwitch Virtualization Model. This model virtualizes the NVSwitch fabric to provide full NVLink bandwidth to multi-GPU VMs, even when the GPUs are allocated to separate VMs.
-
-In the reference architecture proposed by NVIDIA, there are three VMs running on the hypervisor: two Guest VMs and one Service VM. The Service VM is responsible for managing the NVSwitches, executes the commands to control GPU partitioning, and configures the NVSwitches accordingly. The Guest VMs are configured with PCI passthrough for the GPUs and utilize the processing power. Each Guest VM is assigned the GPUs that comprise each of the active partitions of the NVSwitches. See the reference architecture in the image below.
+The OpenNebula integration with Fabric Manager integration follows the NVIDIA Shared NVSwitch Virtualization Model. This model uses a Service VM in each hypervisor for managing the NVSwitches. The NVSwitches are added to the Service VM as PCI passthrough devices to configure the selected GPU partitioning. The Guest VMs are configured with PCI passthrough for the GPUs only, without any visibility of the NVSwitches. See the reference architecture in the image below.
 
 ![ Reference architecture. Adapted diagram based on the "Shared NVSwitch Virtualization Model" located in the NVIDIA Fabric Manager User Guide.](/images/onefabric_virtualization_model.svg)
 
 These are the key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
-- **Service VM** (Fabric Manager VM): a persistent, minimal Virtual Machine runs on the KVM host.
-- **PCI Passthrough:** the NVSwitch hardware devices are passed directly to this Service VM. The GPUs are passed directly to guest (workload) VMs.
+- **Service VM** (Fabric Manager VM): a persistent, minimal Virtual Machine runs on each KVM host.
+- **PCI Passthrough:** the NVSwitch hardware devices are passed directly to this Service VM. The GPUs are passed directly to guests (workload) VMs.
 - **Fabric Manager:** the NVIDIA Fabric Manager and associated NVIDIA tools run inside the Service VM, allowing it to dynamically reconfigure and manage the NVSwitches.
 
-These virtualization model components allow NVIDIAFabric Manager Service to reconfigure the switches dynamically and fix the bandwidth limitations seen in plain GPU passthrough. For additional information about NVIDIA Shared NVSwitch Virtualization Model, refer to the official [NVIDIA Fabric Manager](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html#shared-nvswitch-virtualization-model) documentation.
+For additional information about NVIDIA Shared NVSwitch Virtualization Model, refer to the official [NVIDIA Fabric Manager](https://docs.nvidia.com/datacenter/tesla/fabric-manager-user-guide/index.html#shared-nvswitch-virtualization-model) documentation.
 
 
-## The OpenNebula Approach
+## OpenNebula FabricManager Architecture
 
 OpenNebula implements the NVIDIA Shared NVSwitch Virtualization Model through a two-part system designed for automation and centralized management:
 
-1.  **Host Component (`opennebula-kvm-node` EE package):** the Enterprise Edition of the package is installed on each KVM host that contains NVSwitch devices. It provides a `systemd` service that manages a minimal, self-contained VM known as the "Fabric Manager VM". This VM is given direct, secure access to the NVSwitch hardware via PCI passthrough and contains the necessary NVIDIA tools like `nv-partitioner` and `nvswitch-audit` to manage the hardware.
+1.  **Host Component (`opennebula-kvm-node` EE package):** the Enterprise Edition of the package is installed on each KVM host that contains NVSwitch devices. It provides a `systemd` service that manages a minimal, self-contained VM (`one-fabricmanager`). This VM is given direct, secure access to the NVSwitch hardware via PCI passthrough and contains the necessary NVIDIA tools like `nv-partitioner` and `nvswitch-audit` to manage the hardware.
 
     The host component also includes a monitoring probe that runs periodically. It queries the Fabric Manager VM to get the current NVSwitch partitions and maps the logical GPU module IDs to the physical PCI addresses on the host. This information (`NVSWITCH_PARTITION`) is reported to OpenNebula, making the partition status and the GPU topology visible in the host's monitoring data for scheduling and management.
 
-2.  **Frontend CLI (`onefabric`):** the primary user interface for the tool, managed from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When you run a command like `onefabric list`, the tool uses SSH to connect to the relevant KVM hosts and remotely execute commands inside the Fabric Manager VM using `virsh` and the QEMU guest agent. This allows you, as an administrator, to manage the NVSwitch hardware across all hosts from a single console.
+2.  **Frontend CLI (`onefabric`):** the primary user interface for the tool, managed from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When you run a command, the tool connects to the relevant KVM hosts and execute commands inside the Fabric Manager VM using the QEMU guest agent. This allows you, as an administrator, to manage the NVSwitch hardware across all hosts from a single console.
 
-### Key Scenarios for OpenNebula NVIDIA Fabric Manager
+The OpenNebula NVIDIA Fabric Manager Integration allows administrators:
 
-The OpenNebula NVIDIA Fabric Manager Integration is essential for these cases:
-
-- To enable Shared NVSwitch Virtualization for OpenNebula VMs.
 - To dynamically partition NVSwitch devices across compute hosts.
-- To ensure multi-GPU VMs receive full NVLink bandwidth.
+- To ensure multi-GPU VMs receive full NVLink bandwidth in a multi-tenant environment.
 - To monitor the status and topology of NVSwitch partitions in OpenNebula.
 
 ### Requirements
@@ -53,13 +48,7 @@ KVM Host requirements:
 - NVIDIA NVSwitch Hardware: required on the KVM hosts.
 - Host Software Component: the `opennebula-kvm-node` EE package must be installed on all NVSwitch-equipped hosts.
 - VFIO-PCI Drivers: the `vfio-pci` driver must be enabled and loaded for the NVSwitch and GPU devices to allow PCI passthrough to the Service VM.
-- Service VM Image: the required Fabric Manager VM image is handled and downloaded automatically during service startup.
-
-OpenNebula Frontend requirements:
-
-- `onefabric` CLI Tool: must be available on the OpenNebula frontend server. Installed by default on EE packages.
-- Passwordless SSH Access: the frontend oneadmin user must have passwordless SSH access to the oneadmin user on all KVM hosts for remote command execution.
-
+- Service VM Image: the required Fabric Manager VM image is handled and downloaded automatically during service startup. By default this requires Internet access from the hypervisors.
 
 ## Installation and Configuration
 
@@ -176,7 +165,7 @@ If you do not specify any these parameters, the command is executed for all avai
 
 {{< alert title="Important" color="success" >}}
 You must manually deactivate any currently active partition that shares GPU resources with the new partition you wish to activate. The Fabric Manager does not automatically resolve resource conflicts, meaning you cannot activate a new partition if its required GPUs or NVLinks are already claimed by an active partition. For example: if Partitions P1 and P2 (together using all 8 GPUs) are currently active, activation fails for Partition P0 with 8 GPUs.
-{{< /alert >}} 
+{{< /alert >}}
 
 
 ### Example of Partitioning Configuration
@@ -197,7 +186,6 @@ Partition ID   Number of GPUs GPU Module ID            Max NVLinks/GPU     STATU
 2. Ensure that all partitions are marked as `INACTIVE`.
 
 3.  Activate multiple partitions with the `onefabric activate` command. As an example: split the 8 GPUs into two 4-GPU groups on host ID 0:
-
 
 ```bash
 oneadmin@opennebula-gpu01:~$ onefabric activate 1 --host 0
@@ -265,7 +253,7 @@ GPU Physical Id      1  2  3  4  5  6  7  8
                   8  0  0  0  0 18 18 18 18
 ```
 
-### Monitoring 
+### Monitoring
 
 **Partition Status Commands**
 
