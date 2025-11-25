@@ -183,9 +183,7 @@ Partition ID   Number of GPUs GPU Module ID            Max NVLinks/GPU     STATU
 ...
 ```
 
-2. Ensure that all partitions are marked as `INACTIVE`.
-
-3.  Activate multiple partitions with the `onefabric activate` command. As an example: split the 8 GPUs into two 4-GPU groups on host ID 0:
+2.  Activate multiple partitions with the `onefabric activate` command. As an example: split the 8 GPUs into two 4-GPU groups on host ID 0:
 
 ```bash
 oneadmin@opennebula-gpu01:~$ onefabric activate 1 --host 0
