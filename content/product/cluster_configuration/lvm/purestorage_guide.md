@@ -1,13 +1,7 @@
 ---
-<<<<<<<< HEAD:content/product/cluster_configuration/lvm/purestorage_guide.md
 title: "SAN/LVM: PureStorage setup"
 linkTitle: "PureStorage: SAN setup"
 weight: "2"
-========
-title: PureStorage - LVM-thin Validation
-linkTitle: "LVM Thin - PureStorage"
-weight: "4"
->>>>>>>> 02dda128 (F OpenNebula/one#7243: Docs Refactoring):content/product/cluster_configuration/san_storage/purestorage_-_lvm-thin_validation.md
 ---
 
 This setup assumes you are using a PureStorage FlashArray with iSCSI and want to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the PureStorage interface, create the required resources as desired.

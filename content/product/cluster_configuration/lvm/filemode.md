@@ -1,17 +1,12 @@
 ---
-<<<<<<<< HEAD:content/product/cluster_configuration/lvm/filemode.md
 title: "LVM (File Mode) SAN Datastore"
 linktitle: "LVM - File Mode"
-========
-title: "SAN Storage Configuration"
-linktitle: "LVM Thin - FS"
->>>>>>>> 02dda128 (F OpenNebula/one#7243: Docs Refactoring):content/product/cluster_configuration/san_storage/lvm_drivers.md
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "72"
 tags:
-weight: "4"
+weight: "6"
 ---
 
 In this setup, disk images are stored in file format, such as raw and qcow2, in the Image Datastore,
@@ -21,36 +16,7 @@ Thin]({{% relref "#lvm-thin" %}}) to support creating thin snapshots of the VM d
 
 ## How Should I Read This Chapter
 
-<<<<<<<< HEAD:content/product/cluster_configuration/lvm/filemode.md
 Before performing the procedures outlined in this chapter you must configure access to the SAN following one of the setup guides in the [LVM Overview]({{% relref "overview#san-appliance-setup" %}}) section.
-========
-## SAN Storage
-
-This storage configuration assumes that Hosts have access to storage devices (LUNs) exported by an
-Storage Area Network (SAN) server using a suitable protocol like iSCSI or Fibre Channel. The Hosts
-will interface the devices through the LVM abstraction layer. Virtual Machines run from an LV
-(logical volume) device instead of plain files. This reduces the overhead of having a filesystem in
-place and thus it may increase I/O performance.
-
-Disk images are stored in file format in the Image Datastore and then dumped into an LV when a
-Virtual Machine is created. The image files are transferred to the Host through the SSH protocol.
-Additionally, [LVM Thin]({{% relref "#lvm-thin" %}}) can be enabled to support creating thin
-snapshots of the VM disks.
-
-## SAN Appliance Configuration
-
-First of all, you need to configure your SAN appliance to export the LUN(s) where VMs will be
-deployed. Depending on the manufacturer the process may be slightly different, so please refer to
-the specific guides if your hardware is on the supported list, or your hardware vendor guides
-otherwise:
-
-- [NetApp specific guide]({{% relref "/product/cluster_configuration/san_storage/netapp_-_lvm_thin_validation/" %}})
-- [PureStorage specific guide]({{% relref "/product/cluster_configuration/san_storage/purestorage_-_lvm-thin_validation/" %}})
-
-Also included in the above guides is a specific multipath configuration for both the front-end and virtualization hosts, which recommended over the more general multipath configuration presented below.
-
-<a id="hosts-configuration"></a>
->>>>>>>> 02dda128 (F OpenNebula/one#7243: Docs Refactoring):content/product/cluster_configuration/san_storage/lvm_drivers.md
 
 ## Hypervisor Configuration
 

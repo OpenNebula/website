@@ -1,13 +1,7 @@
 ---
-<<<<<<<< HEAD:content/product/cluster_configuration/lvm/netapp_guide.md
 title: "SAN/LVM: NetApp setup"
 linkTitle: "NetApp: SAN setup"
 weight: "3"
-========
-title: NetApp - LVM-thin Validation
-linkTitle: "LVM Thin - NetApp"
-weight: "5"
->>>>>>>> 02dda128 (F OpenNebula/one#7243: Docs Refactoring):content/product/cluster_configuration/san_storage/netapp_-_lvm_thin_validation.md
 ---
 
 This setup assumes you are using NetApp ONTAP with iSCSI and are trying to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the NetApp ONTAP interface and its functionality, create the required resources as desired.

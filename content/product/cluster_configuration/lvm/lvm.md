@@ -27,7 +27,7 @@ In this first step, you will configure hypervisors for LVM operations over the s
 
 ### Hosts LVM Configuration
 
-Prerequisites: 
+Prerequisites:
 * LVM2 must be available on Hosts.
 * `lvmetad` must be disabled. Set this parameter in `/etc/lvm/lvm.conf`: `use_lvmetad = 0`, and disable the `lvm2-lvmetad.service` if running.
 * `oneadmin` needs to belong to the `disk` group.
