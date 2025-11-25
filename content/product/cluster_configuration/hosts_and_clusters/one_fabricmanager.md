@@ -31,7 +31,7 @@ OpenNebula implements the NVIDIA Shared NVSwitch Virtualization Model through a 
 
 1.  **Host Component (`opennebula-kvm-node` EE package):** the Enterprise Edition of the package is installed on each KVM host that contains NVSwitch devices. It provides a `systemd` service that manages a minimal, self-contained VM (`one-fabricmanager`). This VM is given direct, secure access to the NVSwitch hardware via PCI passthrough and contains the necessary NVIDIA tools like `nv-partitioner` and `nvswitch-audit` to manage the hardware.
 
-The host component also includes a monitoring probe that runs periodically. It queries the Fabric Manager VM to get the current NVSwitch partitions and maps the logical GPU module IDs to the physical PCI addresses on the host. This information (`NVSWITCH_PARTITION`) is reported to OpenNebula, making the partition status and the GPU topology visible in the host's monitoring data for scheduling and management.
+    The host component also includes a monitoring probe that runs periodically. It queries the Fabric Manager VM to get the current NVSwitch partitions and maps the logical GPU module IDs to the physical PCI addresses on the host. This information (`NVSWITCH_PARTITION`) is reported to OpenNebula, making the partition status and the GPU topology visible in the host's monitoring data for scheduling and management.
 
 2.  **Frontend CLI (`onefabric`):** the primary user interface for the tool, managed from the OpenNebula frontend. It acts as a central point of control for the entire cluster. When you run a command, the tool connects to the relevant KVM hosts and execute commands inside the Fabric Manager VM using the QEMU guest agent. This allows you, as an administrator, to manage the NVSwitch hardware across all hosts from a single console.
 
@@ -77,7 +77,7 @@ During the start process the service will perform attempts to download the Fabri
 
 `opennebula-fabricmanager` as a service startup process performs validation steps:
 
-**NVSwitch Detection:** the service scans for NVSwitch devices (Vendor: 10de, Devices: 22a3) and confirms the vfio-pci driver is in use. These devices are automatically added to the `one-fabricmanager` VM. If the devices have different IDs, add them into the configuration file on `/etc/onefabricmanager.conf` on the hosts nodes.
+1. **NVSwitch Detection:** the service scans for NVSwitch devices (Vendor: 10de, Devices: 22a3) and confirms the vfio-pci driver is in use. These devices are automatically added to the `one-fabricmanager` VM. If the devices have different IDs, add them into the configuration file on `/etc/onefabricmanager.conf` on the hosts nodes.
 
 Example output during start:
 
@@ -117,7 +117,7 @@ The generated artifacts include:
 - *one-fabricmanager.xml*: the libvirt Domain XML file that defines the configuration for the Fabric Manager Service VM named `one-fabricmanager`. This XML includes essential settings like CPU, memory, and the PCI passthrough definitions that securely grant the VM direct access to the NVSwitch hardware devices on the KVM host.
 - *service_FabricManager-<version>.qcow2*: the disk image in QCOW2 format for the Fabric Manager Service VM. It contains the minimal operating system, the NVIDIA Fabric Manager tools such as *nv-partitioner* and *nvswitch-audit*, as well as the necessary configuration files required for the VM to boot and manage the NVSwitch hardware.
 
-**VM Running:** the Service VM, named `one-fabricmanager, should be running in virsh list.
+2. **VM Running:** execute `virsh list` to see *one-fabricmanager* running as the Service VM.
 
 Example:
 
@@ -129,7 +129,7 @@ oneadmin@opennebula-gpu01:~$ virsh list
  10   one-fabricmanager   running
 ```
 
-Configure this validation by using `opennebula-fabricmanager.rb` script on the host:
+Optionally, configure this validation by using `opennebula-fabricmanager.rb` script on the host:
 
 ```bash
 oneadmin@opennebula-gpu01:~$ /usr/lib/one/opennebula-fabricmanager.rb --status
@@ -146,6 +146,8 @@ VM state (libvirt): running
 
 The OpenNebula NVIDIA Fabric Manager is intended to use via `onefabric` commands, the central point of control. The  commands are remotely executed via SSH against the KVM hosts, interacting with the Fabric Manager VM through the QEMU guest agent.
 
+The `onefabric` command remotely executes the `/usr/lib/one/opennebula-fabricmanager.rb` script available on the virtualization nodes. As an administrator, you can execute all commands from the host itself by directly using the mentioned script.
+
 `onefabric` key commands:
 
 *   `onefabric list [--csv]`: Lists NVSwitch partitions. Use `--csv` for script-friendly output.
@@ -156,8 +158,8 @@ The OpenNebula NVIDIA Fabric Manager is intended to use via `onefabric` commands
 
 All commands include optional arguments:
 
-`--host <id/name>`:	targets a specific OpenNebula host ID or host name.
-`--cluster <id/name>`:	targets all hosts within a specific cluster ID or cluster name.
+* `--host <id/name>`:	targets a specific OpenNebula host ID or host name.
+* `--cluster <id/name>`:	targets all hosts within a specific cluster ID or cluster name.
 
 If you do not specify any these parameters, the command is executed for all available hosts.
 
@@ -165,7 +167,6 @@ If you do not specify any these parameters, the command is executed for all avai
 You must manually deactivate any currently active partition that shares GPU resources with the new partition you wish to activate. The Fabric Manager does not automatically resolve resource conflicts, meaning you cannot activate a new partition if its required GPUs or NVLinks are already claimed by an active partition. For example: if Partitions P1 and P2 (together using all 8 GPUs) are currently active, activation fails for Partition P0 with 8 GPUs.
 {{< /alert >}}
 
-The `onefabric` command remotely executes the `/usr/lib/one/opennebula-fabricmanager.rb` script available on the virtualization nodes. As an administrator, you can execute all commands from the host itself by directly using the mentioned script.
 
 ### Example of Partitioning Configuration
 
@@ -182,9 +183,7 @@ Partition ID   Number of GPUs GPU Module ID            Max NVLinks/GPU     STATU
 ...
 ```
 
-3.  Activate multiple partitions with the `onefabric activate` command. As an example: split the 8 GPUs into two 4-GPU groups on host ID 0:
-
-2. Check that no partitions are active.
+2.  Activate multiple partitions with the `onefabric activate` command. As an example: split the 8 GPUs into two 4-GPU groups on host ID 0:
 
 ```bash
 oneadmin@opennebula-gpu01:~$ onefabric activate 1 --host 0
@@ -230,7 +229,6 @@ Partition ID   Number of GPUs GPU Module ID            Max NVLinks/GPU     STATU
 4              2              2, 4                     18                  INACTIVE
 ...
 ```
-
 4.2. Run `onefabric audit` to inspect additional details:  the example depicts full 18-link connectivity for the active partitions 1 and 2.
 
 ```bash
