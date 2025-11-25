@@ -35,7 +35,7 @@ Note that this is a simplified version. If you are a developer you may want to t
 | `boot`        | `Boot`             | OpenNebula is waiting for the hypervisor to create the VM.                                                                                                                                                                                                                                               |
 | `runn`        | `Running`          | The VM is running (note that this stage includes the internal virtualized machine booting and shutting down phases). In this state, the virtualization driver will periodically monitor it.                                                                                                              |
 | `migr`        | `Migrate`          | The VM is migrating from one resource to another. This can be a life migration or cold migration (the VM is saved, powered off or powered off hard and VM files are transferred to the new resource).                                                                                                    |
-| `hotp`        | `Hotplug`          | A disk attach/detach, nic attach/detach, save as or resize operation is in process.                                                                                                                                                                                                                       |
+| `hotp`        | `Hotplug`          | A disk attach/detach, nic attach/detach, save as, resize or exec operation is in process.                                                                                                                                                                                                                       |
 | `snap`        | `Snapshot`         | A system snapshot is being taken.                                                                                                                                                                                                                                                                        |
 | `save`        | `Save`             | The system is saving the VM files after a migration, stop, or suspend operation.                                                                                                                                                                                                                          |
 | `epil`        | `Epilog`           | In this phase the system cleans up the Host used to virtualize the VM, and additionally disk images to be saved are copied back to the system datastore.                                                                                                                                                 |
@@ -772,6 +772,85 @@ In this example, the first argument would be the disk and the second the snapsho
 The arguments are mandatory. If you use the CLI or Sunstone they are generated automatically for the actions.{{< /alert >}} 
 
 <a id="vm-charter"></a>
+
+##  Execute Commands Inside the Virtual Machine
+
+You can execute commands inside a Virtual Machine using OpenNebula. Commands are sent to the VM through the QEMU Guest Agent and results are stored in the VM template under `QEMU_GA_EXEC`.
+
+It consists of the following architecture:
+
+![vm_exec_architecture](/images/vm_exec_architecture.png)
+
+
+The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. More details on configuring the monitor probe can be found [here](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md).
+
+{{< alert title="Warning" color="warning" >}}
+Only one command can be executed at a time per VM. If a previous command is still in `EXECUTING` state (even if finished but not yet updated by the monitor probe), new commands cannot be sent until it completes.{{< /alert >}}
+
+{{< alert title="Note" color="success" >}}
+This uses the QEMU Guest Agent, which should be available on the VM. The VM must be in `RUNNING` state{{< /alert >}}
+
+### Options
+The `QEMU_GA_EXEC` section in the VM template contains the following fields:
+
+| Field         | Description                                                     |
+|---------------|-----------------------------------------------------------------|
+| `COMMAND`     | The command to be executed in the VM.                           |
+| `INPUT_DATA`  | Data to pass to the command executed on the VM                  |
+| `PID`         | (Hypervisor-side) PID handling the exec request.                |
+| `RETURN_CODE` | Numeric exit code produced by the command (e.g. `0` = success). |
+| `STATUS`      | Execution state: `EXECUTING`, `CANCELLED`, `DONE` or `ERROR`.   |
+| `STDOUT`      | Command standard output (base64-encoded).                       |
+| `STDERR`      | Command standard error (base64-encoded).                        |
+
+
+### Executing a command from the CLI
+
+To execute a command inside a VM, use the `onevm exec` command. For example, to list files in the home directory of VM 0:
+```default
+$ onevm exec 0 'ls -l'
+```
+
+Check the status of the command with:
+```default
+$ onevm show 0
+```
+
+When still executing:
+
+```default
+VIRTUAL MACHINE TEMPLATE
+...
+QEMU_GA_EXEC=[
+  COMMAND="ls -l",
+  INPUT_DATA="",
+  STATUS="EXECUTING" ]
+```
+
+After execution completes, it will be updated:
+
+```default
+VIRTUAL MACHINE TEMPLATE
+...
+QEMU_GA_EXEC=[
+  COMMAND="ls -l",
+  INPUT_DATA="",
+  PID="3864",
+  RETURN_CODE="0",
+  STATUS="DONE",
+  STDERR="",
+  STDOUT="dG90Y..." ]
+```
+
+To retry the execution of the last command executed, use `onevm retry-exec`:
+```default
+$ onevm retry-exec 0
+```
+
+To cancel the command being executed, use `onevm cancel-exec`:
+```default
+$ onevm cancel-exec 0
+```
 
 ## Virtual Machine Charters
 

@@ -10,6 +10,7 @@ A complete list of solved issues for 7.0.2 are listed in the [project developmen
 
 The following new features have been backported to 7.0.2:
 - [Add clearer names for imported marketplace VM images](../../../product/apps-marketplace/managing_marketplaces/marketapps.md#downloading-a-marketplace-appliance-into-your-cloud-or-desktop)
+- [Add new API calls (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) and monitor message (`EXEC_VM`) to execute commands on a Virtual Machine](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine)
 
 The following issues have been solved in 7.0.2:
 
