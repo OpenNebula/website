@@ -8,7 +8,7 @@ This setup assumes you are using NetApp ONTAP with iSCSI and are trying to use i
 
 {{< alert title="Note" color="success" >}}
 This guide is provided as a prerequisite to use the LVM drivers over a NetApp appliance. It is not
-needed if you are using the [native NetApp]({{% relref "../netapp" %}}) driver.
+needed if you are using the [native NetApp]({{% relref "../san_storage/netapp" %}}) driver.
 {{< /alert >}}
 
 ## NetApp Configuration
