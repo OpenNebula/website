@@ -236,7 +236,7 @@ For deploying the vLLM appliance for benchmarking you should follow those steps:
 
     Also, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port:
 
-    ![vLLM webchat](/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.png)
+    ![vLLM webchat](/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.svg)
 
     If those verifications are successful, the vLLM appliance is ready to run the benchmarks.
 
@@ -265,13 +265,13 @@ In order to run the benchmark you need to follow those steps:
     ```
 
     The benchmark will start running and you will see this output:
-    ![vLLM benchmark](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark.png)
+    ![vLLM benchmark](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark.svg)
 
     There are more parameters available within the benchmarking such as warmups, number of steps, and seconds per step. These parameters are fixed but can be manually adapted if needed.
 
 3. Once finished, the process outputs the results on the terminal and generates an HTML report with all given information in the `/root/benchmark_results` directory:
 
-    ![vLLM benchmark results](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark_results.png)
+    ![vLLM benchmark results](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark_results.svg)
 
 
 ### Benchmark results
