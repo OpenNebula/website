@@ -17,7 +17,7 @@ To perform the validation with LLM Inference you must comply with one of the pre
      * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
 
-As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance is a critical part of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
+As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance are a critical part of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
 
 The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process rather than the quality of the generated result. Metrics assessed by this type of benchmarks include:
   - **Latency**: how fast the model responds to a request.
@@ -28,9 +28,9 @@ In this guide you will find the necessary steps and best practices to perform LL
 
 ## The vLLM Inference Framework
 
-This benchmark focuses on [vLLM](https://docs.vllm.ai/en/latest/), a production-grade, high-performance inference engine designed for large-scale LLM serving.
+The vLLM Inference Framework is a benchmark that focuses on [vLLM](https://docs.vllm.ai/en/latest/), a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
-The main characteristics of vLLM are:
+The main characteristics of vLLM Inference Framework are:
 
 - Supports single-node deployments with one or more GPUs.
 - Uses Python’s native multiprocessing for multi-GPU inference.
@@ -46,7 +46,7 @@ To test the vLLM appliance, the benchmark uses two similar environments, but wit
 
 #### Front-end Requirements
 
-| FRONT-END  |
+| Front-end  |
 | :---- | :---- |
 | Number of Zones | 1 |
 | Cloud Manager | OpenNebula 7.0 |
@@ -57,7 +57,7 @@ To test the vLLM appliance, the benchmark uses two similar environments, but wit
 
 #### Host Requirements
 
-| VIRTUALIZATION HOSTS  |
+| Virtualization Hosts  |
 | :---- | :---- |
 | Number of Nodes | 1 |
 | Server Specs | Supermicro Hyper A+ server, details in the [table below](#server-specifications) |
@@ -67,21 +67,21 @@ To test the vLLM appliance, the benchmark uses two similar environments, but wit
 
 #### Storage Specification
 
-| STORAGE   |
+| Storage   |
 | :---- | :---- |
 | Type | Local disk |
 | Capacity | 1 Datastore |
 
 #### Network Requirements
 
-| NETWORK   |
+| Network   |
 | :---- | :---- |
 | Networking | bridge |
 | Number of Networks | 1 networks: service |
 
 #### Provisioning Model
 
-| PROVISIONING MODEL  |
+| Provisioning Model  |
 | :---- | :---- |
 | Manual on-prem | The two servers have been manually provisioned and configured on-prem. |
 
@@ -234,7 +234,7 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     }
     ```
 
-    Also, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port:
+    Additionally, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port:
 
     ![vLLM webchat](/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.svg)
 
@@ -242,10 +242,10 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
 
 ####  Running the Benchmark Scripts
 
-Within the `/root` directory of the vLLM appliance, you will find [`benchmark.sh`](https://github.com/OpenNebula/one-apps/blob/ec3f5b740dc2a4201f8ed971f93beb195202bfef/appliances/Vllm/scripts/benchmark.sh) which executes GuideLLM CLI. This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress as well as results through the CLI. Specifically, the benchmark script follows this procedure:
+Within the `/root` directory of the vLLM appliance, you will find [`benchmark.sh`](https://github.com/OpenNebula/one-apps/blob/ec3f5b740dc2a4201f8ed971f93beb195202bfef/appliances/Vllm/scripts/benchmark.sh) which executes GuideLLM CLI. This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress as well as results through the CLI. Specifically, the benchmark follows these steps:
 
 - To test performance and stability, the script sends hundreds of requests in parallel.
-- The script uses synthetic data generated automatically to run the benchmark with these values:
+- To run the benchmark, the script uses automatically-generated synthetic data with these values:
     - Input prompt: average 511 tokens.
     - Output prompt: average 255 tokens.
     - Total samples: 999.
@@ -259,7 +259,7 @@ To run the benchmark, follow this procedure:
     $ onevm ssh vllm
     ```
 
-2. Run the benchmark script:
+2. Execute the benchmark script:
     ```shell
     root@vllm$ ./benchmark
     ```
