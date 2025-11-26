@@ -16,7 +16,7 @@ The public OpenNebula [Marketplace](https://marketplace.opennebula.io/) includes
 
 No security credentials are persisted in the distributed appliances. Initial passwords are provided via the contextualization parameters or are dynamically generated for each new Virtual Machine. No two Virtual Machines with default contextualization  parameters share the same passwords or database credentials.
 
-## How Should I Read This Chapter
+## Basic Guide Outline
 
 [OneKE Service (Kubernetes)]({{% relref "oneke" %}}): it describes the OneKE appliance, a minimal hyperconverged Kubernetes platform bundled with OpenNebula and based on RKE2 (Rancher's Next Generation Kubernetes Distribution). The appliance is designed for out-of-the-box functionality, featuring preinstalled components for essential cluster services, including Longhorn for storage persistence, Traefik for ingress traffic, and load balancing options like Cilium, MetalLB, or the ONE Cloud Provider.
 

@@ -14,7 +14,7 @@ weight: "25"
 
 ## Appliance Description
 
-[vLLM](https://docs.vllm.ai/) is a high-performance inference engine optimized for serving transformer LLMs with low latency, high throughput, token-level streaming, and efficient GPU memory usage. This appliance packages vLLM into a ready-to-run and configurable OpenNebula VM image to simplify deployment on your OpenNebula cloud for inference workloads.
+[vLLM](https://docs.vllm.ai/) is a high-performance inference engine optimized for serving transformer LLMs with low latency, high throughput, token-level streaming, and efficient GPU memory usage. This appliance packages vLLM into a configurable OpenNebula VM image which is ready to run, with the purpose of simplified deployment on your OpenNebula cloud for inference workloads.
 
 ## Main Features
 
