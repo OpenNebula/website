@@ -17,14 +17,14 @@ To perform the validation with LLM Inference you must comply with one of the pre
      * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
 
-As Large Language Models (LLMs) are increasingly adopted across industries, ensuring their inference performance is optimized and validated has become a critical part of the deployment process. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
+As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance is a critical part of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
 
-The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process, i.e. the efficiency of inference, rather than the quality of the generated result. Metrics assessed by this type of benchmarks typically include:
-  - **Latency**: How fast the model responds to a request.
-  - **Throughput**: The number of requests the model can handle per unit of time.
-  - **Stability**: Model serving consistency under varying loads.
+The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process rather than the quality of the generated result. Metrics assessed by this type of benchmarks include:
+  - **Latency**: how fast the model responds to a request.
+  - **Throughput**: the number of requests the model can handle per unit of time.
+  - **Stability**: model serving consistency under varying loads.
 
-The following guide provides the necessary steps and best practices to perform LLM inference benchmarking with OpenNebula.
+In this guide you will find the necessary steps and best practices to perform LLM inference benchmarking with OpenNebula.
 
 ## The vLLM Inference Framework
 
@@ -131,23 +131,23 @@ The benchmark process is based on [GuideLLM](https://github.com/vllm-project/gui
 
 ### Executing the Benchmarks
 
-#### Step 1: Deploying the vLLM Appliance
+#### Deploying the vLLM Appliance
 
 The vLLM appliance is available through the OpenNebula Marketplace, offering a [streamlined setup process](https://github.com/OpenNebula/one-apps/wiki/vllm_quick) suitable for both novice and experienced users.
 
-For deploying the vLLM appliance for benchmarking you should follow those steps:
+To deploy the vLLM appliance for benchmarking, follow these steps:
 
 1. Download the vLLM appliance from the marketplace
     ``` shell
     $ onemarketapp export 'service_Vllm' vllm --datastore default
     ```
 
-2. Configure the template for configuring the [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md).
+2. Configure the template for configuring the [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md)
     ```shell
     $ onetemplate update vllm
     ```
 
-    In our case, we configured the template with the following parameters for doing the GPU Passthrough to the VM and configured the specific CPU-Pinning topology:
+    In this scenario, configure the template for GPU Passthrough to the VM and the specific CPU-Pinning topology:
     ```shell
     CPU_MODEL=[
         MODEL="host-passthrough" ]
@@ -168,12 +168,12 @@ For deploying the vLLM appliance for benchmarking you should follow those steps:
     MEMORY="32768"
     ```
 
-3. Instantiate the template. In our case, we kept the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark we did, which means that you will need to instantiate a different VM with the different models for running each benchmark:
+3. Instantiate the template. Keep the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark you do, which means that you will need to instantiate a different VM with the different models for the execution of each benchmark:
     ```shell
     $ onetemplate instantiate service_Vllm --name vllm
     ```
 
-4. Wait until the vLLM engine has loaded the model and the application is served. You can do it by logging to the VM via SSH and checking the logs located in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
+4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
     ```shell
     [...]
 
@@ -195,12 +195,12 @@ For deploying the vLLM appliance for benchmarking you should follow those steps:
 
     ```
 
-    At this point, the vLLM API should be available. You can test it through curl, pointing to the port 8000 of the VM and querying the `v1/models` path:
+    At this point, the vLLM API is available. Perform a test it through curl, pointing to the port 8000 of the VM and querying the `v1/models` path:
     ```shell
     $ curl http://localhost:8000/v1/models | jq .
     ```
 
-    You should receive a json response with the loaded models:
+    You will retrieve a json response with the loaded models:
     ```json
     {
         "object": "list",
@@ -238,21 +238,21 @@ For deploying the vLLM appliance for benchmarking you should follow those steps:
 
     ![vLLM webchat](/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.svg)
 
-    If those verifications are successful, the vLLM appliance is ready to run the benchmarks.
+    If these verification steps are successful, the vLLM appliance is ready to run the benchmarks.
 
-#### Step 2: Running the benchmark scripts
+####  Running the Benchmark Scripts
 
-There is a `benchmark.sh` file inside the `/root` directory of the vLLM appliance that executes GuideLLM CLI. This [script](https://github.com/OpenNebula/one-apps/blob/ec3f5b740dc2a4201f8ed971f93beb195202bfef/appliances/Vllm/scripts/benchmark.sh) automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress and results through the CLI. Specifically, the benchmark script follows this procedure:
+Within the `/root` directory of the vLLM appliance, you will find [`benchmark.sh`](https://github.com/OpenNebula/one-apps/blob/ec3f5b740dc2a4201f8ed971f93beb195202bfef/appliances/Vllm/scripts/benchmark.sh) which executes GuideLLM CLI. This script automatically detects environment parameters, launches the benchmark using GuideLLM, and displays live updates of progress as well as results through the CLI. Specifically, the benchmark script follows this procedure:
 
 - To test performance and stability, the script sends hundreds of requests in parallel.
-- The script uses synthetic data generated automatically to run this benchmark, with these values:
+- The script uses synthetic data generated automatically to run the benchmark with these values:
     - Input prompt: average 511 tokens.
     - Output prompt: average 255 tokens.
     - Total samples: 999.
 - GuideLLM identifies the throughput that the inference can handle.
 - Once the throughput is identified, 9 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
 
-In order to run the benchmark you need to follow those steps:
+To run the benchmark, follow this procedure:
 
 1. Connect to the vLLM appliance through ssh:
     ```shell
@@ -264,7 +264,7 @@ In order to run the benchmark you need to follow those steps:
     root@vllm$ ./benchmark
     ```
 
-    The benchmark will start running and you will see this output:
+    After the benchmark is running, you will see this output:
     ![vLLM benchmark](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark.svg)
 
     There are more parameters available within the benchmarking such as warmups, number of steps, and seconds per step. These parameters are fixed but can be manually adapted if needed.
