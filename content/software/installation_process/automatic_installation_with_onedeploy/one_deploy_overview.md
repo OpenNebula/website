@@ -32,11 +32,10 @@ The basic procedure is as follows:
 
 Ansible is an agentless platform and uses SSH as the default transport for deployment. The control node must be able to communicate with the managed nodes via SSH.
 
-{{< image path=/images/one_deploy_basic_arch.png width=1080 height=669 >}}
+{{< image path="/images/one_deploy_basic_arch.svg" alt="OpenNebula Basic Architecture" align="center" width="50%" pb="20px" >}}
 
 <!-- ![image](/images/one_deploy_basic_arch.png)
 <br/> -->
-<p></p>
 
 It is worth noting that you can use the control node itself as a managed node. In the tutorials included in this documentation, the OpenNebula Front-end is installed on the Ansible control node and the Hypervisors on the managed nodes.
 
