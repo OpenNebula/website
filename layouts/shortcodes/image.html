@@ -1,5 +1,44 @@
-{{- with resources.Get (.Get "path") }}
-  {{- with .Process (printf "resize %dx wepb" ($.Get "width")) -}}
-    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Get "alt" }}">
-  {{- end }}
-{{- end -}}
+{{ $path := .Get "path" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $width := .Get "width" }}
+{{ $class := .Get "class" | default "" }}
+{{ $align := .Get "align" | default "" }}
+{{ $pb := .Get "pb" | default "" }}
+{{ $src := resources.Get $path }}
+
+{{ if $src }}
+  {{ $isSVG := eq $src.MediaType.SubType "svg" }}
+
+  {{/* Build inline style for centering and size */}}
+  {{ $finalStyle := "" }}
+  {{ if eq $align "center" }}
+    {{ $finalStyle = printf "display: block; margin-left: auto; margin-right: auto;" }}
+  {{ end }}
+  {{ if $width }}
+    {{ $finalStyle = printf "%s width: %s;" $finalStyle $width }}
+  {{ end }}
+
+  {{ if $pb }}
+    {{ $finalStyle = printf "%s padding-bottom: %s;" $finalStyle $pb }}
+  {{ end }}
+
+  {{ if $isSVG }}
+    {{/* --- SVG HANDLING --- */}}
+    <img src="{{ $src.RelPermalink }}" alt="{{ $alt }}" 
+      {{ with $width }}width="{{ . }}"{{ end }}
+      {{ with $class }}class="{{ . }}"{{ end }}
+      {{ with $finalStyle }}style="{{ . | safeCSS }}"{{ end }}>
+      
+  {{ else }}
+    {{/* --- RASTER IMAGE PROCESSING (Original Logic) --- */}}
+    {{- with $src.Process (printf "resize %dx webp" $width) -}}
+      <img src="{{ .RelPermalink }}" alt="{{ $alt }}" 
+        width="{{ .Width }}" height="{{ .Height }}" 
+        {{ with $class }}class="{{ . }}"{{ end }}
+        {{ with $finalStyle }}style="{{ $finalStyle }}"{{ end }}>
+    {{- end }}
+  {{ end }}
+
+{{ else }}
+  <p style="color: red;">Image not found: {{ $path }}</p>
+{{ end }}
