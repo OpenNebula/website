@@ -137,12 +137,12 @@ The vLLM appliance is available through the OpenNebula Marketplace, offering a [
 
 To deploy the vLLM appliance for benchmarking, follow these steps:
 
-1. Download the vLLM appliance from the marketplace
+1. Download the vLLM appliance from the marketplace:
     ``` shell
     $ onemarketapp export 'service_Vllm' vllm --datastore default
     ```
 
-2. Configure the template for [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md)
+2. Configure the template for [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md):
     ```shell
     $ onetemplate update vllm
     ```
