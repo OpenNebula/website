@@ -87,3 +87,13 @@ host:
       period: 2 # Number of minutes
       lookback: 60 # Look-back window in minutes for predictions
 ```
+
+## LinuxContainers marketplace
+
+The appliances on this marketplace will fail [to boot](https://github.com/OpenNebula/one/issues/7391) when deployed on rhel10 like hosts. The parameter `lxc.apparmor.profile=unconfined` is what causes the issue and needs to be removed after the appliance is imported.
+
+```
+RAW=[
+  DATA="lxc.apparmor.profile=unconfined",
+  TYPE="lxc" ]
+```
