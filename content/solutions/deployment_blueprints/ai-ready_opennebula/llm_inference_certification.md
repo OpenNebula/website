@@ -17,7 +17,7 @@ To perform the validation with LLM Inference you must comply with one of the pre
      * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
 
-As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance are a critical part of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
+As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance are critical aspects of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
 
 The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process rather than the quality of the generated result. Metrics assessed by this type of benchmarks include:
   - **Latency**: how fast the model responds to a request.
@@ -53,7 +53,7 @@ To test the vLLM appliance, the benchmark uses two similar environments, but wit
 | Server Specs | Supermicro Hyper A+ server, details in the [table below](#server-specifications) |
 | Operating System | Ubuntu 24.04.2 LTS |
 | High Availability | No (1 Front-end) |
-| Authorization | Builtin |
+| Authorization | Built-in |
 
 #### Host Requirements
 
@@ -76,7 +76,7 @@ To test the vLLM appliance, the benchmark uses two similar environments, but wit
 
 | Network   |
 | :---- | :---- |
-| Networking | bridge |
+| Networking | Bridge |
 | Number of Networks | 1 networks: service |
 
 #### Provisioning Model
@@ -142,7 +142,7 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     $ onemarketapp export 'service_Vllm' vllm --datastore default
     ```
 
-2. Configure the template for configuring the [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md)
+2. Configure the template for [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md)
     ```shell
     $ onetemplate update vllm
     ```
@@ -290,12 +290,12 @@ Different application types have distinct performance requirements. The followin
 
 | Use Case                           | Req. Latency (ms) | TTFT (ms)  | ITL (ms) |
 |------------------------------------|-------------------|------------|----------|
-| **Chat Applications**              | -                 | ≤ 200      | ≤ 50     |
-| **Retrieval-Augmented Generation** | -                 | ≤ 300      | ≤ 100    |
-| **Agentic AI**                     | ≤ 5000            | -          | -        |
-| **Content Generation**             | -                 | ≤ 600      | ≤ 200    |
-| **Code Generation**                | -                 | ≤ 500      | ≤ 150    |
-| **Code Completion**                | ≤ 2000            | -          | -        |
+| Chat Applications              | -                 | ≤ 200      | ≤ 50     |
+| Retrieval-Augmented Generation | -                 | ≤ 300      | ≤ 100    |
+| Agentic AI                    | ≤ 5000            | -          | -        |
+| Content Generation             | -                 | ≤ 600      | ≤ 200    |
+| Code Generation               | -                 | ≤ 500      | ≤ 150    |
+| Code Completion                | ≤ 2000            | -          | -        |
 
 The following table contains the results of the benchmark for each model:
 
