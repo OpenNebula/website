@@ -138,10 +138,10 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
 
 To ensure full compatibility with the ovirtAPI module, the Backup Server must run one of the following operating systems:
 
-- AlmaLinux 8 or 9
+- AlmaLinux 9
 - Ubuntu 22.04 or 24.04
-- RHEL 8 or 9
-- Debian 11 or 12
+- RHEL 9
+- Debian 12
 
 The minimum hardware specifications are:
 
