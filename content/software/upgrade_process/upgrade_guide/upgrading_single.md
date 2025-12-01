@@ -43,7 +43,7 @@ Upgrade the OpenNebula software using the package manager of your OS. Refer to t
 For example, in CentOS/RHEL simply execute:
 
 ```bash
-yum upgrade opennebula
+dnf upgrade opennebula
 ```
 
 For Debian/Ubuntu use:
@@ -60,7 +60,7 @@ Upgrade the OpenNebula node KVM or LXC packages, using the package manager of yo
 For example, in a rpm-based Linux distribution simply execute:
 
 ```bash
-yum upgrade opennebula-node-kvm
+dnf upgrade opennebula-node-kvm
 ```
 
 For deb-based distros use:
@@ -140,6 +140,10 @@ onedb backup
 
 In order to be able to retrieve the packages for the latest version, you need to update the OpenNebula packages repository. The instructions for doing this are detailed [here]({{% relref "opennebula_repository_configuration#repositories" %}}).
 
+{{< alert title="Important" color="danger" >}}
+**Note**: Please, make sure the required for your OS 3rd party repositories are enabled as it's described in the [Add Third Party Repositories]({{% relref "front_end_installation/#step-2-add-third-party-repositories" %}}) section.{{< /alert >}}
+
+
 ### Step 6. Upgrade to the New Version
 
 {{< alert title="Important" color="success" >}}
@@ -152,10 +156,10 @@ apt-get update
 apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
 ```
 
-RHEL
+RHEL/AlmaLinux
 
 ```bash
-yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
+dnf upgrade opennebula*
 ```
 
 ### Step 7. Update Configuration Files
@@ -300,7 +304,7 @@ apt-get install --only-upgrade opennebula-node-<hypervisor>
 RHEL
 
 ```bash
-yum upgrade opennebula-node-<hypervisor>
+dnf upgrade opennebula-node-<hypervisor>
 ```
 
 {{< alert title="Note" color="success" >}}
