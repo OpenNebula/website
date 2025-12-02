@@ -31,7 +31,7 @@ Not all OpenNebula dependencies are in base distribution repositories. On select
 
 ### EPEL repository
 
-**AlmaLinux 8,9**
+**AlmaLinux 8 and 9**
 
 ```bash
 dnf -y install epel-release
