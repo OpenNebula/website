@@ -85,6 +85,7 @@ We’d like to thank our global community and partners who have helped shape thi
 - Support for VM Template Profiles with pre-defined deployment settings.
 - Add support for labels in Sunstone, including the labels that were set in the old Sunstone UI. See the [Compatibility guide](../compatibility#compatibility-guide-labels).
 - New way to render and group user inputs when instantiating an appliance. Check [User Inputs in Sunstone](product/virtual_machines_operation/virtual_machine_definitions/vm_templates/#vm-guide-user-inputs-sunstone).
+- Add Confidential Computing Session on VM Template. Check [Support for Confidential Computing Extensions](https://github.com/OpenNebula/one/issues/7331) for more information.
 
 ## API and CLI
 
