@@ -35,6 +35,7 @@ There are different Image Datastores depending on how the images are stored on t
   - [Raw Device Mapping]({{% relref "dev_ds#dev-ds" %}})
   - [iSCSI - Libvirt]({{% relref "iscsi_ds#iscsi-ds" %}}), to access iSCSI devices through the built-in QEMU support
   - [NetApp]({{% relref "netapp" %}}) - Datastore to register a NetApp SAN appliance, provided as an Enterprise Extension
+  - [SharedFS (virtiofs)]({{% relref "sharedfs_ds#sharedfs-ds" %}}) for zero-copy access to shared folders on HPC/NAS storage
 
 ### System Datastores
 
