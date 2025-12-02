@@ -29,18 +29,16 @@ OpenNebula Systems provides an OpenNebula Enterprise Edition to customers with a
 {{< alert title="Important" color="success" >}}
 You should have received the customer access token (username and password) to access these repositories. You have to substitute the appearance of `<token>` with your customer specific token in all instructions below.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
-In **AlmaLinux/RHEL 8,9** some dependencies cannot be found in the default repositories. Some extra repositories need to be enabled. To do this, execute the following as the `root` user:
+Some AlmaLinux and RHEL 8/9 dependencies are not available in the default repositories. You need to enable additional  repositories. To do this, execute the following as the `root` user:
 
 ```bash
 crb enable
 ```
 Check [Add Third Party Repositories]({{% relref "front_end_installation/#step-2-add-third-party-repositories" %}}) for more details.
-{{< /alert >}}
 
 To add the OpenNebula enterprise repository, execute the following as user `root`:
 
-### RHEL 8, 9
+### RHEL 8 and 9
 
 ```bash
 cat << "EOT" > /etc/dnf.repos.d/opennebula.repo
@@ -55,7 +53,7 @@ EOT
 dnf makecache
 ```
 
-### AlmaLinux 8, 9
+### AlmaLinux 8 and 9
 
 ```bash
 cat << "EOT" > /etc/dnf.repos.d/opennebula.repo
@@ -145,18 +143,16 @@ password <password>
 
 The community edition of OpenNebula offers the full functionality of the Cloud Management Platform. You can configure the community repositories as follows:
 
-{{< alert title="Note" color="success" >}}
-In **AlmaLinux/RHEL 8,9** some dependencies cannot be found in the default repositories. Some extra repositories need to be enabled. To do this, execute the following as the `root` user:
+Some AlmaLinux and RHEL 8/9 dependencies are not available in the default repositories. You need to enable additional  repositories. To do this, execute the following as the `root` user:
 
 ```bash
 crb enable
 ```
 Check [Add Third Party Repositories]({{% relref "front_end_installation/#step-2-add-third-party-repositories" %}}) for more details.
-{{< /alert >}}
 
 To add OpenNebula repository, execute the following as user `root`:
 
-### RHEL 8, 9
+### RHEL 8 and 9
 
 ```bash
 cat << "EOT" > /etc/dnf.repos.d/opennebula.repo
@@ -171,7 +167,7 @@ EOT
 dnf makecache
 ```
 
-### AlmaLinux 8, 9
+### AlmaLinux 8 and 9
 
 ```bash
 cat << "EOT" > /etc/dnf.repos.d/opennebula.repo

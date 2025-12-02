@@ -1,5 +1,6 @@
 ---
 title: "KVM Node Installation"
+linkTitle: "KVM Node"
 date: "2025-02-17"
 description:
 categories:
@@ -37,9 +38,7 @@ Refer to [OpenNebula Repositories]({{% relref "opennebula_repository_configurati
 
 ### Installing on AlmaLinux/RHEL
 
-OpenNebula depends on packages which aren’t in the base **AlmaLinux/RHEL 8,9** distribution repositories. Execute one of the commands below (distinguished by the Host platform) under privileged user (`root`) to configure access to additional [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) repository:
-
-#### EPEL repository
+Besides AlmaLinux and RHEL 8/9, OpenNebula depends on packages available in other distribution repositories. Execute one of the commands below, distinguished by the Host platform, under privileged user (`root`) to configure access to [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) repository:
 
 **AlmaLinux 8,9**
 
@@ -113,8 +112,7 @@ setsebool -P virt_use_nfs on
 
 Depending on the type of OpenNebula deployment, the AppArmor can block some operations initiated by the OpenNebula Front-end, which results in a failure of the particular operation.  It’s **not recommended to disable** the apparmor on production environments, as it degrades the security of your server, but to investigate and work around each individual problem. A good starting point is [AppArmor HowToUse Guide](https://wiki.debian.org/AppArmor/HowToUse/). The administrator might disable the AppArmor to temporarily work around the problem or on non-production deployments the steps for disabling it can be found [here](https://wiki.debian.org/AppArmor/HowToUse#Disable_AppArmor).
 
-{{< alert title="Note" color="success" >}}
-Depending on your OpenNebula deployment type, the following lines might be required at `/etc/apparmor.d/abstractions/libvirt-qemu` profile:{{< /alert >}} 
+Depending on your OpenNebula deployment type, the following lines might be required at `/etc/apparmor.d/abstractions/libvirt-qemu` profile: 
 
 ```bash
 /var/lib/one/datastores/** rwk,
@@ -190,7 +188,7 @@ scp -p /var/lib/one/.ssh/known_hosts <node2>:/var/lib/one/.ssh/
 scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
 ```
 
-#### Without SSH Authentication Agent (Optional)
+#### (Optional) Without SSH Authentication Agent
 
 {{< alert title="Warning" color="warning" >}}
 **Not Recommended**. If you don’t use integrated SSH authentication agent service (which is initially enabled) on the Front-end, you’ll have to distribute also `oneadmin`’s private SSH key on your hypervisor nodes to allow connections among nodes and from nodes to Front-end. For security reasons, it’s recommended to use SSH authentication agent service and **avoid this step**.

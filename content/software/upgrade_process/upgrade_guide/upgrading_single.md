@@ -141,8 +141,7 @@ onedb backup
 In order to be able to retrieve the packages for the latest version, you need to update the OpenNebula packages repository. The instructions for doing this are detailed [here]({{% relref "opennebula_repository_configuration#repositories" %}}).
 
 {{< alert title="Important" color="danger" >}}
-**Note**: Please, make sure the required for your OS 3rd party repositories are enabled as it's described in the [Add Third Party Repositories]({{% relref "front_end_installation/#step-2-add-third-party-repositories" %}}) section.{{< /alert >}}
-
+Ensure that the required third-party repositories for your OS are enabled as described in [Add Third Party Repositories]({{% relref "front_end_installation/#step-2-add-third-party-repositories" %}}){{< /alert >}}
 
 ### Step 6. Upgrade to the New Version
 
