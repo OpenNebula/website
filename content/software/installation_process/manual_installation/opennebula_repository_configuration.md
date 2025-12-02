@@ -29,7 +29,7 @@ OpenNebula Systems provides an OpenNebula Enterprise Edition to customers with a
 {{< alert title="Important" color="success" >}}
 You should have received the customer access token (username and password) to access these repositories. You have to substitute the appearance of `<token>` with your customer specific token in all instructions below.{{< /alert >}}
 
-Some AlmaLinux and RHEL 8/9 dependencies are not available in the default repositories. You need to enable additional  repositories. To do this, execute the following as the `root` user:
+Some AlmaLinux and RHEL 8/9 dependencies are not available in the default repositories. You need to enable additional repositories. To do this, execute the following as the `root` user:
 
 ```bash
 crb enable
