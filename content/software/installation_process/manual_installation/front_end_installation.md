@@ -50,7 +50,7 @@ rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 ### CRB repository
 
-**AlmaLinux/RHEL 8,9**
+**AlmaLinux/RHEL 8 and 9**
 
 
 ```bash
