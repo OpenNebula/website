@@ -29,3 +29,4 @@ The following issues have been solved in 7.0.2:
 - Fix delays deploying VMs after a VM with passtrhough or SR-IOV GPU devices is shutdown [#7392](https://github.com/OpenNebula/one/issues/7392)
 - Fix oneswap error management on rbvmomi logic [#7340](https://github.com/OpenNebula/one/issues/7340)
 - Fix oneswap error management on esxi host detection [#7341](https://github.com/OpenNebula/one/issues/7341)
+- Fix Enhanced vMotion Compatibility [#7260](https://github.com/OpenNebula/one/issues/7260)
