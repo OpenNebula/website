@@ -100,7 +100,7 @@ The Front-end requires network access to the NetApp ONTAP API endpoint:
 
 ## Front-end & Node Setup
 
-Configure both the Front-end and nodes with persistent iSCSI connections:
+Configure both the Front-end and nodes with persistent iSCSI connections and multipath configuration as described by the [NetApp ONTAP Documentation - SAN Host Utilities Overview](https://docs.netapp.com/us-en/ontap-sanhost/hu_fcp_scsi_index.html):
 
 1. **iSCSI Initiators:**
    - Configure initiator security in NetApp Storage VM:
