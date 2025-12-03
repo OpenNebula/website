@@ -753,7 +753,7 @@ The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` 
 Only one command can be executed at a time per VM. If a previous command is still in `EXECUTING` state (even if finished but not yet updated by the monitor probe), new commands cannot be sent until it completes.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
-This uses the QEMU Guest Agent, which must be installed and running on the VM. The VM must be in the `RUNNING` state. Additionally, the hypervisor hosting the VM must be able to connect to itself via passwordless SSH.{{< /alert >}}
+This uses the QEMU Guest Agent, which must be installed and running on the VM. The VM must be in the `RUNNING` state.{{< /alert >}}
 
 ### Options
 The `QEMU_GA_EXEC` section in the VM template contains the following fields:
