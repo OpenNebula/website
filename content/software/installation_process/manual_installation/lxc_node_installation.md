@@ -30,7 +30,7 @@ To understand the specific requirements, functionalities, and limitations of the
 
 You can then check the [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}}) system configuration sections to deploy Virtual Machines on your LXC nodes and access them remotely over the network.
 
-## Step 1. Add OpenNebula Repositories
+## Step 1. Adding OpenNebula Repositories
 
 Refer to [OpenNebula Repositories]({{% relref "opennebula_repository_configuration#repositories" %}}) guide to add the **Enterprise** and **Community** Edition software repositories.
 
@@ -44,19 +44,19 @@ OpenNebula depends on packages which aren’t in the base distribution repositor
 
 **AlmaLinux**
 
-```default
+```bash
 # yum -y install epel-release
 ```
 
 **RHEL 8**
 
-```default
+```bash
 # rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 **RHEL 9**
 
-```default
+```bash
 # rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
@@ -66,24 +66,24 @@ Execute the following commands to install the OpenNebula LXC Node package:
 
 #### Installing on AlmaLinux/RHEL
 
-```default
+```bash
 # yum -y install opennebula-node-lxc
 ```
 
 #### Installing on Debian/Ubuntu
 
-```default
+```bash
 # apt-get update
 # apt-get -y install opennebula-node-lxc
 ```
 
 Install the suggested package `rbd-nbd` if the Ceph Datastore is going to be used by the LXC Hosts. For further configuration check the specific [guide]({{% relref "lxc_driver#lxcmg" %}}).
 
-## Step 3. Disable SELinux on AlmaLinux/RHEL (Optional)
+## Step 3. (Optional) Disabling SELinux on AlmaLinux/RHEL 
 
 Depending on the type of OpenNebula deployment, the SELinux can block some operations initiated by the OpenNebula Front-end, which results in a failure of the particular operation.  It’s **not recommended to disable** the SELinux on production environments, as it degrades the security of your server, but to investigate and work around each individual problem based on the [SELinux User’s and Administrator’s Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/). The administrator might disable the SELinux to temporarily work around the problem or on non-production deployments by changing the following line in `/etc/selinux/config`:
 
-```default
+```bash
 SELINUX=disabled
 ```
 
@@ -95,11 +95,12 @@ Depending on your OpenNebula deployment type, the following may be required on y
 * package `util-linux` newer than 2.23.2-51 installed
 * SELinux boolean `virt_use_nfs` enabled (with datastores on NFS):
 
-```default
+```bash
 # setsebool -P virt_use_nfs on
-```{{< /alert >}}  
+```
+{{< /alert >}}  
 
-## Step 4. Configure Passwordless SSH
+## Step 4. Configuring Passwordless SSH
 
 The OpenNebula Front-end connects to the hypervisor nodes using SSH. Following connection types are being established:
 
@@ -129,15 +130,15 @@ You’ll need to update and redistribute file with Host keys every time any Host
 {{< alert title="Important" color="success" >}}
 If [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %}}) shipped with OpenNebula is used, the SSH client automatically accepts Host keys on the first connection. That makes this step optional, as the `known_hosts` will be incrementally automatically generated on your infrastructure when the various connections happen. While this simplifies the initial deployment, it lowers the security of your infrastructure. We highly recommend to populate `known_hosts` on your infrastructure in a controlled manner!{{< /alert >}} 
 
-Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
+Make sure you are logged in on your front-end and run the commands as `oneadmin`, e.g., by typing:
 
-```default
+```bash
 # su - oneadmin
 ```
 
 Create the `known_hosts` file by running following command with all the node names including the Front-end as parameters:
 
-```default
+```bash
 $ ssh-keyscan <frontend> <node1> <node2> <node3> ... >> /var/lib/one/.ssh/known_hosts
 ```
 
@@ -147,13 +148,13 @@ To enable passwordless login on your infrastructure, you must copy authenticatio
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
 
-```default
+```bash
 # su - oneadmin
 ```
 
 Enable passwordless logins by executing the following command for each of your nodes. For example:
 
-```default
+```bash
 $ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node1>
 $ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node2>
 $ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node3>
@@ -161,24 +162,25 @@ $ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node3>
 
 If the list of host SSH public keys was created in the previous section, distribute the `known_hosts` file to each of your nodes. For example:
 
-```default
+```bash
 $ scp -p /var/lib/one/.ssh/known_hosts <node1>:/var/lib/one/.ssh/
 $ scp -p /var/lib/one/.ssh/known_hosts <node2>:/var/lib/one/.ssh/
 $ scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
 ```
 
-#### Without SSH Authentication Agent (Optional)
+#### (Optional) Without SSH Authentication Agent 
 
 {{< alert title="Warning" color="warning" >}}
 **Not Recommended**. If you don’t use integrated SSH authentication agent service (which is initially enabled) on the Front-end, you’ll have to distribute also `oneadmin`’s private SSH key on your hypervisor nodes to allow connections among nodes and from nodes to Front-end. For security reasons, it’s recommended to use SSH authentication agent service and **avoid this step**.
 
 If you need to distribute `oneadmin`’s private SSH key on your nodes, proceed with steps above and continue with following extra commands for all your nodes. For example:
 
-```default
+```bash
 $ scp -p /var/lib/one/.ssh/id_rsa <node1>:/var/lib/one/.ssh/
 $ scp -p /var/lib/one/.ssh/id_rsa <node2>:/var/lib/one/.ssh/
 $ scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
-```{{< /alert >}}  
+```
+{{< /alert >}}  
 
 ### C. Validate Connections
 
@@ -191,7 +193,7 @@ You should verify that none of these connections (under user `oneadmin`) fail an
 
 For example, execute on the Front-end:
 
-```default
+```bash
 # from Front-end to Front-end itself
 $ ssh <frontend>
 $ exit
@@ -227,7 +229,7 @@ $ exit
 $ exit
 ```
 
-## Step 5.  Networking Configuration
+## Step 5.  Setting up Networking
 
 ![image](/images/network-02.png)
 <!-- TODO - This needs rework or drop. -->
@@ -238,7 +240,7 @@ There are various models for virtual networks, check the [Open Cloud Networking]
 
 You may want to use the simplest network model that corresponds to the [bridged]({{% relref "bridged#bridged" %}}) driver. For this driver, you will need to set up a Linux bridge and include a physical device in the bridge. Later on, when defining the network in OpenNebula, you will specify the name of this bridge and OpenNebula will know that it should connect the VM to this bridge, thus giving it connectivity with the physical network device connected to the bridge. For example, a typical Host with two physical networks, one for public IP addresses (attached to an `eth0` NIC for example) and the other for private virtual LANs (NIC `eth1` for example) should have two bridges:
 
-```default
+```bash
 # ip link show type bridge
 4: br0: ...
 5: br1: ...
@@ -253,52 +255,65 @@ You may want to use the simplest network model that corresponds to the [bridged]
 {{< alert title="Note" color="success" >}}
 Remember that this is only required in the Hosts, not in the Front-end. Also remember that the exact name of the resources is not important (`br0`, `br1`, etc…), however it’s important that the bridges and NICs have the same name in all the Hosts.{{< /alert >}} 
 
-## Step 6.  Storage Configuration
+## Step 6. Configuring Storage
 
 In default OpenNebula configuration, the local storage is used for storing Images and running Virtual Machines. This is enough for basic use and you don’t need to take any extra steps now unless you want to deploy an advanced storage solution.
 
 Follow the [Open Cloud Storage Setup]({{% relref "../../../product/cluster_configuration/storage_system/overview#storage" %}}) guide to learn how to use Ceph, NFS, LVM, etc.
 
-## Step 7. Adding Host to OpenNebula
+## Step 7. Adding Hosts to OpenNebula
 
-In this step, we’ll register the hypervisor node we have configured above into the OpenNebula Front-end, so that OpenNebula can launch Virtual Machines on it. This step is documented for Sunstone GUI and CLI, but both accomplish the same result. Select and proceed with just one of the two options.
-
-Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
+In this step, register the hypervisor node you have configured above into the front-end, so that OpenNebula launches Virtual Machines on it. This step is documented for Sunstone GUI and CLI, but both accomplish the same result. Select and proceed with just one of the two options.
 
 {{< alert title="Note" color="success" >}}
 If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}} 
 
-### Add Host with Sunstone
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interfaces**:" disabled=true /%}}
 
-Open Sunstone as documented [here]({{% relref "front_end_installation#verify-frontend-section-sunstone" %}}). On the left side menu go to **Infrastructure** → **Hosts**. Click on the `+` button.
+{{% tab header="Sunstone"%}}
+
+1. Open Sunstone as documented [here]({{% relref "front_end_installation#verify-frontend-section-sunstone" %}}). 
+2. On the left side menu go to **Infrastructure** > **Hosts**. 
+3. Click on the `+` button.
 
 ![sunstone_select_create_host](/images/sunstone_select_create_host.png)
 
-Then fill in the hostname, FQDN, or IP of the node in the `Hostname` field.
+4. Specify the hostname, FQDN, or IP of the node in the `Hostname` field.
 
 ![sunstone_create_host_dialog](/images/sunstone_create_host_dialog_lxc.png)
 
-Finally, return back to the **Hosts** list, and check that the Host has switched to `ON` status. It can take up to one minute. You can click on the refresh button to check the status more frequently.
+5. Return back to the **Hosts** list, and check that the Host has switched to `ON` status. This status change takes approximately a minute. You can click on the refresh button to check the status more frequently.
 
 ![sunstone_list_hosts](/images/sunstone_list_hosts.png)
 
-### Add Host with CLI
+{{% /tab %}}
 
-To add a node to the cloud, run this command as `oneadmin` in the Front-end (replace `<node01>` with your node hostname):
+{{% tab header="CLI"%}}
+ 
+To add a node to the cloud, run this command as `oneadmin` in the front-end, replacing `<node01>` with your node hostname:
 
-```default
+```bash
 $ onehost create <node01> -i lxc -v lxc
 
 $ onehost list
   ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
    1 localhost       default     0                  -                  - init
+```
 
-# After some time (up to 1 minute)
+After some time, approximately 1 minute, run `onehost list`:
 
+```bash
 $ onehost list
   ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
    0 node01          default     0       0 / 400 (0%)     0K / 7.7G (0%) on
 ```
+
+{{% /tab %}}
+
+{{< /tabpane >}}
+
+Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
 
 ## Next steps
 
