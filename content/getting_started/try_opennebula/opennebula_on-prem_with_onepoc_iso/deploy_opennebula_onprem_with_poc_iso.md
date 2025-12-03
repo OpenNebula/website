@@ -64,8 +64,8 @@ The Options are the following:
 - `Install OpenNebula POC` will install a full OpenNebula 7.0.1 frontend and the necessary software to make it a OpenNebula KVM hypervisor
 - `Install OpenNebula Node` will install only the KVM Hypervisor packages
 
-{{< alert title="Media testing before installing" color="success" >}}
-The options `Test this media and Install ...` will scan the media and do a checksum before the installation. It is slow but useful if the media used for installation is prone to error.
+{{< alert title="Other options" color="success" >}}
+**The options `Test this media and Install ...` are not recommended on remote console installations because they are slow and must send all the ISO data to compute a checksum**. They may be useful installing from fast local media (i.e. a USB pendrive) if the unit is prone to error.
 {{< /alert >}}
 
 The installation interface will be in text mode and will only ask for confirmation before deleting all the data on the first disk that it finds on a screen that looks like the following:
