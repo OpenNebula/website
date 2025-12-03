@@ -27,3 +27,5 @@ The following issues have been solved in 7.0.2:
 - Fix headers in the tables are not translated in list mode [#7357](https://github.com/OpenNebula/one/issues/7357)
 - Fix the deployment of NVIDIA GPU VMs by ensuring that monitord configuration is read from host local file system [#7376](https://github.com/OpenNebula/one/issues/7376)
 - Fix delays deploying VMs after a VM with passtrhough or SR-IOV GPU devices is shutdown [#7392](https://github.com/OpenNebula/one/issues/7392)
+- Fix oneswap error management on rbvmomi logic [#7340](https://github.com/OpenNebula/one/issues/7340)
+- Fix oneswap error management on esxi host detection [#7341](https://github.com/OpenNebula/one/issues/7341)
