@@ -59,6 +59,9 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 <!--keeping some examples-->
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
 
+## LXC
+
+- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
 
 
 ## OpenNebula Flow

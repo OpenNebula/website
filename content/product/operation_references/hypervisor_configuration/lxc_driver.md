@@ -61,21 +61,57 @@ You can pin containers to Host CPUs and NUMA nodes simply by adding a `TOPOLOGY`
 
 ### Container Actions
 
-Some of the actions supported by OpenNebula for VMs are not yet implemented for LXC. The following actions are not currently supported:
+Some of the VM actions available in the OpenNebula API are not implemented yet for the LXC driver:
 
-- `migration`
-- `live migration`
-- `live disk resize`
-- `save/restore`
-- `snapshots`
-- `disk-saveas`
-- `disk hot-plugging`
-- `nic hot-plugging`
+- [live migration](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#advanced-operations-for-administrators)
+- [live disk resize](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#resizing-vm-disks)
+- [vm state save and restore](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#save-a-vm-instance)
+- [system snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-system-snapshots)
+- [live disk snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-disk-snapshots)
+- [live disk save](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#saving-a-vm-disk-to-an-image)
+- [live capacity resize](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#live-resize-of-capacity)
 
 ### PCI Passthrough
 
-PCI Passthrough is not currently supported for LXC containers.
+You can perform NIC PCI Passthrough on containers. For this you simply need the [PCI NICs to be monitored in the LXC hosts]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough.md#driver-configuration" %}}). The configuration file for the PCI device detection is `/var/lib/one/remotes/etc/im/lxc-probes.d/pci.conf`. Once monitoring is successful, you can [use this PCI NIC]({{% relref "../../cloud_clusters_infrastructure_configuration/hosts_and_clusters_configuration/pci_passthrough.md#usage" %}})
+by declaring in it on the VM Template or hot plugging it.
 
+Example PCI device monitoring
+
+```bash
+onehost show 1 -j | jq .HOST.HOST_SHARE.PCI_DEVICES.PCI[-1]
+{
+  "ADDRESS": "0000:00:08:0",
+  "BUS": "00",
+  "CLASS": "0200",
+  "CLASS_NAME": "Ethernet controller",
+  "DEVICE": "100e",
+  "DEVICE_NAME": "82540EM Gigabit Ethernet Controller",
+  "DOMAIN": "0000",
+  "FUNCTION": "0",
+  "NUMA_NODE": "-",
+  "SHORT_ADDRESS": "00:08.0",
+  "SLOT": "08",
+  "TYPE": "8086:100e:0200",
+  "VENDOR": "8086",
+  "VENDOR_NAME": "Intel Corporation",
+  "VMID": "-1"
+}
+```
+
+NIC declaration in VM Template
+
+```
+PCI=[
+  NETWORK="public",
+  NETWORK_ID="0",
+  NETWORK_UID="0",
+  NETWORK_UNAME="oneadmin",
+  SHORT_ADDRESS="00:08.0",
+  TYPE="NIC" ]
+```
+
+Hot-plug that device with `onevm nic-attach $VM_ID -n $VNET_ID --pci "00:08.0"`
 ### Wild Containers
 
 Importing wild containers that weren’t deployed by OpenNebula is not currently supported.
