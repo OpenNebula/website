@@ -1,6 +1,6 @@
 ---
 title: "Deploy OpenNebula On-prem with miniONE"
-linkTitle: "OpenNebula On-prem"
+linkTitle: "miniONE deployment"
 date: "2025-02-17"
 #description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
 categories: [Introduction, Evaluation, Learning]
@@ -197,4 +197,4 @@ Log in as root with password `opennebula`.
 
 Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine.
 
-To explore the resources in the environment you've just created, see [Validate the miniONE Environment]({{% relref "validate_the_minione_environment" %}}) --- where additionally you can learn how to quickly download virtual appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploy them to your new cloud.
+To explore the resources in the environment you've just created, see [Validate the miniONE Environment]({{% relref "validate_the_environment" %}}) --- where additionally you can learn how to quickly download virtual appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploy them to your new cloud.

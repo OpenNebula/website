@@ -1,5 +1,6 @@
 ---
 title: "Deploy OpenNebula On-prem with the PoC ISO"
+linkTitle: "PoC ISO deployment"
 description:
 weight: 1
 ---
@@ -12,26 +13,29 @@ Once the ISO has booted and finished installing and setting up the software, a p
 
 The OS installed also includes a menu and a little set of ansible playbooks to make the OpenNebula infrastructure Management simpler.
 
+![onepoc_architecture](/images/ISO/00-onepoc_architecture.png)
+
 ## Requirements
 
 The OpenNebula PoC ISO is based on AlmaLinux 9, and thus it shares the same requirements to run. Note that only the x86-64-v2 instruction set (introduced in 2008\) is supported. The following table states the minimum requirements for installing the PoC ISO.
 
-| Component | Minimum (not recommended) | Recommended |
-| :---- | :---- | :---- |
-| **CPU** | - Intel - Nehalem/Silvermont<br />- AMD - Bulldozer/Jaguar<br />- Virtualization enabled at BIOS level | - Recent CPU (after 2020)<br />- Virtualization enabled at BIOS level |
-| **Memory** | - 6 GB for the frontend<br />- 4 GB for the hypervisors | - Over 32 GB for frontend and nodes |
-| **Disk** | - 128 GB SATA SSD  | - 512 GB NvME |
-| **Network** | - Not needed for installation<br />- At least a NIC for management | - At least 2 NICs (management and service) |
+| Component | Required |
+| :---- | :---- |
+| **CPU** | - Recent CPU (after 2016)<br />- Virtualization enabled at BIOS level |
+| **Memory** | - Over 32 GB for frontend and nodes |
+| **Disk** | - 512 GB NvME |
+| **Network** | - At least a NIC for management\* <br />- Recommended 2 NICs (management and service) |
 
+\*Not needed for installation
 {{< alert title="Warning" color="warning" >}}
 **Installing the ISO will delete all the disk data on the server during the installation.**
 {{< /alert >}}
 
-## Downloading the image, preparing the media and installing
+## ISO Download and installation
 
-Now it is time to download the OpenNebula AlmaLinux ISO. Currently, the following versions are available: 
+Now it is time to download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available: 
 
-- [Alma Linux 9.7 with OpenNebula 7.0.1 CE](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/AlmaLinux-onepoc_7.0.1_CE.iso) \([SHA256 checksum](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/AlmaLinux-onepoc_7.0.1_CE.iso.sha)\)
+- [OpenNebula 7.0.1 Community Edition](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/opennebula-7.0.1-CE.iso) \([SHA256 checksum](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/opennebula-7.0.1-CE.iso.sha)\)
 
 Once the image is downloaded, there are two ways to go:
 
@@ -41,7 +45,7 @@ Once the image is downloaded, there are two ways to go:
 In Linux or MacOS, the image can be dumped on the USB with the following command
 
 ```bash
-dd if=/path/to/your/Almalinux-onepoc.iso of=/dev/sdXX
+dd if=/path/to/your/opennebula-7.0.1-CE.iso of=/dev/sdXX
 ```
 
 {{< alert title="Check the USB drive" color="warning" >}}
@@ -61,7 +65,7 @@ The bootloader will show the following screen
 | UEFI boot screen | MBR boot screen |
 
 The Options are the following:
-- `Install OpenNebula POC` will install a full OpenNebula 7.0.1 frontend and the necessary software to make it a OpenNebula KVM hypervisor
+- `Install OpenNebula POC` will install a full OpenNebula frontend and the necessary software to make it a OpenNebula KVM hypervisor
 - `Install OpenNebula Node` will install only the KVM Hypervisor packages
 
 {{< alert title="Other options" color="success" >}}
@@ -83,26 +87,7 @@ After the confirmation, the installation will start. It will show some informati
 
 Once the installation is finished in the frontend, no network card will be configured, so an access with the console must be provided. It will look like the following (the colours and the font may vary)
 
-```bash
-
-                         ╱╱        ╱╱╱╲╲
-                     ╱╱╳╳╳╱     ╱╲╳╱╱╳╲╲╱╳╲
-                   ╱╲╳╳╳╳╳╱    ╱╳╱       ╲╳╳   ╱╲╱╱╱╳╲╲      ╱╱╳╲╲╲    ╱╱╱╱╲╲╲╲
-         ╱╱╱╱╲╲╲╲ ╱╳╳╳╳╳╳╲     ╳╳         ╲╳╲  ╳╳╱    ╲╳╲  ╱╳╱    ╲╳╲  ╳╳╱   ╱╳╲
-      ╱╲╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╲╱ ╱    ╳╳         ╱╳╱  ╳╱      ╳╳ ╱╳╳╲╱╱╱╱╱╳╳  ╳╳    ╲╳╲
-     ╱╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╲╱ ╱╲╱    ╲╳╱╲      ╱╳╲   ╳╳     ╱╳╲  ╳╳╲    ╱╱╲  ╳╳    ╱╳╱
-    ╱╳╳╳╳╳╳╳╳╳╳╳╳╳╳╱  ╱╲╳╳╱      ╲╳╳╲╲╱╱╳╱╱    ╳╳╱╲╲╱╱╳╱    ╲╳╲╲╱╱╳╱   ╳╳    ╱╳╱
-    ╳╳╳╳╳╳╳╳╳╳╳╳╱   ╱╳╳╳╳╲╲                    ╳╳
-    ╲╳╳╳╳╳╳╳╱╱  ╱╱╳╳╳╳╲╱  ╱                    ╳╳
-    ╱╳╳╳╱╱   ╱╱╳╳╳╲╱╱  ╱╱╳╱
-  ╱╱╱   ╱╱╱╳╳╳╱╱   ╱╱╳╳╳╳╱╲    ╱╳╳╲     ╳╳               ╳╳                     ╱╳
-   ╱╱╱╳╳╱╱╱   ╱╱╱╳╳╳╱╱╱   ╱    ╱╳╲╱╲    ╳╳      ╱╱╲      ╳╳ ╱╱╲╲                ╱╳      ╱╱╲
-╱╱╱╱    ╳╱╱╱╳╳╱╱╱    ╱╱╲╳╳╱    ╱╳╱ ╱╱   ╳╳   ╱╲╲╱╱╱╲╳╲   ╳╳╲╱  ╲╱╳╲  ╳╳     ╳╳  ╱╳   ╱╳╱╱╳╲╲╲╳╱
-╲╱╱╱╱╱╱╱╱╱     ╱╱╱╳╳╳╳╳╳╱╱╲    ╱╳╱  ╲╱  ╳╳  ╱╳╱╲    ╲╳╲  ╳╲      ╳╳  ╳╳     ╳╳  ╱╳  ╱╳╱     ╲╳╱
-      ╱╱╱╱╱╳╲╱╱╱╱╱╱      ╱╱    ╱╳╱   ╲╳╲╳╳  ╲╳╳╱╱╱╱╱╱╱╱  ╳╳      ╲╳  ╳╳     ╳╳  ╱╳  ╲╳╲     ╲╳╱
-              ╱╱╱╱╱╱╳╳╳╳╳╳╱    ╱╳╱    ╲╳╳╳   ╲╳╲   ╱╱╱   ╳╳╱╱  ╲╲╳╱  ╲╳╲  ╱╲╳╳  ╱╳   ╱╳╲   ╱╳╳╱
-     ╲╲╲╲╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╲    ╱╱╲     ╲╱╱     ╲╲╲╱╱     ╱╲ ╲╲╱╱╱      ╲╲╱╱╱╱╱  ╱╱     ╲╲╱╱╱ ╱╲
-
+```
 Welcome to OpenNebula Proof of Concept (onepoc) !
 
 - Please, log in as user `root`
@@ -282,7 +267,7 @@ frontend                   : ok=42   changed=8    unreachable=0    failed=0    s
 Press any key to continue
 ```
 
-## Add the server as an OpenNebula host
+## Configuring the Hypervisor host
 
 After the installation, the server runs only the frontend and needs to be added as a OpenNebula hypervisor to run VMs. The steps are:
 
@@ -445,3 +430,9 @@ On a workstation with access to the frontend, a local route to the virtual net c
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
 After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
+
+## Next Steps
+
+Additionally, we recommend checking [Validate the environment]({{% relref "validate_the_environment" %}}), that describes how to explore the resources installed and how to download and run appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/).
+
+Finally, you can use your OpenNebula installation to [Run a Kubernetes Cluster on OpenNebula]({{% relref "running_kubernetes_clusters" %}}) with minimal steps -- first downloading the OneKE Service from the OpenNebula Public Marketplace, then  deploying a full-fledged K8s cluster with a test application.

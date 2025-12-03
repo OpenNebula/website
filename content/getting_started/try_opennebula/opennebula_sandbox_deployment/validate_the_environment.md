@@ -1,5 +1,5 @@
 ---
-title: "Validate the miniONE Environment"
+title: "Validate the environment"
 linkTitle: "Validate Deployment"
 date: "2025-02-17"
 #description: "Explore the resources automatically installed with **miniONE**, and download and install appliances from the **OpenNebula Marketplace**"
@@ -10,7 +10,7 @@ type: docs
 weight: "4"
 ---
 
-A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione), the simple-to-use installation and deployment tool. This page provides:
+A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione) or [with the PoC ISO]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}}). This page provides:
 
 - An overview of the resources automatically created during that installation
 - An example of what you can do with this type of installation -- in this case, installing a Virtual Machine from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
@@ -23,6 +23,8 @@ The installation described in [Deploy OpenNebula On-premises with miniONE]({{% r
 - A virtualization Cluster to which the Host belongs
 - Datastores for storing files and Virtual Machine images
 - A Virtual Network for the Virtual Machines
+
+If the installation was made following the steps on [the PoC ISO installation guide]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}}) these resources have been created.
 
 Below you will find brief descriptions for these resources, with examples of their visual representation in the Sunstone UI and links to complete references for each resource.
 
