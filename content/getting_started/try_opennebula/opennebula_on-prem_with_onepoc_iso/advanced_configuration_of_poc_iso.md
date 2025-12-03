@@ -2,6 +2,7 @@
 title: "Advanced Configuration of the PoC ISO"
 description:
 weight: 2
+draft: true
 ---
 
 ## OpenNebula Frontend Menu `onefemenu` options {#onefemenu}

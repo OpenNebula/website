@@ -2,6 +2,7 @@
 title: "Validate the PoC ISO Environment"
 description:
 weight: 3
+draft: true
 ---
 
 {{< alert color="success" >}}
