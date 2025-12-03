@@ -29,7 +29,9 @@ The OpenNebula PoC ISO is based on AlmaLinux 9, and thus it shares the same requ
 
 ## Downloading the image, preparing the media and installing
 
-Now it is time to download the [OpenNebula AlmaLinux ISO from https://one-poc.s3.eu-central-1.amazonaws.com/AlmaLinux-onepoc.iso](https://one-poc.s3.eu-central-1.amazonaws.com/AlmaLinux-onepoc.iso) in first instance. To check if the image was downloaded correctly, you can check the [checksum for the ISO in https://one-poc.s3.eu-central-1.amazonaws.com/AlmaLinux-onepoc.iso.sha](https://one-poc.s3.eu-central-1.amazonaws.com/AlmaLinux-onepoc.iso.sha).
+Now it is time to download the OpenNebula AlmaLinux ISO. Currently, the following versions are available: 
+
+- [Alma Linux 9.7 with OpenNebula 7.0.1 CE](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/AlmaLinux-onepoc_7.0.1_CE.iso) \([SHA256 checksum](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/AlmaLinux-onepoc_7.0.1_CE.iso.sha)\)
 
 Once the image is downloaded, there are two ways to go:
 
