@@ -31,7 +31,7 @@ http://<OPENNEBULA-FRONTEND>:2616
 ```
 
 {{< alert title="Note" color="info" >}}
-We are continually expanding the feature set of FireEdge Sunstone, and hence its configuration files are in constant change. In versions 7.0.1 and later, configuration files in `/etc/one/fireedge/` can be replaced by the ones that can be downloaded from [here](https://bit.ly/701-config) in order to activate the latest features.
+We are continually expanding the feature set of FireEdge Sunstone, and hence its configuration files are in constant change. In versions 7.0.1 and later, configuration files in `/etc/one/fireedge/` can be replaced by the ones that can be downloaded from [here](https://github.com/OpenNebula/one/tree/6893ef40c852fd9c64ab275ed02aad84043bf999/src/fireedge/etc) in order to activate the latest features.
 {{< /alert >}}
 
 <a id="fireedge-install-configuration"></a>
