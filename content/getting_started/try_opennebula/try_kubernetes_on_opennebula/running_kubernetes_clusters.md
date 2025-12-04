@@ -19,7 +19,7 @@ Previous tutorials of this Quick Start guide show how to use miniONE to:
 
 - [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
 - [Install an OpenNebula Front-end and a KVM Host on AWS]({{% relref "deploy_opennebula_on_aws" %}})
-- [Validate the environment]({{% relref "validate_the_minione_environment" %}}) created by miniONE, by running a Virtual Machine
+- [Validate the environment]({{% relref "validate_the_environment" %}}) created by miniONE, by running a Virtual Machine
 
 This tutorial builds on the infrastructure created in those previous tutorials. By following it, you can:
 
