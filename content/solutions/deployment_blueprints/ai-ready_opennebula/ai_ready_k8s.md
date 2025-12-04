@@ -1,5 +1,5 @@
 ---
-title: Validation with AI-Ready Kubernetes
+title: Deployment of AI-Ready Kubernetes
 linkTitle: AI-ready Kubernetes
 weight: 5
 ---
@@ -9,7 +9,7 @@ weight: 5
 {{< alert title="Important" color="success" >}}
 To perform the validation with AI-Ready Kubernetes, you must comply with one of the prerequisites:
 * Have an AI Factory ready to be validated; or,
-* Configure an AI Factory by following one of these options: 
+* Configure an AI Factory by following one of these options:
      * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
      * [On-cloud AI Factory Deployment on Scaleway]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
@@ -366,7 +366,7 @@ oneadmin@frontend$ onevm list
 
 #### Connecting to the Workload Cluster Kubernetes API Locally
 
-To establish a local connection to the Workload Cluster Kubernetes API, create a ssh tunnel from your localhost to the K8s workload cluster API, exposing through the vRouter instance. Specify the `vrouter_ip` parameter as the public IP address of the vRouter instance, and the `vr_host_ip` as the ip address of the OpenNebula host where the vRouter node is hosted: 
+To establish a local connection to the Workload Cluster Kubernetes API, create a ssh tunnel from your localhost to the K8s workload cluster API, exposing through the vRouter instance. Specify the `vrouter_ip` parameter as the public IP address of the vRouter instance, and the `vr_host_ip` as the ip address of the OpenNebula host where the vRouter node is hosted:
 
 ```shell
 laptop$ ssh -fNL 8443:<vrouter_ip>:6443 oneadmin@<vr_host_ip>
@@ -521,5 +521,5 @@ Allocatable:
 
 
 {{< alert title="Tip" color="success" >}}
-After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}). 
+After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}).
 {{< /alert >}}

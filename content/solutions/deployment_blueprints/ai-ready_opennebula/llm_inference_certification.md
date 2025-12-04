@@ -1,5 +1,5 @@
 ---
-title: "Validation of the AI Factory with LLM Inference"
+title: "Validation with LLM Inference"
 linkTitle: "LLM Inference"
 date: "2025-10-28"
 description:
