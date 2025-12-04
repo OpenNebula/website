@@ -16,19 +16,20 @@ weight: "7"
 
 ## Overview
 
-Previous tutorials of this Quick Start guide show how to use miniONE to:
+Previous tutorials of this Quick Start guide show how to install an OpenNebula Sandbox environment:
 
 - [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
 - [Install an OpenNebula Front-end and a KVM Host on AWS]({{% relref "deploy_opennebula_on_aws" %}})
-- [Validate the environment]({{% relref "validate_the_minione_environment" %}}) created by miniONE, by running a Virtual Machine
+- [Install an OpenNebula Front-end and a KVM Host on-premises using an ISO]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}})
+- [Validate the Sandbox environment]({{% relref "validate_the_environment" %}}) by running a Virtual Machine
 
 This tutorial builds on the infrastructure created in those previous tutorials. By following it, you can:
 
 - Download a complete Kubernetes cluster from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
-- Deploy the cluster on the KVM Host installed by miniONE
+- Deploy the cluster on the KVM Host
 - Validate the cluster by running a simple test application
 
-This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula On-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
+This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula on-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
 
 {{< alert title="Tip" color="success" >}}
 If deploying on-prem, you can also [install and manage Kubernetes with Rancher]({{% relref "managing_k8s_with_rancher" %}}) as part of this Quick Start guide.
@@ -200,8 +201,8 @@ onevm show <VM ID> | less
 This displays the complete information for the VM, piped through the `less` pager. Use the up and down arrow to scroll, until you find the `VM NICS` table:
 
 ```default
-VM NICS                                                                         
- ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
+VM NICS
+ ID NETWORK              BRIDGE       IP              MAC               PCI_ID
   0 vnet                 minionebr    172.16.100.2    02:00:ac:10:64:02
   1 privnet              onebr1       192.168.200.2   02:00:c0:a8:c8:02
   2 vnet                 minionebr    172.16.100.3    02:00:ac:10:64:03
@@ -220,7 +221,7 @@ Once the OneFlow service has deployed, you can add more worker nodes. In Sunston
 1. Go to **Instances** -> **Services**.
 2. Select the OneKE service.
 3. Select the **Roles** tab.
-4. Click **Worker**, then the green **Scale** button.{{< /alert >}}  
+4. Click **Worker**, then the green **Scale** button.{{< /alert >}}
 
 <a id="step-4"></a>
 
@@ -449,7 +450,7 @@ oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2
         Visit /get-data to print out the dummy data
 
         </div>
-        
+
         <div>
           <h2>
             See you, Space Cowboy!
@@ -597,7 +598,7 @@ In this case you can manually instruct the VMs to report `READY` to the OneGate 
    For each VM, use the ID reported by the `onevm list` command. For example, given the `onevm` output shown above, to update the Kubernetes master node run `onegate vm update 5 --data "READY=YES"`.
 
    Then, on the VNF node you can check the status of the service with `onegate vm show`:
-   
+
    ```default
    SERVICE 3
    NAME                : OneKE 1.31

@@ -37,12 +37,12 @@ The sections below provide a complete guide for contributing to the documentatio
 
 To work on the documentation, you will need to install the Hugo web server on your machine and deploy the site locally, to preview your changes. The basic steps are:
 
-1. Install the Hugo web server on your machine and all the pre-requisites.  
+1. Install the Hugo web server on your machine and all the pre-requisites.
 2. Fork the GH repo of the docs, and clone your fork locally.
 3. Create a new branch in your local copy.
-4. Deploy the docs site on your local machine.  
-5. Make the desired modifications, live-previewing on your local site.  
-6. Commit signed and using the usual format as defined in the GitHub Issue Resolution Process.  
+4. Deploy the docs site on your local machine.
+5. Make the desired modifications, live-previewing on your local site.
+6. Commit signed and using the usual format as defined in the GitHub Issue Resolution Process.
 7. Create the PR as per the GH Issue Resolution Process.
 
 **Contents for quick reference:**
@@ -91,25 +91,25 @@ The docs site uses Hugo \+ the [Docsy theme](https://www.docsy.dev/), which is a
 
 ## Preview the Docs in Hugo
 
-In your terminal, cd to the root directory of your local repo of the docs, and run `hugo server`. Hugo should download the site’s modules and dependencies and deploy the site locally via its embedded web server, by default on port 1313\.
+In your terminal, change directory (cd) to the root directory of your local repo of the docs, and run `hugo server`. Hugo should download the site’s modules and dependencies and deploy the site locally via its embedded web server, by default on port 1313\.
 
 ```
 hugo server
 hugo: downloading modules …
 hugo: collected modules in 31780 msWatching for changes in /home/adm/opennebula/website-version_5/{assets,content,layouts,package.json}
 Watching for config changes in /home/adm/opennebula/website-version_5/hugo.toml, /home/adm/opennebula/website-version_5/go.mod
-Start building sites … 
+Start building sites …
 hugo v0.145.0-666444f0a52132f9fec9f71cf25b441cc6a4f355+extended linux/amd64 BuildDate=2025-02-26T15:41:25Z VendorInfo=gohugoio
 
-                   | EN   
+                   | EN
 -------------------+------
-  Pages            | 508  
-  Paginator pages  |   0  
-  Non-page files   |   2  
-  Static files     |  30  
-  Processed images |   2  
-  Aliases          |   0  
-  Cleaned          |   0  
+  Pages            | 508
+  Paginator pages  |   0
+  Non-page files   |   2
+  Static files     |  30
+  Processed images |   2
+  Aliases          |   0
+  Cleaned          |   0
 
 Built in 6508 ms
 Environment: "development"
@@ -125,8 +125,8 @@ To view the site, fire up a browser and go to `localhost:1313/7.0/`. You should 
 If you change the contents of a doc page in the docs repo, the page shown in the browser will be automatically updated.
 
 > [!TIP]
-> Useful options for running Hugo in server mode:  
-> `--disableFastRender` \- Enables full renders on changes  
+> Useful options for running Hugo in server mode:
+> `--disableFastRender` \- Enables full renders on changes
 > `--noHTTPCache` \- Prevent HTTP caching
 
 ## Basic Hugo Site Structure
@@ -171,7 +171,7 @@ In Hugo, all sections and subsections must have an `_index.md` file, or they wil
 The Markdown `_index.md` files are empty except for the mandatory "front matter" (more on that below). When building the site, Hugo autogenerates a table of contents (ToC) for the section, and fills the resulting index.html file with it. This is the default behavior unless `no_page_list = true` is present in the `_index.md` front matter.
 
 ```
-understand_opennebula$ cat _index.md 
+understand_opennebula$ cat _index.md
 ---
 title: "Understand OpenNebula"
 date: "2025-02-17"

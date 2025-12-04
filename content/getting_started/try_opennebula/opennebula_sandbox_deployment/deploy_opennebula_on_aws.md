@@ -7,7 +7,7 @@ categories: [Introduction, Learning, Deployment, Evaluation]
 pageintoc: "19"
 tags: ['Quick Start', AWS, Tutorial, miniONE]
 type: docs
-weight: "3"
+weight: "2"
 ---
 
 <a id="try-opennebula-on-kvm"></a>
@@ -41,10 +41,10 @@ To install an OpenNebula Front-end using miniONE, we’ll need to complete the f
 The cloud environment installed by miniONE is mainly intended for evaluation, development and testing. However, it can also serve as a base for larger short-lived deployments.
 
 {{< alert title="Note" color="success" >}}
-To complete this tutorial, you will need to log in to a remote Linux machine via SSH. If you follow this tutorial on a Windows machine, you will need to use an SSH client application such as [PuTTY](https://www.putty.org/).{{< /alert >}} 
+To complete this tutorial, you will need to log in to a remote Linux machine via SSH. If you follow this tutorial on a Windows machine, you will need to use an SSH client application such as [PuTTY](https://www.putty.org/).{{< /alert >}}
 
 {{< alert title="Tip" color="info" >}}
-For a list of options supported by the script, run `bash minione -h`. The script supports several types of installations (such as installing a Front-end and a KVM hypervisor node) which are not covered in this tutorial.{{< /alert >}} 
+For a list of options supported by the script, run `bash minione -h`. The script supports several types of installations (such as installing a Front-end and a KVM hypervisor node) which are not covered in this tutorial.{{< /alert >}}
 
 ## Step 1. Prepare the VM in AWS
 
@@ -134,7 +134,7 @@ ssh <IP> -l ubuntu -i ~/.ssh/aws_pemfile.pem
 ```
 
 {{< alert title="Warning" color="warning" >}}
-Ensure you have set the appropriate permissions for the PEM file, or for security reasons SSH will refuse to connect.{{< /alert >}} 
+Ensure you have set the appropriate permissions for the PEM file, or for security reasons SSH will refuse to connect.{{< /alert >}}
 
 ### Step 1.2. Update the VM Operating System
 
@@ -281,14 +281,14 @@ In the output, the `STAT` column on the right should display `on`:
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
 
 {{< alert title="Important" color="success" >}}
-In this configuration, Sunstone exposes its HTTP endpoint on a public network interface. miniONE is an evaluation tool, and this configuration should not be used in production environments.{{< /alert >}} 
+In this configuration, Sunstone exposes its HTTP endpoint on a public network interface. miniONE is an evaluation tool, and this configuration should not be used in production environments.{{< /alert >}}
 
 ## Step 3: Verify the Installation
 
 We will verify the installation by logging in to OpenNebula’s Edge Sunstone GUI.
 
 {{< alert title="Note" color="success" >}}
-When running miniONE within an AWS instance, the reported IP may be a private address that’s not reachable over the Internet. Use the instance’s public IP address to connect to the Sunstone GUI.{{< /alert >}} 
+When running miniONE within an AWS instance, the reported IP may be a private address that’s not reachable over the Internet. Use the instance’s public IP address to connect to the Sunstone GUI.{{< /alert >}}
 
 Point your browser to the public IP showed in miniONE's report. You should be greeted with the Sunstone login screen:
 
@@ -313,6 +313,6 @@ Congratulations — you have deployed an OpenNebula Front-end node, which is rea
 
 During installation, miniONE downloaded the template for a Virtual Machine with Alpine Linux 3.20 preinstalled. You can quickly deploy this VM to the KVM hypervisor on your AWS instance, following the instructions in [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione/#deploying-a-virtual-machine-locally" %}}).
 
-Additionally, we recommend checking [Validate the miniONE Environment]({{% relref "validate_the_minione_environment" %}}), which  describes how to explore the resources installed with miniONE, and how to download and run appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/).
+Additionally, we recommend checking [Validate the miniONE Environment]({{% relref "validate_the_environment" %}}), which  describes how to explore the resources installed with miniONE, and how to download and run appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/).
 
 Finally, you can use your OpenNebula installation to [Run a Kubernetes Cluster on OpenNebula]({{% relref "running_kubernetes_clusters" %}}) with minimal steps -- first downloading the OneKE Service from the OpenNebula Public Marketplace, then  deploying a full-fledged K8s cluster with a test application.
