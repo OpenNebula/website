@@ -29,23 +29,34 @@ Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configura
 
 Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable third party repositories by running the following commands under privileged user (`root`):
 
-**AlmaLinux 8,9**
+### EPEL repository
 
-```default
-yum -y install epel-release
+**AlmaLinux 8 and 9**
+
+```bash
+dnf -y install epel-release
 ```
 
 **RHEL 8**
 
-```default
+```bash
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 **RHEL 9**
 
-```default
+```bash
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
+### CRB repository
+
+**AlmaLinux/RHEL 8 and 9**
+
+
+```bash
+crb enable
+```
+
 
 <a id="packages"></a>
 
@@ -84,7 +95,7 @@ Install all OpenNebula Front-end components by executing the following commands 
 ### AlmaLinux / RHEL
 
 ```bash
-yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
+dnf -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 ### Debian / Ubuntu
@@ -214,7 +225,7 @@ Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula
 
 You are ready to **start** all OpenNebula services with the following command (NOTE: you might want to remove the services from the command arguments if you skipped their configuration steps above):
 
-```default
+```bash
 systemctl start opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
@@ -223,7 +234,7 @@ Make sure all required [network ports]({{% relref "front_end_installation#fronte
 
 Other OpenNebula services might be started as a dependency but you don’t need to care about them unless they need to be explicitly restarted or stopped. To start these **services automatically on server boot**, it’s necessary to enable them by the following command:
 
-```default
+```bash
 systemctl enable opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
@@ -237,8 +248,8 @@ After OpenNebula is started for the first time, you should check that the comman
 
 In the Front-end, run the following command as `oneadmin` system user and find a similar output:
 
-```default
-$ oneuser show
+```bash
+oneuser show
 USER 0 INFORMATION
 ID              : 0
 NAME            : oneadmin
@@ -255,8 +266,8 @@ RESOURCE USAGE & QUOTAS
 
 If you get an error message then the OpenNebula Daemon could not be started properly:
 
-```default
-$ oneuser show
+```bash
+oneuser show
 Failed to open TCP connection to localhost:2633 (Connection refused - connect(2) for "localhost" port 2633)
 ```
 
