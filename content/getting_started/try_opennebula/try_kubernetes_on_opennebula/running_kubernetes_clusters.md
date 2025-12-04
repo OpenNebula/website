@@ -1,4 +1,4 @@
----
+--
 title: "Run a Kubernetes Cluster on OpenNebula"
 linkTitle: "Deploy a Kubernetes Cluster on OpenNebula"
 date: "2025-02-17"
@@ -26,10 +26,10 @@ Previous tutorials of this Quick Start guide show how to install an OpenNebula S
 This tutorial builds on the infrastructure created in those previous tutorials. By following it, you can:
 
 - Download a complete Kubernetes cluster from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
-- Deploy the cluster on the KVM Host installed by miniONE
+- Deploy the cluster on the KVM Host
 - Validate the cluster by running a simple test application
 
-This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula On-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
+This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula on-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
 
 {{< alert title="Tip" color="success" >}}
 If deploying on-prem, you can also [install and manage Kubernetes with Rancher]({{% relref "managing_k8s_with_rancher" %}}) as part of this Quick Start guide.
