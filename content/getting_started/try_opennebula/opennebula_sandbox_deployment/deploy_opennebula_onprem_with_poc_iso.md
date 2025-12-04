@@ -1,13 +1,13 @@
 ---
-title: "Deploy OpenNebula On-prem with the PoC ISO"
-linkTitle: "PoC ISO deployment"
+title: "Deploy OpenNebula on-prem with an ISO"
+linkTitle: "ISO deployment"
 description:
-weight: 1
+weight: 3
 ---
 
 ## Introduction
 
-The OpenNebula PoC ISO is a disk image that can be written to removable media, that can be booted up to install a pre-configured version of AlmaLinux 9 and OpenNebula Enterprise Edition, including initial setup, on a server provided.
+The OpenNebula ISO is a disk image that can be written to removable media, that can be booted up to install a pre-configured version of AlmaLinux 9 and OpenNebula Enterprise Edition, including initial setup, on a server provided.
 
 Once the ISO has booted and finished installing and setting up the software, a pre-configured cloud based on OpenNebula will be ready for immediate use, installed on a single bare-metal server, complete with the OpenNebula Front-end server and a KVM hypervisor node. The same ISO can be used to install other KVM hypervisors on the same infrastructure.
 
@@ -17,7 +17,7 @@ The OS installed also includes a menu and a little set of ansible playbooks to m
 
 ## Requirements
 
-The OpenNebula PoC ISO is based on AlmaLinux 9, and thus it shares the same requirements to run. Note that only the x86-64-v2 instruction set (introduced in 2008\) is supported. The following table states the minimum requirements for installing the PoC ISO.
+The OpenNebula ISO is based on AlmaLinux 9, and thus it shares the same requirements to run. Note that only the x86-64-v2 instruction set (introduced in 2008\) is supported. The following table states the minimum requirements for installing the ISO.
 
 | Component | Required |
 | :---- | :---- |
@@ -33,7 +33,7 @@ The OpenNebula PoC ISO is based on AlmaLinux 9, and thus it shares the same requ
 
 ## ISO Download and installation
 
-Now it is time to download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available: 
+Now it is time to download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available:
 
 - [OpenNebula 7.0.1 Community Edition](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/opennebula-7.0.1-CE.iso) \([SHA256 checksum](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/opennebula-7.0.1-CE.iso.sha)\)
 
@@ -279,7 +279,7 @@ After the installation, the server runs only the frontend and needs to be added 
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
-After selecting the option `add_host`, the IP for the host will be asked for. 
+After selecting the option `add_host`, the IP for the host will be asked for.
 In this case we are using the IP that was configured before, 172.20.0.7
 
 ```
@@ -343,12 +343,12 @@ The GUI should be available in http://\<frontend\_ip\>:2616
 The oneadmin password can be obtained in `onefemenu`, in the option `show_oneadmin_pass`
 
 {{< alert title="Length of `oneadmin` password" color="success" >}}
-`oneadmin` default password is 32 hex chars long (128 bits of entropy). It's recommended to create another users to work with OpenNebula and let oneadmin user only for administrative tasks.
+`oneadmin` default password is 32 hex chars long (128 bits of entropy). It's recommended to create another user to work with OpenNebula and let oneadmin user only for administrative tasks.
 {{< /alert >}}
 
 **Networking**
 
-The ISO PoC networking comes with no networks added, but FRR is configured to add BGP-EVPN so VXLANs should work for internal communication. VXLAN is a technology that allows isolation between Virtual networks, depending on an identifier between 1 and 16777215.
+The ISO deployment does not automatically configure virtual networks. Instead, FRR is configured to add BGP-EVPN so VXLANs should work for internal communication. VXLAN is a technology that allows isolation between Virtual networks, depending on an identifier between 1 and 16777215.
 
 That means that a virtual network over VXLAN can be created from the web interface, selecting the type VXLAN, setting up the physical device for the package transit, and filling the contextualization of the network (address, gateway, etc.).
 
@@ -387,7 +387,7 @@ To determine the virtual network that needs external access use `onevnet list`. 
    0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
-The `ID` and the `NAME` field of every row can be used for all operations on virtual networks. 
+The `ID` and the `NAME` field of every row can be used for all operations on virtual networks.
 
 #### Creating the virtual Network Gateway (access from the frontend)
 

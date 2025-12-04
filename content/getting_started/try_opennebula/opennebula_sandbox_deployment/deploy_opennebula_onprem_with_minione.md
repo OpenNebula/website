@@ -1,5 +1,5 @@
 ---
-title: "Deploy OpenNebula On-prem with miniONE"
+title: "Deploy OpenNebula on-prem with miniONE"
 linkTitle: "miniONE deployment"
 date: "2025-02-17"
 #description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
@@ -7,7 +7,7 @@ categories: [Introduction, Evaluation, Learning]
 pageintoc: "15"
 tags: [miniONE]
 type: docs
-weight: "2"
+weight: "1"
 ---
 
 <a id="create-an-emulated-environment-with-minione"></a>
@@ -42,7 +42,7 @@ It is recommended to perform the installation on a machine capable of running KV
 {{< alert title="Tip" color="primary" >}}
 To quickly check that your machine is capable of KVM emulation, you can run the `kvm-ok` command:
 ```
-kvm-ok 
+kvm-ok
 INFO: /dev/kvm exists
 KVM acceleration can be used
 ```

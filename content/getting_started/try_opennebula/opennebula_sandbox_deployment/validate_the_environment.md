@@ -96,7 +96,7 @@ We’ll follow these high-level steps:
 > 3. Verify the Installation by Connecting to WordPress.
 
 {{< alert title="Important" color="success" >}}
-As mentioned above, in this tutorial we’ll deploy to the Edge Cluster created previously in this Quick Start Guide. To complete this tutorial, you need the Edge Cluster up and running.{{< /alert >}} 
+As mentioned above, in this tutorial we’ll deploy to the Edge Cluster created previously in this Quick Start Guide. To complete this tutorial, you need the Edge Cluster up and running.{{< /alert >}}
 
 ### Step 1. Download the WordPress Appliance from the OpenNebula Marketplace
 
