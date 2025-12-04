@@ -142,7 +142,7 @@ Following the Guide, you can:
 
 > * [Install an OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws" %}}), then use that Front-end to
 > * [Deploy an Edge Cluster]({{% relref "provision_cloud_cluster" %}}), where you will
-> * [Deploy a Virtual Machine]({{% relref "validate_the_minione_environment" %}}), and finally
+> * [Deploy a Virtual Machine]({{% relref "validate_the_environment" %}}), and finally
 > * [Deploy a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}).
 
 The Getting Started Guide is by far the fastest way to familiarize yourself with OpenNebula.
