@@ -6,10 +6,14 @@ title: "Resolved Issues in 7.0.2"
 
 <!--# Resolved Issues 7.0.2 -->
 
-A complete list of solved issues for 7.0.2 are listed in the [project development portal](https://github.com/OpenNebula/one/milestone/86).
+A complete list of solved issues for 7.0.2 are listed in the [project development portal](https://github.com/OpenNebula/one/milestone/86?closed=1).
 
 The following new features have been backported to 7.0.2:
 - [Add clearer names for imported marketplace VM images](../../../product/apps-marketplace/managing_marketplaces/marketapps.md#downloading-a-marketplace-appliance-into-your-cloud-or-desktop)
+- [Veeam - ovirtapi server improvements](https://github.com/OpenNebula/one/issues/7356)
+- [Add incremental backup support for NetApp driver](../../../product/cluster_configuration/san_storage/netapp/#datastore-internals)
+- [Enhanced vMotion Compatibility](https://github.com/OpenNebula/one/issues/7260)
+- [Expanded OS support for RHEL 10, AlmaLinux 10, and Debian 13](../../../software/release_information/release_notes_70/platform_notes/#front-end-components)
 
 The following issues have been solved in 7.0.2:
 
@@ -29,5 +33,6 @@ The following issues have been solved in 7.0.2:
 - Fix delays deploying VMs after a VM with passtrhough or SR-IOV GPU devices is shutdown [#7392](https://github.com/OpenNebula/one/issues/7392)
 - Fix oneswap error management on rbvmomi logic [#7340](https://github.com/OpenNebula/one/issues/7340)
 - Fix oneswap error management on esxi host detection [#7341](https://github.com/OpenNebula/one/issues/7341)
-- Fix Enhanced vMotion Compatibility [#7260](https://github.com/OpenNebula/one/issues/7260)
 - Fix LVM thin pools growing indefinitely when creating and deleting snapshots. [#7400](https://github.com/OpenNebula/one/issues/7400)
+- Fix [Veeam] Incremental backup not working. [#7350](https://github.com/OpenNebula/one/issues/7350)
+
