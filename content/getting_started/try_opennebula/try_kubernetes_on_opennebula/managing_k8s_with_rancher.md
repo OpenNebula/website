@@ -12,7 +12,7 @@ description:
 Previous tutorials of this Quick Start guide show how to use miniONE to:
 
 - [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
-- [Validate the environment]({{% relref "validate_the_minione_environment" %}}) created by miniONE, by running a Virtual Machine
+- [Validate the environment]({{% relref "validate_the_environment" %}}) created by miniONE, by running a Virtual Machine
 
 This tutorial builds on the infrastructure created in those previous tutorials. It shows how to use OpenNebula to quickly and easily install the [Rancher](https://www.rancher.com) Kubernetes management platform, and how to use Rancher's point-and-click interface to provision OpenNebula CAPI RKE2 clusters. It includes complete examples for deploying services, applying configurations, and upgrading the workload cluster.
 
@@ -86,7 +86,7 @@ From your OpenNebula Front-end, you can download the CAPI appliance from the Sun
 
 ### Download from the Sunstone UI
 
-You can download the CAPI appliance by following the same steps as when [downloading the WordPress VM]({{% relref "validate_the_minione_environment#step-1-download-the-wordpress-appliance-from-the-opennebula-marketplace" %}}):
+You can download the CAPI appliance by following the same steps as when [downloading the WordPress VM]({{% relref "validate_the_environment#step-1-download-the-wordpress-appliance-from-the-opennebula-marketplace" %}}):
 
 1. On the left-hand pane, go to **Storage** -> **Apps**.
 1. On the **Apps** screen showing the available apps, filter for `capi`.
@@ -107,7 +107,7 @@ This automatically downloads the **Service Capi** appliance into the default dat
 
 ### From the Sunstone UI
 
-To instantiate the Service Capi appliance, follow the same steps described for [the WordPress VM]({{% relref "validate_the_minione_environment#step-2-instantiate-the-vm" %}}):
+To instantiate the Service Capi appliance, follow the same steps described for [the WordPress VM]({{% relref "validate_the_environment#step-2-instantiate-the-vm" %}}):
 
 1. In the left-hand pane, go to **Templates** -> **VM Templates**.
 1. Select **Capi**, then click the **Instantiate** icon at the top.
