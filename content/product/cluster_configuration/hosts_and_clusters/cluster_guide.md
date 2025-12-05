@@ -183,7 +183,7 @@ The exact CPU model string depends on the hypervisor's supported CPU map. You ca
 $ onehost show <host-id> -j
 ```
 
-Make sure to select a cpu model available in all hosts in the cluster, otherwise you may fail to deploy VMs on unsupported hosts. 
+Make sure to select a cpu model available in all hosts in the cluster, otherwise you may fail to deploy VMs on unsupported hosts.
 
 
 3. To revert or remove EVC, update the cluster template to remove the `EVC_MODE` attribute (for example by setting it to an empty string or re-applying a template without the attribute).
