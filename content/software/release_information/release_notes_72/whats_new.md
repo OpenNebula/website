@@ -41,6 +41,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 ## Storage & Backups
 <!--keeping some examples-->
 - [Integrated NFS life cycle setup](../../../product/cluster_configuration/storage_system/nas_ds.md#automatic-nfs-setup): simplify the configuration and management of SAN/NFS in shared storage scenarios.
+- New redesigned version of [LVM storage subsystem (EE)](../../../product/cluster_configuration/lvm/lvm.md) with native thin-provisioning, unified image and VM disk management, and simplified configuration. The new driver improves performance, reduces deployment complexity, and enables more efficient use of SAN-backed storage by eliminating the need for hybrid file-based setups.
 
 
 ## Sunstone
