@@ -147,7 +147,7 @@ The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphi
 
 ![details_cluster](/images/sunstone_cluster_details.png)
 
-## Enhanced Vm Compatibility (EVC)
+## Enhanced VM Compatibility (EVC)
 
 The Enhanced VM Compatibility (EVC) feature facilitates the management of heterogeneous OpenNebula clusters by masking host CPU capabilities to enforce a unified base model. Using a lowest-common-denominator approach ensures CPU compatibility across hosts and enables seamless live migration of Virtual Machines between hosts with different processor generations.
 
