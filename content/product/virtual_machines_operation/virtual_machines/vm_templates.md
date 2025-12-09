@@ -138,6 +138,82 @@ ones depending on a TPM state.
 
 [See TPM Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#tpm-section" %}}).
 
+### Memory Encryption
+
+Memory encryption can be enabled in Virtual Machines by adding the following information to the VM Template
+
+```none
+MEMORY_ENCRYPTION=[
+  TYPE="SEV"
+]
+```
+
+There are several **virtualization security types**. We currently support `SEV` and `SEV-ES`. The KVM driver monitoring will automatically detect the memory encryption supported by each host. Depending on the CPU capabilities and BIOS configuration, different values can be shown by the monitoring probe.
+
+```none
+oneadmin@one-fe:~$ onehost show 5 -j | jq .HOST.TEMPLATE.MEMORY_ENCRYPTION
+"SEV"
+```
+
+Possible values are: `NONE|SEV|SEV-ES|SEV-SNP|TDX`
+
+More template configuration is required, otherwise the Guest OS might not load correctly.
+
+```none
+CPU_MODEL=[
+  MODEL="host-passthrough" ]
+OS=[
+  FIRMWARE="UEFI",
+  MACHINE="q35" ]
+```
+
+The VM will be automatically deployed to hosts with the desired memory encryption.
+
+A VM with encrypted memory will have a report in the Guest OS kernel message
+
+```none
+localhost:~ # dmesg | grep -i sev
+[    0.054053] Memory Encryption Features active: AMD SEV
+```
+
+#### Host Preparation - SEV
+
+You need a CPU in the KVM host that is able to encrypt memory. You can check this capability on the CPU flags. Note the following AMD CPU includes `sev` and `sev_es`
+
+```none
+oneadmin@sm23:~$ lscpu | grep -i sev
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin cppc amd_ibpb_ret arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d sev sev_es debug_swap
+```
+
+Then you need to make sure the capability is enabled in the BIOS. The following host has SEV enabled but SEV-ES disabled
+
+```none
+root@sm23:/home/one# dmesg | grep -i sev
+[    7.284091] ccp 0000:a3:00.5: sev enabled
+[    7.705036] ccp 0000:a3:00.5: SEV API:1.55 build:61
+[    7.719788] kvm_amd: SEV enabled (ASIDs 1 - 1006)
+[    7.719791] kvm_amd: SEV-ES disabled (ASIDs 0 - 0)
+```
+
+Now check if libvirt is able to make use of this feature. To do this, you can run the `virsh domcapabilities` command.
+
+```none
+oneadmin@sm23:~$ virsh domcapabilities | xmllint --xpath "/domainCapabilities/features/sev" -
+<sev supported="yes">
+      <cbitpos>51</cbitpos>
+      <reducedPhysBits>1</reducedPhysBits>
+      <maxGuests>1006</maxGuests>
+      <maxESGuests>0</maxESGuests>
+      <cpu0Id>ey5j9CwuSUE=</cpu0Id>
+    </sev>
+```
+
+After that, both oneadmin and libvirt need to be able to use the `/dev/sev` device.
+- Set `/dev/sev rw,` in `/etc/apparmor.d/abstractions/libvirt-qemu` if using an Operating System that relies on apparmor.
+- Run the command `chmod o+wr /dev/sev` to allow oneadmin to use that device.
+  - These permissions will not persist. You can automate them with [udev rules](https://www.freedesktop.org/software/systemd/man/latest/udev.html)
+  - You can also restrict the ownership so that just oneadmin and libvirt are able to read and write `/dev/sev` instead of every other non root group user.
+
 ### A Complete Example
 
 The following example shows a VM Template file with a couple of disks and a network interface. A VNC section and an alias were also added:
