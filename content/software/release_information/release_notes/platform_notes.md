@@ -25,7 +25,7 @@ This is the list of the individual platform components that have been through th
 | Red Hat Enterprise Linux | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | AlmaLinux                | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
-| Debian                   | 11, 12, 13                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
+| Debian                   | 11, 12, 13                                 | [Front-End Installation]({{% relref "front_end_installation" %}}).                                                    |
 | MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 
@@ -39,17 +39,17 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 | Red Hat Enterprise Linux | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | AlmaLinux                | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
-| Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Debian                   | 11, 12, 13                                                                                                 | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | KVM/Libvirt              | Support for version included in the Linux distribution.                                                    | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
 
 ### LXC Nodes
 
-| Component     | Version                                                | More information                                                                                                                     |
-|---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| Debian        | 11, 12                                                 | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}}) |
+| Component     | Version                                                | More information                                                                                               |
+|---------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}}) |
+| Debian        | 11, 12, 13                                             | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}}) |
+| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}}) |
+| LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}})                                       |
 
 <a id="context-supported-platforms"></a>
 
