@@ -1,0 +1,38 @@
+---
+title: "Resolved Issues in 7.0.2"
+---
+
+<a id="resolved-issues-702"></a>
+
+<!--# Resolved Issues 7.0.2 -->
+
+A complete list of solved issues for 7.0.2 are listed in the [project development portal](https://github.com/OpenNebula/one/milestone/86?closed=1).
+
+The following new features have been backported to 7.0.2:
+- [Add clearer names for imported marketplace VM images](../../../product/apps-marketplace/managing_marketplaces/marketapps.md#downloading-a-marketplace-appliance-into-your-cloud-or-desktop)
+- [Veeam - ovirtapi server improvements](https://github.com/OpenNebula/one/issues/7356)
+- [Add incremental backup support for NetApp driver](../../../product/cluster_configuration/san_storage/netapp/#datastore-internals)
+- [Enhanced VM Compatibility](../../../product/cluster_configuration/hosts_and_clusters/cluster_guide/#enhanced-vm-compatibility-evc)
+- [Expanded OS support for RHEL 10, AlmaLinux 10, and Debian 13](../../../software/release_information/release_notes_70/platform_notes/#front-end-components)
+
+The following issues have been solved in 7.0.2:
+
+- Fix SCSI serial numbers not applied after restarting a VM [#7307](https://github.com/OpenNebula/one/issues/7307)
+- Fix cluster assignment for virtual network [#7063](https://github.com/OpenNebula/one/issues/7063)
+- Fix VM configuration for Single VM Backup configuration [#7164](https://github.com/OpenNebula/one/issues/7164)
+- Fix opennebula-ovirtapi: Ceph image transfer bug [#7321](https://github.com/OpenNebula/one/issues/7321)
+- Fix opennebula-ovirtapi: Fail to list vnets woned by other users [#7324](https://github.com/OpenNebula/one/issues/7324)
+- Fix VM console buttons (VNC/RDP/SSH) missing in details view despite being visible in card view [#7165](https://github.com/OpenNebula/one/issues/7165)
+- Fix UI overlay issue on Fireedge VNC on 1280x760 resolution[#7175](https://github.com/OpenNebula/one/issues/7175)
+- Fix OneDRS Datastore filtering to include only the matching hosts [#7345](https://github.com/OpenNebula/one/issues/7345)
+- Fix 2FA reset in FireEdge after UI changes are made [#7105](https://github.com/OpenNebula/one/issues/7105)
+- Fix LDAP authentication issue by removing password encoding [#7344](https://github.com/OpenNebula/one/issues/7344)
+- Fix FireEdge Sunstone doesn't respect START_SCRIPT [#7064](https://github.com/OpenNebula/one/issues/7064)
+- Fix headers in the tables are not translated in list mode [#7357](https://github.com/OpenNebula/one/issues/7357)
+- Fix the deployment of NVIDIA GPU VMs by ensuring that monitord configuration is read from host local file system [#7376](https://github.com/OpenNebula/one/issues/7376)
+- Fix delays deploying VMs after a VM with passtrhough or SR-IOV GPU devices is shutdown [#7392](https://github.com/OpenNebula/one/issues/7392)
+- Fix oneswap error management on rbvmomi logic [#7340](https://github.com/OpenNebula/one/issues/7340)
+- Fix oneswap error management on esxi host detection [#7341](https://github.com/OpenNebula/one/issues/7341)
+- Fix LVM thin pools growing indefinitely when creating and deleting snapshots. [#7400](https://github.com/OpenNebula/one/issues/7400)
+- Fix [Veeam] Incremental backup not working. [#7350](https://github.com/OpenNebula/one/issues/7350)
+

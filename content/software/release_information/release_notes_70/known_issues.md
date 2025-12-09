@@ -24,8 +24,9 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
 - The Windows Optimized [OS Profile](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md) yaml file at `/etc/one/fireedge/sunstone/profiles/windows_optimized.yaml` has the wrong configuration. Utilizing such profile in Sunstone will lead to a VM that libvirt fails to create. You have to edit the file and replace its contents with the [documentation yaml content](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md#profile-chain-loading).
-- Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/issues/7172).
+- Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/blob/release-7.0.0/src/fireedge/etc/sunstone/sunstone-server.conf#L128).
 - When fullModeView mode is active and a status change is made in the VM, the buttons at the top are not updated. To see the buttons that correspond to the current status of the VM, you have to go back to the data table and reselect the VM. This error will be resolved in future versions. You can find more information [here](https://github.com/OpenNebula/one/issues/7172).
+- Uploaded files are not deleted from /var/tmp when creating an image from upload file. You can find detailed information [here](https://github.com/OpenNebula/one/issues/7252). This may also trigger a race condition that deletes the temporary file from /var/tmp preventing the correct registering of the image, this may apply in some cases only.
 
 ## Migration
 
@@ -93,3 +94,13 @@ host:
 ### OneGate
 
 - [Avoid Host not permitted on Sinatra server when is behind NGINX proxy](https://github.com/OpenNebula/one/issues/7231)
+
+## LinuxContainers marketplace
+
+The appliances on this marketplace will fail [to boot](https://github.com/OpenNebula/one/issues/7391) when deployed on rhel10 like hosts. The parameter `lxc.apparmor.profile=unconfined` is what causes the issue and needs to be removed after the appliance is imported.
+
+```
+RAW=[
+  DATA="lxc.apparmor.profile=unconfined",
+  TYPE="lxc" ]
+```

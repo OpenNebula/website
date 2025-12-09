@@ -146,3 +146,58 @@ The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphi
 - See cluster details and update overcommitment.
 
 ![details_cluster](/images/sunstone_cluster_details.png)
+
+## Enhanced VM Compatibility (EVC)
+
+The Enhanced VM Compatibility (EVC) feature facilitates the management of heterogeneous OpenNebula clusters by masking host CPU capabilities to enforce a unified base model. Using a lowest-common-denominator approach ensures CPU compatibility across hosts and enables seamless live migration of Virtual Machines between hosts with different processor generations.
+
+EVC is configured at the cluster level. This simplifies management and improves scalability by allowing administrators to add newer hardware to existing clusters without preventing VM migration due to CPU differences.
+
+### Using EVC with the CLI
+
+1. Inspect the cluster to view the current template and attributes:
+
+```bash
+$ onecluster show default
+```
+
+Look for the `CLUSTER TEMPLATE` section. If `EVC_MODE` is not present, it has not been configured for the cluster.
+
+2. Set the `EVC_MODE` attribute on a cluster using `onecluster update`. For example, to set a Sandy Bridge baseline:
+
+```bash
+$ onecluster update default"
+```
+
+Then add the `EVC_MODE` attribute to the list:
+
+```bash
+...
+EVC_MODE="sandybridge"
+...
+```
+
+The exact CPU model string depends on the hypervisor's supported CPU map. You can view the supported cpu models of a given host with the following command under the `KVM_CPU_MODELS` key:
+
+```bash
+$ onehost show <host-id> -j
+```
+
+Make sure to select a cpu model available in all hosts in the cluster, otherwise you may fail to deploy VMs on unsupported hosts. 
+
+
+3. To revert or remove EVC, update the cluster template to remove the `EVC_MODE` attribute (for example by setting it to an empty string or re-applying a template without the attribute).
+
+### Using EVC with Sunstone
+
+The Fireedge / Sunstone web UI provides a convenient way to enable and change EVC without editing templates directly.
+
+1. Open the Infrastructure → Clusters view and select the cluster you want to configure.
+
+2. Click the Update button and go to the Select Hosts tabs, there you will see the EVC Mode section. To enable EVC, choose a model from the droplist. Afterwards you can click Finish.
+
+![Update cluster EVC mode](/images/sunstone_cluster_evc_update.png)
+
+3. Once the EVC mode is set, you can see it listed in the cluster attributes the same way as if the CLI had been used.
+
+![EVC set in cluster attributes](/images/sunstone_cluster_evc_attributes.png)

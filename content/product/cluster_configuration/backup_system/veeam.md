@@ -45,6 +45,11 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
       <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Full Discovery</p></td>
       <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).</p></td>
     </tr>
+    <tr>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Portability</strong></p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>VMWare import</p></td>
+      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Enables restoring virtual machines backed up in Veeam from VMWare into OpenNebula.</p></td>
+    </tr>
   </tbody>
 </table>
 
@@ -108,16 +113,10 @@ The following table summarizes the supported backup modes for each storage syste
 
 Here is a list of the known issues and limitations affecting the Veeam integration with OpenNebula:
 
-- Setting the ``PassengerMaxPoolSize`` variable to values higher than 1 can trigger issues depending on the system properties of the backup server and the amount of concurrent transfers, showing an error in the Veeam Backup & Replication console. If this happens too frequently, reduce the amount of concurrent Passenger processes to 1 until this issue is fixed.
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
-- There is an identified bug with Ceph image datastores that avoids the opennebula-ovirtapi package from uploading images into these kind of datastores, making restores and appliance deployments fail.
-- If a virtual network is owned by a user other than oneadmin (or the user chosen as the Veeam administrator in step 4.1) you may face an error when listing available networks.
-- Alphine virtual machines cannot be backed up.
-- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected ``. This is expected and shouldn't affect performance.
+- Alpine virtual machines cannot be backed up.
+- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
-- Veeam may send multiple login token requests, which can cause to reach the OpenNebula token limit, causing backup failures if an backup was being performed when the token limit was reached.
-- Incremental backups may fail for VMs with more than 1 disk attached to them.
-- The number of VCPU in the KVM appliance may be set to 1 regardless of the configuration in Veeam. This can be solved by manually changing the number of vCPU in OpenNebula and restarting the VM. 
 
 ## Architecture
 
@@ -139,19 +138,23 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
 
 To ensure full compatibility with the ovirtAPI module, the Backup Server must run one of the following operating systems:
 
-- AlmaLinux 8 or 9
+- AlmaLinux 9
 - Ubuntu 22.04 or 24.04
-- RHEL 8 or 9
-- Debian 11 or 12
+- RHEL 9
+- Debian 12
 
-The recommended hardware specifications are:
+The minimum hardware specifications are:
 
-- **CPU:** 4 cores
+- **CPU:** 8 cores
 - **Memory:** 16 GB RAM
 - **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
 
 ## Veeam Backup Appliance Requirements
+<<<<<<< HEAD
 When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following requirements:
+=======
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
+>>>>>>> one-7.0-maintenance
 
 - **CPU:** 6 cores
 - **Memory:** 6 GB RAM
@@ -161,11 +164,11 @@ Please make sure that there is an OpenNebula host with enough capacity for this 
 
 ## Installation and Configuration
 
-1. Prepare the environment for the oVirtAPI Server
+### 1. Prepare the environment for the oVirtAPI Server
 
 A server should be configured to expose both the Rsync Backup datastore and the oVirtAPI Server. This server should be accessible from all the clusters that you want to be able to back up via the management network shown in the architecture diagram. The oVirtAPI Server is going to act as the communication gateway between Veeam and OpenNebula.
 
-2. Create a backup datastore
+### 2. Create a backup datastore
 
 The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. An additional property called ``VEEAM_DS`` must exist in the backup datastore template and be set to ``YES``.
 
@@ -215,7 +218,7 @@ We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scr
 {{< alert title="Remember" color="success" >}}
 For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
 
-3. Install and configure the oVirtAPI module
+### 3. Install and configure the oVirtAPI module
 
 In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backup server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
 
@@ -249,19 +252,11 @@ In RHEL and Alma environments, you may face issues with the passenger package de
 
 {{< /alert >}}
 
-#### Performance Improvements
-To increase the performance of the oVirtAPI module, you may want to modify the ammount of processes assigned to it to better utilize the CPUs available in the backup server. To do so, modify the ``PassengerMaxPoolSize`` parameters in the Apache configuration file to match the available CPUs. Depending on your distro it can be located in the following directories:
-
-* Debian/Ubuntu: ``/etc/apache2/sites-available/ovirtapi-server.conf``
-* Alma/RHEL: ``/etc/httpd/conf.d/ovirtapi-server.conf``
-
-After performing changes, restart the ``httpd`` or ``apache`` service.
-
-4. Add OpenNebula to Veeam
+### 4. Add OpenNebula to Veeam
 
 To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step or follow the next steps:
 
-4.1 Add the new virtualization manager
+#### 4.1 Add the new virtualization manager
 
 The first step should be to add the ovirtAPI Backup server to Veeam. Head over to **Backup Infrastructure**, then to **Managed Servers**, and then click **Add Manager**:
 
@@ -287,7 +282,7 @@ As a last step, you can click finish and the new ovirtAPI server should be liste
 
 ![image](/images/veeam/hypervisor_added.png)
 
-4.2 Deploy the KVM appliance
+#### 4.2 Deploy the KVM appliance
 
 In order for Veeam to be able to perform backup and restore operations, it must deploy a dedicated Virtual Machine to act as a worker. To deploy it, go to the **Backup Infrastructure** tab, then **Backup Proxies**, and click **Add Proxy**:
 
@@ -319,7 +314,7 @@ In the next step, Veeam will take care of deploying the appliance. Once finished
 
 ![image](/images/veeam/appliance_listed.png)
 
-4.3 Verification
+#### 4.3 Verification
 
 If everything is set properly, you should be able to see the available Virtual Machines in the **Inventory** tab under the **Virtual Infrastructure** -> **oVirt KVM** section.
 
@@ -333,6 +328,47 @@ The ovirtapi server will generate logs in the following directory depending on t
 * Alma/RHEL: ``/var/log/httpd``
 
 If you use the cleanup script provided at ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
+<<<<<<< HEAD
+=======
+
+## Performance Improvements
+
+To improve image transfer speed, you can increase the number of concurrent processes to better utilize the backup server's resources. This is controlled by the ``PassengerMaxPoolSize`` parameter in your Apache configuration file.
+
+### Adjusting the Process Pool
+
+You can find the configuration file in the following locations, depending on your distribution:
+
+* Debian/Ubuntu: ``/etc/apache2/sites-available/ovirtapi-server.conf``
+* Alma/RHEL: ``/etc/httpd/conf.d/ovirtapi-server.conf``
+
+After editing and saving the file, you must restart the webserver for the change to take effect:
+
+* Debian/Ubuntu: ``sudo systemctl restart apache2``
+* Alma/RHEL: ``sudo systemctl restart httpd``
+
+### Adjusting the Process Pool
+
+When setting the ``PassengerMaxPoolSize``, you must balance RAM and CPU availability.
+
+**Memory**
+
+Each active Passenger process consumes approximately 150-200 MB of RAM. You can use the following formula as a starting point to determine a safe maximum, leaving a 30% buffer for the OS and other services:
+
+``(TOTAL_SERVER_RAM_MB * 0.70) / 200 = Recommended MaxPoolSize``
+
+**CPU**
+
+While increasing the pool size, monitor your CPU usage during active transfers. If the CPU load becomes the bottleneck (consistently high usage), adding more processes won't increase speed and may even slow things down. In that case, you will need to increase the number of CPUs or vCPUs assigned to the backup server.
+
+### Interpreting Veeam Job Statistics
+
+The Veeam job statistics window shows a breakdown of the load, which is crucial for identifying the true bottleneck in your backup chain.
+
+* **Source:** This represents your backup server. A high load (e.g., 99%) here is ideal. It means your server is working at full capacity and that the bottleneck is correctly placed on the source, not on other components.
+* **Proxy:** This is the KVM appliance deployed by Veeam. If its load is consistently high (e.g., >90%), it is the bottleneck and requires more resources (vCPU/RAM).
+* **Network:** This indicates that the transfer speed is being limited by the available bandwidth on the management network connecting the components.
+>>>>>>> one-7.0-maintenance
 
 ## Volatile disk backups
 

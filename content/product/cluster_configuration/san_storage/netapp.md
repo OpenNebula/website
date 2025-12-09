@@ -179,7 +179,6 @@ $ cat netapp_system.ds
 NAME              = "netapp_system"
 TYPE              = "SYSTEM_DS"
 DISK_TYPE         = "BLOCK"
-DS_MAD            = "netapp"
 TM_MAD            = "netapp"
 NETAPP_HOST       = "10.1.234.56"
 NETAPP_USER       = "admin"
@@ -219,6 +218,7 @@ $ cat netapp_image.ds
 NAME              = "netapp_image"
 TYPE              = "IMAGE_DS"
 DISK_TYPE         = "BLOCK"
+DS_MAD            = "netapp"
 TM_MAD            = "netapp"
 NETAPP_HOST       = "10.1.234.56"
 NETAPP_USER       = "admin"
@@ -241,9 +241,10 @@ Since Volumes contain the LUNs and snapshots, they are by default configured to 
 | Attribute                 | Description                                           |
 | ------------------------- | ----------------------------------------------------- |
 | `NETAPP_SUFFIX`           | Volume/LUN name suffix.                               |
-| `NETAPP_GROW_THRESHOLD`   | Volume autogrow threshold in percent. Default: 96     |
+| `NETAPP_GROW_THRESHOLD`   | Volume autogrow threshold in percent. Default: 90     |
 | `NETAPP_GROW_RATIO`       | Volume maximum autogrow ratio. Default: 2             |
 | `NETAPP_SNAPSHOT_RESERVE` | Volume snapshot reserve in percent. Default: 10       |
+| `NETAPP_STANDALONE`       | Volume FlexClones always split. Default: NO           |
 
 {{< alert title="Note" color="success" >}}
 Volumes will be created with the extra reservation space in mind, which will be `size * ( 1 + NETAPP_SNAPSHOT_RESERVE / 100 )`.
@@ -258,7 +259,7 @@ Volumes will be created with the extra reservation space in mind, which will be 
   - Image datastore: `one_<datastore_id>_<image_id>` (volume), `one_<datastore_id>_<image_id>_lun` (LUN)
   - System datastore: `one_<vm_id>_disk_<disk_id>` (volume), `one_<datastore_id>_<vm_id>_disk_<disk_id>_lun` (LUN)
 - **Operations:**
-  - Non‐persistent: FlexClone, then split
+  - Non‐persistent: FlexClone, optionally split when `NETAPP_STANDALONE="YES"`
   - Persistent: Rename
 
 Symbolic links from the System datastore will be created for each Virtual Machine on its Host once the LUNs have been mapped.
@@ -267,9 +268,19 @@ Symbolic links from the System datastore will be created for each Virtual Machin
 The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
 {{< /alert >}}
 
-## Known Issues
+**Backups process details:**
 
-Currently the NetApp password on the Datastore is not encrypted due to a typo in the configuration file `/etc/one/oned.conf`. To encrypt this password, the Encrypted Attributes section of this file you must change `DATASTORE_ENCRYPTED_ATTR = "NETAPP_PASSWORD"` to `DATASTORE_ENCRYPTED_ATTR = "NETAPP_PASS"` and then restart OpenNebula.
+Both Full and Incremental backups are supported by NetApp. For Full Backups, a snapshot of the Volume containing the VM disk LUN is taken and attached to the host, where it is converted into a qcow2 image and uploaded to the backup datastore. 
+
+Incremental backups are created by first creating the base full backup from the snapshot however this snapshot is then retained on the NetApp Volume rather than deleted after the backup is taken. When another incremental backup is taken, a new snapshot is taken and both the previous and current snapshots are cloned to new Volumes where they are attached to the host and compared for differences at the block level. These block changes are stored in a sparse QCOW2 file backed by the previous snapshot, which is then uploaded to the backup datastore.  The old snapshot is then removed while the new one is retained. When incremental backups are restored, the backing chain is rebuilt before restoring the backup to the VM disk.
+
+{{< alert title="Note" color="success" >}}
+You can configure the block size ( Defualt 2097152 B / 2 MB ) for incremental backups by modifing the file at `/var/tmp/one/etc/tm/san/backup.conf`
+{{< /alert >}}
+
+{{< alert title="Warning" color="warning" >}}
+The incremental backup feature of NetApp requires the `nbd` kernel module to be loaded and the `nbdfuse` package to be installed on all OpenNebula nodes.
+{{< /alert >}}
 
 ## System Considerations
 
