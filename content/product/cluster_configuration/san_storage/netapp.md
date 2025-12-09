@@ -274,7 +274,7 @@ NetApp ONTAP systems have Volume limitations found [in the NetApp Hardware Unive
 
 **Backups process details:**
 
-Both Full and Incremental backups are supported by NetApp. For Full Backups, a snapshot of the Volume containing the VM disk LUN is taken and attached to the host, where it is converted into a qcow2 image and uploaded to the backup datastore. 
+Both Full and Incremental backups are supported by NetApp. For Full Backups, a snapshot of the Volume containing the VM disk LUN is taken and attached to the host, where it is converted into a qcow2 image and uploaded to the backup datastore.
 
 Incremental backups are created by first creating the base full backup from the snapshot however this snapshot is then retained on the NetApp Volume rather than deleted after the backup is taken. When another incremental backup is taken, a new snapshot is taken and both the previous and current snapshots are cloned to new Volumes where they are attached to the host and compared for differences at the block level. These block changes are stored in a sparse QCOW2 file backed by the previous snapshot, which is then uploaded to the backup datastore.  The old snapshot is then removed while the new one is retained. When incremental backups are restored, the backing chain is rebuilt before restoring the backup to the VM disk.
 
