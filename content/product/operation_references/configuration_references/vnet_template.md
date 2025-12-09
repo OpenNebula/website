@@ -145,6 +145,7 @@ The no-SLAAC IPv6 version supports the following attributes:
 | `METHOD`          | Sets IPv4 guest conf. method for NIC in this network. |
 | `IP6_METHOD`      | Sets IPv6 guest conf. method for NIC in this network. |
 | `SEARCH_DOMAIN`   | Default search domains for DNS resolution.            |
+| `ROUTES`          | List of custom (static) routes for this network/AR    |
 
 These attributes can be set in the (in order of precedence): VM Template NIC section, Address Range (AR), and Virtual Network Template.
 
@@ -215,5 +216,5 @@ AR=[ TYPE = "IP4", IP = "130.56.23.2", SIZE = "1"]
 AR=[ TYPE = "IP4", IP = "130.56.23.34", SIZE = "1"]
 AR=[ TYPE = "IP4", IP = "130.56.23.24", SIZE = "1"]
 AR=[ TYPE = "IP4", IP = "130.56.23.17", MAC= "50:20:20:20:20:21", SIZE = "1"]
-AR=[ TYPE = "IP4", IP = "130.56.23.12", SIZE = "1"]
+AR=[ TYPE = "IP4", IP = "130.56.23.12", SIZE = "1", ROUTES = "130.56.24.0/24 via 130.56.23.1, 192.168.1.0/24 via 130.56.23.2"]
 ```

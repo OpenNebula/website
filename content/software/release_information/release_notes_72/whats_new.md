@@ -58,6 +58,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 ## KVM & Networking
 <!--keeping some examples-->
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
+- [Add `ROUTES` as a new contextualization attribute, to define static routes](../../../product/operation_references/configuration_references/vnet_template.md#contextualization-attributes)
 
 ## LXC
 
