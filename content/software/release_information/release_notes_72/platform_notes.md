@@ -10,7 +10,7 @@ weight: "3"
 
 <a id="uspng"></a>
 
-<!--# Platform Notes 7.0 -->
+<!--# Platform Notes 7.2 -->
 
 This page will show you the specific considerations when using an OpenNebula cloud, according to the different supported platforms.
 
@@ -69,13 +69,13 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Open Cloud Storage Infrastructure
 
-| Component   | Version                                    | More information                                                                                                                         |
-|-------------|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| iSCSI       | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}) |
-| LVM2        | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-drivers" %}}) |
-| Ceph        | Reef v18.2.x<br/>Squid   v19.2.x          | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}})  |
-| NetApp      | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../product/cluster_configuration/san_storage/netapp" %}}) |
-| LVM-thin    | NetApp ONTAP 9.16.1P1 & Pure Storage 6.7.2 | [LVM Thin]({{% relref "../../../product/cluster_configuration/san_storage/lvm_drivers#lvm-thin" %}}) |
+| Component | Version                                    | More information                                                                                             |
+|-----------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| iSCSI     | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
+| LVM2      | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
+| Ceph      | Reef v18.2.x<br/>Squid   v19.2.x           | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}}) |
+| NetApp    | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../product/cluster_configuration/san_storage/netapp" %}})           |
+| LVM-thin  | NetApp ONTAP 9.16.1P1 & Pure Storage 6.7.2 | [LVM Thin]({{% relref "../../../product/cluster_configuration/lvm" %}})                                      |
 
 ### Authentication
 
