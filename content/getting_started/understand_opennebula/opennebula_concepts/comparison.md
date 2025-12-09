@@ -18,10 +18,10 @@ OpenNebula is a mature, open platform that provides complete cloud and virtualiz
 
 Unlike proprietary alternatives, OpenNebula offers:
 
-* A predictable subscription model with full access to all features.  
-* Unified virtualization and cloud management.  
-* Native edge and hybrid cloud support, including automatic resource provisioning on public clouds such as AWS.  
-* Integrated Kubernetes orchestration via the OpenNebula Cluster API Provider.  
+* A predictable subscription model with full access to all features.
+* Unified virtualization and cloud management.
+* Native edge and hybrid cloud support, including automatic resource provisioning on public clouds such as AWS.
+* Integrated Kubernetes orchestration via the OpenNebula Cluster API Provider.
 * Enterprise-grade scalability and automation, with high availability, multi-tenancy, and federation across sites.
 
 To assist with the preparation and completion of the numerous Requests for Proposal (RFPs) we receive every week, we have created the following table to help guide comparisons between OpenNebula and other cloud solutions. You will find three areas of interest:
