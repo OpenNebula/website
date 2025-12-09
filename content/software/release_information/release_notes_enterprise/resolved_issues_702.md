@@ -12,7 +12,7 @@ The following new features have been backported to 7.0.2:
 - [Add clearer names for imported marketplace VM images](../../../product/apps-marketplace/managing_marketplaces/marketapps.md#downloading-a-marketplace-appliance-into-your-cloud-or-desktop)
 - [Veeam - ovirtapi server improvements](https://github.com/OpenNebula/one/issues/7356)
 - [Add incremental backup support for NetApp driver](../../../product/cluster_configuration/san_storage/netapp/#datastore-internals)
-- [Enhanced vMotion Compatibility](https://github.com/OpenNebula/one/issues/7260)
+- [Enhanced Vm Compatibility](../../../product/cluster_configuration/hosts_and_clusters/cluster_guide/#enhanced-vm-compatibility-evc)
 - [Expanded OS support for RHEL 10, AlmaLinux 10, and Debian 13](../../../software/release_information/release_notes_70/platform_notes/#front-end-components)
 
 The following issues have been solved in 7.0.2:
