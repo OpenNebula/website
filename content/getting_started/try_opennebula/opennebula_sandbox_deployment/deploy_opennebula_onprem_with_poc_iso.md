@@ -7,7 +7,7 @@ weight: 3
 
 ## Introduction
 
-OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end or processing node. The ISO installs a pre-configured deployment of OpenNebula Enterprise Edition running on a minimal installation of AlmaLinux 9. The ISO image can be flashed to bootable, removable media (such as a USB disk) for local installation or mapped via IPMI Virtual Media for remote hardware management.  
+OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end or processing node. The ISO installs a pre-configured deployment of OpenNebula Enterprise Edition running on a minimal installation of AlmaLinux 9. The ISO image can be flashed to bootable, removable media (such as a USB disk) for local installation or mapped via IPMI Virtual Media for remote hardware management.
 
 Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud will be ready for immediate use, installed on a single bare-metal server, complete with the OpenNebula Front-end server and a KVM hypervisor node. The same ISO can be used to install other KVM hypervisor nodes on the same infrastructure. The installed software includes a menu and a set of ansible playbooks to make the OpenNebula infrastructure management simpler.
 
@@ -330,7 +330,7 @@ After pressing any key you should be returned to the `onefemenu` options.
 
 **Sunstone User Interface**
 
-The Sunstone UI should now be accessible by visiting http://\<frontend\_ip\>:2616 through a browser on a machine on the same network. 
+The Sunstone UI should now be accessible by visiting http://\<frontend\_ip\>:2616 through a browser on a machine on the same network.
 
 To obtain the oneadmin password run `onefemenu` on the command line of your Front-end server and select option `show_oneadmin_pass`
 
@@ -505,10 +505,10 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     ```default
     # ls -la /dev/vfio/
     crw-rw-rw- 1 root kvm 509, 0 Oct 16 10:00 85
-    
+
 ### OpenNebula Configuration
 
-Configure the PCI probe on the front-end node to monitor NVIDIA devices in order to make the GPUs available in OpenNebula 
+Configure the PCI probe on the front-end node to monitor NVIDIA devices in order to make the GPUs available in OpenNebula
 
 1.  Edit the PCI probe configuration file at `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf`.
 2.  Add a filter for NVIDIA devices:
@@ -539,10 +539,10 @@ In the dropdown menu select available GPU device which will be attached to the V
 
 ![PCI Device attachment](/images/ISO/08-vm-instantiate-pci-device-select.png)
 
-Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used. 
+Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used.
 
 ### vLLM appliance validation
-     
+
 The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
 
 1. Go to Storage -> Apps section.
