@@ -150,7 +150,11 @@ The minimum hardware specifications are:
 - **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
 
 ## Veeam Backup Appliance Requirements
+<<<<<<< HEAD
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following requirements:
+=======
 When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
+>>>>>>> one-7.0-maintenance
 
 - **CPU:** 6 cores
 - **Memory:** 6 GB RAM
@@ -324,6 +328,8 @@ The ovirtapi server will generate logs in the following directory depending on t
 * Alma/RHEL: ``/var/log/httpd``
 
 If you use the cleanup script provided at ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
+<<<<<<< HEAD
+=======
 
 ## Performance Improvements
 
@@ -362,6 +368,7 @@ The Veeam job statistics window shows a breakdown of the load, which is crucial 
 * **Source:** This represents your backup server. A high load (e.g., 99%) here is ideal. It means your server is working at full capacity and that the bottleneck is correctly placed on the source, not on other components.
 * **Proxy:** This is the KVM appliance deployed by Veeam. If its load is consistently high (e.g., >90%), it is the bottleneck and requires more resources (vCPU/RAM).
 * **Network:** This indicates that the transfer speed is being limited by the available bandwidth on the management network connecting the components.
+>>>>>>> one-7.0-maintenance
 
 ## Volatile disk backups
 

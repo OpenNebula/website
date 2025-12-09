@@ -100,7 +100,7 @@ The Front-end requires network access to the NetApp ONTAP API endpoint:
 
 ## Front-end & Node Setup
 
-Configure both the Front-end and nodes with persistent iSCSI connections:
+Configure both the Front-end and nodes with persistent iSCSI connections and multipath configuration as described by the [NetApp ONTAP Documentation - SAN Host Utilities Overview](https://docs.netapp.com/us-en/ontap-sanhost/hu_fcp_scsi_index.html):
 
 1. **iSCSI Initiators:**
    - Configure initiator security in NetApp Storage VM:
@@ -121,17 +121,22 @@ Configure both the Front-end and nodes with persistent iSCSI connections:
    Update `/etc/multipath.conf` to something like:
    ~~~text
     defaults {
-      user_friendly_names yes
+      user_friendly_names no
       find_multipaths yes
     }
 
     devices {
       device {
         vendor "NETAPP"
-        product "LUN.*"
-        no_path_retry queue
-        path_checker tur
-        alias_prefix "mpath"
+        product "LUN"
+        path_grouping_policy "group_by_prio"
+        features "2 pg_init_retries 50"
+        prio "ontap"
+        failback "immediate"
+        no_path_retry "queue"
+        flush_on_last_del "always"
+        dev_loss_tmo "infinity"
+        user_friendly_names "no"
       }
     }
 
