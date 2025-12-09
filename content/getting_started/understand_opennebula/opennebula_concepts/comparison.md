@@ -66,7 +66,7 @@ Thousands of organizations worldwide already rely on OpenNebula as an open alter
 | **Monitoring & Observability** | Built-in telemetry, Prometheus and Grafana integration, as well as NVIDIA DCGM for GPU metrics. |
 | **Secure Multi-tenancy** | Fine-grained ACLs, user/group roles, quotas, VDCs, network isolation, and hardware partitioning. |
 | **Container & Kubernetes Support** | Native integrations with Kubernetes through its Cluster API Provider (CAPONE), Cloud Provider Interface (CPI), and Container Storage Interface (CSI), along with fully certified support for SUSE Rancher Prime and RKE2. |
-| **Confidential Computing** | Encrypted VM disks, and support for Confidential Computing and vTPM |
+| **Confidential Computing** | Encrypted VM disks, encrypted VM memory and support for Confidential Computing and vTPM |
 | **Automation & Configuration** | Native support for Terraform and Ansible event hooks and APIs for DevOps integration. |
 | **Marketplace** | Public and private App Marketplaces for VM templates, OS images, and application stacks. |
 | **Graphical User Interface** | Modular and customizable interface with dynamic views, secure VNC, RDP, and SSH access, white-labeling, and intuitive tools for self-service, delegated administration, and resource organization. |

@@ -175,6 +175,7 @@ Secure execution environments ensure data privacy and integrity during processin
 * Confidential Computing: encrypted processing for protecting sensitive workloads in use.
 * vTPM: virtual Trusted Platform Module support for attestation and secure boot.
 * Encrypted Datastores: native support for encrypted storage backends to safeguard data at rest and ensure compliance with enterprise security standards.
+* Encrypted Memory: native support for encrypted Virtual Machine memory. The hypervisor is not able to read the VM memory, guaranteeing runtime privacy.
 
 ### Automation
 
