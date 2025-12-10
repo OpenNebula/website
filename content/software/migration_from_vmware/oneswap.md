@@ -24,7 +24,7 @@ OneSwap is part of a set of tools and services designed to guide you in achievin
 
 The package `opennebula-swap`, provided on the official repositories, provides the command `oneswap`.
 
-It can be installed in Ubuntu with  
+It can be installed in Ubuntu with
 
 ```
 apt install opennebula-swap
@@ -41,7 +41,7 @@ dnf install opennebula-swap
 OneSwap requirements for virtual conversion from VMWare to OpenNebula are the following:
 - OneSwap is only supported on Ubuntu 24.0 LTS and Alma Linux/RHEL 9 servers.
 - A working OpenNebula environment with capacity enough to store imported images and VMs and a user with permissions on the destination datastores. Alternatively, conversion can be done with user `oneadmin` and set the right permissions in a posterior step.
-- A vCenter endpoint with valid credentials to export the VMs. 
+- A vCenter endpoint with valid credentials to export the VMs.
   - The parameters `vcenter`, `vuser`, `vpass` and `port` must be specified.
   - If Delta conversion mode is being used, the user running `oneswap` command must have ssh passwordless access to the ESXi host where the VMs to convert are running.
 - If oneswap is ran on a different machine than OpenNebula frontend, then the following components must also be configured:
@@ -49,24 +49,14 @@ OneSwap requirements for virtual conversion from VMWare to OpenNebula are the fo
   - Set up the transfer method options (oneswap parameters `http_transfer`, `http_host` and `http_port`).
 
 {{< alert color="success" title="OneSwap configuration file" >}}
-OneSwap parameters can be set up on the configuration file `oneswap.yaml`, for instance 
-```
-:vcenter: '172.20.0.123'                 # vCenter hostname or IP
-:vuser: 'administrator@vsphere.local'    # vCenter username
-:vpass: 'changeme123'                    # vCenter password
-:port: 443                               # vCenter port
-
-:http_transfer: true                     # Needed to run oneswap on a host that is not the frontend
-:http_host: 172.10.0.3                   # OpenNebula frontend IP
-:http_port: 443                          # OpenNebula frontend port
-```
+All the OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml`
 {{< /alert >}}
 
 ### Optional requirements and required tools
 
 - VDDK library is recommended to improve disk transfer speeds. As of the moment of writing, the library can be downloaded from [Broadcom developer portal](https://developer.broadcom.com/sdks/vmware-virtual-disk-development-kit-vddk/latest/)
 - It is recommended to increase the vCenter API timeout to avoid request timeouts while converting big VMs. By default this value is 120 minutes and can be changed in vCenter at "Administration -> Deployment -> Client Configuration", allowing values up to 1440 minutes (24 hours).
-- The following libraries/programs must be installed 
+- The following libraries/programs must be installed
   - `libguestfs` library, version must be >= 1.50
   - `libvirt` library, version should be >= 8.7.0
   - `virt-v2v`, stable version
@@ -77,7 +67,9 @@ Ubuntu 24.04 and AlmaLinux/RHEL 9 provide up to date versions of the packages
 
 There are two requirements to convert Windows Virtual Machines:
 - [VirtIO ISO drivers](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) must be stored in the `/usr/local/share/virtio-win` directory.
-- [RHsrvany, an Open Source srvany implementation](https://github.com/rwmjones/rhsrvany) to create the needed Windows services during the migration. The package for AlmaLinux and RHEL is [hosted on fedoraproject.org](https://kojipkgs.fedoraproject.org/packages/mingw-srvany/1.1/11.eln153/noarch/mingw-srvany-redistributable-1.1-11.eln153.noarch.rpm). <br/>
+- [RHsrvany, an Open Source srvany implementation](https://github.com/rwmjones/rhsrvany) to create the needed Windows services during the migration. 
+  - In Alma Linux and RHEL this package is a dependency of OneSwap
+  - In Ubuntu [the package can be downloaded from fedoraproject.org](https://kojipkgs.fedoraproject.org/packages/mingw-srvany/1.1/11.eln153/noarch/mingw-srvany-redistributable-1.1-11.eln153.noarch.rpm). <br/>
 For compatibility with older versions of virt2v the following symlinks are needed
 
 ```
@@ -99,7 +91,7 @@ rpm2cpio srvany.rpm | cpio -idmv \
 ```
 {{< /alert >}}
 
-## Migrating Virtual Machines 
+## Migrating Virtual Machines
 
 {{< alert color="warning" title="Limitations for importing" >}}
 - The **VMs to be converted must be powered off in vCenter** for both regular and Delta conversion. Suspended or hibernated VM migration will fail. <br/>
@@ -123,11 +115,41 @@ booting the VM from a rescue CD and fixing grub may be necessary
 - Officially, Windows 2016 and onwards **require** UEFI boot.
 - Windows VMs can only be converted with virt-v2v style transfer (`custom` and `fallback` will fail)
 
-### UEFI boot
+### Virtual machines with UEFI BIOS
 OneSwap normally detects if the VM boots in UEFI mode and sets up OpenNebula template accordingly, but in some strange cases autodetection may fail. In these cases, modify the following options on the OpenNebula template:
 - CPU architecture: `x86_64`
 - Machine type: `q35`
 - UEFI firmware: UEFI (for secure firmware the box must be checked)
 ![Setting up UEFI boot after oneswap migration](/images/oneswap/modify_UEFI.png)
+
+## `oneswap` usage
+
+### Transfer methods
+
+There are four methods to transfer the images from ESX to OpenNebula. Ordered from faster to slowest:
+
+- **Hybrid**
+  - Use [RbVmomi2](https://github.com/ManageIQ/rbvmomi2) library to download locally the image before importing to OpenNebula.
+  - Fast, but requires extra disk space as it copies the image.
+- **VDDK Library**
+  - Use VMWare Virtual Disk Development Kit library.
+  - The parameter `--vddk /path/to/lib` must be defined.
+- **ESXi Direct SSH transfer**
+  - Copy the disk via SSH from the ESXi host. Incompatible with VDDK.
+  - Requires defining the options `--esxi`, `--esxi_user` and `--esxi_pass`
+- **vCenter API**
+  - The slowest option (vCenter API is used to download the image).
+
+A custom conversion option is also provided, which is only recommended as a fallback, that does not use virt-v2v. It relies on RbVmomi2, using qemu-img and virt-customize/guestfish to prepare the image for OpenNebula.
+
+### Importing VMs 
+
+`oneswap` can query ESX VMs and datacenters
+
+| Command | Output |
+| --- | --- |
+| `oneswap list datacenters` | Lists Datacenters |
+| `oneswap list clusters [--datacenter DCName]` | List clusters (can filter by datacenter) |
+| `oneswap list vms [--datacenter DCName [--cluster ClusterName]]` | List VMs on ESX. Cluster needs the Datacenter name. |
 
 
