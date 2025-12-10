@@ -52,9 +52,9 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 
 - New tab for checking virtual machines logs.
 
-- Tabs about backups, images and files added by default in the groupadmin view.
+- Backups, images and files tabs added by default in the groupadmin view.
 
-- Tab about srvices added by default in the user view.
+- Services Tab added by default in the user view.
 
 ## API and CLI
 <!--keeping some examples-->
