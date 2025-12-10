@@ -312,7 +312,7 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
     PRIVATE_NETWORK_NAME: admin_net
     ```
 
-    Remember to define the `$FRONTEND_HOST_IP` with the OpenNebula frontend IP and the `$OPENNEBULA_PASSWORD` variable with the OpenNebula `oneadmin` user password, and to adapt the network names to your corresponding environment vnets (here we are using the `admin_net` network by default). The number of GPU devices mounted in each worker node depends on the definition of the PCI attribute in the worker nodes template. More information on [NVIDIA GPU Passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md) section. In this example, we will attach a single NVIDIA GPU card to each worker nodes.
+    Remember to define the `$FRONTEND_HOST_IP` with the OpenNebula frontend IP and the `$OPENNEBULA_PASSWORD` variable with the OpenNebula `oneadmin` user password, and to adapt the network names to your corresponding environment vnets (here we are using the `admin_net` network by default). The number of GPU devices mounted in each worker node depends on the definition of the PCI attribute in the worker nodes template. More information on [NVIDIA GPU Passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md#pci-device-passthrough) section. In this example, we will attach a single NVIDIA GPU card to each worker nodes.
 
 4. Once the `values.yaml` file is available, add the helm chart repo and apply the helm chart referencing the values file:
 
