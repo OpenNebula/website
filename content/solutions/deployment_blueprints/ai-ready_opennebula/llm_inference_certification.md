@@ -147,22 +147,13 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     $ onetemplate update vllm
     ```
 
-    In this scenario, configure the template for GPU Passthrough to the VM and the specific CPU-Pinning topology:
+    In this scenario, configure the template for GPU Passthrough to the VM, attach a NIC on a desired network (in our case we are using the `admin_net` network, but you can choose any of your preference) and adjust the CPU and memory to your requirements, for instance:
     ```shell
-    CPU_MODEL=[
-        MODEL="host-passthrough" ]
-    OS=[
-        FIRMWARE="/usr/share/OVMF/OVMF_CODE_4M.fd",
-        MACHINE="pc-q35-noble" ]
     PCI=[
         CLASS="0302",
         DEVICE="26b9",
         VENDOR="10de" ]
-    TOPOLOGY=[
-        CORES="8",
-        PIN_POLICY="THREAD",
-        SOCKETS="2",
-        THREADS="2" ]
+    NIC=[ NETWORK="admin_net" ]
     VCPU="32"
     CPU="32"
     MEMORY="32768"
@@ -170,7 +161,7 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
 
 3. Instantiate the template. Keep the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark you do, which means that you will need to instantiate a different VM with the different models for the execution of each benchmark:
     ```shell
-    $ onetemplate instantiate service_Vllm --name vllm
+    $ onetemplate instantiate vllm --name vllm
     ```
 
 4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
