@@ -52,6 +52,10 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 
 - New tab for checking virtual machines logs.
 
+- Tabs about backups, images and files added by default in the groupadmin view.
+
+- Tab about srvices added by default in the user view.
+
 ## API and CLI
 <!--keeping some examples-->
 - [The `onedb purge-history` command now removes history records only within the specified `–start`, `–end` range for the `–id`, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
