@@ -150,11 +150,7 @@ The minimum hardware specifications are:
 - **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
 
 ## Veeam Backup Appliance Requirements
-<<<<<<< HEAD
-When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following requirements:
-=======
 When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
->>>>>>> one-7.0-maintenance
 
 - **CPU:** 6 cores
 - **Memory:** 6 GB RAM
@@ -180,24 +176,24 @@ The backup datastore must be created in the backup server configured in step 1. 
 Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given cluster:
 
 
-    # Create the Rsync backup datastore
-    cat << EOF > /tmp/rsync-datastore.txt
-    NAME="VeeamDS"
-    DS_MAD="rsync"
-    TM_MAD="-"
-    TYPE="BACKUP_DS"
-    VEEAM_DS="YES"
-    RESTIC_COMPRESSION="-"
-    RESTRICTED_DIRS="/"
-    RSYNC_HOST="localhost"
-    RSYNC_USER="oneadmin"
-    SAFE_DIRS="/var/tmp"
-    EOF
+# Create the Rsync backup datastore
+cat << EOF > /tmp/rsync-datastore.txt
+NAME="VeeamDS"
+DS_MAD="rsync"
+TM_MAD="-"
+TYPE="BACKUP_DS"
+VEEAM_DS="YES"
+RESTIC_COMPRESSION="-"
+RESTRICTED_DIRS="/"
+RSYNC_HOST="localhost"
+RSYNC_USER="oneadmin"
+SAFE_DIRS="/var/tmp"
+EOF
 
-    onedatastore create /tmp/rsync-datastore.txt
+onedatastore create /tmp/rsync-datastore.txt
 
-    # Add the datastore to the cluster with "onecluster adddatastore <cluster-name> <datastore-name>"
-    onecluster adddatastore somecluster VeeamDS
+# Add the datastore to the cluster with "onecluster adddatastore <cluster-name> <datastore-name>"
+onecluster adddatastore somecluster VeeamDS
 
 {{< alert title="SELinux/AppArmor issues" color="success" >}}
 SELinux and AppArmor may cause some issues in the backup server if not configured properly. Either disable them or make sure to whitelist the datastore directories (``/var/lib/one/datastores``).
@@ -213,7 +209,7 @@ If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup 
 
 We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
 
-    0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
+0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
 
 {{< alert title="Remember" color="success" >}}
 For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
@@ -247,8 +243,8 @@ Once the package is installed, a ``oneadmin`` user will be created. Please make 
 {{< alert title="Package dependency" color="success" >}}
 In RHEL and Alma environments, you may face issues with the passenger package dependencies (``mod_passenger`` and ``mod_ssl``). You may add the correct repository and install the packages with the following:
 
-    curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
-    dnf install -y passenger mod_passenger mod_ssl
+curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
+dnf install -y passenger mod_passenger mod_ssl
 
 {{< /alert >}}
 
@@ -328,8 +324,6 @@ The ovirtapi server will generate logs in the following directory depending on t
 * Alma/RHEL: ``/var/log/httpd``
 
 If you use the cleanup script provided at ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb``, the cleanup logs will be placed at ``/var/log/one/backup_cleaner_script.log``.
-<<<<<<< HEAD
-=======
 
 ## Performance Improvements
 
@@ -368,7 +362,6 @@ The Veeam job statistics window shows a breakdown of the load, which is crucial 
 * **Source:** This represents your backup server. A high load (e.g., 99%) here is ideal. It means your server is working at full capacity and that the bottleneck is correctly placed on the source, not on other components.
 * **Proxy:** This is the KVM appliance deployed by Veeam. If its load is consistently high (e.g., >90%), it is the bottleneck and requires more resources (vCPU/RAM).
 * **Network:** This indicates that the transfer speed is being limited by the available bandwidth on the management network connecting the components.
->>>>>>> one-7.0-maintenance
 
 ## Volatile disk backups
 
