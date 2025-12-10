@@ -254,6 +254,7 @@ RSYNC_HOST="localhost"
 RSYNC_USER="oneadmin"
 SAFE_DIRS="/var/tmp"
 EOF
+```
 
 onedatastore create /tmp/rsync-datastore.txt
 ```
@@ -368,7 +369,7 @@ In the next step, Veeam will take care of deploying the appliance. Once finished
 
 ![image](/images/veeam/appliance_listed.png)
 
-#### 4.3 Verification
+4.3 Verification
 
 If everything is set properly, you should be able to see the available Virtual Machines in the **Inventory** tab under the **Virtual Infrastructure** -> **oVirt KVM** section.
 
