@@ -150,6 +150,7 @@ The minimum hardware specifications are:
 - **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
 
 ## Veeam Backup Appliance Requirements
+
 When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
 
 - **CPU:** 6 cores
@@ -171,12 +172,13 @@ The next step is to create a backup datastore in OpenNebula. This datastore will
 {{< alert title="Remember" color="success" >}}
 The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}}
 
-**Rsync Datastore**
+2.1. Create the Rsync backup datastore
 
 Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given cluster:
 
+```bash
+onedatastore create /tmp/rsync-datastore.txt
 
-# Create the Rsync backup datastore
 cat << EOF > /tmp/rsync-datastore.txt
 NAME="VeeamDS"
 DS_MAD="rsync"
@@ -189,14 +191,15 @@ RSYNC_HOST="localhost"
 RSYNC_USER="oneadmin"
 SAFE_DIRS="/var/tmp"
 EOF
+```
 
-onedatastore create /tmp/rsync-datastore.txt
+2.2. Add the datastore to the cluster
+```bash
+onecluster adddatastore <cluster-name> <datastore-name>
+```
 
-# Add the datastore to the cluster with "onecluster adddatastore <cluster-name> <datastore-name>"
-onecluster adddatastore somecluster VeeamDS
-
-{{< alert title="SELinux/AppArmor issues" color="success" >}}
-SELinux and AppArmor may cause some issues in the backup server if not configured properly. Either disable them or make sure to whitelist the datastore directories (``/var/lib/one/datastores``).
+{{< alert title="SELinux/AppArmor issues" color="warning" >}}
+SELinux and AppArmor may cause issues in the backup server if not configured properly. Either disable them or make sure to provide permissions to the datastore directories (``/var/lib/one/datastores``).
 {{< /alert >}}
 
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
@@ -209,7 +212,9 @@ If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup 
 
 We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
 
+```bash
 0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
+```
 
 {{< alert title="Remember" color="success" >}}
 For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
@@ -252,7 +257,7 @@ dnf install -y passenger mod_passenger mod_ssl
 
 To add OpenNebula as a hypervisor to Veeam, configure it as an oVirt KVM Manager in Veeam and choose the IP address of the oVirtAPI module. You can follow the [official Veeam documentation](https://helpcenter.veeam.com/docs/vbrhv/userguide/connecting_manager.html?ver=6) for this step or follow the next steps:
 
-#### 4.1 Add the new virtualization manager
+4.1. Add the new virtualization manager
 
 The first step should be to add the ovirtAPI Backup server to Veeam. Head over to **Backup Infrastructure**, then to **Managed Servers**, and then click **Add Manager**:
 
@@ -278,7 +283,7 @@ As a last step, you can click finish and the new ovirtAPI server should be liste
 
 ![image](/images/veeam/hypervisor_added.png)
 
-#### 4.2 Deploy the KVM appliance
+4.2. Deploy the KVM appliance
 
 In order for Veeam to be able to perform backup and restore operations, it must deploy a dedicated Virtual Machine to act as a worker. To deploy it, go to the **Backup Infrastructure** tab, then **Backup Proxies**, and click **Add Proxy**:
 
@@ -310,13 +315,13 @@ In the next step, Veeam will take care of deploying the appliance. Once finished
 
 ![image](/images/veeam/appliance_listed.png)
 
-#### 4.3 Verification
+4.3 Verification
 
 If everything is set properly, you should be able to see the available Virtual Machines in the **Inventory** tab under the **Virtual Infrastructure** -> **oVirt KVM** section.
 
 ![image](/images/veeam/verification.png)
 
-### Logging information
+## Logging information
 
 The ovirtapi server will generate logs in the following directory depending on the operating system used:
 
@@ -329,9 +334,11 @@ If you use the cleanup script provided at ``/usr/lib/one/ovirtapi-server/scripts
 
 To improve image transfer speed, you can increase the number of concurrent processes to better utilize the backup server's resources. This is controlled by the ``PassengerMaxPoolSize`` parameter in your Apache configuration file.
 
+After setting the ``PassengerMaxPoolSize``, you must balance RAM and CPU availability.
+
 ### Adjusting the Process Pool
 
-You can find the configuration file in the following locations, depending on your distribution:
+The configuration file is available in the following locations depending on your distribution:
 
 * Debian/Ubuntu: ``/etc/apache2/sites-available/ovirtapi-server.conf``
 * Alma/RHEL: ``/etc/httpd/conf.d/ovirtapi-server.conf``
@@ -341,9 +348,6 @@ After editing and saving the file, you must restart the webserver for the change
 * Debian/Ubuntu: ``sudo systemctl restart apache2``
 * Alma/RHEL: ``sudo systemctl restart httpd``
 
-### Adjusting the Process Pool
-
-When setting the ``PassengerMaxPoolSize``, you must balance RAM and CPU availability.
 
 **Memory**
 
