@@ -104,3 +104,20 @@ RAW=[
   DATA="lxc.apparmor.profile=unconfined",
   TYPE="lxc" ]
 ```
+
+## High CPU utilization due to predictions
+
+With some configurations, the usage of CPU on the hosts can be very high, due to running predictions. In such case, the number of threads used by BLAS (Basic Linear Algebra Subprograms) can be limited to 1 (or other suitable number) with the environment variables:
+
+```shell
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
+export OPENBLAS_NUM_THREADS=${OPENBLAS_NUM_THREADS:-1}
+export MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
+export BLIS_NUM_THREADS=${BLIS_NUM_THREADS:-1}
+export NUMEXPR_NUM_THREADS=${NUMEXPR_NUM_THREADS:-1}
+```
+
+A more comprehensive way is to replace the following old files with the appropriate files from `one` repository:
+* [prediction script](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/prediction.sh)
+* [prediction script from node probes](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/node-probes.d/prediction.sh)
+* [prediction model](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/pyoneai/ml/sklearn_prediction_model.py)
