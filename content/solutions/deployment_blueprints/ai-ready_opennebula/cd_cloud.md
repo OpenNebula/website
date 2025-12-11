@@ -38,12 +38,12 @@ Before you begin, ensure your environment meets the following prerequisites.
 
 5. After some minutes and once the instance is running, connect to it via SSH using its public IP address:
 ```bash
-$ ssh ubuntu@<your_instance_public_ip>
+ssh ubuntu@<your_instance_public_ip>
 ```
 
 6. Verify that the GPUs are detected as PCI devices:
 ```bash
-$ lspci -Dnnk | grep NVIDIA
+lspci -Dnnk | grep NVIDIA
 ```
 You should see an output similar to this, listing your NVIDIA GPUs:
 ```bash
@@ -57,7 +57,7 @@ Make sure you note down the full PCI addresses for both GPUs.
 
 7. Confirm that IOMMU is enabled on the server. The `ls` command below should list several numbered subdirectories:
 ```bash
-$ ls -la /sys/kernel/iommu_groups/
+ls -la /sys/kernel/iommu_groups/
 ```
 If the directory is not empty it means that IOMMU is active, which is a prerequisite for PCI passthrough.
 
@@ -106,23 +106,27 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
 
 As a `root` user, clone the `one-deploy` repository and install its dependencies.
 
-```default
-# cd /root
-# git clone https://github.com/OpenNebula/one-deploy.git
-# cd one-deploy/
-# apt update && apt install -y pipx make
-# pipx install hatch
-# pipx ensurepath
-# source ~/.bashrc
-# make requirements
-# hatch shell
+```shell
+cd /root
+git clone https://github.com/OpenNebula/one-deploy.git
+cd one-deploy/
+apt update && apt install -y pipx make
+pipx install hatch
+pipx ensurepath
+source ~/.bashrc
+make requirements
+hatch shell
+```
+
+At this point, you should be using the hatch environment shell:
+```shell
 (one-deploy) #
 ```
 For more details, refer to the [OneDeploy System Requirements](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs).
 
 ## AI Factory Deployment
 
-Create an inventory file named `inventory/scaleway.yml`. This file defines a complete OpenNebula deployment on the local machine (`127.0.0.1`).
+Create an inventory file named `inventory/scaleway.yaml`. This file defines a complete OpenNebula deployment on the local machine (`127.0.0.1`).
 
 {{< alert title="Important" color="success" >}}
 *   Replace `YOUR_SECURE_PASSWORD` with a strong and unique password for the `oneadmin` user.
@@ -168,9 +172,9 @@ node:
         - address: "0000:82:00.0" # Second L40S GPU
 ```
 
-Run the deployment:
+Run the deployment on the `one-deploy` hatch shell environment previously created:
 ```bash
-(one-deploy) # make I=inventory/scaleway.yml
+make I=inventory/scaleway.yaml
 ```
 
 {{< alert title="Tip" color="sucess" >}}
