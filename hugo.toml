@@ -9,6 +9,8 @@ baseURL = "https://docs.opennebula.io/7.0/"
 capitalizeListTitles = "false"
 titleCaseStyle = "none"
 
+#disableKinds = ["taxonomy"]
+
 # relativeURLs = true
 # canonifyURLs = true
 
@@ -21,18 +23,16 @@ blog = "/:section/:year/:month/:day/:slug/"
 
 # You can add your own taxonomies
 [taxonomies]
-tag = "tags"
-category = "categories"
 
 [params.taxonomy]
 # set taxonomyCloud = [] to hide taxonomy clouds
-taxonomyCloud = ["tags", "categories"]
+taxonomyCloud = []
 
 # If used, must have same length as taxonomyCloud
-taxonomyCloudTitle = ["Tag Cloud", "Categories"]
+taxonomyCloudTitle = []
 
 # set taxonomyPageHeader = [] to hide taxonomies on the page headers
-taxonomyPageHeader = ["tags", "categories"]
+taxonomyPageHeader = []
 
 
 [params.ui]
@@ -43,9 +43,9 @@ navbar_logo = true
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like o>
 navbar_translucent_over_cover_disable = false
 # Enable to show the side bar menu in its compact state.
-sidebar_menu_compact = false
+sidebar_menu_compact = true
 sidebar_menu_foldable = true
-ul_show = 3
+ul_show = 0
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if se>
 sidebar_search_disable = true
 showLightDarkModeMenu = true
@@ -185,6 +185,13 @@ version_menu = "Versions"
   [[module.mounts]]
     source = 'static'
     target = 'assets'
+  [[module.mounts]]
+    source = "layouts/shortcodes"
+    target = "layouts/shortcodes"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+
   #[[module.mounts]]
   #  source = 'images'
   #  target = 'static/images'
@@ -195,6 +202,9 @@ enable = true
 feedback_question = 'We value your feedback. Was this page helpful?'
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
+
+[params.ui.scrollSpy]
+disable = false
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
