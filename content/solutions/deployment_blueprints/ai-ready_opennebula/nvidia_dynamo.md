@@ -23,15 +23,16 @@ As a prerequisite, you need a storage provider installed to supply PersistentVol
 1. To install the provisioner, deploy the manifest from the GitHub repository:
 
 ```shell
-laptop$ kubectl apply -f \
-https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.32/deploy/local-path-storage.yaml
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.32/deploy/local-path-storage.yaml
 ```
 
 2. Check that the storage provisioner is up and running:
 
 ```shell
-laptop$ kubectl -n local-path-storage get deploy,pods
->>>
+kubectl -n local-path-storage get deploy,pods
+```
+You should see an output like this:
+```
 NAME                                     READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/local-path-provisioner   1/1     1            1           7d2h
 
@@ -44,7 +45,7 @@ pod/local-path-provisioner-7f57b55d56-7qb42   1/1     Running   0          7d2h
 If you want to modify the `nodePath` parameter, ensure that it is available in the `nodePathMap` field of the provider config as indicated in the [Customize the configmap](https://github.com/rancher/local-path-provisioner?tab=readme-ov-file#customize-the-configmap) guide.
 
 ```shell
-laptop$ cat <<EOF > storageClass.yaml
+cat <<EOF > storageClass.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -59,15 +60,18 @@ volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
 EOF
 
-laptop$ kubectl apply -f storageClass.yaml
+kubectl apply -f storageClass.yaml
 ```
 
 4. Check that this storage class is the default:
 
 ```shell
-laptop$ kubectl get storageClass
+kubectl get storageClass
+```
 
----
+The `local-path` storage class should have the `(default)` suffix:
+
+```
 NAME                   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION
 local-path (default)   rancher.io/local-path   Delete          WaitForFirstConsumer   false
 ```
@@ -77,8 +81,7 @@ At this point, the Dynamo Cloud platform is ready for installation. Configure yo
 1. Install the CRDs:
 
 ```shell
-laptop$ helm install dynamo-crds \
-https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.4.1.tgz \
+helm install dynamo-crds https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.4.1.tgz \
   --namespace dynamo-cloud --create-namespace \
   --wait --atomic
 ```
@@ -86,7 +89,7 @@ https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.4.1.tgz \
 2. Install the operator, using the latest version available in the catalog.:
 
 ```shell
-laptop$ helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-platform-0.4.1.tgz \
+helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-platform-0.4.1.tgz \
   --namespace dynamo-cloud \
   --create-namespace \
   --set "dynamo-operator.controllerManager.manager.image.repository=nvcr.io/nvidia/ai-dynamo/kubernetes-operator" \
@@ -96,8 +99,11 @@ laptop$ helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynam
 3. Check if the operator is up and running:
 
 ```shell
-laptop$ kubectl -n dynamo-cloud get deploy,pod,svc
-<<<
+kubectl -n dynamo-cloud get deploy,pod,svc
+```
+
+All the pods should be in `Running` or `Completed` state:
+```
 NAME                                                                 READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/dynamo-platform-dynamo-operator-controller-manager   1/1     1            1           27h
 deployment.apps/dynamo-platform-nats-box                             1/1     1            1           27h
@@ -119,7 +125,7 @@ service/dynamo-platform-nats-headless   ClusterIP   None            <none>      
 4. To use some LLM models in the platform, you need a HuggingFace token for authenticating against the API. For this purpose, create a secret for that token that could be later referenced by Dynamo:
 
 ```shell
-laptop$ cat<<EOF > hf-secret.yaml
+cat<<EOF > hf-secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -130,7 +136,7 @@ stringData:
   token: "<token>"
 EOF
 
-laptop$ kubectl apply -f hf-secret.yaml
+kubectl apply -f hf-secret.yaml
 ```
 
 ## Deployment of Dynamo Inference Graphs
@@ -151,6 +157,7 @@ The latest vllm-runtime image is located in [`nvcr.io/nvidia/ai-dynamo/vllm-runt
 An example of a disaggregated deployment graph is available in the [NVIDIA Dynamo’s github repository](https://github.com/ai-dynamo/dynamo/tree/v0.4.1/components/backends/vllm/deploy). For this guide, the example was adapted to work for a validated container runtime:
 
 ```yaml
+cat << EOF > disagg_custom.yaml
 apiVersion: nvidia.com/v1alpha1
 kind: DynamoGraphDeployment
 metadata:
@@ -295,6 +302,7 @@ spec:
             - -c
           args:
             - python3 -m dynamo.vllm --model Qwen/Qwen3-0.6B  --is-prefill-worker 2>&1 | tee /tmp/vllm.log
+EOF
 ```
 
 Deploy the disaggregated deployment graph with kubectl:
@@ -324,19 +332,19 @@ service/disagg-frontend                 ClusterIP   10.43.92.113    <none>      
 In case you want to query the API client locally, forward the vllm frontend service through Kubernetes with this command:
 
 ```shell
-laptop$ kubectl port-forward svc/<frontend_service> <local_port>:8000 &
+kubectl port-forward svc/<frontend_service> <local_port>:8000 &
 ```
 
 Example:
 
 ```shell
-laptop$ kubectl port-forward svc/vllm-v1-disagg-router-frontend 9000:8000 &
+kubectl port-forward svc/vllm-v1-disagg-router-frontend 9000:8000 &
 ```
 
  To test the loaded models, run requests to the frontend via curl:
 
 ```shell
-laptop$ curl localhost:9000/v1/models | jq .
+curl localhost:9000/v1/models | jq .
 ```
 
 ```json
@@ -356,7 +364,7 @@ laptop$ curl localhost:9000/v1/models | jq .
 And also submit inference requests:
 
 ```shell
-laptop$ curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
+curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
     "model": "Qwen/Qwen3-0.6B",
     "prompt": "What is opennebula?",
     "stream": false,
@@ -394,7 +402,7 @@ You will receive a response like this:
 If you want to test the response in stream mode, set the parameter `stream: true` and delete the `jq` tool piping to that call:
 
 ```shell
-laptop$ curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
+curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
     "model": "Qwen/Qwen3-0.6B",
     "prompt": "What is opennebula?",
     "stream": true,
