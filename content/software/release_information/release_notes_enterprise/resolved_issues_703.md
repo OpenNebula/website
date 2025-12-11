@@ -12,3 +12,4 @@ The following new features have been backported to 7.0.3:
 
 The following issues have been solved in 7.0.3:
 - Fix high CPU utilization caused by prediction [#7396](https://github.com/OpenNebula/one/issues/7396)
+- Fix WHMCS client Login action [#6879](https://github.com/OpenNebula/one/issues/6879)
