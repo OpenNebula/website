@@ -22,9 +22,9 @@ Before you begin, ensure your environment meets the following prerequisites.
 3. Click **Create Elastic Metal Server**.
 4. Configure your server in the portal:
 
-    *  **Availability Zone:** Choose your preferred zone, such as `PARIS 2`. Alternatively, select `Auto allocate.
+    *  **Availability Zone:** Choose your preferred zone, such as `PARIS 2`. Alternatively, select `Auto allocate`.
     *  **Billing Method:** Select either hourly or monthly. Note that hourly billing is often more cost-effective for short-term projects or testing.
-    *  **Server Type:** Select an instance. For GPU acceleration, you must choose an `Elastic Metal Titanium server.
+    *  **Server Type:** Select an instance. For GPU acceleration, you must choose an `Elastic Metal Titanium` server.
     *  **Image:** Choose `Ubuntu 24.04 LTS` as the operating system.
     *  **Cloud-init:** You can skip this step, as it is not used in this setup.
     *  **Disk Partitions:** Configure the disk partition table so that the `/` path has the full disk space available.
@@ -67,18 +67,18 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
 
 1.  Enable Local Root SSH Access:
     Generate an SSH key pair for the `root` user and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
-    ```default
-    $ sudo su
-    # ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
-    # cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
+    ```shell
+    sudo su
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
+    cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
     ```
 
 2.  Create a Virtual Network Bridge:
     To provide network connectivity to the VMs, create a virtual bridge with NAT. This allows VMs to access the internet through the server's public network interface.
 
     2.1 Create the Netplan configuration file for the bridge:
-    ```default
-    # tee /etc/netplan/60-bridge.yaml > /dev/null << 'EOF'
+    ```shell
+    tee /etc/netplan/60-bridge.yaml > /dev/null << 'EOF'
     network:
       version: 2
       bridges:
@@ -96,10 +96,10 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
 
     2.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
     ```default
-    # netplan apply
-    # sysctl -w net.ipv4.ip_forward=1
-    # iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp129s0f0np0 -j MASQUERADE
-    # iptables-save | uniq | iptables-restore
+    netplan apply
+    sysctl -w net.ipv4.ip_forward=1
+    iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp129s0f0np0 -j MASQUERADE
+    iptables-save | uniq | iptables-restore
     ```
 
 ### OneDeploy Dependencies

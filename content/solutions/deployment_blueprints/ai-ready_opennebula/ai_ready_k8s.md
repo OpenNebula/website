@@ -71,7 +71,7 @@ Deploy your Kubernetes management cluster through the CAPI Service in OpenNebula
     onemarketapp export "Service Capi" service_Capi -d 1
     ```
 
-2. Update the `service_Capi` template by adding the necessary scheduling requirements for deploying in to the desired host. In this case, we're enablin the `host-passthrough` feature and adding a NIC card attached to the default `admin_net` network, but you can change it to any network of your consideratio. The chosen network must be the same that we are going to use for the workload cluster vRouter ingress traffic.
+2. Update the `service_Capi` template by adding the necessary scheduling requirements for deploying in to the desired host. In this case, we're enablin the `host-passthrough` feature and adding a NIC card attached to the default `admin_net` network, but you can change it to any network of your consideration. The chosen network must be the same that we are going to use for the workload cluster vRouter ingress traffic.
 
     ```shell
     onetemplate update service_Capi
