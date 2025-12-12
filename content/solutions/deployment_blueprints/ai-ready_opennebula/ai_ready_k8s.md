@@ -473,13 +473,13 @@ The procedure to install the NVIDIA GPU Operator is as follows:
 5. Check if the Kubernetes nodes gpu autodiscovery operates as expected, by checking the workload nodes, for instance the `nvidia.com/*` labels and the allocatable gpu capacity:
 
     ```shell
-    kubectl describe <kubernetes_workload_node_name>
+    kubectl describe node <kubernetes_workload_node_name>
     ```
 
     for instance, in the example above:
 
     ```shell
-    kubectl describe k8s-gpu-test-md-0-m5tzv-drg4k
+    kubectl describe node k8s-gpu-test-md-0-m5tzv-drg4k
     ```
 
     Those are the labels you should see

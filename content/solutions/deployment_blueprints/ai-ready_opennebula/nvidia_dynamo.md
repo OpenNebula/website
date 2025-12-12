@@ -63,7 +63,10 @@ EOF
 kubectl apply -f storageClass.yaml
 ```
 
-4. Check that this storage class is the default:
+4. Make this storage class is the default:
+```shell
+kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
 
 ```shell
 kubectl get storageClass
@@ -81,7 +84,7 @@ At this point, the Dynamo Cloud platform is ready for installation. Configure yo
 1. Install the CRDs:
 
 ```shell
-helm install dynamo-crds https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.4.1.tgz \
+helm install dynamo-crds https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-crds-0.7.0.tgz \
   --namespace dynamo-cloud --create-namespace \
   --wait --atomic
 ```
@@ -89,11 +92,11 @@ helm install dynamo-crds https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dyn
 2. Install the operator, using the latest version available in the catalog.:
 
 ```shell
-helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-platform-0.4.1.tgz \
+helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-platform-0.7.0.tgz \
   --namespace dynamo-cloud \
   --create-namespace \
   --set "dynamo-operator.controllerManager.manager.image.repository=nvcr.io/nvidia/ai-dynamo/kubernetes-operator" \
-  --set "dynamo-operator.controllerManager.manager.image.tag=0.4.1"
+  --set "dynamo-operator.controllerManager.manager.image.tag=0.7.0"
 ```
 
 3. Check if the operator is up and running:
@@ -295,7 +298,7 @@ spec:
               port: 9090
             periodSeconds: 10
             failureThreshold: 60
-          image: nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.0
+          image: nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1
           workingDir: /workspace/components/backends/vllm
           command:
             - /bin/sh
@@ -407,7 +410,7 @@ curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
     "prompt": "What is opennebula?",
     "stream": true,
     "max_tokens": 300
-  }
+  }'
 ```
 
 You will see this streamed output:
