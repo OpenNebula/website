@@ -43,6 +43,9 @@ In case of rebooting the virtualization Host, the volumes need to be activated t
 
 Virtual Machine disks are symbolic links to the block devices. However, additional VM files like checkpoints or deployment files are stored under `/var/lib/one/datastores/<id>`. To prevent filling local disks, allocate plenty of space for these files.
 
+## Front-end Configuration
+
+The Front-end needs to be configured as it's described in the corresponding section of [Generic SAN setup]({{% relref "generic_guide#front-end-configuration" %}})
 
 ## OpenNebula Configuration
 
