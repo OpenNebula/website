@@ -1,7 +1,7 @@
 ---
 title: "SAN/LVM: PureStorage setup"
 linkTitle: "PureStorage: SAN setup"
-weight: "4"
+weight: "2"
 ---
 
 This setup assumes you are using a PureStorage FlashArray with iSCSI and want to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the PureStorage interface, create the required resources as desired.

@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "72"
 tags:
-weight: "2"
+weight: "5"
 ---
 
 With LVM SAN Datastore (EE), both disks images and actual VM drives are stored as Logical Volumes
@@ -45,7 +45,7 @@ Virtual Machine disks are symbolic links to the block devices. However, addition
 
 ## Front-end Configuration
 
-The Front-end needs to be configured as it's described in the corresponding section of [Generic SAN setup]({{% relref "generic_guide#front-end-configuration" %}})
+The Front-end needs to be configured as it’s described in the corresponding section of either [PureStorage]({{% relref "purestorage_guide#front-end-and-hosts-configuration" %}}), [NetApp]({{% relref "netapp_guide#front-end-and-host-configuration" %}}) or [Generic SAN]({{% relref "generic_guide#front-end-configuration" %}}) depending on the SAN type you have.
 
 ## OpenNebula Configuration
 
