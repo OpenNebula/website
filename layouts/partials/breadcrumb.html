@@ -2,16 +2,34 @@
 {{ with .Parent -}}
   {{ $isSingle = .IsHome -}}
 {{ end -}}
-<nav aria-label="breadcrumb" class="td-breadcrumbs
-    {{- if $isSingle }} td-breadcrumbs__single {{- end }}">
-  <ol class="breadcrumb">
-    {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
-  </ol>
-</nav>
 
-{{- define "breadcrumbnav" -}}
+{{ if .File -}}
+  {{ $path := strings.TrimPrefix (add hugo.WorkingDir "/") $.File.Filename -}}
+  {{ $gh_repo := $.Param "github_repo" -}}
+  {{ $gh_branch := $.Param "github_branch" | default "main" -}}
+  {{ $gh_subdir := $.Param "github_subdir" | default "" -}}
+  {{ $gh_repo_path := printf "%s/%s/%s" $gh_branch $gh_subdir $path -}}
+  {{ $gh_repo_path = replaceRE "//+" "/" $gh_repo_path -}}
+  {{ $viewURL := printf "%s/tree/%s" $gh_repo $gh_repo_path -}}
+
+
+  <nav aria-label="breadcrumb" class="td-breadcrumbs
+      {{- if $isSingle }} td-breadcrumbs__single {{- end }}">
+    <ol class="breadcrumb">
+      <li><a href="{{ .Site.Home.RelPermalink }}" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-house fa-fw"></i> / </li>
+      {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
+    </ol>  
+
+    {{ if $gh_repo -}}
+      <a href="{{ $viewURL }}" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fab fa-github"></i> {{ T "post_view_this" }}</a>
+    {{ end -}}  
+  </nav>
+
+{{ end -}}
+
+{{- define "breadcrumbnav" -}}  
   {{ if .p1.Parent -}}
-    {{ if not .p1.Parent.IsHome -}}
+    {{ if not .p1.Parent.IsHome -}}      
       {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  -}}
     {{ end -}}
   {{ else if not .p1.IsHome -}}
@@ -27,3 +45,4 @@
     {{- end -}}
   </li>
 {{- end -}}
+
