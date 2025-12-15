@@ -24,6 +24,8 @@ In this scenario the cloud administrator must prepare a set of Templates and Ima
 
 For example, when template attributes are defined as mandatory, users can optionally **customize the VM capacity**, **resize disks**, **add new Network Interfaces**, and **provide values required by the template**. Read tips on how to [prepare VM Templates for End-Users]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#vm-templates-endusers" %}}).
 
+Include `%i` in the name to insert the VM index (0..N-1) at a custom place when create more than one virtual machine.
+
 ![sunstone_cloud_create_vm](/images/sunstone_cloud_create_vm.png)
 
 <a id="cloudview-ssh-keys"></a>
@@ -61,7 +63,12 @@ Users can perform the following actions from this view:
 
 Users can create a persistent private copy of the available templates. A **persistent copy will preserve the changes** made to the VM disks after the instance is terminated. This **template is private** and will only be listed to the owner user.
 
-To create a persistent copy, use the **Persistent** switch:
+To create a persistent copy, use the **Persistent** switch. Include `%i` in the name to insert the VM index (0..N-1) at a custom place when create more than one virtual machine:
+
+{{< alert title="Warning" color="warning" >}}
+When creating more than one virtual machine marked as persistent, user must specify `%i` in the name in order to avoid conflicts in the creation of templates and images.
+{{< /alert >}} 
+
 
 ![sunstone_persistent_vm](/images/sunstone_persistent_vm.png)
 

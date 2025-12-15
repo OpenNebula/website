@@ -552,7 +552,7 @@ $ onevm list
    0 oneadmin     oneadmin     test-0     hold       1     768M           0d 00h00
 ```
 
-Equivalently, in Sunstone activate the “Persistent” switch next to the Create button.
+Equivalently, in Sunstone activate the “Persistent” switch next to the Create button. Include `%i` in the name to insert the VM index (0..N-1) at a custom place.
 
 Please bear in mind the following `ontemplate instantiate --persistent` limitation: volatile disks cannot be persistent. The contents of the disks will be lost when the VM is terminated. The cloned VM template will contain the definition for an empty volatile disk.
 
