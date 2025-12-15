@@ -129,7 +129,7 @@ no_list = true
 # or specify a new value if you want to reference another branch in your GitHub links
 github_branch= "one-7.0"
 github_repo = "https://github.com/OpenNebula/website/"
-enableGitInfo = true
+enableGitInfo = false
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
