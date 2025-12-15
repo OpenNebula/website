@@ -20,6 +20,10 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - [libvirtd restarts in cycles each 10 minutes with error message in system logs](https://github.com/OpenNebula/one/issues/6463), due to the way libvirtd gets activated per interaction by systemd in 120-second slices. As the default interval for the OpenNebula monitor probe is 600 seconds (10 minutes), each time a probe reactivates libvirtd, it sends those messages to syslog.
 
+## Drivers - Storage
+
+- Setting a value for `NETAPP_GROW_THRESHOLD` will cause failures in the NetApp Native driver. To solve it, remove the `NETAPP_GROW_THRESHOLD` attribute from both the Image and System datastores.
+
 ## Sunstone
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
