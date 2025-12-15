@@ -65,6 +65,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 ## KVM & Networking
 <!--keeping some examples-->
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
+- [Virtual Machine memory encryption](../../../product/virtual_machines_operation/virtual_machines/vm_templates#memory-encryption) allows VM workloads whose memory cannot be read by the hypervisor.
 
 ## LXC
 
