@@ -290,7 +290,7 @@ The purpose of each directory is described in the following table:
 | `host/system`  | General quasi-static info. about Host (e.g. NUMA nodes) stored in `HOST/TEMPLATE` and `HOST/SHARE` | `SYSTEM_HOST` (600s)  |
 | `vm/monitor`   | Monitor information (variable) (e.g. used cpu, network usage) stored in `VM/MONITORING`            | `MONITOR_VM` (30s)    |
 | `vm/state`     | State change notification, only send when a change is detected                                     | `STATE_VM` (30s)      |
-| `vm/execution` | Retrieve results from the command executed inside the VMs                                           | `EXEC_VM`  (5s)       |
+| `vm/execution` | Retrieve results from the command executed inside the VMs                                          | `EXEC_VM`  (5s)       |
 
 If you need to add custom metrics, the procedure is:
 

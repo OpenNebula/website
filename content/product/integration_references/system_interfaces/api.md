@@ -1392,37 +1392,37 @@ For example:
 - **Description**: Executes a command inside a Virtual Machine. The VM needs to be in RUNNING state.
 - **Parameters**
 
-| Type   | Data Type   | Description                                 |
-|--------|-------------|---------------------------------------------|
-| IN     | Int         | The VM ID.                                  |
-| IN     | String      | The command to be run inside the VM.        |
+| Type   | Data Type   | Description                                        |
+|--------|-------------|----------------------------------------------------|
+| IN     | Int         | The VM ID.                                         |
+| IN     | String      | The command to be run inside the VM.               |
 | OUT    | Boolean     | `true` or `false` whenever it is successful or not |
-| OUT    | Int/String  | The VM ID / The error string.               |
-| OUT    | Int         | Error code.                                 |
+| OUT    | Int/String  | The VM ID / The error string.                      |
+| OUT    | Int         | Error code.                                        |
 
 ### one.vm.retryexec
 
 - **Description**: Attempts to run the last command executed inside a Virtual Machine. The VM needs to be in RUNNING state.
 - **Parameters**
 
-| Type   | Data Type   | Description                                 |
-|--------|-------------|---------------------------------------------|
-| IN     | Int         | The VM ID.                                  |
+| Type   | Data Type   | Description                                     |
+|--------|-------------|-------------------------------------------------|
+| IN     | Int         | The VM ID.                                      |
 | OUT    | Boolean     | `true` or `false` whenever is successful or not |
-| OUT    | Int/String  | The VM ID / The error string.               |
-| OUT    | Int         | Error code.                                 |
+| OUT    | Int/String  | The VM ID / The error string.                   |
+| OUT    | Int         | Error code.                                     |
 
 ### one.vm.cancelexec
 
 - **Description**: Cancels the execution of last command inside a Virtual Machine. The VM needs to be in RUNNING state.
 - **Parameters**
 
-| Type   | Data Type   | Description                                 |
-|--------|-------------|---------------------------------------------|
-| IN     | Int         | The VM ID.                                  |
+| Type   | Data Type   | Description                                     |
+|--------|-------------|-------------------------------------------------|
+| IN     | Int         | The VM ID.                                      |
 | OUT    | Boolean     | `true` or `false` whenever is successful or not |
-| OUT    | Int/String  | The VM ID / The error string.               |
-| OUT    | Int         | Error code.                                 |
+| OUT    | Int/String  | The VM ID / The error string.                   |
+| OUT    | Int         | Error code.                                     |
 
 ### one.vmpool.info
 

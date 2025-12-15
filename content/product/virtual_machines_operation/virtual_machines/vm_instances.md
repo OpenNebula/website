@@ -741,21 +741,16 @@ The arguments are mandatory. If you use the CLI or Sunstone they are generated a
 ## Command Execution Inside the Virtual Machine
 Prerequisites:
 * Running commands within a VM rely on the QEMU Guest Agent, which must be installed and running on the VM. 
-* The VM must be in the `RUNNING` state. 
+* The VM must be in the `RUNNING` state.
+
 With OpenNebula, run commands inside a Virtual Machine. Commands are sent to the VM through the QEMU Guest Agent, and results are stored in the VM template under `QEMU_GA_EXEC`. The following diagram depicts how commands are executed within a VM:
 
-It consists of the following architecture:
-
 ![Architecture Outlining How Command Execution Operates Within the VM](/images/vm_exec_architecture.png)
-
 
 The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. To find more details on configuring the monitor probe, refer to [Monitoring System](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md).
 
 {{< alert title="Warning" color="warning" >}}
-Run only one command at a time for every Virtual Machine. If a current command is still in EXECUTING status, even if finished but not yet updated by the monitor probe, new commands will not be executed until the current one is fully completed.{{< /alert >}}
-
-{{< alert title="Note" color="success" >}}
-This uses the QEMU Guest Agent, which must be installed and running on the VM. The VM must be in the `RUNNING` state.{{< /alert >}}
+Run only one command at a time for every Virtual Machine. If a current command is still in `EXECUTING` status, even if finished but not yet updated by the monitor probe, new commands will not be executed until the current one is fully completed.{{< /alert >}}
 
 ### Options
 The `QEMU_GA_EXEC` section in the VM template contains the following fields:
