@@ -22,7 +22,7 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 ## Drivers - Storage
 
-- Setting a value for `NETAPP_GROW_THRESHOLD` will cause failures in the NetApp Native driver. To solve it, remove the `NETAPP_GROW_THRESHOLD` attribute from both the Image and System datastores.
+- [Setting a value for `NETAPP_GROW_THRESHOLD` will cause failures in the NetApp Native driver](https://github.com/OpenNebula/one/issues/7416). To solve it, remove the `NETAPP_GROW_THRESHOLD` attribute from both the Image and System datastores.
 
 ## Sunstone
 
