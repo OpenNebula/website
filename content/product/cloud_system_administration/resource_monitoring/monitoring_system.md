@@ -60,6 +60,7 @@ For a quick view of any changes in configuration file options in maintenance rel
 | `SYSTEM_HOST`                                                                               | Time in seconds to send Host static/configuration information                                                                                                                                          |                                                                                  |
 | `MONITOR_HOST`                                                                              | Time in seconds to send Host variable information                                                                                                                                                      |                                                                                  |
 | `STATE_VM`                                                                                  | Time in seconds to send VM status (ie. running, error, stopped…)                                                                                                                                       |                                                                                  |
+| `EXEC_VM`                                                                                   | Time in seconds to send VM command execution result                                                                                                                                                    |                                                                                  |
 | `MONITOR_VM`                                                                                | Time in seconds to send VM resource usage metrics                                                                                                                                                      |                                                                                  |
 | `SYNC_STATE_VM`                                                                             | Send a complete VM report if probes stopped more than `SYNC_STATE_VM` seconds                                                                                                                          |                                                                                  |
 
@@ -273,6 +274,9 @@ Probes are structured in different directories that determine the frequency in w
     |   |-- monitor_ds_vm.rb
     |   |-- ...
     |
+    |-- execution
+    |   |-- exec.rb
+    |
     `-- status
         `-- state.rb
 ```
@@ -286,6 +290,7 @@ The purpose of each directory is described in the following table:
 | `host/system`  | General quasi-static info. about Host (e.g. NUMA nodes) stored in `HOST/TEMPLATE` and `HOST/SHARE` | `SYSTEM_HOST` (600s)  |
 | `vm/monitor`   | Monitor information (variable) (e.g. used cpu, network usage) stored in `VM/MONITORING`            | `MONITOR_VM` (30s)    |
 | `vm/state`     | State change notification, only send when a change is detected                                     | `STATE_VM` (30s)      |
+| `vm/execution` | Retrieve results from the command executed inside the VMs                                          | `EXEC_VM`  (5s)       |
 
 If you need to add custom metrics, the procedure is:
 

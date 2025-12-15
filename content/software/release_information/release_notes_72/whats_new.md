@@ -32,6 +32,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 ## Monitoring
 <!--keeping some examples-->
 - [Resource Usage Forecast](../../../product/cloud_system_administration/resource_monitoring/forecast/): Introduces predictive analytics for Host and VM resource consumption, enabling proactive infrastructure management. By analyzing trends in CPU, memory, disk, and network usage, OpenNebula 7.0 supports improved capacity planning, optimized workload scheduling, and early detection of performance bottlenecks.
+- [New monitor message `EXEC_VM`to retrieve the result of commands executed inside a Virtual Machine](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md)
 
 ## Scheduler
 <!--keeping some examples-->
@@ -59,6 +60,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 ## API and CLI
 <!--keeping some examples-->
 - [The `onedb purge-history` command now removes history records only within the specified `–start`, `–end` range for the `–id`, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
+- [New API calls (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) to execute commands on a Virtual Machine](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine)
 - The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and **ARCHITECTURE**.
 - [Add automatic VM index for multiple persistent VM instantiation](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#instantiate-to-persistent)
 
@@ -68,9 +70,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - [Virtual Machine memory encryption](../../../product/virtual_machines_operation/virtual_machines/vm_templates#memory-encryption) allows VM workloads whose memory cannot be read by the hypervisor.
 
 ## LXC
-
 - NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
-
 
 ## OpenNebula Flow
 <!--keeping some examples-->

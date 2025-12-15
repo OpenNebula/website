@@ -122,6 +122,9 @@ Commands with marked with \* are asynchronous. The success response for these co
 | pci-attach                                                                                                                                              | one.vm.attachpci          | VM:MANAGE                                                |
 | pci-detach                                                                                                                                              | one.vm.detachpci          | VM:MANAGE                                                |
 | restore                                                                                                                                                 | one.vm.restore            | VM:MANAGE                                                |
+| exec                                                                                                                                                    | one.vm.exec               | VM:MANAGE                                                |
+| exec-retry                                                                                                                                              | one.vm.retryexec          | VM:MANAGE                                                |
+| exec-cancel                                                                                                                                             | one.vm.cancelexec         | VM:MANAGE                                                |
 
 {{< alert title="Note" color="success" >}}
 The **deploy** action requires the user issuing the command to have VM:ADMIN rights. This user will usually be the scheduler with the oneadmin credentials.
@@ -1383,6 +1386,43 @@ For example:
 | OUT    | Boolean     | true or false whenever is successful or not                                       |
 | OUT    | Int/String  | The VM ID / The error string.                                                     |
 | OUT    | Int         | Error code.                                                                       |
+
+### one.vm.exec
+
+- **Description**: Executes a command inside a Virtual Machine. The VM needs to be in RUNNING state.
+- **Parameters**
+
+| Type   | Data Type   | Description                                        |
+|--------|-------------|----------------------------------------------------|
+| IN     | Int         | The VM ID.                                         |
+| IN     | String      | The command to be run inside the VM.               |
+| OUT    | Boolean     | `true` or `false` whenever it is successful or not |
+| OUT    | Int/String  | The VM ID / The error string.                      |
+| OUT    | Int         | Error code.                                        |
+
+### one.vm.retryexec
+
+- **Description**: Attempts to run the last command executed inside a Virtual Machine. The VM needs to be in RUNNING state.
+- **Parameters**
+
+| Type   | Data Type   | Description                                     |
+|--------|-------------|-------------------------------------------------|
+| IN     | Int         | The VM ID.                                      |
+| OUT    | Boolean     | `true` or `false` whenever is successful or not |
+| OUT    | Int/String  | The VM ID / The error string.                   |
+| OUT    | Int         | Error code.                                     |
+
+### one.vm.cancelexec
+
+- **Description**: Cancels the execution of last command inside a Virtual Machine. The VM needs to be in RUNNING state.
+- **Parameters**
+
+| Type   | Data Type   | Description                                     |
+|--------|-------------|-------------------------------------------------|
+| IN     | Int         | The VM ID.                                      |
+| OUT    | Boolean     | `true` or `false` whenever is successful or not |
+| OUT    | Int/String  | The VM ID / The error string.                   |
+| OUT    | Int         | Error code.                                     |
 
 ### one.vmpool.info
 
