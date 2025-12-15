@@ -738,19 +738,21 @@ In this example, the first argument would be the disk and the second the snapsho
 {{< alert title="Note" color="success" >}}
 The arguments are mandatory. If you use the CLI or Sunstone they are generated automatically for the actions.{{< /alert >}} 
 
-##  Execute Commands Inside the Virtual Machine
-
-You can execute commands inside a Virtual Machine using OpenNebula. Commands are sent to the VM through the QEMU Guest Agent and results are stored in the VM template under `QEMU_GA_EXEC`.
+## Command Execution Inside the Virtual Machine
+Prerequisites:
+* Running commands within a VM rely on the QEMU Guest Agent, which must be installed and running on the VM. 
+* The VM must be in the `RUNNING` state. 
+With OpenNebula, run commands inside a Virtual Machine. Commands are sent to the VM through the QEMU Guest Agent, and results are stored in the VM template under `QEMU_GA_EXEC`. The following diagram depicts how commands are executed within a VM:
 
 It consists of the following architecture:
 
-![vm_exec_architecture](/images/vm_exec_architecture.png)
+![Architecture Outlining How Command Execution Operates Within the VM](/images/vm_exec_architecture.png)
 
 
-The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. More details on configuring the monitor probe can be found [here](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md).
+The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. To find more details on configuring the monitor probe, refer to [Monitoring System](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md).
 
 {{< alert title="Warning" color="warning" >}}
-Only one command can be executed at a time per VM. If a previous command is still in `EXECUTING` state (even if finished but not yet updated by the monitor probe), new commands cannot be sent until it completes.{{< /alert >}}
+Run only one command at a time for every Virtual Machine. If a current command is still in EXECUTING status, even if finished but not yet updated by the monitor probe, new commands will not be executed until the current one is fully completed.{{< /alert >}}
 
 {{< alert title="Note" color="success" >}}
 This uses the QEMU Guest Agent, which must be installed and running on the VM. The VM must be in the `RUNNING` state.{{< /alert >}}
@@ -772,18 +774,18 @@ The `QEMU_GA_EXEC` section in the VM template contains the following fields:
 ### Executing a command from the CLI
 
 To execute a command inside a VM, use the `onevm exec` command. For example, to list files in the home directory of VM 0:
-```default
+```bash
 $ onevm exec 0 'ls -l'
 ```
 
 Check the status of the command with:
-```default
+```bash
 $ onevm show 0
 ```
 
 When still executing:
 
-```default
+```bash
 VIRTUAL MACHINE TEMPLATE
 ...
 QEMU_GA_EXEC=[
@@ -792,9 +794,9 @@ QEMU_GA_EXEC=[
   STATUS="EXECUTING" ]
 ```
 
-After execution completes, it will be updated:
+After the execution is complete, details are updated:
 
-```default
+```bash
 VIRTUAL MACHINE TEMPLATE
 ...
 QEMU_GA_EXEC=[
@@ -808,12 +810,12 @@ QEMU_GA_EXEC=[
 ```
 
 To retry the execution of the last command executed, use `onevm exec-retry`:
-```default
+```bash
 $ onevm exec-retry 0
 ```
 
 To cancel the command being executed, use `onevm exec-cancel`:
-```default
+```bash
 $ onevm exec-cancel 0
 ```
 

@@ -1389,38 +1389,38 @@ For example:
 
 ### one.vm.exec
 
-- **Description**: Execute a command inside a Virtual Machine. The VM needs to be in RUNNING state.
+- **Description**: Executes a command inside a Virtual Machine. The VM needs to be in RUNNING state.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
 |--------|-------------|---------------------------------------------|
 | IN     | Int         | The VM ID.                                  |
 | IN     | String      | The command to be run inside the VM.        |
-| OUT    | Boolean     | true or false whenever is successful or not |
+| OUT    | Boolean     | `true` or `false` whenever it is successful or not |
 | OUT    | Int/String  | The VM ID / The error string.               |
 | OUT    | Int         | Error code.                                 |
 
 ### one.vm.retryexec
 
-- **Description**: Retry to execute the last command executed inside a Virtual Machine. The VM needs to be in RUNNING state.
+- **Description**: Attempts to run the last command executed inside a Virtual Machine. The VM needs to be in RUNNING state.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
 |--------|-------------|---------------------------------------------|
 | IN     | Int         | The VM ID.                                  |
-| OUT    | Boolean     | true or false whenever is successful or not |
+| OUT    | Boolean     | `true` or `false` whenever is successful or not |
 | OUT    | Int/String  | The VM ID / The error string.               |
 | OUT    | Int         | Error code.                                 |
 
 ### one.vm.cancelexec
 
-- **Description**: Cancel the last command being executed inside a Virtual Machine. The VM needs to be in RUNNING state.
+- **Description**: Cancels the execution of last command inside a Virtual Machine. The VM needs to be in RUNNING state.
 - **Parameters**
 
 | Type   | Data Type   | Description                                 |
 |--------|-------------|---------------------------------------------|
 | IN     | Int         | The VM ID.                                  |
-| OUT    | Boolean     | true or false whenever is successful or not |
+| OUT    | Boolean     | `true` or `false` whenever is successful or not |
 | OUT    | Int/String  | The VM ID / The error string.               |
 | OUT    | Int         | Error code.                                 |
 
