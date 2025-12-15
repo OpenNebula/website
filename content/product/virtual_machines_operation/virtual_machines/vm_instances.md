@@ -533,6 +533,25 @@ $ oneimage list
    8 oneadmin   oneadmin   my_vm-disk-0    default       200M OS   Yes used    1
 ```
 
+To "instantiate multiple persistent" VMs use the options `-m N` **and** `--name`. You **must** provide `--name` when `-m` > 1. Include `%i` in the name to insert the VM index (0..N-1) at a custom place:
+
+```default
+$ onetemplate instantiate -m 2 --persistent --name 'test'
+VM ID: 0
+VM ID: 1
+
+$ onetemplate instantiate -m 2 --persistent --name '%i-test'
+VM ID: 2
+VM ID: 3
+
+$ onevm list
+  ID USER         GROUP        NAME       STAT     CPU      MEM     HOST      TIME
+   3 oneadmin     oneadmin     1-test     hold       1     768M           0d 00h00
+   2 oneadmin     oneadmin     0-test     hold       1     768M           0d 00h00
+   1 oneadmin     oneadmin     test-1     hold       1     768M           0d 00h00
+   0 oneadmin     oneadmin     test-0     hold       1     768M           0d 00h00
+```
+
 Equivalently, in Sunstone activate the “Persistent” switch next to the Create button.
 
 Please bear in mind the following `ontemplate instantiate --persistent` limitation: volatile disks cannot be persistent. The contents of the disks will be lost when the VM is terminated. The cloned VM template will contain the definition for an empty volatile disk.

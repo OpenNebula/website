@@ -1,0 +1,50 @@
+name: Hugo Site Build Check
+
+on:
+  pull_request:
+    branches:
+      - '**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build and publish job
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.145.0
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install Node.js dependencies
+        run: npm install
+      - name: Add node_modules to PATH
+        run: echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+      - name: Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: ci
+          PATH: ${{ runner.path }}:/usr/local/bin:/usr/bin:/bin:/node_modules/.bin
+        run: |
+          npx postcss --version # Verify PostCSS installation
+          hugo \
+            --minify \
+            --config hugo.toml

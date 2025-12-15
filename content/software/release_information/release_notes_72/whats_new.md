@@ -42,6 +42,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 ## Storage & Backups
 <!--keeping some examples-->
 - [Integrated NFS life cycle setup](../../../product/cluster_configuration/storage_system/nas_ds.md#automatic-nfs-setup): simplify the configuration and management of SAN/NFS in shared storage scenarios.
+- New redesigned version of [LVM storage subsystem (EE)](../../../product/cluster_configuration/lvm/lvm.md) with native thin-provisioning, unified image and VM disk management, and simplified configuration. The new driver improves performance, reduces deployment complexity, and enables more efficient use of SAN-backed storage by eliminating the need for hybrid file-based setups.
 
 
 ## Sunstone
@@ -50,18 +51,26 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 
 - Sunstone no longer relies on the system-provided Node.js packages, which often varied significantly across supported platforms. OpenNebula now standardizes on Node.js 20 from NodeSource. The required `nodejs` RPM/DEB packages are shipped directly in the OpenNebula repository, eliminating the need for users to configure external NodeSource repositories.
 
+- New tab for checking virtual machines logs.
+
+- Backups, images and files tabs added by default in the groupadmin view.
+
+- Services Tab added by default in the user view.
+
 ## API and CLI
 <!--keeping some examples-->
 - [The `onedb purge-history` command now removes history records only within the specified `–start`, `–end` range for the `–id`, instead of deleting all records](https://github.com/OpenNebula/one/issues/6699).
-- The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and
-**ARCHITECTURE**.
 - [New API calls (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) to execute commands on a Virtual Machine](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine)
+- The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and **ARCHITECTURE**.
+- [Add automatic VM index for multiple persistent VM instantiation](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#instantiate-to-persistent)
 
 ## KVM & Networking
 <!--keeping some examples-->
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
+- [Virtual Machine memory encryption](../../../product/virtual_machines_operation/virtual_machines/vm_templates#memory-encryption) allows VM workloads whose memory cannot be read by the hypervisor.
 
-
+## LXC
+- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
 
 ## OpenNebula Flow
 <!--keeping some examples-->
