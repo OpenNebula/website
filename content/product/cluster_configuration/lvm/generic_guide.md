@@ -1,7 +1,7 @@
 ---
 title: "SAN/LVM: Generic setup"
 linkTitle: "Generic SAN setup"
-weight: "6"
+weight: "4"
 ---
 
 

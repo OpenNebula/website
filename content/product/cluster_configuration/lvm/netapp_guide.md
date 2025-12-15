@@ -1,7 +1,7 @@
 ---
 title: "SAN/LVM: NetApp setup"
 linkTitle: "NetApp: SAN setup"
-weight: "5"
+weight: "3"
 ---
 
 This setup assumes you are using NetApp ONTAP with iSCSI and are trying to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the NetApp ONTAP interface and its functionality, create the required resources as desired.
