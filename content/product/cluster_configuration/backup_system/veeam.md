@@ -132,9 +132,7 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
      - Veeam Backup appliance
 
 
-![image](/images/backup_veeam_architecture.png)
-
-{{< image path="/images/backup_veeam_architecture.svg" alt="Architecture of the OpenNebula-Veeam Backup Integration" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/backup_veeam_architecture.svg" alt="Architecture of the OpenNebula-Veeam Backup Integration" align="center" width="70%" pb="20px" >}}
 
 ## Backup Server Requirements
 
