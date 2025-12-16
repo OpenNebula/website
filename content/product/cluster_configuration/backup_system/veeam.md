@@ -134,6 +134,8 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
 
 ![image](/images/backup_veeam_architecture.png)
 
+{{< image path="/images/backup_veeam_architecture.svg" alt="Architecture of the OpenNebula-Veeam Backup Integration" align="center" width="50%" pb="20px" >}}
+
 ## Backup Server Requirements
 
 To ensure full compatibility with the ovirtAPI module, the Backup Server must run one of the following operating systems:

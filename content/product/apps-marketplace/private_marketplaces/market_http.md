@@ -44,6 +44,7 @@ These are the configuration attributes of a Marketplace template of the HTTP kin
 When an image is uploaded to this market, it is copied to `BRIDGE_LIST`:`PUBLIC_DIR` (if `BRIDGE_LIST` is not set, then it is copied to the current Front-end where OpenNebula is running). After that, it is available in `BASE_URL`. OpenNebula does not set up the webserver nor the secure access to it.
 
 ![HTTP marketplace overview](/images/market_http.png)
+{{< image path="/images/market_http.svg" alt="HTTP marketplace overview" align="center" width="50%" pb="20px" >}}
 
 For example, the following examples illustrate the creation of a Marketplace:
 

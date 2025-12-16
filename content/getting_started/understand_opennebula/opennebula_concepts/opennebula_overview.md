@@ -90,7 +90,7 @@ If you are interested in an OpenNebula cloud fully based on open source platform
 
 ![><](/images/overview_customized-cluster.png)
 
-<!-- overview_customized-cluster.png -->
+{{< image path="/images/overview_customized-cluster.svg" alt="OpenNebula Cloud Model based on Customized Clusters" align="center" width="50%" pb="20px" >}}
 
 ### Choosing the Right Configuration
 

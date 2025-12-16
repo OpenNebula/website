@@ -24,6 +24,8 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 
 ![image0](/images/datastoreoverview.png)
 
+{{< image path="/images/datastoreoverview.svg" alt="Overview of Storage Design based on Datastores" align="center" width="50%" pb="20px" >}}
+
 ### Image Datastores
 
 There are different Image Datastores depending on how the images are stored on the underlying storage technology:

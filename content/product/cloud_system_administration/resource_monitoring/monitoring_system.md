@@ -28,6 +28,8 @@ Probes are structured in information categories for Host and Virtual Machine inf
 
 ![image0](/images/collector.png)
 
+{{< image path="/images/collector.svg" alt="Architecture of Dedicated Monitoring System in OpenNebula" align="center" width="50%" pb="20px" >}}
+
 If information stops coming from a specific Host, OpenNebula detects it by missing heartbeats and pro-actively connects to the particular Host over SSH and restarts probes.
 
 {{< alert title="Important" color="success" >}}

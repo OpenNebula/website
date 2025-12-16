@@ -22,6 +22,7 @@ The hook subsystem has two main components:
 - **Hook Execution Manager** (HEM): it registers itself to the events that trigger the hooks defined in the system. When an event is received it takes care of executing the corresponding hook command.
 
 ![hook-subsystem](/images/hooks-subsystem-architecture.png)
+{{< image path="/images/hooks-subsystem-architecture.svg" alt="Hook Subsystem" align="center" width="50%" pb="20px" >}}
 
 Both components are started together with the OpenNebula service. Note that, provided the network communication is secure, you can grant network access to the event queue and hence deploy HEM in a different server.
 
