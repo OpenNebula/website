@@ -117,6 +117,17 @@ Here is a list of the known issues and limitations affecting the Veeam integrati
 - Alpine virtual machines cannot be backed up.
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
+- After performing a backup using Veeam VNC may stop working for the backed up VM and some configuration attributes may be lost. If facing this issue, please apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/backup_controller.rb`` file in the backup server at lines ~247-251 (the 2 ``vm.updateconf`` calls need the ``true`` statement at the end):
+
+```ruby
+...
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2",' \
+        'BACKUP_VOLATILE"="YES"]', true)
+else
+    LOGGER.info 'Backup volatiles disabled.'
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2"]', true)
+...
+```
 
 ## Architecture
 
