@@ -62,6 +62,16 @@ In order to save space in the backup system, RAW disk backups are converted and 
 
 Before making backups you need to configure some aspects of the backup process (e.g., the backup mode). This can be done for VM templates or Virtual Machines.
 
+### Backup Modes
+
+OpenNebula provides three `FS_FREEZE` modes to control how the guest filesystem is handled before taking a backup. Choose the mode that best fits your workload and guest OS capabilities:
+
+- **NONE**: Do not attempt any filesystem freeze. This is the fastest option and requires no guest-side support, but backups may only be crash-consistent (the same as powering off the VM abruptly). Use when guest-agent support is unavailable or when minimal disruption is required.
+
+- **AGENT**: Use the guest agent to handle the filesystem inside the guest prior to backup. On Linux this typically uses the qemu guest agent or fsfreeze to freeze filesystems; on Windows the guest agent triggers the Volume Shadow Copy Service (VSS) to create application and filesystem-consistent snapshots (in this case VSS needs to be properly configured). `AGENT` is the recommended option when you need stronger consistency and the guest supports it.
+
+- **SUSPEND**: Suspend (pause) the VM at the hypervisor level for the brief period of the backup pre-step. This guarantees a consistent on-disk state without relying on guest tools, but it pauses all guest activity and may impact running services.
+
 ### Virtual Machine Templates
 
 You can configure backups in the VM Template, so every VM created will have a preconfigured backup setup. The following example shows a VM template with incremental backups configured:
