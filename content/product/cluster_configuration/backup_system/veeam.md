@@ -228,6 +228,7 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 * ``one_xmlrpc``: Address of the OpenNebula Front-end. Please do not include any prefixes such as ``http://``, only the IP address itself is needed.
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
 * ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
+* ``backup_freeze``: (Optional) Controls which filesystem freeze mode OpenNebula requests when performing backups initiated via the oVirtAPI/Veeam integration. Valid values are `NONE`, `AGENT`, and `SUSPEND`. For details on each mode see the Backup Modes section in the backup guide: [Backup Modes]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations/#backup-modes" %}}).
 
 {{< alert title="Important" color="success" >}}
 You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
