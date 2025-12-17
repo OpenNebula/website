@@ -52,9 +52,33 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by default. It could happen that after installing a graphical desktop on a Linux VM, the Xorg window system does not load the appropriate video driver. You can force a VESA mode by configuring the kernel parameter `vga=VESA_MODE` in the GNU GRUB configuration file. [Here](https://en.wikipedia.org/wiki/VESA_BIOS_Extensions#Linux_video_mode_numbers/) you can find the VESA mode numbers. For example, adding `vga=791` as kernel parameter will select the 16-bit 1024×768 resolution mode.
 
-## Backups
+## Backups - Veeam
 
-- For Veeam related issues, please referer to the [Veeam (EE) page](../../../product/cluster_configuration/backup_system/veeam.md).
+- If the backup chain is deleted in OpenNebula and an incremental is attempted from Veeam, the data may be corrupt, so a manual Full Backup is needed from Veeam, otherwise the incremental data will be missing. 
+- After performing a backup using Veeam VNC may stop working for the backed up VM and some configuration attributes may be lost. If facing this issue, please apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/backup_controller.rb`` file in the backup server at lines ~247-251 (the 2 ``vm.updateconf`` calls need the ``true`` statement at the end). Then, restart the apache2/httpd service:
+
+```ruby
+...
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2",' \
+        'BACKUP_VOLATILE"="YES"]', true) # <- Add true parameter
+else
+    LOGGER.info 'Backup volatiles disabled.'
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2"]', true) # <- Add true parameter
+...
+```
+
+- In LVM environments, VM restores may fail to deploy if the restored VM is scheduled in the same host as the original VM (and the original is still deployed). To fix this, apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/vm_controller.rb`` file in the backup server at lines ~800. Then, restart the apache2/httpd service:
+
+```ruby
+...
+xml_element.delete_element('TEMPLATE/NIC')
+xml_element.delete_element('TEMPLATE/DISK')
+xml_element.delete_element('TEMPLATE/GRAPHICS')
+xml_element.delete_element('TEMPLATE/OS/BOOT')
+xml_element.delete_element('TEMPLATE/VMID')
+xml_element.delete_element('TEMPLATE/OS/UUID') # <- Add this line
+...
+```
 
 ## Market proxy settings
 
