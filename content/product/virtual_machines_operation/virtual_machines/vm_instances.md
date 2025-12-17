@@ -764,7 +764,8 @@ Prerequisites:
 
 With OpenNebula, run commands inside a Virtual Machine. Commands are sent to the VM through the QEMU Guest Agent, and results are stored in the VM template under `QEMU_GA_EXEC`. The following diagram depicts how commands are executed within a VM:
 
-![Architecture Outlining How Command Execution Operates Within the VM](/images/vm_exec_architecture.png)
+{{< image path="/images/vm_exec_architecture.svg" alt="Architecture Outlining How Command Execution Operates Within the VM" align="center" width="70%" pb="20px" >}}
+
 
 The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. To find more details on configuring the monitor probe, refer to [Monitoring System](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md).
 
