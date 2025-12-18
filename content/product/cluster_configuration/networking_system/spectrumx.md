@@ -57,7 +57,7 @@ The high-level workflow is as follows:
 ## Current Status and Considerations
 
 {{< alert title="Important" color="info" >}}
-This is a high-level overview of the integration. The underlying NVIDIA Spectrum-X Reference Architecture and Deployment Guide contain confidential information. Customers interested in a detailed technical discussion and production deployment should contact OpenNebula Systems.
+This is a high-level overview of the integration. Customers interested in a detailed technical discussion and production deployment should contact OpenNebula Systems.
 {{< /alert >}}
 
 *   **Availability**: This integration is part of the OpenNebula Enterprise Edition and is available as a reference implementation.
