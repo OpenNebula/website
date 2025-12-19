@@ -291,14 +291,14 @@ $ nvidia-smi mig -dci -i <GPU_ID> -gi <GI_ID> -ci <Compute_ID>
 $ nvidia-smi mig -dgi -i <GPU_ID> -gi <GI_ID>
 ```
 
-## Using the vGPU
+## Using the vGPU & MIG Profiles
 
 Once the setup is complete, you can follow the [general steps]({{% relref "pci_passthrough#pci-config" %}}) for adding PCI devices to a VM. For NVIDIA GPUs, please consider the following:
 
 - OpenNebula supports both the legacy mediated device interface and the new vendor-specific interface introduced with Ubuntu 24.04. The vGPU device configuration is handled automatically by the virtualization and monitoring drivers. The monitoring process automatically sets the appropriate mode for each device using the `MDEV_MODE` attribute.
-- The NVIDIA vGPU configuration is based on a profile which defines the vGPU’s characteristics and hardware capabilities. This profile is retrieved from the drivers by the monitoring process, allowing you to select the one that best suits your application’s requirements. When using MIG, each MIG instance you created appears as a separate vGPU profile.
+- The NVIDIA vGPU & MIG configuration is based on a profile which defines the vGPU’s characteristics and hardware capabilities. This profile is retrieved from the drivers by the monitoring process, allowing you to select the one that best suits your application’s requirements. When using MIG, each MIG instance you created appears as a separate vGPU profile.
 
-The following example shows the monitoring information for a NVIDIA vGPU device:
+The following example shows the monitoring information for a NVIDIA vGPU device with all available PROFILES:
 
 ```default
 $ onehost show -j 13
@@ -330,6 +330,23 @@ $ onehost show -j 13
 This monitoring information is also available under the VMs PCI tab in the instances section.
 
 ![sunstone_gpu_graph](/images/sunstone_gpu_graph.png)
+
+In order to use and assign these profiles to a VM or VM Templates, we will need to add the vGPU PCI device to the template and select the desired profile:
+
+In sunstone. select "Attach PCI device" under PCI Devices section on "Advanced options":
+
+![sunstone_gpu_profile](/images/sunstone_gpu_profile.png)
+
+
+Using CLI Template:
+
+```
+PCI=[
+  CLASS="0302",
+  DEVICE="0863",
+  PROFILE="1146 (NVIDIA L40S-2B)",
+  VENDOR="10de" ]
+```
 
 {{< alert title="Important" color="success" >}}
 When using NVIDIA cards, ensure that only the GPU (for PCI passthrough) or vGPUs (for SR-IOV) are exposed through the PCI monitoring probe. Do not mix both types of devices in the same configuration.{{< /alert >}}
