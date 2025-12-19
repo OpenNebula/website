@@ -466,7 +466,7 @@ At the next step GPU has to be bound to the vfio driver. For this, perform the f
     0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
     ```
 
-4.  Set the driver override.     Use the PCI address from the previous step to set an override for the device to use the `vfio-pci` driver.
+4.  Set the driver override. Use the PCI address from the previous step to set an override for the device to use the `vfio-pci` driver.
 
     ```default
     # driverctl set-override 0000:e1:00.0 vfio-pci
@@ -515,7 +515,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     
 ### OpenNebula Configuration
 
-To make the GPUs available in OpenNebula, configure the PCI probe on the front-end node to monitor NVIDIA devices.
+Configure the PCI probe on the front-end node to monitor NVIDIA devices in order to make the GPUs available in OpenNebula 
 
 1.  Edit the PCI probe configuration file at `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf`.
 2.  Add a filter for NVIDIA devices:
@@ -556,8 +556,10 @@ The vLLM appliance is available through the OpenNebula Marketplace. Follow steps
 Search for vLLM appliance and import it. Select DataStore where to save image
 
 ![PCI Device attachment](/images/ISO/09-vllm-appliance.png)
+
 2. Go to VMs section and instantiate vLLM appliance. Specify common VM parameters. In the “Advanced Settings” go to “PCI devices” and ensure that required GPU device selected for attachment to the VM. Click “Accept” and then “Finish” to instantiate vLLM appliance.
-3. Once vLLM appliance instantiated, follow steps from the https://docs.opennebula.io/7.0/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification/ to access a webchat app or execute benchmarking tests
+
+3. Once vLLM appliance instantiated, follow steps from [the llm inference guide]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inferrence_certification" %}}) to access a webchat app or execute benchmarking tests
 
 ## Next Steps
 
