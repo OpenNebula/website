@@ -431,14 +431,14 @@ On a workstation with access to the frontend, a local route to the virtual net c
 
 After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
 
-## GPU and host configuration
+## GPU Configuration - Host
 
-Once basic cloud validation is completed, GPU should be configured in pass-through mode. For detailed process check official documentation - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/
+If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [our official documentation](https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/)
 Overall, a GPU configuration in OpenNebula consists from 2 main stages:
 - Host preparation and driver configuration
 - OpenNebula settings for PCI pass-through devices
 
-To prepare OpenNebula host, complete the following steps:
+To prepare the OpenNebula host complete the following steps:
 - Check that IOMMU was enabled on the host using the following command:
 ```default
 # dmesg | grep -i iommu
@@ -512,7 +512,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     # ls -la /dev/vfio/
     crw-rw-rw- 1 root kvm 509, 0 Oct 16 10:00 85
     
-## OpenNebula Configuration
+## GPU Configuration - OpenNebula
 
 ### Monitoring PCI Devices
 
