@@ -431,12 +431,13 @@ On a workstation with access to the frontend, a local route to the virtual net c
 
 After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
 
-## GPU Configuration - Host
+## GPU Configuration
 
-If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [our official documentation](https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/)
-Overall, a GPU configuration in OpenNebula consists from 2 main stages:
+If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [this guide from the official documentation]({{% relref "/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough" %}}). Overall, a GPU configuration in OpenNebula consists from 2 main stages:
 - Host preparation and driver configuration
 - OpenNebula settings for PCI pass-through devices
+
+### Host Configuration
 
 To prepare the OpenNebula host complete the following steps:
 - Check that IOMMU was enabled on the host using the following command:
@@ -479,7 +480,7 @@ At the next step GPU has to be bound to the vfio driver. For this, perform the f
     Kernel driver in use: vfio-pci
     ```
 
-### VFIO Device Ownership
+#### VFIO Device Ownership
 
 For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be owned by the `root:kvm` user and group. This is achieved by creating a `udev` rule.
 
@@ -512,9 +513,7 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     # ls -la /dev/vfio/
     crw-rw-rw- 1 root kvm 509, 0 Oct 16 10:00 85
     
-## GPU Configuration - OpenNebula
-
-### Monitoring PCI Devices
+### OpenNebula Configuration
 
 To make the GPUs available in OpenNebula, configure the PCI probe on the front-end node to monitor NVIDIA devices.
 
@@ -534,7 +533,7 @@ To make the GPUs available in OpenNebula, configure the PCI probe on the front-e
 
 After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
-## VM with GPU instantiation
+###  VM with GPU instantiation
  To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
 
 ![VM Instantiation](/images/ISO/06-vm-instantiate-1.png)
@@ -549,8 +548,10 @@ In the dropdown menu select available GPU device which will be attached to the V
 
 Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used. 
 
-## vLLM appliance validation
-The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from the official documentation page - https://docs.opennebula.io/7.0/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification/. To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
+### vLLM appliance validation
+     
+The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inferrence_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
+
 1. Go to Storage -> Apps section.
 Search for vLLM appliance and import it. Select DataStore where to save image
 
