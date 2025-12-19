@@ -559,7 +559,7 @@ Search for vLLM appliance and import it. Select DataStore where to save image
 
 2. Go to VMs section and instantiate vLLM appliance. Specify common VM parameters. In the “Advanced Settings” go to “PCI devices” and ensure that required GPU device selected for attachment to the VM. Click “Accept” and then “Finish” to instantiate vLLM appliance.
 
-3. Once vLLM appliance instantiated, follow steps from [the llm inference guide]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) to access a webchat app or execute benchmarking tests
+3. Once vLLM appliance instantiated, follow steps from [the LLM inference guide]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) to access a webchat app or execute benchmarking tests
 
 ## Next Steps
 
