@@ -446,33 +446,27 @@ To prepare the OpenNebula host complete the following steps:
 ```
 If IOMMU wasn’t enabled on the host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
 At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
-1. Install `driverctl` utility:
-
-    ```default
-    # dnf install driverctl
-    ```
-
-2.  Ensure `vfio-pci` module is loaded on boot:
+1.  Ensure `vfio-pci` module is loaded on boot:
 
     ```default
     # echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
     # modprobe vfio-pci
     ```
 
-3.  Identify the GPU's PCI address:
+2. Identify the GPU's PCI address:
 
     ```default
     # lspci -D | grep -i nvidia
     0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
     ```
 
-4.  Set the driver override. Use the PCI address from the previous step to set an override for the device to use the `vfio-pci` driver.
+3. Set the driver override. Use a driverctl utility and the PCI address of the GPU device from the previous step to override driver.
 
     ```default
     # driverctl set-override 0000:e1:00.0 vfio-pci
     ```
 
-5.  Verify the driver binding:
+4. Verify the driver binding:
     Check that the GPU is now using the `vfio-pci` driver.
 
     ```default
