@@ -1,7 +1,7 @@
 ---
 title: "Migrating VMs with OneSwap"
 date: "2025-02-17"
-description: "The OneSwap command-line tool allows you to quickly migrate Virtual Machines and appliances from VMware."
+description: "The OneSwap command-line tool allows a quickly migration of Virtual Machines and appliances from VMware."
 categories:
 pageintoc: "268"
 tags:
@@ -39,7 +39,7 @@ dnf install opennebula-swap
 ### Requirements and recommended settings
 
 OneSwap requirements for virtual conversion from VMWare to OpenNebula are the following:
-- OneSwap is only supported on Ubuntu 24.0 LTS and Alma Linux/RHEL 9 servers.
+- OneSwap is only supported on Ubuntu 24.04 LTS and Alma Linux/RHEL 9 servers. On previous versions of Ubuntu and Alma/RHEL some dependencies are outdated.
 - A working OpenNebula environment with capacity enough to store imported images and VMs and a user with permissions on the destination datastores. Alternatively, conversion can be done with user `oneadmin` and set the right permissions in a posterior step.
 - A vCenter endpoint with valid credentials to export the VMs.
   - The parameters `vcenter`, `vuser`, `vpass` and `port` must be specified.
@@ -68,7 +68,7 @@ Ubuntu 24.04 and AlmaLinux/RHEL 9 provide up to date versions of the packages
 There are two requirements to convert Windows Virtual Machines:
 - [VirtIO ISO drivers](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) must be stored in the `/usr/local/share/virtio-win` directory.
 - [RHsrvany, an Open Source srvany implementation](https://github.com/rwmjones/rhsrvany) to create the needed Windows services during the migration. 
-  - In Alma Linux and RHEL this package is a dependency of OneSwap
+  - In Alma Linux and RHEL this package is a dependency of OneSwap and will be installed automatically
   - In Ubuntu [the package can be downloaded from fedoraproject.org](https://kojipkgs.fedoraproject.org/packages/mingw-srvany/1.1/11.eln153/noarch/mingw-srvany-redistributable-1.1-11.eln153.noarch.rpm). <br/>
 For compatibility with older versions of virt2v the following symlinks are needed
 
@@ -100,20 +100,20 @@ rpm2cpio srvany.rpm | cpio -idmv \
 
 ### On Linux VMs
 - The virtual machine must have the kernel headers installed. The name of the package may differ on each distribution, for instance, in Ubuntu the package to install is `linux-headers` and in Alma Linux is `kernel-headers`.
-- The kernel version must support virtio drivers (kernel 2.6.30 or greater, from 2009-07-09).
+- The guest kernel version must support virtio drivers (kernel 2.6.30 or greater, which was issued on 2009-07-09).
 - virt-v2v tool does not support updating GRUB2, if the following message is shown during the conversion process:
 
 ```
 WARNING: could not determine a way to update the configuration of Grub2
 ```
 
-booting the VM from a rescue CD and fixing grub may be necessary
+booting the VM from a rescue CD and fixing grub may be necessary.
 
 ### On Windows VMs
 - Fast startup must be disabled (Control Panel -> Power Options -> Advanced power settings)
-- Installing VirtIO Storage and Network drivers before the conversion will improve conversion times. If not, they will be injected later.
+- Installing (VirtIO Storage and Network drivers \(available at their github\))[https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md] before the conversion will improve conversion times. If not, they will be injected later.
 - Officially, Windows 2016 and onwards **require** UEFI boot.
-- Windows VMs can only be converted with virt-v2v style transfer (`custom` and `fallback` will fail)
+- Windows VMs can only be converted with virt-v2v style transfer (`custom` and `fallback` styles will fail)
 
 ### Virtual machines with UEFI BIOS
 OneSwap normally detects if the VM boots in UEFI mode and sets up OpenNebula template accordingly, but in some strange cases autodetection may fail. In these cases, modify the following options on the OpenNebula template:
@@ -144,7 +144,7 @@ A custom conversion option is also provided, which is only recommended as a fall
 
 ### Importing VMs 
 
-`oneswap` can query ESX VMs and datacenters
+Before migrations, `oneswap` can query ESX VMs and datacenters
 
 | Command | Output |
 | --- | --- |
@@ -152,4 +152,4 @@ A custom conversion option is also provided, which is only recommended as a fall
 | `oneswap list clusters [--datacenter DCName]` | List clusters (can filter by datacenter) |
 | `oneswap list vms [--datacenter DCName [--cluster ClusterName]]` | List VMs on ESX. Cluster needs the Datacenter name. |
 
-
+For convenience, it is a good practice to populate the `/etc/one/oneswap.yaml` file with the values that will apply for most migrated VMs. If the user running oneswap has no permissions to edit the file, it can be copied, modified and execute `oneswap` with the parameter `--config-file NEW_CONFIG_FILE.yaml`
