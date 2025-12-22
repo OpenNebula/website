@@ -45,16 +45,20 @@ OneSwap requirements for virtual conversion from VMWare to OpenNebula are the fo
   - The parameters `vcenter`, `vuser`, `vpass` and `port` must be specified.
   - If Delta conversion mode is being used, the user running `oneswap` command must have ssh passwordless access to the ESXi host where the VMs to convert are running.
 - If oneswap is ran on a different machine than OpenNebula frontend, then the following components must also be configured:
-  - The [Command Line Interface (CLI) to access to the OpenNebula server]({{% relref "command_line_interface#cli-configuration" %}}) must be able to execute commands on the OpenNebula frontend. Normally, only the variables `ONE_XMLRPC` and `ONE_AUTH` are needed.
   - Set up the transfer method options (oneswap parameters `http_transfer`, `http_host` and `http_port`).
 
-{{< alert color="success" title="OneSwap configuration file" >}}
-All the OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml`
+{{< alert color="success" title="OneSwap configuration" >}}
+Most OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml` but **the user running `oneswap` must be able to run CLI commands on the destination OpenNebula frontend** (i.e. being able to run `onevm list`). If `oneswap` is ran from the frontend as `oneadmin` user this works directly. 
+{{< /alert >}}
+
+{{< alert color="warning" title="OpenNebula CLI" >}}
+If `oneswap` runs from a server different than OpenNebula frontend, [check the documentation]({{% relref "command_line_interface#cli-configuration" %}}) about installing the CLI commands and xport the variables `ONE_XMLRPC` and `ONE_AUTH` accordingly.<br/>
+Normally that means populating the file `$HOME/.one/one_auth` with `username:password` and adding `export ONE_XMLRPC=http://opennebula_frontend:2633/RPC2` on the user profile, but it is recommended to check the documentation. 
 {{< /alert >}}
 
 ### Optional requirements and required tools
 
-- VDDK library is recommended to improve disk transfer speeds. As of the moment of writing, the library can be downloaded from [Broadcom developer portal](https://developer.broadcom.com/sdks/vmware-virtual-disk-development-kit-vddk/latest/)
+- VDDK library is recommended to improve disk transfer speeds. As of the moment of writing, the library can be downloaded from [Broadcom developer portal](https://developer.broadcom.com/sdks/vmware-virtual-disk-development-kit-vddk/latest/). VDDK version **MUST** match the vcenter version.
 - It is recommended to increase the vCenter API timeout to avoid request timeouts while converting big VMs. By default this value is 120 minutes and can be changed in vCenter at "Administration -> Deployment -> Client Configuration", allowing values up to 1440 minutes (24 hours).
 - The following libraries/programs must be installed
   - `libguestfs` library, version must be >= 1.50
@@ -93,10 +97,12 @@ rpm2cpio srvany.rpm | cpio -idmv \
 
 ## Migrating Virtual Machines
 
-{{< alert color="warning" title="Limitations for importing" >}}
-- The **VMs to be converted must be powered off in vCenter** for both regular and Delta conversion. Suspended or hibernated VM migration will fail. <br/>
-- For __regular conversion, VMs must not have any snapshot__, either.
-{{< /alert >}}
+OneSwap supports two different modes for the migration of Virtual machines:
+- **Regular mode** (non-delta)
+  - **Requires VMs to be powered-off** (neither suspended or hibernating)
+  - **VMs to convert must not have any snapshot**
+- **Delta mode** is intended for low-downtime migrations (slower)
+  - **VMs must be powered on**
 
 ### On Linux VMs
 - The virtual machine must have the kernel headers installed. The name of the package may differ on each distribution, for instance, in Ubuntu the package to install is `linux-headers` and in Alma Linux is `kernel-headers`.
