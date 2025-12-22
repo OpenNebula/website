@@ -268,6 +268,10 @@ Symbolic links from the System datastore will be created for each Virtual Machin
 The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
 {{< /alert >}}
 
+{{< alert title="Warning" color="warning" >}}
+NetApp ONTAP systems have Volume limitations found [in the NetApp Hardware Universe page](https://hwu.netapp.com), which can be anywhere from 1000 to 2500 Volumes. Be aware that each Image is a Volume and each Virtual Machine Disk is a Volume with a single LUN inside. This is to retain the atomic disk functionalities provided by OpenNebula.
+{{< /alert >}}
+
 **Backups process details:**
 
 Both Full and Incremental backups are supported by NetApp. For Full Backups, a snapshot of the Volume containing the VM disk LUN is taken and attached to the host, where it is converted into a qcow2 image and uploaded to the backup datastore. 
