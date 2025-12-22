@@ -92,7 +92,7 @@ For example, let’s imagine a case where Web Development, Human Resources, and 
 * **VDC RED**: VDC that allocates resources from DC_West_Coast + DC_Europe + Cloudbursting to Human Resources
 * **VDC GREEN**: VDC that allocates resources from DC_West_Coast + DC_Europe to Big Data Analysis
 
-![VDC Organization](/images/vdc_organization.png)
+{{< image path="/images/vdc_organization.svg" alt="VDC Organization" align="center" width="70%" pb="20px" >}}
 
 ### Flexible Groups
 
