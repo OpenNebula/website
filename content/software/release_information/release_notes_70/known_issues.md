@@ -48,9 +48,9 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by default. It could happen that after installing a graphical desktop on a Linux VM, the Xorg window system does not load the appropriate video driver. You can force a VESA mode by configuring the kernel parameter `vga=VESA_MODE` in the GNU GRUB configuration file. [Here](https://en.wikipedia.org/wiki/VESA_BIOS_Extensions#Linux_video_mode_numbers/) you can find the VESA mode numbers. For example, adding `vga=791` as kernel parameter will select the 16-bit 1024×768 resolution mode.
 
-## Backups
+## Backups - Veeam
 
-- For Veeam related issues, please referer to the [Veeam (EE) page](../../../product/cluster_configuration/backup_system/veeam.md).
+There are curently no issues reported from the Veeam integration.
 
 ## Market proxy settings
 

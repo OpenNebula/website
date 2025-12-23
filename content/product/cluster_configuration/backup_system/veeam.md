@@ -62,61 +62,54 @@ The following table summarizes the supported backup modes for each storage syste
 <table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: center;">
   <thead>
     <tr>
-      <th class="head" rowspan="2" style="min-width: 120px; border: 1px solid; vertical-align: middle"><p>Storage</p></th>
-      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Full</p></th>
-      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Incremental</p></th>
-    </tr>
-    <tr>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
+      <th class="head" style="min-width: 120px; border: 1px solid; vertical-align: middle"><p>Storage</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Full</p></th>
+      <th class="head" style="min-width: 100px; border: 1px solid"><p>Incremental</p></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="min-width: 120px; border: 1px solid"><p>File<sup>*</sup> (qcow2)</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="min-width: 120px; border: 1px solid"><p>File (qcow2)</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
     </tr>
     <tr>
-      <td style="border: 1px solid"><p>File<sup>*</sup> (raw)</p></td>
+      <td style="border: 1px solid"><p>File (raw)</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
+      <td style="border: 1px solid"><p>No*</p></td>
     </tr>
     <tr>
       <td style="border: 1px solid"><p>Ceph</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
     </tr>
     <tr>
       <td style="border: 1px solid"><p>LVM</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
+      <td style="border: 1px solid"><p>Yes**</p></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid"><p>NetApp</p></td>
       <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes**</p></td>
-      <td style="border: 1px solid"><p>Yes**</p></td>
+      <td style="border: 1px solid"><p>Yes</p></td>
     </tr>
   </tbody>
 </table>
 
-<sup>\*</sup> Any datastore based on files with the given format, i.e., NFS/SAN or Local.
+<sup>\*</sup> While OpenNebula doesn't support backups for raw images, Veeam will perform a full backup and perform block to block comparison to create it's own incremental.
 
 <sup>\**</sup> Supported for LVM-thin environments.
 
 ## Limitations
 
-Here is a list of the known issues and limitations affecting the Veeam integration with OpenNebula:
+Here is a list of the limitations affecting the Veeam integration with OpenNebula:
 
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
 - Alpine virtual machines cannot be backed up.
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
+
+If facing other issues or bugs, we highly encourage to check the Veeam section of the [Known Issues page]({{% relref "../../../software/release_information/release_notes_70/known_issues/#backups---veeam" %}}).
 
 ## Architecture
 
@@ -147,7 +140,25 @@ The minimum hardware specifications are:
 
 - **CPU:** 8 cores
 - **Memory:** 16 GB RAM
-- **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
+- **Disk:** Sufficient storage to hold all active backup operations. See more details regarding the storage requirement in the next section. 
+
+### Storage Requirements
+
+The Backup Server acts as a staging area between OpenNebula and the Veeam repository. It must provide enough disk capacity and I/O headroom for active backup and restore operations. Follow these practical guidelines when sizing and configuring storage:
+
+- **Primary backup datastore** (`/var/lib/one/datastores/<backup-datastore-id>`): this is where OpenNebula writes VM images and incremental chains before Veeam moves them to its repository. Size this datastore to hold the largest set of concurrently active backups you expect.
+
+- **Temporary restore area** (`/var/tmp`): when restoring a VM from a Veeam repository into OpenNebula, the restored image is staged here before being moved to the image datastore. Provision this directory to hold at least the largest single disk being restored (or the sum of concurrently restored disks if you will perform parallel restores). You can change this in the `tmp_images_path` parameter in the configuration.
+
+- **Retention and duplicate chains**: the backup will exist both in the OpenNebula backup datastore and in the Veeam repository. If you delete the chain from OpenNebula and Veeam subsequently runs an incremental, Veeam will perform a full backup and reconstruct incrementals itself. This increases transfer time but keeps backups consistent. If storage is constrained, schedule regular cleanup of old backup images in the OpenNebula datastore to free space, understanding that this may force full transfers on the next incremental run.
+
+- **Cleanup tooling**: the ovirtapi package includes a helper script to automate cleanup of the backup datastore: `/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`. You can run this script as the `oneadmin` user or schedule it via cron to maintain a maximum used threshold. Example crontab (daily at 00:00) to cap usage at 50%:
+
+```bash
+0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /usr/lib/one/ovirtapi-server/scripts/backup_clean.rb
+```
+
+Ensure the `ONE_AUTH` variable is set to a valid OpenNebula `user:password` pair with permission to delete backup images. You may adjust `MAX_USED_PERCENTAGE` to a different threshold if desired.
 
 ## Veeam Backup Appliance Requirements
 
@@ -177,8 +188,6 @@ The backup datastore must be created in the backup server configured in step 1. 
 Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given cluster:
 
 ```bash
-onedatastore create /tmp/rsync-datastore.txt
-
 cat << EOF > /tmp/rsync-datastore.txt
 NAME="VeeamDS"
 DS_MAD="rsync"
@@ -191,6 +200,8 @@ RSYNC_HOST="localhost"
 RSYNC_USER="oneadmin"
 SAFE_DIRS="/var/tmp"
 EOF
+
+onedatastore create /tmp/rsync-datastore.txt
 ```
 
 2.2. Add the datastore to the cluster
@@ -204,20 +215,7 @@ SELinux and AppArmor may cause issues in the backup server if not configured pro
 
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
 
-**Sizing recommendations**
 
-The backup datastore needs to have enough space to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup datastore and the Veeam Backup storage. This is something inherent to the Veeam integration with oVirt, as further backups of a Virtual Machine will be incremental and only the changed disk regions will be retrieved.
-
-If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
-
-We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
-
-```bash
-0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
-```
-
-{{< alert title="Remember" color="success" >}}
-For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
 
 ### 3. Install and configure the oVirtAPI module
 
