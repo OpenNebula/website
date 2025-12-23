@@ -47,7 +47,7 @@ OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by defau
 ## Backups
 
 - Ceph Incremental Backups: Currently, incremental backups cannot be flattened. Support for this functionality is under development and is expected to be included in the next maintenance release.
-- For Veeam related issues, please referer to the [Veeam (EE) page](../../../product/cluster_configuration/backup_system/veeam.md).
+- There are curently no issues reported from the Veeam integration.
 
 ## Market proxy settings
 
