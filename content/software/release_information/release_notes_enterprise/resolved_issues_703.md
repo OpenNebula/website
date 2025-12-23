@@ -15,3 +15,4 @@ The following issues have been solved in 7.0.3:
 - Fix WHMCS client Login action [#6879](https://github.com/OpenNebula/one/issues/6879)
 - Fix PCI device assignment mapping to the correct physical NUMA node when pinning is used [#7408](https://github.com/OpenNebula/one/issues/7408)
 - Fix missing ETHx_ROUTES attribute in the VM context section [#7348](https://github.com/OpenNebula/one/issues/7348)
+- Fix LVM backups not working in Veeam [#7418](https://github.com/OpenNebula/one/issues/7418)
