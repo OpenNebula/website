@@ -259,6 +259,8 @@ RSYNC_HOST="localhost"
 RSYNC_USER="oneadmin"
 SAFE_DIRS="/var/tmp"
 EOF
+
+onedatastore create /tmp/rsync-datastore.txt
 ```
 
 onedatastore create /tmp/rsync-datastore.txt
