@@ -55,7 +55,7 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
 
 ## Compatibility
 
-The oVirtAPI module is compatible with the Veeam Backup & Replication version specified in the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes/#monitoring-and-backups" %}}).
+The oVirtAPI module is compatible with the Veeam Backup & Replication version specified in the [Platform Notes]({{% relref "../../../software/release_information/release_notes/platform_notes/#monitoring-and-backups" %}}).
 
 The following table summarizes the supported backup modes for each storage system:
 
@@ -109,7 +109,7 @@ Here is a list of the limitations affecting the Veeam integration with OpenNebul
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 
-If facing other issues or bugs, we highly encourage to check the Veeam section of the [Known Issues page]({{% relref "../../../software/release_information/release_notes_70/known_issues/#backups---veeam" %}}).
+If facing other issues or bugs, we highly encourage to check the Veeam section of the [Known Issues page]({{% relref "../../../software/release_information/release_notes/known_issues/#backups---veeam" %}}).
 
 ## Architecture
 
@@ -140,7 +140,7 @@ The minimum hardware specifications are:
 
 - **CPU:** 8 cores
 - **Memory:** 16 GB RAM
-- **Disk:** Sufficient storage to hold all active backup operations. See more details regarding the storage requirement in the next section. 
+- **Disk:** Sufficient storage to hold all active backup operations. See more details regarding the storage requirement in the next section.
 
 ### Storage Requirements
 

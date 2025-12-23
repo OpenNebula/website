@@ -130,7 +130,7 @@ The interactions between OpenNebula and the underlying cloud infrastructure are 
 * **Networking**: The hypervisor is also prepared with the network configuration for each Virtual Machine.
 * **Event Bus**: A generic message bus where OpenNebula publishes resource events. The message bus is used to synchronize OpenNebula services as well as to integrate custom applications.
 
-The OpenNebula documentation provides a summary of its [key features]({{% relref "key_features#key-features" %}}). The [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes#uspng" %}}) list the infrastructure platforms and resources supported by each OpenNebula release. Because OpenNebula leverages the functionality exposed by the underlying platform services, its functionality and performance may be affected by the limitations imposed by those services.
+The OpenNebula documentation provides a summary of its [key features]({{% relref "key_features#key-features" %}}). The [Platform Notes]({{% relref "../../../software/release_information/release_notes/platform_notes#uspng" %}}) list the infrastructure platforms and resources supported by each OpenNebula release. Because OpenNebula leverages the functionality exposed by the underlying platform services, its functionality and performance may be affected by the limitations imposed by those services.
 
 ## Next Steps
 

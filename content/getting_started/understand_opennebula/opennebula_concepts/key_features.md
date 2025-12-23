@@ -17,7 +17,7 @@ weight: "2"
 
 OpenNebula offers a simple but feature-rich and flexible solution to build and manage data center virtualization and enterprise clouds. This page provides a summary of its key features(\*).
 
-To learn more about the infrastructure platforms and services supported in each version of OpenNebula, please refer to the [Platform Notes]({{% relref "../../../software/release_information/release_notes_70/platform_notes.md#uspng" %}}) for each version.
+To learn more about the infrastructure platforms and services supported in each version of OpenNebula, please refer to the [Platform Notes]({{% relref "../../../software/release_information/release_notes/platform_notes.md#uspng" %}}) for each version.
 
 For high-level overviews and in-depth technical guides, please refer to OpenNebula’s [White Papers](https://opennebula.io/white-papers/).
 

@@ -12,7 +12,7 @@ weight: "1"
 
 <!--# Overview -->
 
-The Front-end is the central part of an OpenNebula installation and is the very first thing that needs to be deployed (or upgraded). Typically it’s a Host where the OpenNebula server-side components are installed and which is responsible for the management of an entire virtualization stack. It can be a physical Host or a Virtual Machine (this decision is left up to the cloud administrator) as long as it matches the [requirements]({{% relref "../../../software/release_information/release_notes_72/platform_notes#uspng" %}}).
+The Front-end is the central part of an OpenNebula installation and is the very first thing that needs to be deployed (or upgraded). Typically it’s a Host where the OpenNebula server-side components are installed and which is responsible for the management of an entire virtualization stack. It can be a physical Host or a Virtual Machine (this decision is left up to the cloud administrator) as long as it matches the [requirements]({{% relref "../../../software/release_information/release_notes/platform_notes#uspng" %}}).
 
 ## How Should I Read This Chapter
 

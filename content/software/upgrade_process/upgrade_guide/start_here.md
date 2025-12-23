@@ -14,7 +14,7 @@ weight: "2"
 
 This guide describes the upgrade procedure for systems that are already running OpenNebula 6.0.x or newer. The upgrade will preserve all current users, hosts, resources, and configurations, for both SQLite and MySQL/MariaDB back-ends.
 
-Read the [Compatibility Guide]({{% relref "../../release_information/release_notes_70/compatibility#compatibility" %}}) and [Release Notes]({{% relref "release_notes_70" %}}) to learn what's new in OpenNebula {{< version >}}.
+Read the [Compatibility Guide]({{% relref "../../release_information/release_notes/compatibility#compatibility" %}}) and [Release Notes]({{% relref "release_notes" %}}) to learn what's new in OpenNebula {{< version >}}.
 
 ## Previous Steps
 
@@ -45,4 +45,3 @@ Update your OpenNebula packages by following only the guide that applies to your
 - [Upgrading a Federation]({{% relref "upgrading_federation#upgrade-federation" %}})
 
 <a id="validate-upgrade"></a>
-
