@@ -6,10 +6,11 @@ weight: 3
 ---
 
 <a id="cd_cloud"></a>
+This document describes the procedure to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) bare-metal server equipped with GPUs.
 
-Here you have a practical guide to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
+The architecture is a converged OpenNebula installation, where the frontend services and KVM hypervisor run on the same physical host. This approach is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
 
-The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. A converged OpenNebula cloud, including frontend and KVM node, is deployed on the same bare metal server.
+The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. 
 
 ## Prerequisites
 
@@ -70,7 +71,8 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     ```shell
     sudo su
     ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
-    cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
+    cat /root/.ssh/id_ed25519.pub /root/.ssh/authorized_keys > /root/.ssh/authorized_keys.tmp
+    mv /root/.ssh/authorized_keys.tmp /root/.ssh/authorized_keys
     ```
 
 2.  Create a Virtual Network Bridge:
@@ -95,7 +97,7 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     ```
 
     2.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
-    ```default
+    ```shell
     netplan apply
     sysctl -w net.ipv4.ip_forward=1
     iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp129s0f0np0 -j MASQUERADE
