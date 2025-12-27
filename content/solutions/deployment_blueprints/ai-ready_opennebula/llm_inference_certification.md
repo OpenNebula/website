@@ -60,8 +60,17 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     onetemplate instantiate vllm --name vllm
     ```
 
-4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
+4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`.
+
+    4.1 To access the VM, run the following command:
     ```shell
+    onevm ssh 0
+    ```
+    You can also list all available VMs by running `onevm list`.
+
+    4.2 Once inside the VM, check the logs in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
+
+    ```base
     [...]
 
     (APIServer pid=2480) INFO 11-26 11:00:33 [api_server.py:1971] Starting vLLM API server 0 on http://0.0.0.0:8000

@@ -64,21 +64,25 @@ If the directory is not empty it means that IOMMU is active, which is a prerequi
 
 ### Server Pre-configuration
 
-These steps prepare the server for the OneDeploy tool, which runs as the `root` user.
+The following steps prepare the server to run OneDeploy, which operates with `root` privileges.
 
-1.  Enable Local Root SSH Access:
-    Generate an SSH key pair for the `root` user and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
+1.  Obtain Root Privileges:
+    OneDeploy installs software and modifies system-level configuration files. To perform these actions, open a `root` shell.
     ```shell
-    sudo su
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
-    cat /root/.ssh/id_ed25519.pub /root/.ssh/authorized_keys > /root/.ssh/authorized_keys.tmp
-    mv /root/.ssh/authorized_keys.tmp /root/.ssh/authorized_keys
+    sudo -i
     ```
 
-2.  Create a Virtual Network Bridge:
+2.  Configure Local Root SSH Access:
+    Generate an SSH key pair for `root` and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
+    ```shell
+    ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519 -N "" -q
+    cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
+    ```
+
+3.  Create a Virtual Network Bridge:
     To provide network connectivity to the VMs, create a virtual bridge with NAT. This allows VMs to access the internet through the server's public network interface.
 
-    2.1 Create the Netplan configuration file for the bridge:
+    3.1 Create the Netplan configuration file for the bridge:
     ```shell
     tee /etc/netplan/60-bridge.yaml > /dev/null << 'EOF'
     network:
@@ -96,7 +100,7 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     EOF
     ```
 
-    2.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
+    3.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
     ```shell
     netplan apply
     sysctl -w net.ipv4.ip_forward=1
