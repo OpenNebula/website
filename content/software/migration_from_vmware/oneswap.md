@@ -52,7 +52,7 @@ Most OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml` bu
 {{< /alert >}}
 
 {{< alert color="warning" title="OpenNebula CLI" >}}
-If `oneswap` runs from a server different than OpenNebula frontend, [check the documentation]({{% relref "command_line_interface#cli-configuration" %}}) about installing the CLI commands and xport the variables `ONE_XMLRPC` and `ONE_AUTH` accordingly.<br/>
+If `oneswap` runs from a server different than OpenNebula frontend, [check the documentation]({{% relref "command_line_interface#cli-configuration" %}}) about installing the CLI commands and export the variables `ONE_XMLRPC` and `ONE_AUTH` accordingly.<br/>
 Normally that means populating the file `$HOME/.one/one_auth` with `username:password` and adding `export ONE_XMLRPC=http://opennebula_frontend:2633/RPC2` on the user profile, but it is recommended to check the documentation.
 {{< /alert >}}
 
