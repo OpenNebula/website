@@ -64,7 +64,7 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
 
     4.1 To access the VM, run the following command:
     ```shell
-    onevm ssh 0
+    onevm ssh vllm
     ```
     You can also list all available VMs by running `onevm list`.
 
