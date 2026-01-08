@@ -34,6 +34,7 @@ The HFHUB Marketplace enables:
 - **Network**: Outbound HTTPS access to `https://huggingface.co` (port 443)
 - **Python**: Python 3.9+ (stdlib + `requests` library - available as system package `python3-requests`)
 - **Authentication** (optional): `HUGGING_FACE_HUB_TOKEN` environment variable for gated models
+- **QCOW2 imports** (optional): `fuse2fs` package and sudoers configuration (see [QCOW2 Format Prerequisites](#qcow2-format-prerequisites))
 
 ## Configuration
 
@@ -274,6 +275,45 @@ hf://meta-llama/Llama-3-8B?format=qcow2
 # Explicit directory format
 hf://meta-llama/Llama-3-8B?format=dir
 ```
+
+### QCOW2 Format Prerequisites
+
+When importing models to block-based datastores (qcow2 format), additional configuration is required on the OpenNebula Front-end:
+
+#### 1. Install fuse2fs
+
+The `fuse2fs` tool allows mounting ext4 disk images without root privileges:
+
+```bash
+# Debian/Ubuntu
+apt-get install -y fuse2fs
+
+# RHEL/CentOS/AlmaLinux
+dnf install -y fuse2fs
+```
+
+#### 2. Configure Sudoers
+
+The `create_hf_image.sh` helper script requires passwordless sudo for the `oneadmin` user:
+
+```bash
+echo 'oneadmin ALL=(ALL) NOPASSWD: /usr/lib/one/sh/create_hf_image.sh' \
+    > /etc/sudoers.d/oneadmin-hfhub
+chmod 440 /etc/sudoers.d/oneadmin-hfhub
+```
+
+#### 3. Configure HuggingFace Token for Datastore Driver
+
+For gated models, the datastore driver needs access to the HuggingFace token. Add it to the fs datastore configuration:
+
+```bash
+echo 'export HUGGING_FACE_HUB_TOKEN="hf_..."' \
+    >> /var/lib/one/remotes/etc/datastore/fs/fs.conf
+```
+
+{{< alert title="Note" color="warning" >}}
+Without these prerequisites, importing models to qcow2 datastores will fail with errors like "Helper script not found" or "sudo: a password is required".
+{{< /alert >}}
 
 ## OpenNebula Certified Models
 
