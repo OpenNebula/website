@@ -6,10 +6,11 @@ weight: 3
 ---
 
 <a id="cd_cloud"></a>
+This document describes the procedure to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) bare-metal server equipped with GPUs.
 
-Here you have a practical guide to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) instance equipped with GPUs. This setup is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
+The architecture is a converged OpenNebula installation, where the frontend services and KVM hypervisor run on the same physical host. This approach is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
 
-The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. A converged OpenNebula cloud, including frontend and KVM node, is deployed on the same bare metal server.
+The outlined procedure is based on an instance with NVIDIA L40S GPUs as an example. 
 
 ## Prerequisites
 
@@ -63,20 +64,25 @@ If the directory is not empty it means that IOMMU is active, which is a prerequi
 
 ### Server Pre-configuration
 
-These steps prepare the server for the OneDeploy tool, which runs as the `root` user.
+The following steps prepare the server to run OneDeploy, which operates with `root` privileges.
 
-1.  Enable Local Root SSH Access:
-    Generate an SSH key pair for the `root` user and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
+1.  Obtain Root Privileges:
+    OneDeploy installs software and modifies system-level configuration files. To perform these actions, open a `root` shell.
     ```shell
-    sudo su
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q
+    sudo -i
+    ```
+
+2.  Configure Local Root SSH Access:
+    Generate an SSH key pair for `root` and authorize it for local connections. This allows Ansible to connect to `127.0.0.1` as `root`.
+    ```shell
+    ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519 -N "" -q
     cat /root/.ssh/id_ed25519.pub >> /root/.ssh/authorized_keys
     ```
 
-2.  Create a Virtual Network Bridge:
+3.  Create a Virtual Network Bridge:
     To provide network connectivity to the VMs, create a virtual bridge with NAT. This allows VMs to access the internet through the server's public network interface.
 
-    2.1 Create the Netplan configuration file for the bridge:
+    3.1 Create the Netplan configuration file for the bridge:
     ```shell
     tee /etc/netplan/60-bridge.yaml > /dev/null << 'EOF'
     network:
@@ -94,8 +100,8 @@ These steps prepare the server for the OneDeploy tool, which runs as the `root` 
     EOF
     ```
 
-    2.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
-    ```default
+    3.2  Apply the network configuration and enable IP forwarding. Replace `enp129s0f0np0` with your server's main network interface if it is different.
+    ```shell
     netplan apply
     sysctl -w net.ipv4.ip_forward=1
     iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp129s0f0np0 -j MASQUERADE
