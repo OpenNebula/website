@@ -329,7 +329,8 @@ ID USER     GROUP    NAME                                  STAT  CPU     MEM HOS
 
 #### Connecting to the Workload Cluster Kubernetes API Locally
 
-To establish a local connection to the Workload Cluster Kubernetes API, you will need to export the following environment variables. The `$VROUTER_IP` will contain the public IP address of the vRouter instance, and the `$CONTROL_PLANE_IP` will contain the IP address of the workload cluster control plane instance. Note that the virtual machines change on each deploy, so change the name of the vRouter and control plane instance appropriately in the following code block:
+To establish a local connection to the Workload Cluster Kubernetes API, you will need to export the following environment variables. The `$VROUTER_IP` will contain the public IP address of the vRouter instance, and the `$CONTROL_PLANE_IP` will contain the IP address of the workload cluster control plane instance. Here, we will connect directly to the Kubernetes cluster from the OpenNebula frontend, to make things simpler.
+Note that the virtual machines change on each deploy, so change the name of the vRouter and control plane instance appropriately in the following code block:
 
 ```shell
 export VROUTER_VM_NAME=<changeme>
