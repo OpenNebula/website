@@ -6,6 +6,7 @@ weight: "6"
 
 OpenNebula’s **Pure Storage FlashArray SAN Datastore** delivers production-grade, native control of FlashArray block storage, from provisioning through cleanup, directly from OpenNebula. This integration exposes the full lifecycle of FlashArray Volumes, Snapshots, and Clones, and automates host connectivity via Pure’s host/host-group model with reliable iSCSI and multipath handling. All communication with the array uses authenticated HTTPS against the FlashArray REST API. This datastore driver is part of OpenNebula Enterprise Edition (EE).
 
+
 ### Key Benefits
 
 With the native Pure driver, OpenNebula users gain the performance consistency of FlashArray’s always-thin, metadata-driven architecture. Pure’s zero-copy snapshots and clones complete instantly, without impacting write amplification or introducing snapshot-tree latency penalties typical of host-side copy-on-write systems. Under mixed 4k/8k and fsync-heavy workloads, FlashArray maintains flat latency profiles even with deep snapshot histories, while LVM-thin commonly exhibits early degradation as CoW pressure increases. The result is higher, steadier IOPS and predictable latency for virtual machine disks at scale.
@@ -20,9 +21,10 @@ With the native Pure driver, OpenNebula users gain the performance consistency o
 | **Security** | HTTPS control path | All FlashArray communication uses authenticated, encrypted HTTPS REST calls. |
 | **Scalability** | Simplified host-group mappings | Safe concurrent attach/detach operations across hosts using deterministic LUN IDs and predictable multipath layout. |
 
-### Supported NetApp Native Functionality
 
-| NetApp Feature | Supported | Notes |
+### Supported PureStorage FlashArray Native Functionality
+
+| PureStorageFeature | Supported | Notes |
 |----------------|------------|-------|
 | **Zero-Copy Volume Clone** | Yes | Pure clones are metadata-only and complete instantly |
 | **Snapshot (manual)** | Yes | Created and deleted directly from OpenNebula; mapped 1:1 to FlashArray snapshots. |
@@ -86,12 +88,12 @@ The Front-end requires network access to the PureStorage FlashArrayAPI endpoint:
 
 ## Front-end & Node Setup
 
-Configure both the Front-end and nodes with persistent iSCSI connections and multipath configuration as described by the [NetApp ONTAP Documentation - SAN Host Utilities Overview](https://docs.netapp.com/us-en/ontap-sanhost/hu_fcp_scsi_index.html):
+The PureStorage FlashArray drivers do automatic host management, based off of your host's hostname. You will just need to at least discover the iSCSI targets on each host, then configure multipath for each host and frontend. Logging into the sessions will be handled automatically by the driver after they are created, which will happen when the first volume needs to be attached to that particular frontend or host.
 
 1. **iSCSI:**
    - Discover the iSCSI targets on the hosts:
      ~~~bash
-     iscsiadm -m discovery -t sendtargets -p <target_ip>   # for each iSCSI target IP from NetApp
+     iscsiadm -m discovery -t sendtargets -p <target_ip>   # for each iSCSI target IP from the FlashArray
      ~~~
 
 2. **Persistent iSCSI Configuration:**
@@ -146,6 +148,7 @@ Create both datastores as PureFA (PureStorage FlashArray) (instant cloning/movin
 - **System Datastore**
 - **Image Datastore**
 
+
 ### Create System Datastore
 
 **Template required parameters:**
@@ -176,6 +179,7 @@ PUREFA_TARGET     = "iqn.1993-08.org.ubuntu:01:1234"
 $ onedatastore create purefa_system.ds
 ID: 101
 ~~~
+
 
 ### Create Image Datastore
 
@@ -208,6 +212,7 @@ $ onedatastore create purefa_image.ds
 ID: 102
 ~~~
 
+
 ### Datastore Optional Attributes
 
 **Template optional parameters:**
@@ -216,6 +221,7 @@ ID: 102
 | ------------------------- | ----------------------------------------------------- |
 | `PUREFA_VERSION`          | PureStorage FlashArray Version (Default: 2.9)         |
 | `PUREFA_SUFFIX`           | Suffix to append to all volume names                  |
+
 
 ## Datastore Internals
 
@@ -250,6 +256,7 @@ You can configure the block size ( Default and minimum 4096 B / 4 KB ) for incre
 {{< alert title="Warning" color="warning" >}}
 The incremental backup feature of PureStorage FlashArray requires the `nbd` kernel module to be loaded and the `nbdfuse` package to be installed on all OpenNebula nodes.
 {{< /alert >}}
+
 
 ## System Considerations
 
