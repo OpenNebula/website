@@ -94,3 +94,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix de-selecting hidden datatable entries](https://github.com/OpenNebula/one/issues/6781).
 - [Fireedge do not refresh actions on VM state change](https://github.com/OpenNebula/one/issues/7172).
 - [Do not allow space in group name](https://github.com/OpenNebula/one/issues/7355).
+- [Fix `onedb fsck` for Virtual Router leases](https://github.com/OpenNebula/one/issues/7428).
