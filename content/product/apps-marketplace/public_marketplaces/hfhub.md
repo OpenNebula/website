@@ -190,12 +190,12 @@ When models are indexed, the following metadata is stored in MarketPlace Apps:
 | `MODEL_ID` | string | HF model identifier | `meta-llama/Meta-Llama-3-8B-Instruct` |
 | `SOURCE` | URI | Logical URI to artifact | `hf://meta-llama/Meta-Llama-3-8B-Instruct` |
 | `FORMAT` | string | Artifact format | `dir` |
-| `SIZE` | integer | Size in MB (0 for metadata-only) | `0` |
+| `SIZE` | integer | Model size in MB from HF storage | `15360` |
 | `TASK` | string | HF pipeline_tag | `text-generation`, `text-to-image` |
 | `LICENSE` | string | Model license | `mit`, `apache-2.0`, `llama3` |
 | `DOWNLOADS` | integer | Total download count from HF | `12345678` |
 | `LAST_MODIFIED` | ISO8601 | Last modification timestamp | `2024-03-15T10:30:00.000Z` |
-| `HAS_CHAT_TEMPLATE` | YES/NO | Whether model includes chat template | `YES` |
+| `HAS_CHAT_TEMPLATE` | YES/NO | Whether model has conversation formatting template (requires `--full 1`) | `YES` |
 | `HF_URL` | URL | Web link to HF model page | `https://huggingface.co/meta-llama/...` |
 | `METADATA_ONLY` | YES | Indicates no artifact downloaded yet | `YES` |
 | `OPENNEBULA_CERTIFIED` | YES/NO | Official OpenNebula support (if from ONEnextgen org) | `YES` |
@@ -223,7 +223,7 @@ $ python3 /var/lib/one/remotes/market/hfhub/hf_catalog.py \
 - `--sort <field>`: Sort by field (`downloads`, `likes`, `lastModified`)
 - `--direction <-1\|1>`: Sort direction (-1 = descending, 1 = ascending)
 - `--limit <n>`: Maximum number of models to index globally across all sources (default: 50)
-- `--full <1>`: Fetch full model metadata (includes config.chat_template check)
+- `--full <1>`: Check for chat template support (downloads tokenizer config per model, sets `HAS_CHAT_TEMPLATE` field)
 
 ### Multi-Source Indexing Examples
 
@@ -246,6 +246,26 @@ $ python3 /var/lib/one/remotes/market/hfhub/hf_catalog.py \
 ```
 
 **Note**: It's recommended to use either collections **or** organizations, not both.
+
+### About Chat Templates
+
+The `--full 1` flag checks for **chat templates** in models. A chat template is a Jinja2 template that defines how to format multi-turn conversations for instruction/chat models. Models with chat templates can automatically format messages like:
+
+```python
+messages = [
+    {"role": "system", "content": "You are a helpful assistant"},
+    {"role": "user", "content": "Hello!"}
+]
+```
+
+**When to use `--full 1`:**
+- Indexing chat/instruction models where conversation formatting matters
+- Building a catalog specifically for conversational AI applications
+
+**When to omit it:**
+- General model indexing (faster, lower API usage)
+- Non-chat models (text-to-image, embeddings, etc.)
+- Large-scale indexing where performance is critical
 
 ## Importing Models
 
