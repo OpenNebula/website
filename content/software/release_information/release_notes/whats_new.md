@@ -68,6 +68,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 <!--keeping some examples-->
 - [Transparent proxying](../../../product/virtual_machines_operation/virtual_machines_networking/tproxy) allows VMs to access external services like OneGate without requiring complex networking setup.
 - [Virtual Machine memory encryption](../../../product/virtual_machines_operation/virtual_machines/vm_templates#memory-encryption) allows VM workloads whose memory cannot be read by the hypervisor.
+- Add [Shared Address Ranges](../../../product/cluster_configuration/networking_system/manage_vnets.md#shared-address-ranges-shared-ar-for-virtual-ips) with [NIC Alias support](../../../product/cluster_configuration/networking_system/manage_vnets.md#request-virtual-ips-with-nic-alias) to assign Virtual IPs that can be shared across multiple VMs
 
 ## LXC
 - NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
