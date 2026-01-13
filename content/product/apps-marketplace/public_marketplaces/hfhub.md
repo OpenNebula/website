@@ -90,7 +90,7 @@ ID: 100
 | `MARKET_MAD` | **YES** | Must be `hfhub` | - |
 | `HFHUB_ORG` | No | Organization(s) to index from (comma-separated, e.g., `ONEnextgen, mycompany-ai`) | `ONEnextgen` |
 | `HFHUB_TASK` | No | Pipeline tag filter (e.g., `text-generation`, `text-to-image`) | - |
-| `HFHUB_COLLECTION` | No | Collection ID(s) to index from (comma-separated, overrides org/task) | - |
+| `HFHUB_COLLECTION` | No | Collection slug(s) to index from (comma-separated, e.g., `org/collection-slug`; overrides org/task) | - |
 | `HFHUB_LIMIT` | No | Maximum models to index (global limit across all sources) | `50` |
 | `HFHUB_AUTO_INDEX` | No | Enable/disable auto-indexing | `YES` |
 | `HFHUB_SORT` | No | Sort field (`downloads`, `likes`, `lastModified`) | `downloads` |
@@ -141,7 +141,7 @@ Index models from a specific HuggingFace collection:
 ```default
 NAME="HF Hub - Custom Collection"
 MARKET_MAD="hfhub"
-HFHUB_COLLECTION="65f1b3c4d5e6f7a8b9c0d1e2"
+HFHUB_COLLECTION="org/collection-slug"
 HFHUB_LIMIT="50"
 HFHUB_AUTO_INDEX="YES"
 ```
@@ -154,7 +154,7 @@ Index models from multiple HuggingFace collections simultaneously:
 ```default
 NAME="HF Hub - Curated Collections"
 MARKET_MAD="hfhub"
-HFHUB_COLLECTION="65f1b3c4d5e6f7a8b9c0d1e2, 75a2b4c5e6f8g9h0i1j2k3l4, 85b3c6d7e8f0a1b2c3d4e5f6"
+HFHUB_COLLECTION="org1/collection-slug1, org2/collection-slug2"
 HFHUB_LIMIT="150"
 HFHUB_AUTO_INDEX="YES"
 ```
@@ -240,8 +240,8 @@ $ python3 /var/lib/one/remotes/market/hfhub/hf_catalog.py \
 **Multiple Collections**:
 ```default
 $ python3 /var/lib/one/remotes/market/hfhub/hf_catalog.py \
-  --collection 65f1b3c4d5e6f7a8b9c0d1e2 \
-  --collection 75a2b4c5e6f8g9h0i1j2k3l4 \
+  --collection org/collection-slug \
+  --collection org2/collection-slug2 \
   --full 1
 ```
 
