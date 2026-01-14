@@ -53,7 +53,7 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 | svncterm   | yes       | **no** to skip building VNC support for LXD drivers       |
 | context    | no        | **yes** to download guest contextualization packages      |
 | download   | no        | **yes** to download 3rd-party tools (Restic, Prometheus…) |
-| xmlrpc_pkgconf | no    | **el8/el9/el10** if you want to use pkg-config for xmlrpc-c libs dependency (otherwise xmlrpc-c-config is used) |
+| xmlrpc_pkgconf | no    | **yes** to use pkg-config to discover xmlrpc libs dependencies, otherwise xmlrpc-c-config is used |
 
 - OpenNebula can be installed in two modes: `system-wide` or in `self-contained` directory. In either case, you do not need to run OpenNebula as root. These options can be specified when running the install script:
 
