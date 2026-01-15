@@ -63,6 +63,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - [New API calls (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) to execute commands on a Virtual Machine](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine)
 - The output of `onemarketapp list` list now contains 2 extra columns displaying **HYPERVISOR** and **ARCHITECTURE**.
 - [Add automatic VM index for multiple persistent VM instantiation](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#instantiate-to-persistent)
+- [The `onedb fsck` returns non-zero exit code in case of issues in DB](https://github.com/OpenNebula/one/issues/6995).
 
 ## KVM & Networking
 <!--keeping some examples-->
