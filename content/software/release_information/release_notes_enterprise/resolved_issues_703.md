@@ -16,3 +16,5 @@ The following issues have been solved in 7.0.3:
 - Fix PCI device assignment mapping to the correct physical NUMA node when pinning is used [#7408](https://github.com/OpenNebula/one/issues/7408)
 - Fix missing ETHx_ROUTES attribute in the VM context section [#7348](https://github.com/OpenNebula/one/issues/7348)
 - Fix LVM backups not working in Veeam [#7418](https://github.com/OpenNebula/one/issues/7418)
+- Do not allow space in group name [#7355](https://github.com/OpenNebula/one/issues/7355).
+- Fix `onedb fsck` for Virtual Router leases [#7428](https://github.com/OpenNebula/one/issues/7428).
