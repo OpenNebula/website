@@ -57,7 +57,7 @@ The first step in building a customized cluster is to decide on the hypervisor t
 
 OpenNebula allows you to deploy heterogeneous multi-hypervisor environments managed by a single OpenNebula instance, so after installing the cloud with one hypervisor you can add another. The ability to gradually integrate open source hypervisors helps to protect existing IT investments and facilitates evaluation and testing, at the same time avoiding vendor lock-in by using open-source components.
 
-![OpenNebula Hypervisors](/images/6_features.png)
+{{< image path="/images/6_features.svg" alt="OpenNebula Hypervisors" align="center" width="50%" pb="20px" >}}
 
 ### 3.2. Install the Virtualization Hosts
 
@@ -118,4 +118,4 @@ Because no two clouds are the same, OpenNebula provides many different interface
 - The **OneFlow API** to create, control, and monitor [multi-tier applications or services]({{% relref "../../../product/integration_references/system_interfaces/appflow_api#appflow-api" %}}) composed of interconnected Virtual Machines.
 - A **Hook Manager** to [trigger administration scripts]({{% relref "../../../product/integration_references/system_interfaces/hook_driver#hooks" %}}) upon resource state changes or API calls.
 
-![OpenNebula Cloud Architecture](/images/new_overview_integrators.png)
+{{< image path="/images/new_overview_integrators.svg" alt="OpenNebula Cloud Architecture" align="center" width="50%" pb="20px" >}}
