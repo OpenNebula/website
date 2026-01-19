@@ -9,57 +9,86 @@ tags:
 weight: "10"
 ---
 
-This guide describes an end-to-end workflow to deploy an LLM model with `vllm-engine` on OpenNebula v7.
+This guide describes how to deploy an LLM inference service on OpenNebula in a few simple steps using the `vllm-engine` appliance.
 
-## Requirements
+## Prerequisites
 
-- An HFHUB marketplace already exists (see the [HuggingFace Hub Marketplace guide]({{% relref "product/apps-marketplace/public_marketplaces/hfhub#market-hfhub" %}}) if you need to set it up).
-- The `vllm-engine` appliance is already available. If not, you can find it on the [OpenNebula Marketplace](https://marketplace.opennebula.io).
+Before you begin, ensure you have:
 
+- **HF Hub marketplace configured** in your OpenNebula cluster. If you need to set this up, see the [HuggingFace Hub Marketplace guide]({{% relref "product/apps-marketplace/public_marketplaces/hfhub#market-hfhub" %}}).
+- **`vllm-engine` appliance imported**. When you import an appliance from the marketplace, OpenNebula automatically imports both the **template** and the **image**. Both must be available in your cluster:
+  - The **template** is used to instantiate VMs
+  - The **image** contains the appliance's base disk
+  - If the appliance is not yet imported, search for `vllm-engine` on the [OpenNebula Marketplace](https://marketplace.opennebula.io) and import it into your cluster.
+- **GPU setup (optional)**. The `vllm-engine` appliance works with both CPU and GPU. For GPU acceleration, ensure GPUs are configured in your cluster. You can attach a GPU (PCI device) to the VM during instantiation. For GPU setup guides, see:
+  - [NVIDIA vGPU/MIG configuration](https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/vgpu/)
+  - [NVIDIA GPU Passthrough](https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/)
 
-{{< alert title="Note" color="success" >}}
-This is a one-time preparation step for the cluster: import the `vllm-engine` appliance once, and import each model once. When a model Image becomes **READY** (`rdy`), you can reuse it by attaching it as a data disk to any number of `vllm-engine` VMs.
-{{< /alert >}}
+## Deployment Steps
 
-## Steps
+### Step 1: Import Your Model
 
-### 1. Import a model from the Hugging Face Marketplace
-   1. In Sunstone, open the HF Hub marketplace, choose a model, and import it into an Image Datastore.
+1. In Sunstone, navigate to the **HF Hub marketplace**.
+2. Browse and select the model you want to deploy.
+3. Click **Import** and choose an Image Datastore.
 
    ![Import model from Hugging Face Marketplace](/images/solutions/deployment_blueprints/how-to-deploy-llm-models/import_model.png)
 
-   2. What happens after import:
-      - OpenNebula downloads the model artifacts from Hugging Face Marketplace.
-      - The datastore driver stores the model in the Image Datastore and creates an OpenNebula **Image** resource.
-      - When the Image becomes **READY** (`rdy`), it can be attached to a VM as a data disk.
+**What happens next:**
+- OpenNebula automatically downloads the model artifacts from Hugging Face.
+- The model is stored in your Image Datastore and appears as an OpenNebula **Image** resource.
+- Wait for the Image status to show **READY** (`rdy`)—this indicates the model is fully downloaded and ready to use.
 
-### 2. Instantiate the vLLM engine VM
-   1. Create a VM from the `vllm-engine` appliance.
-   2. Attach the imported model Image as a **data disk**.
+{{< alert title="Tip" color="success" >}}
+You can check the Image status in Sunstone's Images view. Large models may take some time to download, but you only need to do this once per model.
+{{< /alert >}}
+
+### Step 2: Create and Configure the VM
+
+1. Instantiate a new VM from the **`vllm-engine` template**.
+2. During VM creation:
+   - Attach your imported model Image as a **data disk**.
+   - **(Optional)** For GPU acceleration, attach a GPU device (PCI device). The `vllm-engine` appliance automatically detects and uses the GPU if available; otherwise, it runs on CPU.
 
    ![Attach the model image to the VM](/images/solutions/deployment_blueprints/how-to-deploy-llm-models/attach_disk.png)
 
-### 3. Verification and Validation
-Once the VM is running, the appliance automatically detects and mounts the model disk, starting the vLLM engine. You can then validate the service from any machine that has network access to the VM on port `8000`.
+Once the VM starts running, the `vllm-engine` appliance automatically:
+- Detects the attached model disk
+- Mounts the model files
+- Detects and configures GPU resources
+- Starts the vLLM inference server on port `8000`
 
-**Check Model Availability**<br>
-First, verify that the vLLM engine has loaded the model correctly. This command lists all models currently served by the API.
+No manual configuration needed.
+
+## Verify Your Deployment
+
+Once your VM is running, verify that everything is working correctly.
+
+### Check Model Availability
+
+First, verify that the vLLM engine has loaded your model. Replace `<VM_IP>` with your VM's IP address (visible in Sunstone's VM details).
+
 ```bash
 curl -sS http://<VM_IP>:8000/v1/models
 ```
-You should receive a JSON response containing the model ID (e.g., `meta-llama/Llama-3-8B`). Use this ID in the next step.
 
-**Test Model Inference**<br>
-Send a prompt to the model to verify it can generate responses. This uses the OpenAI-compatible completions endpoint.
+**Expected response:** A JSON object listing your model. Look for the model ID (e.g., `meta-llama/Llama-3-8B`). Copy this MODEL_ID for the next step.
+
+### Test Model Inference
+
+Send a test prompt to verify the model can generate responses:
+
 ```bash
-curl -sS http://<VM_IP>:8000/v1/completions
-  -H 'Content-Type: application/json'
+curl -sS http://<VM_IP>:8000/v1/completions \
+  -H 'Content-Type: application/json' \
   -d '{
     "model": "<MODEL_ID>",
-    "prompt": "Hello! :)",
+    "prompt": "Hello! :)"
   }'
 ```
-You should receive a JSON response with the model's completion, confirming that the end-to-end deployment is functional.
 
-If import fails, the model does not appear as an Image, or you need HF token / QCOW2 prerequisites, follow the [HuggingFace Hub Marketplace guide]({{% relref "product/apps-marketplace/public_marketplaces/hfhub#market-hfhub" %}}).
+**Expected response:** A JSON response containing the model's generated completion, confirming your deployment is fully functional.
 
+## Troubleshooting
+
+- **Model import fails or doesn't appear**: Check the [HuggingFace Hub Marketplace guide]({{% relref "product/apps-marketplace/public_marketplaces/hfhub#market-hfhub" %}}) for prerequisites like HF tokens or QCOW2 requirements.
