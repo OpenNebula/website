@@ -221,7 +221,7 @@ All other IdP-specific configuration settings for the driver should be set up th
 
 Microsoft Entra ID SAML is compatible with OpenNebulaa but has some peculiarities:
 
-- An enterprise application must be created in order to work. The application has a login URL that is the one that must be set up in Fireedge.
+- An enterprise application must be created in order to work. The application has a login URL that is the one that must be set up in FireEdge.
 - Groups are equivalent to roles. The free tiers of Entra do not allow the creation of roles, but groups can be retrieved with the same claim
 - Groups, roles and tenants are identified by a UUID (i.e. `94d6138b-d446-4236-9d37-934fead2033f`) instead of a name
 
@@ -316,7 +316,7 @@ After these steps, the configuration file `/etc/one/auth/saml_auth.conf` will lo
     :mapping_filename: 'entra_groups.yaml'
 ```
 
-On the other hand, fireedge configuration must be modified as well redirecting to the "User access URL" field value on the properties page of the application.
+On the other hand, FireEdge configuration must be modified as well redirecting to the "User access URL" field value on the properties page of the application.
 
 ![entra_08_URL_app](/images/auth/entra/entra_08_URL_app.png)
 
