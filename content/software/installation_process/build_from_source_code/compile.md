@@ -67,6 +67,10 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 {{< alert title="Note" color="success" >}}
 To install OpenNebula with the `system-wide` mode you should have super user privileges.{{< /alert >}}
 
+{{< alert title="Warning" color="warning" >}}
+The `scons` option `xmlrpc_pkgconf=yes` is mandatory for AlmaLinux 9. Otherwise the build fails.{{< /alert >}}
+
+
 ```default
 $ sudo ./install.sh <install_options>
 ```
