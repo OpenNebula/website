@@ -76,8 +76,12 @@ The installation interface will be in text mode and will only ask for confirmati
 
 ![validation_script](/images/ISO/01-validation_script.png)
 
+After that, a little menu showing all the available, non-removable disks, will be shown in the format `disk|sizeGB`. After choosing the disk, a confirmation menu with the options `yes` and `no` will be shown.
+
+![disk_selection](/images/ISO/011-disk_selection.png)
+
 {{< alert title="Warning: data will be deleted" color="warning" >}}
-**IMPORTANT: OpenNebula will be installed on the first disk found and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right server.**{{< /alert >}}
+**IMPORTANT: OpenNebula will be installed on the selected disk and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right disk and server.**{{< /alert >}}
 
 After the confirmation, the installation will start. It will show some information related to the default settings and the packages that will be installed
 
