@@ -73,7 +73,7 @@ AR=[
 
 Marking an Address Range as `SHARED` converts its IPs into **Virtual IPs**. This allows **multiple VMs** to use the same IP address.
 
-To mark an Address Range as `SHARED`, add the `SHARED` attribute:
+To mark an Address Range as `SHARED`, add the `SHARED` attribute in the AR definition:
 
 ```default
 AR=[
@@ -88,29 +88,32 @@ Shared Address Ranges behave slightly differently from regular Address Ranges:
 
 - Same IP, multiple VMs: The same IP address from a Shared AR can be used by more than one VM.
 - No MAC addresses: Leases from a Shared AR do not include a MAC address.
-- Explicit request required: Shared IPs are not assigned automatically. You must explicitly request a Shared IP using [`NIC ALIAS`](#request-virtual-ips-with-nic-alias).
+- Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested using [`NIC ALIAS`](#request-virtual-ips-with-nic-alias).
 - Attribute `USED_LEASES` shows how many different shared IPs are in use, not how many VMs are using them.
 
 For example, a Virtual Network with a no shared AR (`ID=0`) and a shared AR (`ID=1`):
 
 ```default
-ADDRESS RANGE POOL                                                              
-AR 0                                                                            
-SIZE           : 51                 
-LEASES         : 4                   
+ADDRESS RANGE POOL
+AR 0
+SIZE           : 51
+LEASES         : 4
 
 RANGE                                   FIRST                               LAST
 MAC                         02:00:c0:a8:96:64                  02:00:c0:a8:96:c7
 IP                                 10.0.0.150                         10.0.0.201
 
-AR 1                                                                            
-SIZE           : 3                   
-LEASES         : 1                   
+AR 1
+SIZE           : 3
+LEASES         : 1
 
 RANGE                                   FIRST                               LAST
-MAC                                                                             
+MAC
 IP                                 10.0.0.211                         10.0.0.213
 ```
+
+{{< alert title="Important" color="success" >}}
+The Sharedness of an Address Range can be changed only if the Address Range does not contain any leases. All leases must be released before modifying the `SHARED` attribute. {{< /alert >}}
 
 ### Guest Configuration Attributes (Context)
 
@@ -457,7 +460,7 @@ This will result in the VM having a **single network interface** (the parent NIC
 - The explicitly requested shared IP from the `NIC_ALIAS`
 
 {{< alert title="Important" color="success" >}}
-Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by Libvirt. For this reason, the recommended approach is to use `NIC_ALIAS`.{{< /alert >}}  
+Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by Libvirt. For this reason, the recommended approach is to use `NIC_ALIAS`.{{< /alert >}}
 
 ### Configuring the Virtual Machine Network
 
