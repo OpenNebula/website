@@ -283,34 +283,22 @@ After the installation, the server runs only the frontend and needs to be added 
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
-After selecting the option `add_host`, the IP for the host will be asked for.
-In this case we are using the IP that was configured before, 172.20.0.7
-
-```
-                                 ┌──────────────────────────────────────────────────────────┐
-                                 │ Insert the IP for the node                               │
-                                 │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │172.20.0.7                                            │ │
-                                 │ └──────────────────────────────────────────────────────┘ │
-                                 │                                                          │
-                                 ├──────────────────────────────────────────────────────────┤
-                                 │               <  OK  >        <Cancel>                   │
-                                 └──────────────────────────────────────────────────────────┘
+After selecting the option `add_host`, the IP for the host and the user to log into it will be asked for. 
+- In this case we are using the IP that was configured before, 172.20.0.7
+- The user to log into the node MUST be root or have sudo root access without password
 
 ```
 
-Then, the user to log into the node will be asked. It MUST be root or have sudo root access without password
+                      ┌────────────────────────────────Add Node──────────────────────────────────┐
+                      │ ┌──────────────────────────────────────────────────────────────────────┐ │
+                      │ │Host IP:                                                              │ │
+                      │ │User (with root permissions):                                         │ │
+                      │ └──────────────────────────────────────────────────────────────────────┘ │
+                      │                                                                          │
+                      ├──────────────────────────────────────────────────────────────────────────┤
+                      │                       <  OK  >            <Cancel>                       │
+                      └──────────────────────────────────────────────────────────────────────────┘
 
-```
-                                 ┌──────────────────────────────────────────────────────────┐
-                                 │ Insert the user for the node                             │
-                                 │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │root                                                  │ │
-                                 │ └──────────────────────────────────────────────────────┘ │
-                                 │                                                          │
-                                 ├──────────────────────────────────────────────────────────┤
-                                 │               <  OK  >        <Cancel>                   │
-                                 └──────────────────────────────────────────────────────────┘
 ```
 
 A confirmation dialog like the following will be shown:
