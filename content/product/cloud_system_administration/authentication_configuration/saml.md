@@ -219,7 +219,7 @@ All other IdP-specific configuration settings for the driver should be set up th
 
 ### Microsoft Entra ID
 
-Microsoft Entra ID SAML is compatible with OpenNebulaa but has some peculiarities:
+Microsoft Entra ID SAML is compatible with OpenNebula SAML authentication but has some peculiarities:
 
 - An enterprise application must be created in order to work. The application has a login URL that is the one that must be set up in FireEdge.
 - Groups are equivalent to roles. The free tiers of Entra do not allow the creation of roles, but groups can be retrieved with the same claim
@@ -228,7 +228,9 @@ Microsoft Entra ID SAML is compatible with OpenNebulaa but has some peculiaritie
 
 #### Creating the OpenNebula Entra ID application
 
-OpenNebula Service provider name `:sp_entity_id` and the Assertion consumer service URL `:acs_url` must be set up. The following base configuration will be used as example (these must be defined on the file `/etc/one/auth/saml_auth.conf`)
+OpenNebula Service provider name `:sp_entity_id` and the Assertion consumer service URL `:acs_url` must be set up. The following base configuration will be used as example (these must be defined on the file `/etc/one/auth/saml_auth.conf`). 
+
+In this case, our FireEdge server is available on `https://onelocal:8443/fireedge`. Please, modify the URL accordingly to `http(s)://<FIREEDGE_SERVER>:<FIREEDGE_PORT>/fireedge/api/auth/acs`.
 
 ```
 :sp_entity_id: 'onelocal'
@@ -269,11 +271,13 @@ New Application
 
 ![entra_10_modify_NameID](/images/auth/entra/entra_10_modify_NameID.png)
 
-    - As commented previously, the default additional claims can be deleted (pressing the ... close to the name).
+
+As commented previously, the default additional claims can be deleted (pressing the ... close to the name).
+
 
 ![entra_09_delete_claims](/images/auth/entra/entra_09_delete_claims.png)
 
-    - To do OpenNebula group mapping, a group claim must be created, pressing "Add a group claim" and setting one of the group options, normally "Security groups". The changes must be saved.
+To do OpenNebula group mapping, a group claim must be created, pressing "Add a group claim" and setting one of the group options, normally "Security groups". The changes must be saved.
 
 ![entra_11_add_group_claim](/images/auth/entra/entra_11_add_group_claim.png)
 
@@ -282,7 +286,8 @@ This claim will provide Entra ID groups and roles, because they are treated as i
 
   - On the __SAML Certificates__ section, the **Federation Metadata XML** file must be downloaded to extract the idp certificate (the parameter `:idp_cert` of the OpenNebula configuration file). The certificate is the value of the field `/EntityDescriptor/Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate` of the XML file. Supposing that the file was downloaded to `Downloads/OpenNebula Local.xml`, it can be done easily using the command `xpath` as shown in the following commandline 
 ```bash
- cat "Downloads/OpenNebula local.xml" | xpath -e '/EntityDescriptor/Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate/text()' 2>/dev/null
+ cat "Downloads/OpenNebula local.xml" | \
+ xpath -e '/EntityDescriptor/Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate/text()' 2>/dev/null
 ```
   - On the __Set up OpenNebula local__ (or the name of the app that was chosen), the field **Microsoft Entra Identifier** will be needed for further configuration as the `:issuer` field for OpenNebula Entra identity provider
 

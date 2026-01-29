@@ -76,8 +76,12 @@ The installation interface will be in text mode and will only ask for confirmati
 
 ![validation_script](/images/ISO/01-validation_script.png)
 
+After that, a little menu showing all the available, non-removable disks, will be shown in the format `disk|sizeGB`. After choosing the disk, a confirmation menu with the options `yes` and `no` will be shown.
+
+![disk_selection](/images/ISO/011-disk_selection.png)
+
 {{< alert title="Warning: data will be deleted" color="warning" >}}
-**IMPORTANT: OpenNebula will be installed on the first disk found and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right server.**{{< /alert >}}
+**IMPORTANT: OpenNebula will be installed on the selected disk and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right disk and server.**{{< /alert >}}
 
 After the confirmation, the installation will start. It will show some information related to the default settings and the packages that will be installed
 
@@ -279,34 +283,22 @@ After the installation, the server runs only the frontend and needs to be added 
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
-After selecting the option `add_host`, the IP for the host will be asked for.
-In this case we are using the IP that was configured before, 172.20.0.7
-
-```
-                                 ┌──────────────────────────────────────────────────────────┐
-                                 │ Insert the IP for the node                               │
-                                 │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │172.20.0.7                                            │ │
-                                 │ └──────────────────────────────────────────────────────┘ │
-                                 │                                                          │
-                                 ├──────────────────────────────────────────────────────────┤
-                                 │               <  OK  >        <Cancel>                   │
-                                 └──────────────────────────────────────────────────────────┘
+After selecting the option `add_host`, the IP for the host and the user to log into it will be asked for. 
+- In this case we are using the IP that was configured before, 172.20.0.7
+- The user to log into the node MUST be root or have sudo root access without password
 
 ```
 
-Then, the user to log into the node will be asked. It MUST be root or have sudo root access without password
+                      ┌────────────────────────────────Add Node──────────────────────────────────┐
+                      │ ┌──────────────────────────────────────────────────────────────────────┐ │
+                      │ │Host IP:                                                              │ │
+                      │ │User (with root permissions):                                         │ │
+                      │ └──────────────────────────────────────────────────────────────────────┘ │
+                      │                                                                          │
+                      ├──────────────────────────────────────────────────────────────────────────┤
+                      │                       <  OK  >            <Cancel>                       │
+                      └──────────────────────────────────────────────────────────────────────────┘
 
-```
-                                 ┌──────────────────────────────────────────────────────────┐
-                                 │ Insert the user for the node                             │
-                                 │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │root                                                  │ │
-                                 │ └──────────────────────────────────────────────────────┘ │
-                                 │                                                          │
-                                 ├──────────────────────────────────────────────────────────┤
-                                 │               <  OK  >        <Cancel>                   │
-                                 └──────────────────────────────────────────────────────────┘
 ```
 
 A confirmation dialog like the following will be shown:
