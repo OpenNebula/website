@@ -18,7 +18,9 @@ You will learn how to:
 * Configure the Slurm worker template (virtiofs, GPU, and a start script so the worker gets the model and dependencies at boot).
 * Submit a finetuning job from the **Slurm controller** with a single command.
 
-This example uses an **NVIDIA H100L** GPU. If you use a different GPU, adapt the NVIDIA driver version and PCI selection in the steps below.
+{{< alert title="Note" color="success" >}}
+This guide uses an **NVIDIA H100L** and `nvidia-driver-570` as an example. If you use a different GPU, select the correct PCI device in Sunstone and install a compatible NVIDIA driver version.
+{{< /alert >}}
 
 <!-- Image: overview diagram (host folder → controller → worker with virtiofs) → img/overview.png -->
 
@@ -113,8 +115,6 @@ RAW=[
 
 ### Attach GPU to the worker
 
-This example uses an **NVIDIA H100L**. Select the PCI device that matches your GPU (e.g. L40S, A100) in Sunstone.
-
 Add the GPU as a PCI device from **Sunstone**: **Templates** → **VM Templates** → **Update** the Slurm worker template → **Advanced options** → **PCI devices** tab. OpenNebula will insert the correct PCI class, device and vendor into the template.
 
 <!-- Image: Sunstone PCI devices tab → img/sunstone-pci.png -->
@@ -126,7 +126,7 @@ Add the **start script** from **Sunstone**: **Templates** → **VM Templates** �
 ```bash
 mkdir -p /mnt/ai_model
 mount -t virtiofs ai_model /mnt/ai_model
-apt update && apt install -y nvidia-driver-570   # Example for H100L; use the driver that matches your GPU
+apt update && apt install -y nvidia-driver-570
 python3 -m venv /mnt/ai_model/venv
 /mnt/ai_model/venv/bin/pip install --upgrade pip
 /mnt/ai_model/venv/bin/pip install unsloth datasets trl transformers
@@ -141,7 +141,7 @@ What the start script does:
 * The NVIDIA driver lets the VM use the host GPU.
 * The venv and pip install provide the dependencies for `demo_finetune.py`.
 
-This example uses `nvidia-driver-570` for an **H100L**; use the driver version that matches your GPU. Reboot the Slurm worker after the first driver install if required.
+Reboot the Slurm worker after the first driver install if required.
 
 **Verify GPU on the Slurm worker:** Inside the Slurm worker VM, run these commands to confirm the NVIDIA driver is installed and the GPU is recognized:
 
