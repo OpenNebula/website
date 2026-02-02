@@ -42,8 +42,6 @@ huggingface-cli download Qwen/Qwen2.5-1.5B-Instruct --local-dir /tmp/ai_model_fi
 
 Adapt the model ID and path if needed.
 
-The Slurm worker will see this folder as **`/mnt/ai_model`** once the Slurm worker start script has run (see [Configure the Slurm worker template](#configure-the-slurm-worker-template)).
-
 **Create the finetuning script**
 
 * Create the file in the **same host folder** as the model (e.g. `/tmp/ai_model_files/demo_finetune.py`).
@@ -112,6 +110,8 @@ RAW=[
   TYPE="kvm",
   VALIDATE="no" ]
 ```
+
+The Slurm worker will see the **`/tmp/ai_model_files`** folder as **`/mnt/ai_model`** once the Slurm worker start script has run (see [Configure the Slurm worker template](#configure-the-slurm-worker-template)).
 
 ### Attach GPU to the worker
 
