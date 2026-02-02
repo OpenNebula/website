@@ -45,7 +45,6 @@ Adapt the model ID and path if needed.
 **Create the finetuning script**
 
 * Create the file in the **same host folder** as the model (e.g. `/tmp/ai_model_files/demo_finetune.py`).
-* Name it `demo_finetune.py`. The Slurm worker will run it from `/mnt/ai_model/demo_finetune.py` after the virtiofs mount.
 * In the script, `MODEL_PATH` is set to `/mnt/ai_model` (the path inside the worker VM). If you used a different mount path in the start script, change `MODEL_PATH` in the script to match.
 
 ```python
