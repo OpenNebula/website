@@ -18,7 +18,9 @@ You will learn how to:
 * Configure the Slurm worker template (virtiofs, GPU, and a start script so the worker gets the model and dependencies at boot).
 * Submit a finetuning job from the **Slurm controller** with a single command.
 
-The Slurm worker sees the model and script via **virtiofs** (the host folder is mounted inside the worker VM).
+This example uses an **NVIDIA H100L** GPU. If you use a different GPU, adapt the NVIDIA driver version and PCI selection in the steps below.
+
+<!-- Image: overview diagram (host folder → controller → worker with virtiofs) → img/overview.png -->
 
 ---
 
@@ -40,7 +42,7 @@ Adapt the model ID and path if needed.
 
 The Slurm worker will see this folder as **`/mnt/ai_model`** once the Slurm worker start script has run (see [Configure the Slurm worker template](#configure-the-slurm-worker-template)).
 
-**Example `demo_finetune.py`**
+**Create the finetuning script**
 
 * Create the file in the **same host folder** as the model (e.g. `/tmp/ai_model_files/demo_finetune.py`).
 * Name it `demo_finetune.py`. The Slurm worker will run it from `/mnt/ai_model/demo_finetune.py` after the virtiofs mount.
@@ -111,7 +113,11 @@ RAW=[
 
 ### Attach GPU to the worker
 
+This example uses an **NVIDIA H100L**. Select the PCI device that matches your GPU (e.g. L40S, A100) in Sunstone.
+
 Add the GPU as a PCI device from **Sunstone**: **Templates** → **VM Templates** → **Update** the Slurm worker template → **Advanced options** → **PCI devices** tab. OpenNebula will insert the correct PCI class, device and vendor into the template.
+
+<!-- Image: Sunstone PCI devices tab → img/sunstone-pci.png -->
 
 ### Add start script for mount and dependencies
 
@@ -120,11 +126,13 @@ Add the **start script** from **Sunstone**: **Templates** → **VM Templates** �
 ```bash
 mkdir -p /mnt/ai_model
 mount -t virtiofs ai_model /mnt/ai_model
-apt update && apt install -y nvidia-driver-570
+apt update && apt install -y nvidia-driver-570   # Example for H100L; use the driver that matches your GPU
 python3 -m venv /mnt/ai_model/venv
 /mnt/ai_model/venv/bin/pip install --upgrade pip
 /mnt/ai_model/venv/bin/pip install unsloth datasets trl transformers
 ```
+
+<!-- Image: Sunstone Context tab, Start script field → img/sunstone-context.png -->
 
 What the start script does:
 
@@ -133,7 +141,7 @@ What the start script does:
 * The NVIDIA driver lets the VM use the host GPU.
 * The venv and pip install provide the dependencies for `demo_finetune.py`.
 
-Use the driver version that matches your GPU (e.g. **NVIDIA H100L**); `nvidia-driver-570` is an example. Reboot the Slurm worker after the first driver install if required.
+This example uses `nvidia-driver-570` for an **H100L**; use the driver version that matches your GPU. Reboot the Slurm worker after the first driver install if required.
 
 **Verify GPU on the Slurm worker:** Inside the Slurm worker VM, run these commands to confirm the NVIDIA driver is installed and the GPU is recognized:
 
@@ -153,6 +161,8 @@ Before running the job:
 
 * Check that the Slurm controller sees the Slurm worker (e.g. `sinfo` or `scontrol show nodes`).
 * If you need to add or verify worker nodes, see the [Slurm Quick Start](https://github.com/OpenNebula/one-apps/wiki/slurm_quick).
+
+<!-- Image: Slurm controller terminal (sinfo/srun, training output) → img/slurm-srun.png -->
 
 On the **Slurm controller** VM, run the following command to start the finetuning of the AI model on the Slurm worker that has `/mnt/ai_model` mounted:
 
