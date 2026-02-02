@@ -135,8 +135,7 @@ python3 -m venv /mnt/ai_model/venv
 
 What the start script does:
 
-* The target name `ai_model` must match the `<target dir='ai_model'/>` in the RAW section.
-* At boot, the start script mounts the host folder (e.g. `/tmp/ai_model_files`) inside the worker VM at **`/mnt/ai_model`**, so the worker sees the same model and script files at that path.
+* At boot, the start script mounts the host folder (e.g. `/tmp/ai_model_files`) inside the worker VM at **`/mnt/ai_model`**, so the worker sees the same model and script files at that path. The target name `ai_model` must match the `<target dir='ai_model'/>` in the RAW section.
 * The NVIDIA driver lets the VM use the host GPU.
 * The venv and pip install provide the dependencies for `demo_finetune.py`.
 
