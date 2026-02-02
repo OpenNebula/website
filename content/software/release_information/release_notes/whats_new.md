@@ -93,5 +93,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 <!--keeping some examples-->
 - [Fix de-selecting hidden datatable entries](https://github.com/OpenNebula/one/issues/6781).
-- [Fireedge do not refresh actions on VM state change](https://github.com/OpenNebula/one/issues/7172).
-- [Do not allow space in group name](https://github.com/OpenNebula/one/issues/7355).
+- [Fix Fireedge not refreshing actions on VM state change](https://github.com/OpenNebula/one/issues/7172).
+- [Fix group names to not allow space in group name](https://github.com/OpenNebula/one/issues/7355).
+- [Fix quota output for commands `onegroup list` and `oneuser list`](https://github.com/OpenNebula/one/issues/7254).
