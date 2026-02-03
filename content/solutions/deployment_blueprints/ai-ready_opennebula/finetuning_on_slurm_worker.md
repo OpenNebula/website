@@ -14,7 +14,7 @@ This tutorial shows how to run LLM finetuning (Unsloth) on a **Slurm worker** ap
 
 You will learn how to:
 
-* Prepare a host folder with the model and finetuning script.
+* Prepare a folder with the model and finetuning script.
 * Configure the Slurm worker template (virtiofs, GPU, and a start script so the worker gets the model and dependencies at boot).
 * Submit a finetuning job from the **Slurm controller** with a single command.
 
@@ -26,9 +26,9 @@ This guide uses an **NVIDIA H100L** and `nvidia-driver-570` as an example. If yo
 
 ---
 
-## Prepare the shared folder on the host
+## Prepare the shared folder on the OpenNebula frontend
 
-On the **OpenNebula host** that runs the Slurm worker VM:
+On the **OpenNebula frontend** that runs the Slurm worker VM:
 
 * Create a folder (e.g. `/tmp/ai_model_files`).
 * Put there the **model files** and **`demo_finetune.py`**.
@@ -44,7 +44,7 @@ Adapt the model ID and path if needed.
 
 **Create the finetuning script**
 
-* Create the file in the **same host folder** as the model (e.g. `/tmp/ai_model_files/demo_finetune.py`).
+* Create the file in the **same folder** as the model (e.g. `/tmp/ai_model_files/demo_finetune.py`).
 * In the script, `MODEL_PATH` is set to `/mnt/ai_model` (the path inside the worker VM). If you used a different mount path in the start script, change `MODEL_PATH` in the script to match.
 
 ```python
@@ -91,7 +91,7 @@ This section adds virtiofs support, GPU passthrough, and a start script so the w
 
 ### Add RAW sections for virtiofs
 
-Add the following to the **Slurm worker** VM template. Replace `/tmp/ai_model_files` with the path on the OpenNebula host where you will put the model and script (the same path you use in [Prepare the shared folder on the host](#prepare-the-shared-folder-on-the-host)). Then update the template:
+Add the following to the **Slurm worker** VM template. Replace `/tmp/ai_model_files` with the path on the OpenNebula frontend where you will put the model and script (the same path you use in [Prepare the shared folder on the OpenNebula frontend](#prepare-the-shared-folder-on-the-opennebula-frontend)). Then update the template:
 
 ```shell
 onetemplate update <id_slurm_worker_template>
@@ -135,7 +135,7 @@ python3 -m venv /mnt/ai_model/venv
 
 What the start script does:
 
-* At boot, the start script mounts the host folder (e.g. `/tmp/ai_model_files`) inside the worker VM at **`/mnt/ai_model`**, so the worker sees the same model and script files at that path. The target name `ai_model` must match the `<target dir='ai_model'/>` in the RAW section.
+* At boot, the start script mounts the folder (e.g. `/tmp/ai_model_files`) inside the worker VM at **`/mnt/ai_model`**, so the worker sees the same model and script files at that path. The target name `ai_model` must match the `<target dir='ai_model'/>` in the RAW section.
 * The NVIDIA driver lets the VM use the host GPU.
 * The venv and pip install provide the dependencies for `demo_finetune.py`.
 
@@ -183,7 +183,7 @@ Saved to /mnt/ai_model/output
 
 This tutorial showed how to run finetuning on a **Slurm worker** appliance in OpenNebula:
 
-* Prepare the host folder with the model and `demo_finetune.py`.
+* Prepare the folder with the model and `demo_finetune.py`.
 * Configure the Slurm worker template (RAW sections for virtiofs, PCI for GPU, start script for mount and dependencies).
 * Submit the job from the **Slurm controller** with a single `srun` command.
 
