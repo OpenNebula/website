@@ -47,6 +47,8 @@ Adapt the model ID and path if needed.
 * Create the file in the **same folder** as the model (e.g. `/tmp/ai_model_files/demo_finetune.py`).
 * In the script, `MODEL_PATH` is set to `/mnt/ai_model` (the path inside the worker VM). If you used a different mount path in the start script, change `MODEL_PATH` in the script to match.
 
+The script below is a **sample** that shows how to use Unsloth for a small demo finetune.
+
 ```python
 #!/usr/bin/env python3
 import os
