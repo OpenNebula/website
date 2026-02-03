@@ -1,22 +1,26 @@
 ---
-title: "How to finetune an LLM on a Slurm worker"
+title: "How to finetune LLMs using Slurm"
 linkTitle: "Finetune LLM on Slurm"
 weight: 8
 ---
 
 <a id="finetuning_on_slurm_worker"></a>
 
-This tutorial shows how to run LLM finetuning (Unsloth) on a **Slurm worker** appliance in OpenNebula.
+{{< alert title="Important" color="success" >}}
+To perform the validation with LLM Inference you must comply with one of the prerequisites:
+* Have an AI Factory ready to be validated; or,
+* Configure an AI Factory by following one of these options:
+     * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
+     * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
+{{< /alert >}}
+
+This tutorial shows how to run LLM finetuning using **Slurm** appliance in OpenNebula.
 
 You will learn how to:
 
 * Install Slurm (controller and workers) from the OpenNebula marketplace.
 * Configure the Slurm worker template (GPU and a start script that creates a folder, downloads the model, and installs dependencies at boot).
 * Submit a finetuning job from the **Slurm controller** with a single command.
-
-{{< alert title="Note" color="success" >}}
-This guide uses an **NVIDIA H100L** and `nvidia-driver-570` as an example. If you use a different GPU, select the correct PCI device in Sunstone and install a compatible NVIDIA driver version.
-{{< /alert >}}
 
 ---
 
@@ -85,21 +89,22 @@ Add GPU passthrough and a start script that at boot creates `/opt/ai_model`, dow
 
 ### Attach GPU to the worker
 
+{{< alert title="Note" color="success" >}}
+This guide uses an **NVIDIA H100L** and `nvidia-driver-570` as an example. If you use a different GPU, select the correct PCI device in Sunstone and install a compatible NVIDIA driver version.
+{{< /alert >}}
+
+
 **Sunstone** → **Templates** → **VM Templates** → **Update** the Slurm worker template → **Advanced options** → **PCI devices** tab. Add the GPU; OpenNebula fills in PCI class, device and vendor.
 
 ![Sunstone PCI devices tab](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/sunstone_pci_device.png)
 
 ### Add start script (create dir, download model, install dependencies)
 
-Same template → **Context** tab → **Start script** → paste the following. Change the model ID or path if needed. The nameserver and ip route lines may be unnecessary if your network or context already sets DNS and default gateway.
+Same template → **Context** tab → **Start script** → paste the following. Change the model ID or path if needed.
 
 ```bash
 set -e
 AI_DIR=/opt/ai_model
-
-# Network: may not be required if DHCP/context already set resolv.conf and default route
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
-ip route add default via 10.0.1.1
 
 # Create dir for model, venv, and demo script
 mkdir -p "$AI_DIR"
@@ -153,18 +158,6 @@ chmod +x "$AI_DIR/demo_finetune.py"
 
 ![Sunstone Context tab, Start script field](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/sunstone_start_script.png)
 
-**Verify GPU** (on the worker):
-
-```shell
-lspci | grep -i nvidia
-lspci -v -s 01:00.0
-nvidia-smi
-```
-
-(Adapt the PCI address in `lspci -v -s 01:00.0` if your GPU is on a different bus.)
-
----
-
 ## Run the finetuning job from the Slurm controller
 
 On the **Slurm controller** VM:
@@ -181,12 +174,6 @@ Saved to /opt/ai_model/output
 ```
 
 ![Slurm controller terminal: srun and finetuning output](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/slurm_finetuning_output.png)
-
----
-
-## Summary
-
-You installed Slurm (controller and workers), configured the worker template with GPU and a start script that sets up `/opt/ai_model` and dependencies at boot, and submitted the finetuning job with `srun` from the Slurm controller.
 
 {{< alert title="Tip" color="success" >}}
 After running finetuning on a Slurm worker, you may choose to validate your AI Factory with [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) or [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
