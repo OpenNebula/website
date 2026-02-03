@@ -75,6 +75,8 @@ You need a running **[OneGate](https://docs.opennebula.io/7.0/product/operation_
 
    Then configure the worker template for finetuning (next section).
 
+![List of Slurm nodes available](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/slurm_nodes_info.png)
+
 ---
 
 ## Configure the Slurm worker template
@@ -85,7 +87,7 @@ Add GPU passthrough and a start script that at boot creates `/opt/ai_model`, dow
 
 **Sunstone** → **Templates** → **VM Templates** → **Update** the Slurm worker template → **Advanced options** → **PCI devices** tab. Add the GPU; OpenNebula fills in PCI class, device and vendor.
 
-<!-- Image: Sunstone PCI devices tab → img/sunstone-pci.png -->
+![Sunstone PCI devices tab](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/sunstone_pci_device.png)
 
 ### Add start script (create dir, download model, install dependencies)
 
@@ -149,7 +151,7 @@ PYEOF
 chmod +x "$AI_DIR/demo_finetune.py"
 ```
 
-<!-- Image: Sunstone Context tab, Start script field → img/sunstone-context.png -->
+![Sunstone Context tab, Start script field](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/sunstone_start_script.png)
 
 **Verify GPU** (on the worker):
 
@@ -165,8 +167,6 @@ nvidia-smi
 
 ## Run the finetuning job from the Slurm controller
 
-<!-- Image: Slurm controller terminal (sinfo/srun, training output) → img/slurm-srun.png -->
-
 On the **Slurm controller** VM:
 
 ```shell
@@ -179,6 +179,8 @@ To save output to a file, append `> demo_finetune.out 2>&1`. Example output:
 {'train_runtime': 5.067, 'train_samples_per_second': 7.894, 'train_steps_per_second': 1.974, 'train_loss': 1.8984880447387695, 'epoch': 10.0}
 Saved to /opt/ai_model/output
 ```
+
+![Slurm controller terminal: srun and finetuning output](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/slurm_finetuning_output.png)
 
 ---
 
