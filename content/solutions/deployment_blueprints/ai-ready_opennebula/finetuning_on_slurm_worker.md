@@ -22,7 +22,7 @@ This guide uses an **NVIDIA H100L** and `nvidia-driver-570` as an example. If yo
 
 ## Install Slurm (controller and worker)
 
-You need a running **OneGate** server so the controller can share the Munge key with workers. This is a hard requirements for the Slurm Controller node to be able to share the cluster Munge key. This server must be reachable by the Slurm Controller VM.
+You need a running **[OneGate](https://docs.opennebula.io/7.0/product/operation_references/opennebula_services_configuration/onegate/)** server (reachable by the Slurm Controller VM) so the controller can share the Munge key with workers.
 
 ### Step 1: Deploy the Slurm Controller
 
@@ -73,25 +73,23 @@ You need a running **OneGate** server so the controller can share the Munge key 
    scontrol show nodes
    ```
 
-   You should see your worker node(s) listed. You can then proceed to configure the worker template for finetuning (next section).
+   Then configure the worker template for finetuning (next section).
 
 ---
 
 ## Configure the Slurm worker template
 
-This section adds GPU passthrough and a start script that, at boot, creates a folder, downloads the model, installs the NVIDIA driver and Python dependencies, and creates a sample finetuning script.
+Add GPU passthrough and a start script that at boot creates `/opt/ai_model`, downloads the model, and installs the NVIDIA driver and Python dependencies.
 
 ### Attach GPU to the worker
 
-Add the GPU as a PCI device from **Sunstone**: **Templates** → **VM Templates** → **Update** the Slurm worker template → **Advanced options** → **PCI devices** tab. OpenNebula will insert the correct PCI class, device and vendor into the template.
+**Sunstone** → **Templates** → **VM Templates** → **Update** the Slurm worker template → **Advanced options** → **PCI devices** tab. Add the GPU; OpenNebula fills in PCI class, device and vendor.
 
 <!-- Image: Sunstone PCI devices tab → img/sunstone-pci.png -->
 
 ### Add start script (create dir, download model, install dependencies)
 
-Add the **start script** from **Sunstone**: **Templates** → **VM Templates** → **Update** the Slurm worker template → **Context** tab → paste the following into the **Start script** text field. 
-
-The script creates `/opt/ai_model`, downloads the model and installs dependencies at boot. You can copy and paste it as-is; change the model ID or path if needed.
+Same template → **Context** tab → **Start script** → paste the following. Change the model ID or path if needed. The nameserver and ip route lines may be unnecessary if your network or context already sets DNS and default gateway.
 
 ```bash
 set -e
@@ -153,9 +151,7 @@ chmod +x "$AI_DIR/demo_finetune.py"
 
 <!-- Image: Sunstone Context tab, Start script field → img/sunstone-context.png -->
 
-Reboot the Slurm worker after the first driver install if required.
-
-**Verify GPU on the Slurm worker:** Inside the Slurm worker VM, run these commands to confirm the NVIDIA driver is installed and the GPU is recognized:
+**Verify GPU** (on the worker):
 
 ```shell
 lspci | grep -i nvidia
@@ -169,22 +165,15 @@ nvidia-smi
 
 ## Run the finetuning job from the Slurm controller
 
-Before running the job:
-
-* Check that the Slurm controller sees the Slurm worker (e.g. `sinfo` or `scontrol show nodes`).
-* If you need to add or verify worker nodes, see the [Slurm Quick Start](https://github.com/OpenNebula/one-apps/wiki/slurm_quick).
-
 <!-- Image: Slurm controller terminal (sinfo/srun, training output) → img/slurm-srun.png -->
 
-On the **Slurm controller** VM, run the following command to start the finetuning on a Slurm worker (the start script has already created `/opt/ai_model` and the demo script there):
+On the **Slurm controller** VM:
 
 ```shell
 srun --job-name=demo_finetune -N1 -n1 /opt/ai_model/venv/bin/python /opt/ai_model/demo_finetune.py
 ```
 
-Output goes to the terminal. To save it to a file: add `> demo_finetune.out 2>&1` at the end.
-
-If everything goes well, you should see output similar to:
+To save output to a file, append `> demo_finetune.out 2>&1`. Example output:
 
 ```
 {'train_runtime': 5.067, 'train_samples_per_second': 7.894, 'train_steps_per_second': 1.974, 'train_loss': 1.8984880447387695, 'epoch': 10.0}
@@ -195,11 +184,7 @@ Saved to /opt/ai_model/output
 
 ## Summary
 
-This tutorial showed how to run finetuning on a **Slurm worker** appliance in OpenNebula:
-
-* Install Slurm (controller and workers) from the OpenNebula marketplace.
-* Configure the Slurm worker template (PCI for GPU, start script that creates `/opt/ai_model`, downloads the model, installs driver and dependencies, and creates the demo script).
-* Submit the job from the **Slurm controller** with a single `srun` command.
+You installed Slurm (controller and workers), configured the worker template with GPU and a start script that sets up `/opt/ai_model` and dependencies at boot, and submitted the finetuning job with `srun` from the Slurm controller.
 
 {{< alert title="Tip" color="success" >}}
 After running finetuning on a Slurm worker, you may choose to validate your AI Factory with [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) or [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
