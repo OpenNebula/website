@@ -6,14 +6,11 @@ weight: 8
 
 <a id="finetuning_on_slurm_worker"></a>
 
-{{< alert title="Important" color="success" >}}
-To run finetuning on a Slurm worker, you must have the **Service Slurm Worker** and **Service Slurm Controller** appliances deployed. Download them from the OpenNebula marketplace and follow the [Slurm Quick Start](https://github.com/OpenNebula/one-apps/wiki/slurm_quick) tutorial.
-{{< /alert >}}
-
 This tutorial shows how to run LLM finetuning (Unsloth) on a **Slurm worker** appliance in OpenNebula.
 
 You will learn how to:
 
+* Install Slurm (controller and workers) from the OpenNebula marketplace.
 * Prepare a folder with the model and finetuning script.
 * Configure the Slurm worker template (virtiofs, GPU, and a start script so the worker gets the model and dependencies at boot).
 * Submit a finetuning job from the **Slurm controller** with a single command.
@@ -22,7 +19,62 @@ You will learn how to:
 This guide uses an **NVIDIA H100L** and `nvidia-driver-570` as an example. If you use a different GPU, select the correct PCI device in Sunstone and install a compatible NVIDIA driver version.
 {{< /alert >}}
 
-<!-- Image: overview diagram (host folder → controller → worker with virtiofs) → img/overview.png -->
+---
+
+## Install Slurm (controller and worker)
+
+You need a running **OneGate** server so the controller can share the Munge key with workers. This is a hard requirements for the Slurm Controller node to be able to share the cluster Munge key. This server must be reachable by the Slurm Controller VM.
+
+### Step 1: Deploy the Slurm Controller
+
+1. **Import the Slurm Controller appliance** from the OpenNebula Marketplace. This downloads the VM template and disk image.
+
+   ```shell
+   onemarketapp export 'Service SlurmController' SlurmController --datastore default
+   ```
+
+2. **Adjust the SlurmController template** as needed (CPU, memory, disk size, network). Resource needs depend on cluster size (number of workers and jobs).
+
+3. **Instantiate the Slurm Controller**:
+
+   ```shell
+   onetemplate instantiate SlurmController
+   ```
+
+4. **Wait for the controller to be ready:** SSH into the new SlurmController VM. The terminal will show configuration progress. When finished, you should see: **"All set and ready to serve 8)"**.
+
+5. **Get the controller Munge key.** This key must be shared with all worker nodes for Slurm authentication:
+
+   ```shell
+   onevm show <VM-ID> | grep MUNGE
+   ```
+
+   Replace `<VM-ID>` with the ID of your SlurmController VM. Save the Munge key (base64) and the **Slurm Controller IP address**; you will need both when deploying workers.
+
+### Step 2: Deploy the Slurm Worker(s)
+
+1. **Import the Slurm Worker appliance** from the OpenNebula Marketplace.
+
+   ```shell
+   onemarketapp export 'Service SlurmWorker' SlurmWorker --datastore default
+   ```
+
+2. **Adjust the SlurmWorker template** as needed (CPU, memory, disk size, network). You will add GPU and other options later in this tutorial.
+
+3. **Instantiate the Slurm Worker(s)** via the OpenNebula Sunstone web interface:
+   * Set the **number of instances** (e.g. how many worker nodes you want).
+   * Click **Next**.
+   * When prompted, enter:
+     * **Slurm Controller IP address** (the VM you deployed in Step 1). Ensure workers can reach this IP.
+     * **Slurm Controller Munge key** (base64), from the `onevm show ... | grep MUNGE` output.
+
+4. **Verify workers joined the cluster.** After a few minutes, on the **Slurm Controller** VM run:
+
+   ```shell
+   scontrol show nodes
+   ```
+
+   You should see your worker node(s) listed. You can then proceed to prepare the model folder and configure the worker template for finetuning (next sections).
 
 ---
 
