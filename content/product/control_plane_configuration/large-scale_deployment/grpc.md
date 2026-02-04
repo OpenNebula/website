@@ -56,7 +56,7 @@ To configure the OneFlow service to communicate with oned via gRPC, update the `
 In distributed environments, explicit endpoint definitions are required to ensure the client can reach the active leader or the correct regional zone.
 
 * High Availability: Define the `ENDPOINT_GRPC` attribute for every node within the cluster.
-* Federation: Define the `ENDPOINT_GRPC` attribute for each Zone in the federation.
+* Federation: Define the `ENDPOINT_GRPC` attribute for each zone in the federation.
 
 {{< alert title="Warning" color="warning" >}}
 Important: If a client is configured to use gRPC but the `ENDPOINT_GRPC` is missing in an HA or Federated setup, commands may fail to route correctly, resulting in connection errors.
