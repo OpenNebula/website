@@ -54,7 +54,7 @@ OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by defau
 
 ## Backups - Veeam
 
-- If the backup chain is deleted in OpenNebula and an incremental is attempted from Veeam, the data may be corrupt, so a manual Full Backup is needed from Veeam, otherwise the incremental data will be missing. 
+- If the backup chain is deleted in OpenNebula and an incremental is attempted from Veeam, the data may be corrupt, so a manual Full Backup is needed from Veeam, otherwise the incremental data will be missing.
 - After performing a backup using Veeam VNC may stop working for the backed up VM and some configuration attributes may be lost. If facing this issue, please apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/backup_controller.rb`` file in the backup server at lines ~247-251 (the 2 ``vm.updateconf`` calls need the ``true`` statement at the end). Then, restart the apache2/httpd service:
 
 ```ruby
@@ -68,6 +68,8 @@ else
 ```
 
 - In LVM environments, VM restores may fail to deploy if the restored VM is scheduled in the same host as the original VM (and the original is still deployed). To fix this, apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/vm_controller.rb`` file in the backup server at lines ~800. Then, restart the apache2/httpd service:
+
+- Incremental backups fail on Debian 12/13 due to a Libvirt bug that blocks blockcommit via AppArmor. Until upstream fixes it, the workaround is to disable AppArmor in Libvirt’s qemu.conf
 
 ```ruby
 ...
