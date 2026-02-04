@@ -27,48 +27,32 @@ This page lists the **build** dependencies for OpenNebula.
 ## Ubuntu 22.04, 24.04
 
 * **bash-completion**
-* **bower**
-* **debhelper (>= 7.0.50~)**
-* **default-jdk**
-* **freerdp2-dev**
-* **grunt**
-* **javahelper (>= 0.32)**
-* **libaugeas-dev**
-* **libcairo2-dev**
 * **libcurl4-openssl-dev**
-* **libmysql++-dev**
 * **libmysqlclient-dev**
 * **libnode-dev (>= 10)**
-* **libossp-uuid-dev**
-* **libpango1.0-dev**
-* **libpulse-dev**
+* **libnsl-dev**
 * **libsqlite3-dev**
-* **libssh2-1-dev**
 * **libssl-dev**
 * **libsystemd-dev**
-* **libtool**
 * **libvncserver-dev**
-* **libvorbis-dev**
-* **libwebp-dev**
-* **libws-commons-util-java**
 * **libxml2-dev**
 * **libxmlrpc-c++8-dev**
-* **libxslt1-dev**
-* **libzmq3-dev**
-* **libzmq5**
 * **nodejs (>= 10)**
 * **npm**
 * **python3**
 * **python3-pip**
 * **python3-setuptools**
 * **rake**
-* **ruby-dev**
 * **scons**
 * **unzip**
+* **protobuf-compiler-grpc**
+* **libgrpc++-dev**
+* **libabsl-dev**
+* ruby gem **grpc-tools**
 
 For Ubuntu 22.04 is recommended a updated version of Node.js:
 
-```default
+```shell
 apt -y remove nodejs libnode-dev || true
 apt -y autoremove
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -76,103 +60,101 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
 Install all requirements using:
 
-```default
-apt install bash-completion debhelper default-jdk freerdp2-dev grunt javahelper libaugeas-dev libcairo2-dev libcurl4-openssl-dev libmysql++-dev libmysqlclient-dev libnode-dev libossp-uuid-dev libpango1.0-dev libpulse-dev libsqlite3-dev libssh2-1-dev libssl-dev libsystemd-dev libtool libvncserver-dev libvorbis-dev libwebp-dev libws-commons-util-java libxml2-dev libxmlrpc-c++8-dev libxslt1-dev libzmq3-dev libzmq5 nodejs npm python3 python3-pip python3-setuptools rake ruby-dev scons unzip libnsl-dev && npm install -g bower
+```shell
+apt install bash-completion libcurl4-openssl-dev libmysqlclient-dev \
+    libnode-dev libnsl-dev libsqlite3-dev libssl-dev libsystemd-dev \
+    libvncserver-dev libxml2-dev libxmlrpc-c++8-dev nodejs npm \
+    python3 python3-pip python3-setuptools rake scons unzip \
+    protobuf-compiler-grpc libgrpc++-dev libabsl-dev
+gem install grpc-tools
 ```
 
-## Debian 11, Debian 12
+## Debian 12, 13
 
 * **bash-completion**
 * **bower**
-* **debhelper (>= 7.0.50~)**
-* **default-jdk**
 * **default-libmysqlclient-dev**
-* **freerdp2-dev**
-* **grunt**
-* **javahelper (>= 0.32)**
-* **libaugeas-dev**
-* **libcairo2-dev**
 * **libcurl4-openssl-dev**
 * **libnode-dev (>= 10)**
-* **libossp-uuid-dev**
-* **libpango1.0-dev**
-* **libpulse-dev**
+* **libnsl-dev**
 * **libsqlite3-dev**
-* **libssh2-1-dev**
 * **libssl-dev**
 * **libsystemd-dev**
-* **libtool**
 * **libvncserver-dev**
-* **libvorbis-dev**
-* **libwebp-dev**
-* **libws-commons-util-java**
 * **libxml2-dev**
-* **libxmlrpc-c++8-dev**
-* **libxslt1-dev**
-* **libzmq3-dev**
-* **libzmq5**
+* **libxmlrpc-c++8-dev** -> Debian 12,
+* **libxmlrpc-c++9-dev** -> Debian 13
 * **nodejs (>= 10)**
 * **npm**
 * **python3**
+* **python3-pip**
 * **python3-setuptools**
 * **rake**
-* **ruby-dev**
 * **scons**
 * **unzip**
+* **protobuf-compiler-grpc**
+* **libgrpc++-dev**
+* **libabsl-dev**
+* ruby gem **grpc-tools**
 
 Install all requirements using:
 
-```default
-apt install bash-completion debhelper default-jdk default-libmysqlclient-dev freerdp2-dev grunt javahelper libaugeas-dev libcairo2-dev libcurl4-openssl-dev libnode-dev libossp-uuid-dev libpango1.0-dev libpulse-dev libsqlite3-dev libssh2-1-dev libssl-dev libsystemd-dev libtool libvncserver-dev libvorbis-dev libwebp-dev libws-commons-util-java libxml2-dev libxmlrpc-c++8-dev libxslt1-dev libzmq3-dev libzmq5 nodejs npm python3 python3-setuptools rake ruby-dev scons unzip && npm install -g bower
+```shell
+# Debian 12
+apt install bash-completion default-libmysqlclient-dev libcurl4-openssl-dev \
+    libnode-dev libnsl-dev libsqlite3-dev libssl-dev libsystemd-dev \
+    libvncserver-dev libxml2-dev libxmlrpc-c++8-dev nodejs npm \
+    python3 python3-pip python3-setuptools rake scons unzip \
+    protobuf-compiler-grpc libgrpc++-dev libabsl-dev
+gem install grpc-tools
 ```
 
-## AlmaLinux/RHEL 8,9
+```shell
+# Debian 13
+apt install bash-completion default-libmysqlclient-dev libcurl4-openssl-dev \
+    libnode-dev libnsl-dev libsqlite3-dev libssl-dev libsystemd-dev \
+    libvncserver-dev libxml2-dev libxmlrpc-c++9-dev nodejs npm \
+    python3 python3-pip python3-setuptools rake scons unzip \
+    protobuf-compiler-grpc libgrpc++-dev libabsl-dev
+gem install grpc-tools
+```
+
+## AlmaLinux/RHEL 9, 10
 
 * **gcc-c++**
-* **augeas-devel**
-* **cairo-devel**
-* **curl-devel**
-* **epel-rpm-macros**
-* **expat-devel**
-* **freerdp-devel**
 * **gnutls-devel**
-* **java-1.7.0-openjdk-devel** # java-1.8.0-openjdk-devel needs to be installed for AlmaLinux 9
 * **libcurl-devel**
-* **libffi-devel**
 * **libjpeg-turbo-devel**
 * **libnsl2-devel**
-* **libpq-devel**
-* **libssh2-devel**
-* **libtool**
 * **libvncserver-devel**
-* **libvorbis-devel**
-* **libwebp-devel**
 * **libxml2-devel**
-* **libxslt-devel**
-* **mysql-devel**
+* **mariadb-devel**
 * **nodejs >= 10**
-* **nodejs-devel >= 10**
 * **npm**
 * **openssh**
 * **openssl-devel**
-* **pango-devel**
 * **pkgconfig**
-* **pulseaudio-libs-devel**
 * **python3**
-* **python3-devel**
-* **python3-rpm-macros**
 * **python3-scons**
 * **python3-setuptools**
-* **python3-wheel**
-* **ruby-devel**
-* **rubygem-rake**
 * **rubygems**
 * **sqlite-devel**
 * **systemd**
 * **systemd-devel**
 * **xmlrpc-c-devel**
-* **uuid-devel**
-* **zeromq-devel**
+* **grpc-devel**
+* ruby gem **grpc-tools**
+
+Install all requirements using:
+
+```shell
+dnf config-manager --set-enabled crb
+dnf install gcc-c++ gnutls-devel libcurl-devel libjpeg-turbo-devel \
+    libnsl2-devel libvncserver-devel libxml2-devel mariadb-devel nodejs npm \
+    openssh openssl-devel pkgconfig python3 python3-scons python3-setuptools \
+    rubygems sqlite-devel systemd systemd-devel xmlrpc-c-devel grpc-devel
+gem install grpc-tools
+```
 
 ## Arch
 

@@ -46,14 +46,16 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 | sqlite     | yes       | **no** if you don’t want to build Sqlite support          |
 | mysql      | no        | **yes** if you want to build MySQL support                |
 | parsers    | no        | **yes** if you want to rebuild Flex/Bison files.          |
-| sunstone   | no        | **yes** if you want to build Ruby Sunstone minified files |
 | fireedge   | no        | **yes** if you want to build FireEdge minified files      |
 | systemd    | no        | **yes** if you want to build systemd support              |
 | rubygems   | no        | **yes** if you want to generate Ruby gems                 |
 | svncterm   | yes       | **no** to skip building VNC support for LXD drivers       |
 | context    | no        | **yes** to download guest contextualization packages      |
+| strict     | no        | Strict C++ compiler, more warnings, treat warnings as errors |
 | download   | no        | **yes** to download 3rd-party tools (Restic, Prometheus…) |
-| xmlrpc_pkgconf | no    | **el8/el9/el10** if you want to use pkg-config for xmlrpc-c libs dependency (otherwise xmlrpc-c-config is used) |
+| grpc       | yes       | **yes** to build gRPC support                             |
+| grpcproto  | no        | **yes** to generate C++ sources from .proto files         |
+| xmlrpc_pkgconf | no    | **yes** to use pkg-config to discover xmlrpc libs dependencies, otherwise xmlrpc-c-config is used. Needed for Alma9 and RHEL9 |
 
 - OpenNebula can be installed in two modes: `system-wide` or in `self-contained` directory. In either case, you do not need to run OpenNebula as root. These options can be specified when running the install script:
 
@@ -77,15 +79,13 @@ where  *<install_options>* can be one or more of:
 | **-k**   | keep configuration files of existing OpenNebula installation, useful when upgrading. This flag should not be set when installing OpenNebula for the first time               |
 | **-d**   | target installation directory. If defined, it will specified the path for the **self-contained** install. If not defined, the installation will be performed **system wide** |
 | **-c**   | only install client utilities: OpenNebula cli and ec2 client files                                                                                                           |
-| **-s**   | install OpenNebula Ruby Sunstone                                                                                                                                             |
-| **-p**   | do not install OpenNebula Ruby Sunstone non-minified files                                                                                                                   |
-| **-F**   | install OpenNebula FireEdge                                                                                                                                                  |
+| **-F**   | install only OpenNebula FireEdge                                                                                                                                             |
 | **-P**   | do not install OpenNebula FireEdge non-minified files                                                                                                                        |
-| **-G**   | install OpenNebula Gate                                                                                                                                                      |
-| **-6**   | install only OpenNebula Gate Proxy                                                                                                                                           |
-| **-f**   | install OpenNebula Flow                                                                                                                                                      |
+| **-G**   | install only OpenNebula Gate                                                                                                                                                 |
+| **-f**   | install only OpenNebula Flow                                                                                                                                                 |
 | **-r**   | remove Opennebula, only useful if -d was not specified, otherwise `rm -rf $ONE_LOCATION` would do the job                                                                    |
 | **-l**   | creates symlinks instead of copying files, useful for development                                                                                                            |
+| **-a**   | architecture of downloaded vendor artifacts, default: x86_64"                                                                                                                |
 | **-h**   | prints installer help                                                                                                                                                        |
 
 {{< alert title="Note" color="success" >}}
