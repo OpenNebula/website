@@ -1,6 +1,6 @@
 ---
-title: "gRPC"
-linkTitle: "gRPC"
+title: "gRPC Integration"
+linkTitle: "gRPC Integration"
 date: "2025-02-28"
 description:
 categories:
@@ -32,7 +32,7 @@ The gRPC server is managed by the oned daemon and enable by default. To modify t
 
 ### Using the gRPC Clients
 
-OpenNebula 7.2 provides gRPC support for the Ruby (CLI), Go, and Python (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
+OpenNebula 7.2 provides gRPC support for Ruby (CLI), Go, and Python (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
 
 * Flag-based: Append the `--grpc` flag to any supported command.
 * Environment-based: Set `ONEAPI_PROTOCOL=grpc` in your shell profile to make gRPC the default for all commands.
@@ -58,7 +58,9 @@ In distributed environments, explicit endpoint definitions are required to ensur
 * High Availability: Define the `ENDPOINT_GRPC` attribute for every node within the cluster.
 * Federation: Define the `ENDPOINT_GRPC` attribute for each Zone in the federation.
 
-[!CAUTION] Important: If a client is configured to use gRPC but the `ENDPOINT_GRPC` is missing in an HA or Federated setup, commands may fail to route correctly, resulting in connection errors.
+{{< alert title="Warning" color="warning" >}}
+Important: If a client is configured to use gRPC but the `ENDPOINT_GRPC` is missing in an HA or Federated setup, commands may fail to route correctly, resulting in connection errors.
+{{< /alert >}}
 
 ## Performance
 
@@ -74,25 +76,20 @@ To ensure realistic results, the protocols were tested against a synthetic workl
 | Number of VMs            | 20,000  |
 | Average VM template size | 10 KB   |
 
-The workload consisted of the four most common API calls, executed simultaneously to mirror the request ratio observed in production environments
+The workload consisted of the four most common API calls, executed simultaneously to mirror the request ratio observed in production environments.
 
 ### Comparative Results
 
 The following table illustrates the average response times (in seconds) under two different load intensities: 10 requests per second (req/s) and 30 req/s.
 
-<!--# gRPC
-|---------------------|--------------------|--------------------|--------------------|--------------------|
--->
+| API Method | XML-RPC (10 req/s) | gRPC (10 req/s) | XML-RPC (30 req/s) | gRPC (30 req/s) |
+| :--- | :---: | :---: | :---: | :---: |
+| **host.info** | 0.01s | 0.01s | 0.07s | 0.02s |
+| **hostpool.info** | 0.07s | 0.02s | 0.17s | 0.03s |
+| **vm.info** | 0.02s | 0.01s | 0.07s | 0.02s |
+| **vmpool.info** | 0.97s | 0.43s | 2.15s | 0.94s |
 
-| Protocol      | XML-RPC  | gRPC     | XML-RPC  | gRPC     |
-|---------------|----------|----------|----------|----------|
-| API Load      | 10 req/s | 10 req/s | 30 req/s | 30 req/s |
-| host.info     | 0.01     | 0.01     | 0.07     | 0.02     |
-| hostpool.info | 0.07     | 0.02     | 0.17     | 0.03     |
-| vm.info       | 0.02     | 0.01     | 0.07     | 0.02     |
-| vmpool.info   | 0.97     | 0.43     | 2.15     | 0.94     |
-
-For data-intensive calls like vmpool.info, gRPC reduces latency by over 50%, demonstrating the efficiency of binary serialization over text-based XML. The performance advantage of gRPC becomes more significant as the API load increases. At 30 req/s, gRPC consistently delivers responses 2 to 3 times faster than XML-RPC.
+For data-intensive calls like `vmpool.info`, **gRPC reduces latency by over 50%**, demonstrating the efficiency of binary serialization over text-based XML. The performance advantage of gRPC becomes more significant as the API load increases. At 30 req/s, gRPC consistently delivers responses **2 to 3 times faster than XML-RPC**.
 
 ## Development
 
@@ -108,7 +105,7 @@ If you require support for a language not currently provided by the core team (s
 
 ### Example: Generating C++ Bindings
 
-To generate the header and source files manually, you would typically use a command similar to this:
+To generate the header and source files manually, you should typically use a command similar to this:
 
 > ```Bash
 > protoc -I=src/rm/grpc/proto --cpp_out=./output --grpc_out=./output \
@@ -118,4 +115,4 @@ To generate the header and source files manually, you would typically use a comm
 
 ### Contributing
 
-We encourage developers to explore the existing Go and Ruby implementations within the source code as templates for building new language providers.
+We encourage you to explore the existing Go and Ruby implementations within the source code as templates for building new language providers.
