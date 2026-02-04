@@ -78,7 +78,7 @@ You can download miniONE from the [GitHub repository](https://github.com/OpenNeb
 To quickly download miniONE, run:
 
 ```bash
-wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
 ```
 
 After downloading, open a terminal and use the `sudo` to become the `root` user. For example, run:
@@ -105,7 +105,7 @@ To install miniONE, run as root:
 ./minione
 ```
 
-The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and two minutes. When it's finished, miniONE shows a report with connection parameters and login credentials:
+The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and three minutes on most machines. When it's finished, miniONE shows a report with connection parameters and login credentials:
 
 ```default
 ### Report
@@ -198,3 +198,92 @@ Log in as root with password `opennebula`.
 Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine.
 
 To explore the resources in the environment you've just created, see [Validate the miniONE Environment]({{% relref "validate_the_environment" %}}) --- where additionally you can learn how to quickly download virtual appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploy them to your new cloud.
+
+### Troubleshooting
+
+Cannot dispatch VM: No hosts enabled to launch the machine:
+
+```bash
+sudo -u oneadmin onehost sync --force
+```
+
+
+### Expected output
+
+```bash
+### Checks & detection
+Checking augeas is installed  SKIP will try to install
+Checking apt-transport-https is installed  SKIP will try to install
+Checking AppArmor  SKIP will try to modify
+Checking for present ssh key  SKIP
+Checking iptables-persistent is installed  SKIP will try to install
+Checking netfilter-persistent is installed  SKIP will try to install
+Checking terraform  SKIP will try to install
+
+### Main deployment steps:
+Install OpenNebula frontend version 7.0
+Install Terraform
+Configure bridge minionebr with IP 172.16.100.1/24
+Enable NAT over eth0
+Modify AppArmor
+Install OpenNebula KVM node
+Export appliance and update VM template
+Install  augeas-tools apt-transport-https iptables-persistent netfilter-persistent
+
+Do you agree? [yes/no]:
+yes
+
+### Installation
+Updating APT cache  OK
+Install  augeas-tools apt-transport-https iptables-persistent netfilter-persistent  OK
+Creating bridge interface minionebr  OK
+Bring bridge interfaces up  OK
+Enabling IPv4 forward  OK
+Persisting IPv4 forward  OK
+Configuring NAT  OK
+Saving iptables changes  OK
+Installing DNSMasq  OK
+Starting DNSMasq  OK
+Configuring repositories  OK
+Updating APT cache  OK
+Installing OpenNebula packages  OK
+Installing TerraForm  OK
+Installing OpenNebula kvm node packages  OK
+Updating AppArmor  OK
+Disable default libvirtd networking  OK
+Restart libvirtd  OK
+
+### Configuration
+Switching OneGate endpoint in oned.conf  OK
+Switching OneGate endpoint in onegate-server.conf  OK
+Switching keep_empty_bridge on in OpenNebulaNetwork.conf  OK
+Switching scheduler interval in oned.conf  OK
+Setting initial password for current user and oneadmin  OK
+Switching DEFAULT_CDROM_DEVICE_PREFIX in oned.conf  OK
+Switching FireEdge port  OK
+Starting OpenNebula services  OK
+Enabling OpenNebula services  OK
+Add ssh key to oneadmin user  OK
+Update ssh configs to allow VM addresses reusing  OK
+Ensure own hostname is resolvable  OK
+Checking OpenNebula is working  OK
+Disabling ssh from virtual network  OK
+Adding localhost ssh key to known_hosts  OK
+Testing ssh connection to localhost  OK
+Updating datastores template  OK
+Creating kvm host  OK
+Restarting OpenNebula  OK
+Ensure host is synced  OK
+Creating virtual network  OK
+Exporting [Alpine Linux 3.20] from Marketplace to local datastore  OK
+Waiting until the image is ready  OK
+Updating VM template  OK
+
+### Report
+OpenNebula 7.0 was installed
+Sunstone is running on:
+  http://172.20.0.4/
+Use following to login:
+  user: oneadmin
+  password: fZAObvvbXv
+```

@@ -188,7 +188,7 @@ You can download miniONE from the [GitHub repository](https://github.com/OpenNeb
 To quickly download miniONE, run:
 
 ```bash
-wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
 ```
 
 This should download the latest version to your current directory.
