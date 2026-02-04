@@ -20,3 +20,4 @@ The following issues have been solved in 7.0.3:
 - Fix parsing of group names to not allow spaces [#7355](https://github.com/OpenNebula/one/issues/7355).
 - Fix `onedb fsck` for Virtual Router leases [#7428](https://github.com/OpenNebula/one/issues/7428).
 - Fix quota output for commands `onegroup list` and `oneuser list` [#7254](https://github.com/OpenNebula/one/issues/7254)
+- Fix Veeam only working with default datastore path [#7470](https://github.com/OpenNebula/one/issues/7470)
