@@ -174,7 +174,3 @@ Saved to /opt/ai_model/output
 ```
 
 ![Slurm controller terminal: srun and finetuning output](/images/solutions/deployment_blueprints/finetune_llm_on_slurm_worker/slurm_finetuning_output.png)
-
-{{< alert title="Tip" color="success" >}}
-After running finetuning on a Slurm worker, you may choose to validate your AI Factory with [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) or [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
-{{< /alert >}}
