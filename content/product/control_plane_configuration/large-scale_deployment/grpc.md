@@ -15,15 +15,15 @@ weight: "5"
 
 ## Overview
 
-gRPC serves as the modern communication backbone for OpenNebula, replacing XML-RPC with a faster, more efficient protocol. By using binary serialization, gRPC outperforms traditional text-based protocols in both speed and payload size. It simplifies development by providing typed contracts and multi-language support, ensuring the codebase remains scalable and easy to maintain.
+gRPC offers a high-performance alternative to the legacy XML-RPC protocol. By using binary serialization in place of text-based XML, gRPC significantly reduces CPU overhead and network payload sizes, particularly in large-scale deployments. It simplifies development by providing typed contracts and multi-language support through Protocol Buffers for a scalable and easy to maintain code-base.
 
 ## Configuration
 
-To enable and utilize gRPC within an OpenNebula environment, configuration is required at both the daemon level (server-side) and the client level.
+To enable and use gRPC within an OpenNebula environment, you must configure both the daemon (server-side) and the client.
 
 ### Enabling the gRPC Service
 
-The gRPC server is managed by the oned daemon and enable by default. To modify the default values, edit `/etc/one/oned.conf` and define the listening port and address:
+The oned daemon manages the gRPC server, which is enabled by default. To modify the default values, edit `/etc/one/oned.conf` and define the listening port and address:
 
 > ```none
 > GRPC_PORT = 2634
@@ -55,7 +55,7 @@ To configure the OneFlow service to communicate with oned via gRPC, update the `
 
 In distributed environments, explicit endpoint definitions are required to ensure the client can reach the active leader or the correct regional zone.
 
-* High Availability: Define the `ENDPOINT_GRPC` attribute for every node within the cluster.
+* High availability: Define the `ENDPOINT_GRPC` attribute for every node within the cluster.
 * Federation: Define the `ENDPOINT_GRPC` attribute for each zone in the federation.
 
 {{< alert title="Warning" color="warning" >}}
@@ -76,7 +76,7 @@ To ensure realistic results, the protocols were tested against a synthetic workl
 | Number of VMs            | 20,000  |
 | Average VM template size | 10 KB   |
 
-The workload consisted of the four most common API calls, executed simultaneously to mirror the request ratio observed in production environments.
+The workload consisted of the four most common API calls, executed simultaneously to mirror the request ratio observed in production environments: `host.info`, `hostpool.info`, `vm.info`, and `vmpool.info`.
 
 ### Comparative Results
 
@@ -84,10 +84,10 @@ The following table illustrates the average response times (in seconds) under tw
 
 | API Method | XML-RPC (10 req/s) | gRPC (10 req/s) | XML-RPC (30 req/s) | gRPC (30 req/s) |
 | :--- | :---: | :---: | :---: | :---: |
-| **host.info** | 0.01s | 0.01s | 0.07s | 0.02s |
-| **hostpool.info** | 0.07s | 0.02s | 0.17s | 0.03s |
-| **vm.info** | 0.02s | 0.01s | 0.07s | 0.02s |
-| **vmpool.info** | 0.97s | 0.43s | 2.15s | 0.94s |
+| `host.info` | 0.01 | 0.01 | 0.07 | 0.02 |
+| `hostpool.info` | 0.07 | 0.02 | 0.17 | 0.03 |
+| `vm.info` | 0.02 | 0.01 | 0.07 | 0.02 |
+| `vmpool.info` | 0.97 | 0.43 | 2.15 | 0.94 |
 
 For data-intensive calls like `vmpool.info`, **gRPC reduces latency by over 50%**, demonstrating the efficiency of binary serialization over text-based XML. The performance advantage of gRPC becomes more significant as the API load increases. At 30 req/s, gRPC consistently delivers responses **2 to 3 times faster than XML-RPC**.
 
@@ -101,11 +101,11 @@ The contract between the OpenNebula server and any client is defined in `.proto`
 
 ### Generating Language Bindings
 
-If you require support for a language not currently provided by the core team (such as Rust, Java, or C#), you can generate your own bindings using the protoc compiler and the appropriate plugin for your language.
+If you require support for a language not currently provided by the core team such as Rust, Java, or C#, you can generate your own bindings using the `protoc` compiler and the appropriate plugin for your language.
 
 ### Example: Generating C++ Bindings
 
-To generate the header and source files manually, you should typically use a command similar to this:
+To generate the header and source files manually, use a command similar to the following:
 
 > ```Bash
 > protoc -I=src/rm/grpc/proto --cpp_out=./output --grpc_out=./output \
