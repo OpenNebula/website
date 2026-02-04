@@ -82,6 +82,8 @@ xml_element.delete_element('TEMPLATE/OS/UUID') # <- Add this line
 ...
 ```
 
+- Only the default datastore path is supported (``/var/lib/one/datastores/*``) for the image and backup datastores. If using any other path, please make sure there is a soft link in the default path pointing to your current paths. 
+
 ## Market proxy settings
 
 - The option `--proxy` in the `MARKET_MAD` may not be working correctly. To solve it, execute `systemctl edit opennebula` and add the following entries:
