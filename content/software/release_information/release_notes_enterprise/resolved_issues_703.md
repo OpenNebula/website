@@ -17,3 +17,6 @@ The following issues have been solved in 7.0.3:
 - Fix missing ETHx_ROUTES attribute in the VM context section [#7348](https://github.com/OpenNebula/one/issues/7348)
 - Fix LVM backups not working in Veeam [#7418](https://github.com/OpenNebula/one/issues/7418)
 - Fix Update AR not working with the CLI[#7455](https://github.com/OpenNebula/one/issues/7455)
+- Fix parsing of group names to not allow spaces [#7355](https://github.com/OpenNebula/one/issues/7355).
+- Fix `onedb fsck` for Virtual Router leases [#7428](https://github.com/OpenNebula/one/issues/7428).
+- Fix quota output for commands `onegroup list` and `oneuser list` [#7254](https://github.com/OpenNebula/one/issues/7254)
