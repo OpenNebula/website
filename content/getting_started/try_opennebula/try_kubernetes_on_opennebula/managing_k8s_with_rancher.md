@@ -63,6 +63,10 @@ Additionally, we'll perform various operations on the workload cluster:
 
 ## Step 1. Create a Private Network on the Front-end
 
+NOTE: We need to add a second address range in the public network for a loadbalancer.
+
+Add address range Ethernet DHCP: First MAC address 02:00:3c:f0:4d:f9 size 16
+
 In this step we will create a new virtual network and assign a range of private IPs to it. This network will be used by the Virtual Machines in the workload Kubernetes cluster.
 
 To create the network in Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page. If you installed using miniONE, this screen shows the public network automatically installed, called **vnet**:
@@ -354,9 +358,11 @@ Select the **Longhorn** chart. Rancher should display the details screen for Lon
 
 ![><](/images/rancher_longhorn_chart.png)
 
-Click the **Install** button at top right.
+Click the **Install** button at top right. 
 
-The Rancher UI will take you to the **Installed Apps** screen, where Longhorn should be displayed as "Deployed" (near the bottom of the image below).
+The Rancher UI will take you to the **Installed Apps** screen, where Longhorn should be displayed as "Deployed" (near the bottom of the image below). 
+
+NOTE: Longhor is not an app, it will appear in the sidebar when ready
 
 ![><](/images/rancher_apps_longhorn_deployed.png)
 
@@ -431,66 +437,13 @@ Paste the definition into the input box, then click **Import**. Rancher will cre
 
 ![><](/images/rancher_yaml_imported.png)
 
-To see the Nginx deployment, in the menu for the cluster select **Deployments**, and in the `default` namespace look for `nginx`.
+To see the Nginx deployment, in the menu for the cluster select **Workloads** > **Deployments**, and in the `default` namespace look for `nginx`.
 
 ![><](/images/rancher_nginx_deployment.png)
 
 Clicking `nginx` displays additional information for the deployment, including its IP, in this case `10.42.0.32`:
 
 ![><](/images/rancher_nginx_deployment_2.png)
-
-### Checking the Nginx Deployment from OpenNebula (Optional)
-
-This optional step shows how you can check the Nginx deployment without logging into Rancher.
-
-The node where Nginx is running is the Virtual Machine created by OpenNebula as part of the workload cluster, which you can see in Sunstone (**Instances** -> **VMs**), or by running `onevm list` on the Front-end node:
-
-```default
-oneadmin@frontend:~$ onevm list
-  ID USER     GROUP    NAME                                         STAT  CPU     MEM HOST                                TIME
-   4 oneadmin oneadmin capone4-ljm6z                                runn    1      3G localhost                       0d 00h01
-   3 oneadmin oneadmin vr-capone4-cp-0                              runn    1    512M localhost                       0d 00h01
-   2 oneadmin oneadmin Capi-2                                       runn    2      8G localhost                       2d 19h37
-   0 oneadmin oneadmin Alpine Linux 3.20-0                          runn    1    256M localhost                       2d 20h03
-```
-
-To quickly check that the Nginx deployment is working, you can log in to the VM from the Front-end with `onevm ssh <VM ID>` (in this case `4`):
-
-```bash
-onevm ssh 4
-```
-
-And run `curl` against the deployment's IP (in this case `10.42.0.32`):
-
-```default
-root@capone4-ljm6z:/var/log# curl 10.42.0.32
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-root@capone4-ljm6z:/var/log#
-```
-
-At this point we know that the Nginx deployment is working. In the next step we will expose it and check the result on a web browser.
 
 ### Exposing the Nginx Deployment
 
@@ -510,8 +463,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30080
-  type: NodePort
+  type: LoadBalancer
 ```
 
 This will expose port 80 of the pod running the `nginx` service on port 30080 of the master node in the `capone4` cluster.
@@ -523,6 +475,8 @@ After clicking **Import**, you should see `nginx-service` in the cluster's **Ser
 Now your Nginx deployment should be visible on the external IP of the node -- which in this example setup is `192.168.100.4` -- on port 30080:
 
 ![><](/images/rancher_nginx_welcome_screen.png)
+
+GO TO CLUSTER DASHBOARD **SERVICE DISCOVERY** > **SERVICES CLICK** ON NGINX SERVICE LOOK FOR LOAD BALANCER IP
 
 ## Additional Tasks
 
@@ -544,7 +498,7 @@ To upgrade the cluster from within Rancher, select **Cluster Management** at bot
 
 ![><](/images/rancher_edit_config.png)
 
-Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading.
+Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**. 
 
 ![><](/images/rancher_cluster_conf_screen.png)
 
@@ -563,3 +517,8 @@ This tutorial marks the end of the Quick Start guide.
 To learn about OpenNebula in depth, the next sections of the documentation include all of the information necessary for [configuration and administration]({{% relref "product/index" %}}), as well as software [life cycle, releases and installation details]({{% relref "software/index" %}}).
 
 If you are interested in installing OpenNebula by following further tutorials, you can head over to [Automatic Installation with OneDeploy]({{% relref "software/installation_process/automatic_installation_with_onedeploy/one_deploy_overview" %}}) to automatically install a production-ready OpenNebula cloud.
+
+# Notes
+
+To find the correct IP for the capone-rke2 chart, use onevnet list to find the publich network, onevm show <PUB_NET_ID> then get the GATEWAY IP
+
