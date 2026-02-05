@@ -14,44 +14,40 @@ weight: "1"
 
 <!--# Create an Emulated Environment with miniONE -->
 
-In this tutorial, we'll install an OpenNebula Front-end in under ten minutes, using **miniONE**, the installation tool provided by OpenNebula.
+In this tutorial, we will install an OpenNebula Front-end in under ten minutes, using the **miniONE** installation tool provided by OpenNebula.
 
-The miniONE tool is a simple script that allows you to install an OpenNebula Front-end with a single command. It installs quickly and easily and is a great tool for learning and evaluation. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
+**miniONE** is a straightforward tool for deploying an evaluation version of OpenNebula. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
 
-This tutorial covers installation of a Front-end and KVM hypervisor node on the local machine. The resulting installation uses a private IP for communication between the Front-end and Virtual Machines, so it is not suitable for deploying resources to remote infrastructure.
+This tutorial covers installation of a Front-end and KVM hypervisor node on a local machine with a screen attached. If you are installing miniONE on remote infrastructure you will need to use SSH and port forwarding to access user interfaces in your local browser, please refer to the [port fowarding instructions](#ssh-and-port-forwarding) before continuing.
 
-With this setup, during installation miniONE will:
+During this tutorial we will complete the following steps:
 
-- Install OpenNebula from the software packages
-- Install a KVM hypervisor on the local machine
-- Automatically download a Virtual Machine template for the Alpine Linux 3.20 OS from the [OpenNebula Marketplace](https://marketplace.opennebula.io/))
+1. Ensure that the host server meets the installation requirements.
+2. Download and run the miniONE installation script.
+3. Verify the installation.
+4. Instantiate a virtual machine (VM) with Alpine Linux.
 
-After installation, we will use the [Sunstone UI]({{% relref fireedge_sunstone %}}) to try out and manage these components.
+Once you have completed this tutorial, you will have an evaluation version of OpenNebula installed on your machine and you will understand how to use the [Sunstone user interface]({{% relref fireedge_sunstone %}}) to instantiate a VM.  
 
-To install an OpenNebula Front-end using miniONE, we’ll need to complete the following high-level steps:
+## Before starting
 
-> 1. Ensure that the host server meets the installation requirements.
-> 2. Download and run the miniONE script.
-> 3. Verify the installation.
-
-
-{{< alert title="Emulation" color="success" >}}
 It is recommended to perform the installation on a machine capable of running KVM virtualization. If KVM virtualization is not available, miniONE will automatically fall back on QEMU emulation; however, running in full emulation mode will decrease performance.
-{{< /alert >}}
 
-{{< alert title="Tip" color="primary" >}}
 To quickly check that your machine is capable of KVM emulation, you can run the `kvm-ok` command:
 ```
 kvm-ok
 INFO: /dev/kvm exists
 KVM acceleration can be used
 ```
-On Debian-based Linux, you can install `kvm-ok` by installing the `cpu-checker` package.
-{{< /alert >}}
+On Debian-based Linux, you can install `kvm-ok` by installing the `cpu-checker` package:
+
+```bash
+sudo apt install cpu-checker
+```
 
 ## Step 1: Verify Installation Requirements
 
-To run the miniONE script, you will need a physical or virtual server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need an internet connection to download software packages during installation.
+To run the miniONE script, you will need a physical or virtual server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need an internet connection to download software packages during installation. 
 
 **Supported operating systems:**
 : - RHEL/AlmaLinux 8 or 9
@@ -59,7 +55,7 @@ To run the miniONE script, you will need a physical or virtual server with a fre
   - Ubuntu 22.04 or 24.04
 
 **Minimum hardware:**
-: - 4 GiB RAM (16 GiB recommended for [deploying a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}))
+: - 32 GiB RAM
   - 80 GiB free disk space
 
 **Configuration:**
@@ -73,39 +69,33 @@ This tutorial was tested on on Ubuntu 22.04 and 24.04.
 
 ## Step 2: Download and Install miniONE
 
-You can download miniONE from the [GitHub repository](https://github.com/OpenNebula/minione).
-
-To quickly download miniONE, run:
-
-```bash
-wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
-```
-
-After downloading, open a terminal and use the `sudo` to become the `root` user. For example, run:
+Open a terminal and switch to the root user with the `sudo` command:
 
 ```bash
 sudo -i
 ```
 
-Go to the folder where you downloaded the miniONE script, by using the `cd` command:
+Download miniONE, run:
 
 ```bash
-cd <path/to/folder>
+wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
 ```
 
-Next, ensure that the `minione` file has execute permissions:
+Make the `minione` script executable:
 
 ```bash
 chmod +x minione
 ```
 
-To install miniONE, run as root:
+Now run the installation script:
 
 ```bash
 ./minione
 ```
 
-The miniONE script will begin the installation, logging output to the terminal. Installation usually takes between one and three minutes on most machines. When it's finished, miniONE shows a report with connection parameters and login credentials:
+{{< alert title="Tip" color="primary" >}} miniONE will create credentials with a randomized password for logging into the Sunstone UI. You can use the `--password` option to enter a secure and memorable password of your own: `./minione --password <password>`{{< /alert >}} 
+
+The miniONE script executes the installation while logging output to the terminal. Installation usually takes between one and three minutes on most machines. Once finished, miniONE displays a report in the terminal with connection parameters and login credentials:
 
 ```default
 ### Report
@@ -117,17 +107,19 @@ Use following to login:
   password: ZMCoOWUsBg
 ```
 
-Finally we will force a refresh of the ``localhost`` status:
+Please take a note of the IP address and login credentials, you will need them later.
+
+Finally update the ``localhost`` status:
 
 ```bash
 sudo -u oneadmin onehost sync --force
 ```
 
-At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
+At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system is ready for your first login.
 
 ## Step 3: Verify the Installation
 
-We will verify the installation by logging in to OpenNebula's Edge Sunstone GUI.
+Now verify the installation by logging in to OpenNebula's Edge Sunstone GUI.
 
 Point your browser to the Edge IP and port provided by the miniONE report, in this case `192.168.1.130:80`, or simply to `http://localhost`. You should be greeted with the Sunstone login screen:
 
@@ -136,7 +128,7 @@ Point your browser to the Edge IP and port provided by the miniONE report, in th
 
 In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN**.
 
-The screen should display the Sunstone Dashboard:
+The screen will display the Sunstone Dashboard:
 
 ![image](/images/sunstone-dashboard.png)
 <br/>
@@ -147,25 +139,28 @@ As you can see, the Dashboard indicates the following installed components:
 - 1 image
 - 1 virtual network
 
-The installed virtual network is a bridged network attached to a local interface. To see this network, in Sunstone open the left-hand menu (by hovering the mouse over the left-hand pane), then click **Networks** --> **Virtual Networks**:
+The existing virtual network is a bridged network attached to a local interface named `vnet`. To inspect this network, in Sunstone open the left-hand menu (hover the mouse over the left-hand sidebar), then click **Networks** --> **Virtual Networks**:
 
 ![image](/images/sunstone-select_vnetwork.png)
 
-Sunstone should display the **Virtual networks** screen. Clicking the network name displays info tabs for the network:
+Sunstone will display the **Virtual networks** screen. Click the item labelled `vnet` to display information about this network:
 
 ![image](/images/sunstone-network_details.png)
 
-During installation, a KVM virtualization host was automatically configured on the local server. To see the KVM host, in Sunstone open the left-hand menu, then click **Infrastructure** -> **Hosts**.
+During installation, a KVM virtualization host was automatically configured on the local machine. To inspect the KVM host, in Sunstone open the left-hand menu, then click **Infrastructure** -> **Hosts**.
 
-## Deploying a Virtual Machine Locally
+## Step 4: Deploying a Virtual Machine Locally
 
-During installation, miniONE automatically downloaded the template for a Virtual Machine with Alpine Linux 3.20 preinstalled. Using the Sunstone UI, we can now instantiate this Virtual Machine on the local KVM host with a few clicks.
+miniONE automatically downloaded the template for a virtual machine with Alpine Linux 3.20 preinstalled. Through the Sunstone UI, we can now instantiate this VM on the local KVM host with a few clicks.
 
-To deploy the Alpine Linux VM, go to **Templates** -> **VM Templates**. This screen displays a list of all VM templates installed on the system. In this case, only the **Alpine Linux 3.20** template is installed:
+To deploy the Alpine Linux VM, in the left-hand sidebar go to **Templates** -> **VM Templates**. This screen displays a list of all VM templates installed on the system. In this case, only the **Alpine Linux 3.20** template is installed:
 
 ![image](/images/sunstone-vm_templates-alpine.png)
 
-To instantiate the VM template, click the template name, then click the **Instantiate** icon ![image](/images/icons/sunstone/instantiate.png) at the top.
+To instantiate the VM template, click the template item and click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+  <circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" />
+  <path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" />
+</svg> at the top.
 
 Sunstone will display the first screen of the **Instantiate VM Template** wizard:
 
@@ -185,105 +180,56 @@ OpenNebula will instantiate the VM template. For the Alpine Linux VM, this shoul
 
 ![image](/images/sunstone-vm_instances.png)
 
-The green dot to the left of the VM name indicates that the VM is running. Note that you may need to click the **Refresh** icon ![image](images/icons/sunstone/refresh.png) at top left for the VM to display the running state.
+The green dot to the left of the VM name indicates that the VM is running. Note that you may need to click the **Refresh** icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="rgb(0,112,153)">
+<circle cx="12" cy="12" r="11" fill="rgba(218, 218, 218, 1)" stroke="rgb(0,112,153)"/>
+<g transform="translate(6, 6) scale(0.5)">
+<path d="M21.168 8A10.003 10.003 0 0012 2C6.815 2 2.55 5.947 2.05 11" stroke="rgb(0,112,153)" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8h4.4a.6.6 0 00.6-.6V3M2.881 16c1.544 3.532 5.068 6 9.168 6 5.186 0 9.45-3.947 9.951-9" stroke="rgb(0,112,153)" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M7.05 16h-4.4a.6.6 0 00-.6.6V21" stroke="rgb(0,112,153)" stroke-linecap="round" stroke-linejoin="round"></path>
+<g>
+</svg> at top left for the VM to display the running state.
 
 ### Logging into the Virtual Machine
 
-The quickest way to log into the VM is by VNC, available directly in Sunstone. Just click the VNC icon ![image](/images/icons/sunstone/VNC.png) and Sunstone should display the VM boot messages screen directly in your browser.
+The quickest way to log into the VM is by VNC, available directly in Sunstone. Just click the VNC icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" color="rgb(143,147,146)"><path d="M2 15.5V2.6a.6.6 0 01.6-.6h18.8a.6.6 0 01.6.6v12.9m-20 0v1.9a.6.6 0 00.6.6h18.8a.6.6 0 00.6-.6v-1.9m-20 0h20M9 22h1.5m0 0v-4m0 4h3m0 0H15m-1.5 0v-4" stroke="rgb(143,147,146)" stroke-linecap="round" stroke-linejoin="round" fill="white" ></path></svg> and Sunstone will display the VM boot messages screen directly in your browser in another tab. 
 
 ![image](/images/sunstone-VNC-alpine.png)
 
-Log in as root with password `opennebula`.
+Log in as root with password `opennebula`. You can then use the command line to explore the VM and run processes:
 
-Congratulations! You've installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine.
+* Try running `ping 1.1.1.1` to test the internet connection
+* Try running `top` to see the processes running on the machine 
 
-To explore the resources in the environment you've just created, see [Validate the miniONE Environment]({{% relref "validate_the_environment" %}}) --- where additionally you can learn how to quickly download virtual appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/) and deploy them to your new cloud.
+Congratulations! You've now installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine.
 
-### Troubleshooting
+{{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
 
-Cannot dispatch VM: No hosts enabled to launch the machine:
+## Next steps
+
+Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
+
+* [Deploy a WordPress virtual machine](/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine)
+* [Deploy a Kubernetes cluster with the OneKE appliance](/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md)
+* [Deploy a Kubernetes cluster using Rancher and the Cluster API](/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher/)
+* [Further validate your miniONE installation](getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
+
+## SSH and Port Forwarding
+
+If you are deploying miniONE on remote infrastructure it is necessary to use SSH to tunnel into the remote server and access the command line. You also need to use port forwarding in order to access the Sunstone UI through your local browser. 
+
+In order to access the Sunstone UI, you will need to set up port forwarding on your remote machine. Choose a port that is available on your local machine, you can check this by running the following command:
 
 ```bash
-sudo -u oneadmin onehost sync --force
+lsof -i :8443
 ```
 
+In this example we are choosing port 8443. This command should give no output. Any output suggests another process is using that port, `Ctrl-C` and choose another.
 
-### Expected output
+Open a terminal in your local machine and run the following command, inserting your chosen port (8443 in this case, 9869 is the Sunstone port - do not change it):
 
 ```bash
-### Checks & detection
-Checking augeas is installed  SKIP will try to install
-Checking apt-transport-https is installed  SKIP will try to install
-Checking AppArmor  SKIP will try to modify
-Checking for present ssh key  SKIP
-Checking iptables-persistent is installed  SKIP will try to install
-Checking netfilter-persistent is installed  SKIP will try to install
-Checking terraform  SKIP will try to install
-
-### Main deployment steps:
-Install OpenNebula frontend version 7.0
-Install Terraform
-Configure bridge minionebr with IP 172.16.100.1/24
-Enable NAT over eth0
-Modify AppArmor
-Install OpenNebula KVM node
-Export appliance and update VM template
-Install  augeas-tools apt-transport-https iptables-persistent netfilter-persistent
-
-Do you agree? [yes/no]:
-yes
-
-### Installation
-Updating APT cache  OK
-Install  augeas-tools apt-transport-https iptables-persistent netfilter-persistent  OK
-Creating bridge interface minionebr  OK
-Bring bridge interfaces up  OK
-Enabling IPv4 forward  OK
-Persisting IPv4 forward  OK
-Configuring NAT  OK
-Saving iptables changes  OK
-Installing DNSMasq  OK
-Starting DNSMasq  OK
-Configuring repositories  OK
-Updating APT cache  OK
-Installing OpenNebula packages  OK
-Installing TerraForm  OK
-Installing OpenNebula kvm node packages  OK
-Updating AppArmor  OK
-Disable default libvirtd networking  OK
-Restart libvirtd  OK
-
-### Configuration
-Switching OneGate endpoint in oned.conf  OK
-Switching OneGate endpoint in onegate-server.conf  OK
-Switching keep_empty_bridge on in OpenNebulaNetwork.conf  OK
-Switching scheduler interval in oned.conf  OK
-Setting initial password for current user and oneadmin  OK
-Switching DEFAULT_CDROM_DEVICE_PREFIX in oned.conf  OK
-Switching FireEdge port  OK
-Starting OpenNebula services  OK
-Enabling OpenNebula services  OK
-Add ssh key to oneadmin user  OK
-Update ssh configs to allow VM addresses reusing  OK
-Ensure own hostname is resolvable  OK
-Checking OpenNebula is working  OK
-Disabling ssh from virtual network  OK
-Adding localhost ssh key to known_hosts  OK
-Testing ssh connection to localhost  OK
-Updating datastores template  OK
-Creating kvm host  OK
-Restarting OpenNebula  OK
-Ensure host is synced  OK
-Creating virtual network  OK
-Exporting [Alpine Linux 3.20] from Marketplace to local datastore  OK
-Waiting until the image is ready  OK
-Updating VM template  OK
-
-### Report
-OpenNebula 7.0 was installed
-Sunstone is running on:
-  http://172.20.0.4/
-Use following to login:
-  user: oneadmin
-  password: fZAObvvbXv
+ssh -L 8443:localhost:9869 <username>@<REMOTE_IP_ADDRESS>
 ```
+
+This command will take you to the command line of the remote server and establish the port forwarding. You can use this command prompt to run commands on the remote server, including the installation steps detailed above.
+
+Now to access the Sunstone UI (after the successful installation of miniONE) direct your browser to `localhost:8443`, where you will find the Sunstone UI. 
