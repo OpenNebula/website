@@ -108,12 +108,12 @@ SIZE           : 3
 LEASES         : 1
 
 RANGE                                   FIRST                               LAST
-MAC
+MAC                         00:00:00:00:00:00                  00:00:00:00:00:00
 IP                                 10.0.0.211                         10.0.0.213
 ```
 
 {{< alert title="Important" color="success" >}}
-The Sharedness of an Address Range can be changed only if the Address Range does not contain any leases. All leases must be released before modifying the `SHARED` attribute. {{< /alert >}}
+The Sharedness of an Address Range can not be changed. {{< /alert >}}
 
 ### Guest Configuration Attributes (Context)
 
@@ -460,7 +460,7 @@ This will result in the VM having a **single network interface** (the parent NIC
 - The explicitly requested shared IP from the `NIC_ALIAS`
 
 {{< alert title="Important" color="success" >}}
-Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by Libvirt. For this reason, the recommended approach is to use `NIC_ALIAS`.{{< /alert >}}
+Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by OpenNebula. For this reason, the recommended approach is to use `NIC_ALIAS`.{{< /alert >}}
 
 ### Configuring the Virtual Machine Network
 
