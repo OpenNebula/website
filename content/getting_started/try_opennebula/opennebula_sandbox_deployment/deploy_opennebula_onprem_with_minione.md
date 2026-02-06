@@ -16,7 +16,7 @@ weight: "1"
 
 In this tutorial, we will install an OpenNebula Front-end in under ten minutes, using the **miniONE** installation tool provided by OpenNebula.
 
-**miniONE** is a straightforward tool for deploying an evaluation version of OpenNebula. After running **miniONE**, all the OpenNebula services needed to use, manage and run the cloud will be installed on a single Front-end.
+miniONE is a straightforward tool for deploying an evaluation version of OpenNebula. After running the miniONE script, all the OpenNebula services needed to use, manage and run a small cloud deployment will be installed on a single server.
 
 This tutorial covers installation of a Front-end and KVM hypervisor node on a local machine with a screen attached. If you are installing miniONE on remote infrastructure you will need to use SSH and port forwarding to access user interfaces in your local browser, please refer to the [port fowarding instructions](#ssh-and-port-forwarding) before continuing.
 
@@ -47,7 +47,7 @@ sudo apt install cpu-checker
 
 ## Step 1: Verify Installation Requirements
 
-To run the miniONE script, you will need a physical or virtual server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need an internet connection to download software packages during installation. 
+To run the miniONE script, you will need a physical server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need an internet connection to download software packages during installation. 
 
 **Supported operating systems:**
 : - RHEL/AlmaLinux 8 or 9
@@ -65,7 +65,7 @@ To run the miniONE script, you will need a physical or virtual server with a fre
     : - 22 (SSH)
       - 80 (for the web UI)
 
-This tutorial was tested on on Ubuntu 22.04 and 24.04.
+This tutorial was tested on on Ubuntu 22.04 and 24.04. We strongly advise to use a physical server rather than a virtual machine (VM). If you choose to follow this installation on a VM you may experience instability due to nested virtualization during the follow-up [Kubernetes installation guides](/getting_started/try_opennebula/try_kubernetes_on_opennebula/). You may also need to use [port forwarding](#ssh-and-port-forwarding) to access the Sunstone UI.
 
 ## Step 2: Download and Install miniONE
 
@@ -199,7 +199,7 @@ Log in as root with password `opennebula`. You can then use the command line to 
 * Try running `ping 1.1.1.1` to test the internet connection
 * Try running `top` to see the processes running on the machine 
 
-Congratulations! You've now installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a Virtual Machine.
+Congratulations! You've now installed an OpenNebula Front-end with a KVM hypervisor and virtual network, then deployed a virtual machine.
 
 {{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
 
@@ -214,7 +214,7 @@ Now that you have a working miniONE OpenNebula installation, we suggest that you
 
 ## SSH and Port Forwarding
 
-If you are deploying miniONE on remote infrastructure it is necessary to use SSH to tunnel into the remote server and access the command line. You also need to use port forwarding in order to access the Sunstone UI through your local browser. 
+If you are deploying miniONE on remote infrastructure (or a VM) it is necessary to use SSH to tunnel into the remote server and access the command line. You also need to use port forwarding in order to access the Sunstone UI through your local browser. 
 
 In order to access the Sunstone UI, you will need to set up port forwarding on your remote machine. Choose a port that is available on your local machine, you can check this by running the following command:
 
@@ -224,10 +224,10 @@ lsof -i :8443
 
 In this example we are choosing port 8443. This command should give no output. Any output suggests another process is using that port, `Ctrl-C` and choose another.
 
-Open a terminal in your local machine and run the following command, inserting your chosen port (8443 in this case, 9869 is the Sunstone port - do not change it):
+Open a terminal in your local machine and run the following command, inserting your chosen port (8443 in this case, 80 is the port to access Sunstone, do not change it):
 
 ```bash
-ssh -L 8443:localhost:9869 <username>@<REMOTE_IP_ADDRESS>
+ssh -L 8443:localhost:80 <username>@<REMOTE_IP_ADDRESS>
 ```
 
 This command will take you to the command line of the remote server and establish the port forwarding. You can use this command prompt to run commands on the remote server, including the installation steps detailed above.
