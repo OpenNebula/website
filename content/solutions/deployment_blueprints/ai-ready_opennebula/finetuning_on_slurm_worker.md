@@ -7,7 +7,7 @@ weight: 8
 <a id="finetuning_on_slurm_worker"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the validation with LLM Inference you must comply with one of the prerequisites:
+To perform the finetuning LLMs using SLURM you must comply with one of the prerequisites:
 * Have an AI Factory ready to be validated; or,
 * Configure an AI Factory by following one of these options:
      * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
