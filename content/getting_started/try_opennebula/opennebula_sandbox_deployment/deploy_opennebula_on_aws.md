@@ -16,11 +16,11 @@ weight: "2"
 
 ## Overview
 
-In this tutorial, we will install an OpenNebula Front-end and a KVM hypervisor node on an AWS virtual machine (VM) instance in under ten minutes using the **miniONE** installation tool from OpenNebula.
+In this tutorial, we will install an OpenNebula Front-end and a KVM hypervisor node on an AWS bare metal instance in under ten minutes using the **miniONE** installation tool from OpenNebula.
 
 miniONE is a straightforward tool for deploying an evaluation version of OpenNebula. After running the miniONE script, all the OpenNebula services needed to use, manage and run a small cloud deployment will be installed on a single AWS instance.
 
-This tutorial covers installation of a Front-end and KVM hypervisor node on an AWS instance. To complete the procedures detailed in later [Kubernetes quickstart guides](getting_started/try_opennebula/try_kubernetes_on_opennebula/) it is necessary to complete this installation using a `c5.metal` "bare metal" AWS instance.
+This tutorial covers installation of a Front-end and KVM hypervisor node on an AWS instance. To complete the procedures detailed in the following [Kubernetes quickstart guides](getting_started/try_opennebula/try_kubernetes_on_opennebula/) it is necessary to complete this installation using a `c5.metal` "bare metal" AWS instance.
 
 During this tutorial we will complete the following steps:
 
@@ -34,7 +34,7 @@ Once you have completed this tutorial, you will have an evaluation version of Op
 
 ## Before starting
 
-To complete this tutorial, you will need to log in to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can acheive this through a native terminal. If you are working on a Windows machine, you will need to install an SSH client application such as [PuTTY](https://putty.software/).
+To complete this tutorial, you need to log in to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can acheive this through a native terminal. If you are working on a Windows machine, you need to install an SSH client application such as [PuTTY](https://putty.software/).
 
 ## Step 1. Prepare a Virtual Machine Instance in AWS
 
@@ -55,7 +55,7 @@ Choose the `c5.metal` instance type:
 ![image](/images/minione-aws-instance-type.png)
 <br/>
 
-If you don't already have a key pair (a `.pem` or `.ppk` file), select **Create new key pair** in the **Key pair (login)** section. Choose a sensible name for the key pair, it cannot be renamed later, you may either use your name or a context like `minione-admin`. Select EC25519 for **Key pair type** And choose the format: `.pem` (Linux/Mac) or `.ppk` (Windows with PuTTY). 
+If you don't already have a key pair (a `.pem` or `.ppk` file), select **Create new key pair** in the **Key pair (login)** section. Choose a sensible name for the key pair, it cannot be renamed later, you may either use your name or a context such as `minione-admin`. Select EC25519 for **Key pair type** And choose the format: `.pem` (Linux/Mac) or `.ppk` (Windows with PuTTY). 
 
 ![image](/images/minione-aws-key-pair.png)
 <br/>
@@ -71,7 +71,7 @@ In the section labelled **Inbound Security Group Rules** click **Add security gr
 ![image](/images/minione-aws-network-settings-lower.png)
 <br/>
 
-In the **Configure storage** section select **80GiB** of *`gp3` storage. You do not need to edit the **Advanced details** section.
+In the **Configure storage** section select **80GiB** of `gp3` storage. You do not need to edit the **Advanced details** section.
 
 ![image](/images/minione-aws-configure-storage.png)
 <br/>
@@ -80,7 +80,7 @@ Now click **Launch instance**. AWS will now schedule your instance. Note that `c
 
 ## Step 2. Access the AWS Instance through SSH
 
-To access the command line of your newly created AWS instance, you must use SSH or PuTTY and SSH. When you launch your AWS instance, it will be assigned a public IPv4 address. You can find this in the instance details page of your new instance. Locate your instance by going to **EC2** -> **Instances** -> **Instances**. Locate your instance in the list using the name you entered earlier and scroll horizontally to the **Public IPv4 Address** column. This is the address you will use to access your instance in the following commands.
+To access the command line of your newly created AWS instance, you must use SSH or PuTTY. When you launch your AWS instance, it will be assigned a public IPv4 address. You can find this in the instance details page of your new instance. Locate your instance by going to **EC2** -> **Instances** -> **Instances**. Locate your instance in the list using the name you entered earlier and scroll horizontally to the **Public IPv4 Address** column. This is the address you will use to access your instance in the following commands.
 
 ### Linux:
 

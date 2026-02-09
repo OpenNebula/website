@@ -33,13 +33,13 @@ Once you have completed this tutorial, you will have an evaluation version of Op
 
 It is recommended to perform the installation on a machine capable of running KVM virtualization. If KVM virtualization is not available, miniONE will automatically fall back on QEMU emulation; however, running in full emulation mode will decrease performance.
 
-To quickly check that your machine is capable of KVM emulation, you can run the `kvm-ok` command:
+To quickly check that your machine is capable of KVM emulation, run the `kvm-ok` command:
 ```
 kvm-ok
 INFO: /dev/kvm exists
 KVM acceleration can be used
 ```
-On Debian-based Linux, you can install `kvm-ok` by installing the `cpu-checker` package:
+On Debian-based Linux, install `kvm-ok` by installing the `cpu-checker` package:
 
 ```bash
 sudo apt install cpu-checker
@@ -232,4 +232,4 @@ ssh -L 8443:localhost:80 <username>@<REMOTE_IP_ADDRESS>
 
 This command will take you to the command line of the remote server and establish the port forwarding. You can use this command prompt to run commands on the remote server, including the installation steps detailed above.
 
-Now to access the Sunstone UI (after the successful installation of miniONE) direct your browser to `localhost:8443`, where you will find the Sunstone UI. 
+Now to access the Sunstone UI (after the successful installation of miniONE) direct your browser to `localhost:8443`, where you will find the Sunstone UI.
