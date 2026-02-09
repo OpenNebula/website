@@ -14,9 +14,11 @@ To perform the validation with LLM Inference you must comply with one of the pre
      * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
 
-This tutorial shows how to run LLM finetuning using **Slurm** appliance in OpenNebula.
+**SLURM** (Simple Linux Utility for Resource Management) is a widely used workload manager in HPC environments. In OpenNebula, you can run a SLURM cluster (controller and workers) as VMs to schedule and run jobs such as **LLM finetuning** on GPU-equipped workers. This guide walks you through a minimal setup to finetune LLM models using the Slurm appliances from the OpenNebula Marketplace.
 
-You will learn how to:
+This guide is a **simple demo** aimed at getting you started quickly. For a **real integration in a production environment** — for example in an HPC center — additional aspects must be considered. These include integration for **User Management** (e.g., LDAP/SSO, project and quota management), and integration of **shared file systems** (e.g., NFS, Lustre, or similar) for users' home directories, datasets, and software, so that jobs running on any worker see the same environment and data.
+
+This tutorial shows how to run LLM finetuning using the **Slurm** appliance in OpenNebula. You will learn how to:
 
 * Install Slurm (controller and workers) from the OpenNebula marketplace.
 * Configure the Slurm worker template (GPU and a start script that creates a folder, downloads the model, and installs dependencies at boot).
