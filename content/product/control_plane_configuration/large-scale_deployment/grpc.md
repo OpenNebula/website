@@ -1,0 +1,118 @@
+---
+title: "gRPC Integration"
+linkTitle: "gRPC Integration"
+date: "2025-02-28"
+description:
+categories:
+pageintoc: "44"
+tags:
+weight: "5"
+---
+
+<a id="one-grpc"></a>
+
+<!--# gRPC -->
+
+## Overview
+
+gRPC offers a high-performance alternative to the legacy XML-RPC protocol. By using binary serialization in place of text-based XML, gRPC significantly reduces CPU overhead and network payload sizes, particularly in large-scale deployments. It simplifies development by providing typed contracts and multi-language support through Protocol Buffers for a scalable and easy to maintain code-base.
+
+## Configuration
+
+To enable and use gRPC within an OpenNebula environment, you must configure both the daemon (server-side) and the client.
+
+### Enabling the gRPC Service
+
+The oned daemon manages the gRPC server, which is enabled by default. To modify the default values, edit `/etc/one/oned.conf` and define the listening port and address:
+
+> ```none
+> GRPC_PORT = 2634
+> GRPC_LISTEN_ADDRESS = "0.0.0.0"
+> ```
+
+### Using the gRPC Clients
+
+OpenNebula 7.2 provides gRPC support for Ruby (CLI), Go, and Python (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
+
+* Flag-based: Append the `--grpc` flag to any supported command.
+* Environment-based: Set `ONEAPI_PROTOCOL=grpc` in your shell profile to make gRPC the default for all commands.
+
+By default, the client attempts to connect to the local endpoint. You can override this by specifying the target server address:
+
+> ```Bash
+> export ONE_GRPC="<IP_ADDRESS>:<PORT>"
+> ```
+
+### Integration with OneFlow
+
+To configure the OneFlow service to communicate with oned via gRPC, update the `:one_xmlrpc` setting in `/etc/one/oneflow-server.conf` to point to the gRPC endpoint:
+
+> ```yaml
+> :one_xmlrpc: 127.0.0.1:2634
+> ```
+
+### High Availability (HA) and Federation
+
+In distributed environments, explicit endpoint definitions are required to ensure the client can reach the active leader or the correct regional zone.
+
+* High availability: Define the `ENDPOINT_GRPC` attribute for every node within the cluster.
+* Federation: Define the `ENDPOINT_GRPC` attribute for each zone in the federation.
+
+{{< alert title="Warning" color="warning" >}}
+Important: If a client is configured to use gRPC but the `ENDPOINT_GRPC` is missing in an HA or Federated setup, commands may fail to route correctly, resulting in connection errors.
+{{< /alert >}}
+
+## Performance
+
+This section provides a comparative analysis of response times between the legacy XML-RPC and the new gRPC protocol.
+
+### Benchmark Methodology
+
+To ensure realistic results, the protocols were tested against a synthetic workload designed to simulate a medium-to-large OpenNebula deployment. The core oned service was stressed in a single-zone configuration with the following environment specifications:
+
+| Metric                   | Value   |
+|--------------------------|---------|
+| Number of hosts          | 1,250   |
+| Number of VMs            | 20,000  |
+| Average VM template size | 10 KB   |
+
+The workload consisted of the four most common API calls, executed simultaneously to mirror the request ratio observed in production environments: `host.info`, `hostpool.info`, `vm.info`, and `vmpool.info`.
+
+### Comparative Results
+
+The following table illustrates the average response times (in seconds) under two different load intensities: 10 requests per second (req/s) and 30 req/s.
+
+| API Method | XML-RPC (10 req/s) | gRPC (10 req/s) | XML-RPC (30 req/s) | gRPC (30 req/s) |
+| :--- | :---: | :---: | :---: | :---: |
+| `host.info` | 0.01 | 0.01 | 0.07 | 0.02 |
+| `hostpool.info` | 0.07 | 0.02 | 0.17 | 0.03 |
+| `vm.info` | 0.02 | 0.01 | 0.07 | 0.02 |
+| `vmpool.info` | 0.97 | 0.43 | 2.15 | 0.94 |
+
+For data-intensive calls like `vmpool.info`, **gRPC reduces latency by over 50%**, demonstrating the efficiency of binary serialization over text-based XML. The performance advantage of gRPC becomes more significant as the API load increases. At 30 req/s, gRPC consistently delivers responses **2 to 3 times faster than XML-RPC**.
+
+## Development
+
+A primary advantage of gRPC is the ability to generate native client libraries for virtually any programming language using the core service definitions.
+
+### Protocol Buffers (.proto)
+
+The contract between the OpenNebula server and any client is defined in `.proto` files. These files describe the services, RPC methods, and data structures. You can find these definitions in the OpenNebula source tree: `src/rm/grpc/proto/`
+
+### Generating Language Bindings
+
+If you require support for a language not currently provided by the core team such as Rust, Java, or C#, you can generate your own bindings using the `protoc` compiler and the appropriate plugin for your language.
+
+### Example: Generating C++ Bindings
+
+To generate the header and source files manually, use a command similar to the following:
+
+> ```Bash
+> protoc -I=src/rm/grpc/proto --cpp_out=./output --grpc_out=./output \
+>        --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` \
+>        src/rm/grpc/proto/user.proto
+> ```
+
+### Contributing
+
+We encourage you to explore the existing Go and Ruby implementations within the source code as templates for building new language providers.
