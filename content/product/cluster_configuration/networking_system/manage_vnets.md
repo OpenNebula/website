@@ -87,7 +87,7 @@ AR=[
 Shared Address Ranges behave slightly differently from regular Address Ranges:
 
 - Same IP, multiple VMs: The same IP address from a Shared AR can be used by more than one VM.
-- Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested in a `NIC` or [`NIC ALIAS`](#request-virtual-ips-with-nic-alias).
+- Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested in a [`NIC` or `NIC ALIAS`](#request-virtual-ips-with-nic-alias).
 - Attribute `USED_LEASES` shows how many different shared IPs are in use, not how many VMs are using them.
 
 For example, a Virtual Network with a no shared AR (`ID=0`) and a shared AR (`ID=1`):
@@ -437,20 +437,20 @@ Any attribute supported by an NIC attribute can be also used in an alias except 
 {{< alert title="Important" color="success" >}}
 The [Security Groups]({{% relref "../../virtual_machines_operation/virtual_machines_networking/security_groups#security-groups" %}}) and IP/MAC spoofing filters from the NIC network will be applied to the NIC_ALIAS. Those ones belonging to the NIC_ALIAS network won’t apply.{{< /alert >}}  
 
-### Request Virtual IPs with NIC Alias
+### Using Virtual IPs
 
-To request a Virtual IP from a [Shared Address Range](#shared-address-ranges-shared-ar) follow these steps:
+To request a Virtual IP (VIP) from a [Shared Address Range](#shared-address-ranges-shared-ar) you need to explicity request the IP in a `NIC` or `NIC_ALIAS` attribute. The most natural way of using shared Address Ranges for VIPs, is to define a primary NIC in the network with a regular IP and a NIC_ALIAS with the VIP, this way you'll get a single network interface with two different IPs. The procedure is described below:
 
 1. Define the primary NIC and give it a `NAME` so aliases can refer to it
 
 ```default
-NIC = [ NETWORK = "private", NAME = "virtual" ]
+NIC = [ NETWORK = "private", NAME = "main" ]
 ```
 
 2. Add a `NIC_ALIAS` that **explicity requests the shared IP** from the Shared AR (you must include the `IP` attribute)
 
 ```default
-NIC_ALIAS = [ NETWORK = "private", PARENT = "virtual", IP = "10.0.0.211" ]
+NIC_ALIAS = [ NETWORK = "private", PARENT = "main", IP = "10.0.0.211" ]
 ```
 
 This will result in the VM having a **single network interface** (the parent NIC) with **two IPs** configured:
@@ -459,7 +459,7 @@ This will result in the VM having a **single network interface** (the parent NIC
 - The explicitly requested shared IP from the `NIC_ALIAS`
 
 {{< alert title="Important" color="success" >}}
-Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by OpenNebula. For this reason, the recommended approach is to use `NIC_ALIAS`.{{< /alert >}}
+Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by OpenNebula.{{< /alert >}}
 
 ### Configuring the Virtual Machine Network
 
