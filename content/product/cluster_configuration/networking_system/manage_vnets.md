@@ -87,8 +87,7 @@ AR=[
 Shared Address Ranges behave slightly differently from regular Address Ranges:
 
 - Same IP, multiple VMs: The same IP address from a Shared AR can be used by more than one VM.
-- No MAC addresses: Leases from a Shared AR do not include a MAC address.
-- Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested using [`NIC ALIAS`](#request-virtual-ips-with-nic-alias).
+- Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested in a `NIC` or [`NIC ALIAS`](#request-virtual-ips-with-nic-alias).
 - Attribute `USED_LEASES` shows how many different shared IPs are in use, not how many VMs are using them.
 
 For example, a Virtual Network with a no shared AR (`ID=0`) and a shared AR (`ID=1`):
@@ -113,7 +112,7 @@ IP                                 10.0.0.211                         10.0.0.213
 ```
 
 {{< alert title="Important" color="success" >}}
-The Sharedness of an Address Range can not be changed. {{< /alert >}}
+The Shared attribute of an Address Range can not be changed. {{< /alert >}}
 
 ### Guest Configuration Attributes (Context)
 
