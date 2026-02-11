@@ -115,6 +115,8 @@ Finally update the ``localhost`` status:
 sudo -u oneadmin onehost sync --force
 ```
 
+This command might take 2-3 minutes to complete, check the status of the `localhost` periodically with `sudo -u oneadmin onehost list` until the `STAT` column of the `localhost` item reads `on`.
+
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system is ready for your first login.
 
 ## Step 3: Verify the Installation

@@ -43,7 +43,7 @@ Click the **Import** button. Sunstone displays the **Download App to OpenNebula*
 
 ![image](/images/sunstone-service-oneke-download.png)
 
-In the second screen you will need to select a datastore for the appliance. Select the **default** datastore.
+In the second screen select the **default** datastore for the appliance:
 
 ![image](/images/sunstone-service-oneke-datastore.png)
 
@@ -96,14 +96,14 @@ Click **Next**. Sunstone displays the **Service Inputs** screen, select the **Ku
 
 In this page you can define various parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
 
-* **Longhorn**: lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes. 
+* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes. 
 * **Traefik**: An automated edge router and ingress controller that handles external traffic and load balancing for your applications without manual configuration.
 
-Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** **Enable Traefik**:
+Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** and **Enable Traefik** to the enabled position:
 
 ![image](/images/sunstone-oneke-longh-traefik.png)
 
-Click **Next**. In the final step **4: Charter**, no acction is needed, click **Finish**.
+Click **Next**. In the final step **4: Charter**, no action is needed, click **Finish**. The OneKE appliance will now deploy VMs to initialize the Kubernetes cluster.
 
 ### Verify the OneKE Service Deployment
 
@@ -115,7 +115,7 @@ The OneKE service's VMs should be visible in the **Roles** tab:
 
 ![image](/images/sunstone-oneke-vms.png)
 
-You can also verify the deployment using Front-end's command line. SSH into to the Front-end node as `root` then switch to the `oneadmin` user: `sudo su - oneadmin`. Run `oneflow list`. In the command  line output, check that the STAT column displays `RUNNING`:
+You can also verify the deployment using the Front-end server's command line. Open a terminal in the Front-end server then switch to the `oneadmin` user: `sudo su - oneadmin`. Run `oneflow list`. In the command  line output, check that the `STAT` column displays `RUNNING`:
 
 ```default
 oneadmin@ip$ oneflow list
@@ -141,17 +141,34 @@ Before deploying the test application described in this tutorial, you will need 
 
 ### Check the IP Address for the VNF Node
 
-To check the VNF node IP in Sunstone, in the left-hand sidebar go to **Instances** -> **VMs**, then check the information displayed under **vnf_0_(service_<ID>)**. In the image below, the VNF is **vnf_0_(service_2) and the relevant IP address is `172.16.100.2`.
+#### In Sunstone
 
-![image](/images/sunstone-oneke-vms.png)
+To check the VNF node IP in Sunstone, in the left-hand sidebar go to **Instances** -> **VMs**, this shows the VMs previously instantiated by the OneKE appliance. Check the information displayed in the item labeled **vnf_0_(service_ID)**. In the image below, the relevant VM is is **vnf_0_(service_1)** and the relevant IP address is `172.16.100.2`.
 
-Alternatively, to check on the command line, on the Front-end node as user `oneadmin` run:
+![image](/images/sunstone-oneke-vm-list.png)
+
+#### From the Command Line
+
+To check the VNF node IP on the command line, on the Front-end server, as user `oneadmin` run:
+
+```bash
+onevm list
+```
+
+This command shows a list of the VMs instantiated by the OneKE service. Take note of the ID of the VNF VM:
+
+```
+ID USER     GROUP    NAME                  ...  STAT  CPU     MEM HOST       ...      TIME
+ 2 oneadmin oneadmin worker_0_(service_1)  ...  runn    2      3G localhost  ...  0d 15h59
+ 1 oneadmin oneadmin master_0_(service_1)  ...  runn    2      3G localhost  ...  0d 15h59
+  0 oneadmin oneadmin vnf_0_(service_1)     ...  runn    1    512M localhost  ...  0d 15h59
+```
+
+Then run the following command to recover the IP address:
 
 ```bash
 onevm show <VM ID> | less
 ```
-
-(Replace `VM ID` for the VM ID number as shown by `onevm show`, in this case `4`.)
 
 This displays the complete information for the VM, piped through the `less` pager. Use the up and down arrow to scroll, until you find the `VM NICS` table:
 
@@ -160,71 +177,51 @@ VM NICS
  ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
   0 vnet                 minionebr    172.16.100.2    02:00:ac:10:64:02
   1 privnet              onebr1       192.168.200.2   02:00:c0:a8:c8:02
-  2 vnet                 minionebr    172.16.100.3    02:00:ac:10:64:03
-  3 privnet              onebr1       192.168.200.3   02:00:c0:a8:c8:03
 ```
 
-The relevant IP is the first displayed for the `vnet` network, `172.16.100.2`.
-
-To stop displaying the information for the VM, press `q`.
+The relevant IP is the first displayed for the `vnet` network, `172.16.100.2`. Press `q` to return to the command prompt.
 
 If you do not see all VMs listed, or if the OneKE Service is stuck in `DEPLOYING`, see [Known Issues]({{% relref "#k8s-known-issues" %}}) below.
 
-{{< alert title="Tip" color="info" >}}
-Once the OneFlow service has deployed, you can add more worker nodes. In Sunstone:
-
-1. Go to **Instances** -> **Services**.
-2. Select the OneKE service.
-3. Select the **Roles** tab.
-4. Click **Worker**, then the green **Scale** button.{{< /alert >}}  
-
-<a id="step-4"></a>
-
 ## Step 5. Deploy an Application
 
-In this tutorial we will deploy a very simple application designed for training purposes: a MariaDB database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
+In this tutorial we will deploy a very simple application designed for training purposes: a **MariaDB** database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
 
 ### Enable Longhorn Storage
 
-We can enable Longhorn storage with a single command:
+Run `oneflow list` to recover OneKE's service ID:
+
+```default
+oneadmin@IP$ oneflow list
+ID USER     GROUP    NAME               ...       STARTTIME STAT
+1 oneadmin oneadmin Service OneKE 1.31  ...  04/29 08:18:17 RUNNING
+```
+
+Enable Longhorn storage with the following command, inserting the appropriate service ID:
 
 ```bash
 oneflow scale <OneKE service ID> storage 1
 ```
 
-Most probably, the `OneKE service ID` should be `1`. You can find out with the `oneflow list` command:
+This command instantiates a new VM that will manage the Longhorn storage for the Kubernetes cluster.
 
-```default
-[oneadmin@FN]$ oneflow list
-ID USER     GROUP    NAME                                                     STARTTIME STAT
-1 oneadmin oneadmin Service OneKE 1.31                                   04/29 08:18:17 RUNNING
-```
-
-In the example above, the ID is `1`, so:
-
-```bash
-oneflow scale 1 storage 1
-```
-
-This will create a Virtual Machine as part of the OneKE Service which will serve as Longhorn storage for the Kubernetes cluster.
-
-The command will take a moment to execute. During that time the OneKE service will change state, from `RUNNING` to `COOLDOWN` and back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the cluster by running (as `oneadmin` on the Front-end node):
+The command may take 2-5 minustes to complete. During that time the OneKE service will change state from `RUNNING` to `SCALING` to `COOLDOWN` and then back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the cluster by running (as `oneadmin` on the Front-end command line):
 
 ```bash
 oneflow top
 ```
 
-This produces the output of `oneflow list`, updated continuously. Once the status is `RUNNING`, to exit the command type `Ctrl+C`.
+Once the status reverts from `COOLDOWN` to `RUNNING` return to the command prompt using `Ctrl+C`.
 
-On the Front-end node, we can check the status of the newly-created storage VM with `onevm list`:
+On the Front-end server, check the status of the newly-created storage on the command line VM with `onevm list`:
 
 ```
 oneadmin@ip-172-31-47-22:~$ onevm list
-  ID USER     GROUP    NAME                                             STAT  CPU     MEM HOST                                   TIME
-   7 oneadmin oneadmin storage_0_(service_2)                            runn    2      3G localhost                          0d 04h38
-   6 oneadmin oneadmin worker_0_(service_2)                             runn    2      3G localhost                          0d 05h36
-   5 oneadmin oneadmin master_0_(service_2)                             runn    2      3G localhost                          0d 05h36
-   4 oneadmin oneadmin vnf_0_(service_2)                                runn    1    512M localhost                          0d 05h36
+  ID USER     GROUP    NAME                    ...   STAT  CPU   MEM HOST        ...       TIME
+   7 oneadmin oneadmin storage_0_(service_1)   ...   runn    2    3G localhost   ...   0d 04h38
+   6 oneadmin oneadmin worker_0_(service_1)    ...   runn    2    3G localhost   ...   0d 05h36
+   5 oneadmin oneadmin master_0_(service_1)    ...   runn    2    3G localhost   ...   0d 05h36
+   4 oneadmin oneadmin vnf_0_(service_1)       ...   runn    1  512M localhost   ...   0d 05h36
 ```
 
 ### Log into the Master Node and Deploy the Application
@@ -244,34 +241,11 @@ An example run as user `root`:
 ```default
 root@ip-172-31-47-22:~# ssh -A -J 172.16.100.2 192.168.200.4
 Warning: Permanently added '172.16.100.2' (ED25519) to the list of known hosts.
-The authenticity of host '192.168.200.4 (<no hostip for proxy command>)' can't be established.
-ED25519 key fingerprint is SHA256:8fbzSN9OgOGZ1+2Zfdiq9r/6e+yEIJe1Ar6cqLpZ2Cw.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '192.168.200.4' (ED25519) to the list of known hosts.
-Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-126-generic x86_64)
+The authenticity of host '192.168.200.3 (<no hostip for proxy command>)' can't be 
+established.
 
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/pro
-
- System information as of Wed Jun  4 10:10:11 UTC 2025
-
-  System load:           0.61
-  Usage of /:            4.8% of 24.05GB
-  Memory usage:          8%
-  Swap usage:            0%
-  Processes:             106
-  Users logged in:       0
-  IPv4 address for eth0: 10.0.2.15
-  IPv6 address for eth0: fec0::211:22ff:fe33:4455
-
- * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
-
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
-
-Expanded Security Maintenance for Applications is not enabled.
+...
+...
 
 8 updates can be applied immediately.
 8 of these updates are standard security updates.
@@ -298,7 +272,8 @@ To check for new updates run: sudo apt update
  * * * * * * * *
 ```
 
-In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message.
+In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message. Once the cluster is ready, you will see a message: `All set and ready to serve 8)`
+
 
 Once you have connected to the Kubernetes master node, check if `kubectl` is working, by running `kubectl get nodes`:
 
