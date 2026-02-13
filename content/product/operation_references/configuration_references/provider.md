@@ -169,7 +169,7 @@ Below is an example of a typical Provider document:
       },
       "connection": {
         "access_key": "********************",
-        "secret_key": "********************",,
+        "secret_key": "********************",
         "region": "us-east-1"
       },
       "provision_ids": [1],

@@ -12,14 +12,14 @@ weight: "3"
 
 <!--# Equinix Provider -->
 
-An Equinix provider contains the credentials to interact with Equinix and also the location to deploy your Provisions. By default, OpenNebula comes with four pre-defined providers in the following regions:
+An Equinix provider contains the credentials to interact with Equinix and also the location to deploy your Provisions. By default, OpenNebula comes with four pre-defined providers in the following Equinix Metal Metros:
 
 * Amsterdam
 * Parsippany (NJ, US)
 * Tokyo
 * California (US)
 
-It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
+It is possible to add metros by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
 
 To define an Equinix provider, specify the following information:
 
@@ -28,7 +28,7 @@ To define an Equinix provider, specify the following information:
 * **Plans and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Equinix supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*. 
+Equinix supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*.
 
 If you choose a different OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using a different OS than *Ubuntu 24.04* in production environments,  unless you have properly tested it before.
 {{< /alert >}}
@@ -41,7 +41,52 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+**Step 1.** Navigate through `Infrastructure > Providers` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovider/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
+  light="images/oneform/oneprovider/common/light/create_provider_button.png"
+  alt="Step 2"
+>}}
+
+**Step 3.** Select the Equinix oneform driver and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/equinix/dark/equinix_driver.png"
+  light="images/oneform/oneprovider/equinix/light/equinix_driver.png"
+  alt="Step 3"
+>}}
+
+**Step 4.** Fill the general section with at least a name for the provider, and then click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/general_step.png"
+  light="images/oneform/oneprovider/common/light/general_step.png"
+  alt="Step 4"
+>}}
+
+**Step 5.** Fill the Connection Values Section and click on `Finish` button:
+{{< theme-image
+  dark="images/oneform/oneprovider/equinix/dark/equinix_connection_values.png"
+  light="images/oneform/oneprovider/equinix/light/equinix_connection_values.png"
+  alt="Step 5"
+>}}
+
+**Step 6.** Finally, you can see your already Equinix provider:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/equinix/dark/equinix_provider.png"
+  light="images/oneform/oneprovider/equinix/light/equinix_provider.png"
+  alt="Step 6"
+>}}
 {{% /tab %}}
 
 {{% tab header="CLI"%}}

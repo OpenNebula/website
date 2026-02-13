@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Amazon AWS Provider -->
 
-An AWS provider contains the credentials to interact with Amazon and also the region to deploy your provisions. By default, OpenNebula comes with four pre-defined regions for the AWS provider:
+An AWS provider contains the credentials to interact with Amazon Web Services and also the region to deploy your provisions. By default, OpenNebula comes with four pre-defined regions for the AWS provider:
 
 * Frankfurt (`eu-central-1`)
 * London (`eu-west-1`)
@@ -28,7 +28,7 @@ To define an AWS provider, specify the following information:
 * **Instance types and AMIs**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-You can customize AMIs in addition to the default one provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI. 
+You can customize AMIs in addition to the default one provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI.
 
 If you implement a custom AMI, your selected configuration might require additional adjustments, and you will likely observe some unexpected results. Avoid using customized AMIs in production environments, unless you have properly tested them before.
 {{< /alert >}}
@@ -41,7 +41,53 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+**Step 1.** Navigate through `Infrastructure > Providers` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovider/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
+  light="images/oneform/oneprovider/common/light/create_provider_button.png"
+  alt="Step 2"
+>}}
+
+**Step 3.** Select the AWS oneform driver and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/aws/dark/aws_driver.png"
+  light="images/oneform/oneprovider/aws/light/aws_driver.png"
+  alt="Step 3"
+>}}
+
+**Step 4.** Fill the general section with at least a name for the provider, and then click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/general_step.png"
+  light="images/oneform/oneprovider/common/light/general_step.png"
+  alt="Step 4"
+>}}
+
+**Step 5.** Fill the Connection Values Section and click on `Finish` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/aws/dark/aws_connection_values.png"
+  light="images/oneform/oneprovider/aws/light/aws_connection_values.png"
+  alt="Step 5"
+>}}
+
+**Step 6.** Finally, you can see your already AWS provider:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/aws/dark/aws_provider.png"
+  light="images/oneform/oneprovider/aws/light/aws_provider.png"
+  alt="Step 6"
+>}}
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
