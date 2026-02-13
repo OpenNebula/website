@@ -19,7 +19,7 @@ OneFlow allows users and administrators to define, execute, and manage multi-tie
 
 The following diagram represents a multi-tier application. Each node represents a Role and its cardinality (the number of VMs that will be deployed). The arrows indicate the deployment dependencies: each Role’s VMs are deployed only when all its parent’s VMs are running.
 
-{{< image path="/images/service_sample.svg" alt="Multi-tier application with deployment dependencies" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/service_sample.svg" alt="Multi-tier application with deployment dependencies" align="center" width="60%" pb="20px" >}}
 
 This Service can be represented with the following JSON template:
 
@@ -1051,7 +1051,7 @@ You can read more details in the [OneGate API documentation]({{% relref "onegate
 
 Network mapping in OneFlow is facilitated through the use of Virtual Router Roles, which enable efficient management of network resources and floating IPs within your cloud environment.
 
-{{< image path="/images/oneflow-network-map.svg" alt="OneFlow Network Mapping" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/oneflow-network-map.svg" alt="OneFlow Network Mapping" align="center" width="60%" pb="20px" >}}
 
 **Configuring the Service Template**
 

@@ -26,7 +26,7 @@ As part of the regular start process, OpenNebula starts the `onemonitord` daemon
 
 Probes are structured in information categories for Host and Virtual Machine information. At regular intervals (in seconds, configurable per category in the `monitord.conf`) the data is transmitted, so the monitoring subsystem doesn’t need to make any additional connections to gather it.
 
-{{< image path="/images/collector.svg" alt="Architecture of Dedicated Monitoring System in OpenNebula" align="center" width="70%" pb="20px" >}}
+{{< image path="/images/collector.svg" alt="Architecture of Dedicated Monitoring System in OpenNebula" align="center" width="90%" pb="20px" >}}
 
 If information stops coming from a specific Host, OpenNebula detects it by missing heartbeats and pro-actively connects to the particular Host over SSH and restarts probes.
 

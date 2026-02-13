@@ -23,7 +23,7 @@ For Virtual Machines that are part of a Multi-VM Application ([OneFlow Service](
 
 OneGate is a server that listens to http connections from the Virtual Machines. OpenNebula assigns an individual token to each VM instance and Applications running inside the VM use this token to interact with the OneGate API. This token is generated using VM information and signed with the owner User template attribute `TOKEN_PASSWORD`. This password can be changed by updating the User template, but tokens from existing VMs will not work anymore.
 
-{{< image path="/images/onegate_arch.svg" alt="OneGate Architecture" align="center" width="80%" pb="20px" >}}
+{{< image path="/images/onegate_arch.svg" alt="OneGate Architecture" align="center" width="90%" pb="20px" >}}
 
 ## OneGate Usage
 

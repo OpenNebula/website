@@ -88,7 +88,7 @@ OpenNebula is certified to work on top of multiple combinations of hypervisors, 
 
 If you are interested in an OpenNebula cloud fully based on open source platforms and technologies, please refer to our [Open Cloud Reference Architecture](https://support.opennebula.pro/hc/en-us/articles/204210319).
 
-{{< image path="/images/overview_customized-cluster.svg" alt="OpenNebula Cloud Model based on Customized Clusters" align="center" width="70%" pb="20px" >}}
+{{< image path="/images/overview_customized-cluster.svg" alt="OpenNebula Cloud Model based on Customized Clusters" align="center" width="80%" pb="20px" >}}
 
 ### Choosing the Right Configuration
 

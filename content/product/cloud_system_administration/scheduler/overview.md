@@ -153,7 +153,7 @@ OpenNebula continuously optimizes cluster workload distribution using the [OpenN
 
 The diagram below outlines the OpenNebula Scheduling Framework, showing key components for resource selection and workload optimization:
 
-{{< image path="/images/scheduler_architecture.svg" alt="Scheduler Architecture" align="center" width="70%" pb="20px" >}}
+{{< image path="/images/scheduler_architecture.svg" alt="Scheduler Architecture" align="center" width="80%" pb="20px" >}}
 
 Main components:
 
