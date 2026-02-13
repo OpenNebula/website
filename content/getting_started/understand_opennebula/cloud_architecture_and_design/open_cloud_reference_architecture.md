@@ -19,7 +19,7 @@ The OpenNebula Cloud Reference Architecture is a blueprint to guide IT architect
 
 The document describes the reference architecture for Basic and Advanced OpenNebula Clouds, and provides recommended software for main architectural components and the rationale behind them. Each section also provides information about other open source infrastructure platforms tested and certified by OpenNebula to work in enterprise environments. As a complement to these certified components, the browseable OpenNebula add-on catalog offers further options supported by partners and by the OpenNebula community. This reference architecture does not include other components in the open cloud ecosystem that are important to consider at the time of designing a cloud, such as configuration management and automation tools for configuring cloud infrastructure and managing large numbers of devices.
 
-{{< image path="/images/open_cloud_arch-view.svg" alt="OpenNebula Cloud Architecture Overview" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/open_cloud_arch-view.svg" alt="OpenNebula Cloud Architecture Overview" align="center" width="80%" pb="20px" >}}
 
 {{< alert title="Note" color="success" >}}
 The White Paper on the Open Cloud Architecture is publicly available for [download](https://support.opennebula.pro/hc/en-us/articles/204210319-Open-Cloud-Reference-Architecture-White-Paper).{{< /alert >}} 
