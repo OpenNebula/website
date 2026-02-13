@@ -27,7 +27,7 @@
 
   > h2:not(:first-child) {
     margin-top: 3rem;
-  } 
+  }
 }
 
 // Button color for copying code on highlighted code blocks
@@ -106,15 +106,15 @@ body .one-footer-copyright {
 }
 
 body .one-footer-copyright p {
-  color: #FFFFFF !important; 
+  color: #FFFFFF !important;
   margin-top: 5px;;
   margin-bottom: 0px;;
 }
 
 /* Keep the specific selector for links */
-body .one-footer-copyright  a { 
-  color: #FFFFFF; 
-  text-decoration: underline; 
+body .one-footer-copyright  a {
+  color: #FFFFFF;
+  text-decoration: underline;
 }
 
 body .one-footer-acks {
@@ -131,14 +131,14 @@ body .one-footer-acks {
 
 /* Use the ultra-specific selector for plain text */
 body .one-footer-acks p {
-  color: #FFFFFF !important; 
+  color: #FFFFFF !important;
   margin-bottom: 7px;
 }
-  
+
 /* Keep the specific selector for links */
-body .one-footer-acks a { 
-  color: #FFFFFF; 
-  text-decoration: underline; 
+body .one-footer-acks a {
+  color: #FFFFFF;
+  text-decoration: underline;
 }
 
 .td-footer svg {
@@ -175,16 +175,20 @@ body .one-footer-acks a {
   scale: 70%
 }
 
+.td-theme-image {
+  margin-bottom: 1.5rem;
+}
+
 
 // Cards
 .td-navbar .td-search__input {
   border-style: solid;
   border-width: 1px;
-}  
+}
 .td-navbar .td-search__input:hover {
   border-style: solid;
   border-width: 1px;
-}  
+}
 
 // Alerts
 .alert {
@@ -208,7 +212,7 @@ body .one-footer-acks a {
 
   > h2:not(:first-child) {
     margin-top: 3rem;
-  } 
+  }
 }
 
 // Tags
@@ -237,6 +241,11 @@ img[alt$="><"] {
   height: auto;
   margin: auto;
   float: none!important;
+}
+
+// Hide dark images if light mode is selected
+img.td-img-dark {
+    display: none;
 }
 
 /*
@@ -301,17 +310,26 @@ img[alt$="><"] {
 /* Target the specific selector that was making the paragraphs light. */
 /* The color value is now pure CSS, which the compiler cannot fail to understand. */
 [data-bs-theme="light"] p {
-    color: rgb(33, 37, 41) !important; 
+    color: rgb(33, 37, 41) !important;
 }
 
-/* OPTIONAL CLEANUP: 
-   If you have any other custom rules targeting lists (ul/ol) 
-   that are still setting the LIGHT color (87, 92, 91), 
+/* Display images depending on website is in light mode or dark mode */
+[data-bs-theme="dark"] img.td-img-light {
+    display: none;
+}
+
+[data-bs-theme="dark"] img.td-img-dark {
+    display: inline;
+}
+
+/* OPTIONAL CLEANUP:
+   If you have any other custom rules targeting lists (ul/ol)
+   that are still setting the LIGHT color (87, 92, 91),
    you can set them to the dark color here:
 */
 /*
-.td-content ul li, 
+.td-content ul li,
 .td-content ol li {
-    color: rgb(33, 37, 41) !important; 
+    color: rgb(33, 37, 41) !important;
 }
 */
