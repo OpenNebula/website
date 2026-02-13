@@ -13,7 +13,7 @@ Once the ISO has booted and finished installing and setting up the software, a p
 
 The OS installed also includes a menu and a little set of ansible playbooks to make the OpenNebula infrastructure Management simpler.
 
-{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="70%" pb="20px" >}}
+{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" pb="20px" >}}
 
 
 ## Requirements
