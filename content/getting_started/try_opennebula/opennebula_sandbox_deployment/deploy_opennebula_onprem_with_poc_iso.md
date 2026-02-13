@@ -15,7 +15,7 @@ Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud wi
 
 ## Requirements
 
-The OpenNebula ISO is based on AlmaLinux 9, and thus it shares the same requirements to run. Note that only the x86-64-v2 instruction set (introduced in 2008\) is supported. The following table states the minimum requirements for installing the ISO.
+The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements to run. Note that only the x86-64-v2 instruction set (2008\) is supported. The following table outlines the minimum requirements for installing the ISO.
 
 | Component | Required |
 | :---- | :---- |
@@ -319,6 +319,8 @@ frontend      : ok=43   changed=11   unreachable=0    failed=0    skipped=27   r
 
 Press any key to continue
 ```
+
+After pressing any key you should be returned to the `onefemenu` options.
 
 **Sunstone User Interface**
 

@@ -159,10 +159,7 @@ To deploy the Alpine Linux VM, in the left-hand sidebar go to **Templates** -> *
 
 ![image](/images/sunstone-vm_templates-alpine.png)
 
-To instantiate the VM template, click the template item and click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-  <circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" />
-  <path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" />
-</svg> at the top.
+To instantiate the VM template, click the template item and click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" /><path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" /></svg> at the top.
 
 Sunstone will display the first screen of the **Instantiate VM Template** wizard:
 
