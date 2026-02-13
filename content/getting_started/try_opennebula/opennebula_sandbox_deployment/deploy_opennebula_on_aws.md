@@ -28,7 +28,7 @@ During this tutorial we will complete the following steps:
 2. Access the AWS instance command line through SSH.
 2. Download and run the miniONE installation script.
 3. Verify the installation.
-4. Instantiate a virtual machine (VM) with Alpine Linux.
+4. Instantiate a Virtual Machine (VM) with Alpine Linux.
 
 Once you have completed this tutorial, you will have an evaluation version of OpenNebula installed on your AWS instance and you will understand how to use the Sunstone user interface to instantiate a VM.
 
@@ -253,9 +253,9 @@ As you can see, the Dashboard indicates the following installed components:
 
 - 1 VM template
 - 1 image
-- 1 virtual network
+- 1 Virtual Network
 
-The existing virtual network is a bridged network attached to a local interface named `vnet`. To inspect this network, in Sunstone open the left-hand menu (hover the mouse over the left-hand sidebar), then click **Networks** --> **Virtual Networks**:
+The existing Virtual Network is a bridged network attached to a local interface named `vnet`. To inspect this network, in Sunstone open the left-hand menu (hover the mouse over the left-hand sidebar), then click **Networks** --> **Virtual Networks**:
 
 ![image](/images/sunstone-select_vnetwork.png)
 <br/>
@@ -269,7 +269,7 @@ During installation, a KVM virtualization host was automatically configured on t
 
 ## Step 6: Deploying a Virtual Machine on the AWS instance
 
-miniONE automatically downloaded the template for a virtual machine with Alpine Linux 3.20 preinstalled. Through the Sunstone UI, we can now instantiate this VM on the local KVM host with a few clicks.
+miniONE automatically downloaded the template for a VM with Alpine Linux 3.20 preinstalled. Through the Sunstone UI, we can now instantiate this VM on the local KVM host with a few clicks.
 
 To deploy the Alpine Linux VM, in the left-hand sidebar go to **Templates** -> **VM Templates**. This screen displays a list of all VM templates installed on the system. In this case, only the **Alpine Linux 3.20** template is installed:
 
@@ -288,7 +288,7 @@ Feel free to modify the **Capacity** parameters if desired, or leave at their de
 
 Click **Next**.
 
-The next screen allows you to see and modify further parameters for the VM, including selecting the virtual network or scheduling actions.
+The next screen allows you to see and modify further parameters for the VM, including selecting the Virtual Network or scheduling actions.
 
 ![image](/images/sunstone-instantiate_vm-2.png)
 
@@ -317,7 +317,7 @@ Log in as root with password `opennebula`. You can then use the command line to 
 * Try running `ping 1.1.1.1` to test the internet connection
 * Try running `top` to see the processes running on the machine 
 
-Congratulations! You've now installed an OpenNebula Front-end on an AWS instance with a KVM hypervisor and virtual network, then deployed a virtual machine.
+Congratulations! You've now installed an OpenNebula Front-end on an AWS instance with a KVM hypervisor and Virtual Network, then deployed a VM.
 
 {{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
 
@@ -325,7 +325,7 @@ Congratulations! You've now installed an OpenNebula Front-end on an AWS instance
 
 Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
 
-* [Deploy a WordPress virtual machine](/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine)
+* [Deploy a WordPress VM](/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine)
 * [Deploy a Kubernetes cluster with the OneKE appliance](/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md)
 * [Deploy a Kubernetes cluster using Rancher and the Cluster API](/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher/)
 * [Further validate your miniONE installation](getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)

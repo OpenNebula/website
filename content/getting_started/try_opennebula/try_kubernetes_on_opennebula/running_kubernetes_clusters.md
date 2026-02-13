@@ -53,7 +53,7 @@ Click **Finish**. Sunstone will import the appliance template and display a mess
 
 ## Step 2. Instantiate a Private Network on the Cloud Cluster
 
-In this step we will create a new virtual network and assign a range of private IPs to it. The OneKE service uses this network for internal communication.
+In this step we will create a new Virtual Network and assign a range of private IPs to it. The OneKE service uses this network for internal communication.
 
 In Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
 

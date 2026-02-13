@@ -10,56 +10,33 @@ description:
 
 ## Overview
 
-Previous tutorials of this Quick Start guide show how to use miniONE to:
+In this tutorial, we will deploy a Kubernetes cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
 
-- [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
-- [Validate the environment]({{% relref "validate_the_environment" %}}) created by miniONE, by running a Virtual Machine
+To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
-This tutorial builds on the infrastructure created in those previous tutorials. It shows how to use OpenNebula to quickly and easily install the [Rancher](https://www.rancher.com) Kubernetes management platform, and how to use Rancher's point-and-click interface to provision OpenNebula CAPI RKE2 clusters. It includes complete examples for deploying services, applying configurations, and upgrading the workload cluster.
+* [miniONE on-prem installation]({{% relref "deploy_opennebula_onprem_with_minione" %}})
+* [miniONE AWS installation]({{% relref "deploy_opennebula_on_aws" %}})
 
-This tutorial was designed and tested in an on-premises installation. You can use it, for example, as a continuation of [OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}). If you wish to deploy a production-grade Kubernetes cluster on Amazon AWS, please see [Run a Kubernetes Cluster]({{% relref "running_kubernetes_clusters" %}}).
+During this tutorial you will complete the following high-level steps:
+
+1. Configure a public and private network on the Front-end
+1. Download the CAPI Appliance
+1. Instantiate the CAPI Appliance
+1. Connect to the Rancher UI
+1. Deploy an OpenNebula RKE2 cluster
+1. Import the cluster into Rancher
+
+Additionally, we'll perform various operations on the workload cluster:
+  - Install Longhorn
+  - Deploy an Nginx service
+  - Add a worker node to the cluster
+  - Upgrade the workload cluster to the newest version
 
 ### OpenNebula's CAPI Appliance
 
-The [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) is a set of declarative APIs designed for simplifying and automating Kubernetes life cycle management. [OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0) provides a ready-to-use solution for managing Kubernetes clusters through the Rancher web UI. The appliance is fully integrated to support OpenNebula as an infrastructure provider via the [Cluster API Provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula).
+[OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0) provides a ready-to-use solution for managing Kubernetes clusters through the Rancher web UI. The appliance is fully integrated to support OpenNebula as an infrastructure provider via the [Cluster API Provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula).
 
-As shown in this tutorial, the CAPI appliance eliminates the need for manual configuration -- it allows you to effortlessly create, manage, and upgrade CAPI-managed RKE2 clusters, greatly reducing operational overhead.
-
-This tutorial shows how to: 
-
-- Download and install the CAPI Appliance
-- Log in to Rancher and deploy an RKE2 cluster
-- Import the cluster into Rancher
-- Deploy a sample application
-- Deploy additional services
-- Upgrade the workload cluster
-
-### Pre-requisites
-
-To follow this tutorial you will need:
-
-- An [OpenNebula Front-end running on premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) (version >=6.10) on a machine that meets the [Rancher installation requirements](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-requirements#rke2-kubernetes):
-   - 4 vCPUs
-   - 16 GiB RAM
-- The [OneGate service]({{% relref "onegate_usage" %}}) must be running on the Front-end (it is enabled by default if you installed with miniONE).
-- A public and a private virtual network on your Front-end. The public network is installed automatically by miniONE; creating a private network is explained below.
-
-### Tutorial Outline
-
-For completing this tutorial, we'll follow these high-level steps:
-
-1. Create a private network on the Front-end.
-1. Download the CAPI Appliance.
-1. Instantiate the CAPI Appliance.
-1. Connect to the Rancher UI.
-1. Deploy an OpenNebula RKE2 cluster.
-1. Import the cluster into Rancher.
-
-Additionally, we'll perform various operations on the workload cluster:
-   - Install Longhorn
-   - Deploy an Nginx service
-   - Add a worker node to the cluster
-   - Upgrade the workload cluster to the newest version
+This tutorial demonstrates how the CAPI appliance eliminates the need for extensive manual configuration -- it allows you to create, manage, and upgrade CAPI-managed RKE2 clusters in a simple way, reducing operational overhead.
 
 ## Step 1. Configure the Networks on the Front-end
 
@@ -513,8 +490,6 @@ Now your Nginx deployment should be visible on the external IP of the node -- wh
 
 ![><](/images/rancher_nginx_welcome_screen.png)
 
-GO TO CLUSTER DASHBOARD **SERVICE DISCOVERY** > **SERVICES CLICK** ON NGINX SERVICE LOOK FOR LOAD BALANCER IP
-
 ## Additional Tasks
 
 ### Adding Worker Nodes to the Cluster
@@ -548,8 +523,6 @@ When the upgrade is finished, the **Clusters** screen should display the cluster
 Congratulations! You have successfully deployed a K3s cluster with the Rancher management platform as well as a production-grade workload cluster where you've created, exposed and tested a deployment -- all with minimal configuration and using graphical interfaces.
 
 ## Next Steps
-
-This tutorial marks the end of the Quick Start guide.
 
 To learn about OpenNebula in depth, the next sections of the documentation include all of the information necessary for [configuration and administration]({{% relref "product/index" %}}), as well as software [life cycle, releases and installation details]({{% relref "software/index" %}}).
 

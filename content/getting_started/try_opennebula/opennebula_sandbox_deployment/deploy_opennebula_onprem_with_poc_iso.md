@@ -334,9 +334,9 @@ The `oneadmin` default password is 32 hex chars long (128 bits of entropy). It i
 
 **Networking**
 
-This ISO deployment does not automatically configure virtual networks. Instead Free Range Routing (FRR) is configured, allowing BGP-EVPN to automate creation of VXLANs that provide secure isolation between virtual machines. VXLAN is a technology that facilitates isolation between virtual machines using 'tags' that allow for over 16 million unique, isolated virtual networks.
+This ISO deployment does not automatically configure Virtual Networks. Instead Free Range Routing (FRR) is configured, allowing BGP-EVPN to automate creation of VXLANs that provide secure isolation between Virtual Machines. VXLAN is a technology that facilitates isolation between Virtual Machines using 'tags' that allow for over 16 million unique, isolated Virtual Networks.
 
-To set up a virtual network using VXLAN, in the Sunstone UI go to **Networks** -> **Virtual Networks** and select **+ Create**. Name the network and click **Next**. Select **VXLAN** in the following page. Choose a number below the maximum 16777215 for the **VLAN ID** (e.g. 100) and select `evpn` for the **VXLAN mode**. The **Physical device** field should be set to the name of the network interface of the OpenNebula Front-end server that was selected earlier during the ISO installation. Run `nmcli device status` on the command line of your Front-end if you need to recall the name.
+To set up a Virtual Network using VXLAN, in the Sunstone UI go to **Networks** -> **Virtual Networks** and select **+ Create**. Name the network and click **Next**. Select **VXLAN** in the following page. Choose a number below the maximum 16777215 for the **VLAN ID** (e.g. 100) and select `evpn` for the **VXLAN mode**. The **Physical device** field should be set to the name of the network interface of the OpenNebula Front-end server that was selected earlier during the ISO installation. Run `nmcli device status` on the command line of your Front-end if you need to recall the name.
 
 ![sunstone-network_config](/images/ISO/03-sunstone-network-config.png)
 
@@ -372,7 +372,7 @@ VXLAN networks are totally internal and have no access to external networks. By 
 
 #### Determining the VM identifier
 
-To determine the virtual network that needs external access use `onevnet list`. This command will list the existent virtual networks, for instance:
+To determine the Virtual Network that needs external access use `onevnet list`. This command will list the existent Virtual Networks, for instance:
 
 ```
 # onevnet list
@@ -380,11 +380,11 @@ To determine the virtual network that needs external access use `onevnet list`. 
    0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
-The `ID` and the `NAME` field of every row can be used for all operations on virtual networks.
+The `ID` and the `NAME` field of every row can be used for all operations on Virtual Networks.
 
 #### Creating the virtual Network Gateway (access from the frontend)
 
-In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the virtual network should be executed. For example the following command will create the gateway for the network 0
+In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
 
 ```
 # onevnet_add_gw 0
@@ -398,20 +398,20 @@ This gateway is not persistent after reboots. If the frontend is rebooted, the c
 
 #### Setting up NAT (access to the same networks as the frontend)
 
-Virtual machines on this virtual network won't be able to access to the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
+Virtual machines on this Virtual Network won't be able to access to the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
 
 {{< alert title="Security and persistence warning" color="warning" >}}
-By default, the `enable_masquerade` command will allow ALL the virtual networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
+By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
 {{< /alert >}}
 
-#### Add local route (access from external networks to the virtual network)
+#### Add local route (access from external networks to the Virtual Network)
 
-After the gateway has been created and NAT masquerade has been enabled, the VMs in the virtual network 172.16.100.0/24:
+After the gateway has been created and NAT masquerade has been enabled, the VMs in the Virtual Network 172.16.100.0/24:
 
 - can communicate (bidirectionally) with the frontend
 - can access to the same networks that the frontend (i.e. internet)
 
-Currently, any machine (even if it has access to the frontend) cannot reach ths virtual network because doesn't know how to arrive to it. For that, a route via the frontend external IP is needed. A route can be added locally.
+Currently, any machine (even if it has access to the frontend) cannot reach ths Virtual Network because doesn't know how to arrive to it. For that, a route via the frontend external IP is needed. A route can be added locally.
 
 {{< alert title="Routing setup" color="Success" >}}
 This document must not be taken as a manual to configure routing. These are local solutions to test the access. None of this solutions will persist after a reboot of the workstation where they have been applied.
@@ -422,7 +422,7 @@ On a workstation with access to the frontend, a local route to the virtual net c
 - Windows: `route add 172.16.100.0 MASK 255.255.255.0 <frontend_ip>`
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
-After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
+After the route exists, the workstation should be able to reach the Virtual Machines running on the frontend without further configuration.
 
 ## GPU Configuration
 
