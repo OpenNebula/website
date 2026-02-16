@@ -11,7 +11,8 @@ OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end
 
 Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud will be ready for immediate use, installed on a single bare-metal server, complete with the OpenNebula Front-end server and a KVM hypervisor node. The same ISO can be used to install other KVM hypervisor nodes on the same infrastructure. The installed software includes a menu and a set of ansible playbooks to make the OpenNebula infrastructure management simpler.
 
-![onepoc_architecture](/images/ISO/00-onepoc_architecture.png)
+{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" pb="20px" >}}
+
 
 ## Requirements
 
@@ -74,7 +75,12 @@ The installation interface will be in text mode and will only ask for confirmati
 
 ![validation_script](/images/ISO/01-validation_script.png)
 
+After that, a little menu showing all the available, non-removable disks, will be shown in the format `disk|sizeGB`. After choosing the disk, a confirmation menu with the options `yes` and `no` will be shown.
+
+![disk_selection](/images/ISO/011-disk_selection.png)
+
 {{< alert title="Warning: data will be deleted" color="warning" >}}
+
 **IMPORTANT: OpenNebula will be installed on the first disk found and it will IRREVERSIBLY delete all data on that disk. Ensure that the existing data is backed up.**{{< /alert >}}
 
 Answer `yes` to continue. You may be prompted to choose the disk to which you want to install. After choosing the disk and confirming, the installation will commence. The installation will take several minutes:

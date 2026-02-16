@@ -216,3 +216,119 @@ You can proceed with the OpenNebula SAML auth driver configuration (`/etc/one/au
 - **:mapping_mode** - `strict`. Group nesting is not supported for Okta.
 
 All other IdP-specific configuration settings for the driver should be set up the same way as for any other Identity Provider.
+
+### Microsoft Entra ID
+
+Microsoft Entra ID SAML is compatible with OpenNebula SAML authentication but has some peculiarities:
+
+- An enterprise application must be created in order to work. The application has a login URL that is the one that must be set up in FireEdge.
+- Groups are equivalent to roles. The free tiers of Entra do not allow the creation of roles, but groups can be retrieved with the same claim
+- Groups, roles and tenants are identified by a UUID (i.e. `94d6138b-d446-4236-9d37-934fead2033f`) instead of a name
+
+
+#### Creating the OpenNebula Entra ID application
+
+OpenNebula Service provider name `:sp_entity_id` and the Assertion consumer service URL `:acs_url` must be set up. The following base configuration will be used as example (these must be defined on the file `/etc/one/auth/saml_auth.conf`). 
+
+In this case, our FireEdge server is available on `https://onelocal:8443/fireedge`. Please, modify the URL accordingly to `http(s)://<FIREEDGE_SERVER>:<FIREEDGE_PORT>/fireedge/api/auth/acs`.
+
+```
+:sp_entity_id: 'onelocal'
+:acs_url: 'https://onelocal:8443/fireedge/api/auth/acs'
+```
+
+On the Microsoft Cloud Entra interface
+
+- Select Enterprise applications 
+
+![entra_01_select_enterprise_application](/images/auth/entra/entra_01_select_enterprise_application.png)
+
+New Application 
+
+![entra_02_new_app](/images/auth/entra/entra_02_new_app.png)
+
+ Create your own application
+
+![entra_03_create_own_app](/images/auth/entra/entra_03_create_own_app.png)
+
+- A name for the application must be introduced. In this document, the name will be "OpenNebula local"
+- The option "Integrate any other application you don't find in the gallery (Non-gallery)" must be selected before pressing the button "Create"
+
+![entra_04_integrate_app](/images/auth/entra/entra_04_integrate_app.png)
+
+- On the option "Single sign-on" of the menu, the option SAML must be selected.
+
+![entra_05_select_saml](/images/auth/entra/entra_05_select_saml.png)
+
+  - The __Basic SAML configuration__ section requires two fields 
+    - **Identifier (Entity ID)** must match `:sp_entity_id`
+    - **Reply URL (Assertion Consumer Service)** must match `:acs_url`
+
+![entra_06_basic_saml_config](/images/auth/entra/entra_06_basic_saml_config.png)
+
+  - The __Attributes and claims__ section requires two claims (the other ones can be deleted because OpenNebula won't use them)
+    - The **Unique User Identifier (name ID)** will be the field of the user name in OpenNebula. By default is the full email of the user, so using `user.mailnickname` is recommended. The changes must be saved and will be applied immediately.
+
+![entra_10_modify_NameID](/images/auth/entra/entra_10_modify_NameID.png)
+
+
+As commented previously, the default additional claims can be deleted (pressing the ... close to the name).
+
+
+![entra_09_delete_claims](/images/auth/entra/entra_09_delete_claims.png)
+
+To do OpenNebula group mapping, a group claim must be created, pressing "Add a group claim" and setting one of the group options, normally "Security groups". The changes must be saved.
+
+![entra_11_add_group_claim](/images/auth/entra/entra_11_add_group_claim.png)
+
+{{< alert title="Groups/Roles in Entra ID" color="success" >}}
+This claim will provide Entra ID groups and roles, because they are treated as if they were the same. Note that in some Azure tiers roles cannot be created but groups can.{{< /alert >}}
+
+  - On the __SAML Certificates__ section, the **Federation Metadata XML** file must be downloaded to extract the idp certificate (the parameter `:idp_cert` of the OpenNebula configuration file). The certificate is the value of the field `/EntityDescriptor/Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate` of the XML file. Supposing that the file was downloaded to `Downloads/OpenNebula Local.xml`, it can be done easily using the command `xpath` as shown in the following commandline 
+```bash
+ cat "Downloads/OpenNebula local.xml" | \
+ xpath -e '/EntityDescriptor/Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate/text()' 2>/dev/null
+```
+  - On the __Set up OpenNebula local__ (or the name of the app that was chosen), the field **Microsoft Entra Identifier** will be needed for further configuration as the `:issuer` field for OpenNebula Entra identity provider
+
+![entra_07_sts_cert](/images/auth/entra/entra_07_sts_cert.png)
+
+After the application has been created **users/roles must be added to have permissions**. As commented previously, on some Entra ID plans roles cannot be assigned, so users must be added one by one (selectint the link "None selected", choosing the desired users and pressing "Select" and then "Assign").
+
+![entra_12_add_users](/images/auth/entra/entra_12_add_users.png)
+
+A Entra ID required and admin group should be configured in OpenNebula. The group UUIDs are the field __Object Id__ shown on the **All groups** list.
+
+After these steps, the configuration file `/etc/one/auth/saml_auth.conf` will look like follows. 
+
+```
+:sp_entity_id: 'onelocal'
+:acs_url: 'https://onelocal:8443/fireedge/api/auth/acs'
+
+:identity_providers:
+  :entra:
+    :issuer: 'https://sts.windows.net/<TENANT_UUID>/'  # URL for the Microsoft Entra Identifier
+    :idp_cert: 'MIIC...'                               # Certificate extracted from the Federation metadata XML
+    :user_field: 'NameID'
+    :group_field: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/groups'
+    :group_required: '<ACCESS_GROUP_UUID>'             # Group UUID for the users that can log in OpenNebula
+    :group_admin_name: '<ADMIN_GROUP_UUID>'            # Users on this group will also be group admins on their groups
+    :mapping_generate: true                            # Generate mappings between Entra groups and OpenNebula groups
+    :mapping_key: 'SAML_GROUP'                         # Parameter on OpenNebula groups that will be matched on Entra groups
+    :mapping_default: 1                                # Default group for all entra users
+    :mapping_mode: 'strict'
+    :mapping_timeout: 300
+    :mapping_filename: 'entra_groups.yaml'
+```
+
+On the other hand, FireEdge configuration must be modified as well redirecting to the "User access URL" field value on the properties page of the application.
+
+![entra_08_URL_app](/images/auth/entra/entra_08_URL_app.png)
+
+That is set modifying the value of the following two parametes on the file `/etc/one/fireedge-server.conf`
+
+```
+auth: 'saml'
+auth_redirect: 'https://launcher.myapps.microsoft.com/api/signin/................'
+```
+

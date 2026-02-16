@@ -19,7 +19,7 @@ This document presents a powerful distributed Edge Cloud Architecture for OpenNe
 
 We have defined this architecture to be much simpler than traditional cloud computing architectures, which are usually composed of complex, proprietary general-purpose software systems for storage and networking. This architecture has been created from the collective information and experiences of hundreds of users and client engagements for over ten years. It builds on storage and networking technologies that already exist in the Linux operating system and on modern storage hardware available from existing cloud and edge providers, leading to a greatly simplified design. Our Edge Cloud Architecture implements enterprise-grade cloud features for performance, availability, and scalability, with a very simple design that avoids vendor lock-in and reduces complexity, resource consumption, and operational costs.
 
-![image](/images/overview_edge-cluster.png)
+{{< image path="/images/overview_edge-cluster.svg" alt="Edge Cluster Architecture Overview" align="center" width="80%" pb="20px" >}}
 
 {{< alert title="Note" color="success" >}}
 The White Paper on the True Hybrid Cloud Architecture is publicly available for [download](https://support.opennebula.pro/hc/en-us/articles/360050302811-Edge-Cloud-Architecture-White-Paper).{{< /alert >}} 

@@ -206,4 +206,5 @@ The `shared` transfer driver assumes that the datastore is mounted on all the Ho
 
 When a VM is created, its disks (the `disk.i` files) are copied or linked in the corresponding directory of the System Datastore. These file operations are always performed remotely on the target Host.
 
-![image1](/images/fs_shared.png)
+{{< image path="/images/fs_shared.svg" alt="VM disks linked in the System Datastore directory" align="center" width="70%" pb="20px" >}}
+
