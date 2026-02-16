@@ -20,6 +20,10 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - [libvirtd restarts in cycles each 10 minutes with error message in system logs](https://github.com/OpenNebula/one/issues/6463), due to the way libvirtd gets activated per interaction by systemd in 120-second slices. As the default interval for the OpenNebula monitor probe is 600 seconds (10 minutes), each time a probe reactivates libvirtd, it sends those messages to syslog.
 
+## Drivers - Storage
+
+- [Setting a value for `NETAPP_GROW_THRESHOLD` will cause failures in the NetApp Native driver](https://github.com/OpenNebula/one/issues/7416). To solve it, remove the `NETAPP_GROW_THRESHOLD` attribute from both the Image and System datastores.
+
 ## Sunstone
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
@@ -48,9 +52,35 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by default. It could happen that after installing a graphical desktop on a Linux VM, the Xorg window system does not load the appropriate video driver. You can force a VESA mode by configuring the kernel parameter `vga=VESA_MODE` in the GNU GRUB configuration file. [Here](https://en.wikipedia.org/wiki/VESA_BIOS_Extensions#Linux_video_mode_numbers/) you can find the VESA mode numbers. For example, adding `vga=791` as kernel parameter will select the 16-bit 1024×768 resolution mode.
 
-## Backups
+## Backups - Veeam
 
-- For Veeam related issues, please referer to the [Veeam (EE) page](../../../product/cluster_configuration/backup_system/veeam.md).
+- If the backup chain is deleted in OpenNebula and an incremental is attempted from Veeam, the data may be corrupt, so a manual Full Backup is needed from Veeam, otherwise the incremental data will be missing.
+- After performing a backup using Veeam VNC may stop working for the backed up VM and some configuration attributes may be lost. If facing this issue, please apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/backup_controller.rb`` file in the backup server at lines ~247-251 (the 2 ``vm.updateconf`` calls need the ``true`` statement at the end). Then, restart the apache2/httpd service:
+
+```ruby
+...
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2",' \
+        'BACKUP_VOLATILE"="YES"]', true) # <- Add true parameter
+else
+    LOGGER.info 'Backup volatiles disabled.'
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2"]', true) # <- Add true parameter
+...
+```
+
+- In LVM environments, VM restores may fail to deploy if the restored VM is scheduled in the same host as the original VM (and the original is still deployed). To fix this, apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/vm_controller.rb`` file in the backup server at lines ~800. Then, restart the apache2/httpd service:
+
+- Incremental backups fail on Debian 12/13 due to a Libvirt bug that blocks blockcommit via AppArmor. Until upstream fixes it, the workaround is to disable AppArmor in Libvirt’s qemu.conf
+
+```ruby
+...
+xml_element.delete_element('TEMPLATE/NIC')
+xml_element.delete_element('TEMPLATE/DISK')
+xml_element.delete_element('TEMPLATE/GRAPHICS')
+xml_element.delete_element('TEMPLATE/OS/BOOT')
+xml_element.delete_element('TEMPLATE/VMID')
+xml_element.delete_element('TEMPLATE/OS/UUID') # <- Add this line
+...
+```
 
 ## Market proxy settings
 
@@ -104,3 +134,20 @@ RAW=[
   DATA="lxc.apparmor.profile=unconfined",
   TYPE="lxc" ]
 ```
+
+## High CPU utilization due to predictions
+
+With some configurations, the usage of CPU on the hosts can be very high, due to running predictions. In such case, the number of threads used by BLAS (Basic Linear Algebra Subprograms) can be limited to 1 (or other suitable number) with the environment variables:
+
+```shell
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
+export OPENBLAS_NUM_THREADS=${OPENBLAS_NUM_THREADS:-1}
+export MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
+export BLIS_NUM_THREADS=${BLIS_NUM_THREADS:-1}
+export NUMEXPR_NUM_THREADS=${NUMEXPR_NUM_THREADS:-1}
+```
+
+A more comprehensive way is to replace the following old files with the appropriate files from `one` repository:
+* [prediction script](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/prediction.sh)
+* [prediction script from node probes](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/node-probes.d/prediction.sh)
+* [prediction model](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/pyoneai/ml/sklearn_prediction_model.py)

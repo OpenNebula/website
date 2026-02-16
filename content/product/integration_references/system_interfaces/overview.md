@@ -14,7 +14,7 @@ weight: "1"
 
 OpenNebula has been designed to be easily adapted to any infrastructure and easily extended with new components. The result is a modular system that can implement a variety of cloud architectures and can interface with multiple datacenter services. In this Guide we review the main interfaces of OpenNebula and their.
 
-![image0](/images/overview_architecture.png)
+{{< image path="/images/overview_architecture.svg" alt="OpenNebula Components Following a Modular Approach" align="center" width="90%" pb="20px" >}}
 
 ## How Should I Read This Chapter
 

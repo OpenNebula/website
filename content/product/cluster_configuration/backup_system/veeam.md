@@ -111,12 +111,14 @@ The following table summarizes the supported backup modes for each storage syste
 
 ## Limitations
 
-Here is a list of the known issues and limitations affecting the Veeam integration with OpenNebula:
+Here is a list of the limitations affecting the Veeam integration with OpenNebula:
 
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
 - Alpine virtual machines cannot be backed up.
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
+
+If facing other issues or bugs, we highly encourage to check the Veeam section of the [Known Issues page]({{% relref "../../../software/release_information/release_notes_70/known_issues/#backups---veeam" %}}).
 
 ## Architecture
 

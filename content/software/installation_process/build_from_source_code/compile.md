@@ -65,6 +65,10 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 {{< alert title="Note" color="success" >}}
 To install OpenNebula with the `system-wide` mode you should have super user privileges.{{< /alert >}}
 
+{{< alert title="Warning" color="warning" >}}
+The `scons` option `xmlrpc_pkgconf=yes` is mandatory for AlmaLinux 9. Otherwise the build fails.{{< /alert >}}
+
+
 ```default
 $ sudo ./install.sh <install_options>
 ```
@@ -80,7 +84,7 @@ where  *<install_options>* can be one or more of:
 | **-c**   | only install client utilities: OpenNebula cli and ec2 client files                                                                                                           |
 | **-s**   | install OpenNebula Ruby Sunstone                                                                                                                                             |
 | **-p**   | do not install OpenNebula Ruby Sunstone non-minified files                                                                                                                   |
-| **-F**   | install OpenNebula FireEdge                                                                                                                                                  |
+| **-F**   | install only OpenNebula FireEdge                                                                                                                                             |
 | **-P**   | do not install OpenNebula FireEdge non-minified files                                                                                                                        |
 | **-G**   | install OpenNebula Gate                                                                                                                                                      |
 | **-6**   | install only OpenNebula Gate Proxy                                                                                                                                           |

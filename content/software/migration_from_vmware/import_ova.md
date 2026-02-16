@@ -48,11 +48,9 @@ The converted VM will reboot several times after instantiation in order to insta
 
 ## Usage
 
-The full documentation for OneSwap is maintained in the [OneSwap Wiki](https://github.com/OpenNebula/one-swap/wiki).
-
 OneSwap will assume that the provided OVA has been exported from a VMware environment. Users must make sure that the provided OVA is compatible with VMware environments. Other sources are currently not supported (i.e., Xen or VirtualBox).
 
-When converting an OVA or VMDK you will need enough space both in the `/tmp` folder (can be changed with `--work-dir`) and in the destination DS where the disk images are going to be imported.
+When converting an OVA or VMDK you will need enough space both in the `/tmp` folder (can be changed with `--work-dir`) and in the destination Datastore where the disk images are going to be imported.
 
 The parent OVA directory name should match the name of the OVA files inside it. For example
 
@@ -65,7 +63,7 @@ ovf_test/
 ```
 
 
-It is possible to specify the target Datastore and VNET for the OVA to be imported. Refer to `man oneswap` for the complete documentation of the oneswap command. Available options for the `oneswap import` command are:
+It is possible to specify the target Datastore and VNET for the OVA to be imported. Refer to `man oneswap` for the complete documentation of the `oneswap` command. Available options for the `oneswap import` command are:
 
 | Parameter                              | Description                                                                                                                                                                                                     |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -200,11 +198,11 @@ Context will install on first boot, you may need to boot it twice.
 ```
 
 {{< alert title="Note" color="success" >}}
-If context injection does not work after importing, it is also possible to install one-context **before exporting the OVA** from VMware using the packages available in the one-apps repository and uninstalling VMware Tools. In this case it is important to be aware that the one-context service will get rid of any manual network configurations done to the guest OS and the VM won’t be able to get the network configuration from VMware anymore.{{< /alert >}}
+If context injection does not work after importing, it is also possible to install `one-context` **before exporting the OVA** from VMware using the packages available in the `one-apps` repository and uninstalling VMware Tools. In this case it is important to be aware that the `one-context` service will get rid of any manual network configurations done to the guest OS and the VM won’t be able to get the network configuration from VMware anymore.{{< /alert >}}
 
 ## Additional `virt-v2v` Options
 
-The following parameters can be tuned for virt-v2v, defaults will be applied if no options are provided.
+The following parameters can be tuned for `virt-v2v`, defaults will be applied if no options are provided.
 
 | Parameter                             | Description                                                                                                                                                                   |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -213,8 +211,8 @@ The following parameters can be tuned for virt-v2v, defaults will be applied if 
 | `--format \| -f name [ qcow2 \| raw ]` | Disk format `[ qcow2 \| raw ]`. Default: `qcow2`.                                                                                                                               |
 | `--virtio /path/to/iso`             | Full path of the win-virtio ISO file. Required to inject VirtIO drivers to Windows Guests.                                                                                |
 | `--win-qemu-ga /path/to/iso`        | Install QEMU Guest Agent to a Windows guest.                                                                                                                                  |
-| `--qemu-ga`                           | Install qemu-guest-agent package to a Linux guest, useful with `–custom` or `–fallback`.                                                                                      |
+| `--qemu-ga`                           | Install `qemu-guest-agent` package to a Linux guest, useful with `-–custom` or `-–fallback`.                                                                                      |
 | `--delete-after`                      | Removes the leftover conversion directory in the working directory which contains the converted VM disks and descriptor files.                                            |
 | `--vddk /path/to/vddk/`               | Full path to the VDDK library, required for VDDK-based transfer.                                                                                                              |
-| `--virt-tools /path/to/virt-tools`    | Path to the directory containing `rhsrvany.exe`, defaults to `/usr/local/share/virt-tools`. See [https://github.com/rwmjones/rhsrvany](https://github.com/rwmjones/rhsrvany). |
+| `--virt-tools /path/to/virt-tools`    | Path to the directory containing `rhsrvany.exe`, defaults to `/usr/local/share/virt-tools`. See [rhsrvany project GitHub page](https://github.com/rwmjones/rhsrvany) for more details. |
 | `--root option`                       | Choose the root filesystem to be converted. Can be `ask`, `single`, `first` or `/dev/sdX`.                                                                                        |

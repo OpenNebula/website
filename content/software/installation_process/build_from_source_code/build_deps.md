@@ -66,11 +66,23 @@ This page lists the **build** dependencies for OpenNebula.
 * **scons**
 * **unzip**
 
+For Ubuntu 22.04 is recommended a updated version of Node.js:
+
+```default
+apt -y remove nodejs libnode-dev || true
+apt -y autoremove
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+```
+
 Install all requirements using:
 
 ```default
-apt install bash-completion debhelper default-jdk freerdp2-dev grunt javahelper libaugeas-dev libcairo2-dev libcurl4-openssl-dev libmysql++-dev libmysqlclient-dev libnode-dev libossp-uuid-dev libpango1.0-dev libpulse-dev libsqlite3-dev libssh2-1-dev libssl-dev libsystemd-dev libtool libvncserver-dev libvorbis-dev libwebp-dev libws-commons-util-java libxml2-dev libxmlrpc-c++8-dev libxslt1-dev libzmq3-dev libzmq5 nodejs npm python3 python3-pip python3-setuptools rake ruby-dev scons unzip && npm install -g bower
+apt install bash-completion debhelper default-jdk freerdp2-dev grunt javahelper libaugeas-dev libcairo2-dev libcurl4-openssl-dev libmysql++-dev libmysqlclient-dev libnode-dev libossp-uuid-dev libpango1.0-dev libpulse-dev libsqlite3-dev libssh2-1-dev libssl-dev libsystemd-dev libtool libvncserver-dev libvorbis-dev libwebp-dev libws-commons-util-java libxml2-dev libxmlrpc-c++8-dev libxslt1-dev libzmq3-dev libzmq5 nodejs npm python3 python3-pip python3-setuptools rake ruby-dev scons unzip libnsl-dev && npm install -g bower
 ```
+
+{{< alert title="Note" color="success" >}}
+Install the `libnsl-dev` package on Ubuntu 24.04 too. Otherwise the build process will fail.{{< /alert >}}
+
 
 ## Debian 11, Debian 12
 

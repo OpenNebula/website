@@ -76,8 +76,12 @@ The installation interface will be in text mode and will only ask for confirmati
 
 ![validation_script](/images/ISO/01-validation_script.png)
 
+After that, a little menu showing all the available, non-removable disks, will be shown in the format `disk|sizeGB`. After choosing the disk, a confirmation menu with the options `yes` and `no` will be shown.
+
+![disk_selection](/images/ISO/011-disk_selection.png)
+
 {{< alert title="Warning: data will be deleted" color="warning" >}}
-**IMPORTANT: OpenNebula will be installed on the first disk found and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right server.**{{< /alert >}}
+**IMPORTANT: OpenNebula will be installed on the selected disk and it will delete IRREVERSIBLY all the data in that disk. Ensure that this is the right disk and server.**{{< /alert >}}
 
 After the confirmation, the installation will start. It will show some information related to the default settings and the packages that will be installed
 
@@ -279,34 +283,22 @@ After the installation, the server runs only the frontend and needs to be added 
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
-After selecting the option `add_host`, the IP for the host will be asked for.
-In this case we are using the IP that was configured before, 172.20.0.7
-
-```
-                                 ┌──────────────────────────────────────────────────────────┐
-                                 │ Insert the IP for the node                               │
-                                 │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │172.20.0.7                                            │ │
-                                 │ └──────────────────────────────────────────────────────┘ │
-                                 │                                                          │
-                                 ├──────────────────────────────────────────────────────────┤
-                                 │               <  OK  >        <Cancel>                   │
-                                 └──────────────────────────────────────────────────────────┘
+After selecting the option `add_host`, the IP for the host and the user to log into it will be asked for. 
+- In this case we are using the IP that was configured before, 172.20.0.7
+- The user to log into the node MUST be root or have sudo root access without password
 
 ```
 
-Then, the user to log into the node will be asked. It MUST be root or have sudo root access without password
+                      ┌────────────────────────────────Add Node──────────────────────────────────┐
+                      │ ┌──────────────────────────────────────────────────────────────────────┐ │
+                      │ │Host IP:                                                              │ │
+                      │ │User (with root permissions):                                         │ │
+                      │ └──────────────────────────────────────────────────────────────────────┘ │
+                      │                                                                          │
+                      ├──────────────────────────────────────────────────────────────────────────┤
+                      │                       <  OK  >            <Cancel>                       │
+                      └──────────────────────────────────────────────────────────────────────────┘
 
-```
-                                 ┌──────────────────────────────────────────────────────────┐
-                                 │ Insert the user for the node                             │
-                                 │ ┌──────────────────────────────────────────────────────┐ │
-                                 │ │root                                                  │ │
-                                 │ └──────────────────────────────────────────────────────┘ │
-                                 │                                                          │
-                                 ├──────────────────────────────────────────────────────────┤
-                                 │               <  OK  >        <Cancel>                   │
-                                 └──────────────────────────────────────────────────────────┘
 ```
 
 A confirmation dialog like the following will be shown:
@@ -430,6 +422,130 @@ On a workstation with access to the frontend, a local route to the virtual net c
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
 After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
+
+## GPU Configuration
+
+If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [this guide from the official documentation]({{% relref "/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough" %}}). Overall, a GPU configuration in OpenNebula consists from 2 main stages:
+- Host preparation and driver configuration
+- OpenNebula settings for PCI pass-through devices
+
+### Host Configuration
+
+To prepare the OpenNebula host complete the following steps:
+- Check that IOMMU was enabled on the host using the following command:
+```default
+# dmesg | grep -i iommu
+```
+If IOMMU wasn’t enabled on the host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
+At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
+1.  Ensure `vfio-pci` module is loaded on boot:
+
+    ```default
+    # echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
+    # modprobe vfio-pci
+    ```
+
+2. Identify the GPU's PCI address:
+
+    ```default
+    # lspci -D | grep -i nvidia
+    0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
+    ```
+
+3. Set the driver override. Use a driverctl utility and the PCI address of the GPU device from the previous step to override driver.
+
+    ```default
+    # driverctl set-override 0000:e1:00.0 vfio-pci
+    ```
+
+4. Verify the driver binding:
+    Check that the GPU is now using the `vfio-pci` driver.
+
+    ```default
+    # lspci -Dnns e1:00.0 -k
+    Kernel driver in use: vfio-pci
+    ```
+
+#### VFIO Device Ownership
+
+For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be owned by the `root:kvm` user and group. This is achieved by creating a `udev` rule.
+
+1.  Identify the IOMMU group for your GPU using its PCI address:
+
+    ```default
+    # find /sys/kernel/iommu_groups/ -type l | grep e1:00.0
+    /sys/kernel/iommu_groups/85/devices/0000:e1:00.0
+    ```
+    In this example, the IOMMU group is `85`.
+
+2.  Create a `udev` rule:
+    Create the file `/etc/udev/rules.d/99-vfio.rules` with the following content:
+
+    ```default
+    SUBSYSTEM=="vfio", GROUP="kvm", MODE="0666"
+    ```
+
+3.  Reload `udev` rules:
+
+    ```default
+    # udevadm control --reload
+    # udevadm trigger
+    ```
+
+4.  Verify ownership:
+    Check the ownership of the device file corresponding to your GPU's IOMMU group.
+
+    ```default
+    # ls -la /dev/vfio/
+    crw-rw-rw- 1 root kvm 509, 0 Oct 16 10:00 85
+    
+### OpenNebula Configuration
+
+Configure the PCI probe on the front-end node to monitor NVIDIA devices in order to make the GPUs available in OpenNebula 
+
+1.  Edit the PCI probe configuration file at `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf`.
+2.  Add a filter for NVIDIA devices:
+
+    ```default
+    :filter: '10de:*'
+    ```
+
+3.  Synchronize the hosts from the Front-end to apply the new configuration:
+
+    ```default
+    # su - oneadmin
+    $ onehost sync -f
+    ```
+
+After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
+
+###  VM with GPU instantiation
+ To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
+
+![VM Instantiation](/images/ISO/06-vm-instantiate-1.png)
+
+On the next screen select required Storage and Network options. In the “PCI Devices” section click “Attach PCI device”
+
+![PCI Device attachment](/images/ISO/07-vm-instantiate-pci-device.png)
+
+In the dropdown menu select available GPU device which will be attached to the VM. Then click “Accept” button and finalize VM configuration.
+
+![PCI Device attachment](/images/ISO/08-vm-instantiate-pci-device-select.png)
+
+Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used. 
+
+### vLLM appliance validation
+     
+The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
+
+1. Go to Storage -> Apps section.
+Search for vLLM appliance and import it. Select DataStore where to save image
+
+![PCI Device attachment](/images/ISO/09-vllm-appliance.png)
+
+2. Go to VMs section and instantiate vLLM appliance. Specify common VM parameters. In the “Advanced Settings” go to “PCI devices” and ensure that required GPU device selected for attachment to the VM. Click “Accept” and then “Finish” to instantiate vLLM appliance.
+
+3. Once vLLM appliance instantiated, follow steps from [the LLM inference guide]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) to access a webchat app or execute benchmarking tests
 
 ## Next Steps
 

@@ -17,18 +17,7 @@ To perform the validation with LLM Inference you must comply with one of the pre
      * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
 {{< /alert >}}
 
-As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance are critical aspects of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
-
-The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process rather than the quality of the generated result. Metrics assessed by this type of benchmarks include:
-  - **Latency**: how fast the model responds to a request.
-  - **Throughput**: the number of requests the model can handle per unit of time.
-  - **Stability**: model serving consistency under varying loads.
-
-In this guide you will find the necessary steps and best practices to perform LLM inference benchmarking with OpenNebula.
-
-## The vLLM Inference Framework
-
-The vLLM Inference Framework is a benchmark that focuses on [vLLM](https://docs.vllm.ai/en/latest/), a production-grade, high-performance inference engine designed for large-scale LLM serving.
+The [vLLM](https://docs.vllm.ai/en/latest/) Inference Framework is a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
 The main characteristics of vLLM Inference Framework are:
 
@@ -36,7 +25,127 @@ The main characteristics of vLLM Inference Framework are:
 - Uses Python’s native multiprocessing for multi-GPU inference.
 - Does not require additional frameworks, such as Ray, unless deploying across multiple nodes, which is out of scope for this benchmarking task.
 
-## Benchmark Environments
+In this guide you will find the necessary steps and best practices to deploy the OpenNebula vLLM appliance and perform an inference benchmarking to check its performance.
+
+## Deploying the vLLM Appliance
+
+The vLLM appliance is available through the OpenNebula Marketplace, offering a [streamlined setup process](https://github.com/OpenNebula/one-apps/wiki/vllm_quick) suitable for both novice and experienced users.
+
+To deploy the vLLM appliance for benchmarking, follow these steps:
+
+1. Download the vLLM appliance from the marketplace:
+    ``` shell
+    onemarketapp export 'service_Vllm' vllm --datastore default
+    ```
+
+2. Configure the template for [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md):
+    ```shell
+    onetemplate update vllm
+    ```
+
+    In this scenario, configure the template for GPU Passthrough to the VM, attach a NIC on a desired network (in our case we are using the `admin_net` network, but you can choose any of your preference) and adjust the CPU and memory to your requirements, for instance:
+    ```shell
+    PCI=[
+        CLASS="0302",
+        DEVICE="26b9",
+        VENDOR="10de" ]
+    NIC=[ NETWORK="admin_net" ]
+    VCPU="32"
+    CPU="32"
+    MEMORY="32768"
+    ```
+
+3. Instantiate the template. Keep the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark you do, which means that you will need to instantiate a different VM with the different models for the execution of each benchmark:
+    ```shell
+    onetemplate instantiate vllm --name vllm
+    ```
+
+4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`.
+
+    4.1 To access the VM, run the following command:
+    ```shell
+    onevm ssh vllm
+    ```
+    You can also list all available VMs by running `onevm list`.
+
+    4.2 Once inside the VM, check the logs in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
+
+    ```base
+    [...]
+
+    (APIServer pid=2480) INFO 11-26 11:00:33 [api_server.py:1971] Starting vLLM API server 0 on http://0.0.0.0:8000
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:36] Available routes are:
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /openapi.json, Methods: HEAD, GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /docs, Methods: HEAD, GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /redoc, Methods: HEAD, GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /health, Methods: GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /load, Methods: GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /ping, Methods: POST
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /ping, Methods: GET
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /tokenize, Methods: POST
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /detokenize, Methods: POST
+    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /v1/models, Methods: GET
+
+    [...]
+
+    ```
+
+    At this point, the vLLM API is available. Perform a test it through curl, pointing to the port 8000 of the VM and querying the `v1/models` path:
+    ```shell
+    curl http://localhost:8000/v1/models | jq .
+    ```
+
+    You will retrieve a json response with the loaded models:
+    ```json
+    {
+        "object": "list",
+        "data": [
+            {
+            "id": "Qwen/Qwen2.5-1.5B-Instruct",
+            "object": "model",
+            "created": 1764154926,
+            "owned_by": "vllm",
+            "root": "Qwen/Qwen2.5-1.5B-Instruct",
+            "parent": null,
+            "max_model_len": 1024,
+            "permission": [
+                {
+                "id": "modelperm-431ea3199da545b2a5cba62dc373ab53",
+                "object": "model_permission",
+                "created": 1764154926,
+                "allow_create_engine": false,
+                "allow_sampling": true,
+                "allow_logprobs": true,
+                "allow_search_indices": false,
+                "allow_view": true,
+                "allow_fine_tuning": false,
+                "organization": "*",
+                "group": null,
+                "is_blocking": false
+                }
+            ]
+            }
+        ]
+    }
+    ```
+
+    Additionally, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port:
+
+    ![vLLM webchat](/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.svg)
+
+    If these verification steps are successful, the vLLM appliance is ready to run the benchmarks.
+
+## LLM Inference Benchmarking
+
+As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance are critical aspects of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
+
+The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process rather than the quality of the generated result. Metrics assessed by this type of benchmarks include:
+  - **Latency**: how fast the model responds to a request.
+  - **Throughput**: the number of requests the model can handle per unit of time.
+  - **Stability**: model serving consistency under varying loads.
+
+### Benchmark Environments
 
 To test the vLLM appliance, the benchmark uses two similar environments, but with different GPU models:
 - Benchmark environment 1: 1x NVIDIA L40S 48GB GPU cards
@@ -115,7 +224,7 @@ The server specifications are based on a two-server setup for each environment: 
 | **RAM**                  | 1152 GB (24x48GB DDR5-4800)                   | 1536 GB (24x64GB DDR5-6400)                   |
 
 
-## Benchmarks
+### Benchmarks models
 
 The certification includes two LLM architectures — Qwen and Llama — each tested in two different parameter sizes.
 
@@ -130,115 +239,6 @@ Llama Models:
 The benchmark process is based on [GuideLLM](https://github.com/vllm-project/guidellm), the native benchmarking tool provided by vLLM for optimizing and testing deployed models.
 
 ### Executing the Benchmarks
-
-#### Deploying the vLLM Appliance
-
-The vLLM appliance is available through the OpenNebula Marketplace, offering a [streamlined setup process](https://github.com/OpenNebula/one-apps/wiki/vllm_quick) suitable for both novice and experienced users.
-
-To deploy the vLLM appliance for benchmarking, follow these steps:
-
-1. Download the vLLM appliance from the marketplace:
-    ``` shell
-    $ onemarketapp export 'service_Vllm' vllm --datastore default
-    ```
-
-2. Configure the template for [GPU PCI passthrough](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md):
-    ```shell
-    $ onetemplate update vllm
-    ```
-
-    In this scenario, configure the template for GPU Passthrough to the VM and the specific CPU-Pinning topology:
-    ```shell
-    CPU_MODEL=[
-        MODEL="host-passthrough" ]
-    OS=[
-        FIRMWARE="/usr/share/OVMF/OVMF_CODE_4M.fd",
-        MACHINE="pc-q35-noble" ]
-    PCI=[
-        CLASS="0302",
-        DEVICE="26b9",
-        VENDOR="10de" ]
-    TOPOLOGY=[
-        CORES="8",
-        PIN_POLICY="THREAD",
-        SOCKETS="2",
-        THREADS="2" ]
-    VCPU="32"
-    CPU="32"
-    MEMORY="32768"
-    ```
-
-3. Instantiate the template. Keep the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark you do, which means that you will need to instantiate a different VM with the different models for the execution of each benchmark:
-    ```shell
-    $ onetemplate instantiate service_Vllm --name vllm
-    ```
-
-4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
-    ```shell
-    [...]
-
-    (APIServer pid=2480) INFO 11-26 11:00:33 [api_server.py:1971] Starting vLLM API server 0 on http://0.0.0.0:8000
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:36] Available routes are:
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /openapi.json, Methods: HEAD, GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /docs, Methods: HEAD, GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /docs/oauth2-redirect, Methods: HEAD, GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /redoc, Methods: HEAD, GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /health, Methods: GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /load, Methods: GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /ping, Methods: POST
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /ping, Methods: GET
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /tokenize, Methods: POST
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /detokenize, Methods: POST
-    (APIServer pid=2480) INFO 11-26 11:00:33 [launcher.py:44] Route: /v1/models, Methods: GET
-
-    [...]
-
-    ```
-
-    At this point, the vLLM API is available. Perform a test it through curl, pointing to the port 8000 of the VM and querying the `v1/models` path:
-    ```shell
-    $ curl http://localhost:8000/v1/models | jq .
-    ```
-
-    You will retrieve a json response with the loaded models:
-    ```json
-    {
-        "object": "list",
-        "data": [
-            {
-            "id": "Qwen/Qwen2.5-1.5B-Instruct",
-            "object": "model",
-            "created": 1764154926,
-            "owned_by": "vllm",
-            "root": "Qwen/Qwen2.5-1.5B-Instruct",
-            "parent": null,
-            "max_model_len": 1024,
-            "permission": [
-                {
-                "id": "modelperm-431ea3199da545b2a5cba62dc373ab53",
-                "object": "model_permission",
-                "created": 1764154926,
-                "allow_create_engine": false,
-                "allow_sampling": true,
-                "allow_logprobs": true,
-                "allow_search_indices": false,
-                "allow_view": true,
-                "allow_fine_tuning": false,
-                "organization": "*",
-                "group": null,
-                "is_blocking": false
-                }
-            ]
-            }
-        ]
-    }
-    ```
-
-    Additionally, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port:
-
-    ![vLLM webchat](/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.svg)
-
-    If these verification steps are successful, the vLLM appliance is ready to run the benchmarks.
 
 ####  Running the Benchmark Scripts
 
@@ -256,12 +256,12 @@ To run the benchmark, follow this procedure:
 
 1. Connect to the vLLM appliance through ssh:
     ```shell
-    $ onevm ssh vllm
+    onevm ssh vllm
     ```
 
-2. Execute the benchmark script:
+2. Execute the benchmark script inside the appliance:
     ```shell
-    root@vllm$ ./benchmark
+    ./benchmark
     ```
 
     After the benchmark is running, you will see this output:
