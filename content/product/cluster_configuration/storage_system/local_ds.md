@@ -248,7 +248,7 @@ When a VM is launched:
 
 Once the cache manager downloads the image, this is stored in both the _local_ and _central_ caches for future use.
 
-![><](/images/local_ds_cache.png)
+{{< image path="/images/local_ds_cache.svg" alt="Speeding up VM provisioning with Distributed Cache" align="center" width="90%" pb="20px" >}}
 
 ## How to Enable and Configure the Cache
 
