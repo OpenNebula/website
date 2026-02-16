@@ -125,15 +125,13 @@ Now verify the installation by logging in to OpenNebula's Edge Sunstone GUI.
 
 Point your browser to the Edge IP and port provided by the miniONE report, in this case `192.168.1.130:80`, or simply to `http://localhost`. You should be greeted with the Sunstone login screen:
 
-![image](/images/sunstone-login.png)
-<br/>
+{{< image path="/images/quickstart/sunstone-login-page.png" alt="Sunstone login" align="center" width="50%" pb="20px" >}}
 
 In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN**.
 
 The screen will display the Sunstone Dashboard:
 
-![image](/images/sunstone-dashboard.png)
-<br/>
+{{< image path="/images/sunstone-dashboard.png" alt="Sunstone dashboard" align="center" width="90%" pb="20px" >}}
 
 As you can see, the Dashboard indicates the following installed components:
 
@@ -143,11 +141,11 @@ As you can see, the Dashboard indicates the following installed components:
 
 The existing Virtual Network is a bridged network attached to a local interface named `vnet`. To inspect this network, in Sunstone open the left-hand menu (hover the mouse over the left-hand sidebar), then click **Networks** --> **Virtual Networks**:
 
-![image](/images/sunstone-select_vnetwork.png)
+{{< image path="/images/sunstone-select_vnetwork.png" alt="Sunstone select vnet" align="center" width="90%" pb="20px" >}}
 
 Sunstone will display the **Virtual networks** screen. Click the item labelled `vnet` to display information about this network:
 
-![image](/images/sunstone-network_details.png)
+{{< image path="/images/sunstone-network_details.png" alt="Sunstone network details" align="center" width="90%" pb="20px" >}}
 
 During installation, a KVM virtualization host was automatically configured on the local machine. To inspect the KVM host, in Sunstone open the left-hand menu, then click **Infrastructure** -> **Hosts**.
 
@@ -157,13 +155,13 @@ miniONE automatically downloaded the template for a VM with Alpine Linux 3.20 pr
 
 To deploy the Alpine Linux VM, in the left-hand sidebar go to **Templates** -> **VM Templates**. This screen displays a list of all VM templates installed on the system. In this case, only the **Alpine Linux 3.20** template is installed:
 
-![image](/images/sunstone-vm_templates-alpine.png)
+{{< image path="/images/sunstone-vm_templates-alpine.png" alt="Sunstone VM templates" align="center" width="90%" pb="20px" >}}
 
 To instantiate the VM template, click the template item and click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" /><path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" /></svg> at the top.
 
 Sunstone will display the first screen of the **Instantiate VM Template** wizard:
 
-![image](/images/sunstone-instantiate_vm-1.png)
+{{< image path="/images/sunstone-instantiate_vm-1.png" alt="Sunstone instantiate VM" align="center" width="90%" pb="20px" >}}
 
 Feel free to modify the **Capacity** parameters if desired, or leave at their default values.
 
@@ -171,13 +169,13 @@ Click **Next**.
 
 The next screen allows you to see and modify further parameters for the VM, including selecting the Virtual Network or scheduling actions.
 
-![image](/images/sunstone-instantiate_vm-2.png)
+{{< image path="/images/sunstone-instantiate_vm-2.png" alt="Sunstone instantiate VM" align="center" width="90%" pb="20px" >}}
 
 Click **Finish**.
 
 OpenNebula will instantiate the VM template. For the Alpine Linux VM, this should take just a few seconds. Once instantiation is complete, Sunstone should display the **Instances** -> **VMs** screen, with the Alpine Linux VM as the sole instance:
 
-![image](/images/sunstone-vm_instances.png)
+{{< image path="/images/sunstone-vm_instances.png" alt="Sunstone VM instances" align="center" width="90%" pb="20px" >}}
 
 The green dot to the left of the VM name indicates that the VM is running. Note that you may need to click the **Refresh** icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="rgb(0,112,153)">
 <circle cx="12" cy="12" r="11" fill="rgba(218, 218, 218, 1)" stroke="rgb(0,112,153)"/>
@@ -191,7 +189,7 @@ The green dot to the left of the VM name indicates that the VM is running. Note 
 
 The quickest way to log into the VM is by VNC, available directly in Sunstone. Just click the VNC icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" color="rgb(143,147,146)"><path d="M2 15.5V2.6a.6.6 0 01.6-.6h18.8a.6.6 0 01.6.6v12.9m-20 0v1.9a.6.6 0 00.6.6h18.8a.6.6 0 00.6-.6v-1.9m-20 0h20M9 22h1.5m0 0v-4m0 4h3m0 0H15m-1.5 0v-4" stroke="rgb(143,147,146)" stroke-linecap="round" stroke-linejoin="round" fill="white" ></path></svg> and Sunstone will display the VM boot messages screen directly in your browser in another tab. 
 
-![image](/images/sunstone-VNC-alpine.png)
+{{< image path="/images/sunstone-VNC-alpine.png" alt="Sunstone Alpine VM" align="center" width="90%" pb="20px" >}}
 
 Log in as root with password `opennebula`. You can then use the command line to explore the VM and run processes:
 

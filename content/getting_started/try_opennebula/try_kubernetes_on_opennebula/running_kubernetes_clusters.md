@@ -36,20 +36,19 @@ The [OpenNebula Public Marketplace](https://marketplace.opennebula.io) is a repo
 
 In the left-hand menu select **Storage** -> **Apps**. Sunstone will display the **Apps** screen, showing the first page of apps that are available for download. In the search field at the top, type `service oneke 1.31` to filter by name. Then, select **Service OneKE 1.31** (not **Service OneKE 1.31 Airgapped**):
 
-![image](/images/sunstone-service_oneke.png)
-<br/>
+{{< image path="/images/sunstone-service_oneke.png" alt="OneKE service" align="center" width="90%" pb="20px" >}}
 
 Click the **Import** button. Sunstone displays the **Download App to OpenNebula** wizard. In the first screen of the wizard, click **Next**.
 
-![image](/images/sunstone-service-oneke-download.png)
+{{< image path="/images/sunstone-service-oneke-download.png" alt="Download OneKE service" align="center" width="90%" pb="20px" >}}
 
 In the second screen select the **default** datastore for the appliance:
 
-![image](/images/sunstone-service-oneke-datastore.png)
+{{< image path="/images/sunstone-service-oneke-datastore.png" alt="Datastore OneKE service" align="center" width="90%" pb="20px" >}}
 
 Click **Finish**. Sunstone will import the appliance template and display a message at bottom right. To see the imported template, in the left-hand menu select **Templates** -> **Service Templates**:
 
-![image](/images/sunstone-service-templates.png)
+{{< image path="/images/sunstone-service-templates.png" alt="Sunstone service templates" align="center" width="90%" pb="20px" >}}
 
 ## Step 2. Instantiate a Private Network on the Cloud Cluster
 
@@ -57,21 +56,21 @@ In this step we will create a new Virtual Network and assign a range of private 
 
 In Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
 
-![image](/images/sunstone-virtual-networks.png)
+{{< image path="/images/sunstone-virtual-networks.png" alt="Sunstone virtual networks" align="center" width="90%" pb="20px" >}}
 
 Click the **Create** button at the top. Sunstone will display the **Create Virtual Network** screen. Enter a name for the network -- for this example we will use `privnet`. Then, click **Next**.
 
 In the next screen, activate the **Use private host networking or a user-defined bridge** toggle:
 
-![image](/images/sunstone-create-priv-network.png)
+{{< image path="/images/sunstone-create-priv-network.png" alt="Create private network" align="center" width="90%" pb="20px" >}}
 
 Next, click the **Addresses** tab and select **+ Address Range** to add a new address range.  For this example, enter `192.168.200.2` for the base network address, and set the network size to `100`.
 
-![image](/images/sunstone-create-priv-network-2.png)
+{{< image path="/images/sunstone-create-priv-network-2.png" alt="Create private network" align="center" width="90%" pb="20px" >}}
 
 Click **Finish**. You will now see a new network item named `privnet` in the **Virtual networks** page.
 
-![image](/images/sunstone-virtual-networks-2.png)
+{{< image path="/images/sunstone-virtual-networks-2.png" alt="Virtual networks" align="center" width="90%" pb="20px" >}}
 
 ## Step 3. Instantiate the Kubernetes Service
 
@@ -82,17 +81,17 @@ In the left-hand pane, select **Templates** -> **Service Templates**. Select the
 
 Sunstone now displays the **Instantiate Service Template** wizard. Leave the default name `Service OneKE 1.31` and start a single instance.
 
-![kubernetes-qs-service-start](/images/sunstone-oneke-instantiate-1.png)
+{{< image path="/images/sunstone-oneke-instantiate-1.png" alt="Instantiate OneKE" align="center" width="90%" pb="20px" >}}
 
 Click **Next** to go to the next step, **Networks**.
 
 Select the **Public** item in the left hand column, then select the network labelled **vnet** in the right hand column. Select the **Private** item in the left hand column, then select the network labelled **privnet** in the right hand column.
 
-![image](/images/sunstone-oneke-instantiate-2.png)
+{{< image path="/images/sunstone-oneke-instantiate-2.png" alt="Instantiate OneKE" align="center" width="90%" pb="20px" >}}
 
 Click **Next**. Sunstone displays the **Service Inputs** screen, select the **Kubernetes Cluster** tab:
 
-![image](/images/sunstone-instantiate-oneke-service-inputs.png)
+{{< image path="/images/sunstone-instantiate-oneke-service-inputs.png" alt="OneKE service inputs" align="center" width="90%" pb="20px" >}}
 
 In this page you can define various parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
 
@@ -101,7 +100,7 @@ In this page you can define various parameters for the cluster, including a cust
 
 Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** and **Enable Traefik** to the enabled position:
 
-![image](/images/sunstone-oneke-longh-traefik.png)
+{{< image path="/images/sunstone-oneke-longh-traefik.png" alt="Longhorn, Traefik" align="center" width="90%" pb="20px" >}}
 
 Click **Next**. In the final step **4: Charter**, no action is needed, click **Finish**. The OneKE appliance will now deploy VMs to initialize the Kubernetes cluster.
 
@@ -113,7 +112,7 @@ In the Sunstone GUI, open the left-hand pane, select **Instances** -> **Services
 
 The OneKE service's VMs should be visible in the **Roles** tab:
 
-![image](/images/sunstone-oneke-vms.png)
+{{< image path="/images/sunstone-oneke-vms.png" alt="OneKE VMs" align="center" width="90%" pb="20px" >}}
 
 You can also verify the deployment using the Front-end server's command line. Open a terminal in the Front-end server then switch to the `oneadmin` user: `sudo su - oneadmin`. Run `oneflow list`. In the command  line output, check that the `STAT` column displays `RUNNING`:
 
@@ -145,7 +144,7 @@ Before deploying the test application described in this tutorial, you will need 
 
 To check the VNF node IP in Sunstone, in the left-hand sidebar go to **Instances** -> **VMs**, this shows the VMs previously instantiated by the OneKE appliance. Check the information displayed in the item labeled **vnf_0_(service_ID)**. In the image below, the relevant VM is is **vnf_0_(service_1)** and the relevant IP address is `172.16.100.2`.
 
-![image](/images/sunstone-oneke-vm-list.png)
+{{< image path="/images/sunstone-oneke-vm-list.png" alt="OneKE VMs" align="center" width="90%" pb="20px" >}}
 
 #### From the Command Line
 

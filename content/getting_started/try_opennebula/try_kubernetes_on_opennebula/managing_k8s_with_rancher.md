@@ -46,15 +46,15 @@ For the CAPI appliance to function correctly, we need to modify the configuratio
 
 Select the default public network named `vnet`. Click **Update** at the top of the screen: 
 
-![image](/images/quickstart/sunstone-rancher-update-vnet.png)
+{{< image path="/images/quickstart/sunstone-rancher-update-vnet.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
 
 Click **Next** to go to **Advanced options** then in the **Context** tab change the **DNS** field to `8.8.8.8` and then click **Finish**:
 
-![image](/images/quickstart/sunstone-rancher-vnet-dns.png)
+{{< image path="/images/quickstart/sunstone-rancher-vnet-dns.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
 
 From the **Virtual networks** page, select `vnet` again if it is not already selected and in the **Address** tab click **+ Address Range**. Select **Ethernet / DHCP** and enter `02:00:3c:f0:4d:f9` in the **First MAC address** field, set the size to 16:
 
-![image](/images/quickstart/sunstone-rancher-mac-range.png)
+{{< image path="/images/quickstart/sunstone-rancher-mac-range.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
 
 ### Add a Private Network
 
@@ -62,11 +62,11 @@ From the **Virtual networks** page, click the **Create** button at the top. Suns
 
 In the next screen, activate the **Use only private host networking or a user-defined bridge** option:
 
-![image](/images/sunstone-create-priv-network.png)
+{{< image path="/images/sunstone-create-priv-network.png" alt="Sunstone add networks" align="center" width="90%" pb="20px" >}}
 
 Choose the **Addresses** tab and click **+ Address Range**. Here we will enter a range of private IP addresses. For this example, in **First IPv4 address** enter `192.168.200.2`, and set the network size to `100`.
 
-![image](/images/sunstone-create-priv-network-2.png)
+{{< image path="/images/sunstone-create-priv-network-2.png" alt="Sunstone add address range" align="center" width="90%" pb="20px" >}}
 
 Click **Finish**.
 
@@ -76,7 +76,7 @@ From your OpenNebula Front-end, you can download the CAPI appliance from the Sun
 
 ### Download from the Sunstone UI
 
-You can download the CAPI appliance by following the same steps as when [downloading the WordPress VM]({{% relref "validate_the_environment#step-1-download-the-wordpress-appliance-from-the-opennebula-marketplace" %}}):
+Download the CAPI Appliance with the following steps:
 
 1. On the left-hand pane, go to **Storage** -> **Apps**.
 1. On the **Apps** screen showing the available apps, filter for `capi`.
@@ -91,7 +91,7 @@ On the Front-end command line, switch to the `oneadmin` user:
 sudo su - oneadmin
 ```
 
-Then download the Capi appliance from the marketplace:
+Then download the CAPI appliance from the marketplace:
 
 ```bash
 onemarketapp export 'Service Capi' 'Service Capi' --datastore default
@@ -103,31 +103,30 @@ This automatically downloads the **Service Capi** appliance into the default dat
 
 ### From the Sunstone UI
 
-To instantiate the Service Capi appliance, follow the same steps described for [the WordPress VM]({{% relref "validate_the_environment#step-2-instantiate-the-vm" %}}):
+To instantiate the Service CAPI appliance, follow the same steps described for [the WordPress VM]({{% relref "validate_the_environment#step-2-instantiate-the-vm" %}}):
 
 1. In the left-hand pane, go to **Templates** -> **VM Templates**.
 1. Select **Service Capi**, then click the **Instantiate** <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" /><path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" /></svg> icon at the top.
 
 Sunstone displays the **Instantiate VM Template** wizard. Leave the **Configurations** options as default, click **Next** twice to skip the **User inputs** and reach the **Advanced options** step:
 
-![image](/images/quickstart/sunstone-rancher-attach-nic.png)
+{{< image path="/images/quickstart/sunstone-rancher-attach-nic.png" alt="Sunstone attach NIC" align="center" width="90%" pb="20px" >}}
 
 Click **Next** to advance to the **Select a network** step:
 
-![image](/images/quickstart/sunstone-rancher-nic-vnet.png)
+{{< image path="/images/quickstart/sunstone-rancher-nic-vnet.png" alt="Sunstone attach NIC" align="center" width="90%" pb="20px" >}}
 
 Select `vnet`, the default public network. Continue clicking **Next** until the final step and click **Finish**. Click **Finish** again to finish the instantiate VM workflow.
 
 Sunstone will display the **Instances** -> **VMs** screen, showing the newly-created VM:
 
-<a id="capi_vm_running"></a>
-![><](/images/quickstart/sunstone-rancher-capi-vm.png)
+{{< image path="/images/quickstart/sunstone-rancher-capi-vm.png" alt="Sunstone CAPI VM" align="center" width="90%" pb="20px" >}}
 
 Wait a few moments until the VM displays the **RUNNING** state (green dot).
 
 ### From the Command Line
 
-To instantiate the Capi appliance template without additional user inputs, as user `oneadmin` run:
+To instantiate the CAPI appliance template without additional user inputs, as user `oneadmin` run:
 
 ```bash
 onetemplate instantiate 'Service Capi' --nic vnet
@@ -138,7 +137,7 @@ This instantiates the template and attaches the NIC on the public network, **vne
 When you run the command, you will be prompted for user inputs such as the versions for CAPONE, K3s and Turtles. For this tutorial we can leave the values at their defaults, by hitting **Enter** at each prompt.
 
 ```default
-oneadmin@frontend:~$ onetemplate instantiate Capi --nic vnet
+oneadmin@frontend:~$ onetemplate instantiate 'Service Capi' --nic vnet
 There are some parameters that require user input. Use the string <<EDITOR>> to launch an editor (e.g. for multi-line inputs)
   * (ONEAPP_CAPI_CAPONE_VERSION) Capone Version
   * (ONEAPP_CAPI_CERT_MANAGER_VERSION) Cert Manager Chart Version
@@ -161,7 +160,7 @@ You will need to wait some minutes for the K3s cluster and the Rancher web UI to
 
 ## Step 4. Connect to the Rancher UI
 
-If you are working on a screen attached to the OpenNebula Front-end server you can connect to the Rancher interface using a web browser and go to `https://<CAPI_VM_IP>.sslip.io`. In this tutorial, the IP is `172.16.100.2`. You can obtain the VM's IP from the Sunstone UI: in the left-hand pane go to **Instances** -> **VMs**, then check IP address displayed for the VM (see image [above](#capi_vm_running)).
+If you are working on a screen attached to the OpenNebula Front-end server you can connect to the Rancher interface using a web browser and go to `https://<CAPI_VM_IP>.sslip.io`. In this tutorial, the IP is `172.16.100.2`. You can obtain the VM's IP from the Sunstone UI: in the left-hand pane go to **Instances** -> **VMs**, then check IP address displayed for the VM (see image [above](#capi_vm_running)). If you are working on a remote server, please see the [instructions on using port forwarding](#using-ssh-on-remote-hardware).
 
 Alternatively, on the Front-end run:
 
@@ -184,7 +183,7 @@ oneadmin@frontend:~$ onevm show 2 | grep ETH0_IP=
 
 In this case we will connect to `https://172.16.100.3.sslip.io`.
 
-![><](images/rancher_login.png)
+{{< image path="/images/rancher_login.png" alt="Rancher login" align="center" width="90%" pb="20px" >}}
 
 If you did not set a password when instantiating the VM, log in with these credentials:
 
@@ -196,7 +195,7 @@ As mentioned above, with the default resources the complete configuration proces
 {{< /alert >}}
 
 {{< alert title="Tip" color="success" >}}
-If the Rancher UI takes too long to become available or if you prefer to monitor the process manually, you can log in to the Capi VM with:
+If the Rancher UI takes too long to become available or if you prefer to monitor the process manually, you can log in to the CAPI VM with:
 
 ```bash
 onevm ssh <VM ID>
@@ -211,12 +210,7 @@ kubectl get pods -A
 
 ## Step 5. Deploy an OpenNebula RKE2 Cluster
 
-To deploy an OpenNebula RKE2 cluster, there are two available options:
-
-- Import a YAML file for the cluster
-- Use the Helm charts provided by OpenNebula for Kubeadm and RKE2
-
-For this tutorial we will use the second option, installing via the GUI using the RKE2 Helm chart.
+To deploy an OpenNebula RKE2 cluster we will install it using the RKE2 Helm chart via the Rancher UI.
 
 To install from the Helm chart, follow these steps:
 
@@ -224,7 +218,7 @@ In Rancher's left-hand navigation pane, go to the Management Cluster by clicking
 
 In the **Filter charts results** input field, type `capone`. This should display two charts, `capone-kadm` and `capone-rke2`.
 
-![><](/images/quickstart/rancher-ui-capone-apps.png)
+{{< image path="/images/quickstart/rancher-ui-capone-apps.png" alt="Rancher CAPONE apps" align="center" width="90%" pb="20px" >}}
 
 For this tutorial, select `capone-rke2`.
 
@@ -234,7 +228,7 @@ In the next screen, you can specify the namespace where the resources will be cr
 
 Click **Next**. The next screen shows the YAML configuration file. Here you will need to edit some parameters to adapt the deployment to your environment.
 
-![><](/images/rancher_capone_yaml.png)
+{{< image path="/images/rancher_capone_yaml.png" alt="CAPONE YAML" align="center" width="90%" pb="20px" >}}
 
 {{< alert title="Note" color="success" >}}
 It is not necessary to import the CAPONE appliances -- the only requirement is that the public and private networks in the cluster definition already exist, as will be shown below.
@@ -242,16 +236,16 @@ It is not necessary to import the CAPONE appliances -- the only requirement is t
 
 Scroll down to the end of the YAML file:
 
-![><](/images/rancher_capone_yaml_bottom.png)
+{{< image path="/images/rancher_capone_yaml_bottom.png" alt="CAPONE YAML" align="center" width="60%" pb="20px" >}}
 
 Here you will to ensure that the values of the following parameters match your installation:
 
 - `ONE_AUTH`: User credentials for the Front-end, in `<user>:<password>` format. By default, the user is `oneadmin`. The password is the same as for logging in to Sunstone. If you installed your Front-end using miniONE, the credentials were shown at the end of the installation output. (If you installed using miniONE and are unsure of the credentials, on the Front-end check the contents of `/var/lib/one/.one/one_auth`.)
-- `ONE_XMLRPC`: The XML RPC endpoint. This will be the gateway address of the public network that the VM is connected to. In this example, the network is `vnet` and the address is `172.16.100.1`. Run `onevnet show vnet | grep GATEWAY` on the frontend to double check.
+- `ONE_XMLRPC`: The XML RPC endpoint. This will be the gateway address of the public network that the VM is connected to. In this example, the network is `vnet` and the address is `172.16.100.1`.
 - `PRIVATE_NETWORK_NAME`: Name for the private network created on the Front-end, in our case `private`.
 - `PUBLIC_NETWORK_NAME`: Name for the public network created on the Front-end, in our case `vnet`.
 
-To find the IP for `ONE_XMLRPC` on the frontend (as oneadmin) run `onevnet list`, note the ID of the default public network `vnet` then run `onevne show <VNET_ID> | grep GATEWAY`.
+To find the IP for `ONE_XMLRPC` on the Front-end (as oneadmin) run `onevne show vnet | grep GATEWAY` and.
 
 The parameters that were modified for this example are shown below:
 
@@ -268,7 +262,7 @@ The cluster should install and deploy; this process can take a few minutes.
 
 In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Installed Apps**. The list of applications should show the name of the cluster you deployed (in this example, `capone4`), with status `Deployed`.
 
-![><](/images/rancher_capone_deployed.png)
+{{< image path="/images/rancher_capone_deployed.png" alt="Rancher installed apps" align="center" width="90%" pb="20px" >}}
 
 {{< alert title="Note" color="success" >}}
 You can also verify the deployment on the Front-end, by verifying that three new Virtual Machines have been instantiated:
@@ -283,7 +277,7 @@ oneadmin@frontend:~$ onevm list
    0 oneadmin oneadmin Alpine Linux 3.20-0                          runn    1    256M localhost                       2d 20h03
 ```
 
-This shows the Virtual Router `vr-capone4-cp-0`, the master node `capone4-ljm6z`, and the Capi appliance `Capi-2`; as well as an Alpine Linux VM previously installed.
+This shows the Virtual Router `vr-capone4-cp-0`, the master node `capone4-ljm6z`, and the CAPI appliance `Capi-2`; as well as an Alpine Linux VM previously installed.
 
 - On the Sunstone UI, you can see the list of instantiated VMs by going to the left-hand pane and selecting **Instances** -> **VMs**.
 {{< /alert >}}
@@ -296,7 +290,7 @@ In the left-hand pane select **Clusters**, and in the **Clusters** screen select
 
 Rancher displays the screen for the cluster, shown below.
 
-![><](/images/rancher_capone_import.png)
+{{< image path="/images/rancher_capone_import.png" alt="Rancher CAPONE import" align="center" width="90%" pb="20px" >}}
 
 This screen shows three alternative commands that you can use for importing the cluster. In this case, since the Rancher installation uses a self-signed certificate, we will use the second command, with `curl` and `kubectl`:
 
@@ -308,11 +302,11 @@ Copy the command from the screen (you can click the command to copy it to the cl
 
 Go to the Kubectl Shell for the Management Cluster, go to **Cluster Management** (via the "farmhouse" icon ![icon](/images/icons/rancher/farmhouse.png) at bottom left). Then, in the **Clusters** screen select the `local` cluster, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) on the right, and select **Kubectl Shell** from the drop-down.
 
-![><](/images/rancher_open_kubectl_shell.png)
+{{< image path="/images/rancher_open_kubectl_shell.png" alt="Rancher kubectl open shell" align="center" width="90%" pb="20px" >}}
 
 Rancher should display a tab on the bottom of the screen, with the **Kubectl:local** shell:
 
-![><](/images/rancher_kubectl_shell.png)
+{{< image path="/images/rancher_kubectl_shell.png" alt="Rancher kubectl shell" align="center" width="60%" pb="20px" >}}
 
 First, before running the import command you must retrieve the kubeconfig file for the workload cluster. For cluster `capone4`, run:
 
@@ -346,7 +340,7 @@ Importing the cluster may take several minutes.
 
 Once the cluster has been imported, it becomes fully accessible from the Rancher UI, where it is displayed alongside the K3s cluster.
 
-![><](/images/rancher_2_clusters_listed.png)
+{{< image path="/images/rancher_2_clusters_listed.png" alt="Rancher cluster list" align="center" width="90%" pb="20px" >}}
 
 You can now explore and use the cluster -- for instance installing Helm charts, executing `kubectl` commands, and even upgrading the Kubernetes version of the cluster. In the next sections we will perform a few example operations.
 
@@ -363,21 +357,21 @@ This section provides a brief overview of performing day-to-day operations on th
 
 In the `capone4` cluster, select **Cluster Management**, then the `capone4` cluster:
 
-![><](/images/rancher_goto_wkload_cluster.png)
+{{< image path="/images/rancher_goto_wkload_cluster.png" alt="Rancher go to workload cluster" align="center" width="40%" pb="20px" >}}
 
 In the left-hand nav pane for the cluster, go to **Apps** -> **Charts**. In the **Filter charts results** input field, type `longhorn`.
 
-![><](/images/rancher_install_longhorn.png)
+{{< image path="/images/rancher_install_longhorn.png" alt="Rancher install Longhorn" align="center" width="90%" pb="20px" >}}
 
 Select the **Longhorn** chart. Rancher should display the details screen for Longhorn:
 
-![><](/images/quickstart/rancher-longhorn-chart.png)
+{{< image path="/images/quickstart/rancher-longhorn-chart.png" alt="Rancher Longhorn chart" align="center" width="90%" pb="20px" >}}
 
 Click the **Install** button at top right. Don't adjust any settings and click **Next**, then **Install**.
 
 The Rancher UI will direct you to the **Installed Apps** screen. Longhorn will appear as a new item in the left-hand sidebar:
 
-![><](/images/quickstart/rancher-longhorn-sidebar.png)
+{{< image path="/images/quickstart/rancher-longhorn-sidebar.png" alt="Rancher Longhorn sidebar" align="center" width="90%" pb="20px" >}}
 
 ### Creating a Persistent Volume Claim on Longhorn
 
@@ -385,7 +379,7 @@ In this step we will create the Persistent Volume Claim that will be used by our
 
 To create a PVC, in the left-hand nav pane for the cluster select **Storage** -> **PersistentVolumeClaims**.
 
-![><](/images/quickstart/rancher-create-pvc.png)
+{{< image path="/images/quickstart/rancher-create-pvc.png" alt="Rancher Longhorn create PVC" align="center" width="90%" pb="20px" >}}
 
 Rancher will display the **PersistentVolumeClaims** screen. To create a new PVC, click **Create**.
 
@@ -396,13 +390,13 @@ Fill in the required parameters for the PVC:
 - In the **Storage Class** drop-down, select `longhorn`
 - In **Request Storage**, you can modify the default value of 10 GiB to your needs. In this example we will set it to 2 GiB
 
-![><](/images/quickstart/rancher-create-pvc-menu.png)
+{{< image path="/images/quickstart/rancher-create-pvc-menu.png" alt="Rancher Longhorn create PVC menu" align="center" width="90%" pb="20px" >}}
 
 Click **Create**.
 
 The PVC should now be listed in the **Storage** -> **PersistentVolumeClaims** tab for the cluster, shown below.
 
-![><](/images/rancher_pvc_created.png)
+{{< image path="/images/rancher_pvc_created.png" alt="Rancher Longhorn PVC created" align="center" width="90%" pb="20px" >}}
 
 ### Creating an Nginx Deployment
 
@@ -410,7 +404,7 @@ We will create the Nginx deployment by importing the deployment's YAML definitio
 
 Go to the **Cluster Dashboard** (click the icon for the cluster on the left, then in the cluster nav pane click **Cluster**). Then, in the top bar click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png):
 
-![><](/images/rancher_import_yaml.png)
+{{< image path="/images/rancher_import_yaml.png" alt="Rancher import YAML" align="center" width="90%" pb="20px" >}}
 
 Rancher displays the **Import YAML** screen. To deploy Nginx, you can copy and paste the following definition:
 
@@ -448,15 +442,15 @@ spec:
 
 Paste the definition into the input box, then click **Import**. Rancher will create a simple Nginx deployment that mounts the PVC we previously created.
 
-![><](/images/rancher_yaml_imported.png)
+{{< image path="/images/rancher_yaml_imported.png" alt="Rancher import YAML" align="center" width="90%" pb="20px" >}}
 
 To see the Nginx deployment, in the menu for the cluster select **Workloads** > **Deployments**, and in the `default` namespace look for `nginx`.
 
-![><](/images/rancher_nginx_deployment.png)
+{{< image path="/images/rancher_nginx_deployment.png" alt="Rancher NGINX" align="center" width="90%" pb="20px" >}}
 
 Clicking `nginx` displays additional information for the deployment, including its IP, in this case `10.42.0.32`:
 
-![><](/images/rancher_nginx_deployment_2.png)
+{{< image path="/images/rancher_nginx_deployment_2.png" alt="Rancher NGINX" align="center" width="90%" pb="20px" >}}
 
 ### Exposing the Nginx Deployment
 
@@ -484,41 +478,41 @@ This will expose port 80 of the pod running the `nginx` service on port 30080 of
 
 After clicking **Import**, you should see `nginx-service` in the cluster's **Services** tab:
 
-![><](/images/quickstart/rancher-nginx-service.png)
+{{< image path="/images/quickstart/rancher-nginx-service.png" alt="Rancher NGINX" align="center" width="90%" pb="20px" >}}
 
 Now your Nginx deployment should be visible on the external IP of the node -- which in this example setup is `192.168.100.4` -- on port 30080:
 
-![><](/images/rancher_nginx_welcome_screen.png)
+{{< image path="/images/rancher_nginx_welcome_screen.png" alt="Rancher NGINX" align="center" width="60%" pb="20px" >}}
 
 ## Additional Tasks
 
 ### Adding Worker Nodes to the Cluster
 
 {{< alert title="Note" color="success" >}}
-Before creating a replica, ensure you have enough resources allocated to the Capi deployment, and on the machine running the Front-end.
+Before creating a replica, ensure you have enough resources allocated to the CAPI deployment, and on the machine running the Front-end.
 {{< /alert >}}
 
 To add a Worker Node to the cluster, use CAPI to create a replica of the cluster.
 
 In Rancher, go to **Cluster Management**, then in the left-hand nav pane **CAPI** -> **Machine Deployments**. Rancher should display the current deployment of the `capone4` cluster. Clicking the deployment name shows the YAML file for the deployment. To add a replica, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) at top right, then select **Edit YAML**. Find the string `replicas: 1` and change the number to the desired number of replicas.
 
-![><](/images/rancher_create_replica.png)
+{{< image path="/images/rancher_create_replica.png" alt="Rancher create replica" align="center" width="90%" pb="20px" >}}
 
 ### Upgrading the Workload Cluster
 
 To upgrade the cluster from within Rancher, select **Cluster Management** at bottom left, then **Clusters** on the left-hand pane. Click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) for the cluster, then select **Edit Config** from the drop-down.
 
-![><](/images/rancher_edit_config.png)
+{{< image path="/images/rancher_edit_config.png" alt="Rancher edit config" align="center" width="90%" pb="20px" >}}
 
 Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**. 
 
-![><](/images/rancher_cluster_conf_screen.png)
+{{< image path="/images/rancher_cluster_conf_screen.png" alt="Rancher cluster conf" align="center" width="90%" pb="20px" >}}
 
 Rancher should display the **Clusters** screen, where the cluster should display status `Upgrading`. The upgrade can take several minutes. To see the upgrade process, click the **Explore** button to the right of the cluster -- this takes you to the Cluster Dashboard where upgrade messages are displayed.
 
 When the upgrade is finished, the **Clusters** screen should display the cluster with the new version.
 
-![><](/images/rancher_cluster_upgraded.png)
+{{< image path="/images/rancher_cluster_upgraded.png" alt="Rancher cluster upgraded" align="center" width="90%" pb="20px" >}}
 
 Congratulations! You have successfully deployed a K3s cluster with the Rancher management platform as well as a production-grade workload cluster where you've created, exposed and tested a deployment -- all with minimal configuration and using graphical interfaces.
 
@@ -530,13 +524,13 @@ If you are interested in installing OpenNebula by following further tutorials, y
 
 ## Using SSH on Remote Hardware
 
-If you are working with OpenNebula deployed on a remote server or an AWS instance, you will need to use port forwarding to access the Rancher UI. From the command line of the OpenNebula Front-end 
+If you are working with OpenNebula deployed on a remote server or an AWS instance, you will need to use port forwarding to access the Rancher UI. From the command line of the OpenNebula Front-end run: 
 
 ```bash
 sudo su - oneadmin
 ```
 
-Run `onevm list` to obtain the ID of the Capi VM, then run `onevm ssh <CAPI_VM_ID>` to access the CAPI VM command line. Then run the following command:
+Run `onevm list` to obtain the ID of the CAPI VM, then run `onevm ssh <CAPI_VM_ID>` to access the CAPI VM command line. Then run the following command:
 
 ```bash
 nohup kubectl -n cattle-system port-forward svc/rancher 8443:443 --address 0.0.0.0 > pf.log 2>&1 &
