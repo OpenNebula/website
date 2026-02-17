@@ -16,167 +16,123 @@ weight: "7"
 
 ## Overview
 
-Previous tutorials of this Quick Start guide show how to use miniONE to:
+In this tutorial, you will deploy a Kubernetes cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes cluster with minimal effort and configuration and deploy applications on it.
 
-- [Install an OpenNebula Front-end and a KVM Host on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}})
-- [Install an OpenNebula Front-end and a KVM Host on AWS]({{% relref "deploy_opennebula_on_aws" %}})
-- [Validate the environment]({{% relref "validate_the_minione_environment" %}}) created by miniONE, by running a Virtual Machine
+To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
-This tutorial builds on the infrastructure created in those previous tutorials. By following it, you can:
+* [miniONE on-prem installation]({{% relref "deploy_opennebula_onprem_with_minione" %}})
+* [miniONE AWS installation]({{% relref "deploy_opennebula_on_aws" %}})
 
-- Download a complete Kubernetes cluster from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
-- Deploy the cluster on the KVM Host installed by miniONE
-- Validate the cluster by running a simple test application
+After successfully completing the miniONE installation you will complete the following steps in this tutorial to launch a Kubernetes cluster using the OneKE appliance:
 
-This tutorial was designed and tested on an AWS metal instance -- the same `c5.metal` instance used for the [miniONE on AWS]({{% relref "deploy_opennebula_on_aws" %}}) guide. However, you should also be able to complete this tutorial on an on-premises installation with sufficient resources (for requirements, see [Deploy OpenNebula On-prem]({{% relref "deploy_opennebula_onprem_with_minione/#step-1-verify-installation-requirements" %}})).
-
-{{< alert title="Tip" color="success" >}}
-If deploying on-prem, you can also [install and manage Kubernetes with Rancher]({{% relref "managing_k8s_with_rancher" %}}) as part of this Quick Start guide.
-{{< /alert >}}
-
-As mentioned above, the Kubernetes cluster deployed in this tutorial is available in the [OpenNebula Public Marketplace](https://marketplace.opennebula.io). You can find it as the multi-VM appliance **Service OneKE**, the OpenNebula Kubernetes Edition.
-
-To deploy the Kubernetes cluster, we'll follow these high-level steps:
-
-1. Download the OneKE Service from the OpenNebula Marketplace.
-2. Instantiate a private network on the Edge Cluster.
-3. Instantiate the Kubernetes Service.
-4. Deploy an application on Kubernetes.
-
-In this tutorial we'll perform a basic install of the Kubernetes cluster plus the Traefik ingress router and Longhorn storage. The OneKE appliance offers additional options such as High Availability, load balancing and CNI plugins, which are out of the scope of this guide.
-
-{{< alert title="Tip" color="success" >}}
-For more information about OneKE, please see [OneKE Service (Kubernetes)]({{% relref "product/integration_references/marketplace_appliances/oneke" %}}). The full documentation for OneKE is available in the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
-{{< /alert >}}
+- Download the OneKE Kubernetes appliance from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
+- Instantiate a private network using miniONE
+- Deploy the OneKE Kubenetes cluster on the KVM Host installed by miniONE
+- Validate the cluster by deploying a simple test application on the cluster
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
 The [OpenNebula Public Marketplace](https://marketplace.opennebula.io) is a repository of Virtual Machines and appliances which are curated, tested and certified by OpenNebula.
 
-The Kubernetes cluster is packaged in a multi-VM service appliance listed as **Service OneKE <version>**. To download it, follow the same steps as when downloading the WordPress VM:
+In the left-hand menu select **Storage** -> **Apps**. Sunstone will display the **Apps** screen, showing the first page of apps that are available for download. In the search field at the top, type `service oneke 1.31` to filter by name. Then, select **Service OneKE 1.31** (not **Service OneKE 1.31 Airgapped**):
 
-Open the left-hand pane, then select **Storage** -> **Apps**. Sunstone will display the **Apps** screen, showing the first page of apps that are available for download.
+{{< image path="/images/sunstone-service_oneke.png" alt="OneKE service" align="center" width="90%" pb="20px" >}}
 
-![image](/images/sunstone-apps_list.png)
-<br/>
+Click the **Import** button. Sunstone displays the **Download App to OpenNebula** wizard. In the first screen of the wizard, click **Next**.
 
-In the search field at the top, type `oneke` to filter by name. Then, select **Service OneKE <version number>** with the highest version number, in this case **Service OneKE 1.31** highlighted below.
+{{< image path="/images/sunstone-service-oneke-download.png" alt="Download OneKE service" align="center" width="90%" pb="20px" >}}
 
-![image](/images/sunstone-service_oneke.png)
-<br/>
+In the second screen select the **default** datastore for the appliance:
 
-Click the **Import** button.
-
-As with the WordPress appliance, Sunstone displays the **Download App to OpenNebula** wizard. In the first screen of the wizard, click **Next**.
-
-![image](/images/sunstone-aws_cluster_download_oneke.png)
-
-In the second screen you will need to select a datastore for the appliance. Select the **default** datastore.
-
-![kubernetes-qs-marketplace-datastore](/images/aws_cluster_images_datastore.png)
+{{< image path="/images/sunstone-service-oneke-datastore.png" alt="Datastore OneKE service" align="center" width="90%" pb="20px" >}}
 
 Click **Finish**. Sunstone will import the appliance template and display a message at bottom right. To see the imported template, in the left-hand menu select **Templates** -> **Service Templates**:
 
-![image](/images/sunstone-service_templates.png)
+{{< image path="/images/sunstone-service-templates.png" alt="Sunstone service templates" align="center" width="90%" pb="20px" >}}
 
 ## Step 2. Instantiate a Private Network on the Cloud Cluster
 
-In this step we will create a new virtual network and assign a range of private IPs to. This will network will be used by the OneKE service for internal communication.
+In this step we will create a new Virtual Network and assign a range of private IPs to it. The OneKE service uses this network for internal communication.
 
 In Sunstone, open the left-hand pane, then select **Networks** -> **Virtual Networks**. Sunstone displays the **Virtual networks** page showing the network automatically created by miniONE:
 
-![image](/images/sunstone-virtual_networks.png)
+{{< image path="/images/sunstone-virtual-networks.png" alt="Sunstone virtual networks" align="center" width="90%" pb="20px" >}}
 
 Click the **Create** button at the top. Sunstone will display the **Create Virtual Network** screen. Enter a name for the network -- for this example we will use `privnet`. Then, click **Next**.
 
-In the next screen, activate the **Use only private host networking** switch:
+In the next screen, activate the **Use private host networking or a user-defined bridge** toggle:
 
-![image](/images/sunstone-create_priv_network.png)
+{{< image path="/images/sunstone-create-priv-network.png" alt="Create private network" align="center" width="90%" pb="20px" >}}
 
-Then, click the **Addresses** tab. Here we will enter a range of private IP addresses. For this example, enter `192.168.200.2` for the base network address, and set the network size to `100`.
+Next, click the **Addresses** tab and select **+ Address Range** to add a new address range.  For this example, enter `192.168.200.2` for the base network address, and set the network size to `100`.
 
-![image](/images/sunstone-create_priv_network_2.png)
+{{< image path="/images/sunstone-create-priv-network-2.png" alt="Create private network" align="center" width="90%" pb="20px" >}}
 
-Click **Finish**.
+Click **Finish**. You will now see a new network item named `privnet` in the **Virtual networks** page.
+
+{{< image path="/images/sunstone-virtual-networks-2.png" alt="Virtual networks" align="center" width="90%" pb="20px" >}}
 
 ## Step 3. Instantiate the Kubernetes Service
 
-In the left-hand pane, select **Templates** -> **Service Templates**.
+In the left-hand pane, select **Templates** -> **Service Templates**. Select the **Service OneKE 1.31** item, then click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+  <circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" />
+  <path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" />
+</svg>
 
-Select **Service OneKE 1.31**, then click the **Instantiate** icon ![icon2](/images/icons/sunstone/instantiate.png).
+Sunstone now displays the **Instantiate Service Template** wizard. Leave the default name `Service OneKE 1.31` and start a single instance.
 
-Sunstone displays the **Instantiate Service Template** wizard. In the first screen you can give your service a name and specify the number of instances to instantiate. In this example we’ll leave the default name `Service OneKE 1.31` and start a single instance.
+{{< image path="/images/sunstone-oneke-instantiate-1.png" alt="Instantiate OneKE" align="center" width="90%" pb="20px" >}}
 
-![kubernetes-qs-service-start](/images/sunstone-oneke_instantiate-1.png)
+Click **Next** to go to the next step, **Networks**.
 
-Click **Next** to go to the next screen, **Networks**.
+Select the **Public** item in the left hand column, then select the network labelled **vnet** in the right hand column. Select the **Private** item in the left hand column, then select the network labelled **privnet** in the right hand column.
 
-Here we will select the private and the public network for the OneKE service.
+{{< image path="/images/sunstone-oneke-instantiate-2.png" alt="Instantiate OneKE" align="center" width="90%" pb="20px" >}}
 
-To select the public network, click the **Public** tab on the left, then select network **vnet**. For the private network, click the **Private** tab, then select **privnet**.
+Click **Next**. Sunstone displays the **Service Inputs** screen, select the **Kubernetes Cluster** tab:
 
-![image](/images/sunstone-oneke_instantiate-2.png)
+{{< image path="/images/sunstone-instantiate-oneke-service-inputs.png" alt="OneKE service inputs" align="center" width="90%" pb="20px" >}}
 
-Click **Next**. Sunstone displays the **Service Inputs** screen:
+In this page you can define various parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
 
-![image](/images/sunstone-instantiate_oneke-sevice_inputs.png)
+* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes.
+* **Traefik**: An automated edge router and ingress controller that handles external traffic and load balancing for your applications without manual configuration.
 
-Here you can define parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others.
+Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** and **Enable Traefik** to the enabled position:
 
-<!--
+{{< image path="/images/sunstone-oneke-longh-traefik.png" alt="Longhorn, Traefik" align="center" width="90%" pb="20px" >}}
 
-![image](/images/sunstone-kubernetes-user_inputs_vrouter.png)
-
-![image](/images/sunstone-kubernetes-user_inputs_rke2.png)
-
-![image](/images/sunstone-kubernetes-user_inputs_k8s.png)
-
-![image](/images/sunstone-kubernetes-user_inputs_vnf.png)
-
-![image](/images/sunstone-kubernetes-user_inputs_others.png)
-<br/>
-
--->
-
-For this tutorial we'll apply the following configuration:
-
-In the **Kubernetes Cluster** tab, scroll down and activate **Enable Longhorn**. Then scroll down to the bottom of the page and **Enable Traefik**.
-
-![image](/images/sunstone-instantiate_oneke-lhorn_traef.png)
-
-Click **Next**.
-
-In the last screen, click **Finish**.
+Click **Next**. In the final step **4: Charter**, no action is needed, click **Finish**. The OneKE appliance will now deploy VMs to initialize the Kubernetes cluster.
 
 ### Verify the OneKE Service Deployment
 
-To verify that the OneKE Service has correctly deployed, you can either use the Sunstone UI, or the command line the Front-end node.
+To verify that the OneKE Service has correctly deployed, you can either use the Sunstone UI, or the command line of the Front-end server. The OneKE service may take 2-5 minutes to initialize.
 
-To verify in the Sunstone GUI, open the left-hand pane, then Select **Instances** -> **Services**. You should see the OneKE service up and running. Its running VMs should be visible in the **Roles** tab.
+In the Sunstone GUI, open the left-hand pane, select **Instances** -> **Services**. You should see the OneKE service. Wait until the circle in front of the `Service OneKE 1.31` label is green. You can click the refresh icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="rgb(0,112,153)"><circle cx="12" cy="12" r="11" fill="rgba(218, 218, 218, 1)" stroke="rgb(0,112,153)"/><g transform="translate(6, 6) scale(0.5)"><path d="M21.168 8A10.003 10.003 0 0012 2C6.815 2 2.55 5.947 2.05 11" stroke="rgb(0,112,153)" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8h4.4a.6.6 0 00.6-.6V3M2.881 16c1.544 3.532 5.068 6 9.168 6 5.186 0 9.45-3.947 9.951-9" stroke="rgb(0,112,153)" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.05 16h-4.4a.6.6 0 00-.6.6V21" stroke="rgb(0,112,153)" stroke-linecap="round" stroke-linejoin="round"></path><g></svg> to update the interface periodically. Once it changes from blue to green, the service is running and ready.
 
-![image](/images/sunstone-oneke_running.png)
+The OneKE service's VMs should be visible in the **Roles** tab:
 
-To verify the deployment using the command line, log in to the Front-end node as user `oneadmin`, then run `oneflow list`. In the command output, check that the State is `RUNNING`, as shown below. Bear in mind that the service may take a few moments to display the `RUNNING` state.
+{{< image path="/images/sunstone-oneke-vms.png" alt="OneKE VMs" align="center" width="90%" pb="20px" >}}
 
-```default
-[oneadmin@FN]$ oneflow list
-ID USER     GROUP    NAME                                                     STARTTIME STAT
-1 oneadmin oneadmin Service OneKE 1.31                                   04/29 08:18:17 RUNNING
-```
-
-To verify that the VMs for the cluster were correctly deployed, you can use the `onevm list` command. In the example below, the command lists the VMs for the cluster:
+You can also verify the deployment using the Front-end server's command line. Open a terminal in the Front-end server then switch to the `oneadmin` user: `sudo su - oneadmin`. Run `oneflow list`. In the command  line output, check that the `STAT` column displays `RUNNING`:
 
 ```default
-oneadmin@ip-172-31-47-22:~$ onevm list
-  ID USER     GROUP    NAME                                         STAT  CPU     MEM HOST                                TIME
-   6 oneadmin oneadmin worker_0_(service_2)                         runn    2      3G localhost                       0d 00h00
-   5 oneadmin oneadmin master_0_(service_2)                         runn    2      3G localhost                       0d 00h00
-   4 oneadmin oneadmin vnf_0_(service_2)                            runn    1    512M localhost                       0d 00h00
+oneadmin@ip$ oneflow list
+ID USER     GROUP    NAME                     ...             STARTTIME  STAT
+1 oneadmin oneadmin Service OneKE 1.31        ...        04/29 08:18:17  RUNNING
 ```
 
-At this point you have successfully instantiated the Kubernetes cluster on your local hypervisor.
+To verify that the VMs for the cluster were correctly deployed, you can use the `onevm list` command that lists the existing VMs for the cluster:
 
-If the state of the OneKE service as reported by `oneflow list` remains in `DEPLOYING`, see [below](#oneflow-service-is-stuck-in-deploying).
+```default
+oneadmin@ip$ onevm list
+ID USER     GROUP    NAME                 ...   STAT  CPU     MEM HOST        ...       TIME
+6 oneadmin oneadmin worker_0_(service_2)  ...   runn    2      3G localhost   ...   0d 00h00
+5 oneadmin oneadmin master_0_(service_2)  ...   runn    2      3G localhost   ...   0d 00h00
+4 oneadmin oneadmin vnf_0_(service_2)     ...   runn    1    512M localhost   ...   0d 00h00
+```
+
+At this point you have successfully instantiated the Kubernetes cluster on the KVM hypervisor node installed with your OpenNebula Front-end. If the state of the OneKE service as reported by `oneflow list` remains in `DEPLOYING`, see [below](#oneflow-service-is-stuck-in-deploying).
 
 Before deploying the test application described in this tutorial, you will need to find out the IP address of the VNF node on the **public** network -- in this case, the **vnet** network that we set as public network when instantiating the OneKE service -- since this is the address that we will use to connect to the application.
 
@@ -184,91 +140,87 @@ Before deploying the test application described in this tutorial, you will need 
 
 ### Check the IP Address for the VNF Node
 
-To check the VNF node IP in Sunstone, in the left-hand pane go to **Instances** -> **VMs**, then check the information displayed under **vnf_0_(service_<ID>)**. In the image below, the VNF is **vnf_0_(service_2) and the relevant IP address is `172.16.100.2`.
+#### In Sunstone
 
+To check the VNF node IP in Sunstone, in the left-hand sidebar go to **Instances** -> **VMs**, this shows the VMs previously instantiated by the OneKE appliance. Check the information displayed in the item labeled **vnf_0_(service_ID)**. In the image below, the relevant VM is is **vnf_0_(service_1)** and the relevant IP address is `172.16.100.2`.
 
-![image](/images/oneke_vms.png)
+{{< image path="/images/sunstone-oneke-vm-list.png" alt="OneKE VMs" align="center" width="90%" pb="20px" >}}
 
-Alternatively, to check on the command line, on the Front-end node as user `oneadmin` run:
+#### From the Command Line
+
+To check the VNF node IP on the command line, on the Front-end server, as user `oneadmin` run:
+
+```bash
+onevm list
+```
+
+This command shows a list of the VMs instantiated by the OneKE service. Take note of the ID of the VNF VM:
+
+```
+ID USER     GROUP    NAME                  ...  STAT  CPU     MEM HOST       ...      TIME
+ 2 oneadmin oneadmin worker_0_(service_1)  ...  runn    2      3G localhost  ...  0d 15h59
+ 1 oneadmin oneadmin master_0_(service_1)  ...  runn    2      3G localhost  ...  0d 15h59
+  0 oneadmin oneadmin vnf_0_(service_1)     ...  runn    1    512M localhost  ...  0d 15h59
+```
+
+Then run the following command to recover the IP address:
 
 ```bash
 onevm show <VM ID> | less
 ```
 
-(Replace `VM ID` for the VM ID number as shown by `onevm show`, in this case `4`.)
-
 This displays the complete information for the VM, piped through the `less` pager. Use the up and down arrow to scroll, until you find the `VM NICS` table:
 
 ```default
-VM NICS                                                                         
- ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
+VM NICS
+ ID NETWORK              BRIDGE       IP              MAC               PCI_ID
   0 vnet                 minionebr    172.16.100.2    02:00:ac:10:64:02
   1 privnet              onebr1       192.168.200.2   02:00:c0:a8:c8:02
-  2 vnet                 minionebr    172.16.100.3    02:00:ac:10:64:03
-  3 privnet              onebr1       192.168.200.3   02:00:c0:a8:c8:03
 ```
 
-The relevant IP is the first displayed for the `vnet` network, `172.16.100.2`.
-
-To stop displaying the information for the VM, press `q`.
+The relevant IP is the first displayed for the `vnet` network, `172.16.100.2`. Press `q` to return to the command prompt.
 
 If you do not see all VMs listed, or if the OneKE Service is stuck in `DEPLOYING`, see [Known Issues]({{% relref "#k8s-known-issues" %}}) below.
 
-{{< alert title="Tip" color="info" >}}
-Once the OneFlow service has deployed, you can add more worker nodes. In Sunstone:
-
-1. Go to **Instances** -> **Services**.
-2. Select the OneKE service.
-3. Select the **Roles** tab.
-4. Click **Worker**, then the green **Scale** button.{{< /alert >}}  
-
-<a id="step-4"></a>
-
 ## Step 5. Deploy an Application
 
-In this tutorial we will deploy a very simple application designed for training purposes: a MariaDB database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
+In this tutorial we will deploy a very simple application designed for training purposes: a **MariaDB** database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
 
 ### Enable Longhorn Storage
 
-We can enable Longhorn storage with a single command:
+Run `oneflow list` to recover OneKE's service ID:
+
+```default
+oneadmin@IP$ oneflow list
+ID USER     GROUP    NAME               ...       STARTTIME STAT
+1 oneadmin oneadmin Service OneKE 1.31  ...  04/29 08:18:17 RUNNING
+```
+
+Enable Longhorn storage with the following command, inserting the appropriate service ID:
 
 ```bash
 oneflow scale <OneKE service ID> storage 1
 ```
 
-Most probably, the `OneKE service ID` should be `1`. You can find out with the `oneflow list` command:
+This command instantiates a new VM that will manage the Longhorn storage for the Kubernetes cluster.
 
-```default
-[oneadmin@FN]$ oneflow list
-ID USER     GROUP    NAME                                                     STARTTIME STAT
-1 oneadmin oneadmin Service OneKE 1.31                                   04/29 08:18:17 RUNNING
-```
-
-In the example above, the ID is `1`, so:
-
-```bash
-oneflow scale 1 storage 1
-```
-
-This will create a Virtual Machine as part of the OneKE Service which will serve as Longhorn storage for the Kubernetes cluster.
-
-The command will take a moment to execute. During that time the OneKE service will change state, from `RUNNING` to `COOLDOWN` and back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the cluster by running (as `oneadmin` on the Front-end node):
+The command may take 2-5 minustes to complete. During that time the OneKE service will change state from `RUNNING` to `SCALING` to `COOLDOWN` and then back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the cluster by running (as `oneadmin` on the Front-end command line):
 
 ```bash
 oneflow top
 ```
 
-This produces the output of `oneflow list`, updated continuously. Once the status is `RUNNING`, to exit the command type `Ctrl+C`.
+Once the status reverts from `COOLDOWN` to `RUNNING` return to the command prompt using `Ctrl+C`.
 
-On the Front-end node, we can check the status of the newly-created storage VM with `onevm list`:
+On the Front-end server, check the status of the newly-created storage on the command line VM with `onevm list`:
 
 ```
 oneadmin@ip-172-31-47-22:~$ onevm list
-  ID USER     GROUP    NAME                                             STAT  CPU     MEM HOST                                   TIME
-   7 oneadmin oneadmin storage_0_(service_2)                            runn    2      3G localhost                          0d 04h38
-   6 oneadmin oneadmin worker_0_(service_2)                             runn    2      3G localhost                          0d 05h36
-   5 oneadmin oneadmin master_0_(service_2)                             runn    2      3G localhost                          0d 05h36
-   4 oneadmin oneadmin vnf_0_(service_2)                                runn    1    512M localhost                          0d 05h36
+  ID USER     GROUP    NAME                    ...   STAT  CPU   MEM HOST        ...       TIME
+   7 oneadmin oneadmin storage_0_(service_1)   ...   runn    2    3G localhost   ...   0d 04h38
+   6 oneadmin oneadmin worker_0_(service_1)    ...   runn    2    3G localhost   ...   0d 05h36
+   5 oneadmin oneadmin master_0_(service_1)    ...   runn    2    3G localhost   ...   0d 05h36
+   4 oneadmin oneadmin vnf_0_(service_1)       ...   runn    1  512M localhost   ...   0d 05h36
 ```
 
 ### Log into the Master Node and Deploy the Application
@@ -288,34 +240,11 @@ An example run as user `root`:
 ```default
 root@ip-172-31-47-22:~# ssh -A -J 172.16.100.2 192.168.200.4
 Warning: Permanently added '172.16.100.2' (ED25519) to the list of known hosts.
-The authenticity of host '192.168.200.4 (<no hostip for proxy command>)' can't be established.
-ED25519 key fingerprint is SHA256:8fbzSN9OgOGZ1+2Zfdiq9r/6e+yEIJe1Ar6cqLpZ2Cw.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '192.168.200.4' (ED25519) to the list of known hosts.
-Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-126-generic x86_64)
+The authenticity of host '192.168.200.3 (<no hostip for proxy command>)' can't be
+established.
 
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/pro
-
- System information as of Wed Jun  4 10:10:11 UTC 2025
-
-  System load:           0.61
-  Usage of /:            4.8% of 24.05GB
-  Memory usage:          8%
-  Swap usage:            0%
-  Processes:             106
-  Users logged in:       0
-  IPv4 address for eth0: 10.0.2.15
-  IPv6 address for eth0: fec0::211:22ff:fe33:4455
-
- * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
-
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
-
-Expanded Security Maintenance for Applications is not enabled.
+...
+...
 
 8 updates can be applied immediately.
 8 of these updates are standard security updates.
@@ -342,7 +271,8 @@ To check for new updates run: sudo apt update
  * * * * * * * *
 ```
 
-In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message.
+In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message. Once the cluster is ready, you will see a message: `All set and ready to serve 8)`
+
 
 Once you have connected to the Kubernetes master node, check if `kubectl` is working, by running `kubectl get nodes`:
 
@@ -367,7 +297,7 @@ wget https://github.com/alpeon/training-files/raw/refs/heads/main/OneKE/test-app
 This downloads the `test-app.tar` package file. Unpack it with:
 
 ```bash
-tar xvf test-app.tar
+tar -xvf test-app.tar
 ```
 
 This creates the `test-app` directory, which contains the YAML manifest files we will use to deploy the application.
@@ -449,7 +379,7 @@ oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2
         Visit /get-data to print out the dummy data
 
         </div>
-        
+
         <div>
           <h2>
             See you, Space Cowboy!
@@ -597,7 +527,7 @@ In this case you can manually instruct the VMs to report `READY` to the OneGate 
    For each VM, use the ID reported by the `onevm list` command. For example, given the `onevm` output shown above, to update the Kubernetes master node run `onegate vm update 5 --data "READY=YES"`.
 
    Then, on the VNF node you can check the status of the service with `onegate vm show`:
-   
+
    ```default
    SERVICE 3
    NAME                : OneKE 1.31
