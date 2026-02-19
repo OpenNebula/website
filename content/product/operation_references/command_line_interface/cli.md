@@ -42,6 +42,7 @@ OpenNebula provides a set of commands to interact with the system:
 * [onezone](https://docs.opennebula.io/doc/{{< version >}}/cli/onezone.1.html): manages OpenNebula Zones.
 * [oneirb](https://docs.opennebula.io/doc/{{< version >}}/cli/oneirb.1.html): opens an irb session.
 * [onelog](https://docs.opennebula.io/doc/{{< version >}}/cli/onelog.1.html): access to OpenNebula services log files.
+* [oneswap](https://docs.opennebula.io/doc/{{< version >}}/cli/oneswap.1.html): convert Virtual Machines from vCenter to OpenNebula.
 
 The output of these commands can be customized by modifying the configuration files found in `/etc/one/cli/`. They also can be customized on a per-user basis, in this case the configuration files should be placed in `$HOME/.one/cli`.
 
