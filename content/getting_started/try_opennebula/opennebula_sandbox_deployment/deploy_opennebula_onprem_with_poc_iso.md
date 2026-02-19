@@ -430,6 +430,57 @@ On a workstation with access to the frontend, a local route to the virtual net c
 
 After the route exists, the workstation should be able to reach the Virtual Machines running on the frontend without further configuration.
 
+### Resizing disks
+
+The ISO installation creates the volume group `vg_onepoc` and creates three logical volumes on it
+
+- `root` mounted on `/`
+- `one-datastores` mounted on `/var/lib/one/datastores/`
+- `swap` mounted as swap
+
+The volume group `vg_onepoc` does not use all the space in the disk in order to allow growing some of the filesystems. The available space on the volume group can be checked executing the command `vgs` and checking the `VFree` column value. In the following example, there would be 22.19G available:
+
+```
+[root@onepoc ~]# vgs
+  VG        #PV #LV #SN Attr   VSize   VFree
+  vg_onepoc   1   3   0 wz--n- <77.44g <22.19g
+```
+
+The logical volume sizes can be queried with the command `lvs`, in this case:
+
+```
+[root@onepoc ~]# lvs
+  LV             VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  one-datastores vg_onepoc -wi-ao---- <25.69g
+  root           vg_onepoc -wi-ao---- <25.69g
+  swap           vg_onepoc -wi-ao----  <3.88g
+```
+
+A filesystem can be extended online without losing availability with the commands `lvextend` and `xfs_growfs`. For instance, to increase 10G on the `/root` filesystem in the previous case the following commands should be used:
+
+```
+# Increase the Logical Volume root (on the volume group vg_onepoc) by 10 GiB
+[root@onepoc ~]# lvextend vg_onepoc/root -L +10G
+  Size of logical volume vg_onepoc/root changed from <25.69 GiB (411 extents) to <35.69 GiB (571 extents).
+  Logical volume vg_onepoc/root successfully resized.
+
+# Resize the filesystem to the new volume group size
+[root@onepoc ~]# xfs_growfs /dev/mapper/vg_onepoc-root
+meta-data=/dev/mapper/vg_onepoc-root isize=512    agcount=4, agsize=1683456 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1 nrext64=0
+data     =                       bsize=4096   blocks=6733824, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=16384, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 6733824 to 9355264
+```
+
+The filesystem `/` now will be 10GiB bigger with no lose of service.
+
 ## GPU Configuration
 
 If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [this guide from the official documentation]({{% relref "/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough" %}}). Overall, a GPU configuration in OpenNebula consists from 2 main stages:
