@@ -38,35 +38,33 @@ Refer to [OpenNebula Repositories]({{% relref "opennebula_repository_configurati
 
 ### Installing on AlmaLinux/RHEL
 
-#### Repository EPEL
+Besides AlmaLinux and RHEL 8/9, OpenNebula depends on packages available in other distribution repositories. Execute one of the commands below, distinguished by the Host platform, under privileged user (`root`) to configure access to [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) repository:
 
-OpenNebula depends on packages which aren’t in the base distribution repositories. Execute one of the commands below (distinguished by the Host platform) to configure access to additional [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) repository:
+**AlmaLinux 8,9**
 
-**AlmaLinux**
-
-```default
-# yum -y install epel-release
+```bash
+dnf -y install epel-release
 ```
 
 **RHEL 8**
 
-```default
-# rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+```bash
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 **RHEL 9**
 
-```default
-# rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+```bash
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
 #### Install OpenNebula KVM Node Package
 
 Execute the following commands to install the OpenNebula KVM Node package and restart libvirt to use the OpenNebula-provided configuration file:
 
-```default
-# yum -y install opennebula-node-kvm
-# systemctl restart libvirtd
+```bash
+dnf -y install opennebula-node-kvm
+systemctl restart libvirtd
 ```
 
 For further configuration, check the specific [guide]({{% relref "kvm_driver#kvmg" %}}).
@@ -75,10 +73,10 @@ For further configuration, check the specific [guide]({{% relref "kvm_driver#kvm
 
 Execute the following commands to install the OpenNebula KVM Node package and restart libvirt to use the OpenNebula-provided configuration file:
 
-```default
-# apt-get update
-# apt-get -y install opennebula-node-kvm
-# systemctl restart libvirtd
+```bash
+apt-get update
+apt-get -y install opennebula-node-kvm
+systemctl restart libvirtd
 ```
 
 For further configuration check the specific [guide]({{% relref "kvm_driver#kvmg" %}}).
@@ -94,7 +92,7 @@ If you are performing an upgrade skip this and the next steps and go back to the
 
 Depending on the type of OpenNebula deployment, the SELinux can block some operations initiated by the OpenNebula Front-end, which results in a failure of the particular operation.  It’s **not recommended to disable** the SELinux on production environments, as it degrades the security of your server, but to investigate and work around each individual problem based on the [SELinux User’s and Administrator’s Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/). The administrator might disable the SELinux to temporarily work around the problem or on non-production deployments by changing the following line in `/etc/selinux/config`:
 
-```default
+```bash
 SELINUX=disabled
 ```
 
@@ -106,19 +104,18 @@ Depending on your OpenNebula deployment type, the following may be required on y
 * package `util-linux` newer than 2.23.2-51 installed
 * SELinux boolean `virt_use_nfs` enabled (with datastores on NFS):
 
-```default
-# setsebool -P virt_use_nfs on
+```bash
+setsebool -P virt_use_nfs on
 ```
 
 ### Disable AppArmor on Ubuntu/Debian
 
 Depending on the type of OpenNebula deployment, the AppArmor can block some operations initiated by the OpenNebula Front-end, which results in a failure of the particular operation.  It’s **not recommended to disable** the apparmor on production environments, as it degrades the security of your server, but to investigate and work around each individual problem. A good starting point is [AppArmor HowToUse Guide](https://wiki.debian.org/AppArmor/HowToUse/). The administrator might disable the AppArmor to temporarily work around the problem or on non-production deployments the steps for disabling it can be found [here](https://wiki.debian.org/AppArmor/HowToUse#Disable_AppArmor).
 
-{{< alert title="Note" color="success" >}}
-Depending on your OpenNebula deployment type, the following lines might be required at `/etc/apparmor.d/abstractions/libvirt-qemu` profile:{{< /alert >}} 
+Depending on your OpenNebula deployment type, the following lines might be required at `/etc/apparmor.d/abstractions/libvirt-qemu` profile: 
 
-```default
-# /var/lib/one/datastores/** rwk,
+```bash
+/var/lib/one/datastores/** rwk,
 ```
 
 <a id="kvm-local"></a>
@@ -155,14 +152,14 @@ If [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
 
-```default
-# su - oneadmin
+```bash
+su - oneadmin
 ```
 
 Create the `known_hosts` file by running following command with all the node names including the Front-end as parameters:
 
-```default
-$ ssh-keyscan <frontend> <node1> <node2> <node3> ... >> /var/lib/one/.ssh/known_hosts
+```bash
+ssh-keyscan <frontend> <node1> <node2> <node3> ... >> /var/lib/one/.ssh/known_hosts
 ```
 
 ### B. Distribute Authentication Configuration
@@ -171,37 +168,37 @@ To enable passwordless login on your infrastructure, you must copy authenticatio
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
 
-```default
-# su - oneadmin
+```bash
+su - oneadmin
 ```
 
 Enable passwordless logins by executing the following command for each of your nodes. For example:
 
-```default
-$ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node1>
-$ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node2>
-$ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node3>
+```bash
+ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node1>
+ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node2>
+ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node3>
 ```
 
 If the list of host SSH public keys was created in the previous section, distribute the `known_hosts` file to each of your nodes. For example:
 
-```default
-$ scp -p /var/lib/one/.ssh/known_hosts <node1>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/known_hosts <node2>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
+```bash
+scp -p /var/lib/one/.ssh/known_hosts <node1>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/known_hosts <node2>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
 ```
 
-#### Without SSH Authentication Agent (Optional)
+#### (Optional) Without SSH Authentication Agent
 
 {{< alert title="Warning" color="warning" >}}
 **Not Recommended**. If you don’t use integrated SSH authentication agent service (which is initially enabled) on the Front-end, you’ll have to distribute also `oneadmin`’s private SSH key on your hypervisor nodes to allow connections among nodes and from nodes to Front-end. For security reasons, it’s recommended to use SSH authentication agent service and **avoid this step**.
 
 If you need to distribute `oneadmin`’s private SSH key on your nodes, proceed with steps above and continue with following extra commands for all your nodes. For example:
 
-```default
-$ scp -p /var/lib/one/.ssh/id_rsa <node1>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/id_rsa <node2>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
+```bash
+scp -p /var/lib/one/.ssh/id_rsa <node1>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/id_rsa <node2>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
 ```{{< /alert >}}  
 
 ### C. Validate Connections
@@ -215,40 +212,40 @@ You should verify that none of these connections (under user `oneadmin`) fail an
 
 For example, execute on the Front-end:
 
-```default
+```bash
 # from Front-end to Front-end itself
-$ ssh <frontend>
-$ exit
+ssh <frontend>
+exit
 
 # from Front-end to node, back to Front-end and to other nodes
-$ ssh <node1>
-$ ssh <frontend>
-$ exit
-$ ssh <node2>
-$ exit
-$ ssh <node3>
-$ exit
-$ exit
+ssh <node1>
+ssh <frontend>
+exit
+ssh <node2>
+exit
+ssh <node3>
+exit
+exit
 
 # from Front-end to node, back to Front-end and to other nodes
-$ ssh <node2>
-$ ssh <frontend>
-$ exit
-$ ssh <node1>
-$ exit
-$ ssh <node3>
-$ exit
-$ exit
+ssh <node2>
+ssh <frontend>
+exit
+ssh <node1>
+exit
+ssh <node3>
+exit
+exit
 
 # from Front-end to nodes and back to Front-end and other nodes
-$ ssh <node3>
-$ ssh <frontend>
-$ exit
-$ ssh <node1>
-$ exit
-$ ssh <node2>
-$ exit
-$ exit
+ssh <node3>
+ssh <frontend>
+exit
+ssh <node1>
+exit
+ssh <node2>
+exit
+exit
 ```
 
 <a id="kvm-node-networking"></a>
@@ -266,15 +263,15 @@ There are various models for virtual networks, check the [Open Cloud Networking]
 
 You may want to use the simplest network model that corresponds to the [bridged]({{% relref "bridged#bridged" %}}) driver. For this driver, you will need to set up a Linux bridge and include a physical device in the bridge. Later on, when defining the network in OpenNebula, you will specify the name of this bridge and OpenNebula will know that it should connect the VM to this bridge, thus giving it connectivity with the physical network device connected to the bridge. For example, a typical Host with two physical networks, one for public IP addresses (attached to an `eth0` NIC for example) and the other for private virtual LANs (NIC `eth1` for example) should have two bridges:
 
-```default
-# ip link show type bridge
+```bash
+ip link show type bridge
 4: br0: ...
 5: br1: ...
 
-# ip link show master br0
+ip link show master br0
 2: eth0: ...
 
-# ip link show master br1
+ip link show master br1
 3: eth1: ...
 ```
 
@@ -318,16 +315,16 @@ Finally, return back to the **Hosts** list, and check that the Host has switched
 
 To add a node to the cloud, run this command as `oneadmin` in the Front-end (replace `<node01>` with your node hostname):
 
-```default
-$ onehost create <node01> -i kvm -v kvm
+```bash
+onehost create <node01> -i kvm -v kvm
 
-$ onehost list
+onehost list
   ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
    1 localhost       default     0                  -                  - init
 
 # After some time (up to 1 minute)
 
-$ onehost list
+onehost list
   ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
    0 node01          default     0       0 / 400 (0%)     0K / 7.7G (0%) on
 ```
