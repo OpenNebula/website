@@ -28,7 +28,7 @@ To define a Scaleway provider, specify the following information:
 * **Offers and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
 {{< alert title="Warning" color="warning" >}}
-Scaleway supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*. 
+Scaleway supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*.
 
 If you choose a different OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using a different OS than *Ubuntu 24.04* in production environments, unless you have properly tested it before.
 {{< /alert >}}
@@ -42,7 +42,53 @@ The following process describes how to create a Scaleway provider in your OpenNe
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+**Step 1.** Navigate through `Infrastructure > Providers` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovider/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
+  light="images/oneform/oneprovider/common/light/create_provider_button.png"
+  alt="Step 2"
+>}}
+
+**Step 3.** Select the Scaleway oneform driver and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/scaleway/dark/scaleway_driver.png"
+  light="images/oneform/oneprovider/scaleway/light/scaleway_driver.png"
+  alt="Step 3"
+>}}
+
+**Step 4.** Fill the general section with at least a name for the provider, and then click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/common/dark/general_step.png"
+  light="images/oneform/oneprovider/common/light/general_step.png"
+  alt="Step 4"
+>}}
+
+**Step 5.** Fill the Connection Values Section and click on `Finish` button:
+{{< theme-image
+  dark="images/oneform/oneprovider/scaleway/dark/scaleway_connection_values.png"
+  light="images/oneform/oneprovider/scaleway/light/scaleway_connection_values.png"
+  alt="Step 5"
+>}}
+
+**Step 6.** Finally, you can see your already Scaleway provider:
+
+{{< theme-image
+  dark="images/oneform/oneprovider/scaleway/dark/scaleway_provider.png"
+  light="images/oneform/oneprovider/scaleway/light/scaleway_provider.png"
+  alt="Step 6"
+>}}
+
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
