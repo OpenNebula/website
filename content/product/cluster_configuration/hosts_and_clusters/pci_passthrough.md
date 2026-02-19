@@ -242,11 +242,28 @@ The basic workflow is to inspect the Host information, either in the CLI or in S
 
 Note that OpenNebula will only deploy the VM in a Host with the available PCI device. If no Hosts match, an error message will appear in the Scheduler log.
 
-### CLI
+Select the tab of your preferred interface to view additional instructions.
+
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+
+In Sunstone the information is displayed in the **PCI** tab of a Host:
+
+![pciHostTab](/images/sunstone_host_pci.png)
+
+To add a PCI device to a template, select the **PCI Devices** tab when you are creating a Virtual Machine template:
+
+![pciTemplateTab](/images/sunstone_template_pci.png)
+
+{{% /tab %}}
+
+{{% tab header="CLI"%}}
 
 A new table in `onehost show` command gives us the list of PCI devices per Host. For example:
 
-```default
+```bash
 PCI DEVICES
 
    VM ADDR    TYPE           NAME
@@ -272,7 +289,7 @@ PCI DEVICES
 
 To make use of one of the PCI devices in a VM a new option can be added to select which device to use. For example, this will ask for a `Haswell-ULT HD Audio Controller`:
 
-```default
+```bash
 PCI = [
   VENDOR = "8086",
   DEVICE = "0a0c",
@@ -281,7 +298,7 @@ PCI = [
 
 The device can also be specified without all the type values. For example, to get any *PCI Express Root Ports* this can be added to a VM template:
 
-```default
+```bash
 PCI = [
   CLASS = "0604" ]
 ```
@@ -290,21 +307,16 @@ More than one `PCI` options can be added to attach more than one PCI device to t
 
 In some scenarios it may be useful to select a specific device. In this case simply input the address of the device you are interested in:
 
-```default
+```bash
 PCI = [
   SHORT_ADDRESS = "00:03.0"
 ]
 ```
 
-### Sunstone
 
-In Sunstone the information is displayed in the **PCI** tab of a Host:
+{{% /tab %}}
 
-![pciHostTab](/images/sunstone_host_pci.png)
-
-To add a PCI device to a template, select the **PCI Devices** tab when you are creating a Virtual Machine template:
-
-![pciTemplateTab](/images/sunstone_template_pci.png)
+{{< /tabpane >}}
 
 ## Usage as Network Interfaces
 
@@ -324,13 +336,32 @@ The [context packages]({{% relref "../../virtual_machines_operation/virtual_mach
 * `IPV6`: It will assign an IPv6 address to the interface, assuming a `/128` netmask.
 * `VLAN_ID`: If present, it will create a tagged interface and assign the IPs to the tagged interface.
 
-### CLI
+Select the tab of your preferred interface to view additional instructions.
+
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+
+In the Network tab, under advanced options, the hardware profile of the interface can be of three types:
+
+- “Emulated”, it includes the hardware model emulated by Qemu.
+- “PCI - Automatic”, OpenNebula hardware scheduler will pick the best PCI device for the NIC.
+- “PCI - Manual”, user can specify the PCI device by its short-address as shown in Host information.
+
+Use the rest of the dialog as usual by selecting a network from the table.
+
+![pciNic](/images/sunstone_nic_passthrough.png)
+
+{{% /tab %}}
+
+{{% tab header="CLI"%}}
 
 When a `PCI` in a template contains the attribute `TYPE="NIC"`, it will be treated as a `NIC` and OpenNebula will assign a MAC address, a VLAN_ID, an IP, etc., to the PCI device.
 
 This is an example of the PCI section of an interface that will be treated as an NIC:
 
-```default
+```bash
 PCI = [
   NETWORK = "passthrough",
   NETWORK_UNAME = "oneadmin",
@@ -344,14 +375,5 @@ PCI = [
 
 Note that the order of appearance of the `PCI` elements and `NIC` elements in the template is relevant. They will be mapped to NICs in the order they appear, regardless of whether or not they’re NICs of PCIs.
 
-### Sunstone
-
-In the Network tab, under advanced options, the hardware profile of the interface can be of three types:
-
-- “Emulated”, it includes the hardware model emulated by Qemu.
-- “PCI - Automatic”, OpenNebula hardware scheduler will pick the best PCI device for the NIC.
-- “PCI - Manual”, user can specify the PCI device by its short-address as shown in Host information.
-
-Use the rest of the dialog as usual by selecting a network from the table.
-
-![pciNic](/images/sunstone_nic_passthrough.png)
+{{% /tab %}}
+{{< /tabpane >}}
