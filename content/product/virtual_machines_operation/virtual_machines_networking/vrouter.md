@@ -39,31 +39,35 @@ $ onetemplate show 8 # 8 is for the VMTEMPLATE ID
 
 New Virtual Routers are created from a special type of VM Template, like the one created automatically when downloading the market app.
 
-<a id="force-ipv4-sunstone"></a>
+Select the interface to find the corresponding instructions:
 
-### Sunstone
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+<a id="force-ipv4-sunstone"></a>
 
 To create a new Virtual Router from [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}), follow the wizard to select the Virtual Networks that will get logically linked to it. This connection takes effect when the Virtual Machine containing the VR Appliance is automatically deployed, with a network interface attached to each Virtual Network.
 
-For each Virtual Network, the following options can be defined:
+For each Virtual Network, define the relevant options:
 
-* **Floating IP**. Only used in High Availability. This option is controlled with `FLOATING_IP` and `FLOATING_ONLY` parameters.
-* **Force IPv4**. You can force the IP assigned to the network interface. When the VR is not configured in High Availability, this will be the IP requested for the Virtual Machine appliance.
-* **Management interface**. If checked, this network interface will be a Virtual Router management interface. Traffic will not be forwarded to it.
+* **Floating IP**: only used in High Availability. This option is controlled with `FLOATING_IP` and `FLOATING_ONLY` parameters.
+* **Force IPv4**: you can force the IP assigned to the network interface. When the VR is not configured in High Availability, this will be the IP requested for the Virtual Machine appliance.
+* **Management interface**: if checked, this network interface will be a Virtual Router management interface. Traffic will not be forwarded to it.
 
-Once ready, click the “create” button to finish. OpenNebula will create the Virtual Router and the Virtual Machines automatically.
+Once ready, click the **Create** button to finish. OpenNebula automatically creates the Virtual Router and the corresponding Virtual Machines.
 
 ![sunstone_create_vrouter](/images/sunstone_create_vrouter.png)
 
-### CLI
+{{% /tab %}}
 
-Virtual Routers can be managed with the `onevrouter` command.
+{{% tab header="CLI"%}}
 
-To create a new Virtual Router from the CLI, first you need to create a VR Template file with the following attributes:
+Manage Virtual Routers with the `onevrouter` command.
 
-Then use the `onevrouter create` command:
+To create a new Virtual Router from the CLI, first specify a VR Template file with the attributes below. Then run the `onevrouter create` command:
 
-```default
+```bash
 $ cat myvr.txt
 NAME = my-vr
 NIC = [
@@ -77,11 +81,16 @@ $ onevrouter create myvr.txt
 ID: 1
 ```
 
-At this point the Virtual Router resource is created but it does not have any Virtual Machines. A second step is needed to create one (or more, if High Availability is used):
+The Virtual Router resource is created but it does not have any Virtual Machines. Create one or more VMS, depending if High Availability is used:
 
-```default
+```bash
 $ onevrouter instantiate <vrouterid> <templateid>
 ```
+
+{{% /tab %}}
+
+{{< /tabpane >}}
+
 
 ## Managing Virtual Routers
 
