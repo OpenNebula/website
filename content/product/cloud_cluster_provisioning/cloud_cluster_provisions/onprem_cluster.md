@@ -38,14 +38,47 @@ To create an on-premises provision, you must have an [On-Prem provider](/product
 
 Select the relevant interface to create an on-prem provision in your OpenNebula installation:
 
-{{< tabpane text=true right=false >}}
+#### NFS On-premises Cluster
+
+{{< tabpane text=true right=false id="nfs-cluster" >}}
+
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
-{{% tab header="Sunstone"%}}
-Still under development.
+{{% tab header="Sunstone<span style='display:none'>-nfs</span>"%}}
+**Step 1.** Navigate through `Infrastructure > Clusters` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovision/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button and select the option `Install a new On-Premise Cluster`:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/create_cluster_button.png"
+  alt="Step 2.1"
+>}}
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/onprem_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/onprem_cluster_button.png"
+  alt="Step 2.2"
+>}}
+
+
+**Step 3.** Fill the general section with at least a name for the cluster and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/onprem_general_step.png"
+  light="images/oneform/oneprovision/common/light/onprem_general_step.png"
+  alt="Step 3"
+>}}
+
 {{% /tab %}}
 
-{{% tab header="CLI"%}}
+{{% tab header="CLI<span style='display:none'>-nfs</span>"%}}
 
 ### Listing templates
 
@@ -112,7 +145,7 @@ ID   TYPE            NAME
 
 {{% /tab %}}
 
-{{% tab header="API"%}}
+{{% tab header="API<span style='display:none'>-nfs</span>"%}}
 
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/provisions" \
@@ -130,6 +163,55 @@ curl -X POST "https://oneform.example.server/api/v1/provisions" \
 ```
 
 For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+{{% /tab %}}
+
+{{< /tabpane >}}
+
+
+#### SSH On-premises Cluster
+
+{{< tabpane text=true right=false id="ssh-cluster" >}}
+
+{{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone<span style='display:none'>-ssh</span>"%}}
+**Step 1.** Navigate through `Infrastructure > Clusters` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovision/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button and select the option `Install a new On-Premise Cluster`:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/create_cluster_button.png"
+  alt="Step 2.1"
+>}}
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/onprem_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/onprem_cluster_button.png"
+  alt="Step 2.2"
+>}}
+
+
+**Step 3.** Fill the general section with at least a name for the cluster and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/onprem_general_step.png"
+  light="images/oneform/oneprovision/common/light/onprem_general_step.png"
+  alt="Step 3"
+>}}{{% /tab %}}
+
+{{% tab header="CLI<span style='display:none'>-ssh</span>"%}}
+Still under development.
+{{% /tab %}}
+
+{{% tab header="API<span style='display:none'>-ssh</span>"%}}
+Still under development.
 {{% /tab %}}
 
 {{< /tabpane >}}

@@ -54,19 +54,97 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
 {{% tab header="Sunstone"%}}
-Still under development.
+**Step 1.** Navigate through `Infrastructure > Clusters` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovision/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button and select the option `Install a new Cloud Cluster`:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/create_cluster_button.png"
+  alt="Step 2.1"
+>}}
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/cloud_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/cloud_cluster_button.png"
+  alt="Step 2.2"
+>}}
+
+**Step 3.** Select the Provider you want to use to create the cloud cluster:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/scaleway/dark/scaleway_provider.png"
+  light="images/oneform/oneprovision/scaleway/light/scaleway_provider.png"
+  alt="Step 3"
+>}}
+
+**Step 4.** Fill the general section with at least a name for the cluster, and then click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/general_step.png"
+  light="images/oneform/oneprovision/common/light/general_step.png"
+  alt="Step 4"
+>}}
+
+**Step 5.** Select the kind of the deployment you want to use for the cluster and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/scaleway/dark/deployment_types_step.png"
+  light="images/oneform/oneprovision/scaleway/light/deployment_types_step.png"
+  alt="Step 5"
+>}}
+
+**Step 6.** Fill the User Inputs section to configure the cluster and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/scaleway/dark/user_inputs_step.png"
+  light="images/oneform/oneprovision/scaleway/light/user_inputs_step.png"
+  alt="Step 6"
+>}}
+
+**Step 7.** Fill optional tags for resources that will be created on Scaleway and OpenNebula and click on `Finish` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/tags_step.png"
+  light="images/oneform/oneprovision/common/light/tags_step.png"
+  alt="Step 7"
+>}}
+
+**Step 8.** You can follow the logs and the state of the cluster during
+the process:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/scaleway/dark/scaleway_cluster_logs.png"
+  light="images/oneform/oneprovision/scaleway/light/scaleway_cluster_logs.png"
+  alt="Step 8"
+>}}
+
+**Step 9.** After reaching the RUNNING state, a full cloud cluster is available, full to operate with it:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/scaleway/dark/scaleway_cluster.png"
+  light="images/oneform/oneprovision/scaleway/light/scaleway_cluster.png"
+  alt="Step 9"
+>}}
+
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
 
-Create a Scaleway provision using the `oneprovider create <name> --provider-id <id>` command, specifying `scaleway` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create a Scaleway provision using the `oneprovision< create <name> --provider-id <id>` command, specifying `scaleway` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
 ```bash
 $ oneprovision create scaleway --provider-id 1
 There are some parameters that require user input.
   * (oneform_hosts) Number of instances to create [type: number, default: 1]
     > 1
-  * (instance_type) Instance type [type: list: em_a115x_ssd]
+  * (instance_type) Instance type [type: list: em_a116x_ssd]
     > 0
   * (instance_os_name) OS [type: list: ubuntu_2204, ubuntu_2404]
     0: ubuntu_2204
@@ -151,7 +229,7 @@ curl -X POST "https://oneform.example.server/api/v1/provisions" \
       "instance_disk_size": 128,
       "instance_os_name": "ubuntu_2204",
       "instance_public_ips": 0,
-      "instance_type": "em_a115x_ssd"
+      "instance_type": "em_a116x_ssd"
     },
     "name": "Scaleway Cluster",
     "description": "Provision in Scaleway"
