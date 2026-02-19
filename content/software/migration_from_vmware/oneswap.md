@@ -39,7 +39,7 @@ dnf install opennebula-swap
 ### Requirements and recommended settings
 
 OneSwap requirements for virtual conversion from VMWare to OpenNebula are the following:
-- OneSwap is only supported on Ubuntu 24.04 LTS and AlmaLinux/RHEL 9 servers. On previous versions of Ubuntu and AlmaLinux/RHEL some dependencies are outdated.
+- OneSwap is only supported on Ubuntu 24.04 LTS and Alma Linux/RHEL 9/10 servers. On previous versions of Ubuntu and Alma/RHEL some dependencies are outdated.
 - A working OpenNebula environment with capacity enough to store imported images and VMs and a user with permissions on the destination datastores. Alternatively, conversion can be done with user `oneadmin` and set the right permissions in a posterior step.
 - A vCenter endpoint with valid credentials to export the VMs.
   - The parameters `vcenter`, `vuser`, `vpass` and `port` must be specified.
@@ -65,7 +65,7 @@ Normally that means populating the file `$HOME/.one/one_auth` with `username:pas
   - `libvirt` library, version should be >= 8.7.0
   - `virt-v2v`, stable version
 
-Ubuntu 24.04 and AlmaLinux/RHEL 9 provide up to date versions of the packages
+Ubuntu 24.04 and AlmaLinux/RHEL 9/10 provide up to date versions of the packages
 
 ### Required software for migrating Windows Virtual machines
 
