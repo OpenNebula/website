@@ -1,0 +1,72 @@
+<mxfile host="65bd71144e">
+    <diagram name="OneSwap Architecture" id="oneswap-arch">
+        <mxGraphModel dx="992" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="vmware-box" value="VMware Environment" style="swimlane;startSize=36;fillColor=#5a7fbf;fontColor=#ffffff;strokeColor=#5a7fbf;fontSize=14;fontStyle=1;swimlaneLine=1;rounded=1;arcSize=4;swimlaneHead=0;align=center;horizontal=1;childLayout=stackLayout;horizontalStack=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="60" width="250" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="vmware-spacer1" value="" style="text;html=1;" parent="vmware-box" vertex="1">
+                    <mxGeometry width="250" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="vcenter" value="&lt;b&gt;vCenter Server&lt;/b&gt;&lt;br&gt;API endpoint&lt;br&gt;VDDK library" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f0fb;strokeColor=#5a7fbf;fontSize=11;align=center;arcSize=6;" parent="vmware-box" vertex="1">
+                    <mxGeometry x="20" y="50" width="210" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="esxi" value="&lt;b&gt;ESXi Host(s)&lt;/b&gt;&lt;br&gt;running VMs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f0fb;strokeColor=#5a7fbf;fontSize=11;align=center;arcSize=6;" parent="vmware-box" vertex="1">
+                    <mxGeometry x="20" y="140" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="vm1" value="&lt;b&gt;VM 1&lt;/b&gt;&lt;br&gt;disk(s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#5a7fbf;fontSize=10;align=center;arcSize=8;" parent="vmware-box" vertex="1">
+                    <mxGeometry x="20" y="220" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="vm2" value="&lt;b&gt;VM 2&lt;/b&gt;&lt;br&gt;disk(s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#5a7fbf;fontSize=10;align=center;arcSize=8;" parent="vmware-box" vertex="1">
+                    <mxGeometry x="140" y="220" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ssh-note" value="Direct SSH (optional)" style="text;html=1;fontSize=9;fontColor=#666666;align=center;" parent="vmware-box" vertex="1">
+                    <mxGeometry x="20" y="285" width="210" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="oneswap-box" value="OneSwap Server" style="swimlane;startSize=36;fillColor=#e07b39;fontColor=#ffffff;strokeColor=#e07b39;fontSize=14;fontStyle=1;swimlaneLine=1;rounded=1;arcSize=4;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="420" y="140" width="300" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="dedicated-note" value="(dedicated, recommended)" style="text;html=1;fontSize=10;fontColor=#ffffff;align=center;fontStyle=2;" parent="oneswap-box" vertex="1">
+                    <mxGeometry x="10" y="36" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="oneswap-tool" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b style=&quot;font-size:13px;&quot;&gt;oneswap&lt;/b&gt;&lt;br&gt;conversion + transfer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e8;strokeColor=#e07b39;fontSize=11;align=center;arcSize=6;" parent="oneswap-box" vertex="1">
+                    <mxGeometry x="30" y="70" width="240" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="staging" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;Buffer Area&lt;/b&gt;&lt;br&gt;/var/tmp (disk space needed&lt;br&gt;for image conversion)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8f0;strokeColor=#e0b080;fontSize=10;align=center;arcSize=6;" parent="oneswap-box" vertex="1">
+                    <mxGeometry x="30" y="150" width="240" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="one-box" value="OpenNebula" style="swimlane;startSize=36;fillColor=#1a8a5e;fontColor=#ffffff;strokeColor=#1a8a5e;fontSize=14;fontStyle=1;swimlaneLine=1;rounded=1;arcSize=4;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="850" y="60" width="250" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="frontend" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;Front-end&lt;/b&gt;&lt;br&gt;CLI / RPC API&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f5ee;strokeColor=#1a8a5e;fontSize=11;align=center;arcSize=6;" parent="one-box" vertex="1">
+                    <mxGeometry x="20" y="50" width="210" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="kvm" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;KVM Hosts&lt;/b&gt;&lt;br&gt;run migrated VMs&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f5ee;strokeColor=#1a8a5e;fontSize=11;align=center;arcSize=6;" parent="one-box" vertex="1">
+                    <mxGeometry x="20" y="140" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="datastores" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b style=&quot;&quot;&gt;Datastores&lt;/b&gt;&lt;br&gt;Image Datastore&lt;br&gt;System Datastore&lt;br&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;&lt;font&gt;(receives converted images)&lt;/font&gt;&lt;/span&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f5ee;strokeColor=#1a8a5e;fontSize=11;align=center;arcSize=6;" parent="one-box" vertex="1">
+                    <mxGeometry x="20" y="220" width="210" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow-vcenter" value="vCenter API / VDDK" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#5a7fbf;strokeWidth=2;dashed=1;dashPattern=6 3;endArrow=block;endFill=1;fontSize=10;fontColor=#2c4a8e;fillColor=#e8f0fb;" parent="1" source="vcenter" target="oneswap-tool" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow-ssh" value="SSH (optional)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;strokeColor=#5a7fbf;strokeWidth=1.5;dashed=1;dashPattern=4 4;endArrow=block;endFill=1;fontSize=9;fontColor=#5a7fbf;opacity=50;" parent="1" source="esxi" target="oneswap-tool" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="310" y="230"/>
+                            <mxPoint x="310" y="258"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-cli" value="CLI / RPC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#1a8a5e;strokeWidth=2;endArrow=block;endFill=1;fontSize=10;fontColor=#155e40;fillColor=#e6f5ee;" parent="1" source="oneswap-tool" target="frontend" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow-images" value="image transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#1a8a5e;strokeWidth=2;endArrow=block;endFill=1;fontSize=10;fontColor=#155e40;fillColor=#e6f5ee;" parent="1" source="oneswap-tool" target="datastores" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
