@@ -128,3 +128,20 @@ case, just add the device path to the whitelist and check again:
 # echo /dev/mapper/mpatha >> /etc/lvm/devices/system.devices
 # pvs
 ```
+
+### Pool becomes full after live datastore migration
+
+**Problem:** After a live datastore migration between two `fs_lvm_ssh` datastores with `LVM_THIN_ENABLE=yes` the disk now shows full:
+
+```
+# lvs
+  LV             VG       Attr       LSize   Pool           Origin Data%  Meta%
+  lv-one-11-0    vg-one-0 Vwi-aotz-k 256.00m lv-one-11-pool        100.00
+  lv-one-11-pool vg-one-0 twi---tz-k 256.00m                       100.00 12.60
+```
+
+**Impact:** Everything should work as expected. The 100% in the `Data%` column only signifies that the thin volume is using the full space allocated by the pool. The filesystem is not affected and maintains the same space available as before. However, if that figure is used for monitoring, this should be taken into account to avoid false positives.
+
+**Explaination:** The libvirt operation that implements live migration between datastores ([blockcopy](https://www.libvirt.org/manpages/virsh.html#blockcopy)) copied all blocks in the source LV, including the empty ones. This is due to the copy being made between raw block devices that don't expose information about empty blocks; LVM returns zero-filled blocks when reading from an unallocated part of the volume. For some operations like [migrate](https://www.libvirt.org/manpages/virsh.html#migrate), libvirt is able to detect blocks consisting of only zeroes and omit them by using the `--migrate-disks-detect-zeroes` option. Currently that option is not available on the `blockcopy` command.
+
+**Mitigation:** If for any reason this situation unacceptable, an offline datastore migration should fix the issue (until libvirt supports the `--migrate-disks-detect-zeroes` option detailed above). A different mechanism is used for that case (`dd` with `conv=sparse`) which omits empty blocks from the copy.
