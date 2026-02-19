@@ -67,7 +67,7 @@ Some of the VM actions available in the OpenNebula API are not implemented yet f
 - [live disk resize](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#resizing-vm-disks)
 - [vm state save and restore](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#save-a-vm-instance)
 - [system snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-system-snapshots)
-- [live disk snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-disk-snapshots)
+- [live disk snapshots](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#virtual-machine-disk-snapshots) with qcow2 disks.
 - [live disk save](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#saving-a-vm-disk-to-an-image)
 - [live capacity resize](../../virtual_machines_operation/virtual_machine_instances/vm_instances.md#live-resize-of-capacity)
 

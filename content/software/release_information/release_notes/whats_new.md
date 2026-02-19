@@ -73,6 +73,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 
 ## LXC
 - NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- Live disk snapshots can be done and restored to when using [thin LVM pools](../../../product/cluster_configuration/lvm/lvm.md#datastore-internals), raw images and [ceph rbd](../../../product/cluster_configuration/storage_system/ceph_ds.md) blocks.
 
 ## OpenNebula Flow
 <!--keeping some examples-->
