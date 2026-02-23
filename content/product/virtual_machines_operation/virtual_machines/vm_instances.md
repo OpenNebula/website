@@ -1352,7 +1352,7 @@ The `onevm` command manages OpenNebula virtual machines. The general structure o
 | `--ssh-options options`       | SSH options to use                              |
 | `--startscript [file]`        | Starts script to be executed                     |
 | `--success`                   | Recovers a VM by succeeding the pending action   |
-| `-t`, `--target target`       | Device where the image will be attached         |
+| `-t`, `--target target`       | Device where the image will be attached (for FILESYSTEM, this represents the mount tag inside the VM) |
 | `-t`, `--type type`           | Lists type of the new Image                           |
 | `--use`                       | Locks use actions                                |
 | `--user name`                 | User name to connect to OpenNebula              |
