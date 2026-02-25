@@ -12,22 +12,25 @@ weight: "2"
 
 <!--# What’s New in 7.2 -->
 
-We invite you to explore the features, join the community conversations, and give your feedback on this final release.
+We invite you to explore the features, join the community conversations, and give your feedback on this beta release.
 
 We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
 
 ## OpenNebula Core
-- [gRPC API](../../../product/control_plane_configuration/large-scale_deployment/grpc/): Introduction of a next-generation gRPC-based API that provides a modern, low-latency communication layer, allowing the platform to handle larger infrastructures and more concurrent operations with ease.
-- [New monitor message `EXEC_VM`to retrieve the result of commands executed inside a Virtual Machine](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md)
+- Introduction of a next-generation [gRPC API](../../../product/control_plane_configuration/large-scale_deployment/grpc/) that provides a modern, low-latency communication layer, allowing the platform to handle larger infrastructures and more concurrent operations with ease.
+- [New monitor message `EXEC_VM`](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md) to retrieve the result of commands executed inside a Virtual Machine.
 
 ## AI Factories
-- [Integrated NVIDIA Fabric Manager](../../../product/cluster_configuration/hosts_and_clusters/one_fabricmanager/) & [GPU Enhancements](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/): Optimized support for NVIDIA GPUs and NVSwitch technologies, allowing for superior orchestration of GPU-intensive workloads such as AI training and High-Performance Computing (HPC). Including support for H100 and GB200.
+- [Integrated NVIDIA Fabric Manager (EE)](../../../product/cluster_configuration/hosts_and_clusters/one_fabricmanager/): Advanced orchestration for NVSwitch and NVLink high-speed GPU interconnects ensures optimal multi-GPU topologies for AI training and HPC workloads.
+- [GPU Enhancements](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/) with official validation on NVIDIA Grace Blackwell GB200 systems, including NVLink/NVSwitch topologies, ensuring seamless orchestration of next-generation GPU-accelerated infrastructure.
+- Validated compatibility with NVIDIA Spectrum-X networking platforms, enabling high-performance, low-latency Ethernet fabrics optimized for large-scale AI clusters.
+- Validated integration with NVIDIA BlueField DPUs, enabling network offloading, hardware-level isolation, and enhanced multi-tenant segmentation.
 
 ## Storage & Backups
 - New redesigned version of [LVM storage subsystem (EE)](../../../product/cluster_configuration/lvm/lvm.md) with native thin-provisioning, unified image and VM disk management, and simplified configuration. The new driver improves performance, reduces deployment complexity, and enables more efficient use of SAN-backed storage by eliminating the need for hybrid file-based setups.
-- [Storage Live Migration for LVM & File-based Datastores](../../../product/cluster_configuration/storage_system/overview/#storage-portfolio): Ability to perform live migrations of Virtual Machines across LVM and file-based datastores (both shared, local and lvm thin).
-- [NetApp Incremental Backup Support](../../../product/cluster_configuration/san_storage/netapp/): Improved efficiency for NetApp users with new incremental backup capabilities that reduce backup windows and storage consumption by only saving changed data blocks.
-- [Support for Pure Storage FlashArray](../../../product/cluster_configuration/san_storage/purestorage/): A native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
+- [Storage Live Migration for LVM & File-based Datastores](../../../product/cluster_configuration/storage_system/overview/#storage-portfolio) with ability to perform live migrations of Virtual Machines across LVM and file-based datastores (both shared, local and lvm thin).
+- [NetApp Incremental Backup Support](../../../product/cluster_configuration/san_storage/netapp/) with improved efficiency for NetApp users with new incremental backup capabilities that reduce backup windows and storage consumption by only saving changed data blocks.
+- [Support for Pure Storage FlashArray](../../../product/cluster_configuration/san_storage/purestorage/) with a native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
 
 ## Sunstone
 - Integrated VM Logs in Sunstone: Real-time VM execution logs are now accessible directly from the Sunstone GUI, enabling faster troubleshooting without needing CLI access.
@@ -35,7 +38,7 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - [Enforced Two-Factor Authentication (2FA) in Sunstone](../../../product/cloud_system_administration/authentication_configuration/sunstone_auth/#enforce-globally): Strengthen your cloud security posture by mandating 2FA for all users within the Sunstone GUI through a global security policy.
 
 ## API and CLI
-- [New API calls (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) to execute commands on a Virtual Machine](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine)
+- [New API calls](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine) (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) to execute commands on a Virtual Machine.
 - [Add automatic VM index for multiple persistent VM instantiation](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#instantiate-to-persistent)
 
 ## KVM & Networking
@@ -51,7 +54,8 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - [OneForm: Automated Cluster Provisioning](../../../product/operation_references/opennebula_services_configuration/oneform): A new service designed to automate the creation of OpenNebula clusters across on-premise environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
 
 ## Packaging
-- Expanded OS Support: Official support for the latest operating systems, including AlmaLinux 10, SUSE Linux Enterprise 16, OpenSUSE, RHEL 10, and Debian 13.
+- Expanded Operating System Support with official compatibility for SUSE Linux distributions.
+- Support for the latest operating systems, including AlmaLinux 10, SUSE Linux Enterprise 16, OpenSUSE, RHEL 10, and Debian 13.
 - Sunstone no longer relies on the system-provided Node.js packages, which often varied significantly across supported platforms. OpenNebula now standardizes on Node.js 20 from NodeSource. The required `nodejs` RPM/DEB packages are shipped directly in the OpenNebula repository, eliminating the need for users to configure external NodeSource repositories.
 
 
