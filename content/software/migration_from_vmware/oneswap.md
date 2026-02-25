@@ -1,7 +1,7 @@
 ---
 title: "Migrating VMs with OneSwap"
 date: "2025-02-17"
-description: "The OneSwap command-line tool allows a convenient migration of Virtual Machines and appliances from VMware."
+description:
 categories:
 pageintoc: "268"
 tags:
@@ -19,6 +19,19 @@ OneSwap supports importing Open Virtual Appliances (OVAs) previously exported fr
 {{< alert color="success" >}}
 OneSwap is part of a set of tools and services designed to guide you in achieving a smooth transition from VMware. These include the [VMware Migration Service](https://support.opennebula.pro/hc/en-us/articles/18919424033053-VMware-Migration-Service), a complete guidance and support framework to help organizations define and execute their migration plan with minimal disruption to business operations. Further information is available in [Migrating from VMware to OpenNebula](https://support.opennebula.pro/hc/en-us/articles/17225311830429-White-Paper-Migrating-from-VMware-to-OpenNebula).
 {{< /alert >}}
+
+## Architecture and Requirements
+
+OneSwap can be run directly on the OpenNebula frontend or on a **dedicated server**. Running it on a separate server is recommended for production environments as it isolates the migration workload and avoids impacting the OpenNebula frontend during large or concurrent migrations.
+
+The OneSwap server must have network access to:
+
+- **OpenNebula Front-end**: to execute CLI commands (`onevm`, `onedatastore`, etc.) and transfer converted images to the datastores.
+- **vCenter/ESXi endpoint**: to connect to the vCenter API and export virtual machine disks.
+
+Run `oneswap` on a dedicated server with sufficient disk space to buffer VM images during conversion. This server should have high-bandwidth connectivity to both the vCenter environment and the OpenNebula image datastores to minimize migration time.
+
+{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" pb="20px" >}}
 
 ## vCenter Permissions Requirements
 
@@ -126,7 +139,7 @@ Includes all permissions from OneSwap-Standard, plus:
 - For `--clone` mode, the VM **must NOT have any snapshots** (remove all snapshots before cloning)
 - For `--delta` and `--esxi` modes, vCenter permissions are minimal as operations run via direct ESXi SSH
 
-## Installation and requirements
+## Installation
 
 The package `opennebula-swap`, provided on the official repositories, provides the command `oneswap`.
 
