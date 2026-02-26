@@ -52,14 +52,9 @@ It does not expose replication, asynchronous protection groups, or VMware-exclus
 | Category | Unsupported Feature | Rationale / Alternative |
 |-----------|--------------------|--------------------------|
 | **Replication & DR** | Protection Groups / Active Cluster | Planned for future releases; can be managed externally on the FlashArray. |
-| **NAS protocols** | NFS / SMB | Driver focuses on iSCSI block storage only. |
-| **Array-managed automatic snapshots** | Automated snapshot schedules | OpenNebula requires full control over snapshot lifecycle; array policies must remain disabled for OpenNebula-managed volumes. |
 | **Storage QoS / Performance tiers** | Bandwidth / IOPS limits | FlashArray supports QoS, but these controls are not integrated into the driver. |
 | **Storage efficiency analytics** | Deduplication & compression metrics | Calculated internally by FlashArray; not displayed or consumed by OpenNebula. |
 | **Encryption management** | Per-volume encryption toggling | FlashArray encryption is always-on and appliance-managed; no OpenNebula API exposure. |
-| **Advanced VMware features** | VAAI offloads, Storage DRS, vVols | VMware-specific APIs, not applicable to OpenNebula. |
-| **Multi-instance sharing** | Shared datastore IDs | Not supported; each OpenNebula instance must own its datastore definitions uniquely. Utilize suffixes for multi-OpenNebula Arrays |
-| **Synchronous Replication Topologies** | ActiveCluster stretch, pod failover | May be deployed at the array infrastructure level but is not orchestrated by OpenNebula. |
 
 
 ## PureStorage FlashArray Setup
