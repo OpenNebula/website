@@ -32,7 +32,7 @@ The oned daemon manages the gRPC server, which is enabled by default. To modify 
 
 ### Using the gRPC Clients
 
-OpenNebula 7.2 provides gRPC support for Ruby (CLI), Go, and Python (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
+OpenNebula 7.2 provides gRPC support for Ruby (CLI), Go, and [Python]({{% relref "../../../product/integration_references/system_interfaces/python" %}}) (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
 
 * Flag-based: Append the `--grpc` flag to any supported command.
 * Environment-based: Set `ONEAPI_PROTOCOL=grpc` in your shell profile to make gRPC the default for all commands.
@@ -42,6 +42,17 @@ By default, the client attempts to connect to the local endpoint. You can overri
 > ```Bash
 > export ONE_GRPC="<IP_ADDRESS>:<PORT>"
 > ```
+
+It is possible to use gRPC with Python:
+
+```python
+import pyone
+one = pyone.OneServer("one:2634", session="oneadmin:onepass")
+vm_id = one.vmpool.info(-2, -1, -1, -1).VM[0].ID
+```
+
+For more information, see [PyONE documentation]({{% relref "../../../product/integration_references/system_interfaces/python" %}}).
+
 
 ### Integration with OneFlow
 

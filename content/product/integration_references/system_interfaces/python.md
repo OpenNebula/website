@@ -14,7 +14,7 @@ weight: "4"
 
 PyONE is an implementation of OpenNebula XML-RPC bindings in Python. It has been designed as a wrapper for the [XML-RPC methods]({{% relref "api#api" %}}), with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the [XML-RPC documentation]({{% relref "api#api" %}}), you can download the [XML Schemas (XSD) here]({{% relref "api#api-xsd-reference" %}}).
 
-PyONE also supports gRPC as a high-performance alternative transport mechanism, while keeping the same public API as for XML-RPC.
+PyONE also supports [gRPC]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/grpc" %}}) as a high-performance alternative transport mechanism, while keeping the same public API as for XML-RPC.
 
 ## API Documentation
 
