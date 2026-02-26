@@ -21,3 +21,4 @@ The following issues have been solved in 7.0.3:
 - Fix `onedb fsck` for Virtual Router leases [#7428](https://github.com/OpenNebula/one/issues/7428).
 - Fix quota output for commands `onegroup list` and `oneuser list` [#7254](https://github.com/OpenNebula/one/issues/7254)
 - Fix Veeam only working with default datastore path [#7470](https://github.com/OpenNebula/one/issues/7470)
+- Fix OneDRS current VM placement parsing by deriving host allocation from VM history records [#7503](https://github.com/OpenNebula/one/issues/7503)
