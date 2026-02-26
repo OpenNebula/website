@@ -61,7 +61,7 @@ This page will be updated with relevant information about bugs affecting OpenNeb
     This workaround would prevent the `opennebula-sunstone.service` file from removing the uploaded temporary files in `/var/lib/one/fireedge-uploads`, while still allowing copy operations from that directory.
     
     {{< alert title="Note" color="info" >}}
-    This directory will fill up, therefore it is recommended to configure a cleanup service like [systemd-tmpfiles](https://www.freedesktop.org/software/systemd/man/latest/systemd-tmpfiles-setup.service.html) to periodically empty this directory.{{< /alert >}} 
+    This directory will fill up, therefore it is recommended to configure a cleanup service like systemd-tmpfiles, to periodically empty this directory.{{< /alert >}} 
 
 ## Migration
 
