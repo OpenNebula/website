@@ -52,7 +52,6 @@ It does not expose advanced replication or NAS-protocol features available in ot
 | Category | Unsupported Feature | Rationale / Alternative |
 |-----------|--------------------|--------------------------|
 | **Replication & DR** | SnapMirror, SnapVault | Planned for future releases; can be managed externally through ONTAP. |
-| **NAS protocols** | NFS / CIFS shares | Driver focuses on iSCSI block storage only. |
 | **Storage QoS / Performance tiers** | Policy group integration | Manual setup possible in ONTAP, not exposed in driver. |
 | **Storage efficiency analytics** | Deduplication & compression metrics | Handled internally by ONTAP, not shown in OpenNebula UI. |
 | **Encryption management** | Per-volume encryption toggling | Configure at SVM level outside OpenNebula. |
