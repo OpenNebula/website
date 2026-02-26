@@ -12,16 +12,44 @@ weight: "2"
 
 <!--# What’s New in 7.2 -->
 
-We invite you to explore the features, join the community conversations, and give your feedback on this beta release.
+We’re excited to announce the availability of the OpenNebula 7.2 Beta! While our previous 7.0 “Phoenix” release focused on the transition from legacy virtualization, OpenNebula 7.2 is engineered for production at scale. This release marks a significant evolution, introducing deeper automation, hardware-rooted security, and the high-performance orchestration required to power modern Sovereign Clouds and AI Factories.
 
-We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and report any bugs through our [GitHub development portal](https://github.com/OpenNebula/).
+OpenNebula 7.2 is a high-performance engine designed to handle the most demanding enterprise workloads. Key highlights of this release include:
+
+* Optimized infrastructure for AI with advanced orchestration for NVIDIA Fabric Manager (NVLink/NVSwitch), validation for Grace Blackwell (GB200/GB300) systems, and Spectrum-X networking to support large-scale AI training.
+
+* A next-generation gRPC API providing a modern, low-latency API designed for high-throughput communication and improved responsiveness in massive, concurrent environments.
+
+* Introduction of Storage Live Migration between LVM and file-based datastores without downtime, plus a new native driver for Pure Storage FlashArray.
+
+* Enhanced security for confidential computing via hardware-rooted trust in KVM and vTPM support, ensuring workload integrity for regulated industries.
+
+* The debut of the new OneForm service for the automated, on-demand deployment and configuration of distributed OpenNebula clusters.
+
+* Broadened OS support with official support for the latest enterprise distributions, including AlmaLinux 10, RHEL 10, and Debian 13.
+
+
+OpenNebula 7.2 continues to modernize the stack by integrating cutting-edge hardware support and refining the user experience.
+
+| Component |	Status	| Notes | 
+|---------------------|---------|-------|
+| NVIDIA BlueField DPU | Validated	| Enables network offloading and hardware-level isolation. |
+| LXC Drivers |	Production-Ready | Near-native performance with VM-like lifecycle (NIC hot-plug/snapshots). | 
+| VM Execution Logs | Integrated | Real-time logs now available directly in the Sunstone GUI. | 
+| 2FA Enforcement | New	| Administrators can now mandate Two-Factor Authentication globally. | 
+
+<br>
+
+**Please note**: As a beta release, this version is intended for testing and validation purposes only; we do not recommend it for production use at this stage. We encourage you to dive into the new features and help us stabilize the final release by reviewing the Known Issues and reporting any bugs via GitHub.
+
+Thank you to our incredible community and partners for your continued support in building the future of open-source cloud orchestration!
 
 ## OpenNebula Core
 - Introduction of a next-generation [gRPC API](../../../product/control_plane_configuration/large-scale_deployment/grpc/) that provides a modern, low-latency communication layer, allowing the platform to handle larger infrastructures and more concurrent operations with ease.
 - [New monitor message `EXEC_VM`](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md) to retrieve the result of commands executed inside a Virtual Machine.
 
 ## AI Factories
-- [Integrated NVIDIA Fabric Manager (EE)](../../../product/cluster_configuration/hosts_and_clusters/one_fabricmanager/): Advanced orchestration for NVSwitch and NVLink high-speed GPU interconnects ensures optimal multi-GPU topologies for AI training and HPC workloads.
+- [Integrated NVIDIA Fabric Manager (EE)](../../../product/cluster_configuration/hosts_and_clusters/one_fabricmanager/) for advanced orchestration for NVSwitch and NVLink high-speed GPU interconnects ensures optimal multi-GPU topologies for AI training and HPC workloads.
 - [GPU Enhancements](../../../product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/) with official validation on NVIDIA Grace Blackwell GB200 systems, including NVLink/NVSwitch topologies, ensuring seamless orchestration of next-generation GPU-accelerated infrastructure.
 - Validated compatibility with NVIDIA Spectrum-X networking platforms, enabling high-performance, low-latency Ethernet fabrics optimized for large-scale AI clusters.
 - Validated integration with NVIDIA BlueField DPUs, enabling network offloading, hardware-level isolation, and enhanced multi-tenant segmentation.
@@ -33,9 +61,9 @@ We encourage you to review the [Known Issues]({{% relref "known_issues" %}}) and
 - [Support for Pure Storage FlashArray](../../../product/cluster_configuration/san_storage/purestorage/) with a native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
 
 ## Sunstone
-- Integrated VM Logs in Sunstone: Real-time VM execution logs are now accessible directly from the Sunstone GUI, enabling faster troubleshooting without needing CLI access.
+- Integrated VM Logs in Sunstone providing Real-time VM execution logs directly through the Sunstone GUI, enabling faster troubleshooting without needing CLI access.
 - Backups, images and files tabs added by default in the groupadmin view and Services Tab added by default in the user view.
-- [Enforced Two-Factor Authentication (2FA) in Sunstone](../../../product/cloud_system_administration/authentication_configuration/sunstone_auth/#enforce-globally): Strengthen your cloud security posture by mandating 2FA for all users within the Sunstone GUI through a global security policy.
+- [Enforced Two-Factor Authentication (2FA) in Sunstone](../../../product/cloud_system_administration/authentication_configuration/sunstone_auth/#enforce-globally) strengthens your cloud security posture by mandating 2FA for all users within the Sunstone GUI through a global security policy.
 
 ## API and CLI
 - [New API calls](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#execute-commands-inside-the-virtual-machine) (`one.vm.exec`, `one.vm.retryexec` and `one.vm.cancelexec`) to execute commands on a Virtual Machine.
