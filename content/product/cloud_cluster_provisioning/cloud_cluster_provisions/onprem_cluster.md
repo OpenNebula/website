@@ -49,7 +49,7 @@ Still under development.
 
 ### Listing templates
 
-Create an on-prem provision with the `oneprovider create <name> --provider-id <id>` command, specifying `onprem` as the provider type and the ID of the associated provider to this provision. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create an on-prem provision with the `oneprovision create <name> --provider-id <id>` command, specifying `onprem` as the provider type and the ID of the associated provider to this provision. This will initiate an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
 
 ```bash
