@@ -308,13 +308,25 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
 The CAPONE and rke2 Cluster API controllers in the management cluster will deploy the workload cluster on the scheduled host. Check the logs of those controllers to review the progress:
 
 ```
-NAMESPACE                           NAME                                                             READY   STATUS
-capone-system                       capone-controller-manager-64db4f6867-49ppm                       1/1     Running
-rke2-bootstrap-system               rke2-bootstrap-controller-manager-676f89558c-85nxg               1/1     Running
-rke2-control-plane-system           rke2-control-plane-controller-manager-76fb8568cd-5txwc           1/1     Running
+kubectl get pods -A --kubeconfig kubeconfig_management.yaml -l control-plane=controller-manager
+```
+
+You should be able to see the following pods:
+
+```
+NAMESPACE                           NAME                                                             READY   STATUS    RESTARTS   AGE
+capi-kubeadm-bootstrap-system       capi-kubeadm-bootstrap-controller-manager-548b88955-5qktn        1/1     Running   0          9m39s
+capi-kubeadm-control-plane-system   capi-kubeadm-control-plane-controller-manager-79ddf6c498-lckn9   1/1     Running   0          9m37s
+capi-system                         capi-controller-manager-698c5749d4-prxw5                         1/1     Running   0          9m46s
+capone-system                       capone-controller-manager-5cfc7d5f85-8r7tw                       1/1     Running   0          9m36s
+rancher-turtles-system              caapf-controller-manager-6b9b6ccdc-27vz7                         2/2     Running   0          9m35s
+rancher-turtles-system              rancher-turtles-controller-manager-546957d6dc-d4t2z              1/1     Running   0          10m
+rke2-bootstrap-system               rke2-bootstrap-controller-manager-8567757df9-cnzvr               1/1     Running   0          9m31s
+rke2-control-plane-system           rke2-control-plane-controller-manager-6cdf48586d-dzqfm           1/1     Running   0          9m29s
 ```
 
 Check the virtual machines in order to see if the cluster has been finally deployed:
+
 ```shell
 onevm list
 ```
@@ -513,6 +525,56 @@ The procedure to install the NVIDIA GPU Operator is as follows:
 
 6. Finally, to use the PCI GPUs on the specific pod, add the `spec.runtimeClassName:nvidia` parameter in the pod/deploy manifest and set [`nvidia.com/gpu`](http://nvidia.com/gpu)`:1` as a requested resource.
 
+Verification:
+
+To use the PCI GPU in a pod deployment add the `spec.runtimeClassName:nvidia` parameter in the pod/deploy manifest and set [`nvidia.com/gpu`](http://nvidia.com/gpu)`:1` as a requested resource.
+
+For example, we can deploy a job targeting the NVIDIA GPU. Create a manifest with the following schema as `l40s-verify.yaml`:
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: l40s-verify-gpu
+spec:
+  template:
+    spec:
+      # Maps the pod to the NVIDIA Container Toolkit
+      runtimeClassName: nvidia 
+      
+      containers:
+      - name: cuda-test
+        image: nvidia/cuda:12.4.1-base-ubuntu22.04
+        command: ["nvidia-smi"]
+        resources:
+          limits:
+            # Requests exactly 1 physical GPU
+            nvidia.com/gpu: 1 
+          requests:
+            nvidia.com/gpu: 1
+      
+      # Ensures the pod doesn't loop if it fails
+      restartPolicy: Never
+  backoffLimit: 0
+```
+
+Then apply the job:
+
+```bash
+kubectl apply -f l40s-verify.yaml & kubectl get pods -l job-name=l40s-verify-gpu -w
+```
+
+Then check the logs:
+
+```bash
+kubectl logs -l job-name=l40s-verify-gpu
+```
+
+Then delete for cleanup:
+
+```bash
+kubectl delete -f l40s-verify.yaml
+```
 
 {{< alert title="Tip" color="success" >}}
 After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}).
