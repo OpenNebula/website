@@ -85,7 +85,7 @@ The API hooks are triggered after the execution of an API call. The specific att
 
 For API hooks, the `$API` keyword can be used in the `ARGUMENTS` attribute to get the information about the API call. If `$API` is used, a base64-encoded XML document containing the API call arguments and result will be passed to the hook command. The schema of the XML is [defined here](https://github.com/OpenNebula/one/blob/master/share/doc/xsd/api_info.xsd).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If the API method defined in `CALL` is an `allocate` or `delete`, the `$API` document will also include the template of the corresponding resource.{{< /alert >}} 
 
 The following example defines an API hook that executes the command `/var/lib/one/remotes/hooks/log_new_user.rb` whenever a new user is created:
@@ -113,7 +113,7 @@ The State hooks are only available for **Hosts** and **Virtual Machines** and th
 | LCM_STATE | YES         | The LCM state that triggers the hook (Only for VM hooks)                                                                                                                |
 | ON        | YES         | For `RESOURCE=VM`, shortcut to define common `STATE`/`LCM_STATE` pairs. Supported values are: PROLOG, RUNNING, SHUTDOWN, STOP, DONE, UNKNOWN, CUSTOM                    |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Note that `ON` is mandatory for VM hooks, use `ON=CUSTOM` with `STATE` and `LCM_STATE` to define hooks on specific state transitions.{{< /alert >}} 
 
 For State hooks, `$TEMPLATE` can be used in the `ARGUMENTS` attribute to get the template (in XML format, base64 encoded) of the resource which triggered the hook. The XSD schema files for the XML document of each object are available [here](https://github.com/OpenNebula/one/tree/master/share/doc/xsd)
@@ -145,7 +145,7 @@ STATE = READY
 RESOURCE = IMAGE
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Check each resource guide for info about [Image states]({{% relref "../../../product/virtual_machines_operation/virtual_machines/images#images-states" %}}), [VM states]({{% relref "../../../product/operation_references/configuration_references/vm_states#vm-states" %}}) and [Host states]({{% relref "../../../product/operation_references/configuration_references/host_states#host-states" %}}){{< /alert >}} 
 
 ## Managing Hooks
@@ -178,7 +178,7 @@ $ onehook create hook.tmpl
 
 We have just created a hook which will be triggered each time a VM switches to `PENDING` state.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that just one hook can be created for each trigger event.{{< /alert >}} 
 
 ### Checking Hook Execution
@@ -277,14 +277,14 @@ The `EXECUTION STDERR` message shows the reason for the hook execution failure, 
 Internal error No such file or directory - /var/lib/one/remotes/hooks/vm-pending.rb
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The hook log can be queried and filtered according to several criteria by using `onehook log`. More info about the `onehook log` command can be found by running `onehook log --help`.{{< /alert >}} 
 
 ### Retrying Hook Executions
 
 We are going to fix the previous error. Let’s first create the `vm-pending.rb` script and then retry the hook execution.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that any hook execution can be retried regardless of its result.{{< /alert >}} 
 
 ```default
@@ -317,7 +317,7 @@ $ onehook show 0
 
 Note the last successful execution record!
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 When a hook execution is retried, the same execution context is used, i.e., arguments and $TEMPLATE/$API values.{{< /alert >}} 
 
 ## Developing Hooks
@@ -326,7 +326,7 @@ The first thing you need to decide is the type of hook you are interested in, ei
 
 In this section you’ll find two simple script hooks (in ruby) for each type. These examples are good starting points for developing custom hooks.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Note that the scripts below import some dependencies that need to be installed properly in the Front-end node. As most of the dependencies are OpenNebula dependencies, these can be used by adding the snippet below to your scripts:
 
 ```default
@@ -502,7 +502,7 @@ $ onehook create autostart-host.tmpl
 $ onehook create autostart-vm.tmpl
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that any command can be specified in `COMMAND`, for debugging (`COMMAND="/usr/bin/echo"`) can be very helpful.{{< /alert >}} 
 
 <a id="hook-manager-events"></a>
@@ -567,5 +567,5 @@ loop do
 end
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that the key and the content are read separately as [ZeroMQ envelopes](http://zguide.zeromq.org/page:all#Pub-Sub-Message-Envelopes) are used.{{< /alert >}} 

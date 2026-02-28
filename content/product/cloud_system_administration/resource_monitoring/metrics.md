@@ -52,7 +52,7 @@ The MONITOR information includes the following data:
 
 The metrics above are directly read from and stored in the monitoring database.
 
-{{< alert title="GPU Monitoring Notes" color="success" >}}
+{{< alert title="GPU Monitoring Notes" type="info" >}}
 - GPU metrics represent combined values across all detected GPUs. This may be a sum or average depending on the metric.
 - GPU load can spike very quickly (e.g. during inference). Since probes run at configurable intervals (MONITOR_VM, default 30s in `monitord.conf`), short spikes may not be captured. Lower the interval to capture more details. You can check monitoring configuration [here]({{% relref "../../../product/cloud_system_administration/resource_monitoring/monitoring_system" %}}).
 - GPU monitoring metrics may not behave as expected when using MIG or vGPU configurations. In such cases interpretation of the values requires caution.

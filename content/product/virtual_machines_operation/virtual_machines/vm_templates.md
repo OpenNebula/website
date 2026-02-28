@@ -61,7 +61,7 @@ Network **interface alias** allows you to have more than one IP on each network 
 
 The alias takes a lease from the network which it belongs to. So, for the OpenNebula it is the same as an NIC and exposes the same management interface, it is just different in terms of the associated Virtual Network interface within the VM.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The Virtual Network used for the alias can be different from that of the NIC of which it is an alias.{{< /alert >}}
 
 [See Network Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-network-section" %}}).
@@ -78,7 +78,7 @@ In Sunstone the TPM attribute can be added to a VM Template in the Update/Create
 
 #### Initial host setup
 
-{{< alert title="Note" color="info" >}}
+{{< alert title="Note" type="info" >}}
 **Only required for manual installations**. This setup is automatically done when installing the
 `opennebula-node-kvm` package.
 {{< /alert >}}
@@ -127,7 +127,7 @@ of them will be handled by either OpenNebula or libvirt itself:
   poweroff/undeploy or stop/suspend, make libvirt destroy the TPM state too. In those cases,
   OpenNebula takes care of saving and restoring it in a transparent way.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 You must be extra careful with manual operations, such as shutting down the VM using `virsh`, as the
 TPM state is not persisted the same way as disks and could be deleted by libvirt. Depending on the
 way the VM uses the TPM, losing its state ranges from being innocuous to quite catastrophic, for
@@ -240,7 +240,7 @@ TPM = [
   MODEL = "tpm-crb" ]
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Check the [VM definition file for a complete reference]({{% relref "../../operation_references/configuration_references/template#template" %}}){{< /alert >}}
 
 Simple Templates can be also created using the command line instead of creating a Template file. For example, a similar Template as the previous example can be created with the following command:
@@ -251,7 +251,7 @@ $ onetemplate create --name test-vm --memory 128 --cpu 1 --disk "Arch Linux" --n
 
 For a complete reference of all the available options for `onetemplate create`, go to the [CLI reference]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}), or run `onetemplate create -h`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 OpenNebula Templates are designed to be hypervisor-agnostic, but there are additional attributes that are supported for each hypervisor. Check the corresponding hypervisor guide for specific details.{{< /alert >}}
 
 <a id="context-overview"></a>
@@ -289,10 +289,10 @@ USER_INPUTS = [
   MEMORY = "M|range||512..8192|2048" ]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Use float types for CPU, and integer types for MEMORY and VCPU. More information in [the Template reference documentation]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This capacity customization can be forced to be disabled for any Template in the cloud view. Read more in the [Cloud View Customization documentation]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/cloud_view.md" %}}).{{< /alert >}}
 
 <a id="vm-guide-user-inputs"></a>
@@ -312,10 +312,10 @@ CONTEXT=[
   MYSQL_PASSWORD="$MYSQL_PASSWORD" ]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If a VM Template with user inputs is used by a [Service Template Role]({{% relref "../multi-vm_workflows/appflow_use_cli#appflow-use-cli" %}}), the user will be also asked for these inputs when the Service is created.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can use the flag `--user-inputs ui1,ui2,ui3` to use them in a non-interactive way.{{< /alert >}}
 
 [See User Inputs Section in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-user-inputs" %}}).
@@ -385,7 +385,7 @@ In order to help the Sunstone user, the Virtual Machine templates can be extende
 
 [See User Inputs Section Metadata in the VM Template reference]({{% relref "../../operation_references/configuration_references/template#template-user-inputs-metadata" %}}).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The attribute `USER_INPUTS_METADATA` only will be used in Sunstone, not in other components of OpenNebula.{{< /alert >}}
 
 So, if we use the previous Template and add the following information:
@@ -455,7 +455,7 @@ End users can select the VM network interfaces when launching new VMs. You can c
 
 When users add network interfaces, you need to define a default NIC model in case the VM guest needs a specific one (e.g., virtio for KVM). This can be done with the [NIC_DEFAULT]({{% relref "../../operation_references/configuration_references/template#nic-default-template" %}}) attribute, or through the Template wizard. Alternatively, you can change the default value for all VMs in the driver configuration file (see the [KVM one]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#kvmg-default-attributes" %}}) for example).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This networking customization can be forced to be disabled for any Template in the cloud view. Read more in the [Cloud View Customization documentation]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/cloud_view.md" %}}).{{< /alert >}}
 
 ## Instantiating Templates
@@ -524,7 +524,7 @@ NIC=[
 
 A user can delete the second disk but cannot delete the first disk because it has a restricted attribute.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The provided attributes replace the existing ones. To add a new disk, the current one needs to be added also.{{< /alert >}}
 
 ```default

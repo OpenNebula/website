@@ -63,7 +63,7 @@ The attribute name is `VM`.
 
 The actual size given on the system and image datastores depends on the storage driver used. The behavior of the driver is described by the `CLONE_TARGET` and `LN_TARGET` attributes, see [Transfer Driver configuration]({{% relref "../../../product/operation_references/opennebula_services_configuration/oned#oned-conf-transfer-driver" %}})
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Running quotas will be increased or decreased depending on the state of the Virtual Machine. The states in which the machine is counted as “Running” are `ACTIVE` , `HOLD`, `PENDING`, and `CLONING`.{{< /alert >}} 
 
 <a id="quota-auth-generic"></a>
@@ -141,7 +141,7 @@ For each quota there are two special limits:
 * **-1** means that the **default quota** will be used
 * **-2** means **unlimited**
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Each quota has an associated usage counter named `<QUOTA_NAME>_USED`. For example `MEMORY_USED` means the total memory used by user/group VMs, and its associated quota is `MEMORY`.{{< /alert >}} 
 
 The following template shows a quota example for a user in plain text. The template limits the overall usage in Datastore 0 to 20Gb (for an unlimited number of images); the number of VMs that can be created to 4, with a maximum memory of 2G and 5 CPUs; and the number of leases on network 1 to 4. Additionally, Image 1 can only be used by 3 VMs at the same time.
@@ -176,7 +176,7 @@ IMAGE=[
 ]
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Note that whenever a network, image, datastore, or VM is used, the corresponding quota counters are created for the user with an unlimited value. This allows the tracking of each user/group's usage even when quotas are not used.{{< /alert >}} 
 
 ## Setting User/Group Quotas
@@ -191,10 +191,10 @@ $ oneuser quota userA
 
 This will open an editor session to edit a quota template (with some tips about the syntax).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Usage metrics are included for information purposes (e.g., CPU_USED, MEMORY_USED, LEASES_USED…) you cannot modify them{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 You can add as many resource quotas as needed even if they have not been automatically initialized.{{< /alert >}} 
 
 Similarly, you can set the quotas for group A with:

@@ -204,7 +204,7 @@ For further details about the API, refer to the [OneForm API Reference Guide](/p
 
 Deprovisioning a cluster triggers these actions: Terraform's destroy, Ansible's cleanup tasks, and OpenNebula's object removal. 
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 Once deprovisioned, the associated cluster and resources cannot be recovered. Always verify the state and content of the provision before proceeding.
 {{< /alert >}}
 

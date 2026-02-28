@@ -11,7 +11,7 @@ weight: "3"
 
 Here you will find a detailed step-by-step guide to creating a new provisioning driver for OpenNebula Formation. It covers all the necessary components starting with the basic configuration, infrastructure provisioned using Terraform, and post-deployment configuration handled by Ansible.
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 Creating a driver requires working knowledge of both **Terraform** and **Ansible**, as they are fundamental to the provisioning and configuration workflows.
 {{< /alert >}}
 

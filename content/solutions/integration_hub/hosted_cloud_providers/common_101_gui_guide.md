@@ -11,7 +11,7 @@ weight: 2
 
 <a id="validate-hosted-cloud"></a>
 
-{{< alert title="Tip" color="success" >}}
+{{< alert title="Tip" type="tip" >}}
 This guide provides the basic steps. If you wish to see a more detailed guide, please refer to [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione#deploying-a-virtual-machine-locally" %}}).
 {{< /alert >}}
 

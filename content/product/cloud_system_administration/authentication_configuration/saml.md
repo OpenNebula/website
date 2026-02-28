@@ -94,10 +94,10 @@ and in the OpenNebula group template you can define two mappings, one for each I
 KEYCLOAK_GROUP="one-users"
 OKTA_GROUP="group1"
 ```
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If a user has successfully authenticated towards a trusted Identity Provider but no group mapping can be performed, the SAML authentication driver will automatically add that user to the OpenNebula group defined in `:mapping_default`.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that user groups are defined on login. This means that, if a user is already logged in and the group map is updated, the user groups will be updated the next time the user is authenticated. Also note that a user may be using a login token that needs to expire for this change to take effect. The maximum lifetime of a token can be set in `oned.conf` for each driver. If you want groups to be fully managed from OpenNebula (not from the Identity Provider), update `DRIVER_MANAGED_GROUPS` in the `saml` `AUTH_MAD_CONF` configuration attribute.{{< /alert >}}
 
 ### Group Admin. Mapping
@@ -187,7 +187,7 @@ curl http://<keycloak_ip>:<keycloak_port>/realms/<keycloak_realm_name>/protocol/
 
 All other IdP-specific configuration settings for the driver should be set up the same way as for any other Identity Provider.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Be aware that, with this configuration, group nesting is enabled. This means that a user member of the Keycloak group `/group1/subgroup1` is considered both a member of `group1` and a member of `subgroup1`. In case of having mappings configured for both the group and the subgroup, the user will be considered a member of both OpenNebula groups. To disable this behavior you can set the **:mapping_mode** configuration attribute to `strict` and turn off **Full group path** in your Keycloak Group Mapper.{{< /alert >}}
 
 

@@ -41,7 +41,7 @@ It is worth noting that you can use the control node itself as a managed node. I
 
 In the sections below you will find a brief overview of reference architectures and requirements for installing an OpenNebula cloud with the most basic configuration. The documentation also includes two short tutorials for performing a simple installation on two of the reference architectures: using local storage for datastores, and using shared storage.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The recommended OS for running the playbooks is Ubuntu 24.04 or 22.04. The tutorials contain configuration and commands tested on these versions. It is possible to use other OSs to perform the installation; for reference please see the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Reference Architectures

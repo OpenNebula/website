@@ -36,17 +36,17 @@ C   ID NAME                                         ENDPOINT                    
 
 It is a good idea to prevent any API access to the master zone during this step (e.g., by filtering out access to API).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you are upgrading from version 6.2+ you can use `onezone disable <zone_id>`.{{< /alert >}} 
 
 ## Step 2. Stop All Zones
 
 Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.{{< /alert >}} 
 
 ## Step 3. Upgrade Master Zone
@@ -64,7 +64,7 @@ Once the master zone has been updated, you need to export federated tables:
 $ onedb backup -v --federated
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running MySQL you will need to supply connection parameters such as `--user` and `--password`, and `--host` if the database is not on localhost. Please refer to [the CLI Reference]({{% relref "../../../product/operation_references/command_line_interface/cli#cli" %}}) for further information.{{< /alert >}} 
 
 ## Step 5. Restore Federated Backup in Slave Zones
@@ -85,5 +85,5 @@ You can now upgrade the slave zones:
 
 You will restart OpenNebula in each zone as part of the upgrade. Once you finish upgrading your master, remove any access restriction to the API imposed in Step 1.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you are upgrading from version 6.2+ you can use `onezone enable <zone_id>`.{{< /alert >}} 

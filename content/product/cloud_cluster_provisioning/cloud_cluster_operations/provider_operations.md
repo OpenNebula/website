@@ -19,7 +19,7 @@ With this guide, you will understand how the drivers and providers and provision
 - enabling and disabling cloud drivers.
 - managing access controls
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 All driver information is securely stored and encrypted. While regular users can list and view driver information, only members of the `oneadmin` group are allowed to manage and modify providers.
 {{< /alert >}}
 
@@ -33,7 +33,7 @@ $ oneform enable <driver_name>
 
 After running the command, you will see that all the driver templates are created and stored in OpenNebula’s database.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Drivers included by default in OpenNebula - such as **aws**, **equinix**, **scaleway**, and **onprem** - are already enabled after a fresh OpenNebula installation. For detailed usage and configuration instructions, refer to each driver's dedicated section in this chapter.
 
 In case you need to develop and enable custom drivers, refer to the [Provider Development Guide](/product/integration_references/cloud_provider_driver_development/) for step-by-step instructions.
@@ -47,7 +47,7 @@ To disable a driver in OpenNebula, run the `oneform disable` command.
 $ oneform disable <driver_name>
 ```
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 This action will not remove the existing instantiated providers and provisions, but it will prevent users from creating new providers and provisions using this driver.
 {{< /alert >}}
 

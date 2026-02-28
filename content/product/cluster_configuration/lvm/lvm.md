@@ -33,7 +33,7 @@ Prerequisites:
 * `oneadmin` needs to belong to the `disk` group.
 * All the nodes need to have access to the same LUNs.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The LVM Datastore does not need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.
 {{< /alert >}}
 
@@ -126,7 +126,7 @@ The following attributes can be set in `/var/lib/one/remotes/etc/datastore/datas
 * `SUPPORTED_FS`: Comma-separated list with every filesystem supported for creating formatted datablocks.
 * `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Can be set for each filesystem type.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list, verify that the corresponding `mkfs.<fs_name>` command is available in all Hosts including the front-end and hypervisors. The system will revert to the default filesystem if an unsupported one is detected.
 {{< /alert >}}
 
@@ -212,7 +212,7 @@ read-write volume that only stores the changed blocks from its origin.
 When the disk is not needed anymore (e.g., VM terminated or disk detached) the volume is deleted as
 well as its snapshots (if any).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This model makes over-provisioning easy, by having pools smaller than the sum of its LVs. The current version of this driver does not allow such cases to happen though, as the pool grows dynamically to be always able to fit all of its Thin LVs even if they were full.{{< /alert >}}
 
 For more details about the inner workings of LVM Thin Provisioning, please refer to the [lvmthin(7)](https://man7.org/linux/man-pages/man7/lvmthin.7.html) man page.

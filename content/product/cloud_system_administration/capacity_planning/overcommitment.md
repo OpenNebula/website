@@ -42,7 +42,7 @@ In particular, the following capacity attributes can be reserved:
 | `RESERVED_CPU` | (CPU percentage) It will be subtracted from the TOTAL CPU. |
 | `RESERVED_MEM` | (KB) It will be subtracted from the TOTAL MEM.             |
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 These values can be negative, in which case you would actually be increasing the overall capacity, thus overcommitting Host capacity.{{< /alert >}} 
 
 The above values can be absolute, for example `RESERVED_MEM=-10240` will add 1GB of memory to the Host. Alternatively, they can be expressed in percentage terms, for example `RESERVED_MEM=-10%` will increase the memory of the Host by 10%.

@@ -229,7 +229,7 @@ The host may take several minutes to synchronize. continue running the `onehost 
 
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 In this configuration, Sunstone exposes its HTTP endpoint on a public network interface. miniONE is an evaluation tool, and this configuration should not be used in production environments.{{< /alert >}}
 
 ## Step 5: Verify the Installation

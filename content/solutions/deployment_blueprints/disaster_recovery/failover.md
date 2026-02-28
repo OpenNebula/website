@@ -51,7 +51,7 @@ To register the image on Site B, log in to the Front-end as user `oneadmin`, and
 oneimage create disk -d 1
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When creating the images, ensure that no VM is configured with parameters or values that are specific to the source cluster on Site A, such as an attached ISO image or storage with paths that are unavailable in the target cluster.
 {{< /alert >}}
 
@@ -123,7 +123,7 @@ TM_MAD_SYSTEM="ceph"
 
 Prepare a text file with the correct information for the VM. This text file will be your VM template, which you will later use to create the Virtual Machine on Site B as explained [below](#create-the-vm-at-site-b).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To ensure that the new VM obtains IP addresses from the range available at Site B, you many need to modify the template and remove the Network context, if at Site B other virtual networks overlap with the IP address ranges specified in the file.
 {{< /alert >}}
 
@@ -155,7 +155,7 @@ rbd mirror pool demote one
 
 Then, on Site B you can proceed to promoting the Ceph images, explained below.
 
-{{< alert title="Tip" >}}
+{{< alert title="Tip" type="tip">}}
 For more details on image promotion and demotion see the [Ceph Documentation](https://docs.ceph.com/en/mimic/rbd/rbd-mirroring/#image-promotion-and-demotion).
 {{< /alert >}}
 
@@ -165,7 +165,7 @@ By promoting an image or an image pool, we tell Ceph that the image or pool is n
 
 As mentioned [above](#demote-ceph-images-or-pool-on-site-a), if Site A is available, images on Site A should be demoted before images on Site B are promoted.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If you start the VMs on Site B without promoting the image, the VM will start but will quickly begin to report I/O errors, since the target Ceph images are non-primary and non-writeable.
 {{< /alert >}}
 

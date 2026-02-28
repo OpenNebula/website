@@ -96,7 +96,7 @@ VMTEMPLATE64="Q09OVEVYVCA9IFsgTkV...2x1c3RlcikiXQo="
 
 ## Create a New Marketplace Appliance
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You can only create new Marketplace Appliances on **Private Marketplaces**{{< /alert >}} 
 
 A Marketplace Appliance can be created in (or imported into) a Marketplace out of an existing Image, Virtual Machine, Virtual Machine Template, or Multi-VM Service Template. The following table lists the command to use for each case:
@@ -177,13 +177,13 @@ ID: 448
 ID: 449
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If a running VM doesn’t have the `TEMPLATE_ID` attribute set, it cannot be imported into the Marketplace.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 NICs are marked as auto, so they can work when the Marketplace Application is exported to a OpenNebula cloud. If you have NIC_ALIAS in the template, NICs are **not** marked as auto, you need to select the network when you instantiate it.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 To avoid clashing names, if no name is specified a hash is added at the end of the main object name. Sub-objects like disks or VM templates in the case of Service Template, always have the hash.{{< /alert >}} 
 
 ### Marketplace Appliance Attributes
@@ -230,7 +230,7 @@ You can also download an app to a standalone file in your desktop:
 $ onemarketapp download 40 /path/to/app
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This command requires that the ONE_SUNSTONE environment variable is set. Read [here]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#manage-users-shell" %}}) for more information.{{< /alert >}} 
 
 ## Additional Commands

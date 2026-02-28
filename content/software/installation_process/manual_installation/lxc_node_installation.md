@@ -16,7 +16,7 @@ weight: "7"
 
 This page shows you how to configure OpenNebula LXC Node from the binary packages.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "front_end_installation" %}}).{{< /alert >}}
 
 ## Overview
@@ -88,7 +88,7 @@ SELINUX=disabled
 
 After the change, you have to reboot the machine.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Depending on your OpenNebula deployment type, the following may be required on your SELinux-enabled nodes:
 
 * package `util-linux` newer than 2.23.2-51 installed
@@ -107,7 +107,7 @@ The OpenNebula Front-end connects to the hypervisor nodes using SSH. Following c
 - from Front-end to hypervisor node with another connection within to another Node (for migration operations)
 - from Front-end to hypervisor node with another connection within back to Front-end (for data copy back)
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 It must be ensured that Front-end and all nodes **can connect to each other** over SSH without manual intervention.{{< /alert >}} 
 
 When OpenNebula server package is installed on the Front-end, an SSH key pair is automatically generated for the `oneadmin` user into `/var/lib/one/.ssh/id_rsa` and `/var/lib/one/.ssh/id_rsa.pub`, the public key is also added into `/var/lib/one/.ssh/authorized_keys`. It happens only if these files don’t exist yet; existing files (e.g., leftovers from previous installations) are not touched! For new installations the [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %}}) is placed for the `oneadmin` from `/usr/share/one/ssh` into `/var/lib/one/.ssh/config`.
@@ -122,10 +122,10 @@ To learn more about the SSH, read the [Advanced SSH Usage]({{% relref "advanced_
 
 You should prepare and further manage the list of host SSH public keys of your nodes (a.k.a. `known_hosts`) so that all communicating parties know the identity of the other sides. The file is located in `/var/lib/one/.ssh/known_hosts` and we can use the command `ssh-keyscan` to manually create it. It should be executed on your Front-end under the `oneadmin` user and copied on all your nodes.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You’ll need to update and redistribute file with Host keys every time any Host is reinstalled or its keys are regenerated.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %}}) shipped with OpenNebula is used, the SSH client automatically accepts Host keys on the first connection. That makes this step optional, as the `known_hosts` will be incrementally automatically generated on your infrastructure when the various connections happen. While this simplifies the initial deployment, it lowers the security of your infrastructure. We highly recommend to populate `known_hosts` on your infrastructure in a controlled manner!{{< /alert >}} 
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
@@ -168,7 +168,7 @@ $ scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
 
 #### Without SSH Authentication Agent (Optional)
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 **Not Recommended**. If you don’t use integrated SSH authentication agent service (which is initially enabled) on the Front-end, you’ll have to distribute also `oneadmin`’s private SSH key on your hypervisor nodes to allow connections among nodes and from nodes to Front-end. For security reasons, it’s recommended to use SSH authentication agent service and **avoid this step**.
 
 If you need to distribute `oneadmin`’s private SSH key on your nodes, proceed with steps above and continue with following extra commands for all your nodes. For example:
@@ -249,7 +249,7 @@ You may want to use the simplest network model that corresponds to the [bridged]
 3: eth1: ...
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Remember that this is only required in the Hosts, not in the Front-end. Also remember that the exact name of the resources is not important (`br0`, `br1`, etc…), however it’s important that the bridges and NICs have the same name in all the Hosts.{{< /alert >}} 
 
 ## Step 6.  Storage Configuration
@@ -264,7 +264,7 @@ In this step, we’ll register the hypervisor node we have configured above into
 
 Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}} 
 
 ### Add Host with Sunstone

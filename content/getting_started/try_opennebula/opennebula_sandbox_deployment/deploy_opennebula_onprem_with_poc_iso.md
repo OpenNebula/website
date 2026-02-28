@@ -26,8 +26,8 @@ The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements
 | **Network** | - At least one NIC for management\* <br />- Recommended 2 NICs (management and service) |
 
 \*Not needed for installation
-{{< alert title="Warning" color="warning" >}}
-**Installing the ISO will delete all the disk data on the server during the installation. You should archive or backup existing data before proceding with the installation.**
+{{< alert title="Warning" type="warning" >}}
+**Installing the ISO will delete all the disk data on the server during the installation.**
 {{< /alert >}}
 
 ## ISO Download and Installation
@@ -52,7 +52,7 @@ dd if=/path/to/your/opennebula-7.0.1-CE.iso of=/dev/sdXX
 
 On Windows, use Rufus to create the USB drive.
 
-{{< alert title="Rufus USB creation mode" color="warning" >}}
+{{< alert title="Rufus USB creation mode" type="warning" >}}
 The USB drive must be created using DD mode or else it won't be bootable.{{< /alert >}}
 
 With the media inserted (or virtually mounted) on the server, after rebooting it, set the right boot device in the BIOS. Some BIOS may be able to boot the media as MBR and UEFI. We recommend to boot is as UEFI for compatibility reasons.
@@ -277,7 +277,7 @@ Press any key and you will be returned to the `onefemenu` screen. If you are log
 
 After the installation, the server runs only the Front-end and needs to be added as a OpenNebula hypervisor to run VMs. Select `add_host` from the `onefemenu` options.
 
-{{< alert title="Avoid the usage of loopback addresses" color="success" >}}
+{{< alert title="Avoid the usage of loopback addresses" type="info" >}}
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
@@ -398,7 +398,7 @@ In this case, to create the default gateway on this virtual net, the command `on
 
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
 
-{{< alert title="Persistence of the gateway" color="warning" >}}
+{{< alert title="Persistence of the gateway" type="warning" >}}
 This gateway is not persistent after reboots. If the frontend is rebooted, the command `onevnet_add_gw <NETWORK_ID>` must be issued again.
 {{< /alert >}}
 
@@ -419,7 +419,7 @@ After the gateway has been created and NAT masquerade has been enabled, the VMs 
 
 Currently, any machine (even if it has access to the frontend) cannot reach ths Virtual Network because doesn't know how to arrive to it. For that, a route via the frontend external IP is needed. A route can be added locally.
 
-{{< alert title="Routing setup" color="Success" >}}
+{{< alert title="Routing setup" type="info" >}}
 This document must not be taken as a manual to configure routing. These are local solutions to test the access. None of this solutions will persist after a reboot of the workstation where they have been applied.
 {{< /alert >}}
 
