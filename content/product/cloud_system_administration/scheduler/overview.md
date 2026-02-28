@@ -47,7 +47,7 @@ NIC [0]: NETWORK [1] requires CLUSTER [100]
 
 These automatic requirements are combined with any additional requirements specified in the Virtual Machine template. Additionally, a resource must have sufficient capacity to accommodate the VM.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Every Host in a Cluster **must** have access to all System and Image Datastores defined in that Cluster.{{< /alert >}} 
 
 ### Host Requirements
@@ -102,7 +102,7 @@ For example, to prioritize Datastores labeled as *Production*:
 SCHED_DS_REQUIREMENTS="MODE=Production"
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Administrators must manually assign `MODE` labels to Datastores.{{< /alert >}} 
 
 ### Virtual Networks Requirements
@@ -118,7 +118,7 @@ NIC = [ NETWORK_MODE = "auto", SCHED_REQUIREMENTS = "TRAFFIC_TYPE = \"private\""
 
 The first NIC will attach to a *public* network, while the second will connect to a *private* network.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Administrators must manually label Virtual Networks with `TRAFFIC_TYPE`.{{< /alert >}} 
 
 ## Resource Selection

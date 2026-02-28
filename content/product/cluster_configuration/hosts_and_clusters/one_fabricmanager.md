@@ -163,7 +163,7 @@ All commands include optional arguments:
 
 If you do not specify any these parameters, the command is executed for all available hosts.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You must manually deactivate any currently active partition that shares GPU resources with the new partition you wish to activate. The Fabric Manager does not automatically resolve resource conflicts, meaning you cannot activate a new partition if its required GPUs or NVLinks are already claimed by an active partition. For example: if Partitions P1 and P2 (together using all 8 GPUs) are currently active, activation fails for Partition P0 with 8 GPUs.
 {{< /alert >}}
 

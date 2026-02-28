@@ -38,10 +38,10 @@ The Error Code will contain one of the following values:
 | 0x4000  | ALLOCATE       | The resource cannot be allocated.                                     |
 | 0x8000  | LOCKED         | The resource is locked.                                               |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 All methods expect a session string associated to the connected user as the first parameter. It has to be formed with the contents of the ONE_AUTH file, which will be `<username>:<password>` with the default ‘core’ auth driver.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Each XML-RPC request has to be authenticated and authorized. See the [Auth Subsystem documentation]({{% relref "../../../product/cloud_system_administration/multitenancy/auth_overview#auth-overview" %}}) for more information.{{< /alert >}} 
 
 The information strings returned by the `one.*.info` methods are XML-formatted. The complete XML Schemas (XSD) reference is included at the end of this page. We encourage you to use the `-x` option of the [command line interface]({{% relref "../../../product/operation_references/command_line_interface/cli#cli" %}}) to collect sample outputs from your own infrastructure.
@@ -68,7 +68,7 @@ Can be also given to OpenNebula with the following XML:
 
 OpenNebula features a CLI that wraps the XML-RPC requests. For each XML-RPC request, the session token is authenticated, and after that the Request Manager generates an authorization request that can include more than one operation. The following tables document these requests from the different CLI commands.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Commands with marked with \* are asynchronous. The success response for these commands means that all preconditions passed and the action started. To check the action result you need to inspect the resource or its state.{{< /alert >}} 
 
 <a id="onevm-api"></a>
@@ -126,7 +126,7 @@ Commands with marked with \* are asynchronous. The success response for these co
 | exec-retry                                                                                                                                              | one.vm.retryexec          | VM:MANAGE                                                |
 | exec-cancel                                                                                                                                             | one.vm.cancelexec         | VM:MANAGE                                                |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The **deploy** action requires the user issuing the command to have VM:ADMIN rights. This user will usually be the scheduler with the oneadmin credentials.
 
 The scheduler deploys VMs to the Hosts over which the VM owner has MANAGE rights.
@@ -162,7 +162,7 @@ The **backup** action can be done by regular users through the schedule action i
 | show                                     | one.host.info     | HOST:USE                             |
 | list<br/>top                             | one.hostpool.info | HOST:USE                             |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 onehost sync is not performed by the core, it is done by the ruby command onehost.{{< /alert >}} 
 
 ### onecluster
@@ -571,7 +571,7 @@ Sample template string:
 MEMORY=4096\nCPU=4\nVCPU=4
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrites the template `DISK` attribute and as such must contain the entire `DISK` definition.{{< /alert >}} 
 
 ### one.template.update
@@ -1165,7 +1165,7 @@ The supported attributes are:
 | `CONTEXT`       | Any value, except `ETH*`. **Variable substitution will be made**                                                         |
 | `BACKUP_CONFIG` | `FS_FREEZE`, `KEEP_LAST`, `BACKUP_VOLATILE`, `MODE`, `INCREMENT_MODE`                                                    |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Visit the [Virtual Machine Template reference]({{% relref "../../../product/operation_references/configuration_references/template#template" %}}) for a complete description of each attribute{{< /alert >}} 
 
 ### one.vm.recover
@@ -1426,7 +1426,7 @@ For example:
 
 ### one.vmpool.info
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Some attributes e.g. `TEMPLATE`, `USER_TEMPLATE` are limited in this call, see also `one.vmpool.infoextended`.{{< /alert >}} 
 
 - **Description**: Retrieves information for all or part of the VMs in the pool.
@@ -1465,7 +1465,7 @@ The state filter can be one of the following:
 |      10 | CLONING                   |
 |      11 | CLONING_FAILURE           |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Value 7 is reserved for FAILED VMs for compatibility reasons.{{< /alert >}} 
 
 ### one.vmpool.infoextended
@@ -1504,7 +1504,7 @@ The state filter can be one of the following:
 |      10 | CLONING                   |
 |      11 | CLONING_FAILURE           |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Value 7 is reserved for FAILED VMs for compatibility reasons.{{< /alert >}} 
 
 ### one.vmpool.infoset
@@ -2280,7 +2280,7 @@ The third parameter must be an OpenNebula ATTRIBUTE=VALUE template, with these v
 | OUT    | Int         | Error code.                                                      |
 | OUT    | Int         | ID of the object that caused the error.                          |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The ACL rules do not apply to VNET reservations in the same way as they do to normal VNETs and other objects. Read more in the [ACL documentation guide]({{% relref "../../../product/cloud_system_administration/multitenancy/chmod#manage-acl-vnet-reservations" %}}).{{< /alert >}} 
 
 ### one.vn.lock
@@ -2353,7 +2353,7 @@ The ACL rules do not apply to VNET reservations in the same way as they do to no
 
 The range can be used to retrieve a subset of the pool, from the ‘start’ to the ‘end’ ID. To retrieve the complete pool, use `(-1, -1)`; to retrieve all the pool from a specific ID to the last one, use `(<id>, -1)`, and to retrieve the first elements up to an ID, use `(0, <id>)`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The ACL rules do not apply to VNET reservations in the same way as they do to normal VNETs and other objects. Read more in the [ACL documentation guide]({{% relref "../../../product/cloud_system_administration/multitenancy/chmod#manage-acl-vnet-reservations" %}}).{{< /alert >}} 
 
 ## Actions for Security Group Management
@@ -3543,7 +3543,7 @@ Sample template string:
 MEMORY=4096\nCPU=4\nVCPU=4
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Declaring a field overwrites the template. Thus, declaring `DISK=[...]` overwrites the template `DISK` attribute and as such, must contain the entire `DISK` definition.{{< /alert >}} 
 
 ### one.vrouter.attachnic
@@ -4793,7 +4793,7 @@ Sample vntemplate string:
 VN_MAD=bridge\nVLAN_ID=4
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Declaring a field overwrites the vntemplate. Thus, declaring `VN_MAD=[...]` overwrites the vntemplate `VN_MAD` attribute.{{< /alert >}} 
 
 ### one.vntemplate.update

@@ -76,7 +76,7 @@ With the appropriate policies implemented in the Service, these mechanisms allow
 
 There are several actions available to retrieve the information of the Virtual Machine and the Service it belongs to. A Virtual Machine can also retrieve information of other Virtual Machines that are part of the Service.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For a detailed version use the `--json` option and all the information will be returned in JSON format. Use the option `--extended` to increase the information retrieved.{{< /alert >}} 
 
 ##### Retrieving Information of the VM
@@ -91,7 +91,7 @@ STATE               : RUNNING
 IP                  : 192.168.122.23
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Specifying a VM ID different of a different VM will only work to retrieve information of VMs in the same OneFlow Service or the same Virtual Router.{{< /alert >}} 
 
 ##### Retrieving information of the Service
@@ -155,7 +155,7 @@ $ onegate vnet show 0
   ID                  : 0
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This option is only available for Virtual Routers and only for Virtual Networks related to that Virtual Router, i.e., only Virtual Networks attached or related somehow in the reservation hierarchy to another attached Virtual Network can be retrieved.{{< /alert >}} 
 
 ##### Updating the VM Information

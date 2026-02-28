@@ -14,7 +14,7 @@ weight: "4"
 
 ## Installation and Configuration
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you are already running the Prometheus AlertManager you can skip this section and add the alarms described in the next section to your rules file.{{< /alert >}} 
 
 AlertManager is part of the Prometheus distribution and should already be installed in your system after completing the installation process, [see more details here]({{% relref "install#monitor-alert-installation" %}}).
@@ -100,7 +100,7 @@ Alert Rules can be found in `/etc/one/prometheus/rules.yml`.
 
 ## Setting up Alarms for OpenNebula in HA
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 To avoid duplicate alert notifications you should configure **all** your alertmanager instances to run in HA mode,{{< /alert >}} 
 then point **all** your prometheus instances to them.
 

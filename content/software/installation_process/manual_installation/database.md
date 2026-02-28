@@ -23,7 +23,7 @@ It’s recommended to install the database backend now. Later, when doing the [F
 
 ## SQLite Setup
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The information about SQLite is only for information, default installation is preconfigured for SQLite and no actions are required!{{< /alert >}} 
 
 The **SQLite** backend is the default database backend. It's not recommended for production use as it doesn’t perform well under load and on bigger infrastructures. For most cases, it’s recommended to use [MySQL/MariaDB]({{% relref "#mysql-setup" %}}).
@@ -57,7 +57,7 @@ The **MySQL/MariaDB** backend is an alternative to the default SQLite backend. I
 
 First of all, you need a working MySQL or MariaDB server. You can either deploy one for the OpenNebula installation following the guides for your operating system or reuse an existing one accessible via the Front-end. We assume you have a working MySQL/MariaDB server installed.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 MySQL should be recent enough to support the FULLTEXT indexing used by OpenNebula to implement the VM search feature. For MariaDB, that means at least a late minor version of release 10.0 if you use the default InnoDB.{{< /alert >}} 
 
 ### Configure

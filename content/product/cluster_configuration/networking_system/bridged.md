@@ -43,7 +43,7 @@ The following configuration parameters can be adjusted in `/var/lib/one/remotes/
 | `:keep_empty_bridge` | Set to `true` to preserve bridges with no virtual interfaces left.                             |
 | `:ip_bridge_conf`    | *(Hash)* Options passed to `ip` cmd. on bridge create (`ip link add <bridge> type bridge ...`) |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Remember to run `onehost sync -f` to synchronize the changes to all the nodes.{{< /alert >}} 
 
 <a id="bridged-net"></a>
@@ -79,5 +79,5 @@ For example to only allow a VM to use the VLANS IDs 100, 105, 106 and 107, add t
 VLAN_TAGGED_ID = "100,105-107"
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The VM is responsible for tagging the VLAN traffic, no tagging is performed in the bridge{{< /alert >}} 

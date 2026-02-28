@@ -65,7 +65,7 @@ ID: 100
 
 ## Tuning & Extending
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Any modification of code should be handled carefully. Although we might provide hints on how to fine-tune various parts by customizing the OpenNebula internals, in general, **it’s NOT recommended to make changes in the existing code**. Please note the changes will be lost during the OpenNebula upgrade and have to be introduced back again manually!{{< /alert >}} 
 
 System administrators and integrators are encouraged to modify these drivers in order to integrate them with their data center. Please refer to the [Market Driver Development]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-market#devel-market" %}}) guide to learn about the driver details.

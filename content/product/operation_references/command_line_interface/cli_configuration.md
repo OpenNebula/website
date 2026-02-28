@@ -77,10 +77,10 @@ $ cat ~/.one/one_auth
 regularuser:password
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Please note that the example above is intended for a user interacting with OpenNebula from the Front-end, but you can use it from any other computer. Just set the appropriate hostname and port in the `ONE_XMLRPC` variable.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you do not want passwords to be stored in plain files, protected with basic filesystem permissions, please refer to the token-based authentication mechanism described below.{{< /alert >}} 
 
 An alternative method to specify credentials and OpenNebula endpoint is using command line parameters. Most of the commands can understand the following parameters:
@@ -98,7 +98,7 @@ Password:
 [...]
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 You shouldn't use `--password` parameter in a shared machine. Process parameters can be seen by any user with the command `ps` so it is highly insecure.{{< /alert >}} 
 
 * **ONE_SUNSTONE**: URL of the Sunstone portal, used for downloading Marketplace Apps streamed through Sunstone. If this is not specified, it will be inferred from `ONE_XMLRPC` (by changing the port to 9869), and if that ENV variable is undefined as well, it will default to `http://localhost:9869`.

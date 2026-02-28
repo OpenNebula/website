@@ -79,12 +79,12 @@ Alternatively, a VM that wasnâ€™t created as persistent can be saved before itâ€
 
 Any of the these two actions will create a new Template. This Template can be used to **restore the state of a VM after deletion**. This template contains a copy of each one of the original disk images.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If you delete this template, all the disk contents will be also lost.{{< /alert >}} 
 
 ![sunstone_save_vm_3](/images/sunstone_save_vm_3.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 **Avoid making a persistent copy of a persistent copy!** Although there are use cases where it is justified, you will end up with a long list of Templates and the disk usage quota will decrease quickly.{{< /alert >}} 
 
 For more details about the limitations of saved VM, continue to the [Managing Virtual Machines guide]({{% relref "../../virtual_machines_operation/virtual_machines/vm_instances#vm-guide2-clone-vm" %}}).

@@ -21,5 +21,5 @@ We have defined this architecture to be much simpler than traditional cloud comp
 
 {{< image path="/images/overview_edge-cluster.svg" alt="Edge Cluster Architecture Overview" align="center" width="80%" pb="20px" >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The White Paper on the True Hybrid Cloud Architecture is publicly available for [download](https://support.opennebula.pro/hc/en-us/articles/360050302811-Edge-Cloud-Architecture-White-Paper).{{< /alert >}} 

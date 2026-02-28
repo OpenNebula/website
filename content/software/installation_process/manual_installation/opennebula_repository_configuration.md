@@ -25,7 +25,7 @@ Follow the steps below based on your OpenNebula edition and Front-end operating 
 
 OpenNebula Systems provides an OpenNebula Enterprise Edition to customers with an active support subscription. To distribute the packages of the Enterprise Edition there is a private enterprise repository accessible only to those customers that contains all packages (including major, minor, and maintenance releases). You only need to change your repository configuration on Front-end once per major release and you’ll be able to get every package in that series. Private repositories contain all OpenNebula released packages.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You should have received the customer access token (username and password) to access these repositories. You have to substitute the appearance of `<token>` with your customer specific token in all instructions below.{{< /alert >}}
 
 ### AlmaLinux/RHEL
@@ -71,7 +71,7 @@ EOT
 
 ### Debian/Ubuntu
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If the commands below fail, ensure you have `gnupg`, `wget` and `apt-transport-https` packages installed and retry. E.g.,
 
 ```default
@@ -81,7 +81,7 @@ If the commands below fail, ensure you have `gnupg`, `wget` and `apt-transport-h
 
 First, add the repository signing GPG key on the Front-end by executing as user `root`:
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 It might be necessary to create /etc/apt/keyrings directory in Debian 11 because it does not exist by default:
 
 ```default
@@ -122,7 +122,7 @@ and then continue with repository configuration:
 # apt-get update
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can point to a specific 6.6.x version by changing the occurrence of shorter version 6.6 in any of the above commands to the particular full 3 components version number (X.Y.Z). For instance, to point to version 6.6.1 on Ubuntu 22.04, use the following command:{{< /alert >}} 
 
 > ```default
@@ -187,7 +187,7 @@ EOT
 
 ### Debian/Ubuntu
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If the commands below fail, ensure you have `gnupg`, `wget` and `apt-transport-https` packages installed and retry. E.g.,{{< /alert >}} 
 
 ```default

@@ -35,7 +35,7 @@ OneForm’s architecture is organized into three main layers:
 The main configuration file for OneForm is located at `/etc/one/oneform-server.conf`.
 It uses the **YAML syntax**, with the parameters listed in the table below.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 After modifying the configuration file, restart the OneForm service for changes to take effect.
 {{< /alert >}}
 

@@ -234,7 +234,7 @@ Deprovisioning a Cluster triggers the following actions:
 * Ansible cleanup tasks
 * OpenNebula object removal
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 Once deprovisioned, the associated Cluster and resources cannot be recovered. Always verify the state and content of the Provision before proceeding.
 {{< /alert >}}
 

@@ -21,5 +21,5 @@ The document describes the reference architecture for Basic and Advanced OpenNeb
 
 {{< image path="/images/open_cloud_arch-view.svg" alt="OpenNebula Cloud Architecture Overview" align="center" width="80%" pb="20px" >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The White Paper on the Open Cloud Architecture is publicly available for [download](https://support.opennebula.pro/hc/en-us/articles/204210319-Open-Cloud-Reference-Architecture-White-Paper).{{< /alert >}} 

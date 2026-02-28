@@ -29,10 +29,10 @@ Datastore setup can be done either manually or automatically:
 
 Simply mount the **Image** Datastore directory in the Front-end in `/var/lib/one/datastores/<datastore_id>`. Note that if all the Datastores are of the same type you can mount the whole `/var/lib/one/datastores` directory.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The Front-end only needs to mount the Image Datastores and **not** the System Datastores.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 **NFS volumes mount tips**. The following options are recommended to mount NFS shares:`soft, intr, rsize=32768, wsize=32768`. With the documented configuration of libvirt/kvm, the image files can be accessed as the `oneadmin` user. If the files must be read by `root`, the option `no_root_squash` must be added.{{< /alert >}}
 
 ## Manual Host Setup
@@ -47,7 +47,7 @@ Automatic NFS setup is an opt-in feature in the NFS drivers. It’s controlled v
 
 The unmounting/fstab cleanup is performed in a lazy way, similar to mounting. This means regular VM operations (e.g., deploy or terminate) will check whether the current machine has mounted a datastore which either has `NFS_AUTO_ENABLE` set to `no`, or does not exist anymore, and clean it up.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 It is recommended to not to delete the shared filesystem from the NFS server until you are sure that no Hosts still have it mounted.{{< /alert >}}
 
 Other than that, the system state at the end will be similar to the way specified in the Manual Setup sections; each datastore will mount its own NFS share in `/var/lib/one/datastores/<datastore_id>`. In fact, there is no issue in mixing operations between datastores (i.e., managing some of them manually and some others automatically).
@@ -80,7 +80,7 @@ $ onedatastore create systemds.txt
 ID: 101
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When different System Datastores are available the `TM_MAD_SYSTEM` attribute will be set after picking the datastore.{{< /alert >}}
 
 ### Create Image Datastore
@@ -111,7 +111,7 @@ ID: 100
 
 Also note that there are additional attributes that can be set. Check the [datastore template attributes]({{% relref "datastores#datastore-common" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Be sure to use the same `TM_MAD` for both the System and Image Datastores. When combining different transfer modes, check the section below.{{< /alert >}}
 
 ### Additional Configuration
@@ -150,7 +150,7 @@ $ onedatastore create ds.conf
 ID: 102
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.
 {{< /alert >}}
 
@@ -160,12 +160,12 @@ Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the cor
 
 When using the NFS/NAS Datastore, you can improve VM performance by placing the disks in the Host’s local storage area. In this way, you will have a repository of images (distributed across the Hosts using a shared FS) but the VMs running from the local disks. This effectively combines NFS/NAS and [Local Storage datastores]({{% relref "local_ds#local-ds" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This setup will increase performance at the cost of increasing deployment times.{{< /alert >}}
 
 To configure this scenario, simply configure a shared Image and System Datastores as described above (`TM_MAD=shared`). Then, add a Local Storage System Datastore (`TM_MAD=ssh`). Any image registered in the Image Datastore can now be deployed using any of these Datastores.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If you added the NFS/NAS Datastores to the cluster, you need to add the new Local Storage System Datastore to the very same clusters.{{< /alert >}}
 
 To select the (alternate) deployment mode, add the following attribute to the Virtual Machine template:
@@ -195,7 +195,7 @@ For example, a system with an Image Datastore (`1`) with three images and three 
     `-- d0e0df1fb8cfa88311ea54dfbcfc4b0c
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The canonical path for `/var/lib/one/datastores` can be changed in [/etc/one/oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}}) with the `DATASTORE_LOCATION` configuration attribute{{< /alert >}}
 
 The `shared` transfer driver assumes that the datastore is mounted on all the Hosts (Front-end and Hosts) of the cluster. Typically this is achieved through a **shared filesystem**, e.g., NFS, GlusterFS, or Lustre. This transfer mode usually reduces VM deployment times, but it can also become a bottleneck in your infrastructure and degrade your Virtual Machines’ performance if the virtualized services perform disk-intensive workloads. Usually, this limitation may be overcome by:

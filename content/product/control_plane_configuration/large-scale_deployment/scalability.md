@@ -156,7 +156,7 @@ When oned is started in read-only (or cache) mode, it resolves any read-only ope
 > | one.userpool.info       | one.image.info         | one.vmgroup.info    |
 > | one.datastorepool.info  | one.host.info          | one.zone.raftstatus |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Read-only operations enforce any ACL restriction or ownership checks.{{< /alert >}} 
 
 Any other API call is forwarded to the active oned process. In this case, the cache server is acting as a simple proxy. The architecture recommended to be used with the cache server is depicted in the following figure:
