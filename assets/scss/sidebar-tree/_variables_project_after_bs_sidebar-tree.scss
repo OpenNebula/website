@@ -1,0 +1,47 @@
+/**
+* Styles for sidebar tree component that are only colors
+*/
+
+@include color-mode(dark) {
+
+  .ts-sidebar {
+    background-color: #20252d;
+  }
+  .td-sidebar .td-search__input {
+    border-color: #8F9392;
+  }
+  .td-sidebar .td-search__input:hover {
+    border-color: #0098C3;
+  }
+  .td-sidebar-nav a.active {
+    color: #F5F5F5 !important;
+  }    
+ .td-sidebar-link {
+    color: #E9E9E9 !important;
+  }
+ .td-sidebar-link:hover {
+    color: #80CDE6 !important;
+  }  
+}
+
+@include color-mode(light) {
+
+  .td-sidebar {
+    background-color: #FFFFFF;
+  }
+  .td-sidebar .td-search__input {
+    border-color: #c7c9c8;
+  } 
+  .td-sidebar .td-search__input:hover {
+    border-color: #0098C3;
+  }
+  .td-sidebar-nav a.active {
+    color: #353735 !important;
+  }
+  .td-sidebar-link {
+    color: #575C5B !important;
+  }
+ .td-sidebar-link:hover {
+    color: #007099 !important;
+  }
+}
