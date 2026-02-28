@@ -1,0 +1,17 @@
+/**
+* Styles for toc component that are only colors
+*/
+
+@include color-mode(dark) {
+
+  .ts-sidebar-toc {
+    background-color: #20252d;
+  }
+}
+
+@include color-mode(light) {
+
+  .td-sidebar-toc {
+    background-color: #ffffff;
+  }
+}

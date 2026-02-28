@@ -1,0 +1,64 @@
+@import "../_styles_fonts";
+
+.alert {
+  border-radius: 6px;
+  border-width: 1px; 
+  border-style: solid;
+  padding: 24px 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.alert-heading {
+  @include body-medium-bold;
+}
+
+.alert-body {
+  @include body-small;
+}
+
+.alert-icon {
+  width: 24px;
+  height: 24px;
+}
+
+// Information alert
+.alert-info {
+  background-color: #F5F5F5;
+  color: #575C5B;
+  border-left-color: #007099;
+  .alert-heading {
+    color: #007099;
+  }
+}
+
+// Warning alert
+.alert-warning {
+  background-color: #F5F5F5;
+  color: #575C5B;
+  border-left-color: #AF8400;
+  .alert-heading {
+    color: #AF8400;
+  }
+}
+
+// Danger alert
+.alert-danger {
+  background-color: #F5F5F5;
+  color: #575C5B;
+  border-left-color: #C30049;
+  .alert-heading {
+    color: #C30049;
+  }
+}
+
+// Tip alert
+.alert-tip {
+  background-color: #F5F5F5;
+  color: #575C5B;
+  border-left-color: #007099;
+  .alert-heading {
+    color: #007099;
+  }
+}

@@ -1,0 +1,75 @@
+<!-- <div class="row">
+  {{ range .Page.Site.Sections.ByWeight }}
+  <div class="col-lg-6 mb-4">
+    <div class="td-card card border h-100">
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a>
+        </h4>
+        
+        <div class="card-text">
+          <p>{{ .Description | markdownify }}</p>
+          
+          <ul class="list-unstyled mt-3">
+            {{ range .Pages.ByWeight }}
+            <li class="mb-2">
+              <a href="{{ .RelPermalink }}" class="text-muted small">
+                <i class="fas fa-chevron-right me-1" style="font-size: 0.7rem;"></i>
+                <span class="text-dark"><strong>{{ .LinkTitle | default .Title }}</strong></span>
+              </a>
+              {{ with .Description }}
+                <p class="text-muted ms-3 mb-0" style="font-size: 0.8rem;">{{ . | truncate 100 }}</p>
+              {{ end }}
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</div> -->
+
+<div class="section-index">
+  {{ range .Page.Site.Sections.ByWeight }}
+    
+    <div class="td-content">
+      <h2>
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a>
+      </h2>
+    </div>
+    
+    {{ with .Description }}
+      <div class="td-content">
+        <p>{{ . }}</p>
+      </div>      
+    {{ end }}
+
+    <div class="td-card card border me-4">
+      <div class="card-columns">
+        <div class="entry">
+          {{ range .Pages.ByWeight }}
+            <div class="card">
+              <div class="card-header">
+                <a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a>
+              </div>
+              <div class="card-body">
+                {{ with .Description }}
+                  <p>
+                    <inl>{{ . }}</inl>
+                  </p>
+                {{ end }}
+                {{ range .Pages.ByWeight }}
+                  <inl>
+                    <a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a>
+                  </inl>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}        
+        </div>
+      </div>
+    </div>
+
+  {{ end }}
+</div>
