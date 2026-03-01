@@ -2,8 +2,6 @@
 * This file defines all the styles that need to change between dark and light modes
 */
 
-@import "toc/_variables_project_after_bs_toc";
-
 // ****************** Dark mode ****************** 
 @include color-mode(dark) {
 
