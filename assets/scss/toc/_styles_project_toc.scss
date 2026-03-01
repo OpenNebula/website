@@ -1,0 +1,42 @@
+@import "_styles_fonts";
+
+.td-sidebar-toc {
+  padding: 0;
+  width: 100%;
+}
+
+.td-toc {
+  margin-top: 88px;
+}
+
+.td-toc-title {
+  padding-left: 16px;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  @include body-small-bold;
+}
+
+.td-toc-title__link {
+  display: none;
+}
+
+.td-toc #TableOfContents {
+  margin-left: 0px;
+}
+
+.td-toc  #TableOfContents {
+  @include body-small;
+}
+
+.td-toc #TableOfContents a {
+  color: var(--body-disabled-color)
+}
+
+.td-toc #TableOfContents a.active {
+  color: var(--body-color);
+  background-color: transparent;
+  border-left: 1px solid var(--link-color);
+}
+
+
