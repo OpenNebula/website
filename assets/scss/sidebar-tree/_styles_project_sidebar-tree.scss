@@ -1,6 +1,35 @@
-/**
-* Styles for breadcrumb component that are not colors
-*/
+@import "_styles_fonts";
+
+.sidebar-description {
+  @include body-small;
+}
+
+.td-sidebar-menu {
+  padding-top: 14px;
+  @include body-small-medium; 
+  a {
+    color: var(--headings-color);
+    &:hover {
+      color: var(--link-color);
+    }
+  }
+}
+
+.ul-2 a {
+  @include body-small;
+}
+
+.sidebar-title {
+  margin-bottom: 8px;
+}
+
+.td-sidebar-nav__section-title.td-sidebar-nav__section.with-child {
+  padding-left: 20px;
+}
+
+nav.foldable-nav .ul-1 .with-child > label::before {
+  padding-left: 0;
+}
 
 .td-sidebar-nav .td-sidebar-link.tree-root {
   border-bottom-width: 0px;
@@ -8,5 +37,8 @@
   padding-bottom: 0px;
 }
 .td-sidebar {
-  padding-bottom: 6rem;
+  padding-left: 32px;
+  max-width: 242px;
 }
+
+

@@ -1,7 +1,7 @@
 {{/* We cache this partial for bigger sites and set the active class client side. */ -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldDelayActive := ge (len .Site.Pages) $sidebarCacheLimit -}}
-<div id="td-sidebar-menu" class="td-sidebar__inner{{ if $shouldDelayActive }} d-none{{ end }}">
+<div id="td-sidebar-menu" class="td-sidebar-menu td-sidebar__inner{{ if $shouldDelayActive }} d-none{{ end }}">
   {{ if not .Site.Params.ui.sidebar_search_disable -}}
   <form class="td-sidebar__search d-flex align-items-center">
     {{ partial "search-input.html" . }}
@@ -25,10 +25,9 @@
     <i id="clear-search" class="fa-solid fa-xmark" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; display: none;"></i>
   </div-->
 
-  <div class="sidebar-header">
-    </p>
-    <h4>Documentation</h4>
-    <p>Learn basics, installation, configuration and use of OpenNebula.</p>
+  <div class="sidebar-header">    
+    <p class="body-bold sidebar-title">Documentation</p>
+    <p class="sidebar-description">Learn basics, installation, configuration and use of OpenNebula.</p>
   </div>
 
   <nav class="td-sidebar-nav collapse pt-0
