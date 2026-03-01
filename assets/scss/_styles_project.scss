@@ -42,12 +42,15 @@ p {
   margin-bottom: 24px;
 }
 
+p.body-bold {
+  @include body-bold;
+}
+
 .td-content {
   > h2 {
     font-weight: $font-weight-bold;
   }
 }
-
 
 // Delete margin in empty article
 .article-meta {

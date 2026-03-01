@@ -128,6 +128,14 @@
   color: var(--body-color);  
 }
 
+@mixin body-small-medium {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--body-color);  
+}
+
 @mixin body-small-bold {
   font-size: 14px;
   font-style: normal;
