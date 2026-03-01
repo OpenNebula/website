@@ -2,9 +2,7 @@
 * This file defines all the styles that need to change between dark and light modes
 */
 
-@import "sidebar-tree/_variables_project_after_bs_sidebar-tree";
 @import "toc/_variables_project_after_bs_toc";
-@import "footer/_variables_project_after_bs_footer";
 
 // ****************** Dark mode ****************** 
 @include color-mode(dark) {
@@ -22,6 +20,8 @@
 
   --breadcrumb-icon-color: #1393C2;
   --breadcrumb-link-color: #1393C2;
+
+  --footer-background-color: #FFF;  
 
   // Display dark logo
   .logo-light { display: none; }
@@ -111,6 +111,9 @@
   --alert-tip-font-color: #007099;  
   --alert-tip-background-color: #EAF9FF;
   --alert-tip-icon-color: #007099;
+
+  --footer-background-color: #FFF;
+  --footer-linkicon-color: #007099;
 
   // Display light logo
   .logo-light { 
