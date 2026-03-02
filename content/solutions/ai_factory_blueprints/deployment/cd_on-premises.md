@@ -58,9 +58,53 @@ The OneDeploy tool is a collection of Ansible playbooks that streamline the inst
     cd one-deploy
     ```
 2.  **Install dependencies**:
-    OneDeploy requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, follow the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki.
+    OneDeploy requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, consult the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki.
 
-For guidance on how to execute the playbooks in different cloud architectures, see the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
+    Install PIPx:
+    ```bash
+    apt install pipx
+    ```
+
+    Install Ansible:
+
+    ```bash
+    pipx install 'ansible-core<2.16'
+    ```
+
+    Install Hatch:
+
+    ```bash
+    pipx install hatch==1.16.2
+    pipx ensurepath
+    source ~/.bashrc
+    ```
+    From within the one-deploy directory install the requirements:
+
+    ```bash
+    make requirements
+    ```
+
+    To inspect the new virtual environment run:
+
+    ```bash
+    hatch env show
+    ```
+
+    Spawn a new shell in the virtual environment:
+
+    ```bash
+    hatch shell
+    ```
+
+    After activating the virtual environment, your terminal prompt should begin with `(one-deploy)`:
+
+    ```bash
+    (one-deploy) root@vgpu1:~/one-deploy#
+    ```
+
+    You should run the AI Factory deployment in the following step in a terminal with this virtual environment activated. 
+
+    For guidance on how to execute the playbooks in different cloud architectures, see the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
 
 ## AI Factory Deployment
 
@@ -70,8 +114,11 @@ Once the prerequisites including configurations and dependencies are met, procee
 
 Use a dedicated inventory file to define the general cloud architecture, where you specify PCI devices for passthrough.
 
-Here is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring OneDeploy for different architectures like shared or Ceph-based storage, refer to the official [OneDeploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
+Below is an example inventory file, which you can adapt for your environment. This example is based on the `inventory/pci_passthrough.yml` file found in the `one-deploy` repository. For more details on the `pci_passthrough` roles, refer to the [PCI Passthrough wiki page](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough). 
 
+The inventory file shown below is a basic example, and you should adjust it to match your specific cloud architecture, including your frontend and node IP addresses, network configuration (`vn`), and datastore setup (`ds`). For more detailed information on configuring OneDeploy for different architectures like shared or Ceph-based storage, refer to the official [OneDeploy wiki](https://github.com/OpenNebula/one-deploy/wiki).
+
+You may also need to set up a network bridge, ensuring that the name coincides with the `BRIDGE` parameter in your inventory file (in the following example it is named `br0`). 
 
 ```yaml
 ---
@@ -124,6 +171,20 @@ Key configuration parameters to setup:
 *   `pci_devices`: this is a list of PCI devices to be configured for passthrough on that node.
     *   `address`: the full PCI address of the device (e.g., `"0000:09:00.0"`). List this address by running the `lspci -D` command on the hypervisor. Note that you must provide the full address, as short addresses are not supported by this OneDeploy feature.
 
+To find the address of the GPU on each node you can use the following command:
+
+```bash
+lspci -nn | grep -i nvidia
+```
+
+This command should output something similar to the following:
+
+```bash
+c1:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
+```
+
+The relevant address for the inventory file in this case is `"0000.c1:00.0"`. You may need to append four `0`s.
+
 ### Run the Deployment
 
 Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), run OneDeploy to provision your OpenNebula cloud.
@@ -142,15 +203,17 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 
 1. Log in to your OpenNebula Sunstone GUI
 2. Navigate to **Infrastructure -> Hosts**
-3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`).
-4. Go to the **PCI** tab.
-5. You will see your GPU listed as an available PCI device.
+3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`)
+4. Go to the **PCI** tab
+5. You will see your GPU listed as an available PCI device
+
+{{< image path="/images/ai_factories/pci-sunstone.png" alt="Sunstone dashboard" align="center" width="90%" pb="20px" >}}
 
 If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
 
+## Next steps
 
-{{< alert title="Tip" color="success" >}}
-After completing the steps to have your AI-ready OpenNebula cloud with OneDeploy, validate your deployment following one of the alternative options:
-* [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}})
-* [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}})
-{{< /alert >}}
+After completing the steps to launch your AI-ready OpenNebula cloud with OneDeploy, validate your deployment following one of the alternative options:
+
+* [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
+* [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})

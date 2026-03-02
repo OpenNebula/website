@@ -10,8 +10,8 @@ weight: 5
 To perform the validation with AI-Ready Kubernetes, you must comply with one of the prerequisites:
 * Have an AI Factory ready to be validated; or,
 * Configure an AI Factory by following one of these options:
-    * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
-    * [On-cloud AI Factory Deployment on Scaleway]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
+    * [On-premises AI Factory Deployment]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+    * [On-cloud AI Factory Deployment on Scaleway]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 {{< /alert >}}
 
 Tools like Kubernetes provide robust orchestration for deploying AI workloads at scale, being able to manage isolation between cluster workloads and GPU resources for AI inference tasks. With the use of NVIDIA GPU Operator,  you perform the provision of the necessary NVIDIA drivers and libraries for making GPU resources available to containers.
@@ -577,5 +577,5 @@ kubectl delete -f l40s-verify.yaml
 ```
 
 {{< alert title="Tip" color="success" >}}
-After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}).
+After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}).
 {{< /alert >}}
