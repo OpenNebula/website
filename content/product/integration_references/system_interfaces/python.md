@@ -14,17 +14,19 @@ weight: "4"
 
 PyONE is an implementation of OpenNebula XML-RPC bindings in Python. It has been designed as a wrapper for the [XML-RPC methods]({{% relref "api#api" %}}), with some basic helpers. This means that you should be familiar with the XML-RPC API and the XML formats returned by the OpenNebula core. As stated in the [XML-RPC documentation]({{% relref "api#api" %}}), you can download the [XML Schemas (XSD) here]({{% relref "api#api-xsd-reference" %}}).
 
-PyONE also supports [gRPC]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/grpc" %}}) as a high-performance alternative transport mechanism, while keeping the same public API as for XML-RPC.
+PyONE also supports [gRPC]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/grpc" %}}) as a high-performance, alternative transport mechanism, while keeping the same public API as for XML-RPC.
 
 ## API Documentation
 
-As long as the code is generated, the main source of the documentation is still the [XML-RPC doc]({{% relref "api#api" %}})
+As long as the code is generated, the main source of the documentation is still the [XML-RPC doc]({{% relref "api#api" %}}).
 
 ## Download and installation
 
-You can either use the system package `python3-pyone` or install it using `pip install pyone`.
+You can either install the system package `python3-pyone` or install it using `pip install pyone`.
 
 ## Usage
+
+### XML-RPC
 
 You need to configure your XML-RPC Server endpoint and credentials when instantiating the OneServer class:
 
@@ -33,8 +35,7 @@ import pyone
 one = pyone.OneServer("http://one:2633/RPC2", session="oneadmin:onepass")
 ```
 
-If you are connecting to a test platform with a self-signed certificate you can disable
-certificate verification as:
+If you are connecting to a test platform with a self-signed certificate you can disable certificate verification as:
 
 ```python
 import pyone
@@ -44,7 +45,9 @@ one = pyone.OneServer("https://one:8443/RPC2", session="oneadmin:onepass", https
 
 It is also possible to modify the default connection timeout, but note that the setting will modify the TCP socket default timeout of your Python VM. Ensure that the chosen timeout is suitable for any other connections running in your project.
 
-When using gRPC, the configuration is similar, except that URI is provided in the form `"<IP_ADDRESS>:<PORT>"` and the additional argument `protocol="grpc"` is added:
+### gRPC
+
+To use gRPC, the URI is provided in the form `"<IP_ADDRESS>:<PORT>"` and the additional argument `protocol="grpc"`:
 
 ```python
 import pyone
@@ -64,7 +67,7 @@ export ONE_GRPC="one:2634"
 export ONEAPI_PROTOCOL=grpc
 ```
 
-If both `ONE_XMLRPC` and `ONE_GRPC` are exported, `ONE_XMLRPC` will be used. If the protocol is not defined with the `protocol` parameter nor with the `ONEAPI_PROTOCOL` variable, it will be detected based on URI.
+If both `ONE_XMLRPC` and `ONE_GRPC` are exported, `ONE_XMLRPC` will be used. If the protocol is not defined through the `protocol` parameter or with the `ONEAPI_PROTOCOL` variable, it will be detected based on the URI.
 
 ### Making Calls
 
