@@ -21,7 +21,7 @@ In this guide you will find the necessary steps and best practices to deploy the
 
 ## Before starting 
 
-Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete the following guide relevant to your available resources
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
 * [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
 * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
