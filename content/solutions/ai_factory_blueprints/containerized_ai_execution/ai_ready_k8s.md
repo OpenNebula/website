@@ -6,14 +6,6 @@ weight: 5
 
 <a id="ai_ready_k8s"></a>
 
-{{< alert title="Important" color="success" >}}
-To perform the validation with AI-Ready Kubernetes, you must comply with one of the prerequisites:
-* Have an AI Factory ready to be validated; or,
-* Configure an AI Factory by following one of these options:
-    * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
-    * [On-cloud AI Factory Deployment on Scaleway]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
-{{< /alert >}}
-
 Tools like Kubernetes provide robust orchestration for deploying AI workloads at scale, being able to manage isolation between cluster workloads and GPU resources for AI inference tasks. With the use of NVIDIA GPU Operator,  you perform the provision of the necessary NVIDIA drivers and libraries for making GPU resources available to containers.
 Kubernetes embraces multitenancy, supporting different isolated namespaces where the access from different teams or users are managed with Role Based Access Control (RBAC) and network policies. As an administrator, you can also enforce limits on the GPU usage or other resources consumed per namespace, ensuring fair resource allocation.
 
@@ -24,6 +16,13 @@ In this guide you will learn how to combine all of these components for provisio
 {{< alert title="Important" color="success" >}}
 In this guide, we assume that we are using a single node OpenNebula deployment (i.e. a single node that works as an OpenNebula frontend and hypervisor host at the same time).
 {{< /alert >}}
+
+## Before starting
+
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+
+* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
 ## Architecture
 
@@ -40,10 +39,10 @@ The GPU-enabled Kubernetes workload cluster consists of three VMs that operate a
 
 Here is a brief glossary of the components described in this section:
 
-- Management Cluster: a lightweight Kubernetes cluster that contains Cluster API provider components for creating workload Kubernetes declaratively, based on CRDs and yaml manifests/Helm charts.
-- Workload Cluster: the Kubernetes clusters created through the Cluster API that manage the actual workloads.
-- CAPI service Appliance: an OpenNebula Cluster API VM appliance that contains a lightweight-Kubernetes-based (k3s) management cluster prebuilt with the OpenNebula Cluster API Provider (CAPONE) and other Cluster API providers, as well as a Rancher instance. This appliance is ready for deploying and managing workload clusters without any previous setup.
-- CAPONE: the OpenNebula Cluster API Provider which is a Kubernetes  Cluster API infrastructure provider that contacts with the OpenNebula frontend API for provisioning the necessary infrastructure for running workload clusters over OpenNebula VMs.
+- **Management Cluster**: a lightweight Kubernetes cluster that contains Cluster API provider components for creating workload Kubernetes declaratively, based on CRDs and yaml manifests/Helm charts.
+- **Workload Cluster**: the Kubernetes clusters created through the Cluster API that manage the actual workloads.
+- **CAPI service Appliance**: an OpenNebula Cluster API VM appliance that contains a lightweight-Kubernetes-based (k3s) management cluster prebuilt with the OpenNebula Cluster API Provider (CAPONE) and other Cluster API providers, as well as a Rancher instance. This appliance is ready for deploying and managing workload clusters without any previous setup.
+- **CAPONE**: the OpenNebula Cluster API Provider which is a Kubernetes  Cluster API infrastructure provider that contacts with the OpenNebula frontend API for provisioning the necessary infrastructure for running workload clusters over OpenNebula VMs.
 
 ### Infrastructure Provisioning
 
@@ -71,7 +70,7 @@ Deploy your Kubernetes management cluster through the CAPI Service in OpenNebula
     onemarketapp export "Service Capi" service_Capi -d 1
     ```
 
-2. Update the `service_Capi` template by adding the necessary scheduling requirements for deploying in to the desired host. In this case, we're enablin the `host-passthrough` feature and adding a NIC card attached to the default `admin_net` network, but you can change it to any network of your consideration. The chosen network must be the same that we are going to use for the workload cluster vRouter ingress traffic.
+2. Update the `service_Capi` template by adding the necessary scheduling requirements for deploying in to the desired host. In this case, we're enablin the `host-passthrough` feature and adding a NIC card attached to the default `admin_net` network, but you can change it to another network if necessary. The chosen network must be the same that we are going to use for the workload cluster vRouter ingress traffic.
 
     ```shell
     onetemplate update service_Capi
@@ -88,7 +87,7 @@ Deploy your Kubernetes management cluster through the CAPI Service in OpenNebula
 
     The CLI will ask you to input some values. Just press "Enter" for each input in order to keep the default values.
 
-The CAPI appliance takes some minutes to be in “Ready” status. Once the appliance is available, proceed to deploy the workload to the Kubernetes cluster by following the next steps.
+The CAPI appliance takes some minutes to be in “Ready” status. Once the appliance is available, proceed to deploy the workload to the Kubernetes cluster with the following steps.
 
 ##### Step 2: Deploy the Workload Cluster
 
@@ -105,16 +104,21 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
          install -o root -g root -m 0755 -D /dev/fd/0 /usr/local/bin/kubectl
     ```
 
-2. Login as `oneadmin` user again in the frontend and gather the following information from your setup and export the following environment variables:
+2. Switch to the `oneadmin` user again in the frontend and gather the following information from your setup and export the following environment variables:
+
+    In this example, `ONE_FRONETEND_IP` is set as the IP of the machine running the OpenNebula Front-end in the example AI Factory inventory file given in the [on-prem deployment guide]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises#ai-factory-deployment" %}}). In some cases, the gateway of the Virtual Network may be more appropriate, uncomment the following line if this is the case.
+
     ```shell
     export ONE_VNET=admin_net
-    export ONE_FRONTEND_IP=$(onevnet show $ONE_VNET -j | jq .VNET.TEMPLATE.GATEWAY | tr -d '"')
+    export ONE_FRONTEND_IP=192.168.122.2
+    #export ONE_FRONTEND_IP=$(onevnet show $ONE_VNET -j | jq .VNET.TEMPLATE.GATEWAY | tr -d '"')
     export CAPI_VM_IP=$(onevm show capi -j | jq '.VM.TEMPLATE.NIC[0].IP' | tr -d '"')
     export ONEADMIN_PASSWORD=$(cat /var/lib/one/.one/one_auth | awk -F: '{print $2}')
     ```
-    where the `$ONE_VNET` variable contains the vnet where the CAPI instance has been deployed and where the workload cluster is going to be deployed (in our case, `admin_net`),
+    The `$ONE_VNET` variable contains the name of the vnet where the CAPI instance has been deployed and where the workload cluster is going to be deployed (in our case, `admin_net`),
     `$ONE_FRONTEND_IP` is the IP used for accessing the OpenNebula frontend XMLRPC API (in our case we are using the `admin_vnet` virtual network gateway IP, that is bridged with the OpenNebula frontend host),
-    the `$CAPI_VM_IP` is the CAPI appliance IP address, and the `$ONEADMIN_PASSWORD` variable is the defined password for the `oneadmin` user.
+    
+    The `$CAPI_VM_IP` is the CAPI appliance IP address, and the `$ONEADMIN_PASSWORD` variable is the defined password for the `oneadmin` user.
 
     Check that the environment variables have been properly set:
     ```shell
@@ -308,13 +312,25 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
 The CAPONE and rke2 Cluster API controllers in the management cluster will deploy the workload cluster on the scheduled host. Check the logs of those controllers to review the progress:
 
 ```
-NAMESPACE                           NAME                                                             READY   STATUS
-capone-system                       capone-controller-manager-64db4f6867-49ppm                       1/1     Running
-rke2-bootstrap-system               rke2-bootstrap-controller-manager-676f89558c-85nxg               1/1     Running
-rke2-control-plane-system           rke2-control-plane-controller-manager-76fb8568cd-5txwc           1/1     Running
+kubectl get pods -A --kubeconfig kubeconfig_management.yaml -l control-plane=controller-manager
+```
+
+You should be able to see the following pods:
+
+```
+NAMESPACE                           NAME                                                             READY   STATUS    RESTARTS   AGE
+capi-kubeadm-bootstrap-system       capi-kubeadm-bootstrap-controller-manager-548b88955-5qktn        1/1     Running   0          9m39s
+capi-kubeadm-control-plane-system   capi-kubeadm-control-plane-controller-manager-79ddf6c498-lckn9   1/1     Running   0          9m37s
+capi-system                         capi-controller-manager-698c5749d4-prxw5                         1/1     Running   0          9m46s
+capone-system                       capone-controller-manager-5cfc7d5f85-8r7tw                       1/1     Running   0          9m36s
+rancher-turtles-system              caapf-controller-manager-6b9b6ccdc-27vz7                         2/2     Running   0          9m35s
+rancher-turtles-system              rancher-turtles-controller-manager-546957d6dc-d4t2z              1/1     Running   0          10m
+rke2-bootstrap-system               rke2-bootstrap-controller-manager-8567757df9-cnzvr               1/1     Running   0          9m31s
+rke2-control-plane-system           rke2-control-plane-controller-manager-6cdf48586d-dzqfm           1/1     Running   0          9m29s
 ```
 
 Check the virtual machines in order to see if the cluster has been finally deployed:
+
 ```shell
 onevm list
 ```
@@ -513,7 +529,57 @@ The procedure to install the NVIDIA GPU Operator is as follows:
 
 6. Finally, to use the PCI GPUs on the specific pod, add the `spec.runtimeClassName:nvidia` parameter in the pod/deploy manifest and set [`nvidia.com/gpu`](http://nvidia.com/gpu)`:1` as a requested resource.
 
+Verification:
+
+To use the PCI GPU in a pod deployment add the `spec.runtimeClassName:nvidia` parameter in the pod/deploy manifest and set [`nvidia.com/gpu`](http://nvidia.com/gpu)`:1` as a requested resource.
+
+For example, we can deploy a job targeting the NVIDIA GPU. Create a manifest with the following schema as `l40s-verify.yaml`:
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: l40s-verify-gpu
+spec:
+  template:
+    spec:
+      # Maps the pod to the NVIDIA Container Toolkit
+      runtimeClassName: nvidia 
+      
+      containers:
+      - name: cuda-test
+        image: nvidia/cuda:12.4.1-base-ubuntu22.04
+        command: ["nvidia-smi"]
+        resources:
+          limits:
+            # Requests exactly 1 physical GPU
+            nvidia.com/gpu: 1 
+          requests:
+            nvidia.com/gpu: 1
+      
+      # Ensures the pod doesn't loop if it fails
+      restartPolicy: Never
+  backoffLimit: 0
+```
+
+Then apply the job:
+
+```bash
+kubectl apply -f l40s-verify.yaml & kubectl get pods -l job-name=l40s-verify-gpu -w
+```
+
+Then check the logs:
+
+```bash
+kubectl logs -l job-name=l40s-verify-gpu
+```
+
+Then delete for cleanup:
+
+```bash
+kubectl delete -f l40s-verify.yaml
+```
 
 {{< alert title="Tip" color="success" >}}
-After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}).
+After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}).
 {{< /alert >}}

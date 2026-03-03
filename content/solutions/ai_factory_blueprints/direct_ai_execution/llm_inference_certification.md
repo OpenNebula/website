@@ -9,14 +9,6 @@ tags:
 weight: 4
 ---
 
-{{< alert title="Important" color="success" >}}
-To perform the validation with LLM Inference you must comply with one of the prerequisites:
-* Have an AI Factory ready to be validated; or,
-* Configure an AI Factory by following one of these options:
-     * [On-premises AI Factory Deployment]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_on-premises" %}})
-     * [AI Factory Deployment on Scaleway Cloud]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/cd_cloud"%}})
-{{< /alert >}}
-
 The [vLLM](https://docs.vllm.ai/en/latest/) Inference Framework is a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
 The main characteristics of vLLM Inference Framework are:
@@ -26,6 +18,13 @@ The main characteristics of vLLM Inference Framework are:
 - Does not require additional frameworks, such as Ray, unless deploying across multiple nodes, which is out of scope for this benchmarking task.
 
 In this guide you will find the necessary steps and best practices to deploy the OpenNebula vLLM appliance and perform an inference benchmarking to check its performance.
+
+## Before starting 
+
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+
+* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
 ## Deploying the vLLM Appliance
 
@@ -44,6 +43,7 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     ```
 
     In this scenario, configure the template for GPU Passthrough to the VM, attach a NIC on a desired network (in our case we are using the `admin_net` network, but you can choose any of your preference) and adjust the CPU and memory to your requirements, for instance:
+
     ```shell
     PCI=[
         CLASS="0302",
@@ -54,6 +54,20 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     CPU="32"
     MEMORY="32768"
     ```
+
+    To find the relevant details from the command line, on the command line of the node where you will deploy the vLLM appliance run the following command:
+
+    ```bash
+    lspci -nn | grep -i nvidia
+    ```
+
+    This command outputs something similar to the following:
+
+    ```bash
+    c1:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
+    ```
+
+    Compare with the above PCI template section to match the corresponding template fields.
 
 3. Instantiate the template. Keep the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark you do, which means that you will need to instantiate a different VM with the different models for the execution of each benchmark:
     ```shell
@@ -312,5 +326,5 @@ The following table contains the results of the benchmark for each model:
 OpenNebula includes the obtained results in controlled environments, with given hardware and using specific models. This information can later be used to compare future results, assess deployments, and evaluate performance against known baselines.
 
 {{< alert title="Tip" color="success" >}}
-Alternatively, after validating your AI Factory with LLM Inference, you may choose to follow [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}).
+Alternatively, after validating your AI Factory with LLM Inference, you may choose to follow [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}).
 {{< /alert >}}

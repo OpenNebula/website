@@ -7,7 +7,7 @@ weight: 6
 <a id="nvidia_dynamo"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the deployment of NVIDIA Dynamo on Kubernetes, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
+To perform the deployment of NVIDIA Dynamo on Kubernetes, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
 {{< /alert >}}
 
 [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
@@ -428,5 +428,5 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 In the streamed output, you will receive multiple JSON responses with the response tokens in the `text` field, with some metadata included.
 
 {{< alert title="Tip" color="success" >}}
-After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with [NVIDIA KAI Scheduler]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.
+After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with [NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.
 {{< /alert >}}
