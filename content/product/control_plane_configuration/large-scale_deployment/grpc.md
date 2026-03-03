@@ -25,31 +25,42 @@ To enable and use gRPC within an OpenNebula environment, you must configure both
 
 The oned daemon manages the gRPC server, which is enabled by default. To modify the default values, edit `/etc/one/oned.conf` and define the listening port and address:
 
-> ```none
-> GRPC_PORT = 2634
-> GRPC_LISTEN_ADDRESS = "0.0.0.0"
-> ```
+```none
+GRPC_PORT = 2634
+GRPC_LISTEN_ADDRESS = "0.0.0.0"
+```
 
 ### Using the gRPC Clients
 
-OpenNebula 7.2 provides gRPC support for Ruby (CLI), Go, and Python (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
+OpenNebula 7.2 provides gRPC support for Ruby (CLI), Go, and [Python]({{% relref "../../../product/integration_references/system_interfaces/python" %}}) (partial). When using the Command Line Interface (CLI), you can toggle the protocol using one of the following methods:
 
 * Flag-based: Append the `--grpc` flag to any supported command.
 * Environment-based: Set `ONEAPI_PROTOCOL=grpc` in your shell profile to make gRPC the default for all commands.
 
 By default, the client attempts to connect to the local endpoint. You can override this by specifying the target server address:
 
-> ```Bash
-> export ONE_GRPC="<IP_ADDRESS>:<PORT>"
-> ```
+```Bash
+export ONE_GRPC="<IP_ADDRESS>:<PORT>"
+```
+
+It is possible to use gRPC with Python:
+
+```python
+import pyone
+one = pyone.OneServer("one:2634", session="oneadmin:onepass")
+vm_id = one.vmpool.info(-2, -1, -1, -1).VM[0].ID
+```
+
+For more information, see [PyONE documentation]({{% relref "../../../product/integration_references/system_interfaces/python" %}}).
+
 
 ### Integration with OneFlow
 
 To configure the OneFlow service to communicate with oned via gRPC, update the `:one_xmlrpc` setting in `/etc/one/oneflow-server.conf` to point to the gRPC endpoint:
 
-> ```yaml
-> :one_xmlrpc: 127.0.0.1:2634
-> ```
+```yaml
+:one_xmlrpc: 127.0.0.1:2634
+```
 
 ### High Availability (HA) and Federation
 
