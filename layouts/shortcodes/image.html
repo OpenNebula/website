@@ -4,6 +4,7 @@
 {{ $class := .Get "class" | default "" }}
 {{ $align := .Get "align" | default "" }}
 {{ $pb := .Get "pb" | default "" }}
+{{ $pt := .Get "pt" | default "" }}
 
 {{ $srcPath := strings.TrimPrefix "/" $path }}
 {{ $src := resources.Get $srcPath }}
@@ -23,6 +24,9 @@
   {{ end }}
   {{ if $pb }}
     {{ $finalStyle = printf "%s padding-bottom: %s;" $finalStyle $pb }}
+  {{ end }}
+  {{ if $pt }}
+    {{ $finalStyle = printf "%s padding-top: %s;" $finalStyle $pt }}
   {{ end }}
 
   {{/* 2. Render Output */}}

@@ -7,7 +7,7 @@ weight: 7
 <a id="nvidia_kai_scheduler"></a>
 
 {{< alert title="Important" color="success" >}}
-To perform the deployment of NVIDIA KAI Scheduler, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
+To perform the deployment of NVIDIA KAI Scheduler, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
 {{< /alert >}}
 
 [NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
@@ -28,7 +28,7 @@ In this guide you will learn how to perform a validation using NVIDIA KAI Schedu
 ### NVIDIA KAI Scheduler Installation
 
 To install the NVIDIA KAI Scheduler, you need to accomplish the following prerequisites:
-- An [AI-Ready Kubernetes Cluster with the NVIDIA GPU Operator]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}}) installed.
+- An [AI-Ready Kubernetes Cluster with the NVIDIA GPU Operator]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}) installed.
 - Helm CLI. For additional details, check the installation instructions in the [official documentation](https://helm.sh/docs/intro/install/).
 
 1. Create a dedicated namespace for the KAI Scheduler components in the Kubernetes cluster:
@@ -337,5 +337,5 @@ Optionally, deploy another workload with a small GPU fraction on that node.
 With this validation, you have checked how you can efficiently share fractional GPU resources between workloads in an AI-Ready Kubernetes with KAI Scheduler.
 
 {{< alert title="Tip" color="success" >}}
-After powering your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may continue with [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/nvidia_dynamo" %}}) as an additional validation procedure built on top of K8s.
+After powering your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may continue with [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}}) as an additional validation procedure built on top of K8s.
 {{< /alert >}}
