@@ -205,11 +205,11 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 2. Navigate to **Infrastructure -> Hosts**
 3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`)
 4. Go to the **PCI** tab
-5. You will see your GPU listed as an available PCI device
+5. You will see your GPU listed as an available PCI device:
 
 {{< image path="/images/ai_factories/pci-sunstone.png" alt="Sunstone dashboard" align="center" width="90%" pb="20px" >}}
 
-If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
+If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and/or L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
 
 ## Next steps
 

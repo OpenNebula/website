@@ -55,19 +55,19 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     MEMORY="32768"
     ```
 
-    To find the relevant details from teh command line, on the command line of the node where you will deploy the vLLM appliance run the following command:
+    To find the relevant details from the command line, on the command line of the node where you will deploy the vLLM appliance run the following command:
 
     ```bash
     lspci -nn | grep -i nvidia
     ```
 
-    This command should output something similar to the following:
+    This command outputs something similar to the following:
 
     ```bash
     c1:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
     ```
 
-    Compare with the above PCI section to see the corresponding template fields.
+    Compare with the above PCI template section to match the corresponding template fields.
 
 3. Instantiate the template. Keep the default attributes, only changing the LLM Model through the `ONEAPP_VLLM_MODEL_ID` input for each benchmark you do, which means that you will need to instantiate a different VM with the different models for the execution of each benchmark:
     ```shell
