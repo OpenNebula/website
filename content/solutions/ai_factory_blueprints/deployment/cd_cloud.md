@@ -199,6 +199,6 @@ Once the deployment is complete:
 
 {{< alert title="Tip" color="success" >}}
 After completing the steps to have your AI-ready OpenNebula cloud using the OneDeploy tool, validate your deployment following one of the alternative options:
-* [Validation with LLM Inferencing]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}})
-* [Validation with AI-Ready Kubernetes]({{% relref "solutions/deployment_blueprints/ai-ready_opennebula/ai_ready_k8s" %}})
+* [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
+* [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
 {{< /alert >}}
