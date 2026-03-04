@@ -1,5 +1,27 @@
+// .one-footer-main-container {
+//   @include media-breakpoint-up(lg) {
+//     min-height: 355px;
+//   }
+// }
+
 .one-footer-main-container {
+  
+
+
+
+  @include media-breakpoint-up(sm) {
+    padding: 48px 24px 40px 24px;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding: 48px 24px 40px 24px;
+  }
+
   @include media-breakpoint-up(lg) {
-    min-height: 355px;
+    padding: 48px 64px 40px 64px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: 48px 88px 40px 88px;
   }
 }

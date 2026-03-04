@@ -84,7 +84,7 @@ enable = false
 [[params.links.user]]
   name = "OpenNebula on YouTube - Webinars, demos and more"
   url = "http://www.youtube.com/opennebula"
-  icon = "fa fa-play"
+  icon = "fa-brands fa-square-youtube"
   desc = "Webinars, video tutorials, demos and more"
 [[params.links.user]]
   name = "OpenNebula on GitHub - Sources and wikis"
@@ -99,7 +99,7 @@ enable = false
 [[params.links.user]]
   name = "OpenNebula on Facebook"
   url = "https://www.facebook.com/p/OpenNebula-100057184252936/"
-  icon = "fab fa-facebook"
+  icon = "fa-brands fa-facebook-f"
   desc = "Follow OpenNebula on Facebook"
 [[params.links.user]]
   name = "OpenNebula on LinkedIn"
