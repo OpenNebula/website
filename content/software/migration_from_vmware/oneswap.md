@@ -122,6 +122,8 @@ Includes all permissions from OneSwap-Standard, plus:
   - Virtual machine > Edit Inventory > Remove
   - Virtual machine > Provisioning > Clone virtual machine
   - Virtual machine > Provisioning > Customize guest
+  - Virtual machine > Interaction > Power on
+  - Virtual machine > Interaction > Power off
 ```
 
 For download-based conversions (custom/fallback/hybrid):
