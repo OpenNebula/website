@@ -6,6 +6,8 @@
 @import "sidebar-tree/_styles_project_sidebar-tree";
 @import "footer/_styles_project_footer";
 @import "toc/_styles_project_toc";
+@import "table/_styles_project_table";
+@import "blockquote/_styles_project_blockquote";
 @import "_styles_fonts";
 
 /**
@@ -45,6 +47,14 @@ p {
 
 p.body-bold {
   @include body-bold;
+}
+
+.td-content pre {
+  padding: 19px 27px 19.5px 27px;
+}
+
+.td-content pre code {
+  @include code;
 }
 
 .td-content {

@@ -1,0 +1,46 @@
+@import "_styles_fonts";
+
+// Table
+.td-content table:not(.td-initial) {
+  border: 1px solid orange;
+  border-radius: 12px;
+  border: var(--border-width-sm, 1px) solid var(--table-border-color);
+  display: table;
+  table-layout: fixed !important;
+  width: 80%;
+}
+
+// Table header cell
+table thead th {
+  @include body-small-medium;
+  color: var(--body-color) !important;
+  padding: 16px !important; 
+  border-bottom: var(--border-width-sm, 1px) solid var(--table-border-color);
+}
+
+// Table body cell
+table tbody td {
+  @include body-small;
+  color: var(--body-color) !important;
+  padding: 16px !important;
+  background-color: var(--table-background-color) !important;
+  box-shadow: none !important;   
+}
+
+table tbody tr td {
+  border-bottom: 0px;
+}
+
+table tbody tr:not(:last-child) td {
+  border-bottom: var(--border-width-sm, 1px) solid var(--table-border-color);
+}
+
+// Table code elements
+.td-content table code {
+  @include body-caption-semibold;
+  font-family: 'Inter';
+  padding: 2px 8px 2px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--table-code-border-color);
+  background: var(--table-code-background-color);
+}
