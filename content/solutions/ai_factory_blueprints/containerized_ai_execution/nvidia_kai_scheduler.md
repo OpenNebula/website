@@ -290,43 +290,43 @@ Optionally, deploy another workload with a small GPU fraction on that node.
         selector:
             matchLabels:
                 app: vllm-test-02
-    template:
-        metadata:
-            labels:
-                app: vllm-test-02
-                kai.scheduler/queue: test
-        annotations:
-            gpu-fraction: "0.2"
-        spec:
-            schedulerName: kai-scheduler
-            containers:
-            - name: vllm
-            image: vllm/vllm-openai:latest
-            command: ["/bin/sh", "-c"]
-            args: [
-            "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.2"
-            ]
-            ports:
-                - containerPort: 8000
-            resources:
-                limits:
-                    cpu: "8"
-                    memory: 15G
-                requests:
-                    cpu: "6"
-                    memory: 6G
-            livenessProbe:
-                httpGet:
-                    path: /health
-                    port: 8000
-                initialDelaySeconds: 60
-                periodSeconds: 10
-            readinessProbe:
-                httpGet:
-                    path: /health
-                    port: 8000
-                initialDelaySeconds: 60
-                periodSeconds: 5
+        template:
+            metadata:
+                labels:
+                    app: vllm-test-02
+                    kai.scheduler/queue: test
+                annotations:
+                    gpu-fraction: "0.2"
+            spec:
+                schedulerName: kai-scheduler
+                containers:
+                  - name: vllm
+                    image: vllm/vllm-openai:latest
+                    command: ["/bin/sh", "-c"]
+                    args: [
+                    "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.2"
+                    ]
+                    ports:
+                        - containerPort: 8000
+                    resources:
+                        limits:
+                            cpu: "8"
+                            memory: 15G
+                        requests:
+                            cpu: "6"
+                            memory: 6G
+                    livenessProbe:
+                        httpGet:
+                            path: /health
+                            port: 8000
+                        initialDelaySeconds: 60
+                        periodSeconds: 10
+                    readinessProbe:
+                        httpGet:
+                            path: /health
+                            port: 8000
+                        initialDelaySeconds: 60
+                        periodSeconds: 5
     EOF
     ```
 
