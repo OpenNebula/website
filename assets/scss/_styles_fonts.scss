@@ -152,6 +152,14 @@
   color: var(--body-color);  
 }
 
+@mixin body-caption-semibold {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--body-color);  
+}
+
 @mixin caption {
   font-size: 12px;
   font-style: normal;
@@ -168,4 +176,12 @@
   line-height: 16px;
   letter-spacing: 0.1px;
   color: var(--body-color);  
+}
+
+@mixin code {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;  
+  color: var(--code-font-color);  
 }

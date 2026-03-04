@@ -12,6 +12,9 @@
     &:hover {
       color: var(--link-color);
     }
+    &.active {
+      font-weight: 700;
+    }
   }
 }
 
@@ -21,6 +24,9 @@
 
 .sidebar-title {
   margin-bottom: 8px;
+}
+.body-bold.sidebar-title {
+  color: var(--sidebar-title-color);
 }
 
 .td-sidebar-nav__section-title.td-sidebar-nav__section.with-child {
@@ -38,7 +44,26 @@ nav.foldable-nav .ul-1 .with-child > label::before {
 }
 .td-sidebar {
   padding-left: 32px;
-  max-width: 242px;
 }
 
+// Scroll bar - Firefox
+.td-sidebar-nav {
+  scrollbar-width: thin;
+  scrollbar-color: var(--Colors-border-primary, #E0E4E7) transparent;
+}
 
+// Scroll bar - Edge, Chrome and Safari
+.td-sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.td-sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.td-sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-color);
+  border-radius: 96px;
+}
+
+.td-sidebar-nav .td-sidebar-link__page {
+  @include body-small-medium;
+}
