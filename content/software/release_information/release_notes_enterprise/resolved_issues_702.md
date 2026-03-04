@@ -14,7 +14,6 @@ The following new features have been backported to 7.0.2:
 - [Add incremental backup support for NetApp driver](../../../product/cluster_configuration/san_storage/netapp/#datastore-internals)
 - [Enhanced VM Compatibility](../../../product/cluster_configuration/hosts_and_clusters/cluster_guide/#enhanced-vm-compatibility-evc)
 - [Expanded OS support for RHEL 10, AlmaLinux 10, and Debian 13](../../../software/release_information/release_notes_70/platform_notes/#front-end-components)
-- [oneswap - Improve Windows automatic features](https://github.com/OpenNebula/one/issues/7332)
 
 The following issues have been solved in 7.0.2:
 
