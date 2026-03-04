@@ -68,41 +68,41 @@ To install the NVIDIA KAI Scheduler, you need to accomplish the following prereq
     apiVersion: scheduling.run.ai/v2
     kind: Queue
     metadata:
-    name: default
+        name: default
     spec:
-    resources:
-        cpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        gpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        memory:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
+        resources:
+            cpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            gpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            memory:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
     ---
     apiVersion: scheduling.run.ai/v2
     kind: Queue
     metadata:
-    name: test
+        name: test
     spec:
-    parentQueue: default
-    resources:
-        cpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        gpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        memory:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
+        parentQueue: default
+        resources:
+            cpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            gpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            memory:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
     EOF
     ```
 
@@ -160,7 +160,7 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
             image: vllm/vllm-openai:latest
             command: ["/bin/sh", "-c"]
             args: [
-    	      "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.7"
+    	      "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.7 --host 0.0.0.0"
             ]
             ports:
             - containerPort: 8000
@@ -188,7 +188,9 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
 
 3. Verify that the deployment is allocated with the specified resources
     ```shell
-    ❯ kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    ```
+    ```
     NAME                            STATUS    NODE                       GPU-FRACTION   GPU-GROUP
     vllm-test-07-5979b99584-llf45   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.7            407623a2-216d-4c06-b5b8-f8345bf28b5a
     ```
@@ -207,16 +209,18 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
         port: 80
         protocol: TCP
         targetPort: 8000
-    selector:
-        app: vllm-test-07
-    sessionAffinity: None
-    type: ClusterIP
+      selector:
+          app: vllm-test-07
+      sessionAffinity: None
+      type: ClusterIP
     EOF
     ```
 
     Check the service:
     ```shell
-    ❯ kubectl -n ai-workloads get svc
+    kubectl -n ai-workloads get svc
+    ```
+    ```
     NAME           TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
     vllm-test-07   ClusterIP   10.43.119.6   <none>        80/TCP    39s
     ```
@@ -277,58 +281,60 @@ Optionally, deploy another workload with a small GPU fraction on that node.
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: vllm-test-02
-    namespace: ai-workloads
-    labels:
-        app: vllm-test-02
-    spec:
-    replicas: 1
-    selector:
-        matchLabels:
-        app: vllm-test-02
-    template:
-        metadata:
+        name: vllm-test-02
+        namespace: ai-workloads
         labels:
             app: vllm-test-02
-            kai.scheduler/queue: test
+    spec:
+        replicas: 1
+        selector:
+            matchLabels:
+                app: vllm-test-02
+    template:
+        metadata:
+            labels:
+                app: vllm-test-02
+                kai.scheduler/queue: test
         annotations:
             gpu-fraction: "0.2"
         spec:
-        schedulerName: kai-scheduler
-        containers:
-        - name: vllm
+            schedulerName: kai-scheduler
+            containers:
+            - name: vllm
             image: vllm/vllm-openai:latest
             command: ["/bin/sh", "-c"]
             args: [
             "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.2"
             ]
             ports:
-            - containerPort: 8000
+                - containerPort: 8000
             resources:
-            limits:
-                cpu: "8"
-                memory: 15G
-            requests:
-                cpu: "6"
-                memory: 6G
+                limits:
+                    cpu: "8"
+                    memory: 15G
+                requests:
+                    cpu: "6"
+                    memory: 6G
             livenessProbe:
-            httpGet:
-                path: /health
-                port: 8000
-            initialDelaySeconds: 60
-            periodSeconds: 10
+                httpGet:
+                    path: /health
+                    port: 8000
+                initialDelaySeconds: 60
+                periodSeconds: 10
             readinessProbe:
-            httpGet:
-                path: /health
-                port: 8000
-            initialDelaySeconds: 60
-            periodSeconds: 5
+                httpGet:
+                    path: /health
+                    port: 8000
+                initialDelaySeconds: 60
+                periodSeconds: 5
     EOF
     ```
 
 2. Check that the fraction is successfully assigned and the pod is running
     ```shell
-    ❯ kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    ```
+    ```
     NAME                            STATUS    NODE                       GPU-FRACTION   GPU-GROUP
     vllm-test-02-79b48968bc-dtzxs   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.2            407623a2-216d-4c06-b5b8-f8345bf28b5a
     vllm-test-07-5979b99584-llf45   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.7            407623a2-216d-4c06-b5b8-f8345bf28b5a

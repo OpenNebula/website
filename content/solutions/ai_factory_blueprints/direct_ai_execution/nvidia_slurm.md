@@ -99,7 +99,7 @@ You must also have access to the Sunstone user interface.
     {{< image path="/images/ai_factories/slurm-start-script.png" alt="Slurm start script" align="center" width="90%" pt="20px" pb="40px" >}}
 
 ### Start script: 
-```bash
+```python
 set -e
 AI_DIR=/opt/ai_model
 
@@ -196,7 +196,7 @@ chmod +x "$AI_DIR/demo_finetune.py"
    ```
    You should see output similar to the following:
 
-   ```shell
+   ```
    NodeName=slurm-one-worker-1 CoresPerSocket=1 
    CPUAlloc=0 CPUEfctv=1 CPUTot=1 CPULoad=0.00
    AvailableFeatures=one
@@ -228,7 +228,7 @@ If this command returns an error, you may need to wait longer for the startup sc
 
 On the command line, you should see something similar to the following output:
 
-```shell
+```
 🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
 🦥 Unsloth Zoo will now patch everything to make training faster!
 Map: 100%|██████████| 3/3 [00:00<00:00, 1822.82 examples/s]

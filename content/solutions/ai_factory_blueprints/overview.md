@@ -28,7 +28,7 @@ Configuring, deploying and validating a high-performance AI infrastructure using
 <br>
 <br>
 
-3. Perform Validation:  as a prerequisite, you must have an AI Factory ready to be validated. These are the options to validate your AI Factory:
+3. Perform Validation: As a prerequisite, you must have an AI Factory ready to be validated after completing the above installation procedures. These are the options to validate your AI Factory:
     
     * [Validation with direct AI execution]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution" %}}):
         * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}}): Using vLLM with two different models and two model sizes, running across both H100 and L40S GPUs.

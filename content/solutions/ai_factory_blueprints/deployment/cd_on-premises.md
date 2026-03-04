@@ -53,14 +53,25 @@ Avoid pre-installing NVIDIA drivers on the hypervisor nodes before running the O
 The OneDeploy tool is a collection of Ansible playbooks that streamline the installation of OpenNebula. Before running this collection, prepare your control node which is the machine where you will execute the Ansible commands.
 
 1.  **Clone the repository**:
+
+    Switch to the root user:
+
+    ```shell
+    sudo -i
+    ```
+
+    Clone the one-deploy repository:
+
     ```shell
     git clone https://github.com/OpenNebula/one-deploy.git
     cd one-deploy
     ```
+
 2.  **Install dependencies**:
-    OneDeploy requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, consult the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki.
+    OneDeploy requires Ansible and a few other Python libraries. For detailed system requirements and setup instructions, consult the [Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs) in the official wiki. Run the following commands as the root user:
 
     Install PIPx:
+
     ```bash
     apt install pipx
     ```
@@ -211,9 +222,11 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 
 If the device is visible here, your AI-ready OpenNebula cloud is correctly configured. The H100 and/or L40S GPUs are now ready to be passed through to Virtual Machines for high-performance AI and ML tasks.
 
+---
+
 ## Next steps
 
-After completing the steps to launch your AI-ready OpenNebula cloud with OneDeploy, validate your deployment following one of the alternative options:
+After completing the above steps to launch your AI-ready OpenNebula cloud with OneDeploy, validate your deployment one of the one of the following options:
 
 * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
 * [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
