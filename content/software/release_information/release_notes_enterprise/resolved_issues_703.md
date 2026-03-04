@@ -10,6 +10,7 @@ A complete list of solved issues for 7.0.3 are listed in the [project developmen
 
 The following new features have been backported to 7.0.3:
 - [Veeam - Change the workflow order to avoid timeouts](https://github.com/OpenNebula/one/issues/7493)
+- [oneswap - Improve Windows automatic features](https://github.com/OpenNebula/one/issues/7332)
 
 The following issues have been solved in 7.0.3:
 - Fix high CPU utilization caused by prediction [#7396](https://github.com/OpenNebula/one/issues/7396)
