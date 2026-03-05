@@ -1,6 +1,6 @@
 ---
-title: Deployment of NVIDIA KAI Scheduler
-linkTitle: NVIDIA KAI Scheduler
+title: Deployment of the NVIDIA KAI Scheduler
+linkTitle: Scheduling with NVIDIA KAI
 weight: 7
 ---
 
