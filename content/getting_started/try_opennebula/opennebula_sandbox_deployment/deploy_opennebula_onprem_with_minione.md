@@ -1,6 +1,6 @@
 ---
 title: "Deploy OpenNebula on-prem with miniONE"
-linkTitle: "miniONE deployment"
+linkTitle: "Install miniONE on-prem"
 date: "2025-02-17"
 #description: "Install an OpenNebula Front-end and a KVM hypervisor on a single server in a few minutes, using **miniONE**, the installation script provided by OpenNebula."
 categories: [Introduction, Evaluation, Learning]
@@ -18,7 +18,7 @@ In this tutorial, we will install an OpenNebula Front-end in under ten minutes, 
 
 miniONE is a straightforward tool for deploying an evaluation version of OpenNebula. After running the miniONE script, all the OpenNebula services needed to use, manage and run a small cloud deployment will be installed on a single server.
 
-This tutorial covers installation of a Front-end and KVM hypervisor node on a local machine with a screen attached. If you are installing miniONE on remote infrastructure you will need to use SSH and port forwarding to access user interfaces in your local browser, please refer to the [port fowarding instructions](#ssh-and-port-forwarding) before continuing.
+This tutorial covers installation of a Front-end and KVM hypervisor node on a local machine with a screen attached. If you are installing miniONE on remote infrastructure you will need to use SSH and port forwarding to access user interfaces in your local browser, please refer to the [port forwarding instructions](#ssh-and-port-forwarding) before continuing.
 
 During this tutorial we will complete the following steps:
 
@@ -47,7 +47,7 @@ sudo apt install cpu-checker
 
 ## Step 1: Verify Installation Requirements
 
-To run the miniONE script, you will need a physical server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need an internet connection to download software packages during installation. 
+To run the miniONE script, you will need a physical server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need a stable internet connection to download software packages during installation. 
 
 **Supported operating systems:**
 : - RHEL/AlmaLinux 8 or 9
@@ -65,7 +65,7 @@ To run the miniONE script, you will need a physical server with a fresh installa
     : - 22 (SSH)
       - 80 (for the web UI)
 
-This tutorial was tested on on Ubuntu 22.04 and 24.04. We strongly advise to use a physical server rather than a Virtual Machine (VM). If you choose to follow this installation on a VM you may experience instability due to nested virtualization during the follow-up [Kubernetes installation guides](/getting_started/try_opennebula/try_kubernetes_on_opennebula/). You may also need to use [port forwarding](#ssh-and-port-forwarding) to access the Sunstone UI.
+This tutorial was tested on on Ubuntu 22.04 and 24.04. We strongly advise to use a physical server rather than a Virtual Machine (VM). If you choose to follow this installation on a VM you may experience instability due to nested virtualization during the follow-up [Kubernetes installation guides]({{% relref try_kubernetes_on_opennebula %}}). You may also need to use [port forwarding](#ssh-and-port-forwarding) to access the Sunstone UI.
 
 ## Step 2: Download and Install miniONE
 
@@ -121,13 +121,13 @@ At this point, you have successfully installed miniONE. OpenNebula services shou
 
 ## Step 3: Verify the Installation
 
-Now verify the installation by logging in to OpenNebula's Edge Sunstone GUI.
+Now verify the installation by logging in to OpenNebula's Sunstone UI.
 
-Point your browser to the Edge IP and port provided by the miniONE report, in this case `192.168.1.130:80`, or simply to `http://localhost`. You should be greeted with the Sunstone login screen:
+Point your browser to the Edge IP and port provided by the miniONE report, in this case `192.168.1.130`, or simply to `http://localhost`. You should be greeted with the Sunstone login screen:
 
 {{< image path="/images/quickstart/sunstone-login-page.png" alt="Sunstone login" align="center" width="50%" pb="20px" >}}
 
-In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN**.
+In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN NOW**.
 
 The screen will display the Sunstone Dashboard:
 
@@ -163,9 +163,7 @@ Sunstone will display the first screen of the **Instantiate VM Template** wizard
 
 {{< image path="/images/sunstone-instantiate_vm-1.png" alt="Sunstone instantiate VM" align="center" width="90%" pb="20px" >}}
 
-Feel free to modify the **Capacity** parameters if desired, or leave at their default values.
-
-Click **Next**.
+Leave the **Capacity**, **Ownership** and **VM Group** parameters with their default values. Click **Next**.
 
 The next screen allows you to see and modify further parameters for the VM, including selecting the Virtual Network or scheduling actions.
 
@@ -185,29 +183,29 @@ The green dot to the left of the VM name indicates that the VM is running. Note 
 <g>
 </svg> at top left for the VM to display the running state.
 
-### Logging into the Virtual Machine
+### Logging in to the Virtual Machine
 
 The quickest way to log into the VM is by VNC, available directly in Sunstone. Just click the VNC icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" color="rgb(143,147,146)"><path d="M2 15.5V2.6a.6.6 0 01.6-.6h18.8a.6.6 0 01.6.6v12.9m-20 0v1.9a.6.6 0 00.6.6h18.8a.6.6 0 00.6-.6v-1.9m-20 0h20M9 22h1.5m0 0v-4m0 4h3m0 0H15m-1.5 0v-4" stroke="rgb(143,147,146)" stroke-linecap="round" stroke-linejoin="round" fill="white" ></path></svg> and Sunstone will display the VM boot messages screen directly in your browser in another tab. 
 
 {{< image path="/images/sunstone-VNC-alpine.png" alt="Sunstone Alpine VM" align="center" width="90%" pb="20px" >}}
 
-Log in as root with password `opennebula`. You can then use the command line to explore the VM and run processes:
+Log in as `root` with password `opennebula`. You can then use the command line to explore the VM and run processes:
 
 * Try running `ping 1.1.1.1` to test the internet connection
 * Try running `top` to see the processes running on the machine 
 
 Congratulations! You've now installed an OpenNebula Front-end with a KVM hypervisor and Virtual Network, then deployed a VM.
 
-{{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
+{{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide]({{% relref installation_process %}}) for details on deploying in a production environment.{{< /alert >}} 
 
 ## Next steps
 
 Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
 
-* [Deploy a WordPress virtual machine](/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine)
-* [Deploy a Kubernetes cluster with the OneKE appliance](/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md)
-* [Deploy a Kubernetes cluster using Rancher and the Cluster API](/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher/)
-* [Further validate your miniONE installation](getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
+* [Deploy a WordPress virtual machine]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine" %}})
+* [Deploy a Kubernetes cluster with the OneKE appliance]({{% relref "/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md" %}})
+* [Deploy a Kubernetes cluster using Rancher and the Cluster API]({{% relref "/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher" %}})
+* [Further validate your miniONE installation]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md" %}}) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
 
 ## SSH and Port Forwarding
 

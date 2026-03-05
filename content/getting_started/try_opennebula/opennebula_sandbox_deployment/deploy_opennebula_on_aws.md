@@ -1,6 +1,6 @@
 ---
 title: "Deploy OpenNebula on AWS with miniONE"
-linkTitle: "OpenNebula on AWS"
+linkTitle: "Install miniONE on AWS"
 date: "2025-02-17"
 description:
 categories: [Introduction, Learning, Deployment, Evaluation]
@@ -20,7 +20,7 @@ In this tutorial, we will install an OpenNebula Front-end and a KVM hypervisor n
 
 miniONE is a straightforward tool for deploying an evaluation version of OpenNebula. After running the miniONE script, all the OpenNebula services needed to use, manage and run a small cloud deployment will be installed on a single AWS instance.
 
-This tutorial covers installation of a Front-end and KVM hypervisor node on an AWS instance. To complete the procedures detailed in the following [Kubernetes quickstart guides](getting_started/try_opennebula/try_kubernetes_on_opennebula/) it is necessary to complete this installation using a `c5.metal` "bare metal" AWS instance.
+This tutorial covers installation of a Front-end and KVM hypervisor node on an AWS instance. To complete the procedures detailed in the following [Kubernetes quickstart guides]({{% relref "getting_started/try_opennebula/try_kubernetes_on_opennebula/" %}}) it is necessary to complete this installation using a `c5.metal` "bare metal" AWS instance.
 
 During this tutorial we will complete the following steps:
 
@@ -34,13 +34,13 @@ Once you have completed this tutorial, you will have an evaluation version of Op
 
 ## Before starting
 
-To complete this tutorial, you need to log in to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can acheive this through a native terminal. If you are working on a Windows machine, you need to install an SSH client application such as [PuTTY](https://putty.software/).
+To complete this tutorial, you need to login to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can acheive this through a native terminal. If you are working on a Windows machine, you need to install an SSH client application such as [PuTTY](https://putty.software/).
 
 ## Step 1. Prepare a Virtual Machine Instance in AWS
 
-If you don't already have an AWS account, [create one](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/). Log into the AWS console then Navigate to the [EC2 dashboard](console.aws.amazon.com/ec2) and [choose your region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html). 
+If you don't already have an AWS account, [create one](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/). Login to the AWS console then Navigate to the [EC2 dashboard](https://console.aws.amazon.com/ec2) and [choose your region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html). 
 
-Click on **Launch Instance**, this will take you to the [Launch Instance Wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html). In the name and tags section enter an appropriate and memorable name such as `minione-test`:
+Click on **Launch instance**, this will take you to the [Launch Instance Wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html). In the name and tags section enter an appropriate and memorable name such as `minione-test`:
 
 {{< image path="/images/minione-aws-instance-name.png" alt="AWS instance names" align="center" width="90%" pb="20px" >}}
 
@@ -52,16 +52,16 @@ Choose the `c5.metal` instance type:
 
 {{< image path="/images/minione-aws-instance-type.png" alt="AWS instance type" align="center" width="90%" pb="20px" >}}
 
-If you don't already have a key pair (a `.pem` or `.ppk` file), select **Create new key pair** in the **Key pair (login)** section. Choose a sensible name for the key pair, it cannot be renamed later, you may either use your name or a context such as `minione-admin`. Select EC25519 for **Key pair type** and choose the format: 
+If you don't already have a key pair (a `.pem` or `.ppk` file), select **Create new key pair** in the **Key pair (login)** section. Choose a sensible name for the key pair, it cannot be renamed later. You may either use your name or a context such as `minione-admin`. Select EC25519 for **Key pair type** and choose the format: 
 
 * `.pem` (Linux/Mac)
 * `.ppk` (Windows with PuTTY). 
 
 {{< image path="/images/minione-aws-key-pair.png" alt="AWS instance key pair" align="center" width="50%" pb="20px" >}}
 
-Press **Create key pair**. A `.pem` or `.ppk` file will be downloaded to your computer through the browser. Store the key in a secure and memorable location on your local machine, you will need it to access the AWS instance. It is recommended to change the permissions on the file such that only your user can access the key file.
+Click **Create key pair**. A `.pem` or `.ppk` file will be downloaded to your computer through the browser. Store the key in a secure and memorable location on your local machine, you will need it to access the AWS instance. It is recommended to change the permissions on the file such that only your user can access the key file.
 
-In **Network Settings** click **Edit** in the top right corner of the section and select **Create security group**:
+In **Network settings** click **Edit** in the top right corner of the section and select **Create security group**:
 
 {{< image path="/images/minione-aws-network-settings-upper.png" alt="AWS network settings" align="center" width="90%" pb="20px" >}}
 
@@ -69,7 +69,7 @@ In the section labelled **Inbound Security Group Rules** click **Add security gr
 
 {{< image path="/images/minione-aws-network-settings-lower.png" alt="AWS network settings" align="center" width="90%" pb="20px" >}}
 
-In the **Configure storage** section select **80GiB** of `gp3` storage. You do not need to edit the **Advanced details** section.
+In the **Configure storage** section select **80 GiB** of `gp3` storage. You do not need to edit the **Advanced details** section.
 
 {{< image path="/images/minione-aws-configure-storage.png" alt="AWS configure storage" align="center" width="90%" pb="20px" >}}
 
@@ -107,7 +107,7 @@ For example:
 putty.exe ubuntu@3.143.176.142 -i minione-admin.ppk
 ```
 
-### Step 3. Update the VM Operating System
+## Step 3. Update the VM Operating System
 
 Once you have logged in to the VM as user `ubuntu`, use the `sudo` command to switch to the root user (no password is required):
 
@@ -121,7 +121,7 @@ Then, update the system to its latest software packages by running the following
 apt update && apt upgrade
 ```
 
-After updating, you will probably need to restart the VM to run the latest kernel. Check the output of the `apt upgrade` command for lines similar to the following:
+After updating, you may need to restart the VM to run the latest kernel. Check the output of the `apt upgrade` command for lines similar to the following:
 
 ```default
 Pending kernel upgrade!
@@ -131,13 +131,15 @@ Diagnostics:
   The currently running kernel version is not the expected kernel version 6.8.0-1014-aws.
 ```
 
-In this example, you need to restart the VM in order to upgrade to kernel `6.8.0-1014-aws`. To restart the VM, run:
+In this example, a restart is required to upgrade to kernel version `6.8.0-1014-aws`. 
+
+If you receive a message indicating that the kernel is up-to-date, you may skip the following restart procedure and continue with step 4. Otherwise, to restart the VM, run:
 
 ```bash
 shutdown -r now
 ```
 
-You will be immediately logged out of the VM as it restarts. Wait a few moments for the VM to finish rebooting, then log in again using the same procedure as before. After logging back into the VM, you can check the running kernel version with:
+You will be immediately logged out of the VM as it restarts. Wait a few moments for the VM to finish rebooting, then login again using the same procedure as before. After logging back into the VM, you can check the running kernel version with:
 
 ```bash
 uname -a
@@ -150,7 +152,7 @@ $ uname -a
 Linux ip-172-31-3-252 6.8.0-1014-aws #15-Ubuntu SMP Thu Aug  8 19:13:06 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
-Your AWS VM is now ready. In the next steps, we’ll download the miniONE script, upload it to the VM, and run the installation.
+Your AWS VM is now ready. In the next step we’ll download the miniONE script to the VM and run the installation.
 
 ## Step 4: Download and install miniONE
 
@@ -160,7 +162,7 @@ From the command line of your AWS VM instance, use the `sudo` command to become 
 sudo -i
 ```
 
-dDwnload the miniONE installation script to your current directory:
+Download the miniONE installation script to your current directory:
 
 ```bash
 wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
@@ -172,7 +174,7 @@ Now make the `minione` script executable:
 chmod +x minione
 ```
 
-Run the miniONe installation script:
+Run the miniONE installation script:
 
 ```bash
 ./minione
@@ -194,7 +196,7 @@ Use following to login:
   password: lCmPUb5Gwk
 ```
 
-Make sure to save these credentials somewhere secure (including the IP address), you will need them to log into the Sunstone UI.
+Make sure to save these credentials somewhere secure (including the IP address), you will need them to login to the Sunstone UI.
 
 ### Synchronize the Host
 
@@ -232,13 +234,13 @@ In this configuration, Sunstone exposes its HTTP endpoint on a public network in
 
 ## Step 5: Verify the Installation
 
-Now verify the installation by logging in to OpenNebula's Edge Sunstone GUI.
+Now verify the installation by logging in to OpenNebula's Sunstone UI.
 
 Point your browser to the Edge IP and port provided by the miniONE report, which is normally the same as the public IP of the AWS instance. You should be greeted with the Sunstone login screen:
 
 {{< image path="/images/quickstart/sunstone-login-page.png" alt="Sunstone login" align="center" width="50%" pb="20px" >}}
 
-In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN**.
+In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN NOW**.
 
 The screen will display the Sunstone Dashboard:
 
@@ -277,9 +279,7 @@ Sunstone will display the first screen of the **Instantiate VM Template** wizard
 
 {{< image path="/images/sunstone-instantiate_vm-1.png" alt="Sunstone instantiate VM" align="center" width="90%" pb="20px" >}}
 
-Feel free to modify the **Capacity** parameters if desired, or leave at their default values.
-
-Click **Next**.
+Leave the **Capacity**, **Ownership** and **VM Group** parameters with their default values. Click **Next**.
 
 The next screen allows you to see and modify further parameters for the VM, including selecting the Virtual Network or scheduling actions.
 
@@ -301,11 +301,11 @@ The green dot to the left of the VM name indicates that the VM is running. Note 
 
 ### Logging into the Virtual Machine
 
-The quickest way to log into the VM is by VNC, available directly in Sunstone. Just click the VNC icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" color="rgb(143,147,146)"><path d="M2 15.5V2.6a.6.6 0 01.6-.6h18.8a.6.6 0 01.6.6v12.9m-20 0v1.9a.6.6 0 00.6.6h18.8a.6.6 0 00.6-.6v-1.9m-20 0h20M9 22h1.5m0 0v-4m0 4h3m0 0H15m-1.5 0v-4" stroke="rgb(143,147,146)" stroke-linecap="round" stroke-linejoin="round" fill="white" ></path></svg> and Sunstone will display the VM boot messages screen directly in your browser in another tab. 
+The quickest way to login to the VM is by VNC, available directly in Sunstone. Just click the VNC icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" color="rgb(143,147,146)"><path d="M2 15.5V2.6a.6.6 0 01.6-.6h18.8a.6.6 0 01.6.6v12.9m-20 0v1.9a.6.6 0 00.6.6h18.8a.6.6 0 00.6-.6v-1.9m-20 0h20M9 22h1.5m0 0v-4m0 4h3m0 0H15m-1.5 0v-4" stroke="rgb(143,147,146)" stroke-linecap="round" stroke-linejoin="round" fill="white" ></path></svg> and Sunstone will display the VM boot messages screen directly in your browser in another tab. 
 
 {{< image path="/images/sunstone-VNC-alpine.png" alt="Alpine VM VNC" align="center" width="90%" pb="20px" >}}
 
-Log in as root with password `opennebula`. You can then use the command line to explore the VM and run processes:
+Login as root with password `opennebula`. You can then use the command line to explore the VM and run processes:
 
 * Try running `ping 1.1.1.1` to test the internet connection
 * Try running `top` to see the processes running on the machine 
@@ -318,7 +318,7 @@ Congratulations! You've now installed an OpenNebula Front-end on an AWS instance
 
 Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
 
-* [Deploy a WordPress VM](/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine)
-* [Deploy a Kubernetes cluster with the OneKE appliance](/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md)
-* [Deploy a Kubernetes cluster using Rancher and the Cluster API](/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher/)
-* [Further validate your miniONE installation](getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
+* [Deploy a WordPress virtual machine]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine" %}})
+* [Deploy a Kubernetes cluster with the OneKE appliance]({{% relref "/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md" %}})
+* [Deploy a Kubernetes cluster using Rancher and the Cluster API]({{% relref "/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher" %}})
+* [Further validate your miniONE installation]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md" %}}) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)

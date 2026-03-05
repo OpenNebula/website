@@ -10,7 +10,7 @@ description:
 
 ## Overview
 
-In this tutorial, we will deploy a Kubernetes cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
+In this tutorial, we will deploy a Kubernetes cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
@@ -26,7 +26,7 @@ During this tutorial you will complete the following high-level steps:
 1. Deploy an OpenNebula RKE2 cluster
 1. Import the cluster into Rancher
 
-Additionally, we'll perform various operations on the workload cluster:
+Additionally, you will perform various operations on the workload cluster:
   - Install Longhorn
   - Deploy an Nginx service
   - Add a worker node to the cluster
