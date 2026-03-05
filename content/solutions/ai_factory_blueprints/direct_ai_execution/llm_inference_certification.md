@@ -1,6 +1,6 @@
 ---
-title: "Validation with LLM Inference"
-linkTitle: "LLM Inference"
+title: "Inferencing with vLLM"
+linkTitle: "Inferencing with vLLM"
 date: "2025-10-28"
 description:
 categories:
