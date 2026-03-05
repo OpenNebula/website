@@ -62,6 +62,7 @@ The OneDeploy tool is a collection of Ansible playbooks that streamline the inst
 
     Install PIPx:
     ```bash
+    apt update
     apt install pipx
     ```
 
@@ -74,7 +75,7 @@ The OneDeploy tool is a collection of Ansible playbooks that streamline the inst
     Install Hatch:
 
     ```bash
-    pipx install hatch==1.16.2
+    pipx install hatch==1.16.5
     pipx ensurepath
     source ~/.bashrc
     ```

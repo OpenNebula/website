@@ -1,6 +1,6 @@
 ---
 title: Deployment of NVIDIA Dynamo
-linkTitle: NVIDIA Dynamo
+linkTitle: Inferencing with NVIDIA Dynamo
 weight: 6
 ---
 
