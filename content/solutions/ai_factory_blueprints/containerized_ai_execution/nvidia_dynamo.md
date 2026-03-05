@@ -1,6 +1,6 @@
 ---
 title: Deployment of NVIDIA Dynamo
-linkTitle: NVIDIA Dynamo
+linkTitle: Inferencing with NVIDIA Dynamo
 weight: 6
 ---
 
@@ -66,6 +66,7 @@ reclaimPolicy: Delete
 EOF
 
 kubectl replace --force -f storageClass.yaml
+
 ```
 
 4. Make this storage class is the default:

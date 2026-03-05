@@ -1,7 +1,7 @@
 ---
 title: "Migrating VMs with OneSwap"
 date: "2025-02-17"
-description: "The OneSwap command-line tool allows a convenient migration of Virtual Machines and appliances from VMware."
+description:
 categories:
 pageintoc: "268"
 tags:
@@ -20,7 +20,128 @@ OneSwap supports importing Open Virtual Appliances (OVAs) previously exported fr
 OneSwap is part of a set of tools and services designed to guide you in achieving a smooth transition from VMware. These include the [VMware Migration Service](https://support.opennebula.pro/hc/en-us/articles/18919424033053-VMware-Migration-Service), a complete guidance and support framework to help organizations define and execute their migration plan with minimal disruption to business operations. Further information is available in [Migrating from VMware to OpenNebula](https://support.opennebula.pro/hc/en-us/articles/17225311830429-White-Paper-Migrating-from-VMware-to-OpenNebula).
 {{< /alert >}}
 
-## Installation and requirements
+## Architecture and Requirements
+
+OneSwap can be run directly on the OpenNebula frontend or on a **dedicated server**. Running it on a separate server is recommended for production environments as it isolates the migration workload and avoids impacting the OpenNebula frontend during large or concurrent migrations.
+
+The OneSwap server must have network access to:
+
+- **OpenNebula Front-end**: to execute CLI commands (`onevm`, `onedatastore`, etc.) and transfer converted images to the datastores.
+- **vCenter/ESXi endpoint**: to connect to the vCenter API and export virtual machine disks.
+
+Run `oneswap` on a dedicated server with sufficient disk space to buffer VM images during conversion. This server should have high-bandwidth connectivity to both the vCenter environment and the OpenNebula image datastores to minimize migration time.
+
+{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" pb="20px" >}}
+
+## vCenter Permissions Requirements
+
+OneSwap requires specific vCenter permissions depending on the conversion mode used. Below are the required privileges for vCenter 8.
+
+### Minimum Permissions (All Conversion Modes)
+
+**Datastore**:
+- **Browse datastore** - Required to discover VMDK files and VM storage configuration
+- Used by: All conversion modes (standard virt-v2v, custom, hybrid, clone)
+
+**Network**:
+- **Assign network** - Required to read VM NIC configuration and network mappings
+- Used by: All conversion modes
+
+**Resource**:
+- **Assign virtual machine to resource pool** - Required to read VM placement and resource allocation
+- Used by: All conversion modes
+
+**Virtual machine > Change Configuration**:
+- **Change Settings** - Required to read VM hardware configuration (CPU, RAM, disks)
+- **Query unowned files** - Required to access VM configuration files
+- Used by: All conversion modes
+
+**Virtual machine > Edit Inventory**:
+- **Create from existing** - Required to read VM metadata and state
+- Used by: All conversion modes
+
+**Virtual machine > Guest operations**:
+- **Guest operation queries** - Required to read guest OS information, IP addresses, and installed tools
+- Used by: All conversion modes
+
+### Additional Permissions for Clone Mode (`--clone`)
+
+**Datastore**:
+- **Allocate space** - Required to provision storage for the cloned VM (thin provisioning)
+- Used by: `--clone` mode only
+
+**Folder**:
+- **Create folder** - **CRITICAL** - Required to create the cloned VM in the same folder as the original
+  - Without this permission, clone operations will fail with `FileLocked: Unable to access file since it is locked`
+- Used by: `--clone` mode only
+
+**Virtual machine > Edit Inventory**:
+- **Create new** - Required to create the cloned VM
+- **Remove** - Required to delete the clone after successful conversion
+- Used by: `--clone` mode only
+
+**Virtual machine > Provisioning**:
+- **Clone virtual machine** - Required to execute the CloneVM_Task operation
+- **Customize guest** - Required for VM customization during cloning
+- Used by: `--clone` mode only
+
+### Additional Permissions for Custom/Fallback/Hybrid Modes
+
+**Datastore**:
+- **Low level file operations** - Required to download VMDK files directly from datastores
+- Used by: `--custom`, `--fallback`, `--hybrid` modes
+
+### Permission Setup Example
+
+Create a custom role in vCenter 8:
+
+```
+Role Name: OneSwap-Standard
+Description: Minimum permissions for standard virt-v2v conversions
+
+Permissions:
+  - Datastore > Browse datastore
+  - Network > Assign network
+  - Resource > Assign virtual machine to resource pool
+  - Virtual machine > Change Configuration > Change Settings
+  - Virtual machine > Change Configuration > Query unowned files
+  - Virtual machine > Edit Inventory > Create from existing
+  - Virtual machine > Guest operations > Guest operation queries
+```
+
+For clone mode support, create an extended role:
+
+```
+Role Name: OneSwap-Clone
+Description: Permissions for clone-based conversions (zero production impact)
+
+Includes all permissions from OneSwap-Standard, plus:
+  - Datastore > Allocate space
+  - Folder > Create folder
+  - Virtual machine > Edit Inventory > Create new
+  - Virtual machine > Edit Inventory > Remove
+  - Virtual machine > Provisioning > Clone virtual machine
+  - Virtual machine > Provisioning > Customize guest
+  - Virtual machine > Interaction > Power on
+  - Virtual machine > Interaction > Power off
+```
+
+For download-based conversions (custom/fallback/hybrid):
+
+```
+Role Name: OneSwap-Download
+Description: Permissions for custom conversion modes
+
+Includes all permissions from OneSwap-Standard, plus:
+  - Datastore > Low level file operations
+```
+
+**Important Notes**:
+- Assign roles at vCenter root level with **"Propagate to children"** enabled
+- For `--clone` mode, the VM **must NOT have any snapshots** (remove all snapshots before cloning)
+- For `--delta` and `--esxi` modes, vCenter permissions are minimal as operations run via direct ESXi SSH
+
+## Installation
 
 The package `opennebula-swap`, provided on the official repositories, provides the command `oneswap`.
 
@@ -39,7 +160,7 @@ dnf install opennebula-swap
 ### Requirements and recommended settings
 
 OneSwap requirements for virtual conversion from VMWare to OpenNebula are the following:
-- OneSwap is only supported on Ubuntu 24.04 LTS and AlmaLinux/RHEL 9 servers. On previous versions of Ubuntu and AlmaLinux/RHEL some dependencies are outdated.
+- OneSwap is only supported on Ubuntu 24.04 LTS and Alma Linux/RHEL 9/10 servers. On previous versions of Ubuntu and Alma/RHEL some dependencies are outdated.
 - A working OpenNebula environment with capacity enough to store imported images and VMs and a user with permissions on the destination datastores. Alternatively, conversion can be done with user `oneadmin` and set the right permissions in a posterior step.
 - A vCenter endpoint with valid credentials to export the VMs.
   - The parameters `vcenter`, `vuser`, `vpass` and `port` must be specified.
@@ -65,7 +186,7 @@ Normally that means populating the file `$HOME/.one/one_auth` with `username:pas
   - `libvirt` library, version should be >= 8.7.0
   - `virt-v2v`, stable version
 
-Ubuntu 24.04 and AlmaLinux/RHEL 9 provide up to date versions of the packages
+Ubuntu 24.04 and AlmaLinux/RHEL 9/10 provide up to date versions of the packages
 
 ### Required software for migrating Windows Virtual machines
 

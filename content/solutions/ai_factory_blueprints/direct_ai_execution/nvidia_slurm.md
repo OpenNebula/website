@@ -1,6 +1,6 @@
 ---
-title: "How to finetune LLMs using Slurm"
-linkTitle: "Finetune LLM on Slurm"
+title: "Fine-Tuning AI Models on NVIDIA Slurm"
+linkTitle: "Fine-Tuning on Slurm"
 weight: 8
 ---
 

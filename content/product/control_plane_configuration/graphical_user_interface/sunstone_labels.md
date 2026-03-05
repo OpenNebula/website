@@ -50,7 +50,7 @@ Only group admins can apply and create group labels. However they will still be 
 In order to create a set of labels that will be displayed to all users across all groups, you can define a public group, which will be used to store this information.
 
 ```bash
-onegroup create "system labels"
+onegroup create "systemLabels"
 #ID: 100
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: Deployment of NVIDIA KAI Scheduler
-linkTitle: NVIDIA KAI Scheduler
+title: Deployment of the NVIDIA KAI Scheduler
+linkTitle: Scheduling with NVIDIA KAI
 weight: 7
 ---
 
@@ -39,6 +39,7 @@ To install the NVIDIA KAI Scheduler, you need to accomplish the following prereq
     ```shell
     kubectl create namespace kai-scheduler
     ```
+    
 2. Install the KAI Scheduler through Helm. In case you want to use GPU resource sharing feature, set the `"global.gpuSharing=true"` flag:
     ```shell
     helm install kai-scheduler \
@@ -47,7 +48,6 @@ To install the NVIDIA KAI Scheduler, you need to accomplish the following prereq
         --set "global.gpuSharing=true" \
         --set "global.resourceReservation.runtimeClassName=nvidia"
     ```
-
     We recommend that you install version 0.9.8 of the KAI Scheduler to continue. If you wish to install a newer version, please consult the [KAI Scheduler repository](https://github.com/NVIDIA/KAI-Scheduler/releases) and install it via Helm. **Note that later versions of the KAI Scheduler may require extensive modification of the example schemas provided below to function correctly**.
 
 3. Verify that the Helm chart is successfully installed, and all the KAI Scheduler components are running:

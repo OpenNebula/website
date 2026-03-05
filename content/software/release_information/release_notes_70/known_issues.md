@@ -30,7 +30,38 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 - The Windows Optimized [OS Profile](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md) yaml file at `/etc/one/fireedge/sunstone/profiles/windows_optimized.yaml` has the wrong configuration. Utilizing such profile in Sunstone will lead to a VM that libvirt fails to create. You have to edit the file and replace its contents with the [documentation yaml content](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md#profile-chain-loading).
 - Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/blob/release-7.0.0/src/fireedge/etc/sunstone/sunstone-server.conf#L128).
 - When fullModeView mode is active and a status change is made in the VM, the buttons at the top are not updated. To see the buttons that correspond to the current status of the VM, you have to go back to the data table and reselect the VM. This error will be resolved in future versions. You can find more information [here](https://github.com/OpenNebula/one/issues/7172).
-- Uploaded files are not deleted from /var/tmp when creating an image from upload file. You can find detailed information [here](https://github.com/OpenNebula/one/issues/7252). This may also trigger a race condition that deletes the temporary file from /var/tmp preventing the correct registering of the image, this may apply in some cases only.
+- Race condition where the uploaded files are deleted from the temporary directory before they have been moved into the datastore. 
+
+    **Use the following workaround to mitigate this issue:**
+
+    1. Create a dedicated Sunstone upload directory
+    ```bash
+    mkdir -p /var/lib/one/fireedge-uploads
+    chown oneadmin:oneadmin /var/lib/one/fireedge-uploads
+    chmod 755 /var/lib/one/fireedge-uploads
+    ```
+    2. Configure Fireedge to use it, in the `sunstone-server.conf` file.
+    ```bash
+    # /etc/one/fireedge/sunstone/sunstone-server.conf
+    tmpdir: '/var/lib/one/fireedge-uploads'
+    ```
+    3. Apply the append-only flag (as root)
+    ```bash
+    chattr +a /var/lib/one/fireedge-uploads
+    ```
+    4. Verify the append only flag has been set
+    ```bash
+    lsattr -d /var/lib/one/fireedge-uploads
+    # -----a--------e------- fireedge-uploads
+    ```
+    5. Restart Fireedge
+    ```bash
+    systemctl restart opennebula-fireedge
+    ```
+    This workaround would prevent the `opennebula-sunstone.service` file from removing the uploaded temporary files in `/var/lib/one/fireedge-uploads`, while still allowing copy operations from that directory.
+    
+    {{< alert title="Note" color="info" >}}
+    This directory will fill up, therefore it is recommended to configure a cleanup service like systemd-tmpfiles, to periodically empty this directory.{{< /alert >}} 
 
 ## Migration
 
@@ -81,6 +112,8 @@ xml_element.delete_element('TEMPLATE/VMID')
 xml_element.delete_element('TEMPLATE/OS/UUID') # <- Add this line
 ...
 ```
+
+- Only the default datastore path is supported (``/var/lib/one/datastores/*``) for the image and backup datastores. If using any other path, please make sure there is a soft link in the default path pointing to your current paths. 
 
 ## Market proxy settings
 
