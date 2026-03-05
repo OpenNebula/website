@@ -60,7 +60,7 @@ volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
 EOF
 
-kubectl apply -f storageClass.yaml
+kubectl replace --force -f storageClass.yaml
 ```
 
 4. Make this storage class is the default:
