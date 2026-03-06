@@ -12,3 +12,23 @@
         }
     }
 }
+
+
+
+
+.td-sidebar {
+  padding-left: 10px;
+
+  @include media-breakpoint-up(xxl) {
+    padding-left: 32px;
+  }
+}
+
+
+.td-sidebar-nav__section-title.td-sidebar-nav__section.with-child {
+  padding-left: 14px;
+  
+  @include media-breakpoint-up(xl) {
+    padding-left: 20px;
+  }
+}
