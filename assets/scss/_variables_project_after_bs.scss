@@ -2,8 +2,8 @@
 * This file defines all the styles that need to change between dark and light modes
 */
 
-@import "code/syntax-light";
-@import "code/syntax-dark";
+@import "code/_chroma_light";
+@import "code/_chroma_dark";
 
 // ****************** Dark mode ****************** 
 @include color-mode(dark) {
