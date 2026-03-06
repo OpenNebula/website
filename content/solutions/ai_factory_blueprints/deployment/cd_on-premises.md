@@ -60,7 +60,7 @@ The OneDeploy tool is a collection of Ansible playbooks that streamline the inst
     sudo -i
     ```
 
-    Clone the one-deploy repository:
+    Clone the OneDeploy repository:
 
     ```shell
     git clone https://github.com/OpenNebula/one-deploy.git
@@ -83,7 +83,7 @@ The OneDeploy tool is a collection of Ansible playbooks that streamline the inst
     pipx install 'ansible-core<2.16'
     ```
 
-    Install Hatch:
+    Install [Hatch](https://hatch.pypa.io/latest/):
 
     ```bash
     pipx install hatch==1.16.5
@@ -117,7 +117,7 @@ The OneDeploy tool is a collection of Ansible playbooks that streamline the inst
 
     You should run the AI Factory deployment in the following step in a terminal with this virtual environment activated. 
 
-    For guidance on how to execute the playbooks in different cloud architectures, see the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
+    For guidance on how to execute the playbooks in different cloud architectures, consult the [Playbook Usage Guide](https://github.com/OpenNebula/one-deploy/wiki/sys_use).
 
 ## AI Factory Deployment
 
@@ -192,7 +192,7 @@ lspci -nn | grep -i nvidia
 
 This command should output something similar to the following:
 
-```bash
+```
 c1:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
 ```
 
@@ -200,7 +200,7 @@ The relevant address for the inventory file in this case is `"0000.c1:00.0"`. Yo
 
 ### Run the Deployment
 
-Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), run OneDeploy to provision your OpenNebula cloud.
+Once your inventory file is ready (e.g., saved as `inventory/ai_factory.yml`), run OneDeploy to provision your OpenNebula cloud (remember to activate the virtual environment):
 
 ```shell
 make I=inventory/ai_factory.yml
@@ -208,7 +208,7 @@ make I=inventory/ai_factory.yml
 
 When you enable the PCI passthrough feature in your inventory, OneDeploy handles all the necessary configuration steps. On each hypervisor node, OneDeploy prepares the specified GPUs for passthrough by binding them to the required `vfio-pci` driver. It also ensures the correct permissions are set so that OpenNebula manages the devices.
 
-Simultaneously, on the OpenNebula front-end, OneDeploy configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
+Simultaneously, on the OpenNebula Front-end, OneDeploy configures the monitoring system to recognize these GPUs and intelligently updates each Host's template. This ensures that the GPUs are always correctly identified by OpenNebula, even if hardware addresses change, providing a stable and reliable passthrough setup.
 
 ## Post-Deployment Verification
 
@@ -226,9 +226,10 @@ If the device is visible here, your AI-ready OpenNebula cloud is correctly confi
 
 ---
 
-## Next steps
+## Next Steps
 
 After completing the above steps to launch your AI-ready OpenNebula cloud with OneDeploy, validate your deployment one of the one of the following options:
 
 * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
-* [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
+* [Validation with AI-ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
+

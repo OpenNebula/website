@@ -29,7 +29,7 @@ During this tutorial we will complete the following steps:
 
 Once you have completed this tutorial, you will have an evaluation version of OpenNebula installed on your machine and you will understand how to use the [Sunstone user interface]({{% relref fireedge_sunstone %}}) to instantiate a VM.  
 
-## Before starting
+## Before Starting
 
 It is recommended to perform the installation on a machine capable of running KVM virtualization. If KVM virtualization is not available, miniONE will automatically fall back on QEMU emulation; however, running in full emulation mode will decrease performance.
 
@@ -198,7 +198,7 @@ Congratulations! You've now installed an OpenNebula Front-end with a KVM hypervi
 
 {{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide]({{% relref installation_process %}}) for details on deploying in a production environment.{{< /alert >}} 
 
-## Next steps
+## Next Steps
 
 Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
 

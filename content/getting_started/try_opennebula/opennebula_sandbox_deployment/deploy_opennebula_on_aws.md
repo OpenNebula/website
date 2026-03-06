@@ -32,7 +32,7 @@ During this tutorial we will complete the following steps:
 
 Once you have completed this tutorial, you will have an evaluation version of OpenNebula installed on your AWS instance and you will understand how to use the Sunstone user interface to instantiate a VM.
 
-## Before starting
+## Before Starting
 
 To complete this tutorial, you need to login to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can acheive this through a native terminal. If you are working on a Windows machine, you need to install an SSH client application such as [PuTTY](https://putty.software/).
 
@@ -314,7 +314,7 @@ Congratulations! You've now installed an OpenNebula Front-end on an AWS instance
 
 {{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
 
-## Next steps
+## Next Steps
 
 Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
 

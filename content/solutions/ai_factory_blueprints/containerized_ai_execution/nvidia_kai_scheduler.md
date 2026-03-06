@@ -20,7 +20,7 @@ As the KAI Scheduler operates on top of Kubernetes, users benefit from its robus
 
 In this guide you will learn how to perform a validation using NVIDIA KAI Scheduler in an AI-Ready Kubernetes cluster. You will find details about the installation and efficiently share GPU resources among different workloads.
 
-## Before starting
+## Before Starting
 
 Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
@@ -351,6 +351,6 @@ Optionally, you might deploy another workload with a small GPU fraction on that 
 
 With this validation, you have checked how you can efficiently share fractional GPU resources between workloads in an AI-Ready Kubernetes with KAI Scheduler.
 
-{{< alert title="Tip" color="success" >}}
+## Next Steps
+
 After powering your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may continue with [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}}) as an additional validation procedure built on top of K8s.
-{{< /alert >}}

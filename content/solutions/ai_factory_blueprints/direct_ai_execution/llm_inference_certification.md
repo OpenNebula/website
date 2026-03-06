@@ -19,7 +19,7 @@ The main characteristics of vLLM Inference Framework are:
 
 In this guide you will find the necessary steps and best practices to deploy the OpenNebula vLLM appliance and perform an inference benchmarking to check its performance.
 
-## Before starting 
+## Before Starting 
 
 Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
@@ -288,7 +288,7 @@ To run the benchmark, follow this procedure:
     ![vLLM benchmark results](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark_results.svg)
 
 
-### Benchmark results
+### Benchmark Results
 
 The following key performance metrics have been be tested for each model:
 

@@ -12,7 +12,7 @@ Encapsulating the different inference engines, AI models and dependencies into a
 
 In this guide you will learn how to combine the GPU powered Kubernetes Cluster with the NVIDIA Dynamo Cloud Platform for provisioning a secure, robust and scalable solution for our AI workloads on top of the NVIDIA Dynamo framework powered by the OpenNebula cloud platform.
 
-## Before starting
+## Before Starting
 
 Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
@@ -435,6 +435,6 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 
 In the streamed output, you will receive multiple JSON responses with the response tokens in the `text` field, with some metadata included.
 
-{{< alert title="Tip" color="success" >}}
+## Next Steps
+
 After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with the [NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.
-{{< /alert >}}
