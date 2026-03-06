@@ -10,6 +10,6 @@ weight: "2"
 
 <!-- TMP FIX: -->
 
-<a id="try-hybrid-overview"></a>
+<a id="cloud_cluster_provisioning"></a>
 
 <!--# Automated Hybrid Cluster Provisioning -->
