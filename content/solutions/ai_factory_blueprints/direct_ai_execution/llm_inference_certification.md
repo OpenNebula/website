@@ -238,7 +238,7 @@ The server specifications are based on a two-server setup for each environment: 
 | **RAM**                  | 1152 GB (24x48GB DDR5-4800)                   | 1536 GB (24x64GB DDR5-6400)                   |
 
 
-### Benchmarks models
+### Benchmarks Models
 
 The certification includes two LLM architectures — Qwen and Llama — each tested in two different parameter sizes.
 
