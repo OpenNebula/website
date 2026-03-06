@@ -4,6 +4,8 @@ weight: 1
 description: "Overview of AI factory deployment and validation"
 ---
 
+<a id="overview"></a>
+
 The purpose of the AI Factory collection is to provide a step-by-step process for setting up a simple AI Factory system and getting it up and running quickly, including:
 
 * Identifying the minimum hardware and networking requirements for your AI Factory. These baseline specifications also serve as a reference for more advanced deployments. OpenNebula supports high-performance architectures such as InfiniBand, Spectrum-X, and NVLink, although these setups are not automated and require custom configuration.
@@ -23,7 +25,7 @@ Configuring, deploying and validating a high-performance AI infrastructure using
 <br>
 
 2. Deploy and configure your AI Factory with one of these alternatives:
-    * [On-premises AI Factory Deployment]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}}): Set up an AI Factory using OneDeploy for on-prem environments.
+    * [On-premises AI Factory Deployment]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}}): Set up an AI Factory using OneDeploy for On-premise environments.
     * [On-cloud AI Factory Deployment]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_cloud" %}}): Set up an AI Factory using OneDeploy on Scaleway for cloud environments.
 <br>
 <br>
