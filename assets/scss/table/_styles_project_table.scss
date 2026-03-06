@@ -6,8 +6,9 @@
   border-radius: 12px;
   border: var(--border-width-sm, 1px) solid var(--table-border-color);
   display: table;
-  table-layout: fixed !important;
-  width: 80%;
+  table-layout: auto !important;
+  width: auto;
+  max-width: 100%;
 }
 
 // Table header cell

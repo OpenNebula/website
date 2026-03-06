@@ -1,0 +1,23 @@
+@import "_styles_fonts";
+
+.td-content .highlight pre {
+  background-color: var(--code-background-color) !important;
+  padding: 12px 16px 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #E0E4E7;
+  background: #F5F7F9;
+  @include caption;
+}
+
+.td-content button.td-click-to-copy {
+  color: var(--copy-button-color) !important;
+  border-radius: var(--border-radius-xlg, 6px);
+  border: 1px solid var(--copy-button-border-color);
+  background-color: var(--copy-button-background-color)  !important;
+}
+
+.td-content .highlight pre button.td-click-to-copy {
+  right: 16px;
+  top: 12px;
+}
+

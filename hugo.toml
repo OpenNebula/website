@@ -199,15 +199,20 @@ version_menu = "Versions"
 # added the user feedback module
 [params.ui.feedback]
 enable = true
-feedback_question = 'We value your feedback. Was this page helpful?'
+feedback_question = 'GIVE FEEDBACK. Was this page helpful?'
 yes = 'Glad to hear it'
 no = 'Sorry to hear that'
 
 [params.ui.scrollSpy]
 disable = false
 
+
+# Configuration for code blocks
 [markup]
-  defaultMarkdownHandler = 'goldmark'
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    defaultMarkdownHandler = 'goldmark'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true

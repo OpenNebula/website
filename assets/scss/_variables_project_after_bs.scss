@@ -2,6 +2,9 @@
 * This file defines all the styles that need to change between dark and light modes
 */
 
+@import "code/syntax-light";
+@import "code/syntax-dark";
+
 // ****************** Dark mode ****************** 
 @include color-mode(dark) {
 
@@ -128,6 +131,16 @@
   --blockquote-border-color: #30638E;
 
   --code-font-color: #40435C;
+  --code-background-color: #F5F7F9;
+  --code-border-color: #E0E4E7;
+
+  --copy-button-color: #B2B9BE;
+  --copy-button-border-color: #E0E4E7;
+  --copy-button-background-color: #FFF;
+
+  --feedback-button-background-color: #F5F7F9;
+  --feedback-button-border-color: #E0E4E7;
+  
 
   // Display light logo
   .logo-light { 
