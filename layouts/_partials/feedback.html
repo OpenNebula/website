@@ -1,27 +1,17 @@
 {{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable)) -}}
 {{ with .Site.Params.ui.feedback -}}
-<style>
-  .feedback--answer {
-    display: inline-block;
-  }
-  .feedback--answer-no {
-    margin-left: 1em;
-  }
-  .feedback--response {
-    display: none;
-    margin-top: 1em;
-  }
-  .feedback--response__visible {
-    display: block;
-  }
-</style>
+
 <hr class="panel-line">
 <br><br>
-<div class="d-print-none">
+<div class="d-print-none feedback-container">
 <h3 class="feedback--title">{{- i18n "feedback_title" -}}</h3>
 <p class="feedback--question">{{- i18n "feedback_question" -}}</p>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">{{- i18n "feedback_positive" -}}</button>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">{{- i18n "feedback_negative" -}}</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">
+  <i class="fa-regular fa-thumbs-up"></i>
+</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">
+  <i class="fa-regular fa-thumbs-down"></i>
+</button>
 <p class="feedback--response feedback--response-yes">
   {{ .yes | safeHTML }}
 </p>
@@ -29,6 +19,7 @@
   {{ .no | safeHTML }}
 </p>
 </div>
+
 <script>
   const yesButton = document.querySelector('.feedback--answer-yes');
   const noButton = document.querySelector('.feedback--answer-no');

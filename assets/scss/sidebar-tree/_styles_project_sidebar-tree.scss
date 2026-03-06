@@ -29,10 +29,6 @@
   color: var(--sidebar-title-color);
 }
 
-.td-sidebar-nav__section-title.td-sidebar-nav__section.with-child {
-  padding-left: 20px;
-}
-
 nav.foldable-nav .ul-1 .with-child > label::before {
   padding-left: 0;
 }
@@ -41,9 +37,6 @@ nav.foldable-nav .ul-1 .with-child > label::before {
   border-bottom-width: 0px;
   margin-bottom: 0px;
   padding-bottom: 0px;
-}
-.td-sidebar {
-  padding-left: 32px;
 }
 
 // Scroll bar - Firefox

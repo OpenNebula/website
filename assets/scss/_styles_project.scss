@@ -8,6 +8,8 @@
 @import "toc/_styles_project_toc";
 @import "table/_styles_project_table";
 @import "blockquote/_styles_project_blockquote";
+@import "code/_styles_project_code";
+@import "feedback/_styles_project_feedback.scss";
 @import "_styles_fonts";
 
 /**
@@ -113,18 +115,6 @@ p.body-bold {
   @include media-breakpoint-up(lg) {
     max-width: 100%;
   }
-}
-
-// Button color for copying code on highlighted code blocks
-.td-content {
-  button.td-click-to-copy {
-    color: #cecece !important;
-  }
-}
-
-// Tags
-.tag-back {
-  cursor: pointer;
 }
 
 // Pager
