@@ -211,7 +211,6 @@ disable = false
 [markup]
   [markup.highlight]
     noClasses = false
-    codeFences = true
     defaultMarkdownHandler = 'goldmark'
   [markup.goldmark]
     [markup.goldmark.renderer]
