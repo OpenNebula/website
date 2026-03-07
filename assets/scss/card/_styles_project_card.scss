@@ -20,6 +20,12 @@
   margin-bottom: 0; /* Evita márgenes extraños que desalineen */
 }
 
+// Entry in card-columns
+.entry {
+  background: var(--background-color) !important;
+  border-width: 0px !important;
+}
+
 // Card styles (Not only .card because there is a div parent with td-card card and a childer with only .card. We want to modify this last one)
 .td-card .card {
   border-radius: 8px;
