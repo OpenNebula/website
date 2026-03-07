@@ -51,12 +51,12 @@ p.body-bold {
   @include body-bold;
 }
 
-.td-content pre {
-  padding: 19px 27px 19.5px 27px;
+ul {
+  @include body;
 }
 
-.td-content pre code {
-  @include code;
+li {
+  @include body;
 }
 
 .td-content {
