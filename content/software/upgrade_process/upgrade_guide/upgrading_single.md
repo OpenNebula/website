@@ -106,7 +106,7 @@ New config:  7.0.0
 - from 6.10.2 to 7.0.0 (YAML, Ruby)
 ```
 
-{{<alert title="Note" color="success">}}
+{{< alert title="Note" type="info" >}}
 After running `onecfg status`, you might encounter one of the following messages:
 
 * `Unknown Configuration Version Error`: No action is required. The configuration version will be initialized automatically during the OpenNebula upgrade, based on the existing version.
@@ -206,7 +206,7 @@ If you have any custom monitoring probes, follow [these instructions]({{% relref
 
 ### Step 12. Update the Hypervisors
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The hypervisor node operating system must meet the minimum version required according to the [KVM]({{% relref "../../release_information/release_notes/platform_notes.md#kvm-nodes" %}}) or [LXC]({{% relref "../../release_information/release_notes/platform_notes#lxc-nodes" %}}) platform notes. Running a Front-end node with a newer OpenNebula version controlling hypervisor nodes running in old unsupported platforms, like CentOS 7, can result in a myriad of dependency problems. A very common issue is the old ruby version shipped in CentOS 7 not being able to run the newer driver code.{{< /alert >}}
 
 Log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described [above](#step-5-upgrade-opennebula-packages-repository).

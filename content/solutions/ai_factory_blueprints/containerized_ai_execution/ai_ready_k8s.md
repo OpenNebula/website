@@ -13,7 +13,7 @@ Additionally, running Kubernetes clusters on top of OpenNebula-provisioned virtu
 
 In this guide you will learn how to combine all of these components for provisioning a secure, robust and scalable solution for our AI workloads on top of the NVIDIA Dynamo framework powered by the OpenNebula cloud platform.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 In this guide, we assume that you are using a single node OpenNebula deployment (i.e. a single node that works as an OpenNebula Front-end and hypervisor host at the same time).
 {{< /alert >}}
 
@@ -580,6 +580,6 @@ Then delete for cleanup:
 kubectl delete -f l40s-verify.yaml
 ```
 
-{{< alert title="Tip" color="success" >}}
+{{< alert title="Tip" type="info" >}}
 After provisioning your AI Factory with AI-Ready Kubernetes, you may continue with additional validation procedures built on top of K8s, such as [Deployment of NVIDIA Dynamo]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}}) and [Deployment of NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}).
 {{< /alert >}}

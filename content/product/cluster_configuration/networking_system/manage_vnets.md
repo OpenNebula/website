@@ -92,7 +92,7 @@ Shared Address Ranges behave slightly differently from regular Address Ranges:
 - Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested in a NIC or NIC Alias ([more details](#using-virtual-ips)).
 - Attribute `USED_LEASES` shows how many different shared IPs are in use, not how many VMs are using them.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The `SHARED` attribute of an Address Range can't be changed after creation. The default value is `NO`. {{< /alert >}}
 
 ### Guest Configuration Attributes (Context)
@@ -439,7 +439,7 @@ This will result in the VM having a **single network interface** (the parent NIC
 - The IP assigned to the main NIC
 - The explicitly requested shared IP from the `NIC_ALIAS`
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by OpenNebula.{{< /alert >}}
 
 ### Configuring the Virtual Machine Network

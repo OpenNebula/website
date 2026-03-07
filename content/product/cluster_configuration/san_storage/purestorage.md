@@ -44,7 +44,7 @@ With the native Pure driver, OpenNebula users gain the performance consistency o
 While the Pure Storage FlashArray integration delivers full VM disk lifecycle management and the core SAN operations required by OpenNebula, it is deliberately scoped to **primary datastore provisioning** via **iSCSI block devices.**
 Several advanced FlashArray protection and VMware-specific capabilities are intentionally not surfaced through this driver.
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 This integration targets block-level provisioning for OpenNebula environments.
 It does not expose replication, asynchronous protection groups, or VMware-exclusive workflows (e.g., vVols or VAAI primitives).
 {{< /alert >}}
@@ -232,7 +232,7 @@ ID: 102
 
 Hosts are automatically created in PureStorage using the PureStorage FlashArray API, with a name generated from their hostname.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Do NOT change the hostname of your hosts unless you have 0 VM's deployed to that host
 {{< /alert >}}
 
@@ -244,11 +244,11 @@ Both Full and Incremental backups are supported by PureStorage FlashArray. For F
 
 Incremental backups are created using the Volume Difference Feature of PureStorage FlashArray. This returns a list of block offsets and lengths which have changed since a target snapshot. This list is then used to create a sparse QCOW2 format file which is uploaded to the backup datastore.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can configure the block size ( Default and minimum 4096 B / 4 KB ) for incremental backups by modifing the file at `/var/tmp/one/etc/tm/san/backup.conf`
 {{< /alert >}}
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The incremental backup feature of PureStorage FlashArray requires the `nbd` kernel module to be loaded and the `nbdfuse` package to be installed on all OpenNebula nodes.
 {{< /alert >}}
 
@@ -269,7 +269,7 @@ You may wish to contact the OpenNebula Support team to assist in this cleanup; h
   ~~~
   *Be very careful to target the correct multipath device.*
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This behavior stems from the inherent complexities of iSCSI connections and is not exclusive to OpenNebula or PureStorage.
 {{< /alert >}}
 

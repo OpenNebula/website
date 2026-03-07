@@ -27,7 +27,7 @@ To define an AWS provider, specify the following information:
 * **Region**: this is the location in the world where the resources are going to be allocated. All the available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
 * **Instance types and AMIs**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 You can customize AMIs in addition to the default one provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI.
 
 If you implement a custom AMI, your selected configuration might require additional adjustments, and you will likely observe some unexpected results. Avoid using customized AMIs in production environments, unless you have properly tested them before.

@@ -325,6 +325,6 @@ The following table contains the results of the benchmark for each model:
 
 OpenNebula includes the obtained results in controlled environments, with given hardware and using specific models. This information can later be used to compare future results, assess deployments, and evaluate performance against known baselines.
 
-{{< alert title="Tip" color="success" >}}
+{{< alert title="Tip" type="info" >}}
 Alternatively, after validating your AI Factory with LLM Inference, you may choose to follow [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}).
 {{< /alert >}}

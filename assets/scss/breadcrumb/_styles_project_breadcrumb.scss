@@ -34,6 +34,10 @@
   margin: 0;
 }
 
+.breadcrumb li {
+  @include body-small;  
+}
+
 .breadcrumb-item.active {
   @include body-small;  
   color: var(--body-disabled-color);
