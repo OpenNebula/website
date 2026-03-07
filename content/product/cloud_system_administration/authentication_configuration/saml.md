@@ -281,7 +281,7 @@ To do OpenNebula group mapping, a group claim must be created, pressing "Add a g
 
 ![entra_11_add_group_claim](/images/auth/entra/entra_11_add_group_claim.png)
 
-{{< alert title="Groups/Roles in Entra ID" color="success" >}}
+{{< alert title="Groups/Roles in Entra ID" type="info" >}}
 This claim will provide Entra ID groups and roles, because they are treated as if they were the same. Note that in some Azure tiers roles cannot be created but groups can.{{< /alert >}}
 
   - On the __SAML Certificates__ section, the **Federation Metadata XML** file must be downloaded to extract the idp certificate (the parameter `:idp_cert` of the OpenNebula configuration file). The certificate is the value of the field `/EntityDescriptor/Signature/ds:KeyInfo/ds:X509Data/ds:X509Certificate` of the XML file. Supposing that the file was downloaded to `Downloads/OpenNebula Local.xml`, it can be done easily using the command `xpath` as shown in the following commandline 

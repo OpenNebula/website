@@ -27,7 +27,7 @@ To define a new Equinix Provider, specify the following information:
 * **Facility**: This defines the world location where the resources will be deployed. Check the available [Equinix facilities](https://www.equinix.com/data-centers/).
 * **Plans and OS**: Defines the capacity of the resources that will be deployed and the operating system installed on them.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Equinix supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*.
 
 If you choose an alternative OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using an OS other than *Ubuntu 24.04* in production environments, unless you have thoroughly tested it.

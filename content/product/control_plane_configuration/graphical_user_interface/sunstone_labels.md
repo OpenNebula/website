@@ -42,7 +42,7 @@ This will open the **Create Label** modal, which can be used to create user and 
 
 ![labels_create_modal](/images/sunstone_labels_create_modal.png)
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Only group admins can apply and create group labels. However they will still be visible to all members of the group.{{< /alert >}}
 
 ## System labels
@@ -63,7 +63,7 @@ oneacl create "* GROUP/#100 USE"
 
 Now all users will have USE permissions on this group, even though they aren't a member of this group. This means they can read the group's template data, which Sunstone uses when displaying labels to users. For more fine-grained control you can create different groups for storing labels and regulate their access level using the ACLs.
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 In order to allow a user to control the system labels, they can be added to the "system labels" group with group admin permissions. {{< /alert >}} 
 
 ### Default labels
@@ -85,7 +85,7 @@ group:
         - "4"
 ```
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 A user will only see the labels on the resources they have access to, meaning it is fine to be overly-expressive here, as this does not affect the resource permissions in any way.{{< /alert >}} 
 
 The following list of resource names can be used:

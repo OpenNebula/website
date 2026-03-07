@@ -47,7 +47,7 @@ From Linux or MacOS, the image can be dumped on the USB with the following comma
 dd if=/path/to/your/opennebula-7.0.1-CE.iso of=/dev/sdXX
 ```
 
-{{< alert title="Check the USB drive" color="warning" >}}
+{{< alert title="Check the USB drive" type="warning" >}}
 `/dev/sdXX` is the drive for the USB drive. It's recommended to check it twice to avoid catastrophic data loss.{{< /alert >}}
 
 On Windows, use Rufus to create the USB drive.
@@ -67,7 +67,7 @@ The recommended options are the following:
 - `Install OpenNebula POC` will install a full OpenNebula Front-end and the necessary software to make it an OpenNebula KVM hypervisor node.
 - `Install OpenNebula Node` will install only the KVM hypervisor packages to create a compute node or Host that can be managed by the OpenNebula Front-end.
 
-{{< alert title="Other options" color="success" >}}
+{{< alert title="Other options" type="info" >}}
 **The  `Test this media and Install ...` options are only recommended for installation from fast local media (like a USB pendrive). These options will be slow when installing to remote infrastructure.**.
 {{< /alert >}}
 
@@ -79,7 +79,7 @@ After that, a little menu showing all the available, non-removable disks, will b
 
 ![disk_selection](/images/ISO/011-disk_selection.png)
 
-{{< alert title="Warning: data will be deleted" color="warning" >}}
+{{< alert title="Warning: data will be deleted" type="warning" >}}
 
 **IMPORTANT: OpenNebula will be installed on the first disk found and it will IRREVERSIBLY delete all data on that disk. Ensure that the existing data is backed up.**{{< /alert >}}
 
@@ -184,7 +184,7 @@ To configure the network, select `Edit a connection`. The following menu will ap
           └───────────────────────────┘
 ```
 
-{{< alert title="Network considerations" color="success" >}}
+{{< alert title="Network considerations" type="info" >}}
 To set up special networking configuration, please check the documentation about `nmtui`.
 {{< /alert >}}
 
@@ -334,7 +334,7 @@ The Sunstone UI should now be accessible by visiting http://\<frontend\_ip\>:261
 
 To obtain the oneadmin password run `onefemenu` on the command line of your Front-end server and select option `show_oneadmin_pass`
 
-{{< alert title="Length of `oneadmin` password" color="success" >}}
+{{< alert title="Length of `oneadmin` password" type="info" >}}
 The `oneadmin` default password is 32 hex chars long (128 bits of entropy). It is recommended to create a separate user to work with OpenNebula and to use oneadmin user for administrative task only.
 {{< /alert >}}
 
@@ -346,7 +346,7 @@ To set up a Virtual Network using VXLAN, in the Sunstone UI go to **Networks** -
 
 ![sunstone-network_config](/images/ISO/03-sunstone-network-config.png)
 
-{{< alert title="VXLAN evpn" color="success" >}}
+{{< alert title="VXLAN evpn" type="info" >}}
 To allow automatic network discovery, the VXLAN mode must be set to `evpn` in all cases.
 {{< /alert >}}
 
@@ -368,7 +368,7 @@ Select the **Context** tab and enter values similar to the following, based on t
 
 ![sunstone-network_context](/images/ISO/05-sunstone-network-context.png)
 
-{{< alert title="MTU size" color="warning" >}}
+{{< alert title="MTU size" type="warning" >}}
 The contextualization MTU for this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation) or smaller. 1450 is a safe default (regular ethernet frame size).
 {{< /alert >}}
 
@@ -408,7 +408,7 @@ This gateway is not persistent after reboots. If the Front-end is rebooted, the 
 
 Virtual machines on this Virtual Network won't be able to access to the same networks as the Front-end because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
 
-{{< alert title="Security and persistence warning" color="warning" >}}
+{{< alert title="Security and persistence warning" type="warning" >}}
 By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the Front-end, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
 {{< /alert >}}
 

@@ -223,7 +223,7 @@ Images are stored as regular files (under the usual path: `/var/lib/one/datastor
 
 {{< image path="/images/fs_lvm_datastore.svg" alt="Images stored as regular files dumped into LVs" align="center" width="90%" pb="20px" >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Files are dumped directly from the Front-end to the LVs in the Host, using the SSH protocol.{{< /alert >}}
 
 This is the recommended driver to be used when a high-end SAN is available. The same LUN can be exported to all the Hosts while Virtual Machines will be able to run directly from the SAN.

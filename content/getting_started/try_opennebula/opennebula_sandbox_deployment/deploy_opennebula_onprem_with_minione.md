@@ -93,7 +93,7 @@ Now run the installation script:
 ./minione
 ```
 
-{{< alert title="Tip" color="primary" >}} miniONE will create credentials with a randomized password for logging into the Sunstone UI. You can use the `--password` option to enter a secure and memorable password of your own: `./minione --password <password>`{{< /alert >}} 
+{{< alert title="Tip" type="primary" >}} miniONE will create credentials with a randomized password for logging into the Sunstone UI. You can use the `--password` option to enter a secure and memorable password of your own: `./minione --password <password>`{{< /alert >}} 
 
 The miniONE script executes the installation while logging output to the terminal. Installation usually takes between one and three minutes on most machines. Once finished, miniONE displays a report in the terminal with connection parameters and login credentials:
 
@@ -196,7 +196,7 @@ Log in as `root` with password `opennebula`. You can then use the command line t
 
 Congratulations! You've now installed an OpenNebula Front-end with a KVM hypervisor and Virtual Network, then deployed a VM.
 
-{{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide]({{% relref installation_process %}}) for details on deploying in a production environment.{{< /alert >}} 
+{{< alert title="Tip" type="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide]({{% relref installation_process %}}) for details on deploying in a production environment.{{< /alert >}} 
 
 ## Next Steps
 

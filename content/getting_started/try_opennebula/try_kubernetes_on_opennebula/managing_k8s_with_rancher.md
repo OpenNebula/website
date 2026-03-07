@@ -193,7 +193,7 @@ If you did not set a password when instantiating the VM, log in with these crede
 As mentioned above, with the default resources the complete configuration process for the K3s cluster and Rancher can take between 6 and 8 minutes to complete. Occasionally, a bug related to the installation of Turtles -- specifically with the `helm-install-rancher-turtles` pod -- may cause the installation to hang. In such cases, if the Rancher interface does not come up you will need to restart the process.
 {{< /alert >}}
 
-{{< alert title="Tip" color="success" >}}
+{{< alert title="Tip" type="info" >}}
 If the Rancher UI takes too long to become available or if you prefer to monitor the process manually, you can log in to the CAPI VM with:
 
 ```bash
@@ -487,7 +487,7 @@ Now your Nginx deployment should be visible on the external IP of the node -- wh
 
 ### Adding Worker Nodes to the Cluster
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before creating a replica, ensure you have enough resources allocated to the CAPI deployment, and on the machine running the Front-end.
 {{< /alert >}}
 

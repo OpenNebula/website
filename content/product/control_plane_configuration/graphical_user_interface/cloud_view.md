@@ -65,7 +65,7 @@ Users can create a persistent private copy of the available templates. A **persi
 
 To create a persistent copy, use the **Persistent** switch. Include `%i` in the name to insert the VM index (0..N-1) at a custom place when create more than one virtual machine:
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 When creating more than one virtual machine marked as persistent, user must specify `%i` in the name in order to avoid conflicts in the creation of templates and images.
 {{< /alert >}} 
 

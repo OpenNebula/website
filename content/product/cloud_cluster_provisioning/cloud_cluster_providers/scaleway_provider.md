@@ -26,7 +26,7 @@ To define a Scaleway Provider, specify the following information:
 * **Zone**: The world location where the resources will be deployed. All available zones are [listed here](https://www.scaleway.com/en/docs/console/account/reference-content/products-availability/).
 * **Offers and OS**: Defines the capacity of the resources that will be deployed and the operating system to be installed on them.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Scaleway supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*.
 
 If you choose an alternative OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using an OS other than *Ubuntu 24.04* in production environments, unless you have thoroughly tested it.
