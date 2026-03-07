@@ -14,14 +14,23 @@
   border-radius: var(--border-radius-xlg, 6px);
   border: 1px solid var(--copy-button-border-color);
   background-color: var(--copy-button-background-color)  !important;
+  &:hover {
+    color: var(--copy-button-color-hover) !important;
+  }
 }
 
 .td-content .highlight pre button.td-click-to-copy {
   right: 16px;
-  top: 12px;
+  top: 12px;  
 }
 
 .td-content pre:has(code.language-default) {
+  background-color: var(--code-background-default-color);
+  border-radius: 8px;
+  border: 1px solid var(--code-border-default-color);  
+}
+
+.td-content pre:has(code) {
   background-color: var(--code-background-default-color);
   border-radius: 8px;
   border: 1px solid var(--code-border-default-color);  

@@ -23,6 +23,7 @@
 
 .btn-primary.feedback--answer {
   background-color: var(--feedback-button-background-color);
+  color: var(--feedback-button-color);
   border-radius: 6px;
   border: 1px solid var(--feedback-button-border-color);
   padding: 3px 8px 3px 8px;
@@ -35,4 +36,9 @@
 
 .feedback--response__visible {
   display: block;
+}
+
+// Feedback section
+.panel-line  {
+  color: var(--feedback-button-border-color);
 }

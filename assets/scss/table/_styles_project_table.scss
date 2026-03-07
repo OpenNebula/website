@@ -16,6 +16,7 @@ table thead th {
   @include body-small-medium;
   color: var(--body-color) !important;
   padding: 16px !important; 
+  background-color: var(--table-background-color) !important;
   border-bottom: var(--border-width-sm, 1px) solid var(--table-border-color);
 }
 

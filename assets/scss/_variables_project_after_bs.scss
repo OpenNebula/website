@@ -8,68 +8,82 @@
 // ****************** Dark mode ****************** 
 @include color-mode(dark) {
 
+  --background-color: #222431;
+
   --headings-color: #FFF;
   --body-color: #C4CDD5;
   --body-disabled-color: #878F95;
   --link-color: #58D2FF;
   --link-hover-color: #7CDCFF;
 
-  --border-color: #DEE2E6;
+  --border-color: #40435C;
 
-  --card-background-color: #F5F7F9;
-  --card-background-border-color: #E0E4E7;
+  --card-background-color: #2A2D3D;
+  --card-border-color: #40435C;  
+  --card-titles-font-color: #58D2FF;
 
   --breadcrumb-icon-color: #1393C2;
-  --breadcrumb-link-color: #1393C2;
 
-  --footer-background-color: #FFF;  
+  --alert-info-border-color: #80B2FF;
+  --alert-info-font-color: #80B2FF;  
+  --alert-info-background-color: #0D2A57;
+  --alert-info-icon-color: #80B2FF;
 
-  // Display dark logo
-  .logo-light { display: none; }
-  .logo-dark { display: block; }
+  --alert-warning-border-color: #FF6E1F;
+  --alert-warning-font-color: #FF6E1F;  
+  --alert-warning-background-color: #461900;
+  --alert-warning-icon-color: #FF6E1F;
 
-  // Main container
+  --alert-danger-border-color: #FF5779;
+  --alert-danger-font-color: #FF5779;  
+  --alert-danger-background-color: #290008;
+  --alert-danger-icon-color: #FF5779;
+
+  --alert-tip-border-color: #2FB8EB;
+  --alert-tip-font-color: #58D2FF;  
+  --alert-tip-background-color: #003447;
+  --alert-tip-icon-color: #7CDCFF;
+
+  --footer-background-color: var(--background-color);
+  --footer-linkicon-color: #FFF;
+
+  --scrollbar-color: #40435C;
+
+  --sidebar-title-color: #F5F7F9;
+
+  --table-background-color: #2A2D3D;
+  --table-border-color: #40435C;
+  --table-code-border-color: transparent;
+  --table-code-background-color: #40435C;
+
+  --blockquote-border-color: #7CDCFF;
+
+  --code-background-color: #40435C;
+  --code-background-default-color: #34384C;
+  --code-border-color: #2A2D3D;
+  --code-border-default-color: #2A2D3D;
+
+  --copy-button-color: #40435C;
+  --copy-button-color-hover: #878F95;
+  --copy-button-border-color: #40435C;
+  --copy-button-background-color: #2A2D3D;
+
+  --feedback-button-background-color: #F5F7F9;
+  --feedback-button-color: #575C5B;
+  --feedback-button-border-color: #E0E4E7;
+  
+
+  // Display light logo
+  .logo-light { 
+    display: none;
+  }
+  .logo-dark { 
+    display: block; 
+  }
+
+  // Main component
   .td-main {
-    background-color: #222431;
-  }
-
-   // Entry in section-index.html template
-  .entry {
-    background: #222431;
-    border-color: #222431;
-    border-width: 1px;
-  }
-
-  // Feedback section
-  .panel-line  {
-    color: #4A4F6B;
-  }
-
-  // Buttons
-  .btn-primary {
-    background-color: #2A2D3D;
-    color: #EBEBEB;
-    border-color: #8F9392;
-    background-image: none;
-  }
-  .btn-primary:hover {
-    background-color: #35384D;
-    color: #EBEBEB;
-    border-color: #F5F5F5;
-    background-image: none !important;
-  }  
-
-  // Tags
-  .tag-back {
-    color: #83A1BB;
-  }
-
-  // Pager
-  .one-pager {
-    color: #E9E9E9;
-  }
-  .one-pager:hover {
-    color: #40B3D9;
+    background-color: var(--background-color);
   }
 
 }
@@ -113,15 +127,12 @@
   --alert-tip-background-color: #EAF9FF;
   --alert-tip-icon-color: #007099;
 
-  --footer-background-color: #FFF;
+  --footer-background-color: var(--background-color);
   --footer-linkicon-color: #007099;
 
   --scrollbar-color: #E0E4E7;
 
   --sidebar-title-color: #40435C;
-
-  --link-icon-background-color: #007099;
-  --link-icon-color: #007099;
 
   --table-background-color: #FFF;
   --table-border-color: #E0E4E7;
@@ -130,17 +141,18 @@
 
   --blockquote-border-color: #30638E;
 
-  --code-font-color: #40435C;
   --code-background-color: #F5F7F9;
   --code-background-default-color: #E0E4E7;
   --code-border-color: #E0E4E7;
   --code-border-default-color: #C4CDD5;
 
   --copy-button-color: #B2B9BE;
+  --copy-button-color-hover: #737B81;
   --copy-button-border-color: #E0E4E7;
   --copy-button-background-color: #FFF;
 
   --feedback-button-background-color: #F5F7F9;
+  --feedback-button-color: #575C5B;
   --feedback-button-border-color: #E0E4E7;
   
 
@@ -152,47 +164,7 @@
 
   // Main component
   .td-main {
-    background-color: #FFFFFF;
+    background-color: var(--background-color);
   }
-
-  // Entry in card-columns
-  .entry {
-    background: #ffffff !important;
-    border-color: #ffffff !important;
-    border-width: 0px !important;
-  }
-
-
-  // Feedback section
-  .panel-line  {
-    color: #C7C9C8;
-  }
-
-  // Buttons
-  .btn-primary {
-    background-color: #E5F5FA;
-    color: #575C5B;
-    border-color: #007099;
-    background-image: none;
-  }
-  .btn-primary:hover {
-    background-color: #DFE6F2;
-    color: #575C5B;
-    border-color: #0098C3;
-    background-image: none !important;
-  }
-
-  // Tags
-  .tag-back {
-    color: #0d6efd;
-  }
-
-  // Pager
-  .one-pager {
-    color: #575C5B;
-  }
-  .one-pager:hover {
-    color: #007099;
-  }  
 
 }
