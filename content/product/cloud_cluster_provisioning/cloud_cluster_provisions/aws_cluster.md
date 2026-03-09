@@ -31,7 +31,7 @@ The network model is implemented in the following way:
 * **Public Networking**: relies on elastic IPs from AWS and the IPAM driver from OpenNebula. When you create the virtual network in OpenNebula, the elastic IPs are requested to AWS. IP forwarding rules are applied within the host, so the VM communicates over the public IP assigned by AWS. There are limits to the number of elastic IPs that can be requested. Refer to [Elastic IP address quota](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-limit) for more information.
 * **Private Networking**: uses BGP-EVPN and VXLAN.
 
-![Network model implementation with public and private networking](/images/aws_deployment.png)
+{{< image path="images/oneform/oneprovision/aws/aws_deployment.svg" alt="Network model implementation with public and private networking" align="center" width="80%" pb="20px" >}}
 
 ## OpenNebula Resources
 
