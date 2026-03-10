@@ -37,7 +37,7 @@ We’ll follow these high-level steps:
 > 4. Run the playbooks.
 > 5. Verify the installation.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 This tutorial was designed and tested using Ubuntu 24.04 and 22.04 for all servers involved (i.e., OpenNebula Front-end and Hypervisor nodes) using a virtual environment with [Hatch](https://hatch.pypa.io/) . For information on other installation methods and OSs, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Requirements

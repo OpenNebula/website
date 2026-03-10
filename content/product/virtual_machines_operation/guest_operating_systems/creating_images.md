@@ -65,7 +65,7 @@ If you need to incorporate additional content or include a new base OS, refer to
 
 If you are using the KVM hypervisor you can create base images using OpenNebula by manually installing the operating system.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can also start with a base installation provided by the official distribution channels:
 
 * **AlmaLinux**: [https://repo.almalinux.org/almalinux/](https://repo.almalinux.org/almalinux/)

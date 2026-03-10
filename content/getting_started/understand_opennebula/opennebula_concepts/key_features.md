@@ -222,7 +222,7 @@ Comprehensive tools and workflows to enable a smooth transition from VMware envi
 * Minimal Disruption: migration workflows designed to ensure business continuity, avoiding downtime and configuration drift.
 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 (\*) *Because OpenNebula leverages the functionality exposed by the underlying platform services, its functionality and performance may be affected by the limitations imposed by those services.*
 
 - *The list of features may change on the different platform configurations*

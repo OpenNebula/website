@@ -19,7 +19,7 @@ OpenNebula provides a built-in mechanism to ensure high availability (HA) of the
 
 In this section, you learn the basics of how to bootstrap a distributed highly available OpenNebula Front-end.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If you are interested in fail-over protection against hardware and operating system outages within your virtualized IT environment, check the [Virtual Machines High Availability Guide]({{% relref "vm_ha#ftguide" %}}).{{< /alert >}} 
 
 ## Raft Overview
@@ -59,10 +59,10 @@ The servers should be configured in the following way:
 
 This section shows examples of all the steps required to deploy the HA Cluster.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 To maintain a healthy cluster during the procedure of adding servers to the clusters, make sure you add **only** one server at a time.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 In the following, each configuration step starts with (initial) **Leader** or (future) **Follower** to indicate the server where the step must be performed.{{< /alert >}} 
 
 ### Configuration of the initial leader
@@ -102,7 +102,7 @@ ZONE TEMPLATE
 ENDPOINT="http://localhost:2633/RPC2"
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Floating IP should be used for **zone endpoints** and cluster private addresses for the zone **server endpoints**.{{< /alert >}}
 
 * **Leader**: Stop OpenNebula service and update `SERVER_ID` in `/etc/one/oned.conf`
@@ -118,7 +118,7 @@ FEDERATION = [
 
 * **Leader**: [Optional] Enable the RAFT Hooks in `/etc/one/oned.conf`. This will add a floating IP to the system.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Floating IP should be used for monitoring daemon parameter `MONITOR_ADDRESS` in `/etc/one/monitord.conf`{{< /alert >}} 
 
 ```default
@@ -164,10 +164,10 @@ $ ip -o a sh eth0|grep 10.3.3.2/24
 
 ### Adding more servers
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This procedure will discard the OpenNebula database in the server you are adding and substitute it with the database of the initial *leader*.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Add only one host at a time. Repeat this process for every server you want to add.{{< /alert >}} 
 
 * **Leader**: Create a DB backup in the initial *leader* and distribute it to the new server, along with the files in `/var/lib/one/.one/`:
@@ -250,12 +250,12 @@ ZONE TEMPLATE
 ENDPOINT="http://localhost:2633/RPC2"
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 It may be that the **TERM**/**INDEX**/**COMMIT** does not match (as above). This is not important right now; it will sync automatically when the database is changed.{{< /alert >}} 
 
 * **Follower**: Ensure the new node have the exact same configuration than the **Leader** node. In order to do this [onezone serversync]({{% relref "#server-sync-ha" %}}) can be used to fetch the configuration from the Leader node.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you are using FireEdge you need to restart this service in the **Follower** `systemctl restart opennebula-fireedge`.{{< /alert >}} 
 
 Repeat this section to add new servers. Make sure that you only add servers when the cluster is in a healthy state. That means there is 1 *leader* and the rest are in *follower* state. If there is one server in error state, fix it before proceeding.
@@ -364,7 +364,7 @@ The Raft algorithm can be tuned by several parameters in the configuration file 
 | `BROADCAST_TIMEOUT_MS` | How often heartbeats are sent to  *followers*.                                                                         |
 | `XMLRPC_TIMEOUT_MS`    | To timeout raft-related API calls. To set an infinite timeout set this value to 0.                                     |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Any change in these parameters can lead to unexpected behavior during the fail-over and result in whole-cluster malfunction. After any configuration change, always check the crash scenarios for the correct behavior.{{< /alert >}} 
 
 <a id="server-sync-ha"></a>
@@ -373,7 +373,7 @@ Any change in these parameters can lead to unexpected behavior during the fail-o
 
 To synchronize files, you can use the command `onezone serversync`. This command is designed to help administrators to sync OpenNebula’s configurations across HA nodes and fix lagging nodes in HA environments. The command first checks for inconsistencies between local and remote configuration files inside the `/etc/one/` directory. If inconsistencies are found, the local version of a file will be replaced by the remote version, and only the affected service will be restarted. Whole configuration files will be replaced, with the sole exception of `/etc/one/oned.conf`. For this file, the local `FEDERATION` configuration will be maintained, but the rest of the content will be overwritten. Before replacing any file, a backup will be made inside `/etc/one/`.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Only use this option between HA nodes, never across federated nodes.{{< /alert >}} 
 
 This is the list of files that will be checked and replaced:
@@ -392,12 +392,12 @@ Folders:
 - `/etc/one/schedulers`
 - `/etc/one/vmm_exec`
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Any file inside the above folders that does not exist on the remote server (such as backups) will *not* be removed.{{< /alert >}}
 
 ### Usage
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The command has to be executed under a privileged user `root` (as it modifies the configuration files) and requires passwordless SSH access to the remote OpenNebula Front-end and to remote users `root` or `oneadmin`.{{< /alert >}} 
 
 ```default

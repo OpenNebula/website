@@ -19,7 +19,7 @@ This guide assumes you already have an up-and-running Grafana service. If you do
 > - [Download and Installation](https://grafana.com/grafana/download).
 > - [Add a new Prometheus Data sources](https://grafana.com/blog/2022/01/26/video-how-to-set-up-a-prometheus-data-source-in-grafana/).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Prometheus listens on the standard port (9090) as described in the installation guide.{{< /alert >}} 
 
 ## Grafana Dashboards
@@ -55,7 +55,7 @@ datasources:
 EOF
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 In the case that your Grafana instance is running alongside Prometheus on the same OpenNebula server,{{< /alert >}} 
 then the **http://localhost:9090** above can be accessed with ssh tunneling:
 

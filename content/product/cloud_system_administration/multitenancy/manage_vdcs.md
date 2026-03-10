@@ -22,7 +22,7 @@ There is a special `default` VDC created during the installation that allows the
 
 The `users` group belongs to this VDC and any new group is automatically added to the `default` VDC. You can modify the VDC physical resources, or even remove all of them, but the VDC can’t be deleted.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before adding a new group to a specific VDC, you may want to remove it from the `default` one since this allows the use of `ALL` the physical resources.{{< /alert >}} 
 
 ## Adding and Deleting VDCs

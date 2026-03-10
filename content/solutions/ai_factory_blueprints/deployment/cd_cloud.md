@@ -134,7 +134,7 @@ For more details, refer to the [OneDeploy System Requirements](https://github.co
 
 Create an inventory file named `inventory/scaleway.yaml`. This file defines a complete OpenNebula deployment on the local machine (`127.0.0.1`).
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 *   Replace `YOUR_SECURE_PASSWORD` with a strong and unique password for the `oneadmin` user.
 *   The PCI device addresses (`0000:01:00.0`, `0000:82:00.0`) must match the ones you found earlier with `lspci`.
 {{< /alert >}}
@@ -183,7 +183,7 @@ Run the deployment on the `one-deploy` hatch shell environment previously create
 make I=inventory/scaleway.yaml
 ```
 
-{{< alert title="Tip" color="sucess" >}}
+{{< alert title="Tip" type="sucess" >}}
 Improve the security of your public-facing OpenNebula instances with SSL termination and rate limiting by performing the configuration of a reverse proxy such as Nginx or Apache, forwarding requests to localhost:2616. Then, set the host variable in /etc/one/fireedge-server.conf so that it listens only on localhost.
 {{< /alert >}}
 

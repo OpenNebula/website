@@ -115,7 +115,7 @@ When using XFS images it is recommended to use images with a block size of 4K as
 Mon Apr  4 22:20:25 2022 [Z0][VMM][I]: mount: /var/lib/one/datastores/0/30/mapper/disk.1: mount(2) system call failed: Function not implemented.
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Custom images can also be created by using common linux tools like the `mkfs` command for creating the file system and `dd` for copying an existing file system inside the new one. Also, OpenNebula will preserve any custom id map present on the filesystem.{{< /alert >}}
 
 ## Networking
@@ -168,7 +168,7 @@ RAW = [
   DATA = "lxc.signal.reboot = 9" ]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Each line of the `DATA` attribute must contain only an LXC configuration attribute and its corresponding value. If a provided attribute is already set by OpenNebula, it will be discarded and the original value will take precedence.{{< /alert >}}
 
 The `LXC_PROFILES` attribute implements a similar behavior to [LXD profiles](https://linuxcontainers.org/lxd/advanced-guide/#profiles). It allows users to include pre-defined LXC configuration to a container. In order to use a profile, the corresponding LXC configuration file must be available at `/var/lib/one/remotes/etc/vmm/lxc/profiles`.
@@ -182,7 +182,7 @@ $ ls -l /var/lib/one/remotes/etc/vmm/lxc/profiles
 -rw-r--r-- 1 oneadmin oneadmin 35 abr 26 12:35 production
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 After defining the profiles, make sure `oneadmin` user has enough permission to read them. Also, remember to use `onehost sync` command to make sure the changes are synced in the Host. If the profile is not available in the Host, the container will be deployed without including the corresponding profile configuration.{{< /alert >}}
 
 After defining the profiles they can be used by adding the `PROFILES` attribute to the VM template:

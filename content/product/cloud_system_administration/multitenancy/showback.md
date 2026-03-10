@@ -27,7 +27,7 @@ Using this cost schema allows users to resize the Virtual Machine instances.
 ![sunstone_showback_memory](/images/sunstone_showback_memory.png)
 ![sunstone_showback_disks](/images/sunstone_showback_disks.png)
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If your users can access the [Sunstone ‘user’ view]({{% relref "fireedge_sunstone_views#fireedge-suns-views" %}}), it’s important to set a default cost. These users can manage their own Templates, which won’t have a specific cost assigned.{{< /alert >}} 
 
 ## Calculate Monthly Reports
@@ -57,7 +57,7 @@ Optionally you can compute CPU and MEMORY cost only for VMs in `running` state, 
 
 If the time range includes the current month, OpenNebula will calculate the cost up to today’s date.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 There is a timer in the Front-end opennebula-showback.timer that automatically calculates the showback every day. You can check the status by running `systemctl status opennebula-showback.timer`.{{< /alert >}} 
 
 The `oneshowback` command can only be executed by the oneadmin user.
@@ -76,10 +76,10 @@ To calculate only September:
 $ oneshowback calculate --start "09/2016" --end "09/2016"
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This is a resource intensive operation. For big deployments, it is recommended to use the `--start` option to process only the last missing months.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Existing records can be re-calculated. This can be useful to update old records when a VM is renamed or the owner is changed. In this case, the cost of previous months will be also assigned to the new user.{{< /alert >}} 
 
 ### Using Sunstone

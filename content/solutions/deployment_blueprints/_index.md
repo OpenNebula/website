@@ -4,7 +4,7 @@ description: "Real-world deployment types for common use cases in cloud computin
 weight: 1
 ---
 
-{{< alert color="success" >}}
+{{< alert type="info" >}}
 This subsection will outline specific, real-world deployment types, addressing the most common use cases in cloud computing. Each case includes architectural blueprints and deployment guidelines. Examples are:
 
 - AI Factories and GPU-based Clouds

@@ -44,7 +44,7 @@ Using the native NetApp driver, mixed 4k/8k (70/30) workloads delivered up to ~3
 While the NetApp integration covers the full VM disk lifecycle and most SAN-level operations, it focuses strictly on **primary datastore management** using **iSCSI block devices**.
 Some advanced ONTAP-specific or VMware-exclusive capabilities are intentionally not part of this driver.
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 This integration targets block-level provisioning for OpenNebula environments.
 It does not expose advanced replication or NAS-protocol features available in other ecosystems (e.g. VMware vVols or SnapMirror).
 {{< /alert >}}
@@ -64,7 +64,7 @@ OpenNebula runs the set of datastore and transfer manager driver to register an 
 
 The [NetApp ONTAP documentation](https://docs.netapp.com/us-en/ontap/) may be useful during this setup.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Sharing datastores between multiple OpenNebula instances is not supported and may cause issues if they share datastore IDs.
 {{< /alert >}}
 
@@ -75,7 +75,7 @@ The NetApp system requires specific configurations. This driver operates using a
    - In ONTAP System Manager: **Storage > Storage VMs > Select your SVM > Edit > Limit volume creation to preferred local tiers**
    - Assign at least one aggregate/tier and note their UUID(s) from the URL for later use
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The UUID of an object is often found in the URL if using the web interface, otherwise you can use the ONTAP CLI to gather them: `vserver show -fields uuid`, `igroup show -fields uuid`, etc.
 {{< /alert >}}
 
@@ -242,7 +242,7 @@ Since Volumes contain the LUNs and snapshots, they are by default configured to 
 | `NETAPP_SNAPSHOT_RESERVE` | Volume snapshot reserve in percent. Default: 10       |
 | `NETAPP_STANDALONE`       | Volume FlexClones always split. Default: NO           |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Volumes will be created with the extra reservation space in mind, which will be `size * ( 1 + NETAPP_SNAPSHOT_RESERVE / 100 )`.
 {{< /alert >}}
 
@@ -260,11 +260,11 @@ Volumes will be created with the extra reservation space in mind, which will be 
 
 Symbolic links from the System datastore will be created for each Virtual Machine on its Host once the LUNs have been mapped.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The minimum size for a NetApp volume is 20 MB, so any disk smaller than that will result in a 20 MB volume; however, the LUN inside will be the correct size.
 {{< /alert >}}
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 NetApp ONTAP systems have Volume limitations found [in the NetApp Hardware Universe page](https://hwu.netapp.com), which can be anywhere from 1000 to 2500 Volumes. Be aware that each Image is a Volume and each Virtual Machine Disk is a Volume with a single LUN inside. This is to retain the atomic disk functionalities provided by OpenNebula.
 {{< /alert >}}
 
@@ -274,11 +274,11 @@ Both Full and Incremental backups are supported by NetApp. For Full Backups, a s
 
 Incremental backups are created by first creating the base full backup from the snapshot however this snapshot is then retained on the NetApp Volume rather than deleted after the backup is taken. When another incremental backup is taken, a new snapshot is taken and both the previous and current snapshots are cloned to new Volumes where they are attached to the host and compared for differences at the block level. These block changes are stored in a sparse QCOW2 file backed by the previous snapshot, which is then uploaded to the backup datastore.  The old snapshot is then removed while the new one is retained. When incremental backups are restored, the backing chain is rebuilt before restoring the backup to the VM disk.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can configure the block size ( Defualt 2097152 B / 2 MB ) for incremental backups by modifing the file at `/var/tmp/one/etc/tm/san/backup.conf`
 {{< /alert >}}
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The incremental backup feature of NetApp requires the `nbd` kernel module to be loaded and the `nbdfuse` package to be installed on all OpenNebula nodes.
 {{< /alert >}}
 
@@ -298,7 +298,7 @@ You may wish to contact the OpenNebula Support team to assist in this cleanup; h
   ~~~
   *Be very careful to target the correct multipath device.*
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This behavior stems from the inherent complexities of iSCSI connections and is not exclusive to OpenNebula or NetApp.
 {{< /alert >}}
 

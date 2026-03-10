@@ -154,7 +154,7 @@ If you leave the Rancher password empty, it will default to `capi1234` (username
 
 The last number in the command output is the ID for the Virtual Machine, in this case `2`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You will need to wait some minutes for the K3s cluster and the Rancher web UI to become available. The total time will depend on the Front-end machine and the resources assigned to the cluster -- with the default resource values, the configuration process may take 6 to 8 minutes to complete.
 {{< /alert >}}
 
@@ -190,11 +190,11 @@ If you did not set a password when instantiating the VM, log in with these crede
 - **Username**: `admin`
 - **Password**: `capi1234`
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 As mentioned above, with the default resources the complete configuration process for the K3s cluster and Rancher can take between 6 and 8 minutes to complete. Occasionally, a bug related to the installation of Turtles -- specifically with the `helm-install-rancher-turtles` pod -- may cause the installation to hang. In such cases, if the Rancher interface does not come up you will need to restart the process.
 {{< /alert >}}
 
-{{< alert title="Tip" color="success" >}}
+{{< alert title="Tip" type="info" >}}
 If the Rancher UI takes too long to become available or if you prefer to monitor the process manually, you can log in to the CAPI VM with:
 
 ```bash
@@ -230,7 +230,7 @@ Click **Next**. The next screen shows the YAML configuration file. Here you will
 
 {{< image path="/images/rancher_capone_yaml.png" alt="CAPONE YAML" align="center" width="90%" pb="20px" >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 It is not necessary to import the CAPONE appliances -- the only requirement is that the public and private networks in the cluster definition already exist, as will be shown below.
 {{< /alert >}}
 
@@ -264,7 +264,7 @@ In Rancher's left-hand navigation pane, go to the Management Cluster by clicking
 
 {{< image path="/images/rancher_capone_deployed.png" alt="Rancher installed apps" align="center" width="90%" pb="20px" >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can also verify the deployment on the Front-end, by verifying that three new Virtual Machines have been instantiated:
 - On the command line, as user `oneadmin` run `onevm list`:
 
@@ -488,7 +488,7 @@ Now your Nginx deployment should be visible on the external IP of the node -- wh
 
 ### Adding Worker Nodes to the Cluster
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before creating a replica, ensure you have enough resources allocated to the CAPI deployment, and on the machine running the Front-end.
 {{< /alert >}}
 
