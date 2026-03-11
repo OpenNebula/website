@@ -50,12 +50,84 @@ Select the relevant interface to create an Equinix provision in your OpenNebula 
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+**Step 1.** Navigate through `Infrastructure > Clusters` in the sidebar:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
+  light="images/oneform/oneprovision/common/light/sunstone_navigation.png"
+  alt="Step 1"
+>}}
+
+**Step 2.** Click on the `Create` button and select the option `Install a new Cloud Cluster`:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/create_cluster_button.png"
+  alt="Step 2.1"
+>}}
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/cloud_cluster_button.png"
+  light="images/oneform/oneprovision/common/light/cloud_cluster_button.png"
+  alt="Step 2.2"
+>}}
+
+**Step 3.** Select the Provider you want to use to create the cloud cluster:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/equinix/dark/equinix_provider.png"
+  light="images/oneform/oneprovision/equinix/light/equinix_provider.png"
+  alt="Step 3"
+>}}
+
+**Step 4.** Fill the general section with at least a name for the cluster, and then click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/general_step.png"
+  light="images/oneform/oneprovision/common/light/general_step.png"
+  alt="Step 4"
+>}}
+
+**Step 5.** Select the kind of the deployment you want to use for the cluster and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/equinix/dark/deployment_types_step.png"
+  light="images/oneform/oneprovision/equinix/light/deployment_types_step.png"
+  alt="Step 5"
+>}}
+
+**Step 6.** Fill the User Inputs section to configure the cluster and click on `Next` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/equinix/dark/user_inputs_step.png"
+  light="images/oneform/oneprovision/equinix/light/user_inputs_step.png"
+  alt="Step 6"
+>}}
+
+**Step 7.** Fill optional tags for resources that will be created on Equinix and OpenNebula and click on `Finish` button:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/common/dark/tags_step.png"
+  light="images/oneform/oneprovision/common/light/tags_step.png"
+  alt="Step 7"
+>}}
+
+**Step 8.** You can follow the logs and the state of the cluster during
+the process:
+
+**Step 9.** After reaching the RUNNING state, a full cloud cluster is available, full to operate with it:
+
+{{< theme-image
+  dark="images/oneform/oneprovision/equinix/dark/equinix_cluster.png"
+  light="images/oneform/oneprovision/equinix/light/equinix_cluster.png"
+  alt="Step 9"
+>}}
+
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
 
-Create an Equinix provision with the `oneprovider create <name> --provider-id <id>` command, specifying `equinix` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create an Equinix provision with the `oneprovision create <name> --provider-id <id>` command, specifying `equinix` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
 
 ```bash
 $ oneprovision create equinix--provider-id 1
