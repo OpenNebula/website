@@ -221,7 +221,12 @@ Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the cor
 
 Images are stored as regular files (under the usual path: `/var/lib/one/datastores/<id>`) in the Image Datastore, but they will be dumped into a Logical Volumes (LV) upon Virtual Machine creation. The Virtual Machines will run from Logical Volumes in the Host.
 
-![image0](/images/fs_lvm_datastore.svg)
+{{< image path="/images/fs_lvm_datastore.svg" alt="Images stored as regular files dumped into LVs" align="center" width="90%" pb="20px" >}}
+
+{{< alert title="Note" color="success" >}}
+Files are dumped directly from the Front-end to the LVs in the Host, using the SSH protocol.{{< /alert >}}
+
+This is the recommended driver to be used when a high-end SAN is available. The same LUN can be exported to all the Hosts while Virtual Machines will be able to run directly from the SAN.
 
 {{< alert title="Note" color="success" >}}
 The LVM Datastore does **not** need CLVM configured in your cluster. The drivers refresh LVM metadata each time an image is needed on another Host.

@@ -209,3 +209,11 @@ no = 'Sorry to hear that'
       [markup.goldmark.parser.attribute]
         block = true
         title = true
+
+[outputs]
+home = ["HTML", "JSON"]
+
+[outputFormats.JSON]
+mediaType = "application/json"
+baseName = "source-map"
+isPlainText = true

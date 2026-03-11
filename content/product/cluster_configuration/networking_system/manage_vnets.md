@@ -69,6 +69,32 @@ AR=[
 ]
 ```
 
+### Shared Address Ranges (Shared AR) for Virtual IPs
+
+Marking an Address Range as `SHARED` converts its IPs into **Virtual IPs**. This allows **multiple VMs** to use the same IP address.
+
+To mark an Address Range as `SHARED`, add the `SHARED` attribute in the AR definition:
+
+```default
+AR=[
+    TYPE   = "IP4",
+    IP     = "10.0.0.211",
+    SIZE   = "3",
+    SHARED = "YES"
+]
+```
+
+The option to create a Shared AR is also available through a checkbox in the Sunstone UI in the **Add Address Range** dialog.
+
+Shared Address Ranges behave slightly differently from regular Address Ranges:
+
+- Same IP, multiple VMs: The same IP address from a Shared AR can be used by more than one VM.
+- Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested in a NIC or NIC Alias ([more details](#using-virtual-ips)).
+- Attribute `USED_LEASES` shows how many different shared IPs are in use, not how many VMs are using them.
+
+{{< alert title="Important" color="success" >}}
+The `SHARED` attribute of an Address Range can't be changed after creation. The default value is `NO`. {{< /alert >}}
+
 ### Guest Configuration Attributes (Context)
 
 To set up the guest network, the Virtual Network may include additional information to be injected into the VM at boot time. These contextualization attributes may include, for example, network masks, DNS servers, or gateways. For example, to define a gateway and DNS server for the Virtual Machines in the Virtual Network, simply add:
@@ -391,6 +417,30 @@ Any attribute supported by an NIC attribute can be also used in an alias except 
 
 {{< alert title="Important" color="success" >}}
 The [Security Groups]({{% relref "../../virtual_machines_operation/virtual_machines_networking/security_groups#security-groups" %}}) and IP/MAC spoofing filters from the NIC network will be applied to the NIC_ALIAS. Those ones belonging to the NIC_ALIAS network won’t apply.{{< /alert >}}  
+
+### Using Virtual IPs
+
+To request a Virtual IP (VIP) from a [Shared Address Range](#shared-address-ranges-shared-ar-for-virtual-ips) you must explicity request the IP in a `NIC` or `NIC_ALIAS` attribute. The most natural way of using Shared Address Ranges for VIPs is to define a primary NIC in the network with a regular IP and a NIC Alias with the VIP, this way you get a single network interface with two different IPs. The procedure is described below:
+
+1. Define the primary NIC and give it a `NAME` so aliases can refer to it:
+
+```default
+NIC = [ NETWORK = "private", NAME = "main" ]
+```
+
+2. Add a `NIC_ALIAS` that **explicitly requests the shared IP** from the Shared AR (you must include the `IP` attribute):
+
+```default
+NIC_ALIAS = [ NETWORK = "private", PARENT = "main", IP = "10.0.0.211" ]
+```
+
+This will result in the VM having a **single network interface** (the parent NIC) with **two IPs** configured:
+
+- The IP assigned to the main NIC
+- The explicitly requested shared IP from the `NIC_ALIAS`
+
+{{< alert title="Important" color="success" >}}
+Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by OpenNebula.{{< /alert >}}
 
 ### Configuring the Virtual Machine Network
 
