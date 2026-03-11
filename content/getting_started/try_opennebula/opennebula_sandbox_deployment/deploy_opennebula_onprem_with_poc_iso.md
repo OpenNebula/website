@@ -31,7 +31,7 @@ The OpenNebula ISO is based on AlmaLinux 9, and thus it shares the same requirem
 **Installing the ISO will delete all the disk data on the server during the installation.**
 {{< /alert >}}
 
-## ISO Download and installation
+## ISO Download and Installation
 
 Now it is time to download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available:
 
@@ -87,7 +87,7 @@ After the confirmation, the installation will start. It will show some informati
 
 ![anaconda_unattended_install](/images/ISO/02-anaconda_unattended_install.png)
 
-## Frontend configuration
+## Frontend Configuration
 
 Once the installation is finished in the frontend, no network card will be configured, so an access with the console must be provided. It will look like the following (the colours and the font may vary)
 
@@ -137,7 +137,7 @@ The frontend menu will look like the following one (the colours and the font may
                             └────────────────────────────────────────────────────────────────────┘
 ```
 
-### Network and hostname setup
+### Network and Hostname Setup
 
 Now is time to configure the network using the option `netconf` on the menu. This will launch `nmtui` (the default ncurses configuration interface), that allows the setup of the network and hostname, as more complex network configuration (bonding, VLAN, etc.)
 
@@ -271,7 +271,7 @@ frontend                   : ok=42   changed=8    unreachable=0    failed=0    s
 Press any key to continue
 ```
 
-## Configuring the Hypervisor host
+## Configuring the Hypervisor Host
 
 After the installation, the server runs only the frontend and needs to be added as a OpenNebula hypervisor to run VMs. The steps are:
 
@@ -365,28 +365,30 @@ The contextualization MTU on this network MUST be the MTU of the physical interf
 {{< /alert >}}
 
 
-### Virtual network considerations
+### Virtual Network Considerations
 
 VXLAN networks are totally internal and have no access to external networks. By default they can be considered a totally isolated net. External access from/to this networks must be configured.
 
-#### Determining the VM identifier
+#### Determining the VM Identifier
 
 To determine the virtual network that needs external access use `onevnet list`. This command will list the existent virtual networks, for instance:
 
+```bash
+onevnet list
 ```
-# onevnet list
-  ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
-   0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
+```default
+ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
+ 0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
 The `ID` and the `NAME` field of every row can be used for all operations on virtual networks.
 
-#### Creating the virtual Network Gateway (access from the frontend)
+#### Creating the Virtual Network Gateway (access from the frontend)
 
 In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the virtual network should be executed. For example the following command will create the gateway for the network 0
 
 ```
-# onevnet_add_gw 0
+onevnet_add_gw 0
 ```
 
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
@@ -397,7 +399,7 @@ This gateway is not persistent after reboots. If the frontend is rebooted, the c
 
 #### Setting up NAT (access to the same networks as the frontend)
 
-Virtual machines on this virtual network won't be able to access to the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
+Virtual Machines on this Virtual Network won't be able to access the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
 
 {{< alert title="Security and persistence warning" color="warning" >}}
 By default, the `enable_masquerade` command will allow ALL the virtual networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
@@ -421,44 +423,55 @@ On a workstation with access to the frontend, a local route to the virtual net c
 - Windows: `route add 172.16.100.0 MASK 255.255.255.0 <frontend_ip>`
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
-After the route exists, the workstation should be able to reach the virtual machines running on the frontend without further configuration.
+After the route exists, the workstation should be able to reach the virtual machines running on the Front-end without further configuration.
 
-### Resizing disks
+### Resizing Disks
 
-The ISO installation creates the volume group `vg_onepoc` and creates three logical volumes on it
+The ISO installation creates the volume group `vg_onepoc` with three logical volumes:
 
-- `root` mounted on `/`
-- `one-datastores` mounted on `/var/lib/one/datastores/`
-- `swap` mounted as swap
+- `root`: mounted on `/`
+- `one-datastores`: mounted on `/var/lib/one/datastores/`
+- `swap`: mounted as swap
 
-The volume group `vg_onepoc` does not use all the space in the disk in order to allow growing some of the filesystems. The available space on the volume group can be checked executing the command `vgs` and checking the `VFree` column value. In the following example, there would be 22.19G available:
+The volume group `vg_onepoc` leaves space on the disk to allow for filesystem growth. Available space in a volume group can be checked by executing the command `vgs` and inspecting the value in the `VFree` column. In the following example, there is 22.19GiB available:
 
+```bash
+vgs
 ```
-[root@onepoc ~]# vgs
-  VG        #PV #LV #SN Attr   VSize   VFree
-  vg_onepoc   1   3   0 wz--n- <77.44g <22.19g
-```
-
-The logical volume sizes can be queried with the command `lvs`, in this case:
-
-```
-[root@onepoc ~]# lvs
-  LV             VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
-  one-datastores vg_onepoc -wi-ao---- <25.69g
-  root           vg_onepoc -wi-ao---- <25.69g
-  swap           vg_onepoc -wi-ao----  <3.88g
+```default
+VG        #PV #LV #SN Attr   VSize   VFree
+vg_onepoc   1   3   0 wz--n- <77.44g <22.19g
 ```
 
-A filesystem can be extended online without losing availability with the commands `lvextend` and `xfs_growfs`. For instance, to increase 10G on the `/root` filesystem in the previous case the following commands should be used:
+You can query the logical volume sizes using the `lvs` command, in this case:
 
+```bash
+lvs
 ```
+```default
+LV             VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+one-datastores vg_onepoc -wi-ao---- <25.69g
+root           vg_onepoc -wi-ao---- <25.69g
+swap           vg_onepoc -wi-ao----  <3.88g
+```
+
+A filesystem can be extended online while maintaining availability using the commands `lvextend` and `xfs_growfs`. For example, to increase the `/root` filesystem by 10GiB use the following commands:
+
+```bash
 # Increase the Logical Volume root (on the volume group vg_onepoc) by 10 GiB
-[root@onepoc ~]# lvextend vg_onepoc/root -L +10G
-  Size of logical volume vg_onepoc/root changed from <25.69 GiB (411 extents) to <35.69 GiB (571 extents).
-  Logical volume vg_onepoc/root successfully resized.
+lvextend vg_onepoc/root -L +10G
+```
+```default
+Size of logical volume vg_onepoc/root changed from <25.69 GiB (411 extents) to <35.69 GiB (571 extents).
+Logical volume vg_onepoc/root successfully resized.
+```
 
-# Resize the filesystem to the new volume group size
-[root@onepoc ~]# xfs_growfs /dev/mapper/vg_onepoc-root
+Resize the filesystem to the new volume group size:
+
+```bash
+xfs_growfs /dev/mapper/vg_onepoc-root
+```
+```default
 meta-data=/dev/mapper/vg_onepoc-root isize=512    agcount=4, agsize=1683456 blks
          =                       sectsz=512   attr=2, projid32bit=1
          =                       crc=1        finobt=1, sparse=1, rmapbt=0
@@ -472,7 +485,7 @@ realtime =none                   extsz=4096   blocks=0, rtextents=0
 data blocks changed from 6733824 to 9355264
 ```
 
-The filesystem `/` now will be 10GiB bigger with no lose of service.
+The filesystem `/` now will be 10GiB bigger with no loss of service.
 
 ## GPU Configuration
 
@@ -485,35 +498,37 @@ If the OpenNebula evaluation involves GPU management, GPU should be configured i
 To prepare the OpenNebula host complete the following steps:
 - Check that IOMMU was enabled on the host using the following command:
 ```default
-# dmesg | grep -i iommu
+dmesg | grep -i iommu
 ```
 If IOMMU wasn’t enabled on the host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
 At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
 1.  Ensure `vfio-pci` module is loaded on boot:
 
     ```default
-    # echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
-    # modprobe vfio-pci
+    echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
+    modprobe vfio-pci
     ```
 
 2. Identify the GPU's PCI address:
 
     ```default
-    # lspci -D | grep -i nvidia
+    lspci -D | grep -i nvidia
     0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
     ```
 
 3. Set the driver override. Use a driverctl utility and the PCI address of the GPU device from the previous step to override driver.
 
     ```default
-    # driverctl set-override 0000:e1:00.0 vfio-pci
+    driverctl set-override 0000:e1:00.0 vfio-pci
     ```
 
 4. Verify the driver binding:
     Check that the GPU is now using the `vfio-pci` driver.
 
+    ```bash
+    lspci -Dnns e1:00.0 -k
+    ```
     ```default
-    # lspci -Dnns e1:00.0 -k
     Kernel driver in use: vfio-pci
     ```
 
@@ -570,7 +585,7 @@ Configure the PCI probe on the front-end node to monitor NVIDIA devices in order
 
 After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
-###  VM with GPU instantiation
+###  VM with GPU Instantiation
  To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
 
 ![VM Instantiation](/images/ISO/06-vm-instantiate-1.png)
@@ -585,7 +600,7 @@ In the dropdown menu select available GPU device which will be attached to the V
 
 Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used. 
 
-### vLLM appliance validation
+### vLLM Appliance Validation
      
 The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
 
