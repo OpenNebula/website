@@ -61,8 +61,8 @@ Thank you to our incredible community and partners for your continued support in
 
 
 ## LXC
-- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
-- LXC Snapshots are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available, [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- [LXC disks Snapshots](../../../product/operation_references/hypervisor_configuration/lxc_driver.md) are now available for the following storage backends: LVM, LVM thin, ceph rbd, and raw file images.
 
 ## OpenNebula Form
 - [OneForm: Automated Cluster Provisioning](../../../product/operation_references/opennebula_services_configuration/oneform): A new service designed to automate the creation of OpenNebula clusters across on-premise environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
