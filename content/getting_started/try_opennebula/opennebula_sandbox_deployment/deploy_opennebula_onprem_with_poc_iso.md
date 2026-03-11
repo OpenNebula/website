@@ -380,10 +380,12 @@ VXLAN networks are totally internal and have no access to external networks. By 
 
 To determine the Virtual Network that needs external access use `onevnet list`. This command will list the existent Virtual Networks, for instance:
 
+```bash
+onevnet list
 ```
-# onevnet list
-  ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
-   0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
+```default
+ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
+ 0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
 The `ID` and the `NAME` field of every row can be used for all operations on Virtual Networks.
@@ -393,7 +395,7 @@ The `ID` and the `NAME` field of every row can be used for all operations on Vir
 In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
 
 ```
-# onevnet_add_gw 0
+onevnet_add_gw 0
 ```
 
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
@@ -428,7 +430,69 @@ On a workstation with access to the frontend, a local route to the virtual net c
 - Windows: `route add 172.16.100.0 MASK 255.255.255.0 <frontend_ip>`
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
-After the route exists, the workstation should be able to reach the Virtual Machines running on the frontend without further configuration.
+After the route exists, the workstation should be able to reach the virtual machines running on the Front-end without further configuration.
+
+### Resizing Disks
+
+The ISO installation creates the volume group `vg_onepoc` with three logical volumes:
+
+- `root`: mounted on `/`
+- `one-datastores`: mounted on `/var/lib/one/datastores/`
+- `swap`: mounted as swap
+
+The volume group `vg_onepoc` leaves space on the disk to allow for filesystem growth. Available space in a volume group can be checked by executing the command `vgs` and inspecting the value in the `VFree` column. In the following example, there is 22.19GiB available:
+
+```bash
+vgs
+```
+```default
+VG        #PV #LV #SN Attr   VSize   VFree
+vg_onepoc   1   3   0 wz--n- <77.44g <22.19g
+```
+
+You can query the logical volume sizes using the `lvs` command, in this case:
+
+```bash
+lvs
+```
+```default
+LV             VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+one-datastores vg_onepoc -wi-ao---- <25.69g
+root           vg_onepoc -wi-ao---- <25.69g
+swap           vg_onepoc -wi-ao----  <3.88g
+```
+
+A filesystem can be extended online while maintaining availability using the commands `lvextend` and `xfs_growfs`. For example, to increase the `/root` filesystem by 10GiB use the following commands:
+
+```bash
+# Increase the Logical Volume root (on the volume group vg_onepoc) by 10 GiB
+lvextend vg_onepoc/root -L +10G
+```
+```default
+Size of logical volume vg_onepoc/root changed from <25.69 GiB (411 extents) to <35.69 GiB (571 extents).
+Logical volume vg_onepoc/root successfully resized.
+```
+
+Resize the filesystem to the new volume group size:
+
+```bash
+xfs_growfs /dev/mapper/vg_onepoc-root
+```
+```default
+meta-data=/dev/mapper/vg_onepoc-root isize=512    agcount=4, agsize=1683456 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1 nrext64=0
+data     =                       bsize=4096   blocks=6733824, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=16384, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 6733824 to 9355264
+```
+
+The filesystem `/` now will be 10GiB bigger with no loss of service.
 
 ## GPU Configuration
 
@@ -441,35 +505,37 @@ If the OpenNebula evaluation involves GPU management, GPU should be configured i
 To prepare the OpenNebula host complete the following steps:
 - Check that IOMMU was enabled on the host using the following command:
 ```default
-# dmesg | grep -i iommu
+dmesg | grep -i iommu
 ```
 If IOMMU wasn’t enabled on the host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
 At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
 1.  Ensure `vfio-pci` module is loaded on boot:
 
     ```default
-    # echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
-    # modprobe vfio-pci
+    echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
+    modprobe vfio-pci
     ```
 
 2. Identify the GPU's PCI address:
 
     ```default
-    # lspci -D | grep -i nvidia
+    lspci -D | grep -i nvidia
     0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
     ```
 
 3. Set the driver override. Use a driverctl utility and the PCI address of the GPU device from the previous step to override driver.
 
     ```default
-    # driverctl set-override 0000:e1:00.0 vfio-pci
+    driverctl set-override 0000:e1:00.0 vfio-pci
     ```
 
 4. Verify the driver binding:
     Check that the GPU is now using the `vfio-pci` driver.
 
+    ```bash
+    lspci -Dnns e1:00.0 -k
+    ```
     ```default
-    # lspci -Dnns e1:00.0 -k
     Kernel driver in use: vfio-pci
     ```
 
