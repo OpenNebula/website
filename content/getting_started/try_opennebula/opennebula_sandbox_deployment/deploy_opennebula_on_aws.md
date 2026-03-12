@@ -42,36 +42,36 @@ If you don't already have an AWS account, [create one](https://aws.amazon.com/pr
 
 Click on **Launch instance**, this will take you to the [Launch Instance Wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html). In the name and tags section enter an appropriate and memorable name such as `minione-test`:
 
-{{< image path="/images/minione-aws-instance-name.png" alt="AWS instance names" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/minione-aws-instance-name.png" alt="AWS instance names" align="center" width="90%" mb="20px" >}}
 
 Choose the **Ubuntu Server 24.04 LTS (HVM), SSD Volume Type** Amazon Machine Image (AMI). Leave the architecture as **64-bit (x86)**:
 
-{{< image path="/images/minione-aws-os-image.png" alt="AWS instance image" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/minione-aws-os-image.png" alt="AWS instance image" align="center" width="90%" mb="20px" >}}
 
 Choose the `c5.metal` instance type:
 
-{{< image path="/images/minione-aws-instance-type.png" alt="AWS instance type" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/minione-aws-instance-type.png" alt="AWS instance type" align="center" width="90%" mb="20px" >}}
 
 If you don't already have a key pair (a `.pem` or `.ppk` file), select **Create new key pair** in the **Key pair (login)** section. Choose a sensible name for the key pair, it cannot be renamed later. You may either use your name or a context such as `minione-admin`. Select EC25519 for **Key pair type** and choose the format: 
 
 * `.pem` (Linux/Mac)
 * `.ppk` (Windows with PuTTY). 
 
-{{< image path="/images/minione-aws-key-pair.png" alt="AWS instance key pair" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/minione-aws-key-pair.png" alt="AWS instance key pair" align="center" width="50%" mb="20px" >}}
 
 Click **Create key pair**. A `.pem` or `.ppk` file will be downloaded to your computer through the browser. Store the key in a secure and memorable location on your local machine, you will need it to access the AWS instance. It is recommended to change the permissions on the file such that only your user can access the key file.
 
 In **Network settings** click **Edit** in the top right corner of the section and select **Create security group**:
 
-{{< image path="/images/minione-aws-network-settings-upper.png" alt="AWS network settings" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/minione-aws-network-settings-upper.png" alt="AWS network settings" align="center" width="90%" mb="20px" >}}
 
 In the section labelled **Inbound Security Group Rules** click **Add security group rule** (leave the existing settings for port 22). In the **Port range** field enter port 80 and change the **Source type** field to **Anywhere**.
 
-{{< image path="/images/minione-aws-network-settings-lower.png" alt="AWS network settings" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/minione-aws-network-settings-lower.png" alt="AWS network settings" align="center" width="90%" mb="20px" >}}
 
 In the **Configure storage** section select **80 GiB** of `gp3` storage. You do not need to edit the **Advanced details** section.
 
-{{< image path="/images/minione-aws-configure-storage.png" alt="AWS configure storage" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/minione-aws-configure-storage.png" alt="AWS configure storage" align="center" width="90%" mb="20px" >}}
 
 Now click **Launch instance**. AWS will now schedule your instance. Note that `c5.metal` instances can take several minutes to be scheduled depending on availability and account settings. Contact your DevOps team or system administrator if you have trouble launching your instance. 
 
@@ -238,13 +238,13 @@ Now verify the installation by logging in to OpenNebula's Sunstone UI.
 
 Point your browser to the Edge IP and port provided by the miniONE report, which is normally the same as the public IP of the AWS instance. You should be greeted with the Sunstone login screen:
 
-{{< image path="/images/quickstart/sunstone-login-page.png" alt="Sunstone login" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-login-page.png" alt="Sunstone login" align="center" width="50%" mb="20px" >}}
 
 In the **Username** input field, type `oneadmin`. For **Password**, enter the password provided by miniONE at the end of the report (in this example, `ZMCoOWUsBg`) then press `Enter` or click **SIGN IN NOW**.
 
 The screen will display the Sunstone Dashboard:
 
-{{< image path="/images/sunstone-dashboard.png" alt="Sunstone login" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-dashboard.png" alt="Sunstone login" align="center" width="90%" mb="20px" >}}
 
 As you can see, the Dashboard indicates the following installed components:
 
@@ -254,11 +254,11 @@ As you can see, the Dashboard indicates the following installed components:
 
 The existing Virtual Network is a bridged network attached to a local interface named `vnet`. To inspect this network, in Sunstone open the left-hand menu (hover the mouse over the left-hand sidebar), then click **Networks** --> **Virtual Networks**:
 
-{{< image path="/images/sunstone-select_vnetwork.png" alt="Sunstone select vnet" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-select_vnetwork.png" alt="Sunstone select vnet" align="center" width="90%" mb="20px" >}}
 
 Sunstone will display the **Virtual networks** screen. Click the item labelled `vnet` to display information about this network:
 
-{{< image path="/images/sunstone-network_details.png" alt="Sunstone vnet details" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-network_details.png" alt="Sunstone vnet details" align="center" width="90%" mb="20px" >}}
 
 During installation, a KVM virtualization Host was automatically configured on the local machine. To inspect the KVM Host, in Sunstone open the left-hand menu, then click **Infrastructure** -> **Hosts**.
 
@@ -268,7 +268,7 @@ miniONE automatically downloaded the template for a VM with Alpine Linux 3.20 pr
 
 To deploy the Alpine Linux VM, in the left-hand sidebar go to **Templates** -> **VM Templates**. This screen displays a list of all VM templates installed on the system. In this case, only the **Alpine Linux 3.20** template is installed:
 
-{{< image path="/images/sunstone-vm_templates-alpine.png" alt="Sunstone VM template" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-vm_templates-alpine.png" alt="Sunstone VM template" align="center" width="90%" mb="20px" >}}
 
 To instantiate the VM template, click the template item and click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
   <circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" />
@@ -277,19 +277,19 @@ To instantiate the VM template, click the template item and click the **Instanti
 
 Sunstone will display the first screen of the **Instantiate VM Template** wizard:
 
-{{< image path="/images/sunstone-instantiate_vm-1.png" alt="Sunstone instantiate VM" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-instantiate_vm-1.png" alt="Sunstone instantiate VM" align="center" width="90%" mb="20px" >}}
 
 Leave the **Capacity**, **Ownership** and **VM Group** parameters with their default values. Click **Next**.
 
 The next screen allows you to see and modify further parameters for the VM, including selecting the Virtual Network or scheduling actions.
 
-{{< image path="/images/sunstone-instantiate_vm-2.png" alt="Sunstone instantiate VM" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-instantiate_vm-2.png" alt="Sunstone instantiate VM" align="center" width="90%" mb="20px" >}}
 
 Click **Finish**.
 
 OpenNebula will instantiate the VM template. For the Alpine Linux VM, this should take just a few seconds. Once instantiation is complete, Sunstone should display the **Instances** -> **VMs** screen, with the Alpine Linux VM as the sole instance:
 
-{{< image path="/images/sunstone-vm_instances.png" alt="Sunstone VM instances" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-vm_instances.png" alt="Sunstone VM instances" align="center" width="90%" mb="20px" >}}
 
 The green dot to the left of the VM name indicates that the VM is running. Note that you may need to click the **Refresh** icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="rgb(0,112,153)">
 <circle cx="12" cy="12" r="11" fill="rgba(218, 218, 218, 1)" stroke="rgb(0,112,153)"/>
@@ -303,7 +303,7 @@ The green dot to the left of the VM name indicates that the VM is running. Note 
 
 The quickest way to login to the VM is by VNC, available directly in Sunstone. Just click the VNC icon <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" color="rgb(143,147,146)"><path d="M2 15.5V2.6a.6.6 0 01.6-.6h18.8a.6.6 0 01.6.6v12.9m-20 0v1.9a.6.6 0 00.6.6h18.8a.6.6 0 00.6-.6v-1.9m-20 0h20M9 22h1.5m0 0v-4m0 4h3m0 0H15m-1.5 0v-4" stroke="rgb(143,147,146)" stroke-linecap="round" stroke-linejoin="round" fill="white" ></path></svg> and Sunstone will display the VM boot messages screen directly in your browser in another tab. 
 
-{{< image path="/images/sunstone-VNC-alpine.png" alt="Alpine VM VNC" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-VNC-alpine.png" alt="Alpine VM VNC" align="center" width="90%" mb="20px" >}}
 
 Login as root with password `opennebula`. You can then use the command line to explore the VM and run processes:
 

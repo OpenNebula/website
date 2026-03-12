@@ -11,7 +11,7 @@ OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end
 
 Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud will be ready for immediate use, installed on a single bare-metal server, complete with the OpenNebula Front-end server and a KVM hypervisor node. The same ISO can be used to install other KVM hypervisor nodes on the same infrastructure. The installed software includes a menu and a set of ansible playbooks to make the OpenNebula infrastructure management simpler.
 
-{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" pb="20px" >}}
+{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" mb="20px" >}}
 
 
 ## Requirements
