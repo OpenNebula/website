@@ -3,8 +3,14 @@
 {{ $width := .Get "width" }}
 {{ $class := .Get "class" | default "" }}
 {{ $align := .Get "align" | default "" }}
-{{ $pb := .Get "pb" | default "" }}
-{{ $pt := .Get "pt" | default "" }}
+{{ $mb := .Get "mb" | default "" }}
+{{ $mt := .Get "mt" | default "" }}
+
+{{/* Input parameter for round border */}}
+{{ $roundBorder := .Get "roundBorder" | default "true" }}
+{{ $roundClass := "" }}
+{{ if eq $roundBorder "true" }}{{ $roundClass = "roundBorder" }}{{ end }}
+{{ $finalClass := printf "%s %s" $class $roundClass | strings.TrimSpace }}
 
 {{ $srcPath := strings.TrimPrefix "/" $path }}
 {{ $src := resources.Get $srcPath }}
@@ -22,18 +28,18 @@
     {{ if not (findRE "[a-z%]" $width) }}{{ $styleWidth = printf "%spx" $width }}{{ end }}
     {{ $finalStyle = printf "%s width: %s;" $finalStyle $styleWidth }}
   {{ end }}
-  {{ if $pb }}
-    {{ $finalStyle = printf "%s padding-bottom: %s;" $finalStyle $pb }}
+  {{ if $mb }}
+    {{ $finalStyle = printf "%s margin-bottom: %s;" $finalStyle $mb }}
   {{ end }}
-  {{ if $pt }}
-    {{ $finalStyle = printf "%s padding-top: %s;" $finalStyle $pt }}
+  {{ if $mt }}
+    {{ $finalStyle = printf "%s margin-top: %s;" $finalStyle $mt }}
   {{ end }}
 
   {{/* 2. Render Output */}}
   {{ if $isSVG }}
     {{/* SVG: No .Width call, no .Process call */}}
     <img src="{{ $src.RelPermalink }}" alt="{{ $alt }}" 
-      {{ with $class }}class="{{ . }}"{{ end }}
+      {{ with $finalClass }}class="{{ . }}"{{ end }}
       style="{{ $finalStyle | safeCSS }}">
   {{ else }}
     {{/* RASTER: Now it is safe to call .Width and .Process */}}
@@ -48,7 +54,7 @@
     {{- with $src.Process $procCommand -}}
       <img src="{{ .RelPermalink }}" alt="{{ $alt }}" 
         width="{{ .Width }}" height="{{ .Height }}" 
-        {{ with $class }}class="{{ . }}"{{ end }}
+        {{ with $finalClass }}class="{{ . }}"{{ end }}
         style="{{ $finalStyle | safeCSS }}">
     {{- end }}
   {{ end }}

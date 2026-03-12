@@ -31,7 +31,7 @@ The OneSwap server must have network access to:
 
 Run `oneswap` on a dedicated server with sufficient disk space to buffer VM images during conversion. This server should have high-bandwidth connectivity to both the vCenter environment and the OpenNebula image datastores to minimize migration time.
 
-{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" mb="20px" >}}
 
 ## vCenter Permissions Requirements
 

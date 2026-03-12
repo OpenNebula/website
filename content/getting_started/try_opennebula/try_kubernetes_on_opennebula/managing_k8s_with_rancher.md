@@ -45,15 +45,15 @@ For the CAPI appliance to function correctly, we need to modify the configuratio
 
 Select the default public network named `vnet`. Click **Update** at the top of the screen: 
 
-{{< image path="/images/quickstart/sunstone-rancher-update-vnet.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-rancher-update-vnet.png" alt="Sunstone configure networks" align="center" width="90%" mb="20px" >}}
 
 Click **Next** to go to **Advanced options** then in the **Context** tab change the **DNS** field to `8.8.8.8` and then click **Finish**:
 
-{{< image path="/images/quickstart/sunstone-rancher-vnet-dns.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-rancher-vnet-dns.png" alt="Sunstone configure networks" align="center" width="90%" mb="20px" >}}
 
 From the **Virtual networks** page, select `vnet` again if it is not already selected and in the **Address** tab click **+ Address Range**. Select **Ethernet / DHCP** and enter `02:00:3c:f0:4d:f9` in the **First MAC address** field, set the size to 16:
 
-{{< image path="/images/quickstart/sunstone-rancher-mac-range.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-rancher-mac-range.png" alt="Sunstone configure networks" align="center" width="90%" mb="20px" >}}
 
 ### Add a Private Network
 
@@ -61,11 +61,11 @@ From the **Virtual networks** page, click the **Create** button at the top. Suns
 
 In the next screen, activate the **Use only private host networking or a user-defined bridge** option:
 
-{{< image path="/images/sunstone-create-priv-network.png" alt="Sunstone add networks" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-create-priv-network.png" alt="Sunstone add networks" align="center" width="90%" mb="20px" >}}
 
 Choose the **Addresses** tab and click **+ Address Range**. Here we will enter a range of private IP addresses. For this example, in **First IPv4 address** enter `192.168.200.2`, and set the network size to `100`.
 
-{{< image path="/images/sunstone-create-priv-network-2.png" alt="Sunstone add address range" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/sunstone-create-priv-network-2.png" alt="Sunstone add address range" align="center" width="90%" mb="20px" >}}
 
 Click **Finish**.
 
@@ -109,17 +109,17 @@ To instantiate the Service CAPI appliance, follow the same steps described for [
 
 Sunstone displays the **Instantiate VM Template** wizard. Leave the **Configurations** options as default, click **Next** twice to skip the **User inputs** and reach the **Advanced options** step:
 
-{{< image path="/images/quickstart/sunstone-rancher-attach-nic.png" alt="Sunstone attach NIC" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-rancher-attach-nic.png" alt="Sunstone attach NIC" align="center" width="90%" mb="20px" >}}
 
 Click **Next** to advance to the **Select a network** step:
 
-{{< image path="/images/quickstart/sunstone-rancher-nic-vnet.png" alt="Sunstone attach NIC" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-rancher-nic-vnet.png" alt="Sunstone attach NIC" align="center" width="90%" mb="20px" >}}
 
 Select `vnet`, the default public network. Continue clicking **Next** until the final step and click **Finish**. Click **Finish** again to finish the instantiate VM workflow.
 
 Sunstone will display the **Instances** -> **VMs** screen, showing the newly-created VM:
 
-{{< image path="/images/quickstart/sunstone-rancher-capi-vm.png" alt="Sunstone CAPI VM" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/sunstone-rancher-capi-vm.png" alt="Sunstone CAPI VM" align="center" width="90%" mb="20px" >}}
 
 Wait a few moments until the VM displays the **RUNNING** state (green dot).
 
@@ -182,7 +182,7 @@ oneadmin@frontend:~$ onevm show 2 | grep ETH0_IP=
 
 In this case we will connect to `https://172.16.100.3.sslip.io`.
 
-{{< image path="/images/rancher_login.png" alt="Rancher login" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_login.png" alt="Rancher login" align="center" width="90%" mb="20px" >}}
 
 If you did not set a password when instantiating the VM, log in with these credentials:
 
@@ -217,7 +217,7 @@ In Rancher's left-hand navigation pane, go to the Management Cluster by clicking
 
 In the **Filter charts results** input field, type `capone`. This should display two charts, `capone-kadm` and `capone-rke2`.
 
-{{< image path="/images/quickstart/rancher-ui-capone-apps.png" alt="Rancher CAPONE apps" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/rancher-ui-capone-apps.png" alt="Rancher CAPONE apps" align="center" width="90%" mb="20px" >}}
 
 For this tutorial, select `capone-rke2`.
 
@@ -227,7 +227,7 @@ In the next screen, you can specify the namespace where the resources will be cr
 
 Click **Next**. The next screen shows the YAML configuration file. Here you will need to edit some parameters to adapt the deployment to your environment.
 
-{{< image path="/images/rancher_capone_yaml.png" alt="CAPONE YAML" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_capone_yaml.png" alt="CAPONE YAML" align="center" width="90%" mb="20px" >}}
 
 {{< alert title="Note" type="info" >}}
 It is not necessary to import the CAPONE appliances -- the only requirement is that the public and private networks in the cluster definition already exist, as will be shown below.
@@ -235,7 +235,7 @@ It is not necessary to import the CAPONE appliances -- the only requirement is t
 
 Scroll down to the end of the YAML file:
 
-{{< image path="/images/rancher_capone_yaml_bottom.png" alt="CAPONE YAML" align="center" width="60%" pb="20px" >}}
+{{< image path="/images/rancher_capone_yaml_bottom.png" alt="CAPONE YAML" align="center" width="60%" mb="20px" >}}
 
 Here you will to ensure that the values of the following parameters match your installation:
 
@@ -261,7 +261,7 @@ The cluster should install and deploy; this process can take a few minutes.
 
 In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Installed Apps**. The list of applications should show the name of the cluster you deployed (in this example, `capone4`), with status `Deployed`.
 
-{{< image path="/images/rancher_capone_deployed.png" alt="Rancher installed apps" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_capone_deployed.png" alt="Rancher installed apps" align="center" width="90%" mb="20px" >}}
 
 {{< alert title="Note" type="info" >}}
 You can also verify the deployment on the Front-end, by verifying that three new Virtual Machines have been instantiated:
@@ -289,7 +289,7 @@ In the left-hand pane select **Clusters**, and in the **Clusters** screen select
 
 Rancher displays the screen for the cluster, shown below.
 
-{{< image path="/images/rancher_capone_import.png" alt="Rancher CAPONE import" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_capone_import.png" alt="Rancher CAPONE import" align="center" width="90%" mb="20px" >}}
 
 This screen shows three alternative commands that you can use for importing the cluster. In this case, since the Rancher installation uses a self-signed certificate, we will use the second command, with `curl` and `kubectl`:
 
@@ -301,11 +301,11 @@ Copy the command from the screen (you can click the command to copy it to the cl
 
 Go to the Kubectl Shell for the Management Cluster, go to **Cluster Management** (via the "farmhouse" icon ![icon](/images/icons/rancher/farmhouse.png) at bottom left). Then, in the **Clusters** screen select the `local` cluster, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) on the right, and select **Kubectl Shell** from the drop-down.
 
-{{< image path="/images/rancher_open_kubectl_shell.png" alt="Rancher kubectl open shell" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_open_kubectl_shell.png" alt="Rancher kubectl open shell" align="center" width="90%" mb="20px" >}}
 
 Rancher should display a tab on the bottom of the screen, with the **Kubectl:local** shell:
 
-{{< image path="/images/rancher_kubectl_shell.png" alt="Rancher kubectl shell" align="center" width="60%" pb="20px" >}}
+{{< image path="/images/rancher_kubectl_shell.png" alt="Rancher kubectl shell" align="center" width="60%" mb="20px" >}}
 
 First, before running the import command you must retrieve the kubeconfig file for the workload cluster. For cluster `capone4`, run:
 
@@ -339,7 +339,7 @@ Importing the cluster may take several minutes.
 
 Once the cluster has been imported, it becomes fully accessible from the Rancher UI, where it is displayed alongside the K3s cluster.
 
-{{< image path="/images/rancher_2_clusters_listed.png" alt="Rancher cluster list" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_2_clusters_listed.png" alt="Rancher cluster list" align="center" width="90%" mb="20px" >}}
 
 You can now explore and use the cluster -- for instance installing Helm charts, executing `kubectl` commands, and even upgrading the Kubernetes version of the cluster. In the next sections we will perform a few example operations.
 
@@ -356,21 +356,21 @@ This section provides a brief overview of performing day-to-day operations on th
 
 In the `capone4` cluster, select **Cluster Management**, then the `capone4` cluster:
 
-{{< image path="/images/rancher_goto_wkload_cluster.png" alt="Rancher go to workload cluster" align="center" width="40%" pb="20px" >}}
+{{< image path="/images/rancher_goto_wkload_cluster.png" alt="Rancher go to workload cluster" align="center" width="40%" mb="20px" >}}
 
 In the left-hand nav pane for the cluster, go to **Apps** -> **Charts**. In the **Filter charts results** input field, type `longhorn`.
 
-{{< image path="/images/rancher_install_longhorn.png" alt="Rancher install Longhorn" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_install_longhorn.png" alt="Rancher install Longhorn" align="center" width="90%" mb="20px" >}}
 
 Select the **Longhorn** chart. Rancher should display the details screen for Longhorn:
 
-{{< image path="/images/quickstart/rancher-longhorn-chart.png" alt="Rancher Longhorn chart" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/rancher-longhorn-chart.png" alt="Rancher Longhorn chart" align="center" width="90%" mb="20px" >}}
 
 Click the **Install** button at top right. Don't adjust any settings and click **Next**, then **Install**.
 
 The Rancher UI will direct you to the **Installed Apps** screen. Longhorn will appear as a new item in the left-hand sidebar:
 
-{{< image path="/images/quickstart/rancher-longhorn-sidebar.png" alt="Rancher Longhorn sidebar" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/rancher-longhorn-sidebar.png" alt="Rancher Longhorn sidebar" align="center" width="90%" mb="20px" >}}
 
 ### Creating a Persistent Volume Claim on Longhorn
 
@@ -378,7 +378,7 @@ In this step we will create the Persistent Volume Claim that will be used by our
 
 To create a PVC, in the left-hand nav pane for the cluster select **Storage** -> **PersistentVolumeClaims**.
 
-{{< image path="/images/quickstart/rancher-create-pvc.png" alt="Rancher Longhorn create PVC" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/rancher-create-pvc.png" alt="Rancher Longhorn create PVC" align="center" width="90%" mb="20px" >}}
 
 Rancher will display the **PersistentVolumeClaims** screen. To create a new PVC, click **Create**.
 
@@ -389,13 +389,13 @@ Fill in the required parameters for the PVC:
 - In the **Storage Class** drop-down, select `longhorn`
 - In **Request Storage**, you can modify the default value of 10 GiB to your needs. In this example we will set it to 2 GiB
 
-{{< image path="/images/quickstart/rancher-create-pvc-menu.png" alt="Rancher Longhorn create PVC menu" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/rancher-create-pvc-menu.png" alt="Rancher Longhorn create PVC menu" align="center" width="90%" mb="20px" >}}
 
 Click **Create**.
 
 The PVC should now be listed in the **Storage** -> **PersistentVolumeClaims** tab for the cluster, shown below.
 
-{{< image path="/images/rancher_pvc_created.png" alt="Rancher Longhorn PVC created" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_pvc_created.png" alt="Rancher Longhorn PVC created" align="center" width="90%" mb="20px" >}}
 
 ### Creating an Nginx Deployment
 
@@ -403,7 +403,7 @@ We will create the Nginx deployment by importing the deployment's YAML definitio
 
 Go to the **Cluster Dashboard** (click the icon for the cluster on the left, then in the cluster nav pane click **Cluster**). Then, in the top bar click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png):
 
-{{< image path="/images/rancher_import_yaml.png" alt="Rancher import YAML" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_import_yaml.png" alt="Rancher import YAML" align="center" width="90%" mb="20px" >}}
 
 Rancher displays the **Import YAML** screen. To deploy Nginx, you can copy and paste the following definition:
 
@@ -441,15 +441,15 @@ spec:
 
 Paste the definition into the input box, then click **Import**. Rancher will create a simple Nginx deployment that mounts the PVC we previously created.
 
-{{< image path="/images/rancher_yaml_imported.png" alt="Rancher import YAML" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_yaml_imported.png" alt="Rancher import YAML" align="center" width="90%" mb="20px" >}}
 
 To see the Nginx deployment, in the menu for the cluster select **Workloads** > **Deployments**, and in the `default` namespace look for `nginx`.
 
-{{< image path="/images/rancher_nginx_deployment.png" alt="Rancher NGINX" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_nginx_deployment.png" alt="Rancher NGINX" align="center" width="90%" mb="20px" >}}
 
 Clicking `nginx` displays additional information for the deployment, including its IP, in this case `10.42.0.32`:
 
-{{< image path="/images/rancher_nginx_deployment_2.png" alt="Rancher NGINX" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_nginx_deployment_2.png" alt="Rancher NGINX" align="center" width="90%" mb="20px" >}}
 
 ### Exposing the Nginx Deployment
 
@@ -477,11 +477,11 @@ This will expose port 80 of the pod running the `nginx` service on port 30080 of
 
 After clicking **Import**, you should see `nginx-service` in the cluster's **Services** tab:
 
-{{< image path="/images/quickstart/rancher-nginx-service.png" alt="Rancher NGINX" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/quickstart/rancher-nginx-service.png" alt="Rancher NGINX" align="center" width="90%" mb="20px" >}}
 
 Now your Nginx deployment should be visible on the external IP of the node -- which in this example setup is `192.168.100.4` -- on port 30080:
 
-{{< image path="/images/rancher_nginx_welcome_screen.png" alt="Rancher NGINX" align="center" width="60%" pb="20px" >}}
+{{< image path="/images/rancher_nginx_welcome_screen.png" alt="Rancher NGINX" align="center" width="60%" mb="20px" >}}
 
 ## Additional Tasks
 
@@ -495,23 +495,23 @@ To add a Worker Node to the cluster, use CAPI to create a replica of the cluster
 
 In Rancher, go to **Cluster Management**, then in the left-hand nav pane **CAPI** -> **Machine Deployments**. Rancher should display the current deployment of the `capone4` cluster. Clicking the deployment name shows the YAML file for the deployment. To add a replica, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) at top right, then select **Edit YAML**. Find the string `replicas: 1` and change the number to the desired number of replicas.
 
-{{< image path="/images/rancher_create_replica.png" alt="Rancher create replica" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_create_replica.png" alt="Rancher create replica" align="center" width="90%" mb="20px" >}}
 
 ### Upgrading the Workload Cluster
 
 To upgrade the cluster from within Rancher, select **Cluster Management** at bottom left, then **Clusters** on the left-hand pane. Click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) for the cluster, then select **Edit Config** from the drop-down.
 
-{{< image path="/images/rancher_edit_config.png" alt="Rancher edit config" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_edit_config.png" alt="Rancher edit config" align="center" width="90%" mb="20px" >}}
 
 Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**. 
 
-{{< image path="/images/rancher_cluster_conf_screen.png" alt="Rancher cluster conf" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_cluster_conf_screen.png" alt="Rancher cluster conf" align="center" width="90%" mb="20px" >}}
 
 Rancher should display the **Clusters** screen, where the cluster should display status `Upgrading`. The upgrade can take several minutes. To see the upgrade process, click the **Explore** button to the right of the cluster -- this takes you to the Cluster Dashboard where upgrade messages are displayed.
 
 When the upgrade is finished, the **Clusters** screen should display the cluster with the new version.
 
-{{< image path="/images/rancher_cluster_upgraded.png" alt="Rancher cluster upgraded" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/rancher_cluster_upgraded.png" alt="Rancher cluster upgraded" align="center" width="90%" mb="20px" >}}
 
 Congratulations! You have successfully deployed a K3s cluster with the Rancher management platform as well as a production-grade workload cluster where you've created, exposed and tested a deployment -- all with minimal configuration and using graphical interfaces.
 
