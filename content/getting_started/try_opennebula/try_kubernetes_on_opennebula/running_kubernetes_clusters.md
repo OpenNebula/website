@@ -26,7 +26,7 @@ After successfully completing the miniONE installation you will complete the fol
 
 - Download the OneKE Kubernetes appliance from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
 - Instantiate a private network using miniONE
-- Deploy the OneKE Kubenetes cluster on the KVM Host installed by miniONE
+- Deploy the OneKE Kubernetes cluster on the KVM Host installed by miniONE
 - Validate the cluster by deploying a simple test application on the cluster
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace

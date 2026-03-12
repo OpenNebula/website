@@ -16,9 +16,9 @@ We will complete the following high-level steps:
 
 ## Before starting
 
-Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premises resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
-* [AI Factory Deployment with On-premise Hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment with On-premises Hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
 * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
 You need a running **[OneGate](https://docs.opennebula.io/7.0/product/operation_references/opennebula_services_configuration/onegate/)** server (reachable by the Slurm Controller VM) so the controller can share the Munge key with workers. To check the status of OneGate, on your OpenNebula Front-end machine run (using `sudo` if necessary):

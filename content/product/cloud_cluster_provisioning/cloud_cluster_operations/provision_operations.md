@@ -12,7 +12,7 @@ weight: "3"
 
 <!--# Managing Provisions -->
 
-In OneForm, provisions represent fully-deployed clusters or infrastructure stacks. Each provision is associated with a specific cloud or on-premise provider, and contains OpenNebula resources such as hosts, datastores, and virtual networks.
+In OneForm, provisions represent fully-deployed clusters or infrastructure stacks. Each provision is associated with a specific cloud or on-premises provider, and contains OpenNebula resources such as hosts, datastores, and virtual networks.
 
 Here you will find details on how to:
 

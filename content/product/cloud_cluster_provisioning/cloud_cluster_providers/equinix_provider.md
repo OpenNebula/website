@@ -1,5 +1,5 @@
 ---
-title: "Equinix Provider"
+title: "Equinix"
 date: "2025-02-17"
 description:
 categories:
@@ -12,36 +12,36 @@ weight: "3"
 
 <!--# Equinix Provider -->
 
-An Equinix provider contains the credentials to interact with Equinix and also the location to deploy your Provisions. By default, OpenNebula comes with four pre-defined providers in the following regions:
+An Equinix Provider contains the credentials to interact with [Equinix](https://www.equinix.com/) hardware resources and also defines the location to deploy your Provisions. By default, OpenNebula comes with four pre-defined Providers in the following regions:
 
-* Amsterdam
+* Amsterdam (Netherlands)
 * Parsippany (NJ, US)
-* Tokyo
+* Tokyo (Japan)
 * California (US)
 
-It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
+It is possible to add zones by modifying the driver configuration. Learn more about customizing the driver's behavior to [add new zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
 
-To define an Equinix provider, specify the following information:
+To define a new Equinix Provider, specify the following information:
 
-* **Credentials**: these are used to interact with the remote provider. You need to provide `token` and `project`. To retrieve the required data, follow the [Equinix API](https://docs.equinix.com/equinix-api/) guide.
-* **Facility**: this is the location in the world where the resources are going to be deployed. All the available [facilities are listed here](https://www.equinix.com/data-centers/).
-* **Plans and OS**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
+* **Credentials**: Authorizes interaction with the remote Provider. You need to provide the `token` and `project` objects derived through the [Equinix API](https://docs.equinix.com/equinix-api/).
+* **Facility**: This defines the world location where the resources will be deployed. Check the available [Equinix facilities](https://www.equinix.com/data-centers/).
+* **Plans and OS**: Defines the capacity of the resources that will be deployed and the operating system installed on them.
 
 {{< alert title="Warning" color="warning" >}}
 Equinix supports multiple OSs. However, the automation tools are tailored to work with *Ubuntu 24.04*.
 
-If you choose a different OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using a different OS than *Ubuntu 24.04* in production environments,  unless you have properly tested it before.
+If you choose an alternative OS, your selected configuration might require additional adjustments and you will likely observe some unexpected results. Avoid using an OS other than *Ubuntu 24.04* in production environments, unless you have thoroughly tested it.
 {{< /alert >}}
 
 ## Creating an Equinix Provider
 
-The procedure below describes how to create an Equinix provider in your OpenNebula database, and make it available for future provisioning operations.
+The procedure below describes how to create an Equinix Provider in your OpenNebula database and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-**Step 1.** Navigate through `Infrastructure > Providers` in the sidebar:
+**Step 1.** Navigate to **Infrastructure -> Providers** in the Sunstone sidebar:
 
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
@@ -49,7 +49,7 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
   alt="Step 1"
 >}}
 
-**Step 2.** Click on the `Create` button:
+**Step 2.** Click **Create**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
@@ -57,7 +57,7 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
   alt="Step 2"
 >}}
 
-**Step 3.** Select the Equinix oneform driver and click on `Next` button:
+**Step 3.** Select the Equinix oneform driver and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/equinix/dark/equinix_driver.png"
@@ -65,7 +65,7 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
   alt="Step 3"
 >}}
 
-**Step 4.** Fill the general section with at least a name for the provider, and then click on `Next` button:
+**Step 4.** In the **General** page enter a name for the Provider, then click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/general_step.png"
@@ -73,14 +73,14 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
   alt="Step 4"
 >}}
 
-**Step 5.** Fill the Connection Values Section and click on `Finish` button:
+**Step 5.** In the **Connection Values** page enter the **Auth Token** and **Project ID** then click **Finish**:
 {{< theme-image
   dark="images/oneform/oneprovider/equinix/dark/equinix_connection_values.png"
   light="images/oneform/oneprovider/equinix/light/equinix_connection_values.png"
   alt="Step 5"
 >}}
 
-**Step 6.** Finally, you can see your already Equinix provider:
+**Step 6.** Finally, your Equinix Provider will appear in the **Providers** view:
 
 {{< theme-image
   dark="images/oneform/oneprovider/equinix/dark/equinix_provider.png"
@@ -91,10 +91,12 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
 
 {{% tab header="CLI"%}}
 
-Create an Equinix provider using the `oneprovider create <name>` command, and specifying `equinix` as the external cloud provider. During instantiation, OneForm will prompt you to enter the required Equinix credentials and region.
+Create an Equinix Provider using the `oneprovider create <ID>` command, and specifying `equinix` as the external cloud provider ID. During instantiation, OneForm will prompt you to enter the required Equinix credentials and region.
 
 ```bash
-$ oneprovider create equinix
+oneprovider create equinix
+```
+```
 There are some parameters that require user input.
   * (auth_token) Equinix Auth Token [type: string]
     *************************
@@ -111,10 +113,12 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once you have created the provider, review its details using the `oneprovider show <id>` command:
+Once you have created the Provider, review its details using the `oneprovider show <id>` command:
 
 ```bash
-$ oneprovider show 1
+oneprovider show 1
+```
+```
 PROVIDER 1 INFORMATION
 ID                  : 1
 NAME                : Equinix
@@ -145,6 +149,7 @@ IDS:                : --
 
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/providers" \
+  -u "username:password" \
   -H "Content-Type: application/json" \
   -d '{
     "driver": "equinix",
@@ -157,20 +162,23 @@ curl -X POST "https://oneform.example.server/api/v1/providers" \
     "description": "Provider for Equinix infrastructure in Amsterdam"
   }'
 ```
+<br>
 
-For further details about the API, please refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, please see to the [OneForm API Reference]({{% relref "product/integration_references/system_interfaces/oneform_api.md" %}}).
 {{% /tab %}}
 
 {{< /tabpane >}}
+
+Now that you have created your Equiniz Provider, refer to the next guide to [provision an Equinix Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/equinix_cluster.md" %}}).
 
 ## Known Issues
 
 ### Insufficient Capacity on Equinix Metal
 
-When there is not enough hardware available at a Equinix Metal facility for a given machine type, you will see the following error message:
+When there is not enough hardware available at a selected Equinix Metal facility for a given machine type, you will receive the following error message:
 
 ```default
 The facility ams1 has no provisionable c3.small.x86 servers matching your criteria
 ```
 
-To solve this issue, either select a different node type or Equinix Metal provider. You can check the current capacity status on the Equinix Metal API.
+To resolve this issue, either select a different node type or Equinix Metal Provider. You can check the current capacity status using the [Equinix Metal API](https://docs.equinix.com/api-catalog/metalv1/).

@@ -33,7 +33,7 @@ OpenNebula provides a set of commands to interact with the system:
 * [oneshowback](https://docs.opennebula.io/doc/{{< version >}}/cli/oneshowback.1.html): OpenNebula Showback tool.
 * [onetemplate](https://docs.opennebula.io/doc/{{< version >}}/cli/onetemplate.1.html): manages OpenNebula templates.
 * [oneuser](https://docs.opennebula.io/doc/{{< version >}}/cli/oneuser.1.html): manages OpenNebula users.
-* [onevdc](https://docs.opennebula.io/doc/{{< version >}}/cli/onevdc.1.html): manages OpenNebula Virtual Datacenters.
+* [onevdc](https://docs.opennebula.io/doc/{{< version >}}/cli/onevdc.1.html): manages OpenNebula Virtual Data centers.
 * [onevm](https://docs.opennebula.io/doc/{{< version >}}/cli/onevm.1.html): manages OpenNebula Virtual Machines.
 * [onevmgroup](https://docs.opennebula.io/doc/{{< version >}}/cli/onevmgroup.1.html): manages OpenNebula VMGroups.
 * [onevnet](https://docs.opennebula.io/doc/{{< version >}}/cli/onevnet.1.html): manages OpenNebula networks.

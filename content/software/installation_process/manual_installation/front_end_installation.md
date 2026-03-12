@@ -108,7 +108,7 @@ curl 'https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd
 chmod 0755 /usr/bin/terraform
 ```
 
-2. **Ansible** – is used to configure the provisioned resources (cloud or on-premise). Ansible system package is installed
+2. **Ansible** – is used to configure the provisioned resources (cloud or on-premises). Ansible system package is installed
 as a dependency of the OpenNebula provision package. However, for HCI provisioning including Ceph, the system-installed
 ansible version may not be sufficient as it requires ansible-core 2.15+. It is advised to use the latest Ubuntu for the FE if
 Ceph HCI provision is needed or to install ansible 2.15+ on the system and make it default for oneadmin user.
