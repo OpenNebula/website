@@ -1,16 +1,12 @@
 ---
-title: Deployment of NVIDIA KAI Scheduler
-linkTitle: NVIDIA KAI Scheduler
+title: Deployment of the NVIDIA KAI Scheduler
+linkTitle: Scheduling with NVIDIA KAI
 weight: 7
 ---
 
 <a id="nvidia_kai_scheduler"></a>
 
-{{< alert title="Important" color="success" >}}
-To perform the deployment of NVIDIA KAI Scheduler, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
-{{< /alert >}}
-
-[NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
+The [NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
 
 Some of the key features are:
 - Share single or multiple GPU resources among multiple workloads for improving resource allocation.
@@ -24,6 +20,14 @@ As the KAI Scheduler operates on top of Kubernetes, users benefit from its robus
 
 In this guide you will learn how to perform a validation using NVIDIA KAI Scheduler in an AI-Ready Kubernetes cluster. You will find details about the installation and efficiently share GPU resources among different workloads.
 
+## Before Starting
+
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+
+* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
+
+You must then complete the [AI-ready Kubernetes deployment guide]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}). You also must undeploy any appliances, VMs or services you deployed in previous guides before continuing.
 
 ### NVIDIA KAI Scheduler Installation
 
@@ -35,7 +39,8 @@ To install the NVIDIA KAI Scheduler, you need to accomplish the following prereq
     ```shell
     kubectl create namespace kai-scheduler
     ```
-2. Install the KAI Scheduler through Helm. To achieve this, check the available release versions in the [KAI Scheduler repository](https://github.com/NVIDIA/KAI-Scheduler/releases) and install it via Helm using the latest version. In case you want to use GPU resource sharing feature, set the `"global.gpuSharing=true"` flag:
+    
+2. Install the KAI Scheduler through Helm. In case you want to use GPU resource sharing feature, set the `"global.gpuSharing=true"` flag:
     ```shell
     helm install kai-scheduler \
         https://github.com/NVIDIA/KAI-Scheduler/releases/download/v0.9.8/kai-scheduler-v0.9.8.tgz \
@@ -43,10 +48,14 @@ To install the NVIDIA KAI Scheduler, you need to accomplish the following prereq
         --set "global.gpuSharing=true" \
         --set "global.resourceReservation.runtimeClassName=nvidia"
     ```
+    We recommend that you install version 0.9.8 of the KAI Scheduler to continue. If you wish to install a newer version, please consult the [KAI Scheduler repository](https://github.com/NVIDIA/KAI-Scheduler/releases) and install it via Helm. **Note that later versions of the KAI Scheduler may require extensive modification of the example schemas provided below to function correctly**.
 
 3. Verify that the Helm chart is successfully installed, and all the KAI Scheduler components are running:
     ```shell
-    ❯ kubectl get pods -n kai-scheduler
+    kubectl get pods -n kai-scheduler
+    ```
+
+    ```
     NAME                                   READY   STATUS    RESTARTS   AGE
     admission-55f6c958b6-sx8q6             1/1     Running   0          31s
     binder-66757b79cf-hnckr                1/1     Running   0          33s
@@ -68,41 +77,41 @@ To install the NVIDIA KAI Scheduler, you need to accomplish the following prereq
     apiVersion: scheduling.run.ai/v2
     kind: Queue
     metadata:
-    name: default
+        name: default
     spec:
-    resources:
-        cpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        gpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        memory:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
+        resources:
+            cpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            gpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            memory:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
     ---
     apiVersion: scheduling.run.ai/v2
     kind: Queue
     metadata:
-    name: test
+        name: test
     spec:
-    parentQueue: default
-    resources:
-        cpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        gpu:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
-        memory:
-        quota: -1
-        limit: -1
-        overQuotaWeight: 1
+        parentQueue: default
+        resources:
+            cpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            gpu:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
+            memory:
+                quota: -1
+                limit: -1
+                overQuotaWeight: 1
     EOF
     ```
 
@@ -160,7 +169,7 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
             image: vllm/vllm-openai:latest
             command: ["/bin/sh", "-c"]
             args: [
-    	      "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.7"
+    	      "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.7 --host 0.0.0.0"
             ]
             ports:
             - containerPort: 8000
@@ -188,7 +197,9 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
 
 3. Verify that the deployment is allocated with the specified resources
     ```shell
-    ❯ kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    ```
+    ```
     NAME                            STATUS    NODE                       GPU-FRACTION   GPU-GROUP
     vllm-test-07-5979b99584-llf45   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.7            407623a2-216d-4c06-b5b8-f8345bf28b5a
     ```
@@ -207,16 +218,18 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
         port: 80
         protocol: TCP
         targetPort: 8000
-    selector:
-        app: vllm-test-07
-    sessionAffinity: None
-    type: ClusterIP
+      selector:
+          app: vllm-test-07
+      sessionAffinity: None
+      type: ClusterIP
     EOF
     ```
 
     Check the service:
     ```shell
-    ❯ kubectl -n ai-workloads get svc
+    kubectl -n ai-workloads get svc
+    ```
+    ```
     NAME           TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
     vllm-test-07   ClusterIP   10.43.119.6   <none>        80/TCP    39s
     ```
@@ -226,7 +239,7 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
     kubectl -n ai-workloads port-forward svc/vllm-test-07 9000:80 &
     ```
 
-5. Test the deployment by sending a request to the vLLM service API
+5. Test the deployment by sending a request to the vLLM service API:
     ```shell
     curl http://localhost:9000/v1/completions \
     -H "Content-Type: application/json" \
@@ -238,7 +251,7 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
         }' | jq .
     ```
 
-    You should receive a response like this one:
+    You should receive a response similar to the following:
     ```json
     {
         "id": "cmpl-173532a758894deeae63d0a073c53289",
@@ -269,7 +282,7 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
     }
     ```
 
-Optionally, deploy another workload with a small GPU fraction on that node.
+Optionally, you might deploy another workload with a small GPU fraction on that node.
 
 1. Create another workload with a GPU memory fraction of `0.2`
     ```yaml
@@ -277,58 +290,60 @@ Optionally, deploy another workload with a small GPU fraction on that node.
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: vllm-test-02
-    namespace: ai-workloads
-    labels:
-        app: vllm-test-02
-    spec:
-    replicas: 1
-    selector:
-        matchLabels:
-        app: vllm-test-02
-    template:
-        metadata:
+        name: vllm-test-02
+        namespace: ai-workloads
         labels:
             app: vllm-test-02
-            kai.scheduler/queue: test
-        annotations:
-            gpu-fraction: "0.2"
-        spec:
-        schedulerName: kai-scheduler
-        containers:
-        - name: vllm
-            image: vllm/vllm-openai:latest
-            command: ["/bin/sh", "-c"]
-            args: [
-            "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.2"
-            ]
-            ports:
-            - containerPort: 8000
-            resources:
-            limits:
-                cpu: "8"
-                memory: 15G
-            requests:
-                cpu: "6"
-                memory: 6G
-            livenessProbe:
-            httpGet:
-                path: /health
-                port: 8000
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            readinessProbe:
-            httpGet:
-                path: /health
-                port: 8000
-            initialDelaySeconds: 60
-            periodSeconds: 5
+    spec:
+        replicas: 1
+        selector:
+            matchLabels:
+                app: vllm-test-02
+        template:
+            metadata:
+                labels:
+                    app: vllm-test-02
+                    kai.scheduler/queue: test
+                annotations:
+                    gpu-fraction: "0.2"
+            spec:
+                schedulerName: kai-scheduler
+                containers:
+                  - name: vllm
+                    image: vllm/vllm-openai:latest
+                    command: ["/bin/sh", "-c"]
+                    args: [
+                    "vllm serve Qwen/Qwen2.5-1.5B-Instruct --gpu-memory-utilization=0.2"
+                    ]
+                    ports:
+                        - containerPort: 8000
+                    resources:
+                        limits:
+                            cpu: "8"
+                            memory: 15G
+                        requests:
+                            cpu: "6"
+                            memory: 6G
+                    livenessProbe:
+                        httpGet:
+                            path: /health
+                            port: 8000
+                        initialDelaySeconds: 60
+                        periodSeconds: 10
+                    readinessProbe:
+                        httpGet:
+                            path: /health
+                            port: 8000
+                        initialDelaySeconds: 60
+                        periodSeconds: 5
     EOF
     ```
 
 2. Check that the fraction is successfully assigned and the pod is running
     ```shell
-    ❯ kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
+    ```
+    ```
     NAME                            STATUS    NODE                       GPU-FRACTION   GPU-GROUP
     vllm-test-02-79b48968bc-dtzxs   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.2            407623a2-216d-4c06-b5b8-f8345bf28b5a
     vllm-test-07-5979b99584-llf45   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.7            407623a2-216d-4c06-b5b8-f8345bf28b5a
@@ -336,6 +351,6 @@ Optionally, deploy another workload with a small GPU fraction on that node.
 
 With this validation, you have checked how you can efficiently share fractional GPU resources between workloads in an AI-Ready Kubernetes with KAI Scheduler.
 
-{{< alert title="Tip" color="success" >}}
+## Next Steps
+
 After powering your AI Factory with NVIDIA KAI Scheduler on Kubernetes, you may continue with [NVIDIA Dynamo on Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}}) as an additional validation procedure built on top of K8s.
-{{< /alert >}}

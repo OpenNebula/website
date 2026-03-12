@@ -61,8 +61,8 @@ Thank you to our incredible community and partners for your continued support in
 
 
 ## LXC
-- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
-- LXC Snapshots are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available, [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- [LXC disks Snapshots](../../../product/operation_references/hypervisor_configuration/lxc_driver.md) are now available for the following storage backends: LVM, LVM thin, ceph rbd, and raw file images.
 
 ## OpenNebula Form
 - [OneForm: Automated Cluster Provisioning](../../../product/operation_references/opennebula_services_configuration/oneform): A new service designed to automate the creation of OpenNebula clusters across on-premises environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
@@ -121,5 +121,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix quota output for commands `onegroup list` and `oneuser list`](https://github.com/OpenNebula/one/issues/7254).
 - [Fix Veeam only working with default datastore path](https://github.com/OpenNebula/one/issues/7470).
 - [Fix `onedb fsck` returns non-zero exit code in case of issues in DB](https://github.com/OpenNebula/one/issues/6995).
-- [Fix `onedb fsck` for Virtual Router leases](https://github.com/OpenNebula/one/issues/7428). 
-- [Fix FQDN support in Prometheus datasource script](https://github.com/OpenNebula/one/issues/7512)
+- [Fix `onedb fsck` for Virtual Router leases](https://github.com/OpenNebula/one/issues/7428).
+- [Fix FQDN support in Prometheus datasource script](https://github.com/OpenNebula/one/issues/7512).
+- [Fix OneDRS scheduler for VMs with resched flag](https://github.com/OpenNebula/one/issues/7503).

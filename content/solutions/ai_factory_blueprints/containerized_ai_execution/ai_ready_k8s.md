@@ -1,5 +1,5 @@
 ---
-title: Deployment of AI-Ready Kubernetes
+title: Deployment of AI-ready Kubernetes
 linkTitle: AI-ready Kubernetes
 weight: 5
 ---
@@ -14,10 +14,10 @@ Additionally, running Kubernetes clusters on top of OpenNebula-provisioned virtu
 In this guide you will learn how to combine all of these components for provisioning a secure, robust and scalable solution for our AI workloads on top of the NVIDIA Dynamo framework powered by the OpenNebula cloud platform.
 
 {{< alert title="Important" color="success" >}}
-In this guide, we assume that we are using a single node OpenNebula deployment (i.e. a single node that works as an OpenNebula frontend and hypervisor host at the same time).
+In this guide, we assume that you are using a single node OpenNebula deployment (i.e. a single node that works as an OpenNebula Front-end and hypervisor host at the same time).
 {{< /alert >}}
 
-## Before starting
+## Before Starting
 
 Before starting this tutorial, you must complete the AI-factory deployment with either on-premises resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
@@ -70,7 +70,7 @@ Deploy your Kubernetes management cluster through the CAPI Service in OpenNebula
     onemarketapp export "Service Capi" service_Capi -d 1
     ```
 
-2. Update the `service_Capi` template by adding the necessary scheduling requirements for deploying in to the desired host. In this case, we're enablin the `host-passthrough` feature and adding a NIC card attached to the default `admin_net` network, but you can change it to another network if necessary. The chosen network must be the same that we are going to use for the workload cluster vRouter ingress traffic.
+2. Update the `service_Capi` template by adding the necessary scheduling requirements for deploying in to the desired host. In this case, we're enabling the `host-passthrough` feature and adding a NIC card attached to the default `admin_net` network, but you can change it to another network if necessary. The chosen network must be the same that we are going to use for the workload cluster vRouter ingress traffic.
 
     ```shell
     onetemplate update service_Capi
@@ -116,7 +116,7 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
     export ONEADMIN_PASSWORD=$(cat /var/lib/one/.one/one_auth | awk -F: '{print $2}')
     ```
     The `$ONE_VNET` variable contains the name of the vnet where the CAPI instance has been deployed and where the workload cluster is going to be deployed (in our case, `admin_net`),
-    `$ONE_FRONTEND_IP` is the IP used for accessing the OpenNebula frontend XMLRPC API (in our case we are using the `admin_vnet` virtual network gateway IP, that is bridged with the OpenNebula frontend host),
+    `$ONE_FRONTEND_IP` is the IP used for accessing the OpenNebula frontend XMLRPC API (in our case we are using the `admin_vnet` virtual network gateway IP, that is bridged with the OpenNebula Front-end host),
     
     The `$CAPI_VM_IP` is the CAPI appliance IP address, and the `$ONEADMIN_PASSWORD` variable is the defined password for the `oneadmin` user.
 

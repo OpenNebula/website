@@ -1,6 +1,6 @@
 ---
-title: "Validation with LLM Inference"
-linkTitle: "LLM Inference"
+title: "Inferencing with vLLM"
+linkTitle: "Inferencing with vLLM"
 date: "2025-10-28"
 description:
 categories:
@@ -19,7 +19,7 @@ The main characteristics of vLLM Inference Framework are:
 
 In this guide you will find the necessary steps and best practices to deploy the OpenNebula vLLM appliance and perform an inference benchmarking to check its performance.
 
-## Before starting 
+## Before Starting 
 
 Before starting this tutorial, you must complete the AI-factory deployment with either on-premises resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
@@ -238,7 +238,7 @@ The server specifications are based on a two-server setup for each environment: 
 | **RAM**                  | 1152 GB (24x48GB DDR5-4800)                   | 1536 GB (24x64GB DDR5-6400)                   |
 
 
-### Benchmarks models
+### Benchmarks Models
 
 The certification includes two LLM architectures — Qwen and Llama — each tested in two different parameter sizes.
 
@@ -288,7 +288,7 @@ To run the benchmark, follow this procedure:
     ![vLLM benchmark results](/images/solutions/deployment_blueprints/llm_inference_certification/benchmark_results.svg)
 
 
-### Benchmark results
+### Benchmark Results
 
 The following key performance metrics have been be tested for each model:
 
