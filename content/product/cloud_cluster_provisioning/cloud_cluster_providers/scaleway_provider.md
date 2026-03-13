@@ -43,48 +43,48 @@ The following process describes how to create a Scaleway Provider in your OpenNe
 {{% tab header="Sunstone"%}}
 **Step 1.** Navigate to **Infrastructure -> Providers** in the Sunstone sidebar:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
-  light="images/oneform/oneprovider/common/light/sunstone_navigation.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
+  path="images/oneform/oneprovider/common/light/sunstone_navigation.png"
   alt="Step 1"
 >}}
 
 **Step 2.** Click **Create**:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
-  light="images/oneform/oneprovider/common/light/create_provider_button.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/create_provider_button.png"
+  path="images/oneform/oneprovider/common/light/create_provider_button.png"
   alt="Step 2"
 >}}
 
 **Step 3.** Select the Scaleway OneForm driver and click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/scaleway/dark/scaleway_driver.png"
-  light="images/oneform/oneprovider/scaleway/light/scaleway_driver.png"
+{{< image
+  pathDark="images/oneform/oneprovider/scaleway/dark/scaleway_driver.png"
+  path="images/oneform/oneprovider/scaleway/light/scaleway_driver.png"
   alt="Step 3"
 >}}
 
 **Step 4.** In the **General** page enter a name for the Provider, and then click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/general_step.png"
-  light="images/oneform/oneprovider/common/light/general_step.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/general_step.png"
+  path="images/oneform/oneprovider/common/light/general_step.png"
   alt="Step 4"
 >}}
 
 **Step 5.** In the **Connection Values** page, enter the **Access Key**, **Secret Key** and **Project ID** and click **Finish**:
-{{< theme-image
-  dark="images/oneform/oneprovider/scaleway/dark/scaleway_connection_values.png"
-  light="images/oneform/oneprovider/scaleway/light/scaleway_connection_values.png"
+{{< image
+  pathDark="images/oneform/oneprovider/scaleway/dark/scaleway_connection_values.png"
+  path="images/oneform/oneprovider/scaleway/light/scaleway_connection_values.png"
   alt="Step 5"
 >}}
 
 **Step 6.** Finally, your Scaleway Provider will appear in the **Providers** view:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/scaleway/dark/scaleway_provider.png"
-  light="images/oneform/oneprovider/scaleway/light/scaleway_provider.png"
+{{< image
+  pathDark="images/oneform/oneprovider/scaleway/dark/scaleway_provider.png"
+  path="images/oneform/oneprovider/scaleway/light/scaleway_provider.png"
   alt="Step 6"
 >}}
 
