@@ -42,6 +42,7 @@
     {{- if $srcDark -}}
       <img src="{{ $srcDark.RelPermalink }}" alt="{{ $alt }}" {{ with $finalClass }}class="{{ . }} td-img-dark"{{ end }}>
     {{- end -}}    
+    </div>
   {{- else -}}
     {{/* RASTER: Now it is safe to call .Width and .Process */}}
     {{- $procWidth := $src.Width -}}
