@@ -1,6 +1,20 @@
 {{/* We cache this partial for bigger sites and set the active class client side. */ -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldDelayActive := ge (len .Site.Pages) $sidebarCacheLimit -}}
+
+
+{{/* --- Style to delete the aside toc menu. Need to be in the html to render each time the user selects an option --- */}}
+<style>
+
+    .td-sidebar-toc {
+      border-left: 0 !important;
+    }
+    body:has(.td-sidebar-nav .ul-4 .active) .td-sidebar-toc {
+      border-left: 1px solid var(--border-color) !important;
+    }
+
+</style>
+
 <div id="td-sidebar-menu" class="td-sidebar-menu td-sidebar__inner{{ if $shouldDelayActive }} d-none{{ end }}">
   {{ if not .Site.Params.ui.sidebar_search_disable -}}
   <form class="td-sidebar__search d-flex align-items-center">

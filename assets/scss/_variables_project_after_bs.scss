@@ -25,22 +25,22 @@
   --breadcrumb-icon-color: #1393C2;
 
   --alert-info-border-color: #80B2FF;
-  --alert-info-font-color: #80B2FF;  
+  --alert-info-font-color: #F2F7FF;  
   --alert-info-background-color: #0D2A57;
   --alert-info-icon-color: #80B2FF;
 
   --alert-warning-border-color: #FF6E1F;
-  --alert-warning-font-color: #FF6E1F;  
+  --alert-warning-font-color: #FFF0E8;  
   --alert-warning-background-color: #461900;
   --alert-warning-icon-color: #FF6E1F;
 
   --alert-danger-border-color: #FF5779;
-  --alert-danger-font-color: #FF5779;  
+  --alert-danger-font-color: #FFEAEE;  
   --alert-danger-background-color: #290008;
   --alert-danger-icon-color: #FF5779;
 
   --alert-tip-border-color: #2FB8EB;
-  --alert-tip-font-color: #58D2FF;  
+  --alert-tip-font-color: #EAF9FF;  
   --alert-tip-background-color: #003447;
   --alert-tip-icon-color: #7CDCFF;
 
@@ -50,6 +50,7 @@
   --scrollbar-color: #40435C;
 
   --sidebar-title-color: #F5F7F9;
+  --sidebar-hover-color: #7CDCFF;
 
   --table-background-color: #2A2D3D;
   --table-border-color: #40435C;
@@ -71,6 +72,8 @@
   --feedback-button-background-color: #F5F7F9;
   --feedback-button-color: #575C5B;
   --feedback-button-border-color: #E0E4E7;
+
+  --image-shadow-color: #0000001A;
   
 
   // Display light logo
@@ -133,6 +136,7 @@
   --scrollbar-color: #E0E4E7;
 
   --sidebar-title-color: #40435C;
+  --sidebar-hover-color: #1393C2;
 
   --table-background-color: #FFF;
   --table-border-color: #E0E4E7;
@@ -155,6 +159,7 @@
   --feedback-button-color: #575C5B;
   --feedback-button-border-color: #E0E4E7;
   
+  --image-shadow-color: #0000001A;
 
   // Display light logo
   .logo-light { 

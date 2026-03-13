@@ -13,10 +13,16 @@
   a {
     color: var(--headings-color);
     &:hover {
-      color: var(--link-color);
+      color: var(--sidebar-hover-color);
     }
     &.active {
       font-weight: 700;
+    }
+  }
+
+  nav.foldable-nav .with-child > label {  
+    &:hover::before {
+      color: var(--sidebar-hover-color);
     }
   }
 }
@@ -24,6 +30,15 @@
 // Menu first level
 .ul-1 > .td-sidebar-nav__section > label > .td-sidebar-link {
   @include body-small-medium;
+  &:hover {
+    color: var(--sidebar-hover-color);
+  }
+
+  nav.foldable-nav .with-child > label {  
+    &:hover::before {
+      color: var(--sidebar-hover-color);
+    }
+  }
 }
 
 // Menu NOT first level NOT last level

@@ -1,0 +1,11 @@
+.tab-content .tab-pane {
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: var(--border-width-sm, 1px) solid var(--table-border-color);
+}
+
+.nav-tabs {
+  border-bottom: 0;
+}

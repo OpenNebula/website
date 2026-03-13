@@ -10,6 +10,8 @@
 @import "blockquote/_styles_project_blockquote";
 @import "code/_styles_project_code";
 @import "feedback/_styles_project_feedback.scss";
+@import "tab/_styles_project_tab.scss";
+@import "image/_styles_project_image.scss";
 @import "_styles_fonts";
 
 /**
@@ -24,15 +26,15 @@ h1 {
 }
 
 h2 {
-  @include h2;
+  @include h3-bold;
 }
 
 h3 {
-  @include h3;
+  @include title1-bold;
 }
 
 h4 {
-  @include h4;
+  @include title2-bold;
 }
 
 a {

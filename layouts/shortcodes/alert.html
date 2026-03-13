@@ -3,7 +3,7 @@
 {{/* He cambiado el default a 'info' para que coincida con los estándares de Bootstrap */}}
 {{ $type := .Get "type" | default "info" }}
 
-{{ $icon_map := dict "info" "fas fa-check-circle" "warning" "fas fa-triangle-exclamation" "danger" "fas fa-circle-exclamation" "tip" "fas fa-lightbulb" }}
+{{ $icon_map := dict "info" "fa-sharp fa-solid fa-circle-info" "warning" "fas fa-triangle-exclamation" "danger" "fas fa-circle-exclamation" "tip" "fas fa-lightbulb" }}
 
 {{ $icon_class := index $icon_map $type | default (index $icon_map "info") }}
 
