@@ -43,48 +43,48 @@ The procedure below describes how to create an Equinix provider in your OpenNebu
 {{% tab header="Sunstone"%}}
 **Step 1.** Navigate through `Infrastructure > Providers` in the sidebar:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
-  light="images/oneform/oneprovider/common/light/sunstone_navigation.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
+  path="images/oneform/oneprovider/common/light/sunstone_navigation.png"
   alt="Step 1"
 >}}
 
 **Step 2.** Click on the `Create` button:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
-  light="images/oneform/oneprovider/common/light/create_provider_button.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/create_provider_button.png"
+  path="images/oneform/oneprovider/common/light/create_provider_button.png"
   alt="Step 2"
 >}}
 
 **Step 3.** Select the Equinix oneform driver and click on `Next` button:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/equinix/dark/equinix_driver.png"
-  light="images/oneform/oneprovider/equinix/light/equinix_driver.png"
+{{< image
+  pathDark="images/oneform/oneprovider/equinix/dark/equinix_driver.png"
+  path="images/oneform/oneprovider/equinix/light/equinix_driver.png"
   alt="Step 3"
 >}}
 
 **Step 4.** Fill the general section with at least a name for the provider, and then click on `Next` button:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/general_step.png"
-  light="images/oneform/oneprovider/common/light/general_step.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/general_step.png"
+  path="images/oneform/oneprovider/common/light/general_step.png"
   alt="Step 4"
 >}}
 
 **Step 5.** Fill the Connection Values Section and click on `Finish` button:
-{{< theme-image
-  dark="images/oneform/oneprovider/equinix/dark/equinix_connection_values.png"
-  light="images/oneform/oneprovider/equinix/light/equinix_connection_values.png"
+{{< image
+  pathDark="images/oneform/oneprovider/equinix/dark/equinix_connection_values.png"
+  path="images/oneform/oneprovider/equinix/light/equinix_connection_values.png"
   alt="Step 5"
 >}}
 
 **Step 6.** Finally, you can see your already Equinix provider:
 
-{{< theme-image
-  dark="images/oneform/oneprovider/equinix/dark/equinix_provider.png"
-  light="images/oneform/oneprovider/equinix/light/equinix_provider.png"
+{{< image
+  pathDark="images/oneform/oneprovider/equinix/dark/equinix_provider.png"
+  path="images/oneform/oneprovider/equinix/light/equinix_provider.png"
   alt="Step 6"
 >}}
 {{% /tab %}}
