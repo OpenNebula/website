@@ -2,8 +2,10 @@
 
 // Table
 .td-content table:not(.td-initial) {
-  border: 1px solid orange;
-  border-radius: 12px;
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
   border: var(--border-width-sm, 1px) solid var(--table-border-color);
   display: table;
   table-layout: auto !important;

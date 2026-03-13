@@ -32,6 +32,9 @@
   }
   .alert-body {
     color: var(--alert-info-font-color);
+    p {
+      color: var(--alert-info-font-color);
+    }
   }
   .alert-icon {
     color: var(--alert-info-icon-color);
@@ -47,6 +50,9 @@
   }
   .alert-body {
     color: var(--alert-warning-font-color);
+    p {
+      color: var(--alert-warning-font-color);
+    }    
   }
   .alert-icon {
     color: var(--alert-warning-icon-color);
@@ -62,6 +68,9 @@
   }
   .alert-body {
     color: var(--alert-danger-font-color);
+    p {
+      color: var(--alert-danger-font-color);
+    }        
   }
   .alert-icon {
     color: var(--alert-danger-icon-color);
@@ -77,6 +86,9 @@
   }
   .alert-body {
     color: var(--alert-tip-font-color);
+    p {
+      color: var(--alert-tip-font-color);
+    }     
   }
   .alert-icon {
     color: var(--alert-tip-icon-color);

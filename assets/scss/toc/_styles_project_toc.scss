@@ -25,18 +25,30 @@
   margin-left: 0px;
 }
 
-.td-toc  #TableOfContents {
+.td-toc  #TableOfContents li {
+  @include body-small;
+}
+
+.td-toc nav a {
   @include body-small;
 }
 
 .td-toc #TableOfContents a {
-  color: var(--body-disabled-color)
+  color: var(--body-disabled-color);
+  &:hover {
+    color: var(--link-hover-color);
+    background-color: transparent;
+  }
 }
 
 .td-toc #TableOfContents a.active {
   color: var(--body-color);
   background-color: transparent;
   border-left: 1px solid var(--link-color);
+  &:hover {
+    color: var(--link-hover-color);
+    background-color: transparent;
+  }
 }
 
 

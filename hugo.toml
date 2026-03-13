@@ -223,6 +223,9 @@ disable = false
       [markup.goldmark.parser.attribute]
         block = true
         title = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2
 
 [outputs]
 home = ["HTML", "JSON"]
@@ -231,3 +234,7 @@ home = ["HTML", "JSON"]
 mediaType = "application/json"
 baseName = "source-map"
 isPlainText = true
+
+#[services]
+#  [services.googleAnalytics]
+#    id = 'G-TG2W04C1CT'
