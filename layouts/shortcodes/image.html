@@ -1,4 +1,5 @@
 {{ $path := .Get "path" }}
+{{ $pathDark := .Get "pathDark" }}
 {{ $alt := .Get "alt" | default "" }}
 {{ $width := .Get "width" }}
 {{ $class := .Get "class" | default "" }}
@@ -6,14 +7,24 @@
 {{ $mb := .Get "mb" | default "" }}
 {{ $mt := .Get "mt" | default "" }}
 
-{{/* Input parameter for round border */}}
+{{/* Input parameter for display border, round border and shadow */}}
+{{ $border := .Get "border" | default "true" }}
 {{ $roundBorder := .Get "roundBorder" | default "true" }}
-{{ $roundClass := "" }}
-{{ if eq $roundBorder "true" }}{{ $roundClass = "roundBorder" }}{{ end }}
-{{ $finalClass := printf "%s %s" $class $roundClass | strings.TrimSpace }}
+{{ $shadow := .Get "shadow" | default "true" }}
+
+
+{{ $borderClass := cond (eq $border "true") "borderImage" "" }}
+{{ $roundClass := cond (eq $roundBorder "true") "roundBorderImage" "" }}
+{{ $shadowClass := cond (eq $shadow "true") "shadowImage" "" }}
+
+{{ $finalClass := printf "%s %s %s %s" $class $roundClass $borderClass $shadowClass | strings.TrimSpace }}
 
 {{ $srcPath := strings.TrimPrefix "/" $path }}
 {{ $src := resources.Get $srcPath }}
+{{ $srcDark := "" }}
+{{ if $pathDark }}
+  {{ $srcDark = resources.Get (strings.TrimPrefix "/" $pathDark) }}
+{{ end }}
 
 {{ if $src }}
   {{ $isSVG := eq $src.MediaType.SubType "svg" }}
@@ -21,7 +32,7 @@
   {{/* 1. Build CSS Styles (This works for both SVG and Raster) */}}
   {{ $finalStyle := "" }}
   {{ if eq $align "center" }}
-    {{ $finalStyle = "display: block; margin-left: auto; margin-right: auto;" }}
+    {{ $finalStyle = "margin-left: auto; margin-right: auto;" }}
   {{ end }}
   {{ if $width }}
     {{ $styleWidth := $width }}
@@ -37,10 +48,15 @@
 
   {{/* 2. Render Output */}}
   {{ if $isSVG }}
-    {{/* SVG: No .Width call, no .Process call */}}
+    {{/* SVG: No .Width call, no .Process call */}}    
     <img src="{{ $src.RelPermalink }}" alt="{{ $alt }}" 
-      {{ with $finalClass }}class="{{ . }}"{{ end }}
+      {{ with $finalClass }}class="{{ . }} td-img-light {{ if not $srcDark }}td-img-always{{ end }}"{{ end }}
       style="{{ $finalStyle | safeCSS }}">
+      {{ if $srcDark }}
+      <img src="{{ $srcDark.RelPermalink }}" alt="{{ $alt }}" 
+        {{ with $finalClass }}class="{{ . }} td-img-dark"{{ end }}
+        style="{{ $finalStyle | safeCSS }}">
+      {{ end }}
   {{ else }}
     {{/* RASTER: Now it is safe to call .Width and .Process */}}
     {{ $procWidth := $src.Width }}
@@ -54,8 +70,14 @@
     {{- with $src.Process $procCommand -}}
       <img src="{{ .RelPermalink }}" alt="{{ $alt }}" 
         width="{{ .Width }}" height="{{ .Height }}" 
-        {{ with $finalClass }}class="{{ . }}"{{ end }}
+        {{ with $finalClass }}class="{{ . }} td-img-light {{ if not $srcDark }}td-img-always{{ end }}"{{ end }}
         style="{{ $finalStyle | safeCSS }}">
+      {{ if $srcDark }}
+        <img src="{{ $srcDark.RelPermalink }}" alt="{{ $alt }}" 
+          width="{{ .Width }}" height="{{ .Height }}" 
+          {{ with $finalClass }}class="{{ . }} td-img-dark"{{ end }}
+          style="{{ $finalStyle | safeCSS }}">
+      {{ end }}
     {{- end }}
   {{ end }}
 
