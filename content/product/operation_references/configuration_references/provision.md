@@ -260,7 +260,7 @@ OneForm supports two special user inputs for defining the hosts involved in a pr
   }
   ```
 
-- **On-Premise hosts**: supported through the `oneform_onprem_hosts` user input. It allows you to specify a list of existing on-premise IPs or hostnames to be used instead of provisioning new bare-metal hosts from a cloud provider. When this input is present, OneForm skips the Terraform stage entirely and hands over the provided list to the configuration phase, which is executed via OneDeploy using Ansible. This is primarily used with the On-Premises provider and is ideal for hybrid environments or for integrating infrastructure that already exists outside of OneForm's control.
+- **On-Premise hosts**: supported through the `oneform_onprem_hosts` user input. It allows you to specify a list of existing s IPs or hostnames to be used instead of provisioning new bare-metal hosts from a cloud provider. When this input is present, OneForm skips the Terraform stage entirely and hands over the provided list to the configuration phase, which is executed via OneDeploy using Ansible. This is primarily used with the On-Premises provider and is ideal for hybrid environments or for integrating infrastructure that already exists outside of OneForm's control.
 
   ```json
   {

@@ -1,5 +1,5 @@
 ---
-title: "Cloud Cluster Providers"
+title: "Providers"
 date: "2025-02-17"
 description: "Create providers on-premises or in any external cloud provider"
 categories:

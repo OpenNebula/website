@@ -19,9 +19,9 @@ In this guide, we assume that you are using a single node OpenNebula deployment 
 
 ## Before Starting
 
-Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premises resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
-* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment with On-premises hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
 * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
 ## Architecture

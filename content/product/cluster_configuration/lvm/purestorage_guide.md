@@ -4,47 +4,45 @@ linkTitle: "PureStorage: SAN setup"
 weight: "2"
 ---
 
-This setup assumes you are using a PureStorage FlashArray with iSCSI and want to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the PureStorage interface, create the required resources as desired.
+This setup assumes you are using a PureStorage FlashArray with iSCSI and want to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard Volume and Host mappings. If you are already familiar with the PureStorage interface, create the required resources as desired.
 
 ## PureStorage Configuration
 
 ### Host and Host Group
 
-For each of the hosts and frontend you'll need to either gather or define their iSCSI Initiator Name. If you have already started iscsid at least once on the machine it should have a name generated in `/etc/iscsi/initiatorname.iscsi`. If you would prefer to define it, you can modify that file's contents to something like `InitiatorName=iqn.2024-01.com.example.pure:some.host.id` then restarting iscsid (and then reconnect any active iscsi sessions, if already connected).  Each name must be unique.
+For each of the Hosts and Front-end you'll need to either gather or define their iSCSI Initiator Name. If you have already started iscsid at least once on the machine it should have a name generated in `/etc/iscsi/initiatorname.iscsi`. If you would prefer to define it, you can modify that file's contents to something like `InitiatorName=iqn.2024-01.com.example.pure:some.host.id`, then restart iscsid (reconnect any active iscsi sessions, if already connected).  Each name must be unique.
 
-Navigate to **Storage → Hosts** in the PureStorage dashboard. For each OpenNebula host and frontend, select the **+** in the top right of the Hosts card and set a **Name** that clearly identifies the host, and leave the Personality as **None**.  You can also use the "Create Multiple…" if you have many hosts.
+Navigate to **Storage -> Hosts** in the PureStorage dashboard. For each OpenNebula Host and Front-end, select the **+** in the top right of the Hosts card and set a **Name** that clearly identifies the Host. Leave the Personality as **None**.  You can also use the **Create Multiple** option if you have many Hosts.
+<br>
 
-<center>
-{{< image path=/images/purestorage_add_hostgroup.png width=500 alt="image0" >}}
-</center>
+{{< image path="/images/purestorage_add_hostgroup.png" alt="PureStorage Add Hostgroup" align="center" width="60%" pb="20px" >}}
 
-Once each host is populated in the list, click into each of them and then on the **Host Ports** card, select the Menu (**⋮**) button and select **Configure IQNs**. Paste the initiator name from `/etc/iscsi/initiatorname.iscsi` from the proper host here.
+Once each Host is populated in the list, click into each of them and then click on the **Host Ports** card, select the Menu (**⋮**) button and select **Configure IQNs**. Paste the initiator name from `/etc/iscsi/initiatorname.iscsi` from the proper Host here.
 
-Once all hosts have been added and their IQNs have been inserted, create a Host Group by navigating to **Storage → Hosts**, then on the **Host Groups** card select the **+** button and provide an identifiable name for it.
+Once all Hosts have been added and their IQNs have been inserted, create a Host Group by navigating to **Storage -> Hosts**. On the **Host Groups** card select the **+** button and provide an identifiable name for it.
 
-Then, click into the host group and on the **Member Hosts** card there click the Menu (**⋮**) button and select **Add…**. Here, you can select all of the hosts you had created previously, then click **Add**.
+Next, click into the Host group and on the **Member Hosts** card there click the Menu (**⋮**) button and select **Add…**. There, you can select all of the Hosts you had created previously, click **Add**.
 
 ### Volume Creation and Connection
 
-From the PureStorage dashboard, navigate to **Storage → Volumes**.  Here, in the top right of the Volumes card, select **+**.
+From the PureStorage dashboard, navigate to **Storage -> Volumes**.  There, in the top right of the Volumes card, select **+**.
 
-Give the volume a name (this can just be the name of your OpenNebula LVM volume group or something descriptive), and set the desired size. Thin provisioning is always enabled on Pure, so there’s no need to configure anything extra.
+Give the Volume a name (this can just be the name of your OpenNebula LVM Volume group or something descriptive), and set the desired size. Thin provisioning is always enabled on Pure, so there’s no need to configure anything extra.
 
-You don’t need to configure snapshots, protection policies, or replication unless you’re doing something more advanced. For basic OpenNebula integration, just create the volume and leave everything else at defaults.
+You don’t need to configure snapshots, protection policies, or replication unless you’re doing something more advanced. For basic OpenNebula integration, just create the Volume and leave everything else at defaults.
 
-Click on the volume you just created, and on the **Connected Host Groups** card, click the Menu (**⋮**) button and click **Connect…**. Select your host group (or individual hosts if you’re not using a group), and confirm the connection.
+Click on the Volume you just created, and on the **Connected Host Groups** card, click the Menu (**⋮**) button and click **Connect…**. Select your Host group (or individual Hosts if you’re not using a group), and confirm the connection.
+<br>
 
-<center>
-{{< image path=/images/purestorage_connect_hostgroup.png width=500 alt="image0" >}}
-</center>
+{{< image path="/images/purestorage_connect_hostgroup.png" alt="PureStorage Connect Hostgroup" align="center" width="60%" pb="20px" >}}
 
-Once connected, the volume will be exposed to all hosts in the group. You can update the host group if you add/remove hosts from your OpenNebula installation.
+Once connected, the Volume will be exposed to all Hosts in the group. You can update the Host group if you add/remove Hosts from your OpenNebula installation.
 
-After this is complete, the volume is visible on your OpenNebula hosts after rescanning iSCSI sessions via `iscsiadm -m session --rescan`, and finding the new device with `multipath -ll` and `lsblk`. Proceed with the LVM volume group creation and OpenNebula LVM Datastore Setup as usual.
+After this is complete, the Volume is visible on your OpenNebula Hosts after rescanning iSCSI sessions via `iscsiadm -m session --rescan` then finding the new device with `multipath -ll` and `lsblk`. Proceed with the LVM Volume group creation and OpenNebula LVM Datastore Setup as usual.
 
 ## Front-end and Hosts Configuration
 
-The Frontend and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
+The Front-end and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
 
 ~~~
 defaults {
@@ -83,6 +81,4 @@ devices {
 }
 ~~~
 
-If you have an existing multipath configuration file please merge them together if possible.
-
-Please ensure you restart your multipath daemon to pick up the changes: `systemctl restart multipathd`
+If you have an existing multi-path configuration file merge them together if possible. Ensure you restart your multi-path daemon to pick up the changes: `systemctl restart multipathd`

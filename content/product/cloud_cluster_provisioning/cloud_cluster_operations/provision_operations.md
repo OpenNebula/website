@@ -12,7 +12,7 @@ weight: "3"
 
 <!--# Managing Provisions -->
 
-In OneForm, provisions represent fully-deployed clusters or infrastructure stacks. Each provision is associated with a specific cloud or on-premise provider, and contains OpenNebula resources such as hosts, datastores, and virtual networks.
+In OneForm, provisions represent fully-deployed clusters or infrastructure stacks. Each provision is associated with a specific cloud or on-premises provider, and contains OpenNebula resources such as hosts, datastores, and virtual networks.
 
 Here you will find details on how to:
 
@@ -29,7 +29,11 @@ Select the relevant interface to scale provisions:
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+{{< theme-image
+  dark="images/oneform/oneprovision/operations/dark/add_host_operation.png"
+  light="images/oneform/oneprovision/operations/light/add_host_operation.png"
+  alt="Scaling provisions"
+>}}
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
@@ -102,7 +106,11 @@ For further details about the API, refer to the [OneForm API Reference Guide](/p
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+{{< theme-image
+  dark="images/oneform/oneprovision/operations/dark/add_ip_operation_modal.png"
+  light="images/oneform/oneprovision/operations/light/add_ip_operation_modal.png"
+  alt="Managing IPs"
+>}}
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
@@ -170,7 +178,11 @@ Retrying a provision is a non-destructive operation that attempts to resume from
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+{{< theme-image
+  dark="images/oneform/oneprovision/operations/dark/retry_operation_cluster_logs.png"
+  light="images/oneform/oneprovision/operations/light/retry_operation_cluster_logs.png"
+  alt="Managing IPs"
+>}}
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
@@ -214,7 +226,11 @@ Select the relevant interface to follow the procedure about deprovisioning a clu
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-Still under development.
+{{< theme-image
+  dark="images/oneform/oneprovision/operations/dark/delete_host_operation.png"
+  light="images/oneform/oneprovision/operations/light/delete_host_operation.png"
+  alt="Managing IPs"
+>}}
 {{% /tab %}}
 
 {{% tab header="CLI"%}}

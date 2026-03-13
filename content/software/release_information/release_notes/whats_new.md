@@ -22,7 +22,7 @@ OpenNebula 7.2 is a high-performance engine designed to handle the most demandin
 
 * Enhanced security for confidential computing via hardware-rooted trust and memory encryption in KVM and vTPM support ensuring workload integrity for regulated industries.
 
-* The debut of the new OneForm service for automating unified, on-demand deployment and configuration of distributed OpenNebula clusters across resources from both on-premise hardware and cloud providers.
+* The debut of the new OneForm service for automating unified, on-demand deployment and configuration of distributed OpenNebula clusters across resources from both on-premises hardware and cloud providers.
 
 * Broadened OS support with official support for the latest enterprise distributions, including AlmaLinux 10, RHEL 10, and Debian 13.
 
@@ -65,7 +65,7 @@ Thank you to our incredible community and partners for your continued support in
 - [LXC disks Snapshots](../../../product/operation_references/hypervisor_configuration/lxc_driver.md) are now available for the following storage backends: LVM, LVM thin, ceph rbd, and raw file images.
 
 ## OpenNebula Form
-- [OneForm: Automated Cluster Provisioning](../../../product/operation_references/opennebula_services_configuration/oneform): A new service designed to automate the creation of OpenNebula clusters across on-premise environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
+- [OneForm: Automated Cluster Provisioning](../../../product/operation_references/opennebula_services_configuration/oneform): A new service designed to automate the creation of OpenNebula clusters across on-premises environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
 
 ## Packaging
 - Expanded Operating System Support with official compatibility for SUSE Linux distributions.

@@ -104,4 +104,4 @@ In order to change the available size of the Marketplace from 1 TB to your desir
 TOTAL_MB_DEFAULT = 1048576 # Default maximum 1TB
 ```
 
-System administrators and integrators are encouraged to modify these drivers in order to integrate them with their datacenter. Please refer to the [Market Driver Development]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-market#devel-market" %}}) guide to learn about the driver details.
+System administrators and integrators are encouraged to modify these drivers in order to integrate them with their data center. Please refer to the [Market Driver Development]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-market#devel-market" %}}) guide to learn about the driver details.

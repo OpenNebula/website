@@ -1,5 +1,5 @@
 ---
-title: "AWS Provider"
+title: "AWS"
 date: "2025-02-17"
 description:
 categories:
@@ -12,36 +12,36 @@ weight: "2"
 
 <!--# Amazon AWS Provider -->
 
-An AWS provider contains the credentials to interact with Amazon and also the region to deploy your provisions. By default, OpenNebula comes with four pre-defined regions for the AWS provider:
+An AWS Provider contains the credentials to interact with AWS and also defines the target region to deploy your Provisions. By default, OpenNebula comes with four pre-defined regions for the AWS Provider:
 
 * Frankfurt (`eu-central-1`)
 * London (`eu-west-1`)
 * North Virginia (US) (`us-east-1`)
 * North California (US) (`us-west-1`)
 
-It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behaviour in [Adding New Zones](/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones).
+It is possible to add zones by modifying the driver configuration. Learn more about how to modify or expand a driver behavior in [Adding New Zones]({{% relref "product/integration_references/cloud_provider_driver_development/customizing_driver.md#adding-new-zones" %}}).
 
-To define an AWS provider, specify the following information:
+To define an AWS Provider, specify the following information:
 
-* **Credentials**: these are used to interact with the remote provider. You need to provide `access_key` and `secret_key`. You can follow [this guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
-* **Region**: this is the location in the world where the resources are going to be allocated. All the available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
-* **Instance types and AMIs**: these define the capacity of the resources that are going to be deployed and the operating system that is going to be installed on them.
+* **Credentials**: These are used to establish authorization with AWS. You must provide an `access_key` and a `secret_key`. Refer to  [the AWS authentication guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) for details.
+* **Region**: This is the location in the world where the resources are going to be allocated. All available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
+* **Instance types and AMIs**: These define the capacity of the resources that are going to be deployed and the Amazon Machine Image (AMI) that will be used. The AMI dictates which operating system will be used.
 
 {{< alert title="Warning" color="warning" >}}
-You can customize AMIs in addition to the default one provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI.
+You can use customized AMIs in addition to the default AMI provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI.
 
-If you implement a custom AMI, your selected configuration might require additional adjustments, and you will likely observe some unexpected results. Avoid using customized AMIs in production environments, unless you have properly tested them before.
+If you create a custom AMI, your selected configuration might require additional adjustments, and you are likely to encounter unexpected results. Avoid using customized AMIs in production environments to minimize the potential for problems.
 {{< /alert >}}
 
 ## Creating an AWS Provider
 
-The procedure below describes how to create an AWS provider in your OpenNebula database, and make it available for future provisioning operations.
+The procedure below describes how to create an AWS Provider in your OpenNebula database and make it available for future provisioning operations.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-**Step 1.** Navigate through `Infrastructure > Providers` in the sidebar:
+**Step 1.** Navigate to **Infrastructure -> Providers** in the Sunstone sidebar:
 
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/sunstone_navigation.png"
@@ -49,7 +49,7 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
   alt="Step 1"
 >}}
 
-**Step 2.** Click on the `Create` button:
+**Step 2.** Click **Create**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/create_provider_button.png"
@@ -57,7 +57,7 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
   alt="Step 2"
 >}}
 
-**Step 3.** Select the AWS oneform driver and click on `Next` button:
+**Step 3.** Select the AWS oneform driver and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/aws/dark/aws_driver.png"
@@ -65,7 +65,7 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
   alt="Step 3"
 >}}
 
-**Step 4.** Fill the general section with at least a name for the provider, and then click on `Next` button:
+**Step 4.** In the **General** page a name for the Provider, and then click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/general_step.png"
@@ -73,7 +73,7 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
   alt="Step 4"
 >}}
 
-**Step 5.** Fill the Connection Values Section and click on `Finish` button:
+**Step 5.** In the **Connection Values** page enter the **Access Key** and **Secret Key**, then click **Finish**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/aws/dark/aws_connection_values.png"
@@ -81,7 +81,7 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
   alt="Step 5"
 >}}
 
-**Step 6.** Finally, you can see your already AWS provider:
+**Step 6.** Finally, in the **Providers** page your AWS Provider will now be visible:
 
 {{< theme-image
   dark="images/oneform/oneprovider/aws/dark/aws_provider.png"
@@ -92,10 +92,12 @@ The procedure below describes how to create an AWS provider in your OpenNebula d
 
 {{% tab header="CLI"%}}
 
-Create an AWS provider using the `oneprovider create <name>` command, specifying the external cloud provider name (`aws` in this case). During instantiation, OneForm will prompt you to enter the required AWS credentials and region.
+Create an AWS Provider using the `oneprovider create <ID>` command, specifying the external cloud Provider ID (`aws` in this case). During instantiation, OneForm will prompt you to enter the required AWS credentials and region.
 
 ```bash
-$ oneprovider create aws
+oneprovider create aws
+```
+```default
 There are some parameters that require user input.
   * (access_key) AWS Access Key [type: string]
     ***************
@@ -110,10 +112,12 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-Once you have created the provider, review its details using the `oneprovider show <id>` command:
+Once you have created the Provider, review its details using the `oneprovider show <ID>` command:
 
 ```bash
-$ oneprovider show 1
+oneprovider show 1
+```
+```default
 PROVIDER 1 INFORMATION
 ID                  : 1
 NAME                : AWS
@@ -144,6 +148,7 @@ IDS:                : --
 
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/providers" \
+  -u "username:password" \
   -H "Content-Type: application/json" \
   -d '{
     "driver": "aws",
@@ -157,7 +162,9 @@ curl -X POST "https://oneform.example.server/api/v1/providers" \
   }'
 ```
 
-For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, refer to the [OneForm API Reference](/product/integration_references/system_interfaces/oneform_api.md).
 {{% /tab %}}
 
 {{< /tabpane >}}
+
+Now that you have created your AWS Provider, refer to the next guide to [provision an AWS Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/aws_cluster.md" %}}).
