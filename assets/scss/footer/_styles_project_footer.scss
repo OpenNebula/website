@@ -23,8 +23,9 @@
 
 .one-footer-top {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-wrap: nowrap;
 }
 
 .one-footer-left {
