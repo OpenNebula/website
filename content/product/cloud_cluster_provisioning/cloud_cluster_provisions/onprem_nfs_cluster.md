@@ -1,5 +1,5 @@
 ---
-title: "On-premises SSH"
+title: "On-premises NFS"
 date: "2025-02-17"
 description:
 categories:
@@ -10,14 +10,19 @@ weight: "2"
 
 <!--# On-premises Cluster -->
 
-An on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors.
+A NFS on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors. Additionally, it integrates a NFS server that can be either in the OpenNebula Frontend or as external server.
 
-## On-premises Cluster Implementation
+## On-premises NFS Cluster Implementation
 
 Users must manually provide reachable IP addresses for each Host, ensuring that SSH connectivity functions correctly and system prerequisites are already met. The default OS is *Ubuntu 22.04*. The networking model is implemented as follows:
 
 - **Public Networking**: Requires manually provided IP addresses or previously configured public IPs. IP forwarding rules must be managed manually.
 - **Private Networking**: Uses BGP-EVPN and VXLAN to create private Virtual Networks among provided Hosts.
+
+Besides, it is required a NFS server with the a Root NFS directory or export folder and a mount
+point for the NFS clients.
+
+{{< image path="images/oneform/oneprovision/onprem/nfs_onprem_deployment.png" alt="Network model implementation with public, private and NFS networking" align="center" width="80%" pb="20px" >}}
 
 ## OpenNebula Resources
 
@@ -32,7 +37,7 @@ The following resources, which are associated with each on-premises Cluster, are
 ## Creating an On-premises Provision
 
 ### Prerequisites
-To create an on-premises provision, you must have an [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) already created.
+To create an on-premises provision, you must have an [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) that is already present with the `opennebula-form` package installation.
 
 ### Procedure
 
