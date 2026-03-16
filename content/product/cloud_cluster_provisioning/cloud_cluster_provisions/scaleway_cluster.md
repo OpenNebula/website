@@ -224,6 +224,7 @@ To create a new Scaleway Provision using the OneForm API, use the following exam
 
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/provisions" \
+  -u "username:password" \
   -H "Content-Type: application/json" \
   -d '{
     "driver": "scaleway",

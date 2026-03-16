@@ -18,7 +18,7 @@ A Scaleway Provider defines the credentials to authorize interaction with the [S
 * Netherlands - Amsterdam (NL-AMS-1 )
 * Poland - Warsaw (PL-WAW-3)
 
-It is possible to add zones by modifying the Driver configuration. Learn more about customizing the Driver's behavior to [add new zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
+It is possible to add zones by modifying the driver configuration. Learn more about customizing the driver's behavior to [add new zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
 
 
 To define a Scaleway Provider, specify the following information:
@@ -58,7 +58,7 @@ The following process describes how to create a Scaleway Provider in your OpenNe
   alt="Step 2"
 >}}
 
-**Step 3.** Select the Scaleway oneform Driver and click **Next**:
+**Step 3.** Select the Scaleway oneform driver and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/scaleway/dark/scaleway_driver.png"
