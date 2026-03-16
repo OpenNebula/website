@@ -30,7 +30,7 @@ The following resources, which are associated with each on-premises Cluster, are
 
 1. **Cluster**: Aggregating all other resources.
 2. **Hosts**: Corresponding to the provided IP addresses.
-3. **Datastores**: Image and system datastores configured with an SSH transfer manager that utilize the first provided Host as the datastore replica.
+3. **Datastores**: Image and system datastores will be configured with shared transfer mode and will be located on the NFS/NAS server.
 4. **Virtual Network**: For public networking. This resource is configured manually.
 5. **Virtual Network Template**: For private networking.
 
