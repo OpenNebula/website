@@ -58,6 +58,8 @@ Thank you to our incredible community and partners for your continued support in
 ## KVM & Networking
 - [Virtual Machine memory encryption](../../../product/virtual_machines_operation/virtual_machines/vm_templates#memory-encryption) allows VM workloads whose memory cannot be read by the hypervisor.
 - [Shared Address Ranges](../../../product/cluster_configuration/networking_system/manage_vnets.md#shared-address-ranges-shared-ar-for-virtual-ips) with [NIC Alias support](../../../product/cluster_configuration/networking_system/manage_vnets.md#using-virtual-ips) to assign Virtual IPs that can be shared across multiple VMs.
+- DPDK `dpdkvhostuserclient` NICs can now be [hot plugged](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#nic-hot-plugging).
+- vhost unix sockets are now created in a dedicated directory `/var/lib/one/vhost-sockets`.
 
 
 ## LXC
