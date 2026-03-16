@@ -10,9 +10,9 @@ weight: "8"
 
 <a id="oneform-conf"></a>
 
-OpenNebula Form, also known as *OneForm*, is the hybrid provisioning engine for OpenNebula, responsible for automating the deployment, scaling, and configuration of edge and cloud infrastructure using [Terraform]() and [Ansible](). It is delivered as a standalone service and interacts with the core OpenNebula services to register compute hosts, virtual networks, and storage resources as part of a Provision lifecycle.
+OpenNebula Form, also known as *OneForm*, is the hybrid provisioning engine for OpenNebula, responsible for automating the deployment, scaling, and configuration of edge and cloud infrastructure using [Terraform]() and [Ansible](). It is delivered as a standalone service and interacts with the core OpenNebula services to register compute hosts, Virtual Networks, and storage resources as part of a Provision lifecycle.
 
-OneForm is installed by default as part of the standard OpenNebula package set and runs as a systemd service named `opennebula-form`. It can also be deployed independently on a separate host if needed.
+OneForm is installed by default as part of the standard OpenNebula package set and runs as a systemd service named `opennebula-form`. It can also be deployed independently on a separate Host if needed.
 
 ## Architecture and Components
 

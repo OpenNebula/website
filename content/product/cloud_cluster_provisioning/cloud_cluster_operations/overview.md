@@ -1,5 +1,6 @@
 ---
-title: "Overview"
+title: "Cloud Cluster Operations Overview"
+linkTitle: "Overview"
 date: "2025-02-17"
 description:
 categories:
@@ -10,17 +11,17 @@ weight: "1"
 
 <!--# Overview -->
 
-Cloud Cluster Operations involve managing providers and provisions. Provider management deals with maintaining the external resources that OpenNebula uses to build and manage clusters. On the other hand, provision management works with the core functionality of deploying and managing the cluster instances using the providers defined.
+OpenNebula's Cloud Cluster Operations are used to manage Providers and Provisions. Provider management deals with maintaining the external resources that OpenNebula uses to build and manage Clusters. Provision management involves the core functionality of deploying and managing Cluster instances using the defined Providers.
 
 
 ## Basic Outline
 
-This guide is structured as follows:
+This guide consists of two sections:
 
-* [Managing Providers]({{% relref "provider_operations#provider-operations" %}}): use OneForm to define, instantiate and configure your deployment.
-* [Managing Provisions]({{% relref "provider_operations#provision-operations" %}}): dynamically grow your cloud infrastructure on remote cloud providers or on-premises resource.
+* [Managing Providers]({{% relref "provider_operations#provider-operations" %}}): Use OneForm to define, instantiate and configure your deployments.
+* [Managing Provisions]({{% relref "provider_operations#provision-operations" %}}): Dynamically grow your cloud infrastructure automatically on remote cloud providers or on-premises resources.
 
 
 ## Hypervisor Compatibility
 
-Provisions are compatible with the KVM hypervisors.
+Cloud Cluster Operations are compatible with KVM hypervisors.
