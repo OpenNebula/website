@@ -12,12 +12,12 @@ weight: "2"
 
 <!--# Managing Providers -->
 
-In OneForm, providers are created directly from external cloud drivers such as AWS, Scaleway and Equinix. Define with the `oneform` CLI your cloud infrastructure instance and configuration.
+In OneForm, Providers are created using Provider drivers for on-premise hardware or 3rd-party cloud/bare-metal services such as AWS, Scaleway and Equinix. Use the `oneform` CLI tool to manage your cloud infrastructure instance and configuration.
 
-With this guide, you will understand how the drivers and providers and provisions relate by: 
+With this guide, you will understand how the drivers and Providers and Provisions relate by: 
 
-- enabling and disabling cloud drivers.
-- managing access controls
+- Enabling and disabling cloud drivers.
+- Managing access controls
 
 {{< alert title="Important" color="warning" >}}
 All driver information is securely stored and encrypted. While regular users can list and view driver information, only members of the `oneadmin` group are allowed to manage and modify providers.
@@ -25,26 +25,38 @@ All driver information is securely stored and encrypted. While regular users can
 
 ## Enabling a OneForm Driver
 
-To use a new cloud driver, enable the driver using the `oneform enable` command. This validates all the information about the driver and allows users to create providers and provisions based on this driver.
+To use a new cloud driver, enable it using the `oneform enable` command. This validates all the information about the driver and allows users to create Providers and Provisions based on the driver.
 
 ```bash
-$ oneform enable <driver_name>
+oneform enable <driver_name>
 ```
 
 After running the command, you will see that all the driver templates are created and stored in OpenNebula’s database.
 
-{{< alert title="Note" color="success" >}}
-Drivers included by default in OpenNebula - such as **aws**, **equinix**, **scaleway**, and **onprem** - are already enabled after a fresh OpenNebula installation. For detailed usage and configuration instructions, refer to each driver's dedicated section in this chapter.
+## Additional Drivers
 
-In case you need to develop and enable custom drivers, refer to the [Provider Development Guide](/product/integration_references/cloud_provider_driver_development/) for step-by-step instructions.
-{{< /alert >}}
+Only the **onprem** driver is included by default in a fresh OpenNebula installation with OneForm. To install and enable other drivers, such as **aws**, **equinix** and **scaleway**, you need to clone the [OneForm Registry repository](https://github.com/OpenNebula/oneform-registry) onto the OpenNebula Front-end with the following commands as the `oneadmin` user:
+
+```bash
+git -C /var/lib/one/oneform/drivers clone https://github.com/OpenNebula/oneform-registry.git
+```
+
+Then synchronize oneform:
+
+```bash
+oneform sync
+```
+
+After completing these commands, additional drivers will be available. Run `oneform list` to see all available drivers.
+
+If you wish to develop and enable custom drivers, refer to the [Provider Development Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/" %}}) for step-by-step instructions.
 
 ## Disabling a OneForm Driver
 
-To disable a driver in OpenNebula, run the `oneform disable` command. 
+To disable a driver in OpenNebula, use the `oneform disable` command:
 
 ```bash
-$ oneform disable <driver_name>
+oneform disable <driver_name>
 ```
 
 {{< alert title="Important" color="warning" >}}
@@ -53,25 +65,25 @@ This action will not remove the existing instantiated providers and provisions, 
 
 ## Managing Access Controls
 
-To manage access control for the provider and provision associated to the driver, execute these commands:
+To manage access control for the Provider and Provision associated with the driver, execute the the following commands:
 
 - Changing permissions
 
   ```bash
-  $ oneprovider chmod <provider_id> <octet>
-  $ oneprovision chmod <provision_id> <octet>
+  oneprovider chmod <provider_id> <octet>
+  oneprovision chmod <provision_id> <octet>
   ```
 
 - Changing owners
 
   ```bash
-  $ oneprovider chown <provider_id> <user_id> (<group_id>)
-  $ oneprovision chown <provision_id> <user_id> (<group_id>)
+  oneprovider chown <provider_id> <user_id> (<group_id>)
+  oneprovision chown <provision_id> <user_id> (<group_id>)
   ```
 
 - Changing groups
 
   ```bash
-  $ oneprovider chgrp <provider_id> <group_id>
-  $ oneprovision chgrp <provision_id> <group_id>
+  oneprovider chgrp <provider_id> <group_id>
+  oneprovision chgrp <provision_id> <group_id>
   ```
