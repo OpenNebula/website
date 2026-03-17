@@ -9,6 +9,9 @@ categories:
 pageintoc: "1"
 tags:
 weight: "1"
+dashboard_icon_light: "resources/dashboard/light/getting_started.svg"
+dashboard_icon_dark: "resources/dashboard/light/getting_started.svg"
+dashboard_description: "Gain a high-level view of OpenNebula, and easily deploy a cloud for evaluation and testing."
 ---
 
 <a id="cloud-installation"></a>

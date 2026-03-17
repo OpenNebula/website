@@ -9,6 +9,9 @@ categories:
 pageintoc: "238"
 tags:
 weight: "3"
+dashboard_icon_light: "resources/dashboard/light/software.svg"
+dashboard_icon_dark: "resources/dashboard/light/software.svg"
+dashboard_description: "Release notes, upgrade guides, available installation methods, and migration tools."
 ---
 
 <a id="software"></a>
