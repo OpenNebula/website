@@ -44,7 +44,7 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 | [SAN - LVM]({{% relref "../lvm/lvm" %}})                      | Images stored as LVs in a SAN, activated directly.                                                     | yes    | raw (LV)                       | yes            | no           | poweroff          | yes             | KVM     | **EE only**  |
 | [SAN - LVM<br/>(File Mode)]({{% relref "../lvm/filemode" %}}) | Images stored in frontend\*, transferred to hosts via SSH,<br/>and copied to the SAN on instantiation. | yes    | raw (LV)<br/>Images: raw/qcow2 | yes**          | no           | poweroff/live     | yes             | KVM     | EE/CE        |
 | [SAN - NetApp]({{% relref "../san_storage/netapp" %}})        | Images stored in a NetApp cabin, activated directly.                                                   | yes    | raw (LUN)                      | yes            | no           | poweroff          | yes             | KVM     | **EE only**  |
-| [FileSystems - VirtioFS]({{% relref "virtiofs_ds}})           | Images are filesytem paths available on the hosts                                                      | yes    | filesystems (dir)              | no             | no           | no                | yes             | KVM     | EE/CE        |
+| [FileSystems - VirtioFS]({{% relref "virtiofs_ds" %}})           | Images are filesytem paths available on the hosts                                                      | yes    | filesystems (dir)              | no             | no           | no                | yes             | KVM     | EE/CE        |
 
 <sup>\*</sup> Additional options available by mounting remote filesystems in the frontend.
 
