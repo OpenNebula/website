@@ -10,7 +10,7 @@ weight: "8"
 
 <a id="oneform-conf"></a>
 
-OpenNebula Form, also known as *OneForm*, is the hybrid provisioning engine for OpenNebula, responsible for automating the deployment, scaling, and configuration of edge and cloud infrastructure using [Terraform]() and [Ansible](). It is delivered as a standalone service and interacts with the core OpenNebula services to register compute hosts, Virtual Networks, and storage resources as part of a Provision lifecycle.
+OpenNebula Form, also known as *OneForm*, is the hybrid provisioning engine for OpenNebula, responsible for automating the deployment, scaling, and configuration of edge and cloud infrastructure using [Terraform](https://developer.hashicorp.com/terraform) and [Ansible](https://docs.ansible.com/). It is delivered as a standalone service and interacts with the core OpenNebula services to register compute hosts, Virtual Networks, and storage resources as part of a Provision lifecycle.
 
 OneForm is installed by default as part of the standard OpenNebula package set and runs as a systemd service named `opennebula-form`. It can also be deployed independently on a separate Host if needed.
 
@@ -18,22 +18,22 @@ OneForm is installed by default as part of the standard OpenNebula package set a
 
 OneForm is built around a Sinatra-based API server, acting as an abstraction layer over OpenNebula to enable fully automated infrastructure provisioning.  It provides a unified interface to manage heterogeneous environments, seamlessly integrating on-premises data centers, public cloud providers, and edge nodes under a consistent operational model.
 
-![oneform_architecture](/images/oneform-arch.png)
+{{< image path="/images/oneform-arch.png" alt="OneForm Architecture" align="center" width="90%" pb="20px" >}}
 
 OneForm’s architecture is organized into three main layers:
 
-- **Clients**: Includes the FireEdge Web UI (*still in development*), [Ruby OCA](), and the [OpenNebula OneForm CLI](), which enable interaction with the OneForm Server by users, developers and cloud administrators.
+- **Clients**: Includes the FireEdge Web UI, [Ruby OCA]({{% relref "ruby.md"%}}), and the [OpenNebula OneForm CLI]({{% relref "cli.md" %}}), which enable interaction with the OneForm Server by users, developers and cloud administrators.
 - **OpenNebula OneForm Server**: Acts as an abstraction layer over OpenNebula, enabling automated and consistent provisioning across multiple environments. The server is composed of the following core components:
-  - **OneForm API**: Provides a RESTful interface to access all features and operations exposed by OneForm. You can find the full API specification in the [Development Integration Guide]().
-  - **Life Cycle Manager**: Orchestrates the provisioning lifecycle through a state machine. It handles state transitions, error recovery, and coordinates with the driver layer. For a detailed overview, see the Provisioning Lifecycle section in the [Provision Reference Guide]().
-  - **Drivers**: A modular subsystem that encapsulates provider credentials, provisioning workflows, configuration tasks, and networking logic, including integration with Terraform, Ansible, Elastic IP, and IPAM. To explore the driver structure and customization options, visit the [OneForm Driver Development Guide]().
-  - **Automated Provisioning Managers**: Handle the coordination and state management of provider and provision entities, ensuring their accurate representation within OpenNebula. For more insight into their data model, refer to the [Provider and Provision Reference Guides]().
+  - **OneForm API**: Provides a RESTful interface to access all features and operations exposed by OneForm. You can find the full API specification in the [Development Integration Guide]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
+  - **Life Cycle Manager**: Orchestrates the provisioning lifecycle through a state machine. It handles state transitions, error recovery, and coordinates with the driver layer. For a detailed overview, see the Provisioning Lifecycle section in the [Provision Reference Guide]({{% relref "product/operation_references/configuration_references/provision.md" %}}).
+  - **Drivers**: A modular subsystem that encapsulates provider credentials, provisioning workflows, configuration tasks, and networking logic, including integration with Terraform, Ansible, Elastic IP, and IPAM. To explore the driver structure and customization options, visit the [OneForm Driver Development Guide]({{% relref "product/integration_references/cloud_provider_driver_development/" %}}).
+  - **Automated Provisioning Managers**: Handle the coordination and state management of provider and provision entities, ensuring their accurate representation within OpenNebula. For more insight into their data model, refer to the [Provider and Provision Reference Guides]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_operations/" %}}).
 - **OpenNebula Frontend**: Hosts the OpenNebula Core, which manages all virtual resources and serves as the orchestration and virtualization layer.
 
 ## Server Configuration
 
 The main configuration file for OneForm is located at `/etc/one/oneform-server.conf`.
-It uses **YAML syntax**, with the parameters listed in the table below.
+It uses the **YAML syntax**, with the parameters listed in the table below.
 
 {{< alert title="Note" color="success" >}}
 After modifying the configuration file, restart the OneForm service for changes to take effect.
@@ -83,17 +83,17 @@ Change the OneForm server running state by managing the operating system service
 
 To start, restart or stop the server, execute one of:
 
-```default
-# systemctl start   opennebula-form
-# systemctl restart opennebula-form
-# systemctl stop    opennebula-form
+```bash
+systemctl start opennebula-form
+systemctl restart opennebula-form
+systemctl stop opennebula-form
 ```
 
 To enable or disable automatic start on Host boot, execute one of:
 
-```default
-# systemctl enable  opennebula-form
-# systemctl disable opennebula-form
+```bash
+systemctl enable opennebula-form
+systemctl disable opennebula-form
 ```
 
 Server logs for the OneForm server are available at:
@@ -104,8 +104,8 @@ Additionally, the runtime output from Terraform and Ansible executions, along wi
 
 - `/var/log/one/oneform/$ID.log`,  where `$ID` identifies the provision.
 
-Other logs are also available in Journald. Use the following command to show:
+Other logs are also available in journald. Use the following command to show the logs:
 
-```default
-# journalctl -u opennebula-form.service
+```bash
+journalctl -u opennebula-form.service
 ```

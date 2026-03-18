@@ -79,7 +79,7 @@ These elements are combined through a JSON document stored in the OpenNebula dat
 }
 ```
 
-For more detailed information about Provider datamodels and configuration, refer to the [Provider reference](/product/operation_references/configuration_references/provider.md).
+For more detailed information about Provider datamodels and configuration, refer to the [Provider Reference](/product/operation_references/configuration_references/provider.md).
 
 ## Provider Drivers
 

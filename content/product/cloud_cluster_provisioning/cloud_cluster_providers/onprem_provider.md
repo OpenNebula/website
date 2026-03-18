@@ -76,8 +76,10 @@ IDS:                : --
 
 {{% tab header="API"%}}
 
+To inspect the details of the default on-premise Provider using the OneForm API, use the following example request, replacing the appropriate parameters:
+
 ```bash
-curl -X GET "https://oneform.example.server/api/v1/providers" -H "Accept: application/json" -u "oneadmin:opennebulapass"
+curl -X GET "https://oneform.example.server/api/v1/providers" -H "Accept: application/json" -u "username:password"
 ```
 
 ```default
