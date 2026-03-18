@@ -5,7 +5,7 @@ linkTitle: "Solutions"
 description: "This section under development will present a range of OpenNebula deployment scenarios, showcasing how the platform can be adapted to meet diverse infrastructure needs—from enterprise data centers to edge environments and AI workloads"
 weight: 5
 dashboard_icon_light: "resources/dashboard/light/solutions.svg"
-dashboard_icon_dark: "resources/dashboard/light/solutions.svg"
+dashboard_icon_dark: "resources/dashboard/dark/solutions.svg"
 dashboard_description: "OpenNebula deployment scenarios, showcasing how the platform can be adapted to meet diverse infrastructure needs."
 ---
 
