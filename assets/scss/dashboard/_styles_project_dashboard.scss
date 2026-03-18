@@ -9,6 +9,9 @@
 
 .dashboard-card {
   width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--card-border-color);
+  padding: 16px 16px 16px 16px;
 }
 
 .dashboard-card-image {
@@ -16,7 +19,7 @@
   justify-content: center; /* Centra la imagen horizontalmente */
   align-items: center;   
   padding: 24px 64px;
-  border-radius: var(--border-radius-2xl, 8px);
+  border-radius: 8px;
   border: 1px solid var(--card-border-color);
   background: var(--card-background-color);
   margin-bottom: 24px;
@@ -47,7 +50,6 @@
 
 .dashboard-card-description {
   @include body-small;
-  margin-bottom: 32px;
 }
 
 .dashboard-card-menu {

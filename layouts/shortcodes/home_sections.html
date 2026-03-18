@@ -1,35 +1,3 @@
-<!-- <div class="row">
-  {{ range .Page.Site.Sections.ByWeight }}
-  <div class="col-lg-6 mb-4">
-    <div class="td-card card border h-100">
-      <div class="card-body">
-        <h4 class="card-title">
-          <a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a>
-        </h4>
-        
-        <div class="card-text">
-          <p>{{ .Description | markdownify }}</p>
-          
-          <ul class="list-unstyled mt-3">
-            {{ range .Pages.ByWeight }}
-            <li class="mb-2">
-              <a href="{{ .RelPermalink }}" class="text-muted small">
-                <i class="fas fa-chevron-right me-1" style="font-size: 0.7rem;"></i>
-                <span class="text-dark"><strong>{{ .LinkTitle | default .Title }}</strong></span>
-              </a>
-              {{ with .Description }}
-                <p class="text-muted ms-3 mb-0" style="font-size: 0.8rem;">{{ . | truncate 100 }}</p>
-              {{ end }}
-            </li>
-            {{ end }}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{ end }}
-</div> -->
-
 <div class="section-index">
   {{ range .Page.Site.Sections.ByWeight }}
     
