@@ -70,18 +70,18 @@ You have multiple options when creating a new Image in OpenNebula, from using yo
 
 No matter the method you use to create your Images, there is a set of common options that will be useful in any case. The following table summarizes the main options that we will use:
 
-| Parameter                   | Description                                                                                         |
-|-----------------------------|-----------------------------------------------------------------------------------------------------|
-| `--name name`               | Name of the new Image                                                                               |
-| `--datastore name \| ID`    | Name/ID of the Datastore to store the new Image                                                     |
-| `--description description` | Description for the new Image (Optional)                                                            |
-| `--type type`               | Type of the new Image: OS, CDROM, DATABLOCK, KERNEL, RAMDISK, CONTEXT                               |
-| `--persistent`              | Set the Image to persistent mode                                                                    |
-| `--prefix prefix`           | Device/bus to expose the disk to guest OS (e.g. hd, sd or vd)                                       |
-| `--target target`           | Device the disk will be attached to (for `FILESYSTEM`, this represents the mount tag inside the VM) |
-| `--path path`               | Path/URL of the Image                                                                               |
-| `--source source`           | Source to be used. Useful for non file-based Images                                                 |
-| `--size size`               | Size in MB. Used for DATABLOCK type or to resize the Image on boot                                  |
+| Parameter                   | Description                                                             |
+|-----------------------------|-------------------------------------------------------------------------|
+| `--name name`               | Name of the new Image                                                   |
+| `--datastore name \| ID`    | Name/ID of the Datastore to store the new Image                         |
+| `--description description` | Description for the new Image (Optional)                                |
+| `--type type`               | Type of the new Image: OS, CDROM, DATABLOCK, KERNEL, RAMDISK, CONTEXT   |
+| `--persistent`              | Set the Image to persistent mode                                        |
+| `--prefix prefix`           | Device/bus to expose the disk to guest OS (e.g. hd, sd or vd)           |
+| `--target target`           | Device the disk will be attached to                                     |
+| `--path path`               | Path/URL of the Image                                                   |
+| `--source source`           | Source to be used. Useful for non file-based Images                     |
+| `--size size`               | Size in MB. Used for DATABLOCK type or to resize the Image on boot      |
 
 ### Using Your Existing Disk Files
 
