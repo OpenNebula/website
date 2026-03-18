@@ -30,7 +30,7 @@ The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements
 **Installing the ISO will delete all the disk data on the server during the installation. You should archive or backup existing data before proceding with the installation.**
 {{< /alert >}}
 
-## ISO Download and installation
+## ISO Download and Installation
 
 Download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available:
 
@@ -87,7 +87,7 @@ Answer `yes` to continue. You may be prompted to choose the disk to which you wa
 
 ![anaconda_unattended_install](/images/ISO/02-anaconda_unattended_install.png)
 
-## Frontend configuration
+## Frontend Configuration
 
 Once the installation is completed, the machine should reboot. No network card will be configured, so access to the server's console must be provided to login. It will look like the following (the colours and the font may vary on different systems):
 
@@ -132,7 +132,7 @@ Enter user `root` at the `onepoc login` prompt and the default password `0p3nN3b
             └────────────────────────────────────────────────────────────────────┘
 ```
 
-### Network and hostname setup
+### Network and Hostname Setup
 
 Now is time to configure the network using the option `netconf` on the menu. This will launch `nmtui` (the default ncurses configuration interface), that allows the setup of the network and hostname, as well as more complex network configuration (bonding, VLAN, etc.)
 
@@ -273,7 +273,7 @@ Press any key to continue
 
 Press any key and you will be returned to the `onefemenu` screen. If you are logged out, log in again as root and run `onefemenu` from the command line.
 
-## Configuring the Hypervisor host
+## Configuring the Hypervisor Host
 
 After the installation, the server runs only the Front-end and needs to be added as a OpenNebula hypervisor to run VMs. Select `add_host` from the `onefemenu` options.
 
@@ -372,28 +372,30 @@ Select the **Context** tab and enter values similar to the following, based on t
 The contextualization MTU for this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation) or smaller. 1450 is a safe default (regular ethernet frame size).
 {{< /alert >}}
 
-### Virtual network considerations
+### Virtual Network Considerations
 
 VXLAN networks are totally internal and have no access to external networks. By default they can be considered totally isolated. External access to/from these networks must be configured.
 
-#### Determining the VM identifier
+#### Determining the VM Identifier
 
 To determine the Virtual Network that needs external access use `onevnet list`. This command will list the existent Virtual Networks, for instance:
 
+```bash
+onevnet list
 ```
-# onevnet list
-  ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
-   0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
+```default
+ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
+ 0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
 The `ID` and the `NAME` field of every row can be used for all operations on Virtual Networks.
 
-#### Creating the virtual Network Gateway (access from the frontend)
+#### Creating the Virtual Network Gateway (access from the frontend)
 
 In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
 
 ```
-# onevnet_add_gw 0
+onevnet_add_gw 0
 ```
 
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
@@ -410,7 +412,7 @@ Virtual machines on this Virtual Network won't be able to access to the same net
 By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
 {{< /alert >}}
 
-#### Add local route (access from external networks to the Virtual Network)
+#### Add Local Route (access from external networks to the Virtual Network)
 
 After the gateway has been created and NAT masquerade has been enabled, the VMs in the Virtual Network 172.16.100.0/24:
 
@@ -428,7 +430,69 @@ On a workstation with access to the frontend, a local route to the virtual net c
 - Windows: `route add 172.16.100.0 MASK 255.255.255.0 <frontend_ip>`
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
-After the route exists, the workstation should be able to reach the Virtual Machines running on the frontend without further configuration.
+After the route exists, the workstation should be able to reach the virtual machines running on the Front-end without further configuration.
+
+### Resizing Disks
+
+The ISO installation creates the volume group `vg_onepoc` with three logical volumes:
+
+- `root`: mounted on `/`
+- `one-datastores`: mounted on `/var/lib/one/datastores/`
+- `swap`: mounted as swap
+
+The volume group `vg_onepoc` leaves space on the disk to allow for filesystem growth. Available space in a volume group can be checked by executing the command `vgs` and inspecting the value in the `VFree` column. In the following example, there is 22.19GiB available:
+
+```bash
+vgs
+```
+```default
+VG        #PV #LV #SN Attr   VSize   VFree
+vg_onepoc   1   3   0 wz--n- <77.44g <22.19g
+```
+
+You can query the logical volume sizes using the `lvs` command, in this case:
+
+```bash
+lvs
+```
+```default
+LV             VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+one-datastores vg_onepoc -wi-ao---- <25.69g
+root           vg_onepoc -wi-ao---- <25.69g
+swap           vg_onepoc -wi-ao----  <3.88g
+```
+
+A filesystem can be extended online while maintaining availability using the commands `lvextend` and `xfs_growfs`. For example, to increase the `/root` filesystem by 10GiB use the following commands:
+
+```bash
+# Increase the Logical Volume root (on the volume group vg_onepoc) by 10 GiB
+lvextend vg_onepoc/root -L +10G
+```
+```default
+Size of logical volume vg_onepoc/root changed from <25.69 GiB (411 extents) to <35.69 GiB (571 extents).
+Logical volume vg_onepoc/root successfully resized.
+```
+
+Resize the filesystem to the new volume group size:
+
+```bash
+xfs_growfs /dev/mapper/vg_onepoc-root
+```
+```default
+meta-data=/dev/mapper/vg_onepoc-root isize=512    agcount=4, agsize=1683456 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1 nrext64=0
+data     =                       bsize=4096   blocks=6733824, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=16384, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 6733824 to 9355264
+```
+
+The filesystem `/` now will be 10GiB bigger with no loss of service.
 
 ## GPU Configuration
 
@@ -441,35 +505,37 @@ If the OpenNebula evaluation involves GPU management, GPU should be configured i
 To prepare the OpenNebula host complete the following steps:
 - Check that IOMMU was enabled on the host using the following command:
 ```default
-# dmesg | grep -i iommu
+dmesg | grep -i iommu
 ```
 If IOMMU wasn’t enabled on the host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
 At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
 1.  Ensure `vfio-pci` module is loaded on boot:
 
     ```default
-    # echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
-    # modprobe vfio-pci
+    echo "vfio-pci" | sudo tee /etc/modules-load.d/vfio-pci.conf
+    modprobe vfio-pci
     ```
 
 2. Identify the GPU's PCI address:
 
     ```default
-    # lspci -D | grep -i nvidia
+    lspci -D | grep -i nvidia
     0000:e1:00.0 3D controller: NVIDIA Corporation GH100 [H100 PCIe] (rev a1)
     ```
 
 3. Set the driver override. Use a driverctl utility and the PCI address of the GPU device from the previous step to override driver.
 
     ```default
-    # driverctl set-override 0000:e1:00.0 vfio-pci
+    driverctl set-override 0000:e1:00.0 vfio-pci
     ```
 
 4. Verify the driver binding:
     Check that the GPU is now using the `vfio-pci` driver.
 
+    ```bash
+    lspci -Dnns e1:00.0 -k
+    ```
     ```default
-    # lspci -Dnns e1:00.0 -k
     Kernel driver in use: vfio-pci
     ```
 
@@ -526,8 +592,9 @@ Configure the PCI probe on the front-end node to monitor NVIDIA devices in order
 
 After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
-###  VM with GPU instantiation
- To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
+###  VM with GPU Instantiation
+
+To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
 
 ![VM Instantiation](/images/ISO/06-vm-instantiate-1.png)
 
@@ -541,9 +608,9 @@ In the dropdown menu select available GPU device which will be attached to the V
 
 Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used. 
 
-### vLLM appliance validation
+### vLLM Appliance Validation
      
-The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
+The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
 
 1. Go to Storage -> Apps section.
 Search for vLLM appliance and import it. Select DataStore where to save image
@@ -552,7 +619,7 @@ Search for vLLM appliance and import it. Select DataStore where to save image
 
 2. Go to VMs section and instantiate vLLM appliance. Specify common VM parameters. In the “Advanced Settings” go to “PCI devices” and ensure that required GPU device selected for attachment to the VM. Click “Accept” and then “Finish” to instantiate vLLM appliance.
 
-3. Once vLLM appliance instantiated, follow steps from [the LLM inference guide]({{% relref "/solutions/deployment_blueprints/ai-ready_opennebula/llm_inference_certification" %}}) to access a webchat app or execute benchmarking tests
+3. Once vLLM appliance instantiated, follow steps from [the LLM inference guide]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}}) to access a webchat app or execute benchmarking tests
 
 ## Next Steps
 

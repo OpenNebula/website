@@ -1,0 +1,12 @@
+{{/*  Load Images  */}}
+{{ $light := resources.Get (.Get "light") }}
+{{ $dark  := resources.Get (.Get "dark") }}
+
+{{ if and $light $dark }}
+  <div class="td-theme-image">
+    <img src="{{ $light.RelPermalink }}" class="td-img-light" alt="{{ .Get "alt" }}">
+    <img src="{{ $dark.RelPermalink }}"  class="td-img-dark"  alt="{{ .Get "alt" }}">
+  </div>
+{{ else }}
+<!-- image not found -->
+{{ end }}
