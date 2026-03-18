@@ -145,6 +145,7 @@ IDS:                : --
 {{% /tab %}}
 
 {{% tab header="API"%}}
+To create an AWS Provider using the OneForm API, use the following example request, replacing the appropriate parameters:
 
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/providers" \

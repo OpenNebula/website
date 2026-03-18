@@ -10,38 +10,38 @@ weight: "5"
 
 <a id="provision"></a>
 
-A **Provision** defines the configuration and parameters used to create infrastructure resources in OneForm. These objects are stored as **JSON documents** within the OpenNebula database.
+A **Provision** defines the configuration and parameters used to create infrastructure resources with OneForm. These objects are stored as **JSON Documents** within the OpenNebula database.
 
 ## Provision Attributes
 
-The following table describes all the required attributes used in provision objects:
+The following table describes all the required attributes used in Provision objects:
 
 | Attribute              | Description                                                                                        |
 |------------------------|----------------------------------------------------------------------------------------------------|
-| `name`                 | Name of the provision.                                                                             |
-| `description`          | Short explanation of the purpose of the provision.                                                 |
-| `deployment_file`      | Identifier used to locate the deployment configuration (*onedeploy* inventory) for this provision. |
-| `cloud_provider`       | Internal identifier used to map the provider to its corresponding driver folder.                   |
+| `name`                 | Name of the Provision.                                                                             |
+| `description`          | Short explanation of the purpose of the Provision.                                                 |
+| `deployment_file`      | Identifier used to locate the deployment configuration (*onedeploy* inventory) for this Provision. |
+| `cloud_provider`       | Internal identifier used to map the Provider to its corresponding driver folder.                   |
 | `version`              | Version string used to track updates to the driver.                                                |
 | `fireedge`             | UI metadata used by FireEdge.                                                                      |
-| `user_inputs`          | Array of input definitions required from the user to customize the provision.                      |
+| `user_inputs`          | Array of input definitions required from the user to customize the Provision.                      |
 | `user_inputs_values`   | Actual values provided by the user during creation, matched to the input fields.              |
-| `provider_id`          | ID of the registered provider used for provisioning the infrastructure.                            |
-| `state`                | Current state of the provision.                                                                    |
-| `one_objects`          | Collection of OpenNebula resources (cluster, hosts, networks, datastores) linked to the provision. |
-| `registration_time`    | Unix timestamp recording when the provision was created.                                            |
-| `historic`             | Chronological list of relevant events and state transitions during the lifecycle of the provision. |
-| `tags`                 | Optional key-value pairs used to categorize or label the provision.                                |
+| `provider_id`          | ID of the registered Provider used for provisioning the infrastructure.                            |
+| `state`                | Current state of the Provision.                                                                    |
+| `one_objects`          | Collection of OpenNebula resources (Cluster, Hosts, networks, datastores) linked to the Provision. |
+| `registration_time`    | Unix timestamp recording when the Provision was created.                                            |
+| `historic`             | Chronological list of relevant events and state transitions during the lifecycle of the Provision. |
+| `tags`                 | Optional key-value pairs used to categorize or label the Provision.                                |
 
 ### Provisioning Life Cycle
 
 Once created, OneForm manages the provisioning lifecycle using a state machine that defines the key operational states and the transitions between them. Each state is linked to specific actions, triggers, and callbacks that guide the execution and progression of the provisioning workflow.
 
-![oneform-lcm](/images/oneform-lcm.png)
+{{< image path="/images/oneform-lcm.png" alt="Provisioning lifecycle" align="center" width="80%" pb="20px" >}}
 
 | State                   | Description                                                                                                     |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `INIT`                  | Initial state where OneForm prepares the provision environment by setting up directories and copying templates. |
+| `INIT`                  | Initial state where OneForm prepares the Provision environment by setting up directories and copying templates. |
 | `PLANNING`              | Terraform validates the infrastructure plan and ensures required resources and configurations are in place.     |
 | `APPLYING`              | Terraform provisions infrastructure resources on the target cloud provider.                                     |
 | `CONFIGURING_ONE`       | OpenNebula objects are created to reflect the provisioned infrastructure.                                       |
@@ -54,7 +54,7 @@ Once created, OneForm manages the provisioning lifecycle using a state machine t
 
 ### OpenNebula Objects
 
-The `one_objects` attribute contains a structured representation of resources managed by OpenNebula as part of a provision lifecycle. Each of these objects, such as clusters, hosts, networks, or datastores, includes several attributes with distinct purposes and behaviors.
+The `one_objects` attribute contains a structured representation of resources managed by OpenNebula as part of a Provision lifecycle. Each of these objects, such as Clusters, Hosts, networks, or datastores, includes several attributes with distinct purposes and behaviors.
 
 The following table describes the common attributes shared across these OpenNebula objects:
 
@@ -62,12 +62,12 @@ The following table describes the common attributes shared across these OpenNebu
 |---------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `id`          | Yes      | OpenNebula ID object, used to reference the resource.                                                                                                      |
 | `name`        | Yes      | Name assigned to the OpenNebula object.                                                                                                                    |
-| `resource_id` | No       | Identifier of the resource in the cloud provider (e.g., instance ID for a host). Used only for resources mapped to the cloud.                              |
+| `resource_id` | No       | Identifier of the resource in the cloud provider (e.g., instance ID for a Host). Used only for resources mapped to the cloud.                              |
 | `template`    | No       | Contains the OpenNebula template definition for the object (e.g., networking or datastore configuration). Default values are used for the object if empty. |
-| `childs`      | No       | Lists dependent OpenNebula resources not provisioned directly, but tied to the object (e.g., VMs in a host, images in a DS). Empty by default.             |
+| `childs`      | No       | Lists dependent OpenNebula resources not provisioned directly, but tied to the object (e.g., VMs in a Host, images in a DS). Empty by default.             |
 
 {{< alert title="Note" color="success" >}}
-The `one_objects` attribute is automatically generated by OneForm based on the contents of the OneDeploy inventory. Specifically, it parses the rendered inventory template located at `<driver_name>/ansible/templates/<deployment_file>.j2`, which defines the OpenNebula resources associated with the provision. For a detailed explanation of how this mechanism works and how to customize it, please refer to the [OneForm Development Guide](/product/integration_references/edge_provider_driver_development/_index.md).
+The `one_objects` attribute is automatically generated by OneForm based on the contents of the OneDeploy inventory. Specifically, it parses the rendered inventory template located at `<driver_name>/ansible/templates/<deployment_file>.j2`, which defines the OpenNebula resources associated with the Provision. For a detailed explanation of how this mechanism works and how to customize it, please refer to the [OneForm Development Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/" %}}).
 {{< /alert >}}
 
 An example of this attribute is shown below:
@@ -134,7 +134,7 @@ An example of this attribute is shown below:
 
 ### User Inputs
 
-User inputs are dynamically extracted from the Terraform definition (`terraform/variables.tf`) associated with the provision. These inputs represent fields prompted to the user upon provision creation. Each input can include specific validation rules (match objects) to ensure correct and consistent configurations.
+User inputs are dynamically extracted from the Terraform definition (`terraform/variables.tf`) associated with the Provision. These inputs represent fields prompted to the user upon Provision creation. Each input can include specific validation rules (match objects) to ensure correct and consistent configurations.
 
 An example of `user_inputs` is shown below:
 
@@ -165,9 +165,9 @@ An example of `user_inputs` is shown below:
 }
 ```
 
-User inputs can also define validation rules using the `match` object. In the case of `instance_disk_size`, the validation ensures that the disk size value will be between 32 and 1024 GB in this case. For more information about User inputs validation rules please refer to the [OneForm Driver Development Guide](/product/integration_references/edge_provider_driver_development/_index.md).
+User inputs can also define validation rules using the `match` object. In the case of `instance_disk_size`, the validation ensures that the disk size value will be between 32 and 1024 GB in this case. For more information about User inputs validation rules please refer to the [OneForm Driver Development Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/" %}}).
 
-Finally, when a provision is created, the user-provided or default values are stored in the `user_inputs_values` to be used during provisioning:
+Finally, when a Provision is created, the user-provided or default values are stored in the `user_inputs_values` to be used during provisioning:
 
 ```json
 {
@@ -180,9 +180,9 @@ Finally, when a provision is created, the user-provided or default values are st
 
 ### Historic
 
-The provision body includes a `historic` attribute that captures significant events and state transitions throughout the lifecycle of the provision. This history helps to monitor, troubleshoot, and audit provision deployments. Each entry of the historic contains the following attributes:
+The Provision body includes a `historic` attribute that captures significant events and state transitions throughout the lifecycle of the Provision. This history helps to monitor, troubleshoot, and audit Provision deployments. Each entry of the `historic` attribute contains the following attributes:
 
-- **action**: Type of event recorded. Indicates what kind of change occurred during the provision lifecycle.
+- **action**: Type of event recorded. Indicates what kind of change occurred during the Provision lifecycle.
 - **description**: Description of the event, usually including details such as object names or IDs.
 - **time**: UNIX timestamp marking the exact moment when the event took place.
 
@@ -193,10 +193,10 @@ The following table shows the different types of actions that can appear in the 
 | `State changed`             | Indicates a transition between two provisioning states.                  |
 | `Resource provisioned`      | A cloud resource (e.g., Host, IP) was successfully created by Terraform. |
 | `Resource deprovisioned`    | A cloud resource was destroyed by Terraform during deprovisioning.       |
-| `OpenNebula object created` | An OpenNebula object (e.g., Host, Network, Datastore) was registered.    |
+| `OpenNebula object created` | An OpenNebula object (e.g., Host, Network, datastore) was registered.    |
 | `OpenNebula object deleted` | An OpenNebula object was removed during decommissioning.                 |
 
-Here is an example of a provision's historic section, showing a few selected entries:
+Here is an example of a Provision's `historic` section, showing a few selected entries:
 
 ```json
 {
@@ -232,13 +232,13 @@ Here is an example of a provision's historic section, showing a few selected ent
 
 Provisions can define special user inputs prefixed with `oneform_`. These attributes are not used directly by Terraform or OpenNebula, but are interpreted by OneForm during the provisioning process to control additional behaviors such as tagging, public IP assignment, or integration with existing infrastructure.
 
-These special user inputs allow you to customize the lifecycle or attributes of a provision beyond what’s declared in the template itself.
+These special user inputs allow you to customize the lifecycle or attributes of a Provision beyond what’s declared in the template itself.
 
 #### Provision Hosts
 
-OneForm supports two special user inputs for defining the hosts involved in a provision. Each one enables a different provisioning strategy:
+OneForm supports two special user inputs for defining the Hosts involved in a Provision. Each one enables a different provisioning strategy:
 
-- **Cloud hosts**: supported through the `oneform_hosts` user input. It is used to dynamically request a specific number of hosts from a provider. This value is interpreted by OneForm during the provisioning process and passed to the Terraform stage, which provisions the required infrastructure using the selected cloud provider. This input is also used during scaling operations, allowing OneForm to add or remove hosts based on the specified amount.
+- **Cloud Hosts**: Supported through the `oneform_hosts` user input. It is used to dynamically request a specific number of Hosts from a Provider. This value is interpreted by OneForm during the provisioning process and passed to the Terraform stage, which provisions the required infrastructure using the selected cloud provider. This input is also used during scaling operations, allowing OneForm to add or remove Hosts according to the specified amount.
 
   ```json
   {
@@ -260,7 +260,7 @@ OneForm supports two special user inputs for defining the hosts involved in a pr
   }
   ```
 
-- **On-Premise hosts**: supported through the `oneform_onprem_hosts` user input. It allows you to specify a list of existing s IPs or hostnames to be used instead of provisioning new bare-metal hosts from a cloud provider. When this input is present, OneForm skips the Terraform stage entirely and hands over the provided list to the configuration phase, which is executed via OneDeploy using Ansible. This is primarily used with the On-Premises provider and is ideal for hybrid environments or for integrating infrastructure that already exists outside of OneForm's control.
+- **On-Premise Hosts**: Supported through the `oneform_onprem_hosts` user input. It allows you to specify a list of existing s IPs or hostnames to be used instead of provisioning new bare-metal Hosts from a cloud provider. When this input is present, OneForm skips the Terraform stage entirely and hands over the provided list to the configuration phase, which is executed via OneDeploy using Ansible. This is primarily used with the on-premises Provider and is ideal for hybrid environments or for integrating infrastructure that already exists outside of OneForm's control.
 
   ```json
   {
@@ -282,16 +282,16 @@ OneForm supports two special user inputs for defining the hosts involved in a pr
   ```
 
 {{< alert title="Warning" color="warning" >}}
-These inputs are mutually exclusive in behavior: when `oneform_onprem_hosts` is defined, the provisioning process assumes manual control over the infrastructure and disables any automatic host allocation.
+These inputs are mutually exclusive in behavior: when `oneform_onprem_hosts` is defined, the provisioning process assumes manual control over the infrastructure and disables any automatic Host allocation.
 {{< /alert >}}
 
 {{< alert title="Warning" color="warning" >}}
-For On-Premises hosts, all IPs must be reachable via SSH from the Ansible control host. Additionally, the hosts must meet the minimum requirements for OneDeploy described in the [OneDeploy Wiki page](github.com/OpenNebula/one-deploy/wiki).
+For on-premises Hosts, all IPs must be reachable via SSH from the Ansible control Host. Additionally, the Hosts must meet the minimum requirements for OneDeploy described in the [OneDeploy Wiki Page](https://github.com/OpenNebula/one-deploy/wiki).
 {{< /alert >}}
 
 #### Public & Elastic IPs
 
-The `oneform_public_ips` user input defines how many public IP addresses are assigned to the provision’s public network. These IPs are requested directly from the cloud provider using IPAM drivers and dynamically attached to specific VMs by the Elastic driver. For a detailed explanation of how these drivers work, refer to the [IPAM / Elastic Drivers Development Guide](/product/integration_references/infrastructure_drivers_development/devel-ipam.md).
+The `oneform_public_ips` user input defines how many public IP addresses are assigned to the Provision’s public network. These IPs are requested directly from the cloud provider using IPAM drivers and dynamically attached to specific VMs by the Elastic driver. For a detailed explanation of how these drivers work, refer to the [IPAM / Elastic Drivers Development Guide]({{% relref "/product/integration_references/infrastructure_drivers_development/devel-ipam.md" %}}).
 
 ```json
 {
@@ -317,8 +317,8 @@ The `oneform_public_ips` user input defines how many public IP addresses are ass
 
 The `oneform_tags` user input is used to define custom metadata as key-value pairs. These tags are automatically applied to:
 
-- All OpenNebula objects created during the provision (e.g., hosts, networks, datastores).
-- Any external cloud resources provisioned via Terraform, provided the target provider supports tagging (e.g., AWS, Scaleway).
+- All OpenNebula objects created during the Provision (e.g., Hosts, networks, datastores).
+- Any external cloud resources provisioned via Terraform, provided the target cloud provider supports tagging (e.g., AWS, Scaleway).
 
 Tags can be used for organizational purposes, filtering, automation triggers or external integrations.
 
@@ -346,11 +346,11 @@ Tags can be used for organizational purposes, filtering, automation triggers or 
 
 ### Permission to Create Provisions
 
-Provisions are stored as *Documents* in the OpenNebula database. *Documents* are special types of resources in OpenNebula used by OneForm to store templates and information about provisions. When a new user Group is created, you can decide if you want to allow/deny its users to create Documents (and also OneForm provisions). By default, new groups are allowed to create Document resources.
+Provisions are stored as *Documents* in the OpenNebula database. *Documents* are special types of resources in OpenNebula used by OneForm to store templates and information about Provisions. When a new user group is created, you can decide if you want to allow/deny its users to create Documents (and also OneForm Provisions). By default, new groups are allowed to create Document resources.
 
 ## Full Template Example
 
-Below is an example of a typical provision body (after instantiating):
+Below is an example of a typical Provision body (after instantiating):
 
 ```json
 {

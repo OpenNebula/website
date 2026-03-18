@@ -10,7 +10,7 @@ weight: "2"
 
 <!--# On-premises Cluster -->
 
-A NFS on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors. Additionally, it integrates a NFS server that can be either in the OpenNebula Frontend or as external server.
+A NFS on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors. Additionally, it integrates a NFS server that can be either in the OpenNebula Front-end or as an external server.
 
 ## On-premises NFS Cluster Implementation
 
@@ -19,10 +19,11 @@ Users must manually provide reachable IP addresses for each Host, ensuring that 
 - **Public Networking**: Requires manually provided IP addresses or previously configured public IPs. IP forwarding rules must be managed manually.
 - **Private Networking**: Uses BGP-EVPN and VXLAN to create private Virtual Networks among provided Hosts.
 
-Besides, it is required a NFS server with the a Root NFS directory or export folder and a mount
-point for the NFS clients.
+You must configure an NFS server with a root NFS directory or export folder and a mount point for the NFS clients. Consult the [NFS/NAS Reference]({{% relref "/product/cluster_configuration/storage_system/nas_ds/" %}}) for details on configuring an NFS server.
 
-{{< image path="images/oneform/oneprovision/onprem/nfs_onprem_deployment.png" alt="Network model implementation with public, private and NFS networking" align="center" width="80%" pb="20px" >}}
+The following diagram demonstrates the required architecture:
+
+{{< image path="images/oneform/oneprovision/onprem/nfs_onprem_deployment.svg" alt="Network model implementation with public, private and NFS networking" align="center" width="80%" pb="20px" >}}
 
 ## OpenNebula Resources
 
@@ -37,7 +38,7 @@ The following resources, which are associated with each on-premises Cluster, are
 ## Creating an On-premises Provision
 
 ### Prerequisites
-To create an on-premises provision, you must have an [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) that is already present with the `opennebula-form` package installation.
+To create an on-premises Provision with NFS, you should use the [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
 
 ### Procedure
 
@@ -77,27 +78,19 @@ Select the relevant interface to create an on-premises provision in your OpenNeb
   alt="Step 3"
 >}}
 
-**Step 4.** Select the desired deployment type and click **Next**:
+**Step 4.** Select the **On-Prem NFS Cluster** type and click **Next**:
 
 {{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/ssh_deployment_types_step.png"
-  light="images/oneform/oneprovision/onprem/light/ssh_deployment_types_step.png"
+  dark="images/oneform/oneprovision/onprem/dark/nfs_deployment_type.png"
+  light="images/oneform/oneprovision/onprem/light/nfs_deployment_type.png"
   alt="Step 4"
 >}}
 
-**Step 5.** Enter the correct configuration details in the **User Inputs** page and click **Next**:
+**Step 5.** Enter the correct configuration details in the **User Inputs** page. Add the correct details for your NFS server in the lower part of the form. Click **Next**:
 
 {{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/ssh_user_inputs.png"
-  light="images/oneform/oneprovision/onprem/light/ssh_user_inputs.png"
-  alt="Step 5"
->}}
-
-If you chose to create an NFS Cluster type you need to enter some additional details about your NFS server:
-
-{{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/nfs_storage_parameters.png"
-  light="images/oneform/oneprovision/onprem/light/nfs_storage_parameters.png"
+  dark="images/oneform/oneprovision/onprem/dark/nfs_user_inputs.png"
+  light="images/oneform/oneprovision/onprem/light/nfs_user_inputs.png"
   alt="Step 5"
 >}}
 
@@ -226,4 +219,4 @@ For further details about the API, see the [OneForm API Reference]({{% relref "/
 
 {{< /tabpane >}}
 
-Now that you have created an on-premises Cluster, learn how to [manage your provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
+Now that you have created an on-premises Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
