@@ -24,11 +24,12 @@ In OpenNenbula there are two main places where VM disk images are stored:
 
 ## Types and Persistency
 
-OpenNebula uses three different Image types to represent VM disks. A VM can use multiple Image types simultaneously:
+OpenNebula uses four different Image types to represent VM disks. A VM can use multiple Image types simultaneously:
 
 * **Operating System** (`OS`): Main disk, the VM will start from this Image. Every VM must include an OS Image.
 * **CD-ROM ISO** (`CDROM`): These Images are read-only data. Only one Image of this type can be used in a VM.
 * **Data Disk** (`DATABLOCK`): A generic disk to store data. These Images can contain existing data, e.g., a database, or can be formatted as an empty drive.
+* **FileSystem** (`FILESYSTEM`): Shared filesystem exposed to the VM. This type does not act as a block disk. Instead, it allows the VM to mount a filesystem avaialbe on the hosts.
 
 Additionally, *file* Images represent plain files that can be used as:
 

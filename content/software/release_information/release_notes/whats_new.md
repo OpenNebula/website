@@ -45,6 +45,7 @@ Thank you to our incredible community and partners for your continued support in
 - [Storage Live Migration for LVM & file-based datastores](../../../product/cluster_configuration/storage_system/overview/#storage-portfolio) with ability to perform live migrations of Virtual Machines across LVM and file-based datastores (both shared, local and lvm thin).
 - [NetApp Incremental Backup Support](../../../product/cluster_configuration/san_storage/netapp/) with improved efficiency for NetApp users with new incremental backup capabilities that reduce backup windows and storage consumption by only saving changed data blocks.
 - [Support for Pure Storage FlashArray](../../../product/cluster_configuration/san_storage/purestorage/) with a native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
+- [VirtioFS](../../../product/cluster_configuration/storage_system/virtiofs_ds.md) datastores enable Virtual Machines to directly access host filesystems, providing fast, low-latency shared file access. This simplifies data sharing across VMs while improving performance for data-intensive workloads.
 
 ## Sunstone
 - Integrated VM Logs in Sunstone providing real-time VM execution logs directly through the Sunstone GUI, enabling faster troubleshooting without needing CLI access.
