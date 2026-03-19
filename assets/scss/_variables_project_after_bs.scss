@@ -18,7 +18,7 @@
 
   --border-color: #40435C;
 
-  --card-background-color: #2A2D3D;
+  --card-background-color: #40435C;
   --card-border-color: #40435C;  
   --card-titles-font-color: #58D2FF;
 
@@ -79,6 +79,8 @@
   --tab-link-selected-color: #58D2FF;
   --tab-link-hover-background-color: #2A2D3D;
   --tab-link-hover-color: #7CDCFF;
+
+  --search-highlight: #FFEF3E;
 
   // Display light logo
   .logo-light { 
@@ -168,7 +170,9 @@
   --tab-background-color: #F8F9FA;
   --tab-link-selected-color: #007099;
   --tab-link-hover-background-color: #EAF9FF;
-  --tab-link-hover-color: #1393C2;  
+  --tab-link-hover-color: #1393C2;
+
+  --search-highlight: #FFEF3E;
 
   // Display light logo
   .logo-light { 

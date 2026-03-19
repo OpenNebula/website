@@ -134,6 +134,8 @@ enableGitInfo = false
 # gcs_engine_id = "533000100d06b46c0"
 offlineSearch = true
 offlineSearchSummaryLength = 800
+offlineSearchFullPage = true
+search_url = "/search/"
 
 ### Version variables
 # The short X.Y version
