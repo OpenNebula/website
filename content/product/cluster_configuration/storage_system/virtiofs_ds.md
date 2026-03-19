@@ -102,6 +102,14 @@ The VirtioFS Datastore behaves differently from other OpenNebula datastores:
 - The same image cannot be attached more than once to the same VM.
 - Two different images cannot share the same `MOUNT_TAG`.
 
-{{< alert title="Note" color="success" >}}
-Access to the host directory is mapped (`UID`/`GID`) to the `oneadmin` user and group. This mapping can be adjusted globally in `vmm_exec_kvm.conf`, or per host or cluster using the same attributes defined in `vmm_exec_kvm.conf`, for example (`DISK = [ UID_MAP = "1000", GID_MAP = "1000" ]`).
-{{< /alert >}}
+### User and Group ID mapping
+
+OpenNebula configures virtiofs UID/GID mapping using a subordinate ID range starting at `100000` with a size of `65536` for the `oneadmin` user. If `/etc/subuid` or `/etc/subgid` already contain an entry for oneadmin, it will be respected and not modified. These entries are created on hosts during the installation of the `opennebula-node-kvm` package.
+
+Access to the host directory is performed through this mapping, meaning guest user and group IDs are translated into the configured subordinate range on the host. The mapping can be adjusted globally in vmm_exec_kvm.conf, or per host or cluster using the same attributes defined there. For example:
+
+```
+DISK = [ UID_MAP = "1000", GID_MAP = "1000" ]
+```
+
+When customizing these values, ensure that the subordinate ID range configured for oneadmin in `/etc/subuid` and `/etc/subgid` matches the virtiofs `<idmap>` settings. Mismatched configurations may result in permission errors or unexpected ownership on the shared filesystem.
