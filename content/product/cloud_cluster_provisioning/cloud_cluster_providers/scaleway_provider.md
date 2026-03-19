@@ -12,14 +12,13 @@ weight: "4"
 
 <!--# Scaleway Provider -->
 
-A Scaleway Provider defines the credentials to authorize interaction with the [Scaleway cloud service](https://www.scaleway.com/) and also the target location to deploy Provisions. By default, OpenNebula comes with three pre-defined Scaleway Providers in the following regions:
+A Scaleway Provider defines the credentials to authorize interaction with the [Scaleway Cloud Service](https://www.scaleway.com/) and also the target location to deploy Provisions. By default, OpenNebula comes with three pre-defined Scaleway Providers in the following regions:
 
 * France - Paris (PAR-1)
 * Netherlands - Amsterdam (NL-AMS-1 )
 * Poland - Warsaw (PL-WAW-3)
 
-It is possible to add zones by modifying the driver configuration. Learn more about customizing the driver's behavior to [add new zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
-
+It is possible to add zones by modifying the driver configuration. Learn more about customizing the driver's behavior to [Add New Zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
 
 To define a Scaleway Provider, specify the following information:
 
@@ -58,7 +57,7 @@ The following process describes how to create a Scaleway Provider in your OpenNe
   alt="Step 2"
 >}}
 
-**Step 3.** Select the Scaleway oneform driver and click **Next**:
+**Step 3.** Select the Scaleway OneForm driver and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/scaleway/dark/scaleway_driver.png"
@@ -177,11 +176,11 @@ curl -X POST "https://oneform.example.server/api/v1/providers" \
 ```
 <br>
 
-For further details about the API, please see the [OneForm API Reference](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, please see the [OneForm API Reference]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
 {{% /tab %}}
 
 {{< /tabpane >}}
 
-Now that you have created your Scaleway Provider, refer to the next guide to [provision a Scaleway Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/scaleway_cluster.md" %}}).
+Now that you have created your Scaleway Provider, refer to the next guide to [Provision a Scaleway Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/scaleway_cluster.md" %}}).
 
 

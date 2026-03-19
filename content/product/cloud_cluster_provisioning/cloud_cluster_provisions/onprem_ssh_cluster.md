@@ -1,5 +1,6 @@
 ---
-title: "On-premises SSH"
+title: "On-premises SSH Cluster"
+linkTitle: "On-premises SSH"
 date: "2025-02-17"
 description:
 categories:
@@ -10,7 +11,7 @@ weight: "2"
 
 <!--# On-premises Cluster -->
 
-A SSH on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors.
+An SSH on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors.
 
 ## On-premises SSH Cluster Implementation
 
@@ -34,11 +35,11 @@ The following resources, which are associated with each on-premises Cluster, are
 ## Creating an On-premises Provision
 
 ### Prerequisites
-To create an on-premises Provision with NFS, you should use the [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
+To create an on-premises Provision with SSH, you should use the [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
 
 ### Procedure
 
-Select the relevant interface to create an on-premises provision in your OpenNebula installation:
+Select the relevant interface to create an on-premises Provision in your OpenNebula installation:
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
@@ -118,23 +119,31 @@ Select the relevant interface to create an on-premises provision in your OpenNeb
 
 {{% tab header="CLI"%}}
 
-### Listing templates
-
-Create an on-prem provision with the `oneprovision create <name> --provider-id <id>` command, specifying `onprem` as the provider type and the ID of the associated provider to this provision (use `oneprovider list` to identify the correct provider). This will initiate an automated process in which OneForm prompts for all required input parameters and starts the deployment:
+Create an on-premises Provision with the `oneprovision create <name> --provider-id <id>` command, specifying `onprem` as the Provider type and the ID of the associated Provider to this Provision (use `oneprovider list` to identify the correct Provider). This will initiate an automated process in which OneForm prompts for all required input parameters and starts the deployment:
 
 
 ```bash
 oneprovision create onprem --provider-id 1
 ```
 ```default
-There are some parameters that require user input.
-  * (oneform_onprem_hosts) Number of instances to create [type: number, default: 1]
-    > 1
+Please select a deployment configuration for this Provision:
+    0: On-Prem SSH Cluster
+    1: On-Prem NFS Cluster
 
-ID: 1
+    Please type the selection number: 
+```
+Select the SSH option `0`, the CLI will then prompt for numerous details about the Provision, enter the appropriate details or press Enter to use defaults:
+
+```default
+There are some parameters that require user input. 
+  * (oneform_onprem_hosts) Host IPs [type: list(string)]
+    Press enter for default ([]). Enter comma-separated values: 
+  * (oneform_tags) value of the tags to assign to the instance [type: map(string)]
+    Press enter for default ({}). Enter KEY=VALUE pairs separated by commas: 
+...
 ```
 
-After you have created the provision, list all the existing provisions using the `oneprovision list` command:
+After you have created the Provision, list all the existing Provisions using the `oneprovision list` command:
 
 ```bash
 oneprovision list
@@ -144,7 +153,7 @@ ID USER     GROUP     NAME                  STATE            REGTIME
 1  oneadmin oneadmin  On-Prem SSH Cluster   RUNNING          06/05 10:52:29
 ```
 
-To inspect the details of a specific provision, run the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:
+To inspect the details of a specific Provision, run the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as Hosts, datastores, and networks:
 
 ```bash
 oneprovision show 1
@@ -215,4 +224,4 @@ For further details about the API, see the [OneForm API Reference]({{% relref "/
 
 {{< /tabpane >}}
 
-Now that you have created an on-premises Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
+Now that you have created an on-premises SSH Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).

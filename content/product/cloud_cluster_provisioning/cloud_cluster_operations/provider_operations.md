@@ -20,7 +20,7 @@ With this guide, you will understand how the drivers and Providers and Provision
 - Managing access controls
 
 {{< alert title="Important" color="warning" >}}
-All driver information is securely stored and encrypted. While regular users can list and view driver information, only members of the `oneadmin` group are allowed to manage and modify providers.
+All driver information is securely stored and encrypted. While regular users can list and view driver information, only members of the `oneadmin` group are allowed to manage and modify Providers.
 {{< /alert >}}
 
 ## Enabling a OneForm Driver
@@ -60,7 +60,7 @@ oneform disable <driver_name>
 ```
 
 {{< alert title="Important" color="warning" >}}
-This action will not remove the existing instantiated providers and provisions, but it will prevent users from creating new providers and provisions using this driver.
+This action will not remove the existing instantiated Providers and Provisions, but it will prevent users from creating new Providers and Provisions using this driver.
 {{< /alert >}}
 
 ## Managing Access Controls

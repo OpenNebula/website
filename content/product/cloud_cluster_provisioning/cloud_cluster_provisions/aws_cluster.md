@@ -1,5 +1,6 @@
 ---
-title: "AWS"
+title: "AWS Cluster"
+linkTitle: "AWS"
 date: "2025-02-17"
 description:
 categories:
@@ -140,7 +141,7 @@ The following process demonstrates how to create an AWS Provision in your OpenNe
 
 {{% tab header="CLI"%}}
 
-Create an AWS Provision with the `oneprovision create <name> --provider-id <ID>` command, specifying `aws` as the Provider type and the ID of the associated Provider for this Provision. This initiates an automated process in which OneForm prompts for all required input parameters then starts the deployment:
+Create an AWS Provision with the `oneprovision create <name> --provider-id <ID>` command, specifying `aws` as the Provider type and the ID of the associated Provider for this Provision (use `oneprovider list` to find the appropriate ID). This initiates an automated process in which OneForm prompts for all required input parameters then starts the deployment:
 
 ```bash
 oneprovision create aws --provider-id 1
@@ -172,8 +173,8 @@ After you have created the Provision, list all the existing Provisions using the
 oneprovision list
 ```
 ```default
-  ID USER     GROUP    NAME                  STATE            REGTIME
-  1  oneadmin oneadmin AWS SSH Cluster       RUNNING          06/05 10:52:29
+ID USER     GROUP    NAME                  STATE            REGTIME
+1  oneadmin oneadmin AWS SSH Cluster       RUNNING          06/05 10:52:29
 ```
 
 To inspect the details of a specific Provision, run the `oneprovision show <ID>` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:

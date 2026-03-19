@@ -23,9 +23,9 @@ It is possible to add zones by modifying the driver configuration. Learn more ab
 
 To define an AWS Provider, specify the following information:
 
-* **Credentials**: These are used to establish authorization with AWS. You must provide an `access_key` and a `secret_key`. Refer to  [the AWS authentication guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) for details.
-* **Region**: This is the location in the world where the resources are going to be allocated. All available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
-* **Instance types and AMIs**: These define the capacity of the resources that are going to be deployed and the Amazon Machine Image (AMI) that will be used. The AMI dictates which operating system will be used.
+* **Credentials**: These are used to establish authorization with AWS. You must provide an `access_key` and a `secret_key`. Refer to  the [AWS Authentication Guide](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) for details.
+* **Region**: This is the world location where the resources are going to be allocated. All available regions are [listed here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
+* **Instance Types and AMIs**: These define the capacity of the resources that are going to be deployed and the Amazon Machine Image (AMI) that will be used. The AMI dictates which operating system will be used.
 
 {{< alert title="Warning" color="warning" >}}
 You can use customized AMIs in addition to the default AMI provided with your OpenNebula deployment. However, the automation tools are tailored to work with the default AMI.
@@ -57,7 +57,7 @@ The procedure below describes how to create an AWS Provider in your OpenNebula d
   alt="Step 2"
 >}}
 
-**Step 3.** Select the AWS oneform driver and click **Next**:
+**Step 3.** Select the AWS OneForm driver and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/aws/dark/aws_driver.png"
@@ -168,4 +168,4 @@ For further details about the API, refer to the [OneForm API Reference](/product
 
 {{< /tabpane >}}
 
-Now that you have created your AWS Provider, refer to the next guide to [provision an AWS Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/aws_cluster.md" %}}).
+Now that you have created your AWS Provider, refer to the next guide to [Provision an AWS Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/aws_cluster.md" %}}).

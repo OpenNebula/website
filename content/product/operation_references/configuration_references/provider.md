@@ -12,7 +12,7 @@ weight: "4"
 
 <!-- # Provider -->
 
-A Provider defines the structure and configuration of a external cloud provider in OpenNebula. These objects are stored as **JSON documents** within the OpenNebula database.
+A Provider defines the structure and configuration of a external cloud Provider in OpenNebula. These objects are stored as **JSON documents** within the OpenNebula database.
 
 ## Provider attributes
 
@@ -20,27 +20,27 @@ The following table describes the primary attributes used in Provider:
 
 | Attribute           | Description                                                                         |
 | ------------------- | ----------------------------------------------------------------------------------- |
-| `name`              | Name used to identify the provider.                                                 |
-| `description`       | Short summary of the provider's purpose or context.                                 |
-| `driver`            | Internal identifier used to map the provider to its corresponding driver folder.    |
+| `name`              | Name used to identify the Provider.                                                 |
+| `description`       | Short summary of the Provider's purpose or context.                                 |
+| `driver`            | Internal identifier used to map the Provider to its corresponding driver folder.    |
 | `version`           | Version string used to track updates to the driver.                                 |
 | `fireedge`          | Metadata for the FireEdge UI (e.g., icons, labels or layout information).           |
-| `connection`        | Connection inputs parameters and authentication details for accessing the provider.        |
+| `connection`        | Connection inputs parameters and authentication details for accessing the Provider.        |
 | `registration_time` | Timestamp indicating when the document was registered.                              |
 
 ### Dynamic template generation
 
-Providers are dynamically generated from the content within each driver's directory. OneForm automatically extracts relevant provider parameters directly from the Terraform files within the driver's `terraform` folder. This process includes identifying variables and default values used by Terraform for infrastructure provisioning.
+Providers are dynamically generated from the content within each driver's directory. OneForm automatically extracts relevant Provider parameters directly from the Terraform files within the driver's `terraform` folder. This process includes identifying variables and default values used by Terraform for infrastructure provisioning.
 
-Additional attributes, such as the provider’s name or description, can be manually defined in the `driver.conf` file. These are automatically merged with the values extracted from the Terraform files during provider template generation.
+Additional attributes, such as the Provider’s name or description, can be manually defined in the `driver.conf` file. These are automatically merged with the values extracted from the Terraform files during Provider template generation.
 
-For more information about providers internal structure and behaviour please refer to the [OneForm Driver Development Guides](/product/integration_references/edge_provider_driver_development/_index.md).
+For more information about Providers' internal structure and behavior please refer to the [OneForm Driver Development Guides]({{% relref "product/integration_references/cloud_provider_driver_development/customizing_driver.md" %}}).
 
 ### User inputs
 
-User inputs represent parameters prompted to the user during provider creation. These inputs are automatically detected from variable definitions found in the `provider.tf` file within the driver's Terraform directory. Variables lacking default values become required inputs, whereas variables with defaults serve as optional parameters.
+User inputs represent parameters prompted to the user during Provider creation. These inputs are automatically detected from variable definitions found in the `provider.tf` file within the driver's Terraform directory. Variables lacking default values become required inputs, whereas variables with defaults serve as optional parameters.
 
-For example, a provider’s Terraform variables may look like:
+For example, a Provider’s Terraform variables may look like:
 
 ```hcl
 variable "access_key" {
@@ -68,7 +68,7 @@ provider "aws" {
 }
 ```
 
-What OneForm dynamically interprets and translates into the provider's inputs is shown below:
+What OneForm dynamically interprets and translates into the Provider's inputs is shown below:
 
 ```json
 {
@@ -104,17 +104,17 @@ What OneForm dynamically interprets and translates into the provider's inputs is
 }
 ```
 
-In this example, `access_key` and `secret_key` are required user inputs, while `region` is optional since it includes a default value. The connection hash is automatically replaced with the values entered by the user during the provider creation process.
+In this example, `access_key` and `secret_key` are required user inputs, while `region` is optional since it includes a default value. The connection hash is automatically replaced with the values entered by the user during the Provider creation process.
 
-User inputs can also define validation rules using the `match` object. In the case of `region`, the validation ensures that the provided value must be one of the predefined values in the list. For more information about User inputs validation rules please refer to the [OneForm Driver Development Guides](/product/integration_references/edge_provider_driver_development/_index.md).
+User inputs can also define validation rules using the `match` object. In the case of `region`, the validation ensures that the provided value must be one of the predefined values in the list. For more information about User inputs validation rules please refer to the [OneForm Driver Development Guides]({{% relref "product/integration_references/cloud_provider_driver_development/customizing_driver.md" %}}).
 
 ### Additional Attributes
 
-When a provider is created, additional attributes are automatically added to the resulting document in OpenNebula. One of these is the `provisions_ids` attribute.
+When a Provider is created, additional attributes are automatically added to the resulting document in OpenNebula. One of these is the `provisions_ids` attribute.
 
-This attribute contains a list of IDs corresponding to the Provisions that have been deployed using this particular provider object. It is used internally by OneForm to track the relationship between provider documents and the infrastructure they manage.
+This attribute contains a list of IDs corresponding to the Provisions that have been deployed using this particular Provider object. It is used internally by OneForm to track the relationship between Provider documents and the infrastructure they manage.
 
-The example below shows a provider associated with three provisions, referenced by their IDs:
+The example below shows a Provider associated with three Provisions, referenced by their IDs:
 
 ```json
 {
@@ -130,7 +130,7 @@ The example below shows a provider associated with three provisions, referenced 
 
 ### Permission to Create Providers
 
-Providers are stored as *Documents* in the OpenNebula database. *Documents* are special types of resources in OpenNebula used by OneForm to store templates and information about providers. When a new user Group is created, you can decide if you want to allow/deny its users to create Documents (and also OneForm providers). By default, new groups are allowed to create Document resources.
+Providers are stored as *Documents* in the OpenNebula database. *Documents* are special types of resources in OpenNebula used by OneForm to store templates and information about Providers. When a new user Group is created, you can decide if you want to allow/deny its users to create Documents (and also OneForm Providers). By default, new groups are allowed to create Document resources.
 
 ---
 

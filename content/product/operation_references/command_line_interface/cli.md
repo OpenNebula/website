@@ -57,3 +57,11 @@ List operation for each command will open a `less` session for a better user exp
 
 * [onegate](https://docs.opennebula.io/doc/{{< version >}}/cli/onegate.1.html): OneGate Service management.
 
+## OneForm Commands
+
+Still under development.
+
+* [oneform](https://docs.opennebula.io/doc/{{< version >}}/cli/oneform.1.html): OneForm Service management.
+* [oneprovider](https://docs.opennebula.io/doc/{{< version >}}/cli/oneprovider.1.html): Provider management.
+* [oneprovision](https://docs.opennebula.io/doc/{{< version >}}/cli/oneprovision.1.html): Provision management.
+

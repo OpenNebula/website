@@ -16,7 +16,7 @@ In OneForm, Provisions represent fully-deployed Clusters or infrastructure stack
 
 Here you will find details on how to:
 
-* [Scale existing provisions by adding or removing hosts](#scaling-provisions)
+* [Scale existing Provisions by adding or removing hosts](#scaling-provisions)
 * [Manage public IP assignments](#managing-public-ips)
 * [Retry or deprovision failed Provisions](#retrying-failed-provisions)
 * [Monitor and control Provision lifecycles through the CLI](#retrying-failed-provisions)
@@ -38,7 +38,7 @@ In the Sunstone interface, go to **Infrastructure -> Clusters** and select the C
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
-To increase the number of hosts in a running provision, use `oneprovision add-host`. Alternatively, execute `oneprovision del-host` command to decrease hosts. These operations trigger an update of the infrastructure through Terraform and Ansible.
+To increase the number of hosts in a running Provision, use `oneprovision add-host`. Alternatively, execute `oneprovision del-host` command to decrease hosts. These operations trigger an update of the infrastructure through Terraform and Ansible.
 
 Do not set `--amount` and `--host-ids` simultaneously since the operation will fail. You must choose one method of scaling at a time:
 
@@ -70,6 +70,8 @@ Do not set `--amount` and `--host-ids` simultaneously since the operation will f
 {{% /tab %}}
 
 {{% tab header="API"%}}
+
+Use the following example requests, replacing the appropriate parameters for your Provision:
 
 * Add Hosts
 
@@ -151,6 +153,7 @@ To view current IP allocations, run `oneprovision show <id>` and inspect the ass
 {{% /tab %}}
 
 {{% tab header="API"%}}
+Use the following example requests, replacing the appropriate parameters for your Provision:
 
 * Add Public IPs
 
@@ -174,7 +177,6 @@ curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/remove-ip" \
   }'
 ```
 <br>
-
 For further details about the API, see the [OneForm API Reference]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
 {{% /tab %}}
 
@@ -203,7 +205,7 @@ If a Provision fails during deployment, attempt recovery by re-triggering the fa
 oneprovision retry <provision_id>
 ```
 
-To force a retry even if the provision is in an unexpected state:
+To force a retry even if the Provision is in an unexpected state:
 
 ```bash
 oneprovision retry <provision_id> --force
@@ -211,7 +213,7 @@ oneprovision retry <provision_id> --force
 {{% /tab %}}
 
 {{% tab header="API"%}}
-
+Use the following example request, replacing the appropriate parameters for your Provision:
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/retry" \
   -u "username:password" \
@@ -272,7 +274,7 @@ curl -X POST "https://oneform.example.server/api/v1/provisions/<id>/undeploy" \
 ```
 <br>
 
-For further details about the API, see the [OneForm API Reference](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, see the [OneForm API Reference]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
 {{% /tab %}}
 
 {{< /tabpane >}}

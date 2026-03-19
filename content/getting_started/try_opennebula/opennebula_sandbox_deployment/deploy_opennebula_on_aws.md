@@ -34,7 +34,7 @@ Once you have completed this tutorial, you will have an evaluation version of Op
 
 ## Before Starting
 
-To complete this tutorial, you need to login to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can acheive this through a native terminal. If you are working on a Windows machine, you need to install an SSH client application such as [PuTTY](https://putty.software/).
+To complete this tutorial, you need to login to a remote Linux AWS instance via SSH. If you are using MacOS or Linux, you can achieve this through a native terminal. If you are working on a Windows machine, you need to install an SSH client application such as [PuTTY](https://putty.software/).
 
 ## Step 1. Prepare a Virtual Machine Instance in AWS
 
@@ -184,7 +184,7 @@ Run the miniONE installation script:
 
 The miniONE script executes the installation while logging output to the terminal. Installation usually takes between one and three minutes. Once finished, miniONE displays a report in the terminal with connection parameters and login credentials:
 
-```
+```default
 ### Report
 OpenNebula 7.0 was installed
 Sunstone is running on:
@@ -214,17 +214,17 @@ Sync the KVM Host:
 onehost sync --force
 ```
 
-Verify that the host is in sync:
+Verify that the Host is in sync:
 
 ```bash
 onehost list
 ```
 
-The host may take several minutes to synchronize. continue running the `onehost list` command until the `STAT` column of the output displays `on`:
+The Host may take several minutes to synchronize. continue running the `onehost list` command until the `STAT` column of the output displays `on`:
 
 ```default
-  ID NAME                       CLUSTER    TVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
-   0 localhost                  default      0      0 / 9600 (0%)   0K / 188.5G (0%) on
+ID NAME                       CLUSTER    TVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
+ 0 localhost                  default      0      0 / 9600 (0%)   0K / 188.5G (0%) on
 ```
 
 At this point, you have successfully installed miniONE. OpenNebula services should be running, and the system should be ready for your first login.
@@ -260,11 +260,11 @@ Sunstone will display the **Virtual networks** screen. Click the item labelled `
 
 {{< image path="/images/sunstone-network_details.png" alt="Sunstone vnet details" align="center" width="90%" pb="20px" >}}
 
-During installation, a KVM virtualization host was automatically configured on the local machine. To inspect the KVM host, in Sunstone open the left-hand menu, then click **Infrastructure** -> **Hosts**.
+During installation, a KVM virtualization Host was automatically configured on the local machine. To inspect the KVM Host, in Sunstone open the left-hand menu, then click **Infrastructure** -> **Hosts**.
 
 ## Step 6: Deploying a Virtual Machine on the AWS instance
 
-miniONE automatically downloaded the template for a VM with Alpine Linux 3.20 preinstalled. Through the Sunstone UI, we can now instantiate this VM on the local KVM host with a few clicks.
+miniONE automatically downloaded the template for a VM with Alpine Linux 3.20 preinstalled. Through the Sunstone UI, we can now instantiate this VM on the local KVM Host with a few clicks.
 
 To deploy the Alpine Linux VM, in the left-hand sidebar go to **Templates** -> **VM Templates**. This screen displays a list of all VM templates installed on the system. In this case, only the **Alpine Linux 3.20** template is installed:
 
@@ -312,13 +312,13 @@ Login as root with password `opennebula`. You can then use the command line to e
 
 Congratulations! You've now installed an OpenNebula Front-end on an AWS instance with a KVM hypervisor and Virtual Network, then deployed a VM.
 
-{{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [production installation guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
+{{< alert title="Tip" color="primary" >}}Please note that miniONE is an evaluation version of OpenNebula and is intended for experimentation and learning. You should not use miniONE for a production cloud deployment. Please refer to the [Production Installation Guide](/software/installation_process.md) for details on deploying in a production environment.{{< /alert >}} 
 
 ## Next Steps
 
 Now that you have a working miniONE OpenNebula installation, we suggest that you explore OpenNebula's functionality further with the following guides:
 
-* [Deploy a WordPress virtual machine]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine" %}})
+* [Deploy a WordPress Virtual Machine]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md#downloading-and-deploying-a-virtual-machine" %}})
 * [Deploy a Kubernetes cluster with the OneKE appliance]({{% relref "/getting_started/try_opennebula/try_kubernetes_on_opennebula/running_kubernetes_clusters.md" %}})
 * [Deploy a Kubernetes cluster using Rancher and the Cluster API]({{% relref "/getting_started/try_opennebula/try_kubernetes_on_opennebula/managing_k8s_with_rancher" %}})
 * [Further validate your miniONE installation]({{% relref "/getting_started/try_opennebula/opennebula_sandbox_deployment/validate_the_environment.md" %}}) and learn how to download appliances from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)

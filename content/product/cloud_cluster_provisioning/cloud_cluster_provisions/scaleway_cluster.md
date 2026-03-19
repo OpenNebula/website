@@ -1,5 +1,6 @@
 ---
-title: "Scaleway"
+title: "Scaleway Cluster"
+linkTitle: "Scaleway"
 date: "2025-02-17"
 description:
 categories:
@@ -44,7 +45,7 @@ The following resources, which are associated with each Edge Cluster, are create
 
 ### Prerequisites
 
-To create a provision in Scaleway, you must have a [Scaleway provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/scaleway_provider/" %}}) already created.
+To create a Provision in Scaleway, you must have a [Scaleway Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/scaleway_provider/" %}}) already created.
 
 ### Procedure
 
@@ -134,7 +135,7 @@ The following process demonstrates how to create an Scaleway Provision in your O
 
 {{% tab header="CLI"%}}
 
-Create a Scaleway Provision using the `oneprovision create <name> --provider-id <ID>` command, specifying `scaleway` as the Provider type and the ID of the associated Provider for this Provision. This initiates an automated process in which OneForm prompts for all required input parameters and starts the deployment:
+Create a Scaleway Provision using the `oneprovision create <name> --provider-id <ID>` command, specifying `scaleway` as the Provider type and the ID of the associated Provider for this Provision (use `oneprovider list` to find the appropriate ID). This initiates an automated process in which OneForm prompts for all required input parameters and starts the deployment:
 
 ```bash
 oneprovision create scaleway --provider-id 1
@@ -167,7 +168,7 @@ oneprovision list
   1  oneadmin oneadmin  Scaleway SSH Cluster  RUNNING          06/05 10:52:29
 ```
 
-To inspect the details of a specific provision, use the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as Hosts, datastores, and networks:
+To inspect the details of a specific Provision, use the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as Hosts, datastores, and networks:
 
 ```bash
 oneprovision show 1

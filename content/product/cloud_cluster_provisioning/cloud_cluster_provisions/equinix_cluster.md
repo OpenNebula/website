@@ -1,5 +1,6 @@
 ---
-title: "Equinix"
+title: "Equinix Cluster"
+linkTitle: "Equinix"
 date: "2025-02-17"
 description:
 categories:
@@ -131,7 +132,7 @@ The following process demonstrates how to create an Equinix Provision in your Op
 
 {{% tab header="CLI"%}}
 
-Create an Equinix Provision with the `oneprovision create <name> --provider-id <ID>` command, specifying `equinix` as the provider type and the ID of the associated Provider to this Provision. This initiates an automated process in which OneForm prompts for all required input parameters and starts the deployment:
+Create an Equinix Provision with the `oneprovision create <name> --provider-id <ID>` command, specifying `equinix` as the Provider type and the ID of the associated Provider to this Provision (use `oneprovider list` to find the appropriate ID). This initiates an automated process in which OneForm prompts for all required input parameters and starts the deployment:
 
 ```bash
 oneprovision create equinix --provider-id 1

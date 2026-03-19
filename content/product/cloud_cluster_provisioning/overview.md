@@ -8,7 +8,7 @@ tags:
 weight: "1"
 ---
 
-**OneForm** is OpenNebula's automated cloud provisioning tool. It serves as an automated "cloud-on-demand" engine, allowing you to provision resources on-premises, on remote bare-metal or public cloud providers through a simple, streamilined workflow. You can provision Clusters through the Sunstone user interface, the CLI or the API.
+**OneForm** is OpenNebula's automated cloud provisioning tool. It serves as an automated "cloud-on-demand" engine, allowing you to provision resources on-premises, on remote bare-metal, or public cloud providers through a simple, streamlined workflow. You can provision Clusters through the Sunstone user interface, the CLI, or the API.
 
 This documentation covers three topics that outline the process of provisioning Clusters with OneForm. The provisioning workflow takes the following order:
 
@@ -20,7 +20,7 @@ This documentation covers three topics that outline the process of provisioning 
 
 OneForm offers three interfaces to perform Cluster management and provisioning:
 
-* **Sunstone**: Graphical User Interface used through a web browser.
+* **Sunstone**: A Graphical User Interface used through a web browser.
 * **Command Line Interface**: Three command line tools for provisioning:
     * `oneform`: Management and synchronization of cloud drivers.
     * `oneprovider`: Creation and management of Providers.
@@ -51,9 +51,9 @@ Cluster operations handle the lifecycle management of Clusters once they are liv
 
 * **Definition**: Operations involving the day-to-day management of your existing provisions.
 
-* **Key Function**: Tasks such as scaling the Cluster (adding or removing hosts), monitoring the health of the provisioned nodes, and updating configurations.
+* **Key Function**: Tasks such as scaling the Cluster (adding or removing Hosts), monitoring the health of the provisioned nodes, and updating configurations.
 
-* **Sunstone Integration**: These operations are fully integrated into the Sunstone GUI, allowing you to perform tasks such as decommissioning a faulty host or upgrading a Cluster's capacity without needing to manually run CLI scripts.
+* **Sunstone Integration**: These operations are fully integrated into the Sunstone GUI, allowing you to perform tasks such as decommissioning a faulty Host or upgrading a Cluster's capacity without needing to manually run CLI scripts.
 
 ## Configuration
 

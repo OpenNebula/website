@@ -1,5 +1,6 @@
 ---
-title: "On-premises"
+title: "On-premises Provider"
+linkTitle: "On-premises"
 date: "2025-06-02"
 description: ""
 categories:
@@ -24,6 +25,7 @@ OneForm installs an on-premises Provider by default. This existing on-premises P
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
+You can find the default on-premises Provider in the Sunstone interface in the **Infrastructure -> Providers** page:
 {{< theme-image
   dark="images/oneform/oneprovider/common/dark/default_onprem.png"
   light="images/oneform/oneprovider/common/light/default_onprem.png"
@@ -43,7 +45,7 @@ ID USER     GROUP    NAME    ...         REGTIME
 0 oneadmin oneadmin OnPrem   ...   03/09 17:33:27
 ```
 
-Then inspect the default Provider with:
+You can inspect the default Provider with:
 
 ```bash
 oneprovider show 0

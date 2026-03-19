@@ -7,7 +7,7 @@ description:
 
 The OpenNebula OneForm API is a RESTful service designed to register, configure, and orchestrate infrastructure provisioning workflows across multiple Providers. It enables users to define and create Providers and launch full provisioning cycles, each consisting of one or more cloud resources such as Hosts, networks, and datastores. All data is sent and received in JSON format.
 
-This guide is intended for developers and integrators. For other purposes, OneForm is accessible via its own [OneForm Command Line Interface]({{% relref "../../../product/operation_references/command_line_interface/cli#cli" %}}).
+This guide is intended for developers and integrators. For other purposes, OneForm is accessible via its own [OneForm Command Line Interface]({{% relref "/product/operation_references/command_line_interface/cli.md#oneform-commands" %}}).
 
 ## API Authentication
 

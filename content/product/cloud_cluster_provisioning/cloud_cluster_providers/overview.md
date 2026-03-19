@@ -10,7 +10,7 @@ weight: "1"
 ---
 
 <!--# Overview -->
-A **Provider** is an abstraction layer that defines the credentials, endpoints, and specific location (such as a region or zone) within a target infrastructure. It acts as the "source of authority" that OneForm uses to authenticate and communicate with external resources — whether they are public cloud APIs (like AWS) or bare-metal edge locations (like Equinix) — to prepare the ground for a cluster deployment.
+A **Provider** is an abstraction layer that defines the credentials, endpoints, and specific locations (such as a region or zone) within a target infrastructure. It acts as the "source of authority" that OneForm uses to authenticate and communicate with external resources — whether they are public cloud APIs (like AWS) or bare-metal edge locations (like Equinix) — to prepare the ground for a cluster deployment.
 
 ## Basic Outline
 
@@ -79,7 +79,7 @@ These elements are combined through a JSON document stored in the OpenNebula dat
 }
 ```
 
-For more detailed information about Provider datamodels and configuration, refer to the [Provider Reference](/product/operation_references/configuration_references/provider.md).
+For more detailed information about Provider datamodels and configuration, refer to the [Provider Reference]({{% relref "/product/operation_references/configuration_references/provider.md" %}}).
 
 ## Provider Drivers
 
@@ -107,7 +107,7 @@ drivers/
 
 Each component within the driver directory serves a specific purpose:
 
-- **terraform/**: Contains Terraform modules that define and provision the required infrastructure resources, such as hosts, networks, and storage.
+- **terraform/**: Contains Terraform modules that define and provision the required infrastructure resources, such as Hosts, networks, and storage.
 - **ansible/**: Stores OneDeploy Ansible playbooks, roles, and templates used for post-provisioning tasks, such as configuring services, installing software packages, and integrating the resources with OpenNebula.
 - **ipam/** *(Optional)*: Includes scripts responsible for IP Address Management, handling allocation, registration, and release of IP addresses within the provider.
 - **elastic/** *(Optional)*: Holds logic for managing Elastic IPs, including assigning and releasing floating IP addresses to and from Virtual Machines dynamically.

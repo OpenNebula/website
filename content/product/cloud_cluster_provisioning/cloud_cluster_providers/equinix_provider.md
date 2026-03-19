@@ -19,7 +19,7 @@ An Equinix Provider contains the credentials to interact with [Equinix](https://
 * Tokyo (Japan)
 * California (US)
 
-It is possible to add zones by modifying the driver configuration. Learn more about customizing the driver's behavior to [add new zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
+It is possible to add zones by modifying the driver configuration. Learn more about customizing the driver's behavior to [Add New Zones]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver/#adding-new-zones" %}}).
 
 To define a new Equinix Provider, specify the following information:
 
@@ -57,7 +57,7 @@ The procedure below describes how to create an Equinix Provider in your OpenNebu
   alt="Step 2"
 >}}
 
-**Step 3.** Select the Equinix oneform driver and click **Next**:
+**Step 3.** Select the Equinix OneForm driver and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovider/equinix/dark/equinix_driver.png"
@@ -96,7 +96,7 @@ Create an Equinix Provider using the `oneprovider create <ID>` command, and spec
 ```bash
 oneprovider create equinix
 ```
-```
+```default
 There are some parameters that require user input.
   * (auth_token) Equinix Auth Token [type: string]
     *************************
@@ -118,7 +118,7 @@ Once you have created the Provider, review its details using the `oneprovider sh
 ```bash
 oneprovider show 1
 ```
-```
+```default
 PROVIDER 1 INFORMATION
 ID                  : 1
 NAME                : Equinix
@@ -169,7 +169,7 @@ For further details about the API, please see to the [OneForm API Reference]({{%
 
 {{< /tabpane >}}
 
-Now that you have created your Equiniz Provider, refer to the next guide to [provision an Equinix Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/equinix_cluster.md" %}}).
+Now that you have created your Equinix Provider, refer to the next guide to [Provision an Equinix Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/equinix_cluster.md" %}}).
 
 ## Known Issues
 
