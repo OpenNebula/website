@@ -38,4 +38,9 @@
   width: 100px;
   height: 30px;
 }
+
+.td-search__input.form-control:focus {
+  border-color:var(--link-hover-color);
+  box-shadow: none;
+}
   
