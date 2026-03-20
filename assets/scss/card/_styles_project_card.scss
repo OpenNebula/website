@@ -59,7 +59,7 @@
 .card-header {
   background-color: var(--card-background-color);
   border-bottom: 1px solid var(--card-border-color);
-  padding: 8px 16px 4px 16px;
+  padding: 8px 16px 4px 16px;  
   
   // Font styles
   @include body-small-bold;
@@ -68,6 +68,10 @@
   a {
     color: var(--card-titles-font-color);
   }
+}
+
+.card-header:first-child {
+  border-radius: 8px 8px 0px 0px;
 }
 
 // Card body styles
