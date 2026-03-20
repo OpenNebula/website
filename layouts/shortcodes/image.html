@@ -1,60 +1,68 @@
-{{ $path := .Get "path" }}
-{{ $alt := .Get "alt" | default "" }}
-{{ $width := .Get "width" }}
-{{ $class := .Get "class" | default "" }}
-{{ $align := .Get "align" | default "" }}
-{{ $pb := .Get "pb" | default "" }}
-{{ $pt := .Get "pt" | default "" }}
-
-{{ $srcPath := strings.TrimPrefix "/" $path }}
-{{ $src := resources.Get $srcPath }}
-
-{{ if $src }}
-  {{ $isSVG := eq $src.MediaType.SubType "svg" }}
-
-  {{/* 1. Build CSS Styles (This works for both SVG and Raster) */}}
-  {{ $finalStyle := "" }}
-  {{ if eq $align "center" }}
-    {{ $finalStyle = "display: block; margin-left: auto; margin-right: auto;" }}
-  {{ end }}
-  {{ if $width }}
-    {{ $styleWidth := $width }}
-    {{ if not (findRE "[a-z%]" $width) }}{{ $styleWidth = printf "%spx" $width }}{{ end }}
-    {{ $finalStyle = printf "%s width: %s;" $finalStyle $styleWidth }}
-  {{ end }}
-  {{ if $pb }}
-    {{ $finalStyle = printf "%s padding-bottom: %s;" $finalStyle $pb }}
-  {{ end }}
-  {{ if $pt }}
-    {{ $finalStyle = printf "%s padding-top: %s;" $finalStyle $pt }}
-  {{ end }}
-
-  {{/* 2. Render Output */}}
-  {{ if $isSVG }}
-    {{/* SVG: No .Width call, no .Process call */}}
-    <img src="{{ $src.RelPermalink }}" alt="{{ $alt }}" 
-      {{ with $class }}class="{{ . }}"{{ end }}
-      style="{{ $finalStyle | safeCSS }}">
-  {{ else }}
+{{- $path := .Get "path" -}}
+{{- $pathDark := .Get "pathDark" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $width := .Get "width" -}}
+{{- $class := .Get "class" | default "" -}}
+{{- $align := .Get "align" | default "" -}}
+{{- $mb := .Get "mb" | default "" -}}
+{{- $mt := .Get "mt" | default "" -}}
+{{- $border := .Get "border" | default "true" -}}
+{{- $roundBorder := .Get "roundBorder" | default "true" -}}
+{{- $shadow := .Get "shadow" | default "true" -}}
+{{- $borderClass := cond (eq $border "true") "borderImage" "" -}}
+{{- $roundClass := cond (eq $roundBorder "true") "roundBorderImage" "" -}}
+{{- $shadowClass := cond (eq $shadow "true") "shadowImage" "" -}}
+{{- $finalClass := printf "%s %s %s %s" $class $roundClass $borderClass $shadowClass | strings.TrimSpace -}}
+{{- $srcPath := strings.TrimPrefix "/" $path -}}
+{{- $src := resources.Get $srcPath -}}
+{{- $srcDark := "" -}}
+{{- if $pathDark -}}
+  {{- $srcDark = resources.Get (strings.TrimPrefix "/" $pathDark) -}}
+{{- end -}}
+{{- if $src -}}
+  {{- $isSVG := eq $src.MediaType.SubType "svg" -}}
+  {{- $finalStyle := "" -}}
+  {{- if eq $align "center" -}}
+    {{- $finalStyle = "margin-left: auto; margin-right: auto;" -}}
+  {{- end -}}
+  {{- if $width -}}
+    {{- $styleWidth := $width -}}
+    {{- if not (findRE "[a-z%]" $width) -}}{{- $styleWidth = printf "%spx" $width -}}{{- end -}}
+    {{- $finalStyle = printf "%s width: %s;" $finalStyle $styleWidth -}}
+  {{- end -}}
+  {{- if $mb -}}
+    {{- $finalStyle = printf "%s margin-bottom: %s;" $finalStyle $mb -}}
+  {{- end -}}
+  {{- if $mt -}}
+    {{- $finalStyle = printf "%s margin-top: %s;" $finalStyle $mt -}}
+  {{- end -}}
+  {{- if $isSVG -}}
+    <div class="td-image-wrapper" style="{{ $finalStyle | safeCSS }}">
+      <img src="{{ $src.RelPermalink }}" alt="{{ $alt }}" {{ with $finalClass }}class="{{ . }} td-img-light {{ if not $srcDark }} td-img-always{{ end }}"{{ end }} >
+    {{- if $srcDark -}}
+      <img src="{{ $srcDark.RelPermalink }}" alt="{{ $alt }}" {{ with $finalClass }}class="{{ . }} td-img-dark"{{ end }}>
+    {{- end -}}    
+    </div>
+  {{- else -}}
     {{/* RASTER: Now it is safe to call .Width and .Process */}}
-    {{ $procWidth := $src.Width }}
-    {{ if $width }}
-      {{ if not (in $width "%") }}
-        {{ $procWidth = strings.TrimSuffix "px" $width }}
-      {{ end }}
-    {{ end }}
-
+    {{- $procWidth := $src.Width -}}
+    {{- if $width -}}
+      {{- if not (in $width "%") -}}
+        {{- $procWidth = strings.TrimSuffix "px" $width -}}
+      {{- end -}}
+    {{- end -}}
     {{- $procCommand := printf "resize %dx webp" (int $procWidth) -}}
     {{- with $src.Process $procCommand -}}
-      <img src="{{ .RelPermalink }}" alt="{{ $alt }}" 
-        width="{{ .Width }}" height="{{ .Height }}" 
-        {{ with $class }}class="{{ . }}"{{ end }}
-        style="{{ $finalStyle | safeCSS }}">
-    {{- end }}
-  {{ end }}
-
-{{ else }}
-  <p style="color: red; border: 1px solid red; padding: 10px;">
-    <strong>Hugo Error:</strong> Image not found at <code>assets/{{ $srcPath }}</code>
-  </p>
-{{ end }}
+      <div class="td-image-wrapper" style="{{ $finalStyle | safeCSS }}">
+        <img src="{{ .RelPermalink }}" alt="{{ $alt }}" width="{{ .Width }}" height="{{ .Height }}" {{ with $finalClass }}class="{{ . }} td-img-light {{ if not $srcDark }} td-img-always{{ end }}"{{ end }}>
+      {{- if $srcDark -}}
+        <img src="{{ $srcDark.RelPermalink }}" alt="{{ $alt }}" width="{{ .Width }}" height="{{ .Height }}" {{ with $finalClass }}class="{{ . }} td-img-dark"{{ end }}>
+      {{- end -}}
+      </div>
+  {{- end -}}
+{{- end -}}
+{{- else -}}
+<p style="color: red; border: 1px solid red; padding: 10px;">
+  <strong>Hugo Error:</strong> Image not found at <code>assets/{{- $srcPath -}}</code>
+</p>
+{{- end -}}
