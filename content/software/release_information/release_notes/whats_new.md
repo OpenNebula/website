@@ -18,7 +18,7 @@ OpenNebula 7.2 is a high-performance engine designed to handle the most demandin
 
 * A next-generation gRPC API providing a modern, low-latency API designed for high-throughput communication and improved responsiveness in massive, concurrent environments.
 
-* Improvements in storage performance and efficiency with the introduction of Storage Live Migration between LVM and file-based datastores without downtime, plus a new native driver for Pure Storage FlashArray.
+* Improvements in storage performance and efficiency with the introduction of Storage Live Migration between LVM and file-based datastores without downtime, plus a new native driver for Everpure FlashArray.
 
 * Enhanced security for confidential computing via hardware-rooted trust and memory encryption in KVM and vTPM support ensuring workload integrity for regulated industries.
 

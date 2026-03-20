@@ -42,7 +42,7 @@ Virtual Machine disks are symbolic links to the block devices. However, addition
 
 ## Front-end Configuration
 
-The Front-end needs to be configured as it’s described in the corresponding section of either [PureStorage]({{% relref "purestorage_guide#front-end-and-hosts-configuration" %}}), [NetApp]({{% relref "netapp_guide#front-end-and-host-configuration" %}}) or [Generic SAN]({{% relref "generic_guide#front-end-configuration" %}}) depending on the SAN type you have.
+The Front-end needs to be configured as it’s described in the corresponding section of either [Everpure]({{% relref "everpure_guide#front-end-and-hosts-configuration" %}}), [NetApp]({{% relref "netapp_guide#front-end-and-host-configuration" %}}) or [Generic SAN]({{% relref "generic_guide#front-end-configuration" %}}) depending on the SAN type you have.
 
 ## OpenNebula Configuration
 

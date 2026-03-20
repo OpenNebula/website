@@ -313,6 +313,7 @@ ProxyPassReverse
 PubkeyAcceptedAlgorithms
 PublicIP
 PureStorage
+Everpure
 Pyone
 PySpelling
 Qcow

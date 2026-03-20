@@ -106,7 +106,7 @@ Full support for both software-defined storage (SDS) and appliance-based storage
 * NFS/NAS: shared network storage with full image management support.
 * Local storage with multi-tier caching: cost-efficient, high-performance storage using local disks with support for image caching across clusters and hypervisors in multi-cluster or hybrid configurations,
 * Disaggregated and HCI Ceph: scalable distributed storage with block and image replication.
-* SAN/LVM: high-performance block storage with thin provisioning, with specific guides for NetApp, Pure Storage, and generic SAN appliances.
+* SAN/LVM: high-performance block storage with thin provisioning, with specific guides for NetApp, Everpure, and generic SAN appliances.
 * NetApp: optimized driver for NetApp All-Flash systems and ONTAP features.
 
 ### Backup
