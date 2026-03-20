@@ -14,7 +14,7 @@ The OpenNebula NVIDIA&reg; Fabric Manager integration provides a complete soluti
 
 The OpenNebula integration with Fabric Manager integration follows the NVIDIA Shared NVSwitch Virtualization Model. This model uses a Service VM in each hypervisor for managing the NVSwitches. The NVSwitches are added to the Service VM as PCI passthrough devices to configure the selected GPU partitioning. The Guest VMs are configured with PCI passthrough for the GPUs only, without any visibility of the NVSwitches. See the reference architecture in the image below.
 
-![ Reference architecture. Adapted diagram based on the "Shared NVSwitch Virtualization Model" located in the NVIDIA Fabric Manager User Guide.](/images/onefabric_virtualization_model.svg)
+{{< image path="/images/onefabric_virtualization_model.svg" alt="Reference architecture. Adapted diagram based on the \"Shared NVSwitch Virtualization Model\" located in the NVIDIA Fabric Manager User Guide." align="center" width="80%" mb="20px" border="false" >}}
 
 These are the key components of the NVIDIA Shared NVSwitch Virtualization Model:
 

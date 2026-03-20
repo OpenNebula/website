@@ -28,7 +28,7 @@ Before starting this tutorial, you must complete the AI-factory deployment with 
 
 The diagram below depicts the top-level architecture of the NVIDIA Dynamo framework setup in an OpenNebula deployment. The OpenNebula frontend host contains two NVIDIA L40S GPU PCI cards which operate as the host server for the K8s Cluster VMs. For this reference setup, the VMs share a simple bridged network.
 
-![Architecture of NVIDIA Dynamo in OpenNebula over two servers](/images/solutions/deployment_blueprints/ai-ready_opennebula/k8s_architecture_opennebula.svg)
+{{< image path="/images/solutions/deployment_blueprints/ai-ready_opennebula/k8s_architecture_opennebula.svg" alt="Architecture of NVIDIA Dynamo in OpenNebula over two servers" align="center" width="90%" mb="20px" border="false" >}}
 
 
 To deploy the GPU-enabled Kubernetes workload cluster, first deploy a VM with the OpenNebula “CAPI Service” marketplace appliance which contains a light Kubernetes management cluster based in K3s and includes a Rancher and CAPONE controller deployment. This instance is used to provision the GPU-enabled Kubernetes workload cluster nodes in a declarative way.

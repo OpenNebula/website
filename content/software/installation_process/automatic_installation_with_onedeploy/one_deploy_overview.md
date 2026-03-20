@@ -32,7 +32,7 @@ The basic procedure is as follows:
 
 Ansible is an agentless platform and uses SSH as the default transport for deployment. The control node must be able to communicate with the managed nodes via SSH.
 
-{{< image path="/images/one_deploy_basic_arch.svg" alt="OpenNebula Basic Architecture" align="center" width="50%" mb="20px" >}}
+{{< image path="/images/one_deploy_basic_arch.svg" alt="OpenNebula Basic Architecture" align="center" width="50%" mb="20px" border="false" >}}
 
 <!-- ![image](/images/one_deploy_basic_arch.png)
 <br/> -->

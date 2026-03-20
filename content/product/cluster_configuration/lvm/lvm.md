@@ -139,7 +139,7 @@ which is the one associated to the OpenNebula **Image Datastore**. So, there is 
 from the System Datastore to any VG; VM disks instantiated from a given image are located at the
 same VG/LUN as the image they came from.
 
-![image0](/images/lvm_datastore.svg)
+{{< image path="/images/lvm_datastore.svg" align="center" width="90%" mb="20px" border="false" >}}
 
 Images are stored in a different format depending on whether they are persistent or not.
 
