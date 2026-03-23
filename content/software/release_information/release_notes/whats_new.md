@@ -45,6 +45,7 @@ Thank you to our incredible community and partners for your continued support in
 - [Storage Live Migration for LVM & file-based datastores](../../../product/cluster_configuration/storage_system/overview/#storage-portfolio) with ability to perform live migrations of Virtual Machines across LVM and file-based datastores (both shared, local and lvm thin).
 - [NetApp Incremental Backup Support](../../../product/cluster_configuration/san_storage/netapp/) with improved efficiency for NetApp users with new incremental backup capabilities that reduce backup windows and storage consumption by only saving changed data blocks.
 - [Support for Pure Storage FlashArray](../../../product/cluster_configuration/san_storage/purestorage/) with a native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
+- [VirtioFS](../../../product/cluster_configuration/storage_system/virtiofs_ds.md) datastores enable Virtual Machines to directly access host filesystems, providing fast, low-latency shared file access. This simplifies data sharing across VMs while improving performance for data-intensive workloads.
 
 ## Sunstone
 - Integrated VM Logs in Sunstone providing real-time VM execution logs directly through the Sunstone GUI, enabling faster troubleshooting without needing CLI access.
@@ -58,11 +59,13 @@ Thank you to our incredible community and partners for your continued support in
 ## KVM & Networking
 - [Virtual Machine memory encryption](../../../product/virtual_machines_operation/virtual_machines/vm_templates#memory-encryption) allows VM workloads whose memory cannot be read by the hypervisor.
 - [Shared Address Ranges](../../../product/cluster_configuration/networking_system/manage_vnets.md#shared-address-ranges-shared-ar-for-virtual-ips) with [NIC Alias support](../../../product/cluster_configuration/networking_system/manage_vnets.md#using-virtual-ips) to assign Virtual IPs that can be shared across multiple VMs.
+- DPDK `dpdkvhostuserclient` NICs can now be [hot plugged](../../../product/virtual_machines_operation/virtual_machines/vm_instances.md#nic-hot-plugging).
+- `vhost` unix sockets are now created in a dedicated directory `/var/lib/one/vhost-sockets`.
 
 
 ## LXC
-- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
-- LXC Snapshots are now available [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- NIC Hotplugging, recontextualization and NIC PCI passthrough are now available, [driver features](../../../product/operation_references/hypervisor_configuration/lxc_driver.md).
+- [LXC disks Snapshots](../../../product/operation_references/hypervisor_configuration/lxc_driver.md) are now available for the following storage backends: LVM, LVM thin, ceph rbd, and raw file images.
 
 ## OpenNebula Form
 - [OneForm: Automated Cluster Provisioning](../../../product/operation_references/opennebula_services_configuration/oneform): A new service designed to automate the creation of OpenNebula clusters across on-premise environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
@@ -123,3 +126,5 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix `onedb fsck` returns non-zero exit code in case of issues in DB](https://github.com/OpenNebula/one/issues/6995).
 - [Fix `onedb fsck` for Virtual Router leases](https://github.com/OpenNebula/one/issues/7428).
 - [Fix Improve Scheduler log message when a VM is not scheduled](https://github.com/OpenNebula/one/issues/7494).
+- [Fix FQDN support in Prometheus datasource script](https://github.com/OpenNebula/one/issues/7512).
+- [Fix OneDRS scheduler for VMs with resched flag](https://github.com/OpenNebula/one/issues/7503).

@@ -24,7 +24,7 @@ After that, proceed with the specific Datastore documentation you might be inter
 
 Storage in OpenNebula is designed around the concept of datastores. A datastore is any storage medium to store disk images. OpenNebula distinguishes between three different datastore types:
 
-* **Images Datastore**, which stores the base operating system images, persistent data volumes, CD-ROMs.
+* **Images Datastore**, which stores the base operating system images, persistent data volumes, CD-ROMs and File Systems.
 * **System Datastore** holds disks of running Virtual Machines. Disk are moved from/to the Images when the VMs are deployed/terminated.
 * **Files & Kernels Datastore** to store plain files (not disk images), e.g. kernels, ramdisks, or contextualization files. [See details here]({{% relref "file_ds#file-ds" %}}).
 
@@ -44,10 +44,13 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 | [SAN - LVM]({{% relref "../lvm/lvm" %}})                      | Images stored as LVs in a SAN, activated directly.                                                     | yes    | raw (LV)                       | yes            | no           | poweroff          | yes             | KVM     | **EE only**  |
 | [SAN - LVM<br/>(File Mode)]({{% relref "../lvm/filemode" %}}) | Images stored in frontend\*, transferred to hosts via SSH,<br/>and copied to the SAN on instantiation. | yes    | raw (LV)<br/>Images: raw/qcow2 | yes**          | no           | poweroff/live     | yes             | KVM     | EE/CE        |
 | [SAN - NetApp]({{% relref "../san_storage/netapp" %}})        | Images stored in a NetApp cabin, activated directly.                                                   | yes    | raw (LUN)                      | yes            | no           | poweroff          | yes             | KVM     | **EE only**  |
+| [FileSystems - VirtioFS]({{% relref "virtiofs_ds" %}})           | Images are filesytem paths available on the hosts                                                      | yes    | filesystems (dir)              | no             | no           | no                | yes             | KVM     | EE/CE        |
 
 <sup>\*</sup> Additional options available by mounting remote filesystems in the frontend.
 
 <sup>\*\*</sup> Only with LVM Thin mode enabled.
+
+<sup>\*\*\*</sup> Images stored on the frontend just contain metadata. The filesystems to mount should be present and available on the hosts.
 
 ### Other storage options
 
