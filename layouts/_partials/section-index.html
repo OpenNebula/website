@@ -90,16 +90,18 @@
       	   <a href="{{ $manualsubsecLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
            </div>
             <div class="card-body">
-                 {{ if .Description -}}
-                    <p></p><p><inl>{{ .Description | markdownify -}}</inl></p>
-       	        {{ end -}}
-		             {{ range .Pages -}}
-            		  {{ $manualpageLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-         		     <inl>
-            		    <a href="{{ $manualpageLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
-		              </inl>
-                   {{ end -}}
-		{{ end -}}
+              {{ if .Description -}}
+                <p><inl>{{ .Description | markdownify -}}</inl></p>
+       	      {{ end -}}
+              <ul class="td-section-list">
+		            {{ range .Pages -}}
+            	  {{ $manualpageLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+                <li>
+                  <a href="{{ $manualpageLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{end}}>{{- .Title -}}</a>
+                </li>
+                {{ end -}}
+		          {{ end -}}
+              </ul>
 	           <p></p>
 	         </div>
 	      </div>
@@ -131,17 +133,19 @@
             <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
       </div>
       <div class="card-body">
-        <p></p>
+        
           {{ if .Description -}}
             <p><inl>{{ .Description | markdownify -}}</inl></p>
           {{ end -}}
-	{{ range .Pages -}}
-	    {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-                <inl>
-                    <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
-                </inl>
-	{{ end -}}
-              <p></p>
+	          
+            <ul class="td-section-list">
+            {{ range .Pages -}}
+	          {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+              <li>
+                <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+              </li>
+	          {{ end -}}
+            </ul>
       </div>        
 	 </div>
 
@@ -165,22 +169,24 @@
       <div class="td-card card border me-4">
         <div class="card">
           <div class="card-header">
-	In this section:
+	        In this section:
 	       </div>
 	        <div class="card-body">
-	          <p></p>
-    {{ range .Pages -}}
-    {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
-            <div class="td-content">
-                <inl>
-                    <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
-                </inl>
-		  {{ if .Description -}}
-		    <p>{{ .Description | markdownify -}}</p>
-		  {{ end -}}
-		  	   </div>
-     {{ end -}}
-	         <p></p>
+	          
+          {{ if .Description -}}
+            <p><inl>{{ .Description | markdownify -}}</inl></p>
+          {{ end -}}
+
+            <ul class="td-section-list">
+            {{ range .Pages -}}
+            {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) -}}
+
+            <li>
+              <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+            </li>
+            
+           {{ end -}}
+	         </ul>
           </div>
       </div>
     </div>

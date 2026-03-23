@@ -102,14 +102,27 @@
     }    
   }
 
-  // Push links to the bottom
-  & > inl:first-of-type {
-    margin-top: auto;
-  }
-
   // Text color for links
   a {
+    @include body-small;
     color: var(--card-titles-font-color);
+  }
+}
+
+.td-section-list {
+  list-style-position: inside;
+  list-style: none;
+  padding-left: 0;
+  margin-top: auto;
+}
+
+.td-section-list li {
+  @include body-small;
+  &::before {
+    @include body-small;
+    color: var(--card-titles-font-color);
+    content: "•";      
+    padding-right: 4px;      
   }
 }
 

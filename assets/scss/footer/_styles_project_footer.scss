@@ -6,6 +6,9 @@
   padding: 0;
   p {
     @include body-small;
+    &.one-footer-acks {
+      font-size: 12px;
+    }
     a {
       color: var(--link-color);
       &:hover {
@@ -24,7 +27,7 @@
 .one-footer-top {
   display: flex;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: center;
   flex-wrap: nowrap;
 }
 
