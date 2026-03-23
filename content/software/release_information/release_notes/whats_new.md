@@ -44,7 +44,7 @@ Thank you to our incredible community and partners for your continued support in
 - New redesigned version of [LVM Storage Subsystem (EE)](../../../product/cluster_configuration/lvm/lvm.md) with native thin-provisioning, unified image and VM disk management, and simplified configuration. The new driver improves performance, reduces deployment complexity, and enables more efficient use of SAN-backed storage by eliminating the need for hybrid file-based setups.
 - [Storage Live Migration for LVM & file-based datastores](../../../product/cluster_configuration/storage_system/overview/#storage-portfolio) with ability to perform live migrations of Virtual Machines across LVM and file-based datastores (both shared, local and lvm thin).
 - [NetApp Incremental Backup Support](../../../product/cluster_configuration/san_storage/netapp/) with improved efficiency for NetApp users with new incremental backup capabilities that reduce backup windows and storage consumption by only saving changed data blocks.
-- [Support for Pure Storage FlashArray](../../../product/cluster_configuration/san_storage/purestorage/) with a native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
+- [Support for Everpure FlashArray](../../../product/cluster_configuration/san_storage/everpure/) with a native storage driver for managing the full block storage lifecycle directly through the FlashArray REST API.
 - [VirtioFS](../../../product/cluster_configuration/storage_system/virtiofs_ds.md) datastores enable Virtual Machines to directly access host filesystems, providing fast, low-latency shared file access. This simplifies data sharing across VMs while improving performance for data-intensive workloads.
 
 ## Sunstone

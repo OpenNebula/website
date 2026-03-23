@@ -22,7 +22,7 @@ refer to the specific guides if your hardware is on the supported list, or the g
 otherwise:
 
 - [NetApp specific guide]({{% relref "netapp_guide" %}})
-- [PureStorage specific guide]({{% relref "purestorage_guide" %}})
+- [Everpure specific guide]({{% relref "everpure_guide" %}})
 - [Generic guide]({{% relref "generic_guide" %}})
 
 ## LVM Datastore options
