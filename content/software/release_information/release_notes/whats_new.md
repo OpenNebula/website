@@ -125,5 +125,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix Veeam only working with default datastore path](https://github.com/OpenNebula/one/issues/7470).
 - [Fix `onedb fsck` returns non-zero exit code in case of issues in DB](https://github.com/OpenNebula/one/issues/6995).
 - [Fix `onedb fsck` for Virtual Router leases](https://github.com/OpenNebula/one/issues/7428).
+- [Fix Improve Scheduler log message when a VM is not scheduled](https://github.com/OpenNebula/one/issues/7494).
 - [Fix FQDN support in Prometheus datasource script](https://github.com/OpenNebula/one/issues/7512).
 - [Fix OneDRS scheduler for VMs with resched flag](https://github.com/OpenNebula/one/issues/7503).
