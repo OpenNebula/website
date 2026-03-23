@@ -51,71 +51,71 @@ Select the relevant interface to create an on-premises Provision in your OpenNeb
 {{% tab header="Sunstone"%}}
 **Step 1.** Navigate to **Infrastructure -> Clusters** in the Sunstone sidebar:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
-  light="images/oneform/oneprovision/common/light/sunstone_navigation.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
+  path="images/oneform/oneprovision/common/light/sunstone_navigation.png"
   alt="Step 1"
 >}}
 
 **Step 2.** Click **Create** button and select the option **Install a new On-Premise Cluster**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
-  light="images/oneform/oneprovision/common/light/create_cluster_button.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
+  path="images/oneform/oneprovision/common/light/create_cluster_button.png"
   alt="Step 2.1"
 >}}
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/onprem_cluster_button.png"
-  light="images/oneform/oneprovision/common/light/onprem_cluster_button.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/onprem_cluster_button.png"
+  path="images/oneform/oneprovision/common/light/onprem_cluster_button.png"
   alt="Step 2.2"
 >}}
 
 **Step 3.** Enter a name for the cluster in the **General** page the click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/onprem_general_step.png"
-  light="images/oneform/oneprovision/common/light/onprem_general_step.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/onprem_general_step.png"
+  path="images/oneform/oneprovision/common/light/onprem_general_step.png"
   alt="Step 3"
 >}}
 
 **Step 4.** Select the **On-Prem NFS Cluster** type and click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/nfs_deployment_type.png"
-  light="images/oneform/oneprovision/onprem/light/nfs_deployment_type.png"
+{{< image
+  pathDark="images/oneform/oneprovision/onprem/dark/nfs_deployment_type.png"
+  path="images/oneform/oneprovision/onprem/light/nfs_deployment_type.png"
   alt="Step 4"
 >}}
 
 **Step 5.** Enter the correct configuration details in the **User Inputs** page. Add the correct details for your NFS server in the lower part of the form. Click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/nfs_user_inputs.png"
-  light="images/oneform/oneprovision/onprem/light/nfs_user_inputs.png"
+{{< image
+  pathDark="images/oneform/oneprovision/onprem/dark/nfs_user_inputs.png"
+  path="images/oneform/oneprovision/onprem/light/nfs_user_inputs.png"
   alt="Step 5"
 >}}
 
 **Step 6.** You can add optional tags to help identify the Cluster, click **Finish**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/tags_step.png"
-  light="images/oneform/oneprovision/onprem/light/tags_step.png"
+{{< image
+  pathDark="images/oneform/oneprovision/onprem/dark/tags_step.png"
+  path="images/oneform/oneprovision/onprem/light/tags_step.png"
   alt="Step 6"
 >}}
 
 **Step 7.** The **Cluster Logs** page shows the progress of the Cluster installation process:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/onprem_provision_logs.png"
-  light="images/oneform/oneprovision/onprem/light/onprem_provision_logs.png"
+{{< image
+  pathDark="images/oneform/oneprovision/onprem/dark/onprem_provision_logs.png"
+  path="images/oneform/oneprovision/onprem/light/onprem_provision_logs.png"
   alt="Step 7"
 >}}
 
 **Step 8.** After reaching the RUNNING state, a full cloud cluster is available, ready to operate:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/onprem/dark/onprem_cluster.png"
-  light="images/oneform/oneprovision/onprem/light/onprem_cluster.png"
+{{< image
+  pathDark="images/oneform/oneprovision/onprem/dark/onprem_cluster.png"
+  path="images/oneform/oneprovision/onprem/light/onprem_cluster.png"
   alt="Step 8"
 >}}
 

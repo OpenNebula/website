@@ -114,9 +114,9 @@ The following process demonstrates how to create an Equinix Provision in your Op
 
 **Step 8.** You can observe the logs and the status of the Cluster deployment in the **Cluster Logs** view:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/aws/dark/aws_cluster_logs.png"
-  light="images/oneform/oneprovision/aws/light/aws_cluster_logs.png"
+{{< image
+  pathDark="images/oneform/oneprovision/aws/dark/aws_cluster_logs.png"
+  path="images/oneform/oneprovision/aws/light/aws_cluster_logs.png"
   alt="Step 8"
 >}}
 
