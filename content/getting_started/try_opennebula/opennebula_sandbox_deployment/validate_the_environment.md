@@ -1,8 +1,8 @@
 ---
-title: "Validate the miniONE Environment"
+title: "Validate the environment"
 linkTitle: "Validate Deployment"
 date: "2025-02-17"
-#description: "Explore the resources automatically installed with **miniONE**, and download and install appliances from the **OpenNebula Marketplace**"
+#description: "Explore the resources deployed with **miniONE** or the **ISO**, and download and install appliances from the **OpenNebula Marketplace**"
 categories: [Learning, Evaluation, Introduction, Deployment]
 pageintoc: "24"
 tags: ['Quick Start', 'Edge Cluster']
@@ -10,14 +10,14 @@ type: docs
 weight: "4"
 ---
 
-A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione), the simple-to-use installation and deployment tool. This page provides:
+A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione) or [with the PoC ISO]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}}). This page provides:
 
 - An overview of the resources automatically created during that installation
 - An example of what you can do with this type of installation -- in this case, installing a Virtual Machine from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
 
 ## Installed Resources
 
-The installation described in [Deploy OpenNebula On-premises with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}) automatically installs and configures the following resources:
+After following the instructions described in [Deploy OpenNebula On-premises with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}) or in [the PoC ISO installation guide]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}}), the following resources are already created and configured:
 
 - A KVM Host on the local machine
 - A virtualization Cluster to which the Host belongs
@@ -33,7 +33,7 @@ A Host is any entity that is capable of running a VM or a container. Besides run
 * `VM_MAD`: the virtualization technology used on the Host.
 * `IM_MAD`: the driver that retrieves all monitoring metrics from the Host.
 
-As mentioned above, miniONE installs a KVM Host.
+As mentioned above, miniONE installs a KVM Host and following the ISO deployment the KVM host is added in `onefemenu`.
 
 The screenshot below displays the information about the Host. The important information here is:
 
@@ -67,7 +67,7 @@ There are three types of datastores:
 * **Image**: stores the images in your cloud.
 * **Files**: Stores plain files used in contextualization or VM kernels used by some hypervisors.
 
-In the on-prem Cluster created by miniONE, the `default` datastore is the Image datastore.
+In the on-prem Cluster the `default` datastore is the Image datastore.
 
 ![image_datastore](/images/minione-datastore.png)
 
@@ -77,7 +77,7 @@ For a complete overview of Datastore management, see [Datastores]({{% relref "..
 
 ### Virtual Networks
 
-A Virtual Network in OpenNebula basically resembles the physical network in the data center. Virtual Networks allow VMs to have connectivity between them and with the rest of the world. The default miniONE installation creates a private network, by default called `vnet` with a base address of 172.16.100.1, with access to public networks via NAT.
+A Virtual Network in OpenNebula basically resembles the physical network in the data center. Virtual Networks allow VMs to have connectivity between them and with the rest of the world. The default miniONE installation creates a private network, by default called `vnet` with a base address of 172.16.100.1, with access to public networks via NAT. In the ISO deployment, this network is created manually and the gateway and the NAT must be configured.
 
 ![image_vnet](/images/minione-vnet.png)
 
@@ -96,7 +96,7 @@ We’ll follow these high-level steps:
 > 3. Verify the Installation by Connecting to WordPress.
 
 {{< alert title="Important" color="success" >}}
-As mentioned above, in this tutorial we’ll deploy to the Edge Cluster created previously in this Quick Start Guide. To complete this tutorial, you need the Edge Cluster up and running.{{< /alert >}} 
+As mentioned above, in this tutorial we’ll deploy to the Edge Cluster created previously in this Quick Start Guide. To complete this tutorial, you need the Edge Cluster up and running.{{< /alert >}}
 
 ### Step 1. Download the WordPress Appliance from the OpenNebula Marketplace
 

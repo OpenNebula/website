@@ -20,13 +20,48 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - [libvirtd restarts in cycles each 10 minutes with error message in system logs](https://github.com/OpenNebula/one/issues/6463), due to the way libvirtd gets activated per interaction by systemd in 120-second slices. As the default interval for the OpenNebula monitor probe is 600 seconds (10 minutes), each time a probe reactivates libvirtd, it sends those messages to syslog.
 
+## Drivers - Storage
+
+- [Setting a value for `NETAPP_GROW_THRESHOLD` will cause failures in the NetApp Native driver](https://github.com/OpenNebula/one/issues/7416). To solve it, remove the `NETAPP_GROW_THRESHOLD` attribute from both the Image and System datastores.
+
 ## Sunstone
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
 - The Windows Optimized [OS Profile](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md) yaml file at `/etc/one/fireedge/sunstone/profiles/windows_optimized.yaml` has the wrong configuration. Utilizing such profile in Sunstone will lead to a VM that libvirt fails to create. You have to edit the file and replace its contents with the [documentation yaml content](../../../product/virtual_machines_operation/guest_operating_systems/os_profile.md#profile-chain-loading).
 - Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/blob/release-7.0.0/src/fireedge/etc/sunstone/sunstone-server.conf#L128).
 - When fullModeView mode is active and a status change is made in the VM, the buttons at the top are not updated. To see the buttons that correspond to the current status of the VM, you have to go back to the data table and reselect the VM. This error will be resolved in future versions. You can find more information [here](https://github.com/OpenNebula/one/issues/7172).
-- Uploaded files are not deleted from /var/tmp when creating an image from upload file. You can find detailed information [here](https://github.com/OpenNebula/one/issues/7252). This may also trigger a race condition that deletes the temporary file from /var/tmp preventing the correct registering of the image, this may apply in some cases only.
+- Race condition where the uploaded files are deleted from the temporary directory before they have been moved into the datastore. 
+
+    **Use the following workaround to mitigate this issue:**
+
+    1. Create a dedicated Sunstone upload directory
+    ```bash
+    mkdir -p /var/lib/one/fireedge-uploads
+    chown oneadmin:oneadmin /var/lib/one/fireedge-uploads
+    chmod 755 /var/lib/one/fireedge-uploads
+    ```
+    2. Configure Fireedge to use it, in the `sunstone-server.conf` file.
+    ```bash
+    # /etc/one/fireedge/sunstone/sunstone-server.conf
+    tmpdir: '/var/lib/one/fireedge-uploads'
+    ```
+    3. Apply the append-only flag (as root)
+    ```bash
+    chattr +a /var/lib/one/fireedge-uploads
+    ```
+    4. Verify the append only flag has been set
+    ```bash
+    lsattr -d /var/lib/one/fireedge-uploads
+    # -----a--------e------- fireedge-uploads
+    ```
+    5. Restart Fireedge
+    ```bash
+    systemctl restart opennebula-fireedge
+    ```
+    This workaround would prevent the `opennebula-sunstone.service` file from removing the uploaded temporary files in `/var/lib/one/fireedge-uploads`, while still allowing copy operations from that directory.
+    
+    {{< alert title="Note" color="info" >}}
+    This directory will fill up, therefore it is recommended to configure a cleanup service like systemd-tmpfiles, to periodically empty this directory.{{< /alert >}} 
 
 ## Migration
 
@@ -50,7 +85,35 @@ OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by defau
 
 ## Backups - Veeam
 
-There are curently no issues reported from the Veeam integration.
+- If the backup chain is deleted in OpenNebula and an incremental is attempted from Veeam, the data may be corrupt, so a manual Full Backup is needed from Veeam, otherwise the incremental data will be missing.
+- After performing a backup using Veeam VNC may stop working for the backed up VM and some configuration attributes may be lost. If facing this issue, please apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/backup_controller.rb`` file in the backup server at lines ~247-251 (the 2 ``vm.updateconf`` calls need the ``true`` statement at the end). Then, restart the apache2/httpd service:
+
+```ruby
+...
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2",' \
+        'BACKUP_VOLATILE"="YES"]', true) # <- Add true parameter
+else
+    LOGGER.info 'Backup volatiles disabled.'
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2"]', true) # <- Add true parameter
+...
+```
+
+- In LVM environments, VM restores may fail to deploy if the restored VM is scheduled in the same host as the original VM (and the original is still deployed). To fix this, apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/vm_controller.rb`` file in the backup server at lines ~800. Then, restart the apache2/httpd service:
+
+- Incremental backups fail on Debian 12/13 due to a Libvirt bug that blocks blockcommit via AppArmor. Until upstream fixes it, the workaround is to disable AppArmor in Libvirt’s qemu.conf
+
+```ruby
+...
+xml_element.delete_element('TEMPLATE/NIC')
+xml_element.delete_element('TEMPLATE/DISK')
+xml_element.delete_element('TEMPLATE/GRAPHICS')
+xml_element.delete_element('TEMPLATE/OS/BOOT')
+xml_element.delete_element('TEMPLATE/VMID')
+xml_element.delete_element('TEMPLATE/OS/UUID') # <- Add this line
+...
+```
+
+- Only the default datastore path is supported (``/var/lib/one/datastores/*``) for the image and backup datastores. If using any other path, please make sure there is a soft link in the default path pointing to your current paths. 
 
 ## Market proxy settings
 
@@ -104,3 +167,20 @@ RAW=[
   DATA="lxc.apparmor.profile=unconfined",
   TYPE="lxc" ]
 ```
+
+## High CPU utilization due to predictions
+
+With some configurations, the usage of CPU on the hosts can be very high, due to running predictions. In such case, the number of threads used by BLAS (Basic Linear Algebra Subprograms) can be limited to 1 (or other suitable number) with the environment variables:
+
+```shell
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
+export OPENBLAS_NUM_THREADS=${OPENBLAS_NUM_THREADS:-1}
+export MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
+export BLIS_NUM_THREADS=${BLIS_NUM_THREADS:-1}
+export NUMEXPR_NUM_THREADS=${NUMEXPR_NUM_THREADS:-1}
+```
+
+A more comprehensive way is to replace the following old files with the appropriate files from `one` repository:
+* [prediction script](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/prediction.sh)
+* [prediction script from node probes](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/node-probes.d/prediction.sh)
+* [prediction model](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/pyoneai/ml/sklearn_prediction_model.py)

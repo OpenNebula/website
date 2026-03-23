@@ -50,7 +50,7 @@ The following attributes are **required for non AWS s3 implementtions**
 | Attribute           | Description                                                                                      |
 |---------------------|--------------------------------------------------------------------------------------------------|
 | `AWS`               | Must be `no`.                                                                                    |
-| `SIGNATURE_VERSION` | Must be `s3`.                                                                                    |
+| `SIGNATURE_VERSION` | Depends on the S3 implementation, possible values are `s3`, `v2` or `v4`                         |
 | `FORCE_PATH_STYLE`  | Must be `YES`.                                                                                   |
 | `ENDPOINT`          | Preferably don’t use an endpoint that includes the bucket as the leading part of the Host’s URL. |
 
@@ -70,7 +70,23 @@ SIGNATURE_VERSION = s3
 AWS               = no
 ```
 
-which is created by passing the following command:
+And the following one a garage S3 marketplace running on the default endpoint on the port 3900
+
+```default
+$ cat market.conf
+NAME              = S3GarageMarket
+ACCESS_KEY_ID     = "*********************"
+SECRET_ACCESS_KEY = "*********************"
+AWS               = "no"
+BUCKET            = "opennebula-market"
+ENDPOINT          = "http://garageserver.domain.com:3900"
+FORCE_PATH_STYLE  = "YES"
+MARKET_MAD        = "s3"
+REGION            = "garage"
+SIGNATURE_VERSION = "v4"
+```
+
+The marketplace would be created by passing the following command:
 
 ```default
 $ onemarket create market.conf

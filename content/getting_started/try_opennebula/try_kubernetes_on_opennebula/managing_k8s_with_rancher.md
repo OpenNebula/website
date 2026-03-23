@@ -10,7 +10,7 @@ description:
 
 ## Overview
 
-In this tutorial, we will deploy a Kubernetes cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
+In this tutorial, we will deploy a Kubernetes cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
@@ -26,7 +26,7 @@ During this tutorial you will complete the following high-level steps:
 1. Deploy an OpenNebula RKE2 cluster
 1. Import the cluster into Rancher
 
-Additionally, we'll perform various operations on the workload cluster:
+Additionally, you will perform various operations on the workload cluster:
   - Install Longhorn
   - Deploy an Nginx service
   - Add a worker node to the cluster
@@ -44,7 +44,7 @@ For the CAPI appliance to function correctly, we need to modify the configuratio
 
 ### Modify the Default Public Network
 
-Select the default public network named `vnet`. Click **Update** at the top of the screen:
+Select the default public network named `vnet`. Click **Update** at the top of the screen: 
 
 {{< image path="/images/quickstart/sunstone-rancher-update-vnet.png" alt="Sunstone configure networks" align="center" width="90%" pb="20px" >}}
 
@@ -106,7 +106,7 @@ This automatically downloads the **Service Capi** appliance into the default dat
 To instantiate the Service CAPI appliance, follow the same steps described for [the WordPress VM]({{% relref "validate_the_environment#step-2-instantiate-the-vm" %}}):
 
 1. In the left-hand pane, go to **Templates** -> **VM Templates**.
-2. Select **Service Capi**, then click the **Instantiate** <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" /><path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" /></svg> icon at the top.
+1. Select **Service Capi**, then click the **Instantiate** <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" /><path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" /></svg> icon at the top.
 
 Sunstone displays the **Instantiate VM Template** wizard. Leave the **Configurations** options as default, click **Next** twice to skip the **User inputs** and reach the **Advanced options** step:
 
@@ -504,7 +504,7 @@ To upgrade the cluster from within Rancher, select **Cluster Management** at bot
 
 {{< image path="/images/rancher_edit_config.png" alt="Rancher edit config" align="center" width="90%" pb="20px" >}}
 
-Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**.
+Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**. 
 
 {{< image path="/images/rancher_cluster_conf_screen.png" alt="Rancher cluster conf" align="center" width="90%" pb="20px" >}}
 
@@ -524,7 +524,7 @@ If you are interested in installing OpenNebula by following further tutorials, y
 
 ## Using SSH on Remote Hardware
 
-If you are working with OpenNebula deployed on a remote server or an AWS instance, you will need to use port forwarding to access the Rancher UI. From the command line of the OpenNebula Front-end run:
+If you are working with OpenNebula deployed on a remote server or an AWS instance, you will need to use port forwarding to access the Rancher UI. From the command line of the OpenNebula Front-end run: 
 
 ```bash
 sudo su - oneadmin
@@ -536,7 +536,7 @@ Run `onevm list` to obtain the ID of the CAPI VM, then run `onevm ssh <CAPI_VM_I
 nohup kubectl -n cattle-system port-forward svc/rancher 8443:443 --address 0.0.0.0 > pf.log 2>&1 &
 ```
 
-Then from your local machine, run the following port forwarding command, inserting the appropriate IP addresses for the CAPI VM and the remote server (include `-i pem-file.pem` if needed):
+Then from your local machine, run the following port forwarding command, inserting the appropriate IP addresses for the CAPI VM and the remote server (include `-i pem-file.pem` if needed): 
 
 ```bash
 ssh -L 8443:<CAPI_VM_IP>:8443 user@<REMOTE_IP> # -i pem-file.pem

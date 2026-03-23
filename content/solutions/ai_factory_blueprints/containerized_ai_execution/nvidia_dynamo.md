@@ -6,15 +6,20 @@ weight: 6
 
 <a id="nvidia_dynamo"></a>
 
-{{< alert title="Important" color="success" >}}
-To perform the deployment of NVIDIA Dynamo on Kubernetes, first you must follow the procedure outlined in [Deployment of AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}) to create an AI-Ready Kubernetes ready for running GPU workloads.
-{{< /alert >}}
-
 [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
 
 Encapsulating the different inference engines, AI models and dependencies into a single container improves the workload portability and isolation. With this approach, each container is deployed consistently across different environments, including all its dependencies, avoiding conflicts and reproducibility issues.
 
 In this guide you will learn how to combine the GPU powered Kubernetes Cluster with the NVIDIA Dynamo Cloud Platform for provisioning a secure, robust and scalable solution for our AI workloads on top of the NVIDIA Dynamo framework powered by the OpenNebula cloud platform.
+
+## Before Starting
+
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+
+* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
+
+You must then complete the [AI-ready Kubernetes deployment guide]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}). You also must undeploy any appliances, VMs or services you deployed in previous guides before continuing.
 
 ### NVIDIA Dynamo Cloud Platform Installation
 
@@ -60,7 +65,8 @@ volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
 EOF
 
-kubectl apply -f storageClass.yaml
+kubectl replace --force -f storageClass.yaml
+
 ```
 
 4. Make this storage class is the default:
@@ -318,6 +324,8 @@ After some minutes (pulling the vllm runtime image takes its time), check that t
 
 ```shell
 kubectl -n dynamo-cloud get pods,svc
+```
+```
 ---
 NAME                                                                  READY   STATUS      RESTARTS   AGE
 pod/disagg-frontend-65646b6f7b-dwfr2                                  1/1     Running     0          27m
@@ -415,7 +423,7 @@ curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
 
 You will see this streamed output:
 
-```shell
+```
 data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"<think>","index":0,"logprobs":null,"finish_reason":null}],"created":1756908478,"model":"Qwen/Qwen3-0.6B","system_fingerprint":null,"object":"text_completion","usage":{"prompt_tokens":15,"completion_tokens":1,"total_tokens":16,"prompt_tokens_details":null,"completion_tokens_details":null}}
 
 data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"\n","index":0,"logprobs":null,"finish_reason":null}],"created":1756908478,"model":"Qwen/Qwen3-0.6B","system_fingerprint":null,"object":"text_completion","usage":{"prompt_tokens":15,"completion_tokens":2,"total_tokens":17,"prompt_tokens_details":null,"completion_tokens_details":null}}
@@ -427,6 +435,6 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 
 In the streamed output, you will receive multiple JSON responses with the response tokens in the `text` field, with some metadata included.
 
-{{< alert title="Tip" color="success" >}}
-After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with [NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.
-{{< /alert >}}
+## Next Steps
+
+After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with the [NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.

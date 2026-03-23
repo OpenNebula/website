@@ -6,19 +6,19 @@ weight: 8
 
 <a id="finetuning_on_slurm_worker"></a>
 
-In this tutorial, we will install and configure the OpenNebula **Slurm** appliance and run a finetuning example script. 
+In this tutorial, we will install and configure the OpenNebula **Slurm** appliance and run a fine-tuning example script. 
 
 We will complete the following high-level steps:
 
 * Install the Slurm appliances (controller and workers) from the OpenNebula marketplace.
-* Configure the Slurm worker template with an example finetuning job script.
-* Submit a finetuning job from the **Slurm controller** with a single command.
+* Configure the Slurm worker template with an example fine-tuning job script.
+* Submit a fine-tuning job from the **Slurm controller** with a single command.
 
-## Before starting
+## Before Starting
 
 Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
-* [AI Factory Deployment with On-premise Hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
 * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
 You need a running **[OneGate](https://docs.opennebula.io/7.0/product/operation_references/opennebula_services_configuration/onegate/)** server (reachable by the Slurm Controller VM) so the controller can share the Munge key with workers. To check the status of OneGate, on your OpenNebula Front-end machine run (using `sudo` if necessary):
@@ -94,12 +94,12 @@ You must also have access to the Sunstone user interface.
 
     * Click **Next** to the **Custom Variables** page and then select **Finish**.
 
-    * In the **Context** tab, copy the following script into the **Start script** field. This script downloads a model from Hugging Face and installs associated resources then creates a script to run the finetuning job:
+    * In the **Context** tab, copy the following script into the **Start script** field. This script downloads a model from Hugging Face and installs associated resources then creates a script to run the fine-tuning job:
 
     {{< image path="/images/ai_factories/slurm-start-script.png" alt="Slurm start script" align="center" width="90%" pt="20px" pb="40px" >}}
 
-### Start script: 
-```bash
+### Start Script: 
+```python
 set -e
 AI_DIR=/opt/ai_model
 
@@ -115,7 +115,7 @@ python3 -m venv "$AI_DIR/venv"
 "$AI_DIR/venv/bin/pip" install "numpy<2.4.0"
 "$AI_DIR/venv/bin/pip" install unsloth datasets trl transformers
 
-# Write Unsloth demo finetuning script
+# Write Unsloth demo fine-tuning script
 cat > "$AI_DIR/demo_finetune.py" << 'PYEOF'
 #!/usr/bin/env python3
 import os
@@ -196,7 +196,7 @@ chmod +x "$AI_DIR/demo_finetune.py"
    ```
    You should see output similar to the following:
 
-   ```shell
+   ```
    NodeName=slurm-one-worker-1 CoresPerSocket=1 
    CPUAlloc=0 CPUEfctv=1 CPUTot=1 CPULoad=0.00
    AvailableFeatures=one
@@ -216,9 +216,9 @@ chmod +x "$AI_DIR/demo_finetune.py"
    ``` 
 ---
 
-## Run the finetuning job from the Slurm controller
+## Run the Fine-tuning Job from the Slurm Controller
 
-On the Slurm Controller VM run the following command to launch the finetuning job:
+On the Slurm Controller VM run the following command to launch the fine-tuning job:
 
 ```shell
 srun --job-name=demo_finetune -N1 -n1 /opt/ai_model/venv/bin/python /opt/ai_model/demo_finetune.py
@@ -228,7 +228,7 @@ If this command returns an error, you may need to wait longer for the startup sc
 
 On the command line, you should see something similar to the following output:
 
-```shell
+```
 🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
 🦥 Unsloth Zoo will now patch everything to make training faster!
 Map: 100%|██████████| 3/3 [00:00<00:00, 1822.82 examples/s]
@@ -260,9 +260,9 @@ Saved to /opt/ai_model/output
 
 ---
 
-## Next steps
+## Next Steps
 
 After finishing this tutorial and running a job on a Slurm worker, we recommend to continue with the following AI Factory guides:
 
 * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
-* [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}).
+* [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})

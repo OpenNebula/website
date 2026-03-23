@@ -7,7 +7,7 @@ weight: 3
 
 ## Introduction
 
-OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end or processing node. The ISO installs a pre-configured deployment of OpenNebula Enterprise Edition running on a minimal installation of AlmaLinux 9. The ISO image can be flashed to bootable, removable media (such as a USB disk) for local installation or mapped via IPMI Virtual Media for remote hardware management.
+OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end or processing node. The ISO installs a pre-configured deployment of OpenNebula Enterprise Edition running on a minimal installation of AlmaLinux 9. The ISO image can be flashed to bootable, removable media (such as a USB disk) for local installation or mapped via IPMI Virtual Media for remote hardware management.  
 
 Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud will be ready for immediate use, installed on a single bare-metal server, complete with the OpenNebula Front-end server and a KVM hypervisor node. The same ISO can be used to install other KVM hypervisor nodes on the same infrastructure. The installed software includes a menu and a set of ansible playbooks to make the OpenNebula infrastructure management simpler.
 
@@ -29,7 +29,7 @@ The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements
 **Installing the ISO will delete all the disk data on the server during the installation. You should archive or backup existing data before proceding with the installation.**
 {{< /alert >}}
 
-## ISO Download and installation
+## ISO Download and Installation
 
 Download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available:
 
@@ -86,7 +86,7 @@ Answer `yes` to continue. You may be prompted to choose the disk to which you wa
 
 ![anaconda_unattended_install](/images/ISO/02-anaconda_unattended_install.png)
 
-## Frontend configuration
+## Frontend Configuration
 
 Once the installation is completed, the machine should reboot. No network card will be configured, so access to the server's console must be provided to login. It will look like the following (the colours and the font may vary on different systems):
 
@@ -131,7 +131,7 @@ Enter user `root` at the `onepoc login` prompt and the default password `0p3nN3b
             └────────────────────────────────────────────────────────────────────┘
 ```
 
-### Network and hostname setup
+### Network and Hostname Setup
 
 Now is time to configure the network using the option `netconf` on the menu. This will launch `nmtui` (the default ncurses configuration interface), that allows the setup of the network and hostname, as well as more complex network configuration (bonding, VLAN, etc.)
 
@@ -272,7 +272,7 @@ Press any key to continue
 
 Press any key and you will be returned to the `onefemenu` screen. If you are logged out, log in again as root and run `onefemenu` from the command line.
 
-## Configuring the Hypervisor host
+## Configuring the Hypervisor Host
 
 After the installation, the server runs only the Front-end and needs to be added as a OpenNebula hypervisor to run VMs. Select `add_host` from the `onefemenu` options.
 
@@ -329,7 +329,7 @@ After pressing any key you should be returned to the `onefemenu` options.
 
 **Sunstone User Interface**
 
-The Sunstone UI should now be accessible by visiting http://\<frontend\_ip\>:2616 through a browser on a machine on the same network.
+The Sunstone UI should now be accessible by visiting http://\<frontend\_ip\>:2616 through a browser on a machine on the same network. 
 
 To obtain the oneadmin password run `onefemenu` on the command line of your Front-end server and select option `show_oneadmin_pass`
 
@@ -371,30 +371,28 @@ Select the **Context** tab and enter values similar to the following, based on t
 The contextualization MTU for this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation) or smaller. 1450 is a safe default (regular ethernet frame size).
 {{< /alert >}}
 
-### Virtual network considerations
+### Virtual Network Considerations
 
 VXLAN networks are totally internal and have no access to external networks. By default they can be considered totally isolated. External access to/from these networks must be configured.
 
-#### Determining the VM identifier
+#### Determining the VM Identifier
 
 To determine the Virtual Network that needs external access use `onevnet list`. This command will list the existent Virtual Networks, for instance:
 
-```bash
-onevnet list
 ```
-```default
-ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
- 0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
+# onevnet list
+  ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERRO
+   0 oneadmin oneadmin test_vnet     0          XXXXX     rdy           0    0    0
 ```
 
 The `ID` and the `NAME` field of every row can be used for all operations on Virtual Networks.
 
-#### Creating the virtual Network Gateway (access from the frontend)
+#### Creating the Virtual Network Gateway (access from the Front-end)
 
 In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
 
 ```
-onevnet_add_gw 0
+# onevnet_add_gw 0
 ```
 
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
@@ -411,7 +409,7 @@ Virtual machines on this Virtual Network won't be able to access to the same net
 By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
 {{< /alert >}}
 
-#### Add local route (access from external networks to the Virtual Network)
+#### Add Local Route (access from external networks to the Virtual Network)
 
 After the gateway has been created and NAT masquerade has been enabled, the VMs in the Virtual Network 172.16.100.0/24:
 
@@ -570,10 +568,10 @@ For OpenNebula to manage the GPU, the VFIO device files in `/dev/vfio/` must be 
     ```default
     # ls -la /dev/vfio/
     crw-rw-rw- 1 root kvm 509, 0 Oct 16 10:00 85
-
+    
 ### OpenNebula Configuration
 
-Configure the PCI probe on the front-end node to monitor NVIDIA devices in order to make the GPUs available in OpenNebula
+Configure the PCI probe on the front-end node to monitor NVIDIA devices in order to make the GPUs available in OpenNebula 
 
 1.  Edit the PCI probe configuration file at `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf`.
 2.  Add a filter for NVIDIA devices:
@@ -591,8 +589,9 @@ Configure the PCI probe on the front-end node to monitor NVIDIA devices in order
 
 After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
-###  VM with GPU instantiation
- To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
+###  VM with GPU Instantiation
+
+To instantiate VM with a GPU login into the OpenNebula GUI and navigate to the VMs tab. Click “Create”. Then select one of the VM templates On the next screen enter the VM name and click “Next”.
 
 ![VM Instantiation](/images/ISO/06-vm-instantiate-1.png)
 
@@ -604,9 +603,10 @@ In the dropdown menu select available GPU device which will be attached to the V
 
 ![PCI Device attachment](/images/ISO/08-vm-instantiate-pci-device-select.png)
 
-Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used.
+Click the “Finish” button to start VM instantiation. After a while, the VM will be instantiated and may be used. 
 
-### vLLM appliance validation
+### vLLM Appliance Validation
+     
 The vLLM appliance is available through the OpenNebula Marketplace. Follow steps from [this guide from the official documentation]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}}). To download vLLM appliance and instantiate with a GPU in passthrough mode, the following steps have to be performed:
 
 1. Go to Storage -> Apps section.

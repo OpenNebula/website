@@ -16,7 +16,7 @@ weight: "7"
 
 ## Overview
 
-In this tutorial, you will deploy a Kubernetes cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes cluster with minimal effort and configuration and deploy applications on it.
+In this tutorial, you will deploy a Kubernetes cluster on a bare-metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes cluster with minimal effort and configuration and deploy applications on it.  
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
@@ -27,7 +27,7 @@ After successfully completing the miniONE installation you will complete the fol
 
 - Download the OneKE Kubernetes appliance from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
 - Instantiate a private network using miniONE
-- Deploy the OneKE Kubenetes cluster on the KVM Host installed by miniONE
+- Deploy the OneKE Kubernetes cluster on the KVM Host installed by miniONE
 - Validate the cluster by deploying a simple test application on the cluster
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
@@ -77,7 +77,7 @@ Click **Finish**. You will now see a new network item named `privnet` in the **V
 In the left-hand pane, select **Templates** -> **Service Templates**. Select the **Service OneKE 1.31** item, then click the **Instantiate** icon <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
   <circle cx="12" cy="12" r="12" fill="rgba(218, 218, 218, 1)" />
   <path d="M9 7.5v9l7-4.5-7-4.5z" stroke="rgb(143,147,146)" />
-</svg>
+</svg>.
 
 Sunstone now displays the **Instantiate Service Template** wizard. Leave the default name `Service OneKE 1.31` and start a single instance.
 
@@ -95,7 +95,7 @@ Click **Next**. Sunstone displays the **Service Inputs** screen, select the **Ku
 
 In this page you can define various parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
 
-* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes.
+* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes. 
 * **Traefik**: An automated edge router and ingress controller that handles external traffic and load balancing for your applications without manual configuration.
 
 Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** and **Enable Traefik** to the enabled position:
@@ -160,7 +160,7 @@ This command shows a list of the VMs instantiated by the OneKE service. Take not
 ID USER     GROUP    NAME                  ...  STAT  CPU     MEM HOST       ...      TIME
  2 oneadmin oneadmin worker_0_(service_1)  ...  runn    2      3G localhost  ...  0d 15h59
  1 oneadmin oneadmin master_0_(service_1)  ...  runn    2      3G localhost  ...  0d 15h59
-  0 oneadmin oneadmin vnf_0_(service_1)     ...  runn    1    512M localhost  ...  0d 15h59
+ 0 oneadmin oneadmin vnf_0_(service_1)     ...  runn    1    512M localhost  ...  0d 15h59
 ```
 
 Then run the following command to recover the IP address:
@@ -182,7 +182,7 @@ The relevant IP is the first displayed for the `vnet` network, `172.16.100.2`. P
 
 If you do not see all VMs listed, or if the OneKE Service is stuck in `DEPLOYING`, see [Known Issues]({{% relref "#k8s-known-issues" %}}) below.
 
-## Step 5. Deploy an Application
+## Step 4. Deploy an Application
 
 In this tutorial we will deploy a very simple application designed for training purposes: a **MariaDB** database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
 
@@ -240,7 +240,7 @@ An example run as user `root`:
 ```default
 root@ip-172-31-47-22:~# ssh -A -J 172.16.100.2 192.168.200.4
 Warning: Permanently added '172.16.100.2' (ED25519) to the list of known hosts.
-The authenticity of host '192.168.200.3 (<no hostip for proxy command>)' can't be
+The authenticity of host '192.168.200.3 (<no hostip for proxy command>)' can't be 
 established.
 
 ...
@@ -314,7 +314,7 @@ Create all of the applications in the directory:
 kubectl apply -f .
 ```
 
-For example:
+This will output something similar to the following:
 
 ```default
 root@oneke-ip-192-168-200-4:~/test-app# kubectl apply -f .
@@ -340,7 +340,7 @@ mariadb-55496464b6-66kl9    1/1     Running   0          45s
 test-app-56b5745c76-bxxld   1/1     Running   0          45s
 ```
 
-The process may take some seconds to complete. When both pods display status `Running`, we are ready to connect to the application.
+The process may take a few minutes to complete. When both pods display status `Running`, you are ready to connect to the application.
 
 ### Connect to the Application
 
@@ -441,13 +441,13 @@ To insert some dummy data into the database:
 curl 172.16.100.2/insert-dummy
 ```
 
-Repeat this commands to insert more than one data point. Then, verify the inserted data with:
+Repeat this command to insert multiple data points. Then, verify the inserted data with:
 
 ```bash
 curl 172.16.100.2/get-data
 ```
 
-For example:
+This will output data in JSON format, for example:
 
 ```default
 oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2/get-data

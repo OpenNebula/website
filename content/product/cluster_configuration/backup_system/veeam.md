@@ -170,6 +170,16 @@ When adding OpenNebula as a platform into Veeam, a KVM appliance will be deploye
 
 Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
 
+## Veeam Backup Appliance Requirements
+
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
+
+- **CPU:** 6 cores
+- **Memory:** 6 GB RAM
+- **Disk:** 100 GB
+
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
+
 ## Installation and Configuration
 
 ### 1. Prepare the environment for the oVirtAPI Server
@@ -188,6 +198,8 @@ The backup datastore must be created in the backup server configured in step 1. 
 Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given cluster:
 
 ```bash
+onedatastore create /tmp/rsync-datastore.txt
+
 cat << EOF > /tmp/rsync-datastore.txt
 NAME="VeeamDS"
 DS_MAD="rsync"
@@ -200,8 +212,6 @@ RSYNC_HOST="localhost"
 RSYNC_USER="oneadmin"
 SAFE_DIRS="/var/tmp"
 EOF
-
-onedatastore create /tmp/rsync-datastore.txt
 ```
 
 2.2. Add the datastore to the cluster
@@ -217,6 +227,17 @@ You can find more details regarding the Rsync datastore in [Backup Datastore: Rs
 
 
 
+If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
+
+We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to aid in cleaning up the backup datastore. This script can be set up as a cronjob in the backup server with the oneadmin user. The following crontab example will run the script every day at 12:00 am and delete the oldest images until the backup datastore is under 50% capacity:
+
+```bash
+0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
+```
+
+{{< alert title="Remember" color="success" >}}
+For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
+
 ### 3. Install and configure the oVirtAPI module
 
 In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backup server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
@@ -227,6 +248,12 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
 * ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
 * ``backup_freeze``: (Optional) Controls which filesystem freeze mode OpenNebula requests when performing backups initiated via the oVirtAPI/Veeam integration. Valid values are `NONE`, `AGENT`, and `SUSPEND`. For details on each mode see the Backup Modes section in the backup guide: [Backup Modes]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations/#backup-modes" %}}).
+
+{{< alert title="Important" color="success" >}}
+You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
+
+You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
+{{< /alert >}}
 
 {{< alert title="Important" color="success" >}}
 You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.

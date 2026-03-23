@@ -197,8 +197,11 @@ Once the deployment is complete:
     2. Select the `127.0.0.1` host.
     3. Go to the **PCI** tab. You should see both L40S GPUs listed and ready for passthrough.
 
-{{< alert title="Tip" color="success" >}}
-After completing the steps to have your AI-ready OpenNebula cloud using the OneDeploy tool, validate your deployment following one of the alternative options:
+---
+
+## Next steps
+
+After completing the above steps to launch your AI-ready OpenNebula cloud with OneDeploy, validate your deployment one of the one of the following options:
+
 * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
 * [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
-{{< /alert >}}
