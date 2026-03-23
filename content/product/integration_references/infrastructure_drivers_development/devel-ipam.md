@@ -12,7 +12,7 @@ weight: "8"
 
 <!--# IPAM driver -->
 
-An IPAM driver lets you delegate IP lease management to an external component. This way you can coordinate IP use with other virtual or bare-metal servers in your datacenter. To effectively use an external IPAM you need to develop four action scripts that hook on different points of the IP network/lease life-cycle.
+An IPAM driver lets you delegate IP lease management to an external component. This way you can coordinate IP use with other virtual or bare-metal servers in your data center. To effectively use an external IPAM you need to develop four action scripts that hook on different points of the IP network/lease life-cycle.
 
 Note that OpenNebula includes a built-in internal IPAM. You need to develop this component if you are using an IPAM server and want to coordinate OpenNebula with it.
 

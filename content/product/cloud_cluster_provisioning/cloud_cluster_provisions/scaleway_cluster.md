@@ -1,5 +1,6 @@
 ---
-title: "Scaleway Edge Cluster"
+title: "Scaleway Cluster"
+linkTitle: "Scaleway"
 date: "2025-02-17"
 description:
 categories:
@@ -12,49 +13,48 @@ weight: "5"
 
 <!--# Scaleway Edge Cluster -->
 
-Scaleway supports metal edge clusters that use bare-metal instances to create OpenNebula Hosts. Metal provisions run the LXC or KVM hypervisors.
+Scaleway supports metal Edge Clusters that enable deployment of OpenNebula Hosts on bare-metal instances. Scaleway metal Provisions support KVM hypervisors.
 
 ## Scaleway Edge Cluster Implementation
 
 An Edge Cluster in Scaleway creates the following resources:
 
-* **Scaleway Elastic Metal Device**: host to run virtual machines.
-* **Scaleway VPC**: isolated virtual network for all the deployed resources.
-* **Scaleway private subnet**: allows communication between VMs that are running in the provisioned Hosts.
-* **Scaleway internet public gateway**: allows VMs to have public connectivity over Internet.
+* **Scaleway Elastic Metal Device**: Host to run Virtual Machines.
+* **Scaleway VPC**: Isolated Virtual Network for all the deployed resources.
+* **Scaleway Private Subnet**: Allows communication between VMs that are running on the provisioned Hosts.
+* **Scaleway Internet Public Gateway**: Allows VMs to have public connectivity over the internet.
 
 The network model is implemented in the following way:
 
-* **Public Networking**: relies on elastic IPs from Scaleway and the IPAM driver from OpenNebula. When the virtual network is created in OpenNebula, the elastic IPs are requested from Scaleway. Then, inside the Host, IP forwarding rules are applied so the VM can communicate over the public IP assigned by Scaleway.
+* **Public Networking**: Relies on Elastic IPs from Scaleway and the IPAM driver from OpenNebula. When the Virtual Network is created in OpenNebula, the Elastic IPs are requested from Scaleway. Then, inside the Host, IP forwarding rules are applied so the VM can communicate over the public IP assigned by Scaleway.
 * **Private Networking**: uses BGP-EVPN and VXLAN.
 
-![Network model implementation with public and private networking](/images/scaleway-deployment.jpg)
+{{< image path="images/oneform/oneprovision/scaleway/scaleway_deployment.svg" alt="Network model implementation with public and private networking" align="center" width="80%" pb="20px" >}}
 
 ## OpenNebula Resources
 
-The following resources, which are associated to each Edge Cluster, are created in OpenNebula:
+The following resources, which are associated with each Edge Cluster, are created in OpenNebula:
 
-1. Cluster: containing all other resources.
-2. Hosts: for each Scaleway Elastic Metal Device.
-3. Datastores: image and system datastores with SSH transfer manager using first instance as a replica.
-4. Virtual network: for public networking.
-5. Virtual network template: for private networking.
+1. **Cluster**: Containing all other resources.
+2. **Hosts**: For each Scaleway Elastic Metal Device.
+3. **Datastores**: Image and system datastores with SSH transfer manager using first instance as a replica.
+4. **Virtual Network**: For public networking.
+5. **Virtual Network Template**: For private networking.
 
-## Creating an Scaleway Provision
+## Creating a Scaleway Provision
 
 ### Prerequisites
 
-To create a provision in Scaleway, you must have a [Scaleway provider](/product/cloud_cluster_provisioning/cloud_cluster_providers/scaleway_provider/) already created.
+To create a Provision in Scaleway, you must have a [Scaleway Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/scaleway_provider/" %}}) already created.
 
 ### Procedure
 
-Select the relevant interface to create a Scaleway provision in your OpenNebula installation:
-
+The following process demonstrates how to create an Scaleway Provision in your OpenNebula installation. Please select the tab for your preferred interface:
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
 {{% tab header="Sunstone"%}}
-**Step 1.** Navigate through `Infrastructure > Clusters` in the sidebar:
+**Step 1.** Navigate to **Infrastructure -> Clusters** in the Sunstone sidebar:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
@@ -62,7 +62,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 1"
 >}}
 
-**Step 2.** Click on the `Create` button and select the option `Install a new Cloud Cluster`:
+**Step 2.** Click **Create** and select **Install a new Cloud Cluster**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
@@ -76,7 +76,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 2.2"
 >}}
 
-**Step 3.** Select the Provider you want to use to create the cloud cluster:
+**Step 3.** Select your preferred Scaleway Provider and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/scaleway/dark/scaleway_provider.png"
@@ -84,7 +84,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 3"
 >}}
 
-**Step 4.** Fill the general section with at least a name for the cluster, and then click on `Next` button:
+**Step 4.** Enter a name for the Cluster in the **General** page and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/general_step.png"
@@ -92,7 +92,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 4"
 >}}
 
-**Step 5.** Select the kind of the deployment you want to use for the cluster and click on `Next` button:
+**Step 5.** Select the type of deployment and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/scaleway/dark/deployment_types_step.png"
@@ -100,7 +100,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 5"
 >}}
 
-**Step 6.** Fill the User Inputs section to configure the cluster and click on `Next` button:
+**Step 6.** Fill the **User Inputs** section to configure the Cluster and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/scaleway/dark/user_inputs_step.png"
@@ -108,7 +108,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 6"
 >}}
 
-**Step 7.** Fill optional tags for resources that will be created on Scaleway and OpenNebula and click on `Finish` button:
+**Step 7.** Optionally you can add tags to help identify your Cluster in OpenNebula and Scaleway. Click **Finish** to start the Cluster deployment:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/tags_step.png"
@@ -116,8 +116,7 @@ Select the relevant interface to create a Scaleway provision in your OpenNebula 
   alt="Step 7"
 >}}
 
-**Step 8.** You can follow the logs and the state of the cluster during
-the process:
+**Step 8.** You can observe the logs and the status of the Cluster deployment in the **Cluster Logs** view:
 
 {{< theme-image
   dark="images/oneform/oneprovision/scaleway/dark/scaleway_cluster_logs.png"
@@ -125,7 +124,7 @@ the process:
   alt="Step 8"
 >}}
 
-**Step 9.** After reaching the RUNNING state, a full cloud cluster is available, full to operate with it:
+**Step 9.** After reaching the RUNNING state, a full cloud Cluster is available, ready to operate:
 
 {{< theme-image
   dark="images/oneform/oneprovision/scaleway/dark/scaleway_cluster.png"
@@ -136,10 +135,12 @@ the process:
 
 {{% tab header="CLI"%}}
 
-Create a Scaleway provision using the `oneprovision create <name> --provider-id <id>` command, specifying `scaleway` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create a Scaleway Provision using the `oneprovision create <name> --provider-id <ID>` command, specifying `scaleway` as the Provider type and the ID of the associated Provider for this Provision (use `oneprovider list` to find the appropriate ID). This initiates an automated process in which OneForm prompts for all required input parameters and starts the deployment:
 
 ```bash
-$ oneprovision create scaleway --provider-id 1
+oneprovision create scaleway --provider-id 1
+```
+```default
 There are some parameters that require user input.
   * (oneform_hosts) Number of instances to create [type: number, default: 1]
     > 1
@@ -157,18 +158,22 @@ There are some parameters that require user input.
 
 ID: 1
 ```
-After you have created the provision, list all the existing provisions using the `oneprovision list` command:
+After you have created the Provision, list all the existing Provisions using the `oneprovision list` command:
 
 ```bash
-$ oneprovision list
+oneprovision list
+```
+```default
   ID USER     GROUP     NAME                  STATE            REGTIME
   1  oneadmin oneadmin  Scaleway SSH Cluster  RUNNING          06/05 10:52:29
 ```
 
-To inspect the details of a specific provision, run the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:
+To inspect the details of a specific Provision, use the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as Hosts, datastores, and networks:
 
 ```bash
-$ oneprovision show 1
+oneprovision show 1
+```
+```default
 PROVISION 1 INFORMATION
 ID                  : 1
 NAME                : Scaleway SSH Cluster
@@ -215,9 +220,12 @@ ID   TYPE            NAME
 {{% /tab %}}
 
 {{% tab header="API"%}}
+To create a new Scaleway Provision using the OneForm API, use the following example request, replacing the appropriate parameters for your Provision:
+
 
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/provisions" \
+  -u "username:password" \
   -H "Content-Type: application/json" \
   -d '{
     "driver": "scaleway",
@@ -234,8 +242,11 @@ curl -X POST "https://oneform.example.server/api/v1/provisions" \
     "description": "Provision in Scaleway"
   }'
 ```
+<br>
 
-For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, see the [OneForm API Reference]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
 {{% /tab %}}
 
 {{< /tabpane >}}
+
+Now that you have created an AWS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).

@@ -1,6 +1,6 @@
 ---
-title: "Deploy OpenNebula on-prem with an ISO"
-linkTitle: "ISO deployment"
+title: "Deploy OpenNebula On-prem with an ISO"
+linkTitle: "ISO Deployment"
 description:
 weight: 3
 ---
@@ -21,7 +21,7 @@ The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements
 | Component | Required |
 | :---- | :---- |
 | **CPU** | - Recent CPU (after 2016)<br />- Virtualization enabled at BIOS level |
-| **Memory** | - Over 32 GB for frontend and nodes |
+| **Memory** | - Over 32 GB for Front-end and nodes |
 | **Disk** | - 512 GB NvME |
 | **Network** | - At least one NIC for management\* <br />- Recommended 2 NICs (management and service) |
 
@@ -65,7 +65,7 @@ The bootloader will show the following screen
 
 The recommended options are the following:
 - `Install OpenNebula POC` will install a full OpenNebula Front-end and the necessary software to make it an OpenNebula KVM hypervisor node.
-- `Install OpenNebula Node` will install only the KVM hypervisor packages to create a compute node or host that can be managed by the OpenNebula Front-end.
+- `Install OpenNebula Node` will install only the KVM hypervisor packages to create a compute node or Host that can be managed by the OpenNebula Front-end.
 
 {{< alert title="Other options" color="success" >}}
 **The  `Test this media and Install ...` options are only recommended for installation from fast local media (like a USB pendrive). These options will be slow when installing to remote infrastructure.**.
@@ -313,7 +313,7 @@ A confirmation dialog like the following will be shown, confirm with `< Yes >`:
         └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-After that, an ansible playbook will run in order to execute all the needed operations on the frontend. This may take several minutes, once the output reaches `Press any key to continue`, do so to move forward.
+After that, an ansible playbook will run in order to execute all the needed operations on the Front-end. This may take several minutes, once the output reaches `Press any key to continue`, do so to move forward.
 
 ```
 ...
@@ -350,7 +350,7 @@ To set up a Virtual Network using VXLAN, in the Sunstone UI go to **Networks** -
 To allow automatic network discovery, the VXLAN mode must be set to `evpn` in all cases.
 {{< /alert >}}
 
-Select the **Addresses** tab and create a new address range with **+ Address Range**. Select a starting address from a private range (such as 172.16.10.1 or 10.0.0.1) that is distinct from your host’s current IP network to avoid confusion. In this case we chose an IPv4 address range starting from 172.16.100.8 with 100 consecutive IPs (172.16.100.0-7 should be reserved for the network base address, the gateway and other infrastructure).
+Select the **Addresses** tab and create a new address range with **+ Address Range**. Select a starting address from a private range (such as 172.16.10.1 or 10.0.0.1) that is distinct from your Host’s current IP network to avoid confusion. In this case we chose an IPv4 address range starting from 172.16.100.8 with 100 consecutive IPs (172.16.100.0-7 should be reserved for the network base address, the gateway and other infrastructure).
 
 ![sunstone-network_ip_range](/images/ISO/04-sunstone-network-ip-range.png)
 
@@ -390,9 +390,9 @@ ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERR
 
 The `ID` and the `NAME` field of every row can be used for all operations on Virtual Networks.
 
-#### Creating the Virtual Network Gateway (access from the frontend)
+#### Creating the Virtual Network Gateway (access from the Front-end)
 
-In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
+In this case, to create the default gateway on this Virtual Network, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
 
 ```
 onevnet_add_gw 0
@@ -401,36 +401,36 @@ onevnet_add_gw 0
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
 
 {{< alert title="Persistence of the gateway" color="warning" >}}
-This gateway is not persistent after reboots. If the frontend is rebooted, the command `onevnet_add_gw <NETWORK_ID>` must be issued again.
+This gateway is not persistent after reboots. If the Front-end is rebooted, the command `onevnet_add_gw <NETWORK_ID>` must be issued again.
 {{< /alert >}}
 
-#### Setting up NAT (access to the same networks as the frontend)
+#### Setting up NAT (access to the same networks as the Front-end)
 
-Virtual machines on this Virtual Network won't be able to access to the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
+Virtual machines on this Virtual Network won't be able to access to the same networks as the Front-end because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
 
 {{< alert title="Security and persistence warning" color="warning" >}}
-By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
+By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the Front-end, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
 {{< /alert >}}
 
 #### Add Local Route (access from external networks to the Virtual Network)
 
 After the gateway has been created and NAT masquerade has been enabled, the VMs in the Virtual Network 172.16.100.0/24:
 
-- can communicate (bidirectionally) with the frontend
-- can access to the same networks that the frontend (i.e. internet)
+- can communicate (bidirectionally) with the Front-end
+- can access to the same networks that the Front-end (i.e. internet)
 
-Currently, any machine (even if it has access to the frontend) cannot reach ths Virtual Network because doesn't know how to arrive to it. For that, a route via the frontend external IP is needed. A route can be added locally.
+Currently, any machine (even if it has access to the Front-end) cannot reach ths Virtual Network because doesn't know how to arrive to it. For that, a route via the Front-end external IP is needed. A route can be added locally.
 
 {{< alert title="Routing setup" color="Success" >}}
 This document must not be taken as a manual to configure routing. These are local solutions to test the access. None of this solutions will persist after a reboot of the workstation where they have been applied.
 {{< /alert >}}
 
-On a workstation with access to the frontend, a local route to the virtual net can be created with the following commands depending on the operating system
+On a workstation with access to the Front-end, a local route to the Virtual Network can be created with the following commands depending on the operating system
 - Linux: `sudo ip route add 172.16.100.0/24 via <frontend_ip>`
 - Windows: `route add 172.16.100.0 MASK 255.255.255.0 <frontend_ip>`
 - BSD: `route add -net 172.16.100.0/24 <frontend_ip>`
 
-After the route exists, the workstation should be able to reach the virtual machines running on the Front-end without further configuration.
+After the route exists, the workstation should be able to reach the Virtual Machines running on the Front-end without further configuration.
 
 ### Resizing Disks
 
@@ -502,12 +502,12 @@ If the OpenNebula evaluation involves GPU management, GPU should be configured i
 
 ### Host Configuration
 
-To prepare the OpenNebula host complete the following steps:
-- Check that IOMMU was enabled on the host using the following command:
+To prepare the OpenNebula Host complete the following steps:
+- Check that IOMMU was enabled on the Host using the following command:
 ```default
 dmesg | grep -i iommu
 ```
-If IOMMU wasn’t enabled on the host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
+If IOMMU wasn’t enabled on the Host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
 At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
 1.  Ensure `vfio-pci` module is loaded on boot:
 
@@ -583,14 +583,14 @@ Configure the PCI probe on the front-end node to monitor NVIDIA devices in order
     :filter: '10de:*'
     ```
 
-3.  Synchronize the hosts from the Front-end to apply the new configuration:
+3.  Synchronize the Hosts from the Front-end to apply the new configuration:
 
     ```default
     # su - oneadmin
     $ onehost sync -f
     ```
 
-After a few moments, you can check if the GPU is being monitored correctly by showing the host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
+After a few moments, you can check if the GPU is being monitored correctly by showing the Host information (`onehost show <HOST_ID>`). The GPU should appear in the `PCI DEVICES` section.
 
 ###  VM with GPU Instantiation
 

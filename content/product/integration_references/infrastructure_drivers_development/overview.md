@@ -20,10 +20,10 @@ The interactions between OpenNebula and the Cloud infrastructure are performed b
 - **Authentication**. OpenNebula can be also configured to use an external program to authorize and authenticate user requests. In this way, you can implement any access policy to Cloud resources.
 - **Networking**. The hypervisor is also prepared with the network configuration for each Virtual Machine.
 
-Use the driver interfaces if you need OpenNebula to interface any specific storage, virtualization, monitoring, or authorization system already deployed in your datacenter, or to tune the behavior of the standard OpenNebula drivers.
+Use the driver interfaces if you need OpenNebula to interface any specific storage, virtualization, monitoring, or authorization system already deployed in your data center, or to tune the behavior of the standard OpenNebula drivers.
 
 ## How Should I Read This Chapter
 
 You should be reading this Chapter if you are trying to extend OpenNebula functionality.
 
-You can proceed to any of the following sections depending on which component you want to understand and extend the [virtualization system]({{% relref "devel-vmm#devel-vmm" %}}), the [storage system]({{% relref "sd#sd" %}}), the [information system]({{% relref "devel-im#devel-im" %}}), the [authentication system]({{% relref "devel-auth" %}}), the [network system]({{% relref "devel-nm#devel-nm" %}}) or the [marketplace drivers]({{% relref "devel-market#devel-market" %}}). Also you might be interested in the [Hook mechanism]({{% relref "../system_interfaces/hook_driver#hooks" %}}), a powerful way of integrating OpenNebula within your datacenter processes.
+You can proceed to any of the following sections depending on which component you want to understand and extend the [virtualization system]({{% relref "devel-vmm#devel-vmm" %}}), the [storage system]({{% relref "sd#sd" %}}), the [information system]({{% relref "devel-im#devel-im" %}}), the [authentication system]({{% relref "devel-auth" %}}), the [network system]({{% relref "devel-nm#devel-nm" %}}) or the [marketplace drivers]({{% relref "devel-market#devel-market" %}}). Also you might be interested in the [Hook mechanism]({{% relref "../system_interfaces/hook_driver#hooks" %}}), a powerful way of integrating OpenNebula within your data center processes.

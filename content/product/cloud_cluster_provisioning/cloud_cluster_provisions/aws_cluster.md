@@ -1,5 +1,6 @@
 ---
-title: "AWS Edge Cluster"
+title: "AWS Cluster"
+linkTitle: "AWS"
 date: "2025-02-17"
 description:
 categories:
@@ -12,52 +13,52 @@ weight: "3"
 
 <!--# AWS Edge Cluster -->
 
-AWS edge clusters provisioned through OneForm currently support KVM-based deployments. These clusters run on bare-metal EC2 instances and are fully integrated with OpenNebula’s virtualization and storage layers.
+AWS Edge Clusters provisioned through OneForm support KVM-based deployments. These clusters run on bare-metal EC2 instances and are fully integrated with OpenNebula’s virtualization and storage layers.
 
-AWS provisions offer an SSH-based Storage Cluster configuration, which uses the [OpenNebula Local Storage Datastore](/product/cluster_configuration/storage_system/local_ds/) to provision both system and image datastores.
+AWS Provisions offer an SSH-based Storage Cluster configuration, which uses the [OpenNebula Local Storage Datastore]({{% relref "product/cluster_configuration/storage_system/local_ds/" %}}) to provision both system and image datastores.
 
 ## AWS Edge Cluster Implementation
 
-An Edge Cluster in AWS creates these resources:
+Provisioning an Edge Cluster in AWS creates the following resources:
 
-* **AWS instance**: host to run virtual machines.
-* **AWS VPC**: an isolated virtual network for all the deployed resources. There are some limits in the number of VPC that can be requested by the user. For more details, refer to [Amazon VPC Quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
-* **AWS subnet**: allows communication among VMs that are running in the provisioned Hosts.
-* **AWS internet gateway**: allows VMs to have public connectivity over Internet.
-* **AWS security group**: by default all the traffic is allowed. You can define custom security rules to allow only specific traffic to the VMs.
+* **AWS Instance**: Host to run Virtual Machines.
+* **AWS VPC**: An isolated Virtual Network for all the deployed resources. There are some limits in the number of VPCs that can be requested by the user. For more details, refer to [Amazon VPC Quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
+* **AWS Subnet**: Enables communication among VMs that are running on the provisioned Hosts.
+* **AWS Internet Gateway**: Enables VMs to have public connectivity over the internet.
+* **AWS Security Group**: Enables custom security rules to allow only specific traffic to the VMs. By default all traffic is allowed. 
 
 The network model is implemented in the following way:
 
-* **Public Networking**: relies on elastic IPs from AWS and the IPAM driver from OpenNebula. When you create the virtual network in OpenNebula, the elastic IPs are requested to AWS. IP forwarding rules are applied within the host, so the VM communicates over the public IP assigned by AWS. There are limits to the number of elastic IPs that can be requested. Refer to [Elastic IP address quota](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-limit) for more information.
-* **Private Networking**: uses BGP-EVPN and VXLAN.
+* **Public Networking**: Relies on Elastic IPs from AWS and the IPAM driver from OpenNebula. When you create a Virtual Network in OpenNebula, the Elastic IPs are requested from AWS. IP forwarding rules are applied within the Host such that the VM communicates over the public IP assigned by AWS. There are limits to the number of Elastic IPs that can be requested. Refer to [Elastic IP address quota](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-limit) for more information.
+* **Private Networking**: Uses BGP-EVPN and VXLAN.
 
-![Network model implementation with public and private networking](/images/aws_deployment.png)
+{{< image path="images/oneform/oneprovision/aws/aws_deployment.svg" alt="Network model implementation with public and private networking" align="center" width="80%" pb="20px" >}}
 
 ## OpenNebula Resources
 
-The following resources, which are associated to each Edge Cluster, are created in OpenNebula:
+The following resources, which are associated with each Edge Cluster, are created in OpenNebula:
 
-1. Cluster: containing all other resources
-2. Hosts: for each AWS instance
-3. Datastores: image and system datastores with SSH transfer manager using first instance as a replica
-4. Virtual network: for public networking
-5. Virtual network template: for private networking
+1. **Cluster**: Contains all other resources
+2. **Hosts**: For each AWS instance
+3. **Datastores**: Image and system datastores with SSH transfer manager using first instance as a replica
+4. **Virtual Network**: For public networking
+5. **Virtual Network Template**: For private networking
 
 ## Creating an AWS Provision
 
 ### Prerequisites
 
-To create a provision in AWS, you must have an [AWS provider](/product/cloud_cluster_provisioning/cloud_cluster_providers/aws_provider/) already created.
+To create a Provision in AWS, you must have an [AWS Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/aws_provider/" %}}) already created.
 
 ### Procedure
 
-Select the relevant interface to create an AWS provision in your OpenNebula installation:
+The following process demonstrates how to create an AWS Provision in your OpenNebula installation. Please select the tab for your preferred interface:
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-**Step 1.** Navigate through `Infrastructure > Clusters` in the sidebar:
+**Step 1.** Navigate to **Infrastructure -> Clusters** in the Sunstone sidebar:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
@@ -65,7 +66,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
   alt="Step 1"
 >}}
 
-**Step 2.** Click on the `Create` button and select the option `Install a new Cloud Cluster`:
+**Step 2.** Click **Create** and select the **Install a new Cloud Cluster**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
@@ -79,7 +80,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
   alt="Step 2.2"
 >}}
 
-**Step 3.** Select the Provider you want to use to create the cloud cluster and click on `Next` button:
+**Step 3.** Select your preferred AWS Provider and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/aws/dark/aws_provider.png"
@@ -87,7 +88,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
   alt="Step 3"
 >}}
 
-**Step 4.** Fill the general section with at least a name for the cluster and click on `Next` button:
+**Step 4.** Enter a name for the Cluster in the **General** page and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/general_step.png"
@@ -96,7 +97,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
 >}}
 
 
-**Step 5.** Select the kind of the deployment you want to use for the cluster and click on `Next` button:
+**Step 5.** Select the type of deployment and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/aws/dark/deployment_types_step.png"
@@ -104,7 +105,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
   alt="Step 5"
 >}}
 
-**Step 6.** Fill the User Inputs section to configure the cluster and click on `Next` button:
+**Step 6.** Fill the **User Inputs** section to configure the Cluster and click **Next**:
 
 {{< theme-image
   dark="images/oneform/oneprovision/aws/dark/user_inputs_step.png"
@@ -112,7 +113,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
   alt="Step 6"
 >}}
 
-**Step 7.** Fill optional tags for resources that will be created on AWS and OpenNebula and click on `Finish` button:
+**Step 7.** Optionally you can add tags to help identify your Cluster in OpenNebula and AWS. Click **Finish** to start the Cluster deployment:
 
 {{< theme-image
   dark="images/oneform/oneprovision/common/dark/tags_step.png"
@@ -120,8 +121,7 @@ Select the relevant interface to create an AWS provision in your OpenNebula inst
   alt="Step 7"
 >}}
 
-**Step 8.** You can follow the logs and the state of the cluster during
-the process:
+**Step 8.** You can observe the logs and the status of the Cluster deployment in the **Cluster Logs** view:
 
 {{< theme-image
   dark="images/oneform/oneprovision/aws/dark/aws_cluster_logs.png"
@@ -129,7 +129,7 @@ the process:
   alt="Step 8"
 >}}
 
-**Step 9.** After reaching the RUNNING state, a full cloud cluster is available, ready to operate with it:
+**Step 9.** After reaching the RUNNING state, a full cloud Cluster is available, ready to operate:
 
 {{< theme-image
   dark="images/oneform/oneprovision/aws/dark/aws_cluster.png"
@@ -141,10 +141,12 @@ the process:
 
 {{% tab header="CLI"%}}
 
-Create an AWS provision with the `oneprovision create <name> --provider-id <id>` command, specifying `aws` as the provider type and the ID of the associated provider to this provision. This initiates an automated process where OneForm prompts for all required input parameters and starts the deployment:
+Create an AWS Provision with the `oneprovision create <name> --provider-id <ID>` command, specifying `aws` as the Provider type and the ID of the associated Provider for this Provision (use `oneprovider list` to find the appropriate ID). This initiates an automated process in which OneForm prompts for all required input parameters then starts the deployment:
 
 ```bash
-$ oneprovision create aws --provider-id 1
+oneprovision create aws --provider-id 1
+```
+```default
 There are some parameters that require user input.
   * (cidr_block) CIDR block for the VPC [type: string, default: 10.0.0.0/16]
     > 10.0.0.0/16
@@ -165,18 +167,22 @@ There are some parameters that require user input.
 ID: 1
 ```
 
-After you have created the provision, list all the existing provisions using the `oneprovision list` command:
+After you have created the Provision, list all the existing Provisions using the `oneprovision list` command:
 
 ```bash
-$ oneprovision list
-  ID USER     GROUP    NAME                  STATE            REGTIME
-  1  oneadmin oneadmin AWS SSH Cluster       RUNNING          06/05 10:52:29
+oneprovision list
+```
+```default
+ID USER     GROUP    NAME                  STATE            REGTIME
+1  oneadmin oneadmin AWS SSH Cluster       RUNNING          06/05 10:52:29
 ```
 
-To inspect the details of a specific provision, run the `oneprovision show` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:
+To inspect the details of a specific Provision, run the `oneprovision show <ID>` command. The output displays information about the generated OpenNebula objects such as hosts, datastores, and networks:
 
 ```bash
-$ oneprovision show 1
+oneprovision show 1
+```
+```default
 PROVISION 1 INFORMATION
 ID                  : 1
 NAME                : AWS SSH Cluster
@@ -224,8 +230,11 @@ ID   TYPE            NAME
 
 {{% tab header="API"%}}
 
+To create a new AWS Provision using the OneForm API, use the following example request, replacing the appropriate parameters for your Provision:
+
 ```bash
 curl -X POST "https://oneform.example.server/api/v1/provisions" \
+  -u "username:password" \
   -H "Content-Type: application/json" \
   -d '{
     "driver": "aws",
@@ -243,7 +252,10 @@ curl -X POST "https://oneform.example.server/api/v1/provisions" \
     "description": "Provision in AWS"
   }'
 ```
+<br>
 
-For further details about the API, refer to the [OneForm API Reference Guide](/product/integration_references/system_interfaces/oneform_api.md).
+For further details about the API, see the [OneForm API Reference]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
 {{% /tab %}}
 {{< /tabpane >}}
+
+Now that you have created an AWS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).

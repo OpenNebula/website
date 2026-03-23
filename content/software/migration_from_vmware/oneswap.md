@@ -271,12 +271,12 @@ A custom conversion option is also provided, which is only recommended as a fall
 
 ### Importing VMs 
 
-Before migrations, `oneswap` can query ESX VMs and datacenters
+Before migrations, `oneswap` can query ESX VMs and data centers
 
 | Command | Output |
 | --- | --- |
-| `oneswap list datacenters` | Lists Datacenters |
-| `oneswap list clusters [--datacenter DCName]` | List clusters (can filter by datacenter) |
+| `oneswap list datacenters` | Lists Data centers |
+| `oneswap list clusters [--datacenter DCName]` | List clusters (can filter by data center) |
 | `oneswap list vms [--datacenter DCName [--cluster ClusterName]]` | List VMs on ESX. Cluster needs the Datacenter name. |
 
 For convenience, it is a good practice to populate the `/etc/one/oneswap.yaml` file with the values that will apply for most migrated VMs. If the user running oneswap has no permissions to edit the file, it can be copied, modified and execute `oneswap` with the parameter `--config-file NEW_CONFIG_FILE.yaml`
