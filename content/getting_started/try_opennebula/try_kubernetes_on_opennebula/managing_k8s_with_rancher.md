@@ -146,7 +146,7 @@ There are some parameters that require user input. Use the string <<EDITOR>> to 
   * (ONEAPP_CAPI_RANCHER_PASSWORD) Rancher Password
   * (ONEAPP_CAPI_RANCHER_VERSION) Rancher Chart Version
   * (ONEAPP_CAPI_TURTLES_VERSION) Turtles Chart Version
-VM ID: 
+VM ID:
 2
 ```
 
