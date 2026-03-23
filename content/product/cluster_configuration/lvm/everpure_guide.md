@@ -10,13 +10,11 @@ This setup assumes you are using a Everpure FlashArray with iSCSI and want to us
 
 ### Host and Host Group
 
-For each of the Hosts and frontend you'll need to either gather or define their iSCSI Initiator Name. If you have already started iscsid at least once on the machine it should have a name generated in `/etc/iscsi/initiatorname.iscsi`. If you would prefer to define it, you can modify that file's contents to something like `InitiatorName=iqn.2024-01.com.example.pure:some.host.id` then restarting iscsid (and then reconnect any active iscsi sessions, if already connected).  Each name must be unique.
+For each of the Hosts and Front-end you'll need to either gather or define their iSCSI Initiator Name. If you have already started iscsid at least once on the machine it should have a name generated in `/etc/iscsi/initiatorname.iscsi`. If you would prefer to define it, you can modify that file's contents to something like `InitiatorName=iqn.2024-01.com.example.pure:some.host.id` then restarting iscsid (and then reconnect any active iscsi sessions, if already connected).  Each name must be unique.
 
-Navigate to **Storage → Hosts** in the Everpure dashboard. For each OpenNebula Host and frontend, select the **+** in the top right of the Hosts card and set a **Name** that clearly identifies the Host, and leave the Personality as **None**.  You can also use the "Create Multiple…" if you have many Hosts.
+Navigate to **Storage → Hosts** in the Everpure dashboard. For each OpenNebula Host and Front-end, select the **+** in the top right of the Hosts card and set a **Name** that clearly identifies the Host, and leave the Personality as **None**.  You can also use the "Create Multiple…" if you have many Hosts.
 
-<center>
-{{< image path=/images/purestorage_add_hostgroup.png width=500 alt="image0" >}}
-</center>
+{{< image path="/images/purestorage_add_hostgroup.png" alt="PureStorage Add Hostgroup" align="center" width="60%" pb="20px" >}}
 
 Once each Host is populated in the list, click into each of them and then on the **Host Ports** card, select the Menu (**⋮**) button and select **Configure IQNs**. Paste the initiator name from `/etc/iscsi/initiatorname.iscsi` from the proper Host here.
 
@@ -30,13 +28,11 @@ From the Everpure dashboard, navigate to **Storage → Volumes**.  Here, in the 
 
 Give the volume a name (this can just be the name of your OpenNebula LVM volume group or something descriptive), and set the desired size. Thin provisioning is always enabled on Everpure, so there’s no need to configure anything extra.
 
-You don’t need to configure snapshots, protection policies, or replication unless you’re doing something more advanced. For basic OpenNebula integration, just create the volume and leave everything else at defaults.
+You don’t need to configure snapshots, protection policies, or replication unless you’re doing something more advanced. For basic OpenNebula integration, just create the Volume and leave everything else at defaults.
 
 Click on the volume you just created, and on the **Connected Host Groups** card, click the Menu (**⋮**) button and click **Connect…**. Select your Host group (or individual Hosts if you’re not using a group), and confirm the connection.
 
-<center>
-{{< image path=/images/purestorage_connect_hostgroup.png width=500 alt="image0" >}}
-</center>
+{{< image path="/images/purestorage_connect_hostgroup.png" alt="PureStorage Connect Hostgroup" align="center" width="60%" pb="20px" >}}
 
 Once connected, the volume will be exposed to all Hosts in the group. You can update the Host group if you add/remove Hosts from your OpenNebula installation.
 
@@ -44,7 +40,7 @@ After this is complete, the volume is visible on your OpenNebula Hosts after re-
 
 ## Front-end and Hosts Configuration
 
-The Frontend and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
+The Front-end and Hosts of OpenNebula should have their `/etc/multipath.conf` to include these sections:
 
 ~~~
 defaults {
@@ -83,6 +79,4 @@ devices {
 }
 ~~~
 
-If you have an existing multipath configuration file please merge them together if possible.
-
-Please ensure you restart your multipath daemon to pick up the changes: `systemctl restart multipathd`
+If you have an existing multi-path configuration file merge them together if possible. Ensure you restart your multipath daemon to pick up the changes: `systemctl restart multipathd`
