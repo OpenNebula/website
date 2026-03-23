@@ -236,7 +236,3 @@ home = ["HTML", "JSON"]
 mediaType = "application/json"
 baseName = "source-map"
 isPlainText = true
-
-#[services]
-#  [services.googleAnalytics]
-#    id = 'G-TG2W04C1CT'
