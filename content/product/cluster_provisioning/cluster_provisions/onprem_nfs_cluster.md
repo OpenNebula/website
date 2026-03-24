@@ -39,7 +39,7 @@ The following resources, which are associated with each on-premises Cluster, are
 ## Creating an On-premises Provision
 
 ### Prerequisites
-To create an on-premises Provision with NFS, you should use the [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
+To create an on-premises Provision with NFS, you should use the [On-premises Provider]({{% relref "/product/cluster_provisioning/cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
 
 ### Procedure
 
@@ -230,4 +230,4 @@ For further details about the API, see the [OneForm API Reference]({{% relref "/
 
 {{< /tabpane >}}
 
-Now that you have created an on-premises NFS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
+Now that you have created an on-premises NFS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cluster_provisioning/cluster_operations/provision_operations.md" %}}).

@@ -1,5 +1,5 @@
 ---
-title: "Cloud Cluster Provisioning"
+title: "Cluster Provisioning"
 date: "2025-02-17"
 description: "Create and manage providers and provisions on-premises, or on supported cloud services"
 categories:
@@ -10,6 +10,6 @@ weight: "2"
 
 <!-- TMP FIX: -->
 
-<a id="cloud_cluster_provisioning"></a>
+<a id="cluster_provisioning"></a>
 
 <!--# Automated Hybrid Cluster Provisioning -->

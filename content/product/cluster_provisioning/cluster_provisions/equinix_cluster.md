@@ -40,7 +40,7 @@ The following resources, associated to each Edge Cluster, are created in OpenNeb
 
 ### Prerequisites
 
-To create an Equinix Provision, you must have an [Equinix Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/equinix_provider/" %}}) already created.
+To create an Equinix Provision, you must have an [Equinix Provider]({{% relref "/product/cluster_provisioning/cluster_providers/equinix_provider/" %}}) already created.
 
 ### Procedure
 
@@ -246,5 +246,5 @@ For further details about the API, see the [OneForm API Reference]({{% relref "/
 
 {{< /tabpane >}}
 
-Now that you have created an Equinix Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
+Now that you have created an Equinix Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cluster_provisioning/cluster_operations/provision_operations.md" %}}).
 

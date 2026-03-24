@@ -6,6 +6,8 @@ categories:
 pageintoc: "206"
 tags:
 weight: "3"
+toc_hide: true
+headless: true
 ---
 
 <a id="equinix-provider"></a>
@@ -169,7 +171,7 @@ For further details about the API, please see to the [OneForm API Reference]({{%
 
 {{< /tabpane >}}
 
-Now that you have created your Equinix Provider, refer to the next guide to [Provision an Equinix Edge Cluster]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/equinix_cluster.md" %}}).
+Now that you have created your Equinix Provider, refer to the next guide to [Provision an Equinix Edge Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/equinix_cluster.md" %}}).
 
 ## Known Issues
 

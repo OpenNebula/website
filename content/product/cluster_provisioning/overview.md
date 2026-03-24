@@ -1,5 +1,5 @@
 ---
-title: "Cloud Cluster Provisioning Overview"
+title: "Cluster Provisioning Overview"
 linkTitle: "Overview"
 date: "2026-03-06"
 description:
@@ -29,7 +29,7 @@ OneForm offers three interfaces to perform Cluster management and provisioning:
 
 Each of the guides in this Cluster provisioning documentation demonstrates how to perform each task with all three interfaces.
 
-## [Cloud Cluster Providers]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_providers/" %}})
+## [Cluster Providers]({{% relref "product/cluster_provisioning/cluster_providers/" %}})
 
 * **Definition**: Providers represent your credentials and endpoints for third-party cloud services (e.g., AWS, Equinix, Scaleway) or on-premises environments.
 
@@ -37,7 +37,7 @@ Each of the guides in this Cluster provisioning documentation demonstrates how t
 
 * **Automation Integration**: This layer uses Provider drivers to communicate with external IaaS APIs or on-premise bare-metal resources, ensuring that OpenNebula knows how to talk to the specific underlying hardware or virtual resources. 
 
-## [Cloud Cluster Provisions]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_provisions/" %}})
+## [Cluster Provisions]({{% relref "product/cluster_provisioning/cluster_provisions/" %}})
 This is the Deployment and Template phase. Once you have defined a Provider, you need a blueprint for the Cluster deployment itself.
 
 * **Definition**: A "Provision" is a specific instance of a Cluster defined by a Provision Template.
@@ -46,7 +46,7 @@ This is the Deployment and Template phase. Once you have defined a Provider, you
 
 * **One-Click Workflow**: OneForm uses Terraform under the hood to orchestrate the infrastructure and Ansible (via OneDeploy) to configure the OS and OpenNebula services on the newly provisioned nodes.
 
-## [Cloud Cluster Operations]({{% relref "product/cloud_cluster_provisioning/cloud_cluster_operations/" %}})
+## [Cluster Operations]({{% relref "product/cluster_provisioning/cluster_operations/" %}})
 Cluster operations handle the lifecycle management of Clusters once they are live.
 
 * **Definition**: Operations involving the day-to-day management of your existing provisions.
@@ -57,5 +57,5 @@ Cluster operations handle the lifecycle management of Clusters once they are liv
 
 ## Configuration
 
-OneForm can be configured for your specific use-case, please consult the [OneForm Configuration Reference]({{% relref "/product/operation_references/opennebula_services_configuration/oneform/" %}}) for details.
+OneForm can be configured for your specific use case, please consult the [OneForm Configuration Reference]({{% relref "/product/operation_references/opennebula_services_configuration/oneform/" %}}) for details.
 
