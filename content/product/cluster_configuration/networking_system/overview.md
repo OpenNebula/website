@@ -24,7 +24,7 @@ OpenNebula supports the following networking modes:
 
 The attribute `VN_MAD` of a Virtual Network determines which of the above networking modes is used.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Security Groups are not supported in the Open vSwitch modes.{{< /alert >}} 
 
 ## How Should I Read This Chapter

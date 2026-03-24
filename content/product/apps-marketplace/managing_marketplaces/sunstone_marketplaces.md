@@ -22,7 +22,7 @@ The [Sunstone web UI]({{% relref "../../../product/control_plane_configuration/g
 * [Check details of a marketplace]({{% relref "#sunstone-marketplaces-details" %}})
 * [See the appliances that have a marketplace]({{% relref "#sunstone-marketplaces-appliances" %}})
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Only [OpenNebula Systems]({{% relref "../public_marketplaces/opennebula#market-one" %}}), [LinuxContainers]({{% relref "../public_marketplaces/lxc#market-linux-container" %}}), [HTTP]({{% relref "../private_marketplaces/market_http#market-http" %}}) and [S3]({{% relref "../private_marketplaces/market_s3#market-s3" %}}) Marketplaces can be created with Sunstone.{{< /alert >}} 
 
 ![marketplace_dashboard](/images/marketplaces/dashboard.png)

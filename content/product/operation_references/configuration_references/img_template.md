@@ -15,7 +15,7 @@ weight: "2"
 
 This page describes how to define a new image template. An image template follows the same syntax as the [VM template]({{% relref "template#template" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Some template attributes can compromise the security of the system or the security of other VMs, and can be used **only** by users in the `oneadmin` group. These attributes can be configured in [oned.conf]({{% relref "../opennebula_services_configuration/oned#oned-conf" %}}). In the following tables, default attributes are marked with `*`. For the complete list, see the [Restricted Attributes]({{% relref "img_template#img-template-restricted-attributes" %}}) section.{{< /alert >}}
 
 ## Template Attributes
@@ -42,10 +42,10 @@ The following attributes can be defined in the template:
 | `LUKS_SECRET`                                   | Optional                               | UUID value                                                                                                                                                                                | This attribute needs to be set for LUKS-encrypted images. Its value is UUID registered on hypervisor nodes as an identifier for the LUKS secret.                                                                                                                                                                                                                                                                                                  |
 | `SERIAL`                                        | Optional                               | `auto`, any string                                                                                                                                                                      | If present, a serial number will be added to virtual hard drive. If set to `auto`, the serial number will be generated automatically. (<vm_id>-<disk_id>) If set to a specific value, that value will be used as the serial number.                                                                                                                                                                                                               |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Be careful when `PATH` points to a compressed bz2 image, since although it will work, OpenNebula will not calculate its size correctly.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 All of the above KVM attributes also apply to LXC, with the exception of `DEV_PREFIX` and `TARGET`.{{< /alert >}} 
 
 Mandatory attributes for `DATABLOCK` images with no `PATH` set:

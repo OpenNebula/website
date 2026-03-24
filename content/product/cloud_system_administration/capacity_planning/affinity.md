@@ -111,7 +111,7 @@ ROLE = [
 ANTI_AFFINED = "databases, backup"
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Note that a Role policy has to be coherent with any Role-Role policy, i.e., a Role with an `ANTI_AFFINED` policy cannot be included in any `AFFINED` Role-Role rule.{{< /alert >}} 
 
 ### Scheduler Configuration and Remarks
@@ -135,7 +135,7 @@ VMGROUP = [ VMGROUP_NAME = "muilt-tier app", ROLE = "db" ]
 
 You can also specify the `VM_GROUP` by its id (`VMGROUP_ID`), and in case of multiple groups with the same name you can select it by owner with `VMGROUP_UID`, as with any other resource in OpenNebula.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can also add the `VMGROUP` attribute when a VM is created (`onevm create`) or when the associated template is instantiated (`onetemplate instantiate`). This way the same VM template can be associated with different Roles.{{< /alert >}} 
 
 ## VM Group Management

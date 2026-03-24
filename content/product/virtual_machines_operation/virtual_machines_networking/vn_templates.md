@@ -43,7 +43,7 @@ By default just `oneadmin` can create Virtual Network Templates. If other users 
 
 Once the Virtual Network Template is created, you can control access to it by its permissions. For example, if an end user needs to instantiate a specific template, it would be enough to give the template **USE** permission for others. You can find more [information about permissions here]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Depending on the user, ACLs might need to be created in order to allow the users to manage their own networks.{{< /alert >}} 
 
 ### Operations
@@ -66,7 +66,7 @@ The available operations for Virtual Network Templates are the following:
 
 First, create a Virtual Network Template and set all the attributes which need to be set to define the Virtual Network at the template like bridge, vlan id, etc.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that Virtual Network restricted attributes will be also restricted for Virtual Network Templates.{{< /alert >}} 
 
 ```default
@@ -109,7 +109,7 @@ $ onevnet list
 
 The network is now ready. Users can create VMs and attach their interfaces to the newly created Virtual Network simply by adding `NIC = [ NETWORK = private ]` or selecting it through Sunstone.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that for using the newly created Virtual Network, the user needs to define an Address Range either during the Virtual Network Template instantiation or just by updating the Virtual Network.{{< /alert >}} 
 
 You can also manage your Virtual Networks Templates using [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Networks Template** tab to create and operate your Virtual Networks Templates in a user-friendly way.

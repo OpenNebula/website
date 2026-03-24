@@ -16,7 +16,7 @@ weight: "3"
 
 Security Groups define firewall rules to be applied to Virtual Machines.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Security groups are not supported for OpenvSwitch.{{< /alert >}} 
 
 <a id="security-groups-requirements"></a>
@@ -35,7 +35,7 @@ A Security Group is composed of several Rules. Each Rule is defined with the fol
 | **ICMP_TYPE**  | Optional  | Specific ICMP type of the rule. If a type has multiple codes,<br/>it includes all the codes within. This can only be used with<br/>**ICMP**. If omitted the rule will affect the whole **ICMP**<br/>protocol. | 0,3,4,5,8,9,10,11,12,13,14,17,18                                                                                                                                            |
 | **NETWORK_ID** | Optional  | Specify a network ID to which this Security Group will apply                                                                                                                                                  | A valid networkd ID                                                                                                                                                         |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When using `IPSEC` value for `PROTOCOL`, rules for the Encapsulating Security Payload (ESP) protocol of IPSec are set.{{< /alert >}} 
 
 To create a Security Group, use the [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) or create a template file following this example:
@@ -65,7 +65,7 @@ $ onesecgroup create ./sg.txt
 ID: 102
 ```
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 This guide focuses on the CLI command `onesecgroup` but you can also manage Security Groups using the [Sunstone GUI interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Security Group** tab to create and manage groups in a user-friendly way.{{< /alert >}} 
 
 ![sg_wizard_create](/images/sg_wizard_create.png)
@@ -119,7 +119,7 @@ This means that you **must** edit every newly created network and remove the
 Groups, the `default` one will allow all traffic and therefore override the rest
 of the Security Groups.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You may want to remove the rules included in the `default` security groups. This way, users are forced to create security groups (otherwise they will not have connectivity to and from the VMs) which avoid some security problems.{{< /alert >}} 
 
 <a id="security-groups-update"></a>

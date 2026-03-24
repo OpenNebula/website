@@ -30,7 +30,7 @@ The OpenNebula FireEdge server provides a **next-generation web-management inter
 http://<OPENNEBULA-FRONTEND>:2616
 ```
 
-{{< alert title="Note" color="info" >}}
+{{< alert title="Note" type="info" >}}
 We are continually expanding the feature set of FireEdge Sunstone, and hence its configuration files are in constant change. In versions 7.0.1 and later, configuration files in `/etc/one/fireedge/` can be replaced by the ones that can be downloaded from [here](https://github.com/OpenNebula/one/tree/6893ef40c852fd9c64ab275ed02aad84043bf999/src/fireedge/etc) in order to activate the latest features.
 {{< /alert >}}
 
@@ -40,7 +40,7 @@ We are continually expanding the feature set of FireEdge Sunstone, and hence its
 
 The FireEdge server configuration file can be found in `/etc/one/fireedge-server.conf` on your Front-end. It uses **YAML** syntax, with the parameters listed in the table below.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 After a configuration change, the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}}
 
 | Parameter                       | Default Value                | Description                                                                                                                                                                                                                                                           |
@@ -67,7 +67,7 @@ After a configuration change, the FireEdge server must be [restarted]({{% relref
 | `auth`                          | `opennebula`                 | Authentication driver for incoming requests: **OpenNebula** the authentication will be done by the OpenNebula core using the driver defined for the user. **remote** performs the login based on a Kerberos X-Auth-Username header provided by authentication backend |
 | `auth_redirect`                 |                              | This configuration is for the login button redirect. The available options are: **/**, **.** or a **URL**                                                                                                                                                             |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 JWT is an acronym of JSON Web Token{{< /alert >}}
 
 <a id="fireedge-sunstone-configuration"></a>
@@ -76,7 +76,7 @@ JWT is an acronym of JSON Web Token{{< /alert >}}
 
 The Sunstone server configuration file can be found in `/etc/one/fireedge/sunstone/sunstone-server.conf` on your Front-end. It uses the **YAML** syntax, with the parameters listed in the table below.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 After a configuration change the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}}
 
 ![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
@@ -136,7 +136,7 @@ default:
   - user
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The logo can be updated without having to restart the FireEdge server!{{< /alert >}}
 
 ![fireedge_sunstone_linux_login_logo](/images/fireedge_login_linux_logo.png) ![fireedge_sunstone_linux_drawer_logo](/images/fireedge_drawer_linux_logo.png)
@@ -161,7 +161,7 @@ Moreover, Suntone has the capacity to show the detail of a resource in a full sc
 
 This configuration can be modified in the `/etc/one/fireedge/sunstone/sunstone-server.conf` file modifying the parameter `fullViewMode`. [See this table](#fireedge-sunstone-configuration).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Changes will not be visible for users whose template has the `TEMPLATE/FIREEDGE/FULL_SCREEN_INFO` attribute configured, as this value takes precedence over the general Sunstone configuration.{{< /alert >}}
 
 Also, both configurations will be overridden for a specific user if the user changes the configuration in the settings section.
@@ -193,7 +193,7 @@ These two files store a JSON object that has the same structure but with differe
 | footer          | Defines the different colors used in the footer of the app.                                         |
 | graphs          | Defines the different colors used in the different graphs used in the app.                          |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}}
 
 ### Configure Guacamole
@@ -202,7 +202,7 @@ FireEdge uses [Apache Guacamole](http://guacamole.apache.org), a free and open s
 
 Guacamole supports multiple connection methods such as **VNC, RDP, and SSH** and is made up of two separate parts - server and client. The Guacamole server consists of the native server-side libraries required to connect to the server and the Guacamole proxy daemon (`guacd`), which accepts the user’s requests and connects to the remote desktop on their behalf.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The OpenNebula **binary packages** provide Guacamole proxy daemon (package `opennebula-guacd` and service `opennebula-guacd`), which is installed alongside FireEdge. In the default configuration, the Guacamole proxy daemon is automatically started along with FireEdge, and FireEdge is configured to connect to the locally-running Guacamole. No extra steps are required!{{< /alert >}}
 
 If Guacamole is running on a different Host to the FireEdge, the following FireEdge configuration parameters have to be customized:

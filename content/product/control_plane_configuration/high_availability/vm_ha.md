@@ -50,7 +50,7 @@ We are defining a Host hook, named `host_error`, that will execute the script `f
 
 More information on hooks [here]({{% relref "../../../product/integration_references/system_interfaces/hook_driver#hooks" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Note that spurious network errors may lead to a VM being started twice on different hosts and possibly clashing on shared resources. The previous script needs to fence the error Host to prevent split brain VMs. You may use any fencing mechanism for the Host and invoke it within the error hook.{{< /alert >}} 
 
 ## Tuning HA responsiveness
@@ -74,7 +74,7 @@ UserKnownHostsFile /dev/null
 ConnectTimeout 15
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Consider that a temporary network/Host problem or a small hiccup combined with short timers can lead to an overkill situation where the HA hook gets triggered too fast when waiting a few more seconds could have been fine. This is a trade-off you’ll have to be aware of when implementing HA.{{< /alert >}} 
 
 ## Enabling Fencing

@@ -78,7 +78,7 @@ The following attributes can be overridden at Cluster and Host level, but not wi
 - `CGROUPS_VERSION`: Use ‘2’ to use Cgroup V2, all other values or undefined: use Cgroup V1
 - `EMULATOR_CPUS`: specifies which of the host physical CPUs runs the main QEMU emulator threadValue used for KVM option <cputune><emulatorpin cpuset=…>
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 These values are only used during VM creation; for other actions like nic or disk attach/detach the default values must be set in `/var/lib/one/remotes/etc/vmm/kvm/kvmrc`. For more info check [Files and Parameters]({{% relref "kvm_driver#kvmg-files-and-parameters" %}}) section.{{< /alert >}}
 
 For example (check the actual state in the configuration file on your Front-end):
@@ -250,7 +250,7 @@ The `OS/FIRMWARE_FORMAT` attribute can be used to define the format of the UEFI 
 - `qcow2`: store the `UEFI NVRAM` as a `qcow2` image (requires `libvirt >= 10.10`).
 - `raw`: store the `UEFI NVRAM` as a `raw` image (default value).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Internal UEFI VMs snapshots are only supported with `qcow2 UEFI NVRAM` images.
 {{< /alert >}}
 
@@ -261,7 +261,7 @@ The allowed values are:
 - `true`: use Secure Boot.
 - `false`: do not use Secure Boot.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If Secure Boot is enabled, the attribute `OS/MACHINE` must be set to `q35`.{{< /alert >}}
 
 All the OS & CPU options can be accessed in Sunstone from the VM Template Update/Create dialog, in the second step (Advanced options) under the "OS & CPU" tab.
@@ -342,7 +342,7 @@ how many times the memory can be added.</p></td>
 
 <!-- End HTML table. -->
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Live Memory resize needs QEMU version 2.4. Live VCPU resize needs QEMU version 2.7.{{< /alert >}}
 
 ### MEMORY_RESIZE_MODE
@@ -363,7 +363,7 @@ KVM supports hotplugging to the `virtio` and the `SCSI` buses. For disks, the bu
 - `sd`: `SCSI` (default)
 - `hd`: `IDE`
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Hotplugging is not supported for CD-ROM and floppy.{{< /alert >}}
 
 If `TARGET` is passed instead of `DEV_PREFIX` the same rules apply (what happens behind the scenes is that OpenNebula generates a `TARGET` based on the `DEV_PREFIX` if no `TARGET` is provided).

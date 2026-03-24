@@ -22,7 +22,7 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 * **System Datastore** holds disks of running Virtual Machines. Disk are moved from/to the Images when the VMs are deployed/terminated.
 * **Files & Kernels Datastore** to store plain files (not disk images), e.g. kernels, ramdisks, or contextualization files. [See details here]({{% relref "file_ds#file-ds" %}}).
 
-{{< image path="/images/datastoreoverview.svg" alt="Overview of Storage Design based on Datastores" align="center" width="60%" pb="20px" >}}
+{{< image path="/images/datastoreoverview.svg" alt="Overview of Storage Design based on Datastores" align="center" width="60%" mb="20px" border="false" >}}
 
 ### Image Datastores
 
@@ -70,7 +70,7 @@ After that, proceed with the specific Datastore documentation you might be inter
 
 This Chapter applies to KVM and LXC.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Hypervisor limitations:
 
 - **LXC** nodes only support [NFS/NAS]({{% relref "nas_ds#nas-ds" %}}), [Local Storage]({{% relref "local_ds#local-ds" %}}) and [Ceph]({{% relref "ceph_ds#ceph-ds" %}}) datastores.{{< /alert >}}

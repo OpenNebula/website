@@ -86,17 +86,17 @@ You must also have access to the Sunstone user interface.
     * In the **Storage** tab edit the **SlurmWorker** disk by clicking the pen icon:
         * Click **Next** to move to **Advanced options**, set **Size on instantiate** to 20480
     
-    {{< image path="/images/ai_factories/slurm-update-disk.png" alt="Slurm disk" align="center" width="90%" pt="20px" pb="40px" >}}
+    {{< image path="/images/ai_factories/slurm-update-disk.png" alt="Slurm disk" align="center" width="90%" mt="20px" mb="40px" >}}
 
     * In the **PCI Devices** tab select **Attach PCI device**. Choose the your device in the **Device name** dropdown:
 
-    {{< image path="/images/ai_factories/attach-pci-device.png" alt="Slurm PCI" align="center" width="90%" pt="20px" pb="40px" >}}
+    {{< image path="/images/ai_factories/attach-pci-device.png" alt="Slurm PCI" align="center" width="90%" mt="20px" mb="40px" >}}
 
     * Click **Next** to the **Custom Variables** page and then select **Finish**.
 
     * In the **Context** tab, copy the following script into the **Start script** field. This script downloads a model from Hugging Face and installs associated resources then creates a script to run the fine-tuning job:
 
-    {{< image path="/images/ai_factories/slurm-start-script.png" alt="Slurm start script" align="center" width="90%" pt="20px" pb="40px" >}}
+    {{< image path="/images/ai_factories/slurm-start-script.png" alt="Slurm start script" align="center" width="90%" mt="20px" mb="40px" >}}
 
 ### Start Script: 
 ```python
@@ -161,14 +161,14 @@ chmod +x "$AI_DIR/demo_finetune.py"
    * Select the the **SlurmWorker** template
    * Select instantiate:
 
-    {{< image path="/images/ai_factories/instantiate-slurm-worker.png" alt="Alpine VM VNC" align="center" width="90%" pb="20px" pt="20px" >}}
+    {{< image path="/images/ai_factories/instantiate-slurm-worker.png" alt="Alpine VM VNC" align="center" width="90%" mb="20px" mt="20px" >}}
 
    * Set the **number of instances** to 1
    * Click **Next**. When prompted, enter:
      * **Slurm Controller IP address** (the VM you deployed in Step 1). Ensure workers can reach this IP
      * **Slurm Controller Munge key** (base64) that you recorded earlier (everything inside the quotation marks)
 
-     {{< image path="/images/ai_factories/slurm-munge-key.png" alt="Slurm MUNGE" align="center" width="90%" pt="20px" pb="40px" >}}
+     {{< image path="/images/ai_factories/slurm-munge-key.png" alt="Slurm MUNGE" align="center" width="90%" mt="20px" mb="40px" >}}
 
    * Click **Next** to **Advanced options**, select the **Network** tab and select **Attach NIC**:
       * Choose **admin_net** or an alternative available Virtual Network.
