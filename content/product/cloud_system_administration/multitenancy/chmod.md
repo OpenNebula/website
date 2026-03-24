@@ -45,10 +45,10 @@ You can check what operations are allowed with each of the **USE**, **MANAGE**, 
 * **MANAGE**: Operations that modify the resource like stopping a Virtual Machine, changing the persistent attribute of an image, or removing a lease from a network. Typically you will grant **MANAGE** rights to users that will manage your own resources.
 * **ADMIN**: Special operations that are typically limited to administrators, like updating the data of a Host or deleting a user group. Typically you will grant **ADMIN** permissions to those users with an administrator role.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Virtual Machine objects allow you to set the permission level required for each specific action, for example you may want to require USE for the delete-recreate operation instead of the default ADMIN right. You can [overrride the default permissions for each action]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-vm-operations" %}}) in oned.conf.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 By default every user can update any permission group (owner, group, or other) with the exception of the admin bit. There are some scenarios where it would be advisable to limit the other set (e.g., OpenNebula Zones so users cannot break the group limits). In these situations the `ENABLE_OTHER_PERMISSIONS` attribute can be set to `NO` in `/etc/one/oned.conf` file{{< /alert >}} 
 
 ### Changing Permissions with chmod
@@ -164,7 +164,7 @@ $ oneimage delete 2
 $ oneimage unlock 2
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Only the owner of the lock may unlock the resource. The user ONEADMIN can override any lock.{{< /alert >}} 
 
 <a id="manage-acl"></a>
@@ -218,7 +218,7 @@ The next one allows all users in the group 106 to use the Virtual Network 47. Th
 @106 NET/#47 USE
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note the difference between `* NET/#47 USE"` **vs** `* NET/@47 USE`
 
 All users can use NETWORK with ID 47 **vs** All users can use NETWORKS belonging to the group whose ID is 47.{{< /alert >}}  
@@ -393,7 +393,7 @@ ID     USER RES_VHNIUTGDCOZSvRMAPtB   RID OPE_UMAC  ZONE
 
 ## How Permission is Granted or Denied
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Visit the [XML-RPC API reference documentation]({{% relref "../../../product/integration_references/system_interfaces/api#api" %}}) for a complete list of the permissions needed by each OpenNebula command.{{< /alert >}} 
 
 For the internal Authorization in OpenNebula, there is an implicit rule:

@@ -22,7 +22,7 @@ A Marketplace is a repository of Marketplace Appliances. There are three types o
 
 Using Private Marketplaces is very convenient, as it will allow you to move images across different kinds of datastores (using the Marketplace as an exchange point). It is a way to share OpenNebula images in a Federation, as these resources are federated. In an OpenNebula deployment where the different VDCs don’t share any resources, a Marketplace will act like a shared datastore for all the users.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Although a Marketplace created in a Zone will be seen in every Zone on the Federation and every image can be imported from the Marketplace on any Zone, only the Zone where the Marketplace was created will be able to upload appliances to the Marketplace.{{< /alert >}} 
 
 ## Backends

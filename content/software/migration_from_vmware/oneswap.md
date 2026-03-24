@@ -16,7 +16,7 @@ OpenNebula provides [OneSwap](https://github.com/OpenNebula/one-swap), a command
 
 OneSwap supports importing Open Virtual Appliances (OVAs) previously exported from vCenter/ESXi environments. The [Managing OVAs and VMDKs]({{% relref "import_ova" %}}) guide provides instructions, with complete examples.
 
-{{< alert color="success" >}}
+{{< alert type="info" >}}
 OneSwap is part of a set of tools and services designed to guide you in achieving a smooth transition from VMware. These include the [VMware Migration Service](https://support.opennebula.pro/hc/en-us/articles/18919424033053-VMware-Migration-Service), a complete guidance and support framework to help organizations define and execute their migration plan with minimal disruption to business operations. Further information is available in [Migrating from VMware to OpenNebula](https://support.opennebula.pro/hc/en-us/articles/17225311830429-White-Paper-Migrating-from-VMware-to-OpenNebula).
 {{< /alert >}}
 
@@ -31,7 +31,7 @@ The OneSwap server must have network access to:
 
 Run `oneswap` on a dedicated server with sufficient disk space to buffer VM images during conversion. This server should have high-bandwidth connectivity to both the vCenter environment and the OpenNebula image datastores to minimize migration time.
 
-{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" mb="20px" border="false" >}}
 
 ## vCenter Permissions Requirements
 

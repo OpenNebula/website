@@ -24,7 +24,7 @@ To use RBD mirroring, you will need to set up two users for the Ceph clusters: o
 
 This section lists the commands to create the Ceph user on the Ceph clusters for Site and Site B.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Throughout this guide, `one` is used as the pool name, and `site-a` and `site-b` as the Ceph cluster names.
 
 Unless otherwise specified, all commands in this guide should be run as `root`.
@@ -58,7 +58,7 @@ On the target Ceph cluster (Site B), you will need to create a local user for th
 ceph auth get-or-create client.rbd-mirror.$(hostname) mon 'profile rbd-mirror' osd 'profile rbd' -o /etc/ceph/ceph.client.rbd-mirror.$(hostname).keyring
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you wish to restrict the user permissions to this specific pool, you can use `profile rdb pool=one`:
 
 ```bash
@@ -87,7 +87,7 @@ Make sure that the name of the config file matches the name used in the keyring 
 
 ## Enable Mirroring
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When RBD mirroring is enabled for the entire pool, all newly-created images will inherit the `journal` and `exclusive-lock` attributes. However, only template images that do not need to be synchronized will be automatically synchronized to the opposite site, and VM images will not be synchronized even if they inherit the `journal` and `exclusive-lock` attributes, since that would require _flattening_ the image.
 
 Site A can be configured with mirroring in `image` mode, but Site B always needs to use mirroring in `pool` mode.

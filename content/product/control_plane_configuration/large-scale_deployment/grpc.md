@@ -69,7 +69,7 @@ In distributed environments, explicit endpoint definitions are required to ensur
 * High availability: Define the `ENDPOINT_GRPC` attribute for every node within the cluster.
 * Federation: Define the `ENDPOINT_GRPC` attribute for each zone in the federation.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Important: If a client is configured to use gRPC but the `ENDPOINT_GRPC` is missing in an HA or Federated setup, commands may fail to route correctly, resulting in connection errors.
 {{< /alert >}}
 

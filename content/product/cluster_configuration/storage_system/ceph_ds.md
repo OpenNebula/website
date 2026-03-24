@@ -15,7 +15,7 @@ weight: "5"
 
 The Ceph Datastore driver allows the use of Ceph storage for images and disks of Virtual Machines.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This driver requires the OpenNebula nodes using the Ceph driver to be Ceph clients of a running Ceph Cluster. More information in [Ceph documentation](https://docs.ceph.com/en/latest/).{{< /alert >}} 
 
 ## Ceph Cluster Setup
@@ -48,7 +48,7 @@ $ ceph auth get-or-create client.libvirt \
       mon 'profile rbd' osd 'profile rbd pool=one'
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Ceph Luminous release comes with simplified RBD capabilities (more information about user management and authorization capabilities is in the Ceph [documentation](https://docs.ceph.com/en/latest/rados/operations/user-management/#authorization-capabilities)). When **upgrading existing Ceph deployment to the Luminous and later**, please ensure the selected user has the proper new capabilities. For example, for the above user `libvirt` you can do this by running:
 
 ```default
@@ -73,7 +73,7 @@ rbd_default_format = 2
 
 * Pick a set of client nodes of the cluster to act as storage bridges. These nodes will be used to import images into the Ceph Cluster from OpenNebula. These nodes must have the `qemu-img` command installed.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For production environments it is recommended to **not collocate** Ceph services (monitor, osds) with OpenNebula Nodes or the Front-end{{< /alert >}} 
 
 ## Front-end and Hosts Setup
@@ -159,13 +159,13 @@ To use your Ceph Cluster with the OpenNebula, you need to define both System and
 | `EC_POOL_NAME` | Name of Ceph erasure coded pool                                                            | NO          |
 | `CEPH_TRASH`   | Enables trash feature on given datastore (Luminous+),<br/>values: yes|no                   | NO          |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You may add another Image and System Datastore pointing to other pools with different allocation/replication policies in Ceph.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Ceph Luminous release allows use of erasure coding for `RBD` images. In general, erasure-coded images take up less space but have worse I/O performance. Erasure coding can be enabled on Image and/or System Datastores by configuring `EC_POOL_NAME` with the name of the erasure-coded data pool. Regular replicated Ceph pool `POOL_NAME` is still required for image metadata. More information in [Ceph documentation](https://docs.ceph.com/en/latest/rados/operations/erasure-code/#erasure-coding-with-overwrites).{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 In order to place the `ceph.conf` file in a non-default location (i.e., other than `/etc/ceph/ceph.conf`), please perform the following steps.
 
 1. On all nodes listed in `BRIDGE_LIST` configuration attribute of ceph-based DS, move the `ceph.conf` file into the desired location:
@@ -224,7 +224,7 @@ $ onedatastore create systemds.txt
 ID: 101
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When different System Datastores are available the `TM_MAD_SYSTEM` attribute will be set after picking the datastore.{{< /alert >}} 
 
 ### Create  Image Datastore
@@ -260,7 +260,7 @@ BRIDGE_LIST = cephfrontend
 ID: 101
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If you are going to use the `TM_MAD_SYSTEM` attribute with **SSH** mode, you need to have an [SSH type System Datastore]({{% relref "local_ds#local-ds" %}}) configured.{{< /alert >}} 
 
 ### Additional Configuration
@@ -274,7 +274,7 @@ Default values for the Ceph drivers can be set in `/var/lib/one/remotes/etc/data
 * `SUPPORTED_FS`: Comma-separated list with every file system supported for creating formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf`.
 * `FS_OPTS_<FS>`: Options for creating the file system for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each file system type.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Before adding a new file system to the `SUPPORTED_FS` list, make sure that the corresponding `mkfs.<fs_name>` command is available in all nodes including Front-end and hypervisor nodes. If an unsupported FS is used by the user the default one will be used.{{< /alert >}} 
 
 ### Using different modes
@@ -289,7 +289,7 @@ When using Sunstone, the deployment mode needs to be set in the Storage tab.
 
 Images are stored in a Ceph pool, named after its OpenNebula ID `one-<IMAGE ID>`. Virtual Machine disks are stored by default in the same pool (Ceph Mode). You can also choose to export the Image rbd to the hypervisor local storage using the SSH Mode.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 It is necessary to register each image only once, then it can be deployed using any mode (**ceph** or **SSH**).{{< /alert >}} 
 
 ### Ceph Mode (Default)
@@ -307,7 +307,7 @@ one-0-14-0 10240M one/one-0@snap   2
 one-0-15-0 10240M one/one-0@snap   2
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In this case, context disk and auxiliary files (deployment description and checkpoints) are stored locally in the nodes.{{< /alert >}} 
 
 <a id="ceph-ssh-mode"></a>
@@ -326,10 +326,10 @@ total 609228
 -rw-rw-r-- 1 oneadmin oneadmin      372736 Dec 20 14:41 disk.1
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In this case disk.0 is generated with a command similar to `rbd export one/one-0@snap disk.0`{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 In this mode there are some inherent limitations:
 
 * disk snapshots are not supported

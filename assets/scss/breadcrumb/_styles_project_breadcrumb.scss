@@ -1,0 +1,44 @@
+@import "../_styles_fonts";
+
+.td-breadcrumbs {  
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0px 24px 0px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+  color: var(--body-color);
+  padding-right: 0.5rem;
+}
+
+.td-breadcrumbs i {
+  width: 16px;
+  height: 16px;
+  color: var(--breadcrumb-icon-color);
+}  
+
+.td-breadcrumbs a {  
+  @include body-small;
+  color: var(--body-color);
+  &.github-link {
+    color: var(--link-color);
+  }
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}  
+
+.breadcrumb {
+  @include body-small;
+  margin: 0;
+}
+
+.breadcrumb li {
+  @include body-small;  
+}
+
+.breadcrumb-item.active {
+  @include body-small;  
+  color: var(--body-disabled-color);
+}

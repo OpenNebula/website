@@ -19,7 +19,7 @@ OneFlow allows users and administrators to define, execute, and manage multi-tie
 
 The following diagram represents a multi-tier application. Each node represents a Role and its cardinality (the number of VMs that will be deployed). The arrows indicate the deployment dependencies: each Role’s VMs are deployed only when all its parent’s VMs are running.
 
-{{< image path="/images/service_sample.svg" alt="Multi-tier application with deployment dependencies" align="center" width="60%" pb="20px" >}}
+{{< image path="/images/service_sample.svg" alt="Multi-tier application with deployment dependencies" align="center" width="60%" mb="20px" border="false" >}}
 
 This Service can be represented with the following JSON template:
 
@@ -87,7 +87,7 @@ Below are all the attributes that can appear within a Service, which will be cov
 | `networks_values`    | array   | No          | Values for the networks, represented as an array of objects.                                          |
 | `on_hold`            | boolean | No          | If true, the service will be held and not deployed automatically.                                     |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The table shown above is just a summary of the main Service template attributes. For a full information on the Service representation, please check the [API data model guide]({{% relref "../../../product/integration_references/system_interfaces/appflow_api#appflow-api" %}}){{< /alert >}} 
 
 ### Defining the Roles of a Service
@@ -116,7 +116,7 @@ Roles are used to orchestrate and manage these resources according to attributes
 > | `elasticity_policies` | array   | No          | A list of elasticity policies to automatically adjust the number of VMs in the Role. |
 > | `scheduled_policies`  | array   | No          | A list of scheduled policies to adjust the number of VMs based on a schedule.        |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Some defaults values like `cooldown` and `shutdown_action` can be customized in the OneFlow server configuration, located by default at `/etc/one/oneflow-server.conf`.{{< /alert >}} 
 
 2. **VR Role**: this Role defines a Virtual Router Role, which is responsible for managing Virtual Routers within the Service. Similar to the VM Role, it includes attributes like `template_id` and `cardinality`, but is specifically designed to handle network routing services. Please note that in this case `template_id` must refer to a Virtual Router template.
@@ -133,7 +133,7 @@ Some defaults values like `cooldown` and `shutdown_action` can be customized in 
 > | `on_hold`            | boolean | No          | If true, the Role will be held and not deployed automatically.       |
 > | `parents`            | array   | No          | An array of parent Role names.                                       |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Keep in mind that Auto-scaling and Elasticity options for Virtual Router Roles are not supported, as these operations are not natively supported by Virtual Routers.{{< /alert >}} 
 
 ### Create and List Existing Service Templates
@@ -243,7 +243,7 @@ The `oneflow-template clone` (with the optional `--recursive flag`) can be used 
 
 If the name of the VM template + Service template exceeds 128 chars, VM template name will be cropped.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 [Scheduled Actions]({{% relref "../virtual_machines/vm_instances#vm-guide2-scheduling-actions" %}}) cannot be defined in VM templates if they are intended to be used as part of Service templates. Please remove them prior to instantiate a service to avoid indeterministic behavior.{{< /alert >}} 
 
 <a id="appflow-use-cli-automatic-delete"></a>
@@ -315,7 +315,7 @@ You can also parameterize the content of the `template_contents` using the User 
 
 This field follows the same syntactic convention as the User Entries for Virtual Machines to describe the attributes to be asked to the user, so we recommend reviewing the corresponding section for more information.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 All User Inputs will be automatically added to template_contents by OneFlow once the relevant attributes have been requested from the user. There is no need to manually include or reference them within template_contents. Additionally, OneFlow will also add all User Inputs to the CONTEXT of the Role’s machines, similar to how User Inputs are handled in standard Virtual Machines.
 As a result, all values provided by the user will be accessible from within the Role’s machines via OpenNebula’s context packages.{{< /alert >}}  
 
@@ -371,7 +371,7 @@ To enhance the flexibility of User Inputs in Service templates, they can be conf
   }
   ```
 
-  {{< alert title="Note" color="success" >}}
+  {{< alert title="Note" type="info" >}}
   In case you use User Inputs at both levels, **the User Inputs at the Role level will take precedence** over the User Inputs at the Service level.{{< /alert >}} 
 
 From Sunstone, you can add User Inputs as fields during the creation of the OneFlow Service template or update an already existing one in the following form:
@@ -424,7 +424,7 @@ All the user inputs that belong to the Virtual Machine template and are not in t
 
 In order to help the Sunstone user, the Service templates can be extended with an attribute called `user_inputs_metadata` that will be adding some info to the APPS and GROUPS.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The attribute `user_inputs_metadata` can only be used in Sunstone, not in other components of OpenNebula.{{< /alert >}} 
 
 So, if we use the previous template and add the following information:
@@ -453,7 +453,7 @@ Where BASE64_IMAGE is an image in base64 format, Sunstone will render the follow
 
 Using logo attribute we can add a logo to the Service template in base64. Also, we can add info objects with metadata ([please see User Inputs metadata]({{% relref "../../operation_references/configuration_references/template#template-user-inputs-metadata" %}}) to get info about the object structure).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Remember that any User Input that doesn’t meet convention name will be place on the Others tab or Others group. If all User Inputs don’t meet convention name, no tabs or groups will be rendered.{{< /alert >}} 
 
 <a id="appflow-use-cli-networks"></a>
@@ -511,7 +511,7 @@ A Service template can define three different dynamic network modes, determining
 
 This allows you to create more generic Service templates. For example, the same Service template can be used by users of different [groups]({{% relref "../../cloud_system_administration/multitenancy/manage_groups#manage-groups" %}}) that may have access to different Virtual Networks.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When the service is deleted, all the networks that have been created are automatically deleted.{{< /alert >}} 
 
 In addition to specifying Virtual Networks in the template, the Service template also needs to indicate which Roles will be connected to the dynamic networks, which can be achieved using the `template_contents` field. As stated in previous sections, this field is used to override the original template of the Virtual Machine or Virtual Router. For example, to attach a network to the Role, you can specify the following configuration:
@@ -836,7 +836,7 @@ VMs of a Service can be instances on hold with the `on_hold` parameter set to tr
 
 ### Adding or Removing Roles from a Running Service
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Roles can be only added/removed when the service is in RUNNING state.{{< /alert >}} 
 
 In order to add a Role to a running service you can use the command `oneflow add-role`. You need to provide a valid JSON with the Role description, for example:
@@ -858,10 +858,10 @@ $ oneflow add-role 0 role.tmpl
 
 After adding the Role, the service will go to `DEPLOYING` state and when the VMs are created, it will go to `RUNNING`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Networks and User Inputs are supported, so if the new Role has some of them they will be evaluated.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before adding the Role, the JSON is checked, to see that it follows [the schema]({{% relref "../../../product/integration_references/system_interfaces/appflow_api#flow-role-schema" %}}).{{< /alert >}} 
 
 In order to remove a Role from a running service you can use the command `oneflow remove-role`, for example:
@@ -899,13 +899,13 @@ You can update a service in `RUNNING` state. To do this you need to use the comm
 - **state**: this is internal information managed by OneFlow server.
 - **template_id**: this will affect scale operation.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If you try to change one of these values above, you will get an error. The server will also check the schema in case there is another error.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you change the value of min_vms, the OneFlow server will adjust the cardinality automatically. Also, if you add or edit elasticity rules they will be automatically evaluated.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can use the flag `--append` to append new information to the service.{{< /alert >}} 
 
 ### Recovering Services from Failures
@@ -979,7 +979,7 @@ Both Services and Template resources are completely integrated with the [OpenNeb
 
 To change the owner and group of the Service, we can use `oneflow chown/chgrp`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The Service’s VM ownership is also changed.{{< /alert >}} 
 
 All Services and Templates have associated permissions for the **owner**, the users in its **group**, and **others**. These permissions can be modified with the command `chmod`.
@@ -1027,10 +1027,10 @@ $ oneflow action my-service my-role reboot --period 300 --number 2
 
 The `/etc/one/oneflow-server.conf` file contains default values for `period` and `number` that are used if you omit one of them.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can also perform an operation in the whole service using the command `service action`. All the above operations and options are supported.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Schedule actions are only supported by VM-type Roles.{{< /alert >}} 
 
 ## Advanced Usage
@@ -1051,7 +1051,7 @@ You can read more details in the [OneGate API documentation]({{% relref "onegate
 
 Network mapping in OneFlow is facilitated through the use of Virtual Router Roles, which enable efficient management of network resources and floating IPs within your cloud environment.
 
-{{< image path="/images/oneflow-network-map.svg" alt="OneFlow Network Mapping" align="center" width="60%" pb="20px" >}}
+{{< image path="/images/oneflow-network-map.svg" alt="OneFlow Network Mapping" align="center" width="60%" mb="20px" border="false" >}}
 
 **Configuring the Service Template**
 
@@ -1179,7 +1179,7 @@ template_contents": {
 }
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 This will only work when using STRAIGHT strategy and when there is a parent relationship. So the attributes **must** be in the children not in the parent.{{< /alert >}} 
 
 ## Service Template Reference

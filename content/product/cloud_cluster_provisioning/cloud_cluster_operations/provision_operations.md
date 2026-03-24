@@ -30,9 +30,9 @@ Select the tab for your preferred interface to view the procedure to scale Provi
 
 {{% tab header="Sunstone"%}}
 In the Sunstone interface, go to **Infrastructure -> Clusters** and select the Cluster you want to scale. Open the **Host** tab:
-{{< theme-image
-  dark="images/oneform/oneprovision/operations/dark/add_host_operation.png"
-  light="images/oneform/oneprovision/operations/light/add_host_operation.png"
+{{< image
+  pathDark="images/oneform/oneprovision/operations/dark/add_host_operation.png"
+  path="images/oneform/oneprovision/operations/light/add_host_operation.png"
   alt="Scaling provisions"
 >}}
 {{% /tab %}}
@@ -115,9 +115,9 @@ Select the tab for your preferred interface to view the procedure to manage publ
 
 {{% tab header="Sunstone"%}}
 In the Sunstone interface, go to **Infrastructure -> Clusters** and select the Cluster you want to scale. Open the **VNet** tab and click **Add public IPs**:
-{{< theme-image
-  dark="images/oneform/oneprovision/operations/dark/add_ip_operation_modal.png"
-  light="images/oneform/oneprovision/operations/light/add_ip_operation_modal.png"
+{{< image
+  pathDark="images/oneform/oneprovision/operations/dark/add_ip_operation_modal.png"
+  path="images/oneform/oneprovision/operations/light/add_ip_operation_modal.png"
   alt="Managing IPs"
 >}}
 {{% /tab %}}
@@ -191,9 +191,9 @@ Retrying a Provision is a non-destructive operation that attempts to resume from
 
 {{% tab header="Sunstone"%}}
 In the **Cluster Logs** view, if a Cluster installation fails. Click the **Retry** icon in the top right hand corner of the page:
-{{< theme-image
-  dark="images/oneform/oneprovision/operations/dark/retry_operation_cluster_logs.png"
-  light="images/oneform/oneprovision/operations/light/retry_operation_cluster_logs.png"
+{{< image
+  pathDark="images/oneform/oneprovision/operations/dark/retry_operation_cluster_logs.png"
+  path="images/oneform/oneprovision/operations/light/retry_operation_cluster_logs.png"
   alt="Managing IPs"
 >}}
 {{% /tab %}}
@@ -234,7 +234,7 @@ Deprovisioning a Cluster triggers the following actions:
 * Ansible cleanup tasks
 * OpenNebula object removal
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 Once deprovisioned, the associated Cluster and resources cannot be recovered. Always verify the state and content of the Provision before proceeding.
 {{< /alert >}}
 
@@ -245,9 +245,9 @@ Select the tab for your preferred interface to view the procedure to deprovision
 
 {{% tab header="Sunstone"%}}
 In the Sunstone interface, go to **Infrastructure -> Clusters** and select the Cluster you want to deprovision. Click **Deprovision** and then **Accept**:
-{{< theme-image
-  dark="images/oneform/oneprovision/operations/dark/deprovision_cluster.png"
-  light="images/oneform/oneprovision/operations/light/deprovision_cluster.png"
+{{< image
+  pathDark="images/oneform/oneprovision/operations/dark/deprovision_cluster.png"
+  path="images/oneform/oneprovision/operations/light/deprovision_cluster.png"
   alt="Managing IPs"
 >}}
 {{% /tab %}}

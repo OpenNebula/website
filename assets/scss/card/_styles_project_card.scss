@@ -1,0 +1,132 @@
+@import "../_styles_fonts";
+
+ // Grid display to show only one card per column by default
+.card-columns .entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-left: 0;
+  padding-bottom: 56px;
+
+  // Resolution over mobiles use two columns
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, minmax(0, 600px));
+  }
+}
+
+// Same height in the cards in the same row
+.card-columns .entry .card {
+  height: 100%;
+  margin-bottom: 0; /* Evita márgenes extraños que desalineen */
+}
+
+// Entry in card-columns
+.entry {
+  background: var(--background-color) !important;
+  border-width: 0px !important;
+}
+
+// Card styles (Not only .card because there is a div parent with td-card card and a childer with only .card. We want to modify this last one)
+.td-card .card {
+  border-radius: 8px;
+  border: 1px solid var(--card-border-color);
+  background-color: var(--card-background-color);  
+
+  // Default width
+  max-width: 544px;
+  min-width: 288px;
+  
+  // Min and max width depending on the size
+  @include media-breakpoint-up(sm) {
+    max-width: 360px;
+    min-width: 544px;
+  }
+  @include media-breakpoint-up(md) {
+    max-width: 549px;
+    min-width: 357px;
+  }
+  @include media-breakpoint-up(lg) {
+    max-width: 320px;
+    min-width: 260px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 556px;
+    min-width: 320px;
+  }
+}
+
+// Card header styles
+.card-header {
+  background-color: var(--card-background-color);
+  border-bottom: 1px solid var(--card-border-color);
+  padding: 8px 16px 4px 16px;  
+  
+  // Font styles
+  @include body-small-bold;
+
+  // Modify link color
+  a {
+    color: var(--card-titles-font-color);
+  }
+}
+
+.card-header:first-child {
+  border-radius: 8px 8px 0px 0px;
+}
+
+// Card body styles
+.card-body {
+
+  // Use flex to display the content of the card
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // Padding for the card
+  padding: 16px 24px 16px 24px;
+
+  // Font styles
+  @include body-small;
+
+  // Delete margin and padding by default in inl and p elements that are part of the card
+  inl {
+    padding: 0;
+    margin: 0;
+  }
+  p {
+    padding: 0;
+    margin: 0;
+    inl {
+      // Add margin bottom 16px to ensure a min space between description and links
+      margin: 0px 0px 16px 0px;    
+    }    
+  }
+
+  // Text color for links
+  a {
+    @include body-small;
+    color: var(--card-titles-font-color);
+  }
+}
+
+.td-section-list {
+  list-style-position: inside;
+  list-style: none;
+  padding-left: 0;
+  margin-top: auto;
+}
+
+.td-section-list li {
+  @include body-small;
+  &::before {
+    @include body-small;
+    color: var(--card-titles-font-color);
+    content: "•";      
+    padding-right: 4px;      
+  }
+}
+
+// Delete border of card row
+.td-card {
+  border: 0 !important;
+}

@@ -43,7 +43,7 @@ These are the configuration attributes of a Marketplace template of the HTTP kin
 
 When an image is uploaded to this market, it is copied to `BRIDGE_LIST`:`PUBLIC_DIR` (if `BRIDGE_LIST` is not set, then it is copied to the current Front-end where OpenNebula is running). After that, it is available in `BASE_URL`. OpenNebula does not set up the webserver nor the secure access to it.
 
-{{< image path="/images/market_http.svg" alt="HTTP marketplace overview" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/market_http.svg" alt="HTTP marketplace overview" align="center" width="90%" mb="20px" border="false" >}}
 
 For example, the following examples illustrate the creation of a Marketplace:
 
@@ -65,7 +65,7 @@ ID: 100
 
 ## Tuning & Extending
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Any modification of code should be handled carefully. Although we might provide hints on how to fine-tune various parts by customizing the OpenNebula internals, in general, **it’s NOT recommended to make changes in the existing code**. Please note the changes will be lost during the OpenNebula upgrade and have to be introduced back again manually!{{< /alert >}} 
 
 System administrators and integrators are encouraged to modify these drivers in order to integrate them with their data center. Please refer to the [Market Driver Development]({{% relref "../../../product/integration_references/infrastructure_drivers_development/devel-market#devel-market" %}}) guide to learn about the driver details.

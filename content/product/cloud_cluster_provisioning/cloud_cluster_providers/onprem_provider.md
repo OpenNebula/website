@@ -26,9 +26,9 @@ OneForm installs an on-premises Provider by default. This existing on-premises P
 
 {{% tab header="Sunstone"%}}
 You can find the default on-premises Provider in the Sunstone interface in the **Infrastructure -> Providers** page:
-{{< theme-image
-  dark="images/oneform/oneprovider/common/dark/default_onprem.png"
-  light="images/oneform/oneprovider/common/light/default_onprem.png"
+{{< image
+  pathDark="images/oneform/oneprovider/common/dark/default_onprem.png"
+  path="images/oneform/oneprovider/common/light/default_onprem.png"
   alt="Step 1"
 >}}
 {{% /tab %}}

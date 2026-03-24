@@ -38,7 +38,7 @@ ID: 100
 
 The new group has ID 100 to differentiate the special groups from the user-defined ones.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When a new group is created, an ACL rule is also created to provide the default behavior, allowing users to create basic resources. You can learn more about ACL rules in [this guide]({{% relref "chmod#manage-acl" %}}), but you don’t need any further configuration to start using the new group.{{< /alert >}} 
 
 ## Adding Users to Groups
@@ -175,7 +175,7 @@ FIREEDGE=[
 
 The Group template can be used to customize the access level of the `VM_USE_OPERATIONS`, `VM_MANAGE_OPERATIONS` and `VM_ADMIN_OPERATIONS`. For a description of these attributes see [VM Operations Permissions]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf-vm-operations" %}})
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 These values can be overwritten for each user by placing the desired values in the user template.{{< /alert >}} 
 
 If the values are not set, the defaults defined in `oned.conf` are used.

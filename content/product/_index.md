@@ -7,6 +7,9 @@ categories:
 pageintoc: "29"
 tags:
 weight: "2"
+dashboard_icon_light: "images/dashboard/light/product.svg"
+dashboard_icon_dark: "images/dashboard/dark/product.svg"
+dashboard_description: "Follow guides and consult references to expand, enhance, secure and monitor your OpenNebula cloud."
 ---
 
 <a id="cloud-operation"></a>

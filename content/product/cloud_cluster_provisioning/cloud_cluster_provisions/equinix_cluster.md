@@ -52,79 +52,79 @@ The following process demonstrates how to create an Equinix Provision in your Op
 {{% tab header="Sunstone"%}}
 **Step 1.** Navigate to **Infrastructure -> Clusters** in the Sunstone sidebar:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
-  light="images/oneform/oneprovision/common/light/sunstone_navigation.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/sunstone_navigation.png"
+  path="images/oneform/oneprovision/common/light/sunstone_navigation.png"
   alt="Step 1"
 >}}
 
 **Step 2.** Click **Create** and select **Install a new Cloud Cluster**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
-  light="images/oneform/oneprovision/common/light/create_cluster_button.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/create_cluster_button.png"
+  path="images/oneform/oneprovision/common/light/create_cluster_button.png"
   alt="Step 2.1"
 >}}
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/cloud_cluster_button.png"
-  light="images/oneform/oneprovision/common/light/cloud_cluster_button.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/cloud_cluster_button.png"
+  path="images/oneform/oneprovision/common/light/cloud_cluster_button.png"
   alt="Step 2.2"
 >}}
 
 **Step 3.** Select your preferred Equinix Provider and click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/equinix/dark/equinix_provider.png"
-  light="images/oneform/oneprovision/equinix/light/equinix_provider.png"
+{{< image
+  pathDark="images/oneform/oneprovision/equinix/dark/equinix_provider.png"
+  path="images/oneform/oneprovision/equinix/light/equinix_provider.png"
   alt="Step 3"
 >}}
 
 **Step 4.** Enter a name for the Cluster in the **General** page and click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/general_step.png"
-  light="images/oneform/oneprovision/common/light/general_step.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/general_step.png"
+  path="images/oneform/oneprovision/common/light/general_step.png"
   alt="Step 4"
 >}}
 
 **Step 5.** Select the type of deployment and click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/equinix/dark/deployment_types_step.png"
-  light="images/oneform/oneprovision/equinix/light/deployment_types_step.png"
+{{< image
+  pathDark="images/oneform/oneprovision/equinix/dark/deployment_types_step.png"
+  path="images/oneform/oneprovision/equinix/light/deployment_types_step.png"
   alt="Step 5"
 >}}
 
 **Step 6.** Fill the **User Inputs** section to configure the Cluster and click **Next**:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/equinix/dark/user_inputs_step.png"
-  light="images/oneform/oneprovision/equinix/light/user_inputs_step.png"
+{{< image
+  pathDark="images/oneform/oneprovision/equinix/dark/user_inputs_step.png"
+  path="images/oneform/oneprovision/equinix/light/user_inputs_step.png"
   alt="Step 6"
 >}}
 
 **Step 7.** Optionally you can add tags to help identify your Cluster in OpenNebula and Equinix. Click **Finish** to start the Cluster deployment:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/common/dark/tags_step.png"
-  light="images/oneform/oneprovision/common/light/tags_step.png"
+{{< image
+  pathDark="images/oneform/oneprovision/common/dark/tags_step.png"
+  path="images/oneform/oneprovision/common/light/tags_step.png"
   alt="Step 7"
 >}}
 
 **Step 8.** You can observe the logs and the status of the Cluster deployment in the **Cluster Logs** view:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/aws/dark/aws_cluster_logs.png"
-  light="images/oneform/oneprovision/aws/light/aws_cluster_logs.png"
+{{< image
+  pathDark="images/oneform/oneprovision/aws/dark/aws_cluster_logs.png"
+  path="images/oneform/oneprovision/aws/light/aws_cluster_logs.png"
   alt="Step 8"
 >}}
 
 **Step 9.** After reaching the RUNNING state, a full cloud Cluster is available, ready to operate:
 
-{{< theme-image
-  dark="images/oneform/oneprovision/equinix/dark/equinix_cluster.png"
-  light="images/oneform/oneprovision/equinix/light/equinix_cluster.png"
+{{< image
+  pathDark="images/oneform/oneprovision/equinix/dark/equinix_cluster.png"
+  path="images/oneform/oneprovision/equinix/light/equinix_cluster.png"
   alt="Step 9"
 >}}
 
