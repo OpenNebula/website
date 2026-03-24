@@ -15,7 +15,7 @@ weight: "4"
 OpenNebula provides customers with the means to generate diagnostic bundles with all details necessary to handle support cases. The OpenNebula server package contains [OneGather]({{% relref "#support-bundle" %}}), a specialized tool that generates an archive bundle with information about the OpenNebula instance, such as configuration, database, and Hosts' state.
 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 This feature is available only in OpenNebula **Enterprise Edition**.{{< /alert >}} 
 
 <a id="support-bundle"></a>
@@ -30,7 +30,7 @@ For most support issues it’s enough to provide just a limited support bundle w
 $ sudo onegather
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running your Front-end in a federation, OneGather will prompt you in the result section to run it on all other nodes.{{< /alert >}} 
 
 The command generates a diagnostic bundle archive and puts it into `/tmp/`. The precise file location is shown at the end of the terminal output. If the support team asks you for a database dump, you can add it to the bundle archive with the `--db` flag:

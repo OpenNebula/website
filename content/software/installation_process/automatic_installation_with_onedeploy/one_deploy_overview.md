@@ -32,7 +32,7 @@ The basic procedure is as follows:
 
 Ansible is an agentless platform and uses SSH as the default transport for deployment. The control node must be able to communicate with the managed nodes via SSH.
 
-{{< image path="/images/one_deploy_basic_arch.svg" alt="OpenNebula Basic Architecture" align="center" width="50%" pb="20px" >}}
+{{< image path="/images/one_deploy_basic_arch.svg" alt="OpenNebula Basic Architecture" align="center" width="50%" mb="20px" border="false" >}}
 
 <!-- ![image](/images/one_deploy_basic_arch.png)
 <br/> -->
@@ -41,7 +41,7 @@ It is worth noting that you can use the control node itself as a managed node. I
 
 In the sections below you will find a brief overview of reference architectures and requirements for installing an OpenNebula cloud with the most basic configuration. The documentation also includes two short tutorials for performing a simple installation on two of the reference architectures: using local storage for datastores, and using shared storage.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The recommended OS for running the playbooks is Ubuntu 24.04 or 22.04. The tutorials contain configuration and commands tested on these versions. It is possible to use other OSs to perform the installation; for reference please see the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).{{< /alert >}} 
 
 ## Reference Architectures

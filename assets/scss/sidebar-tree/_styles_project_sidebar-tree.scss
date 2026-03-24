@@ -1,0 +1,95 @@
+@import "_styles_fonts";
+
+.sidebar-description {
+  @include body-small;
+}
+
+.td-sidebar {
+  border-right: 1px solid var(--border-color);
+}
+
+.td-sidebar-menu {
+  padding-top: 14px;
+  a {
+    color: var(--headings-color);
+    &:hover {
+      color: var(--sidebar-hover-color);
+    }
+    &.active {
+      font-weight: 700;
+    }
+  }
+
+  nav.foldable-nav .with-child > label {  
+    &:hover::before {
+      color: var(--sidebar-hover-color);
+    }
+  }
+}
+
+// Menu first level
+.ul-1 > .td-sidebar-nav__section > label > .td-sidebar-link {
+  @include body-small-medium;
+  &:hover {
+    color: var(--sidebar-hover-color);
+  }
+
+  nav.foldable-nav .with-child > label {  
+    &:hover::before {
+      color: var(--sidebar-hover-color);
+    }
+  }
+}
+
+// Menu NOT first level NOT last level
+.td-sidebar-link.td-sidebar-link__section {
+  @include body-small;
+}
+
+// Menu last level
+.td-sidebar-link.td-sidebar-link__page {
+  @include body-small;
+}
+
+.sidebar-title {
+  margin-bottom: 8px;
+}
+.body-bold.sidebar-title {
+  color: var(--sidebar-title-color);
+}
+
+nav.foldable-nav .ul-1 .with-child > label::before {
+  padding-left: 0;
+}
+
+.td-sidebar-nav .td-sidebar-link.tree-root {
+  border-bottom-width: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+// Scroll bar - Firefox
+.td-sidebar-nav {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-color) !important;
+}
+
+// Scroll bar - Edge, Chrome and Safari
+.td-sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.td-sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.td-sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-color);
+  border-radius: 96px;
+}
+
+// Modify height of the arrow to fix the line height
+.td-sidebar-nav__section label::before {
+  line-height: 20px !important;
+  height: 20px !important;
+  display: inline-block;
+  vertical-align: middle;
+}

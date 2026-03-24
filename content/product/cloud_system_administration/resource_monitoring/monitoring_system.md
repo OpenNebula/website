@@ -26,18 +26,18 @@ As part of the regular start process, OpenNebula starts the `onemonitord` daemon
 
 Probes are structured in information categories for Host and Virtual Machine information. At regular intervals (in seconds, configurable per category in the `monitord.conf`) the data is transmitted, so the monitoring subsystem doesn’t need to make any additional connections to gather it.
 
-{{< image path="/images/collector.svg" alt="Architecture of Dedicated Monitoring System in OpenNebula" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/collector.svg" alt="Architecture of Dedicated Monitoring System in OpenNebula" align="center" width="90%" mb="20px" border="false" >}}
 
 If information stops coming from a specific Host, OpenNebula detects it by missing heartbeats and pro-actively connects to the particular Host over SSH and restarts probes.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The firewall on the Front-end (if enabled) must allow incoming TCP and UDP packets on port 4124 from the Hosts.{{< /alert >}} 
 
 ## Configuration
 
 The monitor daemon (`onemonitord`) is configured in `/etc/one/monitord.conf`. The table below describes the file’s configuration attributes.
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 For a quick view of any changes in configuration file options in maintenance releases, check the Resolved Issues page in the [Release Notes]({{% relref "../../../software/release_information/release_notes_enterprise#rn-enterprise" %}}) for the release. Please note that even in the case of changes (such as a new option available), you do *not* need to update your configuration files unless you wish to change the application’s behavior.{{< /alert >}} 
 
 | Parameter                                                                                   | Attribute                                                                                                                                                                                              | Description                                                                      |
@@ -127,7 +127,7 @@ Additionally, for each VM running on a Host, a dedicated database tracks its spe
 - **Location**: `/var/tmp/one_db/<VM_ID>.db` (stored on the Host where the VM is running)
 - **Purpose**: Stores historical monitoring metrics for the specific VM
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Following a VM migration, forecast accuracy may be temporarily reduced until sufficient monitoring data is collected on the new Host.{{< /alert >}} 
 
 For more details on how these databases contribute to resource forecasting, see the [Resource Forecast]({{% relref "forecast#monitor-alert-forecast" %}}) section.
@@ -195,7 +195,7 @@ If the system is not working well, the problem could be in database performance.
 
 ## Troubleshooting
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 When debugging the monitor system, we recommend increasing the `DEBUG` level for both `oned` and `onemonitord`, and restarting OpenNebula.{{< /alert >}} 
 
 ### Healthy Monitoring System

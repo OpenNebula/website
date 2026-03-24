@@ -15,10 +15,10 @@ weight: "2"
 
 This page will show you how to compile and install OpenNebula from the sources.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Do not forget to check the [Building Dependencies]({{% relref "build_deps#build-deps" %}}) for a list of specific software requirements to build OpenNebula.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please get in touch at <[community-manager@opennebula.io](mailto:community-manager@opennebula.io)>.{{< /alert >}}
 
 ## Compiling the Software
@@ -32,7 +32,7 @@ Follow these simple steps to install the OpenNebula software:
 $ scons [OPTION=VALUE]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 `scons` can parallelize the build with the `-j NUM_THREADS` parameter. For instance, to compile with 4 parallel processes execute:
 
 ```default
@@ -62,10 +62,10 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 ./install.sh <install_options>
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To install OpenNebula with the `system-wide` mode you should have super user privileges.{{< /alert >}}
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The `scons` option `xmlrpc_pkgconf=yes` is mandatory for AlmaLinux 9. Otherwise the build fails.{{< /alert >}}
 
 
@@ -93,7 +93,7 @@ where  *<install_options>* can be one or more of:
 | **-l**   | creates symlinks instead of copying files, useful for development                                                                                                            |
 | **-h**   | prints installer help                                                                                                                                                        |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you choose the `system-wide` installation, OpenNebula will be installed in the following folders:
 : - /etc/one
   - /usr/lib/one

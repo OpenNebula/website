@@ -360,7 +360,7 @@ To place an alert, use the `alert` shortcode:
 For example:
 
 ```
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.
 {{< /alert >}}
 ```

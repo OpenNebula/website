@@ -134,7 +134,7 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
      - Veeam Backup appliance
 
 
-{{< image path="/images/backup_veeam_architecture.svg" alt="Architecture of the OpenNebula-Veeam Backup Integration" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/backup_veeam_architecture.svg" alt="Architecture of the OpenNebula-Veeam Backup Integration" align="center" width="90%" mb="20px" border="false" >}}
 
 ## Backup Server Requirements
 
@@ -171,7 +171,7 @@ A server should be configured to expose both the Rsync Backup datastore and the 
 
 The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. An additional property called ``VEEAM_DS`` must exist in the backup datastore template and be set to ``YES``.
 
-{{< alert title="Remember" color="success" >}}
+{{< alert title="Remember" type="info" >}}
 The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}}
 
 2.1. Create the Rsync backup datastore
@@ -200,7 +200,7 @@ EOF
 onecluster adddatastore <cluster-name> <datastore-name>
 ```
 
-{{< alert title="SELinux/AppArmor issues" color="warning" >}}
+{{< alert title="SELinux/AppArmor issues" type="warning" >}}
 SELinux and AppArmor may cause issues in the backup server if not configured properly. Either disable them or make sure to provide permissions to the datastore directories (``/var/lib/one/datastores``).
 {{< /alert >}}
 
@@ -218,7 +218,7 @@ We provide alongside the ovirtapi package the ``/usr/lib/one/ovirtapi-server/scr
 0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /path/to/your/script.sh
 ```
 
-{{< alert title="Remember" color="success" >}}
+{{< alert title="Remember" type="info" >}}
 For the ``/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`` script to work you need to set the ONE_AUTH environment variable to a valid ``user:password`` pair that can delete the backup images. You may also set the ``MAX_USED_PERCENTAGE`` variable to a different threshold (set to 50% by default).{{< /alert >}}
 
 ### 3. Install and configure the oVirtAPI module
@@ -231,7 +231,7 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
 * ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
 
 You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
@@ -243,11 +243,11 @@ After installing the package, you should make sure that the oneadmin user in the
 
 Finally, start the service with either ``systemctl start apache2`` (Ubuntu/Debian) or ``systemctl start httpd`` (RHEL/Alma).
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Once the package is installed, a ``oneadmin`` user will be created. Please make sure that this user and the same ``oneadmin`` user in the frontend can establish passwordless ssh connections in both directions.
 {{< /alert >}}
 
-{{< alert title="Package dependency" color="success" >}}
+{{< alert title="Package dependency" type="info" >}}
 In RHEL and Alma environments, you may face issues with the passenger package dependencies (``mod_passenger`` and ``mod_ssl``). You may add the correct repository and install the packages with the following:
 
 curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo

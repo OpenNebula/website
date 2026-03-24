@@ -26,7 +26,7 @@ For the "Initiator group members" section below it should have **Host initiators
 {{< image path=/images/netapp_add_igroup.png width=500 alt=image0 >}}
 </center>
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When you add or remove hosts from your OpenNebula installation, you should update the initiator group as well to ensure their access to the LUN.
 {{< /alert >}}
 

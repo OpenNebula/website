@@ -19,7 +19,7 @@ This page covers **failback**, the process of moving business operations back to
 
 If recovering from a disaster on Site A, then most probably the images on Site A were not demoted. In this case, the first step is to demote them. 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you are performing failback as part of a Disaster Recovery test, then you should have demoted the images in the source cluster at Site A (as described in [Failover]({{% relref "failover#demote-ceph-images-or-pool-on-site-a" %}})), and should skip the below step.
 {{< /alert >}}
 

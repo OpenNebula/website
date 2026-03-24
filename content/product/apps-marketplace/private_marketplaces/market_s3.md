@@ -95,7 +95,7 @@ ID: 100
 
 ## Tuning & Extending
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Any modification of code should be handled carefully. Although we might provide hints on how to fine-tune various parts by customizing the OpenNebula internals, in general, **it’s NOT recommended to make changes in the existing code**. Please note the changes will be lost during the OpenNebula upgrade and have to be introduced back again manually!{{< /alert >}} 
 
 In order to change the available size of the Marketplace from 1 TB to your desired value, you can modify `/var/lib/one/remotes/market/s3/monitor` and change:

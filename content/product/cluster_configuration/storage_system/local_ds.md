@@ -28,7 +28,7 @@ Simply make sure that there is enough space under `/var/lib/one/datastores` to s
 
 Just make sure that there is enough space under `/var/lib/one/datastores` to store the disks of running VMs on that Host.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Local datastore requires that:
 - The **Frontend hostnames are resolvable** from all Hosts.
 - Every Host (including the Front-end) can **SSH to every other Host**, including themselves.
@@ -60,7 +60,7 @@ $ onedatastore create systemds.txt
 ID: 101
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When different System Datastores are available, select one to have the the `TM_MAD_SYSTEM` attribute set.{{< /alert >}}
 
 ### Create Image Datastore
@@ -88,7 +88,7 @@ ID: 100
 
 Also note that there are additional attributes that can be set. Check the [datastore template attributes]({{% relref "datastores#datastore-common" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Be sure to use the same `TM_MAD` for both the System and Image datastores. When combining different transfer modes, check the section below.{{< /alert >}}
 
 ### Additional Configuration
@@ -98,10 +98,10 @@ Be sure to use the same `TM_MAD` for both the System and Image datastores. When 
 - `FS_OPTS_<FS>`: Options for creating the filesystem for formatted datablocks. Configured in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each filesystem type.
 - `SPARSE`: When the value is `NO`, the images and disks in the image and System Datastore, respectively, will not be sparsed (i.e. the files will use all assigned space on the Datastore filesystem).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Before adding a new filesystem to the `SUPPORTED_FS` list make sure that the corresponding `mkfs.<fs_name>` command is available in the Front-end and hypervisor Hosts. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When using a Local Storage Datastore, the `QCOW2_OPTIONS` attribute is ignored because the cloning script uses the `tar` command instead of `qemu-img`.{{< /alert >}}
 
 ## Datastore Drivers
@@ -136,12 +136,12 @@ For example, a system with an Image Datastore (`1`) with three images and three 
     `-- d0e0df1fb8cfa88311ea54dfbcfc4b0c
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The canonical path for `/var/lib/one/datastores` can be changed in [/etc/one/oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}}) by modifying the `DATASTORE_LOCATION` configuration attribute.{{< /alert >}}
 
 In this case, the System Datastore is distributed among the Hosts. The **local** transfer driver uses the Hosts' local storage to place the images of running Virtual Machines. All of the operations are then performed locally, but images still need to be copied to the Hosts, which can be a very resource-demanding operation.
 
-{{< image path="/images/fs_ssh.svg" alt="Overview of Datastore Internals" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/fs_ssh.svg" alt="Overview of Datastore Internals" align="center" width="90%" mb="20px" border="false" >}}
 
 ## Distributed Cache
 
@@ -163,7 +163,7 @@ When a VM is launched:
 
 Once the cache manager downloads the image, this is stored in both the _local_ and _central_ caches for future use.
 
-{{< image path="/images/local_ds_cache.svg" alt="Speeding up VM provisioning with Distributed Cache" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/local_ds_cache.svg" alt="Speeding up VM provisioning with Distributed Cache" align="center" width="90%" mb="20px" border="false" >}}
 
 ## How to Enable and Configure the Cache
 
@@ -191,7 +191,7 @@ When you create a new Datastore, configure these settings through Sunstone .
 
 ![sunstone_ds_cache_config](/images/sunstone_ds_cache_config.png)
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 For the distributed cache to work, the `oneadmin` user (see [Node installation]({{% relref "../../../product/operation_references/hypervisor_configuration" %}})) must have SSH passwordless authentication configured on all Hosts.{{< /alert >}}
 
 ## Using the Cache
@@ -225,5 +225,5 @@ If the total cache size exceeds `CACHE_MAX_SIZE`, the cache manager removes the 
 
 If there is still not enough space after eviction, the new image is fetched directly from the Front-end without caching.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Images used within the last `CACHE_MIN_AGE` seconds cannot be evicted.{{< /alert >}}

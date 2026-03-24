@@ -1,0 +1,3 @@
+[services]
+  [services.googleAnalytics]
+    id = 'G-TG2W04C1CT'

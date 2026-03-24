@@ -43,7 +43,7 @@ You can configure the tool by editing the file `/etc/one/oneswap.yaml`. In here 
 
 Before converting Windows VMs, download the required VirtIO drivers for the Windows VM distribution. These drivers can be downloaded from the [virtio-win repository](https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The converted VM will reboot several times after instantiation in order to install and configure the VirtIO drivers.{{< /alert >}}
 
 ## Usage
@@ -75,7 +75,7 @@ It is possible to specify the target Datastore and VNET for the OVA to be import
 | `--skip-context`                       | Skip injection of the context package.                                                                                                                                                                                                 |
 | `--remove_vmtools`                     | Add contextualization script to force remove VMware tools from the VM.                                                                                                                                                                      |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The options `--ova` and `--vmdk` are mutually exclusive, they cannot be used together.{{< /alert >}}
 
 If multiple network interfaces are detected when importing an OVA and only one VNET ID or not enough VNET IDs are provided for all interfaces using `--network ID`, the last one will be used for the rest of the interfaces after the last coincidence. The same will apply to Datastores using the `--datastore ID` option.
@@ -197,7 +197,7 @@ Success (42.24s)
 Context will install on first boot, you may need to boot it twice.
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If context injection does not work after importing, it is also possible to install `one-context` **before exporting the OVA** from VMware using the packages available in the `one-apps` repository and uninstalling VMware Tools. In this case it is important to be aware that the `one-context` service will get rid of any manual network configurations done to the guest OS and the VM won’t be able to get the network configuration from VMware anymore.{{< /alert >}}
 
 ## Additional `virt-v2v` Options

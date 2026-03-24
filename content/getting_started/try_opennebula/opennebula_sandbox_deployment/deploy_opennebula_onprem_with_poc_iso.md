@@ -11,7 +11,7 @@ OpenNebula provides an ISO image for rapid deployment of an OpenNebula Front-end
 
 Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud will be ready for immediate use, installed on a single bare-metal server, complete with the OpenNebula Front-end server and a KVM hypervisor node. The same ISO can be used to install other KVM hypervisor nodes on the same infrastructure. The installed software includes a menu and a set of ansible playbooks to make the OpenNebula infrastructure management simpler.
 
-{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" pb="20px" >}}
+{{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" mb="20px" border="false" >}}
 
 
 ## Requirements
@@ -26,7 +26,7 @@ The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements
 | **Network** | - At least one NIC for management\* <br />- Recommended 2 NICs (management and service) |
 
 \*Not needed for installation
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 **Installing the ISO will delete all the disk data on the server during the installation. You should archive or backup existing data before proceding with the installation.**
 {{< /alert >}}
 
@@ -47,12 +47,12 @@ From Linux or MacOS, the image can be dumped on the USB with the following comma
 dd if=/path/to/your/opennebula-7.0.1-CE.iso of=/dev/sdXX
 ```
 
-{{< alert title="Check the USB drive" color="warning" >}}
+{{< alert title="Check the USB drive" type="warning" >}}
 `/dev/sdXX` is the drive for the USB drive. It's recommended to check it twice to avoid catastrophic data loss.{{< /alert >}}
 
 On Windows, use Rufus to create the USB drive.
 
-{{< alert title="Rufus USB creation mode" color="warning" >}}
+{{< alert title="Rufus USB creation mode" type="warning" >}}
 The USB drive must be created using DD mode or else it won't be bootable.{{< /alert >}}
 
 With the media inserted (or virtually mounted) on the server, after rebooting it, set the right boot device in the BIOS. Some BIOS may be able to boot the media as MBR and UEFI. We recommend to boot is as UEFI for compatibility reasons.
@@ -67,7 +67,7 @@ The recommended options are the following:
 - `Install OpenNebula POC` will install a full OpenNebula Front-end and the necessary software to make it an OpenNebula KVM hypervisor node.
 - `Install OpenNebula Node` will install only the KVM hypervisor packages to create a compute node or host that can be managed by the OpenNebula Front-end.
 
-{{< alert title="Other options" color="success" >}}
+{{< alert title="Other options" type="info" >}}
 **The  `Test this media and Install ...` options are only recommended for installation from fast local media (like a USB pendrive). These options will be slow when installing to remote infrastructure.**.
 {{< /alert >}}
 
@@ -79,7 +79,7 @@ After that, a little menu showing all the available, non-removable disks, will b
 
 ![disk_selection](/images/ISO/011-disk_selection.png)
 
-{{< alert title="Warning: data will be deleted" color="warning" >}}
+{{< alert title="Warning: data will be deleted" type="warning" >}}
 
 **IMPORTANT: OpenNebula will be installed on the first disk found and it will IRREVERSIBLY delete all data on that disk. Ensure that the existing data is backed up.**{{< /alert >}}
 
@@ -184,7 +184,7 @@ To configure the network, select `Edit a connection`. The following menu will ap
           └───────────────────────────┘
 ```
 
-{{< alert title="Network considerations" color="success" >}}
+{{< alert title="Network considerations" type="info" >}}
 To set up special networking configuration, please check the documentation about `nmtui`.
 {{< /alert >}}
 
@@ -277,7 +277,7 @@ Press any key and you will be returned to the `onefemenu` screen. If you are log
 
 After the installation, the server runs only the Front-end and needs to be added as a OpenNebula hypervisor to run VMs. Select `add_host` from the `onefemenu` options.
 
-{{< alert title="Avoid the usage of loopback addresses" color="success" >}}
+{{< alert title="Avoid the usage of loopback addresses" type="info" >}}
 When a node is added, always use it's external IP, neither `localhost` nor a loopback addres `127.x.x.x'.
 {{< /alert >}}
 
@@ -334,7 +334,7 @@ The Sunstone UI should now be accessible by visiting http://\<frontend\_ip\>:261
 
 To obtain the oneadmin password run `onefemenu` on the command line of your Front-end server and select option `show_oneadmin_pass`
 
-{{< alert title="Length of `oneadmin` password" color="success" >}}
+{{< alert title="Length of `oneadmin` password" type="info" >}}
 The `oneadmin` default password is 32 hex chars long (128 bits of entropy). It is recommended to create a separate user to work with OpenNebula and to use oneadmin user for administrative task only.
 {{< /alert >}}
 
@@ -346,7 +346,7 @@ To set up a Virtual Network using VXLAN, in the Sunstone UI go to **Networks** -
 
 ![sunstone-network_config](/images/ISO/03-sunstone-network-config.png)
 
-{{< alert title="VXLAN evpn" color="success" >}}
+{{< alert title="VXLAN evpn" type="info" >}}
 To allow automatic network discovery, the VXLAN mode must be set to `evpn` in all cases.
 {{< /alert >}}
 
@@ -368,7 +368,7 @@ Select the **Context** tab and enter values similar to the following, based on t
 
 ![sunstone-network_context](/images/ISO/05-sunstone-network-context.png)
 
-{{< alert title="MTU size" color="warning" >}}
+{{< alert title="MTU size" type="warning" >}}
 The contextualization MTU for this network MUST be the MTU of the physical interface minus 50 bytes (the size of the VXLAN encapsulation) or smaller. 1450 is a safe default (regular ethernet frame size).
 {{< /alert >}}
 
@@ -400,7 +400,7 @@ onevnet_add_gw 0
 
 To delete the gateway and make the network unreachable, reverting the behaviour, `onevnet_del_gw <NETWORK_ID>` should be executed in the same way
 
-{{< alert title="Persistence of the gateway" color="warning" >}}
+{{< alert title="Persistence of the gateway" type="warning" >}}
 This gateway is not persistent after reboots. If the frontend is rebooted, the command `onevnet_add_gw <NETWORK_ID>` must be issued again.
 {{< /alert >}}
 
@@ -408,7 +408,7 @@ This gateway is not persistent after reboots. If the frontend is rebooted, the c
 
 Virtual machines on this Virtual Network won't be able to access to the same networks as the frontend because there is no NAT. A simple NAT can be created executing the command `enable_masquerade`
 
-{{< alert title="Security and persistence warning" color="warning" >}}
+{{< alert title="Security and persistence warning" type="warning" >}}
 By default, the `enable_masquerade` command will allow ALL the Virtual Networks having a gateway. To disable this behaviour, execute `disable_masquerade`. After a reboot of the frontend, the NAT configuration will be deleted and must be applied again using `enable_masquerade`.
 {{< /alert >}}
 
@@ -421,7 +421,7 @@ After the gateway has been created and NAT masquerade has been enabled, the VMs 
 
 Currently, any machine (even if it has access to the frontend) cannot reach ths Virtual Network because doesn't know how to arrive to it. For that, a route via the frontend external IP is needed. A route can be added locally.
 
-{{< alert title="Routing setup" color="Success" >}}
+{{< alert title="Routing setup" type="info" >}}
 This document must not be taken as a manual to configure routing. These are local solutions to test the access. None of this solutions will persist after a reboot of the workstation where they have been applied.
 {{< /alert >}}
 

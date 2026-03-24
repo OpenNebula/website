@@ -16,7 +16,7 @@ OpenNebula provides [OneSwap](https://github.com/OpenNebula/one-swap), a command
 
 OneSwap supports importing Open Virtual Appliances (OVAs) previously exported from vCenter/ESXi environments. The [Managing OVAs and VMDKs]({{% relref "import_ova" %}}) guide provides instructions, with complete examples.
 
-{{< alert color="success" >}}
+{{< alert type="info" >}}
 OneSwap is part of a set of tools and services designed to guide you in achieving a smooth transition from VMware. These include the [VMware Migration Service](https://support.opennebula.pro/hc/en-us/articles/18919424033053-VMware-Migration-Service), a complete guidance and support framework to help organizations define and execute their migration plan with minimal disruption to business operations. Further information is available in [Migrating from VMware to OpenNebula](https://support.opennebula.pro/hc/en-us/articles/17225311830429-White-Paper-Migrating-from-VMware-to-OpenNebula).
 {{< /alert >}}
 
@@ -31,7 +31,7 @@ The OneSwap server must have network access to:
 
 Run `oneswap` on a dedicated server with sufficient disk space to buffer VM images during conversion. This server should have high-bandwidth connectivity to both the vCenter environment and the OpenNebula image datastores to minimize migration time.
 
-{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" pb="20px" >}}
+{{< image path="/images/oneswap/oneswap_architecture.svg" alt="Architecture of the OneSwap Migration Tool" align="center" width="90%" mb="20px" border="false" >}}
 
 ## vCenter Permissions Requirements
 
@@ -168,11 +168,11 @@ OneSwap requirements for virtual conversion from VMWare to OpenNebula are the fo
 - If oneswap is ran on a different machine than OpenNebula frontend, then the following components must also be configured:
   - Set up the transfer method options (oneswap parameters `http_transfer`, `http_host` and `http_port`).
 
-{{< alert color="success" title="OneSwap configuration" >}}
+{{< alert type="info" title="OneSwap configuration" >}}
 Most OneSwap parameters can be configured on the file `/etc/one/oneswap.yaml` but **the user running `oneswap` must be able to run CLI commands on the destination OpenNebula frontend** (i.e. being able to run `onevm list`). If `oneswap` is ran from the frontend as `oneadmin` user this works directly.
 {{< /alert >}}
 
-{{< alert color="warning" title="OpenNebula CLI" >}}
+{{< alert type="warning" title="OpenNebula CLI" >}}
 If `oneswap` runs from a server different than OpenNebula frontend, [check the documentation]({{% relref "command_line_interface#cli-configuration" %}}) about installing the CLI commands and export the variables `ONE_XMLRPC` and `ONE_AUTH` accordingly.<br/>
 Normally that means populating the file `$HOME/.one/one_auth` with `username:password` and adding `export ONE_XMLRPC=http://opennebula_frontend:2633/RPC2` on the user profile, but it is recommended to check the documentation.
 {{< /alert >}}
@@ -202,7 +202,7 @@ ln -s /usr/share/virt-tools /usr/local/share/virt-tools
 ln -s /usr/share/virtio-win /usr/local/share/virtio-win
 ```
 
-{{< alert color="success" title="Installing RHsrvany on Ubuntu" >}}
+{{< alert type="info" title="Installing RHsrvany on Ubuntu" >}}
 Github page for the project provides instructions about how to decompress the package for Ubuntu. At the moment of writing the procedure is
 
 ```

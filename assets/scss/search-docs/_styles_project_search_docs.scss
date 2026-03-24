@@ -1,0 +1,24 @@
+@import "../_styles_fonts";
+
+.search-container {
+  margin-top: 64px !important;
+}
+
+.result-link {
+  @include body;
+  color: var(--link-color)
+}
+
+.result-url {
+  @include caption;
+  margin-bottom: 16px;
+}
+
+.result-snippet {
+  @include body-small;
+}
+
+.search-highlight {
+  @include body-small-bold;
+  background-color: var(--search-highlight);
+}

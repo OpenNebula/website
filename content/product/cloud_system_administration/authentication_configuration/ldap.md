@@ -125,7 +125,7 @@ server 2:
 
 The structure is a hash where any key different to `:order` will contain the configuration of one LDAP server we want to query. The special key `:order` holds an array with the order in which we want to query the configured servers.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Items of the `:order` are the server names, or nested arrays of server names, representing the **availability group**. The items in the `:order` are processed one by one until the user is successfully authenticated or until the end of the list is reached. Inside the availability group, only the very first server which can be successfully connected to is queried. Any server not listed in `:order` won’t be queried.{{< /alert >}} 
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -251,7 +251,7 @@ INTERNAL_GROUP_DN="CN=technicians,CN=Groups,DC=internal,DC=com"
 EXTERNAL_GROUP_DN="CN=staff,DC=other-company,DC=com"
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If the map is updated (e.g., you change the LDAP DB) the user groups will be updated the next time the user is authenticated. Also note that a user may be using a login token that needs to expire for this change to take effect. The maximum lifetime of a token can be set in `oned.conf` for each driver. If you want the OpenNebula core not to update user groups (and control group assignment from OpenNebula), update `DRIVER_MANAGED_GROUPS` in the `ldap` `AUTH_MAD_CONF` configuration attribute.{{< /alert >}} 
 
 ### Group Admin. Mapping
