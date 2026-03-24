@@ -1,6 +1,6 @@
 ---
-title: "On-premises SSH Cluster"
-linkTitle: "On-premises SSH"
+title: "On-premises NFS Cluster"
+linkTitle: "On-premises NFS"
 date: "2025-02-17"
 description:
 categories:
@@ -11,16 +11,20 @@ weight: "2"
 
 <!--# On-premises Cluster -->
 
-An SSH on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors.
+A NFS on-premises Cluster utilizes existing physical or virtual servers as OpenNebula Hosts, integrating with and configuring on-premises infrastructure. The on-premises Cluster deployment operates using KVM hypervisors. Additionally, it integrates a NFS server that can be either in the OpenNebula Front-end or as an external server.
 
-## On-premises SSH Cluster Implementation
+## On-premises NFS Cluster Implementation
 
 Users must manually provide reachable IP addresses for each Host, ensuring that SSH connectivity functions correctly and system prerequisites are already met. The default OS is *Ubuntu 22.04*. The networking model is implemented as follows:
 
 - **Public Networking**: Requires manually provided IP addresses or previously configured public IPs. IP forwarding rules must be managed manually.
 - **Private Networking**: Uses BGP-EVPN and VXLAN to create private Virtual Networks among provided Hosts.
 
-{{< image path="images/oneform/oneprovision/onprem/ssh_onprem_deployment.svg" alt="Network model implementation with public and private networking" align="center" width="80%" pb="20px" >}}
+You must configure an NFS server with a root NFS directory or export folder and a mount point for the NFS clients. Consult the [NFS/NAS Reference]({{% relref "/product/cluster_configuration/storage_system/nas_ds/" %}}) for details on configuring an NFS server.
+
+The following diagram demonstrates the required architecture:
+
+{{< image path="images/oneform/oneprovision/onprem/nfs_onprem_deployment.svg" alt="Network model implementation with public, private and NFS networking" align="center" width="80%" pb="20px" >}}
 
 ## OpenNebula Resources
 
@@ -28,14 +32,14 @@ The following resources, which are associated with each on-premises Cluster, are
 
 1. **Cluster**: Aggregating all other resources.
 2. **Hosts**: Corresponding to the provided IP addresses.
-3. **Datastores**: Image and system datastores configured with an SSH transfer manager that utilize the first provided Host as the datastore replica.
+3. **Datastores**: Image and system datastores will be configured with shared transfer mode and will be located on the NFS/NAS server.
 4. **Virtual Network**: For public networking. This resource is configured manually.
 5. **Virtual Network Template**: For private networking.
 
 ## Creating an On-premises Provision
 
 ### Prerequisites
-To create an on-premises Provision with SSH, you should use the [On-premises Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
+To create an on-premises Provision with NFS, you should use the [On-premises Provider]({{% relref "/product/cluster_provisioning/cluster_providers/onprem_provider/" %}}) which is provided by default with the `opennebula-form` package installation.
 
 ### Procedure
 
@@ -75,19 +79,19 @@ Select the relevant interface to create an on-premises Provision in your OpenNeb
   alt="Step 3"
 >}}
 
-**Step 4.** Select the **On-Prem SSH Cluster** type and click **Next**:
+**Step 4.** Select the **On-Prem NFS Cluster** type and click **Next**:
 
 {{< image
-  pathDark="images/oneform/oneprovision/onprem/dark/ssh_deployment_types_step.png"
-  path="images/oneform/oneprovision/onprem/light/ssh_deployment_types_step.png"
+  pathDark="images/oneform/oneprovision/onprem/dark/nfs_deployment_type.png"
+  path="images/oneform/oneprovision/onprem/light/nfs_deployment_type.png"
   alt="Step 4"
 >}}
 
-**Step 5.** Enter the correct configuration details in the **User Inputs** page and click **Next**:
+**Step 5.** Enter the correct configuration details in the **User Inputs** page. Add the correct details for your NFS server in the lower part of the form. Click **Next**:
 
 {{< image
-  pathDark="images/oneform/oneprovision/onprem/dark/ssh_user_inputs.png"
-  path="images/oneform/oneprovision/onprem/light/ssh_user_inputs.png"
+  pathDark="images/oneform/oneprovision/onprem/dark/nfs_user_inputs.png"
+  path="images/oneform/oneprovision/onprem/light/nfs_user_inputs.png"
   alt="Step 5"
 >}}
 
@@ -119,6 +123,8 @@ Select the relevant interface to create an on-premises Provision in your OpenNeb
 
 {{% tab header="CLI"%}}
 
+### Listing templates
+
 Create an on-premises Provision with the `oneprovision create <name> --provider-id <id>` command, specifying `onprem` as the Provider type and the ID of the associated Provider to this Provision (use `oneprovider list` to identify the correct Provider). This will initiate an automated process in which OneForm prompts for all required input parameters and starts the deployment:
 
 
@@ -132,7 +138,7 @@ Please select a deployment configuration for this Provision:
 
     Please type the selection number: 
 ```
-Select the SSH option `0`, the CLI will then prompt for numerous details about the Provision, enter the appropriate details or press Enter to use defaults:
+Select the NFS option `1`, the CLI will then prompt for numerous details about the Provision, enter the appropriate details or press Enter to use defaults:
 
 ```default
 There are some parameters that require user input. 
@@ -224,4 +230,4 @@ For further details about the API, see the [OneForm API Reference]({{% relref "/
 
 {{< /tabpane >}}
 
-Now that you have created an on-premises SSH Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
+Now that you have created an on-premises NFS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cluster_provisioning/cluster_operations/provision_operations.md" %}}).

@@ -1,5 +1,5 @@
 ---
-title: "Cloud Cluster Providers Overview"
+title: "Cluster Providers Overview"
 linkTitle: "Overview"
 date: "2025-02-17"
 description:
@@ -10,25 +10,26 @@ weight: "1"
 ---
 
 <!--# Overview -->
-A **Provider** is an abstraction layer that defines the credentials, endpoints, and specific locations (such as a region or zone) within a target infrastructure. It acts as the "source of authority" that OneForm uses to authenticate and communicate with external resources — whether they are public cloud APIs (like AWS) or bare-metal edge locations (like Equinix) — to prepare the ground for a cluster deployment.
+A **Provider** is an abstraction layer that defines the credentials, endpoints, and specific locations (such as a region or zone) within a target infrastructure. It acts as the "source of authority" that OneForm uses to authenticate and communicate with external resources — whether they are public cloud APIs (like AWS), bare-metal edge locations (like Equinix), or on-premises resources — to prepare the ground for a Cluster deployment.
 
 ## Basic Outline
 
-This guide is structured to help you as a cloud administrator with the following topics:
+This guide is structured to help you as a cloud administrator understand the following topics:
 
 1. The conceptual model of a Provider in OpenNebula's architecture.
 2. The layout of a Provider such as Terraform modules, Ansible playbooks and metadata.
 
-Find more about the cloud Providers enabled by default with OpenNebula:
+An on-premises Provider is installed by default with OpenNebula, refer to the [On-premises Provider Guide]({{% relref "onprem_provider#onprem-provider" %}}) for details.
 
-- [Amazon AWS Provider]({{% relref "aws_provider#aws-provider" %}})
-- [Equinix Provider]({{% relref "equinix_provider#equinix-provider" %}})
-- [Scaleway Provider]({{% relref "scaleway_provider#scaleway-provider" %}})
-- [On-premises provider]({{% relref "onprem_provider#onprem-provider" %}})
+Provider drivers for 3rd-party IaaS cloud providers can be installed in your OpenNebula deployment. The Provider drivers are available in the [OneForm Registry Repository](https://github.com/OpenNebula/oneform-registry) in the [OpenNebula GitHub Project](https://github.com/OpenNebula). Instructions for installing and synchronizing the 3rd-party Provider drivers can be found in the [OneForm Registry Wiki](https://github.com/OpenNebula/oneform-registry/wiki). After installing the drivers, you can find additional guides in the Wiki to create Providers for the following cloud/bare-metal services:
+
+- [Amazon AWS Provider](https://github.com/OpenNebula/oneform-registry/wiki/Amazon-Web-Services-Provider)
+- [Equinix Provider](https://github.com/OpenNebula/oneform-registry/wiki/Equinix-Provider)
+- [Scaleway Provider](https://github.com/OpenNebula/oneform-registry/wiki/Scaleway-Provider)
 
 ## Logical Model of a Provider
 
-A Provider represents a logical cloud endpoint in OpenNebula. It consists of:
+A Provider represents a logical Cluster endpoint in OpenNebula. It consists of:
 
 - **Account Credentials**: API keys, tokens, or certificates. Used to authenticate against the provider cloud API.
 - **Region or Zone Information**: Indicating where resources should be provisioned.

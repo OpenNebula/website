@@ -1,5 +1,5 @@
 ---
-title: "Cloud Cluster Provisions Overview"
+title: "Cluster Provisions Overview"
 linkTitle: "Overview"
 date: "2025-02-17"
 description:

@@ -45,7 +45,7 @@ The following resources, which are associated with each Edge Cluster, are create
 
 ### Prerequisites
 
-To create a Provision in Scaleway, you must have a [Scaleway Provider]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_providers/scaleway_provider/" %}}) already created.
+To create a Provision in Scaleway, you must have a [Scaleway Provider]({{% relref "/product/cluster_provisioning/cluster_providers/scaleway_provider/" %}}) already created.
 
 ### Procedure
 
@@ -249,4 +249,4 @@ For further details about the API, see the [OneForm API Reference]({{% relref "/
 
 {{< /tabpane >}}
 
-Now that you have created an AWS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cloud_cluster_provisioning/cloud_cluster_operations/provision_operations.md" %}}).
+Now that you have created an AWS Cluster, learn how to [Manage your Provisioned Clusters]({{% relref "/product/cluster_provisioning/cluster_operations/provision_operations.md" %}}).
