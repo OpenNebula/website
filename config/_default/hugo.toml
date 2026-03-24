@@ -181,6 +181,9 @@ version_menu = "Versions"
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
+  [[module.imports]]
+    path = "github.com/google/docsy/dependencies"
+    disable = false    
   # later additions:
   [[module.imports]]
     path = "github.com/hugomods/swagger-ui"
