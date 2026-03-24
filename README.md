@@ -13,13 +13,13 @@ For details on contributing to the documentation, including full instructions fo
 
 To build the documentation, you will need:
 
-- The [Hugo](https://gohugo.io/) static site generator and web server: **extended version** between `0.128.0` and `0.145.0`. Version `0.145.0` is **highly** recommended since the documentation was built with this version
+- The [Hugo](https://gohugo.io/) static site generator and web server: **extended version** `0.155.3`
 - [Go](https://go.dev/doc/install)
 - [Node.js LTS](https://github.com/nodesource/distributions/blob/master/README.md#using-debian-as-root-nodejs-current)
 - [npm](https://www.npmjs.com/)
 - PostCSS
 
-The environment can be automatically bootstrapped by running the `./setup.sh` script. This will download and install hugo `0.145.0` along with all other build requirements.
+The environment can be automatically bootstrapped by running the `./setup.sh` script. This will download and install hugo `0.155.3` along with all other build requirements.
 Thereafter you can use `npm run start` to download the different modules and start the server.
 
 The documentation uses the [Docsy](https://www.docsy.dev/) theme. It is installed automatically as a Hugo module when Hugo first runs from the documentation root folder.
@@ -66,10 +66,10 @@ To work on the documentation, you will need to install the Hugo web server on yo
 
 Hugo homepage: [https://gohugo.io/](https://gohugo.io/).
 
-To download the recommended version, 0.145.0: [0.145.0 release page](https://github.com/gohugoio/hugo/releases/tag/v0.145.0).
+To download the recommended version, 0.155.3: [0.155.3 release page](https://github.com/gohugoio/hugo/releases/tag/v0.155.3).
 
 > [!WARNING]
-> It is recommended to download Hugo version 0.145.0, since this is the version used by the GitHub Action. Do not install a version higher than 0.145.0, since version 0.146.0 (released April 10 2025\) introduced changes in the template system, and the site won't build on this version.
+> It is recommended to download Hugo version 0.155.3, since this is the version used by the GitHub Action. Do not install a different version than 0.155.3.
 
 (For reference, see: [https://gohugo.io/installation/](https://gohugo.io/installation/).)
 
@@ -85,7 +85,7 @@ To download and install the Hugo web server and site dependencies, you can follo
 2. **Install Node.js LTS & NPM**, You will need to install Node v22 and NPM. To avoid possible errors, the recommended installation method is to use NVM (Node Version Manager, check the [installation instructions](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script))
 3. **Clone** this Github repository
 4. **Install node dependencies**, trun ``npm install`` in the root directory of the repository.
-5. **Download and Install Hugo**, It is recommended to install Hugo 0.145.0 (note that 0.146.0 will not work because of changes in template system). For reference, see: [https://gohugo.io/installation/](https://gohugo.io/installation/).)
+5. **Download and Install Hugo**. Hugo version must be 0.155.3. For reference, see: [https://gohugo.io/installation/](https://gohugo.io/installation/).)
 
 The docs site uses Hugo \+ the [Docsy theme](https://www.docsy.dev/), which is a Hugo module. When you deploy the site locally for the first time, Hugo should automatically download the theme.
 
@@ -369,14 +369,14 @@ Make sure that every OpenNebula process is stopped. The output of `systemctl lis
 
 In the docs we are currently using:
 
-| Alert title | Color |
-|--------|--------------|
-| `Note` | `success` |
-| `Important` | `success` |
-| `Warning` | `warning` |
-| `Tip` | `info` |
+| Type |
+|--------------|
+| `info` |
+| `warning` |
+| `danger` |
+| `tip` |
 
-The `alerts` shortcode automatically inserts the appropriate icon into the alert HTML, based on the alert title. If the alert title is other than those listed in the table above, a generic "info" icon (the same as for title "Note") is inserted, and if there is no title, no icon is inserted.
+The `alerts` shortcode automatically inserts the appropriate icon into the alert HTML, based on the alert type. If the alert type is other than those listed in the table above, a generic "info" icon (the same as for type "info") is inserted, and if there is no title, no icon is inserted.
 
 ### Tables
 
