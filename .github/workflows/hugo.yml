@@ -32,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.145.0
+      HUGO_VERSION: 0.155.3
     steps:
       - name: Install Hugo CLI
         run: |
@@ -75,12 +75,12 @@ jobs:
         with:
           ruby-version: 3.0
           bundler-cache: true
-      
+
       - name: Get current branch name
         id: get_branch
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-    
+
       - name: Setup SSH keys
         shell: bash
         run: |
@@ -91,7 +91,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-        
+
       - name: Compile and publish documentation
         id: build_publish_docs
         shell: bash

@@ -22,7 +22,7 @@ There is a special `default` VDC created during the installation that allows the
 
 The `users` group belongs to this VDC and any new group is automatically added to the `default` VDC. You can modify the VDC physical resources, or even remove all of them, but the VDC can’t be deleted.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before adding a new group to a specific VDC, you may want to remove it from the `default` one since this allows the use of `ALL` the physical resources.{{< /alert >}} 
 
 ## Adding and Deleting VDCs
@@ -92,7 +92,7 @@ For example, let’s imagine a case where Web Development, Human Resources, and 
 * **VDC RED**: VDC that allocates resources from DC_West_Coast + DC_Europe + Cloudbursting to Human Resources
 * **VDC GREEN**: VDC that allocates resources from DC_West_Coast + DC_Europe to Big Data Analysis
 
-{{< image path="/images/vdc_organization.svg" alt="VDC Organization" align="center" width="80%" pb="20px" >}}
+{{< image path="/images/vdc_organization.svg" alt="VDC Organization" align="center" width="80%" mb="20px" border="false" >}}
 
 ### Flexible Groups
 

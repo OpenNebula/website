@@ -1,7 +1,7 @@
 
 $td-enable-google-fonts: true;
-$google_font_name: 'Inter';
-$google_font_family: 'Inter:300,300i,400,400i,700,700i';
+$td-google_font_name: 'Inter';
+$td-google_font_family: 'Inter:300,300i,400,400i,700,700i';
 
 a:link {
   text-decoration: none;
@@ -67,7 +67,10 @@ $btn-padding-y: 8px;
 $btn-padding-x: 24px;
 
 // card columns
-//$card-columns-margin: 10px !important;
 $card-columns-gap: 10px !important;
 $card-spacer-y: 10px;
 $card-spacer-x: 10px;
+
+
+
+

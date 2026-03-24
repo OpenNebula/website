@@ -142,7 +142,7 @@ scrape_configs:
 
 You can adjust scrape intervals or other configuration attributes in this file.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can easily add or remove Hosts by copying or deleting the corresponding targets, or simply re-run the script. In that case you’ll have a backup in `/etc/one/prometheus/` to recover any additional configurations.{{< /alert >}} 
 
 ## Step 5. Start the Prometheus Service [Front-end]
@@ -328,7 +328,7 @@ alerting:
 
 which points to *all* alertmanager instances that are supposed to be configured in [HA mode](https://prometheus.io/docs/alerting/latest/alertmanager/#high-availability) as well (to deduplicate alert notifications).
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Services `opennebula-prometheus`, `opennebula-alertmanager`, `opennebula-node-exporter` and `opennebula-exporter` should be configured, enabled and started on *all* Front-end machines.{{< /alert >}} 
 
 To configure each alertmanager as a cluster peer, you need to override (or modify) the `opennebula-alertmanager` systemd service.
@@ -348,5 +348,5 @@ EOF
 # systemctl restart opennebula-alertmanager.service
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can create the `opennebula-alertmanager.service.d/override.conf` file yourself or automatically with `systemctl edit opennebula-alertmanager.service`.{{< /alert >}} 

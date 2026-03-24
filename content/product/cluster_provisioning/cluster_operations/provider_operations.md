@@ -19,7 +19,7 @@ With this guide, you will understand how the drivers and Providers and Provision
 - Enabling and disabling cloud drivers.
 - Managing access controls
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 All driver information is securely stored and encrypted. While regular users can list and view driver information, only members of the `oneadmin` group are allowed to manage and modify Providers.
 {{< /alert >}}
 
@@ -59,7 +59,7 @@ To disable a driver in OpenNebula, use the `oneform disable` command:
 oneform disable <driver_name>
 ```
 
-{{< alert title="Important" color="warning" >}}
+{{< alert title="Important" type="warning" >}}
 This action will not remove the existing instantiated Providers and Provisions, but it will prevent users from creating new Providers and Provisions using this driver.
 {{< /alert >}}
 

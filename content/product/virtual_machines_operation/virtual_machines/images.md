@@ -37,7 +37,7 @@ Additionally, *file* Images represent plain files that can be used as:
 * **RAM disk** (`RAMDISK`): loaded by initrd at boot time.
 * **Generic file** (`CONTEXT`): a plain file to be included in the context CD-ROM. Once started, the VM will have access to this file.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 KERNEL, RAMDISK, and CONTEXT file Images can be registered only in Files & Kernels Datastore. Some of the operations described in this guide do not apply to them, in particular: clone and persistent.{{< /alert >}} 
 
 Images of the previous types can also operate in two modes:
@@ -94,10 +94,10 @@ $ oneimage create --datastore default --name Ubuntu --path /home/cloud/images/ub
 
 For OS Images, you need to install the [OpenNebula context packages for your target guest OS]({{% relref "vm_templates#context-overview" %}}) before using them. There are no additional steps if you are creating a data disk.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can use **gz** compressed Image files when registering them in OpenNebula.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Sunstone will allow you to upload disk Images from your desktop.{{< /alert >}} 
 
 If you need to set a complex number of options when creating the Image, you can also pass all of them in a file. We call these files Templates. This is how the Template for the previous example looks:
@@ -147,7 +147,7 @@ Finally, you can boot a VM from an ISO installation Image and install the OS. Pl
 
 ### LUKS-encrypted Images
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 LUKS-encrypted Images can be used **only on KVM**-based hypervisors.{{< /alert >}} 
 
 There are two possible scenarios:
@@ -329,7 +329,7 @@ $ oneimage list
 
 To get complete information about an Image, use `oneimage show`, or list Images continuously with `oneimage top`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Orphan Images (i.e., Images not referenced by any VM Template) can be shown with the `oneimage orphans` command.{{< /alert >}} 
 
 ### Cloning Images
@@ -396,7 +396,7 @@ Persistent Images can have snapshots if they are [created]({{% relref "../virtua
 * `oneimage snapshot-delete <image_id> <snapshot_id>`: Deletes a snapshot. This operation is only allowed if the snapshot is not the active snapshot and if it has no children.
 * `oneimage snapshot-flatten <image_id> <snapshot_id>`: This operation effectively converts the Image to an Image without snapshots. The saved disk state of the Image is the state of the specified snapshot. It’s an operation similar to running `snapshot-revert` and then deleting all the snapshots.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Images with snapshots **cannot** be cloned or made non-persistent. To run either of these operations the user would need to flatten the Image first.{{< /alert >}} 
 
 ## How to Use Images in Virtual Machines
@@ -465,5 +465,5 @@ You can also manage your Images using the [Sunstone GUI]({{% relref "../../contr
 
 When creating Images you can upload them to the Datastore via the client browser. The process copies the Image from the client desktop to a temporal location and creates the Image from it (as described above).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that when file sizes become big (normally over 1GB), and depending on your hardware, it may take a long time to complete the copying. Since the upload request needs to stay pending until copying is successful (so it can delete the temp file safely), there might be Ajax timeouts and/or lack of response from the server. This may cause errors or trigger re-uploads (which re-initiate the loading progress bar).{{< /alert >}} 

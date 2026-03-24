@@ -61,7 +61,7 @@ The login screen will not display the username and password fields anymore, as a
 
 Note that OpenNebula will not verify that the user holds a valid certificate at the time of login: this is expected to be done by the external container of the Sunstone server (normally Apache), whose job is to tell the user’s browser that the site requires a user certificate and to check that the certificate is consistently signed by the chosen Certificate Authority (CA). The setup with Apache/SAML is the more common and tested. However, it can rely on Apache/Nginx for OIDC.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The Sunstone authentication only handles the authentication of the user at the time of login. Authentication of the user certificate is a complementary setup, which can rely on Apache.{{< /alert >}} 
 
 <a id="sunstone-ldap-auth"></a>
@@ -110,7 +110,7 @@ The login screen will not display the username and password fields anymore, as a
 
 ![sunstone_remote_login](/images/sunstone_login_remote.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To configure this function it's mandatory to have an [Apache/Nginx]({{% relref "../../control_plane_configuration/large-scale_deployment/index#large-scale-deployment" %}})  Below are the rules for each one{{< /alert >}} 
 
 ## SAML Auth

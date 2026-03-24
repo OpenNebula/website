@@ -11,7 +11,7 @@ weight: "3"
 <a id="upgrade-single"></a>
 
 <!--# Upgrading Single Front-end Deployments -->
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
 
 ## Upgrading from 6.x and higher
@@ -40,7 +40,7 @@ Then make sure every OpenNebula process is stopped. For example:
 systemctl is-active opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-scheduler.service opennebula-fireedge.service
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}}
 
 ### Step 4. Back up OpenNebula Configuration
@@ -63,7 +63,7 @@ In order to be able to retrieve the packages for the latest version, you need to
 
 ### Step 6. Upgrade to the New Version
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 When prompted by the package manager, select the option to keep your current (modified) configuration files. The upgrade of these files will be handled in the next step.{{< /alert >}}
 
 Ubuntu/Debian
@@ -83,7 +83,7 @@ yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge openn
 
 In High Availability (HA) setups, you must replace the default value `auto` of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
 
-{{< alert title="Important" color="danger" >}}
+{{< alert title="Important" type="danger" >}}
 **Note**: This step **only applies to installations prior to version 7.0** that have defined custom default label groups in `/etc/one/sunstone-views.yaml` and wish to preserve them.
 
 Before proceeding, back up the `/etc/one/sunstone-views.yaml` file. After completing the `onecfg` upgrade step, restore the file to its original location. Once the upgrade is fully finalized and the custom labels are confirmed to be migrated, the file may be safely removed. {{< /alert >}}
@@ -106,7 +106,7 @@ New config:  7.0.0
 - from 6.10.2 to 7.0.0 (YAML, Ruby)
 ```
 
-{{<alert title="Note" color="success">}}
+{{< alert title="Note" type="info" >}}
 After running `onecfg status`, you might encounter one of the following messages:
 
 * `Unknown Configuration Version Error`: No action is required. The configuration version will be initialized automatically during the OpenNebula upgrade, based on the existing version.
@@ -138,7 +138,7 @@ No updates available.
 
 ### Step 8. Upgrade the Database Version
 
-{{< alert title="Important" color="danger" >}}
+{{< alert title="Important" type="danger" >}}
 If you have backed up `/etc/one/sunstone-views.yaml` restore the file to `/etc/one` now before executing the following command.{{< /alert >}}
 
 Simply run the `onedb upgrade -v` command. The connection parameters are automatically retrieved from `/etc/one/oned.conf`. Example:
@@ -182,7 +182,7 @@ Total errors found: 0
 
 ### Step 10. Start OpenNebula
 
-{{< alert title="Important" color="danger" >}}
+{{< alert title="Important" type="danger" >}}
 For versions prior to 7.0, now you can safely delete `/etc/one/sunstone-views.yaml`.{{< /alert >}}
 
 Start OpenNebula and any other related services: OneFlow, OneGate and FireEdge. First reload the new systemd unit files:
@@ -197,7 +197,7 @@ Then restart the services:
 systemctl start opennebula opennebula-flow.service opennebula-gate.service opennebula-hem.service opennebula-fireedge.service
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running FireEdge service behind Apache/Nginx, please start also the Apache/Nginx service.{{< /alert >}}
 
 ### Step 11. Restore Custom Probes
@@ -206,7 +206,7 @@ If you have any custom monitoring probes, follow [these instructions]({{% relref
 
 ### Step 12. Update the Hypervisors
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The hypervisor node operating system must meet the minimum version required according to the [KVM]({{% relref "../../release_information/release_notes/platform_notes.md#kvm-nodes" %}}) or [LXC]({{% relref "../../release_information/release_notes/platform_notes#lxc-nodes" %}}) platform notes. Running a Front-end node with a newer OpenNebula version controlling hypervisor nodes running in old unsupported platforms, like CentOS 7, can result in a myriad of dependency problems. A very common issue is the old ruby version shipped in CentOS 7 not being able to run the newer driver code.{{< /alert >}}
 
 Log in to your hypervisor Hosts and update the `opennebula-node` packages. **NOTE**: you may need to upgrade the software repository as described [above](#step-5-upgrade-opennebula-packages-repository).
@@ -224,10 +224,10 @@ RHEL
 yum upgrade opennebula-node-<hypervisor>
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that the `<hypervisor>` tag should be replaced by the name of the corresponding hypervisor (i.e., `kvm` or `lxc`).{{< /alert >}}
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 For KVM hypervisor it’s also necessary to restart the libvirt service{{< /alert >}}
 
 Then update the virtualization, storage, and networking drivers. As the `oneadmin` user, execute:

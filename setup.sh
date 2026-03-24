@@ -8,8 +8,8 @@ ARCH="$(uname -m)"
 install_hugo_mac() {
     TMP_DIR=$(mktemp -d)
     cd "$TMP_DIR"
-    wget https://github.com/gohugoio/hugo/releases/download/v0.145.0/hugo_extended_0.145.0_darwin-universal.tar.gz
-    tar -xzf hugo_extended_0.145.0_darwin-universal.tar.gz
+    wget https://github.com/gohugoio/hugo/releases/download/v0.155.3/hugo_extended_0.155.3_darwin-universal.tar.gz
+    tar -xzf hugo_extended_0.155.3_darwin-universal.tar.gz
     sudo mv hugo /usr/local/bin/
     cd -
     rm -rfd "$TMP_DIR"
@@ -22,10 +22,10 @@ install_hugo_linux() {
 
     case "$ARCH" in
     aarch64)
-        FILE="hugo_extended_0.145.0_Linux-arm64.tar.gz"
+        FILE="hugo_extended_0.155.3_Linux-arm64.tar.gz"
         ;;
     x86_64)
-        FILE="hugo_extended_0.145.0_Linux-amd64.tar.gz"
+        FILE="hugo_extended_0.155.3_Linux-amd64.tar.gz"
         ;;
     *)
         echo "Unsupported architecture: $ARCH"
@@ -33,7 +33,7 @@ install_hugo_linux() {
         ;;
     esac
 
-    wget "https://github.com/gohugoio/hugo/releases/download/v0.145.0/$FILE"
+    wget "https://github.com/gohugoio/hugo/releases/download/v0.155.3/$FILE"
 
     tar -xzf "$FILE"
     sudo mv hugo /usr/local/bin/

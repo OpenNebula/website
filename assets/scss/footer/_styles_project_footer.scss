@@ -1,0 +1,52 @@
+@import "../_styles_fonts";
+
+.td-footer {
+  background-color: var(--footer-background-color);
+  border-top: 1px solid var(--border-color);
+  padding: 0;
+  p {
+    @include body-small;
+    &.one-footer-acks {
+      font-size: 12px;
+    }
+    a {
+      color: var(--link-color);
+      &:hover {
+        color: var(--link-hover-color);
+      }
+    }
+  }
+}
+
+.one-footer-main-container {  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.one-footer-top {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.one-footer-left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.footer-logo svg {
+  width: 190px;
+  height: 64px;
+  margin-bottom: 24px;
+}
+
+.one-footer-tagline {
+  margin-bottom: 32px;
+}
+
+.one-footer-links-container {
+  color: var(--footer-linkicon-color);
+}

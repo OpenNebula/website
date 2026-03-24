@@ -14,7 +14,7 @@ The OpenNebula NVIDIA&reg; Fabric Manager integration provides a complete soluti
 
 The OpenNebula integration with Fabric Manager integration follows the NVIDIA Shared NVSwitch Virtualization Model. This model uses a Service VM in each hypervisor for managing the NVSwitches. The NVSwitches are added to the Service VM as PCI passthrough devices to configure the selected GPU partitioning. The Guest VMs are configured with PCI passthrough for the GPUs only, without any visibility of the NVSwitches. See the reference architecture in the image below.
 
-![ Reference architecture. Adapted diagram based on the "Shared NVSwitch Virtualization Model" located in the NVIDIA Fabric Manager User Guide.](/images/onefabric_virtualization_model.svg)
+{{< image path="/images/onefabric_virtualization_model.svg" alt="Reference architecture. Adapted diagram based on the \"Shared NVSwitch Virtualization Model\" located in the NVIDIA Fabric Manager User Guide." align="center" width="80%" mb="20px" border="false" >}}
 
 These are the key components of the NVIDIA Shared NVSwitch Virtualization Model:
 
@@ -163,7 +163,7 @@ All commands include optional arguments:
 
 If you do not specify any these parameters, the command is executed for all available hosts.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You must manually deactivate any currently active partition that shares GPU resources with the new partition you wish to activate. The Fabric Manager does not automatically resolve resource conflicts, meaning you cannot activate a new partition if its required GPUs or NVLinks are already claimed by an active partition. For example: if Partitions P1 and P2 (together using all 8 GPUs) are currently active, activation fails for Partition P0 with 8 GPUs.
 {{< /alert >}}
 

@@ -92,7 +92,7 @@ Shared Address Ranges behave slightly differently from regular Address Ranges:
 - Explicit request required: Shared IPs are not assigned automatically. They must be explicitly requested in a NIC or NIC Alias ([more details](#using-virtual-ips)).
 - Attribute `USED_LEASES` shows how many different shared IPs are in use, not how many VMs are using them.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The `SHARED` attribute of an Address Range can't be changed after creation. The default value is `NO`. {{< /alert >}}
 
 ### Guest Configuration Attributes (Context)
@@ -157,7 +157,7 @@ The Virtual Network will be moving through different states to represent the act
 
 ## Adding and Deleting Virtual Networks
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="tip" >}}
 This guide uses the CLI command `onevnet`, but you can also manage your Virtual Networks using the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Virtual Networks** tab to create, enable and operate your Virtual Networks in a user-friendly way.{{< /alert >}} 
 
 There are three different ways for creating a network:
@@ -259,10 +259,10 @@ The update operation will trigger driver action to live update the network confi
 | bridge                            | - PHYDEV                                                                                                                                                                                         |
 | fw                                | - PHYDEV<br/>- INBOUND_AVG_BW<br/>- INBOUND_PEAK_BW<br/>- INBOUND_PEAK_KB<br/>- OUTBOUND_AVG_BW<br/>- OUTBOUND_PEAK_BW                                                                           |
 | 802.1Q<br/>vxlan                  | - PHYDEV<br/>- VLAN_ID<br/>- MTU<br/>- INBOUND_AVG_BW<br/>- INBOUND_PEAK_BW<br/>- INBOUND_PEAK_KB<br/>- OUTBOUND_AVG_BW<br/>- OUTBOUND_PEAK_BW                                                   |
-> {{< alert title="Important" color="success" >}}
+> {{< alert title="Important" type="info" >}}
 > QoS attributes (INBOUND and OUTBOUND) can be updated for single VMs with [onevm nic-update]({{% relref "../../virtual_machines_operation/virtual_machines/vm_instances#nic-update" %}}).{{< /alert >}} 
 
-> {{< alert title="Important" color="success" >}}
+> {{< alert title="Important" type="info" >}}
 > For SR-IOV-based NICs you can update all the attributes that can be set for this type of interfaces.{{< /alert >}} 
 
 As the network is updated for each VM and Host, you can check the progress of the update in Virtual Network details:
@@ -274,7 +274,7 @@ As the network is updated for each VM and Host, you can check the progress of th
 
 In case of driver action failure, the Virtual Network will switch to `UPDATE_FAILURE` state. In that case you can use `onevnet recover --retry` to re-launch the driver actions for failed VMs. Or manually fix the network and call `onevnet recover --success`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Please consider that for Virtual Networks with lot of leases it may take some time to propagate changes to all Hosts and VMs.{{< /alert >}} 
 
 <a id="manage-address-ranges"></a>
@@ -358,10 +358,10 @@ The Virtual Machine will also get a free address from any of the address ranges 
 NIC = [ NETWORK = "Network", IP = 10.0.0.153 ]
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Note that if OpenNebula is not able to obtain a lease from a network the submission will fail.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Users can only attach VMs or make reservations from Virtual Networks with **USE** rights on them. See the [Managing Permissions documentation]({{% relref "../../cloud_system_administration/multitenancy/chmod#chmod" %}}) for more information.{{< /alert >}} 
 
 <a id="vgg-vn-automatic"></a>
@@ -398,7 +398,7 @@ To attach an NIC alias to a VM you need to refer to the parent NIC by its `NAME`
 NIC = [ NETWORK = "public", NAME = "test" ]
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Names in the form `NIC<number>` are reserved. OpenNebula will rename them to `_NIC<number>`.{{< /alert >}} 
 
 Then you can attach an alias using an `NIC_ALIAS` attribute:
@@ -409,13 +409,13 @@ NIC_ALIAS = [ NETWORK = "private", PARENT = "test" ]
 
 If the nic `NAME` is empty, it will be generated automatically in the form `NIC${NIC_ID}`. This name can be also used to create an alias, e.g., `NIC_ALIAS = [ NETWORK = "private", PARENT = "NIC0" ]`
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 You can also use the `onevm` command using the option `--alias alias` so that NIC will be attached as an alias, instead of as an NIC.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Any attribute supported by an NIC attribute can be also used in an alias except for `NETWORK_MODE`. A `NIC_ALIAS` network cannot be automatically selected.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The [Security Groups]({{% relref "../../virtual_machines_operation/virtual_machines_networking/security_groups#security-groups" %}}) and IP/MAC spoofing filters from the NIC network will be applied to the NIC_ALIAS. Those ones belonging to the NIC_ALIAS network won’t apply.{{< /alert >}}  
 
 ### Using Virtual IPs
@@ -439,14 +439,14 @@ This will result in the VM having a **single network interface** (the parent NIC
 - The IP assigned to the main NIC
 - The explicitly requested shared IP from the `NIC_ALIAS`
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Requesting a Shared IP from a Shared AR **without** using `NIC_ALIAS` will create a **new interface** in the VM, with a random MAC assigned by OpenNebula.{{< /alert >}}
 
 ### Configuring the Virtual Machine Network
 
 Hypervisors will set the MAC address for the NIC of the Virtual Machines, but not the IP address. The IP configuration inside the guest is performed by the contextualization process, check the [contextualization guide]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) to learn how to prepare your Virtual Machines to automatically configure the network
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Alternatively, a custom external service can configure the Virtual Machine network (e.g., your own DHCP server in a separate Virtual Machine){{< /alert >}} 
 
 ### Recovering the Virtual Network

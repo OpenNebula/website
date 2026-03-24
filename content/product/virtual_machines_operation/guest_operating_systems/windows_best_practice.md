@@ -69,12 +69,12 @@ There are some major changes necessary here in order to get the most out of your
 - Boot Order: Move the ISO to the top, then the target disk as the second, and check the boxes next to both of them. Leave the others unchecked
 - Firmware: Set this to UEFI. If necessary, use the OVMF_CODE.secboot.fd to enable Secure Boot
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 There are resources online for disabling Secure Boot and TPM, however they involve modifying the registry.{{< /alert >}} 
 
 Most distributions’ repositories do not have the properly signed Secure Boot BIOS for Windows. If you are having trouble installing with Secure Boot enabled then you should download the RHEL RPM for edk2-ovmf, which can be found [here on pkgs.org](https://pkgs.org/download/edk2-ovmf).  Once you have downloaded that you’ll need to extract and update your firmware files manually. Download the RPM to a directory that is easily accessible, perhaps on the Front-end so you can just transfer the files to each Host. These firmware files should exist and be the same layout on every hypervisor.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Modifying the UEFI/BIOS files may cause machines to be unable to boot. These machines must be re-instantiated in order to get the updated changes.  If this is the case, you’ll want to configure that VM to use the old UEFI files. Instructions for that are after the installation instructions.{{< /alert >}} 
 
 To extract the files from the RPM do the following:
@@ -143,7 +143,7 @@ Here we can add some RAW data that can be useful depending on your use case.
 
 If you have a physical TPM device on your Host, you can pass through the TPM to the guest OS with this XML. However, ensure the device is at /dev/tpm0 before implementing it.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you already have <devices> defined in your XML, insert the <tpm> tags inside of that devices tag.{{< /alert >}} 
 
 ```default
@@ -158,7 +158,7 @@ If you already have <devices> defined in your XML, insert the <tpm> tags inside 
 
 If you do not have a physical TPM device on your Host you can emulate one.  There are two options for the model, tpm-tis is the default and will work with both TPM 1.2 and 2.0,  while tpm-crb will only work when the TPM version is 2.0.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If using an emulated TPM device, ensure you have installed swtpm and swtpm-tools packages on all hypervisors.{{< /alert >}} 
 
 ```default
@@ -202,7 +202,7 @@ For extra information and how to enable this on the Hosts, please see [our docum
 
 ## Installing the Operating System
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 These instructions are written for installing Windows 10/11 but the instructions for Server editions should be nearly identical.{{< /alert >}} 
 
 Now that we’ve created the template with all the necessary images and configurations we can begin the deployment. Select the template we just created and go to Instantiate. In this form you should usually need to fill out just the name.  The Capacity and Disks should already be filled and your Network should have been configured in the template. If not, configure a network now if necessary.  If you require a specific Host or datastore then you may also want to define those here.
@@ -221,7 +221,7 @@ In order to do this, click Load Driver then Browse.  In here, scroll down to and
 
 Windows will now begin installing.  This will take some time depending on the hardware but once it is complete and has rebooted you should be prompted to begin the setup. Proceed as normal here until it prompts for network access.  Select the option: I don’t have internet, then: Continue with limited setup.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For Windows 11 this may not be an option depending on how old the image is. If you are unable to bypass the network requirement part of Windows 11, press Shift + F10 to open a Command Prompt in the Virtual Machine.  Then type oobe/BypassNRO and hit enter. This will reboot the machine and allow you to bypass the network requirements.{{< /alert >}} 
 
 ![image](/images/windows_bp_bypassnro.png)

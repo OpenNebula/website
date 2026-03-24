@@ -6,7 +6,7 @@ weight: "3"
 
 This setup assumes you are using NetApp ONTAP with iSCSI and are trying to use it as a backend for one of OpenNebula's [LVM datastore options]({{% relref "." %}}). The configuration uses standard volume and host mappings. If you are familiar with the NetApp ONTAP interface and its functionality, create the required resources as desired.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This guide is provided as a prerequisite to use the LVM drivers over a NetApp appliance. It is not
 needed if you are using the [native NetApp]({{% relref "../san_storage/netapp" %}}) driver.
 {{< /alert >}}
@@ -31,7 +31,7 @@ For the "Initiator group members" section below it should have **Host initiators
 {{< image path=/images/netapp_add_igroup.png width=500 alt=image0 >}}
 </center>
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When you add or remove hosts from your OpenNebula installation, you should update the initiator group as well to ensure their access to the LUN.
 {{< /alert >}}
 
