@@ -35,4 +35,5 @@ The following issues have been solved in 7.0.2:
 - Fix oneswap error management on esxi host detection [#7341](https://github.com/OpenNebula/one/issues/7341)
 - Fix LVM thin pools growing indefinitely when creating and deleting snapshots. [#7400](https://github.com/OpenNebula/one/issues/7400)
 - Fix [Veeam] Incremental backup not working. [#7350](https://github.com/OpenNebula/one/issues/7350)
+- Fix Conversion failed with message Unable to find Host, Cluster, and Datacenter of VM. [#7533](https://github.com/OpenNebula/one/issues/7533).
 
