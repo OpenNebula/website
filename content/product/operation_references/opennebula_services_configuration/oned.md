@@ -23,7 +23,7 @@ The OpenNebula Daemon configuration file can be found in `/etc/one/oned.conf` on
 After a configuration change, the OpenNebula Daemon must be [restarted]({{% relref "oned#oned-conf-service" %}}) to take effect.{{< /alert >}}
 
 {{< alert title="Tip" type="tip" >}}
-For a quick view of any changes in configuration file options in maintenance releases, check the Resolved Issues page in the [Release Notes]({{% relref "../../../software/release_information/release_notes_enterprise/index#rn-enterprise" %}}) for the release. Please note that even in the case of changes (such as a new option available), you do *not* need to update your configuration files unless you wish to change the application’s behavior.{{< /alert >}}
+For a quick view of any changes in configuration file options in maintenance releases, check the Resolved Issues page in the [Release Notes]({{% relref "../../../software/release_information/release_notes" %}}) for the release. Please note that even in the case of changes (such as a new option available), you do *not* need to update your configuration files unless you wish to change the application’s behavior.{{< /alert >}}
 
 - `MANAGER_TIMER`: Time in seconds the core uses to evaluate periodical functions. `MONITORING_INTERVAL` cannot have a smaller value than `MANAGER_TIMER`.
 - `MONITORING_INTERVAL_DATASTORE`: Time in seconds between each Datastore monitoring cycle.
