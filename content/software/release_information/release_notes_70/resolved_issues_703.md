@@ -1,5 +1,5 @@
 ---
-title: "Resolved Issues in 7.0.3"
+title: "Resolved Issues in 7.0.3 (EE)"
 ---
 
 <a id="resolved-issues-703"></a>
