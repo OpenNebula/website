@@ -1,7 +1,7 @@
 ---
 title: "Hosts and Clusters"
 date: "2025-02-17"
-description: "Configure OpenNebula Hosts individually or in clusters"
+description: "Configure OpenNebula Hosts individually or in Clusters."
 categories:
 pageintoc: "51"
 tags:

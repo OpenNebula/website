@@ -32,8 +32,8 @@ For example, a Host with eight processors (`TOTAL CPU=800`) can host eight VMs w
 
 The capacity of a Host is obtained by the monitor probes. You may alter the overall resources available to the VMs by reserving an amount of that capacity:
 
-* Cluster-wise, by updating the cluster template (e.g., `onecluster update`). All Hosts in the cluster will reserve the same amount of capacity.
-* Host-wise, by updating the Host template (e.g., `onehost update`). This value will override those defined at the cluster level.
+* Cluster-wise, by updating the Cluster template (e.g., `onecluster update`). All Hosts in the Cluster will reserve the same amount of capacity.
+* Host-wise, by updating the Host template (e.g., `onehost update`). This value will override those defined at the Cluster level.
 
 In particular, the following capacity attributes can be reserved:
 
