@@ -48,7 +48,7 @@ The attribute name is `VM`.
 
 | VM Attribute       | Description                                                                                                                                     |
 |--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CLUSTER_IDS`      | An optional attribute used to define which clusters are included in this<br/>quota. Leave this attribute empty to apply the quota globally.     |
+| `CLUSTER_IDS`      | An optional attribute used to define which Clusters are included in this<br/>quota. Leave this attribute empty to apply the quota globally.     |
 | `VMS`              | Maximum number of VMs that can be created                                                                                                       |
 | `MEMORY`           | Maximum memory in MB that can be requested by user/group VMs                                                                                    |
 | `CPU`              | Maximum CPU capacity that can be requested by user/group VMs                                                                                    |
@@ -91,19 +91,19 @@ Additionally, it’s important to note that each generic quota defined with the 
 
 #### Per Cluster Quotas
 
-For more granular control over Compute Quotas, use the `CLUSTER_IDS` attribute. This optional attribute specifies which clusters the quota applies to. If left empty, the quota will be applied globally. The value should be a comma-separated list of cluster IDs, and the quota will only affect VMs running in the specified clusters. Note that each cluster can be assigned to only one quota.
+For more granular control over Compute Quotas, use the `CLUSTER_IDS` attribute. This optional attribute specifies which Clusters the quota applies to. If left empty, the quota will be applied globally. The value should be a comma-separated list of Cluster IDs, and the quota will only affect VMs running in the specified Clusters. Note that each Cluster can be assigned to only one quota.
 
 ```default
 # Global quota to allow 4 VMs
 VM = [
   VMS = 4
 ]
-# Quota for cluster 0 to allow 2 VMs
+# Quota for Cluster 0 to allow 2 VMs
 VM = [
   CLUSTER_IDS = "0",
   VMS = 2
 ]
-# Quota for clusters 100 and 101 to allow 3 VMs
+# Quota for Clusters 100 and 101 to allow 3 VMs
 VM = [
   CLUSTER_IDS = "100,101",
   VMS = 3
@@ -114,7 +114,7 @@ In this setup, the user can run:
 
 * Up to **2 VMs** in **cluster 0**
 * Up to **3 VMs** in **clusters 100 and 101** combined
-* No more than **4 VMs** in total across all clusters
+* No more than **4 VMs** in total across all Clusters
 
 ### Network Quotas
 

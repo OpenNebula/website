@@ -147,6 +147,8 @@ The above information can be also displayed in XML, JSON, or CSV format using `-
 
 In order to manage the life cycle of a Host it can be set to different operation modes: enabled (`on`), disabled (`dsbl`), and offline (`off`). The different operation status for each mode is described in the following table:
 
+<!-- Markdown doesn't support merged cells in tables, so as a temporary workaround these are inserted in HTML -->
+
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head" rowspan="2"><p><b>OP. MODE<b></p></th>

@@ -36,7 +36,7 @@ OpenNebula provides a unified and centralized control plane for the complete man
 
 OpenNebula ensures large-scale deployment and distributed cloud operations with a flexible, federated architecture designed for scalability and isolation.
 
-* Disaggregated Architecture: efficient management of highly distributed cloud and edge environments with clusters across multiple sites or data centers.
+* Disaggregated Architecture: efficient management of highly distributed cloud and edge environments with Clusters across multiple sites or data centers.
 * Instance Federation: enables the federation of multiple OpenNebula control planes, allowing unified management across geographically distributed zones.
 * Scalability: proven scalability in production environments with over 2,500 hypervisor nodes managed within a single OpenNebula instance.
 
@@ -45,15 +45,15 @@ OpenNebula ensures large-scale deployment and distributed cloud operations with 
 Built-in high-availability features ensure continuous service operation and data protection with minimal downtime.
 
 * High Availability of Control Plane: redundant front-end components with automatic failover for uninterrupted management services.
-* High Availability of Hypervisor Nodes: cluster-based failover mechanisms to automatically restart workloads on surviving hosts.
+* High Availability of Hypervisor Nodes: Cluster-based failover mechanisms to automatically restart workloads on surviving hosts.
 * Disaster Recovery Across Data Centers: synchronous and asynchronous VM replication and recovery workflows to protect workloads across multiple sites.
 
 ### Hybrid and Edge Cloud
 
-Automates the provisioning and lifecycle management of clusters across private, public, and edge clouds.
+Automates the provisioning and lifecycle management of Clusters across private, public, and edge clouds.
 
-* Dynamic Expansion: automatically scales clusters by extending private cloud capacity to public or edge environments.
-* Multi-Cloud Federation: enables seamless access and workload mobility across clusters deployed in different clouds.
+* Dynamic Expansion: automatically scales Clusters by extending private cloud capacity to public or edge environments.
+* Multi-Cloud Federation: enables seamless access and workload mobility across Clusters deployed in different clouds.
 * Unified Management: provides a single control plane for orchestrating compute, storage, and networking resources across hybrid and distributed infrastructures.
 
 ## Infrastructure and Virtualization Layer
@@ -104,7 +104,7 @@ Full support for both software-defined storage (SDS) and appliance-based storage
 
 * Raw device mapping (RDM): use the directly attached devices in the hypervisors in your VMS.
 * NFS/NAS: shared network storage with full image management support.
-* Local storage with multi-tier caching: cost-efficient, high-performance storage using local disks with support for image caching across clusters and hypervisors in multi-cluster or hybrid configurations,
+* Local storage with multi-tier caching: cost-efficient, high-performance storage using local disks with support for image caching across Clusters and hypervisors in multi-cluster or hybrid configurations,
 * Disaggregated and HCI Ceph: scalable distributed storage with block and image replication.
 * SAN/LVM: high-performance block storage with thin provisioning, with specific guides for NetApp, Pure Storage, and generic SAN appliances.
 * NetApp: optimized driver for NetApp All-Flash systems and ONTAP features.
@@ -131,7 +131,7 @@ A self-service model enabling users to deploy and manage multi-tier applications
 Advanced scheduling and resource optimization ensure efficient use of compute and storage resources.
 
 * Live Migration: seamless movement of running VMs between hosts for maintenance or load balancing.
-* Dynamic Resource Scheduling (DRS): cluster-wide automated & semi-automated load balancing, and generation of migration plans.
+* Dynamic Resource Scheduling (DRS): Cluster-wide automated & semi-automated load balancing, and generation of migration plans.
 * AI-driven Predictive Scheduler: multi-policy scheduling engine supporting priorities, affinity, and cost-aware placement.
 * Affinity/Anti-Affinity Rules: policy-driven placement of VMs to optimize locality or fault tolerance.
 * Host Overcommitment: maximize resource utilization and efficiency.
@@ -151,8 +151,8 @@ Comprehensive isolation, quota management, and access controls ensure secure mul
 * Application Sharing: secure sharing of templates and applications across users, groups, and projects.
 * Authentication Realms: integration with LDAP, Active Directory, SAML, and other identity backends for centralized access control.
 * Fine-Grained ACLs: per-resource access permissions for complete control of user and group privileges.
-* Quota Management: enforces CPU, GPU, storage, and network usage limits per user or tenant to ensure fair resource allocation and policy compliance, including cluster-level quotas and custom quota items for granular governance and control.
-* Cluster and VDC: logical partitioning of resources into isolated clusters and Virtual Data Centers.
+* Quota Management: enforces CPU, GPU, storage, and network usage limits per user or tenant to ensure fair resource allocation and policy compliance, including Cluster-level quotas and custom quota items for granular governance and control.
+* Cluster and VDC: logical partitioning of resources into isolated Clusters and Virtual Data Centers.
 * Users & Groups: logical grouping of users and projects for efficient policy administration.
 * Network Isolation: VLANs and overlays ensure tenant traffic separation.
 
@@ -162,7 +162,7 @@ Comprehensive isolation, quota management, and access controls ensure secure mul
 
 Enterprise-grade Kubernetes management and orchestration through built-in add-ons.
 
-* Cluster API: native support for Cluster API Provider for OpenNebula (CAPONE) to provision and manage clusters.
+* Cluster API: native support for Cluster API Provider for OpenNebula (CAPONE) to provision and manage Clusters.
 * Cloud Provider Interface (CPI): direct integration for OpenNebula-managed resources in Kubernetes.
 * Container Storage Interface (CSI): persistent volume provisioning from OpenNebula storage backends.
 * Rancher Integration: fully certified integration with SUSE Rancher Prime and RKE2, providing enterprise-grade multi-cluster lifecycle management and unified governance of Kubernetes environments.

@@ -2,7 +2,7 @@
 title: "Cluster Operations"
 linkTitle: "Operations"
 date: "2025-02-17"
-description: "Manage providers and operate Cloud and HCI clusters"
+description: "Manage Providers and operate cloud and HCI Clusters."
 categories:
 pageintoc: "220"
 tags:

@@ -1,7 +1,7 @@
 ---
 title: "Cloud Architecture and Design"
 date: "2025-02-17"
-description: "Guidance on how to plan, structure, and deploy your cloud infrastructure. Includes detailed reference architectures for both edge cloud and open cloud environments, helping you understand the best practices for building scalable, resilient, and sovereign cloud solutions"
+description: "Guidance on how to design and deploy your cloud infrastructure including detailed reference architectures for scalable, resilient cloud solutions."
 hide_feedback: true
 categories:
 pageintoc: "9"

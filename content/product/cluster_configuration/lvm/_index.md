@@ -2,7 +2,7 @@
 title: "SAN-LVM Storage"
 linkTitle: "SAN-LVM Storage"
 date: "2025-09-26"
-description:
+description: "Configure access to a generic SAN storage system with LVM."
 categories:
 pageintoc: "66"
 tags:
