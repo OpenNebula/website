@@ -26,7 +26,9 @@ OpenNebula 7.2 is a high-performance engine designed to handle the most demandin
 
 * Broadened OS support with official support for the latest enterprise distributions, including AlmaLinux 10, RHEL 10, and Debian 13.
 
+{{% if-version is="7.1" %}}
 **Please note**: As a beta release, this version is intended for testing and validation purposes only; we do not recommend it for production use at this stage. We encourage you to dive into the new features and help us stabilize the final release by reporting any bugs via [GitHub](https://github.com/OpenNebula/one). We also suggest reviewing the [Known Issues]({{% relref "software/release_information/release_notes/known_issues" %}}) before upgrading.
+{{% /if-version %}}
 
 Thank you to our incredible community and partners for your continued support in building the future of open-source cloud orchestration!
 
