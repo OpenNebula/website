@@ -1,7 +1,7 @@
 ---
 title: "Release Notes 7.2"
 date: "2025-10-06"
-description: "Release Notes, new features, compatibility guides, supported platforms, and other information"
+description: "Release Notes, new features, compatibility guides, supported platforms, and other information."
 categories:
 pageintoc: ""
 tags:

@@ -1,7 +1,8 @@
 ---
 title: Overview
 weight: 1
-description: "Overview of AI factory deployment and validation"
+show_card: false
+description: "Overview of AI factory deployment and validation."
 ---
 
 <a id="overview"></a>
