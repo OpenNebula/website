@@ -216,7 +216,7 @@ chmod +x "$AI_DIR/demo_finetune.py"
    ``` 
 ---
 
-## Run the Finetuning Job from the Slurm Controller
+## Run the Fine-tuning Job from the Slurm Controller
 
 On the Slurm Controller VM run the following command to launch the fine-tuning job:
 

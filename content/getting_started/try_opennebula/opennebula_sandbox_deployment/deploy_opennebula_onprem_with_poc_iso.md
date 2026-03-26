@@ -13,7 +13,6 @@ Once the ISO has booted and finished setup, a pre-configured OpenNebula cloud wi
 
 {{< image path="/images/ISO/00-onepoc_architecture.svg" alt="OnePOC Architecture" align="center" width="80%" mb="20px" border="false" >}}
 
-
 ## Requirements
 
 The OpenNebula ISO is based on AlmaLinux 9, thus it shares the same requirements to run. Note that only the x86-64-v2 instruction set (2008\) is supported. The following table outlines the minimum requirements for installing the ISO.
@@ -390,7 +389,7 @@ ID USER     GROUP    NAME          CLUSTERS   BRIDGE    STATE    LEASES OUTD ERR
 
 The `ID` and the `NAME` field of every row can be used for all operations on Virtual Networks.
 
-#### Creating the Virtual Network Gateway (access from the frontend)
+#### Creating the Virtual Network Gateway (access from the Front-end)
 
 In this case, to create the default gateway on this virtual net, the command `onevnet_add_gw` followed by the ID of the Virtual Network should be executed. For example the following command will create the gateway for the network 0
 

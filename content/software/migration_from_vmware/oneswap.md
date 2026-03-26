@@ -120,16 +120,10 @@ Includes all permissions from OneSwap-Standard, plus:
   - Folder > Create folder
   - Virtual machine > Edit Inventory > Create new
   - Virtual machine > Edit Inventory > Remove
-  - Virtual machine > Provisioning > Allow read-only disk access
-  - Virtual machine > Provisioning > Allow virtual machine download
   - Virtual machine > Provisioning > Clone virtual machine
   - Virtual machine > Provisioning > Customize guest
   - Virtual machine > Interaction > Power on
   - Virtual machine > Interaction > Power off
-  - Virtual machine > Snapshot management   Create snapshot, Remove snapshot
-  - Datastore > Browse datastore, Low level file operations
-  - Global > Disable methods
-  - Global > Enable methods
 ```
 
 For download-based conversions (custom/fallback/hybrid):

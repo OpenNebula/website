@@ -172,8 +172,8 @@ onevm show <VM ID> | less
 This displays the complete information for the VM, piped through the `less` pager. Use the up and down arrow to scroll, until you find the `VM NICS` table:
 
 ```default
-VM NICS                                                                         
- ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
+VM NICS
+ ID NETWORK              BRIDGE       IP              MAC               PCI_ID
   0 vnet                 minionebr    172.16.100.2    02:00:ac:10:64:02
   1 privnet              onebr1       192.168.200.2   02:00:c0:a8:c8:02
 ```
@@ -379,7 +379,7 @@ oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2
         Visit /get-data to print out the dummy data
 
         </div>
-        
+
         <div>
           <h2>
             See you, Space Cowboy!
@@ -527,7 +527,7 @@ In this case you can manually instruct the VMs to report `READY` to the OneGate 
    For each VM, use the ID reported by the `onevm list` command. For example, given the `onevm` output shown above, to update the Kubernetes master node run `onegate vm update 5 --data "READY=YES"`.
 
    Then, on the VNF node you can check the status of the service with `onegate vm show`:
-   
+
    ```default
    SERVICE 3
    NAME                : OneKE 1.31

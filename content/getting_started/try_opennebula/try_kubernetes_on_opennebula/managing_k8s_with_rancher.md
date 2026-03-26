@@ -145,7 +145,7 @@ There are some parameters that require user input. Use the string <<EDITOR>> to 
   * (ONEAPP_CAPI_RANCHER_PASSWORD) Rancher Password
   * (ONEAPP_CAPI_RANCHER_VERSION) Rancher Chart Version
   * (ONEAPP_CAPI_TURTLES_VERSION) Turtles Chart Version
-VM ID: 
+VM ID:
 2
 ```
 
@@ -335,7 +335,7 @@ deployment.apps/cattle-cluster-agent created
 service/cattle-cluster-agent created
 ```
 
-Importing the Cluster may take several minutes.
+Importing the cluster may take several minutes.
 
 Once the Cluster has been imported, it becomes fully accessible from the Rancher UI, where it is displayed alongside the K3s Cluster.
 

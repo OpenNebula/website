@@ -34,7 +34,7 @@ The following table summarizes the supported backup modes for each storage syste
 | LVM          | Yes  | Yes**       |
 | NetApp       | Yes  | Yes         |
 
-<sup>\*</sup> Any datastore based on files with the given format, i.e., NFS/SAN or Local.
+<sup>\*</sup> While OpenNebula doesn't support backups for raw images, Veeam will perform a full backup and perform block to block comparison to create it's own incremental.
 
 <sup>\**</sup> Supported for LVM-thin environments.
 
@@ -78,7 +78,45 @@ The minimum hardware specifications are:
 
 - **CPU:** 8 cores
 - **Memory:** 16 GB RAM
-- **Disk:** Sufficient storage to hold all active backups. This server acts as a staging area to transfer backups from OpenNebula to the Veeam repository, so its disk must be large enough to accommodate the total size of these backups.
+- **Disk:** Sufficient storage to hold all active backup operations. See more details regarding the storage requirement in the next section. 
+
+### Storage Requirements
+
+The Backup Server acts as a staging area between OpenNebula and the Veeam repository. It must provide enough disk capacity and I/O headroom for active backup and restore operations. Follow these practical guidelines when sizing and configuring storage:
+
+- **Primary backup datastore** (`/var/lib/one/datastores/<backup-datastore-id>`): this is where OpenNebula writes VM images and incremental chains before Veeam moves them to its repository. Size this datastore to hold the largest set of concurrently active backups you expect.
+
+- **Temporary restore area** (`/var/tmp`): when restoring a VM from a Veeam repository into OpenNebula, the restored image is staged here before being moved to the image datastore. Provision this directory to hold at least the largest single disk being restored (or the sum of concurrently restored disks if you will perform parallel restores). You can change this in the `tmp_images_path` parameter in the configuration.
+
+- **Retention and duplicate chains**: the backup will exist both in the OpenNebula backup datastore and in the Veeam repository. If you delete the chain from OpenNebula and Veeam subsequently runs an incremental, Veeam will perform a full backup and reconstruct incrementals itself. This increases transfer time but keeps backups consistent. If storage is constrained, schedule regular cleanup of old backup images in the OpenNebula datastore to free space, understanding that this may force full transfers on the next incremental run.
+
+- **Cleanup tooling**: the ovirtapi package includes a helper script to automate cleanup of the backup datastore: `/usr/lib/one/ovirtapi-server/scripts/backup_clean.rb`. You can run this script as the `oneadmin` user or schedule it via cron to maintain a maximum used threshold. Example crontab (daily at 00:00) to cap usage at 50%:
+
+```bash
+0 0 * * * ONE_AUTH="oneadmin:oneadmin" MAX_USED_PERCENTAGE="50" /usr/lib/one/ovirtapi-server/scripts/backup_clean.rb
+```
+
+Ensure the `ONE_AUTH` variable is set to a valid OpenNebula `user:password` pair with permission to delete backup images. You may adjust `MAX_USED_PERCENTAGE` to a different threshold if desired.
+
+## Veeam Backup Appliance Requirements
+
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
+
+- **CPU:** 6 cores
+- **Memory:** 6 GB RAM
+- **Disk:** 100 GB
+
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
+
+## Veeam Backup Appliance Requirements
+
+When adding OpenNebula as a platform into Veeam, a KVM appliance will be deployed (step 4.2) as a VM into OpenNebula. This appliance has the following minimum requirements:
+
+- **CPU:** 6 cores
+- **Memory:** 6 GB RAM
+- **Disk:** 100 GB
+
+Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
 
 ## Veeam Backup Appliance Requirements
 
@@ -135,9 +173,7 @@ SELinux and AppArmor may cause issues in the backup server if not configured pro
 
 You can find more details regarding the Rsync datastore in [Backup Datastore: Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}).
 
-**Sizing recommendations**
 
-The backup datastore needs to have enough space to hold the disks of the VMs that are going to be backed up. This introduces a layer of redundancy to the backups, as they will be stored in the OpenNebula Backup datastore and the Veeam Backup storage. This is something inherent to the Veeam integration with oVirt, as further backups of a Virtual Machine will be incremental and only the changed disk regions will be retrieved.
 
 If storage becomes a constraint, we recommend cleaning up the OpenNebula Backup datastore regularly in order to minimize the storage requirement, but keep in mind that this will reset the backup chain and force Veeam to perform a full backup and download the entire image during the next backup job.
 
@@ -159,6 +195,19 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 * ``one_xmlrpc``: Address of the OpenNebula Front-end. Please do not include any prefixes such as ``http://``, only the IP address itself is needed.
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
 * ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
+* ``backup_freeze``: (Optional) Controls which filesystem freeze mode OpenNebula requests when performing backups initiated via the oVirtAPI/Veeam integration. Valid values are `NONE`, `AGENT`, and `SUSPEND`. For details on each mode see the Backup Modes section in the backup guide: [Backup Modes]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations/#backup-modes" %}}).
+
+{{< alert title="Important" color="success" >}}
+You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
+
+You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
+{{< /alert >}}
+
+{{< alert title="Important" type="info" >}}
+You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
+
+You may also have a variable named ``instance_id``, which you should delete if you are running a version of the package >=7.0.1.
+{{< /alert >}}
 
 {{< alert title="Important" type="info" >}}
 You may see the 5554 port in the ``public_ip`` variable in the default settings, this is no longer needed so avoid using it. Leave only the IP address in the variable, no port needed.
