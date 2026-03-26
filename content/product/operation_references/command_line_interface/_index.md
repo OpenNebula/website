@@ -2,7 +2,7 @@
 title: "Command Line Interface"
 linkTitle: "Command Line Interface"
 date: "2025-02-17"
-description: "Complete references for CLI tools"
+description: "Complete references for CLI tools."
 categories:
 pageintoc: "148"
 tags:

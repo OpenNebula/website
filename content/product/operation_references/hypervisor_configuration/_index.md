@@ -2,7 +2,7 @@
 title: "Hypervisor Configuration"
 linkTitle: "Virtualization Drivers"
 date: "2025-03-05"
-description: "Configure KVM and LXC Hypervisor Nodes"
+description: "Configure KVM and LXC hypervisor nodes."
 categories:
 pageintoc: ""
 hide_feedback: true

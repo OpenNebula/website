@@ -1,7 +1,6 @@
 ---
 title: "Capability Extensions"
-description: "TBC"
-weight: 2
+description: "Still under development."
 toc_hide: true
 headless: true
 ---

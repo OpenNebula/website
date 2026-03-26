@@ -1,7 +1,7 @@
 ---
-title: "OpenNebula Sandbox deployment"
-linkTitle: "OpenNebula deployment"
-description: "These tutorials cover the deployment of a Sandbox environment to quickly try out OpenNebula out of the box features. There are two main mechanisms: using miniONE script or using a ISO which includes the OS as well. After following one of them, all the necessary components to manage and run VMs will be installed and configured on your system."
+title: "OpenNebula Sandbox Deployment"
+linkTitle: "OpenNebula Deployment"
+description: "Deploy OpenNebula in a Sandbox environment for rapid evaluation and testing using the miniONE installer or the OpenNebula PoC ISO image."
 type: docs
 weight: 1
 ---
