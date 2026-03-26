@@ -28,44 +28,9 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
 
-- Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/blob/release-7.0.0/src/fireedge/etc/sunstone/sunstone-server.conf#L128).
-- When fullModeView mode is active and a status change is made in the VM, the buttons at the top are not updated. To see the buttons that correspond to the current status of the VM, you have to go back to the data table and reselect the VM. This error will be resolved in future versions. You can find more information [here](https://github.com/OpenNebula/one/issues/7172).
-- Race condition where the uploaded files are deleted from the temporary directory before they have been moved into the datastore. 
-
-    **Use the following workaround to mitigate this issue:**
-
-    1. Create a dedicated Sunstone upload directory
-    ```bash
-    mkdir -p /var/lib/one/fireedge-uploads
-    chown oneadmin:oneadmin /var/lib/one/fireedge-uploads
-    chmod 755 /var/lib/one/fireedge-uploads
-    ```
-    2. Configure Fireedge to use it, in the `sunstone-server.conf` file.
-    ```bash
-    # /etc/one/fireedge/sunstone/sunstone-server.conf
-    tmpdir: '/var/lib/one/fireedge-uploads'
-    ```
-    3. Apply the append-only flag (as root)
-    ```bash
-    chattr +a /var/lib/one/fireedge-uploads
-    ```
-    4. Verify the append only flag has been set
-    ```bash
-    lsattr -d /var/lib/one/fireedge-uploads
-    # -----a--------e------- fireedge-uploads
-    ```
-    5. Restart Fireedge
-    ```bash
-    systemctl restart opennebula-fireedge
-    ```
-    This workaround would prevent the `opennebula-sunstone.service` file from removing the uploaded temporary files in `/var/lib/one/fireedge-uploads`, while still allowing copy operations from that directory.
-    
-    {{< alert title="Note" type="info" >}}
-    This directory will fill up, therefore it is recommended to configure a cleanup service like systemd-tmpfiles, to periodically empty this directory.{{< /alert >}} 
-
 ## Migration
 
-- When upgrading to 7.0 the `onedb` migration might fail if the `/etc/one/sunstone-views.yaml` file contains a single, unclosed value under the **labels_groups** key, example:
+- When upgrading to 7.2 the `onedb` migration might fail if the `/etc/one/sunstone-views.yaml` file contains a single, unclosed value under the **labels_groups** key, example:
 
   ```yaml
   labels_groups:
@@ -154,7 +119,7 @@ host:
       lookback: 60 # Look-back window in minutes for predictions
 ```
 
-### OneGate
+## OneGate
 
 - [Avoid Host not permitted on Sinatra server when is behind NGINX proxy](https://github.com/OpenNebula/one/issues/7231)
 
