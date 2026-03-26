@@ -16,19 +16,19 @@ weight: "7"
 
 ## Overview
 
-In this tutorial, you will deploy a Kubernetes cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes cluster with minimal effort and configuration and deploy applications on it.  
+In this tutorial, you will deploy a Kubernetes Cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes Cluster with minimal effort and configuration and deploy applications on it.  
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
 * [miniONE on-prem installation]({{% relref "deploy_opennebula_onprem_with_minione" %}})
 * [miniONE AWS installation]({{% relref "deploy_opennebula_on_aws" %}})
 
-After successfully completing the miniONE installation you will complete the following steps in this tutorial to launch a Kubernetes cluster using the OneKE appliance:
+After successfully completing the miniONE installation you will complete the following steps in this tutorial to launch a Kubernetes Cluster using the OneKE appliance:
 
 - Download the OneKE Kubernetes appliance from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io)
 - Instantiate a private network using miniONE
-- Deploy the OneKE Kubernetes cluster on the KVM Host installed by miniONE
-- Validate the cluster by deploying a simple test application on the cluster
+- Deploy the OneKE Kubernetes Cluster on the KVM Host installed by miniONE
+- Validate the Cluster by deploying a simple test application on the Cluster
 
 ## Step 1. Download the OneKE Service from the OpenNebula Marketplace
 
@@ -93,16 +93,16 @@ Click **Next**. Sunstone displays the **Service Inputs** screen, select the **Ku
 
 {{< image path="/images/sunstone-instantiate-oneke-service-inputs.png" alt="OneKE service inputs" align="center" width="90%" mb="20px" >}}
 
-In this page you can define various parameters for the cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
+In this page you can define various parameters for the Cluster, including a custom domain, plugins, VNF routers, storage options and others. For this tutorial we'll apply a simple configuration with the following two features enabled:
 
-* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your cluster nodes. 
+* **Longhorn**: A lightweight, cloud-native storage system that provides highly available persistent block storage by replicating data across your Cluster nodes. 
 * **Traefik**: An automated edge router and ingress controller that handles external traffic and load balancing for your applications without manual configuration.
 
 Scroll down to the end of the **Kubernetes Cluster** tab section and toggle **Enable Longhorn** and **Enable Traefik** to the enabled position:
 
 {{< image path="/images/sunstone-oneke-longh-traefik.png" alt="Longhorn, Traefik" align="center" width="90%" mb="20px" >}}
 
-Click **Next**. In the final step **4: Charter**, no action is needed, click **Finish**. The OneKE appliance will now deploy VMs to initialize the Kubernetes cluster.
+Click **Next**. In the final step **4: Charter**, no action is needed, click **Finish**. The OneKE appliance will now deploy VMs to initialize the Kubernetes Cluster.
 
 ### Verify the OneKE Service Deployment
 
@@ -122,7 +122,7 @@ ID USER     GROUP    NAME                     ...             STARTTIME  STAT
 1 oneadmin oneadmin Service OneKE 1.31        ...        04/29 08:18:17  RUNNING
 ```
 
-To verify that the VMs for the cluster were correctly deployed, you can use the `onevm list` command that lists the existing VMs for the cluster:
+To verify that the VMs for the Cluster were correctly deployed, you can use the `onevm list` command that lists the existing VMs for the Cluster:
 
 ```default
 oneadmin@ip$ onevm list
@@ -132,7 +132,7 @@ ID USER     GROUP    NAME                 ...   STAT  CPU     MEM HOST        ..
 4 oneadmin oneadmin vnf_0_(service_2)     ...   runn    1    512M localhost   ...   0d 00h00
 ```
 
-At this point you have successfully instantiated the Kubernetes cluster on the KVM hypervisor node installed with your OpenNebula Front-end. If the state of the OneKE service as reported by `oneflow list` remains in `DEPLOYING`, see [below](#oneflow-service-is-stuck-in-deploying).
+At this point you have successfully instantiated the Kubernetes Cluster on the KVM hypervisor node installed with your OpenNebula Front-end. If the state of the OneKE service as reported by `oneflow list` remains in `DEPLOYING`, see [below](#oneflow-service-is-stuck-in-deploying).
 
 Before deploying the test application described in this tutorial, you will need to find out the IP address of the VNF node on the **public** network -- in this case, the **vnet** network that we set as public network when instantiating the OneKE service -- since this is the address that we will use to connect to the application.
 
@@ -184,7 +184,7 @@ If you do not see all VMs listed, or if the OneKE Service is stuck in `DEPLOYING
 
 ## Step 4. Deploy an Application
 
-In this tutorial we will deploy a very simple application designed for training purposes: a **MariaDB** database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes cluster's Longhorn storage, so the first step is to enable storage for the cluster.
+In this tutorial we will deploy a very simple application designed for training purposes: a **MariaDB** database to which you can add sample data from the Kubernetes master. The database will reside in the Kubernetes Cluster's Longhorn storage, so the first step is to enable storage for the Cluster.
 
 ### Enable Longhorn Storage
 
@@ -202,9 +202,9 @@ Enable Longhorn storage with the following command, inserting the appropriate se
 oneflow scale <OneKE service ID> storage 1
 ```
 
-This command instantiates a new VM that will manage the Longhorn storage for the Kubernetes cluster.
+This command instantiates a new VM that will manage the Longhorn storage for the Kubernetes Cluster.
 
-The command may take 2-5 minustes to complete. During that time the OneKE service will change state from `RUNNING` to `SCALING` to `COOLDOWN` and then back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the cluster by running (as `oneadmin` on the Front-end command line):
+The command may take 2-5 minustes to complete. During that time the OneKE service will change state from `RUNNING` to `SCALING` to `COOLDOWN` and then back to `RUNNING`. You must wait until this cycle is finished to continue with the next steps. You can continuously check the status of the Cluster by running (as `oneadmin` on the Front-end command line):
 
 ```bash
 oneflow top
@@ -271,7 +271,7 @@ To check for new updates run: sudo apt update
  * * * * * * * *
 ```
 
-In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message. Once the cluster is ready, you will see a message: `All set and ready to serve 8)`
+In the above example the Kubernetes master is self-configuring, hence the "PLEASE WAIT" message. Once the Cluster is ready, you will see a message: `All set and ready to serve 8)`
 
 
 Once you have connected to the Kubernetes master node, check if `kubectl` is working, by running `kubectl get nodes`:
@@ -284,7 +284,7 @@ oneke-ip-192-168-200-6   Ready    <none>                      5h32m   v1.31.3+rk
 oneke-ip-192-168-200-8   Ready    <none>                      4h38m   v1.31.3+rke2r1
 ```
 
-The last row in the output is the `storage` role in the cluster created in the previous step, with IP `172.168.200.8`.
+The last row in the output is the `storage` role in the Cluster created in the previous step, with IP `172.168.200.8`.
 
 Now we are ready to download and deploy our example application.
 
@@ -454,7 +454,7 @@ oneadmin@ip-172-31-47-22:~$ curl 172.16.100.2/get-data
 [{"data1":"2025-06-23 11:51:27","data2":"50","id":1},{"data1":"2025-06-23 11:51:54","data2":"63","id":2},{"data1":"2025-06-23 11:52:09","data2":"84","id":3}]
 ```
 
-And that's it -- you have successfully deployed a Kubernetes cluster, and deployed and tested an application.
+And that's it -- you have successfully deployed a Kubernetes Cluster, and deployed and tested an application.
 
 For more information including additional features for the OneKE Appliance, please refer to the [OpenNebula Apps Documentation](https://github.com/OpenNebula/one-apps/wiki).
 
@@ -468,7 +468,7 @@ For more information including additional features for the OneKE Appliance, plea
 
 An error in network configuration, or any major failure (such as network timeouts or performance problems) can cause the OneKE service to lock up due to a communications outage between it and the Front-end node. The OneKE service will lock if *any* of the VMs belonging to it does not report `READY=YES` to OneGate within the default time.
 
-If one or more of the VMs in the Kubernetes cluster never leave the `DEPLOYING` state, you can troubleshoot OneFlow communications by inspecting the file `/var/log/one/oneflow.log` on the Front-end node. Look for a line like the following:
+If one or more of the VMs in the Kubernetes Cluster never leave the `DEPLOYING` state, you can troubleshoot OneFlow communications by inspecting the file `/var/log/one/oneflow.log` on the Front-end node. Look for a line like the following:
 
 ```default
 [E]: [LCM] [one.document.info] User couldn't be authenticated, aborting call.

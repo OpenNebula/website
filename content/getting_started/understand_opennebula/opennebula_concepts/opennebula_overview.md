@@ -33,7 +33,7 @@ OpenNebula can manage both single VMs and complex multi-tier services composed o
 
 ### Containerized Applications through Kubernetes
 
-OpenNebula supports the automated deployment of Kubernetes clusters through a virtual appliance, **OneKE**, the OpenNebula Kubernetes Engine. OneKE is an enterprise-grade, CNCF-certified Kubernetes distribution based on SUSE Rancher RKE2. In its basic configuration it comprises four Virtual Machines: the Kubernetes master node, a VNF node, a storage node, and a worker node. It can be configured as a multi-master cluster for high availability, and easily scaled up to include more worker nodes, either before deployment or dynamically during operation, by using elasticity rules. It includes features such as MetalLB load balancing, Multus and Cilium CNI plugins, and Longhorn storage. It is available as a multi-VM appliance on the OpenNebula Marketplace and can be installed in minutes using Sunstone, OpenNebula’s web UI.
+OpenNebula supports the automated deployment of Kubernetes Clusters through a virtual appliance, **OneKE**, the OpenNebula Kubernetes Engine. OneKE is an enterprise-grade, CNCF-certified Kubernetes distribution based on SUSE Rancher RKE2. In its basic configuration it comprises four Virtual Machines: the Kubernetes master node, a VNF node, a storage node, and a worker node. It can be configured as a multi-master Cluster for high availability, and easily scaled up to include more worker nodes, either before deployment or dynamically during operation, by using elasticity rules. It includes features such as MetalLB load balancing, Multus and Cilium CNI plugins, and Longhorn storage. It is available as a multi-VM appliance on the OpenNebula Marketplace and can be installed in minutes using Sunstone, OpenNebula’s web UI.
 
 {{< image path="/images/overview_containers.svg" alt="OneKE Architecture with Containerized Applications" align="center" width="80%" mb="20px" border="false" >}}
 
@@ -45,7 +45,7 @@ Management tools include the **Sunstone Web UI**, an easy-to-use visual interfac
 
 {{< image path="/images/sunstone-full_dashboard.png" align="center" width="80%" mb="20px" border="false" >}}
 
-Among other features, Sunstone offers support for easily managing single VMs and multi-VM services, as well as datastores, Hosts and clusters; visualizing metrics and logs; and creating and editing templates for VMs, services, networks, and devices.
+Among other features, Sunstone offers support for easily managing single VMs and multi-VM services, as well as datastores, Hosts and Clusters; visualizing metrics and logs; and creating and editing templates for VMs, services, networks, and devices.
 
 ### Cloud Access Models and Roles
 
@@ -69,7 +69,7 @@ Infrastructure components may reside at different geographical locations. They a
 
 {{< image path="/images/overview_resources.svg" alt="Standard OpenNebula Cloud Architecture" align="center" width="90%" mb="20px" border="false">}}
 
-In general, there are two types of cluster models that can be used with OpenNebula:
+In general, there are two types of Cluster models that can be used with OpenNebula:
 
 * **Edge Clusters** can be deployed on demand both on-premises and on public cloud and edge providers, with a high degree of integration and automation, to enable seamless hybrid cloud deployments.
 * **Customized Clusters** are typically deployed on-premises to meet specific requirements.
@@ -82,7 +82,7 @@ OpenNebula includes its own Edge Cluster configuration. Based on solid open sour
 
 ### Customized Clusters
 
-OpenNebula is certified to work on top of multiple combinations of hypervisors, storage, and networking technologies. In this model you need to first install and configure the underlying cloud infrastructure software components, and then install OpenNebula to build the cloud. The clusters can be deployed on-premises or on your choice of bare-metal cloud or hosting provider. While we support OpenNebula and can troubleshoot the cloud infrastructure as a whole, please be aware that in this type of environment you might need to seek commercial support from third-party vendors for the rest of components in your cloud stack.
+OpenNebula is certified to work on top of multiple combinations of hypervisors, storage, and networking technologies. In this model you need to first install and configure the underlying cloud infrastructure software components, and then install OpenNebula to build the cloud. The Clusters can be deployed on-premises or on your choice of bare-metal cloud or hosting provider. While we support OpenNebula and can troubleshoot the cloud infrastructure as a whole, please be aware that in this type of environment you might need to seek commercial support from third-party vendors for the rest of components in your cloud stack.
 
 If you are interested in an OpenNebula cloud fully based on open source platforms and technologies, please refer to our [Open Cloud Reference Architecture](https://support.opennebula.pro/hc/en-us/articles/204210319).
 
@@ -102,7 +102,7 @@ OpenNebula was designed to be easily adapted to any infrastructure and easily ex
 
 The main components of an OpenNebula installation are listed below.
 
-* **OpenNebula Daemon** (`oned`): The OpenNebula Daemon is the core service of the cloud management platform. It manages the cluster nodes, Virtual Networks, storages, groups, users, and their Virtual Machines; and provides the XML-RPC API to other services and end users.
+* **OpenNebula Daemon** (`oned`): The OpenNebula Daemon is the core service of the cloud management platform. It manages the Cluster nodes, Virtual Networks, storages, groups, users, and their Virtual Machines; and provides the XML-RPC API to other services and end users.
 * **Database**: OpenNebula persists the state of the cloud to a user-selected SQL database. This key component should be monitored and tuned for best performance, following best practices for the particular database product.
 * **Scheduler**: The OpenNebula Scheduler framework is a modular system for optimal resource allocation. It is started automatically with the OpenNebula Daemon, and can apply different scheduling algorithms to allocate Hosts, storage, and Virtual Networks.
 * **Monitoring Subsystem**: The monitoring subsystem is implemented as a dedicated daemon (`onemonitord`) launched by the OpenNebula Daemon. It gathers information relevant to the Hosts and the Virtual Machines, such as Host status, basic performance indicators, Virtual Machine status and capacity consumption.
@@ -139,7 +139,7 @@ Following the Guide, you can:
 > * [Install an OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws" %}}), then use that Front-end to
 > * [Deploy an Edge Cluster]({{% relref "provision_cloud_cluster" %}}), where you will
 > * [Deploy a Virtual Machine]({{% relref "validate_the_environment" %}}), and finally
-> * [Deploy a Kubernetes cluster]({{% relref "running_kubernetes_clusters" %}}).
+> * [Deploy a Kubernetes Cluster]({{% relref "running_kubernetes_clusters" %}}).
 
 The Getting Started Guide is by far the fastest way to familiarize yourself with OpenNebula.
 

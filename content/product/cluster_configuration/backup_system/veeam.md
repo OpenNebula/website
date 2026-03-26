@@ -11,47 +11,14 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
 
 ## Features
 
-<table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: left;">
-  <thead>
-    <tr>
-      <th class="head" style="min-width: 100px; border: 1px solid; vertical-align: middle; padding: 5px;"><p>Area</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid; vertical-align: middle; padding: 5px;"><p>Benefit</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid; vertical-align: middle; padding: 5px;"><p>Description</p></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Data Protection</strong></p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Agentless, Image-Level Backups</p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Protect entire VMs without installing or managing agents inside the guest OS.</p></td>
-    </tr>
-    <tr>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Efficiency</strong></p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Incremental Backups (CBT)</p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Leverages Change Block Tracking (CBT) via the API to back up only the data that has changed, reducing backup windows.</p></td>
-    </tr>
-    <tr>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Native Integration</strong></p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Uses Standard Veeam Workflow</p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Connect OpenNebula as a standard "oVirt" hypervisor in Veeam. No additional custom Veeam plug-ins are required.</p></td>
-    </tr>
-    <tr>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Recovery</strong></p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Flexible Restore Options</p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Enables Full VM restores, instant VM recovery, and file-level restores directly from the Veeam B&amp;R console.</p></td>
-    </tr>
-    <tr>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Automation</strong></p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Full Discovery</p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).</p></td>
-    </tr>
-    <tr>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p><strong>Portability</strong></p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>VMWare import</p></td>
-      <td style="min-width: 100px; border: 1px solid; vertical-align: top; padding: 5px;"><p>Enables restoring virtual machines backed up in Veeam from VMWare into OpenNebula.</p></td>
-    </tr>
-  </tbody>
-</table>
+| Area               | Benefit                        | Description                                                                                                           |
+|--------------------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Data Protection    | Agentless, Image-Level Backups | Protect entire VMs without installing or managing agents inside the guest OS.                                         |
+| Efficiency         | Incremental Backups (CBT)      | Leverages Change Block Tracking (CBT) via the API to back up only the data that has changed, reducing backup windows. |
+| Native Integration | Uses Standard Veeam Workflow   | Connect OpenNebula as a standard "oVirt" hypervisor in Veeam. No additional custom Veeam plug-ins are required.       |
+| Recovery           | Flexible Restore Options       | Enables Full VM restores, instant VM recovery, and file-level restores directly from the Veeam B&amp;R console.       |
+| Automation         | Full Discovery                 | Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).      |
+| Portability        | VMWare import                  | Enables restoring virtual machines backed up in Veeam from VMWare into OpenNebula.                                    |
 
 ## Compatibility
 
@@ -59,51 +26,13 @@ The oVirtAPI module is compatible with the Veeam Backup & Replication version sp
 
 The following table summarizes the supported backup modes for each storage system:
 
-<table class="docutils align-default" style="border-collapse: collapse; width: 100%; text-align: center;">
-  <thead>
-    <tr>
-      <th class="head" rowspan="2" style="min-width: 120px; border: 1px solid; vertical-align: middle"><p>Storage</p></th>
-      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Full</p></th>
-      <th class="head" colspan="2" style="min-width: 100px; border: 1px solid"><p>Incremental</p></th>
-    </tr>
-    <tr>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Live</p></th>
-      <th class="head" style="min-width: 100px; border: 1px solid"><p>Power off</p></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="min-width: 120px; border: 1px solid"><p>File<sup>*</sup> (qcow2)</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid"><p>File<sup>*</sup> (raw)</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid"><p>Ceph</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-      <td style="border: 1px solid"><p>No</p></td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid"><p>LVM</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes</p></td>
-      <td style="border: 1px solid"><p>Yes**</p></td>
-      <td style="border: 1px solid"><p>Yes**</p></td>
-    </tr>
-  </tbody>
-</table>
+| Storage      | Full | Incremental |
+|--------------|------|-------------|
+| File (qcow2) | Yes  | Yes         |
+| File (raw)   | Yes  | No*         |
+| Ceph         | Yes  | Yes         |
+| LVM          | Yes  | Yes**       |
+| NetApp       | Yes  | Yes         |
 
 <sup>\*</sup> Any datastore based on files with the given format, i.e., NFS/SAN or Local.
 

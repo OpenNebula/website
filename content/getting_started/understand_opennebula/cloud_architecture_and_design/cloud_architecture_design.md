@@ -20,7 +20,7 @@ To familiarize yourself with deployment and daily operations, or if you want to 
 
 > * [Install an OpenNebula Front-end]({{% relref "try_opennebula" %}})
 > * Deploy [Virtual Machines]({{% relref "validate_the_environment" %}}) to validate the installed infrastructure
-> * Deploy [Kubernetes clusters]({{% relref "running_kubernetes_clusters" %}})
+> * Deploy [Kubernetes Clusters]({{% relref "running_kubernetes_clusters" %}})
 
 As you follow the tutorials you will learn the basic usage and operation of your cloud. This trial of a real cloud deployment can help you to plan for the most suitable features for performance and scalability, to get the most out of your OpenNebula cloud.
 
@@ -34,15 +34,15 @@ The first step is the installation of the OpenNebula Front-end. The [installatio
 
 If you are planning for a system with a very large number of hypervisors, don’t forget to read the [Large-scale Deployment]({{% relref "../../../product/control_plane_configuration/large-scale_deployment/overview#large-scale-deployment-overview" %}}) section of the documentation. The general recommendation is that each OpenNebula instance can handle up to 2500 servers and 10,000 VMs. Better performance and higher scalability can be achieved by tuning other components, such as the database where the state of the cloud is persisted. To grow the size of your cloud beyond the limits mentioned above, you can horizontally scale the cloud by adding new OpenNebula Zones within a federated deployment. The largest OpenNebula deployment consists of 16 data centers and 300,000 cores.
 
-To reduce downtime of core OpenNebula services, you can optionally set up a [High-availability cluster]({{% relref "../../../product/control_plane_configuration/high_availability/frontend_ha#frontend-ha-setup" %}}). If planning for a large-scale infrastructure, you can [configure a MySQL/MariaDB backend]({{% relref "../../../software/installation_process/manual_installation/database.md#mysql" %}}) as an alternative to the default SQLite backend.
+To reduce downtime of core OpenNebula services, you can optionally set up a [High-availability Cluster]({{% relref "../../../product/control_plane_configuration/high_availability/frontend_ha#frontend-ha-setup" %}}). If planning for a large-scale infrastructure, you can [configure a MySQL/MariaDB backend]({{% relref "../../../software/installation_process/manual_installation/database.md#mysql" %}}) as an alternative to the default SQLite backend.
 
-A single OpenNebula Front-end can manage multiple clusters geographically distributed across several data centers and cloud providers. However, you can choose a multi-Zone deployment with [data center federation]({{% relref "../../../product/control_plane_configuration/data_center_federation/overview#introf" %}}) if data centers belong to different administrative domains or if connectivity between them does not meet latency and bandwidth requirements. Multiple OpenNebula Zones can be configured as a federation, where they will share the same user accounts, groups, and permissions across data centers.
+A single OpenNebula Front-end can manage multiple Clusters geographically distributed across several data centers and cloud providers. However, you can choose a multi-Zone deployment with [data center federation]({{% relref "../../../product/control_plane_configuration/data_center_federation/overview#introf" %}}) if data centers belong to different administrative domains or if connectivity between them does not meet latency and bandwidth requirements. Multiple OpenNebula Zones can be configured as a federation, where they will share the same user accounts, groups, and permissions across data centers.
 
 Besides connecting your cloud to the public [OpenNebula Marketplace and other third-party Marketplaces]({{% relref "../../../product/apps-marketplace/public_marketplaces/index#public-marketplaces" %}}), you can build your own [private Marketplace]({{% relref "../../../product/apps-marketplace/private_marketplaces/overview#private-marketplace-overview" %}}) to provide your users with an easy way of privately publishing, downloading, and sharing your own custom appliances.
 
 ## Step 2. Deploy Edge Clusters
 
-OpenNebula brings its own [Edge Cluster configuration]({{% relref "edge_cloud_reference_architecture#true-hybrid-cloud-reference-architecture" %}}). Based on solid open-source storage and networking technologies, it is a much simpler approach than those of customized cloud architectures made of more complex, general-purpose and separate infrastructure components. OpenNebula automates the deployment of cloud clusters on demand, on virtual or bare-metal resources both on-premises and on your choice of public cloud or edge provider.
+OpenNebula brings its own [Edge Cluster configuration]({{% relref "edge_cloud_reference_architecture#true-hybrid-cloud-reference-architecture" %}}). Based on solid open-source storage and networking technologies, it is a much simpler approach than those of customized cloud architectures made of more complex, general-purpose and separate infrastructure components. OpenNebula automates the deployment of cloud Clusters on demand, on virtual or bare-metal resources both on-premises and on your choice of public cloud or edge provider.
 
 ## Step 3. Set Up Customized Clusters On-premises
 
@@ -50,7 +50,7 @@ OpenNebula is certified to work on top of multiple combinations of hypervisors, 
 
 ### 3.1. Choose Your Hypervisor
 
-The first step in building a customized cluster is to decide on the hypervisor that you will use in your cloud infrastructure. The main OpenNebula distribution provides full support for KVM, one of the most efficient and widely used hypervisors, as well as LXC system containers.
+The first step in building a customized Cluster is to decide on the hypervisor that you will use in your cloud infrastructure. The main OpenNebula distribution provides full support for KVM, one of the most efficient and widely used hypervisors, as well as LXC system containers.
 
 - **Virtualization and Cloud Management on KVM**. Many companies use OpenNebula to manage data center virtualization, consolidate servers, and integrate existing IT assets for computing, storage, and networking. In this deployment model, OpenNebula directly integrates with KVM and completely controls virtual and physical resources, providing advanced features for capacity management, resource optimization, high availability, and business continuity. Some of these deployments additionally use OpenNebula’s **Cloud Management and Provisioning** features for federating data centers, implementing cloud bursting, or offering self-service portals for end users.
 - **Containerization with LXC**. Containers have a minimal memory footprint and avoid the compute-intensive and sometimes unacceptable performance degradation inherent to hardware emulation. You can have a very high density of containers per virtualization node and run workloads close to bare-metal metrics. LXC focuses on system containers, unlike similar technologies such as Docker, which focuses on application containers.
@@ -85,7 +85,7 @@ Before configuring multi-tenancy and defining the provisioning model of your clo
 OpenNebula helps you to define a provisioning model based on two concepts:
 
 - **Users and Groups.** OpenNebula features advanced multi-tenancy with powerful [user and groups management]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#manage-users" %}}), implemented through an [Access Control List]({{% relref "../../../product/cloud_system_administration/multitenancy/chmod#manage-acl" %}}) mechanism that allows for differential role management based on fine-grained permissions that can be applied over any resource. The [resource quota management]({{% relref "../../../product/cloud_system_administration/capacity_planning/quotas#quota-auth" %}}) subsystem lets you track and limit the use of computing, storage, and networking resources.
-- **Virtual Data Centers** or [VDCs]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_vdcs#manage-vdcs" %}}) allow you to assign one or more user groups to a pool of physical resources. You can also create *logical* pools of resources which may physically belong to different clusters and zones, and allocate them to user groups.
+- **Virtual Data Centers** or [VDCs]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_vdcs#manage-vdcs" %}}) allow you to assign one or more user groups to a pool of physical resources. You can also create *logical* pools of resources which may physically belong to different Clusters and zones, and allocate them to user groups.
 
 Finally, the [accounting]({{% relref "../../../product/cloud_system_administration/multitenancy/accounting#accounting" %}}) and [showback]({{% relref "../../../product/cloud_system_administration/multitenancy/showback#showback" %}}) modules allow you to visualize and report resource usage data, produce usage reports, and integrate with chargeback and billing platforms.
 
