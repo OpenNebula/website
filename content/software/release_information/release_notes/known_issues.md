@@ -12,8 +12,176 @@ weight: "6"
 
 <!--# Known Issues -->
 
-A complete list of [known issues for OpenNebula is maintained here](https://github.com/OpenNebula/one/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Bug%22+label%3A%22Status%3A+Accepted%22).
+A complete list of [known issues for OpenNebula is maintained here](https://github.com/OpenNebula/one/issues?q=is%3Aopen%20is%3Aissue%20type%3ABug%20label%3A%22Status%3A%20Accepted%22).
 
 This page will be updated with relevant information about bugs affecting OpenNebula, as well as possible workarounds until a patch is officially published.
 
+## Drivers - Virtualization
+
+- [libvirtd restarts in cycles each 10 minutes with error message in system logs](https://github.com/OpenNebula/one/issues/6463), due to the way libvirtd gets activated per interaction by systemd in 120-second slices. As the default interval for the OpenNebula monitor probe is 600 seconds (10 minutes), each time a probe reactivates libvirtd, it sends those messages to syslog.
+
+## Drivers - Storage
+
+- [Setting a value for `NETAPP_GROW_THRESHOLD` will cause failures in the NetApp Native driver](https://github.com/OpenNebula/one/issues/7416). To solve it, remove the `NETAPP_GROW_THRESHOLD` attribute from both the Image and System datastores.
+
+## Sunstone
+
+- Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
+
+- Enabling fullViewMode in sunstone configuration is not working. You can find the detailed information [here](https://github.com/OpenNebula/one/issues/7154). This is the typo in the configuration file. You can simply fix the issue by removing one `":"` in this [configuration file](https://github.com/OpenNebula/one/blob/release-7.0.0/src/fireedge/etc/sunstone/sunstone-server.conf#L128).
+- When fullModeView mode is active and a status change is made in the VM, the buttons at the top are not updated. To see the buttons that correspond to the current status of the VM, you have to go back to the data table and reselect the VM. This error will be resolved in future versions. You can find more information [here](https://github.com/OpenNebula/one/issues/7172).
+- Race condition where the uploaded files are deleted from the temporary directory before they have been moved into the datastore. 
+
+    **Use the following workaround to mitigate this issue:**
+
+    1. Create a dedicated Sunstone upload directory
+    ```bash
+    mkdir -p /var/lib/one/fireedge-uploads
+    chown oneadmin:oneadmin /var/lib/one/fireedge-uploads
+    chmod 755 /var/lib/one/fireedge-uploads
+    ```
+    2. Configure Fireedge to use it, in the `sunstone-server.conf` file.
+    ```bash
+    # /etc/one/fireedge/sunstone/sunstone-server.conf
+    tmpdir: '/var/lib/one/fireedge-uploads'
+    ```
+    3. Apply the append-only flag (as root)
+    ```bash
+    chattr +a /var/lib/one/fireedge-uploads
+    ```
+    4. Verify the append only flag has been set
+    ```bash
+    lsattr -d /var/lib/one/fireedge-uploads
+    # -----a--------e------- fireedge-uploads
+    ```
+    5. Restart Fireedge
+    ```bash
+    systemctl restart opennebula-fireedge
+    ```
+    This workaround would prevent the `opennebula-sunstone.service` file from removing the uploaded temporary files in `/var/lib/one/fireedge-uploads`, while still allowing copy operations from that directory.
+    
+    {{< alert title="Note" type="info" >}}
+    This directory will fill up, therefore it is recommended to configure a cleanup service like systemd-tmpfiles, to periodically empty this directory.{{< /alert >}} 
+
+## Migration
+
+- When upgrading to 7.0 the `onedb` migration might fail if the `/etc/one/sunstone-views.yaml` file contains a single, unclosed value under the **labels_groups** key, example:
+
+  ```yaml
+  labels_groups:
+    default:
+  ```
+
+  This can be mitigated by declaring an empty array as the value instead, example:
+
+  ```yaml
+  labels_groups:
+    default: []
+  ```
+
+## Install Linux Graphical Desktop on KVM Virtual Machines
+
+OpenNebula uses the `cirrus` graphical adapter for KVM Virtual Machines by default. It could happen that after installing a graphical desktop on a Linux VM, the Xorg window system does not load the appropriate video driver. You can force a VESA mode by configuring the kernel parameter `vga=VESA_MODE` in the GNU GRUB configuration file. [Here](https://en.wikipedia.org/wiki/VESA_BIOS_Extensions#Linux_video_mode_numbers/) you can find the VESA mode numbers. For example, adding `vga=791` as kernel parameter will select the 16-bit 1024×768 resolution mode.
+
+## Backups - Veeam
+
+- If the backup chain is deleted in OpenNebula and an incremental is attempted from Veeam, the data may be corrupt, so a manual Full Backup is needed from Veeam, otherwise the incremental data will be missing.
+- After performing a backup using Veeam VNC may stop working for the backed up VM and some configuration attributes may be lost. If facing this issue, please apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/backup_controller.rb`` file in the backup server at lines ~247-251 (the 2 ``vm.updateconf`` calls need the ``true`` statement at the end). Then, restart the apache2/httpd service:
+
+```ruby
+...
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2",' \
+        'BACKUP_VOLATILE"="YES"]', true) # <- Add true parameter
+else
+    LOGGER.info 'Backup volatiles disabled.'
+    vm.updateconf('BACKUP_CONFIG = ["MODE"="INCREMENT", "KEEP_LAST"="2"]', true) # <- Add true parameter
+...
+```
+
+- In LVM environments, VM restores may fail to deploy if the restored VM is scheduled in the same host as the original VM (and the original is still deployed). To fix this, apply the following change to the ``/usr/lib/one/ovirtapi-server/controllers/vm_controller.rb`` file in the backup server at lines ~800. Then, restart the apache2/httpd service:
+
+- Incremental backups fail on Debian 12/13 due to a Libvirt bug that blocks blockcommit via AppArmor. Until upstream fixes it, the workaround is to disable AppArmor in Libvirt’s qemu.conf
+
+```ruby
+...
+xml_element.delete_element('TEMPLATE/NIC')
+xml_element.delete_element('TEMPLATE/DISK')
+xml_element.delete_element('TEMPLATE/GRAPHICS')
+xml_element.delete_element('TEMPLATE/OS/BOOT')
+xml_element.delete_element('TEMPLATE/VMID')
+xml_element.delete_element('TEMPLATE/OS/UUID') # <- Add this line
+...
+```
+
+- Only the default datastore path is supported (``/var/lib/one/datastores/*``) for the image and backup datastores. If using any other path, please make sure there is a soft link in the default path pointing to your current paths. 
+
+## Market proxy settings
+
+- The option `--proxy` in the `MARKET_MAD` may not be working correctly. To solve it, execute `systemctl edit opennebula` and add the following entries:
+
+```default
+[Service]
+Environment="http_proxy=http://proxy_server"
+Environment="https_proxy=http://proxy_server"
+Environment="no_proxy=domain1,domain2"
+```
+
+Where `proxy_server` is the proxy server to be used and `no_proxy` is a list of the domains or IP ranges that must not be accessed via proxy by opennebula. After that, reload systemd service configuration with `systemctl daemon-reload` and restart opennebula with a `systemctl restart opennebula`
+
+## Monitoring
+
+When configuring resource usage forecasts, it is important to ensure that the `forecast period` is _not shorter_ than the `probe period` defined for `MONITOR_HOST` and `MONITOR_VM` in `/etc/one/monitord.conf`. If the forecast period is set to a value smaller than the monitoring interval, the prediction probe will raise an error and may disable monitoring for the affected Host and VMs.
+
+By default, the monitoring interval for a Host is two minutes. In the following example, the forecast period is set to one minute, which is shorter than the Host's monitoring interval of two minutes. This **misconfiguration** will result in an error and place the Host in an error state:
+
+```yaml
+host:
+  db_retention: 4 # Number of weeks
+  forecast:
+      enabled: true
+      period: 1 # Number of minutes
+      lookback: 60 # The look-back windows in minutes to use for the predictions
+```
+
+To avoid this error, always set the forecast period to a value _equal to or greater_ than the monitoring interval. For example, if the Host monitoring interval is two minutes, the forecast period should be set to at least two minutes:
+
+```yaml
+host:
+  db_retention: 4 # Number of weeks
+  forecast:
+      enabled: true
+      period: 2 # Number of minutes
+      lookback: 60 # Look-back window in minutes for predictions
+```
+
+### OneGate
+
+- [Avoid Host not permitted on Sinatra server when is behind NGINX proxy](https://github.com/OpenNebula/one/issues/7231)
+
+## LinuxContainers marketplace
+
+The appliances on this marketplace will fail [to boot](https://github.com/OpenNebula/one/issues/7391) when deployed on rhel10 like hosts. The parameter `lxc.apparmor.profile=unconfined` is what causes the issue and needs to be removed after the appliance is imported.
+
+```
+RAW=[
+  DATA="lxc.apparmor.profile=unconfined",
+  TYPE="lxc" ]
+```
+
+## High CPU utilization due to predictions
+
+With some configurations, the usage of CPU on the hosts can be very high, due to running predictions. In such case, the number of threads used by BLAS (Basic Linear Algebra Subprograms) can be limited to 1 (or other suitable number) with the environment variables:
+
+```shell
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
+export OPENBLAS_NUM_THREADS=${OPENBLAS_NUM_THREADS:-1}
+export MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
+export BLIS_NUM_THREADS=${BLIS_NUM_THREADS:-1}
+export NUMEXPR_NUM_THREADS=${NUMEXPR_NUM_THREADS:-1}
+```
+
+A more comprehensive way is to replace the following old files with the appropriate files from `one` repository:
+* [prediction script](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/prediction.sh)
+* [prediction script from node probes](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/node-probes.d/prediction.sh)
+* [prediction model](https://github.com/OpenNebula/one/blob/master/src/im_mad/remotes/lib/python/pyoneai/ml/sklearn_prediction_model.py)
 
