@@ -167,4 +167,4 @@ For further details about the API, refer to the [OneForm API Reference](/product
 
 {{< /tabpane >}}
 
-Now that you have created your AWS Provider, refer to the next guide to [Provision an AWS Edge Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/aws_cluster.md" %}}).
+Now that you have created your AWS Provider, refer to the next guide to [Provision an AWS Edge Cluster](https://github.com/OpenNebula/oneform-registry/wiki/Amazon-Web-Services-Cluster).

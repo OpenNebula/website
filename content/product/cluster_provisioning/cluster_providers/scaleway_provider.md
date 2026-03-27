@@ -183,6 +183,6 @@ For further details about the API, please see the [OneForm API Reference]({{% re
 
 {{< /tabpane >}}
 
-Now that you have created your Scaleway Provider, refer to the next guide to [Provision a Scaleway Edge Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/scaleway_cluster.md" %}}).
+Now that you have created your Scaleway Provider, refer to the next guide to [Provision a Scaleway Edge Cluster](https://github.com/OpenNebula/oneform-registry/wiki/Scaleway-Cluster).
 
 

@@ -26,12 +26,12 @@ To create Providers for 3rd-party services, you need to install a Provider drive
 
 ## Developing Provider Drivers
 
-If a driver does not currently exist for your preferred cloud service, refer to the [Provider Driver Development Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/creating_driver.md" %}}). If you need to customize and existing driver to add new zones or images, refer to the [Driver Customization Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver.md" %}}).
+If a driver does not currently exist for your preferred cloud service, you can develop a custom driver. Refer to the [Driver Development Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/creating_driver.md" %}}) for details on developing drivers. If you need to customize and existing driver to add new zones or images, refer to the [Driver Customization Guide]({{% relref "/product/integration_references/cloud_provider_driver_development/customizing_driver.md" %}}).
 
 ## Provisioning Clusters
 
-Once you have created Providers for your preferred cloud or bare-metal service, you can provision Clusters using those services through OneForm. Please refer to the Provisioning guide for your preferred service provider:
+Once you have created Providers for your preferred cloud or bare-metal service, you can provision Clusters using those services through OneForm. Please refer to the relevant Provisioning guide in the OneForm Registry Wiki for your preferred service provider:
 
-* [AWS]({{% relref "product/cluster_provisioning/cluster_provisions/aws_cluster.md" %}})
-* [Equinix]({{% relref "product/cluster_provisioning/cluster_provisions/equinix_cluster.md" %}})
-* [Scaleway]({{% relref "product/cluster_provisioning/cluster_provisions/scaleway_cluster.md" %}})
+* [AWS](https://github.com/OpenNebula/oneform-registry/wiki/Amazon-Web-Services-Cluster)
+* [Equinix](https://github.com/OpenNebula/oneform-registry/wiki/Equinix-Cluster)
+* [Scaleway](https://github.com/OpenNebula/oneform-registry/wiki/Scaleway-Cluster)
