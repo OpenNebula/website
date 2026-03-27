@@ -10,7 +10,7 @@ weight: "2"
 
 <a id="whats-new"></a>
 
-The OpenNebula team is excited to announce the availability of the **OpenNebula 7.2 Beta**! While our previous 7.0 “Phoenix” release focused on the transition from legacy virtualization, OpenNebula 7.2 is engineered for production at scale. This release marks a significant evolution, introducing deeper automation, hardware-rooted security, and the high-performance orchestration required to power modern Sovereign Clouds and AI Factories.
+The OpenNebula team is excited to announce the availability of the **OpenNebula 7.2 "Dark Horse"**! While our previous 7.0 “Phoenix” release focused on the transition from legacy virtualization, OpenNebula 7.2 is engineered for production at scale. This release marks a significant evolution, introducing deeper automation, hardware-rooted security, and the high-performance orchestration required to power modern Sovereign Clouds and AI Factories.
 
 OpenNebula 7.2 is a high-performance engine designed to handle the most demanding enterprise workloads. Key highlights of this release include:
 
