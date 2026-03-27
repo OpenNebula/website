@@ -6,6 +6,8 @@ description:
 categories:
 pageintoc: "212"
 tags:
+toc_hide: true
+headless: true
 weight: "4"
 ---
 

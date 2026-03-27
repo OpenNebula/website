@@ -171,7 +171,7 @@ For further details about the API, please see to the [OneForm API Reference]({{%
 
 {{< /tabpane >}}
 
-Now that you have created your Equinix Provider, refer to the next guide to [Provision an Equinix Edge Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/equinix_cluster.md" %}}).
+Now that you have created your Equinix Provider, refer to the next guide to [Provision an Equinix Edge Cluster](https://github.com/OpenNebula/oneform-registry/wiki/Equinix-Cluster).
 
 ## Known Issues
 
