@@ -129,4 +129,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 - [Fix FQDN support in Prometheus datasource script](https://github.com/OpenNebula/one/issues/7512).
 - [Fix OneDRS scheduler for VMs with resched flag](https://github.com/OpenNebula/one/issues/7503).
 - [Fix Conversion failed with message Unable to find Host, Cluster, and Datacenter of VM](https://github.com/OpenNebula/one/issues/7533).
-- [Fix `LAST_BRIDGE` from backups picked from a comma-separated `BRIDGE_LIST` instead of a space-separated one.](https://github.com/OpenNebula/one/issues/7532)
+- [Fix `BRIDGE_LIST` in backup datastores.](https://github.com/OpenNebula/one/issues/7532)
