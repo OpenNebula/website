@@ -95,23 +95,11 @@ apt-get update
 apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
-### Optional: Install dependencies for OpenNebula Edge Clusters provisioning
-
-There are two main dependencies which needs to be installed on the FE for running provisioning.
-
-1. **Terraform** – is needed to provision resources on public cloud providers, download the binary as follows:
+### SLES / openSUSE
 
 ```bash
-curl 'https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip' | zcat >/usr/bin/terraform
+zypper install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
-```bash
-chmod 0755 /usr/bin/terraform
-```
-
-2. **Ansible** – is used to configure the provisioned resources (cloud or on-premises). Ansible system package is installed
-as a dependency of the OpenNebula provision package. However, for HCI provisioning including Ceph, the system-installed
-ansible version may not be sufficient as it requires ansible-core 2.15+. It is advised to use the latest Ubuntu for the FE if
-Ceph HCI provision is needed or to install ansible 2.15+ on the system and make it default for oneadmin user.
 
 ## Step 4. Enabling MySQL/MariaDB (Optional)
 

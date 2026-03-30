@@ -87,6 +87,19 @@ host:
       lookback: 60 # Look-back window in minutes for predictions
 ```
 
+## SUSE
+
+- The following components are not available for SUSE in 7.2:
+  - opennebula-form
+  - opennebula-ovirt
+  - opennebula-lxc
+
+- PyONE gRPC is not working on openSUSE 16 due to a [protobuf packaging bug](https://bugzilla.opensuse.org/show_bug.cgi?id=1260084). The workaround is to force-install a compatible version:
+
+  ```default
+  pip3.13 install protobuf==5.28.3 --force
+  ```
+
 ## LinuxContainers marketplace
 
 The appliances on this marketplace will fail [to boot](https://github.com/OpenNebula/one/issues/7391) when deployed on rhel10 like hosts. The parameter `lxc.apparmor.profile=unconfined` is what causes the issue and needs to be removed after the appliance is imported.
