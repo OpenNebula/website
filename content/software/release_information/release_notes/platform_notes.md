@@ -138,23 +138,6 @@ The following items apply to all distributions:
 DISK = [ driver = "qcow2", cache = "writethrough" ]
 ```
 
-### RedHat 8 Platform Notes
-
-#### Disable PolicyKit for Libvirt
-
-It is recommended that you disable PolicyKit for Libvirt:
-
-```default
-$ cat /etc/libvirt/libvirtd.conf
-...
-auth_unix_ro = "none"
-auth_unix_rw = "none"
-unix_sock_group = "oneadmin"
-unix_sock_ro_perms = "0770"
-unix_sock_rw_perms = "0770"
-...
-```
-
 ### AlmaLinux 9 Platform Notes
 
 #### Disable Libvirtd’s SystemD Socket Activation
