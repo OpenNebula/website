@@ -50,8 +50,8 @@ sudo apt install cpu-checker
 To run the miniONE script, you will need a physical server with a fresh installation of a supported operating system, with the latest software updates and without any customizations. The server will need a stable internet connection to download software packages during installation. 
 
 **Supported operating systems:**
-: - RHEL/AlmaLinux 8 or 9
-  - Debian 11 or 12
+: - RHEL/AlmaLinux 9 or 10
+  - Debian 12 or 13
   - Ubuntu 22.04 or 24.04
   - openSUSE 16.0, SLES 15.7
 
