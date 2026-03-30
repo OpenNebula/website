@@ -1,3 +1,4 @@
 mapping:
+  one-7.2: '7.2'
   one-7.0: '7.0'
   master: 'devel'

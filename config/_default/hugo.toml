@@ -2,7 +2,7 @@
 
 # title = ""
 
-baseURL = "https://docs.opennebula.io/devel/"
+baseURL = "https://docs.opennebula.io/7.2/"
 
 #######
 
@@ -131,7 +131,7 @@ enable = false
 no_list = true
 # Uncomment this if your GitHub repo does not have "main" as the default branch,
 # or specify a new value if you want to reference another branch in your GitHub links
-github_branch= "master"
+github_branch= "one-7.2"
 github_repo = "https://github.com/OpenNebula/website/"
 enableGitInfo = false
 # Google Custom Search Engine ID. Remove or comment out to disable search.
@@ -143,13 +143,12 @@ search_url = "/search/"
 
 ### Version variables
 # The short X.Y version
-version = "7.1"
+version = "7.2"
 # The full version, including alpha/beta/rc tags
-release = "7.1.80"
+release = "7.2"
 # Docs version is part of the URL & invoked by the alert shortcode
 # Setting here in case it ever needs to differ from SW version
-docs_version = "devel"
-
+docs_version = "7.2"
 
   # Add your release versions here
 version_menu = "Versions"
@@ -162,6 +161,10 @@ version_menu = "Versions"
   [[params.versions]]
     version = "devel"
     url = "https://docs.opennebula.io/devel/"
+
+  [[params.versions]]
+    version = "v7.2"
+    url = "https://docs.opennebula.io/7.2/"
 
   [[params.versions]]
     version = "v7.0"
