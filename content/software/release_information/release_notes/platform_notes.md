@@ -12,20 +12,20 @@ weight: "3"
 
 <!--# Platform Notes 7.2 -->
 
-This page will show you the specific considerations when using an OpenNebula cloud, according to the different supported platforms.
+This page highlights the specific considerations when using an OpenNebula cloud on one of the different supported platforms.
 
 This is the list of the individual platform components that have been through the complete [OpenNebula Quality Assurance and Certification Process](https://github.com/OpenNebula/one/wiki/Quality-Assurance).
 
 ## Certified Components Version
 
-### Front-End Components
+### Front-end Components
 
-| Component                | Version                                    | More information                                                                                                                                                                            |
+| **Component**                | **Version**                                    | **More information** |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
-| AlmaLinux                | 8, 9, 10                                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-End Installation]({{% relref "front_end_installation" %}})                                                     |
-| Debian                   | 11, 12, 13                                     | [Front-End Installation]({{% relref "front_end_installation" %}}).<br/>Not certified to manage VMware infrastructures |
+| Red Hat Enterprise Linux | 8, 9, 10                                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
+| AlmaLinux                | 8, 9, 10                                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
+| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
+| Debian                   | 11, 12, 13                                     | [Front-end Installation]({{% relref "front_end_installation" %}})<br/>Not certified to manage VMware infrastructures |
 | MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 
@@ -34,7 +34,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### KVM Nodes
 
-| Component                | Version                                                                                                    | More information                                                                                                                     |
+| **Component**                | **Version**  | **More information** |
 |--------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Red Hat Enterprise Linux | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | AlmaLinux                | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
@@ -44,11 +44,11 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### LXC Nodes
 
-| Component     | Version                                                | More information                                                                                                                     |
+| **Component**     | **Version**                                                | **More information** |
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| Debian        | 11, 12                                                 | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| Debian        | 11, 12                                                 | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}}) |
 
 <a id="context-supported-platforms"></a>
@@ -61,7 +61,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Open Cloud Networking Infrastructure
 
-| Component           | Version                                    | More information                                                                                                                             |
+| **Component**           | **Version**                                    | **More information** |
 |---------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
 | Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
@@ -69,7 +69,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Open Cloud Storage Infrastructure
 
-| Component | Version                                    | More information                                                                                             |
+| **Component** | **Version**                                   | **More information** |
 |-----------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | iSCSI     | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
 | LVM2      | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
@@ -79,14 +79,14 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Authentication
 
-| Component             | Version                                    | More information                                                                                                        |
+| **Component**             | **Version**                                    | **More information** |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | net-ldap ruby library | 0.19.0 or 0.20                             | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Monitoring and Backups
 
-| Component                     | Version   | More information                                                                                                                    |
+| **Component**                     | **Version**   | **More information** |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
@@ -94,7 +94,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Sunstone
 
-| Browser   | Version     |
+| **Browser**   | **Version**     |
 |-----------|-------------|
 | Chrome    | 61.0 - 94.0 |
 | Firefox   | 59.0 - 92.0 |
@@ -107,7 +107,7 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 
 ### Billing
 
-| Component   | Version     |
+| **Component**   | **Version**     |
 |-------------|-------------|
 | WHMCS       | 8.13.1      |
 
@@ -118,9 +118,9 @@ A single instance of OpenNebula (i.e., a single `oned` process) has been stress-
 
 However, there are several OpenNebula users managing significantly higher numbers of hypervisors (to the order of two thousand) with a single instance. This largely depends, as mentioned, on the storage, networking, and also monitoring configuration.
 
-## Front-End Platform Notes
+## Front-end Platform Notes
 
-The following applies to all Front-Ends:
+The following applies to all Front-ends:
 
 * Only **Ruby versions >= 2.0 are supported**.
 
@@ -128,7 +128,7 @@ The following applies to all Front-Ends:
 
 The following items apply to all distributions:
 
-* When using qcow2 storage drivers you can make sure that the data is written to disk when doing snapshots by setting the `cache` parameter to `writethrough`. This change will make writes slower than other cache modes but safer. To do this edit the file `/etc/one/vmm_exec/vmm_exec_kvm.conf` and change the line for `DISK`:
+* When using qcow2 storage drivers you can ensure that the data is written to disk when creating snapshots by setting the `cache` parameter to `writethrough`. This change will make writes slower but safer than other cache modes. To do this edit the file `/etc/one/vmm_exec/vmm_exec_kvm.conf` and change the line for `DISK`:
 
 ```default
 DISK = [ driver = "qcow2", cache = "writethrough" ]
@@ -138,10 +138,10 @@ DISK = [ driver = "qcow2", cache = "writethrough" ]
 
 #### Disable PolicyKit for Libvirt
 
-It is recommended that you disable PolicyKit for Libvirt:
+It is recommended to disable PolicyKit for Libvirt:
 
-```default
-$ cat /etc/libvirt/libvirtd.conf
+```shell
+cat /etc/libvirt/libvirtd.conf
 ...
 auth_unix_ro = "none"
 auth_unix_rw = "none"
@@ -156,4 +156,4 @@ unix_sock_rw_perms = "0770"
 #### Disable Libvirtd’s SystemD Socket Activation
 
 OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
-You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.
+You can take a look at [this bug report](https://github.com/OpenNebula/one/issues/6143) for a detailed workaround procedure.
