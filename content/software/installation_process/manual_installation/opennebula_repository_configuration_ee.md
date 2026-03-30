@@ -5,28 +5,29 @@ description:
 categories:
 pageintoc: "172"
 tags:
-weight: "4"
+weight: "5"
 show_card: false
+toc_hide: true
 ---
 
-OpenNebula Systems provides an OpenNebula Enterprise Edition to customers with an active support subscription. To distribute the packages of the Enterprise Edition there is a private enterprise repository accessible only to those customers that contains all packages (including major, minor, and maintenance releases). You only need to change your repository configuration on Front-end once per major release and you’ll be able to get every package in that series. Private repositories contain all OpenNebula released packages.
+OpenNebula Systems provides the OpenNebula Enterprise Edition (EE) to customers with an active support subscription. To distribute the packages of the Enterprise Edition there is a private repository accessible only to Enterprise Edition customers that contains all packages (including major, minor, and maintenance releases). You only need to change your repository configuration on your OpenNebula Front-end once per major release and you’ll have access to every package in that series. OpenNebula's private repositories contain all OpenNebula released packages.
 
 {{< alert title="Important" color="success" >}}
-You should have received the customer repository credentials (username and password) to access these repositories. Replace `<user>` and `<password>` in the examples below with your customer-specific credentials.{{< /alert >}}
+You should have received credentials (username and password) to access these private repositories with your OpenNebula EE subscription. Replace `<user>` and `<password>` in the examples below with your customer-specific credentials.{{< /alert >}}
 
 ### AlmaLinux/RHEL
 
 Some dependencies require enabling the CodeReady Linux Builder repository:
 
-```default
+```shell
 crb enable
 ```
 
-To add the OpenNebula enterprise repository, execute the following as user `root`:
+To add the OpenNebula Enterprise Edition repository, execute the following commands for your respective OS as user `root`:
 
 **RHEL 9, 10**
 
-```default
+```shell
 cat << "EOT" > /etc/yum.repos.d/opennebula.repo
 [opennebula]
 name=OpenNebula Enterprise Edition
@@ -44,7 +45,7 @@ dnf makecache
 
 **AlmaLinux 9, 10**
 
-```default
+```shell
 cat << "EOT" > /etc/yum.repos.d/opennebula.repo
 [opennebula]
 name=OpenNebula Enterprise Edition
@@ -63,31 +64,32 @@ dnf makecache
 ### Debian/Ubuntu
 
 {{< alert title="Note" color="success" >}}
-If the commands below fail, ensure you have `gnupg`, `wget` and `apt-transport-https` packages installed and retry. E.g.,
+If the commands below fail, ensure you have `gnupg`, `wget` and `apt-transport-https` packages installed and retry:
 
-```default
+```shell
 apt-get update
 apt-get -y install gnupg wget apt-transport-https
-```{{< /alert >}}
+```
+{{< /alert >}}
 
 First, add the repository signing GPG key on the Front-end by executing as user `root`:
 
 {{< alert title="Note" color="success" >}}
 If `/etc/apt/keyrings` does not exist, create it:
 
-```default
+```shell
 mkdir -p /etc/apt/keyrings
 ```{{< /alert >}}
 
-```default
+```shell
 wget -q -O- https://downloads.opennebula.io/repo/repo2.key | gpg --dearmor --yes --output /etc/apt/keyrings/opennebula.gpg
 ```
 
-and then continue with repository configuration:
+And then continue with repository configuration:
 
 **Debian 12**
 
-```default
+```shell
 cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
 machine enterprise.opennebula.io
 login <user>
@@ -100,7 +102,7 @@ apt-get update
 
 **Debian 13**
 
-```default
+```shell
 cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
 machine enterprise.opennebula.io
 login <user>
@@ -113,7 +115,7 @@ apt-get update
 
 **Ubuntu 22.04**
 
-```default
+```shell
 cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
 machine enterprise.opennebula.io
 login <user>
@@ -126,7 +128,7 @@ apt-get update
 
 **Ubuntu 24.04**
 
-```default
+```shell
 cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
 machine enterprise.opennebula.io
 login <user>
@@ -139,11 +141,13 @@ apt-get update
 
 ### SUSE
 
+During `zypper refresh` you will be prompted to accept the OpenNebula repository signing key. Verify the fingerprint matches `0B2D 385C 7C93 04B1 1A03 67B9 05A0 5927 906D C27C` before accepting.
+
 #### SUSE Linux Enterprise Server 15 SP7
 
 Execute the following as user `root`:
 
-```default
+```shell
 arch=$(uname -m)
 
 SUSEConnect -p PackageHub/15.7/$arch
@@ -182,15 +186,16 @@ zypper refresh
 ```
 
 {{< alert title="Note" color="success" >}}
-You can point to a specific 7.2.x version by changing the occurrence of shorter version 7.2 in any of the above commands to the particular full 3 components version number (X.Y.Z). For instance, to point to version 7.2.1 on Ubuntu 22.04, use the following command:{{< /alert >}}
+You can point to a specific 7.2.x version by changing the occurrence of shorter version number 7.2 in any of the above commands to the full three components. For instance, to point to version 7.2.1 on Ubuntu 22.04, use the following command:
 
-> ```default
-> cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
-> machine enterprise.opennebula.io
-> login <user>
-> password <password>
-> EOT
-> chmod 600 /etc/apt/auth.conf.d/opennebula.conf
-> echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/7.2.1/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
-> apt-get update
-> ```
+```shell
+cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
+machine enterprise.opennebula.io
+login <user>
+password <password>
+EOT
+chmod 600 /etc/apt/auth.conf.d/opennebula.conf
+echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/7.2.1/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+apt-get update
+```
+{{< /alert >}}
