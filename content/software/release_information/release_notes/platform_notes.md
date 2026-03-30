@@ -27,7 +27,7 @@ This is the list of the individual platform components that have been through th
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 | SUSE Linux Enterprise    | 15                                         | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 | openSUSE                 | 16                                         | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
-| Debian                   | 11, 12, 13                                     | [Front-end Installation]({{% relref "front_end_installation" %}})<br/>Not certified to manage VMware infrastructures |
+| Debian                   | 12, 13                                     | [Front-end Installation]({{% relref "front_end_installation" %}})<br/>Not certified to manage VMware infrastructures |
 | SUSE Linux Enterprise    | 15                                          | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 | openSUSE                 | 16                                          | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 >>>>>>> 0ea80533 (F OpenNebula/one#7450: Add SUSE support, known issues)
@@ -139,23 +139,6 @@ The following items apply to all distributions:
 
 ```default
 DISK = [ driver = "qcow2", cache = "writethrough" ]
-```
-
-### RedHat 8 Platform Notes
-
-#### Disable PolicyKit for Libvirt
-
-It is recommended to disable PolicyKit for Libvirt:
-
-```shell
-cat /etc/libvirt/libvirtd.conf
-...
-auth_unix_ro = "none"
-auth_unix_rw = "none"
-unix_sock_group = "oneadmin"
-unix_sock_ro_perms = "0770"
-unix_sock_rw_perms = "0770"
-...
 ```
 
 ### AlmaLinux 9 Platform Notes

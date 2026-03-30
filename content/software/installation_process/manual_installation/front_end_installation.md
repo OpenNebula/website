@@ -28,16 +28,10 @@ Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configura
 
 Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable third party repositories by running the following commands under privileged user (`root`):
 
-**AlmaLinux 8,9**
+**AlmaLinux 9, 10**
 
 ```default
 yum -y install epel-release
-```
-
-**RHEL 8**
-
-```default
-rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 **RHEL 9**
