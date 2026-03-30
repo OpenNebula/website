@@ -79,6 +79,8 @@ RHEL
 yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
 ```
 
+<!-- TODO: Add SLES/openSUSE upgrade instructions (zypper) once there is a previous SUSE release to upgrade from (SUSE support was introduced in 7.2). -->
+
 ### Step 7. Update Configuration Files
 
 In High Availability (HA) setups, you must replace the default value `auto` of the `MONITOR_ADDRESS` parameter in `/etc/one/monitord.conf` with the virtual IP address used in the `RAFT_LEADER_HOOK` and `RAFT_FOLLOWER_HOOK` settings in `/etc/one/oned.conf`.
@@ -223,6 +225,8 @@ RHEL
 ```bash
 yum upgrade opennebula-node-<hypervisor>
 ```
+
+<!-- TODO: Add SLES/openSUSE node upgrade instructions (zypper) once there is a previous SUSE release to upgrade from (SUSE support was introduced in 7.2). -->
 
 {{< alert title="Note" type="info" >}}
 Note that the `<hypervisor>` tag should be replaced by the name of the corresponding hypervisor (i.e., `kvm` or `lxc`).{{< /alert >}}
