@@ -1,7 +1,7 @@
 ---
 title: "Cluster Provisioning"
 date: "2025-02-17"
-description: "Create and manage providers and provisions on-premises, or on supported cloud services"
+description: "Provision Clusters and hybrid clouds with on-premises hardware or supported cloud service providers."
 categories:
 pageintoc: "202"
 tags:

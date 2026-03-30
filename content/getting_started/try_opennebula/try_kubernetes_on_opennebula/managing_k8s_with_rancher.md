@@ -1,5 +1,5 @@
 ---
-title: "Managing Kubernetes with Rancher and the Cluster API Integration"
+title: "Managing Kubernetes with Rancher and the Cluster API"
 date: "2025-02-17"
 type: docs
 description:
@@ -9,7 +9,7 @@ description:
 
 ## Overview
 
-In this tutorial, we will deploy a Kubernetes cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
+In this tutorial, we will deploy a Kubernetes Cluster using the [Kubernetes Cluster API](https://cluster-api.sigs.k8s.io/introduction) (CAPI) and the [Rancher](https://www.rancher.com) Kubernetes management platform through the [OpenNebula Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0).
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
@@ -22,20 +22,20 @@ During this tutorial you will complete the following high-level steps:
 1. Download the CAPI Appliance
 1. Instantiate the CAPI Appliance
 1. Connect to the Rancher UI
-1. Deploy an OpenNebula RKE2 cluster
-1. Import the cluster into Rancher
+1. Deploy an OpenNebula RKE2 Cluster
+1. Import the Cluster into Rancher
 
-Additionally, you will perform various operations on the workload cluster:
+Additionally, you will perform various operations on the workload Cluster:
   - Install Longhorn
   - Deploy an Nginx service
-  - Add a worker node to the cluster
-  - Upgrade the workload cluster to the newest version
+  - Add a worker node to the Cluster
+  - Upgrade the workload Cluster to the newest version
 
 ### OpenNebula's CAPI Appliance
 
-[OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0) provides a ready-to-use solution for managing Kubernetes clusters through the Rancher web UI. The appliance is fully integrated to support OpenNebula as an infrastructure provider via the [Cluster API Provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula).
+[OpenNebula's Kubernetes (CAPI) appliance](https://marketplace.opennebula.io/appliance/c33522e7-7b7e-4046-bc23-833797431bf0) provides a ready-to-use solution for managing Kubernetes Clusters through the Rancher web UI. The appliance is fully integrated to support OpenNebula as an infrastructure provider via the [Cluster API Provider for OpenNebula](https://github.com/OpenNebula/cluster-api-provider-opennebula).
 
-This tutorial demonstrates how the CAPI appliance eliminates the need for extensive manual configuration -- it allows you to create, manage, and upgrade CAPI-managed RKE2 clusters in a simple way, reducing operational overhead.
+This tutorial demonstrates how the CAPI appliance eliminates the need for extensive manual configuration -- it allows you to create, manage, and upgrade CAPI-managed RKE2 Clusters in a simple way, reducing operational overhead.
 
 ## Step 1. Configure the Networks on the Front-end
 
@@ -154,7 +154,7 @@ If you leave the Rancher password empty, it will default to `capi1234` (username
 The last number in the command output is the ID for the Virtual Machine, in this case `2`.
 
 {{< alert title="Note" type="info" >}}
-You will need to wait some minutes for the K3s cluster and the Rancher web UI to become available. The total time will depend on the Front-end machine and the resources assigned to the cluster -- with the default resource values, the configuration process may take 6 to 8 minutes to complete.
+You will need to wait some minutes for the K3s Cluster and the Rancher web UI to become available. The total time will depend on the Front-end machine and the resources assigned to the Cluster -- with the default resource values, the configuration process may take 6 to 8 minutes to complete.
 {{< /alert >}}
 
 ## Step 4. Connect to the Rancher UI
@@ -190,7 +190,7 @@ If you did not set a password when instantiating the VM, log in with these crede
 - **Password**: `capi1234`
 
 {{< alert title="Warning" type="warning" >}}
-As mentioned above, with the default resources the complete configuration process for the K3s cluster and Rancher can take between 6 and 8 minutes to complete. Occasionally, a bug related to the installation of Turtles -- specifically with the `helm-install-rancher-turtles` pod -- may cause the installation to hang. In such cases, if the Rancher interface does not come up you will need to restart the process.
+As mentioned above, with the default resources the complete configuration process for the K3s Cluster and Rancher can take between 6 and 8 minutes to complete. Occasionally, a bug related to the installation of Turtles -- specifically with the `helm-install-rancher-turtles` pod -- may cause the installation to hang. In such cases, if the Rancher interface does not come up you will need to restart the process.
 {{< /alert >}}
 
 {{< alert title="Tip" type="info" >}}
@@ -209,7 +209,7 @@ kubectl get pods -A
 
 ## Step 5. Deploy an OpenNebula RKE2 Cluster
 
-To deploy an OpenNebula RKE2 cluster we will install it using the RKE2 Helm chart via the Rancher UI.
+To deploy an OpenNebula RKE2 Cluster we will install it using the RKE2 Helm chart via the Rancher UI.
 
 To install from the Helm chart, follow these steps:
 
@@ -223,14 +223,14 @@ For this tutorial, select `capone-rke2`.
 
 Rancher will take you to a screen displaying chart details. To install, click the **Install** button at top right.
 
-In the next screen, you can specify the namespace where the resources will be created, as well as an optional name for the cluster. In this example we will use the `default` namespace, and name `capone4`.
+In the next screen, you can specify the namespace where the resources will be created, as well as an optional name for the Cluster. In this example we will use the `default` namespace, and name `capone4`.
 
 Click **Next**. The next screen shows the YAML configuration file. Here you will need to edit some parameters to adapt the deployment to your environment.
 
 {{< image path="/images/rancher_capone_yaml.png" alt="CAPONE YAML" align="center" width="90%" mb="20px" >}}
 
 {{< alert title="Note" type="info" >}}
-It is not necessary to import the CAPONE appliances -- the only requirement is that the public and private networks in the cluster definition already exist, as will be shown below.
+It is not necessary to import the CAPONE appliances -- the only requirement is that the public and private networks in the Cluster definition already exist, as will be shown below.
 {{< /alert >}}
 
 Scroll down to the end of the YAML file:
@@ -257,9 +257,9 @@ PUBLIC_NETWORK_NAME: vnet
 
 After modifying the parameters, click the **Install** button on the bottom right corner.
 
-The cluster should install and deploy; this process can take a few minutes.
+The Cluster should install and deploy; this process can take a few minutes.
 
-In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Installed Apps**. The list of applications should show the name of the cluster you deployed (in this example, `capone4`), with status `Deployed`.
+In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Installed Apps**. The list of applications should show the name of the Cluster you deployed (in this example, `capone4`), with status `Deployed`.
 
 {{< image path="/images/rancher_capone_deployed.png" alt="Rancher installed apps" align="center" width="90%" mb="20px" >}}
 
@@ -283,15 +283,15 @@ This shows the Virtual Router `vr-capone4-cp-0`, the master node `capone4-ljm6z`
 
 ## Step 6. Import the Cluster into Rancher
 
-To manage the cluster in the Rancher UI, you must first import it into Rancher. Go to Cluster Management by clicking the "farmhouse" icon ![icon](/images/icons/rancher/farmhouse.png) near the bottom. Note that you may need to wait several minutes for the new cluster to appear, refresh the page periodically until it appears.
+To manage the Cluster in the Rancher UI, you must first import it into Rancher. Go to Cluster Management by clicking the "farmhouse" icon ![icon](/images/icons/rancher/farmhouse.png) near the bottom. Note that you may need to wait several minutes for the new Cluster to appear, refresh the page periodically until it appears.
 
-In the left-hand pane select **Clusters**, and in the **Clusters** screen select the `capone4` cluster.
+In the left-hand pane select **Clusters**, and in the **Clusters** screen select the `capone4` Cluster.
 
-Rancher displays the screen for the cluster, shown below.
+Rancher displays the screen for the Cluster, shown below.
 
 {{< image path="/images/rancher_capone_import.png" alt="Rancher CAPONE import" align="center" width="90%" mb="20px" >}}
 
-This screen shows three alternative commands that you can use for importing the cluster. In this case, since the Rancher installation uses a self-signed certificate, we will use the second command, with `curl` and `kubectl`:
+This screen shows three alternative commands that you can use for importing the Cluster. In this case, since the Rancher installation uses a self-signed certificate, we will use the second command, with `curl` and `kubectl`:
 
 ```bash
 curl --insecure -sfL https://172.16.100.3.sslip.io/v3/import/<import file>.yaml | kubectl apply -f -
@@ -299,7 +299,7 @@ curl --insecure -sfL https://172.16.100.3.sslip.io/v3/import/<import file>.yaml 
 
 Copy the command from the screen (you can click the command to copy it to the clipboard). Save this command somewhere (e.g. a text file), you will need to edit it and use it later.
 
-Go to the Kubectl Shell for the Management Cluster, go to **Cluster Management** (via the "farmhouse" icon ![icon](/images/icons/rancher/farmhouse.png) at bottom left). Then, in the **Clusters** screen select the `local` cluster, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) on the right, and select **Kubectl Shell** from the drop-down.
+Go to the Kubectl Shell for the Management Cluster, go to **Cluster Management** (via the "farmhouse" icon ![icon](/images/icons/rancher/farmhouse.png) at bottom left). Then, in the **Clusters** screen select the `local` Cluster, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) on the right, and select **Kubectl Shell** from the drop-down.
 
 {{< image path="/images/rancher_open_kubectl_shell.png" alt="Rancher kubectl open shell" align="center" width="90%" mb="20px" >}}
 
@@ -307,21 +307,21 @@ Rancher should display a tab on the bottom of the screen, with the **Kubectl:loc
 
 {{< image path="/images/rancher_kubectl_shell.png" alt="Rancher kubectl shell" align="center" width="60%" mb="20px" >}}
 
-First, before running the import command you must retrieve the kubeconfig file for the workload cluster. For cluster `capone4`, run:
+First, before running the import command you must retrieve the kubeconfig file for the workload Cluster. For Cluster `capone4`, run:
 
 ```bash
 kubectl get secrets capone4-kubeconfig -o jsonpath="{.data.value}" | base64 -d > one-kubeconfig
 ```
 
-This saves the configuration for the cluster into the `one-kubeconfig` file.
+This saves the configuration for the Cluster into the `one-kubeconfig` file.
 
-To import the cluster you need to edit the `curl` command you previously copied and saved. At the end of the command, after `kubectl apply` add `--kubeconfig one-kubeconfig` before the final `-f -`. For example (the URL has been truncated for brevity):
+To import the Cluster you need to edit the `curl` command you previously copied and saved. At the end of the command, after `kubectl apply` add `--kubeconfig one-kubeconfig` before the final `-f -`. For example (the URL has been truncated for brevity):
 
 ```default
 curl --insecure -sfL https://.../-94vbm.yaml | kubectl apply --kubeconfig one-kubeconfig -f -
 ```
 
-Executing this command will import the cluster into Rancher. You should see something similar to the following output in the kubectl console:
+Executing this command will import the Cluster into Rancher. You should see something similar to the following output in the kubectl console:
 
 ```
 clusterrole.rbac.authorization.k8s.io/proxy-clusterrole-kubeapiserver created
@@ -335,17 +335,17 @@ deployment.apps/cattle-cluster-agent created
 service/cattle-cluster-agent created
 ```
 
-Importing the cluster may take several minutes.
+Importing the Cluster may take several minutes.
 
-Once the cluster has been imported, it becomes fully accessible from the Rancher UI, where it is displayed alongside the K3s cluster.
+Once the Cluster has been imported, it becomes fully accessible from the Rancher UI, where it is displayed alongside the K3s Cluster.
 
 {{< image path="/images/rancher_2_clusters_listed.png" alt="Rancher cluster list" align="center" width="90%" mb="20px" >}}
 
-You can now explore and use the cluster -- for instance installing Helm charts, executing `kubectl` commands, and even upgrading the Kubernetes version of the cluster. In the next sections we will perform a few example operations.
+You can now explore and use the Cluster -- for instance installing Helm charts, executing `kubectl` commands, and even upgrading the Kubernetes version of the Cluster. In the next sections we will perform a few example operations.
 
 ## Operating the Cluster
 
-This section provides a brief overview of performing day-to-day operations on the workload cluster through the Rancher UI. Here we will:
+This section provides a brief overview of performing day-to-day operations on the workload Cluster through the Rancher UI. Here we will:
 
 - Install Longhorn
 - Create a Persistent Volume Claim (PVC) on Longhorn
@@ -354,11 +354,11 @@ This section provides a brief overview of performing day-to-day operations on th
 
 ### Installing Longhorn
 
-In the `capone4` cluster, select **Cluster Management**, then the `capone4` cluster:
+In the `capone4` Cluster, select **Cluster Management**, then the `capone4` Cluster:
 
 {{< image path="/images/rancher_goto_wkload_cluster.png" alt="Rancher go to workload cluster" align="center" width="40%" mb="20px" >}}
 
-In the left-hand nav pane for the cluster, go to **Apps** -> **Charts**. In the **Filter charts results** input field, type `longhorn`.
+In the left-hand nav pane for the Cluster, go to **Apps** -> **Charts**. In the **Filter charts results** input field, type `longhorn`.
 
 {{< image path="/images/rancher_install_longhorn.png" alt="Rancher install Longhorn" align="center" width="90%" mb="20px" >}}
 
@@ -376,7 +376,7 @@ The Rancher UI will direct you to the **Installed Apps** screen. Longhorn will a
 
 In this step we will create the Persistent Volume Claim that will be used by our Nginx deployment.
 
-To create a PVC, in the left-hand nav pane for the cluster select **Storage** -> **PersistentVolumeClaims**.
+To create a PVC, in the left-hand nav pane for the Cluster select **Storage** -> **PersistentVolumeClaims**.
 
 {{< image path="/images/quickstart/rancher-create-pvc.png" alt="Rancher Longhorn create PVC" align="center" width="90%" mb="20px" >}}
 
@@ -393,7 +393,7 @@ Fill in the required parameters for the PVC:
 
 Click **Create**.
 
-The PVC should now be listed in the **Storage** -> **PersistentVolumeClaims** tab for the cluster, shown below.
+The PVC should now be listed in the **Storage** -> **PersistentVolumeClaims** tab for the Cluster, shown below.
 
 {{< image path="/images/rancher_pvc_created.png" alt="Rancher Longhorn PVC created" align="center" width="90%" mb="20px" >}}
 
@@ -401,7 +401,7 @@ The PVC should now be listed in the **Storage** -> **PersistentVolumeClaims** ta
 
 We will create the Nginx deployment by importing the deployment's YAML definition, to illustrate Rancher's YAML import feature.
 
-Go to the **Cluster Dashboard** (click the icon for the cluster on the left, then in the cluster nav pane click **Cluster**). Then, in the top bar click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png):
+Go to the **Cluster Dashboard** (click the icon for the Cluster on the left, then in the Cluster nav pane click **Cluster**). Then, in the top bar click the **Import YAML** icon ![Import YAML](/images/icons/rancher/import_yaml.png):
 
 {{< image path="/images/rancher_import_yaml.png" alt="Rancher import YAML" align="center" width="90%" mb="20px" >}}
 
@@ -443,7 +443,7 @@ Paste the definition into the input box, then click **Import**. Rancher will cre
 
 {{< image path="/images/rancher_yaml_imported.png" alt="Rancher import YAML" align="center" width="90%" mb="20px" >}}
 
-To see the Nginx deployment, in the menu for the cluster select **Workloads** > **Deployments**, and in the `default` namespace look for `nginx`.
+To see the Nginx deployment, in the menu for the Cluster select **Workloads** > **Deployments**, and in the `default` namespace look for `nginx`.
 
 {{< image path="/images/rancher_nginx_deployment.png" alt="Rancher NGINX" align="center" width="90%" mb="20px" >}}
 
@@ -473,9 +473,9 @@ spec:
   type: NodePort
 ```
 
-This will expose port 80 of the pod running the `nginx` service on port 30080 of the master node in the `capone4` cluster.
+This will expose port 80 of the pod running the `nginx` service on port 30080 of the master node in the `capone4` Cluster.
 
-After clicking **Import**, you should see `nginx-service` in the cluster's **Services** tab:
+After clicking **Import**, you should see `nginx-service` in the Cluster's **Services** tab:
 
 {{< image path="/images/quickstart/rancher-nginx-service.png" alt="Rancher NGINX" align="center" width="90%" mb="20px" >}}
 
@@ -491,29 +491,29 @@ Now your Nginx deployment should be visible on the external IP of the node -- wh
 Before creating a replica, ensure you have enough resources allocated to the CAPI deployment, and on the machine running the Front-end.
 {{< /alert >}}
 
-To add a Worker Node to the cluster, use CAPI to create a replica of the cluster.
+To add a Worker Node to the Cluster, use CAPI to create a replica of the Cluster.
 
-In Rancher, go to **Cluster Management**, then in the left-hand nav pane **CAPI** -> **Machine Deployments**. Rancher should display the current deployment of the `capone4` cluster. Clicking the deployment name shows the YAML file for the deployment. To add a replica, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) at top right, then select **Edit YAML**. Find the string `replicas: 1` and change the number to the desired number of replicas.
+In Rancher, go to **Cluster Management**, then in the left-hand nav pane **CAPI** -> **Machine Deployments**. Rancher should display the current deployment of the `capone4` Cluster. Clicking the deployment name shows the YAML file for the deployment. To add a replica, click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) at top right, then select **Edit YAML**. Find the string `replicas: 1` and change the number to the desired number of replicas.
 
 {{< image path="/images/rancher_create_replica.png" alt="Rancher create replica" align="center" width="90%" mb="20px" >}}
 
 ### Upgrading the Workload Cluster
 
-To upgrade the cluster from within Rancher, select **Cluster Management** at bottom left, then **Clusters** on the left-hand pane. Click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) for the cluster, then select **Edit Config** from the drop-down.
+To upgrade the Cluster from within Rancher, select **Cluster Management** at bottom left, then **Clusters** on the left-hand pane. Click the three-dot menu ![icon](/images/icons/rancher/3_dots_menu.png) for the Cluster, then select **Edit Config** from the drop-down.
 
 {{< image path="/images/rancher_edit_config.png" alt="Rancher edit config" align="center" width="90%" mb="20px" >}}
 
-Rancher should display the configuration screen for the cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**. 
+Rancher should display the configuration screen for the Cluster. In the **Basics** section, select the desired version for upgrading, then press **Save**. 
 
 {{< image path="/images/rancher_cluster_conf_screen.png" alt="Rancher cluster conf" align="center" width="90%" mb="20px" >}}
 
-Rancher should display the **Clusters** screen, where the cluster should display status `Upgrading`. The upgrade can take several minutes. To see the upgrade process, click the **Explore** button to the right of the cluster -- this takes you to the Cluster Dashboard where upgrade messages are displayed.
+Rancher should display the **Clusters** screen, where the Cluster should display status `Upgrading`. The upgrade can take several minutes. To see the upgrade process, click the **Explore** button to the right of the Cluster -- this takes you to the Cluster Dashboard where upgrade messages are displayed.
 
-When the upgrade is finished, the **Clusters** screen should display the cluster with the new version.
+When the upgrade is finished, the **Clusters** screen should display the Cluster with the new version.
 
 {{< image path="/images/rancher_cluster_upgraded.png" alt="Rancher cluster upgraded" align="center" width="90%" mb="20px" >}}
 
-Congratulations! You have successfully deployed a K3s cluster with the Rancher management platform as well as a production-grade workload cluster where you've created, exposed and tested a deployment -- all with minimal configuration and using graphical interfaces.
+Congratulations! You have successfully deployed a K3s Cluster with the Rancher management platform as well as a production-grade workload Cluster where you've created, exposed and tested a deployment -- all with minimal configuration and using graphical interfaces.
 
 ## Next Steps
 

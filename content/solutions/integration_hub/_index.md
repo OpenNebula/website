@@ -1,8 +1,6 @@
 ---
 title: "Integration Hub"
-description: 
+description: "Details about third-party components supported by OpenNebula."
 weight: 2
 ---
-
-Details about third-party components supported by OpenNebula
 

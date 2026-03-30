@@ -2,7 +2,7 @@
 title: "Virtual Machines Operation"
 linkTitle: "Workload Operation"
 date: "2025-02-17"
-description: "Complete information for creating and managing Virtual Machines. These guides include VM definitions, configurations for the supported networking architectures, creating VM backups, operating system parameters, and services comprising coordinated multiple Virtual Machines"
+description: "Complete information for creating and managing Virtual Machines. These guides include VM definitions, configurations for the supported networking architectures, creating VM backups, operating system parameters, and services comprising coordinated multiple Virtual Machines."
 categories:
 pageintoc: "80"
 tags:
