@@ -24,6 +24,10 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - Guacamole RDP as is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
 
+- The following new features have not been integrated into Sunstone yet, but are planned for a future release:
+  - New [monitor message `EXEC_VM`](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md) to retrieve the result of commands executed inside a Virtual Machine.
+  - [VirtioFS](../../../product/cluster_configuration/storage_system/virtiofs_ds.md) datastores enable Virtual Machines to directly access host filesystems, providing fast, low-latency shared file access. This simplifies data sharing across VMs while improving performance for data-intensive workloads.
+
 ## Migration
 
 - When upgrading to 7.2 the `onedb` migration might fail if the `/etc/one/sunstone-views.yaml` file contains a single, unclosed value under the **labels_groups** key, example:
