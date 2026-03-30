@@ -1,7 +1,7 @@
 ---
 title: "Providers"
 date: "2025-02-17"
-description: "Create providers on-premises or in any external cloud provider"
+description: "Create OpenNebula Providers for on-premises hardware or external cloud service providers."
 categories:
 pageintoc: "203"
 tags:

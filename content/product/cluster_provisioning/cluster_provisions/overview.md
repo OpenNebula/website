@@ -20,13 +20,11 @@ Edge Clusters are based on open-source storage and networking technologies. They
 
 ## Basic Outline
 
-These guides describe how to automatically provision Edge Cluster instances on different Providers:
+The following guides describe how to automatically provision Edge Cluster instances:
 
 - [On-premises Edge Cluster with SSH]({{% relref "onprem_ssh_cluster" %}})
 - [On-premises Edge Cluster with NFS]({{% relref "onprem_nfs_cluster" %}})
-- [Equinix Edge Clusters]({{% relref "equinix_cluster#equinix-cluster" %}})
-- [Amazon AWS Edge Clusters]({{% relref "aws_cluster#aws-cluster" %}})
-- [Scaleway Edge Cluster]({{% relref "scaleway_cluster" %}})
+- [Cloud Clusters]({{% relref "cloud_provider_cluster" %}})
 
 ## Hypervisor Compatibility
 

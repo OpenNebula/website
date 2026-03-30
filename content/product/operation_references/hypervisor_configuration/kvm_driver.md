@@ -242,10 +242,11 @@ for Virtual Machines.
 The allowed values are:
 
 - `BIOS`: use Basic Input/Output System (BIOS).
-- `<UEFI_PATH>`: one the valid paths to a Unified Extensible Firmware Interface
+- `<UEFI_PATH>`: one of the valid paths to a Unified Extensible Firmware Interface
   (UEFI) blob defined in `OVMF_UEFIS` (See [Driver Defaults]({{% relref "#kvmg-default-attributes" %}})).
+   Review a setting of `OVMF_NVRAM` in `/var/lib/one/remotes/etc/vmm/kvm/kvmrc` config file
 
-The `OS/FIRMWARE_FORMAT` attribute can be used to define the format of the UEFI NVRAM image. The NVRAM file will be automatically converted to the specified format if the source file differs. The allowed values are:
+The `OS/FIRMWARE_FORMAT` attribute can be used to define the format of the UEFI NVRAM image. The `FIRMWARE_FORMAT` is valid only in case the `FIRMWARE` contains custom UEFI path. The NVRAM file will be automatically converted to the specified format if the source file differs. The allowed values are as below:
 
 - `qcow2`: store the `UEFI NVRAM` as a `qcow2` image (requires `libvirt >= 10.10`).
 - `raw`: store the `UEFI NVRAM` as a `raw` image (default value).

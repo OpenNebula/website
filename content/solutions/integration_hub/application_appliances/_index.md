@@ -1,5 +1,5 @@
 ---
 title: "Application Appliances"
-description: "TBC"
+description: "Still under development."
 weight: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Hosted Cloud Providers"
-description: "Guidance for cloud service providers offering OpenNebula-based hosted clouds, with validated architectures and supported business models"
+description: "Guidance for cloud service providers offering OpenNebula-based hosted clouds, with validated architectures and supported business models."
 weight: 3
 toc_hide: true
 headless: true
