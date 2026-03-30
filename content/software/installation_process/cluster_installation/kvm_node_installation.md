@@ -83,6 +83,16 @@ Execute the following commands to install the OpenNebula KVM Node package and re
 
 For further configuration check the specific [guide]({{% relref "kvm_driver#kvmg" %}}).
 
+### Installing on SLES/openSUSE
+
+Execute the following command to install the OpenNebula KVM Node package:
+
+```default
+# zypper install opennebula-node-kvm
+```
+
+For further configuration check the specific [guide]({{% relref "kvm_driver#kvmg" %}}).
+
 <a id="kvm-os-security"></a>
 
 ## Step 3. Host OS Security Configuration (Optional)

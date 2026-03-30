@@ -47,6 +47,12 @@ Note that you will be able to use any existing installation of both systems afte
 # apt -y install opennebula-prometheus opennebula-prometheus-kvm
 ```
 
+**SLES/openSUSE**
+
+```default
+# zypper install opennebula-prometheus opennebula-prometheus-kvm
+```
+
 ## Step 3. Install Hosts Packages [Hosts]
 
 In your Hosts you need to install the Prometheus-KVM, this package includes:
@@ -69,6 +75,12 @@ Note that you will be able to use any existing installation of the node exporter
 
 ```default
 # apt -y install opennebula-prometheus-kvm
+```
+
+**SLES/openSUSE**
+
+```default
+# zypper install opennebula-prometheus-kvm
 ```
 
 ## Step 4. Configure Prometheus [Front-end]
