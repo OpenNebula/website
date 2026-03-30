@@ -25,9 +25,12 @@ This is the list of the individual platform components that have been through th
 | Red Hat Enterprise Linux | 9, 10                                      | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 | AlmaLinux                | 9, 10                                      | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
-| Debian                   | 12, 13                                     | [Front-end Installation]({{% relref "front_end_installation" %}})<br/>Not certified to manage VMware infrastructures |
 | SUSE Linux Enterprise    | 15                                         | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
 | openSUSE                 | 16                                         | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
+| Debian                   | 11, 12, 13                                     | [Front-end Installation]({{% relref "front_end_installation" %}})<br/>Not certified to manage VMware infrastructures |
+| SUSE Linux Enterprise    | 15                                          | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
+| openSUSE                 | 16                                          | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
+>>>>>>> 0ea80533 (F OpenNebula/one#7450: Add SUSE support, known issues)
 | MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 
