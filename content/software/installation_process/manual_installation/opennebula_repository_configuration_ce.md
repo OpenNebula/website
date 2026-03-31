@@ -106,8 +106,6 @@ apt-get update
 
 ### SUSE
 
-During `zypper refresh` you will be prompted to accept the OpenNebula repository signing key. Verify the fingerprint matches `0B2D 385C 7C93 04B1 1A03 67B9 05A0 5927 906D C27C` before accepting.
-
 #### SUSE Linux Enterprise Server 15 SP7
 
 Execute the following commands as user `root`:
@@ -119,7 +117,18 @@ SUSEConnect -p PackageHub/15.7/$arch
 SUSEConnect -p sle-module-public-cloud/15.7/$arch
 SUSEConnect -p sle-module-desktop-applications/15.7/$arch
 
-zypper ar -f https://downloads.opennebula.io/repo/{{< release >}}/SLES/15/$arch opennebula
+rpm --import https://downloads.opennebula.io/repo/repo2.key
+
+cat << "EOT" > /etc/zypp/repos.d/opennebula.repo
+[opennebula]
+name=OpenNebula Community Edition
+enabled=1
+autorefresh=1
+baseurl=https://downloads.opennebula.io/repo/{{< release >}}/SLES/15/$basearch
+gpgkey=https://downloads.opennebula.io/repo/repo2.key
+gpgcheck=1
+repo_gpgcheck=1
+EOT
 
 zypper refresh
 ```
@@ -129,9 +138,19 @@ zypper refresh
 openSUSE Leap 16.0 requires the OpenNebula repository and the openSUSE Science repository for SciPy. Execute the following as user `root`:
 
 ```shell
-arch=$(uname -m)
+rpm --import https://downloads.opennebula.io/repo/repo2.key
 
-zypper ar -f https://downloads.opennebula.io/repo/{{< release >}}/openSUSE/16/$arch opennebula
+cat << "EOT" > /etc/zypp/repos.d/opennebula.repo
+[opennebula]
+name=OpenNebula Community Edition
+enabled=1
+autorefresh=1
+baseurl=https://downloads.opennebula.io/repo/{{< release >}}/openSUSE/16/$basearch
+gpgkey=https://downloads.opennebula.io/repo/repo2.key
+gpgcheck=1
+repo_gpgcheck=1
+EOT
+
 zypper ar -f https://download.opensuse.org/repositories/science/openSUSE_Leap_16.0/ science
 zypper refresh
 ```
