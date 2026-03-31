@@ -3,6 +3,7 @@ title: Overview
 weight: 1
 show_card: false
 description: "Overview of AI factory deployment and validation."
+tags: ['AI']
 ---
 
 <a id="overview"></a>

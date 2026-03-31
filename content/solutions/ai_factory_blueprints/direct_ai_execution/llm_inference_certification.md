@@ -5,7 +5,7 @@ date: "2025-10-28"
 description:
 categories:
 pageintoc: "68"
-tags:
+tags: ['AI','vLLM']
 weight: 4
 ---
 

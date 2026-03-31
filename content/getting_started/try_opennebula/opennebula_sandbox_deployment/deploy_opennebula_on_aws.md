@@ -192,9 +192,26 @@ sudo -i
 
 Download the miniONE installation script to your current directory:
 
+{{% if-version is="7.0" %}}
 ```bash
 wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
 ```
+{{% /if-version %}}
+{{% if-version is="7.1" %}}
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```
+{{% /if-version %}}
+{{% if-version is="7.2" %}}
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/download/v7.2.0/minione'
+```
+{{% /if-version %}}
+{{% if-version is="7.3" %}}
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```
+{{% /if-version %}}
 
 Now make the `minione` script executable:
 

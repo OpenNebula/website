@@ -2,6 +2,7 @@
 title: "Fine-Tuning AI Models on NVIDIA Slurm"
 linkTitle: "Fine-Tuning on Slurm"
 weight: 8
+tags: ['AI']
 ---
 
 <a id="finetuning_on_slurm_worker"></a>
