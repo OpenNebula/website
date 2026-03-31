@@ -2,6 +2,7 @@
 title: Deployment of NVIDIA Dynamo
 linkTitle: Inferencing with NVIDIA Dynamo
 weight: 6
+tags: ['AI','Kubernetes','NVIDIA']
 ---
 
 <a id="nvidia_dynamo"></a>

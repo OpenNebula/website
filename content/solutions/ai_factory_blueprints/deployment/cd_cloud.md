@@ -3,6 +3,7 @@ title: "On-cloud Deployment on Scaleway"
 linkTitle: "Cloud Deployment"
 date: "2025-10-21"
 weight: 3
+tags: ['AI']
 ---
 
 <a id="cd_cloud"></a>
