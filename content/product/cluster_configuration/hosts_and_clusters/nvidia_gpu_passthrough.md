@@ -4,7 +4,7 @@ date: "2025-10-16"
 description:
 categories:
 pageintoc: "58"
-tags:
+tags: ['AI','NVIDIA']
 weight: "7"
 ---
 
