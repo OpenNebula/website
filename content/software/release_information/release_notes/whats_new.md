@@ -66,7 +66,6 @@ Thank you to our incredible community and partners for your continued support in
 - DPDK `dpdkvhostuserclient` NICs can now be [Hot-plugged]({{% relref "/product/virtual_machines_operation/virtual_machines/vm_instances.md#nic-hot-plugging" %}}).
 - `vhost` unix sockets are now created in a dedicated directory - `/var/lib/one/vhost-sockets`.
 
-
 ## LXC
 - NIC Hot-plugging, recontextualization and NIC PCI passthrough are now available  as [driver features]({{% relref "/product/operation_references/hypervisor_configuration/lxc_driver.md" %}}).
 - [LXC Disk Snapshots]({{% relref "/product/operation_references/hypervisor_configuration/lxc_driver.md" %}}) are now available for the following storage backends: LVM, LVM thin, Ceph RBD, and raw file images.
@@ -79,9 +78,10 @@ Thank you to our incredible community and partners for your continued support in
 - Support for the latest operating systems, including AlmaLinux 10, SUSE Linux Enterprise 16, OpenSUSE, RHEL 10, and Debian 13.
 - Sunstone no longer relies on the system-provided Node.js packages, which often varied significantly across supported platforms. OpenNebula now standardizes on Node.js 20 from NodeSource. The required `nodejs` RPM/DEB packages are shipped directly in the OpenNebula repository, eliminating the need for users to configure external NodeSource repositories.
 
+## OpenNebula Apps 7.2.0
+The OpenNebula 7.2 release is accompanied by a new version of OneApps. This companion release introduces refreshed base operating systems, improved contextualization packages, and updates across all service appliances to the latest versions. Some of the new features introduced in OpenNebula 7.2 require this OneApps release to ensure full integration. See the [OneApps 7.2.0 release notes for more details](https://github.com/OpenNebula/one-apps/releases/tag/v7.2.0).
 
 ## Features Backported to 7.0.x
-
 Additionally, the following functionalities are present that were not included in OpenNebula 7.0.0, although they debuted in subsequent maintenance releases of the 7.0.x series:
 
 - [Add multi-tier caching system for local drivers]({{% relref "product/cluster_configuration/storage_system/local_ds#distributed-cache" %}}).
