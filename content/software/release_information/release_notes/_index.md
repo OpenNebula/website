@@ -1,5 +1,5 @@
 ---
-title: "Release Notes 7.2"
+title: "Release Notes 7.4"
 date: "2025-10-06"
 description: "Release Notes, new features, compatibility guides, supported platforms, and other information."
 categories:
@@ -10,7 +10,7 @@ weight: "1"
 
 <a id="rn"></a>
 
-<!--# Release Notes 7.2 -->
+<!--# Release Notes 7.4 -->
 
 
 

@@ -10,7 +10,7 @@ weight: "3"
 
 <a id="uspng"></a>
 
-<!--# Platform Notes 7.2 -->
+<!--# Platform Notes 7.4 -->
 
 This page will show you the specific considerations when using an OpenNebula cloud, according to the different supported platforms.
 
