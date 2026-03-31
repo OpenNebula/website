@@ -2,6 +2,7 @@
 title: Deployment of AI-ready Kubernetes
 linkTitle: AI-ready Kubernetes
 weight: 5
+tags: ['AI', 'Kubernetes']
 ---
 
 <a id="ai_ready_k8s"></a>

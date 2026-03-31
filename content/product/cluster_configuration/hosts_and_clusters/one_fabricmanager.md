@@ -2,6 +2,7 @@
 title: OpenNebula NVIDIA Fabric Manager
 linkTitle: NVIDIA Fabric Manager
 weight: 8
+tags: ['AI','NVIDIA']
 ---
 
 <a id="one_fabricmanager"></a>

@@ -3,6 +3,7 @@ title: "On-premises AI Factory Deployment"
 linkTitle: "On-premises Deployment"
 date: "2025-10-21"
 weight: 2
+tags: ['AI']
 ---
 
 <a id="cd_on-premises"></a>

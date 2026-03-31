@@ -2,6 +2,7 @@
 title: Deployment of the NVIDIA KAI Scheduler
 linkTitle: Scheduling with NVIDIA KAI
 weight: 7
+tags: ['AI', 'Kubernetes','NVIDIA']
 ---
 
 <a id="nvidia_kai_scheduler"></a>

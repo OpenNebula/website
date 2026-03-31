@@ -87,6 +87,16 @@ wget 'https://github.com/OpenNebula/minione/releases/download/v7.0.1/minione'
 wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
 ```
 {{% /if-version %}}
+{{% if-version is="7.2" %}}
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/download/v7.2.0/minione'
+```
+{{% /if-version %}}
+{{% if-version is="7.3" %}}
+```bash
+wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
+```
+{{% /if-version %}}
 
 Make the `minione` script executable:
 
