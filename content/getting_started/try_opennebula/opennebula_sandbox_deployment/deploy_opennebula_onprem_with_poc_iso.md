@@ -36,6 +36,7 @@ The OpenNebula ISO is based on AlmaLinux 9, and thus it shares the same requirem
 Now it is time to download the OpenNebula ISO (based on Alma Linux). Currently, the following versions are available:
 
 - [OpenNebula 7.0.1 Community Edition](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/opennebula-7.0.1-CE.iso) \([SHA256 checksum](https://one-poc.s3.eu-central-1.amazonaws.com/7.0.1/CE/opennebula-7.0.1-CE.iso.sha)\)
+- [OpenNebula 7.2 Community Edition](https://one-poc.s3.eu-central-1.amazonaws.com/7.2/CE/opennebula-7.2-CE.iso) \([SHA256 checksum](https://one-poc.s3.eu-central-1.amazonaws.com/7.2/CE/opennebula-7.2-CE.iso.sha)\)
 
 Once the image is downloaded, there are two ways to go:
 
