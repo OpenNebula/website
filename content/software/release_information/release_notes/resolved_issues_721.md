@@ -15,5 +15,6 @@ The following new features have been backported to 7.2.1:
 
 The following issues have been solved in 7.2.1:
 
-* Fix a onehem-server crash caused by a race condition between hook delete and update API calls [#4138](https://github.com/OpenNebula/one-ee/pull/4138).
+* Fix a `onehem-server` crash caused by a race condition between hook delete and update API calls [#7561](https://github.com/OpenNebula/one-ee/pull/7561).
+* Fix a  empty `--resource` for `onegroup create` CLI command [#7458](https://github.com/OpenNebula/one/issues/7458).
 
