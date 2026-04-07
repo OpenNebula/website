@@ -21,7 +21,7 @@ In this tutorial, we’ll use [OneDeploy](https://github.com/OpenNebula/one-depl
 
 This sample architecture uses a basic network configuration, a flat (bridged) network, where each VM’s IP is part of the same network as the Hypervisors.
 
-{{< image path="/images/one_deploy_arch_local.svg" alt="OneDeploy" align="center" width="50%" mb="20px" border="false" >}}
+{{< image path="/images/one_deploy_arch_local.svg" alt="OneDeploy" align="center" width="80%" mb="20px" border="false" shadow="false">}}
 
 Throughout the tutorial you will use three server machines. Replace these references to your own IP addresses:
 
@@ -33,7 +33,7 @@ We’ll follow these high-level steps:
 
 > 1. Set up the Ansible control node (for example, install Ansible if necessary).
 > 2. Download the Ansible playbooks.
-> 3. Modify the playbooks to your needs, e.g., set the OpenNebula version, define the virtual network for the Hosts, storage options, etc.
+> 3. Modify the playbooks to your needs, e.g., set the OpenNebula version, define the Virtual Network for the Hosts, storage options, etc.
 > 4. Run the playbooks.
 > 5. Verify the installation.
 
@@ -58,19 +58,19 @@ First, in the Front-end we’ll install two packages for Python:
 
 To install the packages, run:
 
-```default
+```shell
 sudo apt install python3-pip pipx
 ```
 
 Once the packages are installed, clone the `one-deploy` repository:
 
-```default
+```shell
 git clone https://github.com/OpenNebula/one-deploy.git
 ```
 
 Install hatch:
 
-```default
+```shell
 pipx install hatch
 pipx ensurepath
 source ~/.bashrc
@@ -78,13 +78,13 @@ source ~/.bashrc
 
 Go to the `one-deploy` directory:
 
-```default
+```shell
 cd one-deploy
 ```
 
 Install the necessary components for the installation by running:
 
-```default
+```shell
 make requirements
 ```
 
@@ -98,7 +98,7 @@ hatch env run -e default -- ansible-galaxy collection install --requirements-fil
 
 To list the available environments, run:
 
-```default
+```shell
 hatch env show
 ```
 
@@ -126,7 +126,7 @@ front-end:~/one-deploy$ hatch env show
 
 Now you can switch to the default virtual environment:
 
-```default
+```shell
 hatch shell
 ```
 
@@ -142,7 +142,7 @@ source "/home/frontend/.local/share/hatch/env/virtual/one-deploy/RdxhOVxs/one-de
 
 Create a directory, which for this tutorial we’ll call `my-one`, and go to this directory:
 
-```default
+```shell
 mkdir my-one
 cd my-one
 ```
@@ -150,11 +150,11 @@ cd my-one
 In this directory we’ll create and edit two files:
 
 > * `example.yml` - Contains the definitions for the OpenNebula installation
-> * `ancible.cfg` - Ansible configuration file
+> * `ansible.cfg` - Ansible configuration file
 
 Below are sample contents for `example.yml`. You will probably need to modify parameters for the OpenNebula installation, such as the IP addresses for the Front-end and virtualization nodes.
 
-```default
+```yaml
 ---
 all:
   vars:
@@ -195,14 +195,14 @@ The table below lists some of the parameters, please update them to your setup:
 | `one_version`  | The OpenNebula version to install.                                                                                    |
 | `one_pass`     | Password for the OpenNebula user `oneadmin`.                                                                          |
 | `ensure_hosts` | Boolean to populate `/etc/hosts` on all nodes using `ansible_host` IPs and inventory hostnames (`f1`, `n1` and `n2`). |
-| `vn`           | Parameters for the OpenNebula virtual network (`admin_net`) that will be created for the VMs.                         |
-| `PHYDEV`       | The physical interface on the servers that will attach to the virtual network.                                        |
+| `vn`           | Parameters for the OpenNebula Virtual Network (`admin_net`) that will be created for the VMs.                         |
+| `PHYDEV`       | The physical interface on the servers that will attach to the Virtual Network.                                        |
 | `AR`           | Address range (first `IP` and `SIZE`) available to assign to the VMs.                                                 |
 | `GATEWAY`      | Default gateway for the network.                                                                                      |
 | `DNS`          | DNS server of the network.                                                                                            |
 | `f1,n1,n2`     | `ansible_host` IP address for the Front-end (`f1`) and Hypervisors (`n1` and `n2`).                                   |
 
-In this example, the Front-end will be installed on the server with IP 172.20.0.2, and the two Hypervisors on 0.3 and 0.4, respectively. The virtual network will be bridged through the `eth0` interface of the hypervisors, and VMs will get IP addresses within the range 172.20.0.100 - 172.20.0.147, using 172.20.0.1 as the default gateway.
+In this example, the Front-end will be installed on the server with IP 172.20.0.2, and the two Hypervisors on 0.3 and 0.4, respectively. The Virtual Network will be bridged through the `eth0` interface of the hypervisors, and VMs will get IP addresses within the range 172.20.0.100 - 172.20.0.147, using 172.20.0.1 as the default gateway.
 
 Below are the contents of the `ansible.cfg` file:
 
@@ -235,7 +235,7 @@ After configuring parameters for your cloud, it’s a good idea to ensure that t
 
 To verify connectivity, run this command:
 
-```default
+```shell
 ansible -i example.yml all -m ping -b
 ```
 
@@ -284,7 +284,7 @@ First, ensure you are in the Hatch environment by verifying that your terminal p
 
 To run the playbooks, in the `my-one` directory, run this command:
 
-```default
+```shell
 ansible-playbook -v opennebula.deploy.main
 ```
 
@@ -340,7 +340,7 @@ After the command completes, your new OpenNebula cloud should be up and running.
 
 On the Front-end, you can check that the OpenNebula services are running:
 
-```default
+```shell
 systemctl status opennebula.service
 ```
 
@@ -374,13 +374,13 @@ systemctl status opennebula.service
 
 Next we’ll verify that the cloud resources are up. First, become the `oneadmin` user by running:
 
-```default
+```shell
 sudo -i -u oneadmin
 ```
 
 As user `oneadmin`, to verify the Hosts run:
 
-```default
+```shell
 onehost list
 ```
 
@@ -397,7 +397,7 @@ The two servers that we specified in the `example.yml` file are running as OpenN
 
 To check the datastores, run:
 
-```default
+```shell
 onedatastore list
 ```
 
@@ -413,9 +413,9 @@ oneadmin@front-end:~$ onedatastore list
 
 Again, verify that the last column, `STAT`, displays `on` and not `err`.
 
-Finally, verify the virtual network created as part of the deployment (in this case `admin_net`) by running:
+Finally, verify the Virtual Network created as part of the deployment (in this case `admin_net`) by running:
 
-```default
+```shell
 onevnet list
 ```
 
@@ -431,7 +431,11 @@ The `STATE` column should display `rdy`.
 
 Next we can connect to the Sunstone UI on the Front-end. On any machine with connectivity to the Front-end node, point your browser to `<Front-end IP>:2616`, in this case `http://172.20.0.2:2616`. You should be greeted with the Sunstone login screen:
 
-![><](/images/sunstone_login_dark.png)
+{{< image
+  pathDark="/images/quickstart/dark/sunstone_login_page.png"
+  path="/images/quickstart/light/sunstone_login_page.png"
+  alt="Sunstone login" align="center" width="50%" mb="20px"
+>}}
 <br/>
 
 You can log in as user `oneadmin`, with the password provided as the `one_pass` parameter in the `example.yml` file (in this example, `opennebulapass`).
@@ -442,7 +446,7 @@ At this point, we have verified that the complete OpenNebula cloud is up and run
 
 To create a test VM, first we’ll download an adequate image, in this case an Alpine Linux from the OpenNebula Marketplace. Run this command:
 
-```default
+```shell
 onemarketapp export -d default 'Alpine Linux 3.17' alpine.
 ```
 
@@ -458,7 +462,7 @@ VMTEMPLATE
 
 Verify that the image is ready to be instantiated, by running:
 
-```default
+```shell
 oneimage list
 ```
 
@@ -472,7 +476,7 @@ Ensure that the `STAT` column displays `rdy`.
 
 To create a test VM based on the Alpine image and attach it to the `admin_net` network, run:
 
-```default
+```shell
 onetemplate instantiate --nic admin_net alpine
 ```
 
@@ -485,7 +489,7 @@ VM ID: 0
 
 Wait a few moments for the VM to reach its running state. To verify that it is running, run:
 
-```default
+```shell
 onevm list
 ```
 
@@ -501,7 +505,7 @@ Finally, verify that the VM is reachable on the network. Being the first VM that
 
 To test connectivity with the VM, you can run:
 
-```default
+```shell
 ping -c 3 172.20.0.100
 ```
 
@@ -521,7 +525,7 @@ The VM is up and running. At this point, you have deployed a complete, fully fun
 
 ## Summary of the Installation
 
-The installation in this tutorial follows the most basic OpenNebula cloud configuration, creating a virtual network on a range of IPs already available on the physical network. Each VM in the cloud connects to this virtual network using the main interface on the Hypervisor node where the VM is running.
+The installation in this tutorial follows the most basic OpenNebula cloud configuration, creating a Virtual Network on a range of IPs already available on the physical network. Each VM in the cloud connects to this Virtual Network using the main interface on the Hypervisor node where the VM is running.
 
 You can also use automated deployment with more advanced network configurations, such as [VXLAN/EVPN](https://github.com/OpenNebula/one-deploy/wiki/arch_evpn) or Virtual IPs (VIPs) for [High-Availability](https://github.com/OpenNebula/one-deploy/wiki/arch_ha). For details on these and other configuration options, please refer to the [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki).
 
