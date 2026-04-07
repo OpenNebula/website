@@ -19,4 +19,5 @@ The following issues have been solved in 7.2.1:
 * Fix a  empty `--resource` for `onegroup create` CLI command [#7458](https://github.com/OpenNebula/one/issues/7458).
 * Fix race condition in `oneflow` server in cancel actions [#7570](https://github.com/OpenNebula/one/issues/7570).
 * Fix marketplace broken redirect link [#7291](https://github.com/OpenNebula/one/issues/7291).
+* Fix S3 marketplace SIGNATURE_VERSION parameter hardcoded to s3 [7437](https://github.com/OpenNebula/one/issues/7437).
 
