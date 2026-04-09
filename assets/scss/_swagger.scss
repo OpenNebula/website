@@ -1,225 +1,601 @@
 // -------------------------------------------------------------
 // Variables
 // -------------------------------------------------------------
+
 $padding-horizontal: 10px !default;
 $gap-size: 0.5em !default;
 $tab-margin-bottom: 8px !default;
 $opblock-tag-margin-bottom: 12px !default;
+$swagger-radius: 8px !default;
 $render-text-size: var(--bs-body-font-size) !default;
 $render-text-color: var(--bs-body-color) !default;
-$render-header-color: var(--bs-body-bg) !default;
-$render-code-color-bg: var(--bs-table-striped-bg) !default;
+$render-muted-color: var(--bs-secondary-color) !default;
+$render-heading-color: var(--bs-emphasis-color) !default;
+$render-surface-color: var(--bs-tertiary-bg) !default;
+$render-surface-alt-color: var(--bs-secondary-bg) !default;
+$render-border-color: var(--bs-border-color) !default;
+$render-link-color: var(--bs-link-color) !default;
+$render-code-color-bg: var(--bs-tertiary-bg) !default;
+$swagger-code-bg-dark: #2b3035 !default;
+
+$swagger-code-prefixes: (".highlight-code", ".microlight") !default;
+$swagger-code-magenta-tokens:
+  ("property", "tag", "boolean", "number", "constant", "symbol") !default;
+$swagger-code-green-tokens:
+  ("attr-name", "selector", "string", "char", "inserted") !default;
+$swagger-code-blue-tokens: ("keyword", "atrule", "attr-value") !default;
+$swagger-code-amber-tokens: ("function", "class-name") !default;
+$swagger-code-muted-tokens: ("comment", "prolog", "doctype", "cdata") !default;
+$swagger-code-neutral-tokens: ("punctuation", "operator") !default;
+
+// -------------------------------------------------------------
+// Helpers
+// -------------------------------------------------------------
+
+@mixin swagger-theme-props(
+  $color: null,
+  $background: null,
+  $border: null,
+  $fill: null,
+  $shadow: null
+) {
+  @if $color != null {
+    color: $color !important;
+  }
+
+  @if $background != null {
+    background-color: $background !important;
+  }
+
+  @if $border != null {
+    border-color: $border !important;
+  }
+
+  @if $fill != null {
+    fill: $fill !important;
+  }
+
+  @if $shadow != null {
+    box-shadow: $shadow !important;
+  }
+}
+
+@mixin swagger-prefixed-token-style(
+  $prefixes,
+  $tokens,
+  $color,
+  $background: null
+) {
+  @each $prefix in $prefixes {
+    @each $token in $tokens {
+      #{$prefix} .#{$token} {
+        color: $color !important;
+
+        @if $background != null {
+          background: $background !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin swagger-token-style($tokens, $color, $background: null) {
+  @each $token in $tokens {
+    .token.#{$token} {
+      color: $color !important;
+
+      @if $background != null {
+        background: $background !important;
+      }
+    }
+  }
+}
+
+// -------------------------------------------------------------
+// Themes
+// -------------------------------------------------------------
+
+// Light theme adjustments
+[data-bs-theme="light"] #docsy_swagger_ui {
+  --swagger-code-bg: #{$swagger-code-bg-dark};
+
+  .swagger-ui {
+    .highlight-code,
+    .microlight,
+    pre[class*="language-"],
+    code[class*="language-"],
+    .renderedMarkdown code,
+    .model-example code {
+      color: #f8f9fa !important;
+    }
+
+    .microlight {
+      border-color: #585858 !important;
+    }
+
+    @include swagger-prefixed-token-style(
+      $swagger-code-prefixes,
+      $swagger-code-magenta-tokens,
+      #f5a3c7
+    );
+    @include swagger-prefixed-token-style(
+      $swagger-code-prefixes,
+      $swagger-code-green-tokens,
+      #7ee787
+    );
+    @include swagger-prefixed-token-style(
+      $swagger-code-prefixes,
+      $swagger-code-blue-tokens,
+      #79c0ff
+    );
+    @include swagger-prefixed-token-style(
+      $swagger-code-prefixes,
+      $swagger-code-amber-tokens,
+      #f2cc60
+    );
+    @include swagger-prefixed-token-style(
+      $swagger-code-prefixes,
+      $swagger-code-muted-tokens,
+      #9da7b3
+    );
+    @include swagger-prefixed-token-style(
+      $swagger-code-prefixes,
+      $swagger-code-neutral-tokens,
+      #d0d7de,
+      transparent
+    );
+
+    @include swagger-token-style($swagger-code-magenta-tokens, #f5a3c7);
+    @include swagger-token-style($swagger-code-green-tokens, #7ee787);
+    @include swagger-token-style($swagger-code-blue-tokens, #79c0ff);
+    @include swagger-token-style($swagger-code-amber-tokens, #f2cc60);
+    @include swagger-token-style($swagger-code-muted-tokens, #9da7b3);
+    @include swagger-token-style(
+      $swagger-code-neutral-tokens,
+      #d0d7de,
+      transparent
+    );
+
+    .model-box {
+      @include swagger-theme-props($background: var(--table-background-color));
+    }
+
+  }
+}
+
+// Dark theme adjustments
+[data-bs-theme="dark"] #docsy_swagger_ui {
+  .swagger-ui {
+    .opblock,
+    .opblock .opblock-summary,
+    .opblock .opblock-body,
+    .responses-inner,
+    .model-box,
+    .scheme-container,
+    .tab li button,
+    input,
+    select,
+    textarea,
+    pre,
+    code,
+    .highlight-code,
+    .microlight {
+      @include swagger-theme-props($shadow: none);
+    }
+
+    .opblock.is-open .opblock-summary,
+    .opblock:hover .opblock-summary,
+    .opblock-section-header,
+    .responses-inner,
+    .model-box {
+      @include swagger-theme-props($background: var(--swagger-surface));
+    }
+
+    .opblock-tag small,
+    .response-col_description__inner,
+    .parameters-col_description,
+    .prop-type,
+    .prop-format,
+    .parameter__deprecated {
+      @include swagger-theme-props($color: var(--swagger-muted));
+    }
+  }
+
+}
+
+// -------------------------------------------------------------
+// Swagger docsy theme adjustments
+// -------------------------------------------------------------
 
 #docsy_swagger_ui {
-  // -------------------------------------------------------------
-  // Layout Adjustments
-  // -------------------------------------------------------------
+  // CSS custom properties
+  --swagger-text: #{$render-text-color};
+  --swagger-muted: #{$render-muted-color};
+  --swagger-heading: #{$render-heading-color};
+  --swagger-surface: #{$render-surface-color};
+  --swagger-surface-alt: #{$render-surface-alt-color};
+  --swagger-border: #{$render-border-color};
+  --swagger-link: #{$render-link-color};
+  --swagger-code-bg: #{$render-code-color-bg};
+  --swagger-radius: #{$swagger-radius};
+  --table-code-border-color: var(--swagger-code-bg);
+  --table-code-background-color: var(--swagger-code-bg);
 
+  // Wrapper spacing
   > div.swagger-ui > div > div.wrapper {
     margin-left: 0 !important;
     padding-left: 0 !important;
   }
 
-  // -------------------------------------------------------------
-  // Theme & Color Customizations
-  // -------------------------------------------------------------
-
-  p,
-  button {
-    color: $render-text-color !important;
-  }
-
-  .opblock-tag span,
-  .opblock-summary-control > div,
-  .opblock-summary-path span {
-    color: $render-text-color !important;
-  }
-
-  .opblock-section-header {
-    background-color: $render-header-color !important;
-
-    h4 {
-      color: $render-text-color !important;
-    }
-  }
-
   .swagger-ui {
+    // Base typography
+    @include swagger-theme-props(
+      $color: var(--swagger-text),
+      $background: transparent
+    );
+    font-size: $render-text-size !important;
+
+    // Headings and semantic labels
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .info .title,
+    .opblock-tag,
+    .opblock-tag small,
+    .opblock-summary-path,
+    .opblock-summary-description,
+    .opblock-section-header h4,
+    .opblock-title_normal,
+    .responses-inner h4,
+    .responses-inner h5,
+    .model-title,
+    .model-title__text,
     .parameter__name,
-    .parameter__type {
-      color: $render-text-color !important;
+    .parameter__type,
+    .response-col_status,
+    .prop-name {
+      @include swagger-theme-props($color: var(--swagger-heading));
     }
-  }
 
-  .opblock-summary-method > span {
-    color: inherit !important;
-  }
-
-  .arrow use,
-  .models-control > svg > use {
-    fill: $render-text-color !important;
-  }
-
-  .model-title__text,
-  .model-title {
-    color: $render-text-color !important;
-  }
-
-  // -------------------------------------------------------------
-  // Hide Unnecessary / Unused Components
-  // -------------------------------------------------------------
-
-  .information-container,
-  .scheme-container,
-  .try-out__btn,
-  .response-controls,
-  .copy-to-clipboard,
-  .model-hint,
-  .execute-wrapper {
-    display: none !important;
-  }
-
-  td.parameters-col_description > select {
-    display: none !important;
-  }
-
-  .opblock-summary-control:focus,
-  .models-control:focus,
-  .model-box-control:focus {
-    outline: none !important;
-  }
-
-  // -------------------------------------------------------------
-  // Response Code & Parameters Column
-  // -------------------------------------------------------------
-
-  .response-col_status,
-  .parameters-col_name {
-    font-size: $render-text-size !important;
-    padding-left: $padding-horizontal !important;
-  }
-
-  .parameters-col_name {
-    align-items: center !important;
-    gap: $gap-size !important;
-    padding-right: $padding-horizontal !important;
-  }
-
-  .opblock-summary-control .arrow {
-    margin-right: 15px !important;
-  }
-
-  .parameters-col_description {
-    > input {
-      display: none !important;
+    // Body copy and descriptive text
+    p,
+    div,
+    td,
+    th,
+    label,
+    small,
+    li,
+    button,
+    .description,
+    .renderedMarkdown,
+    .renderedMarkdown p,
+    .renderedMarkdown li,
+    .renderedMarkdown blockquote,
+    .opblock-tag span,
+    .opblock-summary-control > div,
+    .opblock-summary-path span,
+    .opblock-description-wrapper,
+    .response-col_description,
+    .response-col_description__inner,
+    .response-col_links,
+    .response-col_links a,
+    .responses-table td,
+    .parameters-col_description,
+    .parameters-col_description *,
+    .parameter__deprecated,
+    .model,
+    .model-box,
+    .model-box-control,
+    .model-hint,
+    .prop-type,
+    .prop-format,
+    .servers-title,
+    .computed-url,
+    .base-url,
+    .tab li,
+    .tab li button,
+    .tab li button span,
+    .json-schema-2020-12-accordion,
+    .json-schema-2020-12-expand-deep-button {
+      @include swagger-theme-props($color: var(--swagger-text));
     }
-  }
 
-  // -------------------------------------------------------------
-  // Markdown Paragraph Adjustments
-  // -------------------------------------------------------------
-
-  .parameters-col_description > .renderedMarkdown > p,
-  .response-col_description__inner > .renderedMarkdown > p {
-    font-size: $render-text-size !important;
-    margin-top:    0 !important;
-    margin-bottom: 0 !important;
-  }
-
-  .inner-object > .model {
-    padding-top: 10px !important;
-  }
-
-  // -------------------------------------------------------------
-  // Model Example Tab Spacing
-  // -------------------------------------------------------------
-
-  .model-example {
-    > .tab {
-      margin-bottom: $tab-margin-bottom !important;
+    // Links
+    .opblock-summary-method > span,
+    .opblock-summary-path a,
+    .opblock-summary-path a:visited,
+    a.nostyle,
+    a.nostyle:visited {
+      color: inherit !important;
     }
-  }
 
-  .model .renderedMarkdown p {
-    padding-right: 15px !important;
-  }
-
-  // -------------------------------------------------------------
-  // Table Layouts Adjustments
-  // -------------------------------------------------------------
-
-  table {
-    table-layout: fixed !important;
-    width: 100% !important;
-  }
-
-  .responses-header {
-    td:nth-child(3) {
-      display: none !important;
+    a,
+    a:visited,
+    .link,
+    .link:visited {
+      @include swagger-theme-props($color: var(--swagger-link));
     }
-  }
 
-  tbody {
-    tr.response {
+    // Icons and SVG controls
+    .arrow,
+    .arrow use,
+    .models-control,
+    .models-control > svg,
+    .models-control > svg > use,
+    .model-toggle,
+    .expand-operation svg,
+    .opblock-control-arrow svg {
+      @include swagger-theme-props(
+        $color: var(--swagger-text),
+        $fill: var(--swagger-text)
+      );
+    }
+
+    svg:not(.opblock-summary-method svg) {
+      @include swagger-theme-props($color: var(--swagger-text));
+    }
+
+    // Shared surfaces and form controls
+    input,
+    select,
+    textarea,
+    .highlight-code,
+    .microlight,
+    .model-box,
+    .opblock-section-header,
+    .response-col_description__inner pre,
+    .responses-inner,
+    .tab li button,
+    .servers > label > select {
+      @include swagger-theme-props(
+        $color: var(--swagger-text),
+        $background: var(--swagger-surface),
+        $border: var(--swagger-border)
+      );
+    }
+
+    // Shared borders for cards, tables and panels
+    .tab li,
+    .response-col_links,
+    .opblock-section-header,
+    .responses-inner,
+    .model-box,
+    .parameters-container table,
+    .responses-table,
+    .scheme-container,
+    table thead tr th,
+    table tbody tr td {
+      @include swagger-theme-props($border: var(--swagger-border));
+    }
+
+    // Shared radius and clipping
+    .opblock,
+    .opblock-summary,
+    .parameters-container table,
+    .responses-table,
+    .scheme-container,
+    .model-box-control,
+    .tabitem,
+    .tablinks,
+    .highlight-code,
+    .microlight,
+    .renderedMarkdown pre > code {
+      border-radius: var(--swagger-radius) !important;
+      overflow: hidden !important;
+    }
+
+    // Active states
+    .tab li.active,
+    .tab li button.active,
+    .tab li button[aria-selected="true"] {
+      @include swagger-theme-props(
+        $color: var(--swagger-heading),
+        $background: var(--swagger-surface-alt)
+      );
+    }
+
+    // Required parameter markers
+    .parameter__name.required span,
+    .parameter__name.required:after {
+      color: var(--bs-danger, #dc3545) !important;
+    }
+
+    // Focus cleanup
+    .opblock-summary-control:focus,
+    .models-control:focus,
+    .model-box-control:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    // Column sizing and spacing
+    .parameters-col_name,
+    .response-col_status {
+      font-size: $render-text-size !important;
+      padding-left: $padding-horizontal !important;
+    }
+
+    .parameters-col_name {
+      align-items: center !important;
+      gap: $gap-size !important;
+      padding-right: $padding-horizontal !important;
+      width: 18rem !important;
+      min-width: 18rem !important;
+      white-space: normal !important;
+    }
+
+    .parameters-col_description {
+      width: auto !important;
+      min-width: 0 !important;
+    }
+
+    .response-col_status {
+      width: 6rem !important;
+      min-width: 6rem !important;
+      white-space: nowrap !important;
+    }
+
+    .response-col_description {
+      width: auto !important;
+    }
+
+    .opblock-summary-control .arrow {
+      margin-right: 15px !important;
+    }
+
+    // Markdown content
+    .parameters-col_description > .renderedMarkdown > p,
+    .response-col_description__inner > .renderedMarkdown > p,
+    .description .renderedMarkdown > p,
+    .opblock-tag small .renderedMarkdown > p,
+    .response-col_description__inner .markdown > p {
+      @include swagger-theme-props($color: var(--swagger-text));
+      font-size: $render-text-size !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .renderedMarkdown {
+      // Markdown spacing
+      p:last-child,
+      li:last-child {
+        margin-bottom: 0 !important;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.25rem !important;
+      }
+
+      blockquote {
+        border-left: 3px solid var(--swagger-border) !important;
+        margin-left: 0 !important;
+        padding-left: 1rem !important;
+      }
+
+      // Code blocks inside markdown
+      pre {
+        @include swagger-theme-props($background: transparent);
+      }
+
+      code {
+        font-size: 0.95em !important;
+        font-weight: normal !important;
+        padding: 2px 6px !important;
+      }
+
+      pre > code {
+        display: block !important;
+        font-size: 14px !important;
+        font-weight: normal !important;
+        padding: 12px 16px !important;
+        overflow-x: auto !important;
+        line-height: 1.5;
+      }
+
+      li {
+        font-size: 14px !important;
+        line-height: 1.6;
+        margin-bottom: 0.5em;
+      }
+    }
+
+    // Code surfaces and syntax-highlighted blocks
+    .renderedMarkdown code,
+    .model-example code,
+    .highlight-code,
+    .microlight {
+      @include swagger-theme-props(
+        $color: var(--swagger-text),
+        $background: var(--swagger-code-bg)
+      );
+      font-family: Consolas, Monaco, "Courier New", monospace;
+    }
+
+    // Model examples
+    .model-example {
+      > .tab {
+        margin-bottom: $tab-margin-bottom !important;
+      }
+
+      pre {
+        @include swagger-theme-props($background: transparent);
+      }
+    }
+
+    .model .renderedMarkdown p {
+      padding-right: 15px !important;
+    }
+
+    // Tables and responses
+    table {
+      width: 100% !important;
+      padding: 0px !important;
+    }
+
+    .parameters-container table,
+    .responses-table {
+      table-layout: auto !important;
+    }
+
+    .model-box,
+    .parameters-container th,
+    .parameters-container td,
+    .responses-table th,
+    .responses-table td {
+      vertical-align: top !important;
+    }
+
+    // Hide the unused third response column
+    .responses-header,
+    tbody tr.response {
       td:nth-child(3) {
         display: none !important;
       }
     }
-  }
 
-  // -------------------------------------------------------------
-  // Spacing Between Resource Sections
-  // -------------------------------------------------------------
+    // Operation tag spacing
+    .opblock-tag-section {
+      margin-bottom: $opblock-tag-margin-bottom !important;
 
-  .opblock-tag-section {
-    margin-bottom: $opblock-tag-margin-bottom !important;
-  }
+      &.is-open > h3 {
+        margin-bottom: $opblock-tag-margin-bottom !important;
+      }
+    }
 
-  .opblock-tag-section.is-open > h3 {
-    margin-bottom: $opblock-tag-margin-bottom !important;
-  }
+    // Tabs
+    .tabitem {
+      padding: 2px !important;
+    }
 
-  // -------------------------------------------------------------
-  // Code blocks
-  // -------------------------------------------------------------
+    .tabitem > button {
+      padding: 5px !important;
+    }
 
-  // Inline code
-  .swagger-ui .renderedMarkdown code {
-    color: $render-text-color !important;
-    font-family: Consolas, Monaco, "Courier New", monospace;
-    font-size: 0.95em !important;
-    font-weight: normal !important;
-    padding: 2px 6px !important;
-    border-radius: 4px;
-    white-space: pre-wrap !important;
-  }
+    .tabitem::after {
+      content: none !important;
+      display: none !important;
+    }
 
-  // Block code (multiline)
-  .swagger-ui .renderedMarkdown pre > code {
-    display: block !important;
-    background-color: $render-header-color !important;
-    color: $render-text-color !important;
-    font-family: Consolas, Monaco, "Courier New", monospace;
-    font-size: 14px !important;
-    font-weight: normal !important;
-    padding: 12px 16px !important;
-    overflow-x: auto !important;
-    border-radius: 6px;
-    line-height: 1.5;
-  }
+    .tablinks {
+      padding: 10px !important;
+    }
 
-  // List items in markdown
-  .swagger-ui .renderedMarkdown li {
-    color: $render-text-color !important;
-    font-size: 14px !important;
-    line-height: 1.6;
-    margin-bottom: 0.5em;
-  }
-
-  // First column in model tables
-  .swagger-ui .model-box td:first-child {
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-    width: auto !important;
-    vertical-align: top;
+    // Hidden UI elements
+    .information-container,
+    .scheme-container,
+    .try-out__btn,
+    .response-controls,
+    .copy-to-clipboard,
+    .model-hint,
+    .execute-wrapper,
+    td.parameters-col_description > select,
+    .parameters-col_description > input,
+    div.opblock-section-header > label {
+      display: none !important;
+    }
   }
 }
