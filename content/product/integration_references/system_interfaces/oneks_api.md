@@ -14,7 +14,7 @@ This guide is intended for developers and integrators. For other purposes, OneKS
 User authentication is based on [HTTP Basic access authentication](http://tools.ietf.org/html/rfc1945#section-11). The required credentials are the username and password.
 
 ```default
-$ curl -u "username:password" http://oneks.example.server:10780/api/v1/clusters
+curl -u "username:password" http://oneks.example.server:10780/api/v1/clusters
 ```
 
 By default, the OneKS API listens at `http://localhost:10780`. Customize this value along with other API service settings in the `/etc/one/oneks-server.conf` file. For more information, refer to the OneKS Configuration guide.
