@@ -1,0 +1,2155 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OneKS API",
+        "version": "v1",
+        "description": "This specification defines all RESTful operations for the OneKS system, including Kubernetes clusters and nodegroups.\\n"
+    },
+    "servers": [
+        {
+            "url": "http://oneks.example.server:{port}/api/v1",
+            "description": "Default OneKS API server",
+            "variables": {
+                "port": {
+                    "default": "10780",
+                    "description": "Port where the OneKS API is listening",
+                    "enum": [
+                        "10780"
+                    ]
+                }
+            }
+        }
+    ],
+    "tags": [
+        {
+            "name": "clusters",
+            "description": "Create and manage OneKS Kubernetes clusters"
+        },
+        {
+            "name": "nodegroups",
+            "description": "Create and manage OneKS nodegroups"
+        }
+    ],
+    "paths": {
+        "/clusters/families": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "List available cluster families",
+                "description": "Returns all registered cluster families that can be used when creating a cluster. Each family includes its supported Kubernetes versions, input definitions, and flavour catalog.",
+                "responses": {
+                    "200": {
+                        "description": "Array of available cluster families",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/K8sFamily"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/families/{family}": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Get a cluster family",
+                "description": "Returns the metadata for a single control plane family, including its flavour definitions and supported Kubernetes versions.",
+                "parameters": [
+                    {
+                        "name": "family",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster family name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cluster family metadata",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sFamily"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/families/{family}/{flavour}/inputs": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Get input definitions for a cluster flavour",
+                "description": "Returns the input schema for a cluster family and flavour. By default, flavour defaults are included in each user input definition. If `exclude_defaults=true` is provided, only the inputs without default value are returned.",
+                "parameters": [
+                    {
+                        "name": "family",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster family name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "flavour",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster flavour name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "exclude_defaults",
+                        "in": "query",
+                        "required": false,
+                        "description": "When enabled, flavour inputs with default values are omitted",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Flavour-specific input definitions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sFamilyInputResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "List clusters",
+                "description": "Returns every cluster document currently managed by OneKS.",
+                "responses": {
+                    "200": {
+                        "description": "Array of cluster documents",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cluster"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Create a cluster",
+                "description": "Creates a new cluster document and the associated control plane group.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClusterCreateRequest"
+                            },
+                            "example": {
+                                "name": "production-cluster",
+                                "description": "General-purpose production cluster",
+                                "kubernetes_version": "v1.32.9",
+                                "public_network": 105,
+                                "private_network": 106,
+                                "spec": {
+                                    "family": "general",
+                                    "flavour": "ha",
+                                    "user_inputs_values": {
+                                        "count": 3,
+                                        "cpu": 2,
+                                        "vcpu": 2,
+                                        "memory": 4096,
+                                        "disk_size": 16384
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cluster created and provisioning initialized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cluster"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Get a cluster",
+                "description": "Returns a single cluster document. If `expand=true` is provided, `control_plane` and `node_groups` are expanded from lightweight references into full group bodies.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "expand",
+                        "in": "query",
+                        "required": false,
+                        "description": "Expand embedded group references into full group documents",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cluster document",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cluster"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Update cluster document",
+                "description": "Updates the cluster document. Accepts fields such as `name` and `description`.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClusterUpdateRequest"
+                            },
+                            "example": {
+                                "description": "Updated cluster description"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated cluster document",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cluster"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Delete a cluster",
+                "description": "Deletes a cluster. By default, OneKS starts the normal deprovisioning workflow. If `force=true` is supplied, the cluster is removed immediately from the database and the caller is responsible for manual infrastructure cleanup.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "force",
+                        "in": "query",
+                        "required": false,
+                        "description": "Skip the deprovisioning workflow and delete the cluster document directly",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/kubeconfig": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Get cluster kubeconfig from the control plane",
+                "description": "Returns the kubeconfig currently stored on the cluster control plane as a convenience accessor.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kubeconfig payload",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClusterKubeconfig"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/recover": {
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Recover a cluster",
+                "description": "Retries recovery for a cluster that is in warning or a failure state. Recovery is only accepted when at least one associated group has a recoverable failure status.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/upgrade": {
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Upgrade a cluster Kubernetes version",
+                "description": "Validates the requested Kubernetes version against the control plane family, updates the cluster document, and then starts the asynchronous upgrade workflow for the control plane and all nodegroups.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClusterUpgradeRequest"
+                            },
+                            "example": {
+                                "kubernetes_version": "v1.32.9"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cluster updated with the requested target version",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cluster"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/nodegroups/families": {
+            "get": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "List available nodegroup families",
+                "description": "Returns all registered nodegroup families that can be used to create worker pools inside a cluster.",
+                "responses": {
+                    "200": {
+                        "description": "Array of available nodegroup families",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/K8sFamily"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/nodegroups/families/{family}": {
+            "get": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Get a nodegroup family",
+                "description": "Returns the metadata for a single nodegroup family, including flavour defaults and supported Kubernetes versions.",
+                "parameters": [
+                    {
+                        "name": "family",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup family name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Nodegroup family metadata",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sFamily"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/nodegroups/families/{family}/{flavour}/inputs": {
+            "get": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Get input definitions for a nodegroup flavour",
+                "description": "Returns the input schema for a nodegroup family and flavour. By default, flavour defaults are included in each user input definition. If `exclude_defaults=true` is provided, only the inputs without default value are returned.",
+                "parameters": [
+                    {
+                        "name": "family",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup family name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "flavour",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup flavour name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "exclude_defaults",
+                        "in": "query",
+                        "required": false,
+                        "description": "When enabled, flavour inputs with default values are omitted",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Flavour-specific input definitions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sFamilyInputResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/nodegroups": {
+            "get": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "List nodegroups in a cluster",
+                "description": "Returns all nodegroups attached to the specified cluster.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of nodegroups belonging to the cluster",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/K8sGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Create a nodegroup in a cluster",
+                "description": "Creates a new worker nodegroup under the specified cluster and starts the provisioning workflow.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NodeGroupCreateRequest"
+                            },
+                            "example": {
+                                "name": "workers-medium",
+                                "family": "general",
+                                "flavour": "medium",
+                                "description": "Balanced worker pool",
+                                "user_inputs_values": {
+                                    "count": 3,
+                                    "cpu": 4,
+                                    "vcpu": 4,
+                                    "memory": 8192,
+                                    "disk_size": 32768
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Nodegroup created and provisioning initialized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sGroup"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/nodegroups/{nodegroup_id}": {
+            "get": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Get a nodegroup from a cluster",
+                "description": "Returns a single nodegroup from the specified cluster.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "nodegroup_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Nodegroup document",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Update nodegroup document",
+                "description": "Updates the nodegroup document. Accepts fields such as `name` and `description`.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "nodegroup_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NodeGroupUpdateRequest"
+                            },
+                            "example": {
+                                "description": "Updated worker pool description"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated nodegroup document",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/K8sGroup"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Delete a nodegroup from a cluster",
+                "description": "Starts nodegroup deprovisioning. The cluster control plane cannot be deleted through this endpoint since they are managed by the cluster itself.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "nodegroup_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/nodegroups/{nodegroup_id}/recover": {
+            "post": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Recover a nodegroup",
+                "description": "Retries recovery for a nodegroup that is in a recoverable failure state.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "nodegroup_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/nodegroups/{nodegroup_id}/scale": {
+            "post": {
+                "tags": [
+                    "nodegroups"
+                ],
+                "summary": "Scale a nodegroup",
+                "description": "Sets the target worker count for the nodegroup and starts the scaling action. The request body must contain a non-negative integer in `target`.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "nodegroup_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Nodegroup ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NodeGroupScaleRequest"
+                            },
+                            "example": {
+                                "target": 5
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "201": {
+                        "description": "Nodegroup scaling action accepted"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/chmod": {
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Change cluster permissions",
+                "description": "Changes the permissions of the cluster document and recursively applies the same octet to the associated control plane and nodegroup documents.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "octet": {
+                                        "type": "string",
+                                        "description": "New permissions in octal format (for example, `640`)."
+                                    }
+                                },
+                                "required": [
+                                    "octet"
+                                ]
+                            },
+                            "example": {
+                                "octet": "640"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/chown": {
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Change cluster owner",
+                "description": "Changes the owner of the cluster document and recursively applies the same ownership to the associated control plane and nodegroup documents.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "owner_id": {
+                                        "type": "integer",
+                                        "description": "New owner user ID."
+                                    },
+                                    "group_id": {
+                                        "type": "integer",
+                                        "description": "Optional new group ID. If omitted, the current group is preserved."
+                                    }
+                                },
+                                "required": [
+                                    "owner_id"
+                                ]
+                            },
+                            "example": {
+                                "owner_id": 42,
+                                "group_id": 100
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/clusters/{id}/chgrp": {
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Change cluster group",
+                "description": "Changes the group ownership of the cluster document and recursively applies the same group to the associated control plane and nodegroup documents.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cluster ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "group_id": {
+                                        "type": "integer",
+                                        "description": "New group ID."
+                                    }
+                                },
+                                "required": [
+                                    "group_id"
+                                ]
+                            },
+                            "example": {
+                                "group_id": 100
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cluster": {
+                "type": "object",
+                "description": "OpenNebula JSON document representing a OneKS cluster",
+                "properties": {
+                "DOCUMENT": {
+                    "type": "object",
+                    "properties": {
+                    "ID": {
+                        "type": "string",
+                        "description": "ID of the resource in OpenNebula"
+                    },
+                    "UID": {
+                        "type": "string",
+                        "description": "User ID"
+                    },
+                    "GID": {
+                        "type": "string",
+                        "description": "Group ID"
+                    },
+                    "UNAME": {
+                        "type": "string",
+                        "description": "Username"
+                    },
+                    "GNAME": {
+                        "type": "string",
+                        "description": "Group name"
+                    },
+                    "NAME": {
+                        "type": "string",
+                        "description": "Name of the object"
+                    },
+                    "TYPE": {
+                        "type": "string",
+                        "description": "Type identifier of the object"
+                    },
+                    "PERMISSIONS": {
+                        "type": "object",
+                        "description": "Permission bits for the object (U: Use, M: Manage, A: Admin)",
+                        "properties": {
+                        "OWNER_U": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OWNER_M": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OWNER_A": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "GROUP_U": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "GROUP_M": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "GROUP_A": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OTHER_U": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OTHER_M": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OTHER_A": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        }
+                        }
+                    },
+                    "TEMPLATE": {
+                        "type": "object",
+                        "properties": {
+                            "CLUSTER_BODY": {
+                                "type": "object",
+                                "description": "Cluster body information",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Cluster name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Cluster description"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "Current state of the cluster lifecycle",
+                                        "enum": [
+                                            "PENDING",
+                                            "PROVISIONING",
+                                            "RUNNING",
+                                            "SCALING",
+                                            "UPGRADING",
+                                            "DEPROVISIONING",
+                                            "DONE",
+                                            "PROVISIONING_FAILURE",
+                                            "SCALING_FAILURE",
+                                            "UPGRADING_FAILURE",
+                                            "DEPROVISIONING_FAILURE",
+                                            "WARNING"
+                                        ]
+                                    },
+                                    "kubernetes_version": {
+                                        "type": "string",
+                                        "description": "Desired Kubernetes version for the cluster"
+                                    },
+                                    "public_network": {
+                                        "type": "integer",
+                                        "description": "OpenNebula virtual network ID used as the public network"
+                                    },
+                                    "private_network": {
+                                        "type": "integer",
+                                        "description": "OpenNebula virtual network ID used as the private network"
+                                    },
+                                    "vrouter_id": {
+                                        "type": "integer",
+                                        "nullable": true,
+                                        "description": "Optional virtual router ID associated with the cluster"
+                                    },
+                                    "control_plane": {
+                                        "description": "Control plane reference or expanded control plane group body. When expanded, control-plane-specific attributes such as `endpoint` may be present.",
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/K8sGroupReference"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/K8sGroup"
+                                            }
+                                        ]
+                                    },
+                                    "node_groups": {
+                                        "type": "array",
+                                        "description": "Nodegroups attached to the cluster. Entries are references in list mode and full group bodies when expanded.",
+                                        "items": {
+                                            "oneOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/K8sGroupReference"
+                                                },
+                                                {
+                                                    "$ref": "#/components/schemas/K8sGroup"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "registration_time": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "Unix timestamp indicating when the cluster was registered"
+                                    },
+                                    "historic": {
+                                        "type": "array",
+                                        "description": "Historic lifecycle events registered for the cluster",
+                                        "items": {
+                                            "$ref": "#/components/schemas/HistoricEntry"
+                                        }
+                                    }
+                                },
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                    }
+                }
+                },
+                "required": [
+                    "DOCUMENT"
+                ]
+            },
+            "K8sGroup": {
+                "type": "object",
+                "description": "OpenNebula JSON document representing a OneKS Kubernetes group, either a control plane or a nodegroup",
+                "properties": {
+                "DOCUMENT": {
+                    "type": "object",
+                    "properties": {
+                    "ID": {
+                        "type": "string",
+                        "description": "ID of the resource in OpenNebula"
+                    },
+                    "UID": {
+                        "type": "string",
+                        "description": "User ID"
+                    },
+                    "GID": {
+                        "type": "string",
+                        "description": "Group ID"
+                    },
+                    "UNAME": {
+                        "type": "string",
+                        "description": "Username"
+                    },
+                    "GNAME": {
+                        "type": "string",
+                        "description": "Group name"
+                    },
+                    "NAME": {
+                        "type": "string",
+                        "description": "Name of the object"
+                    },
+                    "TYPE": {
+                        "type": "string",
+                        "description": "Type identifier of the object"
+                    },
+                    "PERMISSIONS": {
+                        "type": "object",
+                        "description": "Permission bits for the object (U: Use, M: Manage, A: Admin)",
+                        "properties": {
+                        "OWNER_U": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OWNER_M": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OWNER_A": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "GROUP_U": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "GROUP_M": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "GROUP_A": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OTHER_U": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OTHER_M": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        },
+                        "OTHER_A": {
+                            "type": "string",
+                            "enum": [
+                            "0",
+                            "1"
+                            ]
+                        }
+                        }
+                    },
+                    "TEMPLATE": {
+                        "type": "object",
+                        "properties": {
+                            "GROUP_BODY": {
+                                "type": "object",
+                                "description": "Group body information",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Group name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Group description"
+                                    },
+                                    "cluster_id": {
+                                        "type": "integer",
+                                        "description": "Owning cluster ID"
+                                    },
+                                    "family": {
+                                        "type": "string",
+                                        "description": "Group family name"
+                                    },
+                                    "flavour": {
+                                        "type": "string",
+                                        "description": "Group flavour name"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "Group role",
+                                        "enum": [
+                                            "ControlPlane",
+                                            "NodeGroup"
+                                        ]
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "Current state of the group lifecycle",
+                                        "enum": [
+                                            "PENDING",
+                                            "BOOTSTRAPPING",
+                                            "PROVISIONING",
+                                            "RUNNING",
+                                            "SCALING",
+                                            "UPGRADING",
+                                            "DEPROVISIONING",
+                                            "DONE",
+                                            "WARNING",
+                                            "BOOTSTRAPPING_FAILURE",
+                                            "PROVISIONING_FAILURE",
+                                            "SCALING_FAILURE",
+                                            "UPGRADING_FAILURE",
+                                            "DEPROVISIONING_FAILURE"
+                                        ]
+                                    },
+                                    "vms": {
+                                        "type": "array",
+                                        "description": "OpenNebula VM IDs currently associated with the group",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "dependencies": {
+                                        "type": "array",
+                                        "description": "Dependencies tracked by the group lifecycle manager",
+                                        "items": {
+                                            "$ref": "#/components/schemas/K8sDependency"
+                                        }
+                                    },
+                                    "user_inputs_values": {
+                                        "type": "object",
+                                        "description": "Resolved input values that define the desired size and capacity of the group",
+                                        "additionalProperties": true
+                                    },
+                                    "registration_time": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "description": "Unix timestamp indicating when the group was registered"
+                                    },
+                                    "historic": {
+                                        "type": "array",
+                                        "description": "Historic lifecycle events registered for the group",
+                                        "items": {
+                                            "$ref": "#/components/schemas/HistoricEntry"
+                                        }
+                                    },
+                                    "endpoint": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Kubernetes API endpoint. This attribute is only populated for control plane groups."
+                                    }
+                                },
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                    }
+                }
+                },
+                "required": [
+                    "DOCUMENT"
+                ]
+            },
+            "K8sGroupReference": {
+                "type": "object",
+                "description": "Compact group reference stored inside the cluster document when full body is not requested.",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Group ID"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Group name"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Group role",
+                        "enum": [
+                            "ControlPlane",
+                            "NodeGroup"
+                        ]
+                    },
+                    "flavour": {
+                        "type": "string",
+                        "description": "Group flavour"
+                    },
+                    "family": {
+                        "type": "string",
+                        "description": "Group family"
+                    }
+                }
+            },
+            "K8sDependency": {
+                "type": "object",
+                "description": "Runtime dependency tracked by a Kubernetes group.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Dependency class name",
+                        "example": "ClusterRouter"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Whether the dependency is managed internally or tracked as external",
+                        "enum": [
+                            "MANAGED",
+                            "EXTERNAL"
+                        ]
+                    },
+                    "id": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "ID of the associated OpenNebula resource when available"
+                    },
+                    "ready": {
+                        "type": "boolean",
+                        "description": "Indicates whether the dependency is ready for use"
+                    },
+                    "opts": {
+                        "type": "object",
+                        "description": "Dependency-specific configuration",
+                        "additionalProperties": true
+                    }
+                }
+            },
+            "HistoricEntry": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "description": "Short action name recorded in the lifecycle history"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human-readable description of the event"
+                    },
+                    "time": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Unix timestamp of the event"
+                    }
+                }
+            },
+            "K8sFamily": {
+                "type": "object",
+                "description": "Family metadata for either a control plane family or a nodegroup family.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Display name of the family",
+                        "example": "General Purpose"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the family"
+                    },
+                    "family": {
+                        "type": "string",
+                        "description": "Family identifier used in API requests",
+                        "example": "general"
+                    },
+                    "supported_k8s_versions": {
+                        "type": "array",
+                        "description": "Kubernetes versions accepted by this family",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "user_inputs": {
+                        "type": "array",
+                        "description": "Input definitions available for all flavours in the family",
+                        "items": {
+                            "$ref": "#/components/schemas/UserInput"
+                        }
+                    },
+                    "flavours": {
+                        "type": "array",
+                        "description": "Flavours supported by the family",
+                        "items": {
+                            "$ref": "#/components/schemas/K8sFlavour"
+                        }
+                    },
+                    "dependencies": {
+                        "type": "array",
+                        "description": "Dependency definitions declared by the family",
+                        "items": {
+                            "$ref": "#/components/schemas/K8sDependencyDefinition"
+                        }
+                    }
+                }
+            },
+            "UserInput": {
+                "type": "object",
+                "description": "User input definition exposed by a OneKS family or flavour.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Input identifier"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human-readable explanation of the input"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Declared input type",
+                        "enum": [
+                            "string",
+                            "number",
+                            "bool",
+                            "list",
+                            "map(*any)",
+                            "map(string)"
+                        ]
+                    },
+                    "mandatory": {
+                        "type": "boolean",
+                        "description": "Whether the input must be provided by the caller"
+                    },
+                    "default": {
+                        "description": "Default value injected by the selected flavour when applicable"
+                    },
+                    "match": {
+                        "type": "object",
+                        "description": "Validation rules for the input",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "string",
+                                    "number",
+                                    "list",
+                                    "map"
+                                ]
+                            },
+                            "values": {
+                                "description": "Enumerated values or numeric limits",
+                                "oneOf": [
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "K8sFlavour": {
+                "type": "object",
+                "description": "Preset resource profile for a family.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Flavour identifier"
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "Display label for the flavour"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human-readable description, which may contain HTML fragments"
+                    },
+                    "override_defaults": {
+                        "type": "boolean",
+                        "description": "Whether user-supplied values are allowed to override flavour defaults"
+                    },
+                    "defaults": {
+                        "type": "object",
+                        "description": "Default values applied to user inputs when this flavour is selected",
+                        "additionalProperties": true
+                    }
+                }
+            },
+            "K8sDependencyDefinition": {
+                "type": "object",
+                "description": "Dependency declared statically by a family definition.",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Dependency object identifier",
+                        "example": "seed_vm"
+                    },
+                    "opts": {
+                        "type": "object",
+                        "description": "Dependency options loaded from the family configuration",
+                        "additionalProperties": true
+                    }
+                }
+            },
+            "K8sFamilyInputResponse": {
+                "type": "object",
+                "properties": {
+                    "user_inputs": {
+                        "type": "array",
+                        "description": "Resolved user input definitions for the selected flavour",
+                        "items": {
+                            "$ref": "#/components/schemas/UserInput"
+                        }
+                    },
+                    "options": {
+                        "type": "object",
+                        "description": "Behaviour flags for the selected flavour",
+                        "properties": {
+                            "override_defaults": {
+                                "type": "boolean",
+                                "description": "Whether caller-provided values override the flavour defaults"
+                            }
+                        }
+                    }
+                }
+            },
+            "ClusterCreateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Cluster name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Cluster description"
+                    },
+                    "kubernetes_version": {
+                        "type": "string",
+                        "description": "Kubernetes version to deploy"
+                    },
+                    "public_network": {
+                        "type": "integer",
+                        "description": "OpenNebula public network ID"
+                    },
+                    "private_network": {
+                        "type": "integer",
+                        "description": "OpenNebula private network ID"
+                    },
+                    "spec": {
+                        "$ref": "#/components/schemas/ClusterControlPlaneSpec"
+                    }
+                },
+                "required": [
+                    "name",
+                    "kubernetes_version",
+                    "public_network",
+                    "private_network",
+                    "spec"
+                ]
+            },
+            "ClusterControlPlaneSpec": {
+                "type": "object",
+                "description": "Control plane family and flavour selection used during cluster creation.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Optional control plane group name override"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Optional control plane group description override"
+                    },
+                    "family": {
+                        "type": "string",
+                        "description": "Control plane family. When omitted, the backend defaults to `general`."
+                    },
+                    "flavour": {
+                        "type": "string",
+                        "description": "Control plane flavour to use"
+                    },
+                    "user_inputs_values": {
+                        "type": "object",
+                        "description": "Explicit values for the selected control plane flavour inputs",
+                        "additionalProperties": true
+                    }
+                },
+                "required": [
+                    "flavour"
+                ]
+            },
+            "ClusterUpdateRequest": {
+                "type": "object",
+                "description": "Update payload accepted by the cluster controller.",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": true
+            },
+            "ClusterUpgradeRequest": {
+                "type": "object",
+                "properties": {
+                    "kubernetes_version": {
+                        "type": "string",
+                        "description": "Target Kubernetes version. It must be listed in the selected control plane family's `supported_k8s_versions`."
+                    }
+                },
+                "required": [
+                    "kubernetes_version"
+                ]
+            },
+            "NodeGroupCreateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Nodegroup name"
+                    },
+                    "family": {
+                        "type": "string",
+                        "description": "Nodegroup family. When omitted, the backend defaults to `general`."
+                    },
+                    "flavour": {
+                        "type": "string",
+                        "description": "Nodegroup flavour to use"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Nodegroup description"
+                    },
+                    "user_inputs_values": {
+                        "type": "object",
+                        "description": "Explicit values for the selected nodegroup flavour inputs",
+                        "additionalProperties": true
+                    }
+                },
+                "required": [
+                    "name",
+                    "flavour"
+                ]
+            },
+            "NodeGroupUpdateRequest": {
+                "type": "object",
+                "description": "Update payload accepted by the nodegroup controller.",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": true
+            },
+            "NodeGroupScaleRequest": {
+                "type": "object",
+                "properties": {
+                    "target": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Desired number of worker nodes"
+                    }
+                },
+                "required": [
+                    "target"
+                ]
+            },
+            "ClusterKubeconfig": {
+                "type": "object",
+                "properties": {
+                    "kubeconfig": {
+                        "type": "string",
+                        "description": "Kubeconfig content encoded as YAML text, sourced from the control plane group."
+                    }
+                }
+            }
+        },
+        "responses": {
+            "204": {
+                "description": "The request has been accepted for processing"
+            },
+            "400": {
+                "description": "Malformed syntax"
+            },
+            "401": {
+                "description": "Bad authentication"
+            },
+            "403": {
+                "description": "Bad authorization"
+            },
+            "404": {
+                "description": "Resource not found"
+            },
+            "405": {
+                "description": "The requested action is not allowed in the current resource state"
+            },
+            "500": {
+                "description": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+            }
+        }
+    }
+}
