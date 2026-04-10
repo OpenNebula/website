@@ -37,3 +37,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 
 ## Other Issues Solved
 
+* [Fix marketplace broken redirect link](https://github.com/OpenNebula/one/issues/7291).
