@@ -1,6 +1,6 @@
 ---
-title: "Fine-Tuning AI Models on NVIDIA Slurm"
-linkTitle: "Fine-Tuning on Slurm"
+title: "Fine-tuning AI Models on NVIDIA Slurm"
+linkTitle: "Fine-tuning on Slurm"
 weight: 8
 tags: ['AI']
 ---
@@ -54,7 +54,9 @@ You must also have access to the Sunstone user interface.
     onevm ssh <SLURM_CONTROLLER_VM_ID>
     ```
 
-5. **Get the controller Munge key and IP address.** This key must be shared with all worker nodes for Slurm authentication:
+5. **Get the controller Munge key and IP address.** Press Ctrl-D to exit the SSH tunnel back to your Front-end command line. Run the following commands to acquire the MUNGE key and IP address of the Slurm controller:
+
+   Aquire the MUNGE key:
 
    ```shell
    onevm show <SLURM_CONTROLLER_VM_ID> | grep MUNGE
@@ -65,10 +67,10 @@ You must also have access to the Sunstone user interface.
    onevm show <SLURM_CONTROLLER_VM_ID> | grep ETH0_IP=
    ```
 
-   Save a note of the **Munge key** (base64) and the **Slurm Controller IP address**; you will need both when deploying workers.
+   Save a note of the **Munge key** (base64) and the **Slurm Controller IP address**; you will need both when deploying workers. This key must be shared with all worker nodes for Slurm authentication.
 
 --- 
-## Step 2: Deploy the Slurm Worker
+## Step 2: Modify the Slurm Worker Template
 
 1. Import the **Slurm Worker appliance** from the OpenNebula Marketplace.
 
@@ -93,11 +95,11 @@ You must also have access to the Sunstone user interface.
 
     {{< image path="/images/ai_factories/attach-pci-device.png" alt="Slurm PCI" align="center" width="90%" mt="20px" mb="40px" >}}
 
-    * Click **Next** to the **Custom Variables** page and then select **Finish**.
-
-    * In the **Context** tab, copy the following script into the **Start script** field. This script downloads a model from Hugging Face and installs associated resources then creates a script to run the fine-tuning job:
+    * In the **Context** tab, copy the [script found below](#start-script) into the **Start script** field. This script downloads a model from Hugging Face and installs associated resources then creates a script to run the fine-tuning job:
 
     {{< image path="/images/ai_factories/slurm-start-script.png" alt="Slurm start script" align="center" width="90%" mt="20px" mb="40px" >}}
+
+    * Click **Next** to the **Custom Variables** page and then select **Finish**.
 
 ### Start Script: 
 ```python
@@ -156,7 +158,10 @@ chmod +x "$AI_DIR/demo_finetune.py"
 
 <br>
 
-3. Instantiate the Slurm Worker via the OpenNebula Sunstone web interface:
+---
+## Step 3: Deploy the Slurm Worker
+
+1. Instantiate the Slurm Worker via the OpenNebula Sunstone web interface:
 
    * Go to **Templates -> VM Templates**
    * Select the the **SlurmWorker** template
@@ -165,20 +170,21 @@ chmod +x "$AI_DIR/demo_finetune.py"
     {{< image path="/images/ai_factories/instantiate-slurm-worker.png" alt="Alpine VM VNC" align="center" width="90%" mb="20px" mt="20px" >}}
 
    * Set the **number of instances** to 1
-   * Click **Next**. When prompted, enter:
+   * Click **Next**. In the **User inputs** page, enter:
      * **Slurm Controller IP address** (the VM you deployed in Step 1). Ensure workers can reach this IP
      * **Slurm Controller Munge key** (base64) that you recorded earlier (everything inside the quotation marks)
 
      {{< image path="/images/ai_factories/slurm-munge-key.png" alt="Slurm MUNGE" align="center" width="90%" mt="20px" mb="40px" >}}
 
-   * Click **Next** to **Advanced options**, select the **Network** tab and select **Attach NIC**:
+   * Click **Next** to **Advanced options**, select the **Network** tab and click **Attach NIC**: 
+      * Click next to the **Select a network** page
       * Choose **admin_net** or an alternative available Virtual Network.
 
 <br>
    
-4. After a few minutes, verify that the worker has joined the cluster. SSH into the Slurm Controller VM:
+2. After a few minutes, verify that the worker has joined the cluster. SSH into the Slurm Controller VM:
 
-    Find the Slurm Controler VM ID:
+    Find the Slurm Controller VM ID:
 
     ```shell
     onevm list
@@ -217,7 +223,7 @@ chmod +x "$AI_DIR/demo_finetune.py"
    ``` 
 ---
 
-## Run the Finetuning Job from the Slurm Controller
+## Step 4: Run the Fine-tuning Job from the Slurm Controller
 
 On the Slurm Controller VM run the following command to launch the fine-tuning job:
 
@@ -263,7 +269,9 @@ Saved to /opt/ai_model/output
 
 ## Next Steps
 
-After finishing this tutorial and running a job on a Slurm worker, we recommend to continue with the following AI Factory guides:
+Before continuing with other AI Factory guides, you should undeploy the Slurm controller and worker VMs. Find their respective IDs with `onevm list` then run `onevm terminate <VM_ID>` to terminate each Slurm instance. 
+
+We recommend continuing with the following AI Factory guides:
 
 * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
 * [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
