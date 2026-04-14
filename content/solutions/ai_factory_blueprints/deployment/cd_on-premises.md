@@ -3,6 +3,7 @@ title: "On-premises AI Factory Deployment"
 linkTitle: "On-premises Deployment"
 date: "2025-10-21"
 weight: 2
+tags: ['AI']
 ---
 
 <a id="cd_on-premises"></a>
@@ -218,7 +219,7 @@ After the deployment is complete, verify that the GPUs are correctly configured 
 2. Navigate to **Infrastructure -> Hosts**
 3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`)
 4. Go to the **PCI** tab
-5. You will see your GPU listed as an available PCI device:
+5. You will see your GPU listed as an available PCI device (you may need to wait 2-3 minutes to see it):
 
 {{< image path="/images/ai_factories/pci-sunstone.png" alt="Sunstone dashboard" align="center" width="90%" mb="20px" >}}
 

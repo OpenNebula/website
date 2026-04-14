@@ -5,7 +5,7 @@ date: "2025-10-28"
 description:
 categories:
 pageintoc: "68"
-tags:
+tags: ['AI','vLLM']
 weight: 4
 ---
 
@@ -21,9 +21,9 @@ In this guide you will find the necessary steps and best practices to deploy the
 
 ## Before Starting 
 
-Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+Before starting this tutorial, you must complete the AI-factory deployment with either on-premises resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
-* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment with On-premises hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
 * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
 ## Deploying the vLLM Appliance
@@ -77,14 +77,51 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
 4. Wait until the vLLM engine has loaded the model and the application is served. To confirm progress, access the VM via SSH and check the logs located in `/var/log/one-appliance/vllm.log`.
 
     4.1 To access the VM, run the following command:
+
     ```shell
     onevm ssh vllm
     ```
-    You can also list all available VMs by running `onevm list`.
 
-    4.2 Once inside the VM, check the logs in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
+    While the vLLM appliance is initializing, you will see the following on the command line:
 
-    ```base
+    ```default
+
+    The list of available updates is more than a week old.
+    To check for new updates run: sudo apt update
+
+
+    ___   _ __    ___
+    / _ \ | '_ \  / _ \   OpenNebula Service Appliance
+    | (_) || | | ||  __/
+    \___/ |_| |_| \___|
+
+
+    3/3 Bootstrap step is in progress...
+
+    * * * * * * * *
+    * PLEASE WAIT *
+    * * * * * * * *
+    ```
+
+    Once the vLLM appliance has initialized, it will change to this:
+
+    ```default
+    The list of available updates is more than a week old.
+    To check for new updates run: sudo apt update
+
+
+    ___   _ __    ___
+    / _ \ | '_ \  / _ \   OpenNebula Service Appliance
+    | (_) || | | ||  __/
+    \___/ |_| |_| \___|
+
+
+    All set and ready to serve 8)
+    ```
+
+    4.2 From inside the VM, check the logs in `/var/log/one-appliance/vllm.log`. You should see an output similar to this:
+
+    ```default
     [...]
 
     (APIServer pid=2480) INFO 11-26 11:00:33 [api_server.py:1971] Starting vLLM API server 0 on http://0.0.0.0:8000
@@ -144,9 +181,9 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
     }
     ```
 
-    Additionally, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port:
+    Additionally, the appliance includes a webchat app for interacting with the vLLM chat API. This web application is exposed through the VM `5000` port (see the [port forwarding instructions](#port-forwarding-for-remote-hardware) if you are running on remote hardware):
 
-    {{< image path="/images/solutions/deployment_blueprints/llm_inference_certification/vllm_web.svg" alt="vLLM webchat" align="center" width="90%" mb="20px" border="false" >}}
+    {{< image path="/images/ai_factories/vllm_chatbot.png" alt="vLLM webchat" align="center" width="70%" mb="20px" border="false" >}} 
 
     If these verification steps are successful, the vLLM appliance is ready to run the benchmarks.
 
@@ -155,9 +192,9 @@ To deploy the vLLM appliance for benchmarking, follow these steps:
 As industries adopt Large Language Models (LLMs), optimization and validation of their inference performance are critical aspects of the deployment. Efficient inference is essential to guarantee that LLMs deliver high-quality results while maintaining scalability, responsiveness, and cost-effectiveness.
 
 The LLM Inference Benchmarks focus on measuring performance metrics during the model serving process rather than the quality of the generated result. Metrics assessed by this type of benchmarks include:
-  - **Latency**: how fast the model responds to a request.
-  - **Throughput**: the number of requests the model can handle per unit of time.
-  - **Stability**: model serving consistency under varying loads.
+  - **Latency**: How fast the model responds to a request.
+  - **Throughput**: The number of requests the model can handle per unit of time.
+  - **Stability**: Model serving consistency under varying loads.
 
 ### Benchmark Environments
 
@@ -260,9 +297,9 @@ Within the `/root` directory of the vLLM appliance, you will find [`benchmark.sh
 
 - To test performance and stability, the script sends hundreds of requests in parallel.
 - To run the benchmark, the script uses automatically-generated synthetic data with these values:
-    - Input prompt: average 511 tokens.
-    - Output prompt: average 255 tokens.
-    - Total samples: 999.
+    - **Input prompt**: Average 511 tokens
+    - **Output prompt**: Average 255 tokens
+    - **Total samples**: 999
 - GuideLLM identifies the throughput that the inference can handle.
 - Once the throughput is identified, 9 additional runs are performed at a fixed requests-per-second rate (below the identified throughput) to determine stability and final results.
 
@@ -275,18 +312,18 @@ To run the benchmark, follow this procedure:
 
 2. Execute the benchmark script inside the appliance:
     ```shell
-    ./benchmark
+    ./benchmark.sh
     ```
+    
+    Once the benchmark is running, you will see this output:           
 
-    After the benchmark is running, you will see this output:
-
-    {{< image path="/images/solutions/deployment_blueprints/llm_inference_certification/benchmark.svg" alt="vLLM benchmark" align="center" width="90%" mb="20px" border="false" >}}
+    {{< image path="/images/ai_factories/vllm_benchmark.png" alt="vLLM benchmark" align="center" width="90%" mb="20px" border="false" >}}
 
     There are more parameters available within the benchmarking such as warmups, number of steps, and seconds per step. These parameters are fixed but can be manually adapted if needed.
 
 3. Once finished, the process outputs the results on the terminal and generates an HTML report with all given information in the `/root/benchmark_results` directory:
 
-    {{< image path="/images/solutions/deployment_blueprints/llm_inference_certification/benchmark_results.svg" alt="vLLM benchmark results" align="center" width="90%" mb="20px" border="false" >}}
+    {{< image path="/images/ai_factories/vllm_benchmark_results.png" alt="vLLM benchmark results" align="center" width="90%" mb="20px" border="false" >}}
 
 
 ### Benchmark Results
@@ -329,3 +366,36 @@ OpenNebula includes the obtained results in controlled environments, with given 
 {{< alert title="Tip" type="info" >}}
 Alternatively, after validating your AI Factory with LLM Inference, you may choose to follow [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}).
 {{< /alert >}}
+
+## Next Steps
+
+Before continuing with other AI Factory guides, you should undeploy the vLLM appliance to free up the GPU and system resources. On your OpenNebula Front-end machine run the following commands as the `oneadmin` user:
+
+Find the ID of the vLLM VM:
+
+```shell
+onevm list
+```
+
+Then:
+
+```shell
+onevm terminate <vLLM_VM_ID>
+```
+
+Now that you have completed benchmarking your AI Factory deployment with the vLLM appliance, we recommend continuing with the following AI Factory guides:
+
+* [Fine-Tuning on NVIDIA Slurm]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/nvidia_slurm" %}})
+* [AI-ready Kubernetes Guide]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
+
+## Port Forwarding for Remote Hardware
+
+If you are running the vLLM on remote hardware, you will need to use port forwarding to forward port 5000 from the vLLM appliance VM to your local machine to access the web chat through a browser. 
+
+Run `onevm list` to find the ID of the vLLM appliance, then run `onevm show <vLLM_VM_ID> | grep ETH0_IP` to show its IP address. Then from your local machine run the following command:
+
+```shell
+ssh -L 5000:<vLLM_VM_IP>:5000 <user>@<REMOTE_HOST_IP>
+```
+
+You can then access the chatbot by visiting `http://localhost:5000` in a web browser on your local machine. 
