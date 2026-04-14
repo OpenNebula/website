@@ -27,10 +27,10 @@ You must then complete the [AI-ready Kubernetes Deployment Guide]({{% relref "so
 As a prerequisite, you need a storage provider installed to supply PersistentVolumes to the platform. For testing purposes, use the [rancher local-path-provisioner](https://github.com/rancher/local-path-provisioner) that references to a local path from the pod host as storage, and creates a default storage class using it.
 
 {{< alert title="Important" type="info" >}}
-For the following commands to work, you must use the `kubeconfig_management.yaml` Kubeconfig. Either add `--kubeconfig kubeconfig_management.yaml` to the commands or export the `KUBECONFIG` environment variable:
+For the following commands to work, you must use the `kubeconfig_workload.yaml` Kubeconfig. Either add `--kubeconfig kubeconfig_workload.yaml` to the commands or export the `KUBECONFIG` environment variable:
 
 ```shell
-export KUBECONFIG="$PWD/kubeconfig_management.yaml"
+export KUBECONFIG="$PWD/kubeconfig_workload.yaml"
 ```
 {{< /alert >}}
 
