@@ -13,7 +13,7 @@ This is the official repository of OpenNebula's technical documentation. This do
 - Download our [Technical White Papers](https://opennebula.io/docs-whitepapers/).
 - See our [Documentation](https://docs.opennebula.io).
 - Join our [Community Forum](https://forum.opennebula.io).
-- Check our [Quick Start Guide](https://docs.opennebula.io/7.2/getting_started/try_opennebula/).
+- Check our [Quick Start Guide](https://docs.opennebula.io/stable/getting_started/try_opennebula/).
 
 ## Contributing to the OpenNebula Documentation
 
