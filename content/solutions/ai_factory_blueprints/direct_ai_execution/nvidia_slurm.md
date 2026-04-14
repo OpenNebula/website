@@ -269,7 +269,9 @@ Saved to /opt/ai_model/output
 
 ## Next Steps
 
-After finishing this tutorial and running a job on a Slurm worker, we recommend to continue with the following AI Factory guides:
+Before continuing with other AI Factory guides, you should undeploy the Slurm controller and worker VMs. Find their respective IDs with `onevm list` then run `onevm terminate <VM_ID>` to terminate each Slurm instance. 
+
+We recommend continuing with the following AI Factory guides:
 
 * [Validation with LLM Inferencing]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}})
 * [Validation with AI-Ready Kubernetes]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}})
