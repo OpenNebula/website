@@ -14,6 +14,7 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 
 ## OpenNebula Core
+* Add option [`LOG_RESULT_LENGTH` to `oned.conf`](../../../product/operation_references/opennebula_services_configuration/oned#xml-rpc-server-configuration) to configure max length of API result log.
 
 ## Storage & Backups
 
