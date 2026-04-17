@@ -87,7 +87,7 @@ You must also have access to the Sunstone user interface.
         * **Physical CPU**: 2
     * Click **Next** to move onto the **Advanced options**
     * In the **Storage** tab edit the **SlurmWorker** disk by clicking the pen icon:
-        * Click **Next** to move to **Advanced options**, set **Size on instantiate** to 20480
+        * Click **Next** to move to **Advanced options**, set **Size on instantiate** to 30720
     
     {{< image path="/images/ai_factories/slurm-update-disk.png" alt="Slurm disk" align="center" width="90%" mt="20px" mb="40px" >}}
 
