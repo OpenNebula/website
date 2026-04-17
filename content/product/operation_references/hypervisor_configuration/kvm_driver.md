@@ -493,6 +493,29 @@ You can translate that into a command on the configuration file as follows
   :guest_info: 'one-$vm_id ''{"execute":"guest-info"}'' --timeout 5'
 ```
 
+You can also configure commands to be selectively executed on VMs depending on their OS and architecture. These conditional commands use an alternative syntax to allow providing one or more filters. Let's modify the previous example to only execute the `guest_info` command in VMs running Ubuntu 22.04/24.04:
+
+```yaml
+:enabled: true
+:commands:
+  :vm_qemu_ping: 'one-$vm_id ''{"execute":"guest-ping"}'' --timeout 5'
+  :guest_info:
+    :command: 'one-$vm_id ''{"execute":"guest-info"}'' --timeout 5'
+    :os_ids: ['ubuntu']
+    :os_versions: ['24.04', '22.04']
+```
+
+Filtering works by previously extracting and storing special OS_ attributes from `guest-get-osinfo`, whose values will then be used to check each condition. They can also be accessed in the MONITORING section. The corresponding attribute must then match exactly (case sensitive) one of the given filters for the VM to be eligible to run the command. Providing several filters requires the VM to match each of them.
+
+This table summarizes the available filters and corresponding OS monitoring attributes:
+
+| Filter      | Attribute Matched | Possible Values                          | Comments                                |
+| ----------- | ----------------- | ---------------------------------------- | --------------------------------------- |
+| os_types    | OS_TYPE           | `posix`, `mswindows`                     |                                         |
+| os_ids      | OS_ID             | OS/distro ID (e.g., `ubuntu`, `freebsd`) | From os-release(5) ID attribute         |
+| os_versions | OS_VERSION        | Version ID (e.g., `3.20.9`, `24.04`)     | From os-release(5) VERSION_ID attribute |
+| os_machines | OS_MACHINE        | Architecture (e.g., `x86_64`, `amd64`)   | From `uname -m`                         |
+
 ## Tuning & Extending
 
 <a id="kvm-multiple-actions"></a>
