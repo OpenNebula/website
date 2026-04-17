@@ -22,7 +22,7 @@ Define backup datastores by using the available options for backends or datastor
 
 ## Basic Guide Outline
 
-Before reading this guide, you should have installed your [Frontend]({{% relref "front_end_installation" %}}), the [KVM Hosts]({{% relref "kvm_node_installation#kvm-node" %}}) and have an OpenNebula cloud up and running with at least one virtualization node.
+Before reading this guide, you should have installed your [Frontend]({{% relref "frontend_install" %}}), the [KVM Hosts]({{% relref "kvm_node_installation#kvm-node" %}}) and have an OpenNebula cloud up and running with at least one virtualization node.
 
 To configure your backup system, find about datastore driver options to save your VM backups:
 * [Restic backend]({{% relref "restic#vm-backups-restic" %}}) 

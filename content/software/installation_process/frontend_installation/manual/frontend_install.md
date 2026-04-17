@@ -10,11 +10,11 @@ weight: "6"
 
 <a id="ignc"></a>
 
-<a id="frontend-installation"></a>
+<a id="frontend-install"></a>
 
 <!--# Single Front-end Installation -->
 
-This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration#repositories" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced in other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula on your own.
+This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced in other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula on your own.
 
 Proceed with the following steps to get the fully-featured OpenNebula Front-end up.
 
@@ -22,7 +22,7 @@ Proceed with the following steps to get the fully-featured OpenNebula Front-end 
 
 ## Step 1. Configure the OpenNebula Repositories
 
-Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configuration#repositories" %}}) guide and add software repositories for the OpenNebula edition you are going to deploy.
+Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configuration" %}}) guide and add software repositories for the OpenNebula edition you are going to deploy.
 
 ## Step 2. Add Third Party Repositories
 
@@ -52,7 +52,7 @@ Available packages for OpenNebula clients, the Front-end and hypervisor nodes:
 | **opennebula-tools**                                                                                     | Command Line Interface                                                                                                                               |
 | **opennebula-fireedge**                                                                                  | Next-generation GUI [FireEdge]({{% relref "fireedge#fireedge-setup" %}})                                                                             |
 | **opennebula-gate**                                                                                      | [OneGate]({{% relref "onegate_usage#onegate-overview" %}}) server which allows communication between VMs and OpenNebula                              |
-| **opennebula-flow**                                                                                      | [OneFlow]({{% relref "../../../product/virtual_machines_operation/multi-vm_workflows/overview#oneflow-overview" %}}) manages services and elasticity |
+| **opennebula-flow**                                                                                      | [OneFlow]({{% relref "/product/virtual_machines_operation/multi-vm_workflows/overview#oneflow-overview" %}}) manages services and elasticity |
 | **opennebula-migration**                                                                                 | Database migration tools                                                                                                                             |
 | **opennebula-node-kvm**                                                                                  | Base setup for KVM hypervisor Node                                                                                                                   |
 | **opennebula-node-lxc**                                                                                  | Base setup for LXC hypervisor Node (*not on RHEL 7*)                                                                                                 |
@@ -63,9 +63,9 @@ Available packages for OpenNebula clients, the Front-end and hypervisor nodes:
 | **opennebula-rubygems**                                                                                  | Bundled Ruby gem dependencies                                                                                                                        |
 | **opennebula-libs**                                                                                      | Shared Ruby libraries among various components                                                                                                       |
 | **opennebula-common**                                                                                    | Shared content for OpenNebula packages                                                                                                               |
-| **opennebula-common-onecfg**                                                                             | Helpers for [Configuration Management]({{% relref "../../upgrade_process/configuration_management_ee/" %}}) tool                                     |
-| rpm: **opennebula-java** <br/><br/>deb: **libopennebula-java** <br/><br/>deb: **libopennebula-java-doc** | [Java OCA]({{% relref "../../../product/integration_references/system_interfaces/java#java" %}}) Bindings                                            |
-| **python3-pyone**                                                                                        | [Python 3 OCA]({{% relref "../../../product/integration_references/system_interfaces/python#python" %}}) Bindings                                    |
+| **opennebula-common-onecfg**                                                                             | Helpers for [Configuration Management]({{% relref "software/upgrade_process/configuration_management_ee/" %}}) tool                                     |
+| rpm: **opennebula-java** <br/><br/>deb: **libopennebula-java** <br/><br/>deb: **libopennebula-java-doc** | [Java OCA]({{% relref "/product/integration_references/system_interfaces/java#java" %}}) Bindings                                            |
+| **python3-pyone**                                                                                        | [Python 3 OCA]({{% relref "/product/integration_references/system_interfaces/python#python" %}}) Bindings                                    |
 
 There are also packages with debugging symbols for some platforms, e.g., `openenbula-debuginfo` on AlmaLinux/RHEL and `opennebula-dbgsym` on Debian/Ubuntu. Other architecture-specific components might come with similarly named packages, please check your packaging database if necessary.
 
@@ -123,9 +123,9 @@ echo 'oneadmin:changeme123' > /var/lib/one/.one/one_auth
 ```
 
 {{< alert title="Warning" type="warning" >}}
-This will set the oneadmin’s password only upon starting OpenNebula for the first time. From that point, you must use the `oneuser passwd` command to change oneadmin’s password. More information on how to change the oneadmin password is [here]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}).{{< /alert >}}
+This will set the oneadmin’s password only upon starting OpenNebula for the first time. From that point, you must use the `oneuser passwd` command to change oneadmin’s password. More information on how to change the oneadmin password is [here]({{% relref "/product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}).{{< /alert >}}
 
-Check how to [change oneadmin password]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}) for already running services.
+Check how to [change oneadmin password]({{% relref "product/cloud_system_administration/multitenancy/manage_users#change-credentials" %}}) for already running services.
 
 {{< alert title="Note" type="info" >}}
 For advanced setup, follow the configuration references for the OpenNebula [Daemon]({{% relref "oned#oned-conf" %}}).{{< /alert >}}
@@ -191,7 +191,7 @@ The complete list of operating system services provided by OpenNebula:
 | **opennebula-prometheus**        | OpenNebula Prometheus server                                                                                                |                     |
 
 {{< alert title="Note" type="info" >}}
-Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service, which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}}
+Since 5.12, the OpenNebula comes with an integrated SSH agent as the `opennebula-ssh-agent` service, which removes the need to copy oneadmin’s SSH private key across your Hosts. For more information, refer to the [passwordless login]({{% relref "software/installation_process/cluster_installation/kvm_node_installation#kvm-local" %}}) section of the manual.{{< /alert >}}
 
 You are ready to **start** all OpenNebula services with the following command (NOTE: you might want to remove the services from the command arguments if you skipped their configuration steps above):
 
@@ -200,7 +200,7 @@ systemctl start opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 {{< alert title="Warning" type="warning" >}}
-Make sure all required [network ports]({{% relref "front_end_installation#frontend-fw" %}}) are enabled on your firewall (on Front-end or the router).{{< /alert >}}
+Make sure all required [network ports]({{% relref "frontend_install#frontend-fw" %}}) are enabled on your firewall (on Front-end or the router).{{< /alert >}}
 
 Other OpenNebula services might be started as a dependency but you don’t need to care about them unless they need to be explicitly restarted or stopped. To start these **services automatically on server boot**, it’s necessary to enable them by the following command:
 

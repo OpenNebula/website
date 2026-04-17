@@ -19,7 +19,7 @@ weight: "3"
 
 <!--# FireEdge Configuration -->
 
-The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "front_end_installation" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
+The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "frontend_install" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
 
 ## Main Features
 

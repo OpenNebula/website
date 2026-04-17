@@ -519,7 +519,7 @@ Congratulations! You have successfully deployed a K3s Cluster with the Rancher m
 
 To learn about OpenNebula in depth, the next sections of the documentation include all of the information necessary for [configuration and administration]({{% relref "product/index" %}}), as well as software [life cycle, releases and installation details]({{% relref "software/index" %}}).
 
-If you are interested in installing OpenNebula by following further tutorials, you can head over to [Automatic Installation with OneDeploy]({{% relref "software/installation_process/automatic_installation_with_onedeploy/one_deploy_overview" %}}) to automatically install a production-ready OpenNebula cloud.
+If you are interested in installing OpenNebula by following further tutorials, you can head over to [Automatic Installation with OneDeploy]({{% relref "software/installation_process/advanced_installation_with_onedeploy/one_deploy_overview" %}}) to automatically install a production-ready OpenNebula cloud.
 
 ## Using SSH on Remote Hardware
 

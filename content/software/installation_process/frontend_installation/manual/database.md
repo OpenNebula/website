@@ -85,7 +85,7 @@ mysql> SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 ### Configure OpenNebula
 
-Before you run OpenNebula for the first time in the next section [Front-end Installation]({{% relref "front_end_installation" %}}), you’ll need to set the database backend and connection details in the configuration file [/etc/one/oned.conf]({{% relref "oned#oned-conf" %}}) as follows:
+Before you run OpenNebula for the first time in the next section [Front-end Installation]({{% relref "frontend_installation.md" %}}), you’ll need to set the database backend and connection details in the configuration file [/etc/one/oned.conf]({{% relref "oned#oned-conf" %}}) as follows:
 
 ```default
 # Sample configuration for MySQL

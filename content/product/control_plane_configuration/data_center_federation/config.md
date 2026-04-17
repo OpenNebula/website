@@ -30,7 +30,7 @@ The federation can be set up with MySQL/MariaDB or SQLite as backends, but you c
 
 ## Step 1. Configure the OpenNebula Federation Master Zone
 
-Start by picking an OpenNebula to act as master of the federation. The *master* OpenNebula will be responsible for updating shared information across Zones and replicating the updates to the *slaves*. You may start with an existing installation or with a new one (see the [installation guide]({{% relref "front_end_installation" %}})).
+Start by picking an OpenNebula to act as master of the federation. The *master* OpenNebula will be responsible for updating shared information across Zones and replicating the updates to the *slaves*. You may start with an existing installation or with a new one (see the [installation guide]({{% relref "frontend_install" %}})).
 
 {{< alert title="Note" type="info" >}}
 When installing a new *master* from scratch be sure to start it at least once to properly bootstrap the database.{{< /alert >}} 
@@ -60,7 +60,7 @@ You are now ready to add *slave* Zones.
 
 ## Step 2. Adding a New Federation Slave Zone
 
-- **Slave**: Install OpenNebula on the *slave* as usual following the [installation guide]({{% relref "front_end_installation" %}}). Start OpenNebula at least once to bootstrap the Zone database.
+- **Slave**: Install OpenNebula on the *slave* as usual following the [installation guide]({{% relref "frontend_install" %}}). Start OpenNebula at least once to bootstrap the Zone database.
 - **Slave**: Stop OpenNebula.
 - **Master**: Create a Zone for the *slave* and write down the new Zone ID. This can be done via Sunstone or with the onezone command.
 

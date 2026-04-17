@@ -1,10 +1,11 @@
 ---
 title: "LXC Node Installation"
+linkTitle: "Manual - LXC Node"
 date: "2025-02-17"
 description:
 categories:
-pageintoc: "180"
-tags:
+pageintoc: "177"
+tags: [manual, cluster, deployment]
 weight: "7"
 ---
 
@@ -17,7 +18,7 @@ weight: "7"
 This page shows you how to configure OpenNebula LXC Node from the binary packages.
 
 {{< alert title="Note" type="info" >}}
-Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "front_end_installation" %}}).{{< /alert >}}
+Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "frontend_install" %}}).{{< /alert >}}
 
 ## Overview
 
@@ -27,7 +28,7 @@ From the perspective of a hypervisor node, such a container environment is just 
 
 To understand the specific requirements, functionalities, and limitations of the LXC driver, see [LXC Driver]({{% relref "lxc_driver" %}}).
 
-You can then check the [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}}) system configuration sections to deploy Virtual Machines on your LXC nodes and access them remotely over the network.
+You can then check the [Storage]({{% relref "product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}}) system configuration sections to deploy Virtual Machines on your LXC nodes and access them remotely over the network.
 
 ## Step 1. Add OpenNebula Repositories
 
@@ -263,7 +264,7 @@ If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log
 
 ### Add Host with Sunstone
 
-Open Sunstone as documented [here]({{% relref "front_end_installation#verify-frontend-section-sunstone" %}}). On the left side menu go to **Infrastructure** → **Hosts**. Click on the `+` button.
+Open Sunstone as documented [here]({{% relref "frontend_install#verify-frontend-section-sunstone" %}}). On the left side menu go to **Infrastructure** → **Hosts**. Click on the `+` button.
 
 ![sunstone_select_create_host](/images/sunstone_select_create_host.png)
 
