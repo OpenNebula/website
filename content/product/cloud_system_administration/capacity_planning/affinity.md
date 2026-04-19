@@ -112,7 +112,7 @@ ANTI_AFFINED = "databases, backup"
 ```
 
 {{< alert title="Important" type="info" >}}
-Note that a Role policy has to be coherent with any Role-Role policy, i.e., a Role with an `ANTI_AFFINED` policy cannot be included in any `AFFINED` Role-Role rule.{{< /alert >}} 
+Note that a Role policy has to be coherent with any Role-Role policy, i.e., a Role with an `ANTI_AFFINED` policy cannot be included in any `AFFINED` Role-Role rule.{{< /alert >}}
 
 ### Scheduler Configuration and Remarks
 
@@ -125,7 +125,7 @@ VM Groups are placed by dynamically generating the requirement (`SCHED_REQUIREME
 
 ## Using a VM Group
 
-Once you have defined your VM Group you can start adding VMs to it, either by picking a Role and VM group at instantiation or by setting it in the VM Template. To apply a VM Group to your Virtual Machines either use the Sunstone wizard or set the `VM_GROUP` attribute:
+Once you have defined your VM Group you can start adding VMs to it, either by picking a Role and VM group at instantiation, by setting it in the VM Template, or dynamically add VM Group for an existing VM. To apply a VM Group to your Virtual Machines either use the Sunstone wizard or set the `VM_GROUP` attribute:
 
 ```default
 $ onetemplate update 0
@@ -136,7 +136,27 @@ VMGROUP = [ VMGROUP_NAME = "muilt-tier app", ROLE = "db" ]
 You can also specify the `VM_GROUP` by its id (`VMGROUP_ID`), and in case of multiple groups with the same name you can select it by owner with `VMGROUP_UID`, as with any other resource in OpenNebula.
 
 {{< alert title="Note" type="info" >}}
-You can also add the `VMGROUP` attribute when a VM is created (`onevm create`) or when the associated template is instantiated (`onetemplate instantiate`). This way the same VM template can be associated with different Roles.{{< /alert >}} 
+You can also add the `VMGROUP` attribute when a VM is created (`onevm create`) or when the associated template is instantiated (`onetemplate instantiate`). This way the same VM template can be associated with different Roles.{{< /alert >}}
+
+<a id="dynamic-vmg"></a>
+
+## Dynamic VM Group Management
+
+You can dynamically add or remove a Virtual Machine from a VM Group without needing to recreate the VM or update its template.
+
+To add a VM to a VM Group and Role:
+
+```default
+$ onevm vmgroup-add <vmid> <vmgroupid> <role>
+```
+
+If the Virtual Machine is already running on a Host, OpenNebula will check if the VM's current Host complies with the affinity rules of the target VM Group and Role. If the rules are not met, the operation will fail.
+
+To remove a VM from its current VM Group:
+
+```default
+$ onevm vmgroup-del <vmid>
+```
 
 ## VM Group Management
 
