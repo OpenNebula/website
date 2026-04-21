@@ -53,6 +53,7 @@ To run the miniONE script, you will need a physical server with a fresh installa
 : - RHEL/AlmaLinux 8 or 9
   - Debian 11 or 12
   - Ubuntu 22.04 or 24.04
+  - openSUSE 16.0, SLES 15.7
 
 **Minimum hardware:**
 : - 32 GiB RAM
