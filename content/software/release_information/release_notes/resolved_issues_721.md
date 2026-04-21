@@ -9,7 +9,7 @@ A complete list of solved issues for 7.2.1 are listed in the [project developmen
 
 The following new features have been backported to 7.2.1:
 
-* Place first new feature here
+* Add option [`LOG_RESULT_LENGTH` to `oned.conf`](../../../product/operation_references/opennebula_services_configuration/oned#xml-rpc-server-configuration) to configure max length of API result log.
 
 ## Resolved Issues
 
