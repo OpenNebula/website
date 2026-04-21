@@ -157,7 +157,8 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
     ```
 
 4. Create a `values.yaml` file for parameterizing the workload Cluster helm chart. You will see that the `values.yaml` file contains some default value overrides, like the images and templates applied for the workload nodes:
-    ```yaml
+
+    ```shell
     cat > values.yaml << EOF
     ONE_XMLRPC: "http://$ONE_FRONTEND_IP:2633/RPC2"
     ONE_AUTH: "oneadmin:$ONEADMIN_PASSWORD"
