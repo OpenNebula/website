@@ -190,7 +190,7 @@ These two files store a JSON object that has the same structure but with differe
 | graphs          | Defines the different colors used in the different graphs used in the app. |
 
 {{< alert title="Warning" type="warning" >}}
-Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "../../../software/installation_process/build_from_source_code/sunstone_dev" %}})):{{< /alert >}} 
+Remember that these files are source files, so any change on this configuration will force Sunstone to be compiled again in order to apply these changes. See [Sunstone Development]({{% relref "software/development/sunstone_dev" %}})):{{< /alert >}} 
 
 ### Configure Guacamole
 
