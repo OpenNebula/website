@@ -14,7 +14,7 @@ weight: "6"
 
 <!--# Single Front-end Installation -->
 
-This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced in other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula on your own.
+This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced in other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula for your chosen distribution.
 
 Proceed with the following steps to get the fully-featured OpenNebula Front-end up.
 
@@ -30,13 +30,13 @@ Not all OpenNebula dependencies are in base distribution repositories. On select
 
 **AlmaLinux 9, 10**
 
-```default
+```shell
 yum -y install epel-release
 ```
 
 **RHEL 9**
 
-```default
+```shell
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
@@ -76,22 +76,22 @@ Install all OpenNebula Front-end components by executing the following commands 
 
 ### AlmaLinux / RHEL
 
-```bash
+```shell
 yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 ### Debian / Ubuntu
 
-```bash
+```shell
 apt-get update
 ```
-```bash
+```shell
 apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 ### SLES / openSUSE
 
-```bash
+```shell
 zypper install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
@@ -112,13 +112,13 @@ OpenNebula’s initial deployment on first usage creates a user `oneadmin` **ins
 
 1. Log in as the `oneadmin` system user with this command:
 
-```bash
+```shell
 sudo -u oneadmin /bin/sh
 ```
 
 2. Create file `/var/lib/one/.one/one_auth` with initial password in the format `oneadmin:<password>`
 
-```bash
+```shell
 echo 'oneadmin:changeme123' > /var/lib/one/.one/one_auth
 ```
 
@@ -143,13 +143,13 @@ The OneGate server allows communication between VMs and OpenNebula. It’s optio
 
 1. To configure OneGate, edit `/etc/one/onegate-server.conf` and update the `:host` parameter with service listening address accordingly. For example, use `0.0.0.0` to work on all configured network interfaces on the Front-end:
 
-```bash
+```shell
 :host: 0.0.0.0
 ```
 
-2. To configure OpenNebula Daemon, edit `/etc/one/oned.conf` and set the `ONEGATE_ENDPOINT` with the URL and port of your OneGate server (domain or IP-based). The endpoint address **must be reachable directly from your future Virtual Machines**. You need to decide which virtual networks and addresses will be used in your cloud. For example:
+2. To configure OpenNebula Daemon, edit `/etc/one/oned.conf` and set the `ONEGATE_ENDPOINT` with the URL and port of your OneGate server (domain or IP-based). The endpoint address **must be reachable directly from your future Virtual Machines**. You need to decide which Virtual Networks and addresses will be used in your cloud. For example:
 
-```bash
+```shell
 ONEGATE_ENDPOINT="http://one.example.com:5030"
 ```
 
@@ -162,7 +162,7 @@ For advanced setup, follow the OneGate [configuration reference]({{% relref "one
 
 The OneFlow server orchestrates the services and multi-VM deployments. While for most cases the default configuration fits well, you might need to reconfigure the service to be able to control the OneFlow **remotely** over API. Edit the `/etc/one/oneflow-server.conf` and update `:host:` parameter with service listening address accordingly. For example, use `0.0.0.0` to work on all configured network interfaces on the Front-end:
 
-```bash
+```shell
 :host: 0.0.0.0
 ```
 
@@ -287,7 +287,7 @@ The list below shows the ports used by OpenNebula. These ports need to be open f
 
 |     Port      | Description                                                  |
 |---------------|--------------------------------------------------------------|
-| `22`          | Front-end host SSH server                                    |
+| `22`          | Front-end Host SSH server                                    |
 | `2474`        | OneFlow server                                               |
 | `2616`        | Next-generation GUI server FireEdge                          |
 | `2633`        | Main OpenNebula Daemon (oned), XML-RPC API endpoint          |
@@ -311,22 +311,22 @@ You should open the outgoing connections to these services.
 
 To stop, start, or restart any of the listed individual [services]({{% relref "#frontend-services" %}}), follow the examples below for a selected service:
 
-```bash
+```shell
 systemctl stop opennebula
 ```
-```bash
+```shell
 systemctl start opennebula
 ```
-```bash
+```shell
 systemctl restart opennebula
 ```
-```bash
+```shell
 systemctl try-restart opennebula
 ```
 
 Use following command to **stop all** OpenNebula services:
 
-```bash
+```shell
 systemctl stop opennebula opennebula-hem opennebula-fireedge \
     opennebula-gate opennebula-flow opennebula-guacd \
     opennebula-novnc opennebula-showback.timer \
@@ -335,7 +335,7 @@ systemctl stop opennebula opennebula-hem opennebula-fireedge \
 
 Use the following command to **restart all** already running OpenNebula services:
 
-```bash
+```shell
 systemctl try-restart opennebula-hem opennebula-fireedge \
     opennebula-gate opennebula-flow opennebula-guacd \
     opennebula-novnc opennebula-ssh-agent
@@ -352,9 +352,9 @@ In production environments the services should be stopped in a specific order an
 
 ## Step 9. Next Steps
 
-Now that you have successfully started your OpenNebula services, you can continue with adding content to your cloud. Add hypervisor nodes, storage, and virtual networks. Or you can provision users with groups and permissions, images, define and run Virtual Machines.
+Now that you have successfully started your OpenNebula services, you can continue with adding content to your cloud. Add hypervisor nodes, storage, and Virtual Networks. Or you can provision users with groups and permissions, images, define and run Virtual Machines.
 
 Continue with the following guides:
 
-- [Open Cluster Deployment]({{% relref "../index#open-cluster-deployment" %}}) to provision hypervisor nodes, storage, and virtual networks.
+- [Open Cluster Deployment]({{% relref "../index#open-cluster-deployment" %}}) to provision hypervisor nodes, storage, and Virtual Networks.
 - [Management and Operations]({{% relref "../../index#operations-guide" %}}) to add users, groups, images, define Virtual Machines, and a lot more …

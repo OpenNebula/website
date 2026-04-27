@@ -22,7 +22,7 @@ The aim of this Chapter is to give you a quick-start guide to deploying OpenNebu
 
 After reading this Chapter, you can go on to add the [KVM]({{% relref "kvm_node_installation" %}}) or [LXC]({{% relref "lxc_node_installation" %}}) hypervisor nodes.
 
-To scale from a single-Host Front-end deployment to several Hosts for better performance or reliability (HA), continue to the following chapters on [Large-scale Deployment]({{% relref "/product/control_plane_configuration/large-scale_deployment/" %}}), [High Availability]({{% relref "/product/control_plane_configuration/high_availability/index" %}}) and [Data Center Federation]({{% relref "/product/control_plane_configuration/data_center_federation/index" %}}).
+To scale from a single-host Front-end deployment to several Hosts for better performance or reliability (HA), continue to the following chapters on [Large-scale Deployment]({{% relref "/product/control_plane_configuration/large-scale_deployment/" %}}), [High Availability]({{% relref "/product/control_plane_configuration/high_availability/index" %}}) and [Data Center Federation]({{% relref "/product/control_plane_configuration/data_center_federation/index" %}}).
 
 ## Hypervisor Compatibility
 
