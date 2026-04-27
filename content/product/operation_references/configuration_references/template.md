@@ -204,6 +204,8 @@ The hypervisor column states that the attribute is **O**ptional, **M**andatory, 
 | `VIRTIO_SCSI_QUEUES` | Number of queues for the virtio-scsi controller.                                                                                                                                                       | O     | -  |
 | `VIRTIO_BLK_QUEUES`  | Number of dispatch queues for the virtio-blk driver.                                                                                                                                                   | O     | -   | 
 | `IOTHREADS`          | Number of iothreads for virtio disks. By default threads will be assigned to disk by round robin algorithm. Disk thread id can be forced by disk `IOTHREAD` attribute.                         | O     | -         |
+| `MIGRATE_AUTO_CONVERGE` | Auto-converge configuration for live migration. Format: `<initial>[,<increment>]` with values ranging from 0 to 100. When defined, implicitly enables the `--auto-converge` option during migration. Maps to the `virsh migrate --auto-converge-initial` and `--auto-converge-increment` options. | O     | -  |
+| `MIGRATE_COMPRESSED` | Enable compression during live migration. When set to `yes`, the VM memory will be compressed during migration to reduce bandwidth usage. Maps to the `virsh migrate --compressed` option.                                               | O     | -  |
 
 When setting up the virtio-scsi or virtio-blk queues, you can use the keyword `auto` which defaults to the number of vCPUs defined in the Virtual Machine. Also, the virtio-blk queues can be overridden per `DISK` so you can enable the multi-queue feature for the selected disks only.
 
@@ -213,8 +215,10 @@ FEATURES = [
     ACPI = "yes",
     APIC = "no",
     GUEST_AGENT = "yes",
-    VIRTIO_SCSI_QUEUES = "auto"
-    VIRTIO_BLK_QUEUES = "auto"
+    VIRTIO_SCSI_QUEUES = "auto",
+    VIRTIO_BLK_QUEUES = "auto",
+    MIGRATE_AUTO_CONVERGE = "10,5",
+    MIGRATE_COMPRESSED = "yes"
 ]
 ```
 
