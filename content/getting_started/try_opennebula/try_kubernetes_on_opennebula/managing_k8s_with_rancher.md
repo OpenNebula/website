@@ -213,7 +213,7 @@ To deploy an OpenNebula RKE2 Cluster we will install it using the RKE2 Helm char
 
 To install from the Helm chart, follow these steps:
 
-In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Charts**.
+In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps -> Charts**.
 
 In the **Filter charts results** input field, type `capone`. This should display two charts, `capone-kadm` and `capone-rke2`.
 
@@ -244,7 +244,7 @@ Here you will to ensure that the values of the following parameters match your i
 - `PRIVATE_NETWORK_NAME`: Name for the private network created on the Front-end, in our case `private`.
 - `PUBLIC_NETWORK_NAME`: Name for the public network created on the Front-end, in our case `vnet`.
 
-To find the IP for `ONE_XMLRPC` on the Front-end (as oneadmin) run `onevne show vnet | grep GATEWAY` and.
+To find the IP for `ONE_XMLRPC` on the Front-end (as oneadmin) run `onevnet show vnet | grep GATEWAY` and use the IP address from the output of this command.
 
 The parameters that were modified for this example are shown below:
 
@@ -259,7 +259,7 @@ After modifying the parameters, click the **Install** button on the bottom right
 
 The Cluster should install and deploy; this process can take a few minutes.
 
-In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps** -> **Installed Apps**. The list of applications should show the name of the Cluster you deployed (in this example, `capone4`), with status `Deployed`.
+In Rancher's left-hand navigation pane, go to the Management Cluster by clicking the Rancher icon ![rancher](/images/icons/rancher/rancher_icon.png), then select **Apps -> Installed Apps**. The list of applications should show the name of the Cluster you deployed (in this example, `capone4`), with status `Deployed`.
 
 {{< image path="/images/rancher_capone_deployed.png" alt="Rancher installed apps" align="center" width="90%" mb="20px" >}}
 
@@ -269,11 +269,11 @@ You can also verify the deployment on the Front-end, by verifying that three new
 
 ```default
 oneadmin@frontend:~$ onevm list
-  ID USER     GROUP    NAME                                         STAT  CPU     MEM HOST                                TIME
-   4 oneadmin oneadmin capone4-ljm6z                                runn    1      3G localhost                       0d 00h01
-   3 oneadmin oneadmin vr-capone4-cp-0                              runn    1    512M localhost                       0d 00h01
-   2 oneadmin oneadmin Capi-2                                       runn    2      8G localhost                       2d 19h37
-   0 oneadmin oneadmin Alpine Linux 3.20-0                          runn    1    256M localhost                       2d 20h03
+  ID USER     GROUP    NAME                  ...   STAT  CPU     MEM HOST        ...       TIME
+   4 oneadmin oneadmin capone4-ljm6z         ...   runn    1      3G localhost   ...   0d 00h01
+   3 oneadmin oneadmin vr-capone4-cp-0       ...   runn    1    512M localhost   ...   0d 00h01
+   2 oneadmin oneadmin Capi-2                ...   runn    2      8G localhost   ...   2d 19h37
+   0 oneadmin oneadmin Alpine Linux 3.20-0   ...   runn    1    256M localhost   ...   2d 20h03
 ```
 
 This shows the Virtual Router `vr-capone4-cp-0`, the master node `capone4-ljm6z`, and the CAPI appliance `Capi-2`; as well as an Alpine Linux VM previously installed.
@@ -358,7 +358,7 @@ In the `capone4` Cluster, select **Cluster Management**, then the `capone4` Clus
 
 {{< image path="/images/rancher_goto_wkload_cluster.png" alt="Rancher go to workload cluster" align="center" width="40%" mb="20px" >}}
 
-In the left-hand nav pane for the Cluster, go to **Apps** -> **Charts**. In the **Filter charts results** input field, type `longhorn`.
+In the left-hand nav pane for the Cluster, go to **Apps -> Charts**. In the **Filter charts results** input field, type `longhorn`.
 
 {{< image path="/images/rancher_install_longhorn.png" alt="Rancher install Longhorn" align="center" width="90%" mb="20px" >}}
 
