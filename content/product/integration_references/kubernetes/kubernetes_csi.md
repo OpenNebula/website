@@ -17,7 +17,7 @@ By de-coupling the storage plugin development from the core Kubernetes codebase,
 
 ## CSI in OpenNebula
 
-OpenNebula provides its own CSI Driver to allow Kubernetes Clusters running on OpenNebula resources to dynamically provision and manage persistent storage. This driver leverages OpenNebula's native storage capabilities, enabling users to:
+OpenNebula provides its own CSI Driver to allow Kubernetes Clusters running on OpenNebula resources to dynamically provision and manage persistent storage. This driver leverages OpenNebula's native storage capabilities, enabling the following capabilities:
 
 * Dynamically Provision Volumes: Automatically create OpenNebula images and attach them to Virtual Machines acting as Kubernetes nodes.
 
