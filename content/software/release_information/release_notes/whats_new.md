@@ -35,7 +35,7 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 Additionally, the following functionalities are present that were not in OpenNebula 7.2.0, although they debuted in subsequent maintenance releases of the 7.2.x series:
 
-* [Allow the customization of the favicon](https://github.com/OpenNebula/one/issues/7484).
+* [Allow the customization of the favicon](../../../product/operation_references/opennebula_services_configuration/fireedge.md#branding-fireedge).
 
 ## Other Issues Solved
 
