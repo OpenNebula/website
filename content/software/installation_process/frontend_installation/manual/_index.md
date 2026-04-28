@@ -1,5 +1,6 @@
 ---
 title: "Manual Installation with System Packages"
+linkTitle: "Manual - Packages"
 date: "2025-02-17"
 description: "Manually install the Front-end and hypervisors from the OpenNebula packages."
 categories:
@@ -18,4 +19,4 @@ weight: "2"
 
 <!--# Package Installation References -->
 
-This sections provides details on installing an OpenNebula cloud, beginning with the OpenNebula Front-end and including services and hypervisors. The complete references for configuring OpenNebula services, templates, and hypervisor nodes may be found in [Operation References]({{% relref "../../../product/operation_references/" %}}).
+This sections provides details on installing an OpenNebula cloud, beginning with the OpenNebula Front-end and including services and hypervisors. The complete references for configuring OpenNebula services, templates, and hypervisor nodes may be found in [Operation References]({{% relref "product/operation_references/" %}}).

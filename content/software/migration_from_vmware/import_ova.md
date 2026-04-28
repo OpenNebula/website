@@ -23,7 +23,7 @@ The same command allows users to import single VMDK disks as OpenNebula Images, 
 
 ## Install
 
-OneSwap is developed and maintained by OpenNebula on a [dedicated github repository](https://github.com/OpenNebula/one-swap). Starting from OpenNebula 7.0, OneSwap is being shipped as a package called `opennebula-swap` in the [OpenNebula Repositories]({{% relref "../installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}) for Ubuntu 24.04, AlmaLinux 9 and Debian 12. Install the `opennebula-swap` package with your package manager.
+OneSwap is developed and maintained by OpenNebula on a [dedicated github repository](https://github.com/OpenNebula/one-swap). Starting from OpenNebula 7.0, OneSwap is being shipped as a package called `opennebula-swap` in the [OpenNebula Repositories]({{% relref "software/installation_process/frontend_installation/manual/opennebula_repository_configuration.md" %}}) for Ubuntu 24.04, AlmaLinux 9 and Debian 12. Install the `opennebula-swap` package with your package manager.
 
 ### Configure
 

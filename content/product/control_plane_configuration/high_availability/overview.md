@@ -16,7 +16,7 @@ OpenNebula provides high availability mechanisms both for the Front-end and for 
 
 ## How Should I Read This Chapter
 
-Before starting, you need to have [OpenNebula Front-end]({{% relref "front_end_installation" %}}) running.
+Before starting, you need to have [OpenNebula Front-end]({{% relref "frontend_install" %}}) running.
 
 Read the section [Front-end HA Setup]({{% relref "frontend_ha#frontend-ha-setup" %}}) to learn how to set up a highly available (HA) OpenNebula Front-end. Continue with [Virtual Machines High Availability]({{% relref "vm_ha#ftguide" %}}) if you are interested in a way to provide high availability to your Virtual Machines.
 

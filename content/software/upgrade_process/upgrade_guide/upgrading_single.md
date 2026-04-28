@@ -12,13 +12,13 @@ weight: "3"
 
 <!--# Upgrading Single Front-end Deployments -->
 {{< alert title="Important" type="info" >}}
-If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
+If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "frontend_install#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
 
 ## Upgrading from 6.x and higher
 
 ### Step 1. Check Virtual Machine Status
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). (For more information on the life cycle of Virtual Machines, please see [Virtual Machine Instances]({{% relref "../../../product/virtual_machines_operation/virtual_machines/vm_instances" %}}).)
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). (For more information on the life cycle of Virtual Machines, please see [Virtual Machine Instances]({{% relref "product/virtual_machines_operation/virtual_machines/vm_instances" %}}).)
 
 ### Step 2. Set All Hosts to Disable Mode
 
