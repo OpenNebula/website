@@ -28,16 +28,10 @@ Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configura
 
 Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable third party repositories by running the following commands under privileged user (`root`):
 
-**AlmaLinux 8,9**
+**AlmaLinux 9, 10**
 
 ```shell
 yum -y install epel-release
-```
-
-**RHEL 8**
-
-```default
-rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 **RHEL 9**
@@ -95,23 +89,11 @@ apt-get update
 apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
-### Optional: Install dependencies for OpenNebula Edge Clusters provisioning
-
-There are two main dependencies which needs to be installed on the FE for running provisioning.
-
-1. **Terraform** – is needed to provision resources on public cloud providers, download the binary as follows:
+### SLES / openSUSE
 
 ```shell
 zypper install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
-```bash
-chmod 0755 /usr/bin/terraform
-```
-
-2. **Ansible** – is used to configure the provisioned resources (cloud or on-premises). Ansible system package is installed
-as a dependency of the OpenNebula provision package. However, for HCI provisioning including Ceph, the system-installed
-ansible version may not be sufficient as it requires ansible-core 2.15+. It is advised to use the latest Ubuntu for the FE if
-Ceph HCI provision is needed or to install ansible 2.15+ on the system and make it default for oneadmin user.
 
 ## Step 4. Enabling MySQL/MariaDB (Optional)
 
