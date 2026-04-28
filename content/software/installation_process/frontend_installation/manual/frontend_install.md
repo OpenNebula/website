@@ -91,7 +91,7 @@ apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flo
 
 ### SLES / openSUSE
 
-```bash
+```shell
 zypper install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
