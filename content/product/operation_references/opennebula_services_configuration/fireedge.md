@@ -110,19 +110,22 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 ### Branding FireEdge
 
-You can add your logo to the login, main, favicon, and loading screens by updating the `logo:` attribute as follows:
+You can add your logo to the login, main and loading screens by updating the `logo:` attribute as follows:
 
 - The logo configuration is done in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
 - The logo of the main UI screen is defined for each view.
 
 The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/logos`.
 
-The following example shows how you can change the logo to a generic linux one (included by default in all FireEdge installations):
+Also, you can add you favicon by updating the `favicon:` attribute defined in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file. The favicon must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/favicon`.
+
+The following example shows how you can change the logo and the favicon to a generic linux one (included by default in all FireEdge installations):
 
 ```yaml
 # /etc/one/fireedge/sunstone/views/sunstone-views.yaml
 ---
 logo: linux.png
+favicon: linux.png
 
 groups:
     oneadmin:
@@ -133,7 +136,11 @@ default:
 ```
 
 {{< alert title="Note" type="info" >}}
-The logo can be updated without having to restart the FireEdge server!{{< /alert >}} 
+If the attribute logo is defined and the attribute favicon is not defined, the logo attribute will be used as favicon.
+{{< /alert >}} 
+
+{{< alert title="Note" type="info" >}}
+The logo and the favicon can be updated without having to restart the FireEdge server!{{< /alert >}} 
 
 ![fireedge_sunstone_linux_login_logo](/images/fireedge_login_linux_logo.png) ![fireedge_sunstone_linux_drawer_logo](/images/fireedge_drawer_linux_logo.png)
 
