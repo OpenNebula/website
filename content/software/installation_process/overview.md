@@ -33,7 +33,7 @@ The first step in deploying an OpenNebula cloud is deploying the OpenNebula Fron
         * [Repository Configuration for OpenNebula Community Edition]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration_ce/" %}})
         * [Repository Configuration for OpenNebula Enterprise Edition]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration_ee/" %}})
     3. [Single Front-end Installation]({{% relref "software/installation_process/frontend_installation/frontend_install/" %}})
-* [**Advanced Deployment with OneDeploy**]({{% relref "software/installation_process/advanced_installation_with_onedeploy/" %}})
+* [**Advanced Deployment with OneDeploy**]({{% relref "software/installation_process/advanced_installation_with_onedeploy/" %}}): OneDeploy automates the deployment of cloud infrastructure with advanced configuration options.
 
 After deploying an OpenNebula Front-end, you can move on to deploying and managing Clusters through OpenNebula's Sunstone user interface, the CLI or the REST API.  
 
