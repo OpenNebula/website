@@ -11,12 +11,33 @@ weight: "1"
 
 OneForm is OpenNebula’s automated cloud provisioning tool. It serves as an automated “cloud-on-demand” engine, allowing you to provision resources on-premises, on remote bare-metal, or public cloud providers through a simple, streamlined workflow. You can provision Clusters through the Sunstone user interface, the CLI, or the API.
 
-The OneForm provisioning documentation demonstrates how to provision and manage clusters automatically with OneForm. The OneForm documentation is divided into three separate concepts:
+## Before Starting
 
-* **Providers**: OpenNebula entities that abstract the handling of configuration and credentials for bare-metal, cloud hardware, or virtual resources.
-* **Provisions**: Provisions are Cluster instances deployed by OneForm through the provisioning process.
-* **Operations**: Tasks executed on Clusters after provisioning, such as scaling, monitoring, maintenance and deprovisioning.
+In order to use OneForm, you must first install an OpenNebula Front-end using one of the available deployment options, refer to the [Front-end Installation Guides]({{% relref "software/installation_process/frontend_installation/" %}}) for details. 
 
-Please refer to the [OneForm Documentation]({{% relref "product/cluster_provisioning/" %}}) for details on how to create and use Providers and automatically provision Clusters.
+## Provisioning Clusters with OneForm
 
-In order to use OneForm, you should first install an OpenNebula Front-end using one of the different deployment options available, refer to the [Front-end Installation Guides]({{% relref "software/installation_process/frontend_installation/" %}}) for details. 
+Automatically Provisioning a Cluster with OneForm consists of the following steps:
+
+### Step 1: Create a OneForm Provider
+ 
+A OneForm Provider handles the credentials, API logic, and configuration for connecting to on-premises or cloud servers. 
+
+#### On-premises Servers
+A [Provider for on-premises servers]({{% relref "product/cluster_provisioning/cluster_providers/onprem_provider/" %}}) is pre-installed with the OpenNebula Front-end. See the [On-premises Provider Documentation]({{% relref "product/cluster_provisioning/cluster_providers/onprem_provider/" %}}) for more details.
+
+#### 3rd-party Cloud and Bare-metal Service Providers
+
+To use 3rd-party cloud and bare-metal services you must [install the relevant drivers](https://github.com/OpenNebula/oneform-registry/wiki/OneForm-Driver-Registry) from the [OneForm Registry repository](https://github.com/OpenNebula/oneform-registry). OneForm drivers define the logic for communicating with a 3rd-party IaaS API, enabling OneForm to automatically provision server instances. 
+
+Once you have installed the OneForm driver for your preferred cloud service, refer to the [Provider Documentation](https://github.com/OpenNebula/oneform-registry/wiki) in the OneForm Registry Wiki to configure your OneForm Provider, defining your preferred region and adding credentials.
+
+### Step 2: Provision Clusters with OneForm
+
+Once you have Providers configured for your target infrastructure, you can proceed to provision Clusters with OneForm. OneForm communicates with 3rd-party IaaS APIs to instantiate the requested resources or communicates with on-premises hardware through SSH. Once the resources are available and ready, OneForm proceeds with an OpenNebula Cluster deployment, installing the necessary components for the Cluster to support workloads managed through the OpenNebula Front-end. 
+
+Refer to the [Provisioning Documentation](https://github.com/OpenNebula/oneform-registry/wiki) in the OneForm Registry Wiki for your preferred cloud service provider or the On-premises Provisioning Documentation for a [SSH Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/onprem_ssh_cluster/" %}}) or [NFS Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/onprem_nfs_cluster/"%}}).
+
+### Step 3: Manage the Clusters
+
+OneForm provides various operations to manage Clusters once they have been provisioned. This includes deprovisioning, scaling and recovering Clusters. Please refer to the [OneForm Operations Documentation]({{% relref "product/cluster_provisioning/cluster_operations/provision_operations/" %}})

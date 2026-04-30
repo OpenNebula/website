@@ -5,6 +5,7 @@ description:
 categories:
 pageintoc: "170"
 tags:
+show_card: false
 weight: "1"
 ---
 
