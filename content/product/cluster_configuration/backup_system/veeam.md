@@ -157,7 +157,7 @@ You can find more details regarding the Rsync datastore in [Backup Datastore: Rs
 
 ### 3. Install and configure the oVirtAPI module
 
-In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backup server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "software/installation_process/frontend_installation/manual/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
+In order to install the oVirtAPI module, you need to have the OpenNebula repository configured in the backup server. You can do so by following the instructions in [OpenNebula Repositories]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration.md" %}}). Then, install the opennebula-ovirtapi package.
 
 The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You should change the following variables before starting the service:
 

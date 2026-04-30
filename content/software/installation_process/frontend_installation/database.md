@@ -1,5 +1,6 @@
 ---
-title: "Database Setup"
+title: "Manual Installation - Database Setup"
+linkTitle: "Manual - Database"
 date: "2025-02-17"
 description:
 categories:
@@ -10,9 +11,7 @@ weight: "2"
 
 <a id="database-setup"></a>
 
-<!--# Database Setup -->
-
-OpenNebula Front-end uses the database to persist the complete state of the cloud. It supports several database solutions and each is recommended for different usage. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the backend). The following options are available:
+The OpenNebula Front-end uses the database to persist the complete state of the cloud. It supports several database solutions and each is recommended for different usage. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the backend). The following options are available:
 
 * Default embedded [SQLite]({{% relref "#sqlite-setup" %}}) for small workloads
 * Recommended [MySQL/MariaDB]({{% relref "#mysql-setup" %}}) for production

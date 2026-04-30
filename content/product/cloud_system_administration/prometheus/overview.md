@@ -21,7 +21,7 @@ This Chapter contains documentation on how to configure OpenNebula to work with 
 
 ## How Should I Read This Chapter
 
-Before reading this Chapter, you should have already installed your [Front-end]({{% relref "software/installation_process/frontend_installation/manual/frontend_install.md#frontend-installation" %}}) and [KVM Hosts]({{% relref "software/installation_process/frontend_installation/manual/frontend_install.md#kvm-node" %}}), and have an OpenNebula cloud up and running with at least one virtualization node.
+Before reading this Chapter, you should have already installed your [Front-end]({{% relref "software/installation_process/frontend_installation/frontend_install.md#frontend-installation" %}}) and [KVM Hosts]({{% relref "software/installation_process/frontend_installation/frontend_install.md#kvm-node" %}}), and have an OpenNebula cloud up and running with at least one virtualization node.
 
 This Chapter is structured as follows:
 

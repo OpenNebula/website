@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "26"
 tags: [OneForm, cluster, deployment, automatic]
-weight: "1"
+weight: "2"
 ---
 
 OneForm is OpenNebula’s automated cloud provisioning tool. It serves as an automated “cloud-on-demand” engine, allowing you to provision resources on-premises, on remote bare-metal, or public cloud providers through a simple, streamlined workflow. You can provision Clusters through the Sunstone user interface, the CLI, or the API.
