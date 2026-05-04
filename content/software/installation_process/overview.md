@@ -39,7 +39,7 @@ After deploying an OpenNebula Front-end, you can move on to deploying and managi
 
 ## Cluster Deployment
 
-After successfully deployed an OpenNebula Front-end, you can proceed to manually install or automatically create (provision) Clusters to handle cloud workloads. There are three options:
+After successfully deploying an OpenNebula Front-end, you can proceed to manually install or automatically create (provision) Clusters to handle cloud workloads. There are three options:
 
 * [Automated Cluster Provisioning with OneForm]({{% relref "software/installation_process/cluster_installation/automated/" %}})
 * [Manual Cluster Installation with KVM]({{% relref "software/installation_process/cluster_installation/kvm_node_installation/" %}})

@@ -24,7 +24,7 @@ An on-premises Provider is installed by default with OpenNebula, refer to the [O
 Provider drivers for 3rd-party IaaS cloud providers can be installed in your OpenNebula deployment. The Provider drivers are available in the [OneForm Registry Repository](https://github.com/OpenNebula/oneform-registry) in the [OpenNebula GitHub Project](https://github.com/OpenNebula). Instructions for installing and synchronizing the 3rd-party Provider drivers can be found in the [OneForm Registry Wiki](https://github.com/OpenNebula/oneform-registry/wiki). After installing the drivers, you can find additional guides in the Wiki to create Providers for the following cloud/bare-metal services:
 
 - [Amazon AWS Provider](https://github.com/OpenNebula/oneform-registry/wiki/Amazon-Web-Services-Provider)
-- [Equinix Provider](https://github.com/OpenNebula/oneform-registry/wiki/Equinix-Provider)
+- [i3Dnet Provider](https://github.com/OpenNebula/oneform-registry/wiki/i3Dnet-Provider)
 - [Scaleway Provider](https://github.com/OpenNebula/oneform-registry/wiki/Scaleway-Provider)
 
 ## Logical Model of a Provider
