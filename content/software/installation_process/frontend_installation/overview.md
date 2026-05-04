@@ -13,29 +13,33 @@ weight: "1"
 
 The **OpenNebula Front-end** serves as the control plane for your entire cloud infrastructure. It is the central orchestrator responsible for deploying and managing the lifecycle of Cluster nodes, Virtual Machines (VMs), Virtual Networks, and storage datastores. The Front-end hosts the core OpenNebula services and provides the interfaces — a REST API, a CLI and the Sunstone user interface — through which administrators and users interact with the cloud. 
 
-The Front-end can be deployed in an on-premises server, a Virtual Machine, or bare-metal instance from a cloud provider such as AWS or Scaleway. This decision is governed by the intended cloud architecture and available resources. Ensure that the virtual or physical machine on which you intend to deploy the Front-end meets the minimum [requirements given below](#requirements). 
+The Front-end can be deployed using an on-premises server, a Virtual Machine, or bare-metal instance from an IaaS cloud provider such as AWS or Scaleway. This decision is governed by the intended cloud architecture and available resources. Ensure that the virtual or physical machine on which you intend to deploy the Front-end meets the minimum [requirements given below](#requirements). 
 
 Once you have deployed an OpenNebula Front-end, you can deploy and manage Cluster nodes for handling cloud workloads including Kubernetes Clusters and Virtual Machines. The server on which you deploy the Front-end can also be used as a workload Cluster node simultaneously, if the hardware specification is adequate.
 
 ## Installation Methods
 
-Depending on your environment (evaluation, testing, or production) and your preference for automation, there are three options to set up your Front-end.
+Depending on your environment (evaluation, testing, or production) and your preference for automation, there are three options to deploy your OpenNebula Front-end.
 
 ### 1. Automated Installation via miniONE
 
-The miniONE tool is the fastest way to get an OpenNebula cloud up and running. It is a lightweight installation script designed for deploying an OpenNebula cloud configuration specialized for evaluation, testing, and development environments.  
+The miniONE tool is the fastest method to get an OpenNebula cloud up and running. It is a lightweight installation script designed for deploying an OpenNebula cloud configuration specialized for evaluation, testing, and development environments.  
 
-* **Best for**: Rapid prototyping, sandboxes, and learning.  
+* **Best for**: Rapid prototyping, sandboxes, testing, and learning.  
 
 * **Workflow**: A single command installs the Front-end and, optionally, a local KVM or LXC hypervisor on the same host.
 
 * **Environment**: Typically used on a fresh Linux installation (Ubuntu or AlmaLinux).
 
-Refer to the [Automatic Installation with miniONE]({{% relref "software/installation_process/frontend_installation/automated/" %}}) documentation for more details.
+Refer to the [Automatic Installation with miniONE Documentation]({{% relref "software/installation_process/frontend_installation/automated/" %}}) for more details. 
+
+{{< alert title="Note" type="info" >}}
+The miniONE installation is not appropriate for production environments, if you intend to deploy a production cloud, we recommend that you use the [Manual Installation Process](#2-manual-installation-with-system-packages) or [OneDeploy](#3-advanced-deployment-with-onedeploy).
+{{< /alert >}}
 
 ### 2. Manual Installation with System Packages
 
-For users who require granular control over an OpenNebula deployment, the manual method involves installing OpenNebula directly from official system repositories.  
+For users who require granular control over an OpenNebula cloud deployment, the manual method involves installing OpenNebula directly from official system repositories.  
 
 * **Best for**: Custom production architectures, specific security hardening, or integration with existing databases.
 
@@ -48,11 +52,9 @@ For users who require granular control over an OpenNebula deployment, the manual
 
 * **Environment**: Recommended with a fresh Linux installation (Ubuntu or AlmaLinux), this can also work on existing infrastructure with appropriate configuration.
 
-Refer to the [Manual Installation with System Packages Documentation](software/installation_process/frontend_installation/manual/) for more details.
-
 ### 3. Advanced Deployment with OneDeploy
 
-OneDeploy is an Ansible-based automation toolset intended for complex, production-ready, or High Availability (HA) deployments. If you are looking to automate the deployment of OpenNebula with flexibility (such as a multi-node production environment across various infrastructure providers), please refer to the [Advanced Installation with OneDeploy]({{% relref "software/installation_process/advanced_installation_with_onedeploy/" %}}) section of the documentation.  
+OneDeploy is an Ansible-based automation toolset intended for complex, production-ready, or High Availability (HA) deployments. If you are looking to automate the deployment of OpenNebula with high flexibility (such as a multi-node production environment distributed across various infrastructure providers), please refer to the [Advanced Installation with OneDeploy]({{% relref "software/installation_process/advanced_installation_with_onedeploy/" %}}) section of the documentation.  
 
 ## Cluster Installation 
 
@@ -74,6 +76,7 @@ Regardless of the method chosen, you must ensure that your host meets the minimu
 Hardware requirements for the Front-end machine differ if you intend the target machine to be used solely for the Front-end control plane or for the machine to be used for both the Front-end and Cluster workloads.
 
 **Front-end only**:
+* Virtual Machine or bare-metal instance
 * 16 GiB RAM
 * 80 GiB free disk space
 

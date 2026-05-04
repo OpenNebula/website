@@ -10,11 +10,7 @@ show_card:
 weight: "6"
 ---
 
-<a id="ignc"></a>
-
 <a id="frontend-install"></a>
-
-<!--# Single Front-end Installation -->
 
 This page describes how to install a complete OpenNebula Front-end from binary packages available in the [software repositories]({{% relref "opennebula_repository_configuration" %}}) configured in the previous section. We recommend using a Host with the supported operating system as installation from packages provides the best experience and is referenced in other places of this documentation. If there are no packages for your distribution, you might consider reading the [Building from Source Code]({{% relref "compile#compile" %}}) guide to build OpenNebula for your chosen distribution.
 
@@ -22,7 +18,9 @@ Proceed with the following steps to get the fully-featured OpenNebula Front-end 
 
 <a id="setup-opennebula-repos"></a>
 
-## Step 1. Configure the OpenNebula Repositories
+## Step 1. Install the Database and Configure the OpenNebula Repositories
+
+Before installing the OpenNebula Front-end, you should install the database and configure the repositories. If you haven't already installed the database, complete the [Database Setup Guide]({{% relref "software/installation_process/frontend_installation/database" %}}) .
 
 Follow one of the following guides to configure the software repositories for the OpenNebula edition you intend to deploy:
 

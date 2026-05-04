@@ -14,7 +14,7 @@ weight: "1"
 
 This section contains details for deploying an OpenNebula-managed cloud. There are two principal components of an OpenNebula cloud deployment:
 
-* **OpenNebula Front-end**: This is the control plane of an OpenNebula cloud deployment. The Front-end enables the deployment of Cluster nodes for handling cloud workloads, the deployment and management of Virtual Machines, Virtual Networks, Kubernetes Clusters, monitoring, user and security management.
+* **OpenNebula Front-end**: This is the control plane of an OpenNebula cloud deployment. The Front-end enables the deployment of Cluster nodes for handling cloud workloads along with the deployment and management of Virtual Machines, Virtual Networks, Kubernetes Clusters, cloud monitoring, user and security management.
 
 * [**OpenNebula Clusters**]({{% relref "product/cluster_configuration/hosts_and_clusters/cluster_guide/" %}}): Logical groupings of Hosts, datastores and Virtual Networks that provide compute capacity. The OpenNebula Front-end deploys and manages Clusters using either on-premises hardware or resources from 3rd-party IaaS providers. Through the Edge Provisioning model, the Front-end can dynamically deploy and undeploy Edge Clusters on remote providers to scale cloud compute capacity on demand.
 
@@ -27,7 +27,7 @@ Installation starts with the deployment of an OpenNebula Front-end. You should s
 The first step in deploying an OpenNebula cloud is deploying the OpenNebula Front-end. There are three options:
 
 * [**Automatic Deployment with miniONE**]({{% relref "software/installation_process/frontend_installation/automated/" %}}): miniONE is a tool for rapid deployment of an OpenNebula Front-end, suitable for evaluation, testing and learning. 
-* **Manual Deployment with System Packages**: This option is appropriate for a production environment, for users wanting fine-grained control over an OpenNebula deployment. The process consists of three steps to be followed in order:
+* **Manual Deployment with System Packages**: This option is appropriate for a production environment, for users needing fine-grained control over an OpenNebula cloud deployment. The process consists of three steps to be followed in order:
     1. [Database Setup]({{% relref "software/installation_process/frontend_installation/database" %}})
     2. Repository Configuration:
         * [Repository Configuration for OpenNebula Community Edition]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration_ce/" %}})
@@ -35,11 +35,11 @@ The first step in deploying an OpenNebula cloud is deploying the OpenNebula Fron
     3. [Single Front-end Installation]({{% relref "software/installation_process/frontend_installation/frontend_install/" %}})
 * [**Advanced Deployment with OneDeploy**]({{% relref "software/installation_process/advanced_installation_with_onedeploy/" %}}): OneDeploy automates the deployment of cloud infrastructure with advanced configuration options.
 
-After deploying an OpenNebula Front-end, you can move on to deploying and managing Clusters through OpenNebula's Sunstone user interface, the CLI or the REST API.  
+After deploying an OpenNebula Front-end, you can move on to deploying and managing Clusters through OpenNebula's Sunstone user interface, the CLI or the REST API.
 
 ## Cluster Deployment
 
-Once you have successfully deployed an OpenNebula Front-end, you can proceed to manually install or automatically create (provision) Clusters to handle cloud workloads. There are three options:
+After successfully deployed an OpenNebula Front-end, you can proceed to manually install or automatically create (provision) Clusters to handle cloud workloads. There are three options:
 
 * [Automated Cluster Provisioning with OneForm]({{% relref "software/installation_process/cluster_installation/automated/" %}})
 * [Manual Cluster Installation with KVM]({{% relref "software/installation_process/cluster_installation/kvm_node_installation/" %}})
