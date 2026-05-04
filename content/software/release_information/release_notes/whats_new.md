@@ -38,3 +38,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 
 * [Fix marketplace broken redirect link](https://github.com/OpenNebula/one/issues/7291).
+* [Fix pre-created user authentization with AUTH_DRIVER=LDAP/saml](https://github.com/OpenNebula/one/issues/7606).
