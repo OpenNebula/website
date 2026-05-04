@@ -88,3 +88,20 @@ weight: "5"
 | `opennebula_libvirt_block_virtual_bytes`        | Virtual size of the device                                                                                                         | gauge     |
 | `opennebula_libvirt_block_physical_bytes`       | Physical size of the container of the backing image                                                                                | gauge     |
 | `opennebula_libvirt_daemon_up`                  | State of the libvirt daemon `0`:down `1`:up                                                                                        | gauge     |
+
+## Optional Exporters
+
+The optional sub-packages described in the [installation guide]({{% relref "install#monitor-alert-extra-exporters" %}}) re-package upstream Prometheus exporter binaries unchanged. Their metric reference is maintained upstream:
+
+| Sub-package                          | Metric prefix         | Upstream reference                                                                                          |
+|--------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------|
+| `opennebula-prometheus-ovs`          | `ovs_*`               | [Liquescent-Development/ovs_exporter](https://github.com/Liquescent-Development/ovs_exporter)               |
+| `opennebula-prometheus-mysql`        | `mysql_*`, `mysqld_*` | [prometheus/mysqld_exporter](https://github.com/prometheus/mysqld_exporter#collector-flags)                 |
+| `opennebula-prometheus-smartctl`     | `smartctl_*`          | [prometheus-community/smartctl_exporter](https://github.com/prometheus-community/smartctl_exporter)         |
+| `opennebula-prometheus-lvm`          | `lvm_*`               | [hansmi/prometheus-lvm-exporter](https://github.com/hansmi/prometheus-lvm-exporter)                         |
+
+You can also retrieve the live metric list from any running exporter, e.g.:
+
+```default
+$ curl -s localhost:9475/metrics | grep -E '^# (HELP|TYPE) ovs_' | head
+```
