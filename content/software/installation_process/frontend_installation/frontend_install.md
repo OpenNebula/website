@@ -1,10 +1,12 @@
 ---
-title: "Single Front-end Installation"
+title: "Manual Single Front-end Installation"
+linkTitle: "Manual - Front-end"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "173"
 tags:
+show_card:
 weight: "6"
 ---
 
@@ -22,7 +24,10 @@ Proceed with the following steps to get the fully-featured OpenNebula Front-end 
 
 ## Step 1. Configure the OpenNebula Repositories
 
-Follow the [OpenNebula Repositories]({{% relref "opennebula_repository_configuration" %}}) guide and add software repositories for the OpenNebula edition you are going to deploy.
+Follow one of the following guides to configure the software repositories for the OpenNebula edition you intend to deploy:
+
+* [Configure OpenNebula Community Edition repositories]({{% relref "opennebula_repository_configuration_ce" %}})
+* [Configure OpenNebula Enterprise Edition repositories]({{% relref "opennebula_repository_configuration_ee" %}})
 
 ## Step 2. Add Third Party Repositories
 

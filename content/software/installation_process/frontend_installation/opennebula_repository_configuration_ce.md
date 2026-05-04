@@ -1,13 +1,12 @@
 ---
-title: "OpenNebula Repositories for Community Edition"
+title: "Manual Installation - OpenNebula Repositories for Community Edition"
+linkTitle: "Manual - Repositories (CE)"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "172"
 tags:
 weight: "5"
-show_card: false
-toc_hide: true
 ---
 
 The Community Edition of OpenNebula offers the full functionality of the Cloud Management Platform. You can configure the Community Edition repositories as follows:
