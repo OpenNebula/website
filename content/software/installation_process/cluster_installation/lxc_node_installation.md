@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "177"
 tags: [manual, cluster, deployment]
-weight: "7"
+weight: "4"
 ---
 
 <a id="lxd-node"></a>
@@ -15,7 +15,7 @@ weight: "7"
 
 <!--# LXC Node Installation -->
 
-This page shows you how to configure OpenNebula LXC Node from the binary packages.
+This page demonstrates how to configure an OpenNebula LXC Node from binary packages.
 
 {{< alert title="Note" type="info" >}}
 Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "frontend_install" %}}).{{< /alert >}}
@@ -97,10 +97,10 @@ Depending on your OpenNebula deployment type, the following may be required on y
 
 The OpenNebula Front-end connects to the hypervisor nodes using SSH. Following connection types are being established:
 
-- from Front-end to Front-end
-- from Front-end to hypervisor node
-- from Front-end to hypervisor node with another connection within to another Node (for migration operations)
-- from Front-end to hypervisor node with another connection within back to Front-end (for data copy back)
+- From Front-end to Front-end
+- From Front-end to hypervisor node
+- From Front-end to hypervisor node with another connection within to another Node (for migration operations)
+- From Front-end to hypervisor node with another connection within back to Front-end (for data copy back)
 
 {{< alert title="Important" type="info" >}}
 It must be ensured that Front-end and all nodes **can connect to each other** over SSH without manual intervention.{{< /alert >}} 

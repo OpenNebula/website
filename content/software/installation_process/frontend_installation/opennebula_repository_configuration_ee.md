@@ -1,13 +1,12 @@
 ---
-title: "OpenNebula Repositories for Enterprise Edition"
+title: "Manual Installation - OpenNebula Repositories for Enterprise Edition"
+linkTitle: "Manual - Repositories (EE)"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "172"
 tags:
 weight: "5"
-show_card: false
-toc_hide: true
 ---
 
 OpenNebula Systems provides the OpenNebula Enterprise Edition (EE) to customers with an active support subscription. To distribute the packages of the Enterprise Edition there is a private repository accessible only to Enterprise Edition customers that contains all packages (including major, minor, and maintenance releases). You only need to change your repository configuration on your OpenNebula Front-end once per major release and you’ll have access to every package in that series. OpenNebula's private repositories contain all OpenNebula released packages.
