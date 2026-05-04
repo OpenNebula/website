@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "26"
 tags: [miniONE, deployment, installation, automatic]
-weight: "1"
+weight: "2"
 ---
 
 Automatic installation of an OpenNebula Front-end can be achieved using the miniONE quick installation script. The miniONE installation script automatically configures the target server to deploy a stripped-down version of OpenNebula with the essential modules to run a cloud Cluster. After installing miniONE, you will be able to deploy Virtual Machines, provision Clusters with on-premises or cloud resources and manage your cloud using the command line, the API or the Sunstone user interface.

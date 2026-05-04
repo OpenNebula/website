@@ -6,14 +6,14 @@ description:
 categories:
 pageintoc: "176"
 tags: [manual, cluster, deployment]
-weight: "7"
+weight: "3"
 ---
 
 <a id="kvm-node"></a>
 
 <!--# KVM Node Installation -->
 
-This page shows you how to configure OpenNebula KVM Node from the binary packages.
+This page demonstrates how to configure an OpenNebula KVM Node from binary packages.
 
 {{< alert title="Note" type="info" >}}
 Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "frontend_install" %}}).{{< /alert >}}

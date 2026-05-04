@@ -20,7 +20,7 @@ In this tutorial, we’ll use [OneDeploy](https://github.com/OpenNebula/one-depl
 
 This sample architecture uses a basic network configuration, a flat (bridged) network, where each VM’s IPs is part of the same network as the Hypervisors.
 
-![><](/images/one_deploy_arch_shared.png)
+{{< image path="/images/one_deploy_arch_shared.svg" alt="OneDeploy" align="center" width="80%" mb="20px" border="false" shadow="false">}}
 
 Throughout the tutorial we’ll use three server machines, please be sure to replace these references to your own IP addresses:
 

@@ -28,7 +28,7 @@ This is the list of the individual platform components that have been through th
 | Debian                   | 12, 13                                     | [Front-end Installation]({{% relref "frontend_install" %}})<br/>Not certified to manage VMware infrastructures |
 | SUSE Linux Enterprise    | 15                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | openSUSE                 | 16                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "software/installation_process/frontend_installation/manual/database#mysql" %}})                                                                  |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "software/installation_process/frontend_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 
 {{< alert title="Note" type="info" >}}
