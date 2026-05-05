@@ -25,6 +25,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## KVM
 
+* Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
+
 ## LXC
 
 ## OpenNebula Form
@@ -38,3 +40,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 
 * [Fix marketplace broken redirect link](https://github.com/OpenNebula/one/issues/7291).
+* [Ceph: support monitoring of actual disk usage in RBD](https://github.com/OpenNebula/one/issues/7185).
