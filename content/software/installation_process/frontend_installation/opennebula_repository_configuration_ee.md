@@ -12,7 +12,7 @@ weight: "5"
 OpenNebula Systems provides the OpenNebula Enterprise Edition (EE) to customers with an active support subscription. To distribute the packages of the Enterprise Edition there is a private repository accessible only to Enterprise Edition customers that contains all packages (including major, minor, and maintenance releases). You only need to change your repository configuration on your OpenNebula Front-end once per major release and you’ll have access to every package in that series. OpenNebula's private repositories contain all OpenNebula released packages.
 
 {{< alert title="Important" color="success" >}}
-You should have received credentials (username and password) to access these private repositories with your OpenNebula EE subscription. Replace `<user>` and `<password>` in the examples below with your customer-specific credentials.{{< /alert >}}
+You should have received credentials, token in format `username:password` to access these private repositories with your OpenNebula EE subscription. Replace `<user>` and `<password>` in the examples below with your customer-specific credentials.{{< /alert >}}
 
 ### AlmaLinux/RHEL
 
