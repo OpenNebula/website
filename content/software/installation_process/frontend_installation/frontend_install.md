@@ -20,9 +20,9 @@ Proceed with the following steps to get the fully-featured OpenNebula Front-end 
 
 ## Step 1. Install the Database and Configure the OpenNebula Repositories
 
-Before installing the OpenNebula Front-end, you should install the database and configure the repositories. If you haven't already installed the database, complete the [Database Setup Guide]({{% relref "software/installation_process/frontend_installation/database" %}}) .
+Before installing the OpenNebula Front-end, you should install the database and configure the repositories. If you haven't already installed the database, complete the [Database Setup Guide]({{% relref "software/installation_process/frontend_installation/database" %}}).
 
-Follow one of the following guides to configure the software repositories for the OpenNebula edition you intend to deploy:
+After installing the database, follow one of the following guides to configure the software repositories for the OpenNebula edition you intend to deploy:
 
 * [Configure OpenNebula Community Edition repositories]({{% relref "opennebula_repository_configuration_ce" %}})
 * [Configure OpenNebula Enterprise Edition repositories]({{% relref "opennebula_repository_configuration_ee" %}})
@@ -255,7 +255,11 @@ Make sure the TCP port 2616 is not blocked on your firewall.{{< /alert >}}
 
 Now you can try to log in through the Sunstone GUI and Provision GUI. To do so, point your browser to `http://<frontend_address>:2616/fireedge/sunstone` to access Sunstone and point your browser to `http://<frontend_address>:2616/fireedge/provision` to access Provision. You should get to the login page in both cases. The access user is `oneadmin` and initial (or customized) password is the one from the file `/var/lib/one/.one/one_auth` on your Front-end.
 
-![sunstone_login](/images/sunstone-login.png)
+{{< image
+  pathDark="/images/quickstart/dark/sunstone_login_page.png"
+  path="/images/quickstart/light/sunstone_login_page.png"
+  alt="Sunstone login" align="center" width="50%" mb="20px"
+>}}
 
 In case of problems, you can investigate the OpenNebula logs in `/var/log/one` and check file `/var/log/one/fireedge.log`.
 
@@ -353,11 +357,11 @@ In production environments the services should be stopped in a specific order an
 3. Check and wait until there are no active operations with VMs and images.
 4. Stop **opennebula** and rest services.
 
-## Step 9. Next Steps
+## Next Steps
 
 Now that you have successfully started your OpenNebula services, you can continue with adding content to your cloud. Add hypervisor nodes, storage, and Virtual Networks. Or you can provision users with groups and permissions, images, define and run Virtual Machines.
 
 Continue with the following guides:
 
-- [Open Cluster Deployment]({{% relref "../index#open-cluster-deployment" %}}) to provision hypervisor nodes, storage, and Virtual Networks.
-- [Management and Operations]({{% relref "../../index#operations-guide" %}}) to add users, groups, images, define Virtual Machines, and a lot more …
+- [Cluster Deployment]({{% relref "software/installation_process/cluster_installation/" %}}) to deploy Clusters automatically or install hypervisor nodes manually.
+- [OpenNebula Cloud Management and Operations]({{% relref "product" %}}) for details on configuring and administering your cloud deployment.

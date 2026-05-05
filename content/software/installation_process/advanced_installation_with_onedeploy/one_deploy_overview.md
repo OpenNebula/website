@@ -46,27 +46,4 @@ The recommended OS for running the playbooks is Ubuntu 24.04 or 22.04. The tutor
 
 ## OneDeploy Wiki
 
-The OneDeploy Wiki is the primary documentation resource for deploying a multitude of cloud architectures with OneDeploy. You will find documentation for deploying several reference architectures, advanced configurations and developer information. Please visit the [OneDeploy Wiki Homepage](https://github.com/OpenNebula/one-deploy/wiki) to get started deploying an OpenNebula cloud with OneDeploy, or use one of the following quick links:
-
-* [Requirements & Platform Notes](https://github.com/OpenNebula/one-deploy/wiki/sys_reqs)
-* [Using the playbooks](https://github.com/OpenNebula/one-deploy/wiki/sys_use)
-* Reference Architectures:
-  *  [Single Front-end Cloud with Local Storage](https://github.com/OpenNebula/one-deploy/wiki/arch_single_local)
-  *  [Single Front-end Cloud with Shared Storage](https://github.com/OpenNebula/one-deploy/wiki/arch_single_shared)
-  *  [Single Front-end Cloud with Ceph storage](https://github.com/OpenNebula/one-deploy/wiki/arch_single_ceph)
-* [Verifying the installation](https://github.com/OpenNebula/one-deploy/wiki/sys_verify)
-* Advanced Configurations:
-  *  [Highly-available Front-end](https://github.com/OpenNebula/one-deploy/wiki/arch_ha)
-  *  [Federated Front-ends](https://github.com/OpenNebula/one-deploy/wiki/arch_fed)
-  *  [VXLAN/EVPN networking](https://github.com/OpenNebula/one-deploy/wiki/arch_evpn)
-  *  [Generic Datastore Mode](https://github.com/OpenNebula/one-deploy/wiki/arch_generic_ds)
-  *  [PCI Passthrough](https://github.com/OpenNebula/one-deploy/wiki/pci_passthrough)
-* Additional Options:
-  *  [Sunstone Installation](https://github.com/OpenNebula/one-deploy/wiki/arch_sunstone)
-  *  [Airgapped installation](https://github.com/OpenNebula/one-deploy/wiki/sys_airgap)
-  *  [Front-end installation as VMs](https://github.com/OpenNebula/one-deploy/wiki/arch_infra)
-  *  [Connect through a bastion host](https://github.com/OpenNebula/one-deploy/wiki/arch_bastion)
-* Developer Information:
-  *  [Playbook reference](https://github.com/OpenNebula/one-deploy/wiki/sys_reference)
-  *  [Molecule testing](https://github.com/OpenNebula/one-deploy/wiki/test_molecule)
-  *  [Coding style](https://github.com/OpenNebula/one-deploy/wiki/code_style)
+The OneDeploy Wiki is the primary documentation resource for deploying a multitude of cloud architectures with OneDeploy. You will find documentation for deploying several reference architectures, advanced configurations and developer information. Please visit the [OneDeploy Wiki Homepage](https://github.com/OpenNebula/one-deploy/wiki) to get started deploying an OpenNebula cloud with OneDeploy.

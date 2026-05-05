@@ -10,7 +10,7 @@ weight: "1"
 ---
 
 <!--# Overview -->
-A **Provider** is an abstraction layer that defines the credentials, endpoints, and specific locations (such as a region or zone) within a target infrastructure. It acts as the "source of authority" that OneForm uses to authenticate and communicate with external resources — whether they are public cloud APIs (like AWS), bare-metal edge locations (like Equinix), or on-premises resources — to prepare the ground for a Cluster deployment.
+A **Provider** is an abstraction layer that defines the credentials, endpoints, and specific locations (such as a region or zone) within a target infrastructure. It acts as the "source of authority" that OneForm uses to authenticate and communicate with external resources — whether they are public cloud APIs (like AWS), bare-metal edge locations (like i3Dnet), or on-premises resources — to prepare the ground for a Cluster deployment.
 
 ## Basic Outline
 
@@ -84,7 +84,7 @@ For more detailed information about Provider datamodels and configuration, refer
 
 ## Provider Drivers
 
-Each Provider in OpenNebula is associated with a **Provider driver** that defines the underlying automation logic for infrastructure provisioning and configuration. A driver defines the logic for communicating with a specific cloud IaaS API or bare-metal hardware resource while the Provider defines the credentials, location and metadata. Therefore, a single driver is associated with a specific IaaS service (e.g. AWS, Equinix, Scaleway) while multiple Providers may use the same driver. For example, if you wish to use resources in multiple AWS regions, you must create a separate Provider for each AWS region, using the same AWS driver.  
+Each Provider in OpenNebula is associated with a **Provider driver** that defines the underlying automation logic for infrastructure provisioning and configuration. A driver defines the logic for communicating with a specific cloud IaaS API or bare-metal hardware resource while the Provider defines the credentials, location and metadata. Therefore, a single driver is associated with a specific IaaS service (e.g. AWS, i3Dnet, Scaleway) while multiple Providers may use the same driver. For example, if you wish to use resources in multiple AWS regions, you must create a separate Provider for each AWS region, using the same AWS driver.  
 
 ### Driver Structure
 
