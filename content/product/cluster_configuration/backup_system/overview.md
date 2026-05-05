@@ -35,7 +35,7 @@ Finally, if you need to backup a large number of VMs you can manage them [effect
 
 ## Hypervisor and Storage Compatibility
 
-Performing a VM backup requires support from the hypervisor or the disk image formats. The following table summarizes the backup modes supported for each hypervisor and storage system.
+Performing a VM backup requires support from the hypervisor and the disk image formats. The following table summarizes the backup modes supported for each hypervisor and storage system.
 
 | **Hypervisor** | **Storage** | **Live (full)** | **Power off (full)** | **Live (incremental)** | **Power off (incremental)** |
 | --- | --- | --- | --- | --- | --- |
