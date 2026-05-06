@@ -38,3 +38,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 
 * [Fix marketplace broken redirect link](https://github.com/OpenNebula/one/issues/7291).
+* [Fix override VLAN_ID from VN template instantiation](https://github.com/OpenNebula/one/issues/7457).
