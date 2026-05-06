@@ -11,7 +11,7 @@ weight: "1"
 
 <a id="frontend-installation"></a>
 
-The **OpenNebula Front-end** serves as the control plane for your entire cloud infrastructure. It is the central orchestrator responsible for deploying and managing the lifecycle of Cluster nodes, Virtual Machines (VMs), Virtual Networks, and storage datastores. The Front-end hosts the core OpenNebula services and provides the interfaces — a REST API, a CLI and the Sunstone user interface — through which administrators and users interact with the cloud. 
+The **OpenNebula Front-end** serves as the control plane for your entire cloud infrastructure. It is the central orchestrator responsible for deploying and managing the lifecycle of Cluster nodes, Virtual Machines (VMs), Virtual Networks, and storage datastores. The Front-end Hosts the core OpenNebula services and provides the interfaces — a REST API, a CLI and the Sunstone user interface — through which administrators and users interact with the cloud. 
 
 The Front-end can be deployed using an on-premises server, a Virtual Machine, or bare-metal instance from an IaaS cloud provider such as AWS or Scaleway. This decision is governed by the intended cloud architecture and available resources. Ensure that the virtual or physical machine on which you intend to deploy the Front-end meets the minimum [requirements given below](#requirements). 
 
@@ -27,7 +27,7 @@ The miniONE tool is the fastest method to get an OpenNebula cloud up and running
 
 * **Best for**: Rapid prototyping, sandboxes, testing, and learning.  
 
-* **Workflow**: A single command installs the Front-end and, optionally, a local KVM or LXC hypervisor on the same host.
+* **Workflow**: A single command installs the Front-end and, optionally, a local KVM or LXC hypervisor on the same Host.
 
 * **Environment**: Typically used on a fresh Linux installation (Ubuntu or AlmaLinux).
 
@@ -62,7 +62,7 @@ After completing the installation of an OpenNebula Front-end, you can then proce
 
 ## Requirements
 
-Regardless of the method chosen, you must ensure that your host meets the minimum hardware requirements and has a clean operating system installation to avoid dependency conflicts. 
+Regardless of the method chosen, you must ensure that your Host meets the minimum hardware requirements and has a clean operating system installation to avoid dependency conflicts. 
 
 **Supported operating systems:**
 * RHEL/AlmaLinux 9 or 10
