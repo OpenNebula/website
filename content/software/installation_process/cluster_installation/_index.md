@@ -10,4 +10,4 @@ weight: "2"
 
 <a id="cluster-installation"></a>
 
-OpenNebula Clusters are logical groupings of Hosts, datastores and Virtual Networks that provide compute capacity for cloud workloads. To install or automatically provision Clusters with OpenNebula, you must first deploy an OpenNebula Front-end, please refer to the [Front-end Installation Documentation]({{% relref "software/installation_process/frontend_installation/" %}}) for details.  
+OpenNebula Clusters are logical groupings of Hosts, datastores and Virtual Networks that provide compute capacity for cloud workloads. To manually install or automatically provision Clusters with OpenNebula, you must first deploy an OpenNebula Front-end, please refer to the [Front-end Installation Documentation]({{% relref "software/installation_process/frontend_installation/" %}}) for details. Start with the [Cluster Deployment Overview]({{% relref "software/installation_process/cluster_installation/overview/" %}}).
