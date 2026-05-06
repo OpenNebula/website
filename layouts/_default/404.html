@@ -1,23 +1,33 @@
 {{ define "main" }}
-<div class="td-content">
-    <h1>404: Page Not Found</h1>
-    <p>The documentation for OpenNebula has been restructured. It's likely that the page you are looking for has moved.</p>
-    
-    <div class="alert alert-primary" role="alert">
-        <strong>Try these principal sections:</strong>
-    </div>
+<style>
+    @media (min-width: 1200px) {
+        .td-404 [role=main] {
+            width: 100% !important; /* Full width (10/12 columns) */
+            max-width: none !important;
+            margin-right: 0 !important;
+        }
+    }
+</style>
+<div class="row flex-xl-nowrap" style="width:100%">
+    <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+        
+        <div class="td-content">
+            <h1>Page Not Found</h1>
+            <p>The documentation for OpenNebula is regularly updated. It's possible that the page you are looking for has moved.</p>
+            <p>You may find what you are looking for in one of the following sections:</p>
 
-    <ul>
-        {{/* Update these strings to the exact relative paths in your content folder */}}
-        {{ $paths := slice "software/installation_process/" "software/installation_process/" }}
-        {{ range $paths }}
-            {{ with $.Site.GetPage . }}
-                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-            {{ else }}
-                {{/* This ensures you catch broken links during the build */}}
-                {{ errorf "404 Page: Link path not found: %s" . }}
-            {{ end }}
-        {{ end }}
-    </ul>
+            <ul>
+                {{ $paths := slice "getting_started/" "product/" "software/installation_process/" "software/release_information/" "solutions/"}}
+                {{ range $paths }}
+                    {{ with $.Site.GetPage . }}
+                        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                    {{ else }}
+                        {{/* Validation check */}}
+                        {{ errorf "404 Page: Link path not found: %s" . }}
+                    {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+    </main>
 </div>
 {{ end }}
