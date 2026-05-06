@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="td-content">
+    <h1>404: Page Not Found</h1>
+    <p>The documentation for OpenNebula has been restructured. It's likely that the page you are looking for has moved.</p>
+    
+    <div class="alert alert-primary" role="alert">
+        <strong>Try these principal sections:</strong>
+    </div>
+
+    <ul>
+        {{/* Update these strings to the exact relative paths in your content folder */}}
+        {{ $paths := slice "software/installation_process/" "software/installation_process/" }}
+        {{ range $paths }}
+            {{ with $.Site.GetPage . }}
+                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ else }}
+                {{/* This ensures you catch broken links during the build */}}
+                {{ errorf "404 Page: Link path not found: %s" . }}
+            {{ end }}
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

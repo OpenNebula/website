@@ -1,0 +1,7 @@
+@import "../_styles_fonts";
+
+.error-page-container {
+    width: 100%;
+    max-width: none; /* Overrides constraints */
+    background-color: #f8f9fa; /* Ensure the color fills the area */
+}
