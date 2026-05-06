@@ -5,6 +5,7 @@ description: "Perform Devops-like deployment of a production-ready OpenNebula cl
 categories:
 pageintoc: "1"
 tags:
+no_list: true
 weight: "3"
 ---
 
@@ -12,6 +13,6 @@ weight: "3"
 
 <!--# Automatic Deployment -->
 
-These tutorials provide step-by-step instructions for automatically installing OpenNebula using [OneDeploy](https://github.com/OpenNebula/one-deploy). OneDeploy is a set of Ansible playbooks that automatically installs a complete, production-ready OpenNebula cloud.
+This section provides instructions for automatically deploying an OpenNebula cloud using [OneDeploy](https://github.com/OpenNebula/one-deploy). OneDeploy is a set of Ansible playbooks for automatic deployment of complete, production-ready OpenNebula cloud architectures with advanced configuration options.
 
-The tutorials contain installation steps for two simple scenarios. The [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki) contains detailed information on other deployment and configuration options.
+The [OneDeploy Wiki](https://github.com/OpenNebula/one-deploy/wiki) contains detailed information on using OneDeploy, please refer to the [OneDeploy Overview](software/installation_process/advanced_installation_with_onedeploy/one_deploy_overview/) to get started.

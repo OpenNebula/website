@@ -153,3 +153,7 @@ EOT
 zypper ar -f https://download.opensuse.org/repositories/science/openSUSE_Leap_16.0/ science
 zypper refresh
 ```
+
+## Next Steps
+
+After configuring the OpenNebula Community Edition repositories, you can proceed to install the OpenNebula Front-end. Continue to the [Single Front-end Installation Documentation]({{% relref "software/installation_process/frontend_installation/frontend_install/" %}}) to complete the installation.
