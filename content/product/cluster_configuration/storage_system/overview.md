@@ -53,6 +53,8 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 
 <sup>\*\*\*</sup> Images stored on the frontend just contain metadata. The filesystems to mount should be present and available on the hosts.
 
+For details on performing **datastore migrations**, refer to the [datastore migration section of the Virtual Machines Operation Documentation]({{% relref "product/virtual_machines_operation/virtual_machines/vm_instances/#virtual-machine-datastore-migration" %}}).
+
 ### Other storage options
 
 As an admin, restrict the usage of some storage options because these give low-level access to hosts and could become a serious security risk. Please read carefully the corresponding documentation before using them:
