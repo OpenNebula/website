@@ -12,11 +12,11 @@ weight: "2"
 
 <!--# Installation and Configuration -->
 
-This page describes how to install the OpenNebula Prometheus integration packages available in the [OpenNebula software repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}).
+This page describes how to install the OpenNebula Prometheus integration packages available in the [OpenNebula software repositories]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration" %}}).
 
 ## Step 1. OpenNebula Repositories [Front-end, Hosts]
 
-At this point OpenNebula software repositories should already be configured in your Front-end and Hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "../../../software/installation_process/manual_installation/opennebula_repository_configuration#repositories" %}}) guide.
+At this point OpenNebula software repositories should already be configured in your Front-end and Hosts. Double check this is the case before proceeding, more information can be found in the [OpenNebula Repositories]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration" %}}) guide.
 
 ## Step 2. Install Front-end Packages [Front-end]
 
@@ -47,6 +47,12 @@ Note that you will be able to use any existing installation of both systems afte
 # apt -y install opennebula-prometheus opennebula-prometheus-kvm
 ```
 
+**SLES/openSUSE**
+
+```default
+# zypper install opennebula-prometheus opennebula-prometheus-kvm
+```
+
 ## Step 3. Install Hosts Packages [Hosts]
 
 In your Hosts you need to install the Prometheus-KVM, this package includes:
@@ -69,6 +75,12 @@ Note that you will be able to use any existing installation of the node exporter
 
 ```default
 # apt -y install opennebula-prometheus-kvm
+```
+
+**SLES/openSUSE**
+
+```default
+# zypper install opennebula-prometheus-kvm
 ```
 
 ## Step 4. Configure Prometheus [Front-end]
@@ -143,7 +155,7 @@ scrape_configs:
 You can adjust scrape intervals or other configuration attributes in this file.
 
 {{< alert title="Note" type="info" >}}
-You can easily add or remove Hosts by copying or deleting the corresponding targets, or simply re-run the script. In that case you’ll have a backup in `/etc/one/prometheus/` to recover any additional configurations.{{< /alert >}} 
+You can easily add or remove Hosts by copying or deleting the corresponding targets, or simply re-run the script. In that case you’ll have a backup in `/etc/one/prometheus/` to recover any additional configurations.{{< /alert >}}
 
 ## Step 5. Start the Prometheus Service [Front-end]
 
@@ -211,6 +223,68 @@ opennebula_libvirt_requests_total{code="200",method="get",path="/metrics"} 18.0
 # HELP opennebula_libvirt_daemon_up State of the libvirt daemon 0:down 1:up
 opennebula_libvirt_daemon_up 1.0
 ```
+
+<a id="monitor-alert-extra-exporters"></a>
+
+## Optional Exporters
+
+OpenNebula ships four optional Prometheus exporter sub-packages. Each one is independently installable and only needed where the matching subsystem is in use:
+
+| Sub-package                          | Where to install   | Default port | Upstream                                                                       |
+|--------------------------------------|--------------------|--------------|--------------------------------------------------------------------------------|
+| opennebula-prometheus-ovs          | KVM Hosts with OVS | 9475       | [Liquescent-Development/ovs_exporter](https://github.com/Liquescent-Development/ovs_exporter) |
+| opennebula-prometheus-mysql        | Front-end with MySQL/MariaDB | 9104 | [prometheus/mysqld_exporter](https://github.com/prometheus/mysqld_exporter)    |
+| opennebula-prometheus-smartctl     | Hosts with physical disks | 9633  | [prometheus-community/smartctl_exporter](https://github.com/prometheus-community/smartctl_exporter) |
+| opennebula-prometheus-lvm          | Hosts using LVM    | 9845       | [hansmi/prometheus-lvm-exporter](https://github.com/hansmi/prometheus-lvm-exporter) |
+
+These exporter binaries are pre-built upstream releases re-distributed for your convenience under their respective licenses.
+
+Install on the relevant Hosts (or Front-ends, for `mysql`):
+
+**RPM-based distributions (Alma, RHEL)**
+
+```default
+# yum -y install opennebula-prometheus-{ovs|mysql|smartctl|lvm}
+```
+
+**Deb-based distributions (Ubuntu, Debian)**
+
+```default
+# apt -y install opennebula-prometheus-{ovs|mysql|smartctl|lvm}
+```
+
+**SLES/openSUSE**
+
+```default
+# zypper install opennebula-prometheus-{ovs|mysql|smartctl|lvm}
+```
+
+Each package installs the exporter binary, a systemd unit, and runtime hardening (e.g. file capabilities for `ovs_exporter`, `disk` group membership for `smartctl_exporter`). Enable and start the corresponding service after install:
+
+```default
+# systemctl enable --now opennebula-{ovs|mysql|smartctl|lvm}-exporter.service
+```
+
+For the `mysql` exporter, the service reads database credentials from `/var/lib/one/.my.cnf` (owned by `oneadmin`, mode `0600`):
+
+```ini
+[client]
+user=<db_user>
+password=<db_password>
+```
+
+### Adding the Exporters to Prometheus
+
+Re-run `patch_datasources.rb` on the Front-end after installing a new exporter:
+
+```default
+# /usr/share/one/prometheus/patch_datasources.rb
+# systemctl restart opennebula-prometheus
+```
+
+The script TCP-probes every Host (`onehost list`) and Zone server (`onezone show`) on each known exporter port and adds a scrape job only for the ones that respond and generates a configuration file: `/etc/one/prometheus/prometheus.yml`.
+
+No manual configuration is required — install the sub-package, start the service, re-run the script, and the new exporter appears in Prometheus under a job named after the exporter (`ovs_exporter`, `mysql_exporter`, `smartctl_exporter`, `lvm_exporter`).
 
 <a id="monitor-alert-existing"></a>
 
@@ -329,7 +403,7 @@ alerting:
 which points to *all* alertmanager instances that are supposed to be configured in [HA mode](https://prometheus.io/docs/alerting/latest/alertmanager/#high-availability) as well (to deduplicate alert notifications).
 
 {{< alert title="Important" type="info" >}}
-Services `opennebula-prometheus`, `opennebula-alertmanager`, `opennebula-node-exporter` and `opennebula-exporter` should be configured, enabled and started on *all* Front-end machines.{{< /alert >}} 
+Services `opennebula-prometheus`, `opennebula-alertmanager`, `opennebula-node-exporter` and `opennebula-exporter` should be configured, enabled and started on *all* Front-end machines.{{< /alert >}}
 
 To configure each alertmanager as a cluster peer, you need to override (or modify) the `opennebula-alertmanager` systemd service.
 For example on the “second” Front-end:
@@ -349,4 +423,4 @@ EOF
 ```
 
 {{< alert title="Note" type="info" >}}
-You can create the `opennebula-alertmanager.service.d/override.conf` file yourself or automatically with `systemctl edit opennebula-alertmanager.service`.{{< /alert >}} 
+You can create the `opennebula-alertmanager.service.d/override.conf` file yourself or automatically with `systemctl edit opennebula-alertmanager.service`.{{< /alert >}}

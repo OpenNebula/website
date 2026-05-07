@@ -16,7 +16,7 @@ weight: "5"
 The Ceph Datastore driver allows the use of Ceph storage for images and disks of Virtual Machines.
 
 {{< alert title="Warning" type="warning" >}}
-This driver requires the OpenNebula nodes using the Ceph driver to be Ceph clients of a running Ceph Cluster. More information in [Ceph documentation](https://docs.ceph.com/en/latest/).{{< /alert >}} 
+This driver requires the OpenNebula nodes using the Ceph driver to be Ceph clients of a running Ceph Cluster. More information in [Ceph documentation](https://docs.ceph.com/en/latest/).{{< /alert >}}
 
 ## Ceph Cluster Setup
 
@@ -24,44 +24,33 @@ This guide assumes that you already have a functional Ceph Cluster in place. Add
 
 * Create a pool for the OpenNebula Datastores. Write down the name of the pool to include it in the datastore definitions.
 
-```default
-$ ceph osd pool create one 128
-$ ceph osd pool application enable one rbd
-$ rbd pool init -p one
-$ ceph osd lspools
+```shell
+ceph osd pool create one 128
+ceph osd pool application enable one rbd
+rbd pool init -p one
+ceph osd lspools
 0 data,1 metadata,2 rbd,6 one,
 ```
 
 * Define a Ceph user to access the datastore pool; this user will also be used by libvirt to access the disk images. For example, create the user `libvirt`:
 
-On the **Ceph Jewel** (v10.2.x and earlier):
-
-```default
-$ ceph auth get-or-create client.libvirt \
-      mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=one'
-```
-
-On the **Ceph Luminous** (v12.2.x and later):
-
-```default
-$ ceph auth get-or-create client.libvirt \
+```shell
+ceph auth get-or-create client.libvirt \
       mon 'profile rbd' osd 'profile rbd pool=one'
 ```
 
-{{< alert title="Warning" type="warning" >}}
-Ceph Luminous release comes with simplified RBD capabilities (more information about user management and authorization capabilities is in the Ceph [documentation](https://docs.ceph.com/en/latest/rados/operations/user-management/#authorization-capabilities)). When **upgrading existing Ceph deployment to the Luminous and later**, please ensure the selected user has the proper new capabilities. For example, for the above user `libvirt` you can do this by running:
+Ensure the selected user has the proper capabilities. For example, for the above user `libvirt` you can do this by running:
 
-```default
-$ ceph auth caps client.libvirt \
-      mon 'profile rbd' osd 'profile rbd pool=one'{{< /alert >}}  
+```shell
+ceph auth caps client.libvirt \
+      mon 'profile rbd' osd 'profile rbd pool=one'
 ```
 
 * Get a copy of the key of this user to distribute it later to the OpenNebula Nodes.
 
-```default
-$ ceph auth get-key client.libvirt | tee client.libvirt.key
-
-$ ceph auth get client.libvirt -o ceph.client.libvirt.keyring
+```shell
+ceph auth get-key client.libvirt | tee client.libvirt.key
+ceph auth get client.libvirt -o ceph.client.libvirt.keyring
 ```
 
 * Although RBD format 1 is supported it is strongly recommended to use Format 2. Check that `ceph.conf` includes:
@@ -74,7 +63,7 @@ rbd_default_format = 2
 * Pick a set of client nodes of the cluster to act as storage bridges. These nodes will be used to import images into the Ceph Cluster from OpenNebula. These nodes must have the `qemu-img` command installed.
 
 {{< alert title="Note" type="info" >}}
-For production environments it is recommended to **not collocate** Ceph services (monitor, osds) with OpenNebula Nodes or the Front-end{{< /alert >}} 
+For production environments it is recommended to **not collocate** Ceph services (monitor, osds) with OpenNebula Nodes or the Front-end.{{< /alert >}}
 
 ## Front-end and Hosts Setup
 
@@ -84,10 +73,9 @@ In order to use the Ceph Cluster the Hosts need to be configured as follows:
 * The `mon` daemon must be defined in the `ceph.conf` for all the nodes, so `hostname` and `port` doesn’t need to be specified explicitly in any Ceph command.
 * Copy the Ceph user keyring (`ceph.client.libvirt.keyring`) to the nodes under `/etc/ceph`, and the user key (`client.libvirt.key`) to the oneadmin home.
 
-```default
-$ scp ceph.client.libvirt.keyring root@node:/etc/ceph
-
-$ scp client.libvirt.key oneadmin@node:
+```shell
+scp ceph.client.libvirt.keyring root@node:/etc/ceph
+scp client.libvirt.key oneadmin@node:
 ```
 
 ## Hosts Setup
@@ -96,11 +84,11 @@ Hosts need extra steps to set up credentials in libvirt:
 
 * Generate a secret for the Ceph user and copy it to the nodes under oneadmin home. Write down the `UUID` for later use:
 
-```default
-$ UUID=`uuidgen`; echo $UUID
+```shell
+UUID=`uuidgen`; echo $UUID
 c7bdeabf-5f2a-4094-9413-58c6a9590980
 
-$ cat > secret.xml <<EOF
+cat > secret.xml <<EOF
 <secret ephemeral='no' private='no'>
   <uuid>$UUID</uuid>
   <usage type='ceph'>
@@ -109,25 +97,25 @@ $ cat > secret.xml <<EOF
 </secret>
 EOF
 
-$ scp secret.xml oneadmin@node:
+scp secret.xml oneadmin@node:
 ```
 
 * Define a libvirt secret and remove key files in the nodes:
 
-```default
-$ virsh -c qemu:///system secret-define secret.xml
+```shell
+virsh -c qemu:///system secret-define secret.xml
 
-$ virsh -c qemu:///system secret-set-value --secret $UUID --base64 $(cat client.libvirt.key)
+virsh -c qemu:///system secret-set-value --secret $UUID --base64 $(cat client.libvirt.key)
 
-$ rm client.libvirt.key
+rm client.libvirt.key
 ```
 
 * The `oneadmin` account needs to access the Ceph Cluster using the `libvirt` Ceph user defined above. This requires access to the Ceph user keyring. Test that the Ceph client is properly configured in the node:
 
-```default
-$ ssh oneadmin@node
+```shell
+ssh oneadmin@node
 
-$ rbd ls -p one --id libvirt
+rbd ls -p one --id libvirt
 ```
 
 You can read more information about this in the Ceph guide [Using libvirt with Ceph](https://docs.ceph.com/en/latest/rbd/libvirt/).
@@ -157,35 +145,35 @@ To use your Ceph Cluster with the OpenNebula, you need to define both System and
 | `CEPH_HOST`    | Space-separated list of Ceph monitors. Example: `host1<br/>host2:port2 host3 host4:port4`. | **YES**     |
 | `CEPH_SECRET`  | The UUID of the libvirt secret.                                                            | **YES**     |
 | `EC_POOL_NAME` | Name of Ceph erasure coded pool                                                            | NO          |
-| `CEPH_TRASH`   | Enables trash feature on given datastore (Luminous+),<br/>values: yes|no                   | NO          |
+| `CEPH_TRASH`   | Enables trash feature on given datastore,<br/>values: yes|no                               | NO          |
 
 {{< alert title="Note" type="info" >}}
-You may add another Image and System Datastore pointing to other pools with different allocation/replication policies in Ceph.{{< /alert >}} 
+You may add another Image and System Datastore pointing to other pools with different allocation/replication policies in Ceph.{{< /alert >}}
 
 {{< alert title="Note" type="info" >}}
-Ceph Luminous release allows use of erasure coding for `RBD` images. In general, erasure-coded images take up less space but have worse I/O performance. Erasure coding can be enabled on Image and/or System Datastores by configuring `EC_POOL_NAME` with the name of the erasure-coded data pool. Regular replicated Ceph pool `POOL_NAME` is still required for image metadata. More information in [Ceph documentation](https://docs.ceph.com/en/latest/rados/operations/erasure-code/#erasure-coding-with-overwrites).{{< /alert >}} 
+In general, erasure-coded images take up less space but have worse I/O performance. Erasure coding can be enabled on Image and/or System Datastores by configuring `EC_POOL_NAME` with the name of the erasure-coded data pool. Regular replicated Ceph pool `POOL_NAME` is still required for image metadata. More information in [Ceph documentation](https://docs.ceph.com/en/latest/rados/operations/erasure-code/#erasure-coding-with-overwrites).{{< /alert >}}
 
 {{< alert title="Warning" type="warning" >}}
 In order to place the `ceph.conf` file in a non-default location (i.e., other than `/etc/ceph/ceph.conf`), please perform the following steps.
 
 1. On all nodes listed in `BRIDGE_LIST` configuration attribute of ceph-based DS, move the `ceph.conf` file into the desired location:
 
-```default
-$ sudo mv /etc/ceph/ceph.conf /etc/ceph/ceph1.conf
+```shell
+sudo mv /etc/ceph/ceph.conf /etc/ceph/ceph1.conf
 ```
 
 Extract and save the Ceph key into a separate file (it has to contain only the key, nothing else):
 
-```default
-$ sudo grep -o -P '(?<=key = ).*(?=)' /etc/ceph/ceph.client.oneadmin.keyring >> /etc/ceph/ceph.client.oneadmin.key
+```shell
+sudo grep -o -P '(?<=key = ).*(?=)' /etc/ceph/ceph.client.oneadmin.keyring >> /etc/ceph/ceph.client.oneadmin.key
 ```
 
 2. Add two configuration attributes:
    > - `CEPH_CONF` configuration attribute with absolute path to the custom location of `ceph.conf` file.
    > - `CEPH_KEY` configuration attribute with absolute path to the location of the ceph key file saved in the previous step.
 
-```default
-$ onedatastore update <DS_ID>
+```shell
+onedatastore update <DS_ID>
 CEPH_CONF="/etc/ceph/ceph1.conf"
 CEPH_KEY="/etc/ceph/ceph.client.oneadmin.key"
 ```
@@ -206,8 +194,8 @@ System Datastore also requires these attributes:
 
 Create a System Datastore in Sunstone or through the CLI, for example:
 
-```default
-$ cat systemds.txt
+```shell
+cat systemds.txt
 NAME    = ceph_system
 TM_MAD  = ceph
 TYPE    = SYSTEM_DS
@@ -220,12 +208,12 @@ CEPH_SECRET = "6f88b54b-5dae-41fe-a43e-b2763f601cfc"
 
 BRIDGE_LIST = cephfrontend
 
-$ onedatastore create systemds.txt
+onedatastore create systemds.txt
 ID: 101
 ```
 
 {{< alert title="Note" type="info" >}}
-When different System Datastores are available the `TM_MAD_SYSTEM` attribute will be set after picking the datastore.{{< /alert >}} 
+When different System Datastores are available the `TM_MAD_SYSTEM` attribute will be set after picking the datastore.{{< /alert >}}
 
 ### Create  Image Datastore
 
@@ -241,7 +229,7 @@ Apart from the previous attributes, which need to be the same as the associated 
 
 An example of datastore:
 
-```default
+```shell
 > cat ds.conf
 NAME = "cephds"
 DS_MAD = ceph
@@ -261,7 +249,7 @@ ID: 101
 ```
 
 {{< alert title="Warning" type="warning" >}}
-If you are going to use the `TM_MAD_SYSTEM` attribute with **SSH** mode, you need to have an [SSH type System Datastore]({{% relref "local_ds#local-ds" %}}) configured.{{< /alert >}} 
+If you are going to use the `TM_MAD_SYSTEM` attribute with **SSH** mode, you need to have an [SSH type System Datastore]({{% relref "local_ds#local-ds" %}}) configured.{{< /alert >}}
 
 ### Additional Configuration
 
@@ -275,7 +263,7 @@ Default values for the Ceph drivers can be set in `/var/lib/one/remotes/etc/data
 * `FS_OPTS_<FS>`: Options for creating the file system for formatted datablocks. Can be set in `/var/lib/one/remotes/etc/datastore/datastore.conf` for each file system type.
 
 {{< alert title="Warning" type="warning" >}}
-Before adding a new file system to the `SUPPORTED_FS` list, make sure that the corresponding `mkfs.<fs_name>` command is available in all nodes including Front-end and hypervisor nodes. If an unsupported FS is used by the user the default one will be used.{{< /alert >}} 
+Before adding a new file system to the `SUPPORTED_FS` list, make sure that the corresponding `mkfs.<fs_name>` command is available in all nodes including Front-end and hypervisor nodes. If an unsupported FS is used by the user the default one will be used.{{< /alert >}}
 
 ### Using different modes
 
@@ -290,7 +278,7 @@ When using Sunstone, the deployment mode needs to be set in the Storage tab.
 Images are stored in a Ceph pool, named after its OpenNebula ID `one-<IMAGE ID>`. Virtual Machine disks are stored by default in the same pool (Ceph Mode). You can also choose to export the Image rbd to the hypervisor local storage using the SSH Mode.
 
 {{< alert title="Important" type="info" >}}
-It is necessary to register each image only once, then it can be deployed using any mode (**ceph** or **SSH**).{{< /alert >}} 
+It is necessary to register each image only once, then it can be deployed using any mode (**ceph** or **SSH**).{{< /alert >}}
 
 ### Ceph Mode (Default)
 
@@ -299,7 +287,7 @@ In this mode, Virtual Machines will use the same Image rbd volumes for their dis
 For example, consider a system using an Image and System Datastore backed by a Ceph pool named `one`. The pool with one Image (ID `0`) and two Virtual Machines `14` and `15` using this Image as virtual disk `0` would be similar to:
 
 ```default
-$ rbd ls -l -p one --id libvirt
+rbd ls -l -p one --id libvirt
 NAME         SIZE PARENT         FMT PROT LOCK
 one-0      10240M                  2
 one-0@snap 10240M                  2 yes
@@ -308,7 +296,7 @@ one-0-15-0 10240M one/one-0@snap   2
 ```
 
 {{< alert title="Note" type="info" >}}
-In this case, context disk and auxiliary files (deployment description and checkpoints) are stored locally in the nodes.{{< /alert >}} 
+In this case, context disk and auxiliary files (deployment description and checkpoints) are stored locally in the nodes.{{< /alert >}}
 
 <a id="ceph-ssh-mode"></a>
 
@@ -318,8 +306,8 @@ In this mode, the associated rbd file for each disk is exported to a file and st
 
 For instance, in the previous example, if the VM `14` is set to be deployed in an SSH System Datastore (e.g., `100`), the layout of the datastore in the hypervisor would be similar to:
 
-```default
-$ ls -l /var/lib/one/datastores/100/14
+```shell
+ls -l /var/lib/one/datastores/100/14
 total 609228
 -rw-rw-r-- 1 oneadmin oneadmin        1020 Dec 20 14:41 deployment.0
 -rw-r--r-- 1 oneadmin oneadmin 10737418240 Dec 20 15:19 disk.0
@@ -327,10 +315,11 @@ total 609228
 ```
 
 {{< alert title="Note" type="info" >}}
-In this case disk.0 is generated with a command similar to `rbd export one/one-0@snap disk.0`{{< /alert >}} 
+In this case disk.0 is generated with a command similar to `rbd export one/one-0@snap disk.0`{{< /alert >}}
 
 {{< alert title="Warning" type="warning" >}}
 In this mode there are some inherent limitations:
 
 * disk snapshots are not supported
-* VM disk cannot be saved when located on the Front-end (undeployed or stopped VM){{< /alert >}}  
+* VM disk cannot be saved when located on the Front-end (undeployed or stopped VM)
+{{< /alert >}}

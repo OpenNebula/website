@@ -14,14 +14,23 @@ weight: "1"
 
 This Chapter contains documentation on how to configure OpenNebula to work with the [Prometheus monitoring and alerting toolkit](http://prometheus.io). The integration consists of four components:
 
-> - A Libvirt Exporter that provides information about VM (KVM domains) running on an OpenNebula Host.
-> - An OpenNebula Exporter that provides basic information about the overall OpenNebula cloud.
+> - A **Libvirt Exporter** that provides information about VM (KVM domains) running on an OpenNebula Host.
+> - An **OpenNebula Exporter** that provides basic information about the overall OpenNebula cloud.
 > - Alert rules sample files based on the provided metrics.
 > - [Grafana](https://grafana.com/) dashboards to visualize VM, Host, and OpenNebula information in a convenient way.
 
+Additionally, four **optional** exporter sub-packages are shipped to cover deployment-specific telemetry:
+
+> - **OVS Exporter** for Open vSwitch metrics on Hosts using OVS networking.
+> - **MySQL Exporter** for MariaDB/MySQL server metrics on Front-ends using the MySQL backend.
+> - **SMART Exporter** for S.M.A.R.T. disk health on Hosts (or any machine with physical disks).
+> - **LVM Exporter** for LVM physical-volume / volume-group / logical-volume metrics on Hosts using LVM-backed datastores.
+
+These are *opt-in* — install only the ones relevant to your deployment. Prometheus auto-detects them via TCP probe and adds matching scrape configs the next time `patch_datasources.rb` runs (see the [installation guide]({{% relref "install#monitor-alert-installation" %}})).
+
 ## How Should I Read This Chapter
 
-Before reading this Chapter, you should have already installed your [Front-end]({{% relref "../../../software/installation_process/manual_installation/front_end_installation.md#frontend-installation" %}}) and [KVM Hosts]({{% relref "../../../software/installation_process/manual_installation/front_end_installation.md#kvm-node" %}}), and have an OpenNebula cloud up and running with at least one virtualization node.
+Before reading this Chapter, you should have already installed your [Front-end]({{% relref "software/installation_process/frontend_installation/frontend_install.md#frontend-installation" %}}) and [KVM Hosts]({{% relref "software/installation_process/frontend_installation/frontend_install.md#kvm-node" %}}), and have an OpenNebula cloud up and running with at least one virtualization node.
 
 This Chapter is structured as follows:
 

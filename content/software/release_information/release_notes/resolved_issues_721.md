@@ -13,7 +13,6 @@ The following new features have been backported to 7.2.1:
 * Add per-VM live migration options through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`]({{% relref "/product/operation_references/configuration_references/template#template-features" %}}) VM template attributes. Administrators can now tune auto-convergence and memory compression only for selected KVM VMs, improving migration reliability and bandwidth usage without changing global driver defaults.
 * [Allow the customization of the favicon in FireEdge]({{% relref "product/operation_references/opennebula_services_configuration/fireedge.md#branding-fireedge" %}}).
 
-
 ## Resolved Issues
 
 The following issues have been solved in 7.2.1:
@@ -25,3 +24,5 @@ The following issues have been solved in 7.2.1:
 * Fix race condition in `oneflow` server in cancel actions [#7570](https://github.com/OpenNebula/one/issues/7570)
 * Fix usage of network lease in case of VM deploy failure [#7349](https://github.com/OpenNebula/one/issues/7349)
 * Fix authentication drivers for users with empty password [#7606](https://github.com/OpenNebula/one/issues/7606)
+* Fix standalone installation of Ruby gem openebula-cli [#7608](https://github.com/OpenNebula/one/issues/7608)
+* Fix Ceph monitoring to reflect actual disk usage in RBD [#7185](https://github.com/OpenNebula/one/issues/7185).

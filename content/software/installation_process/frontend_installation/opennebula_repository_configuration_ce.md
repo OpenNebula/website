@@ -1,13 +1,12 @@
 ---
-title: "OpenNebula Repositories for Community Edition"
+title: "Manual Installation - OpenNebula Repositories for Community Edition"
+linkTitle: "Manual - Repositories (CE)"
 date: "2025-02-17"
 description:
 categories:
 pageintoc: "172"
 tags:
 weight: "5"
-show_card: false
-toc_hide: true
 ---
 
 The Community Edition of OpenNebula offers the full functionality of the Cloud Management Platform. You can configure the Community Edition repositories as follows:
@@ -154,3 +153,7 @@ EOT
 zypper ar -f https://download.opensuse.org/repositories/science/openSUSE_Leap_16.0/ science
 zypper refresh
 ```
+
+## Next Steps
+
+After configuring the OpenNebula Community Edition repositories, you can proceed to install the OpenNebula Front-end. Continue to the [Single Front-end Installation Documentation]({{% relref "software/installation_process/frontend_installation/frontend_install/" %}}) to complete the installation.

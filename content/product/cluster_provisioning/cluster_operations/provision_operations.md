@@ -123,7 +123,7 @@ In the Sunstone interface, go to **Infrastructure -> Clusters** and select the C
 {{% /tab %}}
 
 {{% tab header="CLI"%}}
-For Provisions that support public networking like AWS and Equinix, dynamically manage Elastic IPs through the following commands:
+For Provisions that support public networking like AWS and i3Dnet, dynamically manage Elastic IPs through the following commands:
 
 * Add Public IPs
 

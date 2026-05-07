@@ -12,13 +12,13 @@ weight: "3"
 
 <!--# Upgrading Single Front-end Deployments -->
 {{< alert title="Important" type="info" >}}
-If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "front_end_installation#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
+If you haven’t done so, please enable the [OpenNebula and needed 3rd party repositories]({{% relref "frontend_install#setup-opennebula-repos" %}}) before attempting the upgrade process.{{< /alert >}}
 
 ## Upgrading from 6.x and higher
 
 ### Step 1. Check Virtual Machine Status
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). (For more information on the life cycle of Virtual Machines, please see [Virtual Machine Instances]({{% relref "../../../product/virtual_machines_operation/virtual_machines/vm_instances" %}}).)
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migrate, epilog, save). Wait until these VMs get to a final state (running, suspended, stopped, done). (For more information on the life cycle of Virtual Machines, please see [Virtual Machine Instances]({{% relref "product/virtual_machines_operation/virtual_machines/vm_instances" %}}).)
 
 ### Step 2. Set All Hosts to Disable Mode
 
@@ -75,9 +75,14 @@ apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow openne
 
 RHEL
 
+{{< alert title="Warning" type="warning" >}}
+On RHEL/AlmaLinux 9, upgrading from OpenNebula 7.0 to 7.2 may fail due to conflicts between the distro nodejs 16 packages and the nodesource nodejs 20 required by `opennebula-fireedge`. Please check the [Known Issues]({{% relref "../../release_information/release_notes/known_issues#upgrade" %}}) for the workaround.{{< /alert >}}
+
 ```bash
 yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
 ```
+
+<!-- TODO: Add SLES/openSUSE upgrade instructions (zypper) once there is a previous SUSE release to upgrade from (SUSE support was introduced in 7.2). -->
 
 ### Step 7. Update Configuration Files
 
@@ -223,6 +228,8 @@ RHEL
 ```bash
 yum upgrade opennebula-node-<hypervisor>
 ```
+
+<!-- TODO: Add SLES/openSUSE node upgrade instructions (zypper) once there is a previous SUSE release to upgrade from (SUSE support was introduced in 7.2). -->
 
 {{< alert title="Note" type="info" >}}
 Note that the `<hypervisor>` tag should be replaced by the name of the corresponding hypervisor (i.e., `kvm` or `lxc`).{{< /alert >}}

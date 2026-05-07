@@ -1,7 +1,8 @@
 ---
-title: "Installation Process"
+title: "OpenNebula Installation Process"
+linkTitle: "Installation Process"
 date: "2025-02-17"
-description: "Choose the best installation method for your needs -- from automatic installation of a complete OpenNebula cloud, to customized installation of individual components, to compiling from source code for building your own infrastructure and integrations."
+description: "OpenNebula installation processes, including manual and automated options."
 categories:
 pageintoc: "168"
 tags:
@@ -10,12 +11,4 @@ weight: "3"
 
 <a id="package-installation-references"></a>
 
-<a id="ocd"></a>
-
-<a id="vmmg"></a>
-
-<a id="open-cluster-deployment"></a>
-
-<!--# Package Installation References -->
-
-These sections provide details on installing an OpenNebula cloud, beginning with the OpenNebula Front-end and including services and hypervisors. The complete references for configuring OpenNebula services, templates, and hypervisor nodes may be found in [Operation References]({{% relref "../../../product/operation_references/" %}}).
+This section contains details for deploying an OpenNebula-managed cloud. Installation starts with the deployment of an OpenNebula **Front-end**. Once the OpenNebula Front-end is deployed, **Clusters** can be installed manually or deployed automatically with OneForm to handle cloud workloads. **OneDeploy** can be used for advanced, automated installation of both the Front-end and Clusters. Please read the [Installation Overview]({{% relref "software/installation_process/overview/" %}}) for details on each of the installation options prior to starting.

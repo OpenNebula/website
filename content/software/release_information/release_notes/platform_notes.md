@@ -22,11 +22,13 @@ This is the list of the individual platform components that have been through th
 
 | **Component**                | **Version**                                    | **More information** |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9, 10                                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
-| AlmaLinux                | 8, 9, 10                                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "front_end_installation" %}})                                                     |
-| Debian                   | 11, 12, 13                                     | [Front-end Installation]({{% relref "front_end_installation" %}})<br/>Not certified to manage VMware infrastructures |
-| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "../../../software/installation_process/manual_installation/database#mysql" %}})                                                                  |
+| Red Hat Enterprise Linux | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| AlmaLinux                | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| Debian                   | 12, 13                                     | [Front-end Installation]({{% relref "frontend_install" %}})<br/>Not certified to manage VMware infrastructures |
+| SUSE Linux Enterprise    | 15                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| openSUSE                 | 16                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| MariaDB or MySQL         | Version included in the Linux distribution | [MySQL Setup]({{% relref "software/installation_process/frontend_installation/database#mysql" %}})                                                                  |
 | SQLite                   | Version included in the Linux distribution | Default DB, no configuration needed                                                                                                                                                         |
 
 {{< alert title="Note" type="info" >}}
@@ -36,10 +38,12 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 | **Component**                | **Version**  | **More information** |
 |--------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Red Hat Enterprise Linux | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
-| AlmaLinux                | 8, 9, 10                                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Red Hat Enterprise Linux | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| AlmaLinux                | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
-| Debian                   | 11, 12                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Debian                   | 12, 13                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| SUSE Linux Enterprise    | 15                                                                                                         | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| openSUSE                 | 16                                                                                                         | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | KVM/Libvirt              | Support for version included in the Linux distribution.                                                    | [KVM Node Installation]({{% relref "kvm_node_installation#kvm-node" %}}) |
 
 ### LXC Nodes
@@ -47,8 +51,8 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 | **Component**     | **Version**                                                | **More information** |
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| Debian        | 11, 12                                                 | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
-| AlmaLinux     | 8, 9, 10                                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| Debian        | 12, 13                                                 | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| AlmaLinux     | 9, 10                                                  | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | LXC           | Support for version included in the Linux distribution | [LXC Node Installation]({{% relref "lxc_node_installation#lxc-node" %}}) |
 
 <a id="context-supported-platforms"></a>
@@ -89,6 +93,10 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | **Component**                     | **Version**   | **More information** |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
+| OVS exporter                  | 2.3.1     | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
+| MySQL exporter (mysqld_exporter) | 0.19.0 | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
+| SMART exporter                | 0.14.0    | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
+| LVM exporter                  | 0.6.2     | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
 | Veeam B&R                     | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
 
@@ -132,23 +140,6 @@ The following items apply to all distributions:
 
 ```default
 DISK = [ driver = "qcow2", cache = "writethrough" ]
-```
-
-### RedHat 8 Platform Notes
-
-#### Disable PolicyKit for Libvirt
-
-It is recommended to disable PolicyKit for Libvirt:
-
-```shell
-cat /etc/libvirt/libvirtd.conf
-...
-auth_unix_ro = "none"
-auth_unix_rw = "none"
-unix_sock_group = "oneadmin"
-unix_sock_ro_perms = "0770"
-unix_sock_rw_perms = "0770"
-...
 ```
 
 ### AlmaLinux 9 Platform Notes

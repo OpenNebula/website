@@ -15,7 +15,7 @@ weight: "5"
 
 ## Appliance Description
 
-OneKE is a minimal [hyperconverged](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) Kubernetes platform that comes with OpenNebula out-of-the-box, based on [RKE2 - Rancher’s Next Generation Kubernetes Distribution](https://docs.rke2.io/).
+OneKE is a minimal [hyperconverged](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) Kubernetes platform appliance that can be downloaded from the OpenNebula Marketplace, based on [RKE2 - Rancher’s Next Generation Kubernetes Distribution](https://docs.rke2.io/).
 
 ## Main Features
 
@@ -29,9 +29,6 @@ OneKE includes preinstalled components for:
 
 - [OneKE](https://github.com/OpenNebula/one-apps/tree/master/appliances/OneKE) in the [OpenNebula one-apps](https://github.com/OpenNebula/one-apps) project
 - [Full documentation](https://github.com/OpenNebula/one-apps/wiki) for the OneKE appliance
-- Download OneKE from the [OpenNebula Marketplace](https://marketplace.opennebula.io/appliance):
-  - [OneKE](https://marketplace.opennebula.io/appliance/e73d2dda-1816-4f47-981f-72f1255f94ac)
-  - [OneKE Airgapped](https://marketplace.opennebula.io/appliance/9378a80f-7556-46d2-8a89-43c8b03162e6)
-{{< alert type="info" >}}
-For additional OneKE components and versions, in the OpenNebula Marketplace use the search bar to filter for "OneKE".
-{{< /alert >}}
+- Download OneKE from the [OpenNebula Marketplace](https://marketplace.opennebula.io), search for:
+  - OneKE
+  - OneKE Airgapped

@@ -164,7 +164,7 @@ curl -X POST "https://oneform.example.server/api/v1/providers" \
   -u "username:password" \
   -H "Content-Type: application/json" \
   -d '{
-    "driver": "equinix",
+    "driver": "scaleway",
     "connection_values": {
       "region": "fr-par",
       "zone": "fr-par-2",

@@ -24,12 +24,16 @@ TARGET_IQN="iqn.2023-01.com.example:storage.target1"  # iSCSI Qualified Name
 sudo dnf install -y iscsi-initiator-utils
 # Ubuntu/Debian:
 sudo apt update && sudo apt install -y open-iscsi
+# SLES/openSUSE:
+sudo zypper install -y open-iscsi
 
 # === Enable iSCSI services ===
 # RedHat derivates:
 sudo systemctl enable --now iscsid
 # Ubuntu/Debian:
 sudo systemctl enable --now open-iscsi
+# SLES/openSUSE:
+sudo systemctl enable --now iscsid.socket iscsi
 
 # === Discover targets ===
 sudo iscsiadm -m discovery -t sendtargets -p "$TARGET_IP"
@@ -50,6 +54,8 @@ sudo iscsiadm -m node -T "$TARGET_IQN" -p "$TARGET_IP" \
 sudo dnf install -y device-mapper-multipath
 # Ubuntu/Debian:
 sudo apt update && sudo apt install -y multipath-tools
+# SLES/openSUSE:
+sudo zypper install -y multipath-tools
 
 # === Enable multipath daemon ===
 sudo systemctl enable --now multipathd

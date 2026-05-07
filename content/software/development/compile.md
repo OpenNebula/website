@@ -107,7 +107,7 @@ The packages do a `system-wide` installation. To create a similar environment, c
 oneadmin@frontend:~/ $> wget <opennebula tar gz>
 oneadmin@frontend:~/ $> tar xzf <opennebula tar gz>
 oneadmin@frontend:~/ $> cd opennebula-x.y.z
-oneadmin@frontend:~/opennebula-x.y.z/ $> scons -j2 mysql=yes syslog=yes fireedge=yes
+oneadmin@frontend:~/opennebula-x.y.z/ $> scons -j2 mysql=yes syslog=yes fireedge=yes grpcproto=yes
 [ lots of compiling information ]
 scons: done building targets.
 oneadmin@frontend:~/opennebula-x.y.z $> sudo ./install.sh -u oneadmin -g oneadmin
@@ -115,7 +115,7 @@ oneadmin@frontend:~/opennebula-x.y.z $> sudo ./install.sh -u oneadmin -g oneadmi
 
 ## Ruby Dependencies
 
-All required Ruby gems are provided by the **opennebula-rubygems** package. Please check the [Installation guide]({{% relref "front_end_installation" %}}) for more information on installing this package.
+All required Ruby gems are provided by the **opennebula-rubygems** package. Please check the [Installation guide]({{% relref "frontend_install" %}}) for more information on installing this package.
 
 ## Building Python Bindings from Source
 
