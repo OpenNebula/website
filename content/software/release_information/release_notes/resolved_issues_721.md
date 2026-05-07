@@ -12,6 +12,7 @@ The following new features have been backported to 7.2.1:
 * Add option [`LOG_RESULT_LENGTH` to `oned.conf`](../../../product/operation_references/opennebula_services_configuration/oned#xml-rpc-server-configuration) to configure max length of API result log.
 * Add per-VM live migration options through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`](../../../product/operation_references/configuration_references/template#template-features) VM template attributes. Administrators can now tune auto-convergence and memory compression only for selected KVM VMs, improving migration reliability and bandwidth usage without changing global driver defaults.
 * Add optional Prometheus exporter packages for OVS, MySQL/MariaDB, SMART storage health, and LVM monitoring. See [Optional Exporters](../../../product/cloud_system_administration/prometheus/install#monitor-alert-extra-exporters) for installation and service details.
+* VLAN_ID is not mandatory when creating a OpenvSwitch in Sunstone. See [Open vSwitch Networks](../../../product/cluster_configuration/networking_system/openvswitch/) for details.
 
 ## Resolved Issues
 
