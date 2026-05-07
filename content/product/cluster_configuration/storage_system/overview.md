@@ -36,7 +36,7 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 
 ## Storage portfolio
 
-| Use case                                                      | Description                                                                                            | Shared | Disk Format                    | Disk snapshots | VM snapshots | Storage migration | Fault tolerance | HV      | Availability |
+| Use case                                                      | Description                                                                                            | Shared | Disk Format                    | Disk snapshots | VM snapshots | [Storage migration]({{% relref "/product/virtual_machines_operation/virtual_machines/vm_instances/#virtual-machine-datastore-migration" %}}) | Fault tolerance | HV      | Availability |
 | --                                                            | --                                                                                                     | --     | --                             | --             | --           | --                | --              | --      | --           |
 | [Local storage]({{% relref "local_ds" %}})                    | Images stored in Front-end* and transferred to hosts via<br/>SSH on instantiation.                      | no     | raw/qcow2                      | yes            | yes          | poweroff/live     | no              | KVM/LXC | EE/CE        |
 | [NFS/NAS]({{% relref "nas_ds" %}})                            | Images stored in a NFS share, activated directly.                                                      | yes    | raw/qcow2                      | yes            | yes          | poweroff/live     | yes             | KVM/LXC | EE/CE        |

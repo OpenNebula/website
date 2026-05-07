@@ -22,10 +22,10 @@ This guide may be considered a continuation of the [Virtual Machines Templates](
 ### Creating and Listing VMs
 
 {{< alert title="Note" type="info" >}}
-Read the [Creating Virtual Machines guide]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
+Read the [Creating Virtual Machines guide]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}}
 
 {{< alert title="Note" type="info" >}}
-Read the complete reference for [Virtual Machine templates]({{% relref "product/operation_references/configuration_references/template#template" %}}).{{< /alert >}} 
+Read the complete reference for [Virtual Machine templates]({{% relref "product/operation_references/configuration_references/template#template" %}}).{{< /alert >}}
 
 Assuming we have a VM template registered called **vm-example** with ID 6, then we can instantiate the VM by issuing a:
 
@@ -877,6 +877,53 @@ Depending on the state of the VM and the underlying storage drivers, OpenNebula 
 * **Cold Storage Migration**: Performed when the VM is in a POWEROFF or UNDEPLOYED state. The disks are moved physically between datastores before the VM is resumed.
 
 * **Live Storage Migration**: Performed while the VM is RUNNING. OpenNebula coordinates with the hypervisor to mirror disk writes to the new destination in real-time, ensuring zero downtime for the workload.
+
+{{< alert title="Note" type="info" >}}
+Not all storage drivers support both methods. Check the "Storage migration" column in the [storage portfolio]({{% relref "product/cluster_configuration/storage_system/overview/#storage-portfolio" %}}) table for updated compatibility info.
+{{< /alert >}}
+
+### Basic Syntax
+
+You can migrate a VM's disks to a different datastore by specifying the target datastore ID when running `onevm migrate`:
+
+```shell
+onevm migrate [--live] <vm_id> <target_host_id> <target_datastore_id>
+```
+
+If the target host is the same as the current one, only the datastore changes. If you also change the host, both the host and the datastore are migrated simultaneously, although changing both is only supported for offline migrations.
+
+Cold and live migrations cannot be performed between different TM_MAD drivers (for example, from `ceph` to `lvm`).
+
+### Cold Storage Migration
+
+Cold migration is the simplest form of datastore migration. The VM is automatically stopped by OpenNebula before migrating it, saving its running state across the process. OpenNebula copies the disk files from the source datastore to the destination datastore using the Transfer Manager.
+
+```shell
+onevm migrate <vm_id> <host_id> <target_datastore_id>
+```
+
+You can also use `--poff` or `--poff-hard` to power off the VM during migration:
+
+```shell
+onevm migrate <vm_id> <host_id> <target_datastore_id> --poff
+```
+
+As the VM is powered off before any disk operations take place, libvirt is not involved in the actual data transfer. The Transfer Manager handles all file-level operations (copying disk images, updating symlinks, etc.) through the TM_MAD scripts. Once the disk files are in place on the destination datastore, the VM is simply resumed and its disk device paths point to the new location.
+
+### Live Storage Migration
+
+Live storage migration allows the VM disks to be migrated while the VM remains in the `RUNNING` state. OpenNebula coordinates with the hypervisor (KVM) to mirror disk writes to the new destination in real-time.
+
+```shell
+onevm migrate --live <vm_id> <host_id> <target_datastore_id>
+```
+
+At the libvirt level, live datastore migration uses the `virsh blockcopy` command on the same host. Read-only disks (such as CD-ROM or read-only qcow2 images) are copied by OpenNebula, after which libvirt's `change-media` command is used to update their paths.
+
+There are some limitations to keep in mind when performing live datastore migration:
+
+* You **cannot change both the host and the datastore simultaneously**. For that case, you need to perform each of those operations in order.
+* **Disk snapshots** are only preserved with qcow2-based drivers (`qcow2`, `ssh`, `local`); they are lost with other drivers (LVM, raw disks, shared NFS).
 
 <a id="vm-charter"></a>
 
