@@ -75,7 +75,7 @@ The Sunstone server configuration file can be found in `/etc/one/fireedge/sunsto
 {{< alert title="Note" type="info" >}}
 After a configuration change the FireEdge server must be [restarted]({{% relref "fireedge#fireedge-conf-service" %}}) to take effect.{{< /alert >}}
 
-![fireedge_sunstone_dashboard](/images/fireedge_sunstone_dashboard.png)
+{{< image path="/images/fireedge_sunstone_dashboard.png" alt="Fireedge Sunstone dashboard" align="center" width="90%" mb="40px" >}}
 
 | Parameter              | Default Value                           | Description                                                  |
 | ---------------------- | --------------------------------------- | ------------------------------------------------------------ |
@@ -110,19 +110,22 @@ In HA environments, `fireedge_key` needs to be copied from the first leader to t
 
 ### Branding FireEdge
 
-You can add your logo to the login, main, favicon, and loading screens by updating the `logo:` attribute as follows:
+You can add your logo to the login, main, and loading screens by updating the `logo:` attribute as follows:
 
-- The logo configuration is done in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
+- The logo configuration is found in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file.
 - The logo of the main UI screen is defined for each view.
 
 The logo image must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/logos`.
 
-The following example shows how you can change the logo to a generic linux one (included by default in all FireEdge installations):
+You can also add a custom favicon by updating the `favicon:` attribute defined in the `/etc/one/fireedge/sunstone/views/sunstone-views.yaml` file. The favicon must be copied to `/usr/lib/one/fireedge/dist/client/assets/images/favicon`.
+
+The following example demonstrates how to change the logo and the favicon to a generic Linux logo (included by default in all FireEdge installations):
 
 ```yaml
 # /etc/one/fireedge/sunstone/views/sunstone-views.yaml
 ---
 logo: linux.png
+favicon: linux.png
 
 groups:
     oneadmin:
@@ -133,9 +136,15 @@ default:
 ```
 
 {{< alert title="Note" type="info" >}}
-The logo can be updated without having to restart the FireEdge server!{{< /alert >}} 
+If the attribute `logo:` is defined and the attribute `favicon:` is not defined, the `logo:` attribute will be used as favicon.
+{{< /alert >}} 
 
-![fireedge_sunstone_linux_login_logo](/images/fireedge_login_linux_logo.png) ![fireedge_sunstone_linux_drawer_logo](/images/fireedge_drawer_linux_logo.png)
+{{< alert title="Note" type="info" >}}
+The logo and the favicon can be updated without needing to restart the FireEdge server!{{< /alert >}} 
+
+{{< image path="/images/fireedge_login_linux_logo.png" alt="Sunstone login" align="center" width="90%" mb="20px" >}}
+
+{{< image path="/images/fireedge_drawer_linux_logo.png" alt="Sunstone drawer" align="center" width="90%" mb="20px" >}}
 
 <a id="fireedge-conf-guacamole"></a>
 
@@ -143,17 +152,17 @@ The logo can be updated without having to restart the FireEdge server!{{< /alert
 
 Tables in Sunstone can be configured to visualize data as a list of plain text or as a list of cards:
 
-![fireedge_sunstone_list_datatable](/images/sunstone_list_datatable.png)
+{{< image path="/images/sunstone_list_datatable.png" alt="Sunstone list datatable" align="center" width="90%" mb="40px" >}}
 
-![fireedge_sunstone_card_datatable](/images/sunstone_card_datatable.png)
+{{< image path="/images/sunstone_card_datatable.png" alt="Sunstone card datatable" align="center" width="90%" mb="20px" >}}
 
 This configuration could be modified in the `/etc/one/fireedge/sunstone/sunstone-server.conf` file modifying the parameter `rowStyle`. [See this table](fireedge#fireedge-sunstone-configuration).
 
 Moreover, Suntone has the capacity to show the detail of a resource in a full screen mode or in a split mode:
 
-![fireedge_sunstone_resource_full_mode](/images/sunstone_resource_full_mode.png)
+{{< image path="/images/sunstone_resource_full_mode.png" alt="Sunstone resource full mode" align="center" width="90%" mb="40px" >}}
 
-![fireedge_sunstone_resource_split_mode](/images/sunstone_resource_split_mode.png)
+{{< image path="/images/sunstone_resource_split_mode.png" alt="Sunstone resource split mode" align="center" width="90%" mb="40px" >}}
 
 This configuration can be modified in the `/etc/one/fireedge/sunstone/sunstone-server.conf` file modifying the parameter `fullViewMode`. [See this table](#fireedge-sunstone-configuration).
 
@@ -162,7 +171,7 @@ Changes will not be visible for users whose template has the `TEMPLATE/FIREEDGE/
 
 Also, both configurations will be overridden for a specific user if the user changes the configuration in the settings section.
 
-![fireedge_sunstone_setting_list_datatable](/images/sunstone_setting_list_datatable.png)
+{{< image path="/images/sunstone_setting_list_datatable.png" alt="Sunstone setting list datatable" align="center" width="90%" mb="40px" >}}
 
 ### Customize colors
 
