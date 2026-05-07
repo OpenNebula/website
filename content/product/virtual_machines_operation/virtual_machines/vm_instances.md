@@ -15,33 +15,34 @@ weight: "3"
 
 <!--# Managing Virtual Machines Instances -->
 
-This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "../virtual_machines/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
+This guide may be considered a continuation of the [Virtual Machines Templates]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates" %}}) guide. Once a Template is instantiated to a Virtual Machine, there are a number of operations that can be performed using the `onevm` command.
 
 ## Basic Virtual Machine Operations
 
 ### Creating and Listing VMs
 
 {{< alert title="Note" type="info" >}}
-Read the [Creating Virtual Machines guide]({{% relref "../virtual_machines/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
+Read the [Creating Virtual Machines guide]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}}
 
 {{< alert title="Note" type="info" >}}
-Read the complete reference for [Virtual Machine templates]({{% relref "../../operation_references/configuration_references/template#template" %}}).{{< /alert >}} 
+Read the complete reference for [Virtual Machine templates]({{% relref "product/operation_references/configuration_references/template#template" %}}).{{< /alert >}}
 
 Assuming we have a VM template registered called **vm-example** with ID 6, then we can instantiate the VM by issuing a:
 
-```default
-$ onetemplate list
-  ID USER     GROUP    NAME                         REGTIME
-   6 oneadmin oneadmin vm_example            09/28 06:44:07
-
-$ onetemplate instantiate vm-example --name my_vm
+```shell
+onetemplate list
+ID USER     GROUP    NAME                         REGTIME
+ 6 oneadmin oneadmin vm_example            09/28 06:44:07
+```
+```shell
+onetemplate instantiate vm-example --name my_vm
 VM ID: 0
 ```
 
-If the template has [USER INPUTS]({{% relref "../virtual_machines/vm_templates#vm-guide-user-inputs" %}}) defined, the CLI will prompt the user for these values:
+If the template has [USER INPUTS]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#vm-guide-user-inputs" %}}) defined, the CLI will prompt the user for these values:
 
-```default
-$ onetemplate instantiate vm-example --name my_vm
+```shell
+onetemplate instantiate vm-example --name my_vm
 There are some parameters that require user input.
   * (BLOG_TITLE) Blog Title: <my_title>
   * (DB_PASSWORD) Database Password:
@@ -50,30 +51,30 @@ VM ID: 0
 
 Afterwards, the VM can be listed with the `onevm list` command. You can also use the `onevm top` command to list VMs continuously.
 
-```default
-$ onevm list
-    ID USER     GROUP    NAME         STAT CPU     MEM        HOSTNAME        TIME
-     0 oneadmin oneadmin my_vm        pend   0      0K                 00 00:00:03
+```shell
+onevm list
+ID USER     GROUP    NAME         STAT CPU     MEM        HOSTNAME        TIME
+ 0 oneadmin oneadmin my_vm        pend   0      0K                 00 00:00:03
 ```
 
 The scheduler will automatically deploy the VM in one of the Hosts with enough resources available. The deployment can also be forced by oneadmin using `onevm deploy`:
 
-```default
-$ onehost list
-  ID NAME               RVM   TCPU   FCPU   ACPU   TMEM   FMEM   AMEM   STAT
-   2 testbed              0    800    800    800    16G    16G    16G     on
+```shell
+onehost list
+ID NAME               RVM   TCPU   FCPU   ACPU   TMEM   FMEM   AMEM   STAT
+ 2 testbed              0    800    800    800    16G    16G    16G     on
 
-$ onevm deploy 0 2
+onevm deploy 0 2
 
-$ onevm list
-    ID USER     GROUP    NAME         STAT CPU     MEM        HOSTNAME        TIME
-     0 oneadmin oneadmin my_vm        runn   0      0K         testbed 00 00:02:40
+onevm list
+ID USER     GROUP    NAME         STAT CPU     MEM        HOSTNAME        TIME
+ 0 oneadmin oneadmin my_vm        runn   0      0K         testbed 00 00:02:40
 ```
 
 and details about it can be obtained with `show`:
 
-```default
-$ onevm show 0
+```shell
+onevm show 0
 VIRTUAL MACHINE 0 INFORMATION
 ID                  : 0
 NAME                : my_vm
@@ -125,16 +126,16 @@ To search for strings that contain `%` or `_` literally, escape these characters
 
 For example, for to search for a VM with a specific MAC address:
 
-```default
-$ onevm list --search 'VM.TEMPLATE.NIC[*].MAC=02:00:0c:00:4c:dd'
- ID    USER     GROUP    NAME    STAT UCPU UMEM HOST TIME
- 21005 oneadmin oneadmin test-vm pend    0   0K      1d 23h11
+```shell
+onevm list --search 'VM.TEMPLATE.NIC[*].MAC=02:00:0c:00:4c:dd'
+ID    USER     GROUP    NAME    STAT UCPU UMEM HOST TIME
+21005 oneadmin oneadmin test-vm pend    0   0K      1d 23h11
 ```
 
 Equivalently, if there is more than one VM instance that matches the result they will be shown. For example, VM's NAME containing a pattern and owned by oneadmin:
 
-```default
-$ onevm list --search 'VM.NAME=test-vm&VM.UNAME=oneadmin'
+```shell
+onevm list --search 'VM.NAME=test-vm&VM.UNAME=oneadmin'
  ID    USER     GROUP    NAME     STAT UCPU UMEM HOST TIME
  21005 oneadmin oneadmin test-vm  pend    0   0K       1d 23h13
  2100  oneadmin oneadmin test-vm2 pend    0   0K      12d 17h59
@@ -142,8 +143,6 @@ $ onevm list --search 'VM.NAME=test-vm&VM.UNAME=oneadmin'
 
 {{< alert title="Warning" type="warning" >}}
 This feature is only available for **MySQL** backend with version **5.6** or later.{{< /alert >}} 
-
-
 
 ### Terminating VM Instances
 
@@ -203,14 +202,14 @@ Hotplugging might not be available for every supported hypervisor. Please check 
 
 New disks can be hot-plugged to running VMs with the `onevm`, `disk-attach`, and `disk-detach` commands. For example, to attach the Image named **storage** to a running VM:
 
-```default
-$ onevm disk-attach one-5 --image storage
+```shell
+onevm disk-attach one-5 --image storage
 ```
 
 To detach a disk from a running VM, find the disk ID of the Image you want to detach using the `onevm show` command, and then simply execute `onevm detach vm_id disk_id`:
 
-```default
-$ onevm show one-5
+```shell
+onevm show one-5
 ...
 DISK=[
   DISK_ID="1",
@@ -218,7 +217,7 @@ DISK=[
   ]
 ...
 
-$ onevm disk-detach one-5 1
+onevm disk-detach one-5 1
 ```
 
 <a id="vm-guide2-nic-hotplugging"></a>
@@ -227,8 +226,8 @@ $ onevm disk-detach one-5 1
 
 You can hot-plug network interfaces to VMs in the `RUNNING`, `POWEROFF`, or `SUSPENDED` states. Simply specify the network where the new interface should be attached, for example:
 
-```default
-$ onevm show 2
+```shell
+onevm show 2
 
 VIRTUAL MACHINE 2 INFORMATION
 ID                  : 2
@@ -244,13 +243,13 @@ ID NETWORK      VLAN BRIDGE   IP              MAC
 
 ...
 
-$ onevm nic-attach 2 --network net_172
+onevm nic-attach 2 --network net_172
 ```
 
 After the operation you should see two NICs, 0 and 1:
 
-```default
-$ onevm show 2
+```shell
+onevm show 2
 VIRTUAL MACHINE 2 INFORMATION
 ID                  : 2
 NAME                : centos-server
@@ -271,16 +270,16 @@ ID NETWORK      VLAN BRIDGE   IP              MAC
 
 It is possible to attach (and live-attach) PCI and SR-IOV interfaces. Simply select the device by its address, id, vendor, or class.
 
-```default
-$ onevm nic-attach 2 --network net_172 onevm nic-attach 2 --network net_172 --pci '00:06.1'
+```shell
+onevm nic-attach 2 --network net_172 onevm nic-attach 2 --network net_172 --pci '00:06.1'
 ```
 
 **Important**, predictable PCI addresses for guests will be only generated if PCI bus 1 is present in the Virtual Machine as PCI bridges cannot be hot-plugged.
 
 You can also detach a NIC by its ID. If you want to detach interface 1 (MAC `02:00:ac:10:00:ca`), execute:
 
-```default
-$ onevm nic-detach 2 1
+```shell
+onevm nic-detach 2 1
 ```
 
 <a id="nic-update"></a>
@@ -289,14 +288,14 @@ $ onevm nic-detach 2 1
 
 Qos attributes can be updated by the command `onevm nic-update`. If the Virtual Machine is running, the action triggers the driver action to live-update the network parameters.
 
-```default
-$ cat update_nic.txt
+```shell
+cat update_nic.txt
 NIC = [
     INBOUND_AVG_BW = "512",
     INBOUND_PEAK_BW = "1024"
 ]
 
-$ onevm nic-update 0 0 update_nic.txt
+onevm nic-update 0 0 update_nic.txt
 ```
 
 <a id="vm-guide2-sg-hotplugging"></a>
@@ -305,23 +304,23 @@ $ onevm nic-update 0 0 update_nic.txt
 
 You can live attach or detach security groups to VMs. Simply specify the VM, network interface, and security group to attach, for example:
 
-```default
-$ onevm sg-attach centos-server 0 101
+```shell
+onevm sg-attach centos-server 0 101
 ```
 
 Similarly to detach a security group execute:.
 
-```default
-$ onevm sg-detach centos-server 0 101
+```shell
+onevm sg-detach centos-server 0 101
 ```
 
 On Sunstone, you can attach and detach security groups to an NIC on a running or powered off VM by going to the Network tab.
 
-![sunstone_sg_main_view](/images/sunstone_sg_main_view.png)
+{{< image path="/images/sunstone_sg_main_view.png" alt="Sunstone main view" align="center" width="90%" mb="20px" >}}
 
 To attach a new security group, you need to click on the shield on the NIC row. A dialog will be displayed where you can find all the security groups that do not belong to the selected network.
 
-![sunstone_sg_attach](/images/sunstone_sg_attach.png)
+{{< image path="/images/sunstone_sg_attach.png" alt="Sunstone attach security group" align="center" width="90%" mb="20px" >}}
 
 To detach the security group, you must click on the Trash button next to the security group. A confirm dialog will be displayed to ensure that you want to detach the security group.
 
@@ -331,9 +330,9 @@ To detach the security group, you must click on the Trash button next to the sec
 
 You can attach or detach a PCI to/from a Virtual Machine in the `POWEROFF` and `UNDEPLOYED` state. For example:
 
-```default
-$ onevm pci-attach alpine01 --pci_class 0c03 --pci_device 0015 --pci_vendor 1912
-$ onevm pci-detach alpine01 0
+```shell
+onevm pci-attach alpine01 --pci_class 0c03 --pci_device 0015 --pci_vendor 1912
+onevm pci-detach alpine01 0
 ```
 
 <a id="vm-guide2-snapshotting"></a>
@@ -345,23 +344,23 @@ Snapshotting might not be available for every supported hypervisor. Please check
 
 A system snapshot will contain the current disks and memory state. You can create, delete, and restore snapshots for running VMs.{{< /alert >}}  
 
-```default
-$ onevm snapshot-create 4 "just in case"
+```shell
+onevm snapshot-create 4 "just in case"
 
-$ onevm show 4
+onevm show 4
 ...
 SNAPSHOTS
   ID         TIME NAME                                           HYPERVISOR_ID
    0  02/21 16:05 just in case                                   onesnap-0
 
-$ onevm snapshot-revert 4 0 --verbose
+onevm snapshot-revert 4 0 --verbose
 VM 4: snapshot reverted
 ```
 
 {{< alert title="Warning" type="warning" >}}
 For snapshots for VMs running under the **KVM hypervisor** you should consider the following limitations:
 
-- Snapshots are only available if all the VM disks use the [qcow2 driver]({{% relref "../../operation_references/configuration_references/img_template#img-template" %}}).{{< /alert >}}  
+- Snapshots are only available if all the VM disks use the [qcow2 driver]({{% relref "product/operation_references/configuration_references/img_template#img-template" %}}).{{< /alert >}}  
 
 <a id="vm-guide-2-disk-snapshots"></a>
 
@@ -395,19 +394,19 @@ Disk snapshots are managed with the following commands:
 - Hypervisor `VM_MAD=kvm` combined with `TM_MAD=qcow2` datastores. In this case OpenNebula will request that the hypervisor executes `virsh snapshot-create`.
 - Hypervisor `VM_MAD=kvm` with Ceph datastores (`TM_MAD=ceph`). In this case OpenNebula will initially create the snapshots as Ceph snapshots in the current volume.
 
-With these combinations (CEPH and qcow2 datastores, and KVM hypervisor) you can [enable QEMU Guest Agent]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#enabling-qemu-guest-agent" %}}). With this agent enabled the filesystem will be frozen while the snapshot is being taken.
+With these combinations (CEPH and qcow2 datastores, and KVM hypervisor) you can [enable QEMU Guest Agent]({{% relref "product/operation_references/hypervisor_configuration/kvm_driver#enabling-qemu-guest-agent" %}}). With this agent enabled the filesystem will be frozen while the snapshot is being taken.
 
 {{< alert title="Warning" type="warning" >}}
 OpenNebula will not automatically handle live `disk-snapshot-create` and `disk-snapshot-revert` operations for VMs in `RUNNING` state if the virtualization driver does not support it (check the limitations of the corresponding virtualization driver guide to know if this feature is available for your hypervisor). In this case the user needs to suspend or power off the VM before creating the snapshot.{{< /alert >}} 
 
-See the [Storage Driver]({{% relref "../../../product/integration_references/infrastructure_drivers_development/sd#sd-tm" %}}) guide for a reference on the driver actions invoked to perform live and non-live snapshots.
+See the [Storage Driver]({{% relref "product/integration_references/infrastructure_drivers_development/sd#sd-tm" %}}) guide for a reference on the driver actions invoked to perform live and non-live snapshots.
 
 {{< alert title="Warning" type="warning" >}}
 Depending on the `DISK/CACHE` attribute the live snapshot may or may not work correctly. To be sure, you can use `CACHE=writethrough`, although this delivers the slowest performance.{{< /alert >}} 
 
 ### Persistent Images and Disk Snapshots
 
-These actions are available for both persistent and non-persistent Images. In the case of persistent Images the snapshots **will** be preserved upon VM termination and will be able to be used by other VMs using that Image. See the [snapshots]({{% relref "../virtual_machines/images#images-snapshots" %}}) section in the Images guide for more information.
+These actions are available for both persistent and non-persistent Images. In the case of persistent Images the snapshots **will** be preserved upon VM termination and will be able to be used by other VMs using that Image. See the [snapshots]({{% relref "product/virtual_machines_operation/virtual_machines/images#images-snapshots" %}}) section in the Images guide for more information.
 
 <a id="disk-save-as-action"></a>
 
@@ -436,15 +435,15 @@ Note that using this procedure the VM will preserve any resource assigned by Ope
 
 The following is an example of the previous procedure from the command line:
 
-```default
-$ onevm poweroff web_vm
-$ onevm resize web_vm --memory 2G --vcpu 2
-$ onevm resume web_vm
+```shell
+onevm poweroff web_vm
+onevm resize web_vm --memory 2G --vcpu 2
+onevm resume web_vm
 ```
 
 ### Live Resize of Capacity
 
-If you need to resize the capacity in the RUNNING state you have to set up some extra attributes in the VM template. These attributes **must be set before the VM is started**. These attributes are driver-specific, more info for [KVM]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#kvm-live-resize" %}}).
+If you need to resize the capacity in the RUNNING state you have to set up some extra attributes in the VM template. These attributes **must be set before the VM is started**. These attributes are driver-specific, more info for [KVM]({{% relref "product/operation_references/hypervisor_configuration/kvm_driver#kvm-live-resize" %}}).
 
 {{< alert title="Warning" type="warning" >}}
 Hotplug is only implemented for KVM. Added CPUs will be in offline state after the resize. Enable them with `echo 1 > /sys/devices/system/cpu/cpu<ID>/online`{{< /alert >}} 
@@ -456,18 +455,18 @@ Hotplug is only implemented for KVM. Added CPUs will be in offline state after t
 If the disks assigned to a Virtual Machine need more size, this can achieved at instantiation time of the VM. The SIZE parameter of the disk can be adjusted and, if it is bigger than the original size of the Image, OpenNebula will:
 
 - Increase the size of the disk container prior to launching the VM
-- Using the [contextualization packages]({{% relref "../virtual_machines/vm_templates#context-overview" %}}), at boot time the VM will grow the filesystem to adjust to the new size.
+- Using the [contextualization packages]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}), at boot time the VM will grow the filesystem to adjust to the new size.
 
 You can override the size of a `DISK` in a VM template at instantiation:
 
-```default
-$ onetemplate instantiate <template> --disk u2104:size=20000 # Image u2104 will be resized to 2 GB
+```shell
+onetemplate instantiate <template> --disk u2104:size=20000 # Image u2104 will be resized to 2 GB
 ```
 
 You can also resize VM disks for both RUNNING and POWEROFF VMs:
 
-```default
-$ onevm disk-resize <vm_id> <disk_id> <new_size> # <new_size> must be greater than current disk size
+```shell
+onevm disk-resize <vm_id> <disk_id> <new_size> # <new_size> must be greater than current disk size
 ```
 
 This will make the VM disk grow on the hypervisor node. Then the contextualization service running inside the guest OS will expand the filesystem with the newly available free space. The support for this filesystem expansion depends on the Guest OS.
@@ -493,7 +492,7 @@ Some of the VM configuration attributes defined in the VM template can be update
 | `BACKUP_CONFIG` | `FS_FREEZE`, `KEEP_LAST`, `BACKUP_VOLATILE`, `MODE`,<br/>`INCREMENT_MODE`                                                |
 | `CONTEXT`       | Any value, except `ETH*`. **Variable substitution will be made**                                                         |
 
-Visit the [Virtual Machine Template reference]({{% relref "../../operation_references/configuration_references/template#template" %}}) for a complete description of each attribute.
+Visit the [Virtual Machine Template reference]({{% relref "product/operation_references/configuration_references/template#template" %}}) for a complete description of each attribute.
 
 {{< alert title="Warning" type="warning" >}}
 This action might not be supported for `RUNNING` VMs depending on the hypervisor. Please check the limitation section of the specific virtualization driver.{{< /alert >}} 
@@ -518,16 +517,16 @@ When **instantiating to persistent** the template is cloned recursively (a priva
 
 To “instantiate to persistent” use the `--persistent` option:
 
-```default
-$ onetemplate instantiate web_vm --persistent --name my_vm
+```shell
+onetemplate instantiate web_vm --persistent --name my_vm
 VM ID: 31
 
-$ onetemplate list
+onetemplate list
   ID USER            GROUP           NAME                                REGTIME
    7 oneadmin        oneadmin        web_vm                       05/12 14:53:11
    8 oneadmin        oneadmin        my_vm                        05/12 14:53:38
 
-$ oneimage list
+oneimage list
   ID USER       GROUP      NAME            DATASTORE     SIZE TYPE PER STAT RVMS
    7 oneadmin   oneadmin   web-img         default       200M OS   Yes used    1
    8 oneadmin   oneadmin   my_vm-disk-0    default       200M OS   Yes used    1
@@ -535,16 +534,16 @@ $ oneimage list
 
 To "instantiate multiple persistent" VMs use the options `-m N` **and** `--name`. You **must** provide `--name` when `-m` > 1. Include `%i` in the name to insert the VM index (0..N-1) at a custom place:
 
-```default
-$ onetemplate instantiate -m 2 --persistent --name 'test'
+```shell
+onetemplate instantiate -m 2 --persistent --name 'test'
 VM ID: 0
 VM ID: 1
 
-$ onetemplate instantiate -m 2 --persistent --name '%i-test'
+onetemplate instantiate -m 2 --persistent --name '%i-test'
 VM ID: 2
 VM ID: 3
 
-$ onevm list
+onevm list
   ID USER         GROUP        NAME       STAT     CPU      MEM     HOST      TIME
    3 oneadmin     oneadmin     1-test     hold       1     768M           0d 00h00
    2 oneadmin     oneadmin     0-test     hold       1     768M           0d 00h00
@@ -562,8 +561,8 @@ Alternatively, a VM that was not created as persistent can be **saved** before i
 
 This action clones the VM source template, replacing the disks with copies of the current disks (see the disk-snapshot action). If the VM instance was resized, the current capacity is also used. The new cloned Images can be made persistent with the `--persistent` option. NIC interfaces are also overwritten with the ones from the VM instance, to preserve any attach/detach action.
 
-```default
-$ onevm save web_vm copy_of_web_vm --persistent
+```shell
+onevm save web_vm copy_of_web_vm --persistent
 Template ID: 26
 ```
 
@@ -588,14 +587,14 @@ Most of the onevm commands accept the `--schedule` option, allowing users to del
 
 Here is an usage example:
 
-```default
-$ onevm suspend 0 --schedule "09/20"
+```shell
+onevm suspend 0 --schedule "09/20"
 VM 0: suspend scheduled at 2016-09-20 00:00:00 +0200
 
-$ onevm resume 0 --schedule "09/23 14:15"
+onevm resume 0 --schedule "09/23 14:15"
 VM 0: resume scheduled at 2016-09-23 14:15:00 +0200
 
-$ onevm show 0
+onevm show 0
 VIRTUAL MACHINE 0 INFORMATION
 ID                  : 0
 NAME                : one-0
@@ -610,8 +609,8 @@ ID    ACTION  ARGS   SCHEDULED REPEAT   END STATUS
 
 These actions can be deleted or edited using the `onevm sched-delete` and `onevm sched-update` command. The time attributes use Unix time internally.
 
-```default
-$ onevm sched-update 0 0
+```shell
+onevm sched-update 0 0
 
 ID="0"
 PARENT_ID="0"
@@ -625,7 +624,7 @@ DONE="-1"
 ```
 
 {{< alert title="Note" type="info" >}}
-The attributes `ID`, `PARENT_ID` and `TYPE` are OpenNebula system attributes and can’t be modified. For more details about the attributes which can be modified, see [Scheduled Action Template]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}){{< /alert >}} 
+The attributes `ID`, `PARENT_ID` and `TYPE` are OpenNebula system attributes and can’t be modified. For more details about the attributes which can be modified, see [Scheduled Action Template]({{% relref "product/operation_references/configuration_references/template#template-schedule-actions" %}}){{< /alert >}} 
 
 ### Periodic Punctual Actions
 
@@ -652,17 +651,17 @@ The option `--end` can be a number or a date:
 
 Here is a usage example:
 
-```default
-$ onevm suspend 0 --schedule "09/20" --weekly "1,5" --end 5
+```shell
+onevm suspend 0 --schedule "09/20" --weekly "1,5" --end 5
 VM 0: suspend scheduled at 2018-09-20 00:00:00 +0200
 
-$ onevm resume 0 --schedule "09/23 14:15" --weekly "2,6" --end 5
+onevm resume 0 --schedule "09/23 14:15" --weekly "2,6" --end 5
 VM 0: resume scheduled at 2018-09-23 14:15:00 +0200
 
-$ onevm snapshot-create 0 snap-01 --schedule "09/23" --hourly 5 --end "12/25"
+onevm snapshot-create 0 snap-01 --schedule "09/23" --hourly 5 --end "12/25"
 VM 0: snapshot-create scheduled at 2018-09-23 14:15:00 +0200
 
-$ onevm show 0
+onevm show 0
 VIRTUAL MACHINE 0 INFORMATION
 ID                  : 0
 NAME                : one-0
@@ -678,8 +677,8 @@ ID           ACTION     ARGS    SCHEDULED        REPEAT            END  STATUS
 
 These actions can be deleted or edited using the `onevm sched-delete` and `onevm sched-update` command. The time attributes use Unix time internally.
 
-```default
-$ onevm sched-update 0 2
+```shell
+onevm sched-update 0 2
 
 ID="2"
 PARENT_ID="0"
@@ -700,8 +699,8 @@ Scheduled actions can be also relative to the Start Time of the VM. That is, it 
 
 For instance, a VM Template with the following SCHED_ACTION will spawn VMs that will automatically shut down after 1 hour of being instantiated:
 
-```default
-$ onetemplate update 0
+```shell
+onetemplate update 0
 
 SCHED_ACTION=[
    ACTION="terminate",
@@ -736,8 +735,8 @@ The following table summarizes the actions that can be scheduled. Note that some
 
 You can pass arguments to the scheduled actions by using the parameter `ARGS` in the action definition. For example:
 
-```default
-$ onevm sched-update 0 0
+```shell
+onevm sched-update 0 0
 
 ID="2"
 PARENT_ID="0"
@@ -767,7 +766,7 @@ With OpenNebula, run commands inside a Virtual Machine. Commands are sent to the
 {{< image path="/images/vm_exec_architecture.svg" alt="Architecture Outlining How Command Execution Operates Within the VM" align="center" width="70%" mb="20px" border="false" >}}
 
 
-The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. To find more details on configuring the monitor probe, refer to [Monitoring System](../../../product/cloud_system_administration/resource_monitoring/monitoring_system.md).
+The `VM_EXEC` monitor probe collects the results and updates the `QEMU_GA_EXEC` block. To find more details on configuring the monitor probe, refer to [Monitoring System]({{% relref "product/cloud_system_administration/resource_monitoring/monitoring_system.md" %}}).
 
 {{< alert title="Warning" type="warning" >}}
 Run only one command at a time for every Virtual Machine. If a current command is still in `EXECUTING` status, even if finished but not yet updated by the monitor probe, new commands will not be executed until the current one is fully completed.{{< /alert >}}
@@ -790,12 +789,12 @@ The `QEMU_GA_EXEC` section in the VM template contains the following fields:
 
 To execute a command inside a VM, use the `onevm exec` command. For example, to list files in the home directory of VM 0:
 ```bash
-$ onevm exec 0 'ls -l'
+onevm exec 0 'ls -l'
 ```
 
 Check the status of the command with:
 ```bash
-$ onevm show 0
+onevm show 0
 ```
 
 When still executing:
@@ -826,12 +825,12 @@ QEMU_GA_EXEC=[
 
 To retry the execution of the last command executed, use `onevm exec-retry`:
 ```bash
-$ onevm exec-retry 0
+onevm exec-retry 0
 ```
 
 To cancel the command being executed, use `onevm exec-cancel`:
 ```bash
-$ onevm exec-cancel 0
+onevm exec-cancel 0
 ```
 
 <a id="vm-life-cycle-and-states"></a>
@@ -841,7 +840,7 @@ $ onevm exec-cancel 0
 The life-cycle of a Virtual Machine within OpenNebula includes the following stages:
 
 {{< alert title="Note" type="info" >}}
-Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "../../operation_references/configuration_references/vm_states#vm-states" %}}).{{< /alert >}} 
+Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "product/operation_references/configuration_references/vm_states#vm-states" %}}).{{< /alert >}} 
 
 | Short state   | State              | Meaning                                                                                                                                                                                                                                                                                                  |
 |---------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -869,12 +868,68 @@ Note that this is a simplified version. If you are a developer you may want to t
 | `clea`        | `Cleanup-resubmit` | The VM is waiting for the drivers to clean the Host after a `onevm recover --recreate` action.                                                                                                                                                                                                            |
 | `done`        | `Done`             | The VM is done. VMs in this state won’t be shown with `onevm list` but are kept in the database for accounting purposes. You can still get their information with the `onevm show` command.                                                                                                              |
 
+## Virtual Machine Datastore Migration
+
+Datastore Migration allows the transfer of a VM's disk images and associated files from one system datastore to another. This is a critical operation for storage maintenance, balancing disk I/O load across different storage tiers, or evacuating hardware for decommissioning.
+
+Depending on the state of the VM and the underlying storage drivers, OpenNebula supports two primary methods:
+
+* **Cold Storage Migration**: Performed when the VM is in a POWEROFF or UNDEPLOYED state. The disks are moved physically between datastores before the VM is resumed.
+
+* **Live Storage Migration**: Performed while the VM is RUNNING. OpenNebula coordinates with the hypervisor to mirror disk writes to the new destination in real-time, ensuring zero downtime for the workload.
+
+{{< alert title="Note" type="info" >}}
+Not all storage drivers support both methods. Check the "Storage migration" column in the [storage portfolio]({{% relref "product/cluster_configuration/storage_system/overview/#storage-portfolio" %}}) table for updated compatibility info.
+{{< /alert >}}
+
+### Basic Syntax
+
+You can migrate a VM's disks to a different datastore by specifying the target datastore ID when running `onevm migrate`:
+
+```shell
+onevm migrate [--live] <vm_id> <target_host_id> <target_datastore_id>
+```
+
+If the target host is the same as the current one, only the datastore changes. If you also change the host, both the host and the datastore are migrated simultaneously, although changing both is only supported for offline migrations.
+
+Cold and live migrations cannot be performed between different TM_MAD drivers (for example, from `ceph` to `lvm`).
+
+### Cold Storage Migration
+
+Cold migration is the simplest form of datastore migration. The VM is automatically stopped by OpenNebula before migrating it, saving its running state across the process. OpenNebula copies the disk files from the source datastore to the destination datastore using the Transfer Manager.
+
+```shell
+onevm migrate <vm_id> <host_id> <target_datastore_id>
+```
+
+You can also use `--poff` or `--poff-hard` to power off the VM during migration:
+
+```shell
+onevm migrate <vm_id> <host_id> <target_datastore_id> --poff
+```
+
+As the VM is powered off before any disk operations take place, libvirt is not involved in the actual data transfer. The Transfer Manager handles all file-level operations (copying disk images, updating symlinks, etc.) through the TM_MAD scripts. Once the disk files are in place on the destination datastore, the VM is simply resumed and its disk device paths point to the new location.
+
+### Live Storage Migration
+
+Live storage migration allows the VM disks to be migrated while the VM remains in the `RUNNING` state. OpenNebula coordinates with the hypervisor (KVM) to mirror disk writes to the new destination in real-time.
+
+```shell
+onevm migrate --live <vm_id> <host_id> <target_datastore_id>
+```
+
+At the libvirt level, live datastore migration uses the `virsh blockcopy` command on the same host. Read-only disks (such as CD-ROM or read-only qcow2 images) are copied by OpenNebula, after which libvirt's `change-media` command is used to update their paths.
+
+There are some limitations to keep in mind when performing live datastore migration:
+
+* You **cannot change both the host and the datastore simultaneously**. For that case, you need to perform each of those operations in order.
+* **Disk snapshots** are only preserved with qcow2-based drivers (`qcow2`, `ssh`, `local`); they are lost with other drivers (LVM, raw disks, shared NFS).
 
 <a id="vm-charter"></a>
 
 ## Virtual Machine Charters
 
-This functionality automatically adds scheduling actions in VM templates. To enable the creation of Charters in Sunstone, you only need to add the following to the `vm-tab.yaml` file in the corresponding [Sunstone view]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone-views" %}}):
+This functionality automatically adds scheduling actions in VM templates. To enable the creation of Charters in Sunstone, you only need to add the following to the `vm-tab.yaml` file in the corresponding [Sunstone view]({{% relref "product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone-views" %}}):
 
 ```default
 info-tabs:
@@ -884,9 +939,9 @@ info-tabs:
       charter_create: true
 ```
 
-![sunstone_vm_charter](/images/sunstone_vm_charter.png)
+{{< image path="/images/sunstone_vm_charter.png" alt="Sunstone VM charter" align="center" width="90%" mb="20px" >}}
 
-After enabling the creation of Charters, you have to define the schedule actions that have a Charter. To do that, you only need to modify the file `sunstone-server.conf` in the [FireEdge configuration]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}).
+After enabling the creation of Charters, you have to define the schedule actions that have a Charter. To do that, you only need to modify the file `sunstone-server.conf` in the [FireEdge configuration]({{% relref "product/operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}).
 
 To explain this, we'll use an example:
 
@@ -907,7 +962,7 @@ The previous example will create two schedule actions:
 
 So, when the user clicks on the Charter button, the following info will appear:
 
-![sunstone_charter_info](/images/sunstone_charter_info.png)
+{{< image path="/images/sunstone_charter_info.png" alt="Sunstone VM charter info" align="center" width="90%" mb="20px" >}}
 
 The first action cannot be edited but in the second one, you can change the action and the time. Also, you can tune the definition of a Charter:
 
@@ -950,20 +1005,20 @@ ID     ACTION     ARGS    SCHEDULED        REPEAT            END  STATUS
 
 Custom attributes can be added to a VM to store metadata related to this specific VM instance. To add custom attributes simply use the `onevm update` command:
 
-```default
-$ onevm show 0
+```shell
+onevm show 0
 ...
 
 VIRTUAL MACHINE TEMPLATE
 ...
 VMID="0"
 
-$ onevm update 0
+onevm update 0
 ROOT_GENERATED_PASSWORD="1234"
 ~
 ~
 
-$ onevm show 0
+onevm show 0
 ...
 
 VIRTUAL MACHINE TEMPLATE
@@ -976,19 +1031,19 @@ ROOT_GENERATED_PASSWORD="1234"
 
 ## Virtual Machine VM Permissions
 
-OpenNebula comes with an advanced [ACL rules permission mechanism]({{% relref "../../cloud_system_administration/multitenancy/chmod#manage-acl" %}}) intended for administrators, but each VM object has also [implicit permissions]({{% relref "../../cloud_system_administration/multitenancy/chmod#chmod" %}}) that can be managed by the VM owner. To share a VM instance with other users or to allow them to list and show its information, use the `onevm chmod` command:
+OpenNebula comes with an advanced [ACL rules permission mechanism]({{% relref "product/cloud_system_administration/multitenancy/chmod#manage-acl" %}}) intended for administrators, but each VM object has also [implicit permissions]({{% relref "product/cloud_system_administration/multitenancy/chmod#chmod" %}}) that can be managed by the VM owner. To share a VM instance with other users or to allow them to list and show its information, use the `onevm chmod` command:
 
-```default
-$ onevm show 0
+```shell
+onevm show 0
 ...
 PERMISSIONS
 OWNER          : um-
 GROUP          : ---
 OTHER          : ---
 
-$ onevm chmod 0 640
+onevm chmod 0 640
 
-$ onevm show 0
+onevm show 0
 ...
 PERMISSIONS
 OWNER          : um-
@@ -1006,7 +1061,7 @@ There are some `onevm` commands operations meant for cloud administrators:
 
 **Scheduling:**
 
-- `resched`: Sets the reschedule flag for the VM. The Scheduler will migrate (or live-migrate, depending on the [Scheduler configuration]({{% relref "../../../product/cloud_system_administration/scheduler/configuration" %}})) the VM in the next monitorization cycle to a Host that better matches the requirements and rank restrictions. Read more in the [Scheduler documentation]({{% relref "../../../product/cloud_system_administration/scheduler/" %}}).
+- `resched`: Sets the reschedule flag for the VM. The Scheduler will migrate (or live-migrate, depending on the [Scheduler configuration]({{% relref "product/cloud_system_administration/scheduler/configuration" %}})) the VM in the next monitorization cycle to a Host that better matches the requirements and rank restrictions. Read more in the [Scheduler documentation]({{% relref "product/cloud_system_administration/scheduler/" %}}).
 
 - `unresched`: Clears the reschedule flag for the VM, canceling the rescheduling operation.
 
@@ -1020,7 +1075,7 @@ Note: By default, the above operations do not check the target Host capacity. Yo
 
 **Troubleshooting:**
 
-- `recover`: If the VM is stuck in any other state (or the boot operation does not work), you can recover the VM with the following options. Read the [Virtual Machine Failures guide]({{% relref "../../operation_references/opennebula_services_configuration/troubleshooting#ftguide-virtual-machine-failures" %}}) for more information.
+- `recover`: If the VM is stuck in any other state (or the boot operation does not work), you can recover the VM with the following options. Read the [Virtual Machine Failures guide]({{% relref "product/operation_references/opennebula_services_configuration/troubleshooting#ftguide-virtual-machine-failures" %}}) for more information.
   - `--success`: simulates the success of the missing driver action
   - `--failure`: simulates the failure of the missing driver action
   - `--retry`: tries to perform the current driver action again. Optionally the `--interactive` can be combined if it's a Transfer Manager problem
@@ -1034,10 +1089,10 @@ Note: By default, the above operations do not check the target Host capacity. Yo
 
 Sunstone provides several different methods to access your VM console and desktop: VNC, RDP, and SSH. If configured in the VM, these methods can be used to access the VM console through Sunstone. This section shows how these different technologies can be configured and what each requirement is.
 
-[FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-configuration" %}}) automatically installs dependencies for Guacamole connections which are necessary to use VNC, RDP, and SSH.
+[FireEdge]({{% relref "product/operation_references/opennebula_services_configuration/fireedge#fireedge-configuration" %}}) automatically installs dependencies for Guacamole connections which are necessary to use VNC, RDP, and SSH.
 
 {{< alert title="Important" type="info" >}}
-The [FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) server must be running to get Guacamole connections working.{{< /alert >}} 
+The [FireEdge]({{% relref "product/operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) server must be running to get Guacamole connections working.{{< /alert >}} 
 
 <a id="requirements-remote-access-sunstone"></a>
 
@@ -1066,7 +1121,7 @@ To configure it via Sunstone, you need to update the VM template. In the second 
 you can see the graphics section where you can add the IP, the port, a connection password,
 or define your keymap.
 
-![sunstone_guac_vnc](/images/sunstone_guac_vnc.png)
+{{< image path="/images/sunstone_guac_vnc.png" alt="Sunstone GUAC VNC" align="center" width="90%" mb="20px" >}}
 
 <a id="rdp-sunstone"></a>
 
@@ -1083,8 +1138,9 @@ with `RDP` attribute equal to `YES` in the template.
 Via Sunstone, you need to enable an RDP connection on one of the VM template networks, **after or
 before its instantiation**.
 
-![sunstone_guac_nic_1](/images/sunstone_guac_nic_1.png)
-![sunstone_guac_nic_2](/images/sunstone_guac_nic_2.png)
+{{< image path="/images/sunstone_guac_nic_1.png" alt="Sunstone GUAC NIC 1" align="center" width="90%" mb="20px" >}}
+
+{{< image path="/images/sunstone_guac_nic_2.png" alt="Sunstone GUAC NIC 2" align="center" width="90%" mb="20px" >}}
 
 To configure this in the Virtual Machine template in **advanced mode**:
 
@@ -1097,22 +1153,23 @@ NIC=[
 
 Once the VM is instantiated, users will be able to **connect via browser**.
 
-![sunstone_guac_rdp](/images/sunstone_guac_rdp.png)
+
+{{< image path="/images/sunstone_guac_rdp.png" alt="Sunstone GUAC RDP" align="center" width="90%" mb="20px" >}}
 
 RDP connection permits users to **choose the screen resolution** from Sunstone interface.
 
-![sunstone_guac_rdp_interface](/images/sunstone_guac_rdp_interface.png)
+{{< image path="/images/sunstone_guac_rdp_interface.png" alt="Sunstone GUAC RDP interface" align="center" width="90%" mb="20px" >}}
 
 {{< alert title="Important" type="info" >}}
 **The RDP connection is only allowed to activate on a single NIC**. In any case, the connection will only contain the IP of the first NIC with this property enabled.
 The RDP connection will work the **same way for NIC ALIASES**.{{< /alert >}}  
 
-If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the RDP connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).
+If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the RDP connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "product/operation_references/configuration_references/template#template-context" %}}).
 
 {{< alert title="Note" type="info" >}}
 If your Windows VM has a firewall enabled, you can set the following in the start script of the VM (in the Context section of the VM Template):
 
-```
+```shell
 netsh advfirewall firewall set rule group="Remotedesktop" new enable=yes
 ```
 {{< /alert >}} 
@@ -1128,7 +1185,7 @@ you need to enable the SSH connection on one of the VM template networks.
 
 For example, to configure this in the Virtual Machine template in **advanced mode**:
 
-```none
+```default
 NIC=[
     ...
     SSH = "YES"
@@ -1140,14 +1197,14 @@ need to specify the **SSH port in the contextualization section as** `SSH_PORT` 
 not using the standard port.
 
 {{< alert title="Note" type="info" >}}
-If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the SSH connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).{{< /alert >}} 
+If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the SSH connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "product/operation_references/configuration_references/template#template-context" %}}).{{< /alert >}} 
 
 For example, to allow connection by username and password to a guest VM, first make sure you
-have SSH root access to the VM, check more info [here]({{% relref "../../control_plane_configuration/graphical_user_interface/cloud_view#cloudview-ssh-keys" %}}).
+have SSH root access to the VM, check more info [here]({{% relref "product/control_plane_configuration/graphical_user_interface/cloud_view#cloudview-ssh-keys" %}}).
 
 After that you can access the VM and configure the SSH service:
 
-```default
+```shell
 oneadmin@frontend:~$ ssh root@<guest-vm>
 
 # Allow authentication with password: PasswordAuthentication yes
@@ -1160,7 +1217,8 @@ root@<guest-VM>:~$ service sshd restart
 root@<guest-VM>:~$ adduser <username>
 ```
 
-![fireedge_sunstone_ssh_list](/images/fireedge_sunstone_ssh_list.png) ![fireedge_sunstone_ssh_console](/images/fireedge_sunstone_ssh_console.png)
+{{< image path="/images/fireedge_sunstone_ssh_list.png" alt="Sunstone SSH list" align="center" width="90%" mb="20px" >}}
+{{< image path="/images/fireedge_sunstone_ssh_console.png" alt="Sunstone SSH console" align="center" width="90%" mb="20px" >}}
 
 {{< alert title="Note" type="info" >}}
 Guacamole SSH uses RSA encryption. Make sure the VM SSH accepts RSA, otherwise you need to explicitly enable it in the VM SSH configuration (HostkeyAlgorithms and PubkeyAcceptedAlgorithms set as ‘+ssh-rsa){{< /alert >}} 
