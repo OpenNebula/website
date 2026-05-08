@@ -1,0 +1,84 @@
+// // Anchor link styles for headings (h1-h6)
+// .anchor-link {
+//   visibility: hidden !important;
+//   opacity: 0;
+//   margin-left: 0.5rem;
+//   color: rgba(0, 0, 0, 0.3); /* Light grey icon */
+//   font-size: 0.7em;
+//   vertical-align: middle;
+//   text-decoration: none !important;
+//   transition: opacity 0.2s ease-in-out;
+// }
+
+// // Hover State: Reveal when the heading (h1-h6) is hovered
+// h1:hover .anchor-link,
+// h2:hover .anchor-link,
+// h3:hover .anchor-link,
+// h4:hover .anchor-link,
+// h5:hover .anchor-link,
+// h6:hover .anchor-link {
+//   visibility: visible !important;
+//   opacity: 1;
+// }
+
+// // Active Hover: Change color when mousing directly over the icon
+// .anchor-link:hover {
+//   color: #007bff !important; /* Your primary brand color */
+// }
+
+// // Dark Mode: Overrides based on your data attribute and media query
+// html[data-bs-theme="dark"] .anchor-link {
+//     color: rgba(255, 255, 255, 0.3); /* Subtle white when revealed */
+// }
+
+// html[data-bs-theme="dark"] .anchor-link:hover {
+//     color: #4dabff !important; /* Brighter blue for high contrast */
+// }
+
+// /// Optional: Fallback for system-level dark mode if the attribute isn't set yet
+// @media (prefers-color-scheme: dark) {
+//     html:not([data-bs-theme="light"]) .anchor-link {
+//         color: rgba(255, 255, 255, 0.3);
+//     }
+//     html:not([data-bs-theme="light"]) .anchor-link:hover {
+//         color: #4dabff !important;
+//     }
+// }
+
+/* Use a more specific selector to ensure it beats theme defaults */
+.td-content {
+    .anchor-link {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        margin-left: 0.4rem;
+        font-size: 0.8em;
+        text-decoration: none !important;
+        transition: opacity 0.2s ease-in-out, color 0.2s ease;
+        
+        /* Light mode default color */
+        color: rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Target headers explicitly within the content area */
+    h1, h2, h3, h4, h5, h6 {
+        &:hover .anchor-link {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    }
+
+    /* Hover state for the link itself */
+    .anchor-link:hover {
+        color: #007bff !important; 
+    }
+}
+
+/* Dark Mode handling using the attribute you found */
+html[data-bs-theme="dark"] .td-content {
+    .anchor-link {
+        color: rgba(255, 255, 255, 0.3) !important;
+    }
+    .anchor-link:hover {
+        color: #4dabff !important;
+    }
+}
