@@ -887,10 +887,10 @@ Not all storage drivers support both methods. Check the "Storage migration" colu
 You can migrate a VM's disks to a different datastore by specifying the target datastore ID when running `onevm migrate`:
 
 ```shell
-onevm migrate [--live] <vm_id> <target_host_id> <target_datastore_id>
+onevm migrate [--live] <VM_ID> <TARGET_HOST_ID> <TARGET_DATASTORE_ID>
 ```
 
-If the target host is the same as the current one, only the datastore changes. If you also change the host, both the host and the datastore are migrated simultaneously, although changing both is only supported for offline migrations.
+If the target Host is the same as the current one, only the datastore changes. If you also change the Host, both the Host and the datastore are migrated simultaneously, although changing both is only supported for offline migrations.
 
 Cold and live migrations cannot be performed between different TM_MAD drivers (for example, from `ceph` to `lvm`).
 
@@ -899,13 +899,13 @@ Cold and live migrations cannot be performed between different TM_MAD drivers (f
 Cold migration is the simplest form of datastore migration. The VM is automatically stopped by OpenNebula before migrating it, saving its running state across the process. OpenNebula copies the disk files from the source datastore to the destination datastore using the Transfer Manager.
 
 ```shell
-onevm migrate <vm_id> <host_id> <target_datastore_id>
+onevm migrate <VM_ID> <HOST_ID> <TARGET_DATASTORE_ID>
 ```
 
 You can also use `--poff` or `--poff-hard` to power off the VM during migration:
 
 ```shell
-onevm migrate <vm_id> <host_id> <target_datastore_id> --poff
+onevm migrate <VM_ID> <HOST_ID> <TARGET_DATASTORE_ID> --poff
 ```
 
 As the VM is powered off before any disk operations take place, libvirt is not involved in the actual data transfer. The Transfer Manager handles all file-level operations (copying disk images, updating symlinks, etc.) through the TM_MAD scripts. Once the disk files are in place on the destination datastore, the VM is simply resumed and its disk device paths point to the new location.
@@ -915,14 +915,14 @@ As the VM is powered off before any disk operations take place, libvirt is not i
 Live storage migration allows the VM disks to be migrated while the VM remains in the `RUNNING` state. OpenNebula coordinates with the hypervisor (KVM) to mirror disk writes to the new destination in real-time.
 
 ```shell
-onevm migrate --live <vm_id> <host_id> <target_datastore_id>
+onevm migrate --live <VM_ID> <HOST_ID> <TARGET_DATASTORE_ID>
 ```
 
-At the libvirt level, live datastore migration uses the `virsh blockcopy` command on the same host. Read-only disks (such as CD-ROM or read-only qcow2 images) are copied by OpenNebula, after which libvirt's `change-media` command is used to update their paths.
+At the libvirt level, live datastore migration uses the `virsh blockcopy` command on the same Host. Read-only disks (such as CD-ROM or read-only qcow2 images) are copied by OpenNebula, after which libvirt's `change-media` command is used to update their paths.
 
 There are some limitations to keep in mind when performing live datastore migration:
 
-* You **cannot change both the host and the datastore simultaneously**. For that case, you need to perform each of those operations in order.
+* You **cannot change both the Host and the datastore simultaneously**. For that case, you need to perform each of those operations in order.
 * **Disk snapshots** are only preserved with qcow2-based drivers (`qcow2`, `ssh`, `local`); they are lost with other drivers (LVM, raw disks, shared NFS).
 
 <a id="vm-charter"></a>
@@ -1227,7 +1227,7 @@ Guacamole SSH uses RSA encryption. Make sure the VM SSH accepts RSA, otherwise y
 
 ## The `onevm` command
 
-The `onevm` command manages OpenNebula virtual machines. The general structure of the command is as follows:
+The `onevm` command manages OpenNebula Virtual Machines. The general structure of the command is as follows:
 
  `onevm`<a href="#commands">`command`</a>[<a href="#args">*args*</a>] [<a href="#options">*options*</a>] 
 
@@ -1259,13 +1259,13 @@ The `onevm` command manages OpenNebula virtual machines. The general structure o
 | `migrate range\|vmid_list hostid [datastoreid]` | <ul><li>Migrates the given running VM to another Host. If used with `--live` parameter the migration is done without downtime. Datastore migration is not supported for `--live` flag.</li><li>States: RUNNING</li><li>Valid options: enforce, live, poweroff, poweroff_hard</li></ul>|
 | `nic-attach vmid`                  | <ul><li>Attaches a NIC to a VM.</li><li>To attach a nic alias: A template can be passed as a file with or the content via STDIN. Bash symbols must be escaped on STDIN passing. When using a template add only one NIC instance.</li><li>To hotplug a PCI device and use it as a NIC interface in the VM select it with `--pci` (short_address) or `--pci_device` (device ID), `--pci_class` (class ID) and/or `--pci_vendor` (vendor ID).</li><li>States: RUNNING, POWEROFF</li><li>Valid options: alias, file, ip, network, nic_name, pci, pci_class, pci_device, pci_vendor</li></ul> |
 |  `nic-detach vmid nicid`            | Detaches a NIC from a running VM. States: RUNNING, POWEROFF |
-| `nic-update vmid nicid [file]`      | <ul><li>Updates a NIC for a VM. In case the VM is running, trigger NIC update on the host.</li><li>States: Almost all, except BOOT*, MIGRATE and HOTPLUG-NIC</li><li>Valid options: append</li></ul>|
+| `nic-update vmid nicid [file]`      | <ul><li>Updates a NIC for a VM. In case the VM is running, trigger NIC update on the Host.</li><li>States: Almost all, except BOOT*, MIGRATE and HOTPLUG-NIC</li><li>Valid options: append</li></ul>|
 | `pci-attach vmid`                   | <ul><li>Attaches a PCI to a VM. You can specify the PCI device with `--pci` (short_address) or `--pci_device` (device ID), `--pci_class` (class ID) and/or `--pci_vendor` (vendor ID).</li><li>States: POWEROFF</li><li>Valid options: file, pci, pci_class, pci_device, pci_vendor</li></ul> |
 | `pci-detach vmid pciid`             | Detaches a PCI device from a VM. States: POWEROFF           |
 | `port-forward vmid [port]`          | Gets port forwarding from a NIC, e.g: 1.2.3.4@4000 -> 1, means that to connect to VM port 1, you need to connect to IP 1.2.3.4 in port 4000. Valid options: `nic_id` |
 | `poweroff range\|vmid_list`         | <ul><li>Powers off the given VM. The VM will remain in the poweroff state, and can be powered on with the `onevm resume` command.</li><li>States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
 | `reboot range\|vmid_list`           | <ul><li>Reboots the given VM, this is equivalent to execute the reboot command from the VM console. The VM will be ungracefully rebooted if `--hard` is used.</li><li> States: RUNNING</li><li>Valid options: end, hard, hourly, monthly, schedule, weekly, yearly</li></ul>|
-| `recover range\|vmid_list`          | <ul><li>Recovers a stuck VM that is waiting for a driver operation. The recovery may be done by failing, succeeding or retrying the current operation. *You need to manually check the VM status on the host*, to decide if the operation was successful or not, or if it can be retried.</li><li>Example: A VM is stuck in *migrate* because of a hardware failure. You need to check if the VM is running in the new host or not to recover the vm with `--success` or `--failure`, respectively.</li><li>States for success/failure recovers: Any ACTIVE state.</li><li> States for a retry recover: Any FAILURE state</li><li>States for delete: Any</li><li>States for recreate: Any but DONE</li><li>States for delete-db: Any</li><li>Valid options: delete, deletedb, failure, interactive, recreate, retry, success</li></ul>|
+| `recover range\|vmid_list`          | <ul><li>Recovers a stuck VM that is waiting for a driver operation. The recovery may be done by failing, succeeding or retrying the current operation. *You need to manually check the VM status on the Host*, to decide if the operation was successful or not, or if it can be retried.</li><li>Example: A VM is stuck in *migrate* because of a hardware failure. You need to check if the VM is running in the new Host or not to recover the vm with `--success` or `--failure`, respectively.</li><li>States for success/failure recovers: Any ACTIVE state.</li><li> States for a retry recover: Any FAILURE state</li><li>States for delete: Any</li><li>States for recreate: Any but DONE</li><li>States for delete-db: Any</li><li>Valid options: delete, deletedb, failure, interactive, recreate, retry, success</li></ul>|
 | `release range\|vmid_list`           | <ul><li>Releases a VM on hold. See `onevm hold`</li><li>States: HOLD</li><li>Valid options: end, hourly, monthly, schedule, weekly, yearly</li></ul>|
 | `rename vmid name`                   | Renames the VM.                       |
 | `resched range\|vmid_list`           | Sets the rescheduling flag for the VM. States: RUNNING, POWEROFF|
@@ -1348,7 +1348,7 @@ The `onevm` command manages OpenNebula virtual machines. The general structure o
 | `--dry`                       | Just prints the template                       |
 | `--end number\|TIME`          | ----                                          |
 | `--endpoint endpoint`         | URL of OpenNebula xmlrpc frontend             |
-| `-e`, `--enforce`             | Enforces that the host capacity is not exceeded|
+| `-e`, `--enforce`             | Enforces that the Host capacity is not exceeded|
 | `--expand [x=prop,y=prop]`    | Expands column size to fill the terminal. For example: `$onevm list --expand name=0.4,group=0.6` will expand name 40% and group 60%. `$onevm list --expand name,group` expands name and group based on its size. `$onevm list --expand` will expand all columns.    | 
 | `--extended`                  | Shows info extended. It only works with xml output. |
 | `--failure`                   | Recovers a VM by failing the pending action     |
