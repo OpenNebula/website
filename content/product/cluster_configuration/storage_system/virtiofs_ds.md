@@ -60,7 +60,7 @@ Once the Image Datastore is created, register an image that represents a host di
 oneimage create --name fs_data --datastore fs_datastore --persistent --path /mnt/data --type filesystem
 ```
 
-For use cases where the same directory must be shared across multiple VMs simultaneously, create the image as non-persistent and set `READONLY="YES"`.
+For use cases where the same directory must be shared across multiple VMs simultaneously, create the image as non-persistent. If read-only access is required, set `READONLY="YES"` only when the host uses `libvirt >= 11.0.0` and `virtiofsd >= 1.13.0` (older versions do not support read-only virtiofs exports).
 
 After the image is registered, it can be used as any other disk by adding it to the VM template using the `DISK` attribute.
 ```
