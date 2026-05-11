@@ -30,10 +30,6 @@ Storage in OpenNebula is designed around the concept of datastores. A datastore 
 
 {{< image path="/images/datastoreoverview.svg" alt="Overview of Storage Design based on Datastores" align="center" width="60%" mb="20px" border="false" >}}
 
-## Driver Types
-
-
-
 ## Storage portfolio
 
 | Use case                                                      | Description                                                                                            | Shared | Disk Format                    | Disk snapshots | VM snapshots | [Storage migration]({{% relref "/product/virtual_machines_operation/virtual_machines/vm_instances/#virtual-machine-datastore-migration" %}}) | Fault tolerance | HV      | Availability |
