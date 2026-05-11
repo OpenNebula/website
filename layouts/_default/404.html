@@ -1,12 +1,10 @@
 {{ define "main" }}
 <style>
-    @media (min-width: 1200px) {
-        .td-404 [role=main] {
-            width: 100% !important; /* Full width (10/12 columns) */
-            max-width: none !important;
-            margin-right: 0 !important;
-        }
-    }
+.td-404 [role=main] {
+    width: 100% !important; /* Full width (10/12 columns) */
+    max-width: none !important;
+    margin-right: 0 !important;
+}
 </style>
 <div class="row flex-xl-nowrap" style="width:100%">
     <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
@@ -17,7 +15,10 @@
             <p>You may find what you are looking for in one of the following sections:</p>
 
             <ul>
-                {{ $paths := slice "getting_started/" "product/" "software/installation_process/" "software/release_information/" "solutions/"}}
+                <li>
+                    <a href="{{ .Site.BaseURL }}/">Documentation Home</a>
+                </li>
+                {{ $paths := slice "getting_started/" "product/" "software/installation_process/" "software/upgrade_process/" "software/release_information/" "solutions/"}}
                 {{ range $paths }}
                     {{ with $.Site.GetPage . }}
                         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
