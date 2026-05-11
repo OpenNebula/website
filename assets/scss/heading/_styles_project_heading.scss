@@ -1,0 +1,37 @@
+// Styles for heading anchor links (h1-h6)
+.td-content {
+    .anchor-link {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        margin-left: 0.4rem;
+        font-size: 0.8em;
+        text-decoration: none !important;
+        transition: opacity 0.2s ease-in-out, color 0.2s ease;
+        
+        /* Light mode default color */
+        color: rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Target headers explicitly within the content area */
+    h1, h2, h3, h4, h5, h6 {
+        &:hover .anchor-link {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    }
+
+    /* Hover state for the link itself */
+    .anchor-link:hover {
+        color: #007bff !important; 
+    }
+}
+
+// Dark mode overrides
+html[data-bs-theme="dark"] .td-content {
+    .anchor-link {
+        color: rgba(255, 255, 255, 0.3) !important;
+    }
+    .anchor-link:hover {
+        color: #4dabff !important;
+    }
+}
