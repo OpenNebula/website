@@ -32,7 +32,7 @@ Each of the guides in this Cluster provisioning documentation demonstrates how t
 
 ## [Cluster Providers]({{% relref "product/cluster_provisioning/cluster_providers/" %}})
 
-* **Definition**: Providers represent your credentials and endpoints for third-party cloud services (e.g., AWS, Equinix, Scaleway) or on-premises environments.
+* **Definition**: Providers represent your credentials and endpoints for third-party cloud services (e.g., AWS, i3Dnet, Scaleway) or on-premises environments.
 
 * **Key Function**: Acts as an abstraction layer. Instead of managing complex API keys and connection strings every time you need a new Host, you define a Provider only once.
 

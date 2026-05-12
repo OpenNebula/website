@@ -19,23 +19,26 @@ You may use on-premises hardware, virtual or bare-metal resources from a cloud p
 
 To install miniONE it is important to meet the following prerequisites for the machine on which you intend to install miniONE:
 
-**Supported operating systems:**
-  - Ubuntu 22.04 or 24.04
-  - See the [Platform Release Notes]({{% relref "software/release_information/release_notes/platform_notes.md" %}}) for other compatible operating systems
+ **Supported operating systems:**
+* RHEL/AlmaLinux 9 or 10
+* Debian 12 or 13
+* Ubuntu 22.04 or 24.04
+* openSUSE 16.0, SLES 15.7
+* See the [Platform Notes]({{% relref "software/release_information/release_notes/platform_notes.md" %}}) for further details on compatible operating systems
 
 **Minimum hardware:**
 * Front-end only:
-    * 16 GiB RAM
-    * 80 GiB free disk space
+  * 16 GiB RAM
+  * 80 GiB free disk space
 
 * Kubernetes:
-    - 64 GiB RAM
-    - 120 GiB free disk space
+  * 64 GiB RAM
+  * 120 GiB free disk space
     
 * AI Factory:
-    - 128 GiB RAM
-    - 512 GiB free disk space
-    - NVIDIA L40S or H100 GPU
+  * 128 GiB RAM
+  * 512 GiB free disk space
+  * NVIDIA L40S or H100 GPU
 
 **Configuration:**
  - Access to the privileged user (root) account
@@ -224,7 +227,15 @@ Log in as `root` with password `opennebula`. You can then use the command line t
 * Try running `ping 1.1.1.1` to test the internet connection
 * Try running `top` to see the processes running on the machine 
 
-If the above procedure works, you have successfully installed miniONE and it is ready to deploy and manage your cloud infrastructure. 
+If the above procedure works, you have successfully installed miniONE and it is ready to deploy and manage your cloud infrastructure.
+
+## Next Steps
+
+After completing the miniONE installation process and validation, you can proceed to deploy Clusters automatically or manually. Proceed to the [Cluster Deployment Documentation]({{% relref "software/installation_process/cluster_installation/" %}}) for details. 
+
+You can also try deploying Kubernetes Clusters with the [Kubernetes Quickstart Guides](getting_started/try_opennebula/try_kubernetes_on_opennebula/).
+
+
 
 
 

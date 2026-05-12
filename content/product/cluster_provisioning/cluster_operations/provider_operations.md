@@ -12,7 +12,7 @@ weight: "2"
 
 <!--# Managing Providers -->
 
-In OneForm, Providers are created using Provider drivers for on-premise hardware or 3rd-party cloud/bare-metal services such as AWS, Scaleway and Equinix. Use the `oneform` CLI tool to manage your cloud infrastructure instance and configuration.
+In OneForm, Providers are created using Provider drivers for on-premise hardware or 3rd-party cloud/bare-metal services such as AWS, Scaleway and i3Dnet. Use the `oneform` CLI tool to manage your cloud infrastructure instance and configuration.
 
 With this guide, you will understand how the drivers and Providers and Provisions relate by: 
 
@@ -35,7 +35,7 @@ After running the command, you will see that all the driver templates are create
 
 ## Additional Drivers
 
-Only the **onprem** driver is included by default in a fresh OpenNebula installation with OneForm. To install and enable other drivers, such as **aws**, **equinix** and **scaleway**, you need to clone the [OneForm Registry repository](https://github.com/OpenNebula/oneform-registry) onto the OpenNebula Front-end with the following commands as the `oneadmin` user:
+Only the **onprem** driver is included by default in a fresh OpenNebula installation with OneForm. To install and enable other drivers, such as **aws**, **i3dnet** and **scaleway**, you need to clone the [OneForm Registry repository](https://github.com/OpenNebula/oneform-registry) onto the OpenNebula Front-end with the following commands as the `oneadmin` user:
 
 ```bash
 git -C /var/lib/one/oneform/drivers clone https://github.com/OpenNebula/oneform-registry.git

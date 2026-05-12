@@ -11,12 +11,12 @@ weight: "2"
 
 <a id="database-setup"></a>
 
-The OpenNebula Front-end uses the database to persist the complete state of the cloud. It supports several database solutions and each is recommended for different usage. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the backend). The following options are available:
+The OpenNebula Front-end uses a database to persist the complete state of the cloud. It supports several database solutions and each option is recommended for different use cases. It’s necessary to decide carefully which solution is the best for your needs, as the migration of an existing installation to a different database type is complex or impossible (depending on the backend). The following options are available:
 
 * Default embedded [SQLite]({{% relref "#sqlite-setup" %}}) for small workloads
 * Recommended [MySQL/MariaDB]({{% relref "#mysql-setup" %}}) for production
 
-It’s recommended to install the database backend now. Later, when doing the [Front-end Installation]({{% relref "install#frontend-installation" %}}), return back here and only update the OpenNebula configuration for specific backend based tasks (ideally) *prior* to starting OpenNebula for the first time.
+It’s recommended to install the database backend now. Later, while completing the [Front-end Installation]({{% relref "frontend_install" %}}), return back here and only update the OpenNebula configuration for specific backend based tasks (ideally) *prior* to starting OpenNebula for the first time.
 
 <a id="sqlite-setup"></a>
 
@@ -109,3 +109,10 @@ Fields:
 - `DB_NAME` - name of the MySQL database OpenNebula will use
 - `CONNECTIONS` - max. number of connections
 - `COMPARE_BINARY` - compare strings using BINARY clause to make name searches case sensitive
+
+## Next Steps
+
+After installing and configuring the database for your OpenNebula cloud, you can proceed to install the Front-end manually. Prior to installing the Front-end manually, you must first configure the OpenNebula package repositories for your Linux distribution. Please proceed to the repository setup documentation for your OpenNebula edition:
+
+* [Set Up the OpenNebula Repositories for the Community Edition]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration_ce/" %}})
+* [Set Up the OpenNebula Repositories for the Enterprise Edition]({{% relref "software/installation_process/frontend_installation/opennebula_repository_configuration_ee/" %}})

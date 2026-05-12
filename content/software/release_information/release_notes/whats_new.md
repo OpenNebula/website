@@ -25,6 +25,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## KVM
 
+* Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
+
 ## LXC
 
 ## OpenNebula Form
@@ -34,6 +36,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 ## Features Backported to 7.2.x
 
 Additionally, the following functionalities are present that were not in OpenNebula 7.2.0, although they debuted in subsequent maintenance releases of the 7.2.x series:
+
+* [Allow the customization of the favicon in FireEdge]({{% relref "product/operation_references/opennebula_services_configuration/fireedge.md#branding-fireedge" %}}).
 
 ## Other Issues Solved
 

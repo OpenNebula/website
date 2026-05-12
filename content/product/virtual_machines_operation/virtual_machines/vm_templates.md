@@ -375,7 +375,7 @@ Also, there will be a tab called MYSQL with two groups, CONFIG and ADDITIONAL:
 
 ![sunstone_user_inputs_convention_mysql_1](/images/sunstone_user_inputs_convention_mysql_1.png)
 
-To see the user inputs in the ADDITONAL group, the user must turn on the Define additional parameters user input:
+To set the user inputs in the ADDITIONAL group, activate the **Define additional parameters** option:
 
 ![sunstone_user_inputs_convention_mysql_2](/images/sunstone_user_inputs_convention_mysql_2.png)
 

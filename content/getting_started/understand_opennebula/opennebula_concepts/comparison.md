@@ -54,7 +54,7 @@ Thousands of organizations worldwide already rely on OpenNebula as an open alter
 | **Cluster and Federation Support** | Multi-cluster and multi-zone federation with centralized governance and distributed scheduling. |
 | **Scalability** | Proven scalability in production environments with over 2,500 hypervisor nodes managed within a single OpenNebula instance. |
 | **HA and Disaster Recovery** | HA for front-end and host nodes; redundant database and failover mechanisms for service continuity across data centers. |
-| **Hybrid & Edge Cloud** | Automatic provisioning on AWS, Equinix Metal, Scaleway and remote OpenNebula zones; optimized for edge deployments. |
+| **Hybrid & Edge Cloud** | Automatic provisioning on AWS, Scaleway and remote OpenNebula zones; optimized for edge deployments. |
 | **Enhanced Platform Awareness (EPA) Integration** | Support for NUMA\-aware CPU pinning, SR-IOV, and HugePages to provide precise hardware-level optimization and secure, performance-aware orchestration of virtualized workloads.  |
 | **AI and Accelerated Computing** | Support for NVIDIA GPUs, MIG scheduling, NVLink, Infiniband, Spectrum-X, and DPU offloading for accelerated networking, storage, and AI workloads. |
 | **Networking Models** | Comprehensive networking support, including software-defined networking (SDN), virtual, and physical appliances, including Linux Bridge, 802.1Q VLAN, VXLAN, Open vSwitch; SDN integration with BlueField DPUs and Spectrum-X fabrics. |

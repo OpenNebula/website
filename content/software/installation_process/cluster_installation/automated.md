@@ -9,11 +9,11 @@ tags: [OneForm, cluster, deployment, automatic]
 weight: "2"
 ---
 
-OneForm is OpenNebula’s automated cloud provisioning tool. It serves as an automated “cloud-on-demand” engine, allowing you to provision resources on-premises, on remote bare-metal, or public cloud providers through a simple, streamlined workflow. You can provision Clusters through the Sunstone user interface, the CLI, or the API.
+OneForm is OpenNebula’s automated cloud provisioning tool. It serves as an automated “cloud-on-demand” engine, allowing you to provision resources on-premises, or bare-metal instances from public cloud providers through a simple, streamlined workflow. You can provision Clusters through an OpenNebula Front-end through the the Sunstone user interface, the OneForm CLI, or the OneForm REST API.
 
 ## Before Starting
 
-In order to use OneForm, you must first install an OpenNebula Front-end using one of the available deployment options, refer to the [Front-end Installation Guides]({{% relref "software/installation_process/frontend_installation/" %}}) for details. 
+In order to use OneForm, you must first install an OpenNebula Front-end using one of the available deployment options, refer to the [Front-end Installation Documentation]({{% relref "software/installation_process/frontend_installation/" %}}) for details. 
 
 ## Provisioning Clusters with OneForm
 
@@ -34,7 +34,7 @@ Once you have installed the OneForm driver for your preferred cloud service, ref
 
 ### Step 2: Provision Clusters with OneForm
 
-Once you have Providers configured for your target infrastructure, you can proceed to provision Clusters with OneForm. OneForm communicates with 3rd-party IaaS APIs to instantiate the requested resources or communicates with on-premises hardware through SSH. Once the resources are available and ready, OneForm proceeds with an OpenNebula Cluster deployment, installing the necessary components for the Cluster to support workloads managed through the OpenNebula Front-end. 
+Once you have Providers configured for your target infrastructure, you can proceed to provision Clusters with OneForm. OneForm communicates with 3rd-party IaaS APIs to instantiate the requested resources or communicates with on-premises hardware through SSH. Once the resources are available and ready, OneForm proceeds with an automated OpenNebula Cluster deployment, installing the necessary components for the Cluster to support workloads managed through the OpenNebula Front-end. 
 
 Refer to the [Provisioning Documentation](https://github.com/OpenNebula/oneform-registry/wiki) in the OneForm Registry Wiki for your preferred cloud service provider or the On-premises Provisioning Documentation for a [SSH Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/onprem_ssh_cluster/" %}}) or [NFS Cluster]({{% relref "product/cluster_provisioning/cluster_provisions/onprem_nfs_cluster/"%}}).
 

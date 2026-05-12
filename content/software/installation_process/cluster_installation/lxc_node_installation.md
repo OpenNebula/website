@@ -18,7 +18,8 @@ weight: "4"
 This page demonstrates how to configure an OpenNebula LXC Node from binary packages.
 
 {{< alert title="Note" type="info" >}}
-Before reading this chapter, you should have at least installed your [Front-end node]({{% relref "frontend_install" %}}).{{< /alert >}}
+Before installing a KVM node, you must have an OpenNebula Front-end deployed. Refer to the [Front-end Deployment Documentation]({{% relref "/software/installation_process/frontend_installation" %}}) for details.
+{{< /alert >}}
 
 ## Overview
 
@@ -44,14 +45,14 @@ OpenNebula depends on packages which aren’t in the base distribution repositor
 
 **AlmaLinux 9, 10**
 
-```default
-# yum -y install epel-release
+```shell
+yum -y install epel-release
 ```
 
 **RHEL 9**
 
-```default
-# rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+```shell
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
 ### Install OpenNebula LXC Node Package
@@ -60,15 +61,15 @@ Execute the following commands to install the OpenNebula LXC Node package:
 
 #### Installing on AlmaLinux/RHEL
 
-```default
-# yum -y install opennebula-node-lxc
+```shell
+yum -y install opennebula-node-lxc
 ```
 
 #### Installing on Debian/Ubuntu
 
-```default
-# apt-get update
-# apt-get -y install opennebula-node-lxc
+```shell
+apt-get update
+apt-get -y install opennebula-node-lxc
 ```
 
 Install the suggested package `rbd-nbd` if the Ceph Datastore is going to be used by the LXC Hosts. For further configuration check the specific [guide]({{% relref "lxc_driver#lxcmg" %}}).
@@ -77,7 +78,7 @@ Install the suggested package `rbd-nbd` if the Ceph Datastore is going to be use
 
 Depending on the type of OpenNebula deployment, the SELinux can block some operations initiated by the OpenNebula Front-end, which results in a failure of the particular operation.  It’s **not recommended to disable** the SELinux on production environments, as it degrades the security of your server, but to investigate and work around each individual problem based on the [SELinux User’s and Administrator’s Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/). The administrator might disable the SELinux to temporarily work around the problem or on non-production deployments by changing the following line in `/etc/selinux/config`:
 
-```default
+```shell
 SELINUX=disabled
 ```
 
@@ -89,8 +90,8 @@ Depending on your OpenNebula deployment type, the following may be required on y
 * package `util-linux` newer than 2.23.2-51 installed
 * SELinux boolean `virt_use_nfs` enabled (with datastores on NFS):
 
-```default
-# setsebool -P virt_use_nfs on
+```shell
+setsebool -P virt_use_nfs on
 ```{{< /alert >}}  
 
 ## Step 4. Configure Passwordless SSH
@@ -125,14 +126,14 @@ If [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
 
-```default
-# su - oneadmin
+```shell
+su - oneadmin
 ```
 
 Create the `known_hosts` file by running following command with all the node names including the Front-end as parameters:
 
-```default
-$ ssh-keyscan <frontend> <node1> <node2> <node3> ... >> /var/lib/one/.ssh/known_hosts
+```shell
+ssh-keyscan <frontend> <node1> <node2> <node3> ... >> /var/lib/one/.ssh/known_hosts
 ```
 
 ### B. Distribute Authentication Configuration
@@ -141,24 +142,24 @@ To enable passwordless login on your infrastructure, you must copy authenticatio
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
 
-```default
-# su - oneadmin
+```shell
+su - oneadmin
 ```
 
 Enable passwordless logins by executing the following command for each of your nodes. For example:
 
-```default
-$ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node1>
-$ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node2>
-$ ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node3>
+```shell
+ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node1>
+ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node2>
+ssh-copy-id -i /var/lib/one/.ssh/id_rsa.pub <node3>
 ```
 
 If the list of host SSH public keys was created in the previous section, distribute the `known_hosts` file to each of your nodes. For example:
 
-```default
-$ scp -p /var/lib/one/.ssh/known_hosts <node1>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/known_hosts <node2>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
+```shell
+scp -p /var/lib/one/.ssh/known_hosts <node1>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/known_hosts <node2>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
 ```
 
 #### Without SSH Authentication Agent (Optional)
@@ -168,10 +169,10 @@ $ scp -p /var/lib/one/.ssh/known_hosts <node3>:/var/lib/one/.ssh/
 
 If you need to distribute `oneadmin`’s private SSH key on your nodes, proceed with steps above and continue with following extra commands for all your nodes. For example:
 
-```default
-$ scp -p /var/lib/one/.ssh/id_rsa <node1>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/id_rsa <node2>:/var/lib/one/.ssh/
-$ scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
+```shell
+scp -p /var/lib/one/.ssh/id_rsa <node1>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/id_rsa <node2>:/var/lib/one/.ssh/
+scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
 ```{{< /alert >}}  
 
 ### C. Validate Connections
@@ -185,40 +186,40 @@ You should verify that none of these connections (under user `oneadmin`) fail an
 
 For example, execute on the Front-end:
 
-```default
+```shell
 # from Front-end to Front-end itself
-$ ssh <frontend>
-$ exit
+ssh <frontend>
+exit
 
 # from Front-end to node, back to Front-end and to other nodes
-$ ssh <node1>
-$ ssh <frontend>
-$ exit
-$ ssh <node2>
-$ exit
-$ ssh <node3>
-$ exit
-$ exit
+ssh <node1>
+ssh <frontend>
+exit
+ssh <node2>
+exit
+ssh <node3>
+exit
+exit
 
 # from Front-end to node, back to Front-end and to other nodes
-$ ssh <node2>
-$ ssh <frontend>
-$ exit
-$ ssh <node1>
-$ exit
-$ ssh <node3>
-$ exit
-$ exit
+ssh <node2>
+ssh <frontend>
+exit
+ssh <node1>
+exit
+ssh <node3>
+exit
+exit
 
 # from Front-end to nodes and back to Front-end and other nodes
-$ ssh <node3>
-$ ssh <frontend>
-$ exit
-$ ssh <node1>
-$ exit
-$ ssh <node2>
-$ exit
-$ exit
+ssh <node3>
+ssh <frontend>
+exit
+ssh <node1>
+exit
+ssh <node2>
+exit
+exit
 ```
 
 ## Step 5.  Networking Configuration
@@ -232,15 +233,15 @@ There are various models for virtual networks, check the [Open Cloud Networking]
 
 You may want to use the simplest network model that corresponds to the [bridged]({{% relref "bridged#bridged" %}}) driver. For this driver, you will need to set up a Linux bridge and include a physical device in the bridge. Later on, when defining the network in OpenNebula, you will specify the name of this bridge and OpenNebula will know that it should connect the VM to this bridge, thus giving it connectivity with the physical network device connected to the bridge. For example, a typical Host with two physical networks, one for public IP addresses (attached to an `eth0` NIC for example) and the other for private virtual LANs (NIC `eth1` for example) should have two bridges:
 
-```default
-# ip link show type bridge
+```shell
+ip link show type bridge
 4: br0: ...
 5: br1: ...
 
-# ip link show master br0
+ip link show master br0
 2: eth0: ...
 
-# ip link show master br1
+ip link show master br1
 3: eth1: ...
 ```
 
@@ -280,18 +281,18 @@ Finally, return back to the **Hosts** list, and check that the Host has switched
 
 To add a node to the cloud, run this command as `oneadmin` in the Front-end (replace `<node01>` with your node hostname):
 
-```default
-$ onehost create <node01> -i lxc -v lxc
+```shell
+onehost create <node01> -i lxc -v lxc
 
-$ onehost list
-  ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
-   1 localhost       default     0                  -                  - init
+onehost list
+ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
+ 1 localhost       default     0                  -                  - init
 
 # After some time (up to 1 minute)
 
-$ onehost list
-  ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
-   0 node01          default     0       0 / 400 (0%)     0K / 7.7G (0%) on
+onehost list
+ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
+ 0 node01          default     0       0 / 400 (0%)     0K / 7.7G (0%) on
 ```
 
 ## Next steps

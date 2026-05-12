@@ -217,3 +217,7 @@ echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.openne
 apt-get update
 ```
 {{< /alert >}}
+
+## Next Steps
+
+After configuring the OpenNebula Enterprise Edition repositories, you can proceed to install the OpenNebula Front-end. Continue to the [Single Front-end Installation Documentation]({{% relref "software/installation_process/frontend_installation/frontend_install/" %}}) to complete the installation.
