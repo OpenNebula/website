@@ -134,3 +134,5 @@ Additionally, the following functionalities are present that were not included i
 - [Fix OneDRS scheduler for VMs with resched flag](https://github.com/OpenNebula/one/issues/7503).
 - [Fix Conversion failed with message Unable to find Host, Cluster, and Datacenter of VM](https://github.com/OpenNebula/one/issues/7533).
 - [Fix `BRIDGE_LIST` in backup datastores.](https://github.com/OpenNebula/one/issues/7532)
+- [Fix Restic exclusive lock detection](https://github.com/OpenNebula/one/issues/7403).
+
