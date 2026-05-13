@@ -16,7 +16,7 @@ The following new features have been backported to 7.2.1:
 * VLAN_ID is not mandatory when creating a OpenvSwitch in Sunstone. See [Open vSwitch Networks]({{% relref "product/cluster_configuration/networking_system/openvswitch/" %}}) for details.
 * Improved Open vSwitch VLAN trunking support in the `ovswitch` driver by adding native OVS `trunk` mode when only `VLAN_TAGGED_ID` is defined. Existing configurations using `VLAN_ID` continue to behave as before. Note that untagged traffic is now dropped for pure trunk configurations. See [Multiple VLANs (VLAN trunking)](/product/cluster_configuration/networking_system/openvswitch/#multiple-vlans-vlan-trunking) for details.
 * [PCI device monitoring now includes `IFNAME` and `PCI_ROLE` attributes]({{% relref "product/cluster_configuration/hosts_and_clusters/hosts#host-pci-devices" %}}) to map PCI devices to network interface names and identify SR-IOV Physical/Virtual Functions.
-* Moved VHOST socket directory to `/var/run/one/vhost-socks` [#7673](https://github.com/OpenNebula/one/issues/7673)
+* Moved Open vSwitch DPDK socket directory to `/var/run/one/vhost-socks` [#7673](https://github.com/OpenNebula/one/issues/7673)
 
 ## Resolved Issues
 
