@@ -36,3 +36,4 @@ The following issues have been solved in 7.2.1:
 * Fix empty `PROBES_PERIOD` values causing monitor probes to run without delay [#7659](https://github.com/OpenNebula/one/issues/7659).
 * Fix an issue that could cause VLAN trunk information in Virtual Networks to become inconsistent after updating network attributes, resulting in incorrect `VLAN_TAGGED_ID` values being propagated to VM NICs. [#7654](https://github.com/OpenNebula/one/issues/7654).
 * Fix pure LVM live migration when VM has no CONTEXT [#7674](https://github.com/OpenNebula/one/issues/7674)
+* Fix CEPH RBD incremental backup deadlocks [#7529](https://github.com/OpenNebula/one/issues/7529)
