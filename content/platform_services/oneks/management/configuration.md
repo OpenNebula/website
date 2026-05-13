@@ -15,7 +15,7 @@ This section is intended for users intending to install, configure, or troublesh
 
 OneKS is implemented as an ODS-based Ruby service plus a CLI/API client.
 
-Main runtime components include:
+The main runtime components include:
 
 * `oneks-server`: The service daemon/helper script.  
 * `oneks`: The user-facing CLI.  
@@ -23,7 +23,7 @@ Main runtime components include:
 * **Event Manager**: Lifecycle event watcher.  
 * **Cluster Watchdog**: Cluster state monitoring component.  
 * **Seed VM Dependency**: Temporary managed VM used for control-plane bootstrap.  
-* **Cluster Router Dependency**: Router-related cluster dependency.
+* **Cluster Router Dependency**: Router-related Cluster dependency.
 
 By default, the OneKS server listens locally on Host `127.0.0.1` and port `10780`.
 
@@ -37,7 +37,7 @@ http://127.0.0.1:10780/api/v1
 
 Remote API access depends on how the service is exposed in the deployment.
 
-OneKS manages OneKS cluster documents and node-group documents, starts an event manager, and subscribes to OpenNebula lifecycle events.
+OneKS manages OneKS Cluster documents and node-group documents, starts an event manager, and subscribes to OpenNebula lifecycle events.
 
 Important runtime behavior includes:
 
@@ -46,7 +46,7 @@ Important runtime behavior includes:
 * **Seed VM Readiness**: Tracks seed VM readiness through the `ONEKS_STATE` value.  
 * **Router Monitoring**: Monitors virtual router allocation.  
 * **Log Exposure**: Exposes per-cluster logs through the API and CLI.  
-* **State Reconciliation**: Reconciles cluster and group state based on observed lifecycle events.
+* **State Reconciliation**: Reconciles Cluster and group state based on observed lifecycle events.
 
 Primary packaged paths:
 

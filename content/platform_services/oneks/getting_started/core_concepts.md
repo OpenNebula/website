@@ -18,7 +18,7 @@ Users mainly interact with:
 * **Node Groups**: Scalable worker-capacity groups attached to Clusters.  
 * **Topologies**: Deployment layouts that combine control planes, node groups, networks, and runtime dependencies.
 
-Lower-level resources such as OpenNebula VM templates, images, virtual networks, virtual routers, seed VMs, and Cluster API objects are managed underneath these abstractions.
+Lower-level resources such as OpenNebula VM templates, images, Virtual Networks, virtual routers, seed VMs, and Cluster API objects are managed underneath these abstractions.
 
 ## Seed VM
 
@@ -147,7 +147,7 @@ A Cluster includes:
 
 * **Cluster Identity and Metadata**: The name, description, ownership, and registration information for the Cluster.  
 * **Kubernetes Version**: The Kubernetes version deployed in the Cluster.  
-* **Network References**: The public and private OpenNebula virtual networks used by the Cluster.  
+* **Network References**: The public and private OpenNebula Virtual Networks used by the Cluster.  
 * **Control Plane**: One logical control-plane group.  
 * **Node Groups**: Zero or more worker-capacity groups.  
 * **Lifecycle State**: The current operational state of the Cluster.  
@@ -164,7 +164,7 @@ Each OneKS Cluster has one logical control-plane group. Depending on the selecte
 
 Even in `HA` deployments, the control plane is represented as one logical control-plane group. Users do not manually create separate control-plane groups. Control-plane capacity and topology are determined during Cluster creation by the selected profile family and flavour.
 
-A Cluster requires two OpenNebula virtual networks:
+A Cluster requires two OpenNebula Virtual Networks:
 
 * **Public Virtual Network**: Provides external connectivity where required and supports required bootstrap and service access paths.  
 * **Private Virtual Network**: Provides internal Cluster communication and helps preserve network isolation between Cluster nodes.
@@ -330,7 +330,7 @@ Cluster
 
 This model allows users to scale worker capacity independently from the control plane.
 
-OneKS Cluster networking uses the public and private OpenNebula virtual networks selected during Cluster creation.
+OneKS Cluster networking uses the public and private OpenNebula Virtual Networks selected during Cluster creation.
 
 * **Public Network**: Provides external connectivity and supports required bootstrap and service access paths.  
 * **Private Network**: Provides internal communication between Cluster nodes.  
@@ -348,8 +348,8 @@ These dependencies are normally configured by the user and consumed automaticall
 Users do not build the topology manually. Instead, they select:
 
 * **Kubernetes Version**: The version to deploy.  
-* **Public Network**: The OpenNebula public virtual network used by the Cluster.  
-* **Private Network**: The OpenNebula private virtual network used by the Cluster.  
+* **Public Network**: The OpenNebula public Virtual Network used by the Cluster.  
+* **Private Network**: The OpenNebula private Virtual Network used by the Cluster.  
 * **Control-plane Flavour**: The selected control-plane deployment model.  
 * **Node-group Flavour and Count**: The worker capacity profile and number of workers, if additional capacity is required.
 

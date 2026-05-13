@@ -26,7 +26,7 @@ OneKS exposes these operations through the CLI, REST API, and Sunstone Web UI, d
 
 Creating a Cluster provisions the Kubernetes control plane and the supporting OpenNebula infrastructure required by the selected Cluster profile.
 
-Before creating a cluster, verify that:
+Before creating a Cluster, verify that:
 
 * **OneKS Service**: The OneKS service is configured and running.  
 * **OneGate Service**: OneGate is configured and reachable.  
@@ -41,7 +41,7 @@ For more detailed information refer to the [Basic Configuration Guide]({{% relre
 
 ### Create a Cluster Interactively with the CLI
 
-Before creating a Cluster with the CLI, identify the IDs of the OpenNebula public and private Virtual Networks. These networks are used to provide connectivity between OpenNebula, the virtual router, and the Kubernetes cluster, while preserving network isolation.
+Before creating a Cluster with the CLI, identify the IDs of the OpenNebula public and private Virtual Networks. These networks are used to provide connectivity between OpenNebula, the virtual router, and the Kubernetes Cluster, while preserving network isolation.
 
 List the available Virtual Networks with:
 

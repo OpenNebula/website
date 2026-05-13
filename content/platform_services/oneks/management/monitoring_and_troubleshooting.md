@@ -32,7 +32,7 @@ OneKS exposes the following Cluster states:
 
 A Cluster reaches the `RUNNING` state when all expected groups are running. A Cluster receives a `WARNING` state when one or more groups are warned or failed while the Cluster  resource itself is otherwise still present. During deprovisioning, when managed groups have been removed, the Cluster reaches `DONE` and is deleted from storage by the action code.
 
-During control-plane bootstrap, seed VM failures can surface as `BOOTSTRAPPING_FAILURE` on the control-plane group. The Cluster is then notified of the group failure according to the normal reconciliation behavior.
+During control-plane bootstrapping, seed VM failures can surface as `BOOTSTRAPPING_FAILURE` on the control-plane group. The Cluster is then notified of the group failure according to the normal reconciliation behavior.
 
 ## Node Group States
 
