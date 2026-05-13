@@ -109,8 +109,24 @@ Example `spec.json`:
 
 ### Create a Cluster with the API
 
-```
-POST /api/v1/clusters
+You can create a Cluster with the API using the following command:
+
+```shell
+curl -u "$(cat /var/lib/one/.one/one_auth)" \
+  -X POST http://127.0.0.1:10780/api/v1/clusters \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "prod-west",
+    "description": "Production Kubernetes cluster",
+    "kubernetes_version": "v1.32.9",
+    "public_network": 0,
+    "private_network": 1,
+    "spec": {
+      "family": "general",
+      "flavour": "ha",
+      "user_inputs_values": {}
+    }
+  }'
 ```
 
 Example request body:
@@ -150,7 +166,7 @@ The `spec` object selects the family and flavour used for the control-plane grou
 
 ### Create a Cluster with the Sunstone Web UI  
 
-For the Sunstone Web UI, use the Cluster creation wizard described in **Getting Started**.
+For the Sunstone Web UI, use the Cluster creation wizard described in the [Getting Started with OneKS Quick-start Guide]({{% relref "platform_services/oneks/getting_started/quick_start/" %}}).
 
 ## Accessing a Cluster
 
