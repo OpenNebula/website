@@ -11,5 +11,5 @@ tags:
 weight: "3"
 dashboard_icon_light: "images/dashboard/light/platform_services.svg"
 dashboard_icon_dark: "images/dashboard/dark/platform_services.svg"
-dashboard_description: "NEED A DASHBOARD DESCRIPTION HERE."
+dashboard_description: "Deploy and manage high-level application platforms and specialized workloads on top of your OpenNebula cloud."
 ---

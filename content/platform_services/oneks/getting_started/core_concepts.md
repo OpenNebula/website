@@ -110,9 +110,9 @@ Available flavours:
 
 **Node-group profile:**
 
-* **Family:** `general`  
-* **Flavours:** `small`, `medium`, `large`  
-* **Inputs:** `count`, `cpu`, `vcpu`, `memory`, `disk_size`
+* **Family**: `general`  
+* **Flavours**: `small`, `medium`, `large`  
+* **Inputs**: `count`, `cpu`, `vcpu`, `memory`, `disk_size`
 
 Available flavours:
 
@@ -250,7 +250,7 @@ For example, scaling a node group to three nodes means that OneKS reconciles tha
 
 After scaling, users should validate the result with:
 
-```
+```shell
 KUBECONFIG=./kubeconfig kubectl get nodes
 ```
 
@@ -262,16 +262,16 @@ The full state list and reconciliation behavior are documented in **Monitoring a
 
 A Cluster can have:
 
-* **One control-plane group**: the logical control-plane group created during Cluster provisioning.  
-* **Zero node groups**: a control-plane-only Cluster.  
-* **One node group**: a simple Cluster with one worker capacity group.  
-* **Multiple node groups**: a Cluster with separate worker pools for different workload types or capacity profiles.
+* **One Control-plane Group**: The logical control-plane group created during Cluster provisioning.  
+* **Zero Node Groups**: A control-plane-only Cluster.  
+* **One Node Group**: A simple Cluster with one worker capacity group.  
+* **Multiple Node Groups**: A Cluster with separate worker pools for different workload types or capacity profiles.
 
 For example, a Cluster could have:
 
-* **Small node group**: lightweight services.  
-* **Medium node group**: general workloads.  
-* **Large node group**: resource-intensive workloads.
+* **Small Node Group**: Lightweight services
+* **Medium Node Group**: General workloads  
+* **Large Node Group**: Resource-intensive workloads
 
 The exact options depend on the profiles configured by the user.
 
@@ -281,12 +281,12 @@ A topology describes how a OneKS Cluster is assembled from its control plane, no
 
 A OneKS topology is determined by:
 
-* **Control-plane profile and flavour**: the selected configuration for the Kubernetes control plane.  
-* **Kubernetes version**: the Kubernetes version deployed in the Cluster.  
-* **Public and private networks**: the OpenNebula networks selected during Cluster creation.  
-* **Control-plane node count**: the number of control-plane nodes defined by the selected flavour.  
-* **Node-group configuration**: the number and size of worker node groups.  
-* **Runtime dependencies**: supporting components such as the seed VM and Cluster router.
+* **Control-plane Profile and flavour**: The selected configuration for the Kubernetes control plane.  
+* **Kubernetes Version**: The Kubernetes version deployed in the Cluster.  
+* **Public and Private Networks**: The OpenNebula networks selected during Cluster creation.  
+* **Control-plane Node Count**: The number of control-plane nodes defined by the selected flavour.  
+* **Node-group Configuration**: The number and size of worker node groups.  
+* **Runtime Dependencies**: Supporting components such as the seed VM and Cluster router.
 
 Topologies allow OneKS to expose different Kubernetes deployment models without requiring users to manually construct the underlying infrastructure.
 
@@ -294,10 +294,10 @@ A standalone topology uses a single control-plane node.
 
 This topology is suitable for:
 
-* **Development environments**: Clusters used for development and experimentation.  
-* **Test environments**: Clusters used for validation and temporary testing.  
+* **Development Environments**: Clusters used for development and experimentation.  
+* **Test Environments**: Clusters used for validation and temporary testing.  
 * **Evaluation Clusters**: Clusters used to assess OneKS or Kubernetes behavior.  
-* **Non-critical workloads**: workloads that do not require control-plane redundancy.
+* **Non-critical Workloads**: Workloads that do not require control-plane redundancy.
 
 A standalone control plane is simpler and consumes fewer resources, but it does not provide control-plane redundancy. If the single control-plane node fails, the Kubernetes API may become unavailable until the node or underlying infrastructure is recovered.
 
@@ -311,7 +311,7 @@ Each node group can have its own flavour and count.
 
 Example standalone topology:
 
-```
+```default
 Cluster
 ├── Control plane: standalone
 └── Node groups
@@ -320,7 +320,7 @@ Cluster
 
 Example HA topology:
 
-```
+```default
 Cluster
 ├── Control plane: ha
 └── Node groups
@@ -332,25 +332,25 @@ This model allows users to scale worker capacity independently from the control 
 
 OneKS Cluster networking uses the public and private OpenNebula virtual networks selected during Cluster creation.
 
-* **Public network**: provides external connectivity and supports required bootstrap and service access paths.  
-* **Private network**: provides internal communication between Cluster nodes.  
-* **Virtual router**: connects the OpenNebula networking layer with the Kubernetes Cluster topology where required.
+* **Public Network**: Provides external connectivity and supports required bootstrap and service access paths.  
+* **Private Network**: Provides internal communication between Cluster nodes.  
+* **Virtual Router**: Connects the OpenNebula networking layer with the Kubernetes Cluster topology where required.
 
 Some topologies require runtime dependencies. Common dependencies include:
 
-* **Seed VM**: temporary VM used during control-plane bootstrap.  
-* **Cluster router**: router-related dependency used to support Cluster connectivity.  
+* **Seed VM**: Temporary VM used during control-plane bootstrap.  
+* **Cluster router**: Router-related dependency used to support Cluster connectivity.  
 * **OneGate**: OpenNebula service used by VMs to communicate with OpenNebula during bootstrap and runtime configuration.  
-* **Transparent proxy, `tproxy`**: networking configuration used to expose required OpenNebula services such as OneGate and the XML-RPC API through the public network gateway.
+* **Transparent proxy, `tproxy`**: Networking configuration used to expose required OpenNebula services such as OneGate and the XML-RPC API through the public network gateway.
 
 These dependencies are normally configured by the user and consumed automatically by OneKS during lifecycle operations.
 
 Users do not build the topology manually. Instead, they select:
 
-* **Kubernetes version**: the version to deploy.  
-* **Public network**: the OpenNebula public virtual network used by the Cluster.  
-* **Private network**: the OpenNebula private virtual network used by the Cluster.  
-* **Control-plane flavour**: the selected control-plane deployment model.  
-* **Node-group flavour and count**: the worker capacity profile and number of workers, if additional capacity is required.
+* **Kubernetes Version**: The version to deploy.  
+* **Public Network**: The OpenNebula public virtual network used by the Cluster.  
+* **Private Network**: The OpenNebula private virtual network used by the Cluster.  
+* **Control-plane Flavour**: The selected control-plane deployment model.  
+* **Node-group Flavour and Count**: The worker capacity profile and number of workers, if additional capacity is required.
 
 OneKS translates those choices into the corresponding OpenNebula, Cluster API, CAPONE, and Kubernetes resources.

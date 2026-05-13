@@ -15,43 +15,43 @@ Event-driven monitoring is implemented through OpenNebula VM and dependency even
 
 ## Cluster States
 
-OneKS exposes the following cluster states:
+OneKS exposes the following Cluster states:
 
-* `PENDING`: a cluster document has been created.  
-* `PROVISIONING`: control-plane provisioning has started.  
-* `RUNNING`: all expected groups are running.  
-* `SCALING`: a node group is being added, removed, or resized.  
-* `UPGRADING`: the cluster version is being upgraded.  
-* `DEPROVISIONING`: the cluster resources are being deleted.  
-* `WARNING`: one or more groups are inconsistent or degraded.  
-* `DONE`: cluster deprovisioning has completed.  
-* `PROVISIONING_FAILURE`: provisioning failed.  
-* `SCALING_FAILURE`: scaling failed.  
-* `UPGRADING_FAILURE`: upgrade failed.  
-* `DEPROVISIONING_FAILURE`: deprovisioning failed.
+* `PENDING`: A Cluster document has been created.  
+* `PROVISIONING`: Control-plane provisioning has started.  
+* `RUNNING`: All expected groups are running.  
+* `SCALING`: A node group is being added, removed, or resized.  
+* `UPGRADING`: The Cluster version is being upgraded.  
+* `DEPROVISIONING`: The Cluster resources are being deleted.  
+* `WARNING`: One or more groups are inconsistent or degraded.  
+* `DONE`: Cluster deprovisioning has completed.  
+* `PROVISIONING_FAILURE`: Provisioning failed.  
+* `SCALING_FAILURE`: Scaling failed.  
+* `UPGRADING_FAILURE`: Upgrade failed.  
+* `DEPROVISIONING_FAILURE`: Deprovisioning failed.
 
-A cluster reaches the `RUNNING` state when all expected groups are running. A cluster receives a `WARNING` state when one or more groups are warned or failed while the cluster resource itself is otherwise still present. During deprovisioning, when managed groups have been removed, the cluster reaches `DONE` and is deleted from storage by the action code.
+A Cluster reaches the `RUNNING` state when all expected groups are running. A Cluster receives a `WARNING` state when one or more groups are warned or failed while the Cluster  resource itself is otherwise still present. During deprovisioning, when managed groups have been removed, the Cluster reaches `DONE` and is deleted from storage by the action code.
 
-During control-plane bootstrap, seed VM failures can surface as `BOOTSTRAPPING_FAILURE` on the control-plane group. The cluster is then notified of the group failure according to the normal reconciliation behavior.
+During control-plane bootstrap, seed VM failures can surface as `BOOTSTRAPPING_FAILURE` on the control-plane group. The Cluster is then notified of the group failure according to the normal reconciliation behavior.
 
 ## Node Group States
 
 OneKS exposes the following group states:
 
-* `PENDING`: the group document exists.  
-* `BOOTSTRAPPING`: dependencies are being prepared.  
+* `PENDING`: The group document exists.  
+* `BOOTSTRAPPING`: Dependencies are being prepared.  
 * `PROVISIONING`: Kubernetes resources or VMs are being created.  
-* `RUNNING`: expected VMs exist and are running.  
-* `SCALING`: target size is changing.  
-* `UPGRADING`: the group is being upgraded.  
-* `DEPROVISIONING`: group resources are being removed.  
-* `WARNING`: one or more associated VMs or dependencies are degraded.  
-* `DONE`: group deprovisioning has completed.  
-* `BOOTSTRAPPING_FAILURE`: dependency preparation failed.  
-* `PROVISIONING_FAILURE`: provisioning failed.  
-* `SCALING_FAILURE`: scaling failed.  
-* `UPGRADING_FAILURE`: upgrade failed.  
-* `DEPROVISIONING_FAILURE`: deprovisioning failed.
+* `RUNNING`: Expected VMs exist and are running.  
+* `SCALING`: Target size is changing.  
+* `UPGRADING`: The group is being upgraded.  
+* `DEPROVISIONING`: Group resources are being removed.  
+* `WARNING`: One or more associated VMs or dependencies are degraded.  
+* `DONE`: Group deprovisioning has completed.  
+* `BOOTSTRAPPING_FAILURE`: Dependency preparation failed.  
+* `PROVISIONING_FAILURE`: Provisioning failed.  
+* `SCALING_FAILURE`: Scaling failed.  
+* `UPGRADING_FAILURE`: Upgrade failed.  
+* `DEPROVISIONING_FAILURE`: Deprovisioning failed.
 
 A node-group warning may indicate that one or more associated VMs or dependencies are degraded or inconsistent.
 
@@ -59,13 +59,13 @@ A node-group warning may indicate that one or more associated VMs or dependencie
 
 OneKS reconciliation follows these general rules:
 
-* **Cluster running condition**: if all expected groups are `RUNNING`, the cluster reconciles to `RUNNING`.  
-* **Group degradation**: group-level warnings or failures may surface at cluster level as `WARNING` when the cluster resource itself is still present but one or more underlying groups are degraded.  
-* **Action-specific failures**: group failures may map to cluster failure states depending on the cluster action in progress.  
-* **Deprovisioning completion**: during deprovisioning, when managed groups have been removed, the cluster reaches `DONE`.  
-* **Terminal state**: `DONE` is a terminal lifecycle state reached during deprovisioning.  
-* **Node group creation**: node groups can be added only when the cluster is in an appropriate operational state and the control plane is running.  
-* **Control-plane scaling**: the control plane does not support scale operations through the OneKS scale command.
+* **Cluster Running Condition**: If all expected groups are `RUNNING`, the Cluster reconciles to `RUNNING`.  
+* **Group Degradation**: Group-level warnings or failures may surface at Cluster level as `WARNING` when the Cluster resource itself is still present but one or more underlying groups are degraded.  
+* **Action-specific Failures**: Group failures may map to Cluster failure states depending on the Cluster action in progress.  
+* **Deprovisioning Completion**: During deprovisioning, when managed groups have been removed, the Cluster reaches `DONE`.  
+* **Terminal State**: `DONE` is a terminal lifecycle state reached during deprovisioning.  
+* **Node Group Creation**: Node groups can be added only when the Cluster is in an appropriate operational state and the control plane is running.  
+* **Control-plane Scaling**: The control plane does not support scale operations through the OneKS scale command.
 
 ## Troubleshooting Logs
 
@@ -97,11 +97,85 @@ API:
 GET /api/v1/clusters/42/logs
 ```
 
-Service logs are useful for troubleshooting the OneKS daemon. Per-cluster logs are useful for troubleshooting lifecycle operations for a specific cluster. CLI and API log retrieval provide user-facing paths for inspecting cluster lifecycle logs.
+Service logs are useful for troubleshooting the OneKS daemon. Per-cluster logs are useful for troubleshooting lifecycle operations for a specific Cluster. CLI and API log retrieval provide user-facing paths for inspecting Cluster lifecycle logs.
+
+## Provisioning Troubleshooting
+
+Cluster provisioning can fail for different infrastructure or network-related reasons. In most cases, these failures surface as a timeout during provisioning and the Cluster eventually moves to `PROVISIONING_FAILURE`. The following checks can help identify the most common causes.
+
+### OneGate is Not Properly Configured
+
+OneKS relies on the seed VM to report progress and update OpenNebula resources during provisioning. If OneGate is not properly configured or the seed VM cannot reach the OneGate service, the seed VM cannot publish the expected updates back to OpenNebula. As a result, OneKS waits until the provisioning timeout is reached and the Cluster enters `PROVISIONING_FAILURE`.
+
+Check that the OneGate service is running on the OpenNebula Front-end:
+
+```shell
+systemctl status opennebula-gate
+journalctl -u opennebula-gate
+```
+
+Also check the OneGate service logs:
+
+```shell
+tail -n 200 /var/log/one/onegate.log
+tail -n 200 /var/log/one/onegate.error
+```
+
+Verify that the VM template used by the seed VM includes OneGate contextualization, and that the VM receives a valid `ONEGATE_ENDPOINT` and token through context. The VM must also have network connectivity to the OneGate endpoint.
+
+For more information, refer to the [OpenNebula OneGate Documentation]({{% relref "product/operation_references/opennebula_services_configuration/onegate/" %}}).
+
+### VMs Cannot Access the Internet
+
+During provisioning, the seed VM needs Internet access to download the required artifacts and images used to bootstrap and connect the Kubernetes nodes. If the seed VM or the target nodes cannot reach the Internet, provisioning may stall until the timeout is reached and the Cluster moves to `PROVISIONING_FAILURE`.
+
+From the affected VM, check basic network connectivity:
+
+```shell
+ping -c 3 8.8.8.8
+```
+
+Then check DNS resolution:
+
+```shell
+getent hosts opennebula.io
+```
+
+If IP connectivity works but DNS resolution fails, review the DNS configuration assigned to the VM. If both fail, review the router, gateway, NAT, and security group configuration of the public Virtual Network that the Cluster has assigned.
+
+For more information, refer to the [OpenNebula Virtual Networks Documentation]({{% relref "product/cluster_configuration/networking_system/manage_vnets/" %}}).
+
+### VMs Cannot Communicate Through the Private Networks
+
+The seed VM must be able to reach the control-plane VM through the private Cluster network. If the private VNet is not correctly configured, the seed VM may create the control-plane VM successfully but fail when trying to connect to it and pivot the management Cluster.
+
+This usually indicates an issue in the private network configuration, such as missing routing, incorrect address assignment, security group restrictions, or lack of connectivity between the seed VM and the Kubernetes node private IPs.
+
+From the seed VM, check connectivity to the control-plane private IP:
+
+```shell
+ping -c 3 <control_plane_private_ip>
+```
+
+Check whether SSH is reachable:
+
+```shell
+nc -vz <control_plane_private_ip> 22
+```
+
+If the control-plane VM is reachable only through the Cluster virtual router created by OneKS, connect through the router as a jump Host:
+
+```shell
+ssh -J root@<router_public_ip> root@<control_plane_private_ip>
+```
+
+If the private IP cannot be reached, inspect the associated OpenNebula Virtual Networks, leases, security groups, and virtual router configuration. Make sure that the seed VM and the control-plane VM are attached to the expected networks and that traffic between them is allowed.
+
+For more information, see the OpenNebula Virtual Networks documentation.
 
 ## Basic Kubernetes Troubleshooting 
 
-Kubernetes-level checks are cluster-specific. Start by retrieving the kubeconfig for the target cluster:
+Kubernetes-level checks are Cluster-specific. Start by retrieving the kubeconfig for the target Cluster:
 
 ```shell
 oneks show cluster <cluster_id> --kubeconfig > kubeconfig
@@ -113,7 +187,7 @@ Then verify the Kubernetes node state:
 KUBECONFIG=./kubeconfig kubectl get nodes -o wide
 ```
 
-A healthy cluster should show the expected control-plane and worker nodes in a `Ready` state.
+A healthy Cluster should show the expected control-plane and worker nodes in a `Ready` state.
 
 If one or more nodes are `NotReady`, identify the affected OneKS group and OpenNebula VM: 
 
@@ -125,7 +199,7 @@ oneks show nodegroup <nodegroup_id>
 
 The OneKS output shows the VM IDs associated with the control-plane and each node group.
 
-The OpenNebula front-end cannot reach the Kubernetes node private network directly, connect through the cluster virtual router.
+The OpenNebula Front-end cannot reach the Kubernetes node private network directly, connect through the Cluster virtual router.
 
 Identify the virtual router VM:
 
@@ -139,7 +213,7 @@ Inspect the virtual router VM and identify its public-side virtual router IP:
 onevm show <router_vm_id>
 ```
 
-Use the public-side virtual router IP as the SSH jump host and the node private IP as the final destination:
+Use the public-side virtual router IP as the SSH jump Host and the node private IP as the final destination:
 
 ```shell
 ssh -J root@<router_public_ip> root@<node_private_ip>
@@ -161,4 +235,4 @@ systemctl status rke2-agent --no-pager
 journalctl -u rke2-agent -n 200 --no-pager
 ```
 
-Run the `systemctl` and `journalctl` commands inside the affected Kubernetes node VM, not on the OpenNebula front-end.
+Run the `systemctl` and `journalctl` commands inside the affected Kubernetes node VM, not on the OpenNebula Front-end.

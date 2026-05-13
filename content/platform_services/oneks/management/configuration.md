@@ -9,7 +9,7 @@ weight: "3"
 type: docs
 ---
 
-This section is intended for users who install, configure, or troubleshoot the OneKS service.
+This section is intended for users intending to install, configure, or troubleshoot the OneKS service.
 
 ## OneKS Server Configuration
 
@@ -17,15 +17,15 @@ OneKS is implemented as an ODS-based Ruby service plus a CLI/API client.
 
 Main runtime components include:
 
-* `oneks-server`: the service daemon/helper script.  
-* `oneks`: the user-facing CLI.  
-* **ODS log controller**: log management component.  
-* **Event Manager**: lifecycle event watcher.  
-* **Cluster Watchdog**: cluster state monitoring component.  
-* **Seed VM dependency**: temporary managed VM used for control-plane bootstrap.  
-* **Cluster Router dependency**: router-related cluster dependency.
+* `oneks-server`: The service daemon/helper script.  
+* `oneks`: The user-facing CLI.  
+* **ODS Log Controller**: Log management component.  
+* **Event Manager**: Lifecycle event watcher.  
+* **Cluster Watchdog**: Cluster state monitoring component.  
+* **Seed VM Dependency**: Temporary managed VM used for control-plane bootstrap.  
+* **Cluster Router Dependency**: Router-related cluster dependency.
 
-By default, the OneKS server listens locally on host `127.0.0.1` and port `10780`.
+By default, the OneKS server listens locally on Host `127.0.0.1` and port `10780`.
 
 The client API path uses `/api/v1`.
 
@@ -41,12 +41,12 @@ OneKS manages OneKS cluster documents and node-group documents, starts an event 
 
 Important runtime behavior includes:
 
-* **VM event watching**: watches VM allocation and VM state changes.  
-* **Seed VM lifecycle**: creates and monitors temporary seed VMs during control-plane bootstrap.  
-* **Seed VM readiness**: tracks seed VM readiness through the `ONEKS_STATE` value.  
-* **Router monitoring**: monitors virtual router allocation.  
-* **Log exposure**: exposes per-cluster logs through the API and CLI.  
-* **State reconciliation**: reconciles cluster and group state based on observed lifecycle events.
+* **VM Event Watching**: Watches VM allocation and VM state changes.  
+* **Seed VM Lifecycle**: Creates and monitors temporary seed VMs during control-plane bootstrap.  
+* **Seed VM Readiness**: Tracks seed VM readiness through the `ONEKS_STATE` value.  
+* **Router Monitoring**: Monitors virtual router allocation.  
+* **Log Exposure**: Exposes per-cluster logs through the API and CLI.  
+* **State Reconciliation**: Reconciles cluster and group state based on observed lifecycle events.
 
 Primary packaged paths:
 
@@ -68,20 +68,20 @@ $ONE_LOCATION/var/oneks/
 
 Important configurable defaults include:
 
-* **XML-RPC endpoint configuration**: OpenNebula XML-RPC endpoint used by OneKS.  
-* **TPROXY XML-RPC endpoint**: endpoint exposed through transparent proxy where required.  
-* **Server host and port**: local OneKS API listener configuration.  
-* **Subscriber endpoint and timeout**: event subscription configuration.  
-* **`kubectl` path**: path to `kubectl` used by the service where required.  
-* **Kubeconfig path**: path used for kubeconfig handling where required.  
-* **Kubernetes timeout**: timeout for Kubernetes operations.  
-* **Retry values**: retry behavior for lifecycle actions.  
-* **Cooldown values**: cooldown behavior between retries or state checks.  
-* **Concurrency**: number of concurrent lifecycle operations.  
-* **Authentication mode**: authentication behavior for API access.  
-* **Token expiry**: token lifetime where token-based authentication is used.  
-* **Log level**: service logging verbosity.  
-* **Log output system**: destination and format for logs.
+* **XML-RPC Endpoint Configuration**: OpenNebula XML-RPC endpoint used by OneKS.  
+* **TPROXY XML-RPC Endpoint**: Endpoint exposed through transparent proxy where required.  
+* **Server Host and Port**: Local OneKS API listener configuration.  
+* **Subscriber Endpoint and Timeout**: Event subscription configuration.  
+* **`kubectl` Path**: Path to `kubectl` used by the service where required.  
+* **Kubeconfig Path**: Path used for kubeconfig handling where required.  
+* **Kubernetes Timeout**: Timeout for Kubernetes operations.  
+* **Retry Values**: Retry behavior for lifecycle actions.  
+* **Cooldown Values**: Cooldown behavior between retries or state checks.  
+* **Concurrency**: Number of concurrent lifecycle operations.  
+* **Authentication Mode**: Authentication behavior for API access.  
+* **Token Expiry**: Token lifetime where token-based authentication is used.  
+* **Log Level**: Service logging verbosity.  
+* **Log Output System**: Destination and format for logs.
 
 ## Service Management
 
@@ -148,36 +148,36 @@ oneks
 
 Endpoint resolution order:
 
-* **Explicit server URL**: value passed with `--server`.  
-* **`ONEKS_URL`**: environment variable.  
-* **User endpoint file**: `~/.one/oneks_endpoint`.  
-* **oneadmin endpoint file**: `/var/lib/one/.one/oneks_endpoint`.  
-* **Default endpoint**: `http://localhost:10780`.
+* **Explicit Server URL**: Value passed with `--server`.  
+* `ONEKS_URL`: Environment variable.  
+* **User Endpoint File**: `~/.one/oneks_endpoint`.  
+* **oneadmin Endpoint File**: `/var/lib/one/.one/oneks_endpoint`.  
+* **Default Endpoint**: `http://localhost:10780`.
 
 The API client appends `/api/v1`.
 
 Authentication resolution order:
 
-* **CLI credentials:** values such as `--username` and `--password`.  
-* **Environment credentials:** values such as `ONEKS_USER` and `ONEKS_PASSWORD`.  
-* **`ONE_AUTH`:** environment variable.  
-* **User auth file:** `~/.one/one_auth`.  
-* **oneadmin auth file:** `/var/lib/one/.one/one_auth`.
+* **CLI Credentials**: Values such as `--username` and `--password`.  
+* **Environment Credentials**: Values such as `ONEKS_USER` and `ONEKS_PASSWORD`.  
+* `ONE_AUTH`: Environment variable.  
+* **User Auth File**: `~/.one/one_auth`.  
+* **oneadmin Auth File**: `/var/lib/one/.one/one_auth`.
 
 ## Advanced Configuration
 
 OneKS watches OpenNebula events and depends on:
 
-* **Subscriber endpoint connectivity**: required for event-driven lifecycle tracking.  
-* **Seed VM state reporting**: required for control-plane bootstrap progress.  
-* **Cluster router lifecycle monitoring**: required where the topology depends on routers.  
-* **TPROXY support**: required where services must be exposed through the public network gateway.
+* **Subscriber Endpoint Connectivity**: Required for event-driven lifecycle tracking.  
+* **Seed VM State Reporting**: Required for control-plane bootstrap progress.  
+* **Cluster Router Lifecycle Monitoring**: Required where the topology depends on routers.  
+* **TPROXY Support**: Required where services must be exposed through the public network gateway.
 
 Advanced configuration includes:
 
-* **Concurrency tuning**: controls how many operations can run in parallel.  
-* **Log verbosity**: controls the level of service logs.  
-* **Development versus production mode**: controls runtime behavior depending on deployment mode.  
-* **Required network services**: OneGate, XML-RPC, and related service connectivity.  
-* **TPROXY ports and connectivity**: typically ports `5030` and `2633` through the public network gateway.  
-* **Timeout and retry behavior**: controls how long lifecycle actions wait before failing or retrying.
+* **Concurrency Tuning**: Controls how many operations can run in parallel.  
+* **Log Verbosity**: Controls the level of service logs.  
+* **Development Versus Production Mode**: Controls runtime behavior depending on deployment mode.  
+* **Required Network Services**: OneGate, XML-RPC, and related service connectivity.  
+* **TPROXY Ports and Connectivity**: Typically ports `5030` and `2633` through the public network gateway.  
+* **Timeout and Retry Behavior**: Controls how long lifecycle actions wait before failing or retrying.

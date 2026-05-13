@@ -173,7 +173,7 @@ Create a temporary curl pod to test in-cluster service connectivity:
 
 ```shell
 KUBECONFIG=./kubeconfig kubectl run curl-test --image=curlimages/curl:latest \
-           --rm -it --restart=Never --curl -I http://nginx-test
+           --rm -it --restart=Never -- curl -I http://nginx-test
 ```
 
 Expected output:

@@ -19,13 +19,13 @@ oneks <command> <resource> [<args>] [<options>]
 
 Product-facing resources are:
 
-* `cluster`: OneKS cluster resource.  
-* `nodegroup`: worker-capacity group attached to a cluster.
+* `cluster`: OneKS Cluster resource.  
+* `nodegroup`: Worker-capacity group attached to a Cluster.
 
 The CLI may also expose plural forms:
 
-* `clusters`: list or top cluster resources.  
-* `nodegroups`: list or top node-group resources.
+* `clusters`: List or top Cluster resources.  
+* `nodegroups`: List or top node-group resources.
 
 Important command naming note:
 
@@ -33,30 +33,28 @@ Some builds may expose node groups through the lower-level `group` resource in C
 
 ## Common commands
 
-* `oneks list clusters`: list clusters.  
-* `oneks list nodegroups`: list node groups.  
-* `oneks top clusters`: continuously display cluster status.  
-* `oneks top nodegroups`: continuously display node-group status.  
-* `oneks show cluster <cluster_id>`: show detailed cluster information.  
-* `oneks show nodegroup <nodegroup_id>`: show detailed node-group information.  
-* `oneks create cluster`: create a cluster.  
-* `oneks create nodegroup --cluster-id <cluster_id>`: create a node group.  
-* `oneks recover cluster <cluster_id>`: recover a cluster from selected failure states.  
-* `oneks recover nodegroup <nodegroup_id>`: recover a node group from selected failure states.  
-* `oneks delete cluster <cluster_id>`: delete a cluster.  
-* `oneks delete nodegroup <nodegroup_id>`: delete a node group.  
-* `oneks logs cluster <cluster_id>`: show cluster logs.  
-* `oneks upgrade cluster <cluster_id> --k8s-version <version>`: upgrade a cluster version.  
-* `oneks scale nodegroup <nodegroup_id> --target <count>`: scale a node group.  
-* `oneks chgrp cluster <cluster_id> <group_id>`: change cluster group ownership.  
-* `oneks chown cluster <cluster_id> <user_id> <group_id>`: change cluster owner and group.  
-* `oneks chmod cluster <cluster_id> <octet>`: change cluster permissions.
+* `oneks list clusters`: List Clusters.  
+* `oneks list nodegroups`: List node groups.  
+* `oneks top clusters`: Continuously display Cluster status.  
+* `oneks top nodegroups`: Continuously display node-group status.  
+* `oneks show cluster <cluster_id>`: Show detailed Cluster information.  
+* `oneks show nodegroup <nodegroup_id>`: Show detailed node-group information.  
+* `oneks create cluster`: Create a cluster.  
+* `oneks create nodegroup --cluster-id <cluster_id>`: Create a node group.  
+* `oneks recover cluster <cluster_id>`: Recover a Cluster from selected failure states.  
+* `oneks recover nodegroup <nodegroup_id>`: Recover a node group from selected failure states.  
+* `oneks delete cluster <cluster_id>`: Delete a Cluster.  
+* `oneks delete nodegroup <nodegroup_id>`: Delete a node group.  
+* `oneks logs cluster <cluster_id>`: Show Cluster logs.  
+* `oneks upgrade cluster <cluster_id> --k8s-version <version>`: Upgrade a Cluster version.  
+* `oneks scale nodegroup <nodegroup_id> --target <count>`: Scale a node group.  
+* `oneks chgrp cluster <cluster_id> <group_id>`: Change Cluster group ownership.  
+* `oneks chown cluster <cluster_id> <user_id> <group_id>`: Change Cluster owner and group.  
+* `oneks chmod cluster <cluster_id> <octet>`: Change Cluster permissions.
 
-## Common examples
+## Common Examples
 
-
-
-Create and access a cluster:
+Create and access a Cluster:
 
 ```shell
 oneks create cluster --wait
@@ -82,13 +80,13 @@ oneks create nodegroup --cluster-id 42
 oneks scale nodegroup 7 --target 3
 ```
 
-Upgrade a cluster:
+Upgrade a Cluster:
 
 ```shell
 oneks upgrade cluster 42 --k8s-version v1.32.9
 ```
 
-Recover a cluster or node group:
+Recover a Cluster or node group:
 
 ```shell
 oneks recover cluster 42
@@ -102,14 +100,14 @@ oneks logs cluster 42
 oneks logs cluster 42 --follow
 ```
 
-Delete a cluster:
+Delete a Cluster:
 
 ```shell
 oneks delete cluster 42
 oneks delete cluster 42 --force
 ```
 
-Administrative cluster operations:
+Administrative Cluster operations:
 
 ```shell
 oneks rename cluster 42 new-name
