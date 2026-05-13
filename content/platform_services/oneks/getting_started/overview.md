@@ -41,14 +41,14 @@ OneKS users interact primarily with the Cluster and node-group domains. Lower-le
 
 OneKS should be understood together with the following adjacent components:
 
-* **CAPONE**: The Cluster API provider for OpenNebula. It provides the lower-level declarative lifecycle integration between Kubernetes Cluster API and OpenNebula infrastructure.  
-* **OpenNebula Cloud Resources**: VM templates, networks, images, virtual routers, and related infrastructure resources used to provision and operate the Cluster.  
-* **RKE2**: The Kubernetes distribution used by the current OneKS implementation.  
-* **OneKS API**: The programmatic interface for Cluster and node-group lifecycle operations.  
-* **Kubernetes Cloud Provider**: The in-cluster integration layer for OpenNebula infrastructure behavior.  
-* **OneGate**: The OpenNebula service used by Virtual Machines to communicate with OpenNebula during bootstrap and runtime configuration. In a OneKS deployment, OneGate must be configured and reachable so the Cluster bootstrap process can complete successfully.  
-* **Transparent Proxy, `tproxy`**: The OpenNebula networking configuration used to expose required OpenNebula services, such as OneGate and the XML-RPC API, through the public network gateway. OneKS deployments require tproxy rules for ports **5030** and **2633**.  
-* **Cluster API References**: Useful when understanding the lower-level declarative lifecycle and CAPONE integration details.
+* [**CAPONE**]({{% relref "product/integration_references/kubernetes/kubernetes_cluster_api/" %}}): The Cluster API provider for OpenNebula. It provides the lower-level declarative lifecycle integration between Kubernetes Cluster API and OpenNebula infrastructure.  
+* [**OpenNebula Cloud Resources**]({{% relref "product/virtual_machines_operation/" %}}): VM templates, networks, images, virtual routers, and related infrastructure resources used to provision and operate the Cluster.  
+* [**RKE2**](https://docs.rke2.io/): The Kubernetes distribution used by the current OneKS implementation.  
+* [**OneKS API**]({{% relref "platform_services/oneks/references/oneks_api/" %}}): The programmatic interface for Cluster and node-group lifecycle operations.  
+* [**Kubernetes Cloud Provider**]({{% relref "product/integration_references/kubernetes/kubernetes_cloud_provider/" %}}): The in-cluster integration layer for OpenNebula infrastructure behavior.  
+* [**OneGate**]({{% relref "product/operation_references/opennebula_services_configuration/onegate/" %}}): The OpenNebula service used by Virtual Machines to communicate with OpenNebula during bootstrap and runtime configuration. In a OneKS deployment, OneGate must be configured and reachable so the Cluster bootstrap process can complete successfully.  
+* [**Transparent Proxy**]({{% relref "product/virtual_machines_operation/virtual_machines_networking/tproxy/" %}}) `tproxy`: The OpenNebula networking configuration used to expose required OpenNebula services, such as OneGate and the XML-RPC API, through the public network gateway. OneKS deployments require tproxy rules for ports **5030** and **2633**.  
+* [**Cluster API References**]({{% relref "product/integration_references/kubernetes/kubernetes_cluster_api/" %}}): Useful when understanding the lower-level declarative lifecycle and CAPONE integration details.
 
 ### Supported Versions
 

@@ -84,7 +84,7 @@ ID USER     GROUP    NAME                     STAT   CPU  MEM    HOST
  0 oneadmin oneadmin vr-test-cluster-cp-0     runn   1    512M   ubuntu2204-kvm-ssh-ks-7-3-kxu7a-1.test   
 ```
 
-You can also create a CLI Cluster from a JSON specification:
+You can also create a Cluster from a JSON specification with the CLI:
 
 ```shell
 oneks create cluster --file spec.json --wait
