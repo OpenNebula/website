@@ -93,8 +93,8 @@ oneks logs cluster 42 --follow
 
 API:
 
-```
-GET /api/v1/clusters/42/logs
+```shell
+curl -u "$(cat /var/lib/one/.one/one_auth)" http://<oneks-server>:10780/api/v1/clusters/<cluster_id>/logs
 ```
 
 Service logs are useful for troubleshooting the OneKS daemon. Per-cluster logs are useful for troubleshooting lifecycle operations for a specific Cluster. CLI and API log retrieval provide user-facing paths for inspecting Cluster lifecycle logs.

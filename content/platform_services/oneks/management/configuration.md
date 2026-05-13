@@ -72,7 +72,7 @@ Important configurable defaults include:
 * **TPROXY XML-RPC Endpoint**: Endpoint exposed through transparent proxy where required.  
 * **Server Host and Port**: Local OneKS API listener configuration.  
 * **Subscriber Endpoint and Timeout**: Event subscription configuration.  
-* **`kubectl` Path**: Path to `kubectl` used by the service where required.  
+* `kubectl` **Path**: Path to `kubectl` used by the service where required.  
 * **Kubeconfig Path**: Path used for kubeconfig handling where required.  
 * **Kubernetes Timeout**: Timeout for Kubernetes operations.  
 * **Retry Values**: Retry behavior for lifecycle actions.  
@@ -85,7 +85,7 @@ Important configurable defaults include:
 
 ## Service Management
 
-Systemd unit:
+systemd unit:
 
 ```default
 opennebula-oneks.service
