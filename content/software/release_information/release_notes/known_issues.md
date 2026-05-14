@@ -56,6 +56,32 @@ This page will be updated with relevant information about bugs affecting OpenNeb
   rpm -e --nodeps nodejs nodejs-docs nodejs-full-i18n nodejs-libs npm
   yum upgrade opennebula
   ```
+- Upgrade from OpenNebula 7.0 to 7.2 may lead to remote monitoring probes execution failure due to that [bug](https://github.com/OpenNebula/one/issues/7659). Because of that all hypervisor nodes (HVs) get into `error` state. To fix the issue edit `/etc/one/monitord.conf` file and add `EXEC_VM = 5` line into `PROBES_PERIOD` attribute to make it look as below (you may want to use own values):
+  ```default
+   PROBES_PERIOD = [
+     BEACON_HOST    = 30,
+     SYSTEM_HOST    = 600,
+     MONITOR_HOST   = 120,
+     STATE_VM       = 5,
+     EXEC_VM        = 5,
+     MONITOR_VM     = 30,
+     SYNC_STATE_VM  = 180
+  ]
+  ```
+  Restart opennebula.service after the changes made:
+  ```default
+  systemctl restart opennebula.service
+  ```
+
+   Trigger remote monitoring probes execution by running the following command as `oneadmin` user on OpenNebula front-end node:
+   ```default
+   onehost forceupdate
+   ```
+   Check HVs status:
+   ```default
+   onehost list
+   ```
+
 
 ## Install Linux Graphical Desktop on KVM Virtual Machines
 
