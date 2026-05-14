@@ -36,7 +36,7 @@ The parameters are:
 * `--vm`: Virtual Machine Manager driver.
 
 {{< alert title="Note" type="info" >}}
-In the examples included in this guide we’ll use KVM as the hypervisor. Note that the procedure will be the same for any other hypervisor; only the name will need to be changed.{{< /alert >}} 
+In the examples included in this guide we’ll use KVM as the hypervisor. Note that the procedure will be the same for any other hypervisor; only the name will need to be changed.{{< /alert >}}
 
 To remove a Host you can either specify it by ID or by name. The following commands are equivalent:
 
@@ -221,7 +221,7 @@ $ onehost offline 0
 ```
 
 {{< alert title="Note" type="info" >}}
-`onehost disable` and `onehost offline` do not change the state of VMs already running on the Host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}} 
+`onehost disable` and `onehost offline` do not change the state of VMs already running on the Host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}}
 
 Apart from the commands above, the `onehost` tool also provides some commands that allow you to easily perform common operations on a Host.
 
@@ -311,7 +311,8 @@ Each PCI device reported by the monitor contains the following attributes:
 | `VENDOR_NAME`   | String  | Always              | Human-readable vendor name (e.g., "NVIDIA Corporation")                                                        |
 | `VMID`          | Integer | Always              | ID of the Virtual Machine currently using this PCI device (`-1` if unassigned)                                 |
 | `IFNAME`        | String  | Always              | Network interface name bound to the PCI device (e.g., `eth0`, `ens1f0`). For non-network devices, this is `-`. |
-| `PCI_ROLE`      | String  | Always              | SR-IOV role: `pf` (Physical Function), `vf` (Virtual Function), or `-` (neither)                               |
+| `SRIOV`         | String  | Always              | SR-IOV role: `pf` (Physical Function), `vf` (Virtual Function), or `-` (neither)                               |
+| `SRIOV_NUM`     | String  | SRIOV NIC  only     | Available Virtual Functions within a given Physical Function                                                   |
 | `PROFILES`      | String  | NVIDIA vGPU VF only | Available hardware profile(s), comma-separated (e.g., `1145 (NVIDIA L40S-1B),1146 (NVIDIA L40S-2B)`)           |
 | `UUID`          | String  | NVIDIA vGPU VF only | Deterministic SHA1-based identifier derived from the PCI address                                               |
 
