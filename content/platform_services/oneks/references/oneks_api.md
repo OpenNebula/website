@@ -9,7 +9,7 @@ weight: "1"
 type: swagger
 ---
 
-The OpenNebula OneKS API is a RESTful service for managing Kubernetes infrastructure on OpenNebula. It allows users to create and manage Kubernetes Clusters, operate nodegroups, retrieve Cluster information, and trigger lifecycle actions such as scaling and upgrades. All data is sent and received in JSON format.
+The OpenNebula OneKS API is a RESTful service for managing Kubernetes infrastructure on OpenNebula. It allows users to create and manage Kubernetes Clusters, operate nodegroups, retrieve K8s Cluster information, and trigger lifecycle actions such as scaling and upgrades. All data is sent and received in JSON format.
 
 This guide is intended for developers and integrators. For other purposes, OneKS is accessible via its own [OneKS Command Line Interface]({{% relref "/product/operation_references/command_line_interface/cli.md#oneform-commands" %}}).
 

@@ -19,12 +19,12 @@ oneks <command> <resource> [<args>] [<options>]
 
 Product-facing resources are:
 
-* `cluster`: OneKS Cluster resource.  
-* `nodegroup`: Worker-capacity group attached to a Cluster.
+* `cluster`: OneKS K8s Cluster resource.  
+* `nodegroup`: Worker-capacity group attached to a K8s Cluster.
 
 The CLI may also expose plural forms:
 
-* `clusters`: List or top Cluster resources.  
+* `clusters`: List or top K8s Cluster resources.  
 * `nodegroups`: List or top node-group resources.
 
 Important command naming note:
@@ -33,28 +33,28 @@ Some builds may expose node groups through the lower-level `group` resource in C
 
 ## Common commands
 
-* `oneks list clusters`: List Clusters.  
+* `oneks list clusters`: List K8s Clusters.  
 * `oneks list nodegroups`: List node groups.  
-* `oneks top clusters`: Continuously display Cluster status.  
+* `oneks top clusters`: Continuously display K8s Cluster status.  
 * `oneks top nodegroups`: Continuously display node-group status.  
-* `oneks show cluster <cluster_id>`: Show detailed Cluster information.  
+* `oneks show cluster <cluster_id>`: Show detailed K8s Cluster information.  
 * `oneks show nodegroup <nodegroup_id>`: Show detailed node-group information.  
 * `oneks create cluster`: Create a cluster.  
 * `oneks create nodegroup --cluster-id <cluster_id>`: Create a node group.  
-* `oneks recover cluster <cluster_id>`: Recover a Cluster from selected failure states.  
+* `oneks recover cluster <cluster_id>`: Recover a K8s Cluster from selected failure states.  
 * `oneks recover nodegroup <nodegroup_id>`: Recover a node group from selected failure states.  
-* `oneks delete cluster <cluster_id>`: Delete a Cluster.  
+* `oneks delete cluster <cluster_id>`: Delete a K8s Cluster.  
 * `oneks delete nodegroup <nodegroup_id>`: Delete a node group.  
-* `oneks logs cluster <cluster_id>`: Show Cluster logs.  
-* `oneks upgrade cluster <cluster_id> --k8s-version <version>`: Upgrade a Cluster version.  
+* `oneks logs cluster <cluster_id>`: Show K8s Cluster logs.  
+* `oneks upgrade cluster <cluster_id> --k8s-version <version>`: Upgrade a K8s Cluster version.  
 * `oneks scale nodegroup <nodegroup_id> --target <count>`: Scale a node group.  
-* `oneks chgrp cluster <cluster_id> <group_id>`: Change Cluster group ownership.  
-* `oneks chown cluster <cluster_id> <user_id> <group_id>`: Change Cluster owner and group.  
-* `oneks chmod cluster <cluster_id> <octet>`: Change Cluster permissions.
+* `oneks chgrp cluster <cluster_id> <group_id>`: Change K8s Cluster group ownership.  
+* `oneks chown cluster <cluster_id> <user_id> <group_id>`: Change K8s Cluster owner and group.  
+* `oneks chmod cluster <cluster_id> <octet>`: Change K8s Cluster permissions.
 
 ## Common Examples
 
-Create and access a Cluster:
+Create and access a K8s Cluster:
 
 ```shell
 oneks create cluster --wait
@@ -80,13 +80,13 @@ oneks create nodegroup --cluster-id 42
 oneks scale nodegroup 7 --target 3
 ```
 
-Upgrade a Cluster:
+Upgrade a K8s Cluster:
 
 ```shell
 oneks upgrade cluster 42 --k8s-version v1.32.9
 ```
 
-Recover a Cluster or node group:
+Recover a K8s Cluster or node group:
 
 ```shell
 oneks recover cluster 42
@@ -100,14 +100,14 @@ oneks logs cluster 42
 oneks logs cluster 42 --follow
 ```
 
-Delete a Cluster:
+Delete a K8s Cluster:
 
 ```shell
 oneks delete cluster 42
 oneks delete cluster 42 --force
 ```
 
-Administrative Cluster operations:
+Administrative K8s Cluster operations:
 
 ```shell
 oneks rename cluster 42 new-name

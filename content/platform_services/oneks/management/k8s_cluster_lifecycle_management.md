@@ -1,6 +1,6 @@
 ---
-title: "OneKS Cluster Lifecycle Management"
-linkTitle: "Cluster Lifecycle Management"
+title: "OneKS K8s Cluster Lifecycle Management"
+linkTitle: "K8s Cluster Lifecycle Management"
 date: "2026-05-12"
 description:
 categories:
@@ -9,24 +9,24 @@ weight: "1"
 type: docs
 ---
 
-This section describes the main lifecycle operations for OneKS Clusters. It covers how to create, access, scale, upgrade, recover, and delete Clusters.
+This section describes the main lifecycle operations for OneKS K8s Clusters. It covers how to create, access, scale, upgrade, recover, and delete K8s Clusters.
 
-A OneKS Cluster lifecycle normally follows this sequence:
+A OneKS K8s Cluster lifecycle normally follows this sequence:
 
-* **Create a Cluster**: Provision the control plane and required infrastructure.  
-* **Access the Cluster**: Retrieve the kubeconfig and validate Kubernetes API access.  
+* **Create a K8s Cluster**: Provision the control plane and required infrastructure.  
+* **Access the K8s Cluster**: Retrieve the kubeconfig and validate Kubernetes API access.  
 * **Add or Scale Worker Capacity**: Create or resize node groups.  
-* **Upgrade the Cluster**: Move the Cluster to a supported Kubernetes version.  
+* **Upgrade the K8s Cluster**: Move the K8s Cluster to a supported Kubernetes version.  
 * **Recover Failed Operations**: Retry selected failed lifecycle actions.  
-* **Delete the Cluster**: Deprovision the Cluster and associated resources.
+* **Delete the K8s Cluster**: Deprovision the K8s Cluster and associated resources.
 
 OneKS exposes these operations through the CLI, REST API, and Sunstone Web UI, depending on the deployment and user permissions.
 
-## Creating a Cluster
+## Creating a K8s Cluster
 
-Creating a Cluster provisions the Kubernetes control plane and the supporting OpenNebula infrastructure required by the selected Cluster profile.
+Creating a K8s Cluster provisions the Kubernetes control plane and the supporting OpenNebula infrastructure required by the selected K8s Cluster profile.
 
-Before creating a Cluster, verify that:
+Before creating a K8s Cluster, verify that:
 
 * **OneKS Service**: The OneKS service is configured and running.  
 * **OneGate Service**: OneGate is configured and reachable.  
@@ -39,9 +39,9 @@ Before creating a Cluster, verify that:
 
 For more detailed information refer to the [Basic Configuration Guide]({{% relref "platform_services/oneks/getting_started/basic_configuration" %}}).
 
-### Create a Cluster Interactively with the CLI
+### Create a K8s Cluster Interactively with the CLI
 
-Before creating a Cluster with the CLI, identify the IDs of the OpenNebula public and private Virtual Networks. These networks are used to provide connectivity between OpenNebula, the virtual router, and the Kubernetes Cluster, while preserving network isolation.
+Before creating a K8s Cluster with the CLI, identify the IDs of the OpenNebula public and private Virtual Networks. These networks are used to provide connectivity between OpenNebula, the virtual router, and the K8s Cluster, while preserving network isolation.
 
 List the available Virtual Networks with:
 
@@ -54,23 +54,23 @@ ID USER     GROUP    NAME         CLUSTERS   BRIDGE   STATE
  0 oneadmin oneadmin public       0          br1      rdy  
 ```
 
-Then launch the interactive Cluster creation command:
+Then launch the interactive K8s Cluster creation command:
 
 ```shell
 oneks create cluster --wait
 ```
 
-This starts an interactive Cluster creation flow and waits until the operation completes or reaches a terminal state. You will be asked to provide the following parameters:
+This starts an interactive K8s Cluster creation flow and waits until the operation completes or reaches a terminal state. You will be asked to provide the following parameters:
 
-* **Cluster Name**: The name used to identify the OneKS Cluster.  
+* **K8s Cluster Name**: The name used to identify the OneKS K8s Cluster.  
 * **Kubernetes Version**: The Kubernetes version to deploy.  
-* **Cluster Flavour**: The control-plane flavour, such as `standalone` or `ha`.  
-* **Public Network ID**: The OpenNebula public Virtual Network used by the Cluster.  
-* **Private Network ID**: The OpenNebula private Virtual Network used by the Cluster.
+* **K8s Cluster Flavour**: The control-plane flavour, such as `standalone` or `ha`.  
+* **Public Network ID**: The OpenNebula public Virtual Network used by the K8s Cluster.  
+* **Private Network ID**: The OpenNebula private Virtual Network used by the K8s Cluster.
 
 {{< image path="/images/oneks/light/k8s_cluster_create_cli.png" alt="K8s Cluster create CLI menu" align="center" width="60%" mb="20px" >}}
 
-After the Cluster is created, wait until its status changes from `PROVISIONING` to `RUNNING`.
+After the K8s Cluster is created, wait until its status changes from `PROVISIONING` to `RUNNING`.
 
 You can then validate that the virtual router and control plane VM have been created:
 
@@ -84,7 +84,7 @@ ID USER     GROUP    NAME                     STAT   CPU  MEM    HOST
  0 oneadmin oneadmin vr-test-cluster-cp-0     runn   1    512M   ubuntu2204-kvm-ssh-ks-7-3-kxu7a-1.test   
 ```
 
-You can also create a Cluster from a JSON specification with the CLI:
+You can also create a K8s Cluster from a JSON specification with the CLI:
 
 ```shell
 oneks create cluster --file spec.json --wait
@@ -107,9 +107,9 @@ Example `spec.json`:
 }
 ```
 
-### Create a Cluster with the API
+### Create a K8s Cluster with the API
 
-You can create a Cluster with the API using the following command:
+You can create a K8s Cluster with the API using the following command:
 
 ```shell
 curl -u "$(cat /var/lib/one/.one/one_auth)" \
@@ -148,7 +148,7 @@ Example request body:
 
 Required fields:
 
-* `name`: Cluster name.  
+* `name`: K8s Cluster name.  
 * `kubernetes_version`: Kubernetes version to deploy.  
 * `public_network`: OpenNebula public Virtual Network ID.  
 * `private_network`: OpenNebula private Virtual Network ID.  
@@ -156,7 +156,7 @@ Required fields:
 
 Optional fields:
 
-* `description`: Cluster description.  
+* `description`: K8s Cluster description.  
 * `spec.name`: Control-plane group name.  
 * `spec.description`: Control-plane group description.  
 * `spec.family`: Profile family. If omitted, the default family is used.  
@@ -164,13 +164,13 @@ Optional fields:
 
 The `spec` object selects the family and flavour used for the control-plane group. Flavour defaults are combined with any provided user input values according to the profile override rules.
 
-### Create a Cluster with the Sunstone Web UI  
+### Create a K8s Cluster with the Sunstone Web UI  
 
-For the Sunstone Web UI, use the Cluster creation wizard described in the [Getting Started with OneKS Quick-start Guide]({{% relref "platform_services/oneks/getting_started/quick_start/" %}}).
+For the Sunstone Web UI, use the K8s Cluster creation wizard described in the [Getting Started with OneKS Quick-start Guide]({{% relref "platform_services/oneks/getting_started/quick_start/" %}}).
 
-## Accessing a Cluster
+## Accessing a K8s Cluster
 
-After the Cluster reaches the `RUNNING` state, retrieve its kubeconfig. The kubeconfig contains the Kubernetes API endpoint and credentials required to access the Cluster.
+After the K8s Cluster reaches the `RUNNING` state, retrieve its kubeconfig. The kubeconfig contains the Kubernetes API endpoint and credentials required to access the K8s Cluster.
 
 ### Retrieve the kubeconfig with the CLI
 
@@ -194,13 +194,15 @@ Use the saved kubeconfig with `kubectl`.
 
 ### Retrieve the kubeconfig with the Sunstone Web UI
 
-* **Cluster Detail View**: Open the target Cluster.  
+* **K8s Cluster Detail View**: Open the target K8s Cluster.  
 * **Kubeconfig Tab**: Copy the kubeconfig content.  
 * **Local File**: Save it as `kubeconfig`.
 
-{{< image path="/images/oneks/light/k8s_kubeconfig.png" alt="OneKS create Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
+{{< image path="/images/oneks/light/k8s_kubeconfig.png" 
+          pathDark="/images/oneks/dark/k8s_kubeconfig.png"
+alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
-**Cluster validation**: run `kubectl get nodes` with the retrieved kubeconfig.
+**K8s Cluster validation**: run `kubectl get nodes` with the retrieved kubeconfig.
 
 Example output in all cases:
 
@@ -215,7 +217,7 @@ The command should show the control-plane nodes in a `Ready` state.
 
 Scaling worker capacity is done by creating or resizing node groups.
 
-Node groups are the main operational unit for managing worker capacity in OneKS. Scaling should be performed against node groups, not directly against the Cluster control plane.
+Node groups are the main operational unit for managing worker capacity in OneKS. Scaling should be performed against node groups, not directly against the K8s Cluster control plane.
 
 ### Create a Node Group with the CLI
 
@@ -308,19 +310,19 @@ test-cluster-worker-2        Ready    <none>          2m    v1.31.4
 test-cluster-worker-3        Ready    <none>          2m    v1.31.4
 ```
 
-## Upgrading a Cluster
+## Upgrading a K8s Cluster
 
 OneKS supports Kubernetes version upgrades for versions supported by the selected profile family.
 
 Before upgrading, verify that:
 
 * **Target Version**: The target Kubernetes version is supported by the selected family.  
-* **Cluster State**: The Cluster is in a suitable operational state.  
+* **K8s Cluster State**: The K8s Cluster is in a suitable operational state.  
 * **Profiles**: The selected profiles support the target version.  
 * **Workloads**: Running workloads have been reviewed according to the user’s upgrade policy.  
 * **Backups**: Any required backups or recovery procedures have been completed.
 
-### Upgrade a Cluster with the CLI
+### Upgrade a K8s Cluster with the CLI
 
 ```shell
 oneks upgrade cluster <cluster_id> --k8s-version <version>
@@ -332,7 +334,7 @@ Example:
 oneks upgrade cluster 42 --k8s-version v1.32.9
 ```
 
-After the upgrade starts, inspect the Cluster state:
+After the upgrade starts, inspect the K8s Cluster state:
 
 ```shell
 oneks show cluster 42
@@ -344,7 +346,7 @@ Validate the Kubernetes nodes:
 KUBECONFIG=./kubeconfig kubectl get nodes -o wide
 ```
 
-### Upgrade a Cluster with the API
+### Upgrade a K8s Cluster with the API
 
 ```shell
 curl -u "$(cat /var/lib/one/.one/one_auth)" \
@@ -359,14 +361,14 @@ The request must include the target Kubernetes version according to the API sche
 
 After a lifecycle operation, validate both OneKS state and Kubernetes state.
 
-Use OneKS to check whether the Cluster and groups are healthy:
+Use OneKS to check whether the K8s Cluster and groups are healthy:
 
 ```shell
 oneks show cluster <cluster_id>
 oneks list nodegroups
 ```
 
-Then validate the Kubernetes Cluster directly:
+Then validate the K8s Cluster directly:
 
 ```shell
 KUBECONFIG=./kubeconfig kubectl get nodes -o wide
@@ -374,7 +376,7 @@ KUBECONFIG=./kubeconfig kubectl get nodes -o wide
 
 A successful node-group creation or scale operation should result in the node group reaching `RUNNING` in OneKS and the expected worker nodes appearing as `Ready` in Kubernetes.
 
-If the Kubernetes nodes are `Ready` but the OneKS Cluster is in `WARNING`, inspect the failed group state and Cluster logs:
+If the Kubernetes nodes are `Ready` but the OneKS K8s Cluster is in `WARNING`, inspect the failed group state and K8s Cluster logs:
 
 ```shell
 oneks show cluster <cluster_id>
@@ -383,17 +385,19 @@ oneks logs cluster <cluster_id>
 
 A `WARNING` state means one or more underlying groups are degraded or failed, even if the Kubernetes API remains reachable.
 
-### Upgrade a Cluster with Sunstone
+### Upgrade a K8s Cluster with Sunstone
 
-In the **K8S Clusters** view, select the Cluster you want to upgrade. Open the **Info** tab and scroll to the **Kubernetes Version** field.
+In the **K8S Clusters** view, select the K8s Cluster you want to upgrade. Open the **Info** tab and scroll to the **Kubernetes Version** field.
 
 Use the dropdown menu to select the target Kubernetes version, then confirm the upgrade.
 
-The selected version must be supported by the Cluster profile. After starting the upgrade, monitor the Cluster state and logs until the Cluster returns to `RUNNING`.
+The selected version must be supported by the K8s Cluster profile. After starting the upgrade, monitor the K8s Cluster state and logs until the K8s Cluster returns to `RUNNING`.
 
-{{< image path="/images/oneks/light/k8s_upgrade_cluster_sunstone.png" alt="OneKS upgrade cluster Sunstone" align="center" width="90%" mb="20px" >}}
+{{< image path="/images/oneks/light/k8s_upgrade_cluster_sunstone.png" 
+          pathDark="/images/oneks/dark/k8s_upgrade_cluster_sunstone.png" 
+alt="OneKS upgrade cluster Sunstone" align="center" width="90%" mb="20px" >}}
 
-## Recovering a Cluster or Node Group
+## Recovering a K8s Cluster or Node Group
 
 OneKS includes recovery actions for selected failure and warning states.
 
@@ -401,7 +405,7 @@ Recovery retries the failed lifecycle operation where possible. It may also retr
 
 Recovery is not a general rollback mechanism. It should not be assumed to fix every infrastructure, dependency, or Kubernetes-level failure.
 
-### Recover a Cluster with the CLI
+### Recover a K8s Cluster with the CLI
 
 ```shell
 oneks recover cluster <cluster_id>
@@ -413,7 +417,7 @@ oneks recover cluster <cluster_id>
 oneks recover nodegroup <nodegroup_id>
 ```
 
-### Recover a Cluster with the API
+### Recover a K8s Cluster with the API
 
 ```shell
 curl -u "$(cat /var/lib/one/.one/one_auth)" \
@@ -437,11 +441,13 @@ oneks logs cluster <cluster_id>
 
 ### Recover a Node group with Sunstone
 
-In the **K8S Clusters** view, select the Cluster that contains the affected node group. Open the **NodeGroup** tab and locate the node group you want to recover. Click the **Recover Node Group** action button on the node group row.
+In the **K8S Clusters** view, select the K8s Cluster that contains the affected node group. Open the **NodeGroup** tab and locate the node group you want to recover. Click the **Recover Node Group** action button on the node group row.
 
-The recovery action retries the last failed lifecycle operation where possible. It is intended for node groups in a warning or failure state, such as `PROVISIONING_FAILURE`, `SCALING_FAILURE`, or `WARNING`. After starting the recovery, monitor the Cluster logs and node group state until the node group returns to `RUNNING`.
+The recovery action retries the last failed lifecycle operation where possible. It is intended for node groups in a warning or failure state, such as `PROVISIONING_FAILURE`, `SCALING_FAILURE`, or `WARNING`. After starting the recovery, monitor the K8s Cluster logs and node group state until the node group returns to `RUNNING`.
 
-{{< image path="/images/oneks/light/k8s_recover_nodegroup_sunstone.png" alt="OneKS recover nodegroup Sunstone" align="center" width="90%" mb="20px" >}}
+{{< image path="/images/oneks/light/k8s_recover_nodegroup_sunstone.png" 
+          pathDark="/images/oneks/dark/k8s_recover_nodegroup_sunstone.png" 
+alt="OneKS recover nodegroup Sunstone" align="center" width="90%" mb="20px" >}}
 
 After recovery, inspect the affected resource and review logs:
 
@@ -451,11 +457,11 @@ oneks show nodegroup <nodegroup_id>
 oneks logs cluster <cluster_id>
 ``` 
 
-## Deleting a Cluster
+## Deleting a K8s Cluster
 
-Deleting a Cluster deprovisions the OneKS Cluster and its managed resources.
+Deleting a K8s Cluster deprovisions the OneKS K8s Cluster and its managed resources.
 
-### Delete a Cluster with the CLI
+### Delete a K8s Cluster with the CLI
 
 ```shell
 oneks delete cluster <cluster_id>
@@ -467,22 +473,24 @@ Force deletion, if required:
 oneks delete cluster <cluster_id> --force
 ```
 
+{{< alert title="Caution!" type="warning" >}} 
 Use force deletion cautiously. It may skip parts of the normal deprovisioning workflow and can leave infrastructure that requires manual cleanup.
+{{< /alert >}}
 
-### Delete a Cluster with the API
+### Delete a K8s Cluster with the API
 
 ```shell
 curl -u "$(cat /var/lib/one/.one/one_auth)" \
 -X DELETE "http://<oneks-server>:10780/api/v1/clusters/<cluster_id>?force=true"
 ```
 
-### Delete a Cluster with Sunstone
+### Delete a K8s Cluster with Sunstone
 
-In the **K8S Clusters** view, select the Cluster you want to delete. Click the red **Delete** button next to the **Create** button.
+In the **K8S Clusters** view, select the K8s Cluster you want to delete. Click the red **Delete** button next to the **Create** button.
 
-The deletion operation deprovisions the OneKS Cluster and its managed resources, including the control plane and managed node groups. Referenced infrastructure, such as the public and private Virtual Networks selected during Cluster creation, is not normally deleted by OneKS.
+The deletion operation deprovisions the OneKS K8s Cluster and its managed resources, including the control plane and managed node groups. Referenced infrastructure, such as the public and private Virtual Networks selected during K8s Cluster creation, is not normally deleted by OneKS.
 
-After deletion, verify that the Cluster no longer appears in OneKS:
+After deletion, verify that the K8s Cluster no longer appears in OneKS:
 
 ```shell
 oneks list clusters
@@ -496,7 +504,7 @@ onevrouter list
 onetemplate list
 ```
 
-If deletion fails, inspect the Cluster logs:
+If deletion fails, inspect the K8s Cluster logs:
 
 ```shell
 oneks logs cluster <cluster_id>

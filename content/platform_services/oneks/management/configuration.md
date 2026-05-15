@@ -1,5 +1,5 @@
 ---
-title: "OneKS Cluster Configuration"
+title: "OneKS K8s Cluster Configuration"
 linkTitle: "Configuration"
 date: "2026-05-12"
 description:
@@ -21,9 +21,9 @@ The main runtime components include:
 * `oneks`: The user-facing CLI.  
 * **ODS Log Controller**: Log management component.  
 * **Event Manager**: Lifecycle event watcher.  
-* **Cluster Watchdog**: Cluster state monitoring component.  
+* **K8s Cluster Watchdog**: K8s Cluster state monitoring component.  
 * **Seed VM Dependency**: Temporary managed VM used for control-plane bootstrap.  
-* **Cluster Router Dependency**: Router-related Cluster dependency.
+* **K8s Cluster Router Dependency**: Router-related K8s Cluster dependency.
 
 By default, the OneKS server listens locally on Host `127.0.0.1` and port `10780`.
 
@@ -37,7 +37,7 @@ http://127.0.0.1:10780/api/v1
 
 Remote API access depends on how the service is exposed in the deployment.
 
-OneKS manages OneKS Cluster documents and node-group documents, starts an event manager, and subscribes to OpenNebula lifecycle events.
+OneKS manages OneKS K8s Cluster documents and node-group documents, starts an event manager, and subscribes to OpenNebula lifecycle events.
 
 Important runtime behavior includes:
 
@@ -46,7 +46,7 @@ Important runtime behavior includes:
 * **Seed VM Readiness**: Tracks seed VM readiness through the `ONEKS_STATE` value.  
 * **Router Monitoring**: Monitors virtual router allocation.  
 * **Log Exposure**: Exposes per-cluster logs through the API and CLI.  
-* **State Reconciliation**: Reconciles Cluster and group state based on observed lifecycle events.
+* **State Reconciliation**: Reconciles K8s Cluster and group state based on observed lifecycle events.
 
 Primary packaged paths:
 
@@ -170,7 +170,7 @@ OneKS watches OpenNebula events and depends on:
 
 * **Subscriber Endpoint Connectivity**: Required for event-driven lifecycle tracking.  
 * **Seed VM State Reporting**: Required for control-plane bootstrap progress.  
-* **Cluster Router Lifecycle Monitoring**: Required where the topology depends on routers.  
+* **K8s Cluster Router Lifecycle Monitoring**: Required where the topology depends on routers.  
 * **TPROXY Support**: Required where services must be exposed through the public network gateway.
 
 Advanced configuration includes:
