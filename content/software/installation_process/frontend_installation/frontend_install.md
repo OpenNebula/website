@@ -43,8 +43,6 @@ yum -y install epel-release
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
-<a id="packages"></a>
-
 ## Step 3. Installing the Software
 
 Available packages for OpenNebula clients, the Front-end and hypervisor nodes:

@@ -43,34 +43,47 @@ Refer to [OpenNebula Repositories]({{% relref "opennebula_repository_configurati
 
 OpenNebula depends on packages which aren’t in the base distribution repositories. Execute one of the commands below (distinguished by the Host platform) to configure access to additional [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) repository:
 
-**AlmaLinux 9, 10**
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
 
+{{% tab header="**AlmaLinux 9, 10**"%}}
+### AlmaLinux 9, 10
 ```shell
 yum -y install epel-release
 ```
+{{% /tab %}}
 
-**RHEL 9**
+{{% tab header="RHEL 9"%}}
+### RHEL 9
 
 ```shell
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 ### Install OpenNebula LXC Node Package
 
 Execute the following commands to install the OpenNebula LXC Node package:
 
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
+{{% tab header="AlmaLinux/RHEL"%}}
 #### Installing on AlmaLinux/RHEL
 
 ```shell
 yum -y install opennebula-node-lxc
 ```
-
+{{% /tab %}}
+{{% tab header="Debian/Ubuntu"%}}
 #### Installing on Debian/Ubuntu
 
 ```shell
 apt-get update
 apt-get -y install opennebula-node-lxc
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 Install the suggested package `rbd-nbd` if the Ceph Datastore is going to be used by the LXC Hosts. For further configuration check the specific [guide]({{% relref "lxc_driver#lxcmg" %}}).
 
@@ -92,7 +105,8 @@ Depending on your OpenNebula deployment type, the following may be required on y
 
 ```shell
 setsebool -P virt_use_nfs on
-```{{< /alert >}}  
+```
+{{< /alert >}}  
 
 ## Step 4. Configure Passwordless SSH
 
@@ -179,10 +193,10 @@ scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
 
 You should verify that none of these connections (under user `oneadmin`) fail and none require a password:
 
-* from the Front-end to Front-end itself
-* from the Front-end to all nodes
-* from all nodes to all nodes
-* from all nodes back to Front-end
+* From the Front-end to Front-end itself
+* From the Front-end to all nodes
+* From all nodes to all nodes
+* From all nodes back to Front-end
 
 For example, execute on the Front-end:
 
@@ -263,19 +277,26 @@ Learn more in [Hosts and Clusters Management]({{% relref "../../../product/clust
 {{< alert title="Note" type="info" >}}
 If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}} 
 
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interface**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
 ### Add Host with Sunstone
 
 Open Sunstone as documented [here]({{% relref "frontend_install#verify-frontend-section-sunstone" %}}). On the left side menu go to **Infrastructure** → **Hosts**. Click on the `+` button.
 
-![sunstone_select_create_host](/images/sunstone_select_create_host.png)
+{{< image path="/images/sunstone_select_create_host.png" alt="Sunstone select create host" align="center" width="90%" mb="20px" >}}
 
 Then fill in the hostname, FQDN, or IP of the node in the `Hostname` field.
 
-![sunstone_create_host_dialog](/images/sunstone_create_host_dialog_lxc.png)
+{{< image path="/images/sunstone_create_host_dialog_lxc.png" alt="Sunstone select create host dialog" align="center" width="90%" mb="20px" >}}
 
 Finally, return back to the **Hosts** list, and check that the Host has switched to `ON` status. It can take up to one minute. You can click on the refresh button to check the status more frequently.
 
-![sunstone_list_hosts](/images/sunstone_list_hosts.png)
+{{< image path="/images/sunstone_list_hosts.png" alt="Sunstone select list hosts" align="center" width="90%" mb="20px" >}}
+
+{{% /tab %}}
+{{% tab header="CLI"%}}
 
 ### Add Host with CLI
 
@@ -294,10 +315,12 @@ onehost list
 ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
  0 node01          default     0       0 / 400 (0%)     0K / 7.7G (0%) on
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Next steps
 
 Now, you can continue by controlling and extending your cloud:
 
-- Configuring [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}})
-- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cluster_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}})
+- Configuring [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}}).
+- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cluster_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}}).
