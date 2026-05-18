@@ -5,7 +5,7 @@ weight: 1
 type: docs
 ---
 
-OpenNebula Marketplace Appliances offer a streamlined way to launch specialized, pre-configured software solutions on your OpenNebula cloud deployment for specific use cases. This includes everything from basic Virtual Machines with specific operating systems through to advance cloud storage solutions and methods for deploying HPC or AI workloads.
+OpenNebula Marketplace Appliances offer a streamlined way to launch specialized, pre-configured software solutions on your OpenNebula cloud deployment for specific use cases. This includes everything from basic Virtual Machines pre-installed with specific operating systems through to advanced cloud storage solutions and methods for deploying HPC or AI workloads.
 
 You can browse available Marketplace Appliances in the dedicated [OpenNebula Marketplace](https://marketplace.opennebula.io/) site. Below, you will find links to the documentation for several Marketplace Appliances that may be of interest for common use cases:
 

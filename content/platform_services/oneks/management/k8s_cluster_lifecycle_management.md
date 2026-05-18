@@ -488,6 +488,10 @@ curl -u "$(cat /var/lib/one/.one/one_auth)" \
 
 In the **K8S Clusters** view, select the K8s Cluster you want to delete. Click the red **Delete** button next to the **Create** button.
 
+{{< image path="/images/oneks/light/delete_k8s_cluster.png"
+          pathDark="/images/oneks/dark/delete_k8s_cluster.png"
+alt="OneKS create Cluster step 1" align="center" width="90%" mb="20px" >}}
+
 The deletion operation deprovisions the OneKS K8s Cluster and its managed resources, including the control plane and managed node groups. Referenced infrastructure, such as the public and private Virtual Networks selected during K8s Cluster creation, is not normally deleted by OneKS.
 
 After deletion, verify that the K8s Cluster no longer appears in OneKS:
