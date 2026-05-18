@@ -31,17 +31,27 @@ After installing the database, follow one of the following guides to configure t
 
 Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable third party repositories by running the following commands under privileged user (`root`):
 
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
+
+{{% tab header="**AlmaLinux 9, 10**"%}}
 **AlmaLinux 9, 10**
 
 ```shell
 yum -y install epel-release
 ```
 
+{{% /tab %}}
+{{% tab header="**RHEL 9**"%}}
+
 **RHEL 9**
 
 ```shell
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
+
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Step 3. Installing the Software
 
@@ -79,13 +89,20 @@ There are a few differences in package names among distributions. Those with var
 
 Install all OpenNebula Front-end components by executing the following commands under a privileged user:
 
-### AlmaLinux / RHEL
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
+
+{{% tab header="**AlmaLinux 9, 10**"%}}
+**AlmaLinux / RHEL**
 
 ```shell
 yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
-### Debian / Ubuntu
+{{% /tab %}}
+{{% tab header="**RHEL 9**"%}}
+
+**Debian / Ubuntu**
 
 ```shell
 apt-get update
@@ -93,12 +110,17 @@ apt-get update
 ```shell
 apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
+{{% /tab %}}
+{{% tab header="**SLES / openSUSE**"%}}
 
-### SLES / openSUSE
+**SLES / openSUSE**
 
 ```shell
 zypper install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
+
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Step 4. Enabling MySQL/MariaDB (Optional)
 
