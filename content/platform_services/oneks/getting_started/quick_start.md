@@ -1,5 +1,5 @@
 ---
-title: "OneKS Quick Start"
+title: "Quick Start"
 linkTitle: "Quick Start"
 date: "2026-05-12"
 description:

@@ -1,5 +1,5 @@
 ---
-title: "OneKS K8s Cluster Configuration"
+title: "Kubernetes Cluster Configuration"
 linkTitle: "Configuration"
 date: "2026-05-12"
 description:

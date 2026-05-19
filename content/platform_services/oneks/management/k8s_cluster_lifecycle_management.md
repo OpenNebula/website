@@ -1,6 +1,6 @@
 ---
-title: "OneKS K8s Cluster Lifecycle Management"
-linkTitle: "K8s Cluster Lifecycle Management"
+title: "Kubernetes Cluster Lifecycle Management"
+linkTitle: "Kubernetes Cluster Lifecycle Management"
 date: "2026-05-12"
 description:
 categories:
@@ -448,7 +448,7 @@ For further details about the API, see the [OneKS REST API Reference]({{% relref
 
 Deleting a K8s Cluster deprovisions the OneKS K8s Cluster and its managed resources.
 
-{{< alert title="Waring" type="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Use force option during deletion cautiously. It may skip parts of the normal deprovisioning workflow and can leave infrastructure that requires manual cleanup.
 {{< /alert >}}
 
@@ -457,6 +457,10 @@ Use force option during deletion cautiously. It may skip parts of the normal dep
 
 {{% tab header="Sunstone"%}}
 In the **K8S Clusters** view, select the K8s Cluster you want to delete. Click the red **Delete** button next to the **Create** button.
+
+{{< image path="/images/oneks/light/delete_k8s_cluster.png"
+          pathDark="/images/oneks/dark/delete_k8s_cluster.png"
+alt="OneKS recover nodegroup Sunstone" align="center" width="90%" mb="20px" >}}
 
 The deletion operation deprovisions the OneKS K8s Cluster and its managed resources, including the control plane and managed node groups. Referenced infrastructure, such as the public and private Virtual Networks selected during K8s Cluster creation, is not normally deleted by OneKS.
 {{% /tab %}}
