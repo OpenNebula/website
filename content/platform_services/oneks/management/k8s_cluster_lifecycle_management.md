@@ -1,6 +1,6 @@
 ---
-title: "OneKS K8s Cluster Lifecycle Management"
-linkTitle: "K8s Cluster Lifecycle Management"
+title: "Kubernetes Cluster Lifecycle Management"
+linkTitle: "Kubernetes Cluster Lifecycle Management"
 date: "2026-05-12"
 description:
 categories:

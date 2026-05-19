@@ -1,5 +1,5 @@
 ---
-title: "OneKS Overview"
+title: "Overview"
 linkTitle: "Overview"
 date: "2026-05-12"
 categories:

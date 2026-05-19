@@ -1,5 +1,5 @@
 ---
-title: "OneKS CLI Reference"
+title: "CLI Reference"
 linkTitle: "CLI"
 date: "2026-05-12"
 description:

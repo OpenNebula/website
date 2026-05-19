@@ -1,5 +1,5 @@
 ---
-title: "OneKS K8s Cluster Monitoring and Troubleshooting"
+title: "Kubernetes Cluster Monitoring and Troubleshooting"
 linkTitle: "Monitoring and Troubleshooting"
 date: "2026-05-12"
 description:

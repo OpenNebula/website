@@ -1,5 +1,5 @@
 ---
-title: "OneKS REST API Reference"
+title: "REST API Reference"
 linkTitle: "API"
 date: "2026-05-12"
 description:
