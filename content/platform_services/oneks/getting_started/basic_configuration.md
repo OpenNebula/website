@@ -106,8 +106,9 @@ https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
 {{< /tabpane >}}
 
 To download a specific version of kubectl, replace `$(curl -L -s https://dl.k8s.io/release/stable.txt)` in the above commands with the version number. E.g. for version 1.36.0:
+
 {{< tabpane text=true right=false >}}
-{{% tab header="**Architecture**:" /%}}
+{{% tab header="**Architecture**:" disabled=true /%}}
 
 {{% tab header="x86-64"%}}
 ```shell
