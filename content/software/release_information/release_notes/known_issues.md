@@ -148,3 +148,9 @@ RAW=[
   DATA="lxc.apparmor.profile=unconfined",
   TYPE="lxc" ]
 ```
+
+## OneSwap 
+
+OneSwap delta migration may fail on vCenter/ESXi 8 and newer because the sesparse tool used to apply VMware seSparse snapshot deltas was tested against older vCenter/ESXi versions.
+
+Until the upstream fix is merged, `sesparse` needs to be recompiled with the patch from [storpool/any2kvm#1](https://github.com/storpool/any2kvm/pull/1) and installed in the conversion host `/usr/bin/`.
