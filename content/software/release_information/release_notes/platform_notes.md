@@ -18,7 +18,7 @@ This is the list of the individual platform components that have been through th
 
 ## Certified Components Version
 
-### Front-End Components
+### Front-end Components
 
 | Component                | Version                                    | More information                                                                                                                                                                            |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -133,9 +133,9 @@ A single instance of OpenNebula (i.e., a single `oned` process) has been stress-
 
 However, there are several OpenNebula users managing significantly higher numbers of hypervisors (to the order of two thousand) with a single instance. This largely depends, as mentioned, on the storage, networking, and also monitoring configuration.
 
-## Front-End Platform Notes
+## Front-end Platform Notes
 
-The following applies to all Front-Ends:
+The following applies to all Front-ends:
 
 * Only **Ruby versions >= 2.0 are supported**.
 

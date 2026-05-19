@@ -115,7 +115,7 @@ flavours:
 
 ## Spec Sections
 
-| Section                    | Purpose |
+| **Section**                    | **Purpose** |
 |----------------------------|---------|
 | `name`                     | Human-readable profile name shown to users. |
 | `description`              | Short description of the profile purpose. |
@@ -147,7 +147,7 @@ flavours:
 
 Common capacity defaults are:
 
-| Default       | Description |
+| **Default**       | **Description** |
 |---------------|-------------|
 | `count`       | Number of nodes created for the flavour. |
 | `cpu`         | CPU cores assigned to each node. |
@@ -253,7 +253,7 @@ The `dependencies` section defines auxiliary resources required by the profile. 
 | Dependency          | Purpose |
 |---------------------|---------|
 | `seed_vm`           | Temporary VM used to bootstrap the control plane. |
-| `cluster_router`    | Routing component used to connect the cluster to the required networks. |
+| `cluster_router`    | Routing component used to connect the Cluster to the required networks. |
 
 Example:
 
@@ -306,7 +306,7 @@ After customizing a spec:
 * Validate the YAML syntax.
 * Confirm that every new user input is consumed by the relevant templates or scripts.
 * Confirm that each flavour has defaults for the required inputs.
-* Confirm that resource sizes match the capacity of the target OpenNebula hosts and datastores.
+* Confirm that resource sizes match the capacity of the target OpenNebula Hosts and datastores.
 * Confirm that dependency options are valid.
 * Restart the OneKS service.
 * Create a test K8s Cluster or node group using the modified family and flavour.

@@ -1,5 +1,5 @@
 ---
-title: "Upgrading Single Front-End"
+title: "Upgrading Single Front-end"
 date: "2025-02-17"
 description:
 categories:

@@ -23,6 +23,8 @@ After completing the introductory documentation, you can find more information a
 * [K8s Cluster Lifecycle Management]({{% relref "platform_services/oneks/management/k8s_cluster_lifecycle_management/" %}})
 * [Monitoring and Troubleshooting]({{% relref "platform_services/oneks/management/monitoring_and_troubleshooting/" %}})
 * [Configuration]({{% relref "platform_services/oneks/management/configuration/" %}})
+* [Profiles Customization]({{% relref "platform_services/oneks/management/customizing_specs/" %}})
+* [Service Architecture]({{% relref "platform_services/oneks/references/architecture/" %}})
 * [OneKS REST API]({{% relref "platform_services/oneks/references/oneks_api/" %}})
 * [OneKS CLI]({{% relref "platform_services/oneks/references/oneks_cli/" %}})
 

@@ -73,7 +73,7 @@ The custom imported keys are kept only in memory. They must be **imported again*
 
 ## SSH Client Configuration
 
-Initial **default SSH client configuration** files are provided in `/usr/share/one/ssh/`. Depending on your platform the suitable configuration is copied for `oneadmin` into `/var/lib/one/.ssh/config` for all types of Hosts (Front-End or hypervisor nodes) during installation. Check the content of `/var/lib/one/.ssh/config` to know if you are using the initial default version shipped by OpenNebula.
+Initial **default SSH client configuration** files are provided in `/usr/share/one/ssh/`. Depending on your platform the suitable configuration is copied for `oneadmin` into `/var/lib/one/.ssh/config` for all types of Hosts (Front-end or hypervisor nodes) during installation. Check the content of `/var/lib/one/.ssh/config` to know if you are using the initial default version shipped by OpenNebula.
 
 This default SSH configuration ensures that Host SSH keys of new remote Hosts are accepted on the very first connection and strictly checked during subsequent connections (you don’t need to populate SSH Host keys into `/var/lib/one/.ssh/known_hosts` in advance for new Hosts). Also, it configures short-term connection sharing and persistency to speed up driver operations. Persistency is selectively enabled within OpenNebula drivers and **must not be enabled globally**.
 

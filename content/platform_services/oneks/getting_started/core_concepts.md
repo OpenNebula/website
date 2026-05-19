@@ -34,7 +34,7 @@ A OneKS K8s Cluster is the top-level resource exposed to users. It represents a 
 
 A K8s Cluster includes:
 
-| Attribute              | Description |
+| **Attribute**              | **Description** |
 |------------------------|-------------|
 | `name`                 | K8s Cluster name. |
 | `description`          | Optional human-readable description. |
@@ -60,7 +60,7 @@ Even in an HA deployment, users do not create multiple control-plane groups. One
 
 The control-plane group includes:
 
-| Attribute              | Description |
+| **Attribute**              | **Description** |
 |------------------------|-------------|
 | `name`                 | Control-plane group name. |
 | `description`          | Optional human-readable description. |
@@ -87,7 +87,7 @@ Worker nodes host application workloads. When a node group is created, OneKS pro
 
 A node group includes:
 
-| Attribute              | Description |
+| **Attribute**             | **Description** |
 |------------------------|-------------|
 | `name`                 | Node-group name. |
 | `description`          | Optional human-readable description. |
@@ -114,7 +114,7 @@ A K8s Cluster can have:
 
 Profiles define the configuration model used to create OneKS K8s Cluster components. In OneKS, profiles are exposed through families and flavours.
 
-| Concept     | Description |
+| **Concept**     | **Description** |
 |-------------|-------------|
 | Profile     | Configuration model used to create K8s Cluster components. Profiles define accepted inputs, validation rules, templates, defaults, and metadata. |
 | Family      | Concrete configuration intended for a specific use case, including specification files and scripts. |
@@ -130,7 +130,7 @@ Profiles may define user inputs. These inputs are collected during K8s Cluster o
 
 Common inputs include:
 
-| Input        | Description |
+| **Input**        | **Description** |
 |--------------|-------------|
 | `count`      | Number of nodes or instances to create. |
 | `cpu`        | CPU capacity assigned to each node. |
@@ -146,7 +146,7 @@ Group dependencies are auxiliary resources required by a Kubernetes group implem
 
 The current OneKS implementation provides two dependency types used by the control-plane group during provisioning:
 
-| Dependency          | Description |
+| **Dependency**          | **Description** |
 |---------------------|-------------|
 | Seed VM             | Temporary bootstrap VM used to initialize the control-plane provisioning workflow. |
 | K8s Cluster Router  | Routing component required by the control plane to provide connectivity between the Kubernetes Cluster and external networks. |

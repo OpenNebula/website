@@ -20,12 +20,12 @@ OneKS exposes the following K8s Cluster states:
 <div class="row align-items-start g-4 mb-4">
 <div class="col-12 col-lg-5">
 
-{{< image path="/images/oneks_cluster_lcm.png" alt="OneKS K8s Cluster lifecycle states" align="center" width="100%" mb="20px" >}}
+{{< image path="/images/oneks/oneks_cluster_lcm.png" alt="OneKS K8s Cluster lifecycle states" align="center" width="100%" mb="20px" >}}
 
 </div>
 <div class="col-12 col-lg-7">
 
-| State                       | Description |
+| **State**                       | **Description** |
 |-----------------------------|-------------|
 | `PENDING`                   | A K8s Cluster document has been created. |
 | `PROVISIONING`              | Control-plane provisioning has started. |
@@ -50,12 +50,12 @@ OneKS exposes the following group states:
 <div class="row align-items-start g-4 mb-4">
 <div class="col-12 col-lg-5">
 
-{{< image path="/images/oneks_group_lcm.png" alt="OneKS node group lifecycle states" align="center" width="100%" mb="20px" >}}
+{{< image path="/images/oneks/oneks_group_lcm.png" alt="OneKS node group lifecycle states" align="center" width="100%" mb="20px" >}}
 
 </div>
 <div class="col-12 col-lg-7">
 
-| State                       | Description |
+| **State**                      | **Description** |
 |-----------------------------|-------------|
 | `PENDING`                   | The group document exists. |
 | `BOOTSTRAPPING`             | Dependencies are being prepared. |
@@ -79,7 +79,7 @@ OneKS exposes the following group states:
 
 OneKS continuously reconciles the desired K8s Cluster state stored in OpenNebula documents with the observed state of the underlying groups, VMs, and dependencies. The K8s Cluster state is not updated in isolation, it is derived from the current lifecycle action and from the state of its control-plane and worker node groups.
 
-| Rule                            | Behavior |
+| **Rule**                            | **Behavior** |
 |---------------------------------|----------|
 | Running condition               | A K8s Cluster reaches `RUNNING` only when all expected groups are `RUNNING`. |
 | Group degradation               | A group in `WARNING` or a failure state may move the K8s Cluster to `WARNING` when the K8s Cluster resource still exists and the current action can continue being observed. |
@@ -90,7 +90,7 @@ OneKS continuously reconciles the desired K8s Cluster state stored in OpenNebula
 
 Operational constraints are also enforced during reconciliation:
 
-| Constraint              | Behavior |
+| **Constraint**              | **Behavior** |
 |-------------------------|----------|
 | Node group creation     | Node groups can be added only when the K8s Cluster is in an operational state and the control plane is running. |
 | Node group warning      | A node-group warning usually means that one or more associated VMs or dependencies are degraded, inconsistent, or not matching the expected state. |
