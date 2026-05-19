@@ -43,9 +43,15 @@ The configuration is typically defined in the following location on the OpenNebu
 /var/lib/one/remotes/etc/vnm/OpenNebulaNetwork.conf
 ```
 
+{{< alert title="Warning" type="warning" >}}
+If the transparent proxy configuration file cannot be found or loaded correctly, the OneKS service will not start. See [Service Management]({{% relref "platform_services/oneks/management/configuration/#service-management" %}}) to restart the service or inspect its journal.
+
+You can also check the OneKS service logs at `/var/log/one/oneks.log`.
+{{< /alert >}}
+
 Example configuration:
 
-```default
+```yaml
 :tproxy:
   - :remote_addr: 192.168.150.1 # Front-end public network IP
     :remote_port: 5030
@@ -73,6 +79,10 @@ You need:
 ## User Permissions
 
 Verify that the user has permission to create and manage OneKS K8s Clusters and the related OpenNebula resources, including Virtual Machines, Virtual Networks, images, and templates.
+
+OneKS stores its K8s Cluster and node-group definitions as OpenNebula documents. The user must therefore also have the required permissions to manage OpenNebula document resources. Without document permissions, OneKS may be able to reach the infrastructure resources but fail when creating, updating, or deleting the OneKS records that represent the K8s Cluster lifecycle.
+
+Use OpenNebula ACL rules to grant the required permissions for the target users or groups. For more information, see the [Managing ACL Rules]({{% relref "product/cloud_system_administration/multitenancy/chmod#manage-acl" %}}) documentation.
 
 ## kubectl Client
 
@@ -145,6 +155,39 @@ kubectl version --client
 ```
 
 If the above command is not suitable for your Front-end Host configuration, consult the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/) for [MacOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) or [Windows](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/).
+
+## Automatically Generated Resources
+
+When OneKS starts, it automatically downloads the OneKS appliance from the OpenNebula Marketplace. During this process, OneKS creates the corresponding OpenNebula image and VM template in the OpenNebula database, making them ready to deploy K8s Clusters.
+
+{{< alert title="Warning" type="warning" >}}
+If the OneKS appliance cannot be downloaded correctly, the OneKS service will not start. See [Service Management]({{% relref "platform_services/oneks/management/configuration/#service-management" %}}) to restart the service or inspect its journal.
+
+You can also check the OneKS service logs at `/var/log/one/oneks.log`.
+{{< /alert >}}
+
+The generated image is used by the Seed VM to start the K8s Cluster deployment process. For more information about the Seed VM role during provisioning, see the [Seed VM section]({{% relref "platform_services/oneks/getting_started/core_concepts/#seed-vm" %}}) in Core Concepts.
+
+The appliance name and ID can be configured from the control-plane spec configuration file:
+
+```default
+/var/lib/one/oneks/controlplane/general/controlplane.conf
+```
+
+You can also configure the datastore where the appliance image will be stored. This datastore must be accessible by the OpenNebula Hosts where the K8s Cluster VMs will be deployed.
+
+Example configuration:
+
+```yaml
+dependencies:
+  - object: seed_vm
+    options:
+      creation_timeout: 2000
+      destroy_on_running: true
+      appliance_name: OneKS Appliance
+      appliance_id: c3ecb387-e726-49fe-975d-fa39c6d40d05
+      appliance_ds: 1
+```
 
 ## Next Steps
 

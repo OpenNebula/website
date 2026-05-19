@@ -17,87 +17,132 @@ Event-driven monitoring is implemented through OpenNebula VM and dependency even
 
 OneKS exposes the following K8s Cluster states:
 
-* `PENDING`: A K8s Cluster document has been created.  
-* `PROVISIONING`: Control-plane provisioning has started.  
-* `RUNNING`: All expected groups are running.  
-* `SCALING`: A node group is being added, removed, or resized.  
-* `UPGRADING`: The K8s Cluster version is being upgraded.  
-* `DEPROVISIONING`: The K8s Cluster resources are being deleted.  
-* `WARNING`: One or more groups are inconsistent or degraded.  
-* `DONE`: K8s Cluster deprovisioning has completed.  
-* `PROVISIONING_FAILURE`: Provisioning failed.  
-* `SCALING_FAILURE`: Scaling failed.  
-* `UPGRADING_FAILURE`: Upgrade failed.  
-* `DEPROVISIONING_FAILURE`: Deprovisioning failed.
+<div class="row align-items-start g-4 mb-4">
+<div class="col-12 col-lg-5">
 
-A K8s Cluster reaches the `RUNNING` state when all expected groups are running. A K8s Cluster receives a `WARNING` state when one or more groups are warned or failed while the K8s Cluster  resource itself is otherwise still present. During deprovisioning, when managed groups have been removed, the K8s Cluster reaches `DONE` and is deleted from storage by the action code.
+{{< image path="/images/oneks_cluster_lcm.png" alt="OneKS K8s Cluster lifecycle states" align="center" width="100%" mb="20px" >}}
 
-During control-plane bootstrapping, seed VM failures can surface as `BOOTSTRAPPING_FAILURE` on the control-plane group. The K8s Cluster is then notified of the group failure according to the normal reconciliation behavior.
+</div>
+<div class="col-12 col-lg-7">
+
+| State                       | Description |
+|-----------------------------|-------------|
+| `PENDING`                   | A K8s Cluster document has been created. |
+| `PROVISIONING`              | Control-plane provisioning has started. |
+| `RUNNING`                   | All expected groups are running. |
+| `SCALING`                   | A node group is being added, removed, or resized. |
+| `UPGRADING`                 | The K8s Cluster version is being upgraded. |
+| `DEPROVISIONING`            | The K8s Cluster resources are being deleted. |
+| `WARNING`                   | One or more groups are inconsistent or degraded. |
+| `DONE`                      | K8s Cluster deprovisioning has completed. |
+| `PROVISIONING_FAILURE`      | Provisioning failed. |
+| `SCALING_FAILURE`           | Scaling failed. |
+| `UPGRADING_FAILURE`         | Upgrade failed. |
+| `DEPROVISIONING_FAILURE`    | Deprovisioning failed. |
+
+</div>
+</div>
 
 ## Node Group States
 
 OneKS exposes the following group states:
 
-* `PENDING`: The group document exists.  
-* `BOOTSTRAPPING`: Dependencies are being prepared.  
-* `PROVISIONING`: Kubernetes resources or VMs are being created.  
-* `RUNNING`: Expected VMs exist and are running.  
-* `SCALING`: Target size is changing.  
-* `UPGRADING`: The group is being upgraded.  
-* `DEPROVISIONING`: Group resources are being removed.  
-* `WARNING`: One or more associated VMs or dependencies are degraded.  
-* `DONE`: Group deprovisioning has completed.  
-* `BOOTSTRAPPING_FAILURE`: Dependency preparation failed.  
-* `PROVISIONING_FAILURE`: Provisioning failed.  
-* `SCALING_FAILURE`: Scaling failed.  
-* `UPGRADING_FAILURE`: Upgrade failed.  
-* `DEPROVISIONING_FAILURE`: Deprovisioning failed.
+<div class="row align-items-start g-4 mb-4">
+<div class="col-12 col-lg-5">
 
-A node-group warning may indicate that one or more associated VMs or dependencies are degraded or inconsistent.
+{{< image path="/images/oneks_group_lcm.png" alt="OneKS node group lifecycle states" align="center" width="100%" mb="20px" >}}
+
+</div>
+<div class="col-12 col-lg-7">
+
+| State                       | Description |
+|-----------------------------|-------------|
+| `PENDING`                   | The group document exists. |
+| `BOOTSTRAPPING`             | Dependencies are being prepared. |
+| `PROVISIONING`              | Kubernetes resources or VMs are being created. |
+| `RUNNING`                   | Expected VMs exist and are running. |
+| `SCALING`                   | Target size is changing. |
+| `UPGRADING`                 | The group is being upgraded. |
+| `DEPROVISIONING`            | Group resources are being removed. |
+| `WARNING`                   | One or more associated VMs or dependencies are degraded. |
+| `DONE`                      | Group deprovisioning has completed. |
+| `BOOTSTRAPPING_FAILURE`     | Dependency preparation failed. |
+| `PROVISIONING_FAILURE`      | Provisioning failed. |
+| `SCALING_FAILURE`           | Scaling failed. |
+| `UPGRADING_FAILURE`         | Upgrade failed. |
+| `DEPROVISIONING_FAILURE`    | Deprovisioning failed. |
+
+</div>
+</div>
 
 ## Reconciliation Rules
 
-OneKS reconciliation follows these general rules:
+OneKS continuously reconciles the desired K8s Cluster state stored in OpenNebula documents with the observed state of the underlying groups, VMs, and dependencies. The K8s Cluster state is not updated in isolation, it is derived from the current lifecycle action and from the state of its control-plane and worker node groups.
 
-* **K8s Cluster Running Condition**: If all expected groups are `RUNNING`, the K8s Cluster reconciles to `RUNNING`.  
-* **Group Degradation**: Group-level warnings or failures may surface at K8s Cluster level as `WARNING` when the K8s Cluster resource itself is still present but one or more underlying groups are degraded.  
-* **Action-specific Failures**: Group failures may map to K8s Cluster failure states depending on the K8s Cluster action in progress.  
-* **Deprovisioning Completion**: During deprovisioning, when managed groups have been removed, the K8s Cluster reaches `DONE`.  
-* **Terminal State**: `DONE` is a terminal lifecycle state reached during deprovisioning.  
-* **Node Group Creation**: Node groups can be added only when the K8s Cluster is in an appropriate operational state and the control plane is running.  
-* **Control-plane Scaling**: The control plane does not support scale operations through the OneKS scale command.
+| Rule                            | Behavior |
+|---------------------------------|----------|
+| Running condition               | A K8s Cluster reaches `RUNNING` only when all expected groups are `RUNNING`. |
+| Group degradation               | A group in `WARNING` or a failure state may move the K8s Cluster to `WARNING` when the K8s Cluster resource still exists and the current action can continue being observed. |
+| Action-specific failures        | Group failures are mapped to the K8s Cluster failure state that matches the operation in progress, such as `PROVISIONING_FAILURE`, `SCALING_FAILURE`, `UPGRADING_FAILURE`, or `DEPROVISIONING_FAILURE`. |
+| Control-plane bootstrap failure | Seed VM or dependency failures during control-plane bootstrap can surface as `BOOTSTRAPPING_FAILURE` on the control-plane group and K8s Cluster. |
+| Deprovisioning completion       | During deprovisioning, once the managed groups have been removed, the K8s Cluster reaches `DONE` and is removed from OneKS storage. |
+| Terminal state                  | `DONE` is the terminal lifecycle state for a successfully deprovisioned K8s Cluster or node group. |
+
+Operational constraints are also enforced during reconciliation:
+
+| Constraint              | Behavior |
+|-------------------------|----------|
+| Node group creation     | Node groups can be added only when the K8s Cluster is in an operational state and the control plane is running. |
+| Node group warning      | A node-group warning usually means that one or more associated VMs or dependencies are degraded, inconsistent, or not matching the expected state. |
+| Control-plane scaling   | The control plane does not support scale operations through the OneKS scale command. |
 
 ## Troubleshooting Logs
 
-OneKS provides several log surfaces on the OpenNebula Front-end Host.
+OneKS provides two main log surfaces on the OpenNebula Front-end Host: service logs for the daemon itself, and lifecycle logs for each K8s Cluster.
 
-Service logs:
+Use the service logs when the OneKS server does not start, cannot connect to OpenNebula, fails to load configuration, or reports internal errors:
 
-```
+```default
 /var/log/one/oneks.log
 /var/log/one/oneks.error
 ```
 
-Per-cluster lifecycle logs:
+Use the per-cluster lifecycle logs when a specific K8s Cluster fails or stalls during provisioning, scaling, upgrade, recovery, or deletion:
 
-```
+```default
 /var/log/one/oneks/<cluster_id>.log
 ```
 
-CLI examples:
+The CLI and API also expose the per-cluster lifecycle log. For daemon startup errors or configuration loading failures, use the service logs or the systemd journal for the OneKS service.
+
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="CLI"%}}
 
 ```shell
+# Show the lifecycle log for one K8s Cluster
 oneks logs cluster 42
-oneks logs cluster 42 --follow
-```
 
-API:
+# Follow the lifecycle log as new entries are written
+oneks logs cluster 42 --follow
+
+# Include all log lines available for the K8s Cluster
+oneks logs cluster 42 --all
+
+# Include all log lines and keep following new entries
+oneks logs cluster 42 --all --follow
+```
+{{% /tab %}}
+
+{{% tab header="API"%}}
 
 ```shell
 curl -u "$(cat /var/lib/one/.one/one_auth)" http://<oneks-server>:10780/api/v1/clusters/<cluster_id>/logs
 ```
+{{% /tab %}}
 
-Service logs are useful for troubleshooting the OneKS daemon. Per-cluster logs are useful for troubleshooting lifecycle operations for a specific K8s Cluster. CLI and API log retrieval provide user-facing paths for inspecting K8s Cluster lifecycle logs.
+{{< /tabpane >}}
 
 ## Provisioning Troubleshooting
 

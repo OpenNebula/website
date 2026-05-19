@@ -9,175 +9,201 @@ weight: "3"
 type: docs
 ---
 
-This section is intended for users intending to install, configure, or troubleshoot the OneKS service.
+This page summarizes the main runtime configuration used by the OneKS service. It covers the settings that define the service behavior and the server configuration options.
 
-## OneKS Server Configuration
+## Configuration File
 
-OneKS is implemented as an ODS-based Ruby service plus a CLI/API client.
-
-The main runtime components include:
-
-* `oneks-server`: The service daemon/helper script.  
-* `oneks`: The user-facing CLI.  
-* **ODS Log Controller**: Log management component.  
-* **Event Manager**: Lifecycle event watcher.  
-* **K8s Cluster Watchdog**: K8s Cluster state monitoring component.  
-* **Seed VM Dependency**: Temporary managed VM used for control-plane bootstrap.  
-* **K8s Cluster Router Dependency**: Router-related K8s Cluster dependency.
-
-By default, the OneKS server listens locally on Host `127.0.0.1` and port `10780`.
-
-The client API path uses `/api/v1`.
-
-Default local API endpoint:
-
-```default
-http://127.0.0.1:10780/api/v1
-```
-
-Remote API access depends on how the service is exposed in the deployment.
-
-OneKS manages OneKS K8s Cluster documents and node-group documents, starts an event manager, and subscribes to OpenNebula lifecycle events.
-
-Important runtime behavior includes:
-
-* **VM Event Watching**: Watches VM allocation and VM state changes.  
-* **Seed VM Lifecycle**: Creates and monitors temporary seed VMs during control-plane bootstrap.  
-* **Seed VM Readiness**: Tracks seed VM readiness through the `ONEKS_STATE` value.  
-* **Router Monitoring**: Monitors virtual router allocation.  
-* **Log Exposure**: Exposes per-cluster logs through the API and CLI.  
-* **State Reconciliation**: Reconciles K8s Cluster and group state based on observed lifecycle events.
-
-Primary packaged paths:
+By default, the main OneKS server configuration file is:
 
 ```default
 /etc/one/oneks-server.conf
-/usr/lib/one/oneks/oneks-server.rb
-/var/lib/one/oneks/
 ```
 
-When OpenNebula is installed with `ONE_LOCATION` set, OneKS paths are resolved relative to that location.
-
-With `ONE_LOCATION` set:
+When OpenNebula is installed with `ONE_LOCATION` set, the same configuration file is resolved relative to that installation path:
 
 ```default
 $ONE_LOCATION/etc/oneks-server.conf
-$ONE_LOCATION/lib/oneks/oneks-server.rb
-$ONE_LOCATION/var/oneks/
 ```
 
-Important configurable defaults include:
+The file follows the same YAML syntax used by other OpenNebula services.
 
-* **XML-RPC Endpoint Configuration**: OpenNebula XML-RPC endpoint used by OneKS.  
-* **TPROXY XML-RPC Endpoint**: Endpoint exposed through transparent proxy where required.  
-* **Server Host and Port**: Local OneKS API listener configuration.  
-* **Subscriber Endpoint and Timeout**: Event subscription configuration.  
-* `kubectl` **Path**: Path to `kubectl` used by the service where required.  
-* **Kubeconfig Path**: Path used for kubeconfig handling where required.  
-* **Kubernetes Timeout**: Timeout for Kubernetes operations.  
-* **Retry Values**: Retry behavior for lifecycle actions.  
-* **Cooldown Values**: Cooldown behavior between retries or state checks.  
-* **Concurrency**: Number of concurrent lifecycle operations.  
-* **Authentication Mode**: Authentication behavior for API access.  
-* **Token Expiry**: Token lifetime where token-based authentication is used.  
-* **Log Level**: Service logging verbosity.  
-* **Log Output System**: Destination and format for logs.
-
-## Service Management
-
-systemd unit:
-
-```default
-opennebula-oneks.service
-```
-
-Service commands:
-
+{{< alert title="Note" type="info" >}}
+After modifying this file, restart the OneKS service for the changes to take effect:
 ```shell
-systemctl start opennebula-oneks
-systemctl stop opennebula-oneks
-systemctl restart opennebula-oneks
-systemctl status opennebula-oneks
-journalctl -u opennebula-oneks
+systemctl restart opennebula-ks.service
 ```
+{{< /alert >}}
 
-Some deployments may expose the service under a different unit name, such as `opennebula-ks.service`. Use the unit name shipped by the installed package.
+## Server Configuration
 
-Helper commands:
+These options define how OneKS reaches OpenNebula and how the OneKS API listens for client requests.
 
-```shell
-oneks-server start
-oneks-server stop
-```
+| Attribute                     | Default                              | Description |
+|-------------------------------|--------------------------------------|-------------|
+| `:one_xmlrpc`                 | `http://localhost:2633/RPC2`         | OpenNebula XML-RPC endpoint used by the OneKS server to talk to the OpenNebula daemon. Change it when OneKS runs outside the Front-end Host or when OpenNebula uses a non-default endpoint. |
+| `:one_xmlrpc_tproxy`          | `http://169.254.16.9:2633/RPC2`      | XML-RPC endpoint exposed through the transparent proxy network. Workloads that need to reach OpenNebula through the K8s Cluster router use this address. The matching TPROXY rule must exist in `VAR_LOCATION/remotes/etc/vnm/OpenNebulaNetwork.conf`. |
+| `:server`                     | See nested values                    | API listener configuration for the OneKS server. |
+| `:server` / `:environment`    | `production`                         | Runtime environment used by the service. Production deployments should keep `production`. |
+| `:server` / `:bind`           | `127.0.0.1`                          | IP address where the OneKS API listens. Keep it local when only local CLI or Sunstone access is required. Use a reachable address only when the API must be exposed remotely. |
+| `:server` / `:port`           | `10780`                              | TCP port where the OneKS API listens. The default local API endpoint is `http://127.0.0.1:10780/api/v1`. |
+| `:subscriber_endpoint`        | `tcp://localhost:2101`               | OpenNebula event subscription endpoint. It must match the event publisher endpoint configured in `oned.conf`. |
+| `:subscriber_timeout`         | `10`                                 | Receive timeout, in seconds, for OpenNebula event subscribers. Increase it only if event processing is timing out in a slow or overloaded environment. |
 
-## Service Logs 
+## Kubernetes Configuration
 
-Service log paths:
+These options are used when OneKS runs Kubernetes commands from the Front-end Host.
+
+| Attribute            | Default                                  | Description |
+|----------------------|------------------------------------------|-------------|
+| `:kubectl_path`      | `/var/lib/rancher/rke2/bin/kubectl`      | Path to the `kubectl` binary used by OneKS. Change it if `kubectl` is installed in a different location. |
+| `:kubeconfig_path`   | `/etc/rancher/rke2/rke2.yaml`            | Kubeconfig file used by `kubectl` operations executed by the service. The file must be readable by the service user. |
+| `:k8s_timeout`       | `15`                                     | Timeout, in seconds, while waiting for Kubernetes command execution results. Increase it for slow API servers or busy management clusters. |
+
+## Operational Defaults
+
+These values control retry behavior, concurrency, cooldowns, and generated resource names.
+
+| Attribute             | Default | Description |
+|-----------------------|---------|-------------|
+| `:retries`            | `5`     | Number of retries for operations that can be retried after an aborted call. |
+| `:default_cooldown`   | `300`   | Cooldown period, in seconds, after a scale operation. This prevents immediate repeated scale actions. |
+| `:concurrency`        | `10`    | Number of worker threads used for K8s Cluster actions. Increase it only when the Front-end, OpenNebula, and the infrastructure can handle more concurrent lifecycle operations. |
+| `:base_name`          | `oneks` | Prefix used when OneKS generates names for created resources. Change it to separate resources created by different OneKS environments. |
+
+## Authentication
+
+These options define how the OneKS API authenticates requests and how it authenticates against OpenNebula core.
+
+| Attribute         | Default      | Description |
+|-------------------|--------------|-------------|
+| `:auth`           | `opennebula` | Authentication driver for incoming OneKS API requests. With `opennebula`, credentials are validated against OpenNebula. |
+| `:core_auth`      | `cipher`     | Authentication driver used to communicate with OpenNebula core. Supported values are `cipher` for symmetric token encryption and `x509` for X.509 certificate based token encryption. |
+| `:expire_delta`   | `3600`       | Token lifetime window, in seconds. Tune it according to the token expiration policy used by the deployment. |
+
+## Logging
+
+These values configure the OneKS service logging behavior and are defined under the `:log` section of the configuration file.
+
+| Attribute            | Default | Description |
+|----------------------|---------|-------------|
+| `:log` / `:level`    | `3`     | Log verbosity. Values are `0` for ERROR, `1` for WARNING, `2` for INFO, and `3` for DEBUG. Use `3` for troubleshooting and reduce it in normal production operation if logs are too verbose. |
+| `:log` / `:system`   | `file`  | Log destination. Supported values are `file` and `syslog`. |
+
+Service logs are written to the standard OneKS log files. These files are useful to inspect general service activity, runtime errors, and unexpected failures. Service logs files can be found in the following paths:
 
 ```default
 /var/log/one/oneks.log
 /var/log/one/oneks.error
 ```
 
-With `ONE_LOCATION`:
-
-```default
-$ONE_LOCATION/var/oneks.log
-$ONE_LOCATION/var/oneks.error
-```
-
-Per-cluster lifecycle logs:
+Each cluster also has its own lifecycle log file. These per-cluster logs are useful to follow provisioning and monitoring operations for a specific cluster:
 
 ```default
 /var/log/one/oneks/<cluster_id>.log
 ```
 
-With `ONE_LOCATION`:
+With `ONE_LOCATION` set, these log files can be found in the below paths:
 
 ```default
+$ONE_LOCATION/var/oneks.log
+$ONE_LOCATION/var/oneks.error
 $ONE_LOCATION/var/oneks/<cluster_id>.log
 ```
 
-## Authentication and Endpoint Configuration
+## Service Management
 
-CLI binary:
+OneKS is managed through the packaged systemd unit `opennebula-ks.service`.
+
+Use the following command to start the OneKS service:
 
 ```shell
-oneks
+systemctl start opennebula-ks.service
 ```
 
-Endpoint resolution order:
+Use this command to check the current status of the service:
 
-* **Explicit Server URL**: Value passed with `--server`.  
-* `ONEKS_URL`: Environment variable.  
-* **User Endpoint File**: `~/.one/oneks_endpoint`.  
-* **oneadmin Endpoint File**: `/var/lib/one/.one/oneks_endpoint`.  
-* **Default Endpoint**: `http://localhost:10780`.
+```shell
+systemctl status opennebula-ks.service
+```
 
-The API client appends `/api/v1`.
+Use this command to stop the OneKS service:
 
-Authentication resolution order:
+```shell
+systemctl stop opennebula-ks.service
+```
 
-* **CLI Credentials**: Values such as `--username` and `--password`.  
-* **Environment Credentials**: Values such as `ONEKS_USER` and `ONEKS_PASSWORD`.  
-* `ONE_AUTH`: Environment variable.  
-* **User Auth File**: `~/.one/one_auth`.  
-* **oneadmin Auth File**: `/var/lib/one/.one/one_auth`.
+Use this command to restart the service after configuration changes or when troubleshooting:
 
-## Advanced Configuration
+```shell
+systemctl restart opennebula-ks.service
+```
 
-OneKS watches OpenNebula events and depends on:
+When debugging service errors, always check the systemd journal for the OneKS unit:
 
-* **Subscriber Endpoint Connectivity**: Required for event-driven lifecycle tracking.  
-* **Seed VM State Reporting**: Required for control-plane bootstrap progress.  
-* **K8s Cluster Router Lifecycle Monitoring**: Required where the topology depends on routers.  
-* **TPROXY Support**: Required where services must be exposed through the public network gateway.
+```shell
+journalctl -u opennebula-ks.service
+```
 
-Advanced configuration includes:
+## Related Configuration
 
-* **Concurrency Tuning**: Controls how many operations can run in parallel.  
-* **Log Verbosity**: Controls the level of service logs.  
-* **Development Versus Production Mode**: Controls runtime behavior depending on deployment mode.  
-* **Required Network Services**: OneGate, XML-RPC, and related service connectivity.  
-* **TPROXY Ports and Connectivity**: Typically ports `5030` and `2633` through the public network gateway.  
-* **Timeout and Retry Behavior**: Controls how long lifecycle actions wait before failing or retrying.
+OneKS relies on several OpenNebula services and network endpoints:
+
+| Area                 | What to Check |
+|----------------------|---------------|
+| OneGate              | OneGate must be reachable by the Seed VM during provisioning. |
+| OpenNebula XML-RPC   | `:one_xmlrpc` must point to the OpenNebula daemon endpoint used by the OneKS server. |
+| TPROXY               | `:one_xmlrpc_tproxy` must match the XML-RPC endpoint exposed through the transparent proxy network. |
+| OpenNebula events    | `:subscriber_endpoint` must match the event endpoint configured in `oned.conf`. |
+| Service logs         | Use service logs for daemon issues and per-cluster logs for provisioning, scaling, upgrade, and deletion workflows. |
+
+## Example Configuration
+
+```yaml
+################################################################################
+# Server Configuration
+################################################################################
+
+:one_xmlrpc: http://localhost:2633/RPC2
+:one_xmlrpc_tproxy: http://169.254.16.9:2633/RPC2
+
+:server:
+  :environment: production
+  :bind: 127.0.0.1
+  :port: 10780
+
+:subscriber_endpoint: 'tcp://localhost:2101'
+:subscriber_timeout: 10
+
+################################################################################
+# Kubernetes Configuration
+################################################################################
+
+:kubectl_path: '/var/lib/rancher/rke2/bin/kubectl'
+:kubeconfig_path: '/etc/rancher/rke2/rke2.yaml'
+:k8s_timeout: 15
+
+################################################################################
+# Defaults
+################################################################################
+
+:retries: 5
+:default_cooldown: 300
+:concurrency: 10
+:base_name: 'oneks'
+
+################################################################################
+# Auth
+################################################################################
+
+:auth: opennebula
+:core_auth: cipher
+:expire_delta: 3600
+
+################################################################################
+# Log
+################################################################################
+
+:log:
+  :level: 3
+  :system: file
+```
