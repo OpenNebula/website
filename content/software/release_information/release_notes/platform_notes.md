@@ -20,7 +20,7 @@ This is the list of the individual platform components that have been through th
 
 ### Front-end Components
 
-| Component                | Version                                    | More information                                                                                                                                                                            |
+| **Component**                | **Version**                                    | **More information**                                                                                                                                                                           |
 |--------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Red Hat Enterprise Linux | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | AlmaLinux                | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
@@ -36,7 +36,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### KVM Nodes
 
-| Component                | Version                                                                                                    | More information                                                                                                                     |
+| **Component**                | **Version**                                                                                                    | **More information**                                                                                                                    |
 |--------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Red Hat Enterprise Linux | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | AlmaLinux                | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
@@ -48,7 +48,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 ### LXC Nodes
 
-| Component     | Version                                                | More information                                                                                                                     |
+| **Component**     | **Version**                                                | **More information**                                                                                                                     |
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | Debian        | 12, 13                                                 | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
@@ -65,7 +65,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Open Cloud Networking Infrastructure
 
-| Component           | Version                                    | More information                                                                                                                             |
+| **Component**           | **Version**                                    | **More information**                                                                                                                             |
 |---------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
 | Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
@@ -73,7 +73,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Open Cloud Storage Infrastructure
 
-| Component | Version                                    | More information                                                                                             |
+| **Component** | **Version**                                    | **More information**                                                                                             |
 |-----------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | iSCSI     | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
 | LVM2      | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
@@ -83,14 +83,14 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Authentication
 
-| Component             | Version                                    | More information                                                                                                        |
+| **Component**             | **Version**                                    | **More information**                                                                                                        |
 |-----------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | net-ldap ruby library | 0.19.0 or 0.20                             | [LDAP Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/ldap#ldap" %}})      |
 | openssl               | Version included in the Linux distribution | [x509 Authentication]({{% relref "../../../product/cloud_system_administration/authentication_configuration/x509#x509-auth" %}}) |
 
 ### Monitoring and Backups
 
-| Component                     | Version   | More information                                                                                                                    |
+| **Component**                     | **Version**   | **More information**                                                                                                                    |
 |-------------------------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Prometheus monitoring toolkit | 2.53.1    | [Monitoring and Alerting Installation]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-installation" %}}) |
 | OVS exporter                  | 2.3.1     | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
@@ -102,7 +102,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Sunstone
 
-| Browser   | Version     |
+| **Browser**   | **Version**     |
 |-----------|-------------|
 | Chrome    | 61.0 - 94.0 |
 | Firefox   | 59.0 - 92.0 |
@@ -115,13 +115,13 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 
 ### Billing
 
-| Component   | Version     |
+| **Component**   | **Version**     |
 |-------------|-------------|
 | WHMCS       | 8.13.1      |
 
 ### Kubernetes
 
-| K8s Version | Documentation |
+| **K8s Version** | **Documentation** |
 |-------------|---------------|
 | 1.34.2      | [v1.34](https://v1-34.docs.kubernetes.io/docs/home/) |
 | 1.33.7      | [v1.33](https://v1-33.docs.kubernetes.io/docs/home/) |

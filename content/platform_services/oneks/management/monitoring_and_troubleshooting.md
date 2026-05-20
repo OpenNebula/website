@@ -20,7 +20,7 @@ OneKS exposes the following K8s Cluster states:
 <div class="row align-items-start g-4 mb-4">
 <div class="col-12 col-lg-5">
 
-{{< image path="/images/oneks/oneks_cluster_lcm.png" alt="OneKS K8s Cluster lifecycle states" align="center" width="100%" mb="20px" >}}
+{{< image path="/images/oneks/light/oneks_cluster_lcm.svg" alt="OneKS K8s Cluster lifecycle states" align="center" width="100%" mb="20px" >}}
 
 </div>
 <div class="col-12 col-lg-7">
@@ -50,7 +50,7 @@ OneKS exposes the following group states:
 <div class="row align-items-start g-4 mb-4">
 <div class="col-12 col-lg-5">
 
-{{< image path="/images/oneks/oneks_group_lcm.png" alt="OneKS node group lifecycle states" align="center" width="100%" mb="20px" >}}
+{{< image path="/images/oneks/light/oneks_group_lcm.svg" alt="OneKS node group lifecycle states" align="center" width="100%" mb="20px" >}}
 
 </div>
 <div class="col-12 col-lg-7">

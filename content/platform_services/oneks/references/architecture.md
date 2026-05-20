@@ -17,7 +17,7 @@ OneKS simplifies the creation, operation, scaling, upgrade, recovery, and deprov
 
 The OneKS architecture follows a layered orchestration model. At the highest level, users interact with a OneKS K8s Cluster resource. Beneath the Cluster, OneKS manages one logical control-plane group, zero or more node groups, and supporting dependencies such as the Seed VM and the K8s Cluster Router.
 
-{{< image path="/images/oneks/oneks_service_architecture.svg" alt="OneKS Service Architecture" align="center" width="60%" mb="20px" border="false" shadow="false">}}
+{{< image path="/images/oneks/light/oneks_service_architecture.svg" alt="OneKS Service Architecture" align="center" width="60%" mb="20px" border="false" shadow="false">}}
 
 The service sits between the Kubernetes Cluster layer and the OpenNebula infrastructure layer. CAPONE connects Kubernetes Cluster API resources with OpenNebula primitives, while OneKS acts as the service gateway and lifecycle orchestrator.
 
@@ -33,7 +33,7 @@ From an infrastructure perspective, a Kubernetes workload Cluster deployed by On
 
 Each component is implemented through one or more OpenNebula VMs. The Virtual Router is attached to both the public and private networks and acts as the network entry point for the K8s Cluster. The control-plane VM is attached to the private network and provides the Kubernetes API and management services. Worker nodes are also attached to the private network and run the application workloads scheduled by Kubernetes.
 
-{{< image path="/images/oneks/oneks_deployed_architecture.svg" alt="OneKS Deployed Architecture" align="center" width="60%" mb="20px" >}}
+{{< image path="/images/oneks/light/oneks_deployed_architecture.svg" alt="OneKS Deployed Architecture" align="center" width="60%" mb="20px" >}}
 
 In this model, the public network provides external access through the Virtual Router, while the private network interconnects the control-plane and worker-node VMs. From the OpenNebula perspective, the resulting K8s Cluster appears as a set of managed resources, including one virtual router, one or more control-plane machines, and one or more worker machines provisioned by CAPONE.
 
@@ -41,7 +41,7 @@ In this model, the public network provides external access through the Virtual R
 
 From a domain-oriented perspective, OneKS is organized into three main layers:
 
-{{< image path="/images/oneks/oneks_domain_architecture.svg" alt="OneKS Domain Architecture" align="center" width="80%" mb="20px" >}}
+{{< image path="/images/oneks/light/oneks_domain_architecture.svg" alt="OneKS Domain Architecture" align="center" width="50%" mb="20px" >}}
 
 | **Domain**                          | **Description** |
 |---------------------------------|-------------|
