@@ -22,11 +22,10 @@ The following new features have been backported to 7.2.1:
 
 The following issues have been solved in 7.2.1:
 
-* Fix a `onehem-server` crash caused by a race condition between hook delete and update API calls [#7561](https://github.com/OpenNebula/one-ee/pull/7561).
+* Fix a `onehem-server` crash caused by a race condition between hook delete and update API calls [#7561](https://github.com/OpenNebula/one/issues/7561).
 * Fix a  empty `--resource` for `onegroup create` CLI command [#7458](https://github.com/OpenNebula/one/issues/7458).
 * Fix race condition in `oneflow` server in cancel actions [#7570](https://github.com/OpenNebula/one/issues/7570).
 * Fix S3 marketplace `SIGNATURE_VERSION` parameter hardcoded to `s3` version [7437](https://github.com/OpenNebula/one/issues/7437).
-* Fix race condition in `oneflow` server in cancel actions [#7570](https://github.com/OpenNebula/one/issues/7570)
 * Fix usage of network lease in case of VM deploy failure [#7349](https://github.com/OpenNebula/one/issues/7349)
 * Fix authentication drivers for users with empty password [#7606](https://github.com/OpenNebula/one/issues/7606)
 * Fix standalone installation of Ruby gem openebula-cli [#7608](https://github.com/OpenNebula/one/issues/7608)
@@ -39,3 +38,10 @@ The following issues have been solved in 7.2.1:
 * Fix Restic exclusive lock detection [#7403](https://github.com/OpenNebula/one/issues/7403) + [#7404](https://github.com/OpenNebula/one/issues/7404).
 * Fix CEPH RBD incremental backup deadlocks [#7529](https://github.com/OpenNebula/one/issues/7529)
 * Fix `USER_INPUT` variable expansion not applied in `SCHED_REQUIREMENTS` when instantiating via FireEdge [#7491](https://github.com/OpenNebula/one/issues/7491)
+* Fix Add fireedge.error into logrotate [#7621](https://github.com/OpenNebula/one/issues/7621)
+* Fix Users/Groups are not shown from a non-master zone in a federation [#7617](https://github.com/OpenNebula/one/issues/7617)
+* Fix Fireedge missing SAML key in auth handler [#7601](https://github.com/OpenNebula/one/issues/7601)
+* Fix Refresh view when change group or zone [#7554](https://github.com/OpenNebula/one/issues/7554)
+* Fix [OneSwap] NIC not gonna be attached to template even specified in yaml file [#7526](https://github.com/OpenNebula/one/issues/7526)
+* Fix [oneswap] Cluster name contains space in name [#7525](https://github.com/OpenNebula/one/issues/7525)
+* Fix Deploy failure when 802.1q driver is used but PHYDEV element in the template is an empty string [#7432](https://github.com/OpenNebula/one/issues/7432)
