@@ -12,7 +12,7 @@ A complete list of solved issues for 7.2.1 are listed in the [project developmen
 
 The following new features have been backported to 7.2.1:
 
-* Add option [`LOG_RESULT_LENGTH` to `oned.conf`]({{% relref "/product/operation_references/opennebula_services_configuration/oned#xml-rpc-server-configuration" %}}), enables capping of the log size to keep logs lean and save space.
+* Add option [`LOG_RESULT_LENGTH` to `oned.conf`]({{% relref "/product/operation_references/opennebula_services_configuration/oned#xml-rpc-server-configuration" %}}). This option enables capping of the log size to keep logs lean and save space.
 * Add per-VM live migration options through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`]({{% relref "/product/operation_references/configuration_references/template#template-features" %}}) VM template attributes. Administrators can now tune auto-convergence and memory compression only for selected KVM VMs, improving migration reliability and bandwidth usage without changing global driver defaults.
 * Add [custom favicon option in FireEdge]({{% relref "product/operation_references/opennebula_services_configuration/fireedge.md#branding-fireedge" %}}) for applying custom brands and logos to the Sunstone web UI.
 * Add optional Prometheus exporter packages for OVS, MySQL/MariaDB, SMART storage health, and LVM monitoring for improved observability. See [Optional Exporters]({{% relref "/product/cloud_system_administration/prometheus/install#monitor-alert-extra-exporters" %}}) for installation and service details.
