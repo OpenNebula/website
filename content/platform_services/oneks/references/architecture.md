@@ -41,7 +41,7 @@ In this model, the public network provides external access through the Virtual R
 
 From a domain-oriented perspective, OneKS is organized into three main layers:
 
-{{< image path="/images/oneks/light/oneks_domain_architecture.svg" alt="OneKS Domain Architecture" align="center" width="50%" mb="20px" >}}
+{{< image path="/images/oneks/light/oneks_domain_architecture.svg" alt="OneKS Domain Architecture" align="center" width="60%" mb="20px" >}}
 
 | **Domain**                          | **Description** |
 |---------------------------------|-------------|
