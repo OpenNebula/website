@@ -1,6 +1,6 @@
 ---
-title: "NVIDIA Spectrum-X Integration"
-linkTitle: "NVIDIA Spectrum-X"
+title: "NVIDIA Spectrum-X Integration (EE)"
+linkTitle: "NVIDIA Spectrum-X (EE)"
 date: "2025-12-17"
 categories: ["networking"]
 pageintoc: "64"
@@ -31,12 +31,13 @@ The integration between OpenNebula and Spectrum-X is achieved by creating a clea
 ### Resource Mapping
 
 *   **Tenant Mapping**: An AI Factory tenant is directly mapped to a **User** in OpenNebula. This user is then granted access to a specific set of isolated resources (N/S vNet, BlueField-3 PCI Device and GPU PCI Device).
-
+<br>
+<br>
 *   **Network Mapping**: The integration distinguishes between two traffic patterns:
     *   **North-South (N/S) Network**: This is the standard management and external access network for a VM. It is implemented in OpenNebula as a regular **Virtual Network (vNet)**.
-    *   **East-West (E/W) Network**: This is the high-performance Spectrum-X fabric used for GPU-to-GPU communication.
-    The link between these two networks is established by storing the tenant E/W **VXLAN Network Identifier (VNI)** as a custom attribute, `SPX_VNI`, within the N/S Virtual Network template in OpenNebula. A tenant can attach a VM to its own E/W segment by attaching a specific BlueField-3 PCI device to the VM.
-
+    *   **East-West (E/W) Network**: This is the high-performance Spectrum-X fabric used for GPU-to-GPU communication.The link between these two networks is established by storing the tenant E/W **VXLAN Network Identifier (VNI)** as a custom attribute, `SPX_VNI`, within the N/S Virtual Network template in OpenNebula. A tenant can attach a VM to its own E/W segment by attaching a specific BlueField-3 PCI device to the VM.
+<br>
+<br>
 *   **Hardware Access**:
     *   NVIDIA GPUs and BlueField-3 SuperNICs are represented in OpenNebula as **PCI Devices**.
     *   Access is granted to tenants by assigning ownership or group access to these PCI devices.

@@ -1,5 +1,5 @@
 ---
-title: "OneKS Service Architecture"
+title: "Service Architecture"
 linkTitle: "Service Architecture"
 date: "2026-05-12"
 description:

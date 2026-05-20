@@ -1,5 +1,5 @@
 ---
-title: "K8s Cluster Profiles Customization"
+title: "Kubernetes Cluster Profiles Customization"
 linkTitle: "Profiles Customization"
 date: "2026-05-12"
 description:
