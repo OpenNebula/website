@@ -10,7 +10,7 @@ weight: "3"
 
 <a id="upgrade-single"></a>
 
-If you are upgrading from a 7.2.x installation you only need to follow a reduced set of steps. If you are running a 6.10.x version or older, please check [these set of steps]({{% relref "./upgrading_single.html#upgrade-6" %}}) (some additional ones may apply, please review them at the end of the section).
+If you are upgrading from a 7.2.x installation you only need to follow a reduced set of steps. If you are running a 6.10.x version or older, please check [this set of steps]({{% relref "./upgrading_single.html#upgrade-6" %}}) (some additional steps may be necessary, please review them at the end of this section).
 
 
 <!--# Upgrading Single Front-end Deployments -->
@@ -20,7 +20,7 @@ If you haven’t done so, please enable the [OpenNebula and needed 3rd party rep
 <a id="upgrade-7"></a>
 ## Upgrading from 7.2.x
 
-This section describes the installation procedure for systems that are already running a 7.2.x OpenNebula. The upgrade to OpenNebula 7.2 can be done directly following this section, you don’t need to perform intermediate version upgrades. The upgrade will preserve all current users, hosts, resources and configurations.
+This section describes the installation procedure for systems that are already running a 7.2.x OpenNebula. The upgrade to OpenNebula 7.2 can be done directly by following this section, you don’t need to perform intermediate version upgrades. The upgrade will preserve all current users, Hosts, resources and configurations.
 
 When performing a minor upgrade OpenNebula adheres to the following convention to ease the process:
 
@@ -31,13 +31,13 @@ When a critical bug requires an exception to the previous rules it will be expli
 
 ### Step 1. Stop OpenNebula Services
 
-Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migr, epil, save). Wait until these VMs get to a final state (run, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "../../../product/virtual_machines_operation/virtual_machines/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle.
+Before proceeding, make sure you don’t have any VMs in a transient state (prolog, migr, epil, save). Wait until these VMs reach a final state (running, suspended, stopped, done). Check the [Managing Virtual Machines guide]({{% relref "product/virtual_machines_operation/virtual_machines/vm_instances#vm-guide-2" %}}) for more information on the VM life-cycle in OpenNebula.
 
 Now you are ready to stop OpenNebula and any other related services you may have running, e.g. Sunstone or OneFlow. It’s preferable to use the system tools, like systemctl or service as root in order to stop the services.
 
 ### Step 2. Upgrade Front-end to the New Version
 
-Upgrade the OpenNebula software using the package manager of your OS. Refer to the [Single Front-end Installation guide]({{% relref "frontend_install" %}}) for a complete list of the OpenNebula packages installed on your system. Package repos need to be pointing to the latest version (7.2).
+Upgrade the OpenNebula software using the package manager of your OS. Refer to the [Single Front-end Installation guide]({{% relref "frontend_install" %}}) for a complete list of the OpenNebula packages installed on your system. Package repos must be pointing to the latest version (7.2).
 
 For example, in CentOS/RHEL simply execute:
 
@@ -56,7 +56,7 @@ apt-get install --only-upgrade opennebula
 
 Upgrade the OpenNebula node KVM or LXC packages, using the package manager of your OS.
 
-For example, in a rpm-based Linux distribution simply execute:
+For example, in an rpm-based Linux distribution simply execute:
 
 ```bash
 yum upgrade opennebula-node-kvm
