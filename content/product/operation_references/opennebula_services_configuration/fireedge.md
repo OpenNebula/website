@@ -21,6 +21,9 @@ weight: "3"
 
 The OpenNebula FireEdge server provides a **next-generation web-management interface** for remote OpenNebula Cluster provisioning as well as additional functionality to Sunstone. It’s a dedicated daemon installed by default as part of the [Single Front-end Installation]({{% relref "frontend_install" %}}), but can be deployed independently on a different machine. The server is distributed as an operating system package `opennebula-fireedge` with the system service `opennebula-fireedge`.
 
+{{< alert title="Note" type="info" >}}
+We are continually expanding the feature set of FireEdge Sunstone, and hence its configuration files are in constant change. In versions 7.2.1 and later, configuration files in ``/etc/one/fireedge/`` can be replaced by the ones that can be downloaded from [here](https://bit.ly/721-config) in order to activate the latest features.{{< /alert >}}
+
 ## Main Features
 
 - **Guacamole Proxy** for Sunstone to remotely access the VMs (incl., VNC, RDP, and SSH)
