@@ -52,10 +52,16 @@
 }
 
 .sidebar-title {
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 .body-bold.sidebar-title {
   color: var(--sidebar-title-color);
+}
+.sidebar-version {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: var(--sidebar-version-color);
 }
 
 nav.foldable-nav .ul-1 .with-child > label::before {
