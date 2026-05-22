@@ -15,12 +15,12 @@ weight: "7"
 
 ## Overview
 
-In this tutorial, you will deploy a Kubernetes Cluster on a bare metal server using the [OpenNebula OneKE](https://docs.opennebula.io/7.0/product/integration_references/marketplace_appliances/oneke/) appliance. The OneKE appliance helps you set up a functioning Kubernetes Cluster with minimal effort and configuration and deploy applications on it.  
+In this tutorial, you will deploy a Kubernetes Cluster on a bare metal server using the [OpenNebula OneKE Appliance](https://github.com/OpenNebula/one-apps/wiki/oneke_intro). The OneKE appliance helps you set up a functioning Kubernetes Cluster with minimal effort and configuration and deploy applications on it.  
 
 To follow this tutorial, you must first complete the miniONE installation with either on-prem resources meeting the relevant hardware requirements or an AWS `c5.metal` instance:
 
-* [miniONE on-prem installation]({{% relref "deploy_opennebula_onprem_with_minione" %}})
-* [miniONE AWS installation]({{% relref "deploy_opennebula_on_aws" %}})
+* [miniONE On-premises Installation]({{% relref "deploy_opennebula_onprem_with_minione" %}})
+* [miniONE AWS Installation]({{% relref "deploy_opennebula_on_aws" %}})
 
 After successfully completing the miniONE installation you will complete the following steps in this tutorial to launch a Kubernetes Cluster using the OneKE appliance:
 
