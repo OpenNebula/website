@@ -23,6 +23,8 @@ Include a high level description and a link to the documentation explaining the 
 
 The following issues have been solved in 7.2.2:
 
+* Fix `oneswap` vmware tools removal from a Windows Server 2025 [#814](https://github.com/OpenNebula/engineering/issues/814).
+
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
 
