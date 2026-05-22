@@ -5,15 +5,31 @@
     max-width: none !important;
     margin-right: 0 !important;
 }
+.dynamic-suggestions {
+    margin-bottom: 0rem;
+    padding: 0rem;
+}
+.dynamic-suggestions h3 {
+    margin-top: 0;
+}
+.hidden {
+    display: none !important;
+}
 </style>
+
 <div class="row flex-xl-nowrap" style="width:100%">
     <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
         
         <div class="td-content">
             <h1>Page Not Found</h1>
             <p>The documentation for OpenNebula is regularly updated. It's possible that the page you are looking for has moved.</p>
-            <p>You may find what you are looking for in one of the following sections:</p>
 
+            <div id="suggested-links-container" class="dynamic-suggestions hidden">
+                <p id="suggestion-heading"><strong>Were you looking for the following page?</strong></p>
+                <ul id="suggested-links-list"></ul>
+            </div>
+
+            <p>You may find what you are looking for in one of the following sections:</p>
             <ul>
                 <li>
                     <a href="{{ .Site.BaseURL }}/">Documentation Home</a>
@@ -31,4 +47,108 @@
         </div>
     </main>
 </div>
+
+<script type="module">
+    // 1. Paste or import the Link Matcher logic directly
+    function getSimilarity(a, b) {
+        const distance = levenshtein(a, b);
+        const maxLength = Math.max(a.length, b.length);
+        return maxLength === 0 ? 1.0 : 1.0 - distance / maxLength;
+    }
+
+    function levenshtein(a, b) {
+        const matrix = [];
+        for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
+                }
+            }
+        }
+        return matrix[b.length][a.length];
+    }
+
+    function suggestLinks(currentPath, sourceMap) {
+        const pathSegments = currentPath.split('/').filter(Boolean);
+        const target = pathSegments[pathSegments.length - 1] || "";
+        const matches = [];
+
+        for (const [url, info] of Object.entries(sourceMap)) {
+            const urlSegments = url.split('/').filter(Boolean);
+            const fileName = urlSegments[urlSegments.length - 1] || "";
+
+            let score = 0;
+            if (url.includes(target)) {
+                score = 0.9; 
+            } else {
+                score = getSimilarity(target, fileName);
+            }
+
+            if (score > 0.6) {
+                matches.push({ url, title: info.title, score });
+            }
+        }
+        return matches.sort((a, b) => b.score - a.score).slice(0, 5);
+    }
+
+    // 2. Fetch the source-map.json and manipulate the DOM
+    async function initLinkMatcher() {
+        try {
+            // Fetch source-map.json from the site root
+            const response = await fetch('{{ "source-map.json" | relURL }}');
+            if (!response.ok) return; // Silent fail to default view if map isn't found
+            
+            const sourceMap = await response.json();
+            const currentPath = window.location.pathname;
+            
+            const matches = suggestLinks(currentPath, sourceMap);
+            
+            if (matches.length > 0) {
+                const container = document.getElementById('suggested-links-container');
+                const heading = document.getElementById('suggestion-heading');
+                const list = document.getElementById('suggested-links-list');
+
+                // Adjust Heading Text based on grammar requirement
+                if (matches.length === 1) {
+                    heading.textContent = "Were you looking for the following page?";
+                } else {
+                    heading.textContent = "Were you looking for one of the following pages?";
+                }
+
+                // Render match list items safely
+                matches.forEach(match => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+
+                    console.log(match)
+                    
+                    // Prepend BaseURL if sourceMap keys don't include it natively
+                    // a.href = '{{ .Site.BaseURL }}' + match.url.replace(/^\//, '');
+                    a.href = match.url 
+                    a.textContent = match.title || match.url;
+                    
+                    li.appendChild(a);
+                    list.appendChild(li);
+                });
+
+                // Unhide the container
+                container.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error("Error matching 404 link alternative:", error);
+        }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', initLinkMatcher);
+</script>
 {{ end }}
