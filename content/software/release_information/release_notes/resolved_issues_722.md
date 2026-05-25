@@ -25,6 +25,7 @@ The following issues have been solved in 7.2.2:
 
 * Fix `oneswap` vmware tools removal from a Windows Server 2025 [#814](https://github.com/OpenNebula/engineering/issues/814).
 * Fix `oneswap` compatibility with vCenter 8.0.3 [7698](https://github.com/OpenNebula/one/issues/7698)
+* `oneswap` Add Windows OS Profile/Best practices VM template options to oneswap Windows conversion [7351](https://github.com/OpenNebula/one/issues/7351).
 
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
