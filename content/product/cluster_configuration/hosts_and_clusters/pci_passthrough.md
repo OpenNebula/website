@@ -17,7 +17,7 @@ It is possible to discover PCI devices in the Hosts and directly assign them to 
 The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA-related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.
 
 {{< alert title="Warning" type="warning" >}}
-The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different.**{{< /alert >}} 
+The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different.**{{< /alert >}}
 
 ## Requirements
 
@@ -142,7 +142,7 @@ cgroup_device_acl = [
 <a id="pci-config"></a>
 
 {{< alert title="Note" type="info" >}}
-There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the necessary owner:group for them to work{{< /alert >}} 
+There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the necessary owner:group for them to work{{< /alert >}}
 
 ## Driver Configuration
 
@@ -310,12 +310,15 @@ To add a PCI device to a template, select the **PCI Devices** tab when you are c
 
 It is possible use a PCI device as an NIC interface directly in OpenNebula. In order to do so you will need to follow the configuration steps mentioned in this guide, namely changing the device driver.
 
-For SR-IOV interfaces you can configure some parameters, in particular the following attributes can be defined for a SR-IOV interface:
+For SR-IOV interfaces, you can configure different parameters depending on whether the parent Physical Function (PF) of the Virtual Function (VF) is operating in legacy or switchdev mode:
 
-> - `MAC`
-> - `VLAN_ID`
-> - `SPOOFCHK`
-> - `TRUST`
+* **Legacy Mode**: In the traditional SR-IOV mode, parameters are applied directly to the hardware VF. The following attributes can be defined:
+  - `MAC`: Configures the MAC address of the VF interface.
+  - `VLAN_ID`: Sets the VLAN tag for the interface.
+  - `SPOOFCHK`: Enables or disables MAC/VLAN spoof checking.
+  - `TRUST`: Enables or disables VF trust status.
+
+* **Switchdev Mode**: In switchdev mode, VF parameters are controlled by host-side representor interfaces. These can then be attached to a virtual switch to establish port control. In this mode, only the `MAC` is applied directly in the VF interface. The rest of the control parameters are the same as those that are supported by the virtual switch driver of virtual network. As of now, only [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) is supported for Switchdev Mode
 
 The [context packages]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) support the configuration of the following attributes:
 
