@@ -218,7 +218,7 @@ Example:
 
 ### Per-Host Device Filtering
 
-The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) contains the definition of PCI device filtering rules which are applied globally across all hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific hosts, these attributes can be configured on a per-host or per-cluster basis within the corresponding host template:
+The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) contains the definition of PCI device filtering rules which are applied globally across all Hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific Hosts, these attributes can be configured on a per-host or per-cluster basis within the corresponding Host template:
 
 | Parameter        | Description                                                                        |
 |------------------|------------------------------------------------------------------------------------|
@@ -323,7 +323,7 @@ For SR-IOV interfaces you can configure some parameters, in particular the follo
 > - `SPOOFCHK`
 > - `TRUST`
 
-The [context packages]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) support the configuration of the following attributes:
+The [context packages]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) support the configuration of the following attributes:
 
 * `MAC`: It will change the mac address of the corresponding network interface to the MAC assigned by OpenNebula.
 * `IP`: It will assign an IPv4 address to the interface, assuming a `/24` netmask.
