@@ -51,7 +51,7 @@ add_drivers+="vfio vfio_iommu_type1 vfio_pci vfio_virqfd"
 and regenerate `initrd`:
 
 ```shell
-# dracut --force
+dracut --force
 ```
 
 ### Driver Blacklisting
