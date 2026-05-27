@@ -1,0 +1,44 @@
+<footer class="td-footer">   
+  <div class="one-footer-main-container">
+    
+    <div class="one-footer-top">
+      <div class="one-footer-left">
+        <span class="footer-logo">
+          {{- if ne .Site.Params.ui.navbar_logo false -}}      
+            {{ with resources.Get "icons/logo-light.svg" -}}
+              <span class="logo-light">{{ ( . | minify).Content | safeHTML }}</span>
+            {{ end -}}
+            {{ with resources.Get "icons/logo-dark.svg" -}}
+              <span class="logo-dark">{{ ( . | minify).Content | safeHTML }}</span>
+            {{ end -}}
+          {{ end -}}
+        </span>
+
+        <p class="one-footer-tagline">
+          The Open Source Cloud & Edge Computing Platform.
+        </p>
+
+        <div class="one-footer-links-container">
+          {{ with .Site.Params.links -}}
+          {{ with index . "user" -}}
+              {{- partial "footer/links.html"  . -}}
+          {{ end -}}
+          {{ end -}}
+        </div>
+      </div>
+      
+      <div class="one-footer-right">
+        <p class="one-footer-acks">
+          OpenNebula Next Generation incorporates key features funded by the Spanish Ministry for Digital Transformation and Civil Service, delivered through the ONEnextgen (UNICO IPCEI‑2023‑003) and ONEedge5G (TSI‑064200‑2023‑1) projects. These initiatives are co‑funded by the European Union’s NextGenerationEU recovery and resilience fund (RRF).
+        </p>
+      </div>
+      
+    </div>
+
+    <div class="one-footer-copyright text-center">
+      <p>Copyright 2002-2026 © OpenNebula Project (OpenNebula.io). All Rights Reserved. Please send comments to the <a href="mailto:webmaster@opennebula.io">webmaster</a>. Read the <a href="http://opennebula.io/legal">Legal Notice</a>. This site is hosted by <a href="http://opennebula.io/">OpenNebula Systems</a>.</p>
+    </div>
+
+  </div>
+</footer>
+

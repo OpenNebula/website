@@ -38,10 +38,10 @@ $ cat /var/lib/one/.one/sunstone_auth
 serveradmin:1612b78a4843647a4b541346f678f9e1b43bbcf9
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The `serveradmin` password is hashed in the database. You can use the `--sha256` flag when issuing `oneuser passwd` command for this user.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 When Sunstone is running in a different machine than oned you should use an SSL connection. This can be archived with an SSL proxy like stunnel or apache/nginx acting as proxy. After securing the OpenNebula XML-RPC connection, configure Sunstone to use https with the proxy port:
 
 ```yaml

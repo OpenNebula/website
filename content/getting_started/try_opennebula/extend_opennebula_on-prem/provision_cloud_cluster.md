@@ -12,6 +12,6 @@ weight: "5"
 
 <!--# Provisioning an Edge Cluster -->
 
-{{< alert title="Provisioning Functionality" color="success" >}}
+{{< alert title="Provisioning Functionality" type="info" >}}
 OpenNebula {{< version >}} has removed the legacy provisioning component, incorporating internal code changes that lay the groundwork for a complete rewrite. The fully redesigned provisioning system, featuring enhanced support for additional providers, will be released in a subsequent maintenance update.
 {{< /alert >}}

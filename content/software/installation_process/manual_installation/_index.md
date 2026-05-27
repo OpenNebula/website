@@ -2,7 +2,7 @@
 title: "Manual Installation with System Packages"
 linktitle: "Manual Installation with Packages"
 date: "2025-02-17"
-description: "Manually install the Front-end and hypervisors from the OpenNebula packages"
+description: "Manually install the Front-end and hypervisors from the OpenNebula packages."
 categories:
 pageintoc: "168"
 tags:

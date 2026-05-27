@@ -21,10 +21,10 @@ This guide may be considered a continuation of the [Virtual Machines Templates](
 
 ### Creating and Listing VMs
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Read the [Creating Virtual Machines guide]({{% relref "../virtual_machines/vm_templates#vm-guide" %}}) for more information on how to manage and instantiate VM templates.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Read the complete reference for [Virtual Machine templates]({{% relref "../../operation_references/configuration_references/template#template" %}}).{{< /alert >}} 
 
 Assuming we have a VM template registered called **vm-example** with ID 6, then we can instantiate the VM by issuing a:
@@ -140,7 +140,7 @@ $ onevm list --search 'VM.NAME=test-vm&VM.UNAME=oneadmin'
  2100  oneadmin oneadmin test-vm2 pend    0   0K      12d 17h59
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This feature is only available for **MySQL** backend with version **5.6** or later.{{< /alert >}} 
 
 
@@ -162,7 +162,7 @@ There are two different ways to temporarily stop the execution of a VM: *short* 
 * `poweroff`: Gracefully powers off a running VM by sending the ACPI signal. It is similar to suspend but without saving the VM state. When the VM is resumed it will boot immediately in the same Host.
 * `poweroff --hard`: Same as above but the VM is immediately powered off. Use this action when the VM doesn’t have ACPI support.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When the guest is shut down from within the VM, OpenNebula will put the VM in the `poweroff` state.{{< /alert >}} 
 
 You can also plan a **long term pause**. The Host resources used by the VM are freed and the Host is cleaned. VM disk state is saved in the system datastore. The following actions are useful if you want to preserve network and storage allocations (e.g., IPs, persistent disk images):
@@ -196,7 +196,7 @@ Then you can resume it with:
 
 ## Hotplug Devices to a Virtual Machine
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Hotplugging might not be available for every supported hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.{{< /alert >}} 
 
 ### Disk Hot-plugging
@@ -340,7 +340,7 @@ $ onevm pci-detach alpine01 0
 
 ## Virtual Machine System Snapshots
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Snapshotting might not be available for every supported hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.
 
 A system snapshot will contain the current disks and memory state. You can create, delete, and restore snapshots for running VMs.{{< /alert >}}  
@@ -358,7 +358,7 @@ $ onevm snapshot-revert 4 0 --verbose
 VM 4: snapshot reverted
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 For snapshots for VMs running under the **KVM hypervisor** you should consider the following limitations:
 
 - Snapshots are only available if all the VM disks use the [qcow2 driver]({{% relref "../../operation_references/configuration_references/img_template#img-template" %}}).{{< /alert >}}  
@@ -372,7 +372,7 @@ There are two kinds of operations related to disk snapshots:
 * `disk-snapshot-create`, `disk-snapshot-revert`, `disk-snapshot-delete`, `disk-snapshot-rename`: Allows the user to take snapshots of the disk states and return to them during the VM life-cycle. It is also possible to rename or delete snapshots.
 * `disk-saveas`: Exports VM disk (or a previously created snapshot) to an Image in an OpenNebula Datastore. This is a live action.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Disk snapshots might have different limitations depending on the hypervisor. Please check the limitations of the specific virtualization driver you’re using to ensure this feature is available before using it.{{< /alert >}} 
 
 <a id="vm-guide-2-disk-snapshots-managing"></a>
@@ -397,12 +397,12 @@ Disk snapshots are managed with the following commands:
 
 With these combinations (CEPH and qcow2 datastores, and KVM hypervisor) you can [enable QEMU Guest Agent]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#enabling-qemu-guest-agent" %}}). With this agent enabled the filesystem will be frozen while the snapshot is being taken.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 OpenNebula will not automatically handle live `disk-snapshot-create` and `disk-snapshot-revert` operations for VMs in `RUNNING` state if the virtualization driver does not support it (check the limitations of the corresponding virtualization driver guide to know if this feature is available for your hypervisor). In this case the user needs to suspend or power off the VM before creating the snapshot.{{< /alert >}} 
 
 See the [Storage Driver]({{% relref "../../../product/integration_references/infrastructure_drivers_development/sd#sd-tm" %}}) guide for a reference on the driver actions invoked to perform live and non-live snapshots.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Depending on the `DISK/CACHE` attribute the live snapshot may or may not work correctly. To be sure, you can use `CACHE=writethrough`, although this delivers the slowest performance.{{< /alert >}} 
 
 ### Persistent Images and Disk Snapshots
@@ -415,7 +415,7 @@ These actions are available for both persistent and non-persistent Images. In th
 
 Any VM disk can be saved to a new Image (if the VM is in `RUNNING`, `POWEROFF`, `SUSPENDED`, `UNDEPLOYED`, or `STOPPED` states). This is a live operation that happens immediately. This operation accepts `--snapshot <snapshot_id>` as an optional argument, which specifies a disk snapshot to use as base of the new Image, instead of the current disk state (value by default).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This action is not in sync with the hypervisor. If the VM is in `RUNNING` state make sure the disk is unmounted (preferred), synced, or quiesced in some way or another before doing the `disk-saveas` operation.{{< /alert >}} 
 
 <a id="vm-guide2-resizing-a-vm"></a>
@@ -446,7 +446,7 @@ $ onevm resume web_vm
 
 If you need to resize the capacity in the RUNNING state you have to set up some extra attributes in the VM template. These attributes **must be set before the VM is started**. These attributes are driver-specific, more info for [KVM]({{% relref "../../operation_references/hypervisor_configuration/kvm_driver#kvm-live-resize" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Hotplug is only implemented for KVM. Added CPUs will be in offline state after the resize. Enable them with `echo 1 > /sys/devices/system/cpu/cpu<ID>/online`{{< /alert >}} 
 
 <a id="vm-guide2-resize-disk"></a>
@@ -472,7 +472,7 @@ $ onevm disk-resize <vm_id> <disk_id> <new_size> # <new_size> must be greater th
 
 This will make the VM disk grow on the hypervisor node. Then the contextualization service running inside the guest OS will expand the filesystem with the newly available free space. The support for this filesystem expansion depends on the Guest OS.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 In FreeBSD the resize of the root filesystem inside the guest OS is not performed automatically by the Contextualization Service. This leads to [filesystem corruption](https://github.com/OpenNebula/addon-context-linux/issues/298) and permanent data loss. This only applies to the partition mounted on `/` , partitions with other mountpoints will be resized.{{< /alert >}} 
 
 <a id="vm-updateconf"></a>
@@ -495,10 +495,10 @@ Some of the VM configuration attributes defined in the VM template can be update
 
 Visit the [Virtual Machine Template reference]({{% relref "../../operation_references/configuration_references/template#template" %}}) for a complete description of each attribute.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This action might not be supported for `RUNNING` VMs depending on the hypervisor. Please check the limitation section of the specific virtualization driver.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In running state only changes in CONTEXT take effect immediately, other values may need a VM restart. Also, the action may fail and the context will not be changed if the VM is running. You can try to manually trigger the action again.{{< /alert >}} 
 
 <a id="vm-guide2-clone-vm"></a>
@@ -605,7 +605,7 @@ END_VALUE="-1"
 DONE="-1"
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The attributes `ID`, `PARENT_ID` and `TYPE` are OpenNebula system attributes and can’t be modified. For more details about the attributes which can be modified, see [Scheduled Action Template]({{% relref "../../operation_references/configuration_references/template#template-schedule-actions" %}}){{< /alert >}} 
 
 ### Periodic Punctual Actions
@@ -735,7 +735,7 @@ TIME="1537653600"
 
 In this example, the first argument would be the disk and the second the snapshot name.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The arguments are mandatory. If you use the CLI or Sunstone they are generated automatically for the actions.{{< /alert >}} 
 
 <a id="vm-life-cycle-and-states"></a>
@@ -744,7 +744,7 @@ The arguments are mandatory. If you use the CLI or Sunstone they are generated a
 
 The life-cycle of a Virtual Machine within OpenNebula includes the following stages:
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that this is a simplified version. If you are a developer you may want to take a look at the complete diagram referenced in the [Virtual Machines States Reference guide]({{% relref "../../operation_references/configuration_references/vm_states#vm-states" %}}).{{< /alert >}} 
 
 | Short state   | State              | Meaning                                                                                                                                                                                                                                                                                                  |
@@ -940,7 +940,7 @@ Sunstone provides several different methods to access your VM console and deskto
 
 [FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-configuration" %}}) automatically installs dependencies for Guacamole connections which are necessary to use VNC, RDP, and SSH.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The [FireEdge]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) server must be running to get Guacamole connections working.{{< /alert >}} 
 
 <a id="requirements-remote-access-sunstone"></a>
@@ -1007,13 +1007,13 @@ RDP connection permits users to **choose the screen resolution** from Sunstone i
 
 ![sunstone_guac_rdp_interface](/images/sunstone_guac_rdp_interface.png)
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 **The RDP connection is only allowed to activate on a single NIC**. In any case, the connection will only contain the IP of the first NIC with this property enabled.
 The RDP connection will work the **same way for NIC ALIASES**.{{< /alert >}}  
 
 If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the RDP connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If your Windows VM has a firewall enabled, you can set the following in the start script of the VM (in the Context section of the VM Template):
 
 ```
@@ -1043,7 +1043,7 @@ SSH is standardized to use port 22 and this will be the proper value in most cas
 need to specify the **SSH port in the contextualization section as** `SSH_PORT` if you are
 not using the standard port.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If the VM template has a `PASSWORD` and `USERNAME` set in the contextualization section, this will be reflected in the SSH connection. You can read about them in the [Virtual Machine Definition File reference section]({{% relref "../../operation_references/configuration_references/template#template-context" %}}).{{< /alert >}} 
 
 For example, to allow connection by username and password to a guest VM, first make sure you
@@ -1066,7 +1066,7 @@ root@<guest-VM>:~$ adduser <username>
 
 ![fireedge_sunstone_ssh_list](/images/fireedge_sunstone_ssh_list.png) ![fireedge_sunstone_ssh_console](/images/fireedge_sunstone_ssh_console.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Guacamole SSH uses RSA encryption. Make sure the VM SSH accepts RSA, otherwise you need to explicitly enable it in the VM SSH configuration (HostkeyAlgorithms and PubkeyAcceptedAlgorithms set as ‘+ssh-rsa){{< /alert >}} 
 
 <a id="onevm-command"></a>

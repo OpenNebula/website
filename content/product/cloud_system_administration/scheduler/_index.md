@@ -1,6 +1,6 @@
 ---
 title: "Resource Scheduler"
-description: "Configure scheduling of cloud resources using various methods to optimize the use of cloud resources"
+description: "Configure scheduling of cloud resources using various methods to optimize the use of cloud resources."
 categories:
 pageintoc: ""
 tags:

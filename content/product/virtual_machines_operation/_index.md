@@ -2,7 +2,7 @@
 title: "Virtual Machines Operation"
 linkTitle: "Workload Operation"
 date: "2025-02-17"
-description: "Complete information for creating and managing Virtual Machines. These guides include VM definitions, configurations for the supported networking architectures, creating VM backups, operating system parameters, and services comprising coordinated multiple Virtual Machines"
+description: "Complete information for creating and managing Virtual Machines. These guides include VM definitions, configurations for the supported networking architectures, creating VM backups, operating system parameters, and services comprising coordinated multiple Virtual Machines."
 categories:
 pageintoc: "80"
 tags:
@@ -19,7 +19,7 @@ weight: "4"
 
 This Chapter contains documentation on how to create and manage Virtual Machines and their associated objects.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Through these guides Virtual Machine or VM is used as a generic abstraction that may represent real VMs, micro-VMs, or system containers.{{< /alert >}} 
 
 ## How Should I Read This Chapter

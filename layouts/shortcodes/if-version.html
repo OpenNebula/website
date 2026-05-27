@@ -1,0 +1,30 @@
+{{- $currentVersion := .Site.Params.version -}}
+{{- $targetVersion := .Get "is" -}}
+{{- $notVersion := .Get "not" -}}
+
+{{- if $targetVersion -}}
+    {{- if eq (string $currentVersion) (string $targetVersion) -}}
+        {{ .Inner }}
+    {{- end -}}
+{{- else if $notVersion -}}
+    {{- if ne (string $currentVersion) (string $notVersion) -}}
+        {{ .Inner }}
+    {{- end -}}
+{{- else -}}
+    {{ .Inner }}
+{{- end -}}
+<!-- {{ $currentVersion := .Site.Params.version }}
+{{ $targetVersion := .Get "is" }}
+{{ $notVersion := .Get "not" }}
+
+{{ if $targetVersion }}
+    {{ if eq (string $currentVersion) (string $targetVersion) }}
+        {{ .Inner | markdownify }}
+    {{ end }}
+{{ else if $notVersion }}
+    {{ if ne (string $currentVersion) (string $notVersion) }}
+        {{ .Inner | markdownify }}
+    {{ end }}
+{{ else }}
+    {{ .Inner | markdownify }}
+{{ end }} -->

@@ -23,7 +23,7 @@ What’s happening behind the scenes is that the Sunstone server you are using i
 
 ![zoneswitchsunstone](/images/zoneswitchsunstone.png)
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Uploading Virtual Machine Images over Sunstone works only for the main Zone to which the particular Sunstone instance belongs, not with other Zones users can switch to.{{< /alert >}} 
 
 <a id="cli-federation-usage"></a>

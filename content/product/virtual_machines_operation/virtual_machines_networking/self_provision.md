@@ -71,10 +71,10 @@ NIC = [ NETWORK = "MyVNET"]
 
 A reservation can be also extended with new addresses. That is, you can add a new reservation to an existing one. This way, users can refer to their own network with a controlled and deterministic address space.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Reservation increase lease counters on the user and group, and they can be limited through a quota.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The reservation interface is exposed by Sunstone in a very convenient way.{{< /alert >}} 
 
 ## Virtual Network Templates

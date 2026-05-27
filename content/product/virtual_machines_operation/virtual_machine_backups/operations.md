@@ -47,7 +47,7 @@ VM backups can be taken live or while the VM is powered off. The operation compr
 - *Backup*: Full disk copies (or increments) are uploaded to the backup server. In this step, OpenNebula will use the specific datastore drivers for the backup system.
 - *Post-backup*: Cleans any temporal file in the hypervisor.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In order to save space in the backup system, RAW disk backups are converted and stored always in Qcow2 format.{{< /alert >}} 
 
 ## Limitations

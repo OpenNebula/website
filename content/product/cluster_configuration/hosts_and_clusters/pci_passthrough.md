@@ -16,7 +16,7 @@ It is possible to discover PCI devices in the Hosts and directly assign them to 
 
 The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA-related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different.**{{< /alert >}} 
 
 ## Requirements
@@ -141,7 +141,7 @@ cgroup_device_acl = [
 
 <a id="pci-config"></a>
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the necessary owner:group for them to work{{< /alert >}} 
 
 ## Driver Configuration

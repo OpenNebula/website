@@ -17,7 +17,7 @@ This guide describes how to use the [Open vSwitch](http://openvswitch.org/) netw
 
 The VLAN ID will be the same for every interface in a given network, calculated automatically by OpenNebula. It may also be forced by specifying an `VLAN_ID` parameter in the [Virtual Network template]({{% relref "../../operation_references/configuration_references/vnet_template#vnet-template" %}}).
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This driver doesn’t support Security Groups.{{< /alert >}} 
 
 
@@ -77,7 +77,7 @@ The following configuration parameters can be adjusted in `/var/lib/one/remotes/
 | `:keep_empty_bridge`   | Set to `true` to preserve bridges with no virtual interfaces left.                                                                         |
 | `:ovs_bridge_conf`     | *(Hash)* Options for Open vSwitch bridge creation                                                                                          |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Remember to run `onehost sync -f` to synchronize the changes to all the nodes.{{< /alert >}} 
 
 <a id="ovswitch-net"></a>
@@ -105,7 +105,7 @@ VLAN_ID = 50          # Optional
 ...
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Currently, if IP Spoofing is enabled, only one NIC per VM for the same Open vSwith network can be attached.{{< /alert >}} 
 
 ### Multiple VLANs (VLAN trunking)
@@ -161,7 +161,7 @@ In this example, the driver will check for the existence of bridge `ovsvxbr0.100
 
 ## Open vSwitch with DPDK
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This section is only relevant for KVM guests.{{< /alert >}} 
 
 This section describes how to use a DPDK datapath with the Open vSwitch drivers. When using the DPDK backend, the OpenNebula drivers will automatically configure the bridges and ports accordingly.
@@ -175,7 +175,7 @@ Please consider the following when using the DPDK datapath for Open vSwitch:
 
 ### Host Configuration
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This section will use an Ubuntu22.04 server to show working configurations. You may need to adapt them to other Linux distributions.{{< /alert >}} 
 
 #### Set up Hugepages and iommu
@@ -198,7 +198,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on default_hugepagesz=1G hu
 # update-grub
 ```
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 Use `amd_iommu=on` instead for Hosts with an AMD CPU{{< /alert >}} 
 
 Then reboot the system. After rebooting make sure that the hugepages mount can be seen so the applications can access them.
@@ -233,7 +233,7 @@ Node 1 HugePages_Free:    125
 Node 1 HugePages_Surp:      0
 ```
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 To run the `numastat -m` command, you can install `numactl`.{{< /alert >}}
 
 And finally iommu should be also enabled:
@@ -257,7 +257,7 @@ We just need to install the dpdk version of the package and update alternatives 
 # ovs-vsctl set Open_vSwitch . other_config:dpdk-init=true
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Make sure the openvswitch software you install has been compiled with dpdk support. You should be able to see if this is the case by querying its dependencies with the package manager.{{< /alert >}}
 
 Now, restart the openvswitch service and check dpdk is enabled:
@@ -319,7 +319,7 @@ Network devices using DPDK-compatible driver
 0000:83:00.1 'Ethernet Controller X710 for 10GbE SFP+ 1572' drv=vfio-pci unused=i40e
 ```
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 For this operation to work, you might need to enable the `vfio-pci` kernel module.{{< /alert >}}
 
 Now we can add the cards to an Open vSwitch port, or in this example create a bond port with both:

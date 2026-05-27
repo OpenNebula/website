@@ -44,7 +44,7 @@ The deployment procedure consists of the following high-level steps:
 1. Launch the deployment automation commands.
 1. Launch the verification automation command.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For detailed information about how to use the required parameters and which configuration files to modify, please refer to the `README` of the [Certified Hardware Ampere for OpenNebula](https://github.com/OpenNebula/certified-hardware-ampere).
 {{< /alert >}}
 

@@ -61,7 +61,7 @@ INCREMENT_MODE = "SNAPSHOT"
 
 ### Priority Setting
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The number of concurrent backup operations are controlled globally, [please refer to the Backup Scheduler section for more details]({{% relref "operations#vm-backups-scheduler" %}}){{< /alert >}} 
 
 Finally, you have the option to add attributes to customize the execution of the Backup Job. The `PRIORITY` attribute, ranging from 0 to 99, determines the execution order of Backup Jobs. Users can freely assign values up to 49, while the range of 50-99 is reserved for administrators to prioritize system-wise Backup Jobs.

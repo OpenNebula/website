@@ -106,7 +106,7 @@ From this section, users can define multiple configuration options for themselve
 - **Login token**: allows the creation of a new token for the user.
 - **Two Factor Authentication**: allows users to register an app to perform [Two Factor Authentication]({{% relref "../../cloud_system_administration/authentication_configuration/sunstone_auth#sunstone-2f-auth" %}}).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 All the configurations set in this section will be in the user template.{{< /alert >}}
 
 ![fireedge_sunstone_settings](/images/fireedge_sunstone_settings.png)
@@ -196,7 +196,7 @@ On Sunstone each view is defined by a folder that has the YAML files for the con
 
 In the following tables, the description field contains the expected behavior when it is set to `true`.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The attributes can be modified only if they come in the YAML file by default. If an attribute is not present, it has the same behavior as when it is set to false.{{< /alert >}}
 
 ### Actions
@@ -383,12 +383,12 @@ To set these VNC connection configurations we must:
 2. Go to the “Advanced options” step and click on Input/Output.
 3. Under the “Graphics” section there are all the VNC configurations.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In case the VNC client is blurry or has any kind of visual tearing, try switching to the **virtio** video device type instead. This can be done by selecting the VM and going to the `Configuration` tab.
 ![fireedge_sunstone_update_vm_config](/images/sunstone_update_vm_config.png)
 {{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Due to hypervisor limitations it is not possible to share the clipboard with the VM. For this we recommend the use of RDP or SSH.{{< /alert >}}
 
 ![fireedge_sunstone_vnc](/images/sunstone-vnc.png)
@@ -402,7 +402,7 @@ At the top of the console you can find the buttons for the following actions:
 - **Reconnect**: Reconnect the VNC console.
 - **Lock/Unlock**: Lock/Unlock the use of the keyboard and mouse.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Sunstone does not connect directly to the VNC port, located in the VM template. Sunstone creates an SSH tunnel to the VNC port on any available port.{{< /alert >}}
 
 ### OpenNebula RDP remote connection.
@@ -417,10 +417,10 @@ Sunstone also admits direct connections using RDP. This kind of connection is bo
 
 ![fireedge_sunstone_rdp](/images/sunstone-rdp.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For RDP connections to work, a service such as [XRPD](https://www.xrdp.org/) is required on the VM to which you want to connect. Also, depending on the configuration of your RDP service, the following parameters can be added in the context of the VM:
 
 | Attribute      | Description                                                                                                                                                                          |
@@ -438,7 +438,7 @@ At the top of the console you can find the buttons for the following actions:
 - **Screenshot**: Take a screenshot from the VNC console.
 - **Reconnect**: Reconnect the VNC console.
 - **Download connection file**: Download the connection file for use with [Microsoft Remote Desktop](https://apps.microsoft.com/detail/9wzdncrfj3ps?hl=es-es&gl=ES).
-  > {{< alert title="Note" color="success" >}}
+  > {{< alert title="Note" type="info" >}}
   > In order to be able to connect from an external application, you must have access to the IP address that appears in the file.{{< /alert >}}
 
 ### OpenNebula SSH remote connection.
@@ -453,10 +453,10 @@ Sunstone also allows direct connections using SSH. This kind of connection is bo
 
 ![fireedge_sunstone_ssh](/images/sunstone-ssh.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To enable them on a running VM, you must follow steps 3 to 5 once you click the VM you want.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To make the connection by this means, it must be done with username and password. it is not possible to send the SSH key.{{< /alert >}}
 
 ### Actions in SSH console
@@ -494,5 +494,5 @@ At the top of the console you can find the buttons for the following actions:
   - **Font Size**: The size of the font to use, in points. This parameter is optional. If not specified, the default of 12 will be used instead.
 
 - **Download connection file**: Download the connection file for use with [TigerVNC Viewer](https://tigervnc.org/).
-  > {{< alert title="Note" color="success" >}}
+  > {{< alert title="Note" type="info" >}}
   > In order to be able to connect from an external application, you must have access to the IP address that appears in the file.{{< /alert >}}

@@ -23,17 +23,17 @@ Additionally, each VXLAN has an associated multicast address to encapsulate L2 b
 
 By default, this driver uses the default linux UDP server port 8472 to transfer VXLAN traffic between Hosts.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Please note that the official IANA port for VXLAN transport is UDP 4789. If you use hardware equipment, take this into consideration.{{< /alert >}}
 
 VXLAN traffic is forwarded to a physical device; this device can be set (optionally) to be a VLAN-tagged interface, but in that case you must make sure that the tagged interface is manually created first in all the Hosts.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The network interface that will act as the physical device **must** have an IP.{{< /alert >}}
 
 The bridge `${PHYSDEV}.${VXLAN_ID}` (PHYSDEV is the physical interface and VXLAN_ID is the VxLAN VNI) will be created and the VM NICs will be attached to it. This has a very important implication: **the amount of characters for a bridge name that iproute2 allows is 15**
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If the physical interface name and the VNI are longer than 15 characters the deploy of any VM with that Virtual Network will fail. The solution can be creating an alternative name (alias) for the interface. For instance, if you have the interface `en0s0f0p0`, you can execute{{< /alert >}} 
 
 `sudo ip link set en0s0f0p0 alias vx`
@@ -99,7 +99,7 @@ The following configuration parameters can be adjusted in `/var/lib/one/remotes/
 | `:ip_bridge_conf`    | *(Hash)* Options passed to `ip` cmd. on bridge create (`ip link add <bridge> type bridge ...`) |
 | `:ip_link_conf`      | *(Hash)* Options passed to `ip` cmd. on VLAN interface create (`ip link add`)                  |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Remember to run `onehost sync -f` to synchronize the changes to all the nodes.{{< /alert >}} 
 
 Example:
@@ -142,7 +142,7 @@ To create a VXLAN network, include the following information in the template:
 | `VXLAN_MC`          | Base multicast address for each VLAN. The MC address is `:vxlan_mc` + `:vlan_id`                                                                    | NO                                   |
 | `IP_LINK_CONF`      | Options passed to `ip` cmd. on operations specific to this Virtual Network.<br/>Syntax: `IP_LINK_CONF="option1=value1,option2=,option3=value3,..."` | NO                                   |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 `VXLAN_MODE`, `VXLAN_TEP` and `VXLAN_MC` can be defined system-wide in `/var/lib/one/remotes/etc/vnm/OpenNebulaNetwork.conf`. To use per network configuration you may need the `IP_LINK_CONF` attribute.{{< /alert >}} 
 
 For example, you can define a *VXLAN Network* with the following template:
@@ -243,5 +243,5 @@ You need to update the `/var/lib/one/remotes/etc/vnm/OpenNebulaNetwork.conf` fil
 
 After updating the configuration file on the Front-end, don’t forget to execute `onehost sync -f` to distribute the changes on the hypervisor nodes.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 It is not recommended to set `:nolearing:` in `:ip_link_conf:` system-wide attribute in `/var/lib/one/remotes/etc/vnm/OpenNebulaNetwork.conf` because that doesn’t allow the coexistence of VLAN and VXLAN with BGP EVPN Virtual Networks on Hosts. For VXLAN with BGP EVPN, set `IP_LINK_CONF="nolearning="` attribute in the Virtual Network definition instead.{{< /alert >}} 

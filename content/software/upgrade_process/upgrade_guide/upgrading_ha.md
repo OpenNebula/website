@@ -33,10 +33,10 @@ You need to stop all the nodes in the cluster to upgrade them at the same time. 
 
 Stop OpenNebula and any other related services you may have running: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running FireEdge service behind Apache/Nginx, please also stop the Apache/Nginx service.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Make sure that every OpenNebula process is stopped. The output of `systemctl list-units | grep opennebula` should be empty.{{< /alert >}} 
 
 ## Step 4. Upgrade the Leader
@@ -68,7 +68,7 @@ MySQL DB opennebula at localhost restored.
 
 Synchronize the configuration files to the followers:
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Before copying, gather the `SERVER_ID` from your `/etc/one/oned.conf files` on each follower, then replace those values afterwards.{{< /alert >}} 
 
 ```default
@@ -87,7 +87,7 @@ $ chown -R oneadmin:oneadmin /var/lib/one/remotes/etc
 
 Start OpenNebula and any other related services: OneFlow, OneGate & FireEdge. It’s preferable to use the system tools, like `systemctl` or `service` as `root` in order to stop the services.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you are running FireEdge service behind Apache/Nginx, please also start the Apache/Nginx service.{{< /alert >}} 
 
 ## Step 8. Check Cluster Health

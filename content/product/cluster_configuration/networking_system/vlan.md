@@ -63,7 +63,7 @@ The following configuration parameters can be adjusted in `/var/lib/one/remotes/
 | `:ip_bridge_conf`    | *(Hash)* Options passed to `ip` cmd. on bridge create (`ip link add <bridge> type bridge ...`) |
 | `:ip_link_conf`      | *(Hash)* Options passed to `ip` cmd. on VLAN interface create (`ip link add`)                  |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Remember to run `onehost sync -f` to synchronize the changes to all the nodes.{{< /alert >}} 
 
 Example:
@@ -127,7 +127,7 @@ However, for the most common scenarios the 802.1Q driver can produce the double 
 - Tagged traffic from the VM using the CVLANS will be also tagged with the transport VLAN.
 - Tagged traffic from the VM using any other VLAN ID will be discarded.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When `CVLANS` is not configured the bridge will add the VLAN ID tag to any traffic coming from the VM (tagged or not). There is no filtering of the VLAN IDs used by the VM.{{< /alert >}} 
 
 ### OpenNebula Configuration
@@ -153,7 +153,7 @@ VLAN_ID  = 50                 # Service VLAN ID
 CVLANS   = "101,103,110-113"  # Customer VLAN ID list
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 `CVLANS` can be updated and will be dynamically reconfigured in any existing bridge{{< /alert >}} 
 
 ### Implementation Details

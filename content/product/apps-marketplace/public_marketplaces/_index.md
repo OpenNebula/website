@@ -1,7 +1,7 @@
 ---
 title: "Public Marketplaces"
 date: "2025-02-17"
-description: "Configure the available Marketplaces or add new Public Marketplaces"
+description: "Configure the available Marketplaces or add new Public Marketplaces."
 categories:
 pageintoc: "184"
 tags:

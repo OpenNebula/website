@@ -87,7 +87,7 @@ There are four important sections:
 > * **Generic Attributes**, under `DATASTORE TEMPLATE` you can find configuration attributes and custom tags (see below).
 > * **Images**, the list of images currently stored in this datastore.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The example above shows what a basic image datastore looks like. A Files and Kernels Datastore will look mostly the same but with different values in the type fields.{{< /alert >}} 
 
 ### System Datastore
@@ -160,7 +160,7 @@ Also, there are a set of common attributes that can be used in any datastore to 
 
 The Files & Kernels Datastore is a special datastore type to store plain files to be used as kernels, ram-disks, or context files. [See here to learn how to define them]({{% relref "file_ds#file-ds" %}}).
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If you  are using `BRIDGE_LIST` you need to install any tool needed to access the underlying storage (e.g., Ceph `BRIDGE_LIST` servers need Ceph client tools), as well as generic tools like `qemu-img`.{{< /alert >}} 
 
 ## Disable a System Datastore

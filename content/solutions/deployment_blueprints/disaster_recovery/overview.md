@@ -28,7 +28,7 @@ Following this guide, you can:
 - Design your own recovery procedures for failover and failback, based on the provided examples
 - Test the DR solution
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This guide does not cover setting up the Ceph clusters on your OpenNebula infrastructure. For details on configuring Ceph as your storage system, see [Ceph Datastore]({{% relref "ceph_ds" %}}). You can also deploy OpenNebula with Ceph storage using [OneDeploy](https://github.com/OpenNebula/one-deploy); for details please see [Deploying a Single Front-end with Ceph Storage](https://github.com/OpenNebula/one-deploy/wiki/arch_single_ceph) in the OneDeploy Wiki.
 {{< /alert >}}
 
@@ -44,6 +44,6 @@ Configuring the DR solution involves these high-level steps:
 ### Additional Information Resources
 
 * [Ceph Datastore]({{% relref "ceph_ds" %}})
-* [Ceph Documentation](https://docs.ceph.com/en/mimic/)
-* [RBD Mirroring](https://docs.ceph.com/en/mimic/rbd/rbd-mirroring/)
+* [Ceph Documentation](https://docs.ceph.com/en/latest/)
+* [RBD Mirroring](https://docs.ceph.com/en/latest/rbd/rbd-mirroring/)
 

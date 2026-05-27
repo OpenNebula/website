@@ -185,7 +185,7 @@ View definitions are placed in the `/etc/one/fireedge/sunstone/views` directory.
 ...
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The easiest way to create a custom view is to copy the admin folder and modify or delete tab files as needed. Also, configure sunstone-views.yaml if needed.{{< /alert >}} 
 
 <a id="fireedge-sunstone-views-custom"></a>

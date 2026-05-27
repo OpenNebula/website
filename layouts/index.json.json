@@ -1,0 +1,11 @@
+{
+{{- $pages := .Site.RegularPages -}}
+{{- range $i, $p := $pages -}}
+  {{ if $i }},{{ end }}
+  "{{ $p.RelPermalink }}": {
+    "source": "{{ $p.File.Path }}",
+    "absolute_source": "{{ $p.File.Filename }}",
+    "title": "{{ $p.Title }}"
+  }
+{{- end -}}
+}

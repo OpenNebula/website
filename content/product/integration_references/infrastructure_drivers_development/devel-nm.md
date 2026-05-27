@@ -24,10 +24,10 @@ To enable a new network manager driver, the first requirement is to make a new d
 - **vnet_create**: Virtual Network is being added to OpenNebula, do driver initialization.
 - **vnet_delete**: Virtual Network is being removed from OpenNebula, do a clean-up.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The above three files **must exist**. If no action is required in them a simple `exit 0` will be enough.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Remember that any change in the `/var/lib/one/remotes` directory won’t be effective in the Hosts until you execute, as `oneadmin`: `onehost sync -f`{{< /alert >}} 
 
 Virtual Machine actions and their relation with Network actions:
@@ -60,7 +60,7 @@ VN_MAD_CONF = [
 ]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Note that you can set `BRIDGE_TYPE` attribute to `none` if you need to leave the bridge empty.{{< /alert >}} 
 
 <a id="devel-nm-hook"></a>

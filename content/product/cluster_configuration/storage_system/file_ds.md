@@ -27,7 +27,7 @@ The specific attributes for Kernels and Files Datastore are listed in the follow
 | `DS_MAD`    | `fs`          |
 | `TM_MAD`    | `local`       |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The recommended `DS_MAD` and `TM_MAD` are the ones stated above but any other can be used to fit specific use cases. Regarding this, the same [configuration guidelines]({{% relref "datastores#datastores" %}}) defined for Image and System Datastores apply for the Kernels and Files Datastore.{{< /alert >}} 
 
 For example, the following illustrates the creation of Kernels and Files:

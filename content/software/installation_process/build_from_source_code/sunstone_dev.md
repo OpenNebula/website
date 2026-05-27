@@ -52,7 +52,7 @@ The Sunstone client has been split up into **8** different base modules:
 
 These modules have been separated in such a way that no hard links exist between them. Any internal cross-module dependencies are handled at runtime by the module federation through its shared dependency scope. This ensures modules can be rebuilt and served separately from each other.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 By default, when a new version is released, all modules are packaged and shipped with the client, and served from the FireEdge server.{{< /alert >}} 
 
 <a id="remotes-config"></a>
@@ -83,7 +83,7 @@ Where:
 - The `name` property must match the runtime namespace as defined in the remote module’s Webpack configuration.
 - The `<ModuleKey>` and `name` can be identical but are defined separately to allow flexibility in naming conventions.
 
-{{< alert title="Tip" color="info" >}}
+{{< alert title="Tip" type="info" >}}
 The `__HOST__` flag can be used to simplify setups, as this resolves to the current navigator URL in the client. This should be used most of the time when the remote modules are being served directly from the FireEdge server.{{< /alert >}} 
 
 This example shows the default configuration of the different modules when they are being loaded locally from the FireEdge server.
@@ -125,7 +125,7 @@ This example shows the default configuration of the different modules when they 
 }
 ```
 
-{{< alert title="Hint" color="info" >}}
+{{< alert title="Hint" type="info" >}}
 Loading modules over HTTPS is fully supported and requires no extra setting up in the client.{{< /alert >}} 
 
 ### A module fails to load
@@ -168,7 +168,7 @@ Where:
   * `moduleId`: The identifier for the remote module. It must match the name field in the corresponding module’s entry in the `remotes-config.json`.
   * `Component`: The exported name of the component that renders the tab’s content.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The client searches for the `Component` from the base of the `<ModuleIdentifier>` and does not support nested imports. All modules should expose their exports through a global barrel file, see [Module webpack configuration]({{% relref "sunstone_dev#exporting-remote-modules" %}}) for more details.{{< /alert >}} 
 
 ### Adding a New Tab
@@ -222,7 +222,7 @@ Now let's create a new module called `CustomContainersModule`, based off the ori
    const sharedDeps = require('../sharedDeps')
    ```
 
-   {{< alert title="Note" color="success" >}}
+   {{< alert title="Note" type="info" >}}
    We can now save this file as this is really the only modification we need to make, assuming we don’t want to add any new dependencies to the shared context scope, which is defined in `src/modules/sharedDeps.js` if you want to have a look.
 
    The `sharedDeps.js` file imports the `package.json` file in order to parse dependency versions, but these can be overwritten and modified as you see fit.
@@ -261,10 +261,10 @@ Now let's create a new module called `CustomContainersModule`, based off the ori
    } from '@ComponentsModule'
    ```
 
-   {{< alert title="Note" color="success" >}}
+   {{< alert title="Note" type="info" >}}
    Notice how we import from the `@ComponentsModule` instead of using a relative path to the `src/modules/components` directory. This is because the import goes through the module federation and is resolved dynamically at runtime, as opposed to being bundled within our new module directly.{{< /alert >}} 
 
-   {{< alert title="Important" color="success" >}}
+   {{< alert title="Important" type="info" >}}
    Cross-module imports should *NEVER* be done relative to one another, only inside subdirectories of the module itself should you use relative import paths like `import ... from @modules/<moduleName>`. See [importing from other modules]({{% relref "sunstone_dev#importing-remote-modules" %}}) for more information.{{< /alert >}}
 
 7. Now let's rename our component to “UsersAndGroups” and modify the code so that we return a two column grid with both our tables inside
@@ -347,7 +347,7 @@ Now let's create a new module called `CustomContainersModule`, based off the ori
    export * from '@modules/customContainers/Users/Users'
    ```
 
-   {{< alert title="Note" color="success" >}}
+   {{< alert title="Note" type="info" >}}
    Here the `@modules` name is an alias we use in our webpack configuration, which gets resolved to the `src/modules` directory when building. You can examine this more closely inside the `webpack.config.prod.customcontainer.js` file. In this case, exporting relative to our parent directory is fine as we are not doing any cross-module referencing. See the [module webpack configuration]({{% relref "sunstone_dev#module-webpack-configuration" %}}) section for more information.{{< /alert >}} 
 
 9. Time to build our module (for the sake of convenience we will save the build command inside our `package.json` file)
@@ -442,7 +442,7 @@ Now let's create a new module called `CustomContainersModule`, based off the ori
          Component: "UsersAndGroups"
    ```
 
-   {{< alert title="Important" color="success" >}}
+   {{< alert title="Important" type="info" >}}
    Make sure to add the `moduleId` pointing to the “CustomContainersModule”, as otherwise the client will attempt to load the Component from the default `ContainersModule`{{< /alert >}} 
 
 13. Finally we need to add a new [view configuration]({{% relref "../../../product/control_plane_configuration/graphical_user_interface/fireedge_sunstone.md#fireedge-sunstone-views" %}}), allowing us to access the /usersgroups endpoint
@@ -616,7 +616,7 @@ const configuredRemotes = Object.entries(remotesConfig)
 
 When building your modules you should review the shared dependency configuration, which by default is defined in the `src/modules/sharedDeps.js` file. This script imports the `package.json` file for resolving different dependency versions and should be sufficient in most cases.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Not all dependencies are shared between modules. For more information on which dependencies should be shared and how to configure them, you can refer to the official [Module Federation documentation](https://module-federation.io/configure/shared.html).{{< /alert >}} 
 
 <a id="importing-remote-modules"></a>
@@ -635,7 +635,7 @@ This should match the key property in the `configuredRemotes` object, as mention
 
 All remote module exports should be done using a global barrel file. This means that all nested exports should be accessible from the top-level index file of the module.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Default exports should not be used. You should use named exports only, when exposing imports according to the default webpack configuration used [here]({{% relref "sunstone_dev#default-module-webpack" %}}).{{< /alert >}}
 
 An example of the barrel file from the `ContainersModule`
@@ -695,7 +695,7 @@ $ -d '{"user": "username", "token": "password"}' \
 $ http://fireedge.server/fireedge/api/auth
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The JWT lifetime can be configured in the fireedge_server.conf configuration file.{{< /alert >}} 
 
 ### Methods
@@ -817,7 +817,7 @@ Through each tab in the sidebar you can control and manage OpenNebula resources.
 |-----------------|------------------------------------------------------------------|
 | `resource_name` | Reference to `RESOURCE_NAMES` in `src/client/constants/index.js` |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 It’s important that `resource_name` matches the `RESOURCE_NAMES` constant because the constants are used to define the routes in `src/client/apps/sunstone/routesOne.js`.{{< /alert >}} 
 
 ### Actions
@@ -943,7 +943,7 @@ For example:
 $ https://{fireedge-sunstone}?externalToken={JWT}
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To obtain the JWT you must first make a call to `http://{fireedge}/fireedge/api/auth` sending the user’s credentials and retrieving only the value of **token**, e.g.:
 
 ```default

@@ -95,7 +95,7 @@ Example of multiple patch modes for multiple files:
 
 Upgrade operations are done safely on a copy of production configuration files without changing the system state. After the upgrade ends successfully, the modified files are copied back to production locations.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Each upgrade operation creates a backup of current directories with OpenNebula configuration files in `/var/lib/one/backups/config/`. In case of error when copying the modified state back to production locations, the automatic restore is triggered.{{< /alert >}} 
 
 In the case of a catastrophic failure when even automatic restore fails, the original content of configuration directories must be restored **manually** from initial backup. Here’s an example of a failed upgrade which requires manual intervention:

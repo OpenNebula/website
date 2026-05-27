@@ -179,7 +179,7 @@ The deployment procedure consists of the following high-level steps:
 4. Launch the deployment automation commands.
 5. Launch the verification automation command.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For detailed information about how to use the required parameters and which configuration files to modify, please refer to the README of the [OpenNebula hosted IONOS repo](https://github.com/OpenNebula/opennebula-hosted-ionos).
 {{< /alert >}}
 

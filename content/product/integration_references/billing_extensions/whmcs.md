@@ -27,7 +27,7 @@ The install and update process are essentially identical. The module files can b
 cp -rf /usr/share/one/whmcs/modules /path/to/web/root/whmcs/.
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Make sure you download the updated package from the EE repository before doing either an install or an update.{{< /alert >}} 
 
 ## WHMCS Tenants Module Configuration
@@ -91,7 +91,7 @@ Below the resources you can determine if the User should be automatically set up
 
 ![image](/images/whmcs_tenants_module_settings.png)
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For more information about managing VDCs refer to the [Managing VDCs]({{% relref "product/cloud_system_administration/multitenancy/manage_vdcs#manage-vdcs" %}}) page.{{< /alert >}} 
 
 The **Upgrades** tab can also be a useful feature to make use of.  If you create multiple products with different resource quotas, you can select the products here which your users can upgrade to.  You can select multiple products by holding the Shift or Ctrl key.
@@ -106,7 +106,7 @@ If your product is configured to be set up after manually accepting the order, y
 
 Once orders are set up there is a User, Group, and ACL created which correspond to the Service in WHMCS. Then, the Quota will be created for the Group linked to this order. On the service page for the customer, they will have a Login link.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If there are issues when upgrading products, the user and group may need to be recreated. Any existing VMs can be assigned to the admin user temporarily while this is done. This will be fixed in a future release.{{< /alert >}} 
 
 ### Checking Metrics

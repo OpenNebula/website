@@ -19,20 +19,20 @@ OpenNebula *master* Zone server replicates database changes on *slaves* using a 
 
 In this document, each configuration step starts with **Master** or **Slave** to indicate the server where the step must be performed.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 *Master* and *slave* servers need to talk to each other through their XML-RPC API. You may need to update the `LISTEN_ADDRESS`, and or `PORT` in [/etc/one/oned.conf]({{% relref "../../operation_references/opennebula_services_configuration/oned#oned-conf" %}}), or any firewall rule blocking this communication. Note that by default this traffic is not secure, so if you are using public links you need to secure the communication.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 When using an HA environment, every change at any configuration file included in the steps below should be applied to every HA cluster node.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The federation can be set up with MySQL/MariaDB or SQLite as backends, but you can’t mix them across Zones. MySQL/MariaDB is recommended for production deployments.{{< /alert >}} 
 
 ## Step 1. Configure the OpenNebula Federation Master Zone
 
 Start by picking an OpenNebula to act as master of the federation. The *master* OpenNebula will be responsible for updating shared information across Zones and replicating the updates to the *slaves*. You may start with an existing installation or with a new one (see the [installation guide]({{% relref "front_end_installation" %}})).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 When installing a new *master* from scratch be sure to start it at least once to properly bootstrap the database.{{< /alert >}} 
 
 - **Master**: Edit the *master* Zone endpoint. This can be done via Sunstone or with the onezone command. Write down this endpoint to use it later when configuring the *slaves*.
@@ -42,7 +42,7 @@ $ onezone update 0
 ENDPOINT = http://<master-ip>:2633/RPC2
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In the HA setup, the `<master-ip>` should be set to the **floating** IP address, see [the HA installation guide]({{% relref "../high_availability/frontend_ha#oneha" %}}) for more details. In single server Zones, just use the IP of the server.{{< /alert >}} 
 
 - **Master**: Update `/etc/one/oned.conf` to change the mode to **master**.
@@ -78,7 +78,7 @@ $ onezone list
   100 slave-name
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In HA setups use the **floating** IP address for the `<slave-zone-ip>`; in single server Zones just use the IP of the server.{{< /alert >}} 
 
 - **Master**: Make a snapshot of the federated tables with the following command:
@@ -89,7 +89,7 @@ Sqlite database backup of federated tables stored in /var/lib/one/one.db_federat
 Use 'onedb restore' to restore the DB.
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This example shows how to make a database snapshot with SQLite. For MySQL/MariaDB just change the `-s` option with the corresponding MySQL/MariaDB options: `-u <username> -p <password> -d <database_name>`. For SQLite, you need to stop OpenNebula before taking the DB snapshot. This is not required for MySQL/MariaDB.{{< /alert >}} 
 
 - **Master**: Copy the database snapshot to the *slave*.
@@ -130,7 +130,7 @@ default_zone:
     endpoint: 'http://<slave-ip>:2633/RPC2' //ENDPOINT
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In case the default [PORT]({{% relref "../../operation_references/opennebula_services_configuration/fireedge#fireedge-conf" %}}) of the FireEdge (Master or Slave) is changed, it is required that the Zone that this FireEdge represents has the `FIREEDGE_ENDPOINT` field added with the endpoint that the other FireEdge receives HTTPS requests.{{< /alert >}} 
 
 - **Slave**: Start FireEdge.
@@ -141,7 +141,7 @@ The Zone should be now configured and ready to use.
 
 Now you can start adding more servers to the *slave* Zone to provide it with HA capabilities. The procedure is the same as the one described for stand-alone Zones in [the HA installation guide]({{% relref "../high_availability/frontend_ha#oneha" %}}). In this case, the replication works in a multi-tier fashion. The *master* replicates a database change to one of the Zone servers. Then this server replicates the change across the Zone servers.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 It is important to double check that the federation is working before adding HA servers to the Zone, as you will be updating the Zone metadata which is federated information.{{< /alert >}} 
 
 ## Step 4. Show Service Information by Zone in Sunstone (Optional)
@@ -150,7 +150,7 @@ To see services information for a specific Zone within Sunstone, you need to do 
 
 - Adjust the `:host` field in `/etc/one/oneflow-server.conf` of the slave Zone to allow listening for requests outside of 127.0.0.1
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 So that the oneflow-server listens for requests from anywhere, the Host field can be set to 0.0.0.0{{< /alert >}} 
 
 - Update the slave Zone in the master Zone. Adding the `ONEFLOW_ENDPOINT=http://<slave-zone-ip>:2474/` field with the public address of the slave Zone with the following command `onezone update <id-slave-zone>`
@@ -174,7 +174,7 @@ OpenNebula database has two different version numbers:
 - federated (shared) tables version
 - local tables version
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 To federate OpenNebula Zones, they must run the same version of the federated tables (which are pretty stable).{{< /alert >}} 
 
 Upgrades to a version that does not increase the federated version can be done asynchronously in each Zone. However, an update in the shared table version requires a coordinated update of all Zones.

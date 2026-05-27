@@ -32,8 +32,8 @@ For example, a Host with eight processors (`TOTAL CPU=800`) can host eight VMs w
 
 The capacity of a Host is obtained by the monitor probes. You may alter the overall resources available to the VMs by reserving an amount of that capacity:
 
-* Cluster-wise, by updating the cluster template (e.g., `onecluster update`). All Hosts in the cluster will reserve the same amount of capacity.
-* Host-wise, by updating the Host template (e.g., `onehost update`). This value will override those defined at the cluster level.
+* Cluster-wise, by updating the Cluster template (e.g., `onecluster update`). All Hosts in the Cluster will reserve the same amount of capacity.
+* Host-wise, by updating the Host template (e.g., `onehost update`). This value will override those defined at the Cluster level.
 
 In particular, the following capacity attributes can be reserved:
 
@@ -42,7 +42,7 @@ In particular, the following capacity attributes can be reserved:
 | `RESERVED_CPU` | (CPU percentage) It will be subtracted from the TOTAL CPU. |
 | `RESERVED_MEM` | (KB) It will be subtracted from the TOTAL MEM.             |
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 These values can be negative, in which case you would actually be increasing the overall capacity, thus overcommitting Host capacity.{{< /alert >}} 
 
 The above values can be absolute, for example `RESERVED_MEM=-10240` will add 1GB of memory to the Host. Alternatively, they can be expressed in percentage terms, for example `RESERVED_MEM=-10%` will increase the memory of the Host by 10%.

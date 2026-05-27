@@ -95,7 +95,7 @@ To change the base folder to store disk backups for **all** Hosts, edit `/var/li
 
 The `BRIDGE_LIST` parameter in a Backup Datastore defines which Hosts are responsible for transferring VM backups from the hypervisor to the Backup Datastore.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This feature is only supported for **shared system datastores** (currently only with **Ceph**).{{< /alert >}}
 
 All Hosts listed in `BRIDGE_LIST` must meet the following requirements:

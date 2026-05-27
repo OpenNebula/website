@@ -1,0 +1,51 @@
+
+<div class="dashboard-container">
+
+  {{ range .Page.Site.Sections.ByWeight }}
+  <div class="dashboard-card">
+
+    <div class="dashboard-card-image">
+      {{ $iconLight := resources.Get .Params.dashboard_icon_light }}
+      {{ $iconDark := resources.Get .Params.dashboard_icon_dark }}
+
+      {{ if $iconLight }}
+        <img src="{{ $iconLight.RelPermalink }}" class="dashboard-image td-img-light {{ if not $iconDark }} td-img-always{{ end }}" alt="{{ .Title }} icon" data-no-zoom>
+      {{ end }}
+
+      {{ if $iconDark }}
+        <img src="{{ $iconDark.RelPermalink }}" class="dashboard-image td-img-dark" alt="{{ .Title }} icon" data-no-zoom>
+      {{ end }}
+    </div>
+    <div class="dashboard-card-body">
+      <div class="dashboard-card-body-text">
+        <div class="dashboard-card-title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </div>
+        <div class="dashboard-card-description">
+          {{ with .Params.dashboard_description }}
+            {{ . }}
+          {{ else }}
+            {{ .Description }}
+          {{ end }}  
+        </div>
+      </div>
+      <div class="dashboard-card-body-menu">
+        {{ $pages := .Pages.ByWeight }}
+        <div class="dashboard-card-body-menu-list">
+        {{ range first 3 $pages }}
+          <a href="{{ .RelPermalink }}" class="dashboard-card-menu-item">{{ .Title }}</a>
+        {{ end }}
+        </div>
+        {{ $remaining := (after 3 $pages) }}
+        {{ $count := len $remaining }}
+
+        {{ if gt $count 0 }}
+        <a href="{{ .RelPermalink }}" class="dashboard-card-body-menu-more">
+          {{ $count }} more ->
+        </a>
+        {{ end }}
+      </div>
+    </div>    
+  </div>
+  {{ end }}
+</div>

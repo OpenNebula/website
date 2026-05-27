@@ -28,7 +28,7 @@ When Virtual Machines are terminated (changed into a `DONE` state), OpenNebula j
 
 ## OpenNebula Database Maintenance Tool
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 All the commands should be run with OpenNebula stopped, except the ones that have a warning in this documentation saying that it is executed with OpenNebula running.{{< /alert >}} 
 
 This section describes the OpenNebula database maintenance command-line tool `onedb`. It can be used to get information from an OpenNebula database, backup and restore, upgrade to new versions of an OpenNebula database, clean up unused content, or fix inconsistency problems.
@@ -69,7 +69,7 @@ $ onedb <command> -v --sqlite /var/lib/one/one.db
 $ onedb <command> -v -S localhost -u oneadmin -p oneadmin -d opennebula
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 If the MySQL user password contains special characters, such as `@` or `#`, the onedb command might fail to connect to the database. The workaround is to temporarily change the oneadmin password to an alphanumeric string. The [SET PASSWORD](https://dev.mysql.com/doc/refman/8.4/en/set-password.html) statement can be used for this:
 
 ```default
@@ -143,7 +143,7 @@ Comment:   Database migrated from 3.7.80 to 3.8.0 (OpenNebula 3.8.0) by onedb co
 
 Change the CLUSTER_ID of a previous VM sequence in a non-interactive way. This is useful when accidentally deleting a cluster. You might be unable to attach disks or NICs to the VM due to the VM being reported in a non-existing cluster.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 When dealing with history records you need to take into account that the oldest index of the history records equals 0, whereas the latest one has the largest index number. So in order to modify the latest history record one needs to get the largest index first, for example with the following command:
 
 ```default
@@ -289,7 +289,7 @@ Sqlite database backup restored in /var/lib/one/one.db
 
 ### onedb purge-history
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
 Deletes all but the last two history records from the metadata of Virtual Machines which are still active (not in a `DONE` state). You can specify the start and end dates if you don’t want to delete all history. E.g.:
@@ -308,7 +308,7 @@ $ onedb purge-history --id <vm_id>
 
 ### onedb purge-done
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
 Deletes information from the database with already terminated Virtual Machines (state `DONE`). You can set start and end dates via `-start` and `--end` parameters if you don’t want to delete all the old data. E.g.:
@@ -321,7 +321,7 @@ $ onedb purge-done --end 2016/01
 
 ### onedb change-body
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
 This command allows you to update the body content of OpenNebula objects in a database. Supported object types are `vm`, `host`, `vnet`, `image`, `cluster`, `document`, `group`, `marketplace`, `marketplaceapp`, `secgroup`, `template`, `vrouter`, or `zone`.
@@ -364,7 +364,7 @@ $ onedb change-body vm --expr LCM_STATE=8 '/VM/TEMPLATE/DISK/CACHE' default --ap
 
 ### onedb update-body
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The operation is done while OpenNebula is running. Make a **database backup** before executing!{{< /alert >}} 
 
 This command allows you to update the body content of OpenNebula objects in a database. Supported object types are `vm`, `host`, `vnet`, `image`, `cluster`, `document`, `group`, `marketplace`, `marketplaceapp`, `secgroup`, `template`, `vrouter`, or `zone`.

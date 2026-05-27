@@ -38,7 +38,7 @@ In this example:
 - `PASSWORD`: value of the password field for the user that is trying to authenticate. This can be `-` when the user does not exist in the OpenNebula database.
 - `SECRET`: value provided in the password field of the authentication string.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Before OpenNebula 5.6, the parameters were passed as command line parameters. Now all the data is passed using only the standard input!{{< /alert >}} 
 
 For example, we can create a new authentication method that just checks the length of the password. For this we can store in the password field the number of characters accepted, for example 5, and user name test. Here are some example calls to the driver with several passwords:

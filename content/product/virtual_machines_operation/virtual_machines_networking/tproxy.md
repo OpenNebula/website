@@ -38,10 +38,10 @@ Transparent Proxies read their config from the `~oneadmin/remotes/etc/vnm/OpenNe
   :networks: [vnet_name_or_id]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The YAML snippet above defines two distinct proxies, where the first is the usual OneGate proxy and the second is a completely custom service.{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If the `:networks:` YAML key is missing or empty, the particular proxy will be applied to *all* available Virtual Networks. Defining multiple entries with the identical `:service_port:` values will have no effect as the subsequent duplicates will be ignored by networking drivers.{{< /alert >}} 
 
 **To apply the configuration, you need to perform two steps:**
@@ -125,7 +125,7 @@ table ip one_tproxy {
 }
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 The `nftables` config is not persisted across hypervisor Host reboots, as it is the default behavior in OpenNebula in general.{{< /alert >}} 
 
 **Listing all custom network namespaces:**
@@ -135,7 +135,7 @@ $ ip netns list
 one_tproxy_br0 (id: 0)
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 Each active Virtual Network requires one of those namespaces to run the proxy inside.{{< /alert >}} 
 
 **Checking if the “internal” end of the VETH device pair has been put inside the dedicated namespace:**
@@ -152,7 +152,7 @@ $ ip netns exec one_tproxy_br0 ip address
        valid_lft forever preferred_lft forever
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In case multiple hypervisor Hosts participate in the Virtual Network’s traffic, the `169.254.16.9` address stays the same regardless, the closest hypervisor Host is supposed to answer guest requests.{{< /alert >}} 
 
 **Checking if the default route for sending packets back into the bridge has been configured:**
@@ -170,13 +170,13 @@ one_tproxy: 16803
 one_tproxy_br0: 16809
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 There is only a single `one_tproxy` process running in the default network namespace, it connects to real remote services.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 There are multiple `one_tproxy_*` processes, they are boxed inside corresponding dedicated network namespaces and connect to the `one_tproxy` process using UNIX sockets.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 There is no PID file management implemented. For simplicity, all proxy processes may be found by looking at the `/proc/PID/cmdline` process attributes.{{< /alert >}} 
 
 **Restarting/reloading config of proxy daemons:**
@@ -186,7 +186,7 @@ $ /var/tmp/one/vnm/tproxy restart
 $ /var/tmp/one/vnm/tproxy reload
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 While you can manually run the `start`, `stop`, `restart` and `reload` commands as part of a debugging process, under normal circumstances the proxy daemons are completely managed by networking drivers. The command-line interface here is very minimal and does not require any extra parameters, as all the relevant config is stored in `nftables`.{{< /alert >}} 
 
 ## Security Groups

@@ -10,7 +10,7 @@ weight: 4
 
 <a id="validate-certified-hardware"></a>
 
-{{< alert title="Tip" color="success" >}}
+{{< alert title="Tip" type="info" >}}
 This guide provides the basic steps. If you wish to see a more detailed guide, please refer to [Deploying a Virtual Machine Locally]({{% relref "deploy_opennebula_onprem_with_minione#deploying-a-virtual-machine-locally" %}}).
 {{< /alert >}}
 
@@ -25,7 +25,7 @@ The image below shows the **Alpine Linux 3.20** Virtual Machine included in the 
 <a id="one-marketplace"></a>
 ![><][one-marketplace]
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Make sure to choose the correct variant of the image, which fits the certified hardware's architecture. For example for ARM-based architectures the correct Alpine Linux 3.20 Virtual Machine template is **Alpine Linux 3.20 (aarch64)**.
 {{< /alert >}}
 

@@ -18,7 +18,7 @@ This guide covers advanced SSH configuration for OpenNebula nodes, specifically:
 * [SSH client configuration]({{% relref "#node-ssh-config" %}})
 * gathering of [host SSH public keys]({{% relref "#node-ssh-known-hosts" %}})
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 This section extends the Configure Passwordless SSH step within the Node installation guides with advanced SSH configuration and usage.{{< /alert >}} 
 
 <a id="node-ssh-agent"></a>
@@ -27,7 +27,7 @@ This section extends the Configure Passwordless SSH step within the Node install
 
 OpenNebula’s integrated **SSH Authentication Agent** service is automatically started on the Front-end by implicit dependencies of OpenNebula. During startup, it imports the default SSH private keys of `oneadmin` user from the directory `/var/lib/one/.ssh/` on the Front-end, and securely delegates them to the hypervisor nodes for the OpenNebula driver operations which need to make connections between the Hosts or back to the Front-end. Authentication Agent must be started before or with OpenNebula.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 OpenNebula’s SSH Authentication Agent service is started and used by default, but **it’s not mandatory**. It can be disabled if cross-Host connections are enabled by any other method (e.g., by distributing private keys on all Hosts or if you already use your own authentication agent).{{< /alert >}} 
 
 ### Service Management
@@ -42,7 +42,7 @@ To stop, start, or restart the service use the following commands:
 # systemctl restart opennebula-ssh-agent.service
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 OpenNebula only uses the dedicated SSH Authentication Agent if it’s running (manually or automatically via service manager by implicit dependencies) when OpenNebula starts up. If the agent service is started after OpenNebula you’ll need to **restart OpenNebula service** itself to force OpenNebula to use the SSH Authentication Agent.{{< /alert >}} 
 
 The SSH Authentication Agent service doesn’t need to be enabled to start when your Front-end server boots up. It’s started automatically by the OpenNebula service as an implicit dependency. To **avoid automatic starting and using** the SSH Authentication Agent service at all, you must mask the service in the following way:
@@ -77,7 +77,7 @@ Initial **default SSH client configuration** files are provided in `/usr/share/o
 
 This default SSH configuration ensures that Host SSH keys of new remote Hosts are accepted on the very first connection and strictly checked during subsequent connections (you don’t need to populate SSH Host keys into `/var/lib/one/.ssh/known_hosts` in advance for new Hosts). Also, it configures short-term connection sharing and persistency to speed up driver operations. Persistency is selectively enabled within OpenNebula drivers and **must not be enabled globally**.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The default SSH client configuration for `oneadmin` is provided only during installation of a fresh package and is not updated anytime later, even during a packages upgrade. You can always find the most recent default configurations in `/usr/share/one/ssh`.{{< /alert >}} 
 
 The following SSH configuration snippets introduce various ways how to configure the SSH clients by putting suitable parts into `/var/lib/one/.ssh/config` on your machines. You need to merge the content of the snippets into a single matching section appropriately because, in the case of multiple `Host *` sections in the single configuration file, only the first one is effective!
@@ -95,10 +95,10 @@ Host *
    ControlPersist 0
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 You can enable this configuration only on the Front-end, **not on hypervisor nodes!** This configuration can’t be used on a Host that serves both as Front-end and hypervisor!{{< /alert >}} 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Due to a problem with [control socket cleanup](https://bugzilla.mindrot.org/show_bug.cgi?id=3067) in specific OpenSSH versions, when `ControlPersist` is configured to remain open for a limited time the OpenNebula driver operations might randomly fail if the operation coincides with the connection being closed. If connections with unlimited time persistency (`ControlPersist 0`) are not possible due to a large infrastructure, it’s recommended to handle the closing of persistent connections on your own or use long enough persistence times to lower the chance of experiencing the problem.{{< /alert >}} 
 
 <a id="node-ssh-config-accept"></a>
@@ -107,7 +107,7 @@ Due to a problem with [control socket cleanup](https://bugzilla.mindrot.org/show
 
 When provisioning new Hosts, one of the steps to configure the passwordless logins is to gather the list of Host SSH public keys of all communicating parties and its distribution on them. By default, the OpenSSH requires user interaction to manually accept keys of new Hosts but can be configured to accept them automatically. While this decreases the security of your deployment by automatic acceptance of Host keys during the very first connection, it still refuses to open further connections on the Hosts that change keys (e.g., in case of MITM attack) and provides a compromise between security and usability.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This configuration can be used only with OpenSSH 7.6 and newer!{{< /alert >}} 
 
 ```default
@@ -119,7 +119,7 @@ Host *
 
 ### Disable SSH Host Keys Checking
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This configuration is mentioned only for information but is **NOT RECOMMENDED** for general use.{{< /alert >}} 
 
 The following configuration completely disables storing and checking the identity of the remote Hosts you are connecting to over SSH. You can use the configuration if you don’t need or want to manage the list of host SSH keys in `known_hosts` at all. **It introduces a major security issue and shouldn’t be used.**

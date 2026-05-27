@@ -57,7 +57,7 @@ Wed Feb  9 12:36:07 2022
 
 ## Enable the NVIDIA vGPU
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The following steps assume that your graphic card supports SR-IOV. If not, please refer to official NVIDIA documentation in order to activate vGPU.{{< /alert >}}
 
 ### Finding the PCI
@@ -107,7 +107,7 @@ $ virsh nodedev-dumpxml pci_0000_41_00_0
 
 ### Enabling Virtual Functions
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You need to perform this operation every time you reboot your server.{{< /alert >}}
 
 ```default
@@ -145,7 +145,7 @@ Check full NVIDIA documentation [here](https://docs.nvidia.com/grid/latest/pdf/g
 MIG (Multi-Instance GPU) allows partitioning a single GPU into multiple isolated GPU instances.
 This is useful for running multiple workloads delivered with a guaranteed Quality of Service (QoS) through hardware-level isolation.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Note: Only certain NVIDIA GPUs support vGPU on MIG instances (e.g., H100). Other GPUs may not support MIG-backed vGPU. Always check your GPU model and driver version before attempting this setup. To check MIG-supported GPUs, refer to [NVIDIA's official documentation](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#supported-gpus).{{< /alert >}} 
 
 For more information about MIG and additional configuration resources, refer to the NVIDIA documentation [here](https://docs.nvidia.com/datacenter/tesla/pdf/NVIDIA_MIG_User_Guide.pdf).
@@ -165,7 +165,7 @@ $ nvidia-smi -i 0 -q | grep "MIG Mode" -A1  # Check MIG status
         Current                           : Enabled
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Depending on the GPU model, a GPU reset or system reboot may be required after enabling MIG mode.{{< /alert >}} 
 
 2. List Available MIG Profiles
@@ -246,12 +246,12 @@ Similarly, you can remove specific instances (see step 5) to free resources and 
 Each MIG instance you create will be represented as a vGPU profile by the NVIDIA driver.
 When assigning vGPUs to VMs, these profiles appear as selectable devices corresponding to the MIG slices you configured.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 After creating new MIG partitions, profiles take time to update depending on the monitoring configuration; this time depends on the [installation's monitoring configuration]({{% relref "../../..//product/cloud_system_administration/resource_monitoring/monitoring_system#monitor-alert-configuration" %}}). To update the profiles immediately, run the `onehost forceupdate <hostid>` command.
 {{< /alert >}}
 
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Created MIG instances (GPU/Compute Instances) are not persistent across a GPU reset or reboot.{{< /alert >}} 
 
 4. Inspect MIG Partitioning
@@ -331,5 +331,5 @@ This monitoring information is also available under the VMs PCI tab in the insta
 
 ![sunstone_gpu_graph](/images/sunstone_gpu_graph.png)
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 When using NVIDIA cards, ensure that only the GPU (for PCI passthrough) or vGPUs (for SR-IOV) are exposed through the PCI monitoring probe. Do not mix both types of devices in the same configuration.{{< /alert >}}

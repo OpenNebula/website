@@ -1,7 +1,7 @@
 ---
 title: "Scaleway - Hosted Deployment"
 linkTitle: "Scaleway OpenNebula"
-description: "TBC"
+description: "Still under development."
 toc_hide: true
 draft: true
 weight: 2

@@ -29,7 +29,7 @@ There are different user accounts in OpenNebula, depending on the default permis
 * **Group Administrators** are similar to users but can manage user accounts and resources in their group.
 * **Service Users** are used by the OpenNebula services (e.g., Sunstone web interface, OneFlow) to proxy auth request. By default, `serveradmin` user is created the first time OpenNebula service is started. This user is only intended to be used by OpenNebula services.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 `oneadmin` credentials are set the first time OpenNebula service is started. By default, it looks for a session string in `/var/lib/one/.one/one_auth` and defines the credentials according to it.{{< /alert >}} 
 
 <a id="manage-users-shell"></a>
@@ -47,7 +47,7 @@ $ oneuser create <user_name> <password>
 ID: 3
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 When defining usernames and passwords consider the following invalid characters:
 
 ```none
@@ -107,7 +107,7 @@ GROUP           : oneadmin
 PASSWORD        : c24783ba96a35464632a624d9f829136edc0175e
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 OpenNebula does not store the plain password but a hashed version in the database, as shown by the oneuser example above.{{< /alert >}} 
 
 Check [this guide]({{% relref "../../operation_references/command_line_interface/cli#cli-shell" %}}) to discover how you can customize shell variables.
@@ -254,7 +254,7 @@ In order to change the `oneadmin` credentials you have to do the following in th
 # echo 'oneadmin:<PASSWORD>' > /var/lib/one/.one/one_auth
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 After changing the password, please restart the OpenNebula service.{{< /alert >}} 
 
 To change `serveradmin` credentials, in the Front-end:

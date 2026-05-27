@@ -28,7 +28,7 @@ Follow the guides of each component to find the logs’ location and configurati
 
 After changing the logging level, don’t forget to restart the service so that it can take effect.
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Logs are rotated on (re)start of a particular component. Find a historic log alongside the current logs with date/time suffixes (e.g., latest `/var/log/one/oned.log` might have the following historic log `/var/log/one/oned.log-20210321-1616319097`, or an even older compressed log `/var/log/one/oned.log-20210314-1615719402.gz`){{< /alert >}} 
 
 <a id="troubleshoot-additional"></a>

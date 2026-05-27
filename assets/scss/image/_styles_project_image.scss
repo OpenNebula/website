@@ -1,0 +1,33 @@
+.borderImage {
+  border: 1px solid var(--table-border-color);
+}
+
+.roundBorderImage {
+  border-radius: 8px;
+}
+
+.shadowImage {
+  box-shadow: 0 10px 15px -13px var(--image-shadow-color), 0 4px 6px -4px var(--image-shadow-color);
+}
+
+.medium-zoom-overlay{
+  background-color: rgba(0, 0, 0, 0.70) !important;  
+  backdrop-filter: blur(8px);
+}
+
+// Handle images in dark and light
+[data-bs-theme="light"] img.td-img-light {
+    display: block;
+}
+[data-bs-theme="dark"] img.td-img-light {
+    display: none;
+}
+[data-bs-theme="light"] img.td-img-dark {
+    display: none;
+}
+[data-bs-theme="dark"] img.td-img-dark {
+    display: block;
+}
+.td-img-always {
+  display: block !important;
+}

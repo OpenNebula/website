@@ -15,7 +15,7 @@ weight: "7"
 
 The RDM Datastore is an Image Datastore that enables raw access to block devices on Nodes. This Datastore enables fast VM deployments due to a non-existent transfer operation from the Image Datastore to the System Datastore.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 The Datastore should only be usable by the administrators. Letting users create images in this Datastore is a huge **security risk**! For example, users could register an image `/dev/sda` and read the Host filesystem.{{< /alert >}} 
 
 ## Datastore Layout
@@ -104,5 +104,5 @@ If you are using the CLI, pass the absolute path to the device with parameter `-
 $ oneimage create -d 101 --name nbd --source /dev/sdc --driver raw --prefix vd --persistent --type OS --size 0MB
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 As this Datastore is just a container for existing devices, the size of images in OpenNebula doesn’t reflect the real block device size. All devices registered will render a size of 0 and the overall devices Datastore will show up with 1MB of available space{{< /alert >}} 

@@ -1,7 +1,7 @@
 ---
 title: "Storage System"
 date: "2025-02-17"
-description: "Set up storage on different drivers and cloud architectures"
+description: "Set up storage on different drivers and cloud architectures."
 categories:
 pageintoc: "66"
 tags:

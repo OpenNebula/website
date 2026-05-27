@@ -19,7 +19,7 @@ OpenNebula will configure by default the following Marketplaces in your installa
 | OpenNebula Public  | The official public [OpenNebula Systems Marketplace](http://marketplace.opennebula.systems) |
 | Linux Containers   | The public LXC [image repository](https://images.linuxcontainers.org)                       |
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 The OpenNebula Front-end needs access to the Internet to use the Public Marketplaces.{{< /alert >}} 
 
 Only the OpenNebula Public Marketplace is enabled by default. Other Marketplaces are initialized as disabled. To enable them use `onemarket enable <market_id>`.

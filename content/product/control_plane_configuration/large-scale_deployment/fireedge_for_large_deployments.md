@@ -81,7 +81,7 @@ If FireEdge is installed and you want to place an apache to forward traffic to F
 </VirtualHost>
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 As you can see in the configuration the **location** is in `/fireedge`, that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`{{< /alert >}} 
 
 **NGINX**
@@ -123,7 +123,7 @@ server {
 }
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 As you can see in the configuration the **location** is in `/fireedge`, that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`{{< /alert >}} 
 
 <a id="fireedge-advance-apache-tls-proxy"></a>
@@ -173,7 +173,7 @@ We must create the virtual Host that will run our FireEdge. Here is an example:
 
 Now the configuration should be ready. Restart  or reload the Apache configuration to start the application and point to the virtual Host to check that everything is running.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 As you can see in the configuration inside the **location**, **ProxyPass** and **ProxyPassReverse** is in `/fireedge` that means it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`.{{< /alert >}} 
 
 **NGINX**
@@ -225,5 +225,5 @@ server {
 }
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 As you can see in the configuration the **location** is in `/fireedge`, that means that it is a path of your domain `<YOUR_DOMAIN>/fireedge`. If you want the FireEdge to be in the root you must change it to `/`{{< /alert >}} 

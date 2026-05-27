@@ -49,7 +49,7 @@ This set of attributes limit the bandwidth of each NIC attached to the Virtual N
 | `OUTBOUND_PEAK_BW` | Maximum bitrate for the interface in kilobytes/second for outbound traffic. | All except ovswitch                 |
 | `OUTBOUND_PEAK_KB` | Data that can be transmitted at peak speed in kilobytes.                    | All except ovswitch                 |
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 For Outbound QoS when using Open vSwitch, you can leverage the [Open vSwitch QoS](https://docs.openvswitch.org/en/latest/faq/qos/) capabilities.{{< /alert >}} 
 
 ## The Address Range
@@ -69,7 +69,7 @@ For Outbound QoS when using Open vSwitch, you can leverage the [Open vSwitch QoS
 
 ### IPv6 Address Range
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 IPv6 Address Ranges can use SIZE up to 2^128. However, note that a MAC address (48 bits)  is also assigned to each lease. MAC addresses will be reused when the number of IPv6 addresses is bigger than 2^48.{{< /alert >}} 
 
 | Attribute       | Description                                                                          | Mandatory   |

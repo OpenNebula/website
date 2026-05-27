@@ -96,7 +96,7 @@ VMTEMPLATE64="Q09OVEVYVCA9IFsgTkV...2x1c3RlcikiXQo="
 
 ## Create a New Marketplace Appliance
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 You can only create new Marketplace Appliances on **Private Marketplaces**{{< /alert >}} 
 
 A Marketplace Appliance can be created in (or imported into) a Marketplace out of an existing Image, Virtual Machine, Virtual Machine Template, or Multi-VM Service Template. The following table lists the command to use for each case:
@@ -177,13 +177,13 @@ ID: 448
 ID: 449
 ```
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 If a running VM doesn’t have the `TEMPLATE_ID` attribute set, it cannot be imported into the Marketplace.{{< /alert >}} 
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 NICs are marked as auto, so they can work when the Marketplace Application is exported to a OpenNebula cloud. If you have NIC_ALIAS in the template, NICs are **not** marked as auto, you need to select the network when you instantiate it.{{< /alert >}} 
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 To avoid clashing names, if no name is specified a hash is added at the end of the main object name. Sub-objects like disks or VM templates in the case of Service Template, always have the hash.{{< /alert >}} 
 
 ### Marketplace Appliance Attributes
@@ -213,6 +213,15 @@ VMTEMPLATE
     ID: -1
 ```
 
+When an appliance is downloaded from the Marketplace, short hash values may be appended to object names to ensure uniqueness. This convention also applies to additional objects created during the download process, such as virtual machine templates and disks. To keep names easily identifiable, the original object name is preserved and placed before the appended hash and index. For example:
+```default
+$ oneimage list
+  ID USER     GROUP    NAME                                                                       DATASTORE     SIZE TYPE PER STAT RVMS
+  2 oneadmin oneadmin Windows VM Template_0-Contextualization Packages-aa38438e4a-2              default         2M CD    No rdy     0
+  1 oneadmin oneadmin Windows VM Template_0-Windows VirtIO Drivers - v0.1.285-e3cf06243b-1       default       754M CD    No rdy     0
+  0 oneadmin oneadmin Windows VM Template_0-Empty disk-fcee73d9e5-0                              default         5G OS    No rdy     0
+```
+
 <a id="marketapp-download"></a>
 
 You can also download an app to a standalone file in your desktop:
@@ -221,7 +230,7 @@ You can also download an app to a standalone file in your desktop:
 $ onemarketapp download 40 /path/to/app
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 This command requires that the ONE_SUNSTONE environment variable is set. Read [here]({{% relref "../../../product/cloud_system_administration/multitenancy/manage_users#manage-users-shell" %}}) for more information.{{< /alert >}} 
 
 ## Additional Commands

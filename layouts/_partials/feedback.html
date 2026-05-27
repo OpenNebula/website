@@ -1,0 +1,54 @@
+{{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable)) -}}
+{{ with .Site.Params.ui.feedback -}}
+
+<hr class="panel-line">
+<br><br>
+<div class="d-print-none feedback-container">
+<h3 class="feedback--title">{{- i18n "feedback_title" -}}</h3>
+<p class="feedback--question">{{- i18n "feedback_question" -}}</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">
+  <i class="fa-regular fa-thumbs-up"></i>
+</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">
+  <i class="fa-regular fa-thumbs-down"></i>
+</button>
+<p class="feedback--response feedback--response-yes">
+  {{ .yes | safeHTML }}
+</p>
+<p class="feedback--response feedback--response-no">
+  {{ .no | safeHTML }}
+</p>
+</div>
+
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    {{ $maxValue := .max_value | default 100 -}}
+    sendFeedback({{ $maxValue }});
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+{{ end -}}
+<br />
+{{ end -}}

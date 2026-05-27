@@ -16,7 +16,7 @@ weight: "2"
 
 In order to use your existing physical nodes, you have to add them to OpenNebula as Hosts. To add a Host only its hostname and type is needed.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Before adding a Linux Host check that you can SSH to it without being prompted for a password.{{< /alert >}}
 
 ## Creating and Deleting Hosts
@@ -35,7 +35,7 @@ The parameters are:
 * `--im`: Information Manager driver.
 * `--vm`: Virtual Machine Manager driver.
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 In the examples included in this guide we’ll use KVM as the hypervisor. Note that the procedure will be the same for any other hypervisor; only the name will need to be changed.{{< /alert >}} 
 
 To remove a Host you can either specify it by ID or by name. The following commands are equivalent:
@@ -147,6 +147,8 @@ The above information can be also displayed in XML, JSON, or CSV format using `-
 
 In order to manage the life cycle of a Host it can be set to different operation modes: enabled (`on`), disabled (`dsbl`), and offline (`off`). The different operation status for each mode is described in the following table:
 
+<!-- Markdown doesn't support merged cells in tables, so as a temporary workaround these are inserted in HTML -->
+
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head" rowspan="2"><p><b>OP. MODE<b></p></th>
@@ -218,7 +220,7 @@ Similarly, to take the Host offline:
 $ onehost offline 0
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 `onehost disable` and `onehost offline` do not change the state of VMs already running on the Host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}} 
 
 Apart from the commands above, the `onehost` tool also provides some commands that allow you to easily perform common operations on a Host.
@@ -303,7 +305,7 @@ WILD VIRTUAL MACHINES
                  CentOS7 422375e7-7fc7-4ed1-e0f0-fb778fe6e6e0    1       2048
 ```
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Wild VMs’ support and limitations may differ depending on the virtualization driver used (e.g., KVM or LXC). In order to find more specific information for the virtualization driver you’re using, please check the corresponding driver guide.{{< /alert >}}
 
 ## Using Sunstone to Manage Hosts

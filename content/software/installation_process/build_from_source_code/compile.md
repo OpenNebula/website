@@ -15,10 +15,10 @@ weight: "2"
 
 This page will show you how to compile and install OpenNebula from the sources.
 
-{{< alert title="Warning" color="warning" >}}
+{{< alert title="Warning" type="warning" >}}
 Do not forget to check the [Building Dependencies]({{% relref "build_deps#build-deps" %}}) for a list of specific software requirements to build OpenNebula.{{< /alert >}}
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you need to build customized OpenNebula packages you can find the source packages for publicly released versions available in the download repositories for easy rebuilds and customizations. If you need to access the packaging tools, please get in touch at <[community-manager@opennebula.io](mailto:community-manager@opennebula.io)>.{{< /alert >}}
 
 ## Compiling the Software
@@ -32,7 +32,7 @@ Follow these simple steps to install the OpenNebula software:
 $ scons [OPTION=VALUE]
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 `scons` can parallelize the build with the `-j NUM_THREADS` parameter. For instance, to compile with 4 parallel processes execute:
 
 ```default
@@ -62,8 +62,12 @@ The argument expression [OPTION=VALUE] is used to set non-default values for :
 ./install.sh <install_options>
 ```
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 To install OpenNebula with the `system-wide` mode you should have super user privileges.{{< /alert >}}
+
+{{< alert title="Warning" type="warning" >}}
+The `scons` option `xmlrpc_pkgconf=yes` is mandatory for AlmaLinux 9. Otherwise the build fails.{{< /alert >}}
+
 
 ```default
 $ sudo ./install.sh <install_options>
@@ -80,7 +84,7 @@ where  *<install_options>* can be one or more of:
 | **-c**   | only install client utilities: OpenNebula cli and ec2 client files                                                                                                           |
 | **-s**   | install OpenNebula Ruby Sunstone                                                                                                                                             |
 | **-p**   | do not install OpenNebula Ruby Sunstone non-minified files                                                                                                                   |
-| **-F**   | install OpenNebula FireEdge                                                                                                                                                  |
+| **-F**   | install only OpenNebula FireEdge                                                                                                                                             |
 | **-P**   | do not install OpenNebula FireEdge non-minified files                                                                                                                        |
 | **-G**   | install OpenNebula Gate                                                                                                                                                      |
 | **-6**   | install only OpenNebula Gate Proxy                                                                                                                                           |
@@ -89,7 +93,7 @@ where  *<install_options>* can be one or more of:
 | **-l**   | creates symlinks instead of copying files, useful for development                                                                                                            |
 | **-h**   | prints installer help                                                                                                                                                        |
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 If you choose the `system-wide` installation, OpenNebula will be installed in the following folders:
 : - /etc/one
   - /usr/lib/one
@@ -108,7 +112,7 @@ The packages do a `system-wide` installation. To create a similar environment, c
 oneadmin@frontend:~/ $> wget <opennebula tar gz>
 oneadmin@frontend:~/ $> tar xzf <opennebula tar gz>
 oneadmin@frontend:~/ $> cd opennebula-x.y.z
-oneadmin@frontend:~/opennebula-x.y.z/ $> scons -j2 mysql=yes syslog=yes fireedge=yes
+oneadmin@frontend:~/opennebula-x.y.z/ $> scons -j2 mysql=yes syslog=yes fireedge=yes grpcproto=yes
 [ lots of compiling information ]
 scons: done building targets.
 oneadmin@frontend:~/opennebula-x.y.z $> sudo ./install.sh -u oneadmin -g oneadmin

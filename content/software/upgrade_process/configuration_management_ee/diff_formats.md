@@ -48,7 +48,7 @@ Command is a type of operation to be executed on the configuration file. Only th
 
 Path uniquely identifies the location of the changed parameter as a slash `/` separated XPath-like segments and key from document root and without leading slash (e.g., `path/path/path/key`). **If  any path element contains spaces, the whole path must be quoted with (and only with!) double quotes** (`"`), internal double quotes must be escaped by backslash (`\`).
 
-{{< alert title="Note" color="success" >}}
+{{< alert title="Note" type="info" >}}
 For YAML configuration files, the path elements and values starting with `:` are transformed into Ruby symbols.{{< /alert >}} 
 
 Examples:
@@ -74,7 +74,7 @@ these paths are valid to address the emphasized parameters:
 > 2. `DB/BACKEND` or `"DB/BACKEND"`
 > 3. `IM_MAD/"monitord"/THREADS` or `"IM_MAD/\"monitord\"/THREADS"`
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 In the `oned.conf`-like configurations, some nested structures are unique (e.g., `DB=[...]` is just a single database connection configuration) and some can appear several times (e.g., `VM_MAD=[...]` configures execution of different drivers for different hypervisors, one section for each driver). In the second case, the nested structure is uniquely addressed by a value of one identifying parameter inside the structure, usually `NAME`. This value (including the quotes) is placed as part of the path. See path 3 above.{{< /alert >}} 
 
 - for the following `/etc/one/fireedge-server.conf` snippet
@@ -101,7 +101,7 @@ these paths are valid to address the emphasized parameter(s):
 
 > 1. `:IP/:desc` or `":IP/:desc"`
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 Path accepts only double quotes (`"`) to enclose paths that include spaces. Single quotes (`'`) are always understood as part of the string.{{< /alert >}} 
 
 ### `JSON VALUE`
@@ -124,7 +124,7 @@ Examples:
 - `{"fruit": "apple"}` - Hash with key `fruit` with value `apple`
 - `{'fruit': 'apple'}` - **invalid JSON value!**
 
-{{< alert title="Important" color="success" >}}
+{{< alert title="Important" type="info" >}}
 When the value in the addressed configuration file contains quotes, these must also be specified in the JSON value or within a path. This leads to double quoting of values; the first quotes identify a JSON string and the second (inner) escaped quotes are passed to the configuration file (e.g., `"\"quoted string\"'`). This is usually seen in the `oned.conf`-like configuration files.{{< /alert >}} 
 
 ### Examples

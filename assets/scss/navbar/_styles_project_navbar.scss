@@ -1,0 +1,46 @@
+@import "../_styles_fonts";
+
+// Navbar
+.td-navbar {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+// Text color of each menu
+.nav-link {
+
+  // Font styles
+  @include body-small-bold;
+
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}
+
+// Search input
+.td-navbar .td-search__input {
+  @include body-small;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);  
+  padding: 8px 27.5px 8px 13px;
+}  
+
+// Logo
+.navbar-brand {
+  margin: 0;
+  padding: 0;
+}
+
+// Logo
+.td-navbar .navbar-brand svg {
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 30px;
+}
+
+.td-search__input.form-control:focus {
+  border-color:var(--link-hover-color);
+  box-shadow: none;
+}
+  
