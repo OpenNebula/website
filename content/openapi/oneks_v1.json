@@ -268,6 +268,109 @@
                 }
             }
         },
+        "/clusters/check": {
+            "get": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Get readiness check service status",
+                "description": "Returns whether the OneKS readiness check service is enabled in the OneKS server configuration.",
+                "responses": {
+                    "200": {
+                        "description": "Readiness check service status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean",
+                                            "description": "Whether the OneKS readiness check service is enabled."
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "enabled": true
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "clusters"
+                ],
+                "summary": "Run a readiness check",
+                "description": "Runs the OneKS readiness check service against a public and private Virtual Network pair before provisioning a Kubernetes cluster. The response is a Server-Sent Events stream. Each progress event uses the `check_cluster` event name and sends a JSON object inline in the event `data` field with the following structure: `name` is the check step, `state` is one of `started`, `success`, or `failure`, and `context` is an optional error or detail message.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "public_network",
+                                    "private_network"
+                                ],
+                                "properties": {
+                                    "public_network": {
+                                        "type": "integer",
+                                        "description": "Public Virtual Network ID used by the readiness probe VM."
+                                    },
+                                    "private_network": {
+                                        "type": "integer",
+                                        "description": "Private Virtual Network ID validated by the readiness probe VM."
+                                    }
+                                }
+                            },
+                            "example": {
+                                "public_network": 105,
+                                "private_network": 106
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Readiness check progress stream",
+                        "content": {
+                            "text/event-stream": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Server-Sent Events stream. Each event is named `check_cluster` and contains JSON data with `name`, `state`, and optional `context` fields."
+                                },
+                                "example": "event: check_cluster\ndata: {\"name\":\"Starting OneKS readiness checks\",\"state\":\"success\"}\n\nevent: check_cluster\ndata: {\"name\":\"Creating probe VM\",\"state\":\"started\"}\n\nevent: check_cluster\ndata: {\"name\":\"Creating probe VM\",\"state\":\"success\"}\n\n"
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
         "/clusters/{id}": {
             "get": {
                 "tags": [

@@ -148,6 +148,51 @@ curl -u "$(cat /var/lib/one/.one/one_auth)" http://<oneks-server>:10780/api/v1/c
 
 K8s Cluster provisioning can fail for different infrastructure or network-related reasons. In most cases, these failures surface as a timeout during provisioning and the K8s Cluster eventually moves to `PROVISIONING_FAILURE`. The following checks can help identify the most common causes.
 
+### OneKS Readiness Check
+
+If the OneKS readiness check service is enabled, use it to validate the public and private Virtual Networks used by a K8s Cluster. The check deploys a temporary lightweight probe VM and verifies the main requirements needed by OneKS provisioning, including OneGate access, Internet connectivity, and private network paths. For configuration details, see the [Readiness Check Configuration]({{% relref "platform_services/oneks/management/configuration#readiness-check-configuration" %}}). For command syntax, see the [`oneks check` CLI reference]({{% relref "platform_services/oneks/references/oneks_cli#readiness-checks" %}}).
+
+When a deployment fails, run the readiness check against the failed K8s Cluster. OneKS resolves the networks from the cluster document:
+
+```shell
+oneks check cluster <cluster_id>
+```
+
+When all checks pass, the command reports each validated step:
+
+```default
+[OK] Starting OneKS readiness checks
+[OK] Creating probe VM
+[OK] Waiting for probe VM RUNNING state
+[OK] Waiting for probe VM context
+[OK] Checking OneGate access
+[OK] Checking Internet connectivity
+[OK] Checking private network paths
+[OK] Cleanup probe VM
+[OK] All OneKS readiness checks passed
+```
+
+You can also run the check before creating a K8s Cluster by passing the networks explicitly:
+
+```shell
+oneks check --public-network <network_id> --private-network <network_id>
+```
+
+If the readiness check fails, the tool reports the failing step and the environment problem that must be fixed. For example, if the probe VM cannot access OneGate:
+
+```default
+[OK] Starting OneKS readiness checks
+[OK] Creating probe VM
+[OK] Waiting for probe VM RUNNING state
+[OK] Waiting for probe VM context
+[FAIL] Checking OneGate access
+       OneKS cluster cannot reach OneGate endpoint: ONEGATE_ENDPOINT not found in the cluster context
+[OK] Cleanup probe VM
+[FAIL] One or more OneKS readiness checks failed
+```
+
+Before recovering or recreating the Kubernetes cluster, review and resolve any reported configuration issues to ensure the environment is properly prepared for deployment. The following subsections describe the recommended resolution steps for reported error.
+
 ### OneGate is Not Properly Configured
 
 OneKS relies on the seed VM to report progress and update OpenNebula resources during provisioning. If OneGate is not properly configured or the seed VM cannot reach the OneGate service, the seed VM cannot publish the expected updates back to OpenNebula. As a result, OneKS waits until the provisioning timeout is reached and the K8s Cluster enters `PROVISIONING_FAILURE`.

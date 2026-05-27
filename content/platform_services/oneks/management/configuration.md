@@ -59,6 +59,22 @@ These options are used when OneKS runs Kubernetes commands from the Front-end Ho
 | `:kubeconfig_path`   | `/etc/rancher/rke2/rke2.yaml`            | Kubeconfig file used by `kubectl` operations executed by the service. The file must be readable by the service user. |
 | `:k8s_timeout`       | `15`                                     | Timeout, in seconds, while waiting for Kubernetes command execution results. Increase it for slow API servers or busy management clusters. |
 
+## Readiness Check Configuration
+
+The optional `:readiness` section enables the OneKS readiness check service. When it is enabled, users can validate the public and private Virtual Networks that will be used by a K8s Cluster before starting a deployment.
+
+On startup, OneKS verifies that the readiness appliance is available. If the appliance is not already imported, OneKS imports the configured marketplace appliance into the configured datastore, creating the OneKS readiness service VM template and its backing image as part of the import.
+
+Comment out the full `:readiness` section to disable the readiness check service.
+
+| Attribute                         | Default                                 | Description |
+|-----------------------------------|-----------------------------------------|-------------|
+| `:readiness` / `:appliance_name`  | `OneKS Readiness Service`               | Marketplace appliance name used when importing the readiness probe template if it is missing. |
+| `:readiness` / `:appliance_id`    | `97383e01-6150-4a1f-8830-fc5d745056e0`  | Marketplace appliance UUID used to find or import the readiness probe VM template. By default, this value points to an Alpine 3.20 appliance from the OpenNebula Marketplace. |
+| `:readiness` / `:appliance_ds`    | `1`                                     | Datastore ID where the readiness appliance image is imported. |
+| `:readiness` / `:external_url`    | `https://get.rke2.io`                   | Public URL used by the probe VM to validate DNS resolution and outbound Internet access. |
+| `:readiness` / `:timeout`         | `60`                                    | Maximum time, in seconds, to wait for the probe VM and each readiness check step. |
+
 ## Operational Defaults
 
 These values control retry behavior, concurrency, cooldowns, and generated resource names.
@@ -181,6 +197,17 @@ OneKS relies on several OpenNebula services and network endpoints:
 :kubectl_path: '/var/lib/rancher/rke2/bin/kubectl'
 :kubeconfig_path: '/etc/rancher/rke2/rke2.yaml'
 :k8s_timeout: 15
+
+################################################################################
+# Cluster Readiness Check
+################################################################################
+
+:readiness:
+  :appliance_name: 'OneKS Readiness Service'
+  :appliance_id: 97383e01-6150-4a1f-8830-fc5d745056e0
+  :appliance_ds: 1
+  :external_url: 'https://get.rke2.io'
+  :timeout: 60
 
 ################################################################################
 # Defaults
