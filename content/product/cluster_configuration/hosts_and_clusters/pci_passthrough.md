@@ -16,8 +16,8 @@ It is possible to discover PCI devices in the Hosts and directly assign them to 
 
 The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA-related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.
 
-{{< alert title="Warning" type="warning" >}}
-The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different.**{{< /alert >}}
+{{% alert title="Warning" type="warning" %}}
+The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different**.{{% /alert %}}
 
 ## Requirements
 
@@ -142,7 +142,7 @@ cgroup_device_acl = [
 <a id="pci-config"></a>
 
 {{< alert title="Note" type="info" >}}
-There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the necessary owner:group for them to work{{< /alert >}}
+There may be permissions problems if `/dev/vfio` devices are not owned by `oneadmin:kvm`. In this cases, a udev rule like `SUBSYSTEM=="vfio", GROUP="kvm", OWNER="oneadmin"` will set up the necessary owner:group for them to work.{{< /alert >}}
 
 ## Driver Configuration
 
@@ -318,9 +318,9 @@ For SR-IOV interfaces, you can configure different parameters depending on wheth
   - `SPOOFCHK`: Enables or disables MAC/VLAN spoof checking.
   - `TRUST`: Enables or disables VF trust status.
 
-* **Switchdev Mode**: In switchdev mode, VF parameters are controlled by host-side representor interfaces. These can then be attached to a virtual switch to establish port control. In this mode, only the `MAC` is applied directly in the VF interface. The rest of the control parameters are the same as those that are supported by the virtual switch driver of virtual network. As of now, only [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) is supported for Switchdev Mode
+* **Switchdev Mode**: In switchdev mode, VF parameters are controlled by host-side representor interfaces. These can then be attached to a virtual switch to establish port control. In this mode, only the `MAC` is applied directly in the VF interface. The rest of the control parameters are the same as those that are supported by the virtual switch driver of virtual network. As of now, only [Open vSwitch]({{% relref "product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) is supported for Switchdev Mode.
 
-The [context packages]({{% relref "../../virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) support the configuration of the following attributes:
+The [context packages]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates#context-overview" %}}) support the configuration of the following attributes:
 
 * `MAC`: It will change the mac address of the corresponding network interface to the MAC assigned by OpenNebula.
 * `IP`: It will assign an IPv4 address to the interface, assuming a `/24` netmask.

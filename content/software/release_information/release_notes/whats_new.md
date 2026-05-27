@@ -19,7 +19,7 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## Networking
 
-* Support for SRIOV capable network interfaces in [switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough.md#usage-as-network-interfaces" %}})
+* Support for SR-IOV capable network interfaces in [switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough.md#usage-as-network-interfaces" %}}).
 
 ## Sunstone
 
