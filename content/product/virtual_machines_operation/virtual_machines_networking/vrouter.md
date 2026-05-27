@@ -8,10 +8,6 @@ tags:
 weight: "5"
 ---
 
-<a id="vrouter"></a>
-
-<!--# Virtual Routers -->
-
 Virtual Routers provide routing across Virtual Networks. The administrators can easily connect Virtual Networks from Sunstone and the CLI. The routing itself is implemented with a Virtual Machine appliance available though the Marketplace. This Virtual Machine can be seamlessly deployed in high availability mode.
 
 ## Download the Virtual Router Appliance
@@ -20,51 +16,55 @@ OpenNebula provides an appliance which implements various Virtual Network Functi
 
 - Download the appliance from the OpenNebula Marketplace. For example, to put the Virtual Router image in the default datastore and create a Virtual Router template named `Service Virtual Router`, use:
 
-```default
-$ onemarketapp export 'Service Virtual Router' vr --datastore default --vmname vr
-IMAGE
-    ID: 9
-VMTEMPLATE
-    ID: 8
-```
+  ```shell
+  onemarketapp export 'Service Virtual Router' vr --datastore default --vmname vr
+  IMAGE
+      ID: 9
+  VMTEMPLATE
+      ID: 8
+  ```
 
 - Check that the resources are properly created and update them to your OpenNebula installation if needed:
 
-```default
-$ oneimage show 9 # 9 is the IMAGE ID from the previous onemarketapp command
-$ onetemplate show 8 # 8 is for the VMTEMPLATE ID
-```
+  ```shell
+  oneimage show 9 # 9 is the IMAGE ID from the previous onemarketapp command
+  onetemplate show 8 # 8 is for the VMTEMPLATE ID
+  ```
 
 ## Creating a New Virtual Router
 
 New Virtual Routers are created from a special type of VM Template, like the one created automatically when downloading the market app.
 
+Select the interface to find the corresponding instructions:
+
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interfaces**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
 <a id="force-ipv4-sunstone"></a>
 
-### Sunstone
+To create a new Virtual Router from [Sunstone UI Interface]({{% relref "product/control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}), follow the wizard to select the Virtual Networks that will get logically linked to it. This connection takes effect when the Virtual Machine containing the VR Appliance is automatically deployed, with a network interface attached to each Virtual Network.
 
-To create a new Virtual Router from [Sunstone UI Interface]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}), follow the wizard to select the Virtual Networks that will get logically linked to it. This connection takes effect when the Virtual Machine containing the VR Appliance is automatically deployed, with a network interface attached to each Virtual Network.
+For each Virtual Network, define the relevant options:
 
-For each Virtual Network, the following options can be defined:
+* **Floating IP**: Only used in High Availability. This option is controlled with `FLOATING_IP` and `FLOATING_ONLY` parameters.
+* **Force IPv4**: You can force the IP assigned to the network interface. When the VR is not configured in High Availability, this will be the IP requested for the Virtual Machine appliance.
+* **Management Interface**: If checked, this network interface will be a Virtual Router management interface. Traffic will not be forwarded to it.
 
-* **Floating IP**. Only used in High Availability. This option is controlled with `FLOATING_IP` and `FLOATING_ONLY` parameters.
-* **Force IPv4**. You can force the IP assigned to the network interface. When the VR is not configured in High Availability, this will be the IP requested for the Virtual Machine appliance.
-* **Management interface**. If checked, this network interface will be a Virtual Router management interface. Traffic will not be forwarded to it.
+Once ready, click the **Create** button to finish. OpenNebula automatically creates the Virtual Router and the corresponding Virtual Machines.
 
-Once ready, click the “create” button to finish. OpenNebula will create the Virtual Router and the Virtual Machines automatically.
+{{< image path="/images/sunstone_create_vrouter.png" alt="Sunstone create Vrouter" align="center" width="90%" mb="20px" >}}
 
-![sunstone_create_vrouter](/images/sunstone_create_vrouter.png)
+{{% /tab %}}
 
-### CLI
+{{% tab header="CLI"%}}
 
-Virtual Routers can be managed with the `onevrouter` command.
+Manage Virtual Routers with the `onevrouter` command.
 
-To create a new Virtual Router from the CLI, first you need to create a VR Template file with the following attributes:
+To create a new Virtual Router from the CLI, first specify a VR Template file with the attributes below. Then run the `onevrouter create` command:
 
-Then use the `onevrouter create` command:
-
-```default
-$ cat myvr.txt
+```shell
+cat myvr.txt
 NAME = my-vr
 NIC = [
   NETWORK="blue-net",
@@ -73,15 +73,20 @@ NIC = [
 NIC = [
   NETWORK="red-net" ]
 
-$ onevrouter create myvr.txt
+onevrouter create myvr.txt
 ID: 1
 ```
 
-At this point the Virtual Router resource is created but it does not have any Virtual Machines. A second step is needed to create one (or more, if High Availability is used):
+The Virtual Router resource is created but it does not have any Virtual Machines. Create one or more VMS, depending if High Availability is used:
 
-```default
-$ onevrouter instantiate <vrouterid> <templateid>
+```shell
+onevrouter instantiate <vrouterid> <templateid>
 ```
+
+{{% /tab %}}
+
+{{< /tabpane >}}
+
 
 ## Managing Virtual Routers
 
@@ -91,7 +96,7 @@ The Virtual Networks connected to the VR machines can be modified with the attac
 
 In the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}) the actions can be found in the Virtual Router’s main information panel, in the networks table. The options to add a new Virtual Network are the same as for the creation wizard, see previous section.
 
-![sunstone_vrouter](/images/sunstone_vrouter.png)
+{{< image path="/images/sunstone_vrouter.png" alt="Sunstone create Vrouter" align="center" width="90%" mb="20px" >}}
 
 The `onevrouter nic-attach` command takes a file containing a single NIC attribute. Alternatively, you can provide the new Virtual Network settings with command options, see `onevrouter nic-attach -h` for more information.
 
@@ -111,8 +116,8 @@ More than one Virtual Machine can be associated to a Virtual Router in order to 
 
 To enable a high-availability scenario, you need to choose two or more instances when the Virtual Router is created in Sunstone. In the CLI, the number of VM instances is given with the `-m` option
 
-```default
-$ onevrouter instantiate -h
+```shell
+onevrouter instantiate -h
 [...]
 -m, --multiple x          Instance multiple VMs
 ```

@@ -24,8 +24,8 @@ This section covers `onecfg` tool subcommands:
 {{< alert title="Important" type="info" >}}
 This command must be always run under privileged user `root` directly or via `sudo`. For example:
 
-```default
-$ sudo onecfg status
+```shell
+sudo onecfg status
 ```
 {{< /alert >}}
 

@@ -8,25 +8,21 @@ tags:
 weight: "5"
 ---
 
-<a id="kvm-pci-passthrough"></a>
-
-<!--# PCI Passthrough -->
-
 It is possible to discover PCI devices in the Hosts and directly assign them to Virtual Machines in the KVM hypervisor.
 
-The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA-related sections, those for PCI devices that are not graphic cards, or if you don’t want to output video signal from them.
+The setup and environment information is taken from [here](https://stewartadam.io/howtos/fedora-20/create-gaming-virtual-machine-using-vfio-pci-passthrough-kvm). You can safely ignore all the VGA-related sections, those for PCI devices that are not graphics cards, or if you don’t want to output video signal from them.
 
 {{% alert title="Warning" type="warning" %}}
 The overall setup state was extracted from a preconfigured Fedora 22 machine. **Configuration for your distro may be different**.{{% /alert %}}
 
 ## Requirements
 
-Virtualization Host must
+Virtualization Host must:
 
-* support [I/O MMU](https://en.wikipedia.org/wiki/IOMMU) (processor features Intel VT-d or AMD-Vi)
-* have Linux kernel >= 3.12
+* Support [I/O MMU](https://en.wikipedia.org/wiki/IOMMU) (processor features Intel VT-d or AMD-Vi)
+* Have Linux kernel >= 3.12
 
-(instructions below are made for Intel branded processors but the process should be very similar for AMD)
+Instructions below apply to Intel branded processors but the process should be similar for AMD.
 
 ## Machine Configuration (Hypervisor)
 
@@ -34,13 +30,13 @@ Virtualization Host must
 
 The kernel must be configured to support I/O MMU and to blacklist any driver that could be accessing the PCIs that we want to use in our VMs. The parameter to enable I/O MMU is:
 
-```default
+```shell
 intel_iommu=on
 ```
 
 We also need to tell the kernel to load the `vfio-pci` driver and blacklist the drivers for the selected cards. For example, for NVIDIA GPUs we can use these parameters:
 
-```default
+```shell
 rd.driver.pre=vfio-pci rd.driver.blacklist=nouveau
 ```
 
@@ -48,21 +44,21 @@ rd.driver.pre=vfio-pci rd.driver.blacklist=nouveau
 
 The modules for vfio must be added to initrd. The list of modules are `vfio vfio_iommu_type1 vfio_pci vfio_virqfd`. For example, if your system uses `dracut`, add the file `/etc/dracut.conf.d/local.conf` with this line:
 
-```default
+```shell
 add_drivers+="vfio vfio_iommu_type1 vfio_pci vfio_virqfd"
 ```
 
 and regenerate `initrd`:
 
-```default
-# dracut --force
+```shell
+dracut --force
 ```
 
 ### Driver Blacklisting
 
 The same blacklisting done in the kernel parameters must be done in the system configuration. `/etc/modprobe.d/blacklist.conf` for NVIDIA GPUs:
 
-```default
+```shell
 blacklist nouveau
 blacklist lbm-nouveau
 options nouveau modeset=0
@@ -72,7 +68,7 @@ alias lbm-nouveau off
 
 Alongside this configuration the VFIO driver should be loaded by passing the id of the PCI cards we want to attach to VMs. For example, for NVIDIA GRID K2 GPU we pass the id `10de:11bf`. File `/etc/modprobe.d/local.conf`:
 
-```default
+```shell
 options vfio-pci ids=10de:11bf
 ```
 
@@ -82,7 +78,7 @@ I/O MMU separates PCI cards into groups to isolate memory operation between devi
 
 This script binds a card to VFIO. It goes into `/usr/local/bin/vfio-bind`:
 
-```default
+```shell
 #!/bin/sh
 modprobe vfio-pci
 for dev in "$@"; do
@@ -97,7 +93,7 @@ done
 
 The configuration goes into `/etc/sysconfig/vfio-bind`. The cards are specified with PCI addresses. Addresses can be retrieved with the `lspci` command. Make sure to prepend the domain that is usually `0000`. For example:
 
-```default
+```shell
 DEVICES="0000:04:00.0 0000:05:00.0 0000:84:00.0 0000:85:00.0"
 ```
 
@@ -122,8 +118,8 @@ WantedBy=multi-user.target
 
 Now we need to give QEMU access to the VFIO devices for the groups assigned to the PCI cards. We can get a list of PCI cards and its I/O MMU group using this command:
 
-```default
-# find /sys/kernel/iommu_groups/ -type l
+```shell
+find /sys/kernel/iommu_groups/ -type l
 ```
 
 In our example our cards have the groups 45, 46, 58, and 59 so we add this configuration to `/etc/libvirt/qemu.conf`:
@@ -222,7 +218,7 @@ Example:
 
 ### Per-Host Device Filtering
 
-The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) contains the definition of PCI device filtering rules which are applied globally across all hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific hosts, these attributes can be configured on a per-host or per-cluster basis within the corresponding host template:
+The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf` ) contains the definition of PCI device filtering rules which are applied globally across all Hosts. Additionally, if the cloud administrator intends to apply filtering rules to specific Hosts, these attributes can be configured on a per-host or per-cluster basis within the corresponding Host template:
 
 | Parameter        | Description                                                                        |
 |------------------|------------------------------------------------------------------------------------|
@@ -230,8 +226,10 @@ The driver configuration file ( `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.co
 | `PCI_SHORT_ADDRESS` | *(List)* Filters by short PCI address `bus:device.function`                        |
 
 Example: The command below filters by PCI with the `10de:*` pattern and addresses using the `e1` bus`
+```shell
+onehost show 0 | grep PCI
+```
 ```default
-$ onehost show 0 | grep PCI
 PCI_FILTER="10de:*"
 PCI_SHORT_ADDRESS="e1:00.0"
 ```
@@ -242,7 +240,22 @@ The basic workflow is to inspect the Host information, either in the CLI or in S
 
 Note that OpenNebula will only deploy the VM in a Host with the available PCI device. If no Hosts match, an error message will appear in the Scheduler log.
 
-### CLI
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interface**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+
+In Sunstone the information is displayed in the **PCI** tab of a Host:
+
+{{< image path="/images/sunstone_host_pci.png" alt="Sunstone PCI Passthrough" align="center" width="90%" mb="20px">}}
+
+To add a PCI device to a template, select the **PCI Devices** tab when you are creating a Virtual Machine template:
+
+{{< image path="/images/sunstone_template_pci.png" alt="Sunstone PCI Devices" align="center" width="90%" mb="20px">}}
+
+{{% /tab %}}
+
+{{% tab header="CLI"%}}
 
 A new table in `onehost show` command gives us the list of PCI devices per Host. For example:
 
@@ -296,15 +309,8 @@ PCI = [
 ]
 ```
 
-### Sunstone
-
-In Sunstone the information is displayed in the **PCI** tab of a Host:
-
-![pciHostTab](/images/sunstone_host_pci.png)
-
-To add a PCI device to a template, select the **PCI Devices** tab when you are creating a Virtual Machine template:
-
-![pciTemplateTab](/images/sunstone_template_pci.png)
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Usage as Network Interfaces
 
@@ -327,7 +333,24 @@ The [context packages]({{% relref "product/virtual_machines_operation/virtual_ma
 * `IPV6`: It will assign an IPv6 address to the interface, assuming a `/128` netmask.
 * `VLAN_ID`: If present, it will create a tagged interface and assign the IPs to the tagged interface.
 
-### CLI
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interface**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
+
+In the **Network** tab, under **Advanced options**, the hardware profile of the interface can be one of three types:
+
+- **Emulated**: It includes the hardware model emulated by Qemu.
+- **PCI - Automatic**: OpenNebula hardware scheduler will pick the best PCI device for the NIC.
+- **PCI - Manual**: User can specify the PCI device by its short-address as shown in Host information.
+
+Use the rest of the dialog as usual by selecting a network from the table.
+
+{{< image path="/images/sunstone_nic_passthrough.png" alt="Sunstone PCI Passthrough" align="center" width="90%" mb="20px">}}
+
+{{% /tab %}}
+
+{{% tab header="CLI"%}}
 
 When a `PCI` in a template contains the attribute `TYPE="NIC"`, it will be treated as a `NIC` and OpenNebula will assign a MAC address, a VLAN_ID, an IP, etc., to the PCI device.
 
@@ -347,14 +370,5 @@ PCI = [
 
 Note that the order of appearance of the `PCI` elements and `NIC` elements in the template is relevant. They will be mapped to NICs in the order they appear, regardless of whether or not they’re NICs of PCIs.
 
-### Sunstone
-
-In the Network tab, under advanced options, the hardware profile of the interface can be of three types:
-
-- “Emulated”, it includes the hardware model emulated by Qemu.
-- “PCI - Automatic”, OpenNebula hardware scheduler will pick the best PCI device for the NIC.
-- “PCI - Manual”, user can specify the PCI device by its short-address as shown in Host information.
-
-Use the rest of the dialog as usual by selecting a network from the table.
-
-![pciNic](/images/sunstone_nic_passthrough.png)
+{{% /tab %}}
+{{< /tabpane >}}

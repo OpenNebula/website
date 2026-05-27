@@ -17,8 +17,8 @@ The OpenNebula-Veeam&reg; Backup Integration works by exposing a native **oVirt-
 | Efficiency         | Incremental Backups (CBT)      | Leverages Change Block Tracking (CBT) via the API to back up only the data that has changed, reducing backup windows. |
 | Native Integration | Uses Standard Veeam Workflow   | Connect OpenNebula as a standard "oVirt" hypervisor in Veeam. No additional custom Veeam plug-ins are required.       |
 | Recovery           | Flexible Restore Options       | Enables Full VM restores, instant VM recovery, and file-level restores directly from the Veeam B&amp;R console.       |
-| Automation         | Full Discovery                 | Veeam automatically discovers and displays the OpenNebula cluster hierarchy (clusters, hosts, VMs, and storage).      |
-| Portability        | VMWare import                  | Enables restoring virtual machines backed up in Veeam from VMWare into OpenNebula.                                    |
+| Automation         | Full Discovery                 | Veeam automatically discovers and displays the OpenNebula Cluster hierarchy (Clusters, Hosts, VMs, and storage).      |
+| Portability        | VMWare import                  | Enables restoring Virtual Machines backed up in Veeam from VMWare into OpenNebula.                                    |
 
 ## Compatibility
 
@@ -43,7 +43,7 @@ The following table summarizes the supported backup modes for each storage syste
 Here is a list of the limitations affecting the Veeam integration with OpenNebula:
 
 - The KVM appliance in step 4.2 does not include context packages. This implies that in order to configure the networking of an appliance, you must either manually choose the first available free IP in the management network or set up a DHCP service router.
-- Alpine virtual machines cannot be backed up.
+- Alpine Virtual Machines cannot be backed up.
 - During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration, so avoid using them (even if they are allowed in OpenNebula itself), otherwise you may face issues when performing an in-place restores of said VMs.
 
@@ -53,7 +53,7 @@ If facing other issues or bugs, we highly encourage to check the Veeam section o
 
 To ensure a compatible integration between OpenNebula and Veeam Backup, the following components and network configuration are required:
 
-- Backup Server: to host both the **OpenNebula Backup datastore** and the **OpenNebula oVirtAPI Server**.
+- Backup Server: to Host both the **OpenNebula Backup datastore** and the **OpenNebula oVirtAPI Server**.
 - Veeam Backup Appliance: this is automatically deployed by Veeam when OpenNebula is added as a hypervisor.
 - Management Network: to provide connectivity between all of the following components:
      - OpenNebula Front-end
@@ -106,24 +106,24 @@ When adding OpenNebula as a platform into Veeam, a KVM appliance will be deploye
 - **Memory:** 6 GB RAM
 - **Disk:** 100 GB
 
-Please make sure that there is an OpenNebula host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
+Please make sure that there is an OpenNebula Host with enough capacity for this appliance. The system and image datastores should also be able to accomodate the disk storage requirement.
 
 ## Installation and Configuration
 
 ### 1. Prepare the environment for the oVirtAPI Server
 
-A server should be configured to expose both the Rsync Backup datastore and the oVirtAPI Server. This server should be accessible from all the clusters that you want to be able to back up via the management network shown in the architecture diagram. The oVirtAPI Server is going to act as the communication gateway between Veeam and OpenNebula.
+A server should be configured to expose both the Rsync Backup datastore and the oVirtAPI Server. This server should be accessible from all the Clusters that you want to be able to back up via the management network shown in the architecture diagram. The oVirtAPI Server is going to act as the communication gateway between Veeam and OpenNebula.
 
 ### 2. Create a backup datastore
 
-The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md" %}}) is supported. An additional property called ``VEEAM_DS`` must exist in the backup datastore template and be set to ``YES``.
+The next step is to create a backup datastore in OpenNebula. This datastore will be used by the oVirtAPI module to handle the backup of the Virtual Machines before sending the backup data to Veeam. Currently only [Rsync Datastore]({{% relref "product/cluster_configuration/backup_system/rsync.md" %}}) is supported. An additional property called ``VEEAM_DS`` must exist in the backup datastore template and be set to ``YES``.
 
 {{< alert title="Remember" type="info" >}}
-The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any cluster that you want to be able to back up.{{< /alert >}}
+The backup datastore must be created in the backup server configured in step 1. Also, remember to add this datastore to any Cluster that you want to be able to back up.{{< /alert >}}
 
 2.1. Create the Rsync backup datastore
 
-Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given cluster:
+Here is an example of how to create an Rsync datastore in a Host named `backup-host` and then add it to a given Cluster:
 
 ```bash
 cat << EOF > /tmp/rsync-datastore.txt
@@ -142,7 +142,7 @@ EOF
 onedatastore create /tmp/rsync-datastore.txt
 ```
 
-2.2. Add the datastore to the cluster
+2.2. Add the datastore to the Cluster
 ```bash
 onecluster adddatastore <cluster-name> <datastore-name>
 ```
@@ -164,6 +164,8 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 * ``one_xmlrpc``: Address of the OpenNebula Front-end. Please do not include any prefixes such as ``http://``, only the IP address itself is needed.
 * ``endpoint_port``: Port used by the OpenNebula RPC endpoint (defaults to 2633).
 * ``public_ip``: Address that Veeam is going to use to communicate with the ovirtapi server.
+* ``one_sshkey``: Path to the private key file used by the oVirtAPI server to reach the OpenNebula Front-end.
+* ``one_sshkey_host``: Path to the private key file used by the OpenNebula Front-end to reach hypervisor Hosts. Local path as seen on the Front-end.
 * ``backup_freeze``: (Optional) Controls which filesystem freeze mode OpenNebula requests when performing backups initiated via the oVirtAPI/Veeam integration. Valid values are `NONE`, `AGENT`, and `SUSPEND`. For details on each mode see the Backup Modes section in the backup guide: [Backup Modes]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations/#backup-modes" %}}).
 
 {{< alert title="Important" type="info" >}}
@@ -236,7 +238,7 @@ This will open a new wizard to deploy the appliance. You should choose to deploy
 
 ![image](/images/veeam/new_appliance.png)
 
-Next you should choose the cluster on which to deploy the appliance, as well as a name and the storage domain where the appliance image should be stored:
+Next you should choose the Cluster on which to deploy the appliance, as well as a name and the storage domain where the appliance image should be stored:
 
 ![image](/images/veeam/appliance_virtual_machine.png)
 
@@ -306,4 +308,4 @@ The Veeam job statistics window shows a breakdown of the load, which is crucial 
 
 ## Volatile disk backups
 
-To perform a backup of volatile disks, enable this functionality in the OpenNebula virtual machine configuration by setting the ``BACKUP_VOLATILE`` parameter to ``YES``, otherwise the disk won't be listed in Veeam. For more information regarding backups of volatile disks in OpenNebula please refer to the [backup documentation page]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations.md" %}}).
+To perform a backup of volatile disks, enable this functionality in the OpenNebula Virtual Machine configuration by setting the ``BACKUP_VOLATILE`` parameter to ``YES``, otherwise the disk won't be listed in Veeam. For more information regarding backups of volatile disks in OpenNebula please refer to the [backup documentation page]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations.md" %}}).
