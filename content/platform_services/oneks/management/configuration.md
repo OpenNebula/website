@@ -72,7 +72,7 @@ Comment out the full `:readiness` section to disable the readiness check service
 | `:readiness` / `:appliance_name`  | `OneKS Readiness Service`               | Marketplace appliance name used when importing the readiness probe template if it is missing. |
 | `:readiness` / `:appliance_id`    | `97383e01-6150-4a1f-8830-fc5d745056e0`  | Marketplace appliance UUID used to find or import the readiness probe VM template. By default, this value points to an Alpine 3.20 appliance from the OpenNebula Marketplace. |
 | `:readiness` / `:appliance_ds`    | `1`                                     | Datastore ID where the readiness appliance image is imported. |
-| `:readiness` / `:external_url`    | `https://get.rke2.io`                   | Public URL used by the probe VM to validate DNS resolution and outbound Internet access. |
+| `:readiness` / `:external_url`    | `https://get.rke2.io`                   | Public URL used by the probe VM to validate DNS resolution and outbound internet access. |
 | `:readiness` / `:timeout`         | `60`                                    | Maximum time, in seconds, to wait for the probe VM and each readiness check step. |
 
 ## Operational Defaults

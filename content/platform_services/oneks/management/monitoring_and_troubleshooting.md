@@ -150,9 +150,9 @@ K8s Cluster provisioning can fail for different infrastructure or network-relate
 
 ### OneKS Readiness Check
 
-If the OneKS readiness check service is enabled, use it to validate the public and private Virtual Networks used by a K8s Cluster. The check deploys a temporary lightweight probe VM and verifies the main requirements needed by OneKS provisioning, including OneGate access, Internet connectivity, and private network paths. For configuration details, see the [Readiness Check Configuration]({{% relref "platform_services/oneks/management/configuration#readiness-check-configuration" %}}). For command syntax, see the [`oneks check` CLI reference]({{% relref "platform_services/oneks/references/oneks_cli#readiness-checks" %}}).
+If the OneKS readiness check service is enabled, use it to validate the public and private Virtual Networks used by a K8s Cluster. The check deploys a temporary lightweight probe VM and verifies the main requirements needed by OneKS provisioning, including OneGate access, internet connectivity, and private network paths. For configuration details, see the [Readiness Check Configuration]({{% relref "platform_services/oneks/management/configuration#readiness-check-configuration" %}}). For command syntax, see the [`oneks check` CLI reference]({{% relref "platform_services/oneks/references/oneks_cli#readiness-checks" %}}).
 
-When a deployment fails, run the readiness check against the failed K8s Cluster. OneKS resolves the networks from the cluster document:
+When a deployment fails, run the readiness check against the failed K8s Cluster. OneKS resolves the networks from the Cluster document:
 
 ```shell
 oneks check cluster <cluster_id>
@@ -191,7 +191,7 @@ If the readiness check fails, the tool reports the failing step and the environm
 [FAIL] One or more OneKS readiness checks failed
 ```
 
-Before recovering or recreating the Kubernetes cluster, review and resolve any reported configuration issues to ensure the environment is properly prepared for deployment. The following subsections describe the recommended resolution steps for reported error.
+Before recovering or recreating the Kubernetes Cluster, review and resolve any reported configuration issues to ensure the environment is properly prepared for deployment. The following subsections describe the recommended resolution steps for reported error.
 
 ### OneGate is Not Properly Configured
 
@@ -217,7 +217,7 @@ For more information, refer to the [OpenNebula OneGate Documentation]({{% relref
 
 ### VMs Cannot Access the Internet
 
-During provisioning, the seed VM needs Internet access to download the required artifacts and images used to bootstrap and connect the Kubernetes nodes. If the seed VM or the target nodes cannot reach the Internet, provisioning may stall until the timeout is reached and the K8s Cluster moves to `PROVISIONING_FAILURE`.
+During provisioning, the seed VM needs internet access to download the required artifacts and images used to bootstrap and connect the Kubernetes nodes. If the seed VM or the target nodes cannot reach the internet, provisioning may stall until the timeout is reached and the K8s Cluster moves to `PROVISIONING_FAILURE`.
 
 From the affected VM, check basic network connectivity:
 
