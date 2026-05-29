@@ -1,0 +1,74 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.4.1/css/rowGroup.dataTables.min.css">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.4.1/js/dataTables.rowGroup.min.js"></script>
+
+<style>
+  /* Styling for DataTables dynamically built group rows */
+  tr.dtrg-group.dtrg-level-0 {
+      background-color: #f7f9fa !important;
+      font-weight: bold;
+      text-align: left;
+  }
+  tr.dtrg-group td {
+      padding: 12px !important;
+      border-top: 2px solid #d1d5db !important;
+      color: #1f2937;
+  }
+  .custom-search-container {
+      margin-bottom: 12px;
+      width: 100%;
+  }
+  .custom-search-container input {
+      padding: 6px 12px;
+      width: 220px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+  }
+</style>
+
+<div class="interactive-table-wrapper">
+  <div class="custom-search-container">
+    <label for="col1-search">Filter Column 1: </label>
+    <input type="text" id="col1-search" placeholder="Type to filter...">
+  </div>
+
+  {{ .Inner }}
+</div>
+
+<script>
+$(document).ready(function() {
+    // 1. Filter applies to Column Index 1 (since Column 0 is the hidden tracking text)
+    $.fn.dataTable.ext.search.push(
+        function(settings, data, dataIndex) {
+            var searchTerm = $('#col1-search').val().toLowerCase();
+            var targetColumnValue = data[1].toLowerCase(); // Index 1 represents your original 1st column
+            
+            if (searchTerm === "" || targetColumnValue.includes(searchTerm)) {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    // 2. Initialize DataTable
+    var table = $('#data-spreadsheet').DataTable({
+        "pageLength": 100,
+        "dom": 'tpi',
+        "columnDefs": [
+            { "visible": false, "targets": 0 } // Hides the layout tracking column completely
+        ],
+        "rowGroup": {
+            "dataSrc": 0 // Groups dynamically based on the contents of the hidden column
+        },
+        "order": [] // Prevents overriding your spreadsheet's natural order
+    });
+
+    // 3. Bind input box
+    $('#col1-search').on('keyup change clear', function() {
+        table.draw();
+    });
+});
+</script>

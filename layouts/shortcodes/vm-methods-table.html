@@ -1,0 +1,161 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.4.1/css/rowGroup.dataTables.min.css">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.4.1/js/dataTables.rowGroup.min.js"></script>
+
+<style>
+
+    /* --- THEME VARIABLES (Defaults to Light Theme) --- */
+  :root {
+      --table-divider-bg: #f8fafc;
+      --table-divider-text: #0f172a;
+      --table-divider-border: #e2e8f0;
+      --filter-label-text: #475569;
+      --filter-input-bg: #ffffff;
+      --filter-input-border: #cbd5e1;
+      --filter-input-text: #1e293b;
+  }
+
+  /* --- DARK THEME OVERRIDES */
+  html[data-bs-theme="dark"] {
+      --table-divider-bg: #3e4d66;         
+      --table-divider-text: #f8fafc;    
+      --table-divider-border: #334155;     
+      --filter-label-text: #94a3b8;       
+      --filter-input-bg: #0f172a;   
+      --filter-input-border: #334155;  
+      --filter-input-text: #f1f5f9;
+  }
+
+@media (min-width: 1000px) { 
+      .interactive-table-wrapper {
+          width: 63vw !important; 
+          max-width: 1200px !important;
+          /* Pulls the table frame outward into the empty right-hand space */
+          margin-right: -500px !important;
+          overflow-x: auto;
+          left: -200px !important; /* Adjusts the horizontal pull to ensure the table is fully visible without cutting off content */
+      }
+  }
+
+  .dataTables_wrapper,
+  #data-spreadsheet {
+      width: 100% !important;
+      max-width: 100% !important;
+      table-layout: fixed !important;
+      word-wrap: break-word;
+  }
+
+  .dataTables_wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+  }
+
+  #data-spreadsheet {
+      table-layout: fixed !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      word-wrap: break-word;
+  }
+
+  table.dataTable thead th.sorting,
+  table.dataTable thead th.sorting_asc,
+  table.dataTable thead th.sorting_desc {
+      background-image: none !important;
+      cursor: default !important;
+  }
+  
+  tr.dtrg-group.dtrg-level-0 {
+      background-color: var(--table-divider-bg) !important;
+      font-weight: bold;
+      text-align: left;
+  }
+  tr.dtrg-group td {
+      padding: 12px !important;
+      border-top: 2px solid #d1d5db !important;
+      color: #1f2937;
+  }
+
+  .custom-search-container {
+      margin-bottom: 16px;
+      width: 100%;
+  }
+  .custom-search-container label {
+      font-weight: 600;
+      color: var(--filter-label-text);
+      margin-right: 8px;
+  }
+  .custom-search-container input {
+      padding: 8px 14px;
+      width: 250px;
+      font-size: 0.95rem;
+      color: #1e293b;
+      background-color: #ffffff; 
+      border: 2px solid #e2e8f0; 
+      border-radius: 6px;
+      transition: border-color 0.15s ease-in-out;
+
+      color: var(--filter-input-text);
+      background-color: var(--filter-input-bg); 
+      border: 2px solid var(--filter-input-border);
+  }
+  .custom-search-container input:focus {
+      outline: none;
+      border-color: #7faefa;
+  }
+
+  .truncated-attribute {
+      max-width: 100%;           /* Adapts fluidly to the locked column frame width */
+      white-space: nowrap;      
+      overflow: hidden;         
+      text-overflow: ellipsis;  
+      cursor: help;             
+  }
+</style>
+
+<div class="interactive-table-wrapper">
+  <div class="custom-search-container">
+    <label for="col1-search">Filter method: </label>
+    <input type="text" id="col1-search" placeholder="Type to filter...">
+  </div>
+
+  {{ .Inner }}
+</div>
+
+<script>
+$(document).ready(function() {
+    $.fn.dataTable.ext.search.push(
+        function(settings, data, dataIndex) {
+            var searchTerm = $('#col1-search').val().toLowerCase();
+            var targetColumnValue = data[1].toLowerCase(); 
+            
+            if (searchTerm === "" || targetColumnValue.includes(searchTerm)) {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    var table = $('#data-spreadsheet').DataTable({
+        "pageLength": 100,
+        "dom": 'tpi',
+        "ordering": false,
+        "autoWidth": false, // FIX: Tells DataTables to defer dimension math entirely to our custom CSS
+        "columnDefs": [
+            { "visible": false, "targets": 0 }
+        ],
+        "rowGroup": {
+            "dataSrc": 0
+        }
+    });
+
+    $('#col1-search').on('keyup change clear', function() {
+        table.draw();
+    });
+});
+</script>
