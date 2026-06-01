@@ -27,6 +27,7 @@ The following issues have been solved in 7.2.2:
 * `oneswap` Add Windows OS Profile/Best practices VM template options to oneswap Windows conversion [7351](https://github.com/OpenNebula/one/issues/7351).
 * Fix `opennebula-exporter` crash when monitoring diskless VMs [7703](https://github.com/OpenNebula/one/issues/7703).
 * Fix PCI attach to prevent bus address collisions [#7695](https://github.com/OpenNebula/one/issues/7695)
+* Fix lack of VLAN tags clearance in OVS when removing them from virtual network [#7707](https://github.com/OpenNebula/one/issues/7707)
 
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
