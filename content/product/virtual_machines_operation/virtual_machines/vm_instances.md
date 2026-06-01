@@ -492,7 +492,7 @@ Some of the VM configuration attributes defined in the VM template can be update
 | `BACKUP_CONFIG` | `FS_FREEZE`, `KEEP_LAST`, `BACKUP_VOLATILE`, `MODE`,<br/>`INCREMENT_MODE`                                                |
 | `CONTEXT`       | Any value, except `ETH*`. **Variable substitution will be made**                                                         |
 
-Visit the [Virtual Machine Template reference]({{% relref "product/operation_references/configuration_references/template#template" %}}) for a complete description of each attribute.
+Visit the [Virtual Machine Template reference]({{% relref "product/operation_references/configuration_references/template#template" %}}) for a complete description of each attribute. Visit the [VM Update Methods Reference]({{% relref "product/operation_references/configuration_references/vm_update_methods/" %}}) for additional details on all available VM configuration update methods.
 
 {{< alert title="Warning" type="warning" >}}
 This action might not be supported for `RUNNING` VMs depending on the hypervisor. Please check the limitation section of the specific virtualization driver.{{< /alert >}} 
