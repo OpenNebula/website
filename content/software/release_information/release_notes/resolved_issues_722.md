@@ -28,6 +28,7 @@ The following issues have been solved in 7.2.2:
 * Fix `opennebula-exporter` crash when monitoring diskless VMs [7703](https://github.com/OpenNebula/one/issues/7703).
 * Fix PCI attach to prevent bus address collisions [#7695](https://github.com/OpenNebula/one/issues/7695)
 * Fix lack of VLAN tags clearance in OVS when removing them from virtual network [#7707](https://github.com/OpenNebula/one/issues/7707)
+* Fix OneKS lifecycle operations after renaming a cluster by using stable Kubernetes identifiers [#7724](https://github.com/OpenNebula/one/issues/7724).
 
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
