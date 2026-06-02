@@ -21,6 +21,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## Sunstone
 
+* Added FSaaS (virtiofs) support in Sunstone, allowing users to manage shared storage file systems, create filesystem images, and attach disks directly from the GUI.
+
 ## API and CLI
 
 * **Dynamic VM Group Management**: New CLI commands `onevm vmgroup-add` and `onevm vmgroup-del` allow adding or removing VMs from a [VM Group]({{% relref "affinity.md#dynamic-vmg" %}}) dynamically.
@@ -44,3 +46,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 
 * [Fix marketplace broken redirect link](https://github.com/OpenNebula/one/issues/7291).
+* [Fix Improve live migration options for busy guests](https://github.com/OpenNebula/one/issues/5774).
+* [Fix Units in "Size on instantiate" VM Template instantiation](https://github.com/OpenNebula/one/issues/7672).
+* [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
