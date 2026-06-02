@@ -35,7 +35,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Compute</td>
       <td>one.vm.resize</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/CPU">VM/TEMPLATE/CPU</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/CPU</span></td>
       <td>Changes VM CPU allocation factor</td>
       <td>NO</td>
       <td>YES</td>
@@ -47,7 +47,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Compute</td>
       <td>one.vm.resize</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/VCPU">VM/TEMPLATE/VCPU</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/VCPU</span></td>
       <td>Changes VM virtual CPU count</td>
       <td>Partial</td>
       <td>YES</td>
@@ -59,7 +59,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Compute</td>
       <td>one.vm.resize</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/MEMORY">VM/TEMPLATE/MEMORY</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/MEMORY</span></td>
       <td>Changes VM memory allocation</td>
       <td>Partial</td>
       <td>YES</td>
@@ -71,7 +71,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Disk</td>
       <td>one.vm.attach</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/DISK">VM/TEMPLATE/DISK</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/DISK</span></td>
       <td>Attaches a disk to the VM</td>
       <td>Partial</td>
       <td>YES</td>
@@ -83,7 +83,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Disk</td>
       <td>one.vm.detach</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/DISK">VM/TEMPLATE/DISK</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/DISK</span></td>
       <td>Detaches a disk from the VM</td>
       <td>Partial</td>
       <td>YES</td>
@@ -95,7 +95,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Disk</td>
       <td>one.vm.diskresize</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/DISK">VM/TEMPLATE/DISK</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/DISK</span></td>
       <td>Resizes VM disk</td>
       <td>Partial</td>
       <td>YES</td>
@@ -107,7 +107,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Disk</td>
       <td>one.vm.disksaveas</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/DISK">VM/TEMPLATE/DISK</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/DISK</span></td>
       <td>Saves VM disk as image</td>
       <td>YES</td>
       <td>YES</td>
@@ -119,7 +119,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>NIC</td>
       <td>one.vm.attachnic</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/NIC">VM/TEMPLATE/NIC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/NIC</span></td>
       <td>Attaches NIC to the VM</td>
       <td>YES</td>
       <td>YES</td>
@@ -131,7 +131,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>NIC</td>
       <td>one.vm.detachnic</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/NIC">VM/TEMPLATE/NIC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/NIC</span></td>
       <td>Detaches NIC from the VM</td>
       <td>YES</td>
       <td>YES</td>
@@ -143,7 +143,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>NIC</td>
       <td>one.vm.updatenic</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/NIC">VM/TEMPLATE/NIC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/NIC</span></td>
       <td>Updates VM NIC configuration</td>
       <td>YES</td>
       <td>YES</td>
@@ -155,7 +155,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>NIC</td>
       <td>one.vm.attachsg</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/NIC/SECURITY_GROUPS">VM/TEMPLATE/NIC/SECURITY_GROUPS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/NIC/SECURITY_GROUPS</span></td>
       <td>Attaches security group to VM NIC</td>
       <td>YES</td>
       <td>YES</td>
@@ -167,7 +167,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>NIC</td>
       <td>one.vm.detachsg</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/NIC/SECURITY_GROUPS">VM/TEMPLATE/NIC/SECURITY_GROUPS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/NIC/SECURITY_GROUPS</span></td>
       <td>Detaches security group from VM NIC</td>
       <td>YES</td>
       <td>YES</td>
@@ -179,7 +179,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>PCI</td>
       <td>one.vm.attachpci</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/PCI">VM/TEMPLATE/PCI</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/PCI</span></td>
       <td>Attaches PCI device to the VM</td>
       <td>NO</td>
       <td>YES</td>
@@ -191,7 +191,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>PCI</td>
       <td>one.vm.detachpci</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/PCI">VM/TEMPLATE/PCI</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/PCI</span></td>
       <td>Detaches PCI device from the VM</td>
       <td>NO </td>
       <td>YES</td>
@@ -203,7 +203,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.snapshotcreate</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/SNAPSHOT">VM/TEMPLATE/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/SNAPSHOT</span></td>
       <td>Creates VM snapshot</td>
       <td>YES</td>
       <td>YES</td>
@@ -215,7 +215,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.snapshotrevert</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/SNAPSHOT">VM/TEMPLATE/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/SNAPSHOT</span></td>
       <td>Reverts VM to snapshot state</td>
       <td>NO</td>
       <td>YES</td>
@@ -227,7 +227,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.snapshotdelete</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/SNAPSHOT">VM/TEMPLATE/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/SNAPSHOT</span></td>
       <td>Deletes VM snapshot</td>
       <td>YES</td>
       <td>YES</td>
@@ -239,7 +239,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.disksnapshotcreate</td>
-      <td class="truncated-attribute" title="VM/SNAPSHOTS/SNAPSHOT">VM/SNAPSHOTS/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/SNAPSHOTS/SNAPSHOT</span></td>
       <td>Creates disk snapshot</td>
       <td>YES</td>
       <td>YES</td>
@@ -251,7 +251,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.disksnapshotdelete</td>
-      <td class="truncated-attribute" title="VM/SNAPSHOTS/SNAPSHOT">VM/SNAPSHOTS/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/SNAPSHOTS/SNAPSHOT</span></td>
       <td>Deletes disk snapshot</td>
       <td>YES</td>
       <td>YES</td>
@@ -263,7 +263,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.disksnapshotrevert</td>
-      <td class="truncated-attribute" title="VM/SNAPSHOTS/SNAPSHOT">VM/SNAPSHOTS/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/SNAPSHOTS/SNAPSHOT</span></td>
       <td>Reverts disk to snapshot state</td>
       <td>NO</td>
       <td>YES</td>
@@ -275,7 +275,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Snapshots</td>
       <td>one.vm.disksnapshotrename</td>
-      <td class="truncated-attribute" title="VM/SNAPSHOTS/SNAPSHOT">VM/SNAPSHOTS/SNAPSHOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/SNAPSHOTS/SNAPSHOT</span></td>
       <td>Renames disk snapshot</td>
       <td>YES</td>
       <td>YES</td>
@@ -287,7 +287,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Backups</td>
       <td>one.vm.backup</td>
-      <td class="truncated-attribute" title="VM/BACKUPS">VM/BACKUPS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/BACKUPS</span></td>
       <td>Creates VM backup</td>
       <td>YES</td>
       <td>YES</td>
@@ -299,7 +299,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Backups</td>
       <td>one.vm.backupcancel</td>
-      <td class="truncated-attribute" title="VM/BACKUPS">VM/BACKUPS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/BACKUPS</span></td>
       <td>Cancels running VM backup job</td>
       <td>YES</td>
       <td>YES</td>
@@ -311,7 +311,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Backups</td>
       <td>one.vm.restore</td>
-      <td class="truncated-attribute" title="VM/BACKUPS">VM/BACKUPS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/BACKUPS</span></td>
       <td>Restores VM disks/state from backup</td>
       <td>NO</td>
       <td>YES</td>
@@ -323,7 +323,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM attributes</td>
       <td>one.vm.update</td>
-      <td class="truncated-attribute" title="VM/USER_TEMPLATE">VM/USER_TEMPLATE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/USER_TEMPLATE</span></td>
       <td>Updates VM user template</td>
       <td>NO</td>
       <td>YES</td>
@@ -335,7 +335,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM attributes</td>
       <td>one.vm.rename</td>
-      <td class="truncated-attribute" title="VM/NAME">VM/NAME</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/NAME</span></td>
       <td>Renames VM</td>
       <td>YES</td>
       <td>YES</td>
@@ -347,7 +347,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM attributes</td>
       <td>one.vm.chown</td>
-      <td class="truncated-attribute" title="VM/UID, VM/GID, VM/UNAME, VM/GNAME">VM/UID, VM/GID, VM/UNAME, VM/GNAME</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/UID, VM/GID, VM/UNAME, VM/GNAME</span></td>
       <td>Changes VM ownership</td>
       <td>YES</td>
       <td>YES</td>
@@ -359,7 +359,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM attributes</td>
       <td>one.vm.chmod</td>
-      <td class="truncated-attribute" title="VM/PERMISSIONS">VM/PERMISSIONS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/PERMISSIONS</span></td>
       <td>Changes VM permissions</td>
       <td>YES</td>
       <td>YES</td>
@@ -371,7 +371,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM scheduled actions</td>
       <td>one.vm.schedadd</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/SCHED_ACTION">VM/TEMPLATE/SCHED_ACTION</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/SCHED_ACTION</span></td>
       <td>Adds scheduled VM action</td>
       <td>YES</td>
       <td>YES</td>
@@ -383,7 +383,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM scheduled actions</td>
       <td>one.vm.schedupdate</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/SCHED_ACTION">VM/TEMPLATE/SCHED_ACTION</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/SCHED_ACTION</span></td>
       <td>Updates scheduled VM action</td>
       <td>YES</td>
       <td>YES</td>
@@ -395,7 +395,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>VM scheduled actions</td>
       <td>one.vm.scheddelete</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/SCHED_ACTION">VM/TEMPLATE/SCHED_ACTION</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/SCHED_ACTION</span></td>
       <td>Deletes scheduled VM action</td>
       <td>YES</td>
       <td>YES</td>
@@ -407,7 +407,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Other</td>
       <td>one.vm.lock</td>
-      <td class="truncated-attribute" title="VM/LOCK">VM/LOCK</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/LOCK</span></td>
       <td>Locks VM actions</td>
       <td>YES</td>
       <td>YES</td>
@@ -419,7 +419,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Other</td>
       <td>one.vm.unlock</td>
-      <td class="truncated-attribute" title="VM/LOCK">VM/LOCK</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/LOCK</span></td>
       <td>Unlocks VM actions</td>
       <td>YES</td>
       <td>YES</td>
@@ -431,7 +431,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Other</td>
       <td>one.vm.exec</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/QEMU_GA_EXEC">VM/TEMPLATE/QEMU_GA_EXEC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/QEMU_GA_EXEC</span></td>
       <td>Executes command inside guest</td>
       <td>YES</td>
       <td>NO</td>
@@ -443,7 +443,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Other</td>
       <td>one.vm.retryexec</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/QEMU_GA_EXEC">VM/TEMPLATE/QEMU_GA_EXEC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/QEMU_GA_EXEC</span></td>
       <td>Retries guest command</td>
       <td>YES</td>
       <td>NO</td>
@@ -455,7 +455,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>Other</td>
       <td>one.vm.cancelexec</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/QEMU_GA_EXEC">VM/TEMPLATE/QEMU_GA_EXEC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/QEMU_GA_EXEC</span></td>
       <td>Cancels guest command</td>
       <td>YES</td>
       <td>NO</td>
@@ -467,7 +467,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/ARCH">VM/TEMPLATE/OS/ARCH</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/ARCH</span></td>
       <td>Defines guest CPU architecture</td>
       <td>NO</td>
       <td>YES</td>
@@ -479,7 +479,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/MACHINE">VM/TEMPLATE/OS/MACHINE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/MACHINE</span></td>
       <td>Defines machine/chipset type used by hypervisor</td>
       <td>NO</td>
       <td>YES</td>
@@ -491,7 +491,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/KERNEL">VM/TEMPLATE/OS/KERNEL</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/KERNEL</span></td>
       <td>Defines kernel image for direct kernel boot</td>
       <td>NO</td>
       <td>YES</td>
@@ -503,7 +503,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/INITRD">VM/TEMPLATE/OS/INITRD</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/INITRD</span></td>
       <td>Defines initrd image for direct kernel boot</td>
       <td>NO</td>
       <td>YES</td>
@@ -515,7 +515,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/BOOTLOADER">VM/TEMPLATE/OS/BOOTLOADER</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/BOOTLOADER</span></td>
       <td>Defines external bootloader</td>
       <td>NO</td>
       <td>YES</td>
@@ -527,7 +527,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/BOOTLOADER">VM/TEMPLATE/OS/BOOTLOADER</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/BOOTLOADER</span></td>
       <td>Defines VM boot device</td>
       <td>YES</td>
       <td>YES</td>
@@ -539,7 +539,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/KERNEL_CMD">VM/TEMPLATE/OS/KERNEL_CMD</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/KERNEL_CMD</span></td>
       <td>Defines kernel command line parameters</td>
       <td>NO</td>
       <td>YES</td>
@@ -551,7 +551,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/ROOT">VM/TEMPLATE/OS/ROOT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/ROOT</span></td>
       <td>Defines guest root device</td>
       <td>NO</td>
       <td>YES</td>
@@ -563,7 +563,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/SD_DISK_BUS">VM/TEMPLATE/OS/SD_DISK_BUS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/SD_DISK_BUS</span></td>
       <td>Defines bus type for SD disks</td>
       <td>NO</td>
       <td>YES</td>
@@ -575,7 +575,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/UUID">VM/TEMPLATE/OS/UUID</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/UUID</span></td>
       <td>Defines VM UUID</td>
       <td>NO</td>
       <td>YES</td>
@@ -587,7 +587,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/FIRMWARE">VM/TEMPLATE/OS/FIRMWARE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/FIRMWARE</span></td>
       <td>Defines VM firmware/UEFI loader</td>
       <td>NO</td>
       <td>YES</td>
@@ -599,7 +599,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/OS/FIRMWARE_FORMAT">VM/TEMPLATE/OS/FIRMWARE_FORMAT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/OS/FIRMWARE_FORMAT</span></td>
       <td>Defines firmware image format</td>
       <td>NO</td>
       <td>YES</td>
@@ -611,7 +611,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/CPU_MODEL/MODEL">VM/TEMPLATE/CPU_MODEL/MODEL</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/CPU_MODEL/MODEL</span></td>
       <td>Defines guest CPU model exposed to VM</td>
       <td>NO</td>
       <td>YES</td>
@@ -623,7 +623,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/CPU_MODEL/FEATURES">VM/TEMPLATE/CPU_MODEL/FEATURES</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/CPU_MODEL/FEATURES</span></td>
       <td>Defines guest CPU feature flags</td>
       <td>NO</td>
       <td>YES</td>
@@ -635,7 +635,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/ACPI">VM/TEMPLATE/FEATURES/ACPI</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/ACPI</span></td>
       <td>Enables ACPI support</td>
       <td>NO</td>
       <td>YES</td>
@@ -647,7 +647,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/PAE">VM/TEMPLATE/FEATURES/PAE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/PAE</span></td>
       <td>Enables Physical Address Extension support</td>
       <td>NO</td>
       <td>YES</td>
@@ -659,7 +659,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/APIC">VM/TEMPLATE/FEATURES/APIC</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/APIC</span></td>
       <td>Enables APIC support</td>
       <td>NO</td>
       <td>YES</td>
@@ -671,7 +671,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/LOCALTIME">VM/TEMPLATE/FEATURES/LOCALTIME</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/LOCALTIME</span></td>
       <td>Configures guest RTC clock mode</td>
       <td>NO</td>
       <td>YES</td>
@@ -683,7 +683,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/HYPERV">VM/TEMPLATE/FEATURES/HYPERV</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/HYPERV</span></td>
       <td>Enables Hyper-V enlightenments</td>
       <td>NO</td>
       <td>YES</td>
@@ -695,7 +695,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/GUEST_AGENT">VM/TEMPLATE/FEATURES/GUEST_AGENT</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/GUEST_AGENT</span></td>
       <td>Enables QEMU guest agent channel</td>
       <td>NO</td>
       <td>YES</td>
@@ -707,7 +707,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/VIRTIO_SCSI_QUEUES">VM/TEMPLATE/FEATURES/VIRTIO_SCSI_QUEUES</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/VIRTIO_SCSI_QUEUES</span></td>
       <td>Configures virtio-scsi queue count</td>
       <td>NO</td>
       <td>YES</td>
@@ -719,7 +719,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/VIRTIO_BLK_QUEUES">VM/TEMPLATE/FEATURES/VIRTIO_BLK_QUEUES</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/VIRTIO_BLK_QUEUES</span></td>
       <td>Configures virtio-blk queue count</td>
       <td>NO</td>
       <td>YES</td>
@@ -731,7 +731,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/FEATURES/IOTHREADS">VM/TEMPLATE/FEATURES/IOTHREADS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/FEATURES/IOTHREADS</span></td>
       <td>Configures disk IO threads</td>
       <td>NO</td>
       <td>YES</td>
@@ -743,7 +743,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/INPUT/TYPE">VM/TEMPLATE/INPUT/TYPE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/INPUT/TYPE</span></td>
       <td>Defines guest input device type</td>
       <td>NO</td>
       <td>YES</td>
@@ -755,7 +755,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/INPUT/BUS">VM/TEMPLATE/INPUT/BUS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/INPUT/BUS</span></td>
       <td>Defines guest input device bus</td>
       <td>NO</td>
       <td>YES</td>
@@ -767,7 +767,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/GRAPHICS/TYPE">VM/TEMPLATE/GRAPHICS/TYPE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/GRAPHICS/TYPE</span></td>
       <td>Defines graphics protocol/backend</td>
       <td>NO</td>
       <td>YES</td>
@@ -779,7 +779,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/GRAPHICS/LISTEN">VM/TEMPLATE/GRAPHICS/LISTEN</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/GRAPHICS/LISTEN</span></td>
       <td>Defines graphics listen address</td>
       <td>NO</td>
       <td>YES</td>
@@ -791,7 +791,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/GRAPHICS/PASSWD">VM/TEMPLATE/GRAPHICS/PASSWD</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/GRAPHICS/PASSWD</span></td>
       <td>Defines graphics console password</td>
       <td>NO</td>
       <td>YES</td>
@@ -803,7 +803,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/GRAPHICS/KEYMAP">VM/TEMPLATE/GRAPHICS/KEYMAP</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/GRAPHICS/KEYMAP</span></td>
       <td>Defines keyboard layout for graphics console</td>
       <td>NO</td>
       <td>YES</td>
@@ -815,7 +815,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/GRAPHICS/COMMAND">VM/TEMPLATE/GRAPHICS/COMMAND</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/GRAPHICS/COMMAND</span></td>
       <td>Defines graphics command parameters</td>
       <td>NO</td>
       <td>YES</td>
@@ -827,7 +827,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/VIDEO/TYPE">VM/TEMPLATE/VIDEO/TYPE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/VIDEO/TYPE</span></td>
       <td>Defines virtual video adapter type</td>
       <td>YES</td>
       <td>YES</td>
@@ -839,7 +839,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/VIDEO/IOMMU">VM/TEMPLATE/VIDEO/IOMMU</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/VIDEO/IOMMU</span></td>
       <td>Enables IOMMU support for video device</td>
       <td>YES</td>
       <td>YES</td>
@@ -851,7 +851,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/VIDEO/ATS">VM/TEMPLATE/VIDEO/ATS</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/VIDEO/ATS</span></td>
       <td>Enables Address Translation Service for video device</td>
       <td>YES</td>
       <td>YES</td>
@@ -863,7 +863,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/VIDEO/VRAM">VM/TEMPLATE/VIDEO/VRAM</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/VIDEO/VRAM</span></td>
       <td>Defines virtual video memory size</td>
       <td>YES</td>
       <td>YES</td>
@@ -875,7 +875,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/VIDEO/RESOLUTION">VM/TEMPLATE/VIDEO/RESOLUTION</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/VIDEO/RESOLUTION</span></td>
       <td>Defines guest display resolution</td>
       <td>YES</td>
       <td>YES</td>
@@ -887,7 +887,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/RAW/DATA">VM/TEMPLATE/RAW/DATA</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/RAW/DATA</span></td>
       <td>Defines raw hypervisor XML snippet</td>
       <td>NO</td>
       <td>YES</td>
@@ -899,7 +899,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/RAW/DATA_VMX">VM/TEMPLATE/RAW/DATA_VMX</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/RAW/DATA_VMX</span></td>
       <td>Defines VMX-specific raw configurationDefines VMX-specific raw configuration</td>
       <td>NO</td>
       <td>YES</td>
@@ -911,7 +911,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/RAW/TYPE">VM/TEMPLATE/RAW/TYPE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/RAW/TYPE</span></td>
       <td>Defines hypervisor backend type</td>
       <td>NO</td>
       <td>YES</td>
@@ -923,7 +923,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/RAW/VALIDATE">VM/TEMPLATE/RAW/VALIDATE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/RAW/VALIDATE</span></td>
       <td>Enables raw XML validation</td>
       <td>NO</td>
       <td>YES</td>
@@ -935,7 +935,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/BACKUP_CONFIG/FS_FREEZE">VM/TEMPLATE/BACKUP_CONFIG/FS_FREEZE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/BACKUP_CONFIG/FS_FREEZE</span></td>
       <td>Enables filesystem freeze during backup</td>
       <td>YES</td>
       <td>YES</td>
@@ -947,7 +947,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/BACKUP_CONFIG/KEEP_LAST">VM/TEMPLATE/BACKUP_CONFIG/KEEP_LAST</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/BACKUP_CONFIG/KEEP_LAST</span></td>
       <td>Defines number of retained backups</td>
       <td>YES</td>
       <td>YES</td>
@@ -959,7 +959,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/BACKUP_CONFIG/BACKUP_VOLATILE">VM/TEMPLATE/BACKUP_CONFIG/BACKUP_VOLATILE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/BACKUP_CONFIG/BACKUP_VOLATILE</span></td>
       <td>Includes volatile disks in backup</td>
       <td>YES</td>
       <td>YES</td>
@@ -971,7 +971,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/BACKUP_CONFIG/MODE">VM/TEMPLATE/BACKUP_CONFIG/MODE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/BACKUP_CONFIG/MODE</span></td>
       <td>Defines backup mode</td>
       <td>YES</td>
       <td>YES</td>
@@ -983,7 +983,7 @@ OpenNebula provides a powerful set of tools through the GUI, CLI and API that al
     <tr>
       <td>one.vm.updateconf</td>
       <td>one.vm.updateconf</td>
-      <td class="truncated-attribute" title="VM/TEMPLATE/BACKUP_CONFIG/INCREMENT_MODE">VM/TEMPLATE/BACKUP_CONFIG/INCREMENT_MODE</td>
+      <td class="truncated-attribute"><span class="cell-content">VM/TEMPLATE/BACKUP_CONFIG/INCREMENT_MODE</span></td>
       <td>Defines incremental backup mode</td>
       <td>YES</td>
       <td>YES</td>

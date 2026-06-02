@@ -16,6 +16,10 @@
       --filter-input-bg: #ffffff;
       --filter-input-border: #cbd5e1;
       --filter-input-text: #1e293b;
+
+      --hover-overlay-bg: #ffffff;
+      --hover-overlay-border: #cbd5e1;
+      --hover-overlay-shadow: rgba(15, 23, 42, 0.1) 0px 10px 15px -3px, rgba(15, 23, 42, 0.05) 0px 4px 6px -2px;
   }
 
   /* --- DARK THEME OVERRIDES */
@@ -27,6 +31,10 @@
       --filter-input-bg: #0f172a;   
       --filter-input-border: #334155;  
       --filter-input-text: #f1f5f9;
+
+      --hover-overlay-bg: #1e293b; /* Deep slate background matching section divider */
+      --hover-overlay-border: #475569;
+      --hover-overlay-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px -3px, rgba(0, 0, 0, 0.3) 0px 4px 6px -2px;
   }
 
 @media (min-width: 1000px) { 
@@ -110,11 +118,54 @@
   }
 
   .truncated-attribute {
-      max-width: 100%;           /* Adapts fluidly to the locked column frame width */
+      /* max-width: 100%; 
       white-space: nowrap;      
       overflow: hidden;         
       text-overflow: ellipsis;  
-      cursor: help;             
+      cursor: help;  */
+      
+      position: relative;
+      max-width: 180px; /* Or whatever width constraint you established previously */
+      padding: 12px 8px !important; /* Retain proper vertical table alignments */
+  }
+
+  .truncated-attribute .cell-content {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      border: 1px solid transparent; 
+      background-color: transparent;
+      padding: 0;
+      border-radius: 6px;
+      
+      transition: z-index 0.5s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, overflow 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .truncated-attribute:hover .cell-content {
+      position: absolute;
+      /*top: 50%;                  Center vertically within the cell */
+      /*transform: translateY(-50%); */
+      
+      top: 4px;
+      left: 4px;                /* Slight offset padding alignment from the cell edge */
+      
+      width: max-content;       /* Forces the box to dynamically perfectly match the long text */
+      max-width: 450px;         /* Safety max-width boundary so it doesn't shoot clear off the screen */
+      white-space: normal;      /* Allows natural word wrapping down if it hits max-width */
+      word-break: break-word;
+      
+      /* Visual styling encapsulate overlay wrapper */
+      background-color: var(--hover-overlay-bg);
+      border: 1px solid var(--hover-overlay-border);
+      border-radius: 6px;
+      box-shadow: var(--hover-overlay-shadow);
+      padding: 8px 12px;
+      
+      /* Forces this layer directly above neighboring columns/text grids */
+      z-index: 100;
   }
 </style>
 

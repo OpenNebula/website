@@ -91,8 +91,14 @@ def excel_to_html(xlsx_path):
             cell = sheet.cell(row=row_idx, column=col_idx)
             val = cell.value if cell.value is not None else ""
             
+            # if col_idx == 2 and val:
+            #     html.append(f'      <td class="truncated-attribute" title="{val}">{val}</td>')
+            # else:
+            #     html.append(f'      <td>{val}</td>')
+            
             if col_idx == 2 and val:
-                html.append(f'      <td class="truncated-attribute" title="{val}">{val}</td>')
+                # We remove the 'title' attribute since our new CSS hover will replace the browser tooltip
+                html.append(f'      <td class="truncated-attribute"><span class="cell-content">{val}</span></td>')
             else:
                 html.append(f'      <td>{val}</td>')
             
