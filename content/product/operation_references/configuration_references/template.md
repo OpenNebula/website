@@ -25,7 +25,7 @@ If not explicitly stated, the described attributes are valid for all supported h
 
 The syntax of the template file is as follows:
 
-- Anything behind the pound or hash sign `#` is a **comment**.
+- Anything after a hash (or pound) sign `#` on a line is a **comment**.
 - **Strings** are delimited with double quotes `"`, if a double quote is part of the string it needs to be escaped `\\"`.
 - **Single Attributes** are in the form:
 
@@ -40,7 +40,11 @@ NAME=[NAME1=VALUE1,NAME2=VALUE2]
 ```
 
 - **Vector Attributes** must contain at least one value.
-- Attribute names are case insensitive, in fact the names are converted to uppercase internally.
+- The following values are permitted for **attribute names**:
+  * Letters: `A-Z` (lower case letters are allowed, but are automatically capitalized internally)
+  * Digits: `0-9`
+  * Underscore: `_`
+
 
 ## XML Syntax
 
