@@ -41,7 +41,7 @@ NAME=[NAME1=VALUE1,NAME2=VALUE2]
 
 - **Vector Attributes** must contain at least one value.
 - The following values are permitted for **attribute names**:
-  * Letters: `A-Z` (lower case letters are allowed, but are automatically capitalized internally)
+  * Letters: `A-Z` (lowercase letters are allowed, but are automatically capitalized internally)
   * Digits: `0-9`
   * Underscore: `_`
 
