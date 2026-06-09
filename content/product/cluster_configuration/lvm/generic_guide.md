@@ -107,7 +107,7 @@ further configuration will be needed. Example for illustration purposes:
   ---------     (iSCSI + multipath)
 ```
 
-Alternatively, delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in the System datastore. The front-end refers to one of the hosts in the list to proxy SAN operations. Only a reduced set of operations are initiated in the front-end, such as the ones intended for undeployed VMs.
+Alternatively, delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in both the System and Image datastores. The front-end refers to one of the hosts in the list to proxy SAN operations. Only a reduced set of operations are initiated in the front-end, such as the ones intended for undeployed VMs.
 
 ## Troubleshooting
 
