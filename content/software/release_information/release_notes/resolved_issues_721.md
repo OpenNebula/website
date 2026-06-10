@@ -50,3 +50,4 @@ The following issues have been solved in 7.2.1:
 * Fix `oneswap` bug when Cluster name contains spaces [#7525](https://github.com/OpenNebula/one/issues/7525).
 * Fix `onevm deploy` failure when 802.1Q driver is used but PHYDEV element in the template is an empty string [#7432](https://github.com/OpenNebula/one/issues/7432).
 * Fix VRouter leaking network leases. Leases are no longer left orphaned after `onevrouter delete` operation [#7699](https://github.com/OpenNebula/one/issues/7699).
+* Fix LVM (EE) crash during FT mode recovery [#7739](https://github.com/OpenNebula/one/issues/7739).
