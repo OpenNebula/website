@@ -30,6 +30,7 @@ The following issues have been solved in 7.2.2:
 * Fix lack of VLAN tags clearance in OVS when removing them from virtual network [#7707](https://github.com/OpenNebula/one/issues/7707)
 * Fix OneKS lifecycle operations after renaming a cluster by using stable Kubernetes identifiers [#7724](https://github.com/OpenNebula/one/issues/7724).
 * `oneswap` Add support for batch VM conversion [#7726](https://github.com/OpenNebula/one/issues/7726)
+* Fix LVM (EE) crash during FT mode recovery [#7739](https://github.com/OpenNebula/one/issues/7739)
 
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
