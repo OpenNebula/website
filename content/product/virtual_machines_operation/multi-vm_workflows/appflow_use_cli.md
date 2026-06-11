@@ -1030,6 +1030,30 @@ The `/etc/one/oneflow-server.conf` file contains default values for `period` and
 {{< alert title="Note" type="info" >}}
 You can also perform an operation in the whole service using the command `service action`. All the above operations and options are supported.{{< /alert >}} 
 
+### Deleting Scheduled Actions from Service VMs
+
+When an action is scheduled through OneFlow, the scheduled action is created in the VMs that belong to the selected Role or Service. You can remove that scheduled action centrally from OneFlow instead of deleting it VM by VM.
+
+To delete a scheduled action from all the VMs in a Role, use the scheduled action ID shown in the Service or VM scheduled actions view:
+
+```default
+$ oneflow sched-delete <SERVICE_ID> <ROLE_NAME> <SCHED_ID>
+```
+
+For example, to delete scheduled action `3` from every VM in the `frontend` Role:
+
+```default
+$ oneflow sched-delete my-service frontend 3
+```
+
+You can also delete a scheduled action from all the VMs in the Service:
+
+```default
+$ oneflow service sched-delete <SERVICE_ID> <SCHED_ID>
+```
+
+The operation is idempotent: VMs that no longer have the scheduled action are skipped.
+
 {{< alert title="Warning" type="warning" >}}
 Schedule actions are only supported by VM-type Roles.{{< /alert >}} 
 
