@@ -70,8 +70,8 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
 | Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
 | iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../product/cluster_configuration/networking_system/vxlan#vxlan" %}})                    |
-| Spectrum-X          | Vendor-supported version | [Spectrum-X documentation]({{% relref "../../../product/cluster_configuration/networking_system/spectrumx" %}})                    |
-| InfiniBand          | Vendor-supported version |  [InfiniBand documentation](https://networking-docs.nvidia.com/doca/sdk/infiniband-network) |
+| Spectrum-X          | N/A | [Spectrum-X documentation]({{% relref "../../../product/cluster_configuration/networking_system/spectrumx" %}})                    |
+| InfiniBand          | N/A |  [InfiniBand documentation](https://networking-docs.nvidia.com/doca/sdk/infiniband-network) |
 
 ### Storage Infrastructure
 
