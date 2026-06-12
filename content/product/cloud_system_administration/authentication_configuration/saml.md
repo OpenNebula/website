@@ -301,7 +301,7 @@ A Entra ID required and admin group should be configured in OpenNebula. The grou
 
 After these steps, the configuration file `/etc/one/auth/saml_auth.conf` will look like follows. 
 
-```
+```yaml
 :sp_entity_id: 'onelocal'
 :acs_url: 'https://onelocal:8443/fireedge/api/auth/acs'
 
@@ -327,8 +327,27 @@ On the other hand, FireEdge configuration must be modified as well redirecting t
 
 That is set modifying the value of the following two parametes on the file `/etc/one/fireedge-server.conf`
 
-```
-auth: 'saml'
+```yaml
+auth: 'opennebula'
 auth_redirect: 'https://launcher.myapps.microsoft.com/api/signin/................'
 ```
 
+{{< alert title="Note" type="info" >}}
+Depending on Entra configuration, the URL `https://launcher.myapps.microsoft.com/api/signin/....` may not redirect to Microsoft login screen for OpenNebula app.
+In that case the URL `https://myapps.microsoft.com/signin/APP_NAME/APP_UUID?tenantId=TENANT_UUID` may be correct.
+{{< /alert >}}
+
+#### Mapping Entra Groups to OpenNebula groups
+
+By default:
+
+- Entra users belonging to `:group_required` will have access to OpenNebula, being members of the `:mapping_default` configured group.
+- the users that are also members of `:group_admin_name` will be administrators of that group.
+
+To map an Entra group to another primary group, the `:mapping_key` attribute must be defined in the OpenNebula group. In our configuration, the default `:mapping_key` value is `SAML_GROUP`.
+
+To map the users of the Entra group `abcdabcd-abcd-abcd-abcd-0123456789ab` to OpenNebula group `101`, the following one-liner can be executed:
+
+```bash
+echo 'SAML_GROUP="abcdabcd-abcd-abcd-abcd-0123456789ab"' | onegroup update -a 101
+```
