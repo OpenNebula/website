@@ -5,7 +5,7 @@ description:
 categories:
 pageintoc: "244"
 tags:
-weight: "2"
+weight: "1"
 ---
 
 <a id="whats-new"></a>
@@ -30,6 +30,7 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 ## KVM
 
 * Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
+* Added support for [dummy interfaces]({{% relref "vm_templates#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
 
 ## LXC
 
@@ -49,3 +50,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * [Fix Improve live migration options for busy guests](https://github.com/OpenNebula/one/issues/5774).
 * [Fix Units in "Size on instantiate" VM Template instantiation](https://github.com/OpenNebula/one/issues/7672).
 * [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
+* [Fix API commands executed on HA follower, for full list of commands the GitHub issue](https://github.com/OpenNebula/one/issues/7725).
