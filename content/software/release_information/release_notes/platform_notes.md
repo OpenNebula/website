@@ -98,7 +98,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | Ada Lovelace GPUs   | L4, L40, L40S 8.9 | 
 | Hopper GPUs      | H100, H200, GH200 9.0  | 
 | Blackwell GPUs   | B200, B300, GB200, GB300  | 
-| Blackwell GPUs   | 2, 3 | 
+| BlueField DPUs   | 2, 3 | 
 
 ### Authentication
 
