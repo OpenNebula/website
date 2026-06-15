@@ -81,7 +81,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Storage Infrastructure
 
-| **Component** | **Version**                                    | **More information**                                                                                             |
+| **Component** | **Version**  | **More information**                                                                                             |
 |-----------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | iSCSI     | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
 | LVM2      | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
@@ -92,7 +92,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 ### Accelerated Infrastructure
 
-| **Component** | **Models** | 
+| **Component** | **Models/Generations** | 
 |-----------|--------------------------------------------|
 | Ampere GPUs  | A10, A30, A40, A100 8.0 | 
 | Ada Lovelace GPUs   | L4, L40, L40S 8.9 | 
