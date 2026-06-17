@@ -17,6 +17,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## Storage & Backups
 
+* Added the [interactive backup datastore]({{% relref "../../../product/cluster_configuration/backup_system/interactive.md#vm-backups-interactive" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
+
 ## Networking
 
 ## Sunstone
