@@ -1,7 +1,7 @@
 ---
 title: "Veeam Backup (EE)"
 linkTitle: "Veeam (EE)"
-weight: "5"
+weight: "4"
 ---
 
 <a id="vm-backups-veeam"></a>
@@ -53,8 +53,8 @@ To ensure a compatible integration between OpenNebula and Veeam Backup, the foll
 
 - Backup Server: hosts the **OpenNebula oVirtAPI Server**.
 - Veeam Backup Appliance: automatically deployed by Veeam when OpenNebula is added as a hypervisor.
-- OpenNebula Backup Exporter (OneBEX): runs on demand on the OpenNebula hypervisors and exposes VM backup data to Veeam. See [Backup Datastore: Interactive]({{% relref "../../../product/cluster_configuration/backup_system/interactive.md" %}}) for more information.
-- OpenNebula interactive backup datastore: used by OpenNebula to coordinate Veeam backup operations and track backup metadata.
+- OpenNebula Backup Exporter (OneBEX): runs on demand on the OpenNebula hypervisors and exposes VM backup data to Veeam. See [Interactive Backup Integrations]({{% relref "../../../product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}) for implementation details.
+- Veeam (interactive) backup datastore: an OpenNebula `BACKUP_DS` using `DS_MAD="interactive"` and `VEEAM_DS="YES"`. This datastore coordinates Veeam backup operations and tracks backup metadata. The backup itself is stored in the Veeam repository.
 - Management Network: to provide connectivity between all of the following components:
      - OpenNebula Front-end
      - OpenNebula oVirtAPI Server
@@ -93,7 +93,7 @@ When OpenNebula is added as a platform in Veeam, Veeam deploys a KVM appliance a
 
 ### 1. Configure OneBEX
 
-Configure OneBEX on every OpenNebula hypervisor that can run VMs backed up by Veeam. OneBEX starts on demand during the interactive backup operation and exposes the prepared disk exports directly to Veeam.
+Configure OneBEX on every OpenNebula hypervisor that can run VMs backed up by Veeam. OneBEX starts on demand during the backup operation and exposes the prepared disk exports directly to Veeam.
 
 The Veeam Server and Veeam Backup Appliance must be able to connect to the configured OneBEX address and port on each hypervisor.
 
@@ -107,17 +107,19 @@ Edit the OneBEX configuration in the OpenNebula remotes directory and synchroniz
 $ onehost sync -f
 ```
 
-For more information, see [Backup Datastore: Interactive]({{% relref "../../../product/cluster_configuration/backup_system/interactive.md" %}}).
+For OneBEX parameters and API details, see [Interactive Backup Integrations]({{% relref "../../../product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}).
 
 ### 2. Prepare the environment for the oVirtAPI Server
 
 A server should be configured to expose the oVirtAPI Server. This server should be accessible from all the Clusters that you want to be able to back up via the management network shown in the architecture diagram. The oVirtAPI Server is going to act as the communication gateway between Veeam and OpenNebula.
 
-### 3. Create an interactive backup datastore
+### 3. Create the Veeam backup datastore
 
-Create and configure an interactive backup datastore in OpenNebula. This datastore is used by OpenNebula to coordinate Veeam backup operations and store the corresponding backup metadata. The datastore template must include `VEEAM_DS="YES"` so the oVirtAPI server can identify the datastore used by the Veeam integration.
+Create and configure the Veeam backup datastore in OpenNebula. This datastore uses the interactive datastore driver to start OneBEX, coordinate backup sessions initiated from Veeam, and store the corresponding OpenNebula backup metadata. The **backup** itself **is stored in the Veeam repository**.
 
-The following example creates an interactive backup datastore:
+The datastore template must include `VEEAM_DS="YES"` so the oVirtAPI server can identify the datastore used by the Veeam integration, and `DS_MAD="interactive"` so OpenNebula can handle the OneBEX workflow.
+
+The following example creates a Veeam backup datastore:
 
 ```bash
 cat << EOF > /tmp/interactive-datastore.txt
@@ -139,7 +141,7 @@ Add the datastore to each cluster containing VMs that will be backed up by Veeam
 onecluster adddatastore <cluster-name> <datastore-name>
 ```
 
-For more information, see [Backup Datastore: Interactive]({{% relref "../../../product/cluster_configuration/backup_system/interactive.md" %}}).
+For more information about the `interactive` driver internals, see [Interactive Backup Integrations]({{% relref "../../../product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration#interactive-backup-integration" %}}).
 
 ### 4. Install and configure the oVirtAPI module
 
@@ -152,7 +154,7 @@ The configuration file can be found at ``/etc/one/ovirtapi-server.yml``. You sho
 * ``public_ip``: Address that Veeam uses to communicate with the oVirtAPI server.
 * ``one_sshkey``: Path to the private key file used by the oVirtAPI server to reach the OpenNebula Front-end.
 * ``one_sshkey_host``: Path to the private key file used by the OpenNebula Front-end to reach hypervisor Hosts. Local path as seen on the Front-end.
-* ``backup_freeze``: (Optional) Controls which filesystem freeze mode OpenNebula requests when performing backups initiated via the oVirtAPI/Veeam integration. Valid values are `NONE`, `AGENT`, and `SUSPEND`. For details on each mode see the Backup Modes section in the backup guide: [Backup Modes]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations/#backup-modes" %}}).
+* ``backup_freeze``: (Optional) Controls which filesystem freeze mode OpenNebula requests when performing backups initiated via the oVirtAPI/Veeam integration. Valid values are `NONE`, `AGENT`, and `SUSPEND`. For details on each mode see the Backup Modes section in the backup guide: [Backup Modes]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations/#backup-modes" %}}).
 
 In the same configuration file, configure the OneBEX port and the port range reserved for interactive restores:
 

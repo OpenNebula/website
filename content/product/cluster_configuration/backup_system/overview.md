@@ -18,7 +18,6 @@ Define backup datastores by using the available options for backends or datastor
 
 - **Restic**: Based on the [restic backup tool](https://restic.net/).
 - **Rsync**: Relies on the [rsync utility](https://rsync.samba.org/) to transfer backup files.
-- **Interactive**: Exposes VM backup data through the OpenNebula Backup Exporter (OneBEX), so supported third-party backup systems can pull backups from the hypervisors.
 - **OpenNebula-Veeam&reg; Backup Integration**: Provides robust, agentless backup and recovery for OpenNebula VMs using Veeam Backup & Replication.
 
 ## Basic Guide Outline
@@ -28,7 +27,6 @@ Before reading this guide, you should have installed your [Front-end]({{% relref
 To configure your backup system, find about datastore driver options to save your VM backups:
 * [Restic backend]({{% relref "restic#vm-backups-restic" %}})
 * [Rsync datastore]({{% relref "rsync#vm-backups-rsync" %}})
-* [Interactive datastore]({{% relref "interactive#vm-backups-interactive" %}})
 * [OpenNebula-Veeam Backup Integration]({{% relref "veeam#vm-backups-veeam" %}})
 
 Then, consult the [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations" %}}) section to find out how to perform, schedule and restore VM backups.
@@ -56,7 +54,3 @@ Performing a VM backup requires support from the hypervisor and the disk image f
 <sup>†</sup> Ceph full and incremental backups are currently stored in a different way, see [backup types]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#backup-types" %}}) for more details.
 
 <sup>‡</sup> Only supported in [thin mode]({{% relref "product/cluster_configuration/lvm/filemode#lvm-thin" %}}).
-
-{{< alert title="Important" type="info" >}}
-The interactive backup datastore currently supports KVM VMs with file-based `qcow2` disks. Incremental interactive backups require CBT mode.
-{{< /alert >}}

@@ -40,9 +40,9 @@ Also, for **RBD** disks (Ceph), FULL and INCREMENT backups are currently stored 
 - **Incremental** backups (`FORMAT=rbd`) store the initial RBD export, as well as zero or more increment files, in the native format of Ceph exports (rbd export –export-format 2 / rbd export-diff). The restore process involves importing the initial export and applying the diff files in the same order, one by one.
 
 {{< alert title="Note" type="info" >}}
-Interactive backups are available through the [interactive backup datastore]({{% relref "../../../product/cluster_configuration/backup_system/interactive.md" %}}). In this workflow, OpenNebula exposes the backup data through OneBEX and an external backup system pulls the data from the hypervisor.
+The `INTERACTIVE` backup workflow is reserved for supported third-party integrations, such as the [OpenNebula-Veeam&reg; Backup Integration]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md#vm-backups-veeam" %}}). It is not a standalone backup backend for users to configure directly. In this workflow, OpenNebula exposes the backup data through OneBEX and the external backup system pulls the data from the hypervisor.
 
-For interactive backup datastores, OpenNebula supports:
+For interactive backup integrations, OpenNebula supports:
 
 - **Full interactive backups** for `qcow2` disks.
 - **Incremental interactive backups** for `qcow2` disks using **CBT** mode only.
@@ -55,7 +55,7 @@ Interactive incremental backups do not support the `SNAPSHOT` increment mode.
 VM backups can be taken live or while the VM is powered off. The operation comprises three steps:
 
 - *Pre-backup*: Disks (or increments) are prepared for backup. When the VM is running the filesystems of the guest are frozen (see below) and temporal disks are created so the VM can continue its normal operation. Note: backups are taken at the same time for all the VM disks (qcow2/raw images) to guarantee **crash consistent backups**.
-- *Backup*: The selected backup datastore handles the backup data. Standard backup datastores upload full disk copies or increments to the backup server. Interactive backup datastores expose the data through OneBEX so an external backup system can pull it from the hypervisor.
+- *Backup*: The selected backup datastore handles the backup data. Standard backup datastores upload full disk copies or increments to the backup server. Supported backup integrations can use OneBEX to expose the data so an external backup system can pull it from the hypervisor.
 - *Post-backup*: Cleans any temporal file in the hypervisor.
 
 {{< alert title="Note" type="info" >}}
@@ -163,7 +163,7 @@ Sunstone will display the screen to update the VM Configuration.
 | `KEEP_LAST`             | Only keep the last N backups (full backups or increments) for the VM (default: none)                             |
 | `MODE`                  | Backup type `FULL` (default) or `INCREMENT`                                                                      |
 | `INCREMENT_MODE`        | Incremental backup type `CBT` (default) or `SNAPSHOT`                                                            |
-| `INTERACTIVE`           | Use the interactive backup workflow through OneBEX (default: `NO`)                                                |
+| `INTERACTIVE`           | Enable the OneBEX interactive workflow for supported backup integrations (default: `NO`)                          |
 | `INCREMENTAL_BACKUP_ID` | For `INCREMENT` points to the backup image where increment chain is stored (read-only)                           |
 | `LAST_INCREMENT_ID`     | For `INCREMENT` the ID of the last incremental backup taken (read-only)                                          |
 | `LAST_BRIDGE`           | Hostname of the bridge host used to export the backup to the backup datastore                                    |

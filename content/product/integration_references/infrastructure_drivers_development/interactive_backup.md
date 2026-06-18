@@ -1,34 +1,34 @@
 ---
-title: "Backup Datastore: Interactive"
-linkTitle: "Interactive"
+title: "Interactive Backup Integrations"
+linkTitle: "Interactive Backups"
 date: "2026-06-17"
 description:
 categories:
-pageintoc: "80"
+pageintoc: "299"
 tags:
-weight: "4"
+weight: "9"
 ---
 
-<a id="vm-backups-interactive"></a>
+<a id="interactive-backup-integration"></a>
 
-<!--# Backup Datastore: Interactive -->
+<!--# Interactive Backup Integrations -->
 
-The interactive backup datastore allows third-party backup systems to pull Virtual Machine backup data directly from OpenNebula KVM hypervisors. It is designed for integrations that manage their own backup repository, such as the OpenNebula-Veeam&reg; Backup Integration.
+This page describes the OpenNebula interactive backup workflow for backup integrations. It is intended for integration developers and for administrators following a specific integration guide, such as the [OpenNebula-Veeam&reg; Backup Integration]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md#vm-backups-veeam" %}}).
 
-Interactive backups use the OpenNebula Backup Exporter (OneBEX). OneBEX is started on demand on the hypervisor that is running the VM backup operation. OpenNebula prepares the disk export, OneBEX exposes the export through an HTTP API, and the external backup system reads the backup data from the hypervisor.
+The `interactive` backup datastore driver is a coordination driver. It is not a general-purpose backup backend where users store and manage backup payloads directly. For regular OpenNebula backup storage, use the [Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}}) or [Rsync]({{% relref "../../../product/cluster_configuration/backup_system/rsync.md#vm-backups-rsync" %}}) backup datastore guides. For Veeam deployments, follow the [Veeam guide]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md#vm-backups-veeam" %}}), which explains the datastore attributes required by that integration.
+
+Interactive backups use the OpenNebula Backup Exporter (OneBEX). OneBEX is started on demand on the hypervisor that is running the VM backup operation. OpenNebula prepares the disk export, OneBEX exposes the export through an HTTP API, and the external backup system reads the backup data from the hypervisor. The external backup product stores the backup payload in its own repository, while OpenNebula keeps the backup image metadata needed to track and restore the backup.
 
 ## How It Works
 
-When a VM backup is created in an interactive backup datastore, OpenNebula performs the following actions:
+When a VM backup is created through an interactive backup integration, OpenNebula performs the following actions:
 
 1. The VM backup workflow prepares the selected disks for export. Full backups and CBT incremental backups are supported.
 2. OpenNebula writes the export metadata to `interactive_exports.json` in the VM backup directory on the hypervisor.
 3. OneBEX is started on the hypervisor if it is not already running.
 4. The external backup system requests the export from OneBEX, discovers the available disk transfers, and reads disk data ranges and block extents.
 5. The external backup system finalizes each transfer and then finishes the VM backup session.
-6. OpenNebula records the backup metadata as a backup image in the interactive backup datastore.
-
-The interactive datastore is therefore a coordination datastore. The backup payload is stored by the external backup product, while OpenNebula keeps the backup image metadata needed to track and restore the backup.
+6. OpenNebula records the backup metadata as a backup image in the integration datastore.
 
 OneBEX stops automatically when the backup session is finished or when it remains idle for longer than the configured timeout.
 
@@ -51,7 +51,7 @@ Interactive incremental backups do not support the `SNAPSHOT` increment mode. Op
 
 ## Network Requirements
 
-The external backup system must be able to connect to OneBEX on every hypervisor that can run VMs backed up by third-party backup systems.
+The external backup system must be able to connect to OneBEX on every hypervisor that can run VMs backed up by the integration.
 
 Make sure that:
 
@@ -104,37 +104,31 @@ The configuration file defines the OneBEX listen address, shutdown behavior, log
 | `:puma: :min_threads:` | `1` | Minimum number of Puma threads used to handle concurrent OneBEX HTTP requests. |
 | `:puma: :max_threads:` | `4` | Maximum number of Puma threads used to handle concurrent OneBEX HTTP requests. |
 
-## Creating an Interactive Backup Datastore
+## Integration Datastore
 
-Create a backup datastore that uses the `interactive` datastore driver:
+An interactive backup integration needs a `BACKUP_DS` datastore using `DS_MAD="interactive"`. This datastore records OpenNebula backup metadata and lets the integration identify which backups belong to it. The backup payload itself is stored by the external backup system.
+
+Do not create this datastore as a standalone backup target. Create it only when required by an integration guide. Integrations can require additional marker attributes. For example, the Veeam integration requires `VEEAM_DS="YES"` so the oVirtAPI server can select the datastore used by Veeam.
+
+The minimal datastore shape is:
 
 ```default
-$ cat ds_interactive.txt
-NAME   = "Interactive Backups"
+NAME   = "Integration Backups"
 TYPE   = "BACKUP_DS"
 
 DS_MAD = "interactive"
 TM_MAD = "-"
 ```
 
-Create the datastore:
-
-```default
-$ onedatastore create ds_interactive.txt
-ID: 100
-```
-
-Add the datastore to the clusters that contain the VMs to be backed up by third-party backup systems:
+The datastore must be added to every cluster that contains VMs managed by the integration.
 
 ```default
 $ onecluster adddatastore <cluster_name> <datastore_name>
 ```
 
-After the datastore is created and OneBEX is reachable on the hypervisors, supported integrations can start using interactive backups.
-
 ## Restoring Interactive Backups
 
-During interactive restores, OpenNebula passes the Image Datastore downloader a OneBEX-URL in the following form:
+During interactive restores, OpenNebula passes the Image Datastore downloader a OneBEX URL in the following form:
 
 ```default
 onbex://<IMAGE_DS_ID>:<PORT_ID>
@@ -144,14 +138,14 @@ onbex://<IMAGE_DS_ID>:<PORT_ID>
 
 ## OneBEX API Reference
 
-The OneBEX API is consumed by backup integrations. Current API is:
+The OneBEX API is consumed by backup integrations. The current API is:
 
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
 | `/` | `GET` | Returns basic server information and the available API routes. |
 | `/status` | `GET` | Returns the current export status for a VM. Requires `VM_ID`. |
 | `/exporters` | `GET` | Lists the exporter backends available in OneBEX. |
-| `/export` | `POST` | Starts one or more disk exports for a VM. Requires `VM_ID` and `DS_ID`; `DISKS` is optional. |
+| `/export` | `POST` | Starts one or more disk exports for a VM. Requires `VM_ID` and `DS_ID`. `DISKS` is optional. |
 | `/transfers/:TRANSFER_ID/info` | `GET` | Returns size and format information for a transfer. |
 | `/images/:TRANSFER_ID` | `OPTIONS` | Returns supported image transfer features and concurrency limits. |
 | `/images/:TRANSFER_ID/extents` | `GET` | Returns block extent information for a transfer. |
@@ -159,7 +153,6 @@ The OneBEX API is consumed by backup integrations. Current API is:
 | `/images/:TRANSFER_ID` | `PATCH` | Flushes a transfer when the request body uses `op=flush`. |
 | `/transfer/:TRANSFER_ID/finalize` | `POST` | Finalizes a transfer and releases its exporter resources. |
 | `/vms/:VM_ID/finish` | `POST` | Finishes the VM backup session after all transfers have been finalized. |
-
 
 ## Exporters
 
