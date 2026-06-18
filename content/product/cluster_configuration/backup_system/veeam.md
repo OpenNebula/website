@@ -42,7 +42,7 @@ The following is a list of the limitations affecting the Veeam integration with 
 
 - The KVM appliance deployed by Veeam does not include context packages. To configure the appliance network, either manually choose the first available free IP in the management network or set up a DHCP service router.
 - Alpine Virtual Machines cannot be backed up.
-- During image transfers, you may see a warning message stating ``Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected``. This is expected and shouldn't affect performance.
+- During image transfers, you may see a warning message stating `Unable to use transfer URL for image transfer: Switched to proxy URL. Backup performance may be affected`. This is expected and shouldn't affect performance.
 - Spaces are not allowed in Virtual Machine names in the integration. Avoid using them, even if they are allowed in OpenNebula itself, to prevent issues when performing in-place restores.
 
 If you encounter other issues or bugs, check the [Known Issues page]({{% relref "software/release_information/release_notes/known_issues/" %}}) for Veeam-related issues.
@@ -152,7 +152,7 @@ To install the oVirtAPI module, configure the OpenNebula repository on the Backu
 
 The configuration file can be found at `/etc/one/ovirtapi-server.yml`. Change the following variables before starting the service:
 
-* `one_xmlrpc`: Address of the OpenNebula Front-end. Please do not include any prefixes such as ``http://``, only the IP address itself is needed.
+* `one_xmlrpc`: Address of the OpenNebula Front-end. Please do not include any prefixes such as `http://`, only the IP address itself is needed.
 * `endpoint_port`: Port used by the OpenNebula RPC endpoint (defaults to 2633).
 * `public_ip`: IP address that Veeam uses to communicate with the oVirtAPI server.
 * `one_sshkey`: Path to the private key file used by the oVirtAPI server to reach the OpenNebula Front-end.
@@ -175,14 +175,14 @@ During installation a self-signed certificate is generated at `/etc/one/ovirtapi
 
 After installing the package, make sure that the `oneadmin` user in the Backup Server can perform passwordless SSH to the `oneadmin` user in the Front-end server.
 
-Finally, start the service with either `systemctl start apache2` (Ubuntu/Debian) or ``systemctl start httpd`` (RHEL/Alma).
+Finally, start the service with either `systemctl start apache2` (Ubuntu/Debian) or `systemctl start httpd` (RHEL/Alma).
 
 {{< alert title="Important" type="info" >}}
 Once the package is installed, a `oneadmin` user is created. This user and the `oneadmin` user in the Front-end must be able to establish passwordless SSH connections in both directions.
 {{< /alert >}}
 
 {{< alert title="Package dependency" type="info" >}}
-In RHEL and Alma environments, you may face issues with the passenger package dependencies (``mod_passenger`` and ``mod_ssl``). You may add the correct repository and install the packages with the following:
+In RHEL and Alma environments, you may face issues with the passenger package dependencies (`mod_passenger` and `mod_ssl`). You may add the correct repository and install the packages with the following:
 
 ```shell
 curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
@@ -268,7 +268,7 @@ If the integration is configured correctly, the available Virtual Machines appea
 The oVirtAPI server writes logs in the following directory depending on the operating system:
 
 * Ubuntu/Debian: `/var/log/apache2`
-* Alma/RHEL: `/var/log/httpd``
+* Alma/RHEL: `/var/log/httpd`
 
 Additional logs for interactive backups are available on the hypervisors:
 
