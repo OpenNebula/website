@@ -31,6 +31,7 @@ The following issues have been solved in 7.2.2:
 * Fix OneKS lifecycle operations after renaming a cluster by using stable Kubernetes identifiers [#7724](https://github.com/OpenNebula/one/issues/7724).
 * `oneswap` Add support for batch VM conversion [#7726](https://github.com/OpenNebula/one/issues/7726)
 * Fix LVM (EE) post-reboot activation silently skipping VM disks [#7720](https://github.com/OpenNebula/one/issues/7720).
+* Fix VirtioFS filesystem image size reporting always `0`(https://github.com/OpenNebula/one/issues/7751)
 
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
