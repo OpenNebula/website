@@ -51,3 +51,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * [Fix Units in "Size on instantiate" VM Template instantiation](https://github.com/OpenNebula/one/issues/7672).
 * [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
 * [Fix API commands executed on HA follower, for full list of commands the GitHub issue](https://github.com/OpenNebula/one/issues/7725).
+* [Fix VirtioFS filesystem image size reporting always `0`](https://github.com/OpenNebula/one/issues/7751).

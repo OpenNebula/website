@@ -34,12 +34,14 @@ Before creating and using a VirtioFS Datastore, ensure the following:
 
 To create a new Image Datastore, define the following template parameters:
 
-| Attribute   | Values           | Description                                       |
-| ----------- | ---------------- | --------------------------------------------------|
-| `NAME`      |                  | Name of the datastore                             |
-| `TYPE`      | `IMAGE_DS`       | OpenNebula datastore type                         |
-| `DS_MAD`    | `virtiofs`       | Datastore driver                                  |
-| `TM_MAD`    | `virtiofs`       | Transger manager driver                           |
+| Attribute         | Values       | Description                                                         |
+| ----------------- | ------------ | ------------------------------------------------------------------- |
+| `NAME`            |              | Name of the datastore                                               |
+| `TYPE`            | `IMAGE_DS`   | OpenNebula datastore type                                           |
+| `DS_MAD`          | `virtiofs`   | Datastore driver                                                    |
+| `TM_MAD`          | `virtiofs`   | Transfer manager driver                                             |
+| `RESTRICTED_DIRS` |              | Paths that cannot be registered as filesystem images                |
+| `SAFE_DIRS`       |              | Paths that can be registered even when covered by `RESTRICTED_DIRS` |
 
 This can be done either in Sunstone or through the CLI. For example:
 
@@ -49,15 +51,21 @@ NAME      = fs_datastore
 TYPE      = IMAGE_DS
 DS_MAD    = virtiofs
 TM_MAD    = virtiofs
+RESTRICTED_DIRS = "/"
+SAFE_DIRS       = "/srv/virtiofs"
 
 $ onedatastore create ds.conf
 ID: 100
 ```
 
+{{< alert title="Note" type="info" >}}
+The `RESTRICTED_DIRS` and `SAFE_DIRS` attributes are evaluated when a VirtioFS filesystem image is registered. If the image `PATH` resolves inside a directory listed in `RESTRICTED_DIRS`, the image is rejected unless the path also resolves inside one of the directories listed in `SAFE_DIRS`. In the example above, only paths under `/srv/virtiofs` can be registered.
+{{< /alert >}}
+
 ## Usage
-Once the Image Datastore is created, register an image that represents a host directory. Typically, only the path and image type needs to be defined.
+Once the Image Datastore is created, register an image that represents a host directory. Typically, only the path and image type need to be defined.
 ```
-oneimage create --name fs_data --datastore fs_datastore --persistent --path /mnt/data --type filesystem
+oneimage create --name fs_data --datastore fs_datastore --persistent --path /srv/virtiofs/data --type filesystem
 ```
 
 For use cases where the same directory must be shared across multiple VMs simultaneously, create the image as non-persistent. If read-only access is required, set `READONLY="YES"` only when the host uses `libvirt >= 11.0.0` and `virtiofsd >= 1.13.0` (older versions do not support read-only virtiofs exports).
