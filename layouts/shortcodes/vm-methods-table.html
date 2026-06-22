@@ -1,0 +1,278 @@
+{{- $csvPath := .Get "src" | default "tables/vm_update_methods.csv" -}}
+{{- $csvResource := resources.Get $csvPath -}}
+{{- if not $csvResource -}}
+  {{- errorf "vm-methods-table shortcode could not find assets/%s" $csvPath -}}
+{{- end -}}
+{{- $csvOptions := dict "targetType" "slice" -}}
+{{- $rows := transform.Unmarshal $csvOptions $csvResource -}}
+{{- if not $rows -}}
+  {{- errorf "vm-methods-table shortcode found no rows in assets/%s" $csvPath -}}
+{{- end -}}
+{{- $headers := index $rows 0 -}}
+{{- $columnWidths := slice "22%" "13%" "12%" "12%" "12%" "5%" "5%" "5%" "20%" -}}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.4.1/css/rowGroup.dataTables.min.css">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.4.1/js/dataTables.rowGroup.min.js"></script>
+
+<style>
+
+    /* --- THEME VARIABLES (Defaults to Light Theme) --- */
+  :root {
+      --table-divider-bg: #f8fafc;
+      --table-divider-text: #0f172a;
+      --table-divider-border: #e2e8f0;
+      --filter-label-text: #475569;
+      --filter-input-bg: #ffffff;
+      --filter-input-border: #cbd5e1;
+      --filter-input-text: #1e293b;
+
+      --hover-overlay-bg: #ffffff;
+      --hover-overlay-border: #cbd5e1;
+      --hover-overlay-shadow: rgba(15, 23, 42, 0.1) 0px 10px 15px -3px, rgba(15, 23, 42, 0.05) 0px 4px 6px -2px;
+  }
+
+  /* --- DARK THEME OVERRIDES */
+  html[data-bs-theme="dark"] {
+      --table-divider-bg: #3e4d66;         
+      --table-divider-text: #f8fafc;    
+      --table-divider-border: #334155;     
+      --filter-label-text: #94a3b8;       
+      --filter-input-bg: #0f172a;   
+      --filter-input-border: #334155;  
+      --filter-input-text: #f1f5f9;
+
+      --hover-overlay-bg: #1e293b; /* Deep slate background matching section divider */
+      --hover-overlay-border: #475569;
+      --hover-overlay-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px -3px, rgba(0, 0, 0, 0.3) 0px 4px 6px -2px;
+  }
+
+@media (min-width: 1000px) { 
+      .interactive-table-wrapper {
+          width: 63vw !important; 
+          max-width: 1200px !important;
+          /* Pulls the table frame outward into the empty right-hand space */
+          margin-right: -500px !important;
+          overflow-x: auto;
+          left: -200px !important; /* Adjusts the horizontal pull to ensure the table is fully visible without cutting off content */
+      }
+  }
+
+  .dataTables_wrapper,
+  #data-spreadsheet {
+      width: 100% !important;
+      max-width: 100% !important;
+      table-layout: fixed !important;
+      word-wrap: break-word;
+  }
+
+  .dataTables_wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+  }
+
+  #data-spreadsheet {
+      table-layout: fixed !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      word-wrap: break-word;
+  }
+
+  table.dataTable thead th.sorting,
+  table.dataTable thead th.sorting_asc,
+  table.dataTable thead th.sorting_desc {
+      background-image: none !important;
+      cursor: default !important;
+  }
+  
+  tr.dtrg-group.dtrg-level-0 {
+      background-color: var(--table-divider-bg) !important;
+      font-weight: bold;
+      text-align: left;
+  }
+  tr.dtrg-group td {
+      padding: 12px !important;
+      border-top: 2px solid #d1d5db !important;
+      color: #1f2937;
+  }
+
+  .custom-search-container {
+      margin-bottom: 16px;
+      width: 100%;
+  }
+  .custom-search-container label {
+      font-weight: 600;
+      color: var(--filter-label-text);
+      margin-right: 8px;
+  }
+  .custom-search-container input {
+      padding: 8px 14px;
+      width: 250px;
+      font-size: 0.95rem;
+      color: #1e293b;
+      background-color: #ffffff; 
+      border: 2px solid #e2e8f0; 
+      border-radius: 6px;
+      transition: border-color 0.15s ease-in-out;
+
+      color: var(--filter-input-text);
+      background-color: var(--filter-input-bg); 
+      border: 2px solid var(--filter-input-border);
+  }
+  .custom-search-container input:focus {
+      outline: none;
+      border-color: #7faefa;
+  }
+
+  .truncated-attribute {
+      /* max-width: 100%; 
+      white-space: nowrap;      
+      overflow: hidden;         
+      text-overflow: ellipsis;  
+      cursor: help;  */
+      
+      position: relative;
+      max-width: 180px; /* Or whatever width constraint you established previously */
+      padding: 12px 8px !important; /* Retain proper vertical table alignments */
+  }
+
+  .truncated-attribute .cell-content {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      border: 1px solid transparent; 
+      background-color: transparent;
+      padding: 0;
+      border-radius: 6px;
+      
+      transition: z-index 0.5s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, overflow 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .truncated-attribute:hover .cell-content {
+      position: absolute;
+      /*top: 50%;                  Center vertically within the cell */
+      /*transform: translateY(-50%); */
+      
+      top: 4px;
+      left: 4px;                /* Slight offset padding alignment from the cell edge */
+      
+      width: max-content;       /* Forces the box to dynamically perfectly match the long text */
+      max-width: 450px;         /* Safety max-width boundary so it doesn't shoot clear off the screen */
+      white-space: normal;      /* Allows natural word wrapping down if it hits max-width */
+      word-break: break-word;
+      
+      /* Visual styling encapsulate overlay wrapper */
+      background-color: var(--hover-overlay-bg);
+      border: 1px solid var(--hover-overlay-border);
+      border-radius: 6px;
+      box-shadow: var(--hover-overlay-shadow);
+      padding: 8px 12px;
+      
+      /* Forces this layer directly above neighboring columns/text grids */
+      z-index: 100;
+  }
+</style>
+
+<div class="interactive-table-wrapper">
+  <div class="custom-search-container">
+    <label for="col1-search">Filter method: </label>
+    <input type="text" id="col1-search" placeholder="Type to filter...">
+  </div>
+
+  <table id="data-spreadsheet" class="display" style="width:100%">
+    <thead>
+      <tr class="dt-layout-row">
+        <th>SectionTracker</th>
+        {{- range $headerIndex, $headerValue := $headers }}
+          {{- $header := $headerValue | strings.TrimSpace -}}
+          {{- if not $header -}}
+            {{- $header = printf "Column %d" (add $headerIndex 1) -}}
+          {{- end -}}
+          {{- $width := "" -}}
+          {{- if lt $headerIndex (len $columnWidths) -}}
+            {{- $width = index $columnWidths $headerIndex -}}
+          {{- end -}}
+          <th{{ with $width }} style="width: {{ . }};"{{ end }}>{{ $header }}</th>
+        {{- end }}
+      </tr>
+    </thead>
+    <tbody>
+      {{- $currentSection := "General" -}}
+      {{- $maxCols := len $headers -}}
+      {{- range after 1 $rows }}
+        {{- $row := . -}}
+        {{- $firstCell := "" -}}
+        {{- if gt (len $row) 0 -}}
+          {{- $firstCell = index $row 0 | strings.TrimSpace -}}
+        {{- end -}}
+        {{- $otherCellsEmpty := true -}}
+        {{- range $cellIndex, $cellValue := $row -}}
+          {{- if and (gt $cellIndex 0) (ne ($cellValue | strings.TrimSpace) "") -}}
+            {{- $otherCellsEmpty = false -}}
+          {{- end -}}
+        {{- end -}}
+        {{- if and $firstCell $otherCellsEmpty -}}
+          {{- $currentSection = $firstCell -}}
+        {{- else }}
+          <tr>
+            <td>{{ $currentSection }}</td>
+            {{- range $colIndex := seq 0 (sub $maxCols 1) }}
+              {{- $value := "" -}}
+              {{- if lt $colIndex (len $row) -}}
+                {{- $value = index $row $colIndex | strings.TrimSpace -}}
+              {{- end -}}
+              {{- if and (eq $colIndex 1) $value }}
+                <td class="truncated-attribute"><span class="cell-content">{{ $value }}</span></td>
+              {{- else }}
+                <td>{{ $value }}</td>
+              {{- end }}
+            {{- end }}
+          </tr>
+        {{- end -}}
+      {{- end }}
+    </tbody>
+  </table>
+</div>
+
+<script>
+$(document).ready(function() {
+    $.fn.dataTable.ext.search.push(
+        function(settings, data, dataIndex) {
+            var searchTerm = $('#col1-search').val().toLowerCase();
+            var targetColumnValue = data[1].toLowerCase(); 
+            
+            if (searchTerm === "" || targetColumnValue.includes(searchTerm)) {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    var table = $('#data-spreadsheet').DataTable({
+        "pageLength": 100,
+        "dom": 't',
+        "paging": false,
+        "ordering": false,
+        "autoWidth": false, // FIX: Tells DataTables to defer dimension math entirely to our custom CSS
+        "columnDefs": [
+            { "visible": false, "targets": 0 }
+        ],
+        "rowGroup": {
+            "dataSrc": 0
+        }
+    });
+
+    $('#col1-search').on('keyup change clear', function() {
+        table.draw();
+    });
+});
+</script>
