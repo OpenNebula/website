@@ -17,6 +17,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## Storage & Backups
 
+* Added [interactive backup integration support]({{% relref "../../../product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
+
 ## Networking
 
 ## Sunstone
@@ -52,3 +54,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
 * [Fix API commands executed on HA follower, for full list of commands the GitHub issue](https://github.com/OpenNebula/one/issues/7725).
 * [Fix VirtioFS filesystem image size reporting always `0`](https://github.com/OpenNebula/one/issues/7751).
+* [Fix onehost failing on CLI-only installs due to an unconditional require of HostSyncManager](https://github.com/OpenNebula/one/issues/7768).
