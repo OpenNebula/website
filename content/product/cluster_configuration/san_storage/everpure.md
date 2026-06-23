@@ -1,10 +1,10 @@
 ---
-title: "Everpure FlashArray SAN Datastore (EE)"
-linkTitle: "Everpure FlashArray - Native (EE)"
+title: "Everpure SAN Datastore (EE)"
+linkTitle: "Everpure - Native (EE)"
 weight: "6"
 ---
 
-OpenNebula’s **Everpure FlashArray SAN Datastore** delivers production-grade, native control of FlashArray block storage, from provisioning through cleanup, directly from OpenNebula. This integration exposes the full lifecycle of FlashArray Volumes, Snapshots, and Clones, and automates Host connectivity via Everpure’s Host/Host-group model with reliable iSCSI and multipath handling. All communication with the array uses authenticated HTTPS against the FlashArray REST API. This datastore driver is part of OpenNebula Enterprise Edition (EE).
+OpenNebula’s **Everpure SAN Datastore** delivers production-grade, native control of FlashArray block storage, from provisioning through cleanup, directly from OpenNebula. This integration exposes the full lifecycle of FlashArray Volumes, Snapshots, and Clones, and automates Host connectivity via Everpure’s Host/Host-group model with reliable iSCSI and multipath handling. All communication with the array uses authenticated HTTPS against the FlashArray REST API. This datastore driver is part of OpenNebula Enterprise Edition (EE).
 
 
 ### Key Benefits
@@ -75,7 +75,7 @@ The [Everpure Linux documentation](https://support.purestorage.com/bundle/m_linu
 
 ## Front-end Only Setup
 
-The Front-end requires network access to the Everpure FlashArrayAPI endpoint:
+The Front-end requires network access to the Everpure FlashArray API endpoint:
 
 1. **API Access:**
    - Ensure network connectivity to the Everpure FlashArray API interface. The datastore will be in an ERROR state if the API is not accessible or cannot be monitored properly.

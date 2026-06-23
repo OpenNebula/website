@@ -31,8 +31,7 @@
     {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref")
     (relref . .Params.manualLinkRelref) .RelPermalink) }}
     <li><a href="{{ $manualLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
-        .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{ end }}>{{- .Title
-        -}}</a></li>
+        .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{ end }}>{{- .Params.cardTitle | default .Title -}}</a></li>
     {{ end -}}
   </ul>
   {{ else -}}
@@ -46,7 +45,7 @@
   (relref . .Params.manualLinkRelref) .RelPermalink) -}}
   <div class="td-content">
     <h2><a href="{{ $manualLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
-        .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{end}}>{{- .Title
+        .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{end}}>{{- .Params.cardTitle | default .Title
         -}}</a></h2>
   </div>
 
@@ -74,7 +73,7 @@
           <inl>
             <a href="{{ .Page.Permalink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
               .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{end}}>{{-
-              .Title -}}</a>
+              .Params.cardTitle | default .Title -}}</a>
           </inl>
           {{ end -}}
           {{ end -}}
@@ -100,7 +99,7 @@
           <div class="card-header">            
             <a href="{{ $manualsubsecLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
               .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{end}}>{{-
-              .Title -}}</a>
+              .Params.cardTitle | default .Title -}}</a>
           </div>
           <div class="card-body">
             {{ if .Description -}}
@@ -115,7 +114,7 @@
               <li>                
                 <a href="{{ $manualpageLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
                   .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end
-                  }}{{end}}>{{- .Title -}}</a>
+                  }}{{end}}>{{- .Params.cardTitle | default .Title -}}</a>
               </li>
               {{ end -}}
               {{ end -}}
@@ -151,7 +150,7 @@
         <div class="card-header">
           <a href="{{ $manualLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
             .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{ end }}>{{-
-            .Title -}}</a>
+            .Params.cardTitle | default .Title -}}</a>
         </div>
         <div class="card-body">
 
@@ -168,7 +167,7 @@
             <li>
               <a href="{{ $manualLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
                 .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{ end
-                }}>{{- .Title -}}</a>
+                }}>{{- .Params.cardTitle | default .Title -}}</a>
             </li>
             {{ end -}}
           </ul>
@@ -212,8 +211,7 @@
 
           <li>
             <a href="{{ $manualLink }}" {{ with .Params.manualLinkTitle }} title="{{ . }}" {{ end }}{{ with
-              .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{ end }}>{{-
-              .Title -}}</a>
+              .Params.manualLinkTarget }} target="{{ . }}" {{ if eq . "_blank" }} rel="noopener" {{ end }}{{ end }}>{{- .Params.cardTitle | default .Title -}}</a>
           </li>
 
           {{ end -}}

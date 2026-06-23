@@ -31,7 +31,7 @@ These define the **underlying networking infrastructure** that will support the 
 | `VN_MAD`            | The network driver to implement the network.                                                                                                                                   | 802.1Q<br/>fw<br/>ovswitch<br/>vxlan<br/>dummy | **YES**                                         | All                                                        |
 | `BRIDGE`            | Device to attach the Virtual Machines to,<br/>depending on the network driver it may refer to<br/>different technologies or require Host setups.                               | String                                                     | `YES` for dummy, ovswitch and fw | dummy<br/>802.1Q<br/>vxlan<br/>ovswitch<br/>fw<br/>        |
 | `VLAN_ID`           | Identifier for the VLAN.                                                                                                                                                       | Integer                                                    | `YES` unless<br/>`AUTOMATIC_VLAN_ID` for 802.1Q | 802.1Q<br/>vxlan<br/>ovswitch<br/>                         |
-| `AUTOMATIC_VLAN_ID` | If set to YES, OpenNebula will generate a VLAN ID<br/>automatically if VLAN_ID is not defined.<br/>Mandatory YES for 802.1Q if VLAN_ID is not<br/>defined, optional otherwise. | String                                                     | `YES` unless `VLAN_ID`<br/>for 802.1Q           | 802.1Q<br/>vxlan<br/>ovswitch<br/>                          
+| `AUTOMATIC_VLAN_ID` | If set to YES, OpenNebula will generate a VLAN ID<br/>automatically if VLAN_ID is not defined.<br/>Mandatory YES for 802.1Q if VLAN_ID is not<br/>defined, optional otherwise. | String                                                     | `YES` unless `VLAN_ID`<br/>for 802.1Q           | 802.1Q<br/>vxlan<br/>ovswitch<br/>
 | `PHYDEV`            | Name of the physical network device that will be<br/>attached to the bridge.                                                                                                   | String                                                     | `YES`<br/><br/>                                 | 802.1Q<br/>vxlan<br/>                                      |
 
 ## Quality of Service Attributes
@@ -50,7 +50,7 @@ This set of attributes limit the bandwidth of each NIC attached to the Virtual N
 | `OUTBOUND_PEAK_KB` | Data that can be transmitted at peak speed in kilobytes.                    | All except ovswitch                 |
 
 {{< alert title="Warning" type="warning" >}}
-For Outbound QoS when using Open vSwitch, you can leverage the [Open vSwitch QoS](https://docs.openvswitch.org/en/latest/faq/qos/) capabilities.{{< /alert >}} 
+For Outbound QoS when using Open vSwitch, you can leverage the [Open vSwitch QoS](https://docs.openvswitch.org/en/latest/faq/qos/) capabilities.{{< /alert >}}
 
 ## The Address Range
 
@@ -70,7 +70,7 @@ For Outbound QoS when using Open vSwitch, you can leverage the [Open vSwitch QoS
 ### IPv6 Address Range
 
 {{< alert title="Important" type="info" >}}
-IPv6 Address Ranges can use SIZE up to 2^128. However, note that a MAC address (48 bits)  is also assigned to each lease. MAC addresses will be reused when the number of IPv6 addresses is bigger than 2^48.{{< /alert >}} 
+IPv6 Address Ranges can use SIZE up to 2^128. However, note that a MAC address (48 bits)  is also assigned to each lease. MAC addresses will be reused when the number of IPv6 addresses is bigger than 2^48.{{< /alert >}}
 
 | Attribute       | Description                                                                          | Mandatory   |
 |-----------------|--------------------------------------------------------------------------------------|-------------|
@@ -132,20 +132,20 @@ The no-SLAAC IPv6 version supports the following attributes:
 
 ## Contextualization Attributes
 
-| Attribute         | Description                                           |
-|-------------------|-------------------------------------------------------|
-| `NETWORK_ADDRESS` | Base network address.                                 |
-| `NETWORK_MASK`    | Network mask.                                         |
-| `GATEWAY`         | Default gateway for the network.                      |
-| `GATEWAY6`        | IPv6 router for this network.                         |
-| `DNS`             | DNS servers, a space separated list of servers.       |
-| `GUEST_MTU`       | Sets the `MTU` for the NICs in this network.          |
-| `METRIC`          | Route metric for default IPv4 gateway.                |
-| `IP6_METRIC`      | Route metric for default IPv6 gateway.                |
-| `METHOD`          | Sets IPv4 guest conf. method for NIC in this network. |
-| `IP6_METHOD`      | Sets IPv6 guest conf. method for NIC in this network. |
-| `SEARCH_DOMAIN`   | Default search domains for DNS resolution.            |
-| `ROUTES`          | List of custom (static) routes for this network/AR    |
+| Attribute         | Description                                                  |
+|-------------------|--------------------------------------------------------------|
+| `NETWORK_ADDRESS` | Base network address.                                        |
+| `NETWORK_MASK`    | Network mask. Needs to follow dot notation ("255.255.255.0").|
+| `GATEWAY`         | Default gateway for the network.                             |
+| `GATEWAY6`        | IPv6 router for this network.                                |
+| `DNS`             | DNS servers, a space separated list of servers.              |
+| `GUEST_MTU`       | Sets the `MTU` for the NICs in this network.                 |
+| `METRIC`          | Route metric for default IPv4 gateway.                       |
+| `IP6_METRIC`      | Route metric for default IPv6 gateway.                       |
+| `METHOD`          | Sets IPv4 guest conf. method for NIC in this network.        |
+| `IP6_METHOD`      | Sets IPv6 guest conf. method for NIC in this network.        |
+| `SEARCH_DOMAIN`   | Default search domains for DNS resolution.                   |
+| `ROUTES`          | List of custom (static) routes for this network/AR           |
 
 These attributes can be set in the (in order of precedence): VM Template NIC section, Address Range (AR), and Virtual Network Template.
 

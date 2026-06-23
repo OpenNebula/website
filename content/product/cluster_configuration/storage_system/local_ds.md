@@ -202,7 +202,7 @@ When you launch or migrate a VM, the cache manager performs the following steps:
 
 2. **Check Upstream Cache:** If the image is missing locally (or invalid), the cache manager checks each host in `CACHE_UPSTREAMS`. If found, it copies the image locally and returns that path.
 
-3. **Fallback to Front-End:** If not found in any cache, retrieves the image from the Image Datastore on the Front-end. Then stores it locally and on the central cache.
+3. **Fallback to Front-end:** If not found in any cache, retrieves the image from the Image Datastore on the Front-end. Then stores it locally and on the central cache.
 
 Cached images are stored in the cache directory (e.g., `/var/lib/one/cache/`) like this:
 

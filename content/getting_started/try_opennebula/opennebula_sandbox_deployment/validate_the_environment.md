@@ -206,7 +206,7 @@ The image below shows the newly instantiated WordPress VM and the Alpine VM that
 ![image](/images/minione-running_vms.png)
 <br/>
 
-As you can see in the image above, its IP address is 172.16.100.3.
+As you can see in the image above, its IP address is 172.16.100.3. Note: This IP will only be reachable from localhost, bridged networks, or another instance in the same VNet.  
 
 ### Step 3. Connect to WordPress
 

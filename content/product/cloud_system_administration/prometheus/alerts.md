@@ -105,3 +105,7 @@ To avoid duplicate alert notifications you should configure **all** your alertma
 then point **all** your prometheus instances to them.
 
 Please refer to the [Using Prometheus with OpenNebula in HA]({{% relref "install#monitor-alert-ha" %}}) section for details.
+
+## Alerts for the Optional Exporters
+
+The shipped `rules.yml` only covers the four base metric sources (Prometheus, OpenNebula, Libvirt, Node). If you install any of the [optional exporters]({{% relref "install#monitor-alert-extra-exporters" %}}), you can add your own rules using their metric prefixes (e.g. `mysql_up == 0` for `mysql_exporter`, `ovs_status` for `ovs_exporter`). See the upstream documentation linked in the [metrics reference]({{% relref "metrics#monitor-alert-metrics" %}}) for the available series.

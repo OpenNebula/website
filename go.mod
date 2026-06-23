@@ -1,4 +1,4 @@
-module github.com/OpenNebula/website.git
+module github.com/OpenNebula/one-docs.git
 
 go 1.18
 

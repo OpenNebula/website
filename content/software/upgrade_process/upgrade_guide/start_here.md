@@ -40,7 +40,7 @@ ERROR: Configurations metadata are outdated.
 
 Update your OpenNebula packages by following only the guide that applies to your current OpenNebula configuration:
 
-- [Upgrading a Single Front-End Deployment]({{% relref "upgrading_single#upgrade-single" %}})
+- [Upgrading a Single Front-end Deployment]({{% relref "upgrading_single#upgrade-single" %}})
 - [Upgrading an HA Cluster]({{% relref "upgrading_ha#upgrade-ha" %}})
 - [Upgrading a Federation]({{% relref "upgrading_federation#upgrade-federation" %}})
 

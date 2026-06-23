@@ -8,9 +8,9 @@ ARCH="$(uname -m)"
 install_hugo_mac() {
     TMP_DIR=$(mktemp -d)
     cd "$TMP_DIR"
-    wget https://github.com/gohugoio/hugo/releases/download/v0.155.3/hugo_extended_0.155.3_darwin-universal.tar.gz
-    tar -xzf hugo_extended_0.155.3_darwin-universal.tar.gz
-    sudo mv hugo /usr/local/bin/
+    PKG="hugo_0.155.3_darwin-universal.pkg"
+    wget "https://github.com/gohugoio/hugo/releases/download/v0.155.3/$PKG"
+    sudo installer -pkg "$PKG" -target /
     cd -
     rm -rfd "$TMP_DIR"
     hugo version

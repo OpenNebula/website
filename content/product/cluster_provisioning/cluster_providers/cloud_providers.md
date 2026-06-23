@@ -11,7 +11,7 @@ weight: "3"
 
 <a id="cloud-providers"></a>
 
-Cloud Providers define how OneForm interacts with 3rd-party IaaS cloud or bare-metal infrastructure providers such as AWS, Scaleway or Equinix. Providers for cloud-based service providers handle the credentials and API keys needed to connect with the service and automatically manage physical or virtual computing resources through OneForm. You only need to set up a Provider once for a cloud-based service, then it can be used repeatedly to provision Clusters without the need to recall credentials or configuration.  
+Cloud Providers define how OneForm interacts with 3rd-party IaaS cloud or bare-metal infrastructure providers such as AWS, Scaleway or i3Dnet. Providers for cloud-based service providers handle the credentials and API keys needed to connect with the service and automatically manage physical or virtual computing resources through OneForm. You only need to set up a Provider once for a cloud-based service, then it can be used repeatedly to provision Clusters without the need to recall credentials or configuration.  
 
 ## Creating Providers for 3rd-party Cloud or Bare-metal Services
 
@@ -21,7 +21,7 @@ To create Providers for 3rd-party services, you need to install a Provider drive
 
 * After installing the drivers follow the instructions for creating Providers for the following services:
     * [Amazon AWS Provider](https://github.com/OpenNebula/oneform-registry/wiki/Amazon-Web-Services-Provider)
-    * [Equinix Provider](https://github.com/OpenNebula/oneform-registry/wiki/Equinix-Provider)
+    * [i3Dnet Provider](https://github.com/OpenNebula/oneform-registry/wiki/i3Dnet-Provider)
     * [Scaleway Provider](https://github.com/OpenNebula/oneform-registry/wiki/Scaleway-Provider)
 
 ## Developing Provider Drivers
@@ -33,5 +33,5 @@ If a driver does not currently exist for your preferred cloud service, you can d
 Once you have created Providers for your preferred cloud or bare-metal service, you can provision Clusters using those services through OneForm. Please refer to the relevant Provisioning guide in the OneForm Registry Wiki for your preferred service provider:
 
 * [AWS](https://github.com/OpenNebula/oneform-registry/wiki/Amazon-Web-Services-Cluster)
-* [Equinix](https://github.com/OpenNebula/oneform-registry/wiki/Equinix-Cluster)
+* [i3Dnet](https://github.com/OpenNebula/oneform-registry/wiki/i3Dnet-Cluster)
 * [Scaleway](https://github.com/OpenNebula/oneform-registry/wiki/Scaleway-Cluster)

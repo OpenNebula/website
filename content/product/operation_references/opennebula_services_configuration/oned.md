@@ -205,6 +205,7 @@ For showback the CPU and memory cost are counted if the resource is reserved on 
   - `%G` – group name
   - `%a` – auth token
   - `%%` – %
+- `LOG_RESULT_LENGTH`: Max length of the API result log length, default is 20.
 
 ```default
 #*******************************************************************************
@@ -219,6 +220,7 @@ For showback the CPU and memory cost are counted if the resource is reserved on 
 #RPC_LOG            = NO
 #MESSAGE_SIZE       = 1073741824
 #LOG_CALL_FORMAT    = "Req:%i UID:%u %m invoked %l"
+#LOG_RESULT_LENGTH  = 20
 ```
 
 ## Virtual Networks

@@ -44,6 +44,6 @@ Configuring the DR solution involves these high-level steps:
 ### Additional Information Resources
 
 * [Ceph Datastore]({{% relref "ceph_ds" %}})
-* [Ceph Documentation](https://docs.ceph.com/en/mimic/)
-* [RBD Mirroring](https://docs.ceph.com/en/mimic/rbd/rbd-mirroring/)
+* [Ceph Documentation](https://docs.ceph.com/en/latest/)
+* [RBD Mirroring](https://docs.ceph.com/en/latest/rbd/rbd-mirroring/)
 

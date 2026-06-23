@@ -33,7 +33,7 @@ Although a single Sunstone server can connect to different Zones, all the other 
 
 ## How Should I Read This Chapter
 
-Before starting, it’s required to have at least two new instances of [OpenNebula Front-end]({{% relref "front_end_installation" %}}) ready to configure as Federation.
+Before starting, it’s required to have at least two new instances of [OpenNebula Front-end]({{% relref "frontend_install" %}}) ready to configure as Federation.
 
 Start by reading the [Federation Configuration]({{% relref "config#federationconfig" %}}) section to learn how to set-up the OpenNebula Federation, and continue with [Federation Usage]({{% relref "usage#federationmng" %}}) to learn how to use the Zones with CLI and Sunstone GUI.
 

@@ -25,22 +25,26 @@ If not explicitly stated, the described attributes are valid for all supported h
 
 The syntax of the template file is as follows:
 
-- Anything behind the pound or hash sign `#` is a **comment**.
+- Anything after a hash (or pound) sign `#` on a line is a **comment**.
 - **Strings** are delimited with double quotes `"`, if a double quote is part of the string it needs to be escaped `\\"`.
 - **Single Attributes** are in the form:
 
-```default
-NAME=VALUE
-```
+  ```default
+  NAME=VALUE
+  ```
 
 - **Vector Attributes** that contain several values can be defined as follows:
 
-```default
-NAME=[NAME1=VALUE1,NAME2=VALUE2]
-```
+  ```default
+  NAME=[NAME1=VALUE1,NAME2=VALUE2]
+  ```
 
 - **Vector Attributes** must contain at least one value.
-- Attribute names are case insensitive, in fact the names are converted to uppercase internally.
+- The following values are permitted for **attribute names**:
+  * Letters: `A-Z` (lowercase letters are allowed, but are automatically capitalized internally)
+  * Digits: `0-9`
+  * Underscore: `_`
+
 
 ## XML Syntax
 
@@ -49,18 +53,18 @@ Template files can be expressed in XML, with the following syntax:
 - The root element must be `TEMPLATE`.
 - **Single Attributes** are in the form:
 
-```default
-<NAME>VALUE</NAME>
-```
+  ```default
+  <NAME>VALUE</NAME>
+  ```
 
 - **Vector Attributes** that contain several values can be defined as follows:
 
-```default
-<NAME>
-  <NAME1>VALUE1</NAME1>
-  <NAME2>VALUE2</NAME2>
-</NAME>
-```
+  ```default
+  <NAME>
+    <NAME1>VALUE1</NAME1>
+    <NAME2>VALUE2</NAME2>
+  </NAME>
+  ```
 
 A simple example:
 
@@ -204,6 +208,8 @@ The hypervisor column states that the attribute is **O**ptional, **M**andatory, 
 | `VIRTIO_SCSI_QUEUES` | Number of queues for the virtio-scsi controller.                                                                                                                                                       | O     | -  |
 | `VIRTIO_BLK_QUEUES`  | Number of dispatch queues for the virtio-blk driver.                                                                                                                                                   | O     | -   | 
 | `IOTHREADS`          | Number of iothreads for virtio disks. By default threads will be assigned to disk by round robin algorithm. Disk thread id can be forced by disk `IOTHREAD` attribute.                         | O     | -         |
+| `MIGRATE_AUTO_CONVERGE` | Auto-converge configuration for live migration. Format: `<initial>[,<increment>]` with values ranging from 0 to 100. When defined, implicitly enables the `--auto-converge` option during migration. Maps to the `virsh migrate --auto-converge-initial` and `--auto-converge-increment` options. | O     | -  |
+| `MIGRATE_COMPRESSED` | Enable compression during live migration. When set to `yes`, the VM memory will be compressed during migration to reduce bandwidth usage. Maps to the `virsh migrate --compressed` option.                                               | O     | -  |
 
 When setting up the virtio-scsi or virtio-blk queues, you can use the keyword `auto` which defaults to the number of vCPUs defined in the Virtual Machine. Also, the virtio-blk queues can be overridden per `DISK` so you can enable the multi-queue feature for the selected disks only.
 
@@ -213,8 +219,10 @@ FEATURES = [
     ACPI = "yes",
     APIC = "no",
     GUEST_AGENT = "yes",
-    VIRTIO_SCSI_QUEUES = "auto"
-    VIRTIO_BLK_QUEUES = "auto"
+    VIRTIO_SCSI_QUEUES = "auto",
+    VIRTIO_BLK_QUEUES = "auto",
+    MIGRATE_AUTO_CONVERGE = "10,5",
+    MIGRATE_COMPRESSED = "yes"
 ]
 ```
 
@@ -328,7 +336,7 @@ DISK = [ TYPE     = swap,
          SIZE     = 1024 ]
 ```
 
-Because this VM did not declare a `CONTEXT` or any disk using a `CDROM` Image, the first `DATABLOCK` found is placed right after the OS Image, in `sdb`. For more information on Image management and moving please check the [Storage guide]({{% relref "../../cluster_configuration/storage_system/overview#sm" %}}).
+Because this VM did not declare a `CONTEXT` or any disk using a `CDROM` Image, the first `DATABLOCK` found is placed right after the OS Image, in `sdb`. For more information on Image management and moving please check the [Storage guide]({{% relref "product/cluster_configuration/storage_system/overview#sm" %}}).
 
 <a id="template-network-section"></a>
 
@@ -357,7 +365,7 @@ The hypervisor column states that the attribute is **O**ptional, **M**andatory, 
 | `OUTBOUND_AVG_BW`    | Average bitrate for the interface in kilobytes/second for outbound traffic.                                                               | O                   | O                   |
 | `OUTBOUND_PEAK_BW`   | Maximum bitrate for the interface in kilobytes/second for outbound traffic.                                                               | O                   | O                   |
 | `OUTBOUND_PEAK_KB`   | Data that can be transmitted at peak speed in kilobytes.                                                                                  | O                   | -                   |
-| `NETWORK_MODE`       | To let the Scheduler pick the VNET if set to auto), any other value will be ignored By default, the network mode is not set.              | O                   | O                   |
+| `NETWORK_MODE`       | Network selection mode. Set to `auto` to let the Scheduler pick the VNET, or to `dummy` to create a KVM guest interface without attaching it to a Virtual Network. By default, the network mode is not set. | O | O (`auto` only) |
 | `SCHED_REQUIREMENTS` | Define the requirement when `NETWORK_MODE` is auto.                                                                                       | O                   | O                   |
 | `SCHED_RANK`         | Define the rank when `NETWORK_MODE` is auto.                                                                                              | O                   | O                   |
 | `NAME`               | Name of the NIC.                                                                                                                          | O                   | O                   |
@@ -385,7 +393,7 @@ NIC = [ NETWORK = "Test", NAME = "TestName" ]
 NIC_ALIAS = [ NETWORK = "Test", PARENT = "TestName" ]
 ```
 
-For more information on setting up virtual networks please check the [Managing Virtual Networks guide]({{% relref "../../cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}).
+For more information on setting up virtual networks please check the [Managing Virtual Networks guide]({{% relref "product/cluster_configuration/networking_system/manage_vnets#manage-vnets" %}}).
 
 <a id="nic-default-template"></a>
 
@@ -565,7 +573,7 @@ GRAPHICS = [
 For the KVM hypervisor the port number is a real one, not the VNC port. So for VNC port 0 you should specify 5900, for port 1, 5901 and so on.{{< /alert >}} 
 
 {{< alert title="Warning" type="warning" >}}
-OpenNebula will prevent VNC port collision within a cluster to ensure that a VM can be deployed or migrated to any Host in the selected cluster. If the selected port is in use, the VM deployment will fail. If the user does not specify the port variable, OpenNebula will try to assign `VNC_PORTS[START] + VMID`, or the first lower available port. The `VNC_PORTS[START]` is specified inside the `oned.conf` file.{{< /alert >}} 
+OpenNebula will prevent VNC port collision within a Cluster to ensure that a VM can be deployed or migrated to any Host in the selected Cluster. If the selected port is in use, the VM deployment will fail. If the user does not specify the port variable, OpenNebula will try to assign `VNC_PORTS[START] + VMID`, or the first lower available port. The `VNC_PORTS[START]` is specified inside the `oned.conf` file.{{< /alert >}} 
 
 <a id="template-context"></a>
 
@@ -1059,7 +1067,8 @@ For example:
 
 In Sunstone, the `USER_INPUTS` can be ordered with the mouse.
 
-![user_inputs](/images/sunstone_user_inputs.png)
+
+{{< image path="/images/sunstone_user_inputs.png" alt="Sunstone user inputs" align="center" width="90%" mb="20px" >}}
 
 <a id="template-user-inputs-metadata"></a>
 
@@ -1171,7 +1180,7 @@ NUMA_NODE = [ MEMORY = 1024, TOTAL_CPUS = 2 ]
 NUMA_NODE = [ MEMORY = 2048, TOTAL_CPUS = 4 ]
 ```
 
-Please [check the NUMA guide]({{% relref "../../cluster_configuration/hosts_and_clusters/numa#numa" %}}) for more information.
+Please [check the NUMA guide]({{% relref "product/cluster_configuration/hosts_and_clusters/numa#numa" %}}) for more information.
 
 <a id="tpm-section"></a>
 
@@ -1227,8 +1236,8 @@ SUNSTONE = [
 ]
 ```
 
-![sunstone_network_options](/images/sunstone_network_options.png)
+{{< image path="/images/sunstone_network_options.png" alt="Sunstone network options" align="center" width="90%" mb="20px" >}}
 
-![sunstone_network_options-2](/images/sunstone_network_options-2.png)
+{{< image path="/images/sunstone_network_options-2.png" alt="Sunstone network options 2" align="center" width="90%" mb="20px" >}}
 
-![sunstone_network_options-3](/images/sunstone_network_options-3.png)
+{{< image path="/images/sunstone_network_options-3.png" alt="Sunstone network options 3" align="center" width="90%" mb="20px" >}}

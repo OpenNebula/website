@@ -36,7 +36,7 @@ The parameters are:
 * `--vm`: Virtual Machine Manager driver.
 
 {{< alert title="Note" type="info" >}}
-In the examples included in this guide we’ll use KVM as the hypervisor. Note that the procedure will be the same for any other hypervisor; only the name will need to be changed.{{< /alert >}} 
+In the examples included in this guide we’ll use KVM as the hypervisor. Note that the procedure will be the same for any other hypervisor; only the name will need to be changed.{{< /alert >}}
 
 To remove a Host you can either specify it by ID or by name. The following commands are equivalent:
 
@@ -221,7 +221,7 @@ $ onehost offline 0
 ```
 
 {{< alert title="Note" type="info" >}}
-`onehost disable` and `onehost offline` do not change the state of VMs already running on the Host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}} 
+`onehost disable` and `onehost offline` do not change the state of VMs already running on the Host. If you need to automatically migrate running VMs use `onehost flush`.{{< /alert >}}
 
 Apart from the commands above, the `onehost` tool also provides some commands that allow you to easily perform common operations on a Host.
 
@@ -284,6 +284,47 @@ You can also select which Hosts you want to upgrade by naming them or selecting 
 $ onehost sync host01,host02,host03
 $ onehost sync -c myCluster
 ```
+
+<a id="host-pci-devices"></a>
+
+### PCI Devices
+
+The monitoring information for a Host includes details about all PCI devices detected on the node. This is particularly useful for [PCI passthrough]({{% relref "pci_passthrough" %}}) configurations, where specific devices need to be assigned to Virtual Machines. PCI devices are discovered by the Information Manager probe and can be filtered using the configuration in `/var/lib/one/remotes/etc/im/kvm-probes.d/pci.conf`.
+
+Each PCI device reported by the monitor contains the following attributes:
+
+| Attribute       | Type    | Present             | Description                                                                                                    |
+| ---             | ---     | ---                 | ---                                                                                                            |
+| `ADDRESS`       | String  | Always              | Full PCI address including domain (e.g., `0000:81:02:1`)                                                       |
+| `BUS`           | String  | Always              | PCI bus number (e.g., `81`)                                                                                    |
+| `CLASS`         | String  | Always              | PCI class code in hexadecimal (e.g., `0300` for VGA controller)                                                |
+| `CLASS_NAME`    | String  | Always              | Human-readable class name (e.g., "VGA compatible controller")                                                  |
+| `DEVICE`        | String  | Always              | PCI device ID (e.g., `10f9`)                                                                                   |
+| `DEVICE_NAME`   | String  | Always              | Human-readable device name (e.g., "Tu104 Graphics Controller")                                                 |
+| `DOMAIN`        | String  | Always              | PCI domain number (e.g., `0000`)                                                                               |
+| `FUNCTION`      | String  | Always              | PCI function number (e.g., `1`)                                                                                |
+| `NUMA_NODE`     | String  | Always              | NUMA node where the PCI device is attached (`-` if undetermined)                                               |
+| `SHORT_ADDRESS` | String  | Always              | Short PCI address without domain (e.g., `81:02:1`)                                                             |
+| `SLOT`          | String  | Always              | PCI slot name (e.g., `02`)                                                                                     |
+| `TYPE`          | String  | Always              | PCI device type (`VENDOR:DEVICE:CLASS`)                                                                        |
+| `VENDOR`        | String  | Always              | PCI vendor ID (e.g., `10de` for NVIDIA)                                                                        |
+| `VENDOR_NAME`   | String  | Always              | Human-readable vendor name (e.g., "NVIDIA Corporation")                                                        |
+| `VMID`          | Integer | Always              | ID of the Virtual Machine currently using this PCI device (`-1` if unassigned)                                 |
+| `IFNAME`        | String  | Always              | Network interface name bound to the PCI device (e.g., `eth0`, `ens1f0`). For non-network devices, this is `-`. |
+| `SRIOV`         | String  | Always              | SR-IOV role: `pf` (Physical Function), `vf` (Virtual Function), or `-` (neither)                               |
+| `SRIOV_NUM`     | String  | SRIOV NIC  only     | Available Virtual Functions within a given Physical Function                                                   |
+| `PROFILES`      | String  | NVIDIA vGPU VF only | Available hardware profile(s), comma-separated (e.g., `1145 (NVIDIA L40S-1B),1146 (NVIDIA L40S-2B)`)           |
+| `UUID`          | String  | NVIDIA vGPU VF only | Deterministic SHA1-based identifier derived from the PCI address                                               |
+
+#### IFNAME Resolution
+
+The `IFNAME` attribute is resolved using multiple methods, following this precedence (first match is used):
+
+1. **udev rules** — reads `/etc/udev/rules.d/99-rename.rules`, looking for specially formatted comments. This file is automatically generated by [OneDeploy]({{% relref "../../../solutions/ai_factory_blueprints/deployment/cd_on-premises.md" %}}) and is not intended to be edited manually. It is used to assign persistent names to network interfaces, either for convenience (custom names) or to prevent losing the standard name after VFIO takes control of the device.
+2. **File cache** — consults `/var/tmp/one_db/pci_net_names/<PCI_ADDRESS>`, where each file (named as the PCI address) contains the interface name. Created automatically on first resolution.
+3. **Direct sysfs lookup** — reads the directory `/sys/bus/pci/devices/<PCI_ADDRESS>/net/` to find the kernel interface name.
+
+The cache is cleared when the monitoring daemon restarts.
 
 <a id="import-wild-vms"></a>
 

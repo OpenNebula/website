@@ -7,11 +7,11 @@ weight: "4"
 
 ### Hosts SAN Configuration
 
-The abstraction required to access LUNs consists of block devices. This means that there are
-several ways to set them up, although it usually involves using a network block protocol such as
-iSCSI or Fibre Channel, as well as some way to make it redundant, like DM Multipath.
+The abstraction required to access LUNs consists of block devices. This means that there are several ways to set them up, although it usually involves using a network block protocol such as iSCSI or Fibre Channel, as well as some form of path redundancy, such as DM Multipath.
 
-Here is a sample session for setting up access via iSCSI and multipath:
+Hypervisor hosts acting as SCSI initiators must be configured according to the storage vendor's documentation and recommended best practices. The exact implementation may vary depending on the storage platform, access protocol (iSCSI or Fibre Channel), and multipathing requirements. Vendor-specific guidance should always take precedence over generic operating system configuration procedures.
+
+The following example illustrates a generic iSCSI and DM Multipath configuration on Linux hosts and is provided for reference purposes only.
 
 ```
 # === ISCSI ===
@@ -107,7 +107,7 @@ further configuration will be needed. Example for illustration purposes:
   ---------     (iSCSI + multipath)
 ```
 
-Alternatively, delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in the System datastore. The front-end refers to one of the hosts in the list to proxy SAN operations. Only a reduced set of operations are initiated in the front-end, such as the ones intended for undeployed VMs.
+Alternatively, delegate front-end SAN operations to one or more specific hosts by setting the `BRIDGE_LIST` attribute in both the System and Image datastores. The front-end refers to one of the hosts in the list to proxy SAN operations. Only a reduced set of operations are initiated in the front-end, such as the ones intended for undeployed VMs.
 
 ## Troubleshooting
 

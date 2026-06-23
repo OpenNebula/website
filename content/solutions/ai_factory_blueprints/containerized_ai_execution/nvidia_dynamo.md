@@ -7,7 +7,7 @@ tags: ['AI','Kubernetes','NVIDIA']
 
 <a id="nvidia_dynamo"></a>
 
-[NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, such as across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends like TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way- like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
+[NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends such as TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way - like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
 
 Encapsulating the different inference engines, AI models and dependencies into a single container improves the workload portability and isolation. With this approach, each container is deployed consistently across different environments, including all its dependencies, avoiding conflicts and reproducibility issues.
 
@@ -15,16 +15,24 @@ In this guide you will learn how to combine the GPU powered Kubernetes Cluster w
 
 ## Before Starting
 
-Before starting this tutorial, you must complete the AI-factory deployment with either on-premise resources or cloud resources. Please complete one of the following guides relevant to your available resources:
+Before starting this tutorial, you must complete the AI Factory deployment with either on-premises resources or cloud resources. Please complete one of the following guides relevant to your available resources:
 
-* [AI Factory Deployment with On-premise hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
+* [AI Factory Deployment with On-premises Hardware]({{% relref "/solutions/ai_factory_blueprints/deployment/cd_on-premises" %}})
 * [AI Factory Deployment on Scaleway Cloud]({{% relref "solutions/ai_factory_blueprints/deployment/cd_cloud"%}})
 
-You must then complete the [AI-ready Kubernetes deployment guide]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}). You also must undeploy any appliances, VMs or services you deployed in previous guides before continuing.
+You must then complete the [AI-ready Kubernetes Deployment Guide]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s" %}}). You also must undeploy any appliances, VMs or services you deployed in previous guides before continuing.
 
 ### NVIDIA Dynamo Cloud Platform Installation
 
-As a prerequisite, you need a storage provider installed to supply PersistentVolumes to the platform. For testing purposes, use the [rancher local-path-provisioner](https://github.com/rancher/local-path-provisioner) that references to a local path from the pod host as storage, and creates a Default storage class using it:
+As a prerequisite, you need a storage provider installed to supply PersistentVolumes to the platform. For testing purposes, use the [rancher local-path-provisioner](https://github.com/rancher/local-path-provisioner) that references to a local path from the pod host as storage, and creates a default storage class using it.
+
+{{< alert title="Important" type="info" >}}
+For the following commands to work, you must use the `kubeconfig_workload.yaml` Kubeconfig. Either add `--kubeconfig kubeconfig_workload.yaml` to the commands or export the `KUBECONFIG` environment variable:
+
+```shell
+export KUBECONFIG="$PWD/kubeconfig_workload.yaml"
+```
+{{< /alert >}}
 
 1. To install the provisioner, deploy the manifest from the GitHub repository:
 
@@ -113,7 +121,8 @@ kubectl -n dynamo-cloud get deploy,pod,svc
 ```
 
 All the pods should be in `Running` or `Completed` state:
-```
+
+```default
 NAME                                                                 READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/dynamo-platform-dynamo-operator-controller-manager   1/1     1            1           27h
 deployment.apps/dynamo-platform-nats-box                             1/1     1            1           27h
@@ -132,7 +141,11 @@ service/dynamo-platform-nats            ClusterIP   10.43.175.109   <none>      
 service/dynamo-platform-nats-headless   ClusterIP   None            <none>        4222/TCP,8222/TCP   27h
 ```
 
-4. To use some LLM models in the platform, you need a HuggingFace token for authenticating against the API. For this purpose, create a secret for that token that could be later referenced by Dynamo:
+{{< alert title="Tip" type="info" >}}
+If the `dynamo-platform-dynamo-operator-controller-manager` pod is stuck in the `ImagePullBackOff` state, see the [Known Issues](#known-issues) section for a solution.
+{{< /alert >}}
+
+4. To use some LLM models in the platform, you need a HuggingFace token for authenticating against the API. Go to the [tokens page of the HuggingFace website](https://huggingface.co/settings/tokens) to create a new token if you don't already have one. Create a YAML file with your HF token (replace `<token>`):
 
 ```shell
 cat<<EOF > hf-secret.yaml
@@ -145,13 +158,16 @@ type: Opaque
 stringData:
   token: "<token>"
 EOF
+```
+Then apply YAML file so that Dynamo can access the token:
 
+```shell
 kubectl apply -f hf-secret.yaml
 ```
 
 ## Deployment of Dynamo Inference Graphs
 
-NVIDIA Dynamo orchestrates the deployment of inference graphs [through the Dynamo CLI](https://docs.nvidia.com/dynamo/latest/guides/dynamo_deploy/README.html) or by deploying manifests following the specific [Dynamo CRDs](https://docs.nvidia.com/dynamo/latest/guides/dynamo_deploy/dynamo_operator.html) directly in the cluster, which are recognized and managed by the Dynamo Kubernetes Operator.
+NVIDIA Dynamo orchestrates the deployment of inference graphs [through the Dynamo CLI](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart) or by deploying manifests following the specific [Dynamo CRDs](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/ai-dynamo/helm-charts/dynamo-crds?version=0.9.1) directly in the cluster, which are recognized and managed by the Dynamo Kubernetes Operator.
 
 The instructions of this guide do not expose the Dynamo API externally. You benefit from the Dynamo Kubernetes Operator by deploying the manifests of the inference graphs directly on the cluster.
 
@@ -162,9 +178,9 @@ To run your workloads as Dynamo Inference Graphs, check the following requiremen
 
 Once you access the Kubernetes API, proceed to deploy the inference graphs you defined in the corresponding manifest.
 
-The latest vllm-runtime image is located in [`nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1`](http://nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1), but you can build your own runtime image following the [instructions](https://github.com/ai-dynamo/dynamo/blob/main/components/backends/vllm/README.md) in the Dynamo repository.
+The latest vllm-runtime image is located in [`nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1`](https://github.com/ai-dynamo/dynamo/tree/main/docs/backends/vllm), but you can build your own runtime image following the [instructions](https://github.com/ai-dynamo/dynamo/tree/main/docs/backends/vllm) in the Dynamo repository.
 
-An example of a disaggregated deployment graph is available in the [NVIDIA Dynamo’s github repository](https://github.com/ai-dynamo/dynamo/tree/v0.4.1/components/backends/vllm/deploy). For this guide, the example was adapted to work for a validated container runtime:
+An example of a disaggregated deployment graph is available in the [NVIDIA Dynamo GitHub Repository](https://github.com/ai-dynamo/dynamo/tree/v0.4.1/components/backends/vllm/deploy). For this guide, the example was adapted to work for a validated container runtime:
 
 ```yaml
 cat << EOF > disagg_custom.yaml
@@ -200,9 +216,11 @@ spec:
         requests:
           cpu: "1"
           memory: "2Gi"
+          ephemeral-storage: "1Gi"
         limits:
           cpu: "1"
           memory: "2Gi"
+          phemeral-storage: "2Gi"
       extraPodSpec:
         mainContainer:
           image: nvcr.io/nvidia/ai-dynamo/vllm-runtime:0.4.1
@@ -236,10 +254,13 @@ spec:
           cpu: "10"
           memory: "20Gi"
           gpu: "1"
+          ephemeral-storage: "5Gi"
         limits:
           cpu: "10"
           memory: "20Gi"
           gpu: "1"
+          ephemeral-storage: "10Gi"
+
       envs:
         - name: DYN_SYSTEM_ENABLED
           value: "true"
@@ -260,7 +281,7 @@ spec:
             - /bin/sh
             - -c
           args:
-            - python3 -m dynamo.vllm --model Qwen/Qwen3-0.6B  2>&1 | tee /tmp/vllm.log
+            - python3 -m dynamo.vllm --model Qwen/Qwen3-0.6B
     VllmPrefillWorker:
       dynamoNamespace: vllm-v1-disagg-router
       envFromSecret: hf-token-secret
@@ -285,10 +306,12 @@ spec:
           cpu: "10"
           memory: "20Gi"
           gpu: "1"
+          ephemeral-storage: "5Gi"
         limits:
           cpu: "10"
           memory: "20Gi"
           gpu: "1"
+          ephemeral-storage: "10Gi"
       envs:
         - name: DYN_SYSTEM_ENABLED
           value: "true"
@@ -311,7 +334,7 @@ spec:
             - /bin/sh
             - -c
           args:
-            - python3 -m dynamo.vllm --model Qwen/Qwen3-0.6B  --is-prefill-worker 2>&1 | tee /tmp/vllm.log
+            - python3 -m dynamo.vllm --model Qwen/Qwen3-0.6B  --is-prefill-worker
 EOF
 ```
 
@@ -436,6 +459,82 @@ data: {"id":"cmpl-84041acf-79d1-4ec4-b913-c492fa4f3379","choices":[{"text":"Okay
 
 In the streamed output, you will receive multiple JSON responses with the response tokens in the `text` field, with some metadata included.
 
+## Undeployment
+
+Before moving on to other AI Factory guides or deployments, you must undeploy NVIDIA Dynamo and the Disaggregated Deployment Graph. 
+
+Run the following command to undeploy the graph:
+
+```shell
+kubectl delete dynamographdeployment vllm-v1-disagg-router -n dynamo-cloud
+```
+
+Run the following command, until you receive the response `No resources found in dynamo-cloud namespace.`:
+
+```shell
+kubectl get dynamographdeployment -n dynamo-cloud
+```
+
+Next, to undeploy NVIDIA Dynamo, run the following command until all pods have terminated:
+
+```shell
+kubectl get all -n dynamo-cloud
+```
+
+Once NVIDIA Dynamo is successfully undeployed, you will receive the response: `No resources found in dynamo-cloud namespace.`
+
+Finally, delete the `dynamo-cloud` namespace:
+
+```shell
+kubectl delete namespace dynamo-cloud
+```
+
 ## Next Steps
 
 After powering your AI Factory with NVIDIA Dynamo on Kubernetes, you may continue with the [NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}}) as an additional validation procedure built on top of K8s.
+
+## Known Issues
+
+### Dynamo Operator Controller Manager stuck in ImagePullBackoff
+
+If the `dynamo-platform-dynamo-operator-controller-manager` pod is stuck in the ImagePullBackOff state, this may be due to a missing image path:
+
+```shell
+kubectl -n dynamo-cloud get deploy,pod,svc
+```
+```default
+NAME                                                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dynamo-platform-dynamo-operator-controller-manager   1/1     1            1           42m
+
+NAME                                                                  READY   STATUS             RESTARTS   AGE
+pod/dynamo-platform-dynamo-operator-controller-manager-75847c7qj2kx   2/2     ImagePullBackOff   0          19m
+pod/dynamo-platform-etcd-0                                            1/1     Running            0          42m
+pod/dynamo-platform-nats-0                                            2/2     Running            0          42m
+...
+```
+
+Google is migrating images away from the *gcr.io* domain to *pkg.dev*. Fix the problem by updating the image path in the deployment:
+
+Open the deployment for editing:
+
+```shell
+kubectl -n dynamo-cloud edit deployment dynamo-platform-dynamo-operator-controller-manager
+```
+
+Look for the line:
+
+```yaml
+image: gcr.io/kubebuilder/kube-rbac-proxy:v0.15.0
+```
+
+Replace it with:
+
+```yaml
+image: quay.io/brancz/kube-rbac-proxy:v0.15.0
+```
+
+Save and exit the editor. The pod should automatically restart. Run the following command again until the pod reaches the `Running` status:
+
+```shell
+kubectl -n dynamo-cloud get deploy,pod,svc
+```
