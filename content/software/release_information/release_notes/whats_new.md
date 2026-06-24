@@ -28,6 +28,7 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 ## API and CLI
 
 * **Dynamic VM Group Management**: New CLI commands `onevm vmgroup-add` and `onevm vmgroup-del` allow adding or removing VMs from a [VM Group]({{% relref "affinity.md#dynamic-vmg" %}}) dynamically.
+* **OneGate Sinatra Configuration**: OneGate now exposes the Sinatra server configuration through the `:server` section in `onegate-server.conf`, allowing administrators to customize supported Sinatra settings such as Host authorization.
 
 ## KVM
 
@@ -52,6 +53,7 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * [Fix Improve live migration options for busy guests](https://github.com/OpenNebula/one/issues/5774).
 * [Fix Units in "Size on instantiate" VM Template instantiation](https://github.com/OpenNebula/one/issues/7672).
 * [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
+* [Fix VM CDROM hot-attach without target or dev-prefix](https://github.com/OpenNebula/one/issues/7736).
 * [Fix API commands executed on HA follower, for full list of commands the GitHub issue](https://github.com/OpenNebula/one/issues/7725).
 * [Fix VirtioFS filesystem image size reporting always `0`](https://github.com/OpenNebula/one/issues/7751).
 * [Fix onehost failing on CLI-only installs due to an unconditional require of HostSyncManager](https://github.com/OpenNebula/one/issues/7768).

@@ -135,7 +135,7 @@ To evaluate OpenNebula, we strongly recommend that you follow our [Getting Start
 Following the Guide, you can:
 
 * [Install an OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws" %}}), then use that Front-end to
-* [Deploy a Virtual Machine]({{% relref "validate_the_environment" %}}).
+* [Deploy a Virtual Machine]({{% relref "validate_the_environment" %}})
 
 The Getting Started Guide is by far the fastest way to familiarize yourself with OpenNebula.
 
