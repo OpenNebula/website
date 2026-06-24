@@ -32,7 +32,13 @@ Configuring, deploying and validating a high-performance AI infrastructure using
 <br>
 <br>
 
-3. Perform Validation: As a prerequisite, you must have an AI Factory ready to be validated after completing the above installation procedures. These are the options to validate your AI Factory:
+3. Integrate external infrastructure services when required:
+    * [Infrastructure Integration]({{% relref "solutions/ai_factory_blueprints/infrastructure_integration" %}}): Connect OpenNebula with services such as NVIDIA NICo.
+    * [Bare Metal as a Service with NICo]({{% relref "solutions/ai_factory_blueprints/infrastructure_integration/bare_metal_nico" %}}): Offer multi-tenant bare metal instances from an existing OpenNebula cloud.
+<br>
+<br>
+
+4. Perform Validation: As a prerequisite, you must have an AI Factory ready to be validated after completing the above installation procedures. These are the options to validate your AI Factory:
     
     * [Direct AI execution]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution" %}}):
         * [LLM Inferencing with vLLM]({{% relref "solutions/ai_factory_blueprints/direct_ai_execution/llm_inference_certification" %}}): Using vLLM with two different models and two model sizes, running across both H100 and L40S GPUs.
