@@ -39,7 +39,7 @@ The current interactive backup implementation supports the following configurati
 | Component | Support |
 |-----------|---------|
 | Hypervisor | KVM |
-| VM disk storage | File-based `qcow2` disks |
+| VM disk storage | File-based `qcow2` disks and disks on LVM datastores |
 | Backup types | Full and incremental |
 | Incremental mode | CBT only (`INCREMENT_MODE="CBT"`) |
 | VM state | Running and powered off VMs |
@@ -158,6 +158,7 @@ The OneBEX API is consumed by backup integrations. The current API is:
 
 OneBEX uses exporters to expose VM disk data to external backup systems.
 
-| Exporter | Disk format | Transport | Description |
-|----------|-------------|-----------|-------------|
-| `nbd` | `qcow2` | Network Block Device | Exposes the backup disk through NBD. For local disk images, OneBEX starts a read-only `qemu-nbd` process and serves the image through a Unix socket. |
+| Exporter | VM disk storage | Transport | Description |
+|----------|-----------------|-----------|-------------|
+| `nbd` | File-based `qcow2` disks | Network Block Device | Exposes the backup disk through NBD. OneBEX starts a read-only `qemu-nbd` process and serves the disk export through a Unix socket. |
+| `lvm` | Disks on LVM datastores | Direct block-device reads | Exposes the prepared LVM block device directly. Full backups return the full device extent. Incremental backups use `thin_delta` to return changed extents from LVM thin metadata. |
