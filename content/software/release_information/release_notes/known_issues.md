@@ -24,6 +24,10 @@ OneForm is not properly restarted in a [HA setup when the leader changes](https:
 
 [libvirtd restarts in cycles each 10 minutes with an error message in system logs](https://github.com/OpenNebula/one/issues/6463), due to the way libvirtd gets activated per interaction by systemd in 120-second slices. As the default interval for the OpenNebula monitor probe is 600 seconds (10 minutes), each time a probe reactivates libvirtd, it sends those messages to syslog.
 
+## Drivers - Storage
+
+[LVM (EE) does not yet allow changing image persistency](https://github.com/OpenNebula/one/issues/7779).
+
 ## Sunstone
 
 * Guacamole RDP as it is currently shipped in OpenNebula does not support NLA authentication. You can follow [these instructions](https://www.parallels.com/blogs/ras/disabling-network-level-authentication/) in order to disable NLA in the Windows box to use Guacamole RDP within Sunstone.
