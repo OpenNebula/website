@@ -12,11 +12,11 @@ weight: "4"
 
 ## Overview
 
-The NICo VMM and IM drivers let OpenNebula deploy and monitor NVIDIA NICo instances through the NICo REST API. A NICo Host in OpenNebula does not represent a KVM or LXC hypervisor node. Instead, it represents a NICo allocation and the API connection settings used to create, inspect, and delete NICo instances.
+The NICo [VMM]({{% relref "product/integration_references/infrastructure_drivers_development/devel-vmm/" %}}) and [IM]({{% relref "product/integration_references/infrastructure_drivers_development/devel-im/" %}}) drivers let OpenNebula deploy and monitor NVIDIA NICo instances through the NICo REST API. A NICo Host in OpenNebula does not represent a KVM or LXC hypervisor node. Instead, it represents a NICo allocation and the API connection settings used to create, inspect, and delete NICo instances.
 
-The NICo VMM driver stores the NICo instance UUID as the VM `DEPLOY_ID`. Later operations, such as shutdown and monitoring, use this value to call the NICo API.
+The NICo VMM driver stores the NICo instance UUID as the VM `DEPLOY_ID`. Later operations, such as shutdown and monitoring, use this value when making calls to the NICo REST API.
 
-OpenNebula keeps a NICo VM in the `RUNNING` state during a NICo reboot request. The monitor data includes `NICO_STATUS`, so transient NICo states such as `Rebooting` can be inspected without changing the OpenNebula lifecycle state.
+OpenNebula keeps a NICo VM in the `RUNNING` state during a NICo reboot request. The monitor data includes `NICO_STATUS`, so that transient NICo states such as `Rebooting` can be inspected without changing the OpenNebula lifecycle state.
 
 ## Creating a NICo Host
 
@@ -48,24 +48,24 @@ NICO_FORCE_DESTROY     = "NO"
 
 Required Host attributes:
 
-- `NICO_CARBIDE_PROXY`: base URL for the CARBIDE proxy.
-- `NICO_SSA_ISSUER`: issuer URL used to obtain the JWT token.
+- `NICO_CARBIDE_PROXY`: Base URL for the CARBIDE proxy.
+- `NICO_SSA_ISSUER`: Issuer URL used to obtain the JWT token.
 - `NICO_NGC_ORG`: NGC organization used in NICo API paths.
-- `NICO_ISV_CLIENT_ID`: client ID for the `client_credentials` flow.
-- `NICO_ISV_CLIENT_SECRET`: client secret for the `client_credentials` flow.
-- `NICO_TARGET_SCOPES`: scopes requested when acquiring the JWT token.
+- `NICO_ISV_CLIENT_ID`: Client ID for the `client_credentials` flow.
+- `NICO_ISV_CLIENT_SECRET`: Client secret for the `client_credentials` flow.
+- `NICO_TARGET_SCOPES`: Scopes requested when acquiring the JWT token.
 - `NICO_ALLOCATION`: NICo allocation ID represented by this OpenNebula Host.
 
 Optional Host attributes:
 
 - `NICO_API_TIMEOUT`: API timeout in seconds. The default is `60`.
-- `NICO_FORCE_DESTROY`: set to `YES` to request forced deletion on cancel operations. The default is `NO`.
+- `NICO_FORCE_DESTROY`: Set to `YES` to request forced deletion on cancel operations. The default is `NO`.
 
 The IM driver uses `NICO_ALLOCATION` to query `GET /allocation/<id>` and report Host capacity from `allocationConstraints[0].constraintValue`.
 
 ## Creating a NICo VM Template
 
-Create a VM template with the NICo instance attributes required by the allocation and operating system you want to deploy.
+Create a VM template with the NICo instance attributes required by the allocation and operating system you intend to deploy.
 
 Example VM template:
 
@@ -96,19 +96,19 @@ Required VM attributes:
 - `CPU`: Must be `1`, as it represents a single instance to the OpenNebula scheduler.
 - `MEMORY`: Must be `1`, same as with CPU.
 - `NICO_INSTANCE_TYPE_ID`: NICo instance type to deploy.
-- `NICO_OS_ID`: operating system ID.
+- `NICO_OS_ID`: Operating system ID.
 - `NICO_VPC_ID`: VPC used by the instance. This attribute must be defined in the VM template.
-- `NIC`: network interface used by the instance.
+- `NIC`: Network interface used by the instance.
 - `NIC/NICO_VPC_PREFIX_ID`: VPC prefix used by the instance interface. This attribute must be defined in the NIC section.
-- `SCHED_REQUIREMENTS`: scheduling expression used to place the VM on the NICo Host.
+- `SCHED_REQUIREMENTS`: Scheduling expression used to place the VM on the NICo Host.
 
 `NICO_VPC_ID` is read only from the VM template. `NICO_VPC_PREFIX_ID` is read only from the first NIC section.
 
 Common optional VM attributes:
 
-- `NICO_NETWORK_SECURITY_GROUP_ID`: network security group ID.
-- `NICO_SSH_KEY_GROUP_IDS`: comma-separated list of SSH key group IDs.
-- `NICO_USER_DATA`: user data passed to the NICo instance.
+- `NICO_NETWORK_SECURITY_GROUP_ID`: Network security group ID.
+- `NICO_SSH_KEY_GROUP_IDS`: Comma-separated list of SSH key group IDs.
+- `NICO_USER_DATA`: User data passed to the NICo instance.
 - `NICO_LABELS`: JSON object with labels to attach to the NICo instance.
 
 ## Scheduling to the NICo Host
