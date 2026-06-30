@@ -16,12 +16,12 @@ This guide focuses on the service integration model. For the complete driver att
 
 ## Prerequisites
 
-Before you start, it is expected that NICo is already set up and configured on compatible hardware, please refer to the [Offical NVIDIA NICo Documentation]|(https://docs.nvidia.com/infra-controller/documentation/home). Prior to using OpenNebula's NICo integration, ensure that:
+Before you start, it is expected that NICo is already set up and configured on compatible hardware, please refer to the [Offical NVIDIA NICo Documentation](https://docs.nvidia.com/infra-controller/documentation/home). Prior to using OpenNebula's NICo integration, ensure that:
 
 - OpenNebula is already [installed]({{% relref "software/installation_process/overview/" %}}) and running.
 - The NICo service is already deployed and reachable from the OpenNebula Front-end.
 - The NICo VMM and IM drivers are installed in the OpenNebula Front-end.
-- You have a NICo allocation ID (the `id` from [Create](https://docs.nvidia.com/infra-controller/rest-api-reference/api-reference/allocation/create-allocation) or [Retrieve](https://docs.nvidia.com/infra-controller/rest-api-reference/api-reference/allocation/get-all-allocation) Allocation) for the capacity you want to expose through OpenNebula.
+- You have a NICo allocation ID (the `id` from [Create](https://docs.nvidia.com/infra-controller/rest-api-reference/api-reference/allocation/create-allocation) or [Retrieve Allocation](https://docs.nvidia.com/infra-controller/rest-api-reference/api-reference/allocation/get-all-allocation)) for the capacity you want to expose through OpenNebula.
 - You have the NICo API credentials and connection details required by your environment.
 - The NICo VPC, VPC prefix, operating system, instance type, network security group, and SSH key group identifiers have been created in NICo.
 - OpenNebula [users]({{% relref "product/cloud_system_administration/multitenancy/manage_users/" %}}), [groups]({{% relref "product/cloud_system_administration/multitenancy/manage_groups/" %}}), and [Virtual Data Centers (VDCs)]({{% relref "product/cloud_system_administration/multitenancy/manage_vdcs/" %}}) are already planned for the tenants that will consume the service.
