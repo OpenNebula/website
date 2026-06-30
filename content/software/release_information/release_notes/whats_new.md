@@ -37,6 +37,10 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## Packaging
 
+## AI Factories
+
+* Integration of the [NVIDIA Infra Controller (NICo)]({{% relref "" %}}) introduces Bare Metal as a Service to OpenNebula, streamlining the lifecycle management of bare-metal instances within multi-tenant, AI Factory-scale infrastructures.
+
 ## Features Backported to 7.2.x
 
 Additionally, the following functionalities are present that were not in OpenNebula 7.2.0, although they debuted in subsequent maintenance releases of the 7.2.x series:
