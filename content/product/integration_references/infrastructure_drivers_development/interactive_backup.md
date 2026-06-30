@@ -43,7 +43,7 @@ The current interactive backup implementation supports the following configurati
 | Backup types | Full and incremental |
 | Incremental mode | CBT only (`INCREMENT_MODE="CBT"`) |
 | VM state | Running and powered off VMs |
-| OneBEX exporter | NBD |
+| OneBEX exporter | NBD, LVM |
 
 {{< alert title="Important" type="info" >}}
 Interactive incremental backups do not support the `SNAPSHOT` increment mode. OpenNebula rejects this combination when the backup configuration is updated.
@@ -118,6 +118,8 @@ TYPE   = "BACKUP_DS"
 
 DS_MAD = "interactive"
 TM_MAD = "-"
+
+DATASTORE_CAPACITY_CHECK="NO"
 ```
 
 The datastore must be added to every cluster that contains VMs managed by the integration.
@@ -131,7 +133,7 @@ $ onecluster adddatastore <cluster_name> <datastore_name>
 During interactive restores, OpenNebula passes the Image Datastore downloader a OneBEX URL in the following form:
 
 ```default
-onbex://<IMAGE_DS_ID>:<PORT_ID>
+onebex://<IMAGE_DS_ID>:<PORT_ID>
 ```
 
 `IMAGE_DS_ID` is the destination Image Datastore ID where the restored disk image will be created. `PORT_ID` is the restore transfer port allocated for the interactive restore session.
