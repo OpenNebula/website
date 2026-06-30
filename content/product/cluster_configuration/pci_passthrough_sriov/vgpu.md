@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "57"
 tags: ['AI','NVIDIA']
-weight: "6"
+weight: "4"
 ---
 
 <a id="kvm-vgpu"></a>
