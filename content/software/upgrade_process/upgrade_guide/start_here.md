@@ -45,3 +45,15 @@ Update your OpenNebula packages by following only the guide that applies to your
 - [Upgrading a Federation]({{% relref "upgrading_federation#upgrade-federation" %}})
 
 <a id="validate-upgrade"></a>
+
+## Upgrading Contextualization Packages
+
+When upgrading your OpenNebula infrastructure, you do not need to execute a massive update of the contextualization packages of all your running virtual machines. For details on the highly flexible compatibility support between contextualizaiton and infrastructure versions, see the [Contextualization]({{% relref "kvm_contextualization#compatibility-overview" %}}) page
+
+To ensure stability and minimize disruption, follow these best practise recommendations:
+
+1. **Keep running VMs as is:** Do not update the context packages of currently running VMs during an infrastructure upgrade. The new OpenNebula version will continue to manage them without issue.  
+2. **Update context on golden images:** Update the contextualization packages on your customized "golden" images and templates. This ensures that all *new* VMs provisioned after the upgrade will utilize the latest contextualization features. 
+3. **Targeted updates for running VMs:** Only update the context package on an actively running VM if you specifically need a new feature introduced in the newer context version, or if you need to resolve a known bug that impacts that specific VM.
+
+You can find the installation and upgrade instruction in the one-apps wiki for [Linux](https://github.com/OpenNebula/one-apps/wiki/linux_installation) and [Windows](https://github.com/OpenNebula/one-apps/wiki/win_installation) guest VMs.
