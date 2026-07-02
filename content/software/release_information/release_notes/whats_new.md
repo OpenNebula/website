@@ -10,31 +10,28 @@ weight: "1"
 
 <a id="whats-new"></a>
 
-The OpenNebula team is excited to announce the availability of OpenNebula 7.4. This release introduces a broad set of usability, automation, and operational improvements across the platform, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive. OpenNebula 7.4 also delivers important enhancements for operating virtualized infrastructure at scale, including new batch operations for VM actions and migrations, improved VM Group management, Ubuntu 26.04 support, and greater control and visibility during Kubernetes provisioning with OneKS. In addition, this release includes a wide range of fixes and improvements across HA, networking, storage, monitoring, and vCenter compatibility, further reinforcing OpenNebula’s stability and reliability.
+The OpenNebula team is excited to announce the availability of OpenNebula 7.4. This release introduces a broad set of usability, automation, and operational improvements across the platform, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive.
+
+OpenNebula 7.4 also delivers important enhancements for operating virtualized infrastructure at scale, including OneSwap batch VMware migrations, improved OneDRS datastore selection, dynamic VM group management through the CLI, bulk operations for service VMs, Ubuntu 26.04 support, expanded backup capabilities with OneBEX, new VLAN group-level authorization policies, support for SR-IOV-capable PCI network interfaces in Switchdev mode with Open vSwitch, an enhanced Slurm appliance with out-of-the-box NVIDIA GPU support and LDAP identity integration, and a wide range of fixes and improvements across HA, networking, storage, monitoring, and vCenter compatibility.
+
+Together with this release, OpenNebula also introduces new extension capabilities for advanced infrastructure use cases, including automated AI Factory-scale Bare Metal as a Service with NVIDIA NICo and enhanced Kubernetes provisioning and pre-deployment diagnostics with OneKS. These extensions further expand OpenNebula’s role as a flexible, production-ready platform for private cloud, edge, HPC, and sovereign AI infrastructure.
 
 Key highlights of this release include:
 
 * Redesigned Sunstone interface, delivering a modern, highly intuitive user experience for cloud administrators.
+* Optimized enterprise workload management with OneSwap batch VMware migrations, dynamic VM group management via the CLI, and bulk deletion of scheduled actions from all service VMs.
+* Removed Veeam integration storage requirements using expanded backup capabilities via the OpenNebula Backup Exporter (OneBEX), allowing third-party tools to interactively pull full incremental changes on virtual disks — qcow2 and LVM based disks are supported in this first release.
+* Enhanced Slurm appliance simplifies the creation of Slurm Clusters for AI and HPC workloads with out-of-the-box NVIDIA GPU support and LDAP identity integration.
+* Improved OneDRS datastore selection during VM migrations, helping identify optimal datastores based on space and usage requirements.
+* New VLAN group-level authorization policies, allowing cloud administrators to delegate VLAN management to tenants and enable Virtual Network self-provisioning in multi-tenant environments. 
+* Support for SR-IOV-capable PCI network interfaces in Switchdev mode with Open vSwitch.
+* Updated OS compatibility with production-ready packages fully supporting Ubuntu 26.04 (Resolute Raccoon).
+* Multiple fixes and stability improvements across the platform, and much more!...
+
+The Enterprise Subscription also includes advanced extensions designed for enterprise cloud and AI Factory deployments, including:
 
 * Enhanced Kubernetes management with multi-cluster deployment configuration options and pre-deployment diagnostics to validate cluster readiness and avoid time-consuming provisioning failures.
-
-* Optimized enterprise workload management with OneSwap batch VMware migrations, dynamic VM Group management via the CLI, and bulk deletion of scheduled actions from all service VMs.
-
-* Expanded backup capabilities via the OpenNebula Backup Exporter (OneBEX), allowing third-party tools to interactively pull full incremental changes on virtual disks — qcow2 and LVM based disks are supported in this first release.
-
-* Native support for the NVIDIA Infra Controller (NICo) for automated AI Factory-scale provisioning and orchestration of accelerated hardware.
-
-* Enhanced Slurm appliance simplifies the creation of Slurm Clusters for AI and HPC workloads with out-of-the-box NVIDIA GPU support and LDAP identity integration.
-
-* Improved OneDRS datastore selection during VM migrations, helping identify optimal datastores based on space and usage requirements.
-
-* New VLAN group-level authorization policies, allowing cloud administrators to delegate VLAN management to tenants and enable Virtual Network self-provisioning in multi-tenant environments. 
-
-* Support for SR-IOV-capable PCI network interfaces in Switchdev mode with Open vSwitch.
-
-* Updated OS compatibility with production-ready packages fully supporting Ubuntu 26.04 (Resolute Raccoon).
-
-* Multiple fixes and stability improvements across the platform, and much more!...
+* Native integration with the NVIDIA Infrastructure Controller (NICo) to deliver automated Bare Metal as a Service (BMaaS) and AI Factory-scale provisioning and orchestration of accelerated infrastructure.
 
 Thank you to our incredible community and partners for your continued support in building the future of open-source cloud orchestration!
 
@@ -107,7 +104,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix OneKS Clusters stuck in DEPROVISIONING state if a OneKS group becomes empty during the deprovisioning process [#7749](https://github.com/OpenNebula/one/issues/7749)
 * Fix unrecoverable WARNING state of OneKS groups after recovery of OneKS Cluster [#7748](https://github.com/OpenNebula/one/issues/7748)
 * Fix OneKS lifecycle operations after renaming a cluster by using stable Kubernetes identifiers [#7724](https://github.com/OpenNebula/one/issues/7724).
-* Fix parallel datastore deployment failure on shared volume group due to thin pool metadata inconsistency [#7719](https://github.com/OpenNebula/one/issues/7719).
 * Fix oneswap compatibility issue with vCenter 8.0.3 [#7698](https://github.com/OpenNebula/one/issues/7698).
 * Fix `opennebula-exporter` crash when monitoring diskless VMs [#7703](https://github.com/OpenNebula/one/issues/7703).
 * Fix PCI attach to prevent bus address collisions [#7695](https://github.com/OpenNebula/one/issues/7695).
@@ -115,4 +111,7 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix LVM (EE) post-reboot activation silently skipping VM disks [#7720](https://github.com/OpenNebula/one/issues/7720).
 * Fix OVS port QinQ vlan mode being overwritten with changes introduced in[#7657](https://github.com/OpenNebula/one/issues/7657).
 * Fix MAC address range parsing for invalid MAD address ranges [#7233](https://github.com/OpenNebula/one/issues/7233).
+* Fix file-based image cloning between two datastores with BRIDGE_LIST [#7762](https://github.com/OpenNebula/one/issues/7762).
+* Fix AutoNFS not working correctly when used on System Datastores of type `shared` [#7763](https://github.com/OpenNebula/one/issues/7763).
+* Fix LVM concurrency issue with parallel deployments from different hosts using the same VG [#7719](https://github.com/OpenNebula/one/issues/7719).
 
