@@ -38,7 +38,10 @@ The following issues have been solved in 7.2.2:
 * Fix `onehost` failing on CLI-only installs (`opennebula-tools`) due to an unconditional `require 'HostSyncManager'` aborting all subcommands [#7768](https://github.com/OpenNebula/one/issues/7768).
 * Fix VirtioFS filesystem image size reporting always `0` [#7751](https://github.com/OpenNebula/one/issues/7751).
 * Fix concurrent VM deployments in the LVM storage driver [#7719](https://github.com/OpenNebula/one/issues/7719).
-* Fix OVS port QinQ vlan mode being overwritten with changes introduced in [#7657](https://github.com/OpenNebula/one/issues/7657)
+* Fix OVS port QinQ vlan mode being overwritten with changes introduced in [#7657](https://github.com/OpenNebula/one/issues/7657).
+* Fix file-based image cloning between two datastores with BRIDGE_LIST [#7762](https://github.com/OpenNebula/one/issues/7762).
+* Fix AutoNFS not working correctly when used on System Datastores of type `shared` [#7763](https://github.com/OpenNebula/one/issues/7763).
+* Fix LVM concurrency issue with parallel deployments from different hosts using the same VG [#7719](https://github.com/OpenNebula/one/issues/7719).
 
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
