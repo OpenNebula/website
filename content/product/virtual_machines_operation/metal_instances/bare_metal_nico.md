@@ -2,7 +2,7 @@
 title: "Bare Metal as a Service with NICo"
 date: "2026-06-24"
 description: "Integrate OpenNebula with NVIDIA NICo to offer multi-tenant bare-metal instances as a service."
-weight: 1
+weight: 2
 tags: ['AI']
 ---
 

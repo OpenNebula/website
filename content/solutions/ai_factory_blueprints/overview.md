@@ -33,8 +33,7 @@ Configuring, deploying and validating a high-performance AI infrastructure using
 <br>
 
 3. Integrate external infrastructure services when required:
-    * [Infrastructure Integration]({{% relref "solutions/ai_factory_blueprints/infrastructure_integration" %}}): Connect OpenNebula with services such as NVIDIA NICo.
-    * [Bare Metal as a Service with NICo]({{% relref "solutions/ai_factory_blueprints/infrastructure_integration/bare_metal_nico" %}}): Offer multi-tenant bare metal instances from an existing OpenNebula cloud.
+    * [Bare Metal as a Service with NICo]({{% relref "product/virtual_machines_operation/metal_instances/bare_metal_nico" %}}): Offer multi-tenant bare metal instances from an existing OpenNebula cloud.
 <br>
 <br>
 
