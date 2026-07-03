@@ -114,4 +114,5 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix file-based image cloning between two datastores with BRIDGE_LIST [#7762](https://github.com/OpenNebula/one/issues/7762).
 * Fix AutoNFS not working correctly when used on System Datastores of type `shared` [#7763](https://github.com/OpenNebula/one/issues/7763).
 * Fix LVM concurrency issue with parallel deployments from different hosts using the same VG [#7719](https://github.com/OpenNebula/one/issues/7719).
+* Fix various logrotate issues [#7646](https://github.com/OpenNebula/one/issues/7646).
 
