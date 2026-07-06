@@ -47,6 +47,10 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## Packaging
 
+## OpenNebula Distributed Resource Scheduler
+
+* [OneDRS]({{% relref "product/cloud_system_administration/scheduler/drs#scheduler-drs" %}}) now supports storage migrations in addition to migrations across hosts when optimizing cluster workloads.
+
 ## Features Backported to 7.2.x
 
 Additionally, the following functionalities are present that were not in OpenNebula 7.2.0, although they debuted in subsequent maintenance releases of the 7.2.x series:
