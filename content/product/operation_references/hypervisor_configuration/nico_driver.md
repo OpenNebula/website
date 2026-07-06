@@ -1,5 +1,5 @@
 ---
-title: "NICo Driver (EE)"
+title: "NICo Driver (AE)"
 date: "2026-06-03"
 description: "Configure OpenNebula Hosts and VM templates for NVIDIA NICo instances."
 categories:
