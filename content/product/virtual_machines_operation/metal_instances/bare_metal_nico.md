@@ -16,7 +16,7 @@ This guide focuses on the service integration model. For the complete driver att
 
 ## Prerequisites
 
-Before you start, it is expected that NICo is already set up and configured on compatible hardware, please refer to the [Offical NVIDIA NICo Documentation](https://docs.nvidia.com/infra-controller/documentation/home). Prior to using OpenNebula's NICo integration, ensure that:
+Before you start, it is expected that NICo is already set up and configured on compatible hardware, please refer to the [Official NVIDIA NICo Documentation](https://docs.nvidia.com/infra-controller/documentation/home) for details. Prior to using OpenNebula's NICo integration, ensure that:
 
 - OpenNebula is already [installed]({{% relref "software/installation_process/overview/" %}}) and running.
 - The NICo service is already deployed and reachable from the OpenNebula Front-end.

@@ -12,11 +12,11 @@ weight: "4"
 
 ## Overview
 
-The NICo [VMM]({{% relref "product/integration_references/infrastructure_drivers_development/devel-vmm/" %}}) and [IM]({{% relref "product/integration_references/infrastructure_drivers_development/devel-im/" %}}) drivers let OpenNebula deploy and monitor NVIDIA NICo instances through the NICo REST API. A NICo Host in OpenNebula does not represent a KVM or LXC hypervisor node. Instead, it represents a NICo allocation and the API connection settings used to create, inspect, and delete NICo instances.
+The NICo [VMM]({{% relref "product/integration_references/infrastructure_drivers_development/devel-vmm/" %}}) and [IM]({{% relref "product/integration_references/infrastructure_drivers_development/devel-im/" %}}) drivers enable OpenNebula to deploy and monitor NVIDIA NICo instances through the NICo REST API. A NICo Host in OpenNebula does not represent a KVM or LXC hypervisor node. Instead, it represents a NICo allocation and the API connection settings used to create, inspect, and delete NICo instances.
 
 The NICo VMM driver stores the NICo instance UUID as the VM `DEPLOY_ID`. Later operations, such as shutdown and monitoring, use this value when making calls to the NICo REST API.
 
-OpenNebula keeps a NICo VM in the `RUNNING` state during a NICo reboot request. The monitor data includes `NICO_STATUS`, so that transient NICo states such as `Rebooting` can be inspected without changing the OpenNebula lifecycle state.
+OpenNebula maintains a NICo VM in the `RUNNING` state during a NICo reboot request. The monitor data includes `NICO_STATUS`, so that transient NICo states such as `Rebooting` can be inspected without changing the OpenNebula lifecycle state.
 
 ## Creating a NICo Host
 
