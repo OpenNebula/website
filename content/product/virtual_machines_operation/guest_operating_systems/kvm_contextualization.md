@@ -53,7 +53,7 @@ OpenNebula contextualization is designed to be highly flexible, supporting compa
 
 There is a single OpenNebula contextualization package maintained on the OpenNebula Marketplace that always represents the newest version. This latest package is continuously updated to support a wide range of OpenNebula releases. See the [contextualization package on the OpenNebula Marketplace](https://marketplace.opennebula.io/appliance/6f7a1735-5b88-4667-a319-07ffe5e684ee), where the compatible releases are listed.
 
-| Scenario | Supported? | Details |
+| **Scenario** | **Supported** | **Details** |
 | ---- | ---- | ---- |
 | Newer OpenNebula (e.g., v7.x) managing older Context (e.g., v6.x) | **Yes** | The upgraded `oned` daemon natively understands how to manage VMs running older contextualization packages. |
 | Older OpenNebula (e.g., v6.x) deploying newer Context (e.g., v7.x) | **Yes** | You can run the latest contextualization package inside VM guests instantiated on older, compatible LTS infrastructure. |
