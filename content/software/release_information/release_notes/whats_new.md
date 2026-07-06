@@ -41,7 +41,8 @@ Thank you to our incredible community and partners for your continued support in
 
 ## Storage & Backups
 
-* Added [interactive backup integration support]({{% relref "product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
+* Added [interactive backup integration support]({{% relref "../../../product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
+* Added [selected disk backups]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks" %}}), allowing VM backup configurations and Backup Jobs to back up only a defined subset of eligible VM disks. Selected-disk backups can be restored as [individual disks]({{% relref "../../../product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks-restore" %}}).
 
 ## AI Factories
 
@@ -81,6 +82,12 @@ Thank you to our incredible community and partners for your continued support in
 
 * Added Windows OS Profile/Best practices VM template options to oneswap Windows conversion.
 * OneSwap batch VM conversion enables the migration of multiple VMs in a single execution 
+## AI Factories
+
+Integration of the [NVIDIA Infra Controller (NICo)]({{% relref "product/virtual_machines_operation/metal_instances/bare_metal_nico/" %}}) introduces Bare Metal as a Service to OpenNebula, streamlining the lifecycle management of bare-metal instances within multi-tenant, AI Factory-scale infrastructures.
+## OpenNebula Distributed Resource Scheduler
+
+* [OneDRS]({{% relref "product/cloud_system_administration/scheduler/drs#scheduler-drs" %}}) can now skip automatic migration for VMs whose user template sets `ONEDRS_BLOCKED` to `YES`.
 
 ## Features Backported to 7.2.x
 
@@ -115,4 +122,3 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix AutoNFS not working correctly when used on System Datastores of type `shared` [#7763](https://github.com/OpenNebula/one/issues/7763).
 * Fix LVM concurrency issue with parallel deployments from different hosts using the same VG [#7719](https://github.com/OpenNebula/one/issues/7719).
 * Fix various logrotate issues [#7646](https://github.com/OpenNebula/one/issues/7646).
-
