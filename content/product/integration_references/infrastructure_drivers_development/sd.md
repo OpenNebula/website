@@ -102,7 +102,7 @@ The backup datastore drivers are responsible for storing the generate `backup` f
   - **ARGUMENTS**: `host:remote_system_ds disks deploy_id vm_id ds_id`
   - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
   - `host` is the target Host where the VM is running
-  - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g., “0:1:”)
+  - `disks` List (‘:’ separated) of disk IDs that need backup (e.g., “0:1:”). This list is already filtered by `BACKUP_CONFIG/DISK_IDS` and disk eligibility.
   - `deploy_id` ID of the VM in the hypervisor
   - `backupjob_id` if defined ‘-’ otherwise
   - `vm_id` is the id of the VM
@@ -112,7 +112,7 @@ The backup datastore drivers are responsible for storing the generate `backup` f
   - `backup_id` driver reference for the backup
   - `size_mb` size that the backup takes
   - `format` value of the backup image’s FORMAT attribute (values: raw, rbd)
-- **restore**: Restore the OpenNebula objects (VM Template and Images). Note that the actual download of the images will be made by the Image Datastore using the reference uri. The specific mechanism for download images of a given protocol is coded in the `downloader.sh` script. The pseudo-URL takes the form: `<backup_proto>://<datastore_id>/<backup_job_id>/<driver_snapshot_id_chain>/<disk filename>` (example: `restic://100/23/0:25f4b298,1:6968545c//var/lib/one/datastores/0/0/backup/disk.0`, the backup job id can be empty):
+- **restore**: Restore the OpenNebula objects (VM Template and Images). Note that the actual download of the images will be made by the Image Datastore using the reference URI. The specific mechanism to download images for a given protocol is coded in the `downloader.sh` script. Standard backup datastore pseudo-URLs take the form: `<backup_proto>://<datastore_id>/<backup_job_id>/<driver_snapshot_id_chain>/<disk filename>` (example: `restic://100/23/0:25f4b298,1:6968545c//var/lib/one/datastores/0/0/backup/disk.0`, the backup job ID can be empty). Interactive restores use OneBEX-URL form `onebex://<IMAGE_DS_ID>:<PORT_ID>`, where `IMAGE_DS_ID` is the destination Image Datastore ID and `PORT_ID` is the restore transfer port allocated for the interactive restore:
   - **ARGUMENTS**: `datastore_action_dump image_id`
   - **RETURNS**: `Template_ID Image_ID1 Image_ID2 ...`
 - **ls**: Lists the disk backups included in a given backup together with a downloader URL. The action receives the increment ID as a parameter and the information of the backup image, datastore and VM as XML through standard input.
@@ -132,6 +132,14 @@ The backup datastore drivers are responsible for storing the generate `backup` f
 ```default
 {
   "0": "rsync://102//0:0e6658/var/lib/one/datastores/102/21/0e6658/disk.0.0"
+}
+```
+
+For interactive restores, the downloader URL uses the OneBEX pseudo-URL:
+
+```default
+{
+  "0": "onebex://1:13050"
 }
 ```
 
@@ -285,7 +293,7 @@ VM = [ ID = ${vm_id}, MONITOR = "\
   - **ARGUMENTS**: `host:remote_system_ds disks deploy_id vm_id ds_id`
   - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
   - `host` is the target Host where the VM is running
-  - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g. “0:1:”)
+  - `disks` List (‘:’ separated) of disk IDs that need backup (e.g. “0:1:”). This list is already filtered by `BACKUP_CONFIG/DISK_IDS` and disk eligibility.
   - `deploy_id` ID of the VM in the hypervisor
   - `backupjob_id` is the id of the Backup job (‘-’ if undefined)
   - `vm_id` is the id of the VM
@@ -294,7 +302,7 @@ VM = [ ID = ${vm_id}, MONITOR = "\
   - **ARGUMENTS**: `host:remote_system_ds disks deploy_id vm_id ds_id`
   - `remote_system_ds_dir` is the path for the VM directory in the system datastore in the Host
   - `host` is the target Host where the VM is running
-  - `disks` List (‘:’ separated) of disk_ids  of disks that needs backup (e.g. “0:1:”)
+  - `disks` List (‘:’ separated) of disk IDs that need backup (e.g. “0:1:”). This list is already filtered by `BACKUP_CONFIG/DISK_IDS` and disk eligibility.
   - `deploy_id` ID of the VM in the hypervisor
   - `backupjob_id` is the id of the Backup job (‘-’ if undefined)
   - `vm_id` is the id of the VM

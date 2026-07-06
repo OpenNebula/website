@@ -19,6 +19,6 @@ This is the official repository of OpenNebula's technical documentation. This do
 
 If you find a problem in the documentation, or find something that needs updating, please create an issue in the [Main OpenNebula Repository](https://github.com/OpenNebula/one). Make sure to add the label `Documentation`. You are encouraged to fork this repo and send us pull requests if you are contributing new features!
 
-To build the documentation, follow the [documentation build instructions](https://github.com/OpenNebula/website/wiki/Build) in the Wiki. Details about how to contribute to the documentation, including style and structure guidance, can be found in the [Wiki for this repository](https://github.com/OpenNebula/website/wiki).
+To build the documentation, follow the [documentation build instructions](https://github.com/OpenNebula/one-docs/wiki/Build) in the Wiki. Details about how to contribute to the documentation, including style and structure guidance, can be found in the [Wiki for this repository](https://github.com/OpenNebula/one-docs/wiki).
 
 

@@ -39,16 +39,27 @@ Also, for **RBD** disks (Ceph), FULL and INCREMENT backups are currently stored 
 - **Full** backups (`FORMAT=raw`) store the RBD export converted to a qcow2 file. The restore process involves converting it to a RAW file and importing it to the Ceph pool.
 - **Incremental** backups (`FORMAT=rbd`) store the initial RBD export, as well as zero or more increment files, in the native format of Ceph exports (rbd export –export-format 2 / rbd export-diff). The restore process involves importing the initial export and applying the diff files in the same order, one by one.
 
+{{< alert title="Note" type="info" >}}
+The `INTERACTIVE` backup workflow is reserved for supported third-party integrations, such as the [OpenNebula-Veeam&reg; Backup Integration]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md#vm-backups-veeam" %}}). It is not a standalone backup backend for users to configure directly. In this workflow, OpenNebula exposes the backup data through OneBEX and the external backup system pulls the data from the hypervisor.
+
+For interactive backup integrations, OpenNebula supports:
+
+- **Full interactive backups** for file-based `qcow2` disks and disks on LVM datastores.
+- **Incremental interactive backups** for file-based `qcow2` disks and disks on LVM datastores using **CBT** mode only.
+
+Interactive incremental backups do not support the `SNAPSHOT` increment mode.
+{{< /alert >}}
+
 ### The Backup Process
 
 VM backups can be taken live or while the VM is powered off. The operation comprises three steps:
 
 - *Pre-backup*: Disks (or increments) are prepared for backup. When the VM is running the filesystems of the guest are frozen (see below) and temporal disks are created so the VM can continue its normal operation. Note: backups are taken at the same time for all the VM disks (qcow2/raw images) to guarantee **crash consistent backups**.
-- *Backup*: Full disk copies (or increments) are uploaded to the backup server. In this step, OpenNebula will use the specific datastore drivers for the backup system.
+- *Backup*: The selected backup datastore handles the backup data. Standard backup datastores upload full disk copies or increments to the backup server. Supported backup integrations can use OneBEX to expose the data so an external backup system can pull it from the hypervisor.
 - *Post-backup*: Cleans any temporal file in the hypervisor.
 
 {{< alert title="Note" type="info" >}}
-In order to save space in the backup system, RAW disk backups are converted and stored always in Qcow2 format.{{< /alert >}} 
+In order to save space in the backup system, RAW disk backups are converted and stored always in Qcow2 format.{{< /alert >}}
 
 ## Limitations
 
@@ -57,6 +68,7 @@ In order to save space in the backup system, RAW disk backups are converted and 
 - Attaching a disk to a VM that had an incremental backup previously made will yield an error. The –reset option for the backup operation is required to recreate a new incremental chain
 - Incremental backups on VMs with disk or system snapshots is not supported
 - `KEEP_LAST` option is not supported for Incremental backups of Ceph disks
+- Interactive backups only support datastores using the `local`, `shared` and `lvm*` TM drivers.
 
 ## Preparing VMs for Backups
 
@@ -141,6 +153,51 @@ Sunstone will display the screen to update the VM Configuration.
 
 ![vm_cfg_tab](/images/backup_vm_configuration_tab.png)
 
+<a id="vm-backups-selected-disks"></a>
+
+### Selecting Disks for Backup
+
+By default, a VM backup includes all disks that are eligible for backup. You can restrict the backup to a subset of VM disks by setting the `DISK_IDS` attribute in `BACKUP_CONFIG`.
+
+The value is a comma-separated list of disk IDs from the VM `DISK` section. For example, to back up only disks `0` and `2`:
+
+```default
+$ onevm updateconf 0
+
+BACKUP_CONFIG = [
+   DISK_IDS = "0,2"
+]
+...
+```
+
+You can clear `DISK_IDS` by setting it to an empty value. A missing or empty `DISK_IDS` attribute means that all eligible disks are included in the backup:
+
+```default
+$ onevm updateconf 0
+
+BACKUP_CONFIG = [
+   DISK_IDS = ""
+]
+...
+```
+
+OpenNebula validates `DISK_IDS` when the backup configuration is updated. The value must contain valid non-negative integer disk IDs, and every disk ID must refer to a disk that can be backed up. Disks of type `SWAP`, `CDROM`, `RBD_CDROM`, and `FILESYSTEM` are not included in VM backups. Volatile `FS` disks are included only when `BACKUP_VOLATILE="YES"` is set.
+
+For incremental backups, the effective disk set is part of the incremental chain. Changing `DISK_IDS`, changing `BACKUP_VOLATILE` so that the effective disk set changes, or attaching or detaching an eligible disk when all disks are selected resets the incremental chain. The next backup creates a new full base for the new disk set. If a disk listed in `DISK_IDS` is detached, OpenNebula removes that disk ID from the backup configuration and resets the chain.
+
+<a id="vm-backups-selected-disks-restore"></a>
+
+#### Restoring Selected Disk Backups
+
+A backup that contains only selected disks cannot be restored as a complete VM, because it may not contain all disks needed to boot or reconstruct the original VM. To restore data from this type of backup, restore an individual disk that is part of the backup:
+
+```default
+$ oneimage restore -d default --disk_id 2 176
+Image: 203
+```
+
+The disk ID must be present in the backup image metadata. You can check the backed up disk IDs with `oneimage show`; they are listed in the `BACKUP_DISK_IDS` section.
+
 <a id="vm-backups-config-attributes"></a>
 
 ### Reference: Backup Configuration Attributes
@@ -152,6 +209,8 @@ Sunstone will display the screen to update the VM Configuration.
 | `KEEP_LAST`             | Only keep the last N backups (full backups or increments) for the VM (default: none)                             |
 | `MODE`                  | Backup type `FULL` (default) or `INCREMENT`                                                                      |
 | `INCREMENT_MODE`        | Incremental backup type `CBT` (default) or `SNAPSHOT`                                                            |
+| `DISK_IDS`              | Comma-separated list of disk IDs to back up. Empty or missing means all eligible disks                            |
+| `INTERACTIVE`           | Enable the OneBEX interactive workflow for supported backup integrations (default: `NO`)                          |
 | `INCREMENTAL_BACKUP_ID` | For `INCREMENT` points to the backup image where increment chain is stored (read-only)                           |
 | `LAST_INCREMENT_ID`     | For `INCREMENT` the ID of the last incremental backup taken (read-only)                                          |
 | `LAST_BRIDGE`           | Hostname of the bridge host used to export the backup to the backup datastore                                    |

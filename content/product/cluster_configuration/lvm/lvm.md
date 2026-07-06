@@ -87,6 +87,7 @@ To create a new LVM Image Datastore, set following template parameters:
 | `DS_MAD`          | `lvm`                                                                                                       |
 | `TM_MAD`          | `lvm`                                                                                                       |
 | `DISK_TYPE`       | `BLOCK`                                                                                                     |
+| `BRIDGE_LIST`     | Front-end will use hosts in the list to proxy SAN operations                                                |
 | `LVM_THIN_ENABLE` | (default: `NO`) `YES` to enable [LVM Thin]({{% relref "#lvm-thin" %}}) functionality (RECOMMENDED).         |
 
 The example below illustrates the creation of an LVM Image Datastore:
@@ -109,6 +110,12 @@ Afterwards, create an LVM VG in the shared LUN for the image datastore **with th
 following name: `vg-one-<image_ds_id>`**. This step is performed once, either in one host,
 or the front-end if it has access. This VG is where both images and VM disks will be located, and
 OpenNebula will take care of creating and managing the LVs for each of them.
+
+{{< alert title="Note" type="info" >}}
+If the Front-end does not have direct access to the SAN, set `BRIDGE_LIST` in both the System and
+Image datastores. The listed Hosts must have access to the SAN storage and the required LVM tools
+installed. For example: `BRIDGE_LIST = "host1 host2"`.
+{{< /alert >}}
 
 For example, assuming `/dev/mapper/mpatha` is the LUN (iSCSI/multipath) block device:
 

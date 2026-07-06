@@ -6,3 +6,4 @@ resources/
 .hugo_build.lock
 package.json
 package-lock.json
+AGENTS.md
