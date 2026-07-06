@@ -39,7 +39,7 @@ Configuring OneDRS for the cluster requires setting the following options:
 OneNebula DRS migrates VMs according to the defined policy:
 
 - **Packing**: Minimizes the number of active Hosts to save energy or prepare for maintenance.
-- **Load Balancing**: Distributes VMs across available Hosts to prevent resource contention.
+- **Load Balancing**: Distributes VMs across available Hosts or Datastores to prevent resource contention.
 
 #### Load Balancing Objectives
 
@@ -52,6 +52,23 @@ The load balancing goal can combine multiple performance indicators:
 - **Network Traffic**: Optimization based on network throughput.
 
 For example, you can balance CPU and disk usage equally, setting CPU- and disk-associated weights to 50% each.
+
+#### Host and Storage Migrations
+
+According to the defined policy, OneNebula DRS can trigger Host or Storage migrations, as follows:
+
+- **Host migrations:** Moving VMs across Hosts, as a part of the packing policy and the load balancing policy that doesn't consider Disk I/O
+- **Storage migrations:** Moving VMs across Datastores, as a part of the load balancing policy that considers only Disk I/O
+- **Both kinds of migrations:** Moving VMs across Hosts and Datastores, as a part of the load balancing policy that considers the Disk I/O and another indicator
+
+If both Host and Storage migrations are applied for the same VM, they need to be executed in sequence: first the host migration, then the datastore migration. To ensure sequential execution, currently, it is required to limit the number of actions in the configuration file `oned.conf`:
+
+```
+MAX_ACTIONS_PER_HOST    = 1
+MAX_ACTIONS_PER_CLUSTER = 1
+```
+
+This setting is not required if only one king of migration is applied.
 
 #### Predictive DRS
 
@@ -79,7 +96,7 @@ Administrators can choose between different automation levels:
 
 ## Initial Placement
 
-OneDRS can also handle the **initial placement** of pending VMs, selecting the most suitable Hosts. Unlike the default Rank Scheduler, which considers one VM at a time, OneDRS evaluates all pending VMs together for optimal placement.
+OneDRS can also handle the **initial placement** of pending VMs, selecting the most suitable Hosts and Datastores. Unlike the default Rank Scheduler, which considers one VM at a time, OneDRS evaluates all pending VMs together for optimal placement.
 
 Initial placement is configured in `/etc/one/oned.conf` by modifying the `SCHED_MAD` section:
 
@@ -125,7 +142,7 @@ Configuration:
 Scheduling policies define optimization objectives:
 
 - `PACK`: Consolidates VMs on fewer Hosts to minimize active hardware.
-- `BALANCE`: Distributes VMs across Hosts to reduce resource contention.
+- `BALANCE`: Distributes VMs across Hosts or Datastores to reduce resource contention.
 
 Example:
 
