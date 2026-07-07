@@ -8,9 +8,9 @@ tags:
 weight: "5"
 ---
 
-In enterprise-grade cloud environments, orchestrating the physical placement of virtualized workloads is paramount to achieving infrastructure resilience, performance optimization, and strict fault isolation. OpenNebula addresses these requirements through its **VM Group** (Affinity and Anti-Affinity Groups) architectural subsystem. This mechanism enables system administrators and cloud architects to define relationship policies among multi-VM application tiers. Operational realities such as urgent infrastructure maintenance, emergency capacity rebalancing, or live patching frequently demand that in some cases these rules must be temporarily bypassed. 
+In enterprise-grade cloud environments, orchestrating the physical placement of virtualized workloads is paramount to achieving infrastructure resilience, performance optimization, and strict fault isolation. OpenNebula addresses these requirements through its **VM Group** architectural subsystem (**Affinity** and **Anti-Affinity** Groups). This mechanism enables system administrators and cloud architects to define relationship policies among multi-VM application tiers. Operational realities such as urgent infrastructure maintenance, emergency capacity rebalancing, or live patching frequently demand that in certain cases these rules must be temporarily bypassed. 
 
-This document provides details about the structural mechanics of OpenNebula VM Groups and how to use them, including the exact execution paths where placement rules are overridden during cold or live migrations, and the self-healing workflows triggered by the reschedule action to restore policy compliance.
+This document provides details about the structural mechanics of OpenNebula VM Groups and how to use them, including the exact execution paths where placement rules (or policies) are overridden during cold or live migrations, and the self-healing workflows triggered by the reschedule action to restore policy compliance.
 
 ## Structural Architecture of OpenNebula VM Groups
 
@@ -100,7 +100,7 @@ ID: 0
 
 ## Placement Policy Examples
 
-The following examples show how placement policies can be applied to the VMs of a VM Group.
+The following VM Group template examples show how different placement policies can be applied to the VMs of a VM Group.
 
 #### VM to Host Affinity
 
@@ -267,18 +267,18 @@ To implement this operational behavior in production environments, administrator
 
 ## Other Common Scenarios
 
-### What happens if a reschedule is triggered on a compliant VM?
+#### What happens if a reschedule is triggered on a compliant VM?
 
 * The scheduler will attempt to move the VM into another compliant Host. If no other Host meets the group requirements the VM won’t be moved, but will be left marked for rescheduling. 
 
-### What happens when a reschedule is triggered but no Host meets the requirements?
+#### What happens when a reschedule is triggered but no Host meets the requirements?
 
 * The VM will be left with the Reschedule flag activated. As soon as a Host appears that meets the requirements (for example a VM with anti-affinity rules in that Host was terminated), the scheduler will move the VM there. The reschedule flag can be removed through both CLI and Sunstone. 
 
-### What happens if 2 VMs are breaking an Anti-Affinity rule and both are marked for reschedule?
+#### What happens if 2 VMs are breaking an Anti-Affinity rule and both are marked for reschedule?
 
 * The scheduling operations are executed sequentially. One VM will be moved to a fulfilling `Host_B` (if able). Then the scheduler will also attempt to move the VM into another fulfilling Host (different than B, since that one no longer fulfills the anti-affinity requirement). If another Host is found, the second VM will also be moved. If not, it will be left marked for `Reschedule` until a Host is found. 
 
-### What happens if a VM has manual template requirements that conflict with its VM Group rules when a reschedule is triggered?
+#### What happens if a VM has manual template requirements that conflict with its VM Group rules when a reschedule is triggered?
 
 * The scheduler evaluates both the VM Group rules and the manual `SCHED_REQUIREMENTS` specified in the VM template by combining them with a logical AND operator. If they are mutually exclusive (e.g. the template restricts the VM to `Host_A`, but the VM Group anti-affinity rule forbids `Host_A`), the combined expression returns zero valid Hosts. The VM will not be moved and will remain on its current Host with the Reschedule flag active until either the template or the group rules are updated to resolve the deadlock.
