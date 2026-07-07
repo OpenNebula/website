@@ -24,13 +24,15 @@ OpenNebula DRS employs an integer linear programming (ILP) solver to optimize cl
 - **Predictive DRS**: Uses resource usage forecasts to provide proactive migration recommendations.
 - **Migration Recommendations**: Generates migration suggestions, allowing administrators to manually approve or automate actions.
 
+A VM might be migrated to another Host or another Datastore, but can't change both Host and Datastore.
+
 ## Configuration and Usage
 
 To enable OneDRS: In Sunstone, select the **Cluster** tab, then enable **OneDRS**. Alternatively, in the Cluster template set the `ONE_DRS` configuration attribute.
 
 Configuring OneDRS for the cluster requires setting the following options:
 
-- **Policies**: Defines how workloads are distributed across Hosts.
+- **Policies**: Defines how workloads are distributed across Hosts and Datastores.
 - **Usage Metrics and Predictions**: Specifies which resource metrics (CPU, Memory, Network, Disk) to consider for balancing.
 - **Migration Threshold**: Limits the number of migrations generated in an optimization cycle.
 
@@ -52,23 +54,6 @@ The load balancing goal can combine multiple performance indicators:
 - **Network Traffic**: Optimization based on network throughput.
 
 For example, you can balance CPU and disk usage equally, setting CPU- and disk-associated weights to 50% each.
-
-#### Host and Storage Migrations
-
-According to the defined policy, OneNebula DRS can trigger Host or Storage migrations, as follows:
-
-- **Host migrations:** Moving VMs across Hosts, as a part of the packing policy and the load balancing policy that doesn't consider Disk I/O
-- **Storage migrations:** Moving VMs across Datastores, as a part of the load balancing policy that considers only Disk I/O
-- **Both kinds of migrations:** Moving VMs across Hosts and Datastores, as a part of the load balancing policy that considers the Disk I/O and another indicator
-
-If both Host and Storage migrations are applied for the same VM, they need to be executed in sequence: first the host migration, then the datastore migration. To ensure sequential execution, currently, it is required to limit the number of actions in the configuration file `oned.conf`:
-
-```
-MAX_ACTIONS_PER_HOST    = 1
-MAX_ACTIONS_PER_CLUSTER = 1
-```
-
-This setting is not required if only one king of migration is applied.
 
 #### Predictive DRS
 
