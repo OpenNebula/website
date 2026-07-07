@@ -265,7 +265,7 @@ To implement this operational behavior in production environments, administrator
 5. To enforce the affinity low-latency rules once again, the operator triggers rescheduling on the replica.
 6. The scheduler assesses the available capacity on Host_Premium, matches it against the broken affinity metadata, and automatically issues a live migration request to reunite the database instances on the premium Host.
 
-## Other Common Scenarios
+### Other Common Scenarios
 
 #### What happens if a reschedule is triggered on a compliant VM?
 
