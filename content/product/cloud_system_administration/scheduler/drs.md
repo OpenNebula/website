@@ -148,7 +148,15 @@ PLACE:
     MEMORY: 0.4
 ```
 
+### Migration Configuration
+
+Migration configuration options are relevant only for workload optimization.
+
 `MIGRATION_THRESHOLD` limits the number of migrations per cycle.
+
+`PRIORITIZE_STORAGE_MIGRATIONS` decides if storage migrations will be prioritized over host migrations (value `"YES"`), when they bring the same improvement with respect to the selected policy.
+
+### Complete Configuration Example
 
 The following shows a complete configuration file for the OneDRS scheduler:
 
@@ -163,6 +171,7 @@ PLACE:
 OPTIMIZE:
   POLICY: "BALANCE"
   MIGRATION_THRESHOLD: 10
+  PRIORITIZE_STORAGE_MIGRATIONS: "YES"
   WEIGHTS:
     CPU_USAGE: 0.2
     CPU: 0.2
@@ -177,6 +186,6 @@ MEMORY_SYSTEM_DS_SCALE: 0
 DIFFERENT_VNETS: YES
 ```
 
-### Blocking VM Migrations
+## Blocking VM Migrations
 
 It is possible to avoid the migrations for specific VMs, by setting `ONEDRS_BLOCKED` to `YES` in its user template.
