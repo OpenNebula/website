@@ -28,7 +28,7 @@ OpenNebula is certified over all the following platforms, taking into account th
 | Red Hat Enterprise Linux | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | AlmaLinux                | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | Rocky Linux              | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}}).<br/>Available through Red Hat packages.                 |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS), 26.04 (LTS)      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | Debian                   | 12, 13                                     | [Front-end Installation]({{% relref "frontend_install" %}})  |
 | SUSE Linux Enterprise    | 15                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | openSUSE                 | 16                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
