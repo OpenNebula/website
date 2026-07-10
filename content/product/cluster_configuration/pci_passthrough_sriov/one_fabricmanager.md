@@ -1,7 +1,7 @@
 ---
 title: OpenNebula NVIDIA Fabric Manager (AE)
 linkTitle: NVIDIA Fabric Manager (AE)
-weight: 8
+weight: 10
 tags: ['AI','NVIDIA']
 ---
 
