@@ -236,6 +236,50 @@ $ onevnet show 1
 
 Check the `onevnet` command help or the [reference guide]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}) for more options to list the Virtual Networks.
 
+## Group VLAN Rules
+
+Group VLAN rules let cloud administrators delegate Virtual Network self-provisioning while keeping tenant VLAN usage inside explicit ranges. Rules are defined per group and are evaluated when a non-administrator:
+
+- Instantiates a Virtual Network Template.
+- Updates a Virtual Network, including VLAN attributes in Address Ranges.
+
+A group VLAN rule is defined with `ID`, `SCOPE`, and optionally `VNTEMPLATE`:
+
+```default
+RULE = [
+  ID         = "100-199",
+  SCOPE      = "VLAN_ID",
+  VNTEMPLATE = "10"
+]
+```
+
+- `ID`: Allowed VLAN values. Use a single value, a comma-separated list, or ranges, for example `100`, `100,105`, or `100-199`.
+- `SCOPE`: VLAN attribute controlled by the rule. Supported values are `VLAN_ID`, `OUTER_VLAN_ID`, `CVLAN`, `VLAN_TAGGED_ID`, and `ANY`.
+- `VNTEMPLATE`: Virtual Network Template IDs where the rule applies. Use a single ID, a comma-separated list, ranges, or `-1` to apply the rule to any Virtual Network Template. If omitted, OpenNebula stores it as `-1`.
+
+For example, the following rule allows VLAN IDs 300, and 400 through 450, for any supported VLAN attribute and any Virtual Network Template:
+
+```default
+RULE = [
+  ID         = "300,400-450",
+  SCOPE      = "ANY",
+  VNTEMPLATE = "-1"
+]
+```
+
+To set the rules for a group, create a file such as `tenant-vlans.txt` and run:
+
+```default
+$ onegroup vlan tenant-a tenant-vlans.txt
+```
+
+If the file argument is omitted, `onegroup vlan` opens the editor with the current rules.
+
+When users belong to more than one group, a requested VLAN value is accepted if any of their groups has a matching rule. A rule only authorizes values in its own scope, except for `ANY`, which matches all supported VLAN scopes. `VLAN_ID` and `OUTER_VLAN_ID` must be single values; `CVLAN` and `VLAN_TAGGED_ID` can use the same range syntax as rule IDs.
+
+{{< alert title="Important" type="info" >}}
+If a group has VLAN rules that apply to the target Virtual Network Template, users in that group must request explicit VLAN values. Automatic selection with `AUTOMATIC_VLAN_ID` or `AUTOMATIC_OUTER_VLAN_ID` is rejected for that template because it would bypass the group VLAN policy.{{< /alert >}}
+
 ### Virtual Network Tips
 
 * You may have some used IPs in a VNET so you do not want them to be assigned. You can add as many ARs as you need to implement these address gaps. Alternatively you can put address on hold to prevent them from being assigned.
