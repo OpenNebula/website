@@ -4040,16 +4040,16 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 
 ### one.group.vlan
 
-- **Description**: Sets the group VLAN rules used to authorize tenant Virtual Network Template instantiation and updates of Virtual Networks derived from templates.
-- **Parameters**
+- **Description**: Sets the user group VLAN rules used to authorize tenant Virtual Network template instantiation and updates of Virtual Networks derived from templates.
+- **Parameters**:
 
 | Type   | Data Type   | Description                                                                                         |
 |--------|-------------|-----------------------------------------------------------------------------------------------------|
 | IN     | String      | The session string.                                                                                 |
 | IN     | Int         | The object ID.                                                                                      |
 | IN     | String      | The VLAN rule template contents. Syntax can be the usual `attribute=value` or XML.                  |
-| OUT    | Boolean     | true or false whenever is successful or not                                                         |
-| OUT    | Int/String  | The resource ID / The error string.                                                                 |
+| OUT    | Boolean     | `true` or `false` indicating success or failure of VLAN rule application.                           |
+| OUT    | Int/String  | The resource ID / error string.                                                                     |
 | OUT    | Int         | Error code.                                                                                         |
 
 Sample VLAN rule template:
