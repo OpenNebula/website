@@ -138,3 +138,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix `SD_DISK_BUS` not taken in account when attaching a disk[#7590](https://github.com/OpenNebula/one/issues/7590)
 * Fix `queues` attribute in disk driver element is only supported for virtio bus[#7586](https://github.com/OpenNebula/one/issues/7586)
 * Fix default `IOTHREAD` no applied when attaching a virtio disk[#7588](https://github.com/OpenNebula/one/issues/7588)
+* Fix `VOLATILE` disks not being considered during LVM and CEPH backups[#7914](https://github.com/OpenNebula/one/issues/7914)
