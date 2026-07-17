@@ -141,5 +141,5 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix `SD_DISK_BUS` not taken in account when attaching a disk [#7590](https://github.com/OpenNebula/one/issues/7590).
 * Fix `queues` attribute in disk driver element is only supported for virtio bus [#7586](https://github.com/OpenNebula/one/issues/7586).
 * Fix default `IOTHREAD` no applied when attaching a virtio disk [#7588](https://github.com/OpenNebula/one/issues/7588).
-* Fix Ceph/RBD VM backup leaving temporary RBD snapshots after successful backup [#7717](https://github.com/OpenNebula/one/issues/7717).
+* Fix Ceph/RBD VM backup leaving temporary RBD snapshots after successful backup [#7918](https://github.com/OpenNebula/one/issues/7918).
 * Fix OneDRS not using predictive resource usage when generating optimization plans [#7915](https://github.com/OpenNebula/one/issues/7915).
