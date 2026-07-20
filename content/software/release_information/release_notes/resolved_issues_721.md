@@ -21,6 +21,7 @@ The following new features have been backported to 7.2.1:
 * [PCI device monitoring now includes `IFNAME`, `SRIOV` and `SRIOV_NUM` attributes]({{% relref "product/cluster_configuration/hosts_and_clusters/hosts#host-pci-devices" %}}) to map PCI devices to network interface names and identify SR-IOV Physical/Virtual Functions.
 * [Move Open vSwitch DPDK socket directory](https://github.com/OpenNebula/one/issues/7673) to `/var/run/one/vhost-socks`.
 * Add [Elastic Kubernetes as a Service with OneKS]({{% relref "platform_services/oneks/getting_started/overview/" %}}) for streamlined Kubernetes Cluster deployment.
+* Fix various logrotate issues [#7646](https://github.com/OpenNebula/one/issues/7646).
 
 ## Resolved Issues
 
