@@ -88,7 +88,7 @@ Thank you to our incredible community and partners for your continued support in
 ## Networking
 
 * [VLAN Rules]({{% relref "manage_vnets#group-vlan-rules" %}}) enable cloud administrators to delegate VLAN management to tenants in multi-tenant clouds, enabling tenant self-provisioning of Virtual Networks.
-* Support for [SR-IOV capable PCI network interfaces in Switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough/#usage-as-network-interfaces" %}}) with Open vSwitch.
+* Support for [SR-IOV capable PCI network interfaces in Switchdev mode]({{% relref "product/cluster_configuration/pci_passthrough_sriov/network_interfaces#legacy-and-switchdev-modes" %}}) with Open vSwitch.
 * Added support for [dummy interfaces]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates.md#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
 * Added the optional [`MAC_GLOBAL_SPACE`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}) generation mode, which allocates generated MAC addresses from a global pool to prevent collisions across Virtual Networks.
 * Added round-robin [Address Range]({{% relref "product/cluster_configuration/networking_system/manage_vnets.md#manage-vnet-ar" %}}) lease assignment, reducing immediate reuse of recently released addresses when new NICs are allocated.
