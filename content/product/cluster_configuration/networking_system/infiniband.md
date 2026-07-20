@@ -7,25 +7,25 @@ tags: ["networking"]
 weight: "7"
 ---
 
-InfiniBand is a high-performance networking technology designed for environments where extremely low latency, high throughput, and efficient CPU utilization are critical. It is widely used in High Performance Computing (HPC), AI training and inference clusters, and other data-intensive workloads that require significantly higher performance than conventional Ethernet networks. InfiniBand achieves this through technologies such as Remote Direct Memory Access (RDMA), allowing applications to exchange data directly between systems with minimal CPU involvement.
+InfiniBand is a high-performance networking technology designed for environments where extremely low latency, high throughput, and efficient CPU utilization are critical. It is widely used in High Performance Computing (HPC), AI training and inference Clusters, and other data-intensive workloads that require significantly higher performance than conventional Ethernet networks. InfiniBand achieves this through technologies such as Remote Direct Memory Access (RDMA), allowing applications to exchange data directly between systems with minimal CPU involvement.
 
 OpenNebula supports deployment on infrastructure equipped with InfiniBand fabrics, enabling virtualized and bare-metal workloads to take advantage of high-speed interconnects. Depending on the workload requirements, InfiniBand can be used in several different ways:
 
 * As an IP network using IP over InfiniBand (IPoIB).
 * By exposing InfiniBand adapters directly to Virtual Machines using PCI Passthrough or SR-IOV Virtual Functions (VFs).
-* For storage and cluster communication over high-speed fabrics.
+* For storage and Cluster communication over high-speed fabrics.
 * For applications that use RDMA directly.
 
 ## Typical Use Cases
 
 InfiniBand is most commonly deployed for workloads such as:
 
-* AI and machine learning training clusters
+* AI and machine learning training Clusters
 * High Performance Computing (HPC)
 * Scientific simulations
 * High-performance distributed storage
 * MPI-based parallel applications
-* GPU clusters requiring low-latency node-to-node communication
+* GPU Clusters requiring low-latency node-to-node communication
 
 These environments benefit from InfiniBand's low latency, high bandwidth, and efficient RDMA transport.
 
@@ -37,7 +37,7 @@ OpenNebula does not implement a dedicated InfiniBand networking driver. Instead,
 
 The simplest deployment method is IP over InfiniBand (IPoIB), where the InfiniBand fabric behaves as a conventional IP network.
 
-Once the host operating system has configured the InfiniBand interfaces, they appear as standard Linux network interfaces and can be used throughout OpenNebula just like Ethernet interfaces.
+Once the Host operating system has configured the InfiniBand interfaces, they appear as standard Linux network interfaces and can be used throughout OpenNebula just like Ethernet interfaces.
 
 Typical uses include:
 
@@ -78,7 +78,7 @@ depending on whether the adapter operates in Legacy or Switchdev mode.
 
 ## Host Requirements
 
-Before deploying workloads using InfiniBand, ensure that each host is correctly configured by the operating system.
+Before deploying workloads using InfiniBand, ensure that each Host is correctly configured by the operating system.
 
 Typical requirements include:
 
@@ -101,7 +101,7 @@ If Virtual Machines require native InfiniBand functionality, the guest operating
 
 Guests using PCI Passthrough or SR-IOV interact directly with the assigned hardware and are responsible for managing the device.
 
-Considerations
+### Considerations
 
 When planning an InfiniBand deployment, consider the following:
 
@@ -111,12 +111,3 @@ IPoIB offers excellent compatibility with existing networking tools but does not
 Applications must be specifically designed or configured to use RDMA in order to benefit from InfiniBand's lowest latency communication.
 
 Network configuration, firmware management, and Subnet Manager deployment remain the responsibility of the underlying operating system and network infrastructure.
-
-## Related Documentation
-
-* PCI Passthrough
-* Virtual Networks
-* Linux Bridge Networks
-* Open vSwitch Networks
-* NVIDIA Spectrum-X
-* Bare Metal Provisioning (when using InfiniBand-enabled hosts)

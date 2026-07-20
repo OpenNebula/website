@@ -364,7 +364,7 @@ The system-wide configuration can be overridden for individual clusters or hosts
 |-----------|-------------|
 | PCI_FILTER | (List) Filters by PCI vendor:device:class patterns (same as for lspci) |
 | PCI_SHORT_ADDRESS | (List) Filters by short PCI address bus:device.function |
-| PCI_DEVICE_NAME | |
+| PCI_DEVICE_NAME | (List) Filters by the PCI device name reported by the Host  |
 
 This allows different clusters to expose different classes of PCI devices while sharing the same frontend configuration.
 
