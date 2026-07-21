@@ -143,3 +143,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix default `IOTHREAD` no applied when attaching a virtio disk [#7588](https://github.com/OpenNebula/one/issues/7588).
 * Fix Ceph/RBD VM backup leaving temporary RBD snapshots after successful backup [#7717](https://github.com/OpenNebula/one/issues/7717), [#7918](https://github.com/OpenNebula/one/issues/7918).
 * Fix OneDRS not using predictive resource usage when generating optimization plans [#7915](https://github.com/OpenNebula/one/issues/7915).
+* Fix OneForm not restarting after a leader change in HA configurations [#7562](https://github.com/OpenNebula/one/issues/7562).
