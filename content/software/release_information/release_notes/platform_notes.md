@@ -16,6 +16,9 @@ This page highlights the specific considerations when using an OpenNebula cloud 
 
 This is the list of the individual platform components that have been through the complete [OpenNebula Quality Assurance and Certification Process](https://github.com/OpenNebula/one/wiki/Quality-Assurance).
 
+{{< alert title="Note" type="info" >}}
+For supported deployments, hypervisor nodes in the same Cluster must run the same operating system and version. In High Availability Front-end deployments, all Front-end nodes must also run the same operating system and version. Homogeneous deployments require matching both the OS distribution and its release version.{{< /alert >}}
+
 ## Certified Components Version
 
 ### Front-end Components
