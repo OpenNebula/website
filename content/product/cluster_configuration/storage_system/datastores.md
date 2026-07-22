@@ -183,4 +183,8 @@ STATE          : DISABLED
 
 You can also manage your Datastores using the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Storage > Datastore** to create, enable, disable, delete, and see information about your datastores in a user-friendly way.
 
-![image1](/images/sunstone_datastores.png)
+{{< image
+  pathDark="/images/storage/dark/sunstone_datastores.png"
+  path="/images/storage/light/sunstone_datastores.png"
+  alt="Datastores" align="center" mb="20px"
+>}}
