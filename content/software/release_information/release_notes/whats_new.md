@@ -51,14 +51,16 @@ Thank you to our incredible community and partners for your continued support in
     * **Richer Resource Visualization** — Individual resource views have been redesigned to surface the most relevant information upfront, reducing the need to dig through tabs to get a clear picture of an item's state, configuration, and relationships.
     * **Added FSaaS (VirtioFS) Support** — Users can now manage shared storage file systems, create filesystem images, and attach disks directly from the Sunstone GUI.
 
-## OpenNebula Core
+## OneFlow
 
 * Added the capacity to [batch delete scheduled actions from all service VMs]({{% relref "product/virtual_machines_operation/multi-vm_workflows/appflow_use_cli/#deleting-scheduled-actions-from-service-vms" %}}), negating the need to delete actions from each individual VM.
 
 ## Storage & Backups
 
-* Added [interactive backup integration support]({{% relref "product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
+* Added [interactive backup integration support]({{% relref "product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` and LVM VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
+* Added [S3 backend support for Restic Backup Datastores]({{% relref "product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}}), allowing backups to be stored in AWS S3 and S3-compatible object storage such as MinIO, Garage, or Ceph RGW.
 * Added [selected disk backups]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks" %}}), allowing VM backup configurations and Backup Jobs to back up only a defined subset of eligible VM disks. Selected-disk backups can be restored as [individual disks]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks-restore" %}}).
+* Updated the [Veeam Backup integration architecture]({{% relref "product/cluster_configuration/backup_system/veeam.md#architecture" %}}) to connect Veeam to OpenNebula through the Front-end and pull backup data directly from hypervisors through OneBEX, removing the need for a separate oVirtAPI server VM.
 
 ## AI Factories
 
@@ -71,9 +73,9 @@ Thank you to our incredible community and partners for your continued support in
 
 ## KVM
 
-* Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
-* Added support for [dummy interfaces]({{% relref "vm_templates#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
+* Added filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
 * Gather network information using qemu-guest-agent when [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring) is enabled.
+* Added per-VM live migration tuning through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`]({{% relref "product/operation_references/configuration_references/template.md#template-features" %}}), allowing administrators to improve live migration convergence for busy KVM guests.
 
 ## OpenNebula Elastic Kubernetes Service
 
@@ -84,6 +86,9 @@ Thank you to our incredible community and partners for your continued support in
 
 * [VLAN Rules]({{% relref "manage_vnets#group-vlan-rules" %}}) enable cloud administrators to delegate VLAN management to tenants in multi-tenant clouds, enabling tenant self-provisioning of Virtual Networks.
 * Support for [SR-IOV capable PCI network interfaces in Switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough/#usage-as-network-interfaces" %}}) with Open vSwitch.
+* Added support for [dummy interfaces]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates.md#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
+* Added the optional [`MAC_GLOBAL_SPACE`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}) generation mode, which allocates generated MAC addresses from a global pool to prevent collisions across Virtual Networks.
+* Added round-robin [Address Range]({{% relref "product/cluster_configuration/networking_system/manage_vnets.md#manage-vnet-ar" %}}) lease assignment, reducing immediate reuse of recently released addresses when new NICs are allocated.
 
 ## Packaging
 
@@ -93,6 +98,7 @@ Thank you to our incredible community and partners for your continued support in
 
 * Added Windows OS Profile/Best practices VM template options to OneSwap Windows conversion.
 * OneSwap [batch VM conversion]({{% relref "software/migration_from_vmware/oneswap/#batch-conversion" %}}) enables the migration of multiple VMs in a single execution.
+* OneSwap hybrid migrations can now use [striped transfers]({{% relref "software/migration_from_vmware/oneswap/#striped-transfers" %}}) with `--download-stripes`, splitting datastore downloads across multiple HTTP range requests to improve transfer throughput.
 
 ## AI Factories
 
@@ -102,6 +108,7 @@ Thank you to our incredible community and partners for your continued support in
 
 * [OneDRS]({{% relref "product/cloud_system_administration/scheduler/drs" %}}) now supports storage migrations in addition to migrations across Hosts when optimizing Cluster workloads.
 * [OneDRS]({{% relref "product/cloud_system_administration/scheduler/drs" %}}) can now skip automatic migration for VMs whose user template sets `ONEDRS_BLOCKED` to `YES`.
+* [OneDRS]({{% relref "product/cloud_system_administration/scheduler/drs#migration-configuration" %}}) can now prioritize storage migrations over Host migrations with `PRIORITIZE_STORAGE_MIGRATIONS` when both options provide the same optimization benefit.
 
 ## Features Backported to 7.2.x
 
@@ -113,31 +120,35 @@ Additionally, the following functionalities are present that were not in OpenNeb
 ## Other Issues Solved
 
 * Fix marketplace broken redirect link [#7291](https://github.com/OpenNebula/one/issues/7291).
-* Fix improve live migration options for busy guests [#5774](https://github.com/OpenNebula/one/issues/5774).
 * Fix missing units in "Size on instantiate" VM Template instantiation [#7672](https://github.com/OpenNebula/one/issues/7672).
 * Fix VM log is not showing up in the FireEdge if `USE_VMS_LOCATION=YES` [#7680](https://github.com/OpenNebula/one/issues/7680).
+* Fix Zombie VMs not being shown in the corresponding Host tab in FireEdge [#7472](https://github.com/OpenNebula/one/issues/7472).
 * Fix VM CDROM hot-attach without target or dev-prefix [#7736](https://github.com/OpenNebula/one/issues/7736).
 * Fix API commands executed on HA follower, for full list of commands the GitHub issue [#7725](https://github.com/OpenNebula/one/issues/7725).
 * Fix onehost failing on CLI-only installs due to an unconditional require of HostSyncManager [#7768](https://github.com/OpenNebula/one/issues/7768).
 * Fix AutoNFS bug where `NFX_AUTO_*` attributes are not correctly read, preventing the automatic mount [#7763](https://github.com/OpenNebula/one/issues/7763).
 * Fix OneDRS placement failure for LVM SAN EE datastore with `KeyError` on Image DS ID [#7752](https://github.com/OpenNebula/one/issues/7752).
+* Fix LVM datastore capacity reporting based on filesystem capacity instead of the configured volume group capacity, causing incorrect scheduler rejections [#7721](https://github.com/OpenNebula/one/issues/7721).
 * Fix incorrect reporting of sizes for VirtioFS images [#7751](https://github.com/OpenNebula/one/issues/7751).
 * Fix OneKS Clusters stuck in DEPROVISIONING state if a OneKS group becomes empty during the deprovisioning process [#7749](https://github.com/OpenNebula/one/issues/7749).
 * Fix unrecoverable WARNING state of OneKS groups after recovery of OneKS Cluster [#7748](https://github.com/OpenNebula/one/issues/7748).
 * Fix OneKS lifecycle operations after renaming a Cluster by using stable Kubernetes identifiers [#7724](https://github.com/OpenNebula/one/issues/7724).
 * Fix oneswap compatibility issue with vCenter 8.0.3 [#7698](https://github.com/OpenNebula/one/issues/7698).
 * Fix `opennebula-exporter` crash when monitoring diskless VMs [#7703](https://github.com/OpenNebula/one/issues/7703).
+* Fix Veeam worker IP detection by reading the worker IP from the init script before attaching the management NIC [#7750](https://github.com/OpenNebula/one/issues/7750).
 * Fix PCI attach to prevent bus address collisions [#7695](https://github.com/OpenNebula/one/issues/7695).
 * Fix lack of VLAN tags clearance in OVS when removing them from Virtual Network [#7707](https://github.com/OpenNebula/one/issues/7707).
 * Fix LVM (EE) post-reboot activation silently skipping VM disks [#7720](https://github.com/OpenNebula/one/issues/7720).
 * Fix OVS port QinQ vlan mode being overwritten with changes introduced in[#7657](https://github.com/OpenNebula/one/issues/7657).
 * Fix MAC address range parsing for invalid MAD address ranges [#7233](https://github.com/OpenNebula/one/issues/7233).
+* Fix Signature v4 support for non-AWS S3 Marketplace storage backends [#7485](https://github.com/OpenNebula/one/issues/7485).
 * Fix file-based image cloning between two datastores with BRIDGE_LIST [#7762](https://github.com/OpenNebula/one/issues/7762).
 * Fix AutoNFS not working correctly when used on System Datastores of type `shared` [#7763](https://github.com/OpenNebula/one/issues/7763).
 * Fix LVM concurrency issue with parallel deployments from different Hosts using the same VG [#7719](https://github.com/OpenNebula/one/issues/7719).
 * Fix various logrotate issues [#7646](https://github.com/OpenNebula/one/issues/7646).
 * Fix Datastores rounding off capacity values [#7777](https://github.com/OpenNebula/one/issues/7777).
 * Fix `VOLATILE` disks not being considered during LVM and CEPH backups [#7914](https://github.com/OpenNebula/one/issues/7914).
+* Fix Veeam LVM volatile incremental backups by reporting volatile disks with the correct format [#7786](https://github.com/OpenNebula/one/issues/7786).
 * Fix `SD_DISK_BUS` not taken in account when attaching a disk [#7590](https://github.com/OpenNebula/one/issues/7590).
 * Fix `queues` attribute in disk driver element is only supported for virtio bus [#7586](https://github.com/OpenNebula/one/issues/7586).
 * Fix default `IOTHREAD` no applied when attaching a virtio disk [#7588](https://github.com/OpenNebula/one/issues/7588).

@@ -430,6 +430,8 @@ There are four methods to transfer the images from vCenter/ESXi to the conversio
   - Use the [RbVmomi2](https://github.com/ManageIQ/rbvmomi2) library to download the image locally, then convert it with a local `virt-v2v` run.
   - Fast, but requires extra disk space as it copies the image. Incompatible with `--custom`, `--esxi` and `--vddk`.
 
+<a id="striped-transfers"></a>
+
 Hybrid datastore downloads can optionally use multiple HTTP Range requests in parallel with `--download-stripes N` or `:download_stripes: N` in `oneswap.yaml`. The default value is `1`, which keeps the existing single-stream behavior. Values greater than `1` apply only to hybrid datastore transfers and require `--hybrid`. If HTTP Range support is not available, OneSwap falls back to the standard single-stream download.
 
 For example:
