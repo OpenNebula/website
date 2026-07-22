@@ -89,6 +89,7 @@ Thank you to our incredible community and partners for your continued support in
 * Added support for [dummy interfaces]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates.md#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
 * Added the optional [`MAC_GLOBAL_SPACE`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}) generation mode, which allocates generated MAC addresses from a global pool to prevent collisions across Virtual Networks.
 * Added round-robin [Address Range]({{% relref "product/cluster_configuration/networking_system/manage_vnets.md#manage-vnet-ar" %}}) lease assignment, reducing immediate reuse of recently released addresses when new NICs are allocated.
+* Added support for [host-specific TProxy configuration]({{% relref "product/virtual_machines_operation/virtual_machines_networking/tproxy.md#hypervisor-configuration" %}}), allowing per-host configuration overrides to simplify deployments across multiple clusters, racks, or network zones.
 
 ## Packaging
 
@@ -156,3 +157,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix OneDRS not using predictive resource usage when generating optimization plans [#7915](https://github.com/OpenNebula/one/issues/7915).
 * Fix volatile disks not being instantiated as thin LVs when `LVM_THIN_ENABLE=YES` [#7924](https://github.com/OpenNebula/one/issues/7924).
 * Fix OneForm not restarting after a leader change in HA configurations [#7562](https://github.com/OpenNebula/one/issues/7562).
+* Fix OneGate TProxy connectivity failing when the host uses strict ARP policies [#7691](https://github.com/OpenNebula/one/issues/7691).
