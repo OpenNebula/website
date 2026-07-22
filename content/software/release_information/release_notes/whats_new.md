@@ -63,6 +63,7 @@ Thank you to our incredible community and partners for your continued support in
 ## AI Factories
 
 * Integration of the [NVIDIA Infra Controller (NICo)]({{% relref "product/virtual_machines_operation/metal_instances/bare_metal_nico/" %}}) delivers automated AI Factory-scale provisioning of accelerated bare-metal hardware, with full lifecycle management including hardware discovery, firmware validation, DPU provisioning, and multi-tenant operation through an API.
+* [Enhanced Slurm appliance](https://marketplace.opennebula.io/appliance/8ce164d5-3cce-42a7-b9a7-0e8133ef92c6) simplifies the creation of Slurm Clusters, with out-of-the-box NVIDIA GPU support and LDAP, supported both externally and locally for advanced multi-tenancy access management. 
 
 ## API and CLI
 
@@ -131,7 +132,7 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix lack of VLAN tags clearance in OVS when removing them from Virtual Network [#7707](https://github.com/OpenNebula/one/issues/7707).
 * Fix LVM (EE) post-reboot activation silently skipping VM disks [#7720](https://github.com/OpenNebula/one/issues/7720).
 * Fix OVS port QinQ vlan mode being overwritten with changes introduced in[#7657](https://github.com/OpenNebula/one/issues/7657).
-* Fix MAC address range parsing for invalid MAD address ranges [#7233](https://github.com/OpenNebula/one/issues/7233).
+* Fix MAC address range parsing for invalid MAC address ranges [#7233](https://github.com/OpenNebula/one/issues/7233).
 * Fix file-based image cloning between two datastores with BRIDGE_LIST [#7762](https://github.com/OpenNebula/one/issues/7762).
 * Fix AutoNFS not working correctly when used on System Datastores of type `shared` [#7763](https://github.com/OpenNebula/one/issues/7763).
 * Fix LVM concurrency issue with parallel deployments from different Hosts using the same VG [#7719](https://github.com/OpenNebula/one/issues/7719).
