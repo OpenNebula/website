@@ -128,6 +128,9 @@ The no-SLAAC IPv6 version supports the following attributes:
 | `MAC`       | First `MAC`, if not provided it will be<br/>generated randomly. | **NO**      |
 | `SIZE`      | Number of addresses in this range.                              | **YES**     |
 
+{{< alert title="Note" type="info" >}}
+Generated MAC address behavior is controlled by the `MAC_PREFIX` and optional `MAC_GLOBAL_SPACE` settings in [`oned.conf`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}). When `MAC_GLOBAL_SPACE` is enabled, OpenNebula uses a global MAC address pool to prevent collisions across Virtual Networks. This does not apply to IP networks.{{< /alert >}}
+
 <a id="vnet-template-context"></a>
 
 ## Contextualization Attributes

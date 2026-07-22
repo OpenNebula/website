@@ -59,6 +59,8 @@ The addresses available in a Virtual Network are defined by one or more Address 
 - **Dual stack**, each NIC in the network will get both an IPv4 and an IPv6 address (SLAAC or no-SLAAC), [see more here]({{% relref "../../operation_references/configuration_references/vnet_template#vnet-template-ar46" %}})
 - **Ethernet**,  just MAC addresses are generated for the VMs. You should use this AR when an external service is providing the IP addresses, such as a DHCP server, [see more details here]({{% relref "../../operation_references/configuration_references/vnet_template#vnet-template-eth" %}})
 
+Generated MAC address behavior is controlled by the `MAC_PREFIX` and optional `MAC_GLOBAL_SPACE` settings in [`oned.conf`]({{% relref "../../operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}). `MAC_GLOBAL_SPACE` allocates generated MAC addresses from a global pool to prevent collisions across Virtual Networks. This does not apply to IP networks.
+
 For example, to define the IPv4 address range 10.0.0.150 - 10.0.0.200
 
 ```default
