@@ -160,5 +160,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix Ceph/RBD VM backup leaving temporary RBD snapshots after successful backup [#7717](https://github.com/OpenNebula/one/issues/7717), [#7918](https://github.com/OpenNebula/one/issues/7918).
 * Fix OneDRS not using predictive resource usage when generating optimization plans [#7915](https://github.com/OpenNebula/one/issues/7915).
 * Fix volatile disks not being instantiated as thin LVs when `LVM_THIN_ENABLE=YES` [#7924](https://github.com/OpenNebula/one/issues/7924).
+* Fix PCI device and PCI NIC quota accounting when instantiating VMs from templates [#7922](https://github.com/OpenNebula/one/issues/7922).
 * Fix OneForm not restarting after a leader change in HA configurations [#7562](https://github.com/OpenNebula/one/issues/7562).
 * Fix OneGate TProxy connectivity failing when the Host uses strict ARP policies [#7691](https://github.com/OpenNebula/one/issues/7691).
