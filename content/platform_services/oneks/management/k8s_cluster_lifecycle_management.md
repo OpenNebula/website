@@ -48,7 +48,7 @@ Deployment options let you choose where each K8s Cluster is placed and which Ope
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-From the left-hand navigation menu in Sunstone, go to **Kubernetes -> K8S Clusters** and click **Create** to start the K8s Cluster creation wizard.
+From the left-hand navigation menu in Sunstone, go to **Kubernetes -> K8S Clusters** and click **+ Create Kubernetes Cluster** to start the K8s Cluster creation wizard.
 
 {{< image
   path="/images/oneks/light/create_k8s_cluster_1.png"
@@ -276,7 +276,7 @@ Node groups are the main operational unit for managing worker capacity in OneKS.
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-From **Kubernetes -> K8S Clusters**, open the target K8s Cluster. Select the **NodeGroup** tab, then click **Add Node Group**.
+From **Kubernetes -> K8S Clusters**, open the target K8s Cluster. Select the **Node groups** tab, then click **+ Create**.
 
 {{< image
   path="/images/oneks/light/k8s_add_node_group.png"
@@ -487,7 +487,7 @@ Recovery is not a general rollback mechanism. It should not be assumed to fix ev
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-In the **K8S Clusters** view, select the K8s Cluster that contains the affected node group. Open the **NodeGroup** tab and locate the node group you want to recover. Click the **Recover Node Group** action button on the node group row.
+In the **K8S Clusters** view, select the K8s Cluster that contains the affected node group. Open the **NodeGroup** tab and locate the node group you want to recover. Click the **Recover Node Group** action button from the dropdown menu.
 
 {{< image
   path="/images/oneks/light/k8s_recover_nodegroup_sunstone.png"
@@ -557,7 +557,7 @@ Use force option during deletion cautiously. It may skip parts of the normal dep
 {{% tab header="**Interfaces**:" disabled=true /%}}
 
 {{% tab header="Sunstone"%}}
-In the **K8S Clusters** view, select the K8s Cluster you want to delete. Click the red **Delete** button next to the **Create** button.
+In the **K8S Clusters** view, select the K8s Cluster you want to delete. Click the red dustbin icon to delete the K8s Cluster:
 
 {{< image
   path="/images/oneks/light/delete_k8s_cluster.png"
