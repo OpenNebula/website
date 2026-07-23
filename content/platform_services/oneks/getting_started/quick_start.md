@@ -42,26 +42,32 @@ The wizard guides you through the required configuration steps:
 
 In the **General** step, provide the basic K8s Cluster information. Enter a K8s Cluster name and, optionally, a description.
 
-{{< image path="/images/oneks/light/create_k8s_cluster_2.png" 
-          pathDark="/images/oneks/dark/create_k8s_cluster_2.png"
+{{< image path="/images/oneks/light/oneks_create_cluster_step1_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_cluster_step1_dark.png"
 alt="OneKS create K8s Cluster general" align="center" width="90%" mb="20px" >}}
+
+In **Select Cluster**, select the OpenNebula Cluster that will be use to allocate the Hosts, Datastores and Virtual networks for the K8s Cluster.
+
+{{< image path="/images/oneks/light/oneks_create_cluster_step2_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_cluster_step2_dark.png"
+alt="OneKS create K8s Cluster public network" align="center" width="90%" mb="20px" >}}
 
 In **Select a Public Virtual Network**, select the public Virtual Network that will provide external connectivity for the K8s Cluster. The public network acts as the gateway to the Internet and is used by the K8s Cluster to expose external access where required.
 
-{{< image path="/images/oneks/light/create_k8s_cluster_3.png" 
-          pathDark="/images/oneks/dark/create_k8s_cluster_3.png"
+{{< image path="/images/oneks/light/oneks_create_cluster_step3_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_cluster_step3_dark.png"
 alt="OneKS create K8s Cluster public network" align="center" width="90%" mb="20px" >}}
 
 In **Select a Private Virtual Network**, select the private Virtual Network that will be used for internal K8s Cluster communication. This network provides isolation from the public Internet and is used for communication between the K8s Cluster nodes.
 
-{{< image path="/images/oneks/light/create_k8s_cluster_4.png" 
-          pathDark="/images/oneks/dark/create_k8s_cluster_4.png"
+{{< image path="/images/oneks/light/oneks_create_cluster_step4_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_cluster_step4_dark.png"
 alt="OneKS create K8s Cluster private network" align="center" width="90%" mb="20px" >}}
 
 In **Kubernetes Version**, select the Kubernetes version you intend to deploy. Only the versions available in the environment are shown.
 
-{{< image path="/images/oneks/light/create_k8s_cluster_version.png"
-          pathDark="/images/oneks/dark/create_k8s_cluster_version.png"
+{{< image path="/images/oneks/light/oneks_create_cluster_step5_light.png"
+          pathDark="/images/oneks/dark/oneks_create_cluster_step5_dark.png"
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 In **Flavours**, select the control-plane flavour for the K8s Cluster. The flavour defines the control-plane deployment model and the resources used by the control-plane nodes.
@@ -71,8 +77,8 @@ Available options include:
 * **Single-node Control Plane**: Deploys one control-plane node. Suitable for development, evaluation, and non-critical workloads.  
 * **Highly Available Control Plane**: Deploys three control-plane nodes with built-in redundancy. Suitable for production or environments that require higher availability.
 
-{{< image path="/images/oneks/light/create_k8s_cluster_flavours.png" 
-          pathDark="/images/oneks/dark/create_k8s_cluster_flavours.png"
+{{< image path="/images/oneks/light/oneks_create_cluster_step6_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_cluster_step6_dark.png"
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 In **User Inputs**, review the remaining user input parameters required by the selected K8s Cluster configuration.
@@ -81,8 +87,8 @@ After completing the required fields, finish the wizard to start K8s Cluster cre
 
 During provisioning, the K8s Cluster initially appears with a `CREATING` or `PROVISIONING` status. The control-plane nodes are provisioned according to the selected flavour. This process typically takes several minutes.
 
-{{< image path="/images/oneks/light/k8s_logs_creating.png"
-          pathDark="/images/oneks/dark/k8s_logs_creating.png"
+{{< image path="/images/oneks/light/oneks_create_cluster_provisioning_light.png"
+          pathDark="/images/oneks/dark/oneks_create_cluster_provisioning_dark.png"
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 You can check that the provisioning process is proceeding as expected on the Front-end command line using `onevm list`. Early in the provisioning process, you should see the [**Seed VM**]({{% relref "platform_services/oneks/getting_started/core_concepts/#seed-vm" %}}) in the `onevm list` output, this means that the provisioning process is proceeding as expected.  
@@ -103,8 +109,8 @@ ID USER     GROUP    NAME                                      STAT  CPU     MEM
 
 Continue waiting until the K8s Cluster reaches the `RUNNING` state in the Sunstone **Kubernetes Logs** view.
 
-{{< image path="/images/oneks/light/create_k8s_logs_running.png" 
-          pathDark="/images/oneks/dark/create_k8s_logs_running.png" 
+{{< image path="/images/oneks/light/oneks_create_cluster_running_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_cluster_running_dark.png" 
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 You can verify that the K8s Cluster is running using the `onevm list` command on the Front-end command line. You should still see the two newly created VMs, one for the virtual router and one for the control plane. The seed VM will terminate upon completion of the process:
@@ -166,8 +172,8 @@ The node-group creation wizard guides you through the required configuration ste
 
 In the **General** step, provide the basic node group information. Enter a node group name and, optionally, a description.
 
-{{< image path="/images/oneks/light/k8s_node_group_name.png"
-          pathDark="/images/oneks/dark/k8s_node_group_name.png" 
+{{< image path="/images/oneks/light/oneks_create_group_1_light.png"
+          pathDark="/images/oneks/dark/oneks_create_group_1_dark.png" 
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 In **Flavours**, select the worker node flavour. The flavour defines the resource profile that will be used to deploy the worker nodes in this node group.
@@ -180,22 +186,22 @@ Available options include:
 
 Each flavour shows its default resource configuration, such as CPU, memory, and disk size.
 
-{{< image path="/images/oneks/light/k8s_choose_flavours.png" 
-          pathDark="/images/oneks/dark/k8s_choose_flavours.png" 
+{{< image path="/images/oneks/light/oneks_create_group_2_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_group_2_dark.png" 
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 In **User Inputs**, set the number of worker nodes to create. For example, set **Count** to `2` to create two worker nodes. The remaining fields, such as **CPU**, **Virtual CPU**, **Memory**, and **Disk Size**, are populated from the selected flavour.
 
-{{< image path="/images/oneks/light/k8s_user_inputs.png" 
-          pathDark="/images/oneks/dark/k8s_user_inputs.png" 
+{{< image path="/images/oneks/light/oneks_create_group_3_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_group_3_dark.png" 
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 After finishing the wizard, you will be redirected to the **Kubernetes Logs** view, where you can monitor the node group provisioning process.
 
 Wait until the node group reaches the `RUNNING` state and the K8s Cluster returns to `RUNNING`.
 
-{{< image path="/images/oneks/light/k8s_logs_adding_node_group.png" 
-          pathDark="/images/oneks/dark/k8s_logs_adding_node_group.png" 
+{{< image path="/images/oneks/light/oneks_create_group_running_light.png" 
+          pathDark="/images/oneks/dark/oneks_create_group_running_dark.png" 
 alt="OneKS create K8s Cluster choose k8s version" align="center" width="90%" mb="20px" >}}
 
 From the OpenNebula Front-end machine command line, verify the new worker nodes with:
