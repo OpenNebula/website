@@ -10,7 +10,7 @@ weight: "1"
 
 <a id="whats-new"></a>
 
-The OpenNebula team is excited to announce the availability of **OpenNebula 7.4 "Helix"**! This release introduces a broad set of usability, automation, and operational improvements across the platform for operating virtualized infrastructure at scale, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive.
+The OpenNebula team is excited to announce the availability of **OpenNebula 7.4 "Helix"**! This release introduces a broad set of usability, automation, and operational improvements across the platform for operating virtualized infrastructure at scale, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive. This release also introduces OneKS Elastic Kubernetes as a Community Edition feature — now available to all OpenNebula users!
 
 {{< image
   pathDark="images/sunstone/common/dark/sunstone_dashboard.png"
@@ -23,6 +23,8 @@ Together with this release, OpenNebula also introduces new extension capabilitie
 Key highlights of this release include:
 
 * Redesigned Sunstone interface, delivering a modern, highly intuitive user experience for cloud administrators.
+* OneKS Elastic Kubernetes is now a Community Edition feature — OpenNebula's simple, powerful Kubernetes Cluster provisioning and management tool is now available to all users.
+* Improved Kubernetes management with multi-cluster deployment configuration options and pre-deployment diagnostics to validate Cluster readiness and avoid time-consuming provisioning failures.
 * Optimized enterprise workload management with OneSwap batch VMware migrations, dynamic VM group management via the CLI, and bulk deletion of scheduled actions from all service VMs.
 * Removed Veeam integration storage requirements using expanded backup capabilities via the OpenNebula Backup Exporter (OneBEX), allowing third-party tools to interactively pull full incremental changes on virtual disks — qcow2 and LVM based disks are supported in this first release.
 * Enhanced Slurm appliance simplifies the creation of Slurm Clusters for AI and HPC workloads with out-of-the-box NVIDIA GPU support and LDAP identity integration.
@@ -34,7 +36,6 @@ Key highlights of this release include:
 
 The Enterprise Subscription also includes advanced extensions designed for enterprise cloud and AI Factory deployments, including:
 
-* Enhanced Kubernetes management with multi-cluster deployment configuration options and pre-deployment diagnostics to validate Cluster readiness and avoid time-consuming provisioning failures.
 * Native integration with the NVIDIA Infrastructure Controller (NICo) to deliver automated Bare Metal as a Service (BMaaS) and AI Factory-scale provisioning and orchestration of accelerated infrastructure.
 
 The OpenNebula 7.4 release is accompanied by a companion release of [OpenNebula Apps 7.4.0](https://github.com/OpenNebula/one-apps/releases/tag/v7.4.0), delivering a multitude of improvements and fixes to OpenNebula's Appliance ecosystem. Highlights include the aforementioned Slurm appliance upgrades, AArch64 support for the OneKS service appliance, Alpine 3.24 support and multiple stability fixes.
@@ -57,10 +58,11 @@ Thank you to our incredible community and partners for your continued support in
 
 ## Storage & Backups
 
+* LVM SAN storage is now a Community Edition feature, available to all OpenNebula users.
 * Added [interactive backup integration support]({{% relref "product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` and LVM VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
 * Added [S3 backend support for Restic Backup Datastores]({{% relref "product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}}), allowing backups to be stored in AWS S3 and S3-compatible object storage such as MinIO, Garage, or Ceph RGW.
 * Added [selected disk backups]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks" %}}), allowing VM backup configurations and Backup Jobs to back up only a defined subset of eligible VM disks. Selected-disk backups can be restored as [individual disks]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks-restore" %}}).
-* Updated the [Veeam Backup integration architecture]({{% relref "product/cluster_configuration/backup_system/veeam.md#architecture" %}}) to connect Veeam to OpenNebula through the Front-end and pull backup data directly from hypervisors through OneBEX, removing the need for a separate oVirtAPI server VM.
+* Updated the [Veeam Backup integration architecture]({{% relref "product/cluster_configuration/backup_system/veeam.md#architecture" %}}) to connect Veeam to OpenNebula through the Front-end and pull backup data directly from hypervisors through OneBEX, removing the need for a separate oVirtAPI server VM. 
 
 ## AI Factories
 
@@ -89,7 +91,7 @@ Thank you to our incredible community and partners for your continued support in
 * Added support for [dummy interfaces]({{% relref "product/virtual_machines_operation/virtual_machines/vm_templates.md#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
 * Added the optional [`MAC_GLOBAL_SPACE`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}) generation mode, which allocates generated MAC addresses from a global pool to prevent collisions across Virtual Networks.
 * Added round-robin [Address Range]({{% relref "product/cluster_configuration/networking_system/manage_vnets.md#manage-vnet-ar" %}}) lease assignment, reducing immediate reuse of recently released addresses when new NICs are allocated.
-* Added support for [host-specific TProxy configuration]({{% relref "product/virtual_machines_operation/virtual_machines_networking/tproxy.md#hypervisor-configuration" %}}), allowing per-host configuration overrides to simplify deployments across multiple clusters, racks, or network zones.
+* Added support for [Host-specific TProxy configuration]({{% relref "product/virtual_machines_operation/virtual_machines_networking/tproxy.md#hypervisor-configuration" %}}), allowing per-host configuration overrides to simplify deployments across multiple Clusters, racks, or network zones.
 
 ## Packaging
 
@@ -104,6 +106,7 @@ Thank you to our incredible community and partners for your continued support in
 ## AI Factories
 
 * Integration of the [NVIDIA Infra Controller (NICo)]({{% relref "product/virtual_machines_operation/metal_instances/bare_metal_nico/" %}}) introduces Bare Metal as a Service to OpenNebula, streamlining the lifecycle management of bare-metal instances within multi-tenant, AI Factory-scale infrastructures.
+* The [enhanced Slurm appliance](https://marketplace.opennebula.io/appliance/8ce164d5-3cce-42a7-b9a7-0e8133ef92c6) simplifies the creation of Slurm Clusters for AI and HPC workloads, with out-of-the-box compatibility with NVIDIA GPUs and both external and local LDAP support for multi-tenant workload management.
 
 ## OpenNebula Distributed Resource Scheduler
 
@@ -157,4 +160,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * Fix OneDRS not using predictive resource usage when generating optimization plans [#7915](https://github.com/OpenNebula/one/issues/7915).
 * Fix volatile disks not being instantiated as thin LVs when `LVM_THIN_ENABLE=YES` [#7924](https://github.com/OpenNebula/one/issues/7924).
 * Fix OneForm not restarting after a leader change in HA configurations [#7562](https://github.com/OpenNebula/one/issues/7562).
-* Fix OneGate TProxy connectivity failing when the host uses strict ARP policies [#7691](https://github.com/OpenNebula/one/issues/7691).
+* Fix OneGate TProxy connectivity failing when the Host uses strict ARP policies [#7691](https://github.com/OpenNebula/one/issues/7691).
