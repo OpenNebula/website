@@ -356,7 +356,7 @@ You can also manage your Hosts using [Sunstone UI Interface]({{% relref "../../c
 {{< image
   pathDark="/images/host/dark/host_tab.png"
   path="/images/host/light/host_tab.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone Host tab" align="center" width="90%" mb="20px"
 >}}
 
 Click **Create Host** and complete the wizard to create the host.
@@ -364,5 +364,5 @@ Click **Create Host** and complete the wizard to create the host.
 {{< image
   pathDark="/images/host/dark/host_create.png"
   path="/images/host/light/host_create.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone Host create" align="center" width="90%" mb="20px"
 >}}

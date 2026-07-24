@@ -140,7 +140,7 @@ The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphi
 {{< image
   pathDark="/images/cluster/dark/cluster_create.png"
   path="/images/cluster/light/cluster_create.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone Cluster create" align="center" width="90%" mb="20px"
 >}}
 
 - See the list of current Clusters, from which you can update or delete existing ones.
@@ -148,7 +148,7 @@ The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphi
 {{< image
   pathDark="/images/cluster/dark/cluster_tab.png"
   path="/images/cluster/light/cluster_tab.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone Cluster tab" align="center" width="90%" mb="20px"
 >}}
 
 - See cluster details and update overcommitment.
@@ -156,7 +156,7 @@ The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphi
 {{< image
   pathDark="/images/cluster/dark/cluster_details.png"
   path="/images/cluster/light/cluster_details.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone Cluster details" align="center" width="90%" mb="20px"
 >}}
 
 ## Enhanced VM Compatibility (EVC)
@@ -210,7 +210,7 @@ The Fireedge / Sunstone web UI provides a convenient way to enable and change EV
 {{< image
   pathDark="/images/cluster/dark/cluster_evc.png"
   path="/images/cluster/light/cluster_evc.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone EVC tab" align="center" width="90%" mb="20px"
 >}}
 
 3. Once the EVC mode is set, you can see it listed in the Cluster attributes the same way as if the CLI had been used.
@@ -218,5 +218,5 @@ The Fireedge / Sunstone web UI provides a convenient way to enable and change EV
 {{< image
   pathDark="/images/cluster/dark/cluster_evc_details.png"
   path="/images/cluster/light/cluster_evc_details.png"
-  alt="Name instance" align="center" width="90%" mb="20px"
+  alt="Sunstone EVC details" align="center" width="90%" mb="20px"
 >}}
