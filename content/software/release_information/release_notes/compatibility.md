@@ -24,7 +24,7 @@ The Sunstone interface has been completely redesigned in the OpenNebula 7.4 rele
 
 OpenNebula 7.4 adds round-robin Address Range lease assignment. New NIC allocations no longer always start from the beginning of the Address Range, reducing immediate reuse of recently released addresses. Environments that relied on immediate MAC reuse after VM termination should review any external DHCP, IPAM, or static MAC mapping workflows.
 
-OpenNebula 7.4 also adds an optional global MAC address space generation mode through the [`MAC_GLOBAL_SPACE`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}) setting in `oned.conf`. This setting defaults to `NO`. When set to `YES`, generated MAC addresses are allocated from a global pool to prevent collisions across Virtual Networks. This mode does not apply to IP networks and limits the generated global space to `2^20` Virtual Networks and up to `2^20` leases per Virtual Network.
+OpenNebula 7.4 also adds an optional global MAC address space generation mode through the [`MAC_GLOBAL_SPACE`]({{% relref "product/operation_references/opennebula_services_configuration/oned.md#virtual-networks" %}}) setting in `oned.conf`. This setting defaults to `NO`. When set to `YES`, generated MAC addresses are allocated from a global pool to prevent collisions across Virtual Networks. This mode does not apply to IP networks and limits the generated global space to 2<sup>20</sup> Virtual Networks and up to 2<sup>20</sup> leases per Virtual Network.
 
 ## VM Backup Disk Selection
 
