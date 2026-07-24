@@ -10,7 +10,7 @@ weight: "1"
 
 <a id="whats-new"></a>
 
-The OpenNebula team is excited to announce the availability of **OpenNebula 7.4 "Helix"**! This release introduces a broad set of usability, automation, and operational improvements across the platform for operating virtualized infrastructure at scale, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive. This release also introduces OneKS Elastic Kubernetes and LVM storage as a Community Edition features — now available to all OpenNebula users!
+The OpenNebula team is excited to announce the availability of **OpenNebula 7.4 "Helix"**! This release introduces a broad set of usability, automation, and operational improvements across the platform for operating virtualized infrastructure at scale, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive. This release also introduces OneKS Elastic Kubernetes and LVM storage as Community Edition features — now available to all OpenNebula users!
 
 {{< image
   pathDark="images/sunstone/common/dark/sunstone_dashboard.png"
