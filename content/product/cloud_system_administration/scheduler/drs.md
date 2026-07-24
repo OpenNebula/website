@@ -45,7 +45,7 @@ Administrators can choose between different automation levels:
 - **Partial**: Migrations are periodically generated and require approval before execution.
 - **Full**: Migrations are generated and applied automatically based on recommendations.
 
-This is example how manual automation looks like in a cluster template:
+The following is an example of how manual automation appears in a Cluster template:
 
 ```
 ONE_DRS=[
@@ -60,7 +60,7 @@ OneDRS migrates VMs according to the defined policy:
 - **Packing**: Minimizes the number of active Hosts to save energy or prepare for maintenance.
 - **Load Balancing**: Distributes VMs across available Hosts or datastores to prevent resource contention.
 
-This is example how the Load Balancing policy is specified in a cluster template:
+The following is an example how the Load Balancing policy is specified within a Cluster template:
 
 ```
 ONE_DRS=[
@@ -100,7 +100,7 @@ OneDRS allows balancing based on monitored or predicted values. A **prediction w
 
 By default, DRS uses only monitored values.
 
-It might also be specified in a cluster template, for example:
+It might also be specified within a cluster template, for example:
 
 ```
 ONE_DRS=[
@@ -114,11 +114,11 @@ Since migrations add overhead, administrators can set **migration thresholds** t
 
 There are three values related to migration thresholds to set:
 
-- **Migration Threshold**: The maximum combined number of VM migrations allowed between hosts and datastores. By default, this number is not limited (i.e. the migration threshold is `-1`).
-- **Host Migration Threshold**: The maximum number of VM migrations allowed between hosts. By default, this number is not limited (i.e. the migration threshold is `-1`).
-- **Datastore Migration Threshold**: The maximum number of VM migrations allowed between datastores. By default, this number is `0`, which means that VM migrations  between datastores are not allowed. For unlimited migrations, the threshold should be `-1`.
+- **Migration Threshold**: The maximum combined number of VM migrations allowed between Hosts and datastores. By default, this number is not limited (i.e. the migration threshold is `-1`).
+- **Host Migration Threshold**: The maximum number of VM migrations allowed between Hosts. By default, this number is not limited (i.e. the migration threshold is `-1`).
+- **Datastore Migration Threshold**: The maximum number of VM migrations allowed between datastores. By default, this number is `0`, which means that VM migrations between datastores are not allowed. For unlimited migrations, the threshold should be `-1`.
 
-This is an example how migration thresholds can be defined in a cluster template, if a user wants to allow 2 VM migrations between datastores, 3 VM migrations between hosts, but only 4 migrations in total:
+The following is an example of how migration thresholds can be defined in a Cluster template, if a user wants to allow 2 VM migrations between datastores, 3 VM migrations between Hosts, but only 4 migrations in total:
 
 ```
 ONE_DRS=[
@@ -128,20 +128,20 @@ ONE_DRS=[
   ... ]
 ```
 
-Each setting produces an additional constraint and all of them must be obeyed.
+Each setting creates an additional constraint and all constraints must be obeyed.
 
 ### Storage DRS
 
-In addition to VM migrations between hosts, DRS allows migrations between datastores. Storage migrations might be used to additionally improve the workload distribution across the cluster. They are potentially effective for any policy or weight combination, because a storage migration can remove a datastore-capacity constraint that otherwise prevents a beneficial host placement. So, optimizing the workload using any policy or weight might include migrations between datastores.
+In addition to VM migrations between Hosts, DRS allows migrations between datastores. Storage migrations might be used to further improve the workload distribution across a Cluster. They are potentially effective for any policy or weight combination, because a storage migration can remove a datastore-capacity constraint that otherwise prevents a beneficial Host placement. Therefore, optimizing the workload using any policy or weight might include migrations between datastores.
 
-The main limitation is the fact that a single VM can't be migrated to another host and another datastore in the same optimization cycle.
+The main limitation is the fact that a single VM can't be migrated to another Host and another datastore during the same optimization cycle.
 
-By default, storage migrations are _disabled_ in OneDRS, by setting the datastore migration threshold to `0`. To enable them, set this value in Sunstone, Cluster template, or the configuration file to:
+By default, storage migrations are _disabled_ in OneDRS, by setting the datastore migration threshold to `0`. To enable them, either set this value in Sunstone, the Cluster template, or the configuration file to:
 
 - A positive integer to impose a limit
 - "Unlimited" (Sunstone) or `-1` (template and configuration) to avoid limitations
 
-Note that even when storage migrations are disabled, a user might still be able to balance disk I/O by performing host migrations, possibly with different result and effectiveness.
+Note that even when storage migrations are disabled, a user might still be able to balance disk I/O by performing Host migrations, possibly with differing degrees of effectiveness.
 
 ## Initial Placement
 
@@ -175,7 +175,7 @@ The main DRS configuration file is `/etc/one/schedulers/one_drs.conf`. This file
 
 ### Solver Configuration
 
-OneDRS uses the [**PuLP** library](https://pypi.org/project/PuLP/) for ILP/MILP solvers, supporting multiple solvers like:
+OneDRS uses the [**PuLP** library](https://pypi.org/project/PuLP/) for ILP/MILP solvers, supporting multiple solvers such as:
 
 - **CBC Solver** (default)
 - **GLPK**
@@ -216,15 +216,15 @@ PLACE:
 
 Migration configuration options are relevant only for workload optimization, and can contain the same settings as the Cluster template:
 
-- `MIGRATION_THRESHOLD`: The maximum combined number of VM migrations allowed between hosts and datastores in an optimization cycle
-- `HOST_MIGRATION_THRESHOLD`: The maximum number of VM migrations allowed between hosts
+- `MIGRATION_THRESHOLD`: The maximum combined number of VM migrations allowed between Hosts and datastores within an optimization cycle
+- `HOST_MIGRATION_THRESHOLD`: The maximum number of VM migrations allowed between Hosts
 - `DS_MIGRATION_THRESHOLD`: The maximum number of VM migrations allowed between datastores
 
-Another option is `PRIORITIZE_STORAGE_MIGRATIONS`. It decides if storage migrations will be prioritized over host migrations (value `"YES"`), when they bring the same improvement with respect to the selected policy.
+Another option is `PRIORITIZE_STORAGE_MIGRATIONS`. It decides if storage migrations will be prioritized over Host migrations (value `"YES"`), when they bring the same improvement with respect to the selected policy.
 
 ### Complete Configuration Example
 
-This is a complete configuration file example for the OneDRS scheduler:
+The following is a complete configuration file example for the OneDRS scheduler:
 
 ```yaml
 DEFAULT_SCHED:
