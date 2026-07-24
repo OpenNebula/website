@@ -137,15 +137,27 @@ The [Sunstone UI interface]({{% relref "../../control_plane_configuration/graphi
 
 - Create new clusters selecting the resources you want to include in this cluster.
 
-![create_cluster](/images/sunstone_cluster_create.png)
+{{< image
+  pathDark="/images/cluster/dark/cluster_create.png"
+  path="/images/cluster/light/cluster_create.png"
+  alt="Name instance" align="center" width="90%" mb="20px"
+>}}
 
 - See the list of current clusters, from which you can update or delete existing ones.
 
-![dashboard_cluster](/images/sunstone_cluster_dashboard.png)
+{{< image
+  pathDark="/images/cluster/dark/cluster_tab.png"
+  path="/images/cluster/light/cluster_tab.png"
+  alt="Name instance" align="center" width="90%" mb="20px"
+>}}
 
 - See cluster details and update overcommitment.
 
-![details_cluster](/images/sunstone_cluster_details.png)
+{{< image
+  pathDark="/images/cluster/dark/cluster_details.png"
+  path="/images/cluster/light/cluster_details.png"
+  alt="Name instance" align="center" width="90%" mb="20px"
+>}}
 
 ## Enhanced VM Compatibility (EVC)
 
@@ -183,7 +195,7 @@ The exact CPU model string depends on the hypervisor's supported CPU map. You ca
 $ onehost show <host-id> -j
 ```
 
-Make sure to select a cpu model available in all hosts in the cluster, otherwise you may fail to deploy VMs on unsupported hosts. 
+Make sure to select a cpu model available in all hosts in the cluster, otherwise you may fail to deploy VMs on unsupported hosts.
 
 
 3. To revert or remove EVC, update the cluster template to remove the `EVC_MODE` attribute (for example by setting it to an empty string or re-applying a template without the attribute).
@@ -196,8 +208,16 @@ The Fireedge / Sunstone web UI provides a convenient way to enable and change EV
 
 2. Click the Update button and go to the Select Hosts tabs, there you will see the EVC Mode section. To enable EVC, choose a model from the droplist. Afterwards you can click Finish.
 
-![Update cluster EVC mode](/images/sunstone_cluster_evc_update.png)
+{{< image
+  pathDark="/images/cluster/dark/cluster_evc.png"
+  path="/images/cluster/light/cluster_evc.png"
+  alt="Name instance" align="center" width="90%" mb="20px"
+>}}
 
 3. Once the EVC mode is set, you can see it listed in the cluster attributes the same way as if the CLI had been used.
 
-![EVC set in cluster attributes](/images/sunstone_cluster_evc_attributes.png)
+{{< image
+  pathDark="/images/cluster/dark/cluster_evc_details.png"
+  path="/images/cluster/light/cluster_evc_details.png"
+  alt="Name instance" align="center" width="90%" mb="20px"
+>}}
