@@ -10,7 +10,7 @@ weight: "1"
 
 <a id="whats-new"></a>
 
-The OpenNebula team is excited to announce the availability of **OpenNebula 7.4 "Helix"**! This release introduces a broad set of usability, automation, and operational improvements across the platform for operating virtualized infrastructure at scale, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive. This release also introduces OneKS Elastic Kubernetes as a Community Edition feature — now available to all OpenNebula users!
+The OpenNebula team is excited to announce the availability of **OpenNebula 7.4 "Helix"**! This release introduces a broad set of usability, automation, and operational improvements across the platform for operating virtualized infrastructure at scale, led by a redesigned Sunstone interface that makes day-to-day cloud management more modern and intuitive. This release also introduces OneKS Elastic Kubernetes and LVM storage as a Community Edition features — now available to all OpenNebula users!
 
 {{< image
   pathDark="images/sunstone/common/dark/sunstone_dashboard.png"
@@ -24,6 +24,7 @@ Key highlights of this release include:
 
 * Redesigned Sunstone interface, delivering a modern, highly intuitive user experience for cloud administrators.
 * OneKS Elastic Kubernetes is now a Community Edition feature — OpenNebula's simple, powerful Kubernetes Cluster provisioning and management tool is now available to all users.
+* LVM storage is now a Community Edition feature, bringing flexibility such as dynamic resizing and live migration capabilities to all OpenNebula users.
 * Improved Kubernetes management with multi-cluster deployment configuration options and pre-deployment diagnostics to validate Cluster readiness and avoid time-consuming provisioning failures.
 * Optimized enterprise workload management with OneSwap batch VMware migrations, dynamic VM group management via the CLI, and bulk deletion of scheduled actions from all service VMs.
 * Removed Veeam integration storage requirements using expanded backup capabilities via the OpenNebula Backup Exporter (OneBEX), allowing third-party tools to interactively pull full incremental changes on virtual disks — qcow2 and LVM based disks are supported in this first release.
@@ -58,7 +59,7 @@ Thank you to our incredible community and partners for your continued support in
 
 ## Storage & Backups
 
-* LVM SAN storage is now a Community Edition feature, available to all OpenNebula users.
+* [LVM SAN storage]({{% relref "product/cluster_configuration/lvm/" %}}) is now a Community Edition feature, available to all OpenNebula users, enabling flexibility such as dynamic resizing of logical volumes, live VM migration between Cluster notes, and volume grouping.
 * Added [interactive backup integration support]({{% relref "product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` and LVM VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
 * Added [S3 backend support for Restic Backup Datastores]({{% relref "product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}}), allowing backups to be stored in AWS S3 and S3-compatible object storage such as MinIO, Garage, or Ceph RGW.
 * Added [selected disk backups]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks" %}}), allowing VM backup configurations and Backup Jobs to back up only a defined subset of eligible VM disks. Selected-disk backups can be restored as [individual disks]({{% relref "product/virtual_machines_operation/virtual_machine_backups/operations#vm-backups-selected-disks-restore" %}}).
