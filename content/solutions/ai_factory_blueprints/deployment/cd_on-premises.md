@@ -139,7 +139,7 @@ You may also need to set up a network bridge, ensuring that the name coincides w
 all:
   vars:
     ansible_user: root
-    one_version: '7.2'
+    one_version: '7.4'
     one_pass: opennebulapass
     ds:
       mode: ssh
