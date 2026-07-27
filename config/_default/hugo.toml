@@ -163,6 +163,10 @@ version_menu = "Versions"
     url = "https://docs.opennebula.io/devel/"
 
   [[params.versions]]
+    version = "v7.4"
+    url = "https://docs.opennebula.io/7.4/"
+
+  [[params.versions]]
     version = "v7.2"
     url = "https://docs.opennebula.io/7.2/"
 
