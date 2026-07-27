@@ -145,7 +145,7 @@ Create an inventory file named `inventory/scaleway.yaml`. This file defines a co
 all:
   vars:
     ansible_user: root
-    one_version: '7.0'
+    one_version: '7.4'
     one_pass: YOUR_SECURE_PASSWORD # Replace with a strong password
     gate_endpoint: "http://192.168.100.1:5030"
     ds:
