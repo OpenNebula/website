@@ -98,7 +98,7 @@ wget 'https://github.com/OpenNebula/minione/releases/download/v7.2.0/minione'
 wget 'https://github.com/OpenNebula/minione/releases/latest/download/minione'
 ```
 {{% /if-version %}}
-{{% if-version is="7.2" %}}
+{{% if-version is="7.4" %}}
 ```bash
 wget 'https://github.com/OpenNebula/minione/releases/download/v7.4.0/minione'
 ```
