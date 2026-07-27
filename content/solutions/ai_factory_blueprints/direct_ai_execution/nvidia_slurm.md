@@ -5,7 +5,7 @@ weight: 8
 tags: ['AI']
 ---
 
-{{< alert title="Tip" type="primary" >}}
+{{< alert title="Work In Progress" type="primary" >}}
 This Slurm appliance documentation is currently under development. Please contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) if you would like to arrange a demonstration of OpenNebula's Slurm integration.
 {{< /alert >}} 
 

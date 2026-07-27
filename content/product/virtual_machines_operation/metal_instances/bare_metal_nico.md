@@ -9,7 +9,7 @@ tags: ['AI']
 
 <a id="bare_metal_nico"></a>
 
-{{< alert title="Tip" type="primary" >}}
+{{< alert title="Work In Progress" type="primary" >}}
 The OpenNebula NVIDIA NICo integration is still under development. This guide currently serves as a proof of concept. Please contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) if you would like to arrange a demonstration.
 {{< /alert >}} 
 
