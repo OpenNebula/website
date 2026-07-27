@@ -8,6 +8,10 @@ tags: ['AI']
 
 <a id="overview"></a>
 
+{{< alert title="Work In Progress" type="primary" >}}
+The AI Factory blueprints are currently under development. If you are interested in AI Factory deployments with OpenNebula {{<version>}} we encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration or discuss our professional services.
+{{< /alert >}} 
+
 The purpose of the AI Factory collection is to provide a step-by-step process for setting up a simple AI Factory system and getting it up and running quickly, including:
 
 * Identifying the minimum hardware and networking requirements for your AI Factory. These baseline specifications also serve as a reference for more advanced deployments. OpenNebula supports high-performance architectures such as InfiniBand, Spectrum-X, and NVLink, although these setups are not automated and require custom configuration.
