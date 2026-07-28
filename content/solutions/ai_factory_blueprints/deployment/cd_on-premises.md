@@ -9,7 +9,7 @@ tags: ['AI']
 <a id="cd_on-premises"></a>
 
 {{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
+The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
 {{< /alert >}}  
 
 Machine Learning (ML) training and inference are resource-intensive tasks that often require the full power of a dedicated GPU. PCI passthrough allows a Virtual Machine (VM) to have exclusive access to a physical GPU, delivering bare-metal performance for the most demanding AI workloads.

@@ -8,7 +8,7 @@ tags: ['AI', 'Kubernetes','NVIDIA']
 <a id="nvidia_kai_scheduler"></a>
 
 {{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
+The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
 {{< /alert >}} 
 
 
