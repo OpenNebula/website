@@ -16,3 +16,6 @@ A complete list of [known issues for OpenNebula is maintained here](https://gith
 
 This page will be updated with relevant information about bugs affecting OpenNebula, as well as possible workarounds until a patch is officially published.
 
+## Frontend HA
+
+- [ARP tables are not updated automatically](https://github.com/OpenNebula/one/issues/7920) when a leader is elected in Red Hat Enterprise Linux OS variants.
