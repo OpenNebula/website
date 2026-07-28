@@ -7,6 +7,10 @@ tags: ['AI', 'Kubernetes']
 
 <a id="ai_ready_k8s"></a>
 
+{{< alert title="Work In Progress" type="primary" >}}
+The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
+{{< /alert >}} 
+
 Tools like Kubernetes provide robust orchestration for deploying AI workloads at scale, capable of managing isolation between Cluster workloads and GPU resources for AI inference tasks. With the use of the NVIDIA GPU Operator, you  can perform the provision of the necessary NVIDIA drivers and libraries for making GPU resources available to containers.
 
 Kubernetes embraces multi-tenancy, supporting different isolated namespaces where the access from different teams or users are managed with Role Based Access Control (RBAC) and network policies. As an administrator, you can also enforce limits on the GPU usage or other resources consumed per namespace, ensuring fair resource allocation.

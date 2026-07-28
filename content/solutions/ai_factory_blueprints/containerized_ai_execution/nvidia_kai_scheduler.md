@@ -7,6 +7,11 @@ tags: ['AI', 'Kubernetes','NVIDIA']
 
 <a id="nvidia_kai_scheduler"></a>
 
+{{< alert title="Work In Progress" type="primary" >}}
+The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
+{{< /alert >}} 
+
+
 The [NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
 
 Some of the key features are:
