@@ -7,6 +7,11 @@ tags: ['AI']
 ---
 
 <a id="cd_cloud"></a>
+
+{{< alert title="Work In Progress" type="primary" >}}
+The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
+{{< /alert >}} 
+
 This document describes the procedure to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) bare-metal server equipped with GPUs.
 
 The architecture is a converged OpenNebula installation, where the frontend services and KVM hypervisor run on the same physical host. This approach is ideal for demonstrations, proofs-of-concept (PoCs), or for quickly trying out the solution without the need for a complex physical infrastructure.
