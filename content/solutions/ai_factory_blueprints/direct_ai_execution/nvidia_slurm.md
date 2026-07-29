@@ -6,7 +6,7 @@ tags: ['AI']
 ---
 
 {{< alert title="Work In Progress" type="primary" >}}
-This Slurm appliance and documentation is currently under development, you may encounter problems following this guide. Please contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) if you would like to arrange a demonstration of OpenNebula's Slurm integration.
+This Slurm appliance and documentation are currently under development, you may encounter problems following this guide. Please contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) if you would like to arrange a demonstration of OpenNebula's Slurm integration.
 {{< /alert >}} 
 
 In this tutorial, we will install and configure the OpenNebula **Slurm** appliance and run a fine-tuning example script. 
