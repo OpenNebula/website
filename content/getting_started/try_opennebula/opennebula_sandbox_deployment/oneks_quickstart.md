@@ -9,7 +9,7 @@ type: docs
 weight: "5"
 ---
 
-[OneKS]({{% relref "platform_services/oneks/" %}}) is OpenNebula's Elastic Kubernetes service, it offers a structured way to create, access, operate, upgrade, recover, and deprovision Kubernetes Clusters. OneKS enables you to manage a Kubernetes Cluster simply and efficiently through the Sunstone interface or using the command line on your OpenNebula Front-end. This guide demonstrates how to launch a new Kubernetes Cluster on the hypervisor node installed with your miniONE installation and deploy a simple application. 
+[OneKS]({{% relref "platform_services/oneks/" %}}) is OpenNebula's Elastic Kubernetes service. It offers a structured way to create, access, operate, upgrade, recover, and deprovision Kubernetes Clusters. OneKS enables you to manage a Kubernetes Cluster simply and intuitively through the Sunstone interface or using the command line on your OpenNebula Front-end. This guide demonstrates how to launch a new Kubernetes Cluster on the hypervisor node installed with your miniONE installation and deploy a simple application. 
 
 ## Before Starting
 
