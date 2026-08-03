@@ -29,3 +29,4 @@ The following issues have been solved in 7.4.1:
 
 * Fix VM configuration update call in Sunstone [#7502](https://github.com/OpenNebula/one/issues/7502).
 * Fix ARP tables not being updated on HA leader election [#7920](https://github.com/OpenNebula/one/issues/7920).
+* Fix Veeam not being able to fetch VM with ID 0 [#7949](https://github.com/OpenNebula/one/issues/7949).
