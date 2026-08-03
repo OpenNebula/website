@@ -13,9 +13,11 @@ weight: "5"
 
 ## Before Starting
 
+This guide assumes that you are evaluating OneKS using a standard miniONE deployment of OpenNebula, having followed the miniONE installation guides in the [Getting Started]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/" %}}) section of the OpenNebula documentation, with the Front-end and a KVM hypervisor node installed on a single Host. If you are using an existing OpenNebula installation deployed by other means (e.g. manual installation or using OneDeploy), or you are using hypervisor nodes installed on separate Hosts, we recommend that you follow the guides in the [Elastic Kubernetes]({{% relref "platform_services/oneks/" %}}) documentation since additional configuration is required. 
+
 ### Install miniONE
 
-Prior to starting this guide, you should have completed the miniONE installation with [on-premises hardware]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/deploy_opennebula_onprem_with_minione/" %}}) or an [AWS instance]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/deploy_opennebula_on_aws/" %}}) that fits the hardware requirements.
+Prior to starting this guide, you must complete the miniONE installation with [on-premises hardware]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/deploy_opennebula_onprem_with_minione/" %}}) or an [AWS instance]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/deploy_opennebula_on_aws/" %}}) that fits the hardware requirements.
 
 ### Install the Kubectl Client
 
@@ -251,7 +253,7 @@ Run the following command, including the name of the cloudflared pod retrieved u
 KUBECONFIG=./kubeconfig kubectl logs cloudflared-5cc6fb5c66-p9kx8
 ```
 
-Scroll through the output until you see the following boxed text with a randomly created URL:
+Scroll through the output until you see something similar to the following boxed text with a randomly created URL:
 
 ```default
 2026-07-31T10:45:50Z INF Requesting new quick Tunnel on trycloudflare.com...
@@ -262,7 +264,7 @@ Scroll through the output until you see the following boxed text with a randomly
 2026-07-31T10:45:55Z INF Cannot determine default configuration path. No file [config.yml config.yaml] ....
 ```
 
-Visit the URL given in the log output and you will see the interface of the example application:
+Visit the randomly generated URL given in the log output and you will see the interface of the example application:
 
 {{< image path="/images/quickstart/light/k8s_example_application.png" 
 alt="OneKS Quickstart create K8s cluster" align="center" width="90%" mb="20px" >}}
@@ -291,6 +293,10 @@ id	date	destination
 6	2026-07-31 10:57:06	Skull Nebula
 7	2026-07-31 10:57:08	Bug Nebula
 ```
+
+## Next Steps
+
+Now that you have learned how to deploy a K8s Cluster with OneKS, refer to the dedicated [Elastic Kubernetes documentation section]({{% relref "platform_services/oneks/" %}}) to learn more about how to manage, scale, recover and deprovision K8s Clusters and how to configure OneKS. 
 
 
 
