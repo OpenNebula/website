@@ -222,4 +222,8 @@ There is the option `Show all` to see all system resources, the option `Show all
 
 This allows users to work more comfortably on projects by isolating the resources belonging to one group from others.
 
-![sunstone_filter](/images/sunstone_filter.png)
+{{< image
+  pathDark="/images/sunstone/groups/dark/group_filters.png"
+  path="/images/sunstone/groups/light/group_filters.png"
+  alt="Sunstone group filters" align="center" width="90%" mb="20px"
+>}}
