@@ -135,3 +135,17 @@ Until the upstream fix is merged, `sesparse` needs to be recompiled with the pat
 ## Ubuntu 22.04
 
 CDROM hot-attach is not supported on Ubuntu 22.04, due to old `virsh` version. The requried version is 10.10.0.
+
+## Veeam Backups
+
+Worker creation and restores [will fail](https://github.com/OpenNebula/one/issues/7949) if the VM with ID 0 doesn't exist in the database. 
+
+It can be fixed by changing the line ~145 in the `/usr/lib/one/ovirtapi-server/controllers/disk_controller.rb` file (located in the oVirtAPI backup server). Then restart the apache2/httpd service.
+
+```
+vm_id = disk_hash['IMAGE']['VM_ID'].to_i
+if backup_mode == 'incremental' && vm_id > 0    # <-- Add this vm_id check 
+    vm = VmController.get_one_vms(client, :vm_id => vm_id)
+    vm_hash = vm.to_hash
+    backup_ids = vm_hash.dig('VM', 'BACKUPS', 'BACKUP_IDS', 'ID')
+```
