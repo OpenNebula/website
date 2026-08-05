@@ -101,7 +101,7 @@ yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 
 {{% /tab %}}
 {{% tab header="**RHEL 9, 10**"%}}
-**RHEL 9/ 10**
+**RHEL 9 / 10**
 
 ```shell
 yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
