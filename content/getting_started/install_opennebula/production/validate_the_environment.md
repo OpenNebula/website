@@ -1,23 +1,20 @@
 ---
-title: "Validate the environment"
-linkTitle: "Validate Deployment"
+title: "Validate the Environment"
+linkTitle: "Validate the Production Deployment"
 date: "2025-02-17"
 #description: "Explore the resources deployed with **miniONE** or the **ISO**, and download and install appliances from the **OpenNebula Marketplace**"
 categories: [Learning, Evaluation, Introduction, Deployment]
 pageintoc: "24"
 tags: ['Quick Start', 'Edge Cluster']
 type: docs
-weight: "4"
+weight: "3"
 ---
 
-A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione) or [with the PoC ISO]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}}). This page provides:
-
-- An overview of the resources automatically created during that installation
-- An example of what you can do with this type of installation -- in this case, installing a Virtual Machine from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
+The previous guides in this section detail how to deploy an [OpenNebula Front-end automatically with miniONE]({{% relref "/getting_started/install_opennebula/production/minione_frontend_install" %}}) and deploy [OpenNebula Clusters automatically with OneForm]({{% relref "/getting_started/install_opennebula/production/cluster_oneform" %}}). Follow this guide to validate that the expected resources are installed and functional.
 
 ## Installed Resources
 
-After following the instructions described in [Deploy OpenNebula On-premises with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}) or in [the PoC ISO installation guide]({{% relref "deploy_opennebula_onprem_with_poc_iso" %}}), the following resources are already created and configured:
+After following the instructions for [installing an OpenNebula Front-end automatically with miniONE]({{% relref "/getting_started/install_opennebula/production/minione_frontend_install" %}}), the following resources are already created and configured:
 
 - A KVM Host on the local machine
 - A virtualization Cluster to which the Host belongs
@@ -30,8 +27,8 @@ Below you will find brief descriptions for these resources, with examples of the
 
 A Host is any entity that is capable of running a VM or a container. Besides running them, it retrieves all monitoring information. A Host has two important attributes:
 
-* `VM_MAD`: the virtualization technology used on the Host.
-* `IM_MAD`: the driver that retrieves all monitoring metrics from the Host.
+* `VM_MAD`: The virtualization technology used on the Host.
+* `IM_MAD`: The driver that retrieves all monitoring metrics from the Host.
 
 As mentioned above, miniONE installs a KVM Host and following the ISO deployment the KVM Host is added in `onefemenu`.
 
@@ -49,9 +46,9 @@ The screenshot below displays the information about the Host. The important info
 
 The basic operations you can perform on the Host are:
 
-* **Offline**: take the Host totally offline.
-* **Disable**: disable the Host, for example to perform maintenance operations.
-* **Enable**: enable the Host, so that OpenNebula monitors it and it switches back to MONITORED state.
+* **Offline**: Take the Host totally offline.
+* **Disable**: Disable the Host, for example to perform maintenance operations.
+* **Enable**: Enable the Host, so that OpenNebula monitors it and it switches back to MONITORED state.
 
 For a complete overview of Hosts management, see [Hosts]({{% relref "product/cluster_configuration/hosts_and_clusters/hosts#hosts" %}}).
 
@@ -71,8 +68,8 @@ For a complete overview of Cluster management, see [Clusters]({{% relref "produc
 
 There are three types of datastores:
 
-* **System**: contains the information of running VMs, such as disks or context CD-ROM.
-* **Image**: stores the images in your cloud.
+* **System**: Contains the information of running VMs, such as disks or context CD-ROM.
+* **Image**: Stores the images in your cloud.
 * **Files**: Stores plain files used in contextualization or VM kernels used by some hypervisors.
 
 In the on-prem Cluster the `default` datastore is the Image datastore.

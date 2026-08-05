@@ -31,7 +31,7 @@ The miniONE tool is the fastest method to get an OpenNebula cloud up and running
 
 * **Environment**: Typically used on a fresh Linux installation (Ubuntu or AlmaLinux).
 
-Refer to the [Automatic Installation with miniONE Documentation]({{% relref "software/installation_process/frontend_installation/automated/" %}}) for more details. 
+Refer to the [Automatic Installation with miniONE Documentation]({{% relref "getting_started/install_opennebula/production/minione_frontend_install/" %}}) for more details. 
 
 {{< alert title="Note" type="info" >}}
 The miniONE installation is not appropriate for production environments, if you intend to deploy a production cloud, we recommend that you use the [Manual Installation Process](#2-manual-installation-with-system-packages) or [OneDeploy](#3-advanced-deployment-with-onedeploy).

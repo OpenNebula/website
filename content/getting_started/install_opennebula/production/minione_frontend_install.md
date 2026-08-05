@@ -1,19 +1,19 @@
 ---
-title: "Automatic Installation with miniONE"
-linkTitle: "Automatic - miniONE"
+title: "Automated Front-end Installation with miniONE for Production"
+linkTitle: "Front-end Installation with miniONE"
 date: "2026-04-15"
 description:
 categories:
 pageintoc: "26"
 tags: [miniONE, deployment, installation, automatic]
-weight: "2"
+weight: "1"
 ---
 
 Automatic installation of an OpenNebula Front-end can be achieved using the miniONE quick installation script. The miniONE installation script automatically configures the target server to deploy a stripped-down version of OpenNebula with the essential modules to run a cloud Cluster. After installing miniONE, you will be able to deploy Virtual Machines, provision Clusters with on-premises or cloud resources and manage your cloud using the command line, the API or the Sunstone user interface.
 
 ## Prerequisites
 
-You may wish to install the miniONE OpenNebula Front-end on its own dedicated machine, that is only intended for management and not workload, in which case you should follow the guidelines for "Front-end only". You may also install the miniONE OpenNebula Front-end on the same machine you intend to use for compute workloads, in which case you should consider your intended use-case, guidance is given below for a small Kubernetes Cluster and an AI Factory. 
+You may wish to install the miniONE OpenNebula Front-end on its own dedicated machine, which is only intended for management and not workload, in which case you should follow the guidelines for "Front-end only". You may also install the miniONE OpenNebula Front-end on the same machine you intend to use for compute workloads, in which case you should consider your intended use-case, guidance is given below for a small Kubernetes Cluster and an AI Factory. 
 
 You may use on-premises hardware, virtual or bare-metal resources from a cloud provider to install miniONE. If you are intending to use the target machine only for the OpenNebula Front-end and not Cluster workloads, a Virtual Machine meeting the requirements given below would suffice. If you are intending to use the target machine for Cluster workloads, particularly Kubernetes workloads, it is highly recommended to use a bare-metal instance.
 
@@ -111,7 +111,7 @@ Use following to login:
 
 Please take a note of the IP address and login credentials, you will need them later.
 
-Finally update the ``localhost`` status:
+Finally update the `localhost` status:
 
 ```bash
 sudo -u oneadmin onehost sync --force
@@ -236,7 +236,10 @@ If the above procedure works, you have successfully installed miniONE and it is 
 
 ## Next Steps
 
-After completing the miniONE installation process and validation, you can proceed to deploy Clusters automatically or manually. Proceed to the [Cluster Deployment Documentation]({{% relref "software/installation_process/cluster_installation/" %}}) for details. 
+After completing the miniONE installation process and validation, you can proceed to deploy Clusters automatically or manually:
+
+* [Automatically deploy Clusters with OneForm]({{% relref "/getting_started/install_opennebula/production/cluster_oneform" %}})
+* Manually install Clusters with [KVM]({{% relref "software/installation_process/cluster_installation/kvm_node_installation/" %}}) or [LXC]({{% relref "software/installation_process/cluster_installation/lxc_node_installation/" %}})
 
 You can also try deploying Kubernetes Clusters with the [Kubernetes Quickstart Guides](getting_started/try_opennebula/try_kubernetes_on_opennebula/).
 

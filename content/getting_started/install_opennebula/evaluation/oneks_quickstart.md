@@ -6,7 +6,7 @@ categories: [Learning, Evaluation, Kubernetes]
 pageintoc: "24"
 tags:
 type: docs
-weight: "5"
+weight: "3"
 ---
 
 [OneKS]({{% relref "platform_services/oneks/" %}}) is OpenNebula's Elastic Kubernetes service. It offers a structured way to create, access, operate, upgrade, recover, and deprovision Kubernetes Clusters. OneKS enables you to manage a Kubernetes Cluster simply and intuitively through the Sunstone interface or using the command line on your OpenNebula Front-end. This guide demonstrates how to launch a new Kubernetes Cluster on the hypervisor node installed with your miniONE installation and deploy a simple application. 
@@ -17,7 +17,7 @@ This guide assumes that you are evaluating OneKS using a standard miniONE deploy
 
 ### Install miniONE
 
-Prior to starting this guide, you must complete the miniONE installation with [on-premises hardware]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/deploy_opennebula_onprem_with_minione/" %}}) or an [AWS instance]({{% relref "getting_started/try_opennebula/opennebula_sandbox_deployment/deploy_opennebula_on_aws/" %}}) that fits the hardware requirements.
+Prior to starting this guide, you must complete the miniONE installation with [on-premises hardware]({{% relref "getting_started/install_opennebula/evaluation/deploy_opennebula_onprem_with_minione/" %}}) or an [AWS instance]({{% relref "getting_started/install_opennebula/evaluation/deploy_opennebula_on_aws/" %}}) that fits the hardware requirements.
 
 ### Install the Kubectl Client
 

@@ -1,6 +1,6 @@
 ---
-title: "Automatic Cluster Provisioning with OneForm"
-linkTitle: "Automatic - OneForm"
+title: "Automated Cluster Installation with OneForm"
+linkTitle: "Cluster Installation with OneForm"
 date: "2026-04-15"
 description:
 categories:
