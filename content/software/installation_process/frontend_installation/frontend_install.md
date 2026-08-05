@@ -93,14 +93,22 @@ Install all OpenNebula Front-end components by executing the following commands 
 {{% tab header="**OS**:" disabled=true /%}}
 
 {{% tab header="**AlmaLinux 9, 10**"%}}
-**AlmaLinux / RHEL**
+**AlmaLinux 9, 10**
 
 ```shell
 yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
 {{% /tab %}}
-{{% tab header="**RHEL 9**"%}}
+{{% tab header="**RHEL 9, 10**"%}}
+**RHEL 9/ 10**
+
+```shell
+yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
+```
+
+{{% /tab %}}
+{{% tab header="**Debian / Ubuntu**"%}}
 
 **Debian / Ubuntu**
 
