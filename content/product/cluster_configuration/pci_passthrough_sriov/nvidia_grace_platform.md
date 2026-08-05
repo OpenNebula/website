@@ -1,13 +1,12 @@
 ---
-title: "NVIDIA Grace Platform Virtualization (AE)"
+title: "NVIDIA Grace Platforms Virtualization (AE)"
 linkTitle: "NVIDIA Grace Platforms (AE)"
 date: "2026-07-09"
 description:
 categories:
 pageintoc: "58"
 tags: ['AI','NVIDIA']
-weight: "9"
-toc_hide: true
+weight: "7"
 ---
 
 ## Overview

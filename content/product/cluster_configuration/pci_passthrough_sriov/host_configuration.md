@@ -1,5 +1,6 @@
 ---
-title: "Host Configuration"
+title: "Host Configuration for PCI Passthrough"
+linkTitle: "Host Configuration for PCI Passthrough"
 date: "2026-06-30"
 description:
 categories:

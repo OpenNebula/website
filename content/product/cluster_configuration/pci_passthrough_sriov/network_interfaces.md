@@ -1,5 +1,5 @@
 ---
-title: "Network Interfaces"
+title: "Network Interfaces with PCI Passthrough"
 date: "2026-06-30"
 description:
 categories:
