@@ -1,5 +1,5 @@
 ---
-title: "Validate the Environment"
+title: "Validate the Production Deployment"
 linkTitle: "Validate the Production Deployment"
 date: "2025-02-17"
 #description: "Explore the resources deployed with **miniONE** or the **ISO**, and download and install appliances from the **OpenNebula Marketplace**"
@@ -16,9 +16,12 @@ The previous guides in this section detail how to deploy an [OpenNebula Front-en
 
 After following the instructions for [installing an OpenNebula Front-end automatically with miniONE]({{% relref "/getting_started/install_opennebula/production/minione_frontend_install" %}}), the following resources are already created and configured:
 
+- Datastores for storing files and Virtual Machine images
+
+The following resources are installed if the default miniONE installation is chosen (i.e. `--frontend` or `--lxc` options are not used):
+
 - A KVM Host on the local machine
 - A virtualization Cluster to which the Host belongs
-- Datastores for storing files and Virtual Machine images
 - A Virtual Network for the Virtual Machines
 
 Below you will find brief descriptions for these resources, with examples of their visual representation in the Sunstone UI and links to complete references for each resource.
@@ -98,16 +101,14 @@ For a complete overview, see [Virtual Network Templates]({{% relref "product/vir
 
 ## Downloading and Deploying a Virtual Machine
 
-If you followed the [Deploy OpenNebula On-prem with miniONE]({{% relref "deploy_opennebula_onprem_with_minione" %}}), guide, you will have already [locally deployed the Virtual Machine]({{% relref "deploy_opennebula_onprem_with_minione/#deploying-a-virtual-machine-locally" %}}) bundled by default with the miniONE installation. In this section we will download a Virtual Machine from the [OpenNebula Public Marketplace](https://marketplace.opennebula.io) and deploy it on the local KVM hypervisor created by miniONE.
+{{< alert title="Important" type="info" >}}
+If you have used the default miniONE installation that deploys a KVM node, you can try deploying a Virtual Machine to validate your OpenNebula cloud is functioning correctly. If you chose to only install the Front-end or install an LXC node, you will need to adjust the following instructions accordingly.{{< /alert >}}
 
 We’ll follow these high-level steps:
 
 1. Download the WordPress appliance from the OpenNebula Marketplace.
 2. Instantiate the Virtual Machine for the appliance.
 3. Verify the Installation by Connecting to WordPress.
-
-{{< alert title="Important" type="info" >}}
-As mentioned above, in this tutorial we’ll deploy to the Edge Cluster created previously in this Quick Start Guide. To complete this tutorial, you need the Edge Cluster up and running.{{< /alert >}}
 
 ### Step 1. Download the WordPress Appliance from the OpenNebula Marketplace
 

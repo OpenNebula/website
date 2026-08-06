@@ -20,7 +20,7 @@ In this tutorial, we will install an OpenNebula Front-end and a KVM hypervisor n
 
 miniONE is a straightforward tool for deploying an evaluation version of OpenNebula. After running the miniONE script, all the OpenNebula services needed to use, manage and run a small cloud deployment will be installed on a single AWS instance.
 
-This tutorial covers installation of a Front-end and KVM hypervisor node on an AWS instance. To complete the procedures detailed in the following [Kubernetes quickstart guides]({{% relref "getting_started/try_opennebula/try_kubernetes_on_opennebula/" %}}) it is necessary to complete this installation using a `c5.metal` "bare metal" AWS instance.
+This tutorial covers installation of a Front-end and KVM hypervisor node on an AWS instance. To complete the procedures detailed in the following [OneKS Kubernetes Quickstart Guide]({{% relref "getting_started/install_opennebula/evaluation/oneks_quickstart/" %}}) we advise performing this installation using a `c5.metal` "bare metal" AWS instance for best performance.
 
 During this tutorial we will complete the following steps:
 

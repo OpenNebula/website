@@ -4,13 +4,12 @@ linkTitle: "Validate Deployment"
 date: "2025-02-17"
 #description: "Explore the resources deployed with **miniONE** or the **ISO**, and download and install appliances from the **OpenNebula Marketplace**"
 categories: [Learning, Evaluation, Introduction, Deployment]
-pageintoc: "24"
 tags: ['Quick Start', 'Edge Cluster']
 type: docs
-weight: "4"
+weight: 3
 ---
 
-A previous tutorial in this section details how to [deploy OpenNebula on-premises]({{% relref "deploy_opennebula_onprem_with_minione" %}}) with [miniONE](https://github.com/OpenNebula/minione). This page provides:
+Previous guides in this section detail how to [deploy OpenNebula on-premises]({{% relref "getting_started/install_opennebula/evaluation/deploy_opennebula_onprem_with_minione/" %}}) with [miniONE](https://github.com/OpenNebula/minione) or [deploy OpenNebula on AWS]({{% relref "getting_started/install_opennebula/evaluation/deploy_opennebula_on_aws/" %}}). This guide demonstrates how to validate that the insallation procedure has succeeded and your OpenNebula cloud is ready for operation, including:
 
 - An overview of the resources automatically created during that installation
 - An example of what you can do with this type of installation -- in this case, installing a Virtual Machine from the [OpenNebula Marketplace](https://marketplace.opennebula.io/)
