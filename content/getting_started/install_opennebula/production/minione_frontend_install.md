@@ -11,6 +11,11 @@ weight: "1"
 
 Automatic installation of an OpenNebula Front-end can be achieved using the miniONE rapid installation script. The miniONE installation script automatically configures the target server to deploy a stripped-down version of OpenNebula with the essential modules to run a cloud Cluster. After installing OpenNebula with miniONE, you will be able to deploy Virtual Machines, provision Clusters with on-premises or cloud resources and manage your cloud using the command line, the API or the Sunstone user interface.
 
+This automated miniONE OpenNebula installation is recommended for most users. However, if you require more fine-grained control over your installation or require advanced automation options, you may wish to consider consulting the following documentation:
+
+* [Manual Front-end deployment]({{% relref "software/installation_process/frontend_installation/" %}})
+* [Advanced deployment with OneDeploy]({{% relref "getting_started/install_opennebula/one_deploy/one_deploy_overview/" %}})
+
 ## Prerequisites
 
 You may wish to install the miniONE OpenNebula Front-end on its own dedicated machine, which is only intended for management and not workload, in which case you should follow the guidelines for "Front-end only". You may also install the miniONE OpenNebula Front-end on the same machine you intend to use for compute workloads, in which case you should consider your intended use-case, guidance is given below for a small Kubernetes Cluster and an AI Factory. 
@@ -19,7 +24,7 @@ You may use on-premises hardware, virtual or bare-metal resources from a cloud p
 
 To install miniONE it is important to meet the following prerequisites for the machine on which you intend to install miniONE:
 
- **Supported operating systems:**
+ **Supported operating systems**:
 * RHEL/AlmaLinux 9 or 10
 * Debian 12 or 13
 * Ubuntu 24.04 or 26.04
@@ -27,15 +32,13 @@ To install miniONE it is important to meet the following prerequisites for the m
 * See the [Platform Notes]({{% relref "software/release_information/release_notes/platform_notes.md" %}}) for further details on compatible operating systems
 
 **Minimum hardware:**
-* Front-end only:
+* **Front-end only**:
   * 16 GiB RAM
   * 80 GiB free disk space
-
-* Kubernetes:
+* **Kubernetes**:
   * 64 GiB RAM
   * 120 GiB free disk space
-    
-* AI Factory:
+* **AI Factory**:
   * 128 GiB RAM
   * 512 GiB free disk space
   * NVIDIA L40S or H100 GPU
@@ -45,7 +48,7 @@ To install miniONE it is important to meet the following prerequisites for the m
   - An SSH server running on port 22
   - Open ports:
     - 22 (SSH)
-    - 80 (for the web UI)
+    - 80 (for the Sunstone web UI)
 
 ## Installing miniONE
 
@@ -96,13 +99,13 @@ Now run the installation script, choosing one of the following options as approp
     ```bash
     ./minione --frontend
     ```
-  * **Front-end and KVM node**:
+  * **Front-end and single KVM node**:
 
     ```bash
     ./minione
     ```
 
-  * **Front-end and LXC node**:
+  * **Front-end and single LXC node**:
 
     ```bash
     ./minione --lxc
@@ -125,7 +128,7 @@ Use following to login:
 
 Please take a note of the IP address and login credentials, you will need them later.
 
-Finally update the `localhost` status:
+Finally, if you have installed a local hypervisor node, update the `localhost` status:
 
 ```bash
 sudo -u oneadmin onehost sync --force
@@ -255,8 +258,8 @@ If the above procedure works, you have successfully installed miniONE and it is 
 After completing the miniONE installation process and validation, you can proceed to deploy Clusters automatically or manually:
 
 * [Automatically deploy Clusters with OneForm]({{% relref "/getting_started/install_opennebula/production/cluster_oneform" %}})
-* Manually install Clusters with [KVM]({{% relref "software/installation_process/cluster_installation/kvm_node_installation/" %}}) or [LXC]({{% relref "software/installation_process/cluster_installation/lxc_node_installation/" %}})
-* Try deploying Kubernetes Clusters with the [OneKS Kubernetes Guides]({{% relref "platform_services/oneks/" %}}).
+* Manually install Cluster nodes with [KVM]({{% relref "software/installation_process/cluster_installation/kvm_node_installation/" %}}) or [LXC]({{% relref "software/installation_process/cluster_installation/lxc_node_installation/" %}})
+* Try deploying Kubernetes Clusters with the [OneKS Kubernetes Guides]({{% relref "platform_services/oneks/" %}})
 
 
 
