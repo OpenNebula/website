@@ -49,11 +49,11 @@ OpenNebula supports both SR-IOV operating modes.
 
     These attributes are applied directly by the network adapter.
 
-* **Switchdev Mode**: In Switchdev mode, VF parameters are controlled by Host-side representor interfaces. These representor interfaces can be attached to a virtual switch to establish port-level control.
+* **Switchdev Mode**: In Switchdev mode, VF parameters are controlled by Host-side representor interfaces. These representor interfaces are attached to a virtual switch to establish port-level control.
 
     In this mode, only the MAC address is applied directly to the VF interface. All other control parameters are managed by the virtual switch driver associated with the Virtual Network.
 
-    OpenNebula automatically configures the representor interface during deployment. As of now, only Open vSwitch is supported for Switchdev mode.
+    OpenNebula automatically configures the representor interface during deployment. Only Open vSwitch is supported for Switchdev mode.
 
 ## Host Configuration
 
@@ -70,7 +70,7 @@ echo 8 > /sys/bus/pci/devices/<PCI_ADDRESS>/sriov_numvfs
 ```
 
 {{< alert title="Note" type="primary" >}}
-The configured number of Virtual Functions is typically reset after reboot. Refer to your Linux distribution or hardware vendor documentation to configure persistent SR-IOV devices.{{< /alert >}} 
+The configured number of Virtual Functions is typically reset after reboot. Refer to your Linux distribution or hardware vendor documentation to configure persistent SR-IOV devices.{{< /alert >}}
 
 ### Verification
 
@@ -122,7 +122,7 @@ It is important to have a clear picture of which resources are going to be exclu
 
 ### Network Interfaces
 
-Identify which network interfaces are going to be used as DPDK interfaces. When the system has multiple NUMA nodes, it is important to consider the node placement of these interfaces. 
+Identify which network interfaces are going to be used as DPDK interfaces. When the system has multiple NUMA nodes, it is important to consider the node placement of these interfaces.
 
 To identify which node the interfaces belong to:
 
@@ -146,11 +146,11 @@ Every memory dedicated to hugepages is effectively memory that is no longer avai
 
 ### CPU
 
-The DPDK PMD driver runs continuous polling threads to process network packets. These threads are assigned to dedicated CPUs from the operating system. By default, one thread per interface in a NUMA node is used. More threads means faster polling. 
+The DPDK PMD driver runs continuous polling threads to process network packets. These threads are assigned to dedicated CPUs from the operating system. By default, one thread per interface in a NUMA node is used. More threads means faster polling.
 
 After the configuration, regardless of whether there is traffic or not in the switch, the polling processes will be using these threads at 100% usage, so it is effectively removed from the system and the linux scheduler will not use those processes normally.
 
-For added security, you can use the isolcpus kernel parameter to declare those threads as not available to the linux scheduler, however the linux scheduler is mature enough to not need this. The important reservation comes in the OpenNebula scheduler. 
+For added security, you can use the isolcpus kernel parameter to declare those threads as not available to the linux scheduler, however the linux scheduler is mature enough to not need this. The important reservation comes in the OpenNebula scheduler.
 
 You must set the ISOCLPUS host parameter to prevent a case where the scheduler could pin VCPUs from VMs to those threads.
 
@@ -176,10 +176,10 @@ This mountpoint should be automatically managed by a system where libvirt is ins
 
 ```shell
 mount | grep -i huge
- hugetlbfs on /dev/hugepages type hugetlbfs 
+ hugetlbfs on /dev/hugepages type hugetlbfs
  (rw,relatime,seclabel,pagesize=1024M)
 ```
-To assign the previously reserved huge pages to DPDK use the` other_config:dpdk-socket-mem` parameter. This is a comma separated list of memory, in MB, to allocate per node, which will then be backed by the huge pages available at `other_config:dpdk-hugepage-dir`. 
+To assign the previously reserved huge pages to DPDK use the` other_config:dpdk-socket-mem` parameter. This is a comma separated list of memory, in MB, to allocate per node, which will then be backed by the huge pages available at `other_config:dpdk-hugepage-dir`.
 
 ### Examples
 
@@ -207,10 +207,10 @@ The CPU threads where OVS will pin the PMD threads  are signaled with the parame
 
 To generate the value of the bitmask:
 
-* Inspect the CPUs available in the Operating System. To get a full picture of this, run the command lscpu --all -p=CPU,CORE,NODE. 
-* This will yield a list of logical CPU threads ids, their respective parent logical core id and the NUMA node they belong to. 
+* Inspect the CPUs available in the Operating System. To get a full picture of this, run the command lscpu --all -p=CPU,CORE,NODE.
+* This will yield a list of logical CPU threads ids, their respective parent logical core id and the NUMA node they belong to.
 * Create a comma separated list of the CPU IDs going to be used according to recommendations.
-* Create a binary bitmask with each desired CPU thread ID set to 1. 
+* Create a binary bitmask with each desired CPU thread ID set to 1.
 * Convert to hex.
 
 Example:
@@ -252,9 +252,9 @@ Check OVS is properly configured. Make sure that DPDK is initialized and the con
 
 ```shell
 ovs-vsctl get Open_vSwitch . dpdk_initialized
-grep DPDK /var/log/openvswitch/ovs-vswitchd.log 
-ovs-vsctl get Open_vSwitch . other_config:dpdk-socket-mem 
-ovs-vsctl get Open_vSwitch . other_config:pmd-cpu-mask 
+grep DPDK /var/log/openvswitch/ovs-vswitchd.log
+ovs-vsctl get Open_vSwitch . other_config:dpdk-socket-mem
+ovs-vsctl get Open_vSwitch . other_config:pmd-cpu-mask
 ovs-vsctl get Open_vSwitch . other_config:dpdk-hugepage-dir
 ```
 
@@ -306,13 +306,13 @@ ovs-vsctl add-bond 'ovsbr0' 'bond0' 'dpdk0' 'dpdk1' 'bond_mode=balance-slb' \
 
 After binding interfaces you should now start seeing the PMD threads at 100% CPU usage. This is expected and will happen regardless of whether that bridge is serving traffic to VMs or not.
 
-If the DPDK interface  holds an IP address which is needed, this IP address must be migrated to the OVS bridge internal interface. It has the same name as the bridge. This interface can be configured like regular system interfaces. We recommend setting all of the L2 related configuration in OVS directly and only manage the IP related configuration outside of OVS, you can use manual commands or the system network renderer for this. 
+If the DPDK interface  holds an IP address which is needed, this IP address must be migrated to the OVS bridge internal interface. It has the same name as the bridge. This interface can be configured like regular system interfaces. We recommend setting all of the L2 related configuration in OVS directly and only manage the IP related configuration outside of OVS, you can use manual commands or the system network renderer for this.
 
 If the interface is a management interface then you must ensure a proper IP migration via a script since binding the network interface and submitting it to a bridge makes it lose connectivity.
 
 ### Security Configuration
 
-Depending on your distro, it might be required to tune Selinux or AppArmor to allow proper OVS-QEMU interaction. 
+Depending on your distro, it might be required to tune Selinux or AppArmor to allow proper OVS-QEMU interaction.
 
 When a VM is created, qemu creates a UNIX socket for each network interface backed by a DPDK capable bridge. OVS then attempts to connect to these sockets. Some operations involving VM states, like migrations and power cycles require qemu also to perform an unlink operation in the socket.
 
@@ -349,7 +349,7 @@ Refer to the OpenvSwitch with DPDK section for the Virtual Network configuration
 
 ### Security Configuration
 
-You can use the [openvswitch role](https://github.com/OpenNebula/one-deploy/blob/dbbec90d80a0a6a7e598b9a55169b0050a8c7c9f/roles/openvswitch/README.md#L16) to automate all of the DPDK related configuration and standalone OVS complex configurations as well. 
+You can use the [openvswitch role](https://github.com/OpenNebula/one-deploy/blob/dbbec90d80a0a6a7e598b9a55169b0050a8c7c9f/roles/openvswitch/README.md#L16) to automate all of the DPDK related configuration and standalone OVS complex configurations as well.
 
 ## Using PCI Devices as Network Interfaces
 
@@ -366,10 +366,10 @@ Unlike generic PCI passthrough, a PCI device configured as a network interface b
 
 During deployment, OpenNebula:
 
-1. Selects a compatible PCI device.  
-2. Allocates networking resources from the specified Virtual Network.  
-3. Configures the PCI device.  
-4. Generates the corresponding NIC context information.  
+1. Selects a compatible PCI device.
+2. Allocates networking resources from the specified Virtual Network.
+3. Configures the PCI device.
+4. Generates the corresponding NIC context information.
 5. Contextualizes the guest operating system.
 
 As a result, the guest receives a fully configured network interface without additional manual configuration.
@@ -415,11 +415,11 @@ Explicit selection should generally be reserved for specialized deployments wher
 
 Unlike generic PCI passthrough, PCI network interfaces participate fully in OpenNebula Virtual Networks. The selected Virtual Network provides:
 
-* MAC address allocation  
-* IPv4 allocation  
-* IPv6 allocation  
-* VLAN configuration  
-* Security Groups  
+* MAC address allocation
+* IPv4 allocation
+* IPv6 allocation
+* VLAN configuration
+* Security Groups
 * Address management
 
 This allows PCI passthrough interfaces to behave consistently with virtual network interfaces from the administrator's perspective.
@@ -428,12 +428,12 @@ This allows PCI passthrough interfaces to behave consistently with virtual netwo
 
 When the Context package is installed inside the guest operating system, OpenNebula automatically configures the assigned PCI interface. The guest receives:
 
-* MAC address  
-* IPv4 address  
-* IPv6 address  
-* Network mask  
-* Gateway  
-* DNS configuration  
+* MAC address
+* IPv4 address
+* IPv6 address
+* Network mask
+* Gateway
+* DNS configuration
 * Hostname
 
 No manual network configuration is required inside the guest.
@@ -444,20 +444,20 @@ PCI network interfaces support the standard PCI attributes together with network
 
 Common PCI attributes include:
 
-* `DEVICE`  
-* `CLASS`  
-* `VENDOR`  
+* `DEVICE`
+* `CLASS`
+* `VENDOR`
 * `TYPE`
 
 Network-specific attributes include:
 
-* `NETWORK`  
-* `NETWORK_UNAME`  
-* `MAC`  
-* `IP`  
-* `IP6`  
-* `VLAN_ID`  
-* `TRUST`  
+* `NETWORK`
+* `NETWORK_UNAME`
+* `MAC`
+* `IP`
+* `IP6`
+* `VLAN_ID`
+* `TRUST`
 * `SPOOFCHK`
 
 Refer to the Virtual Machine Template reference for a complete description of each attribute.
@@ -468,20 +468,20 @@ PCI network interfaces support the standard PCI attributes together with network
 
 Common PCI attributes include:
 
-* `DEVICE`  
-* `CLASS`  
-* `VENDOR`  
+* `DEVICE`
+* `CLASS`
+* `VENDOR`
 * `TYPE`
 
 Network-specific attributes include:
 
-* `NETWORK`  
-* `NETWORK_UNAME`  
-* `MAC`  
-* `IP`  
-* `IP6`  
-* `VLAN_ID`  
-* `TRUST`  
+* `NETWORK`
+* `NETWORK_UNAME`
+* `MAC`
+* `IP`
+* `IP6`
+* `VLAN_ID`
+* `TRUST`
 * `SPOOFCHK`
 
 Refer to the Virtual Machine Template reference for a complete description of each attribute.
@@ -506,12 +506,12 @@ The interface should appear as a native PCI network adapter and be configured au
 
 ## Best Practices
 
-* Prefer automatic PCI device selection whenever possible.  
-* Use Virtual Functions instead of Physical Functions for cloud deployments.  
-* Reserve Physical Functions for workloads requiring exclusive device ownership.  
-* Configure PCI monitoring to expose only passthrough devices.  
-* Install the OpenNebula Context package in guest operating systems.  
-* Use NUMA-aware placement for latency-sensitive workloads.  
+* Prefer automatic PCI device selection whenever possible.
+* Use Virtual Functions instead of Physical Functions for cloud deployments.
+* Reserve Physical Functions for workloads requiring exclusive device ownership.
+* Configure PCI monitoring to expose only passthrough devices.
+* Install the OpenNebula Context package in guest operating systems.
+* Use NUMA-aware placement for latency-sensitive workloads.
 * Prefer Switchdev mode when integrating with Open vSwitch.
 
 ## Next Steps
