@@ -142,8 +142,8 @@ To evaluate OpenNebula, we strongly recommend that you follow our [Getting Start
 
 Following the Guide, you can:
 
-* [Install an OpenNebula Front-end]({{% relref "deploy_opennebula_on_aws" %}}), then use that Front-end to
-* [Deploy a Virtual Machine]({{% relref "validate_the_environment" %}})
+* [Install an OpenNebula Front-end]({{% relref "/getting_started/install_opennebula/evaluation/deploy_opennebula_onprem_with_minione.md" %}}), then use that Front-end to
+* [Deploy a Virtual Machine]({{% relref "/getting_started/install_opennebula/evaluation/validate_the_environment.md" %}})
 
 The Getting Started Guide is by far the fastest way to familiarize yourself with OpenNebula.
 
@@ -151,6 +151,6 @@ The Getting Started Guide is by far the fastest way to familiarize yourself with
 
 If you are interested in building a production environment, then [Cloud Architecture Design]({{% relref "../cloud_architecture_and_design/cloud_architecture_design#intro" %}}) is a good resource to explore and consider the available options and choices.
 
-If you are interested in automatic, DevOps-like deployment of a production-ready OpenNebula cloud, please refer to the [Automatic Deployment]({{% relref "../../../software/installation_process/advanced_installation_with_onedeploy/index#automatic-deployment" %}}) section of the Installation Guide.
+If you are interested in automatic, DevOps-like deployment of a production-ready OpenNebula cloud, please refer to the [Automatic Deployment]({{% relref "/getting_started/install_opennebula/one_deploy/one_deploy_overview.md" %}}) section of the Installation Guide.
 
 Remember that if you need our support at any time, or access to our professional services or to the **Enterprise Edition**, you can always [contact us](https://opennebula.io/enterprise).

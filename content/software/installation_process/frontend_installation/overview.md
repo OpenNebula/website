@@ -54,7 +54,7 @@ For users who require granular control over an OpenNebula cloud deployment, the 
 
 ### 3. Advanced Deployment with OneDeploy
 
-OneDeploy is an Ansible-based automation toolset intended for complex, production-ready, or High Availability (HA) deployments. If you are looking to automate the deployment of OpenNebula with high flexibility (such as a multi-node production environment distributed across various infrastructure providers), please refer to the [Advanced Installation with OneDeploy]({{% relref "software/installation_process/advanced_installation_with_onedeploy/" %}}) section of the documentation.  
+OneDeploy is an Ansible-based automation toolset intended for complex, production-ready, or High Availability (HA) deployments. If you are looking to automate the deployment of OpenNebula with high flexibility (such as a multi-node production environment distributed across various infrastructure providers), please refer to the [Advanced Installation with OneDeploy]({{% relref "getting_started/install_opennebula/one_deploy/one_deploy_overview/" %}}) section of the documentation.  
 
 ## Cluster Installation 
 
