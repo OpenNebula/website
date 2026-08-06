@@ -9,19 +9,6 @@ type: docs
 weight: "6"
 ---
 
-<a id="use-case-screencasts"></a>
-
-<!--# Use Cases -->
-
-## Screencasts
-
-Browse the ever-expanding catalog of screencasts created by the OpenNebula Team to showcase interesting applications and integrations with third-party technologies and other open source projects.
-
-![image1](/images/use_cases.png)
-
-{{< alert title="Note" type="info" >}}
-Browse the catalog of screencasts and tutorial videos [here](https://opennebula.io/screencasts/).{{< /alert >}} 
-
 ## User Stories
 
 OpenNebula is used to implement different types of cloud deployments, from clouds tuned to address the demands of a niche market to clouds optimized to manage the virtualized resources in the data center. We are constantly collecting inspiring user stories from organizations using OpenNebula and interested in sharing their experience with the rest of the OpenNebula Community.
