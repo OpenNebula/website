@@ -29,4 +29,4 @@ The following issues have been solved in 7.4.1:
 * Fix ARP tables not being updated on HA leader election [#7935](https://github.com/OpenNebula/one/issues/7935).
 * Fix repeated attributes in Cluster template [#7941](https://github.com/OpenNebula/one/issues/7941).
 * Fix use of PCI NIC device for `onevm ssh` and `onevm port-forward` commands [#7925](https://github.com/OpenNebula/one/issues/7925).
-* "ACPI=yes" is not rendered into kvm xml so some VMs aren't starting [#7792](https://github.com/OpenNebula/one/issues/7792).
+* Fix "ACPI=yes" not being applied for some UEFI configurations [#7792](https://github.com/OpenNebula/one/issues/7792).
