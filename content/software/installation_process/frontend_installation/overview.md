@@ -23,9 +23,9 @@ Depending on your environment (evaluation, testing, or production) and your pref
 
 ### 1. Automated Installation via miniONE
 
-The miniONE tool is the fastest method to get an OpenNebula cloud up and running. It is a lightweight installation script designed for deploying an OpenNebula cloud configuration specialized for evaluation, testing, and development environments.  
+The miniONE tool is the fastest method to get an OpenNebula cloud up and running. It is a lightweight installation script designed for deploying an OpenNebula cloud configuration specialized for quick startup. miniONE is ideal for evaluation, testing and learning, but can also be used to quickly bootstrap a production deployment, with later reconfiguration for production hardening.  
 
-* **Best for**: Rapid prototyping, sandboxes, testing, and learning.  
+* **Best for**: Rapid prototyping, sandboxes, testing, learning and quickly bootstrapping a production deployment.  
 
 * **Workflow**: A single command installs the Front-end and, optionally, a local KVM or LXC hypervisor on the same Host.
 
@@ -39,7 +39,7 @@ The miniONE installation is not appropriate for production environments, if you 
 
 ### 2. Manual Installation with System Packages
 
-For users who require granular control over an OpenNebula cloud deployment, the manual method involves installing OpenNebula directly from official system repositories.  
+For users who require granular control over an OpenNebula cloud deployment, the manual method involves installing OpenNebula directly from official system repositories. The guides in this section outline the manual installation process.
 
 * **Best for**: Custom production architectures, specific security hardening, or integration with existing databases.
 

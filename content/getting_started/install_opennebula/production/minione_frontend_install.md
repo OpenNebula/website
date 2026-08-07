@@ -9,12 +9,14 @@ tags: [miniONE, deployment, installation, automatic]
 weight: "1"
 ---
 
-Automatic installation of an OpenNebula Front-end can be achieved using the miniONE rapid installation script. The miniONE installation script automatically configures the target server to deploy a stripped-down version of OpenNebula with the essential modules to run a cloud Cluster. After installing OpenNebula with miniONE, you will be able to deploy Virtual Machines, provision Clusters with on-premises or cloud resources and manage your cloud using the command line, the API or the Sunstone user interface.
+Automatic installation of an OpenNebula Front-end can be achieved using the miniONE rapid installation script. The miniONE installation script automatically configures the target server to deploy OpenNebula with the essential modules to run a cloud. After installing OpenNebula with miniONE, you will be able to deploy Virtual Machines, provision Clusters with on-premises or cloud resources and manage your cloud using the command line, the API or the Sunstone user interface.
 
-This automated miniONE OpenNebula installation is recommended for most users. However, if you require more fine-grained control over your installation or require advanced automation options, you may wish to consult the following documentation:
+This automated miniONE OpenNebula installation is recommended for most users to quickly bootstrap a production cloud deployment. However, if you require more fine-grained control over your installation or require advanced automation options, you may wish to consult the following documentation:
 
 * [Manual Front-end deployment]({{% relref "software/installation_process/frontend_installation/" %}})
 * [Advanced deployment with OneDeploy]({{% relref "getting_started/install_opennebula/one_deploy/one_deploy_overview/" %}})
+
+miniONE establishes a network bridge as a convenience measure to simplify network connectivity within the newly installed OpenNebula cloud, enabling quick validation, learning, and testing. This configuration is generally inappropriate for expanding a cloud within a data center. The network configuration should be modified at a later stage to include relevant network interfaces and facilitate network connectivity within a data center. Refer to the [Networking System Guides]({{% relref "product/cluster_configuration/networking_system/" %}}) for details on network configuration. 
 
 ## Prerequisites
 
@@ -260,6 +262,7 @@ After completing the miniONE installation process and validation, you can procee
 * [Automatically deploy Clusters with OneForm]({{% relref "/getting_started/install_opennebula/production/cluster_oneform" %}})
 * Manually install Cluster nodes with [KVM]({{% relref "software/installation_process/cluster_installation/kvm_node_installation/" %}}) or [LXC]({{% relref "software/installation_process/cluster_installation/lxc_node_installation/" %}})
 * Try deploying Kubernetes Clusters with the [OneKS Kubernetes Guides]({{% relref "platform_services/oneks/" %}})
+* [Modify your network configuration to facilitate connectivity with other hardware]({{% relref "product/cluster_configuration/networking_system/" %}})
 
 
 
