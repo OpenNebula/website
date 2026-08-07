@@ -53,10 +53,9 @@ The service should be in the active (`running`) state. If the service is in a fa
 sudo systemctl restart opennebula-ks.service
 ```
 
-### Warning
-
+{{< alert title="Warning" type="warning" >}}
 Configure `appliance_ds` before starting `opennebula-ks.service` for the first time. If the service is started with the wrong datastore, OneKS may create the appliance image and VM template there. Changing `appliance_ds` afterwards does not automatically move or recreate these resources and may result in errors indicating that the IMAGE or TEMPLATE name is already in use. In that case, remove the previously generated OneKS image and VM template from OpenNebula, then restart `opennebula-ks.service` so OneKS can create them again using the configured datastore.
-
+{{< /alert >}}
 
 ## OneGate Service
 
@@ -198,10 +197,10 @@ If the above command is not suitable for your Front-end Host configuration, cons
 
 When OneKS starts, it automatically downloads the OneKS appliance from the OpenNebula Marketplace. During this process, OneKS creates the corresponding OpenNebula image and VM template in the OpenNebula database, making them ready to deploy K8s Clusters.
 
-The datastore used for the appliance image must be configured before the first start of the OneKS service. See the OneKS Service section above.
+The datastore used for the appliance image must be configured before the first time that the OneKS service is started. See the OneKS Service section above.
 
 {{< alert title="Warning" type="warning" >}}
-If the OneKS appliance cannot be downloaded correctly, the OneKS service will not start. See Service Management to restart the service or inspect its journal.
+If the OneKS appliance cannot be downloaded correctly, the OneKS service will not start. Refer to the [Service Management Documentation]({{% relref "platform_services/oneks/management/configuration/#service-management" %}}) for details on how to restart the service or inspect its journal.
 
 You can also check the OneKS service logs at `/var/log/one/oneks.log`.
 {{< /alert >}}
