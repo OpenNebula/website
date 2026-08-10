@@ -52,6 +52,7 @@ Thank you to our incredible community and partners for your continued support in
     * **New Item Exploration via Side Drawer** — Resources can now be inspected without leaving the current context. A new slide-in drawer lets operators quickly explore the details of any item — VMs, Hosts, networks — without losing their place in the workflow.
     * **Richer Resource Visualization** — Individual resource views have been redesigned to surface the most relevant information upfront, reducing the need to dig through tabs to get a clear picture of an item's state, configuration, and relationships.
     * **Added FSaaS (VirtioFS) Support** — Users can now manage shared storage file systems, create filesystem images, and attach disks directly from the Sunstone GUI.
+    * **Virtual Machine Command Execution** — An optional [Exec tab]({{% relref "product/virtual_machines_operation/virtual_machines/vm_instances.md#executing-a-command-from-sunstone" %}}) lets users run, monitor, retry, and cancel commands inside Virtual Machines and copy their output directly from Sunstone.
 
 ## OneFlow
 
