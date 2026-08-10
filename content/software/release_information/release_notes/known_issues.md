@@ -20,6 +20,10 @@ This page will be updated with relevant information about bugs affecting OpenNeb
 
 - [ARP tables are not updated automatically](https://github.com/OpenNebula/one/issues/7920) when a leader is elected in Red Hat Enterprise Linux OS variants.
 
+## Sunstone
+
+[Repeated column width recalculations per table cell](https://github.com/OpenNebula/one/issues/7946) leads to FireEdge performance degradation. The fix is scheduled to be released in 7.4.1.
+
 ## Veeam Backups
 
 Worker creation and restores [will fail](https://github.com/OpenNebula/one/issues/7949) if the VM with ID 0 doesn't exist in the database.
