@@ -9,6 +9,8 @@ tags: ['AI','NVIDIA']
 weight: "7"
 ---
 
+{{< alert title="Work In Progress" type="primary" >}} GPU passthrough functionality for Axelera GPUs is currently under active development. If you would like to discuss a demonstration, please contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/).{{< /alert >}}
+
 ## Overview
 
 This guide describes how to assign an Axelera Metis AI Processing Unit (AIPU) directly to an OpenNebula Virtual Machine using PCI passthrough. The device is exclusively owned by the guest while the Virtual Machine is running; the Axelera driver and Voyager SDK are therefore installed in the guest, not on the Host.
@@ -22,12 +24,12 @@ The installation commands below reproduce a validated environment using Ubuntu 2
 Before continuing, verify that:
 
 * The Metis AIPU is installed and visible on the Host.
-* IOMMU and VFIO are configured on the Host.
-* The OpenNebula PCI monitoring probe is configured.
+* [IOMMU]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/#step-2-enable-the-iommu" %}}) and [VFIO]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/#step-3-configure-vfio-device-binding" %}}) are configured on the Host.
+* The OpenNebula [PCI monitoring probe is configured]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/#step-5-configure-pci-monitoring" %}}).
 * The guest uses Ubuntu 22.04 or Ubuntu 24.04 and has Internet access.
 * The guest disk has at least 30 GB of capacity.
 * The VM CPU model is `host-passthrough`.
-* The VM does not use a Q35 machine type.
+* The VM **does not use** a Q35 machine type.
 
 {{< alert title="Important" type="warning" >}}
 The Voyager SDK operator build requires CPU features exposed by `host-passthrough`. With a generic CPU model, `make operators` can fail because NumPy requires the x86-64-v2 (`X86_V2`) instruction baseline. In the validated environment, the operator build also failed with a Q35 machine type. Leave the `OS/MACHINE` attribute unset so OpenNebula uses its default machine type.
@@ -180,13 +182,13 @@ Configure the repository matching the guest operating system:
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Ubuntu version**:" disabled=true /%}}
-{{% tab header="Ubuntu 22.04" %}}
+{{% tab header="**Ubuntu 22.04**" %}}
 ```shell
 echo "deb [signed-by=/etc/apt/keyrings/axelera.gpg] https://software.axelera.ai/artifactory/axelera-apt-source ubuntu22 main" \
   | sudo tee /etc/apt/sources.list.d/axelera.list
 ```
 {{% /tab %}}
-{{% tab header="Ubuntu 24.04" %}}
+{{% tab header="**Ubuntu 24.04**" %}}
 ```shell
 echo "deb [signed-by=/etc/apt/keyrings/axelera.gpg] https://software.axelera.ai/artifactory/axelera-apt-source ubuntu24 main" \
   | sudo tee /etc/apt/sources.list.d/axelera.list
@@ -269,7 +271,7 @@ for device in /sys/kernel/iommu_groups/"$group"/devices/*; do
 done
 ```
 
-On systems where a PCI switch in the same group is managed by the `switchtec` module, unloading that module allowed the group to be assigned:
+On systems where a PCI switch in the same group is managed by the `switchtec` module, unloading that module may allow the group to be assigned:
 
 ```shell
 sudo modprobe -r switchtec
