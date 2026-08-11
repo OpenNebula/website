@@ -18,7 +18,7 @@ An OpenNebula VM Group defines a logical boundary enclosing a set of interrelate
 
 Placement logic within VM Groups is divided into three primary categories:
 
-* **VM-to-VM Affinity**: Forces instances belonging to the same Role to be packed onto the same physical hypervisor node. This is highly effective for microservices or high-throughput computing workloads that exhibit dense east-west network traffic, minimizing network latency by utilizing local memory-speed vSwitch communication.
+* **VM-to-VM Affinity**: Forces instances belonging to the same Role to be placed onto the same physical hypervisor node. This is highly effective for microservices or high-throughput computing workloads that exhibit dense east-west network traffic, minimizing network latency by utilizing local memory-speed vSwitch communication.
 * **VM-to-VM Anti-Affinity**: Directs instances of a Role to be scattered across different physical Hosts or fault domains. This is standard practice for High Availability (HA) Cluster nodes, ensuring that a physical hardware failure on a single Host does not induce a catastrophic outage of an entire application tier.
 * **Role-to-Role Inter-Affinity / Anti-Affinity**: Governs relationship rules between different classes of servers. For example, a policy can dictate that the *backup-role* must never run on the same hypervisor node as the *production-database-role* (Anti-Affinity), or that *app-servers* must reside on the same chassis as their corresponding *cache-nodes* (Affinity).
 
@@ -51,16 +51,19 @@ You can impose additional placement constraints on the VMs of a Role by using th
 {{% tab header="Sunstone"%}}
 ## Creating VM Groups in Sunstone
 
-To manage VM Groups go to **Templates -> VM Groups**.
+To manage VM Groups go to **Templates -> VM Groups**. Click **+ Create VM group** to open the VM Group creation wizard and name the group:
 
-Click **Create** to open the VM Group creation wizard, name the group and then press **Next** to advance to the **Role Definition** page:
+{{< image pathDark="/images/cloud_administration/capacity_planning/dark/vm_group_create.png" 
+          path="/images/cloud_administration/capacity_planning/light/vm_group_create.png" 
+          alt="VM Groups create wizard" align="center" width="90%" mb="20px" >}}
 
-{{< image path="/images/cloud_administration/capacity_planning/vmg_wizard_create.png" alt="VM Groups create wizard" align="center" width="90%" mb="20px" >}}
+In the **Role Definition** page you can create new Roles and configure them including VM-VM and Host affinities:
 
-Here you can add Roles and also specify Role Host affinities. 
+{{< image pathDark="/images/cloud_administration/capacity_planning/dark/role_definition.png" 
+          path="/images/cloud_administration/capacity_planning/light/role_definition.png" 
+          alt="VM Groups create wizard" align="center" width="90%" mb="20px" >}}
 
-{{< image path="/images/cloud_administration/capacity_planning/vmg_wizard_create-2.png" alt="VM Groups create wizard 2" align="center" width="90%" mb="20px" >}}
-
+Then press **Next** to advance to the **Role affinity** page, where you can adjust role affinities. 
 <br>
 {{% /tab %}}
 {{% tab header="CLI"%}}
@@ -194,7 +197,7 @@ Note also that the same ACL/permission system is applied to VM Groups, so use ac
 
 ##  Scheduling Mechanics vs. Administrative Control
 
-To understand why placement rules can be broken, it is essential to distinguish between the two separate execution pathways within the OpenNebula control plane:
+To understand when placement rules can be bypassed, it is essential to distinguish between the two separate execution pathways within the OpenNebula control plane:
 
 1. **The Automated Scheduling Path**: OpenNebula’s scheduling daemon operates asynchronously in a periodic loop. When a new Virtual Machine is instantiated or placed in a pending state, the scheduler reads the VM Group definition, auto-generates a complex hypervisor requirement expression (`SCHED_REQUIREMENTS`), filters out invalid Hosts, and assigns the VM to an eligible node. The scheduler will strictly enforce rules; if no Host satisfies an affinity constraint, the affected VMs remain trapped in the `PENDING` state.
 2. **The Direct Operational Path (oned)**: The primary OpenNebula core daemon directly handles API calls initiated by authorized human operators or external orchestration scripts. When an administrator explicitly commands a VM to move to a designated destination Host via the command-line interface or the Sunstone GUI, the system interprets this as an absolute directive. Administrative sovereignty overrides the automated scheduler filters, completely bypassing the VM Group rule validation logic.
@@ -208,19 +211,12 @@ VM Groups are placed by dynamically generating the requirement (`SCHED_REQUIREME
 
 ## The Exception Matrix: Bypassing Rules via Migrations
 
-When explicit manual control is exerted over a Virtual Machine, configured placement rules can be actively violated. This behavior manifests in two core migration workflows:
-
-* **A. Cold Migration Mechanics**: Cold migration occurs when an administrator triggers a migration on a non-running or suspended virtual machine, or executes a standard move that involves a state-saving power down sequence. The core daemon updates the internal allocation table, modifies the hypervisor configuration file, and maps the virtual disk paths directly to the targeted physical node. Because this bypasses the scheduler's compliance filtering entirely, an administrator can easily cold-migrate a VM to a Host that already runs a heavily affined or anti-affined sibling instance, breaking the rule immediately upon the next boot sequence.
-
-* **B. Live Migration Mechanics**: Live migration shifts the active memory state, CPU registers, and block execution runtime of an active VM from a source hypervisor to a target hypervisor across the management network with near-zero downtime. If an emergency arises, such as a physical hypervisor overheating or experiencing a network card failure, the administrator must prioritize the survival of the workload over compliance. OpenNebula allows the administrator to live-migrate the VM to any Host with sufficient capacity, even if it breaches anti-affinity groups, grouping high-risk VMs onto the same failure node temporarily.
-
-The following architectural table summarizes how various operational actions treat VM Group constraints:
+When explicit manual control is exerted over a Virtual Machine, configured placement rules can be actively bypassed. The following architectural table summarizes how various operational actions treat VM Group constraints:
 
 | **Operational Action** | **Affinity Constraint Status** | **Architectural Implication** |
 |------------------------|--------------------------------|-------------------------------|
 | Initial Instantiation  | <span style="color: #42db47;">Strictly Respected</span> | Calculates baseline compliant placement prior to boots |
-| Manual Live Migration  | <span style="color: #d91414;">Bypassed / Broken</span> | Forces runtime execution onto target Host; ignores rules. |
-| Manual Cold Migration | <span style="color: #d91414;">Bypassed / Broken</span> | Alters target node tracking; rule check skipped. |
+| Manual Live / Cold Migration | <span style="color: #d91414;">Bypassed</span> | Alters target node tracking; rule check skipped. |
 | Reschedule Action  | <span style="color: #42db47;">Re-enforced / Healed</span> | Re-evaluates group state and migrates VMs back to compliance. |
 
 ## Restoring Compliance via the Reschedule Action
@@ -231,10 +227,10 @@ Executing a reschedule does not immediately terminate or move a VM. Instead, it 
 
 1. **State Assessment**: It scans the current physical Host where the rescheduled VM is residing.
 2. **Constraint Evaluation**: It fetches the VM Group schema associated with the instance and scans the physical layout of all sibling instances within that group across the entire Cluster.
-3. **Rule Conflict Discovery**: If it notes that an anti-affinity rule is currently broken (e.g., two HA Roles sharing a Host) or an affinity rule is broken (e.g., local packing is unmet), the Host is marked as non-compliant for that VM.
+3. **Rule Conflict Discovery**: If it notes that an anti-affinity rule is currently bypassed (e.g., two HA Roles sharing a Host) or an affinity rule is bypassed (e.g., local packing is unmet), the Host is marked as non-compliant for that VM.
 4. **Migration Plan Execution**: The scheduler searches the broader Cluster for a valid Host that possesses enough CPU/RAM overhead and strictly satisfies the VM Group constraints. Once a valid target node is discovered, the scheduler automatically fires an underlying live or cold migration command, moving the VM to repair the Cluster state without requiring manual destination mapping from the operator.
 
-Note that by default the reschedule action is only performed in cold status. To enable live rescheduling, set the `LIVE_RESCHEDS` variable to 1 in `/etc/one/oned.conf`. 
+{{< alert title="Note" type="primary" >}}By default the reschedule action is only performed in cold status. To enable live rescheduling, set the `LIVE_RESCHEDS` variable to 1 in `/etc/one/oned.conf`. {{< /alert >}}
 
 ## Advanced Operational Workflows and Scenarios
 
@@ -247,7 +243,7 @@ To implement this operational behavior in production environments, administrator
 **The Workflow**:
 
 1. The administrator executes a manual live migration command to evacuate `Host_01`.
-2. OpenNebula executes the transfer. Both web servers are now running concurrently on `Host_02`. The anti-affinity group rule is actively broken, but the application avoids downtime during maintenance.
+2. OpenNebula executes the transfer. Both web servers are now running concurrently on `Host_02`. The anti-affinity group rule is actively bypassed, but the application avoids downtime during maintenance.
 3. The administrator updates and reboots `Host_01`. The Host returns online and enters the `MONITORED` state.
 4. Instead of manually calculating where to return the Virtual Machines, the administrator executes the reschedule action against the non-compliant VM.
 5. During the next scheduling interval, the scheduler intercepts the flag, scans the topology, discovers the anti-affinity collision on `Host_02`, and automatically initiates a live migration of `VM_Web_A` back to the newly restored `Host_01`, completely self-healing the Cluster's high-availability state.
@@ -260,10 +256,10 @@ To implement this operational behavior in production environments, administrator
 
 1. To preserve database responsiveness, the system operator chooses to break the performance affinity rule to trade network latency for raw processing compute capacity.
 2. The operator executes a cold migration sequence on the replica to shift it to an underutilized standard Host.
-3. The instance boots up successfully on Host_Standard. The workload is stabilized, but the affinity rule is broken since the master and replica are split.
+3. The instance boots up successfully on Host_Standard. The workload is stabilized, but the affinity rule is bypassed since the master and replica are split.
 4. Hours later, the heavy processing finishes, and CPU utilization on Host_Premium normalizes.
 5. To enforce the affinity low-latency rules once again, the operator triggers rescheduling on the replica.
-6. The scheduler assesses the available capacity on Host_Premium, matches it against the broken affinity metadata, and automatically issues a live migration request to reunite the database instances on the premium Host.
+6. The scheduler assesses the available capacity on Host_Premium, matches it against the bypassed affinity metadata, and automatically issues a live migration request to reunite the database instances on the premium Host.
 
 ### Other Common Scenarios
 
