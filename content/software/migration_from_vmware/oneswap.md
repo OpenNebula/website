@@ -216,13 +216,91 @@ Ubuntu 24.04 and AlmaLinux/RHEL 9 provide up to date versions of the packages.
 
 The script builds the nbdkit version matching the installed distro package and copies only the VDDK plugin into nbdkit's plugin directory. It requires internet access, or an internal mirror via the `NBDKIT_REPO_URL` environment variable.
 
-### Required software for migrating Windows Virtual machines
+VDDK mode is also required for VMware vSAN-backed VMDKs. vSAN disks are object-backed and are not available through the classic vCenter datastore `*-flat.vmdk` download path used by the non-VDDK and hybrid transfer modes.
+
+To convert VMs stored on a vSAN datastore, configure VDDK in `/etc/one/oneswap.yaml`:
+
+```yaml
+:vddk_path: '/opt/vmware-vix-disklib-distrib/'
+```
+
+or pass it on the command line:
+
+```bash
+oneswap convert VM_NAME --vddk /opt/vmware-vix-disklib-distrib/
+```
+
+Delta and hybrid modes are currently not supported for vSAN-backed disks. Use full conversion with VDDK for vSAN-backed VMs.
+
+### Non-root libguestfs appliance
+
+When OneSwap is executed as a non-root user, for example `oneadmin`, libguestfs may invoke `supermin` to build an appliance from the host kernel. If the active kernel image under `/boot/vmlinuz-*` is readable only by root, `supermin` can fail with:
+
+```text
+cp: cannot open '/boot/vmlinuz-...-generic' for reading: Permission denied
+libguestfs: error: /usr/bin/supermin exited with error status 1
+```
+
+To avoid relying on local kernel image permissions, configure OneSwap to use a prebuilt libguestfs appliance:
+
+```bash
+cd /var/lib/one
+wget https://download.libguestfs.org/binaries/appliance/appliance-1.56.0.tar.xz
+tar -xJf appliance-1.56.0.tar.xz
+mv appliance libguestfs-appliance
+chown -R oneadmin:oneadmin libguestfs-appliance
+```
+
+The appliance version can be adjusted to a newer available version from the [libguestfs appliance directory](https://download.libguestfs.org/binaries/appliance/).
+
+Configure the appliance path in `/etc/one/oneswap.yaml`:
+
+```yaml
+:libguestfs_path: /var/lib/one/libguestfs-appliance
+```
+
+Alternatively, pass the path on the command line:
+
+```bash
+oneswap convert VM_NAME --libguestfs-path /var/lib/one/libguestfs-appliance
+```
+
+Validate that libguestfs can start with the prebuilt appliance as the OneSwap user:
+
+```bash
+sudo -u oneadmin -H bash -lc 'LIBGUESTFS_PATH=/var/lib/one/libguestfs-appliance libguestfs-test-tool'
+```
+
+The expected result is:
+
+```text
+===== TEST FINISHED OK =====
+```
+
+If `/dev/kvm` exists, add the OneSwap user to the `kvm` group to allow libguestfs to use hardware virtualization:
+
+```bash
+usermod -aG kvm oneadmin
+```
+
+If `/dev/kvm` is not present, hardware virtualization or nested virtualization must be enabled. Otherwise libguestfs may fall back to TCG and run much slower.
+
+### Required software for migrating Windows Virtual Machines
 
 There are two requirements to convert Windows Virtual Machines:
-- [VirtIO ISO drivers](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) must be stored in the `/usr/local/share/virtio-win` directory.
+- [VirtIO ISO drivers](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso) are required when the converted Windows VM uses VirtIO block devices (`vd`). Store the ISO on the host where OneSwap runs and configure its path with `:virtio_path` in `/etc/one/oneswap.yaml` or pass `--virtio /path/to/virtio-win.iso`.
 - [RHsrvany, an Open Source srvany implementation](https://github.com/rwmjones/rhsrvany) to create the needed Windows services during the migration.
   - In Alma Linux and RHEL this package is a dependency of OneSwap and will be installed automatically
   - In Ubuntu [the package can be downloaded from fedoraproject.org](https://kojipkgs.fedoraproject.org/packages/mingw-srvany/1.1/11.eln153/noarch/mingw-srvany-redistributable-1.1-11.eln153.noarch.rpm). <br/>
+
+For example:
+
+```yaml
+:virtio_path: /usr/local/share/virtio-win/virtio-win.iso
+```
+
+When a Windows guest is going to use the `vd` device prefix and no VirtIO ISO is configured, OneSwap displays a warning before starting the conversion. The warning does not stop the conversion, but the resulting VM may fail to boot if the required storage drivers are not already installed in the guest.
+
 For compatibility with older versions of virt-v2v the following symlinks are needed
 
 ```
@@ -404,6 +482,99 @@ oneswap convert --vms vm-web-01,vm-db-01,vm-app-01 $VOPTS [--fallback|--custom|-
 
 The VMs are converted one at a time; if a conversion fails, the batch continues with the remaining VMs. At the end, a summary is printed with the total number of VMs requested, the successful conversions and the list of failed VMs. The command exits with code `0` if all the VMs were converted successfully and `1` otherwise. The positional VM name, `--vms` and `--vm-list` are mutually exclusive.
 
+#### Estimating Migration Time with Dry Run
+
+OneSwap can estimate the expected duration of a migration without converting the VM:
+
+```bash
+oneswap convert VM_NAME --dry-run
+```
+
+The dry-run estimate reports the expected time for the main phases:
+
+* source export
+* disk conversion
+* OpenNebula image import
+* total estimated duration
+
+By default, OneSwap uses configured fallback transfer rates. The estimate becomes more accurate when benchmark data or previous conversion metrics are available.
+
+To measure the OpenNebula image import speed, run:
+
+```bash
+oneswap convert VM_NAME --dry-run --benchmark-import
+```
+
+This creates a temporary raw file and imports it as a temporary OpenNebula Image to measure the real import speed. The temporary image and local benchmark file are removed automatically after the benchmark finishes.
+
+To measure the source export speed from the VMware datastore, run:
+
+```bash
+oneswap convert VM_NAME --dry-run --benchmark-export
+```
+
+This creates a temporary benchmark file on the VMware datastore, downloads it through the same source transfer path, records the measured speed, and removes the temporary file afterward.
+
+The benchmark results are stored in the OneSwap work directory and reused by later dry-run estimates. For HTTP transfers, OneSwap uses import benchmark metrics or configured fallback values for future estimates; real HTTP import timings from full conversions are not reused as trusted metrics.
+
+#### Staged Delta Migration
+
+Delta mode can be executed as a single command:
+
+```bash
+oneswap convert VM_NAME --delta
+```
+
+For planned maintenance windows, the same workflow can also be split into explicit stages.
+
+First, prepare the base disk while the source VM keeps running:
+
+```bash
+oneswap convert VM_NAME --delta --delta-prepare
+```
+
+This creates a VMware snapshot, clones and transfers the base disk, converts it locally, and writes the prepared delta state. The source VM keeps running, but the VMware snapshot remains active until the migration is committed or cleaned up.
+
+After the prepare phase, estimate the final downtime/import-ready time:
+
+```bash
+oneswap convert VM_NAME --dry-run --delta
+```
+
+This refreshes the current delta size from the active VMware snapshot and estimates the final phase, including:
+
+* copying the remaining delta
+* applying the delta to the prepared disk
+* guest OS morph/customization
+* OpenNebula image import
+* template creation
+
+For a more accurate OpenNebula import estimate, the import benchmark can also be used with the delta dry-run:
+
+```bash
+oneswap convert VM_NAME --dry-run --delta --benchmark-import
+```
+
+When ready for the maintenance window, commit the prepared migration:
+
+```bash
+oneswap convert VM_NAME --delta --delta-commit
+```
+
+This applies the final delta to the prepared disk, performs the remaining guest customization, imports the image into OpenNebula, creates the VM Template, and removes the OneSwap VMware snapshot.
+
+If the prepared migration should be cancelled, clean it up with:
+
+```bash
+oneswap convert VM_NAME --delta --delta-cleanup
+```
+
+This removes the OneSwap-created VMware snapshot, the temporary ESXi clone directory, and the local prepared delta state. Do not leave the prepared snapshot active indefinitely, because the delta can continue growing while the source VM is running.
+
+{{< alert color="warning" title="Delta prepare snapshot" >}}
+After `--delta --delta-prepare`, the source VM keeps running with an active VMware snapshot. Always finish with either `--delta --delta-commit` or `--delta --delta-cleanup`.
+{{< /alert >}}
+
 #### Prechecks
 
 Before starting a conversion, OneSwap runs a set of prechecks against the destination OpenNebula cloud and the conversion host, and aborts early when:
@@ -413,7 +584,16 @@ Before starting a conversion, OneSwap runs a set of prechecks against the destin
 - The OpenNebula Virtual Network passed with `--network` does not exist.
 - `--vddk` is used but the nbdkit VDDK plugin is not installed (see [VDDK Transfer Support](#vddk-transfer-support)).
 
-For Windows guests, OneSwap also warns when the conversion host lacks CompactOS/WOF support (see [Windows CompactOS Support](#windows-compactos-support)). The prechecks can be skipped with `--skip-prechecks`.
+For Windows guests, OneSwap also warns when:
+
+- the conversion host lacks CompactOS/WOF support (see [Windows CompactOS Support](#windows-compactos-support));
+- the effective disk device prefix is `vd` and no VirtIO driver ISO is configured through `virtio_path` or `--virtio`.
+
+The missing VirtIO ISO warning is informational and does not stop the conversion. Continuing without the drivers may result in a Windows VM that cannot boot from its VirtIO disk.
+
+The prechecks can be skipped with `--skip-prechecks`.
+
+If OpenNebula fails to allocate an Image or VM Template during the import phase, OneSwap reports the full error returned by the OpenNebula API and stops the current conversion. It does not continue with an invalid object ID or wait for an Image that was not created. Converted local disks are preserved according to the existing failed-conversion cleanup behavior.
 
 #### Network mapping
 
@@ -434,8 +614,8 @@ OneSwap injects the [OpenNebula context packages]({{% relref "kvm_contextualizat
 
 Additional guest software can be injected during the conversion:
 
-- `--virtio /path/to/iso`: full path of the win-virtio ISO file, required to inject VirtIO drivers into Windows guests.
-- `--virt-tools /path/to/virt-tools`: path to the directory containing `rhsrvany.exe`, defaults to `/usr/local/share/virt-tools` (see [Required software for migrating Windows Virtual machines](#required-software-for-migrating-windows-virtual-machines)).
+- `--virtio /path/to/iso`: full path of the VirtIO driver ISO used to inject storage and network drivers into Windows guests. Configure this option when Windows disks use the `vd` device prefix; otherwise the converted VM may fail to boot if the drivers are not already installed.
+- `--virt-tools /path/to/virt-tools`: path to the directory containing `rhsrvany.exe`, defaults to `/usr/local/share/virt-tools` (see [Required software for migrating Windows Virtual Machines](#required-software-for-migrating-windows-virtual-machines)).
 - `--win-qemu-ga /path/to/iso`: install the QEMU Guest Agent into a Windows guest.
 - `--qemu-ga`: install the `qemu-guest-agent` package into a Linux guest, useful with `--custom` or `--fallback`.
 - `--remove-vmtools`: inject a firstboot script that removes VMware Tools from the guest on its first boot in OpenNebula (supported for both Linux and Windows guests, including Windows Server 2025).
@@ -477,3 +657,7 @@ When `oneswap` runs on a server different from the OpenNebula frontend, the conv
 - `--http-port port`: port of the temporary HTTP server. Default: `29869`.
 
 Using an alternative OpenNebula endpoint (`--endpoint`) requires HTTP transfer to be enabled. Make sure the OpenNebula frontend can reach the OneSwap server on the configured port.
+
+For dry-run import benchmarks and real image imports from a dedicated OneSwap server, the OpenNebula frontend must be able to reach the OneSwap server on `--http-host` and `--http-port`.
+
+Local path image registration is only safe when OneSwap runs on the OpenNebula frontend or when the work directory is shared with the frontend. Use HTTP transfer for dedicated OneSwap servers.

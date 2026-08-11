@@ -16,8 +16,8 @@ This page will show you the specific considerations when using an OpenNebula clo
 
 This is the list of the individual platform components that have been through the complete [OpenNebula Quality Assurance and Certification Process](https://github.com/OpenNebula/one/wiki/Quality-Assurance).
 
-OpenNebula is certified over all the following platforms, taking into account that mixing different operating systems in the front-end and the nodes, including different versions of the same operating system, does not form part of our QA testing, and therefore is not supported.
-
+{{< alert title="Note" type="info" >}}
+For supported deployments, hypervisor nodes in the same Cluster must run the same operating system and version. In High Availability Front-end deployments, all Front-end nodes must also run the same operating system and version. Homogeneous deployments require matching both the OS distribution and its release version.{{< /alert >}}
 
 ## Certified Components Version
 
@@ -28,7 +28,7 @@ OpenNebula is certified over all the following platforms, taking into account th
 | Red Hat Enterprise Linux | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | AlmaLinux                | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | Rocky Linux              | 9, 10                                      | [Front-end Installation]({{% relref "frontend_install" %}}).<br/>Available through Red Hat packages.                 |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                   | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
+| Ubuntu Server            | 24.04 (LTS), 26.04 (LTS)                   | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | Debian                   | 12, 13                                     | [Front-end Installation]({{% relref "frontend_install" %}})  |
 | SUSE Linux Enterprise    | 15                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
 | openSUSE                 | 16                                         | [Front-end Installation]({{% relref "frontend_install" %}})                                                     |
@@ -45,7 +45,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 | Red Hat Enterprise Linux | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | AlmaLinux                | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Rocky Linux              | 9, 10                                                                                                      | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}}).<br/>Available through Red Hat packages. |
-| Ubuntu Server            | 22.04 (LTS), 24.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
+| Ubuntu Server            | 24.04 (LTS), 26.04 (LTS)                                                                                   | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | Debian                   | 12, 13                                                                                                     | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | SUSE Linux Enterprise    | 15                                                                                                         | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
 | openSUSE                 | 16                                                                                                         | [KVM Driver]({{% relref "../../../product/operation_references/hypervisor_configuration/kvm_driver#kvmg" %}})                           |
@@ -55,7 +55,7 @@ Support for nodes’ operating system ensures that the latest two LTS releases f
 
 | **Component**     | **Version**                                                | **More information**                                                                                                                     |
 |---------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Ubuntu Server | 22.04 (LTS), 24.04 (LTS)                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
+| Ubuntu Server | 24.04 (LTS), 26.04 (LTS)                               | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | Debian        | 12, 13                                                 | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | AlmaLinux     | 9, 10                                                  | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}})                          |
 | Rocky Linux   | 9, 10                                                  | [LXC Driver]({{% relref "product/operation_references/hypervisor_configuration/lxc_driver#lxcmg" %}}).<br/>Available through Red Hat packages.              |
@@ -73,32 +73,32 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 
 | **Component**           | **Version**                                    | **More information**                                                                                                                             |
 |---------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "../../../product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
-| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "../../../product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
-| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "../../../product/cluster_configuration/networking_system/vxlan#vxlan" %}})                    |
-| Spectrum-X          | N/A | [Spectrum-X documentation]({{% relref "../../../product/cluster_configuration/networking_system/spectrumx" %}})                    |
-| InfiniBand          | N/A |  [PCI Passthrough]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough/" %}}) |
+| 8021q kernel module | Version included in the Linux distribution | [802.1Q VLAN]({{% relref "product/cluster_configuration/networking_system/vlan#hm-vlan" %}})             |
+| Open vSwitch        | Version included in the Linux distribution | [Open vSwitch]({{% relref "product/cluster_configuration/networking_system/openvswitch#openvswitch" %}}) |
+| iproute2            | Version included in the Linux distribution | [VXLAN]({{% relref "product/cluster_configuration/networking_system/vxlan#vxlan" %}})                    |
+| Spectrum-X          | N/A | [Spectrum-X documentation]({{% relref "product/cluster_configuration/networking_system/spectrumx" %}})                    |
+| InfiniBand          | N/A |  [PCI Passthrough]({{% relref "product/cluster_configuration/pci_passthrough_sriov/pci_passthrough/" %}}) |
 
 ### Storage Infrastructure
 
 | **Component** | **Version**  | **More information**                                                                                             |
 |-----------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| iSCSI     | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
-| LVM2      | Version included in the Linux distribution | [LVM Drivers]({{% relref "../../../product/cluster_configuration/lvm" %}})                                   |
-| Ceph      | Reef v18.2.x<br/>Squid   v19.2.x           | [The Ceph Datastore]({{% relref "../../../product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}}) |
-| NetApp    | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "../../../product/cluster_configuration/san_storage/netapp" %}})           |
+| iSCSI     | Version included in the Linux distribution | [LVM Drivers]({{% relref "product/cluster_configuration/lvm" %}})                                   |
+| LVM2      | Version included in the Linux distribution | [LVM Drivers]({{% relref "product/cluster_configuration/lvm" %}})                                   |
+| Ceph      | Reef v18.2.x<br/>Squid   v19.2.x           | [The Ceph Datastore]({{% relref "product/cluster_configuration/storage_system/ceph_ds#ceph-ds" %}}) |
+| NetApp    | ONTAP 9.16.1P1.                            | [NetApp ONTAP Drivers]({{% relref "product/cluster_configuration/san_storage/netapp" %}})           |
 | Everpure    | 6.7.2              | [Everpure SAN Datastore]({{% relref "product/cluster_configuration/san_storage/everpure" %}})           |
-| LVM-thin  | NetApp ONTAP 9.16.1P1 | [LVM Thin]({{% relref "../../../product/cluster_configuration/lvm" %}})                                      |
+| LVM-thin  | NetApp ONTAP 9.16.1P1 | [LVM Thin]({{% relref "product/cluster_configuration/lvm" %}})                                      |
 
 ### Accelerated Infrastructure
 
-| **Component** | **Models/Generations** | 
+| **Component** | **Models/Generations** |
 |-----------|--------------------------------------------|
-| Ampere GPUs  | A10, A30, A40, A100 | 
-| Ada Lovelace GPUs   | L4, L40, L40S | 
-| Hopper GPUs      | H100, H200, GH200  | 
-| Blackwell GPUs   | B200, B300, GB200, GB300  | 
-| BlueField DPUs   | 2, 3 | 
+| Ampere GPUs  | A10, A30, A40, A100 |
+| Ada Lovelace GPUs   | L4, L40, L40S |
+| Hopper GPUs      | H100, H200, GH200  |
+| Blackwell GPUs   | B200, B300, GB200, GB300  |
+| BlueField DPUs   | 2, 3 |
 
 ### Authentication
 
@@ -117,7 +117,7 @@ More information: [one-apps wiki](https://github.com/OpenNebula/one-apps/wiki)
 | SMART exporter                | 0.14.0    | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
 | LVM exporter                  | 0.6.2     | [Optional Exporters]({{% relref "../../../product/cloud_system_administration/prometheus/install.md#monitor-alert-extra-exporters" %}}) |
 | Restic backup backend         | 0.17.3    | [Backup Datastore: Restic]({{% relref "../../../product/cluster_configuration/backup_system/restic.md#vm-backups-restic" %}})                                        |
-| Veeam B&R                     | 12.3.1    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
+| Veeam B&R                     | >=13.0    | [Veeam Backup (EE)]({{% relref "../../../product/cluster_configuration/backup_system/veeam.md" %}}) |
 
 ### Sunstone
 
@@ -167,10 +167,3 @@ The following items apply to all distributions:
 ```default
 DISK = [ driver = "qcow2", cache = "writethrough" ]
 ```
-
-### AlmaLinux 9 Platform Notes
-
-#### Disable Libvirtd’s SystemD Socket Activation
-
-OpenNebula currently works only with the legacy `livirtd.service`. You should disable libvirt’s modular daemons and systemd socket activation for the `libvirtd.service`.
-You can take a look at [this](https://github.com/OpenNebula/one/issues/6143) bug report, for a detailed workaround procedure.

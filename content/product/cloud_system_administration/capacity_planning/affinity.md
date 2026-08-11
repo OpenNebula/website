@@ -281,4 +281,14 @@ To implement this operational behavior in production environments, administrator
 
 #### What happens if a VM has manual template requirements that conflict with its VM Group rules when a reschedule is triggered?
 
-* The scheduler evaluates both the VM Group rules and the manual `SCHED_REQUIREMENTS` specified in the VM template by combining them with a logical AND operator. If they are mutually exclusive (e.g. the template restricts the VM to `Host_A`, but the VM Group anti-affinity rule forbids `Host_A`), the combined expression returns zero valid Hosts. The VM will not be moved and will remain on its current Host with the Reschedule flag active until either the template or the group rules are updated to resolve the deadlock.
+{{< image
+  pathDark="/images/capacity/dark/vmgroup-role-definition.png"
+  path="/images/capacity/light/vmgroup-role-definition.png"
+  alt="VM Group role definition" align="center" width="90%" mb="20px"
+>}}
+
+{{< image
+  pathDark="/images/capacity/dark/vm-group-role-affinity.png"
+  path="/images/capacity/light/vm-group-role-affinity.png"
+  alt="VM Group role affinity" align="center" width="90%" mb="20px"
+>}}

@@ -125,6 +125,8 @@ Commands with marked with \* are asynchronous. The success response for these co
 | exec                                                                                                                                                    | one.vm.exec               | VM:MANAGE                                                |
 | exec-retry                                                                                                                                              | one.vm.retryexec          | VM:MANAGE                                                |
 | exec-cancel                                                                                                                                             | one.vm.cancelexec         | VM:MANAGE                                                |
+| vmgroup-add                                                                                                                                             | one.vm.vmgroupadd         | VM:MANAGE                                                |
+| vmgroup-del                                                                                                                                             | one.vm.vmgroupdel         | VM:MANAGE                                                |
 
 {{< alert title="Note" type="info" >}}
 The **deploy** action requires the user issuing the command to have VM:ADMIN rights. This user will usually be the scheduler with the oneadmin credentials.
@@ -178,6 +180,9 @@ onehost sync is not performed by the core, it is done by the ruby command onehos
 | deldatastore         | one.cluster.deldatastore | CLUSTER:ADMIN<br/><br/>DATASTORE:ADMIN |
 | addvnet              | one.cluster.addvnet      | CLUSTER:ADMIN<br/><br/>NET:ADMIN       |
 | delvnet              | one.cluster.delvnet      | CLUSTER:ADMIN<br/><br/>NET:ADMIN       |
+| optimize             | one.cluster.optimize     | CLUSTER:ADMIN                          |
+| planexecute          | one.cluster.planexecute  | CLUSTER:ADMIN                          |
+| plandelete           | one.cluster.plandelete   | CLUSTER:ADMIN                          |
 | rename               | one.cluster.rename       | CLUSTER:MANAGE                         |
 | show                 | one.cluster.info         | CLUSTER:USE                            |
 | list                 | one.clusterpool.info     | CLUSTER:USE                            |
@@ -193,6 +198,7 @@ onehost sync is not performed by the core, it is done by the ruby command onehos
 | addadmin           | one.group.addadmin    | GROUP:MANAGE<br/><br/>USER:MANAGE      |
 | deladmin           | one.group.deladmin    | GROUP:MANAGE<br/><br/>USER:MANAGE      |
 | quota              | one.group.quota       | GROUP:ADMIN                            |
+| vlan               | one.group.vlan        | GROUP:ADMIN                            |
 | list               | one.grouppool.info    | GROUP:USE                              |
 | –                  | one.groupquota.info   | –                                      |
 | defaultquota       | one.groupquota.update | Only for users in the `oneadmin` group |
@@ -474,7 +480,7 @@ onehost sync is not performed by the core, it is done by the ruby command onehos
 | delete            | one.hook.delete   | HOOK:MANAGE     |
 | show              | one.hook.info     | HOOK:USE        |
 | rename            | one.hook.rename   | HOOK:MANAGE     |
-| list<br/><br/>top | one.hook.info     | HOOK:USE        |
+| list<br/><br/>top | one.hookpool.info | HOOK:USE        |
 | lock              | one.hook.lock     | HOOK:MANAGE     |
 | unlock            | one.hook.unlock   | HOOK:MANAGE     |
 | retry             | one.hook.retry    | HOOK:MANAGE     |
@@ -1379,6 +1385,7 @@ For example:
 
 | Type   | Data Type   | Description                                                                       |
 |--------|-------------|-----------------------------------------------------------------------------------|
+| IN     | String      | The session string.                                                               |
 | IN     | Int         | The VM ID.                                                                        |
 | IN     | Int         | The Image ID of the backup to use                                                 |
 | IN     | Int         | Sets the increment to restore. Use -1 for the last increment or with full backups |
@@ -1396,6 +1403,7 @@ For backups created with a selected disk list, only disks present in the backup 
 
 | Type   | Data Type   | Description                                        |
 |--------|-------------|----------------------------------------------------|
+| IN     | String      | The session string.                                |
 | IN     | Int         | The VM ID.                                         |
 | IN     | String      | The command to be run inside the VM.               |
 | OUT    | Boolean     | `true` or `false` whenever it is successful or not |
@@ -1409,6 +1417,7 @@ For backups created with a selected disk list, only disks present in the backup 
 
 | Type   | Data Type   | Description                                     |
 |--------|-------------|-------------------------------------------------|
+| IN     | String      | The session string.                             |
 | IN     | Int         | The VM ID.                                      |
 | OUT    | Boolean     | `true` or `false` whenever is successful or not |
 | OUT    | Int/String  | The VM ID / The error string.                   |
@@ -1421,6 +1430,35 @@ For backups created with a selected disk list, only disks present in the backup 
 
 | Type   | Data Type   | Description                                     |
 |--------|-------------|-------------------------------------------------|
+| IN     | String      | The session string.                             |
+| IN     | Int         | The VM ID.                                      |
+| OUT    | Boolean     | `true` or `false` whenever is successful or not |
+| OUT    | Int/String  | The VM ID / The error string.                   |
+| OUT    | Int         | Error code.                                     |
+
+### one.vm.vmgroupadd
+
+- **Description**: Adds a Virtual Machine to a VM Group role.
+- **Parameters**
+
+| Type   | Data Type   | Description                                     |
+|--------|-------------|-------------------------------------------------|
+| IN     | String      | The session string.                             |
+| IN     | Int         | The VM ID.                                      |
+| IN     | Int         | The VM Group ID.                                |
+| IN     | String      | The VM Group role name.                         |
+| OUT    | Boolean     | `true` or `false` whenever is successful or not |
+| OUT    | Int/String  | The VM ID / The error string.                   |
+| OUT    | Int         | Error code.                                     |
+
+### one.vm.vmgroupdel
+
+- **Description**: Removes a Virtual Machine from its VM Group.
+- **Parameters**
+
+| Type   | Data Type   | Description                                     |
+|--------|-------------|-------------------------------------------------|
+| IN     | String      | The session string.                             |
 | IN     | Int         | The VM ID.                                      |
 | OUT    | Boolean     | `true` or `false` whenever is successful or not |
 | OUT    | Int/String  | The VM ID / The error string.                   |
@@ -1441,7 +1479,7 @@ Some attributes e.g. `TEMPLATE`, `USER_TEMPLATE` are limited in this call, see a
 | IN     | Int         | When the next parameter is >= -1 this is the Range start ID.<br/>Can be -1. For smaller values this is the offset used for pagination.                                                                                                                            |
 | IN     | Int         | For values >= -1 this is the Range end ID. Can be -1 to get until the<br/>last ID. For values < -1 this is the page size used for pagination.                                                                                                                     |
 | IN     | Int         | VM state to filter by.                                                                                                                                                                                                                                            |
-| IN     | String      | Filter in KEY=VALUE format.                                                                                                                                                                                                                                       |
+| IN     | String      | Filter using [json syntax]({{% relref "vm_instances.md#vm-search" %}}): `VM.KEY1=VALUE1&VM.KEY2=VALUE2`.                                                                                                                                                                                                                                       |
 | OUT    | Boolean     | true or false whenever is successful or not                                                                                                                                                                                                                       |
 | OUT    | String      | Version of the VM Pool with a short VM body documents.                                                                                                                                                                                                            |
 | OUT    | Int         | Error code.                                                                                                                                                                                                                                                       |
@@ -1963,6 +2001,48 @@ Sample output:
 | IN     | Int         | The vnet ID.                                |
 | OUT    | Boolean     | true or false whenever is successful or not |
 | OUT    | Int/String  | The resource ID / The error string.         |
+| OUT    | Int         | Error code.                                 |
+| OUT    | Int         | ID of the Cluster that caused the error.    |
+
+### one.cluster.optimize
+
+- **Description**: Creates an optimization plan for a Cluster.
+- **Parameters**
+
+| Type   | Data Type   | Description                                 |
+|--------|-------------|---------------------------------------------|
+| IN     | String      | The session string.                         |
+| IN     | Int         | The cluster ID.                             |
+| OUT    | Boolean     | true or false whenever is successful or not |
+| OUT    | Int/String  | The cluster ID / The error string.          |
+| OUT    | Int         | Error code.                                 |
+| OUT    | Int         | ID of the Cluster that caused the error.    |
+
+### one.cluster.planexecute
+
+- **Description**: Starts applying the optimization plan for a Cluster.
+- **Parameters**
+
+| Type   | Data Type   | Description                                 |
+|--------|-------------|---------------------------------------------|
+| IN     | String      | The session string.                         |
+| IN     | Int         | The cluster ID.                             |
+| OUT    | Boolean     | true or false whenever is successful or not |
+| OUT    | Int/String  | The cluster ID / The error string.          |
+| OUT    | Int         | Error code.                                 |
+| OUT    | Int         | ID of the Cluster that caused the error.    |
+
+### one.cluster.plandelete
+
+- **Description**: Deletes the optimization plan for a Cluster.
+- **Parameters**
+
+| Type   | Data Type   | Description                                 |
+|--------|-------------|---------------------------------------------|
+| IN     | String      | The session string.                         |
+| IN     | Int         | The cluster ID.                             |
+| OUT    | Boolean     | true or false whenever is successful or not |
+| OUT    | Int/String  | The cluster ID / The error string.          |
 | OUT    | Int         | Error code.                                 |
 | OUT    | Int         | ID of the Cluster that caused the error.    |
 
@@ -4036,6 +4116,26 @@ The range can be used to retrieve a subset of the pool, from the ‘start’ to 
 | OUT    | Int/String  | The resource ID / The error string.                                                |
 | OUT    | Int         | Error code.                                                                        |
 | OUT    | Int         | ID of the group that caused the error.                                             |
+
+### one.group.vlan
+
+- **Description**: Sets the user group VLAN rules used to authorize tenant Virtual Network template instantiation and updates of Virtual Networks derived from templates.
+- **Parameters**:
+
+| Type   | Data Type   | Description                                                                                         |
+|--------|-------------|-----------------------------------------------------------------------------------------------------|
+| IN     | String      | The session string.                                                                                 |
+| IN     | Int         | The object ID.                                                                                      |
+| IN     | String      | The VLAN rule template contents. Syntax can be the usual `attribute=value` or XML.                  |
+| OUT    | Boolean     | `true` or `false` indicating success or failure of VLAN rule application.                           |
+| OUT    | Int/String  | The resource ID / error string.                                                                     |
+| OUT    | Int         | Error code.                                                                                         |
+
+Sample VLAN rule template:
+
+```none
+RULE=[ID="100-199",SCOPE="VLAN_ID",VNTEMPLATE="10"]
+```
 
 ### one.grouppool.info
 

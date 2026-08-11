@@ -6,7 +6,7 @@ categories: [Introduction, Overview]
 pageintoc: "5"
 tags: [Features]
 type: docs
-weight: "2"
+weight: "3"
 ---
 
 OpenNebula offers a simple but feature-rich and flexible solution to build and manage data center virtualization and enterprise clouds. This page provides a summary of its key features**.
@@ -80,6 +80,7 @@ Native integration with NVIDIA technologies to deliver GPU and DPU-accelerated N
 * GPU Passthrough: Secure, high-performance GPU access for multi-tenant environments.
 * DPU Integration (BF-3): Hardware offload for networking, security, and encryption tasks.
 * GPU Telemetry: Real-time GPU monitoring via NVIDIA DCGM and gpu-tools.
+* NVIDIA Infrastructure Controller Integration: Multi-tenant, AI Factory-scale bare-metal infrastructure management with NICo.
 * Inference Applications: Pre-built apps optimized for fast inference, with native integration of vLLM and Hugging Face frameworks for efficient deployment of AI and LLM workloads.
 * NVIDIA Ecosystem Integration: Seamless integration with the NVIDIA AI software stack, including platforms such as Run:ai and Dynamo, enabling unified orchestration, scheduling, and monitoring of AI workloads.
 

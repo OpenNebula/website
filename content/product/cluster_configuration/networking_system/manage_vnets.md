@@ -170,22 +170,22 @@ End users typically use the last two ways, instantiation and reservation. The ad
 
 To create a new network from scratch, put its configuration in a file and then execute:
 
-```default
-$ onevnet create priv.net
+```shell
+onevnet create priv.net
 ID: 4
 ```
 
 You can delete a Virtual Network using its ID or name:
 
-```default
-$ onevnet delete 0
-$ onevnet delete "Private"
+```shell
+onevnet delete 0
+onevnet delete "Private"
 ```
 
 To list the Virtual Networks in the system use `onevnet list`:
 
-```default
-$ onevnet list
+```shell
+onevnet list
 ID USER      GROUP       NAME        CLUSTER    BRIDGE    STATE  LEASES
  0 admin     oneadmin    Private     0,100      onebr.10  rdy         0
  1 admin     oneadmin    Public      0,101      vbr0      rdy         0
@@ -195,8 +195,8 @@ In the output above, `USER` is the owner of the network and `LEASES` the number 
 
 You can check the details of a Virtual Network with the `onevnet show` command:
 
-```default
-$ onevnet show 1
+```shell
+onevnet show 1
   VIRTUAL NETWORK 4 INFORMATION
   ID             : 4
   NAME           : Private
@@ -235,6 +235,50 @@ $ onevnet show 1
 ```
 
 Check the `onevnet` command help or the [reference guide]({{% relref "../../operation_references/command_line_interface/cli#cli" %}}) for more options to list the Virtual Networks.
+
+## Group VLAN Rules
+
+Group VLAN rules allow cloud administrators to delegate Virtual Network self-provisioning while restricting tenant VLAN usage within explicit ranges. Rules are defined [**per user group**]({{% relref "product/cloud_system_administration/multitenancy/manage_groups/" %}}) and are evaluated when a non-administrator:
+
+- Instantiates a Virtual Network template.
+- Updates a Virtual Network, including VLAN attributes in Address Ranges.
+
+A group VLAN rule is defined with `ID`, `SCOPE`, and optionally `VNTEMPLATE`:
+
+```default
+RULE = [
+  ID         = "100-199",
+  SCOPE      = "VLAN_ID",
+  VNTEMPLATE = "10"
+]
+```
+
+- `ID`: Allowed VLAN values. Use a single value, a comma-separated list, or ranges, for example `100`, `100,105`, or `100-199`.
+- `SCOPE`: VLAN attribute controlled by the rule. Supported values are `VLAN_ID`, `OUTER_VLAN_ID`, `CVLAN`, `VLAN_TAGGED_ID`, and `ANY`.
+- `VNTEMPLATE`: Virtual Network template IDs where the rule applies. Use a single ID, a comma-separated list, ranges, or `-1` to apply the rule to any Virtual Network template. If omitted, OpenNebula sets it by default as `-1`.
+
+For example, the following rule allows VLAN IDs 300, and 400 through 450, for any supported VLAN attribute and any Virtual Network template:
+
+```default
+RULE = [
+  ID         = "300,400-450",
+  SCOPE      = "ANY",
+  VNTEMPLATE = "-1"
+]
+```
+
+To set the rules for a user group, create a file such as `vlans.txt` with the intended group VLAN rules as detailed above then run:
+
+```shell
+onegroup vlan <user_group_name> vlans.txt
+```
+
+If the file argument is omitted, `onegroup vlan` opens an editor with the current rules. Adjust this file to your preferences then save and close the editor, the `onegroup vlan` command will then execute upon closing the editor.
+
+When users belong to more than one group, a requested VLAN value is accepted if any of their groups has a matching rule. A rule only authorizes values within its own scope, except for `ANY`, which matches all supported VLAN scopes. `VLAN_ID` and `OUTER_VLAN_ID` must be single values; `CVLAN` and `VLAN_TAGGED_ID` can use the same range syntax as rule IDs.
+
+{{< alert title="Important" type="info" >}}
+If a group has VLAN rules that apply to the target Virtual Network template, users in that group must request explicit VLAN values. Automatic selection with `AUTOMATIC_VLAN_ID` or `AUTOMATIC_OUTER_VLAN_ID` is rejected for that template since it would bypass the group VLAN policy.{{< /alert >}}
 
 ### Virtual Network Tips
 
@@ -317,12 +361,12 @@ Addresses can be temporarily be marked as `hold`. They are still part of the net
 
 To do so, use the `onevnet hold` and `onevnet release` commands. By default, the address will be put on hold in all ARs containing it; if you need to hold the IP of a specific AR you can specify it with the ‘-a <AR_ID>’ option:
 
-```default
+```shell
 #Hold IP 10.0.0.120 in all ARs
-$ onevnet hold "Private Network" 10.0.0.120
+onevnet hold "Private Network" 10.0.0.120
 
 #Hold IP 10.0.0.123 in AR 0
-$ onevnet hold 0 10.0.0.123 -a 0
+onevnet hold 0 10.0.0.123 -a 0
 ```
 
 You see the list of leases on hold with the `onevnet show` command; they’ll show up as used by Virtual Machine -1, ‘V: -1’
@@ -461,10 +505,42 @@ In case the Virtual Network is not in `READY` state, use `onevnet recover` to fi
 
 You can also manage your Virtual Networks using the [Sunstone GUI]({{% relref "../../control_plane_configuration/graphical_user_interface/fireedge_sunstone#fireedge-sunstone" %}}). Select the **Virtual Networks** tab to create, enable, and operate your Virtual Networks in a user-friendly way.
 
-![image0](/images/sunstone_vnets.png)
+{{< image
+  pathDark="/images/virtual_networks/management/dark/sunstone_vnets_list.png"
+  path="/images/virtual_networks/management/light/sunstone_vnets_list.png"
+  alt="Sunstone Virtual Networks list" align="center" width="90%" mb="20px"
+>}}
 
-- Create new Virtual Networks
+- Create new Virtual Networks using the **+ Create Virtual Network** button, you can choose to create a new network fro scratch or from an existing template:
 
-![image1](/images/sunstone_vnet_create_general.png)
+{{< image
+  pathDark="/images/virtual_networks/management/dark/create_vnet_option.png"
+  path="/images/virtual_networks/management/light/create_vnet_option.png"
+  alt="Sunstone Virtual Networks create" align="center" width="70%" mb="20px"
+>}}
 
-![image2](/images/sunstone_vnet_create_advanced.png)
+- If you are creating a Virtual Network from scratch, fill in the details in each step of the creation wizard:
+
+  * General details:
+
+  {{< image
+    pathDark="/images/virtual_networks/management/dark/create_vnet_general.png"
+    path="/images/virtual_networks/management/light/create_vnet_general.png"
+    alt="Sunstone Virtual Networks create general step" align="center" width="90%" mb="20px"
+  >}}
+
+  * Advanced details:
+
+  {{< image
+    pathDark="/images/virtual_networks/management/dark/create_vnet_advanced.png"
+    path="/images/virtual_networks/management/light/create_vnet_advanced.png"
+    alt="Sunstone Virtual Networks create advanced step" align="center" width="90%" mb="20px"
+  >}}
+
+- If creating a Virtual Network from a template, choose your preferred template from the menu:
+
+{{< image
+  pathDark="/images/virtual_networks/management/dark/create_vnet_from_template.png"
+  path="/images/virtual_networks/management/light/create_vnet_from_template.png"
+  alt="Sunstone Virtual Networks create from template" align="center" width="80%" mb="20px"
+>}}

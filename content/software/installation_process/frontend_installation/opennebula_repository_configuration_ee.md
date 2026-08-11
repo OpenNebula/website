@@ -1,6 +1,6 @@
 ---
 title: "Manual Installation - OpenNebula Repositories for Enterprise Edition"
-linkTitle: "Manual - Repositories (EE)"
+linkTitle: "Repositories (EE)"
 date: "2025-02-17"
 description:
 categories:
@@ -112,19 +112,6 @@ echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.openne
 apt-get update
 ```
 
-**Ubuntu 22.04**
-
-```shell
-cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
-machine enterprise.opennebula.io
-login <user>
-password <password>
-EOT
-chmod 600 /etc/apt/auth.conf.d/opennebula.conf
-echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/{{< release >}}/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
-apt-get update
-```
-
 **Ubuntu 24.04**
 
 ```shell
@@ -135,6 +122,26 @@ password <password>
 EOT
 chmod 600 /etc/apt/auth.conf.d/opennebula.conf
 echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/{{< release >}}/Ubuntu/24.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+apt-get update
+```
+
+**Ubuntu 26.04**
+
+Ubuntu 26.04 ships Node.js 22 in its base repositories, but OpenNebula FireEdge requires Node.js 20, which is provided by the OpenNebula repository. Add an APT pin so that `apt` installs Node.js 20 from the OpenNebula repository instead of the newer version shipped by Ubuntu:
+
+```shell
+cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
+machine enterprise.opennebula.io
+login <user>
+password <password>
+EOT
+chmod 600 /etc/apt/auth.conf.d/opennebula.conf
+cat << "EOT" > /etc/apt/preferences.d/opennebula-nodejs
+Package: nodejs
+Pin: release o=OpenNebula
+Pin-Priority: 600
+EOT
+echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/{{< release >}}/Ubuntu/26.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 apt-get update
 ```
 
@@ -199,12 +206,12 @@ gpgcheck=1
 repo_gpgcheck=1
 EOT
 
-zypper ar -f https://download.opensuse.org/repositories/science/openSUSE_Leap_16.0/ science
+zypper ar -f https://download.opensuse.org/repositories/science/16.0/ science
 zypper refresh
 ```
 
 {{< alert title="Note" color="success" >}}
-You can point to a specific 7.2.x version by changing the occurrence of shorter version number 7.2 in any of the above commands to the full three components. For instance, to point to version 7.2.1 on Ubuntu 22.04, use the following command:
+You can point to a specific 7.4.x version by changing the occurrence of shorter version number 7.4 in any of the above commands to the full three components. For instance, to point to version 7.4.1 on Ubuntu 24.04, use the following command:
 
 ```shell
 cat << "EOT" > /etc/apt/auth.conf.d/opennebula.conf
@@ -213,7 +220,7 @@ login <user>
 password <password>
 EOT
 chmod 600 /etc/apt/auth.conf.d/opennebula.conf
-echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/7.2.1/Ubuntu/22.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+echo "deb [signed-by=/etc/apt/keyrings/opennebula.gpg] https://enterprise.opennebula.io/repo/7.4.1/Ubuntu/24.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
 apt-get update
 ```
 {{< /alert >}}

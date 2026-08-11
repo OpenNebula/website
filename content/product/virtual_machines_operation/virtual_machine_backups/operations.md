@@ -44,8 +44,8 @@ The `INTERACTIVE` backup workflow is reserved for supported third-party integrat
 
 For interactive backup integrations, OpenNebula supports:
 
-- **Full interactive backups** for `qcow2` disks.
-- **Incremental interactive backups** for `qcow2` disks using **CBT** mode only.
+- **Full interactive backups** for file-based `qcow2` disks and disks on LVM datastores.
+- **Incremental interactive backups** for file-based `qcow2` disks and disks on LVM datastores using **CBT** mode only.
 
 Interactive incremental backups do not support the `SNAPSHOT` increment mode.
 {{< /alert >}}
@@ -59,7 +59,7 @@ VM backups can be taken live or while the VM is powered off. The operation compr
 - *Post-backup*: Cleans any temporal file in the hypervisor.
 
 {{< alert title="Note" type="info" >}}
-In order to save space in the backup system, RAW disk backups are converted and stored always in Qcow2 format.{{< /alert >}} 
+In order to save space in the backup system, RAW disk backups are converted and stored always in Qcow2 format.{{< /alert >}}
 
 ## Limitations
 
@@ -68,6 +68,7 @@ In order to save space in the backup system, RAW disk backups are converted and 
 - Attaching a disk to a VM that had an incremental backup previously made will yield an error. The –reset option for the backup operation is required to recreate a new incremental chain
 - Incremental backups on VMs with disk or system snapshots is not supported
 - `KEEP_LAST` option is not supported for Incremental backups of Ceph disks
+- Interactive backups only support datastores using the `local`, `shared` and `lvm*` TM drivers.
 
 ## Preparing VMs for Backups
 
@@ -103,7 +104,11 @@ BACKUP_CONFIG = [
 
 To configure using the Sunstone GUI, select the **Backup** tab:
 
-![template_cfg](/images/backup_template_cfg.png)
+{{< image
+  pathDark="/images/virtual_machines/templates/dark/backup-tab.png"
+  path="/images/virtual_machines/templates/light/backup-tab.png"
+  alt="VM Template Backup tab" align="center" width="90%" mb="20px"
+>}}
 
 ### Virtual Machines
 
@@ -146,11 +151,19 @@ MODE="INCREMENT"
 
 To configure using the Sunstone GUI, click on the virtual machine, select the **Backup** tab and click on the **Backup config** button:
 
-![vm_cfg](/images/backup_vm_configuration.png)
+{{< image
+  pathDark="/images/virtual_machines/management/dark/backup-tab.png"
+  path="/images/virtual_machines/management/light/backup-tab.png"
+  alt="VM Backup tab" align="center" width="90%" mb="20px"
+>}}
 
 Sunstone will display the screen to update the VM Configuration.
 
-![vm_cfg_tab](/images/backup_vm_configuration_tab.png)
+{{< image
+  pathDark="/images/virtual_machines/management/dark/backup-config.png"
+  path="/images/virtual_machines/management/light/backup-config.png"
+  alt="VM Backup configuration" align="center" width="90%" mb="20px"
+>}}
 
 <a id="vm-backups-selected-disks"></a>
 
@@ -234,7 +247,11 @@ VM 0: backup scheduled at 2022-12-01 13:28:44 +0000
 
 Using Sunstone to take one-shot backup:
 
-![vm_backup_action](/images/vm_backup_action.png)
+{{< image
+  pathDark="/images/virtual_machines/management/dark/create-backup.png"
+  path="/images/virtual_machines/management/light/create-backup.png"
+  alt="Create VM backup" align="center" width="90%" mb="20px"
+>}}
 
 After the backup is complete you should see the backup information in the VM details, as well as the associated backup image. For example:
 
@@ -320,7 +337,11 @@ ID        Time                 Host                                  Tags       
 
 You can program periodic backups [through the schedule actions interface]({{% relref "../virtual_machines/vm_instances#schedule-actions" %}}). Note that in this case, you have to pass the target datastore ID as argument of the action. You can create a periodic backup with the `--schedule` option in the CLI, or through Sunstone in the Schedule Action dialog (to open the dialog, click the Sched Actions tab then click Add action).
 
-![vm_schedule](/images/backup_schedule.png)
+{{< image
+  pathDark="/images/virtual_machines/management/dark/schedule-backup.png"
+  path="/images/virtual_machines/management/light/schedule-backup.png"
+  alt="Schedule VM backup" align="center" width="90%" mb="20px"
+>}}
 
 **Note**: As with any other schedule action, you can plan for several backup operations or add a pre-set backup schedule in the VM template.
 
