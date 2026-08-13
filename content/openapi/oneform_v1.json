@@ -273,7 +273,7 @@
       "delete": {
         "tags": ["providers"],
         "summary": "Delete a provider",
-        "description": "Deletes the provider when it is not required by an on-premises provision.",
+        "description": "Deletes the selected provider only when it is not used by any provision. The default on-premises provider cannot be deleted.",
         "parameters": [{ "$ref": "#/components/parameters/DocumentId" }],
         "responses": {
           "204": { "$ref": "#/components/responses/NoContent" },
@@ -479,10 +479,11 @@
       "delete": {
         "tags": ["provisions"],
         "summary": "Delete a provision",
-        "description": "Deletes completed provisions immediately; otherwise it starts asynchronous deprovisioning. Use force to override lifecycle safeguards.",
+        "description": "Starts deprovisioning for the selected provision. Use force to override lifecycle safeguards. Use from_db only as a last resort when deprovisioning cannot complete.",
         "parameters": [
           { "$ref": "#/components/parameters/DocumentId" },
-          { "$ref": "#/components/parameters/Force" }
+          { "$ref": "#/components/parameters/Force" },
+          { "$ref": "#/components/parameters/FromDb" }
         ],
         "responses": {
           "202": { "$ref": "#/components/responses/Accepted" },
@@ -882,6 +883,12 @@
         "name": "force",
         "in": "query",
         "description": "Force the requested lifecycle operation",
+        "schema": { "type": "boolean" }
+      },
+      "FromDb": {
+        "name": "from_db",
+        "in": "query",
+        "description": "Deletes only the OneForm provision document without deprovisioning. It does not delete OpenNebula objects or resources at the external provider. Use only as a last resort when uncontrolled errors prevent deprovisioning; manually remove every remaining resource.",
         "schema": { "type": "boolean" }
       }
     },

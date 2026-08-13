@@ -286,7 +286,21 @@ OpenNebula resources, run:
 oneprovision delete <provision_id>
 ```
 
-Use `--force` to delete a Provision from any state or when it has unmanaged resources.
+Use `--force` to start deprovisioning from any state or when the Provision has unmanaged resources.
+
+If deprovisioning cannot be completed because of an uncontrolled error, you can
+remove only the Provision document:
+
+```bash
+oneprovision delete <provision_id> --from-db
+```
+
+{{< alert type="warning" >}}
+**Important:** Use `--from-db` only as a last resort. It removes only the OneForm Provision
+document; it does **not** delete the OpenNebula objects or resources created at
+the external provider. An administrator must manually identify and remove every
+remaining resource in both environments.
+{{< /alert >}}
 
 {{% /tab %}}
 
@@ -296,6 +310,8 @@ Use `--force` to delete a Provision from any state or when it has unmanaged reso
 curl -X DELETE "https://oneform.example.server/api/v1/provisions/<id>?force=true" \
   -u "username:password"
 ```
+
+To remove only the Provision document, use `from_db=true` instead of `force=true`.
 <br>
 
 For further details about the API, see the [OneForm API Reference]({{% relref "/product/integration_references/system_interfaces/oneform_api.md" %}}).
