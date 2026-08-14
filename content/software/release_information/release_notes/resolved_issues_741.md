@@ -35,3 +35,4 @@ The following issues have been solved in 7.4.1:
 * Fix cmd_confinement leaking secrets passed via environment [#7823](https://github.com/OpenNebula/one/issues/7823).
 * Fix live storage migration with NVRAM [#7770](https://github.com/OpenNebula/one/issues/7770).
 * Fix attachment of XFS volatile disks [#7746](https://github.com/OpenNebula/one/issues/7746).
+* Fix NFS automount with shared DS and TM_MAD_SYSTEM=ssh [#7758](https://github.com/OpenNebula/one/issues/7758).
