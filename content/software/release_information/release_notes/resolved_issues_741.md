@@ -37,3 +37,9 @@ The following issues have been solved in 7.4.1:
 * Fix storage migrations to prevent Open vSwitch ports from being removed [#7947](https://github.com/OpenNebula/one/issues/7947).
 * Fix Isolated CPUS input not updating when switching hosts [#7970](https://github.com/OpenNebula/one/issues/7970).
 * Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962)
+* Fix parsing of internal Address Range, it will fail to create the network [#7974](https://github.com/OpenNebula/one/issues/7974)
+* Fix backup retry after failure for Ceph storage [#7937](https://github.com/OpenNebula/one/issues/7937)
+* Fix `vip.sh` return code, make the script more robust [#7980](https://github.com/OpenNebula/one/issues/7980)
+* Fix false `POWEROFF` or `UNKNOWN` state after VM deploy [#7975](https://github.com/OpenNebula/one/issues/7975)
+* Fix `one.image.restore` reporting success if authorization fails [#7991](https://github.com/OpenNebula/one/issues/7991)
+* Fix `one.group.update`, `one.group.addadmin` and `one.group.deladmin` authorization levels [#7987](https://github.com/OpenNebula/one/issues/7987)
