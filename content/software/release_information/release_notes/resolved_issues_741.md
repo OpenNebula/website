@@ -36,3 +36,4 @@ The following issues have been solved in 7.4.1:
 * Fix live storage migration with NVRAM [#7770](https://github.com/OpenNebula/one/issues/7770).
 * Fix attachment of XFS volatile disks [#7746](https://github.com/OpenNebula/one/issues/7746).
 * Fix NFS automount with shared DS and TM_MAD_SYSTEM=ssh [#7758](https://github.com/OpenNebula/one/issues/7758).
+* Fix metadata update after LVM persistent image resizing [#7427](https://github.com/OpenNebula/one/issues/7427).
