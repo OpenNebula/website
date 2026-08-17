@@ -29,4 +29,4 @@ The following issues have been solved in 7.4.1:
 * Fix ARP tables not being updated on HA leader election [#7935](https://github.com/OpenNebula/one/issues/7935).
 * Fix repeated attributes in Cluster template [#7941](https://github.com/OpenNebula/one/issues/7941).
 * Fix use of PCI NIC device for `onevm ssh` and `onevm port-forward` commands [#7925](https://github.com/OpenNebula/one/issues/7925).
-* Fix Sunstone sets wrong ownership of template saved from instance [#7393](https://github.com/OpenNebula/one/issues/7393)
+* Fix incorrect ownership of templates saved from instances in Sunstone [#7393](https://github.com/OpenNebula/one/issues/7393)
