@@ -128,6 +128,17 @@ The no-SLAAC IPv6 version supports the following attributes:
 | `MAC`       | First `MAC`, if not provided it will be<br/>generated randomly. | **NO**      |
 | `SIZE`      | Number of addresses in this range.                              | **YES**     |
 
+### Lease Allocation Policy
+
+The `REUSE_ADDRESS` Virtual Network attribute controls how OpenNebula automatically allocates leases from internal Address Ranges:
+
+| Value | Behavior |
+|-------|----------|
+| `NO`  | Allocate leases in round-robin order. |
+| `YES` | Reuse the first available lease in the Address Range. |
+
+If this attribute is not set, the Virtual Network uses the global `REUSE_ADDRESS` value from [`oned.conf`]({{% relref "oned#virtual-networks" %}}). The global default is `NO`. This attribute does not affect Address Ranges managed by an external IPAM driver.
+
 <a id="vnet-template-context"></a>
 
 ## Contextualization Attributes

@@ -69,6 +69,16 @@ AR=[
 ]
 ```
 
+#### Lease Allocation Policy
+
+By default, OpenNebula automatically allocates leases from internal Address Ranges in round-robin order. To reuse the first available lease instead, add `REUSE_ADDRESS = "YES"` to the Virtual Network template:
+
+```default
+REUSE_ADDRESS = "YES"
+```
+
+The Virtual Network attribute overrides the global `REUSE_ADDRESS` setting in [`oned.conf`]({{% relref "oned#virtual-networks" %}}). If the attribute is omitted, the network uses the global setting, which defaults to `NO`. The setting does not affect Address Ranges managed by an external IPAM driver. See the [Virtual Network template reference]({{% relref "vnet_template#lease-allocation-policy" %}}) for details.
+
 ### Shared Address Ranges (Shared AR) for Virtual IPs
 
 Marking an Address Range as `SHARED` converts its IPs into **Virtual IPs**. This allows **multiple VMs** to use the same IP address.
