@@ -624,13 +624,20 @@ Note that any generic quota attribute will be added to the `VM_RESTRICTED_ATTR` 
 
 ## Restricted Attributes Configuration
 
-Users outside the `oneadmin` group won’t be able to instantiate templates created by users outside the `oneadmin` group that include attributes restricted by:
+Restricted attributes prevent users outside the `oneadmin` group from setting or modifying selected object template attributes. Configure them with:
 
 - `VM_RESTRICTED_ATTR`: Virtual Machine attribute to be restricted for users outside the oneadmin group
 - `IMAGE_RESTRICTED_ATTR`: Image attribute to be restricted for users outside the oneadmin group
 - `VNET_RESTRICTED_ATTR`: Virtual Network attribute to be restricted for users outside the oneadmin group when updating a reservation. These attributes are not considered for regular VNET creation.
+- `USER_RESTRICTED_ATTR`: User template attribute to be restricted for users outside the oneadmin group
+- `GROUP_RESTRICTED_ATTR`: Group template attribute to be restricted for users outside the oneadmin group
 
-If the VM template has been created by admins in the `oneadmin` group then users outside the oneadmin group **can** instantiate these templates.
+For single attributes, specify the attribute name directly. For vector attributes, you can restrict either the complete vector or individual attributes within it:
+
+- `ATTRIBUTE`: Restricts the single attribute or the complete vector attribute. For example, `VM_RESTRICTED_ATTR = "DISK"` prevents users from adding, removing, or changing any `DISK` vector.
+- `VECTOR/ATTRIBUTE`: Restricts only the specified attribute in every occurrence of the vector. For example, `VM_RESTRICTED_ATTR = "DISK/SIZE"` protects `SIZE` while other attributes in the `DISK` vector remain customizable.
+
+Users outside the `oneadmin` group can instantiate VM templates created by an administrator even when those templates contain restricted attributes, but they cannot override the restricted values.
 
 Sample configuration:
 
@@ -672,6 +679,14 @@ VNET_RESTRICTED_ATTR = "AR/VN_MAD"
 VNET_RESTRICTED_ATTR = "AR/PHYDEV"
 VNET_RESTRICTED_ATTR = "AR/VLAN_ID"
 VNET_RESTRICTED_ATTR = "AR/BRIDGE"
+
+USER_RESTRICTED_ATTR = "VM_USE_OPERATIONS"
+USER_RESTRICTED_ATTR = "VM_MANAGE_OPERATIONS"
+USER_RESTRICTED_ATTR = "VM_ADMIN_OPERATIONS"
+
+GROUP_RESTRICTED_ATTR = "VM_USE_OPERATIONS"
+GROUP_RESTRICTED_ATTR = "VM_MANAGE_OPERATIONS"
+GROUP_RESTRICTED_ATTR = "VM_ADMIN_OPERATIONS"
 ```
 
 OpenNebula evaluates these attributes:
