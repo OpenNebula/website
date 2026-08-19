@@ -9,6 +9,8 @@ A complete list of solved issues for 7.4.1 are listed in the [project developmen
 
 The following new features have been backported to 7.4.1:
 
+* Allow changing LVM image persistency [#7779](https://github.com/OpenNebula/one/issues/7779).
+
 <!-- item structure
 Include a high level description and a link to the documentation explaining the new feature. Example:
 
