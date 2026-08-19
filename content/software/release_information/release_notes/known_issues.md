@@ -16,6 +16,17 @@ A complete list of [known issues for OpenNebula is maintained here](https://gith
 
 This page will be updated with relevant information about bugs affecting OpenNebula, as well as possible workarounds until a patch is officially published.
 
+## Upgrade Overwrites the Host Fencing Script
+
+Upgrading the OpenNebula packages [overwrites a customized](https://github.com/OpenNebula/one/issues/7996) `/var/lib/one/remotes/hooks/ft/fence_host.sh` with the stock template. If the Host error hook is configured with fencing enabled, fencing (and thus the hook) will fail after the upgrade until the file is restored.
+
+The pre-upgrade file is preserved in the configuration backup taken automatically during the package upgrade, and can be restored from there:
+
+```default
+cp /var/lib/one/backups/config/<timestamp>-v<previous version>/var/lib/one/remotes/hooks/ft/fence_host.sh \
+   /var/lib/one/remotes/hooks/ft/fence_host.sh
+```
+
 ## Frontend HA
 
 - [ARP tables are not updated automatically](https://github.com/OpenNebula/one/issues/7920) when a leader is elected in Red Hat Enterprise Linux OS variants.
