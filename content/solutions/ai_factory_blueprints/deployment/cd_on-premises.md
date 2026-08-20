@@ -14,7 +14,7 @@ The AI Factory functionality is currently under development for OpenNebula 7.4 a
 
 Machine Learning (ML) training and inference are resource-intensive tasks that often require the full power of a dedicated GPU. PCI passthrough allows a Virtual Machine (VM) to have exclusive access to a physical GPU, delivering bare-metal performance for the most demanding AI workloads.
 
-In this guide you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [OneDeploy](https://github.com/OpenNebula/one-deploy) tool. It covers the general process for preparing an environment for demanding AI workloads by leveraging PCI passthrough for GPUs like the NVIDIA H100 and L40S. 
+In this guide you will find the details to deploy and configure an AI-ready OpenNebula cloud using the [OneDeploy](https://github.com/OpenNebula/one-deploy) tool. It covers the general process of preparing an environment for demanding AI workloads by leveraging PCI passthrough for GPUs such as the NVIDIA H100 and L40S. 
 
 ## Prerequisites
 
@@ -170,22 +170,18 @@ node:
   hosts:
     h100-node:
       ansible_host: 192.168.122.3
-      pci_passthrough_enabled: true
       pci_devices:
         - address: "0000:09:00.0" # NVIDIA H100 GPU
     l40s-node:
       ansible_host: 192.168.122.4
-      pci_passthrough_enabled: true
       pci_devices:
         - address: "0000:0a:00.0" # NVIDIA L40S GPU
     standard-node:
       ansible_host: 192.168.122.5
-      pci_passthrough_enabled: false
 ```
 
 Key configuration parameters to setup:
 
-*   `pci_passthrough_enabled: true`: this boolean flag enables the PCI passthrough configuration for a specific node.
 *   `pci_devices`: this is a list of PCI devices to be configured for passthrough on that node.
     *   `address`: the full PCI address of the device (e.g., `"0000:09:00.0"`). List this address by running the `lspci -D` command on the hypervisor. Note that you must provide the full address, as short addresses are not supported by this OneDeploy feature.
 
@@ -201,7 +197,7 @@ This command should output something similar to the following:
 c1:00.0 3D controller [0302]: NVIDIA Corporation AD102GL [L40S] [10de:26b9] (rev a1)
 ```
 
-The relevant address for the inventory file in this case is `"0000.c1:00.0"`. You may need to append four `0`s.
+The relevant address for the inventory file in this case is `"0000.c1:00.0"`. You may need to prepend `0000.`.
 
 ### Run the Deployment
 
@@ -219,7 +215,7 @@ Simultaneously, on the OpenNebula Front-end, OneDeploy configures the monitoring
 
 After the deployment is complete, verify that the GPUs are correctly configured and available to OpenNebula by checking the Host information in Sunstone:
 
-1. Log in to your OpenNebula Sunstone GUI
+1. Log in to your OpenNebula Sunstone GUI (normally accessible at <FRONTEND_IP>:2616), with the password you set in the inventory
 2. Navigate to **Infrastructure -> Hosts**
 3. Select one of the hypervisors you configured for passthrough (e.g., `h100-node`)
 4. Go to the **PCI** tab

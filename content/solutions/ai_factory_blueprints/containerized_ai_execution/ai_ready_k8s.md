@@ -604,6 +604,22 @@ Now that you have provisioned an AI-ready Kubernetes Cluster, you can move onto 
 * [Deployment of NVIDIA Dynamo]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}})
 * [Deployment of the NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}})
 
+## Teardown
+
+Once you have completed the AI Factory guides that you are interested in, we recommend to tear down the CAPI Cluster unless you intend to make further deployments to free up compute resources. The following instructions show how to cleanly shut down the CAPI Cluster:
+
+Run the following command on your OpenNebula Front-end's command line:
+
+```shell
+kubectl --kubeconfig ./kubeconfig_management.yaml delete cluster k8s-gpu-test -n default
+```
+
+Watch the virtual router, the control plane and the worker VMs terminate with `onevm list`. Once the router, control plane and worker VMs are all successfully terminated, terminate the CAPI VM itself:
+
+```shell
+onevm terminate <CAPI_VM_ID>
+```
+
 ## Known Errors
 
 ### Connection closed by UNKNOWN port 65535
@@ -657,4 +673,6 @@ ssh-keygen -f "/var/lib/one/.ssh/known_hosts" -R "172.20.0.9"
 ```
 
 After completing this procedure, the SSH jumphost command should work correctly.
+
+
 
