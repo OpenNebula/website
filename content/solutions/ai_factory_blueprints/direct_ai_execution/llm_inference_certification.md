@@ -9,10 +9,6 @@ tags: ['AI','vLLM']
 weight: 4
 ---
 
-{{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
-{{< /alert >}} 
-
 The [vLLM](https://docs.vllm.ai/en/latest/) Inference Framework is a production-grade, high-performance inference engine designed for large-scale LLM serving.
 
 The main characteristics of vLLM Inference Framework are:

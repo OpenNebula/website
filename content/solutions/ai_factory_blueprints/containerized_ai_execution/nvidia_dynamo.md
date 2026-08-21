@@ -7,10 +7,6 @@ tags: ['AI','Kubernetes','NVIDIA']
 
 <a id="nvidia_dynamo"></a>
 
-{{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
-{{< /alert >}} 
-
 [NVIDIA&reg; Dynamo](https://docs.nvidia.com/dynamo/latest/index.html) is a high-performant inference framework for serving AI models in an agnostic way, across any framework, architecture or deployment scale, as well as in multi-node distributed environments. Being an agnostic inference engine, it supports different backends such as TRT-LLM, vLLM, SGLang, etc. Dynamo also allows you to declare inference graphs which deploy different containerized components in a disaggregated way - like an API frontend, a prefill worker, a decode worker, a K/V cache, and others - and to let them interact to efficiently respond to the user queries.
 
 Encapsulating the different inference engines, AI models and dependencies into a single container improves the workload portability and isolation. With this approach, each container is deployed consistently across different environments, including all its dependencies, avoiding conflicts and reproducibility issues.
@@ -110,7 +106,7 @@ helm install dynamo-crds https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dyn
   --wait --atomic
 ```
 
-2. Install the operator, using the latest version available in the catalog.:
+2. Install the operator, using the 0.7.0 version (using another version may cause problems while following this guide):
 
 ```shell
 helm install dynamo-platform https://helm.ngc.nvidia.com/nvidia/ai-dynamo/charts/dynamo-platform-0.7.0.tgz \
@@ -348,7 +344,7 @@ Deploy the disaggregated deployment graph with kubectl:
 kubectl -n dynamo-cloud apply -f disagg_custom.yaml
 ```
 
-After some minutes (pulling the vllm runtime image takes its time), check that the pods are up and running:
+After some minutes (pulling the vLLM runtime image takes some time), check that the pods are up and running. If pods are in the `ContainerCreating` status, continue waiting until they convert to `Running`:
 
 ```shell
 kubectl -n dynamo-cloud get pods,svc
@@ -400,7 +396,9 @@ curl localhost:9000/v1/models | jq .
 }
 ```
 
-And also submit inference requests:
+If the `data` attribute is empty, the model may still be loading, try again in a minute or so. 
+
+Once the model is loaded, try submitting an inference request:
 
 ```shell
 curl localhost:9000/v1/completions   -H "Content-Type: application/json"   -d '{
@@ -465,7 +463,7 @@ In the streamed output, you will receive multiple JSON responses with the respon
 
 ## Undeployment
 
-Before moving on to other AI Factory guides or deployments, you must undeploy NVIDIA Dynamo and the Disaggregated Deployment Graph. 
+Before moving on to other AI Factory guides or deployments, it is recommended to undeploy NVIDIA Dynamo and the Disaggregated Deployment Graph if you do not intend to further use NVIDIA Dynamo. 
 
 Run the following command to undeploy the graph:
 

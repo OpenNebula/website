@@ -39,7 +39,7 @@ Check OneGate on the OpenNebula Front-end:
 systemctl status opennebula-gate
 ```
 
-The OneSlurm service requires an NFS for operational convenience. If you do not have an NFS server available, you can create one locally:
+The OneSlurm service benefits from an NFS for operational convenience, allowing data to be easily shared between the controller and workers. If you do not have an NFS server available, you can create one locally:
 
 1. Install the NFS server:
 
@@ -70,6 +70,9 @@ The OneSlurm service requires an NFS for operational convenience. If you do not 
     ONEAPP_SLURM_NFS_SCRATCH = <FRONTEND_IP>:/srv/nfs/slurm/scratch
     ONEAPP_SLURM_NFS_HOME    = <FRONTEND_IP>:/srv/nfs/slurm/home
     ```
+{{< alert title="Note" type="primary" >}}
+If you do not have an NFS server and you do not wish to create one, you must adjust the following instructions to store the AI model data and scripts directly on the worker VM and execute the job accordingly. 
+{{< /alert >}} 
 
 ## Step 1: Import the OneSlurm Service
 
@@ -83,23 +86,26 @@ The command imports two VM templates and one service template. In the examples b
 
 ## Step 2: Review the Worker Template
 
-Before instantiating the service, review the Worker VM template. Size CPU, memory, and GPU resources for your workload.
+Before instantiating the service, review the Worker VM template. Set CPU, memory, and GPU resources appropriately for your workload.
 
 For this tutorial, use at least:
 
-* Memory: 16384 MB
-* Physical CPU: 2
+* **Memory**: 16384 MB
+* **Physical CPU**: 2
 * One NVIDIA GPU or GPU PCI profile
 
 In Sunstone:
 
-* Go to **Templates -> VM Templates**.
-* Select the imported **Service Slurm Worker** template and click **Update**.
-* Adjust CPU and memory in **General**.
-* Attach the GPU in **PCI Devices**.
+* Go to **Templates -> VM Templates**
+* Select the imported **Service Slurm Worker** template and click **Update**
+* Adjust CPU and memory in **General**
+* Attach the GPU in **PCI Devices**
 
-{{< image path="/images/ai_factories/attach-pci-device.png" alt="Slurm PCI" align="center" width="90%" mt="20px" mb="40px" >}}
-
+{{< image
+  pathDark="/images/ai_factories/dark/attach_pci.png"
+  path="/images/ai_factories/light/attach_pci.png"
+  alt="Attach PCI" align="center" width="80%" mb="20px"
+>}}
 ## Step 3: Instantiate the OneSlurm Service
 
 Instantiate the imported service template:
@@ -110,16 +116,16 @@ oneflow-template instantiate 'Service OneSlurm'
 
 When prompted:
 
-* Select the OpenNebula virtual network for `Service`.
-* Enable local LDAP with `ONEAPP_LDAP_ENABLE=YES`, or provide `ONEAPP_LDAP_URL` and `ONEAPP_LDAP_DOMAIN` for an external LDAP service.
-* Set `ONEAPP_LDAP_DOMAIN`, for example `slurm.local`.
-* Set `ONEAPP_LDAP_ADMIN_USER`, for example `admin`.
-* Set `ONEAPP_LDAP_ADMIN_PASSWORD`.
-* Set `ONEAPP_SLURM_NFS_SCRATCH` to the NFS export used for `/scratch`, for example `10.125.0.1:/srv/nfs/slurm/scratch`.
-* Optionally set `ONEAPP_SLURM_NFS_HOME` to an NFS export used for `/home`.
-* Leave InfiniBand disabled unless your Workers have passthrough InfiniBand devices and the fabric is already configured.
+* Select the OpenNebula virtual network for `Service`
+* Enable local LDAP with `ONEAPP_LDAP_ENABLE=YES`, or provide `ONEAPP_LDAP_URL` and `ONEAPP_LDAP_DOMAIN` for an external LDAP service
+* Set `ONEAPP_LDAP_DOMAIN`, for example `slurm.local`
+* Set `ONEAPP_LDAP_ADMIN_USER`, for example `admin`
+* Set `ONEAPP_LDAP_ADMIN_PASSWORD`
+* Set `ONEAPP_SLURM_NFS_SCRATCH` to the NFS export used for `/scratch`, for example `10.125.0.1:/srv/nfs/slurm/scratch`
+* Optionally set `ONEAPP_SLURM_NFS_HOME` to an NFS export used for `/home`
+* Leave InfiniBand disabled unless your Workers have passthrough InfiniBand devices and the fabric is already configured
 
-OneFlow waits to deploy Workers until the Controller publishes `READY=YES` through OneGate. The Controller also publishes the Munge key and LDAP metadata, so you do not need to copy a Munge key or Controller IP address into Worker user inputs.
+OneFlow waits to deploy Workers until the Controller publishes `READY=YES` through OneGate. The Controller also publishes the Munge key and LDAP metadata, so you do not need to copy a Munge key or Controller IP address into the Worker user inputs.
 
 Wait until the service reaches `RUNNING`:
 
@@ -141,14 +147,14 @@ SSH into the Slurm Controller:
 onevm ssh <SLURM_CONTROLLER_VM_ID>
 ```
 
-Verify the Worker registered with Slurm:
+Verify the Worker is registered with Slurm:
 
 ```shell
 scontrol show nodes
 sinfo
 ```
 
-Verify the GPU is visible through Slurm:
+Verify the GPU is visible to the Worker through Slurm:
 
 ```shell
 srun -N1 -n1 --gres=gpu:1 nvidia-smi -L
@@ -164,7 +170,7 @@ If you enabled local LDAP, the Controller runs OpenLDAP and the Controller and W
 
 ## Step 5: Create an LDAP User
 
-Skip this step if you use an external LDAP service and already have a POSIX user for Slurm jobs.
+Skip this step if you are using an external LDAP service and already have a POSIX user for Slurm jobs.
 
 On the Slurm Controller, create a local LDAP user. The example creates user `aiuser` with UID and GID `20000`. Choose values that do not collide with existing users or groups.
 

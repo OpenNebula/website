@@ -7,11 +7,6 @@ tags: ['AI', 'Kubernetes','NVIDIA']
 
 <a id="nvidia_kai_scheduler"></a>
 
-{{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
-{{< /alert >}} 
-
-
 The [NVIDIA&reg; KAI Scheduler](https://github.com/NVIDIA/KAI-Scheduler) is an open source Kubernetes-native scheduler designed to optimize GPU resource allocation for AI and machine learning workloads at scale. It is capable of managing large GPU clusters and handling high-throughput demanding workload environments. KAI Scheduler targets both interactive jobs and large-scale training or inference tasks within the same cluster, orchestrating available resources  across different users and teams. It also operates alongside other schedulers installed in a cluster.
 
 Some of the key features are:
@@ -220,7 +215,8 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
     EOF
     ```
 
-3. Verify that the deployment is allocated with the specified resources
+3. Verify that the deployment is allocated with the specified resources:
+
     ```shell
     kubectl -n ai-workloads get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,GPU-FRACTION:.metadata.annotations.gpu-fraction,GPU-GROUP:.metadata.labels.runai-gpu-group"
     ```
@@ -228,6 +224,8 @@ To test the GPU sharing feature of KAI Scheduler, follow these steps:
     NAME                            STATUS    NODE                       GPU-FRACTION   GPU-GROUP
     vllm-test-07-5979b99584-llf45   Running   k8s-gpu-md-0-wr9k6-gbtvr   0.7            407623a2-216d-4c06-b5b8-f8345bf28b5a
     ```
+
+    Wait until the STATUS column reaches the `Running` state before continuing, this may take several minutes. 
 
 4. Deploy a Kubernetes service to access the API
     ```yaml
