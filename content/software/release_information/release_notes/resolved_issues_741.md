@@ -39,3 +39,4 @@ The following issues have been solved in 7.4.1:
 * Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962).
 * Fix the Virtual machine template form by setting the name to read-only [#7951](https://github.com/OpenNebula/one/issues/7951).
 * Fix the Virtual Machine and Host tables by adding the cluster filter [#7994](https://github.com/OpenNebula/one/issues/7994).
+* Fix the blank page displayed in the host NUMA tab when a physical CPU is assigned to a VM. [#7969](https://github.com/OpenNebula/one/issues/7969)
