@@ -15,6 +15,9 @@ Include a high level description and a link to the documentation explaining the 
 * Add per-VM live migration options through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`]({{% relref "/product/operation_references/configuration_references/template#template-features" %}}) VM template attributes. Administrators can now tune auto-convergence and memory compression only for selected KVM VMs, improving migration reliability and bandwidth usage without changing global driver defaults.
 -->
 
+* Edit permissions on update group form in Sunstone [#6394](https://github.com/OpenNebula/one/issues/6394)
+* Fix cluster quota generation in Sunstone [#7538](https://github.com/OpenNebula/one/issues/7538)
+
 ## Resolved Issues
 <!-- item structure
 One line per issue starting with "Fix ...". Descrive the issue so the user understands the fix. Add link to GH. Example:
@@ -29,6 +32,8 @@ The following issues have been solved in 7.4.1:
 * Fix ARP tables not being updated on HA leader election [#7935](https://github.com/OpenNebula/one/issues/7935).
 * Fix repeated attributes in Cluster template [#7941](https://github.com/OpenNebula/one/issues/7941).
 * Fix use of PCI NIC device for `onevm ssh` and `onevm port-forward` commands [#7925](https://github.com/OpenNebula/one/issues/7925).
+* Fix preventing users from entering negative numbers in non-negative fields [#7135](https://github.com/OpenNebula/one/issues/7135).
+* Fix incorrect ownership of templates saved from instances in Sunstone [#7393](https://github.com/OpenNebula/one/issues/7393)
 * Fix "ACPI=yes" not being applied for some UEFI configurations [#7792](https://github.com/OpenNebula/one/issues/7792).
 * Fix storage migrations to prevent Open vSwitch ports from being removed [#7947](https://github.com/OpenNebula/one/issues/7947).
 * Fix TM migration cleanup with symlinked datastores [#7972](https://github.com/OpenNebula/one/issues/7972).
@@ -37,3 +42,8 @@ The following issues have been solved in 7.4.1:
 * Fix attachment of XFS volatile disks [#7746](https://github.com/OpenNebula/one/issues/7746).
 * Fix NFS automount with shared DS and TM_MAD_SYSTEM=ssh [#7758](https://github.com/OpenNebula/one/issues/7758).
 * Fix metadata update after LVM persistent image resizing [#7427](https://github.com/OpenNebula/one/issues/7427).
+* Fix Isolated CPUS input not updating when switching hosts [#7970](https://github.com/OpenNebula/one/issues/7970).
+* Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962).
+* Fix the Virtual machine template form by setting the name to read-only [#7951](https://github.com/OpenNebula/one/issues/7951).
+* Fix the Virtual Machine and Host tables by adding the cluster filter [#7994](https://github.com/OpenNebula/one/issues/7994).
+* Fix interactive restores producing truncated images when trailing zeroed ranges are skipped during transfer [#8008](https://github.com/OpenNebula/one/issues/8008).
