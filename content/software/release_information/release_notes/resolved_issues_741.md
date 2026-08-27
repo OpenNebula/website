@@ -15,6 +15,7 @@ Include a high level description and a link to the documentation explaining the 
 * Add per-VM live migration options through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`]({{% relref "/product/operation_references/configuration_references/template#template-features" %}}) VM template attributes. Administrators can now tune auto-convergence and memory compression only for selected KVM VMs, improving migration reliability and bandwidth usage without changing global driver defaults.
 -->
 
+* Add new OneDRS block in Sunstone [#7783](https://github.com/OpenNebula/one/issues/7783)
 * Edit permissions on update group form in Sunstone [#6394](https://github.com/OpenNebula/one/issues/6394)
 * New parameter `--keep-ha` for CLI command `onezone serversync`, which keeps local [RAFT configuration]({{% relref "frontend_ha.md#server-sync-ha" %}}).
 * Log HA hearbeat and replication messages at log level 5.
