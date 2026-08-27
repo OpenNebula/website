@@ -38,4 +38,4 @@ The following issues have been solved in 7.4.1:
 * Fix Isolated CPUS input not updating when switching hosts [#7970](https://github.com/OpenNebula/one/issues/7970).
 * Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962).
 * Fix the Virtual machine template form by setting the name to read-only [#7951](https://github.com/OpenNebula/one/issues/7951).
-* Fix log mandatory OneBEX configuration file parameters [#8004](https://github.com/OpenNebula/one/issues/8004)
+* Fix Backup Exporter service error reporting to cover additional error conditions [#8004](https://github.com/OpenNebula/one/issues/8004), [#7986](https://github.com/OpenNebula/one/issues/7986).
