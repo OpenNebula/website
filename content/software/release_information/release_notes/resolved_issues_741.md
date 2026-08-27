@@ -16,6 +16,9 @@ Include a high level description and a link to the documentation explaining the 
 -->
 
 * Edit permissions on update group form in Sunstone [#6394](https://github.com/OpenNebula/one/issues/6394)
+* New parameter `--keep-ha` for CLI command `onezone serversync`, which keeps local [RAFT configuration]({{% relref "frontend_ha.md#server-sync-ha" %}}).
+* Log HA hearbeat and replication messages at log level 5.
+* Option to configure network lease policy for internal Address Ranges. The policy can be set globally in [oned.conf]({{% relref "oned#virtual-networks" %}}).
 
 ## Resolved Issues
 <!-- item structure
@@ -35,8 +38,24 @@ The following issues have been solved in 7.4.1:
 * Fix incorrect ownership of templates saved from instances in Sunstone [#7393](https://github.com/OpenNebula/one/issues/7393)
 * Fix "ACPI=yes" not being applied for some UEFI configurations [#7792](https://github.com/OpenNebula/one/issues/7792).
 * Fix storage migrations to prevent Open vSwitch ports from being removed [#7947](https://github.com/OpenNebula/one/issues/7947).
+* Fix TM migration cleanup with symlinked datastores [#7972](https://github.com/OpenNebula/one/issues/7972).
+* Fix cmd_confinement leaking secrets passed via environment [#7823](https://github.com/OpenNebula/one/issues/7823).
+* Fix live storage migration with NVRAM [#7770](https://github.com/OpenNebula/one/issues/7770).
+* Fix attachment of XFS volatile disks [#7746](https://github.com/OpenNebula/one/issues/7746).
+* Fix NFS automount with shared DS and TM_MAD_SYSTEM=ssh [#7758](https://github.com/OpenNebula/one/issues/7758).
+* Fix metadata update after LVM persistent image resizing [#7427](https://github.com/OpenNebula/one/issues/7427).
 * Fix Isolated CPUS input not updating when switching hosts [#7970](https://github.com/OpenNebula/one/issues/7970).
+* Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962)
+* Fix parsing of internal Address Range, it will fail to create the network [#7974](https://github.com/OpenNebula/one/issues/7974)
+* Fix backup retry after failure for Ceph storage [#7937](https://github.com/OpenNebula/one/issues/7937)
+* Fix `vip.sh` return code, make the script more robust [#7980](https://github.com/OpenNebula/one/issues/7980)
+* Fix false `POWEROFF` or `UNKNOWN` state after VM deploy [#7975](https://github.com/OpenNebula/one/issues/7975)
+* Fix `one.image.restore` reporting success if authorization fails [#7991](https://github.com/OpenNebula/one/issues/7991)
+* Fix `one.group.update`, `one.group.addadmin` and `one.group.deladmin` authorization levels [#7987](https://github.com/OpenNebula/one/issues/7987)
 * Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962).
 * Fix the Virtual machine template form by setting the name to read-only [#7951](https://github.com/OpenNebula/one/issues/7951).
 * Fix the Virtual Machine and Host tables by adding the cluster filter [#7994](https://github.com/OpenNebula/one/issues/7994).
 * Fix allow RAW hypervisor VM configuration update [#7613](https://github.com/OpenNebula/one/issues/7613).
+* Fix interactive restores producing truncated images when trailing zeroed ranges are skipped during transfer [#8008](https://github.com/OpenNebula/one/issues/8008).
+* Fix cluster quota generation in Sunstone [#7538](https://github.com/OpenNebula/one/issues/7538)
+* Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
