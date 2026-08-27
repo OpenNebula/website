@@ -38,4 +38,4 @@ The following issues have been solved in 7.4.1:
 * Fix Isolated CPUS input not updating when switching hosts [#7970](https://github.com/OpenNebula/one/issues/7970).
 * Fix interactive LVM incremental backups with more than one dirty extent [#7962](https://github.com/OpenNebula/one/issues/7962).
 * Fix the Virtual machine template form by setting the name to read-only [#7951](https://github.com/OpenNebula/one/issues/7951).
-* Fix Expose SR-IOV PF TRUST and SPOOFCHK in Sunstone [#7933](https://github.com/OpenNebula/one/issues/7933).
+* Fix Sunstone Virtual Network tab to include inputs for SR-IOV `TRUST` and `SPOOFCHK` attributes [#7933](https://github.com/OpenNebula/one/issues/7933).
