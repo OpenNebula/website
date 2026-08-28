@@ -67,3 +67,4 @@ The following issues have been solved in 7.4.1:
 * Fix Prometheus datasource patching on systems with older Ruby versions [#7997](https://github.com/OpenNebula/one/issues/7997).
 * Fix VM configuration update call in Sunstone [#7502](https://github.com/OpenNebula/one/issues/7502).
 * Fix FS freeze for live Ceph backups [#8011](https://github.com/OpenNebula/one/issues/8011).
+* Fix stale symlink after TM_MAD=shared persistent disk detach [#8000](https://github.com/OpenNebula/one/issues/8000).
