@@ -353,12 +353,31 @@ The list below shows the ports used by OpenNebula. These ports need to be open f
 {{< alert title="Note" type="info" >}}
 These are only the default ports. Each component can be configured to bind to specific ports or use a HTTP Proxy.{{< /alert >}}
 
-OpenNebula connects to the hypervisor nodes over SSH (port 22). Additionally, the main OpenNebula Daemon (oned) may connect to various remote Marketplace servers to get a list of available appliances, e.g.:
+OpenNebula connects to the hypervisor nodes over SSH (port 22).
 
-- OpenNebula Marketplace (`https://marketplace.opennebula.io/`)
-- Linux Containers Marketplace (`https://images.linuxcontainers.org/`)
+### Required Outgoing Connections
 
-You should open the outgoing connections to these services.
+{{< alert title="Note" type="info" >}}
+Direct outbound internet access to these services is not strictly required. You can deploy and run OpenNebula in air-gapped or restricted environments by setting up local repository mirrors, and the use of external marketplaces is entirely optional.
+{{< /alert >}}
+
+By default, the following external services are accessed:
+
+#### OpenNebula Repositories (Package Installation)
+*   **OpenNebula Community Edition**: `https://downloads.opennebula.io/` (to fetch packages and updates for Community users)
+*   **OpenNebula Enterprise Edition**: `https://enterprise.opennebula.io/` (to fetch packages and updates for active Enterprise subscribers)
+
+#### OpenNebula Marketplaces (Runtime Services - Optional)
+*   **OpenNebula Marketplace**: `https://marketplace.opennebula.io/` (to fetch and import official appliances)
+*   **Linux Containers Marketplace**: `https://images.linuxcontainers.org/` (to fetch and import LXC/container system images)
+
+#### Upstream Dependencies (Installation & Deployment Tools)
+*   **Ansible Galaxy**: `https://galaxy.ansible.com/` (to fetch collections and role requirements)
+*   **GitHub**: `https://github.com/` (to clone or pull the `one-deploy` repository and custom playbooks)
+*   **PyPI**: `https://pypi.org/` and `https://files.pythonhosted.org/` (to fetch Python libraries, Ansible modules, and OCA bindings)
+
+
+
 
 ## Step 8. Stop and Restart Services (Optional)
 
