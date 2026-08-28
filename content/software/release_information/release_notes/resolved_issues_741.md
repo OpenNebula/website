@@ -20,6 +20,8 @@ Include a high level description and a link to the documentation explaining the 
 * New parameter `--keep-ha` for CLI command `onezone serversync`, which keeps local [RAFT configuration]({{% relref "frontend_ha.md#server-sync-ha" %}}).
 * Log HA hearbeat and replication messages at log level 5.
 * Option to configure network lease policy for internal Address Ranges. The policy can be set globally in [oned.conf]({{% relref "oned#virtual-networks" %}}).
+* Extend Network PCI physical functions (PF) card control with link state management and flags in switchdev mode.
+* Extend link state management for network Physical Functions when using Virtual Functions as PCI network interfaces.
 
 ## Resolved Issues
 <!-- item structure
@@ -30,7 +32,7 @@ One line per issue starting with "Fix ...". Descrive the issue so the user under
 
 The following issues have been solved in 7.4.1:
 
-* Fix VM configuration update call in Sunstone [#7502](https://github.com/OpenNebula/one/issues/7502).
+* Fix ARP tables not being updated on HA leader election [#7920](https://github.com/OpenNebula/one/issues/7920).
 * Fix Veeam not being able to fetch VM with ID 0 [#7949](https://github.com/OpenNebula/one/issues/7949).
 * Fix ARP tables not being updated on HA leader election [#7935](https://github.com/OpenNebula/one/issues/7935).
 * Fix repeated attributes in Cluster template [#7941](https://github.com/OpenNebula/one/issues/7941).
@@ -60,8 +62,10 @@ The following issues have been solved in 7.4.1:
 * Fix the Virtual Machine and Host tables by adding the cluster filter [#7994](https://github.com/OpenNebula/one/issues/7994).
 * Fix allow RAW hypervisor VM configuration update [#7613](https://github.com/OpenNebula/one/issues/7613).
 * Fix interactive restores producing truncated images when trailing zeroed ranges are skipped during transfer [#8008](https://github.com/OpenNebula/one/issues/8008).
+* Fix persistent image creation when saving a VM as a template in Sunstone [#7425](https://github.com/OpenNebula/one/issues/7425).
 * Fix cluster quota generation in Sunstone [#7538](https://github.com/OpenNebula/one/issues/7538)
 * Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
 * Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
 * Fix Prometheus datasource patching on systems with older Ruby versions [#7997](https://github.com/OpenNebula/one/issues/7997).
 * Fix current host and datastore selection in the Sunstone migration dialog [#7995](https://github.com/OpenNebula/one/issues/7995).
+* Fix VM configuration update call in Sunstone [#7502](https://github.com/OpenNebula/one/issues/7502).
