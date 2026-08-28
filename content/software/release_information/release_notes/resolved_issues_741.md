@@ -64,3 +64,4 @@ The following issues have been solved in 7.4.1:
 * Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
 * Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
 * Fix Prometheus datasource patching on systems with older Ruby versions [#7997](https://github.com/OpenNebula/one/issues/7997).
+* Fix current host and datastore context in the migration dialog [#7995](https://github.com/OpenNebula/one/issues/7995).
