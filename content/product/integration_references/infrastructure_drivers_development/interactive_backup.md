@@ -142,19 +142,36 @@ onebex://<IMAGE_DS_ID>:<PORT_ID>
 
 The OneBEX API is consumed by backup integrations. The current API is:
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/` | `GET` | Returns basic server information and the available API routes. |
-| `/status` | `GET` | Returns the current export status for a VM. Requires `VM_ID`. |
-| `/exporters` | `GET` | Lists the exporter backends available in OneBEX. |
-| `/export` | `POST` | Starts one or more disk exports for a VM. Requires `VM_ID` and `DS_ID`. `DISKS` is optional. |
-| `/transfers/:TRANSFER_ID/info` | `GET` | Returns size and format information for a transfer. |
-| `/images/:TRANSFER_ID` | `OPTIONS` | Returns supported image transfer features and concurrency limits. |
-| `/images/:TRANSFER_ID/extents` | `GET` | Returns block extent information for a transfer. |
-| `/images/:TRANSFER_ID` | `GET` | Reads a byte range from a transfer. Requires an HTTP `Range` header. |
-| `/images/:TRANSFER_ID` | `PATCH` | Flushes a transfer when the request body uses `op=flush`. |
-| `/transfer/:TRANSFER_ID/finalize` | `POST` | Finalizes a transfer and releases its exporter resources. |
-| `/vms/:VM_ID/finish` | `POST` | Finishes the VM backup session after all transfers have been finalized. |
+### API Endpoints
+
+| Endpoint | Method | Purpose | HTTP Status |
+|----------|--------|---------|-------------|
+| `/` | `GET` | Returns basic server information and the available API routes. | `200` |
+| `/status` | `GET` | Returns the current export status for a VM. Requires `VM_ID`. | `200`, `400` |
+| `/exporters` | `GET` | Lists the exporter backends available in OneBEX. | `200` |
+| `/export` | `POST` | Starts one or more disk exports for a VM. Requires `VM_ID` and `DS_ID`. `DISKS` is optional. | `200`, `400`, `404`, `500` |
+| `/transfers/:TRANSFER_ID/info` | `GET` | Returns size and format information for a transfer. | `200`, `404` |
+| `/images/:TRANSFER_ID` | `OPTIONS` | Returns supported image transfer features and concurrency limits. | `200` |
+| `/images/:TRANSFER_ID/extents` | `GET` | Returns block extent information for a transfer. | `200`, `404` |
+| `/images/:TRANSFER_ID` | `GET` | Reads a byte range from a transfer. Requires an HTTP `Range` header. | `206`, `400`, `404`, `416` |
+| `/images/:TRANSFER_ID` | `PUT` | Image write operation. Currently not implemented. | `501` |
+| `/images/:TRANSFER_ID` | `PATCH` | Flushes a transfer when the request body uses `op=flush`. | `200`, `400`, `404` |
+| `/transfer/:TRANSFER_ID/finalize` | `POST` | Finalizes a transfer and releases its exporter resources. | `200`, `404` |
+| `/vms/:VM_ID/cancel` | `POST` | Cancels all active transfers for a VM. | `200`, `400` |
+| `/vms/:VM_ID/finish` | `POST` | Finishes the VM backup session after all transfers have been finalized. | `200`, `409` |
+
+### HTTP Status Codes
+
+| Code | Description |
+|------|---------|
+| `200 OK` | Request completed successfully. |
+| `206 Partial Content` | Requested byte range returned successfully. |
+| `400 Bad Request` | Invalid request, missing parameters, malformed JSON, or unsupported operation. |
+| `404 Not Found` | Transfer, disk, export metadata, or endpoint not found. |
+| `409 Conflict` | VM backup cannot finish while transfers are still pending. |
+| `416 Range Not Satisfiable` | Missing or invalid byte range. |
+| `500 Internal Server Error` | Unexpected server-side error. |
+| `501 Not Implemented` | Operation exists but is not implemented. |
 
 ## Exporters
 
