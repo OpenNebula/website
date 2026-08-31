@@ -74,3 +74,4 @@ The following issues have been solved in 7.4.1:
 * Fix current host and datastore selection in the Sunstone migration dialog [#7995](https://github.com/OpenNebula/one/issues/7995).
 * Fix VM configuration update call in Sunstone [#7502](https://github.com/OpenNebula/one/issues/7502).
 * Fix the Add NIC form to include the DNS field [#7916](https://github.com/OpenNebula/one/issues/7916).
+* Fix update any item without having permissions to create it on yaml FireEdge views [#6416](https://github.com/OpenNebula/one/issues/6416).
