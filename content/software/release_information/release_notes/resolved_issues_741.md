@@ -71,3 +71,4 @@ The following issues have been solved in 7.4.1:
 * Fix Prometheus datasource patching on systems with older Ruby versions [#7997](https://github.com/OpenNebula/one/issues/7997).
 * Fix current host and datastore selection in the Sunstone migration dialog [#7995](https://github.com/OpenNebula/one/issues/7995).
 * Fix VM configuration update call in Sunstone [#7502](https://github.com/OpenNebula/one/issues/7502).
+* Fix the form for adding a NIC by adding the DNS field [#7916](https://github.com/OpenNebula/one/issues/7916).
