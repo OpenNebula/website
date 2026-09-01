@@ -69,7 +69,6 @@ The following issues have been solved in 7.4.1:
 * Fix cluster quota generation in Sunstone [#7538](https://github.com/OpenNebula/one/issues/7538)
 * Fix missing VM monitoring section in Sunstone [#8014](https://github.com/OpenNebula/one/issues/8014)
 * Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
-* Fix customized `hooks/ft/fence_host.sh` being overwritten on upgrade. Fencing is now enabled by creating `fence_host.sh` from the shipped `fence_host.sh.example`, see [Enabling Fencing]({{% relref "vm_ha.md#enabling-fencing" %}}) [#7996](https://github.com/OpenNebula/one/issues/7996).
 * Fix Prometheus datasource patching on systems with older Ruby versions [#7997](https://github.com/OpenNebula/one/issues/7997).
 * Fix interactive backup cancellation while waiting for the external server to finish [#8009](https://github.com/OpenNebula/one/issues/8009).
 * Fix custom timezone setting option [#7575](https://github.com/OpenNebula/one/issues/7575).
