@@ -1,5 +1,5 @@
 ---
-title: "On-cloud Deployment on Scaleway"
+title: "On-cloud AI Factory Deployment with Scaleway"
 linkTitle: "Cloud Deployment"
 date: "2025-10-21"
 weight: 3
@@ -9,7 +9,7 @@ tags: ['AI']
 <a id="cd_cloud"></a>
 
 {{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
+This AI Factory guide is currently under testing for OpenNebula 7.4, therefore you might encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
 {{< /alert >}} 
 
 This document describes the procedure to deploy an AI-ready OpenNebula cloud using OneDeploy on a single [Scaleway Elastic Metal](https://www.scaleway.com/en/elastic-metal/) bare-metal server equipped with GPUs.
