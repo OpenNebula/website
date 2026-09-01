@@ -1,6 +1,6 @@
 ---
 title: "AMD GPU Passthrough"
-linkTitle: "AMD GPU Passthrough"
+linkTitle: "AMD GPUs"
 date: "2026-06-30"
 description:
 categories:

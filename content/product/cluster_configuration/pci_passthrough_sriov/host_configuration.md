@@ -1,6 +1,6 @@
 ---
-title: "Host Configuration for PCI Passthrough"
-linkTitle: "Host Configuration for PCI Passthrough"
+title: "Host Configuration for PCI Passthrough and SR-IOC"
+linkTitle: "Host Configuration (PCI Passthrough and SR-IOV)"
 date: "2026-06-30"
 description:
 categories:

@@ -1,6 +1,6 @@
 ---
 title: "Axelera GPU Passthrough"
-linkTitle: "Axelera GPU Passthrough"
+linkTitle: "Axelera GPUs"
 date: "2025-10-16"
 description:
 categories:

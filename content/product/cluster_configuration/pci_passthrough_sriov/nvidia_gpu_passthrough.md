@@ -1,6 +1,6 @@
 ---
 title: "NVIDIA GPU Passthrough"
-linkTitle: "NVIDIA GPU Passthrough"
+linkTitle: "NVIDIA GPUs"
 date: "2025-10-16"
 description:
 categories:
