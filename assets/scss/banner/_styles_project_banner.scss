@@ -39,6 +39,10 @@
     padding-top: 0;
   }
 
+  .td-content {
+    padding-top: 24px;
+  }
+
   .td-sidebar {
     @include media-breakpoint-up(md) {
       padding-top: 0;
