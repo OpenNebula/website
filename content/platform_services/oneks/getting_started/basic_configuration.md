@@ -18,12 +18,7 @@ Install the OneKS package on the OpenNebula Front-end if it is not already insta
 sudo apt install -y opennebula-ks
 ```
 
-OneKS uses an appliance from the OpenNebula Marketplace to bootstrap K8s
-Clusters. By default, it imports this appliance into the default OpenNebula
-image datastore when the service starts. Ensure that this datastore is
-associated with the OpenNebula Cluster where K8s Clusters will be deployed. To
-make the appliance available to additional clusters or configure it for
-air-gapped environments, see [Appliance Configuration]({{% relref "platform_services/oneks/management/configuration/#appliance-configuration" %}}).
+OneKS uses an appliance from the OpenNebula Marketplace to bootstrap K8s Clusters. By default, it imports this appliance into the default OpenNebula image datastore when the service starts. Ensure that this datastore is accessible to the OpenNebula Cluster where K8s Clusters will be deployed. To make the appliance available to additional Clusters or configure it for air-gapped environments, see [Appliance Configuration]({{% relref "platform_services/oneks/management/configuration/#appliance-configuration" %}}).
 
 ## Confirm the Status of the OneGate Service
 
@@ -181,10 +176,7 @@ If the above command is not suitable for your Front-end Host configuration, cons
 
 ## Automatically Generated Resources
 
-When OneKS starts, it automatically downloads the OneKS appliance from the
-OpenNebula Marketplace. During this process, OneKS creates the corresponding
-OpenNebula image in the default OpenNebula image datastore and its VM Template,
-making them ready to deploy K8s Clusters that use that datastore.
+When OneKS starts, it automatically downloads the OneKS appliance from the OpenNebula Marketplace. During this process, OneKS creates the corresponding OpenNebula image in the default OpenNebula image datastore with its VM Template, making them ready to deploy K8s Clusters that use that datastore.
 
 {{< alert title="Warning" type="warning" >}}
 If the OneKS appliance cannot be downloaded correctly, the OneKS service will
@@ -215,8 +207,6 @@ dependencies:
       appliance_name: OneKS Appliance
       appliance_id: c3ecb387-e726-49fe-975d-fa39c6d40d05
 ```
-
-
 
 ## Next Steps
 
