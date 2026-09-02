@@ -1,5 +1,6 @@
 ---
 title: "Open vSwitch DPDK"
+linkTitle: "Open vSwitch DPDK"
 date: "2026-08-10"
 description:
 categories:
@@ -8,263 +9,410 @@ tags: ['AI','NVIDIA']
 weight: "7"
 ---
 
-## Host Configuration for DPDK Interfaces
+<a id="openvswitch-dpdk"></a>
 
-In cases where high network performance is needed but passing through PCI network interfaces to a VM is not possible, Open vSwitch can run with an accelerated datapath by using DPDK userspace libraries. In this mode, the packet processing responsibility is taken away from the kernel and dedicated resources are assigned to the packet processing. This includes CPU threads and huge pages.
+Open vSwitch (OVS) can use the Data Plane Development Kit (DPDK) to move packet processing from the kernel to dedicated userspace polling threads. This provides an accelerated, shareable network path when assigning a physical NIC directly to each Virtual Machine is not appropriate.
 
-The virtual network interfaces of the VM are not passed through, but the uplink backing the virtual switch normally is passed through to OVS, with the use of vfio-pci. In this section there is the host configuration required to set up DPDK.
+{{< alert title="Warning" type="warning" >}}
+Open vSwitch DPDK is supported only for KVM Hosts.
+{{< /alert >}}
 
-### Installation
+The physical NIC is owned by `ovs-vswitchd`, normally through `vfio-pci`; it is not passed through to the VM. OpenNebula connects each VM to the userspace bridge with a `dpdkvhostuserclient` port. QEMU creates the corresponding vhost-user socket under `/var/run/one/vhost-socks/`.
 
-You need a version of OVS that has been compiled with DPDK support. Linux distributions handle the distribution of this version quite differently.
+Although OpenNebula can create a missing OVS bridge with `datapath_type=netdev`, the recommended workflow is to create the bridge during Host provisioning, either manually or with OneDeploy. The physical NIC must be bound and its DPDK port or bond must be added by the administrator, so configuring the bridge at the same time makes it possible to verify the complete physical data path before deploying VMs. OpenNebula then manages the VM-side ports.
 
-* **Ubuntu and Debian**: Use the openvswitch-switch-dpdk package. The openvswitch-switch package lacks DPDK libraries.
-* **Red Hat**:
-  * Activate the fast-datapath-for-rhel-<rhel_version_major>-x86_64-rpms repo in subscription manager.
-  * Install any of the openvswitch<major.minor> packages. Red Hat distributes multiple versions, each with its own package.
-* **Alma**:
-  * Install centos-release-nfv-openvswitch to activate the required repo.
-  * Install any of the openvswitch<major.minor> packages.
+## Requirements
 
-Verify DPDK support by checking the OVS version:
+Before starting, verify only that:
+
+* The Host is an OpenNebula KVM node.
+* The physical NIC is supported by a DPDK Poll Mode Driver (PMD).
+* Administrative and, when changing a management uplink, out-of-band access to the Host is available.
+
+This guide walks you through configuring the remaining requirements; they do not need to be prepared before starting:
+
+* An OVS build with DPDK support and a compatible DPDK version. The guide uses distribution packages and references the [OVS and DPDK compatibility table](https://docs.openvswitch.org/en/latest/faq/releases/).
+* Huge Pages for OVS and for every VM connected through vhost-user.
+* Dedicated CPU threads for the OVS PMDs and their reservation in OpenNebula.
+* IOMMU and VFIO when the selected PMD requires the NIC to be bound to `vfio-pci`. Bifurcated PMDs are an exception and retain their kernel driver.
+* The OVS userspace bridge and its physical DPDK port or bond.
+* A virtio NIC, shared memory and NUMA-aware placement in the VM Template.
+
+## Automated Configuration
+
+The [OneDeploy Open vSwitch role](https://github.com/OpenNebula/one-deploy/tree/master/roles/openvswitch) can install OVS-DPDK, configure kernel parameters and modules, bind PCI devices, and create OVS ports, bonds and bridges. Use it when Host networking is managed with OneDeploy.
+
+{{< alert title="Warning" type="warning" >}}
+The role replaces the operating system network configuration. Keep out-of-band access to the Host and validate the interface names, PCI addresses, IP configuration and routes before applying it.
+{{< /alert >}}
+
+The following sections describe the equivalent manual configuration and the OpenNebula objects required to consume it.
+
+## Step 1. Install OVS with DPDK Support
+
+Use the packages provided for the Host operating system:
+
+* **Ubuntu and Debian**: install `openvswitch-switch-dpdk`. Select `/usr/lib/openvswitch-switch-dpdk/ovs-vswitchd-dpdk` with `update-alternatives` if the distribution does not select it automatically. The service is `openvswitch-switch.service`.
+* **Red Hat Enterprise Linux**: enable the Fast Datapath repository for the installed RHEL major version, then install one of its versioned Open vSwitch packages and `dpdk-tools`. The service is `openvswitch.service`.
+* **AlmaLinux**: enable the NFV Open vSwitch repository with `centos-release-nfv-openvswitch`, then install a versioned Open vSwitch package and `dpdk-tools`. The service is `openvswitch.service`.
+
+Start and enable the service. Use the command for the Host distribution:
+
+```shell
+# Ubuntu and Debian
+systemctl enable --now openvswitch-switch.service
+
+# Red Hat Enterprise Linux and AlmaLinux
+systemctl enable --now openvswitch.service
+```
+
+Verify that `ovs-vswitchd` reports both OVS and DPDK versions:
 
 ```shell
 ovs-vswitchd --version
- ovs-vswitchd (Open vSwitch) 3.5.3-6.el9s
- DPDK 24.11.3
 ```
 
-### Resource Allocation
+Do not continue if the output does not contain a DPDK version.
 
-It is important to have a clear picture of which resources are going to be exclusively dedicated to DPDK. These resources are effectively a payload, since they are not available to the rest of the system.
+## Step 2. Plan the Host Resources
 
-### Network Interfaces
+Use one consistent topology throughout the configuration. The examples in this guide use the following values; replace them with the values from each Host:
 
-Identify which network interfaces are going to be used as DPDK interfaces. When the system has multiple NUMA nodes, it is important to consider the node placement of these interfaces.
+| Resource | Example value |
+|----------|---------------|
+| Host NUMA nodes | `0` and `1` |
+| Physical uplink | `enp1s0f0` |
+| PCI address | `0000:01:00.0` |
+| NIC NUMA node | `0` |
+| MTU | `1500` |
+| PMD CPU | `2`, on NUMA node 0 |
+| OVS memory | 1024 MB on NUMA node 0 |
+| Test VM memory | 4096 MB on NUMA node 0 |
+| Huge Page size | 1 GB |
+| OVS bridge | `ovsbr0` |
 
-To identify which node the interfaces belong to:
+### Identify the NIC and its NUMA Node
+
+Determine the PCI address used by the uplink and verify its current driver:
 
 ```shell
-cat /sys/bus/pci/devices/0000\:01\:00.0/numa_nod
+ethtool -i enp1s0f0
+lspci -Dnnk -s 0000:01:00.0
 ```
 
-### Memory
-
-Each Network Interface in DPDK requires a certain amount of memory in terms of hugepages. This amount of memory depends on the MTU of the interface and the NUMA node location of the interface. Whenever possible, use 1GB hugepages.
-
-A good rule of thumb is to use 1GB per 1500 MTU NIC and 3GB per 9000+ MTU NIC. For a detailed memory calculation refer to the [memory model documentation](https://docs.openvswitch.org/en/stable/topics/dpdk/memory/) in the OpenvSwitch doc. If there are NUMA nodes without a network interface, 1GB of memory should be allocated to said NUMA node.
-
-VMs with their virtual network interfaces backed by a DPDK capable bridge need hugepages to run as well. Therefore, more huge pages are required to consume this feature.
-
-Refer to the Huge Pages section to configure the required amount of pages. Consider that huge pages exist on a per node basis. If the node location is unspecified when requesting hugepages, the pages will be requested evenly. Make sure enough is available per node.
-
-VMs backed by a DPDK bridge also require hugepages. On top of the hugepages required for the OVS daemon, consider also pages for running VMs.
-
-Every memory dedicated to hugepages is effectively memory that is no longer available for running regular non huge page backed VMs. Since dynamic huge page allocation is not guaranteed, especially with 1GB huge pages, it is important to pre-allocate in the kernel command line a reasonable number, based on a typical workload. Alternatively, 2MB huge pages could be used since they are much easier to dynamically allocate.
-
-### CPU
-
-The DPDK PMD driver runs continuous polling threads to process network packets. These threads are assigned to dedicated CPUs from the operating system. By default, one thread per interface in a NUMA node is used. More threads means faster polling.
-
-After the configuration, regardless of whether there is traffic or not in the switch, the polling processes will be using these threads at 100% usage, so it is effectively removed from the system and the linux scheduler will not use those processes normally.
-
-For added security, you can use the isolcpus kernel parameter to declare those threads as not available to the linux scheduler, however the linux scheduler is mature enough to not need this. The important reservation comes in the OpenNebula scheduler.
-
-You must set the ISOCLPUS host parameter to prevent a case where the scheduler could pin VCPUs from VMs to those threads.
-
-### Deamon Configuration
-
-After having a clear picture of the resource allocation, it’s time to tell OVS about how to use them.
-
-First, make sure that the daemon is enabled:
+Display the NUMA node associated with the device:
 
 ```shell
-systemctl start openvswitch
-systemctl enable openvswitch
+cat /sys/bus/pci/devices/0000:01:00.0/numa_node
 ```
 
-Then initialize DPDK and signal the huge table mountpount:
+A value of `-1` means that the platform did not report a NUMA association for the device.
+
+When using VFIO, also inspect the complete IOMMU group:
 
 ```shell
-ovs-vsctl set Open_vSwitch . other_config:dpdk-init=true
-ovs-vsctl set Open_vSwitch . other_config:dpdk-hugepage-dir="/dev/hugepages"
+readlink -f /sys/bus/pci/devices/0000:01:00.0/iommu_group
+ls -1 /sys/bus/pci/devices/0000:01:00.0/iommu_group/devices/
 ```
 
-This mountpoint should be automatically managed by a system where libvirt is installed. It is an interface to consume the pages of the size specified in that mountpoint:
+The IOMMU group is the minimum device-ownership unit. For the group to be usable through VFIO, every member must be detached from its native host driver and bound to a VFIO-compatible driver, or otherwise left unbound. Inspect the group before changing any driver and do not detach a member that the Host still requires.
+
+{{< alert title="Warning" type="warning" >}}
+Do not bind an active management interface to `vfio-pci` from a remote session. Binding removes its kernel network interface and immediately interrupts connectivity. Use a separate management interface or out-of-band console and prepare any required IP and route migration first.
+{{< /alert >}}
+
+### Allocate Huge Pages
+
+OVS uses a shared memory model by default. Ports on the same NUMA node with the same MTU share a mempool; memory is not allocated independently for every NIC. Enabling `other_config:per-port-memory=true` changes this behavior and requires a separate calculation for each port.
+
+The following values from the [OVS DPDK memory model](https://docs.openvswitch.org/en/latest/topics/dpdk/memory/) are useful starting points for the default shared model:
+
+| MTU | Approximate shared mempool | Practical 1 GB page allocation |
+|-----|-----------------------------|--------------------------------|
+| 1500 | 788 MB | 1 GB per active NUMA node |
+| 9000 | 2667 MB | 3 GB per active NUMA node |
+
+An additional pool may be created for every distinct MTU on the same NUMA node. Size the final allocation from the configured MTUs, queue counts and OVS memory model rather than multiplying these values by the number of NICs.
+
+Allocate OVS memory only on NUMA nodes that will run DPDK physical or vhost-user ports. For example, the reference Host uses 1024 MB on node 0 and none on node 1:
+
+```default
+dpdk-socket-mem=1024,0
+```
+
+VM memory is separate from `dpdk-socket-mem`. The reference Host needs at least five 1 GB Huge Pages on node 0 to start OVS and one 4 GB VM: one page for the OVS mempool and four pages for the guest. Add capacity for concurrent VMs and operational headroom.
+
+Configure the required pages as described in [Host Configuration for PCI Passthrough and SR-IOV]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration#step-3-configure-huge-pages-optional" %}}). Huge Pages are allocated per NUMA node, so verify their placement:
 
 ```shell
-mount | grep -i huge
- hugetlbfs on /dev/hugepages type hugetlbfs
- (rw,relatime,seclabel,pagesize=1024M)
+grep -i '\<Huge' /sys/devices/system/node/node*/meminfo
+mount | grep hugetlbfs
 ```
-To assign the previously reserved huge pages to DPDK use the` other_config:dpdk-socket-mem` parameter. This is a comma separated list of memory, in MB, to allocate per node, which will then be backed by the huge pages available at `other_config:dpdk-hugepage-dir`.
 
-### Examples
+The directory passed to `dpdk-hugepage-dir` must be a mounted `hugetlbfs` with the intended page size. This guide uses `/dev/hugepages` with 1 GB pages. Do not assume that libvirt created or mounted it.
 
-A system has 2 NUMA nodes. Two network interfaces are going to be used as DPDK interfaces. Each interface is in a different NUMA node. The interfaces will have 1500 MTU. 1GB hugepages are used. 2 pages are required in each node:
+### Reserve PMD CPUs
+
+PMD threads continuously poll the Rx queues assigned to them. Start with at least one PMD CPU on every NUMA node that runs DPDK ports, then scale the number of PMDs and queues from measured traffic and packet-loss requirements. OVS assigns Rx queues to PMDs automatically unless an explicit affinity is configured; see the [OVS PMD documentation](https://docs.openvswitch.org/en/latest/topics/dpdk/pmd/).
+
+Inspect the CPU topology:
 
 ```shell
-ovs-vsctl set Open_vSwitch . other_config:dpdk-socket-mem=1024,1024
+lscpu -e=CPU,CORE,SOCKET,NODE,ONLINE
 ```
 
-A system has 1 NUMA node. Two network interfaces are going to be used as DPDK interfaces. The interfaces will have 9000 MTU. 1GB hugepages are used. 6 pages are required:
+Prefer dedicated physical cores. Using both SMT siblings of one core can reduce the number of reserved cores, but usually provides less predictable maximum throughput. Keep PMDs, physical ports, VM vCPUs and VM memory on the same NUMA node whenever possible.
+
+`other_config:pmd-cpu-mask` is a hexadecimal bit mask of logical CPU IDs. For the reference CPU ID `2`, calculate the mask with:
 
 ```shell
-ovs-vsctl set Open_vSwitch . other_config:dpdk-socket-mem=6144
+python3 -c 'cpus=(2,); print(hex(sum(1 << cpu for cpu in cpus)))'
+0x4
 ```
 
-A system has 4 NUMA nodes. Two network interfaces are going to be used as DPDK interfaces. Interfaces are located in node0 and node1. The interfaces will have 9000 MTU. 1GB hugepages are used. 3 pages are required in node0 and node1 each.1 page is required in node2 and 3 each.
+Reserve the same CPUs in the OpenNebula Host template so that the scheduler does not pin VM vCPUs to them. Update the Host through Sunstone or run:
 
 ```shell
-ovs-vsctl set Open_vSwitch . other_config:dpdk-socket-mem=3072,3072,1024,1024
+onehost update <host-id> -a
 ```
 
-### PMD Threads
+Add the following attribute in the editor:
 
-The CPU threads where OVS will pin the PMD threads  are signaled with the parameter `other_config:pmd-cpu-mask`. It is a hex bitmask. Each bit represents a specific logical CPU ID. At least one CPU thread per node is needed. When assigning multiple threads per node, it is recommended to pick threads sharing the same physical CPU core.
+```default
+ISOLCPUS = "2"
+```
 
-To generate the value of the bitmask:
+The OpenNebula `ISOLCPUS` attribute is required for scheduler accounting. The kernel `isolcpus` parameter is optional CPU scheduling and performance tuning; it is not a security control.
 
-* Inspect the CPUs available in the Operating System. To get a full picture of this, run the command lscpu --all -p=CPU,CORE,NODE.
-* This will yield a list of logical CPU threads ids, their respective parent logical core id and the NUMA node they belong to.
-* Create a comma separated list of the CPU IDs going to be used according to recommendations.
-* Create a binary bitmask with each desired CPU thread ID set to 1.
-* Convert to hex.
+## Step 3. Prepare the Physical NIC
 
-Example:
+The required binding procedure depends on the DPDK PMD used by the NIC.
+
+### Conventional VFIO PMDs
+
+Enable the IOMMU and configure persistent `vfio-pci` binding as described in [Host Configuration for PCI Passthrough and SR-IOV]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration#step-2-configure-vfio-device-binding" %}}). For the reference NIC:
 
 ```shell
-lscpu --all -p=CPU,CORE,NODE
- # The following is the parsable format, which can be fed to other
- # programs. Each different item in every column has an unique ID
- # starting usually from zero.
- # CPU,Core,Node
- 0,0,0 # pick
- 1,1,1 # pick
- 2,2,0
- ...
+driverctl set-override 0000:01:00.0 vfio-pci
+dpdk-devbind.py --status-dev net
 ```
 
-Core 0 in node 0 holds threads 0 and 64. Core 1 in node 1 holds threads 1 and 65. The string `0,1,64,65` should be used as the ISOLCPUS parameter in the hypervisor node configuration.
+Repeat the binding operation for every other IOMMU-group member that must use `vfio-pci`. The status command should show `drv=vfio-pci` for `0000:01:00.0`.
+
+VFIO ownership must match the process consuming the group. On distributions where `ovs-vswitchd` runs as a non-root user, the `root:kvm` and `0660` rule from the generic passthrough guide is sufficient only when that service user belongs to the `kvm` group. Otherwise, use a suitable supplementary group or distribution-provided policy. Check both the service identity and the VFIO group device:
 
 ```shell
-echo "ISOLCPUS=\"0,1,64,65\"" > /tmp/dpdk-host.tpl
-onehost update sm15 -a /tmp/dpdk-host.tpl
+ps -o user,group,comm -C ovs-vswitchd
+ls -l /dev/vfio/
 ```
 
-The subsequent mask is then applied:
+### Bifurcated PMDs
+
+Some NICs, including devices using the `mlx5` PMD, use a bifurcated driver. The device remains bound to its native kernel driver, such as `mlx5_core`, while DPDK accesses the data path. Do not bind such a device to `vfio-pci`. Check the NIC-specific section of the [DPDK driver documentation](https://doc.dpdk.org/guides/nics/index.html) before changing its driver.
+
+## Step 4. Configure OVS-DPDK
+
+Set the initialization parameters together so that only one restart is required. The following values implement the reference topology:
 
 ```shell
-ovs-vsctl set Open_vSwitch . other_config:pmd-cpu-mask=0x30000000000000003
+ovs-vsctl --no-wait set Open_vSwitch . \
+    other_config:dpdk-init=true \
+    other_config:dpdk-hugepage-dir=/dev/hugepages \
+    other_config:dpdk-socket-mem=1024,0 \
+    other_config:pmd-cpu-mask=0x4
 ```
 
-Restart the openvswitch daemon so it loads all of the DPDK related configurations:
+Restart the service for the initialization parameters to take effect:
 
 ```shell
-systemctl restart openvswitch
+# Ubuntu and Debian
+systemctl restart openvswitch-switch.service
+
+# Red Hat Enterprise Linux and AlmaLinux
+systemctl restart openvswitch.service
 ```
 
-### Verification
-
-Check OVS is properly configured. Make sure that DPDK is initialized and the configuration values we established for the OVS daemon are loaded:
+Verify initialization before creating ports:
 
 ```shell
 ovs-vsctl get Open_vSwitch . dpdk_initialized
-grep DPDK /var/log/openvswitch/ovs-vswitchd.log
+ovs-vsctl get Open_vSwitch . dpdk_version
 ovs-vsctl get Open_vSwitch . other_config:dpdk-socket-mem
 ovs-vsctl get Open_vSwitch . other_config:pmd-cpu-mask
 ovs-vsctl get Open_vSwitch . other_config:dpdk-hugepage-dir
 ```
 
-### Bridge Creation
-
-The OVS DPDK bridge must be pre-created before being used in OpenNebula. Besides some extra configuration, most of the normal OVS bridge related configurations apply. There are two elements that distinguish a DPDK bridge from a regular bridge: accelerated datapath and the use of DPDK interfaces.
-
-A DPDK bridge is created as follows:
+`dpdk_initialized` must return `true`. If it does not, inspect the service log:
 
 ```shell
-ovs-vsctl --may-exist add-br 'ovsbr0' -- set Bridge 'ovsbr0' 'datapath_type=netdev'
+# Ubuntu and Debian
+journalctl -u openvswitch-switch.service --since "10 minutes ago"
+
+# Red Hat Enterprise Linux and AlmaLinux
+journalctl -u openvswitch.service --since "10 minutes ago"
 ```
 
-Then the DPDK interfaces must be assigned to that bridge. Normally, those interfaces need to have their kernel driver unbound and use instead the `vfio-pci` driver used for passthrough. However, there are cases where the kernel driver must not be unbound. This is the case for the `MT27710 Family [ConnectX-4 Lx] 1015` Mellanox network interfaces using the `mlx5_core` driver.
+## Step 5. Configure the Physical Uplink
 
-Refer to the PCI Device VFIO binding section for this procedure. Alternatively, use the utility `dpdk-devbind.py` provided by the DPDK related packages. It allows to rebind interfaces as well, without the use of `driverctl` and it also provides a summary of every PCI device related property.
+Create the DPDK bridge as part of Host provisioning, either manually as shown below or with OneDeploy. OpenNebula can create a missing bridge when the first VM NIC is attached, but it cannot bind or add the physical DPDK uplink. Creating the bridge explicitly keeps the bridge and uplink configuration together and allows the physical data path to be verified before it is exposed to VMs:
 
 ```shell
-dpdk-devbind.py --status-dev net
-
- Network devices using DPDK-compatible driver
- ============================================
- 0000:01:00.0 'BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller 16d8' numa_node=0 drv=vfio-pci unused=bnxt_en
- 0000:01:00.1 'BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller 16d8' numa_node=0 drv=vfio-pci unused=bnxt_en
- 0000:81:00.2 'MT27710 Family [ConnectX-4 Lx Virtual Function] 1016' numa_node=0 drv=vfio-pci unused=mlx5_core
- ...
+ovs-vsctl --may-exist add-br ovsbr0 \
+    -- set Bridge ovsbr0 datapath_type=netdev
 ```
 
-After the interface is ready, attach it to the bridge:
+Add the reference NIC as a DPDK port:
 
 ```shell
-ovs-vsctl add-port ovsbr0 dpdk0 -- set Interface dpdk0 \
-type=dpdk options:dpdk-devargs=<PCI_ADDR> # replace <PCI_ADDR> with the network interface PCI device address
+ovs-vsctl --may-exist add-port ovsbr0 dpdk0 \
+    -- set Interface dpdk0 type=dpdk \
+       options:dpdk-devargs=0000:01:00.0
 ```
 
-In this case `dpdk0` was the name used for the interface and the port. This name is not important as the interface is referenced by its PCI address. vfio-pci bound interfaces do not even have names. What’s important is that the said name must be unique per interface.
+The OVS interface name `dpdk0` is local to OVS. A VFIO-bound device has no kernel interface name; `options:dpdk-devargs` identifies the device by PCI address.
 
-If using multiple interfaces in bond, first create the bond normally, then attach the interfaces to the bond port. For example:
+Verify the bridge and physical port:
 
 ```shell
-ovs-vsctl add-bond 'ovsbr0' 'bond0' 'dpdk0' 'dpdk1' 'bond_mode=balance-slb' \
-    -- set Interface 'vmnic0' 'type=dpdk' \
-    -- set Interface 'vmnic0' 'options:dpdk-devargs=0000:01:00.0' \
-    -- set Interface 'vmnic0' 'mtu_request=9126' \
-    -- set Interface 'vmnic1' 'type=dpdk' \
-    -- set Interface 'vmnic1' 'options:dpdk-devargs=0000:01:00.1' \
-    -- set Interface 'vmnic1' 'mtu_request=9126' \
+ovs-vsctl show
+ovs-vsctl get Interface dpdk0 error
+ovs-vsctl get Interface dpdk0 link_state
 ```
 
-After binding interfaces you should now start seeing the PMD threads at 100% CPU usage. This is expected and will happen regardless of whether that bridge is serving traffic to VMs or not.
+An empty `error` value and `link_state` of `up` indicate that OVS attached the port successfully.
 
-If the DPDK interface  holds an IP address which is needed, this IP address must be migrated to the OVS bridge internal interface. It has the same name as the bridge. This interface can be configured like regular system interfaces. We recommend setting all of the L2 related configuration in OVS directly and only manage the IP related configuration outside of OVS, you can use manual commands or the system network renderer for this.
+If the Host needs an IP address on this network, configure it on the bridge internal interface, `ovsbr0`, rather than on the physical NIC. Make this change persistently with the distribution network renderer. Migrating a management address requires out-of-band access and a coordinated change to addresses, routes and DNS.
 
-If the interface is a management interface then you must ensure a proper IP migration via a script since binding the network interface and submitting it to a bridge makes it lose connectivity.
+### DPDK Bonds and Jumbo Frames
 
-### Security Configuration
-
-Depending on your distro, it might be required to tune Selinux or AppArmor to allow proper OVS-QEMU interaction.
-
-When a VM is created, qemu creates a UNIX socket for each network interface backed by a DPDK capable bridge. OVS then attempts to connect to these sockets. Some operations involving VM states, like migrations and power cycles require qemu also to perform an unlink operation in the socket.
-
-Selinux or AppArmor can, at any given time block any of these operations. This is affected also by how the Operating System distributes the OVS binary. In the case of the Red Hat familiy, OVS runs with a dedicated user. In the case of the Debian family, OVS runs as root. This might cause issues with directory based permissions, depending on the location of the socket. These sockets, starting from OpenNebula 7.2.1+ are located at `/var/run/one/vhost-socks/`.
-
-Below is a reference of the configuration required for Selinux systems. If errors persist after creating VMs, check the system logs, especially the audit logs, for operations being blocked if you still see permission denied errors but permissions look correct:
+For redundancy, create a DPDK bond instead of the single physical port. This corrected example uses the same interface names in `add-bond` and `set Interface`:
 
 ```shell
-sudo chcon -t virt_var_run_t /var/run/one/vhost-socks/
-
-TDIR=$(mktemp -d)
-cat << 'EOF' > "$TDIR/dpdk_virt.te"
-module dpdk_virt 1.0;
-require {
-    type openvswitch_t;
-    type virt_var_run_t;
-    class dir { search getattr read open };
-    class sock_file { write getattr append };
-}
-allow openvswitch_t virt_var_run_t:dir { search getattr read open };
-allow openvswitch_t virt_var_run_t:sock_file { write getattr append };
-EOF
-
-checkmodule -M -m -o "$TDIR/dpdk_virt.mod" "$TDIR/dpdk_virt.te"
-semodule_package -o "$TDIR/dpdk_virt.pp" -m "$TDIR/dpdk_virt.mod"
-sudo semodule -i "$TDIR/dpdk_virt.pp"
-rm -rf "$TDIR"
-sudo setfacl -m u:openvswitch:rx /var/run/one/
-sudo setfacl -m u:openvswitch:rx /var/run/one/vhost-socks/
-sudo setfacl -d -m u:openvswitch:rwX /var/run/one/vhost-socks/
+ovs-vsctl --may-exist add-bond ovsbr0 bond0 dpdk0 dpdk1 \
+    -- set Port bond0 bond_mode=balance-slb \
+    -- set Interface dpdk0 type=dpdk \
+       options:dpdk-devargs=0000:01:00.0 mtu_request=9000 \
+    -- set Interface dpdk1 type=dpdk \
+       options:dpdk-devargs=0000:81:00.0 mtu_request=9000
 ```
 
-Refer to the OpenvSwitch with DPDK section for the Virtual Network configuration and reference VM Templates.
+Do not run both the single-port and bond examples without first removing `dpdk0` from its existing OVS port. If the second NIC is on another NUMA node, allocate Huge Pages and a PMD CPU on that node and update `dpdk-socket-mem`, `pmd-cpu-mask` and OpenNebula `ISOLCPUS` accordingly.
 
-### Security Configuration
+For jumbo frames, use the same MTU on the physical DPDK interfaces, the OVS internal interface when used, the OpenNebula Virtual Network, and the guest. Recalculate the OVS mempool before changing the MTU.
 
-You can use the [openvswitch role](https://github.com/OpenNebula/one-deploy/blob/dbbec90d80a0a6a7e598b9a55169b0050a8c7c9f/roles/openvswitch/README.md#L16) to automate all of the DPDK related configuration and standalone OVS complex configurations as well.
+## Step 6. Configure OpenNebula
+
+### Create the Virtual Network
+
+Use the `ovswitch` driver and set `BRIDGE_TYPE` to `openvswitch_dpdk`. Do not define `PHYDEV`; the physical DPDK port is already attached to the bridge outside OpenNebula.
+
+```default
+NAME        = "dpdk-net"
+VN_MAD      = "ovswitch"
+BRIDGE      = "ovsbr0"
+BRIDGE_TYPE = "openvswitch_dpdk"
+VLAN_ID     = "1402"
+MTU         = "1500"
+```
+
+Normal [Open vSwitch network configuration]({{% relref "openvswitch#ovswitch-net" %}}) rules apply, including the Open vSwitch Security Group limitations.
+
+### Configure the VM
+
+The VM NIC must use the virtio model. [Vhost-user](https://docs.openvswitch.org/en/latest/topics/dpdk/vhost-user/) also requires shared guest memory; in OpenNebula, configure Huge Pages and set `MEMORY_ACCESS` to `shared`. Add the following resources to a normal VM Template:
+
+```default
+CPU    = "2"
+VCPU   = "2"
+MEMORY = "4096"
+
+NIC = [
+  NETWORK = "dpdk-net",
+  MODEL   = "virtio"
+]
+
+TOPOLOGY = [
+  SOCKETS       = "1",
+  CORES         = "2",
+  THREADS       = "1",
+  PIN_POLICY    = "THREAD",
+  NODE_AFFINITY = "0",
+  HUGEPAGE_SIZE = "1024",
+  MEMORY_ACCESS = "shared"
+]
+```
+
+`NODE_AFFINITY="0"` matches the NIC, PMD and Huge Pages in the reference topology. Change it when the physical path is on another NUMA node. See [CPU and NUMA Pinning]({{% relref "product/cluster_configuration/hosts_and_clusters/numa#cpu-and-numa-pinning" %}}) for more complex topologies.
+
+For each NIC, QEMU creates a server socket in `/var/run/one/vhost-socks/` and OpenNebula adds an OVS `dpdkvhostuserclient` interface that connects to it. The socket name matches the VM NIC target, normally `one-<vm-id>-<nic-id>`.
+
+## Step 7. Verify the Data Path
+
+Verify the Host configuration:
+
+```shell
+ovs-vsctl get Open_vSwitch . dpdk_initialized
+ovs-vsctl show
+ovs-appctl dpif-netdev/pmd-rxq-show
+ovs-appctl dpif-netdev/pmd-perf-show
+```
+
+`pmd-rxq-show` displays the physical and vhost-user Rx queues assigned to every PMD. Use it after adding ports and starting a VM; the number of PMDs is not derived from the number of interfaces.
+
+Verify the VM-side socket and libvirt interface:
+
+```shell
+find /var/run/one/vhost-socks/ -maxdepth 1 -type s -ls
+virsh dumpxml one-<vm-id>
+```
+
+The domain XML must contain an interface similar to:
+
+```xml
+<interface type='vhostuser'>
+  <source type='unix' path='/var/run/one/vhost-socks/one-42-0' mode='server'/>
+  <model type='virtio'/>
+</interface>
+```
+
+The corresponding OVS interface must use client mode:
+
+```default
+Interface "one-42-0"
+    type: dpdkvhostuserclient
+    options: {vhost-server-path="/var/run/one/vhost-socks/one-42-0"}
+```
+
+## Troubleshooting
+
+### DPDK Does Not Initialize
+
+Check:
+
+* `ovs-vswitchd --version` reports DPDK support and the OVS/DPDK versions are compatible.
+* The Huge Page mount exists and has sufficient free pages on the requested NUMA nodes.
+* `dpdk-socket-mem` matches the Host NUMA topology; use `0` for unused nodes.
+* The OVS service user can open the required VFIO group.
+* The PCI device is using the driver required by its PMD.
+
+Review the distribution-specific Open vSwitch service log for DPDK EAL errors after every initialization change.
+
+### Unexpected PMD CPU Usage
+
+Polling PMDs with assigned Rx queues normally consume a complete logical CPU even when traffic is low. This is expected. Confirm the queue assignment with `ovs-appctl dpif-netdev/pmd-rxq-show` before adding PMDs.
+
+Recent OVS versions support `other_config:pmd-sleep-max` to reduce idle polling. Sleeping trades CPU consumption for wake-up latency and possible packet loss during bursts; validate it with the target workload before using it in production.
+
+### Vhost-user Socket Permission Errors
+
+QEMU is the socket server and OVS is the client. Check directory traversal, socket permissions and the service identities:
+
+```shell
+namei -l /var/run/one/vhost-socks/
+ps -o user,group,comm -C ovs-vswitchd
+ps -eo user,group,comm,args | grep '[q]emu-system'
+```
+
+On SELinux or AppArmor systems, inspect the audit or kernel log for a mandatory-access-control denial before changing policy. The required policy depends on the distribution packages and their service domains. Prefer an updated distribution policy or a reviewed local policy.
+
+Do not use `chcon` as a permanent fix because its label can be lost during filesystem relabeling. If a custom SELinux file context is required and has been validated for the distribution, make it persistent with `semanage fcontext` and apply it with `restorecon`. Apply equivalent profile changes when AppArmor is in use.

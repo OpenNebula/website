@@ -415,6 +415,7 @@ Once these checks are complete, the host is ready to assign PCI devices to virtu
 
 After completing the host configuration:
 
+* Continue with the [Generic PCI Devices Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/generic_devices/" %}}) to assign storage controllers, USB controllers, audio devices, and other generic PCI devices.
 * Continue with the [Network Interfaces Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/network_interfaces/" %}}) to configure PCI passthrough or SR-IOV network devices.
 * Continue with the [NVIDIA GPUs Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/nvidia_gpu_passthrough/" %}}) for NVIDIA GPU passthrough, mediated devices (vGPU), and platform-specific GPU configuration.
 * Continue with the [NVIDIA Fabric Manager Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/one_fabricmanager/" %}}) when deploying supported NVSwitch-based systems.

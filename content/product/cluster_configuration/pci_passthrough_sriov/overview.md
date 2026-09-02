@@ -64,8 +64,8 @@ The PCI passthrough documentation is organized into the following guides:
 | **Guide** | **Description** |
 |-------|-------------|
 | [Host Configuration]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/" %}}) | Configure virtualization Hosts for PCI passthrough, including IOMMU, VFIO, Huge Pages, SR-IOV, and other common Host requirements. |
+| [Generic PCI Devices]({{% relref "product/cluster_configuration/pci_passthrough_sriov/generic_devices/" %}}) | Assign storage controllers, USB controllers, audio devices, and other generic PCI devices to Virtual Machines. |
 | [Network Interfaces]({{% relref "product/cluster_configuration/pci_passthrough_sriov/network_interfaces/" %}}) | Configure PCI passthrough and SR-IOV for network adapters. |
-| [Device Passthrough]({{% relref "product/cluster_configuration/pci_passthrough_sriov/pci_passthrough/" %}}) | Configure the passthrough configuration of a given device. |
 | [NVIDIA GPU Passthrough]({{% relref "product/cluster_configuration/pci_passthrough_sriov/nvidia_gpu_passthrough/" %}}) | Configure NVIDIA GPUs for passthrough. | 
 | [NVIDIA vGPU and MIG-backed GPU]({{% relref "product/cluster_configuration/pci_passthrough_sriov/nvidia_mig_passthrough/" %}}) | Configure NVIDIA GPUs for passthrough with mutli-VM resource sharing through vGPU and MIG. |
 | [NVIDIA Grace Platforms]({{% relref "product/cluster_configuration/pci_passthrough_sriov/nvidia_grace_platform/" %}}) | Configure NVIDIA GPUs for passthrough on Grace Hopper and Grace Blackwell platforms. |

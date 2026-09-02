@@ -1,11 +1,12 @@
 ---
 title: "Network Interfaces with PCI Passthrough"
+linkTitle: "Network Interfaces"
 date: "2026-06-30"
 description:
 categories:
 pageintoc: "58"
 tags: ['AI','NVIDIA']
-weight: "3"
+weight: "4"
 ---
 
 This guide describes how to use PCI network devices as OpenNebula network interfaces.
@@ -92,6 +93,23 @@ Additional SR-IOV configuration for network adapters is described in the **Netwo
 
 ## Using PCI Devices as Network Interfaces
 
+### Sunstone
+
+When creating or editing a Virtual Machine Template, open **Advanced options** and select the **Network** tab. Under **Hardware**, select **PCI Passthrough** as the device type. Then select one of the following scheduling modes:
+
+* **Automatic**: the scheduler selects an available PCI network function matching the configured constraints.
+* **Manual**: you select the exact PCI address to assign.
+
+Select the Virtual Network and configure the remaining interface attributes as required.
+
+{{< image
+  pathDark="/images/host/dark/host_vm_nic_passthrough.png"
+  path="/images/host/light/host_vm_nic_passthrough.png"
+  alt="Configuring a PCI passthrough network interface in Sunstone" align="center" width="90%" mb="20px"
+>}}
+
+### Virtual Machine Template
+
 To use a PCI device as a network interface, set the `TYPE` attribute of the `PCI` element to `NIC`. Example:
 
 ```default
@@ -144,11 +162,12 @@ Example:
 ```
 PCI = [
   TYPE = "NIC",
-  DEVICE = "0000:81:00.4"
+  NETWORK = "SRIOV-NET",
+  SHORT_ADDRESS = "81:00.4"
 ]
 ```
 
-Explicit selection should generally be reserved for specialized deployments where the VM needs to be attached to specific networks.
+`SHORT_ADDRESS` selects the physical PCI function, while `NETWORK` selects the OpenNebula Virtual Network that provides its network configuration and leases. Explicit device selection should generally be reserved for deployments that require a particular physical interface because of its PCI topology, interconnection, or NUMA locality.
 
 ## Virtual Network Integration
 
@@ -186,30 +205,7 @@ Common PCI attributes include:
 * `DEVICE`
 * `CLASS`
 * `VENDOR`
-* `TYPE`
-
-Network-specific attributes include:
-
-* `NETWORK`
-* `NETWORK_UNAME`
-* `MAC`
-* `IP`
-* `IP6`
-* `VLAN_ID`
-* `TRUST`
-* `SPOOFCHK`
-
-Refer to the Virtual Machine Template reference for a complete description of each attribute.
-
-## Supported PCI Attributes
-
-PCI network interfaces support the standard PCI attributes together with networking-specific attributes.
-
-Common PCI attributes include:
-
-* `DEVICE`
-* `CLASS`
-* `VENDOR`
+* `SHORT_ADDRESS`
 * `TYPE`
 
 Network-specific attributes include:

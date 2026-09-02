@@ -1,6 +1,6 @@
 ---
 title: "NVIDIA vGPU and MIG-backed vGPU"
-linkTitle: "NVIDIA vGPU and MIG-backed vGPU"
+linkTitle: "NVIDIA vGPU and MIG"
 date: "2025-10-16"
 description:
 categories:
@@ -17,7 +17,7 @@ NVIDIA vGPU enables multiple Virtual Machines to share the resources of a physic
 
 Depending on the GPU generation, vGPU profiles can be created using one of two deployment models:
 
-* **NVIDIA vGPU**, where virtual GPU profiles are created directly by the NVIDIA AI Enterprise software stack.  
+* **NVIDIA vGPU**, where virtual GPU profiles are created directly by the NVIDIA AI Enterprise software stack.
 * **MIG-backed vGPU**, where the GPU is first partitioned using NVIDIA Multi-Instance GPU (MIG), and one or more vGPU profiles are created from the resulting GPU Instances.
 
 Regardless of how the profiles are created, OpenNebula automatically discovers the available vGPU profiles during Host monitoring and schedules them as GPU resources that can be assigned to Virtual Machines.
@@ -30,9 +30,9 @@ Before deploying NVIDIA vGPU devices, complete the generic PCI passthrough confi
 
 Before continuing, verify that the Host satisfies the following requirements:
 
-* A supported NVIDIA GPU is installed.  
-* The NVIDIA Host driver is installed and operational.  
-* PCI monitoring is configured.  
+* A supported NVIDIA GPU is installed.
+* The NVIDIA Host driver is installed and operational.
+* PCI monitoring is configured.
 * The GPU has been discovered by OpenNebula.
 
 Verify that the NVIDIA driver is correctly installed:
@@ -239,8 +239,8 @@ nvidia-smi
 
 Use the output provided by the NVIDIA vGPU software stack for your selected profile to verify that:
 
-* the assigned virtual GPU is detected correctly;  
-* the reported GPU name matches the selected vGPU profile;  
+* the assigned virtual GPU is detected correctly;
+* the reported GPU name matches the selected vGPU profile;
 * no driver or hardware errors are reported.
 
 The guest configuration is identical for conventional NVIDIA vGPU and MIG-backed vGPU deployments. Once deployed, the guest operating system interacts with the assigned virtual GPU transparently, regardless of how the profile was created.
