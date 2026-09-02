@@ -19,7 +19,7 @@ NVIDIA Grace Hopper and Grace Blackwell platforms implement a virtualization arc
 
 OpenNebula automates the creation of this virtual hardware topology during deployment. From the administrator's perspective, GPU assignment uses the standard `PCI` attribute while OpenNebula generates the libvirt configuration required by the Grace virtualization architecture.
 
-### Requirements
+## Requirements
 
 Before configuring Grace platform virtualization, ensure that the Host has already been configured following the [Host Configuration Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/" %}}).
 
@@ -33,7 +33,7 @@ In addition, verify that the Host satisfies the following Grace-specific require
 
 The installation and configuration of the virtualization software stack is outside the scope of this guide. Refer to the NVIDIA Grace Virtualization documentation for platform-specific installation instructions.
 
-### Versions Used for Verification
+## Versions Used for Verification
 
 The configuration described in this guide was verified with the following software stack:
 
@@ -49,7 +49,7 @@ The configuration described in this guide was verified with the following softwa
 
 Use the NVIDIA-provided QEMU and libvirt packages. The corresponding upstream versions do not necessarily include all the Grace virtualization extensions.
 
-### Host Configuration
+## Host Configuration
 
 Only the Grace-specific configuration required after completing the generic Host configuration is described in this section.
 
@@ -349,7 +349,7 @@ During deployment, OpenNebula automatically generates the Grace virtualization t
 
 This topology follows the NVIDIA Grace virtualization architecture and preserves CPU and GPU NUMA locality.
 
-### Guest Configuration
+## Guest Configuration
 
 Install the NVIDIA data center driver R580 or later inside the guest operating system following the NVIDIA documentation.
 
