@@ -86,3 +86,4 @@ The following issues have been solved in 7.4.1:
 * Fix stale symlink after TM_MAD=shared persistent disk detach [#8000](https://github.com/OpenNebula/one/issues/8000).
 * Fix the Add NIC form to include the DNS field [#7916](https://github.com/OpenNebula/one/issues/7916).
 * Fix ovirtAPI issue with truncated disk UUIDs [#7965](https://github.com/OpenNebula/one/issues/7965).
+* Fix service template updates in Sunstone [#77193](https://github.com/OpenNebula/one/issues/77193).
