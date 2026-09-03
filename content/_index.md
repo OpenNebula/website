@@ -6,8 +6,6 @@ hide_feedback: true
 no_list: true
 ---
 
-[OpenNebula](https://opennebula.io) is a powerful, easy-to-use open source platform for enterprise, private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence.
-This site contains the OpenNebula technical documentation. For additional resources, visit the [OpenNebula Community Forum](https://forum.opennebula.io/) and [blog](https://opennebula.io/blog/).
-To access additional material including white papers, guides and screencasts, see [Official Guides](https://opennebula.io/docs/).
+[OpenNebula](https://opennebula.io) is a powerful, easy-to-use open source platform for enterprise, private, hybrid or edge cloud infrastructure. OpenNebula focuses on simplicity, flexibility, scalability and vendor independence. This site contains the OpenNebula technical documentation. For additional resources visit the [OpenNebula website](https://opennebula.io/) including [white papers](https://opennebula.io/white-papers/), [webinars](https://opennebula.io/webinars/), [screencasts](https://opennebula.io/screencasts/) and the [blog](https://opennebula.io/blog/). You can also communicate with the OpenNebula team and user community through the [OpenNebula Community Forum](https://forum.opennebula.io/).
 
 {{< dashboard >}}

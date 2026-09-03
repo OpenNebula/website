@@ -17,7 +17,7 @@ screencast updates.
 
 <div class="screencast-grid">
 {{< screencast id="YdZQlqvJHHQ" title="Introduction to OpenNebula" >}}
-{{< screencast id="fMfUoG8JIjE" title="Discover OpenNebula - The Open Source Cloud & Edge Computing Platform" thumbnail="discover_openNebula.png" >}}
+{{< screencast id="fMfUoG8JIjE" title="Discover OpenNebula" thumbnail="discover_openNebula.png" >}}
 {{< screencast id="LLa2nS1irPM" title="Install OpenNebula Using miniONE" >}}
 {{< screencast id="xd4v8fHx14I" title="Production Deployment with miniONE and OneForm" >}}
 </div>
@@ -28,7 +28,7 @@ screencast updates.
 {{< screencast id="j6e0y4ShrMk" title="Basic VM Operations in OpenNebula" >}}
 {{< screencast id="USXYzwah7Fs" title="Disk and VM Snapshots in OpenNebula" >}}
 {{< screencast id="PQs15vy5WC8" title="Migrate a VM in OpenNebula" >}}
-{{< screencast id="vI5F7ok-TYM" title="Resizing a Running Virtual Machine in OpenNebula" >}}
+{{< screencast id="vI5F7ok-TYM" title="Resizing a Running Virtual Machine in OpenNebula" thumbnail="resizing_running_vm.png">}}
 {{< screencast id="NaeiaSa0vuM" title="Build a Windows VM Template and Image" >}}
 {{< screencast id="182NyVvb5Zg" title="Run Linux OS Workloads in OpenNebula" >}}
 </div>
@@ -63,7 +63,7 @@ screencast updates.
 
 <div class="screencast-grid">
 {{< screencast id="cLvmSUUZh1Y" title="OpenNebula Frontend High Availability" >}}
-{{< screencast id="ea8nGH4bvWQ" title="Virtual Machine High Availability in OpenNebula" >}}
+{{< screencast id="IFRuZV8tuhA" title="Virtual Machine High Availability in OpenNebula" >}}
 {{< screencast id="HuHqGAwNzW8" title="Optimizing Infrastructure at Scale with OpenNebula’s AI-Powered DRS" thumbnail="ai_drs.png" >}}
 </div>
 
@@ -74,10 +74,14 @@ screencast updates.
 {{< screencast id="UkPzfjtmcRY" title="Migrate from VMware to OpenNebula with OneSwap" >}}
 </div>
 
-## Kubernetes and Hybrid Cloud
+## Kubernetes
 
 <div class="screencast-grid">
 {{< screencast id="LWtFQgM8WXQ" title="OpenNebula Kubernetes Service" >}}
+</div>
+
+## Hybrid Cloud
+<div class="screencast-grid">
 {{< screencast id="qhgdeehNnZE" title="Provisioning Clusters with OneForm" >}}
 </div>
 
