@@ -513,7 +513,7 @@ The filesystem `/` now will be 10GiB bigger with no loss of service.
 
 ## GPU Configuration
 
-If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [this guide from the official documentation]({{% relref "/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough" %}}). Overall, a GPU configuration in OpenNebula consists from 2 main stages:
+If the OpenNebula evaluation involves GPU management, GPU should be configured in pass-through mode. For the detailed process check [this guide from the official documentation]({{% relref "/product/cluster_configuration/pci_passthrough_sriov/nvidia_gpu_passthrough" %}}). Overall, a GPU configuration in OpenNebula consists from 2 main stages:
 - Host preparation and driver configuration
 - OpenNebula settings for PCI pass-through devices
 
@@ -525,7 +525,7 @@ To prepare the OpenNebula Host complete the following steps:
 ```default
 dmesg | grep -i iommu
 ```
-If IOMMU wasn’t enabled on the Host, follow the process specified in the official documentation to enable IOMMU - https://docs.opennebula.io/7.0/product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough/.
+If IOMMU wasn’t enabled on the Host, follow the process in the [PCI Passthrough Host Configuration guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration#step-1-enable-the-iommu" %}}).
 At the next step GPU has to be bound to the vfio driver. For this, perform the following steps:
 1.  Ensure `vfio-pci` module is loaded on boot:
 
@@ -631,8 +631,8 @@ On the next screen select required Storage and Network options. In the “PCI De
 In the dropdown menu select available GPU device which will be attached to the VM. Then click “Accept” button and finalize VM configuration.
 
 {{< image
-  pathDark="/images/ISO/dark/instantiate_pci_device_select.png"
-  path="/images/ISO/light/instantiate_pci_device_select.png"
+  pathDark="/images/ISO/dark/select_pci.png"
+  path="/images/ISO/light/select_pci.png"
   alt="PCI device select" align="center" width="90%" mb="20px"
 >}}
 

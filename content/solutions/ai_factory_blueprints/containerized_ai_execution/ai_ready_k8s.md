@@ -7,10 +7,6 @@ tags: ['AI', 'Kubernetes']
 
 <a id="ai_ready_k8s"></a>
 
-{{< alert title="Work In Progress" type="primary" >}}
-The AI Factory functionality is currently under development for OpenNebula 7.4 and you may encounter problems following this guide. We encourage you to contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/) to arrange a demonstration of OpenNebula 7.4's AI Factory capabilities or discuss professional services.
-{{< /alert >}} 
-
 Tools like Kubernetes provide robust orchestration for deploying AI workloads at scale, capable of managing isolation between Cluster workloads and GPU resources for AI inference tasks. With the use of the NVIDIA GPU Operator, you  can perform the provision of the necessary NVIDIA drivers and libraries for making GPU resources available to containers.
 
 Kubernetes embraces multi-tenancy, supporting different isolated namespaces where the access from different teams or users are managed with Role Based Access Control (RBAC) and network policies. As an administrator, you can also enforce limits on the GPU usage or other resources consumed per namespace, ensuring fair resource allocation.
@@ -290,7 +286,7 @@ The CAPI appliance takes some minutes to be in “Ready” status. Once the appl
     EOF
     ```
 
-    The number of GPU devices mounted in each worker node depends on the definition of the `PCI` attribute in the worker nodes template (note that the attributes of this map could change depending on the GPU model). In our case, we are deploying 2 worker nodes, with 1 GPU attached to each one. In case you only have available a single GPU card, change the number or `WORKER_MACHINE_COUNT` to 1. More information on [NVIDIA GPU Passthrough]({{% relref "product/cluster_configuration/hosts_and_clusters/nvidia_gpu_passthrough.md#pci-device-passthrough" %}}) section. In this example, we will attach a single NVIDIA GPU card to each worker nodes.
+    The number of GPU devices mounted in each worker node depends on the definition of the `PCI` attribute in the worker nodes template (note that the attributes of this map could change depending on the GPU model). In our case, we are deploying 2 worker nodes, with 1 GPU attached to each one. In case you only have available a single GPU card, change the number or `WORKER_MACHINE_COUNT` to 1. More information is available in the [NVIDIA GPU Passthrough]({{% relref "product/cluster_configuration/pci_passthrough_sriov/nvidia_gpu_passthrough/" %}}) guide. In this example, we will attach a single NVIDIA GPU card to each worker nodes.
 
 5. Once the `values.yaml` file is available, you can proceed to deploy the workload Cluster with Helm. First, add the helm chart repo for CAPONE and apply the helm chart referencing the values file:
 
@@ -504,6 +500,8 @@ The procedure to install the NVIDIA GPU Operator is as follows:
     nvidia-operator-validator-z52q7                                   1/1     Running     0          8d
     ```
 
+    If you find tha the `nvidia-driver-daemonset-*****` pods are stuck in an Error/CrashLoopBackoff cycle, this may be caused by a problem with the availability of the drivers for the Linux kernel version of the worker VMs. Refer to the [Known Issues]({{% relref "/solutions/ai_factory_blueprints/containerized_ai_execution/ai_ready_k8s/#nvidia-driver-daemonset-pods-stuck-in-crashloopbackoff" %}}) section for a solution.
+
 5. Check if the Kubernetes nodes GPU autodiscovery operates as expected, by checking the workload nodes, for instance the `nvidia.com/*` labels and the allocatable gpu capacity:
 
     ```shell
@@ -604,7 +602,37 @@ Now that you have provisioned an AI-ready Kubernetes Cluster, you can move onto 
 * [Deployment of NVIDIA Dynamo]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_dynamo" %}})
 * [Deployment of the NVIDIA KAI Scheduler]({{% relref "solutions/ai_factory_blueprints/containerized_ai_execution/nvidia_kai_scheduler" %}})
 
-## Known Errors
+## Undeployment
+
+Once you have completed the AI Factory guides that you are interested in, we recommend to undeploy the CAPI Cluster to free up compute resources (unless you intend to make further K8s deployments). The following instructions show how to cleanly shut down the CAPI Cluster:
+
+Run the following command on your OpenNebula Front-end's command line:
+
+```shell
+kubectl --kubeconfig ./kubeconfig_management.yaml delete cluster k8s-gpu-test -n default
+```
+
+Watch the virtual router, the control plane and the worker VMs terminate with `onevm list`. Once the router, control plane and worker VMs are all successfully terminated, terminate the CAPI VM itself:
+
+```shell
+onevm terminate <CAPI_VM_ID>
+```
+
+## Known Issues
+
+### NVIDIA Driver Daemonset Pods Stuck in CrashLoopBackoff
+
+The `nvidia-driver-daemonset-*****` may get stuck in an Error/CrashLoopBackoff cycle. This may be a problem with the availability of the drivers for the Linux kernel version of the worker VMs. 
+
+Using `onevm list` identify the worker VM ID(s), they are normally the VMs with the longest names. Use `onevm ssh <VM_ID>` to access the command line on each worker VM, then run the following commands:
+
+```shell
+apt update
+apt full-upgrade -y
+reboot
+```
+
+Choose `Keep the local version currently installed` in the prompt asking `What do you want to do about modified configuration file sshd_config?`. After running these commands on the worker nodes and rebooting, within a few minutes the situation should resolve and all pods should reach the `Running` status. 
 
 ### Connection closed by UNKNOWN port 65535
 
