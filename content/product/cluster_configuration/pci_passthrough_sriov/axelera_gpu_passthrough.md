@@ -6,7 +6,7 @@ description:
 categories:
 pageintoc: "58"
 tags: ['AI','NVIDIA']
-weight: "7"
+weight: "9"
 ---
 
 {{< alert title="Work In Progress" type="primary" >}} GPU passthrough functionality for Axelera GPUs is currently under active development. If you would like to discuss a demonstration, please contact the [OpenNebula sales and customer support team](https://opennebula.io/contact/).{{< /alert >}}
