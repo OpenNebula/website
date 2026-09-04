@@ -27,6 +27,16 @@ cp /var/lib/one/backups/config/<timestamp>-v<previous version>/var/lib/one/remot
    /var/lib/one/remotes/hooks/ft/fence_host.sh
 ```
 
+## Live Storage Migration with NVRAM VMs Failure
+
+During Live Storage Migration the virtual machine goes through a series of commands in virsh: dumpxml, define, undefine. If the virtual machine has NVRAM there is a [silent uncaught failure](https://github.com/OpenNebula/one/issues/7770):
+
+```default
+error: Requested operation is not valid: cannot undefine domain with nvram
+```
+
+The migrate pattern should be aware of NVRAM existence and properly use --keep-nvram during the undefine operation. Fix will be made availabe in OpenNebula 7.4.1.
+
 ## Frontend HA
 
 - [ARP tables are not updated automatically](https://github.com/OpenNebula/one/issues/7920) when a leader is elected in Red Hat Enterprise Linux OS variants.
