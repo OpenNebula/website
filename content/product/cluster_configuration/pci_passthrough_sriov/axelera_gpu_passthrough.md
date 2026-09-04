@@ -15,7 +15,7 @@ weight: "9"
 
 This guide describes how to assign an Axelera Metis AI Processing Unit (AIPU) directly to an OpenNebula Virtual Machine using PCI passthrough. The device is exclusively owned by the guest while the Virtual Machine is running; the Axelera driver and Voyager SDK are therefore installed in the guest, not on the Host.
 
-The generic PCI passthrough configuration, including IOMMU, VFIO device ownership, and PCI monitoring, is described in the [Host Configuration Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/" %}}). Complete that configuration before following this guide.
+The generic PCI passthrough configuration, including IOMMU, VFIO device ownership, and PCI monitoring, is described in the [Host Configuration Guide]({{% relref "product/cluster_configuration/pci_passthrough_sriov/host_configuration/" %}}). Complete the Host configuration guide before commencing this guide.
 
 The installation commands below reproduce a validated environment using Ubuntu 24.04, `metis-dkms` 1.5.7, and the Axelera runtime and development kit 1.6.0. Refer to the [Voyager SDK installation guide](https://github.com/axelera-ai-hub/voyager-sdk/blob/release/v1.7/docs/user-guides/sdk-install.md) before using a different software combination.
 
@@ -64,7 +64,7 @@ e5:00.0 Processing accelerators [1200]: Device [1f9d:1100]
 e6:00.0 Processing accelerators [1200]: Device [1f9d:1100]
 ```
 
-Update the database and run `lspci` again:
+Update the database and then run the above `lspci` command again:
 
 ```shell
 sudo update-pciids
